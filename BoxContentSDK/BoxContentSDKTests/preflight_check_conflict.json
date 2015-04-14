@@ -1,0 +1,19 @@
+{
+    "type":"error",
+    "status":409,
+    "code":"item_name_in_use",
+    "context_info":
+    {
+        "conflicts":
+        {
+            "type":"file",
+            "id":"23807540037",
+            "sequence_id":"0",
+            "etag":"0",
+            "sha1":"f6e4992f1a987fec2d77327df0b3ba4a3d576e22",
+            "name":"test.txt"}
+    },
+    "help_url":"http:\/\/developers.box.com\/docs\/#errors",
+    "message":"Item with the same name already exists",
+    "request_id":"184843290254a7231a35f20"
+}

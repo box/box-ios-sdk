@@ -1,0 +1,174 @@
+{
+    "chunk_size": 2,
+    "next_stream_position": 1415027508361,
+    "entries" : [
+                 {
+                 "type": "event",
+                 "event_id": "59258b2c913b322decec09a5b2932ddb57dfa296",
+                 "created_by": {
+                 "type": "user",
+                 "id": "14292077",
+                 "name": "Bender test",
+                 "login": "bender@gmail.com"
+                 },
+                 "created_at": "2014-11-03T06:25:44-08:00",
+                 "recorded_at": "2014-11-03T06:25:44-08:00",
+                 "event_type": "ITEM_PREVIEW",
+                 "session_id": "dlfkgjdflgkjd",
+                 "source": {
+                 "type": "file",
+                 "id": "22371775721",
+                 "sequence_id": "4",
+                 "etag": "4",
+                 "sha1": "b3cd56f3616e7ec9a6e583d27823d4228673ec01",
+                 "name": "Mydoc.doc",
+                 "description": "",
+                 "size": 312832,
+                 "path_collection": {
+                 "total_count": 3,
+                 "entries": [
+                             {
+                             "type": "folder",
+                             "id": "0",
+                             "sequence_id": null,
+                             "etag": null,
+                             "name": "All Files"
+                             } 
+                             ]
+                 },
+                 "created_at": "2014-10-29T04:44:45-07:00",
+                 "modified_at": "2014-10-29T04:50:14-07:00",
+                 "trashed_at": null,
+                 "purged_at": null,
+                 "content_created_at": "2014-10-29T04:44:33-07:00",
+                 "content_modified_at": "2014-10-29T04:50:04-07:00",
+                 "created_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "modified_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "owned_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "shared_link": {
+                 "url": "https://app.box.com/s/omdfqkjajgqfkb5lnnic",
+                 "download_url": "https://app.box.com/shared/static/omdfqkjajgqfkb5lnnic.doc",
+                 "vanity_url": null,
+                 "effective_access": "open",
+                 "is_password_enabled": false,
+                 "unshared_at": null,
+                 "download_count": 0,
+                 "preview_count": 3,
+                 "access": "open",
+                 "permissions": {
+                 "can_download": true,
+                 "can_preview": true
+                 }
+                 },
+                 "parent": {
+                 "type": "folder",
+                 "id": "0",
+                 "sequence_id": "1",
+                 "etag": "1",
+                 "name": "All files"
+                 },
+                 "item_status": "active",
+                 "synced": true
+                 }
+                 },
+                 {
+                 "type": "event",
+                 "event_id": "b3cd56f3616e7ec9a6e583d27823d4228673ec01",
+                 "created_by": {
+                 "type": "user",
+                 "id": "14292077",
+                 "name": "Bender test",
+                 "login": "bender@gmail.com"
+                 },
+                 "created_at": "2014-11-03T06:25:44-08:00",
+                 "recorded_at": "2014-11-03T06:25:44-08:00",
+                 "event_type": "ITEM_COPY",
+                 "session_id": "dlfkgjdflgkjd",
+                 "source": {
+                 "type": "file",
+                 "id": "22371775721",
+                 "sequence_id": "4",
+                 "etag": "4",
+                 "sha1": "dlfkgjdflgkjd",
+                 "name": "Mydoc2.doc",
+                 "description": "",
+                 "size": 312832,
+                 "path_collection": {
+                 "total_count": 3,
+                 "entries": [
+                             {
+                             "type": "folder",
+                             "id": "0",
+                             "sequence_id": null,
+                             "etag": null,
+                             "name": "All Files"
+                             } 
+                             ]
+                 },
+                 "created_at": "2014-10-29T04:44:45-07:00",
+                 "modified_at": "2014-10-29T04:50:14-07:00",
+                 "trashed_at": null,
+                 "purged_at": null,
+                 "content_created_at": "2014-10-29T04:44:33-07:00",
+                 "content_modified_at": "2014-10-29T04:50:04-07:00",
+                 "created_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "modified_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "owned_by": {
+                 "type": "user",
+                 "id": "184281521",
+                 "name": "Clement Rousselle",
+                 "login": "clement.rousselle@gmail.com"
+                 },
+                 "shared_link": {
+                 "url": "https://app.box.com/s/omdfqkjajgqfkb5lnnic",
+                 "download_url": "https://app.box.com/shared/static/omdfqkjajgqfkb5lnnic.doc",
+                 "vanity_url": null,
+                 "effective_access": "open",
+                 "is_password_enabled": false,
+                 "unshared_at": null,
+                 "download_count": 0,
+                 "preview_count": 3,
+                 "access": "open",
+                 "permissions": {
+                 "can_download": true,
+                 "can_preview": true
+                 }
+                 },
+                 "parent": {
+                 "type": "folder",
+                 "id": "0",
+                 "sequence_id": "1",
+                 "etag": "1",
+                 "name": "All files"
+                 },
+                 "item_status": "active",
+                 "synced": true
+                 }
+                 }
+                 ]
+}

@@ -1,0 +1,19 @@
+{
+    "total_count": 2,
+    "entries": [
+        {
+            "type": "collection",
+            "id": "10047",
+            "name": "Favorites",
+            "collection_type": "favorites"
+        },
+        {
+            "type": "collection",
+            "id": "10048",
+            "name": "Custom Collection",
+            "collection_type": "My Collection type"
+        }
+    ],
+    "limit": 100,
+    "offset": 0
+}

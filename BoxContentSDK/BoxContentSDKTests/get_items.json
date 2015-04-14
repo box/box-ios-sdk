@@ -1,0 +1,52 @@
+{
+    "total_count": 24,
+    "entries": [
+                {
+                "type": "folder",
+                "id": "192429928",
+                "sequence_id": "1",
+                "etag": "1",
+                "name": "Stephen Curry Three Pointers"
+                },
+                {
+                "type": "file",
+                "id": "818853862",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Warriors.jpg"
+                },
+                {
+                "type": "file",
+                "id": "123",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Halloweenie-3.jpg",
+                },
+                {
+                "type": "web_link",
+                "id": "6006481",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Box Developer Site",
+                },
+                {
+                "type": "folder",
+                "id": "123",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "My first sub-folder",
+                }
+                ],
+    "offset": 0,
+    "limit": 5,
+    "order": [
+              {
+              "by": "type",
+              "direction": "ASC"
+              },
+              {
+              "by": "name",
+              "direction": "ASC"
+              }
+              ]
+}
