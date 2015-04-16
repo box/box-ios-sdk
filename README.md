@@ -59,6 +59,12 @@ You can find guides and tutorials in the `doc` directory.
 * [Search](doc/Search.md)
 * [Users](doc/Users.md)
 
+
+Contributing
+------------
+See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.
+
+
 Copyright and License
 ---------------------
 Copyright 2015 Box, Inc. All rights reserved.
