@@ -41,7 +41,7 @@ Step 3: Set the remote fetch origin
 -------------------------------
 
 The remote fetch origin is the project under the Box organization.
-Setting this will ensure you're pulling in the latest changes from main repository.
+Setting this will ensure you're pulling in the latest changes from the main repository.
 
 ```
 git remote set-url origin https://github.com/box/box-ios-content-sdk.git
