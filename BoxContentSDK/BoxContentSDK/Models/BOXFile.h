@@ -76,20 +76,6 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canComment;
 
 /**
- *  Indicates permission for the current user to rename the file.
- *  Warning: By default, the Box API does not return this value, and it will be BOXAPIBooleanUnknown.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, assign) BOXAPIBoolean canRename;
-
-/**
- *  Indicates permission for the current user to delete the file.
- *  Warning: By default, the Box API does not return this value, and it will be BOXAPIBooleanUnknown.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, assign) BOXAPIBoolean canDelete;
-
-/**
  *  Whether the file is a package. Used for Mac Packages used by iWorks.
  *  Warning: By default, the Box API does not return this value, and it will be BOXAPIBooleanUnknown.
  *  You must request it by setting the "fields" of the request.

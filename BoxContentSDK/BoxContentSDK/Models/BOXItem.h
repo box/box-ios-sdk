@@ -168,6 +168,20 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canSetShareAccess;
 
 /**
+ *  Indicates permission for the current user to rename this folder.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean canRename;
+
+/**
+ *  Indicates permission for the current user to delete this folder.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean canDelete;
+
+/**
  *  Convenience method to check if the item is a File.
  */
 @property (nonatomic, readonly, assign) BOOL isFile;
