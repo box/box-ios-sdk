@@ -14,7 +14,6 @@ Quickstart
 ----------
 Step 1: Add to your Podfile
 ```
-source 'git@gitenterprise.inside-box.net:Mobile/box-ios-podspecs.git'
 pod 'box-ios-content-sdk'
 ```
 Step 2: Install
