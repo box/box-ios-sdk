@@ -1,4 +1,5 @@
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
+[![Build Status](https://api.travis-ci.com/box/box-ios-content-sdk.svg?token=TSVGuRLzmJKtGXuAYZAC&branch=travis_yml)](https://magnum.travis-ci.com/box/box-ios-content-sdk)
 
 Box iOS Content SDK
 ===================
