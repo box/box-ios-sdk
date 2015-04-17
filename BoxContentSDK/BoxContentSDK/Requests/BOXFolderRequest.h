@@ -8,8 +8,8 @@
 @interface BOXFolderRequest : BOXRequestWithSharedLinkHeader
 
 /*
- By default BOXFileRequest will fetch all fields for a particular item. You can customize which exact fields to fetch
- by passing in a field string in the format of "field1, field2, field3".
+ By default BOXFileRequest will only fetch a predefined set of fields. Use |requestAllFolderFields| to
+ request all fields.
  For detailed explaination and list of the fields please visit https://developers.box.com/docs/#folders-folder-object
  */
 @property (nonatomic, readwrite, assign) BOOL requestAllFolderFields;
