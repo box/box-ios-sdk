@@ -17,9 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//#error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
-#warning Remove the clientID/clientSecret and enable the #error before final release.
-    [BOXContentClient setClientID:@"m8nwyiz20tq7j9itkz3loab9rwsgwa1y" clientSecret:@"cVDIgTy6WFQ8RbUKSSgNxlzl4ej59KvO"];
+#error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
+    [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
     [BOXContentClient setAppToAppBoxAuthenticationEnabled:YES];
 
     BOXSampleAccountsViewController *accountsController = [[BOXSampleAccountsViewController alloc] init];
