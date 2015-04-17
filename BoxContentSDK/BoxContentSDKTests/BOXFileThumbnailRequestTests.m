@@ -98,44 +98,6 @@
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);
 }
 
-#pragma mark - Progress blocks
-
-- (void)test_that_thumbnail_request_calls_progress_blocks
-{
-    BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:@"123" size:BOXThumbnailSize64];
-    
-    // Image has to be big enough to trigger chunking in BOXCannedURLProtocol
-    UIImage *cannedResponseImage = [self blankImageWithSize:CGSizeMake(500, 500) color:[UIColor purpleColor]];
-    NSData *cannedResponseData =  UIImagePNGRepresentation(cannedResponseImage);
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:200 responseData:cannedResponseData];
-    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    
-    __block long intermediateProgressBlockCalls = 0;
-    __block long finalProgressBlockCalls = 0;
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-        if (totalBytesTransferred < totalBytesExpectedToTransfer) {
-            intermediateProgressBlockCalls++;
-        }
-        else if (totalBytesTransferred == totalBytesExpectedToTransfer) {
-            finalProgressBlockCalls++;
-        } else {
-            XCTFail(@"Progress called with totalBytesTransferred greater than totalBytesExpectedToTransfer");
-        }
-        
-    } completion:^(UIImage *image, NSError *error) {
-        XCTAssertNotNil(image);
-        XCTAssertNil(error);
-        [expectation fulfill];
-    }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-    
-    // Intermediate progress should be called at least once, and final should be called exactly once.
-    XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
-    XCTAssertEqual(1, finalProgressBlockCalls);
-}
-
 #pragma mark - Private helper
 
 - (UIImage *)blankImageWithSize:(CGSize)size color:(UIColor *)color
