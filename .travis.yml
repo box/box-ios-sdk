@@ -1,0 +1,3 @@
+language: objective-c
+script: 
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator8.1 -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug

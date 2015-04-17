@@ -141,43 +141,6 @@
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);
 }
 
-#pragma mark - Progress blocks
-
-- (void)test_that_download_request_calls_progress_blocks
-{
-    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];
-    
-    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithOutputStream:outputStream fileID:@"123"];
-    
-    NSData *cannedResponseData = [self randomDataWithLength:500 * 1024]; // Has to be sufficiently big enough to trigger progress blocks.
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:200 responseData:cannedResponseData];
-    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    
-    __block long intermediateProgressBlockCalls = 0;
-    __block long finalProgressBlockCalls = 0;
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-        if (totalBytesTransferred < totalBytesExpectedToTransfer) {
-            intermediateProgressBlockCalls++;
-        }
-        else if (totalBytesTransferred == totalBytesExpectedToTransfer) {
-            finalProgressBlockCalls++;
-        } else {
-            XCTFail(@"Progress called with totalBytesTransferred greater than totalBytesExpectedToTransfer");
-        }
-        
-    } completion:^(NSError *error) {
-        XCTAssertNil(error);
-        [expectation fulfill];
-    }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-    
-    // Intermediate progress should be called at least once, and final should be called exactly once.
-    XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
-    XCTAssertEqual(1, finalProgressBlockCalls);
-}
-
 #pragma mark - Error Handling
 
 - (void)test_that_invalid_grant_400_error_triggers_logout_notification
