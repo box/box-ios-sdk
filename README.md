@@ -42,7 +42,7 @@ Step 5: Authenticate a User
 
 Sample App
 ----------
-A sample app can be found in the [BoxContentSDKSampleApp](../../tree/dev/BoxContentSDKSampleApp) folder. The sample app demonstrates how to authenticate a user, and manage the user's files and folders.
+A sample app can be found in the [BoxContentSDKSampleApp](../../tree/master/BoxContentSDKSampleApp) folder. The sample app demonstrates how to authenticate a user, and manage the user's files and folders.
 
 Tests
 -----
