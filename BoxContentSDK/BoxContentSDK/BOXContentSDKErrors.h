@@ -35,6 +35,8 @@ typedef enum {
     BOXContentSDKAPIErrorRequestEntityTooLarge = 413,
     BOXContentSDKAPIErrorPreconditionRequired = 428,
     BOXContentSDKAPIErrorTooManyRequests = 429, // rate limit exceeded
+    BOXContentSDKAPIErrorServerCertError = 495, // indicates error when app encounters server with unverified identity.
+
     // 5xx errors
     BOXContentSDKAPIErrorInternalServerError = 500,
     BOXContentSDKAPIErrorInsufficientStorage = 507,

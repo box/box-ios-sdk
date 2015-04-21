@@ -11,6 +11,7 @@
 #import "BOXUser.h"
 #import "BOXContentClient+User.h"
 #import "BOXUserRequest.h"
+#import "BOXContentSDKErrors.h"
 
 #define BOX_SSO_SERVER_TRUST_ALERT_TAG (1)
 #define BOX_SSO_CREDENTIALS_ALERT_TAG (2)
@@ -315,67 +316,23 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 		SecTrustResultType trustResult = kSecTrustResultOtherError;
 		OSStatus status = SecTrustEvaluate([[challenge protectionSpace] serverTrust], &trustResult);
 		
-		BOOL requestUserConfirmation = NO;
-		if (status == errSecSuccess)
-		{
-			switch (trustResult)
-			{
-				case kSecTrustResultInvalid:
-					// Invalid setting or result. Usually, this result indicates that the SecTrustEvaluate function did not complete successfully.
-					requestUserConfirmation = YES;
-					break;
-				case kSecTrustResultProceed:
-					// The user indicated that you may trust the certificate for the purposes designated in the specified policies. This value may be returned by the SecTrustEvaluate function or stored as part of the user trust settings. In the Keychain Access utility, this value is termed “Always Trust.”
-					// Do not request user confirmation, it is safe to proceed.
-					break;
-				case kSecTrustResultDeny:
-					// The user specified that the certificate should not be trusted. This value may be returned by the SecTrustEvaluate function or stored as part of the user trust settings. In the Keychain Access utility, this value is termed “Never Trust.”
-					requestUserConfirmation = YES;
-					break;
-				case kSecTrustResultUnspecified:
-					// The user did not specify a trust setting. This value may be returned by the SecTrustEvaluate function or stored as part of the user trust settings. In the Keychain Access utility, this value is termed “Use System Policy.” This is the default user setting.
-					// Do not request user confirmation, it is safe to proceed.
-					break;
-				case kSecTrustResultRecoverableTrustFailure:
-					// Trust denied; retry after changing settings. For example, if trust is denied because the certificate has expired, you can ask the user whether to trust the certificate anyway. If the user answers yes, then use the SecTrustSettingsSetTrustSettings function to set the user trust setting to kSecTrustResultProceed and call SecTrustEvaluate again. This value may be returned by the SecTrustEvaluate function but not stored as part of the user trust settings.
-					requestUserConfirmation = YES;
-					break;
-				case kSecTrustResultFatalTrustFailure:
-					// Trust denied; no simple fix is available. For example, if a certificate cannot be verified because it is corrupted, trust cannot be established without replacing the certificate. This value may be returned by the SecTrustEvaluate function but not stored as part of the user trust settings.
-					requestUserConfirmation = YES;
-					break;
-				case kSecTrustResultOtherError:
-					// A failure other than that of trust evaluation; for example, an internal failure of the SecTrustEvaluate function. This value may be returned by the SecTrustEvaluate function but not stored as part of the user trust settings.
-					requestUserConfirmation = YES;
-					break;
-				default:
-					break;
-			}
-		}
-		else
-		{
-			// The SecTrustEvaluate method failed
-			BOXLog(@"Sec trust evaluate failed to establish a value, so prompt the user.");
-			requestUserConfirmation = YES;
-		}
+        // By default, allow a certificate if its status was evaluated successfully and the result is
+        // that it should be trusted
+        BOOL shouldTrustServer = (status == errSecSuccess && (trustResult == kSecTrustResultProceed || trustResult == kSecTrustResultUnspecified));
 
-		if (requestUserConfirmation)
+		if (shouldTrustServer)
 		{
-			self.authenticationChallenge = challenge;
-			UIAlertView *serverTrustAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Verify Server Identity", @"Alert view title: title for SSO server trust challenge")
-																		   message:[NSString stringWithFormat:NSLocalizedString(@"Box cannot verify the identity of \"%@\". Would you like to continue anyway?", @"Alert view message: Message for SSO server trust challenge, giving the user the host of the server who's identity cannot be verified."), [[challenge protectionSpace] host]]
-																		  delegate:self
-																 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
-																 otherButtonTitles:NSLocalizedString(@"Continue", @"Label: Continue action. Usually used on buttons."), nil];
-			serverTrustAlertView.tag = BOX_SSO_SERVER_TRUST_ALERT_TAG;
-			[serverTrustAlertView show];
-		}
+            [self completeServerTrustAuthenticationChallenge:challenge shouldTrust:shouldTrustServer];
+        }
 		else
 		{
-			// By default, allow a certificate if its status was evaluated successfully and the result is
-			// that it should be trusted
-			BOOL shouldTrustServer = (status == errSecSuccess && (trustResult == kSecTrustResultProceed || trustResult == kSecTrustResultUnspecified));
-			[self completeServerTrustAuthenticationChallenge:challenge shouldTrust:shouldTrustServer];
+            UIAlertView *serverTrustAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Verify Server Identity", @"Alert view title: title for SSO server trust challenge")
+                                                                           message:[NSString stringWithFormat:NSLocalizedString(@"Login failed because app cannot verify the identity of \"%@\".", @"Alert view message: Message for SSO server trust challenge, giving the user the host of the server who's identity cannot be verified."), [[challenge protectionSpace] host]]
+                                                                          delegate:self
+                                                                 cancelButtonTitle:NSLocalizedString(@"OK", @"Button title: Dismiss the alert view")
+                                                                 otherButtonTitles:nil];
+            serverTrustAlertView.tag = BOX_SSO_SERVER_TRUST_ALERT_TAG;
+            [serverTrustAlertView show];
 		}
 	}
 	else
@@ -542,8 +499,11 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 	}
 	else if (alertView.tag == BOX_SSO_SERVER_TRUST_ALERT_TAG)
 	{
-		BOOL trust = (buttonIndex != alertView.cancelButtonIndex);
-		[self completeServerTrustAuthenticationChallenge:self.authenticationChallenge shouldTrust:trust];
+        if (self.completionBlock)
+        {
+            NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIErrorServerCertError userInfo:nil];
+            self.completionBlock(self, nil, error);            
+        }
 	}
 
 	// Clear out the authentication challenge in memory
