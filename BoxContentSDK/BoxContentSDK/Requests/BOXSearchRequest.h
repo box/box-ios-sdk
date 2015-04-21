@@ -19,6 +19,12 @@
 @property (nonatomic, readwrite, strong) NSArray *contentTypes;
 @property (nonatomic, readwrite, strong) NSString *type;
 
+/*
+ By default BOXSearchRequest will only fetch a predefined set of fields. Use |requestAllItemFields| to
+ request all fields.
+ */
+@property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
+
 - (instancetype)initWithSearchQuery:(NSString *)query inRange:(NSRange)range;
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
 
