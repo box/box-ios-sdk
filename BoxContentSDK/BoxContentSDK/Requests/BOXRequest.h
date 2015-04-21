@@ -64,6 +64,9 @@ typedef void (^BOXFileVersionBlock)(BOXFileVersion *fileVersion, NSError *error)
 
 @property (nonatomic, readonly, strong) NSURLRequest *urlRequest;
 
+@property (nonatomic, readwrite, strong) NSString *SDKIdentifier;
+@property (nonatomic, readwrite, strong) NSString *SDKVersion;
+
 - (void)performRequest;
 - (void)cancel;
 
