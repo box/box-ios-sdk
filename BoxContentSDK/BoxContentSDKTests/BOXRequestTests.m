@@ -39,6 +39,13 @@
 
 @end
 
+@interface BOXRequest ()
+
+- (NSString *)modelID;
+- (NSString *)userAgent;
+
+@end
+
 @interface BOXAPIOperation ()
 - (void)sendLogoutNotification;
 @end
@@ -140,6 +147,61 @@
     }];
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_user_agent_is_correct
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    id requestMock = [OCMockObject partialMockForObject:request];
+    NSString *fakeModelID = @"test_device";
+    [[[requestMock stub] andReturn:fakeModelID] modelID];
+    
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+                                   BOX_CONTENT_SDK_IDENTIFIER,
+                                   BOX_CONTENT_SDK_VERSION,
+                                   [[UIDevice currentDevice] systemVersion],
+                                   fakeModelID,
+                                   [NSLocale currentLocale].localeIdentifier,
+                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    
+    XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
+}
+
+- (void)test_that_user_agent_sdk_identifier_and_version_can_be_customized
+{
+    NSString *expectedSDKIdentifier = @"test_sdk_identifier";
+    NSString *expectedSDKVersion = @"test_sdk_version";
+    
+    BOXRequest *request = [[BOXRequest alloc] init];
+    request.SDKIdentifier = expectedSDKIdentifier;
+    request.SDKVersion = expectedSDKVersion;
+    
+    id requestMock = [OCMockObject partialMockForObject:request];
+    NSString *fakeModelID = @"test_device";
+    [[[requestMock stub] andReturn:fakeModelID] modelID];
+    
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+                                   expectedSDKIdentifier,
+                                   expectedSDKVersion,
+                                   [[UIDevice currentDevice] systemVersion],
+                                   fakeModelID,
+                                   [NSLocale currentLocale].localeIdentifier,
+                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    
+    XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
+}
+
+- (void)test_that_user_agent_gets_set_when_performing_request
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil OAuth2Session:request.queueManager.OAuth2Session];
+    request.operation = operation;
+    
+    [request performRequest];
+    
+    XCTAssertEqualObjects(request.userAgent, [request.urlRequest valueForHTTPHeaderField:@"User-Agent"]);
 }
 
 @end

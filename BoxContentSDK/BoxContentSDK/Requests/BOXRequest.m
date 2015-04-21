@@ -10,6 +10,8 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXISO8601DateFormatter.h"
+#include <sys/types.h>
+#include <sys/sysctl.h>
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
@@ -78,6 +80,7 @@
 
 - (void)performRequest
 {
+    [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
     [self.queueManager enqueueOperation:self.operation];
 }
 
@@ -398,23 +401,52 @@
     return [array componentsJoinedByString:@","];
 }
 
-//TODO: Set this up appropriately
-- (NSString *)defaultUserAgentHeaderString
+- (NSString *)modelID
 {
-    // The user agent string looks like this:
-    // appID/appVersion;OS/OSVersion;DeviceManufacturer/DeviceType
-    // For example:
-    // com.box.ios.dev/3.4.1;iOS/8.0.1;Apple/iPad Air (WiFi)
-    // Note that for performance, this string is retained for the life of the application
-    static NSString *userAgentString = nil;
-//    if (userAgentString == nil) {
-//        userAgentString = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@",
-//                           [[NSBundle mainBundle] bundleIdentifier],
-//                           [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
-//                           [[UIDevice currentDevice] systemVersion],
-//                           [[UIDevice currentDevice] detailedModelName]];
-//    }
-    return userAgentString;
+    NSString *model = nil;
+    
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+
+    if (machine != NULL) {
+        sysctlbyname("hw.machine", machine, &size, NULL, 0);
+        model = [NSString stringWithUTF8String:machine];
+        free(machine);
+    }
+    
+    return model;
+}
+
+- (NSString *)SDKIdentifier
+{
+    if (_SDKIdentifier.length > 0) {
+        return _SDKIdentifier;
+    } else {
+        return BOX_CONTENT_SDK_IDENTIFIER;
+    }
+}
+
+- (NSString *)SDKVersion
+{
+    if (_SDKVersion.length > 0) {
+        return _SDKVersion;
+    } else {
+        return BOX_CONTENT_SDK_VERSION;
+    }
+}
+
+- (NSString *)userAgent
+{
+    NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+                           self.SDKIdentifier,
+                           self.SDKVersion,
+                           [[UIDevice currentDevice] systemVersion],
+                           [self modelID],
+                           [NSLocale currentLocale].localeIdentifier,
+                           [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    
+    return userAgent;
 }
 
 - (NSString *)nonEmptyFilename:(NSString *)filename
