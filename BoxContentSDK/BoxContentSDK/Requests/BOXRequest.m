@@ -438,12 +438,11 @@
 
 - (NSString *)userAgent
 {
-    NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+    NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                            self.SDKIdentifier,
                            self.SDKVersion,
                            [[UIDevice currentDevice] systemVersion],
                            [self modelID],
-                           [NSLocale currentLocale].localeIdentifier,
                            [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     return userAgent;

@@ -157,12 +157,11 @@
     NSString *fakeModelID = @"test_device";
     [[[requestMock stub] andReturn:fakeModelID] modelID];
     
-    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                                    BOX_CONTENT_SDK_IDENTIFIER,
                                    BOX_CONTENT_SDK_VERSION,
                                    [[UIDevice currentDevice] systemVersion],
                                    fakeModelID,
-                                   [NSLocale currentLocale].localeIdentifier,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
@@ -181,12 +180,11 @@
     NSString *fakeModelID = @"test_device";
     [[[requestMock stub] andReturn:fakeModelID] modelID];
     
-    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@;%@",
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                                    expectedSDKIdentifier,
                                    expectedSDKVersion,
                                    [[UIDevice currentDevice] systemVersion],
                                    fakeModelID,
-                                   [NSLocale currentLocale].localeIdentifier,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
