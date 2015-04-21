@@ -204,18 +204,20 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 	{
         __weak BOXAuthorizationViewController *me = self;
         [self.SDKClient.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
-            if (error) {
-                if (self.completionBlock) {
-                    self.completionBlock(me, nil, error);
-                }
-            } else {
-                BOXUserRequest *userRequest = [self.SDKClient currentUserRequest];
-                [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
                     if (self.completionBlock) {
-                        self.completionBlock(me, user, error);
+                        self.completionBlock(me, nil, error);
                     }
-                }];
-            }
+                } else {
+                    BOXUserRequest *userRequest = [self.SDKClient currentUserRequest];
+                    [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
+                        if (self.completionBlock) {
+                            self.completionBlock(me, user, error);
+                        }
+                    }];
+                }                
+            });
         }];
 	}
 	else if (self.connectionIsTrusted == NO)
