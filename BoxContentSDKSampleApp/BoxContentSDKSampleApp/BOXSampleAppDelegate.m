@@ -19,25 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
     [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
-    [BOXContentClient setAppToAppBoxAuthenticationEnabled:YES];
 
     BOXSampleAccountsViewController *accountsController = [[BOXSampleAccountsViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:accountsController];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    if ([BOXContentClient canCompleteAuthenticationWithURL:url]) {
-        [BOXContentClient completeAuthenticationWithURL:url];
-    }
-
     return YES;
 }
 
