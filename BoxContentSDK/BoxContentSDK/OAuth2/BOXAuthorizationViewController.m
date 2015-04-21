@@ -206,14 +206,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         [self.SDKClient.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
-                    if (self.completionBlock) {
-                        self.completionBlock(me, nil, error);
+                    if (me.completionBlock) {
+                        me.completionBlock(me, nil, error);
                     }
                 } else {
-                    BOXUserRequest *userRequest = [self.SDKClient currentUserRequest];
+                    BOXUserRequest *userRequest = [me.SDKClient currentUserRequest];
                     [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
-                        if (self.completionBlock) {
-                            self.completionBlock(me, user, error);
+                        if (me.completionBlock) {
+                            me.completionBlock(me, user, error);
                         }
                     }];
                 }                
