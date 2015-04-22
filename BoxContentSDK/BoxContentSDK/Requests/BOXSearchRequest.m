@@ -38,6 +38,10 @@
     NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
     queryParameters[BOXAPIParameterKeyQuery] = self.query;
 
+    if (self.requestAllItemFields) {
+        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterString];
+    }
+    
     if (self.fileExtensions) {
         queryParameters[BOXAPIParameterKeyFileExtensions] = [self.fileExtensions componentsJoinedByString:@","];
     }

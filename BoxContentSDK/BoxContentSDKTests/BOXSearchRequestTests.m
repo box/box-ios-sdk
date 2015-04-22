@@ -14,6 +14,12 @@
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
 
+@interface BOXRequest ()
+
+- (NSString *)fullItemFieldsParameterString;
+
+@end
+
 @interface BOXSearchRequestTests : BOXRequestTestCase
 
 @end
@@ -39,7 +45,25 @@
     XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyOffset], @"2");
 }
 
-- (void)test_that_request_with_additional_fieldshas_expected_URLRequest
+- (void)test_that_request_with_requestAllItemFields_has_expected_URLRequest
+{
+    NSString *searchQuery = @"test";
+    BOXSearchRequest *request = [[BOXSearchRequest alloc] initWithSearchQuery:searchQuery inRange:NSMakeRange(2, 10)];
+    request.requestAllItemFields = YES;
+    NSURLRequest *URLRequest = request.urlRequest;
+    
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/search", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    
+    XCTAssertEqualObjects(expectedURL, requestURL);
+    XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
+    
+    NSDictionary *requestURLParameters = [URLRequest.URL box_queryDictionary];
+    XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyQuery], searchQuery);
+    XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyFields], [request fullItemFieldsParameterString]);
+}
+
+- (void)test_that_request_with_additional_params_has_expected_URLRequest
 {
     NSString *searchQuery = @"test";
     BOXSearchRequest *request = [[BOXSearchRequest alloc] initWithSearchQuery:searchQuery inRange:NSMakeRange(2, 10)];
