@@ -87,11 +87,21 @@ static NSString *staticKeychainAccessGroup;
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
 {
     NSDictionary *URLQueryParams = [URL box_queryDictionary];
+    NSString *serverNonce = [URLQueryParams valueForKey:BOXOAuth2URLParameterAuthorizationStateKey];
     NSString *authorizationCode = [URLQueryParams valueForKey:BOXOAuth2URLParameterAuthorizationCodeKey];
     NSString *authorizationError = [URLQueryParams valueForKey:BOXOAuth2URLParameterErrorCodeKey];
 
-    if (authorizationError != nil)
-    {
+    if ([serverNonce isEqualToString:self.nonce] == NO) {        
+        NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain 
+                                                    code:BOXContentSDKOAuth2ErrorAccessTokenNonceMismatch
+                                                userInfo:nil];
+        if (block) {
+            block(nil, error);
+        }
+        return;
+    }
+    
+    if (authorizationError != nil) {
         NSInteger errorCode = BOXContentSDKAPIErrorUnknownStatusCode;
         if ([authorizationError isEqualToString:BOXOAuth2ErrorAccessDenied]) {
             errorCode = BOXContentSDKAPIErrorUserDeniedAccess;
@@ -173,12 +183,24 @@ static NSString *staticKeychainAccessGroup;
     [self.queueManager enqueueOperation:operation];
 }
 
+- (NSString *)nonce
+{    
+    if (_nonce == nil) {
+        NSMutableData * data = [[NSMutableData alloc] initWithLength:32];
+        SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
+        NSData *encodedData = [data base64EncodedDataWithOptions:0];
+        _nonce = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+    }
+    
+    return _nonce;
+}
+
 - (NSURL *)authorizeURL
 {
     NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
     NSString *authorizeURLString = [NSString stringWithFormat:
-                                    @"%@/oauth2/authorize?response_type=code&client_id=%@&state=ok&redirect_uri=%@",
-                                    self.APIBaseURLString, self.clientID, encodedRedirectURI];
+                                    @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
+                                    self.APIBaseURLString, self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
 

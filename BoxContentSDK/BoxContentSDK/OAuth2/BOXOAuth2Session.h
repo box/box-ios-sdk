@@ -80,6 +80,11 @@ extern NSString *const BOXOAuth2UserIDKey;
  */
 @property (nonatomic, readwrite, weak) BOXAPIQueueManager *queueManager;
 
+/**
+ * The randomly generated nonce used to prevent spoofing attack during login
+ */
+@property (nonatomic, readwrite, strong) NSString *nonce;
+
 /** @name Service settings */
 
 /**

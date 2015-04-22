@@ -57,7 +57,8 @@ typedef enum {
 typedef enum {
     BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued = 20000, // access token is expired. The failed request was reenqueued
     BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCannotBeReenqueued = 20001, // access token is expired and the operation cannot be reenqueued because it cannot be copied
-    BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCouldNotBeCompleted = 20002 // Operation failed because access token is expired and could not be refreshed. Usually due to no internet connection
+    BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCouldNotBeCompleted = 20002, // Operation failed because access token is expired and could not be refreshed. Usually due to no internet connection
+    BOXContentSDKOAuth2ErrorAccessTokenNonceMismatch = 20003, // Operation failed because nonce returned by server didn't match the one used by app to authorize user.
 } BOXContentSDKOAuth2Error;
 
 typedef enum {
