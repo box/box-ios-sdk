@@ -412,7 +412,12 @@ static NSString *staticKeychainAccessGroup;
         NSArray* keychainEntries = (__bridge_transfer NSArray*)keychainQueryResult;
         for (NSDictionary *dict in keychainEntries)
         {
-            NSString *keychainIdentifier = [dict objectForKey:((__bridge NSString *)kSecAttrGeneric)];
+            NSObject *object = [dict objectForKey:((__bridge id)kSecAttrGeneric)];
+            if (![object isKindOfClass:[NSString class]]) {
+                continue;
+            }
+            
+            NSString *keychainIdentifier = (NSString *) object;
             if ([keychainIdentifier hasPrefix:[self keychainIdentifierPrefix]])
             {
                 NSString *userID = [self userIDFromKeychainIdentifier:keychainIdentifier];
