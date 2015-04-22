@@ -8,7 +8,7 @@ s.summary               = "iOS SDK for the Box Content API"
 s.homepage              = "https://github.com/box/box-ios-content-sdk"
 s.license               = { :type => "Apache 2.0", :file => "LICENSE" }
 s.author                = "Box"
-s.source                = { :git => "https://github.com/box/box-ios-content-sdk", :tag => "v#{s.version}" }
+s.source                = { :git => "https://github.com/box/box-ios-content-sdk.git", :tag => "v#{s.version}" }
 
 # Platform
 
