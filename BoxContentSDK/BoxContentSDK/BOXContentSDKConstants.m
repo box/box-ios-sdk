@@ -56,6 +56,7 @@ BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI = @"BoxApi";
 
 // OAuth2 constants
 // Authorization code response
+NSString *const BOXOAuth2URLParameterAuthorizationStateKey = @"state";
 NSString *const BOXOAuth2URLParameterAuthorizationCodeKey = @"code";
 NSString *const BOXOAuth2URLParameterErrorCodeKey = @"error";
 NSString *const BOXOAuth2URLParameterStateKey = @"state";

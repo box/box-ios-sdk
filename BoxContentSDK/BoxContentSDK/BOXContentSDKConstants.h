@@ -61,6 +61,7 @@ extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI;
 
 // OAuth2 constants
 // Authorization code response
+extern NSString *const BOXOAuth2URLParameterAuthorizationStateKey;
 extern NSString *const BOXOAuth2URLParameterAuthorizationCodeKey;
 extern NSString *const BOXOAuth2URLParameterErrorCodeKey;
 extern NSString *const BOXOAuth2URLParameterStateKey;
