@@ -61,9 +61,11 @@ extern NSString *const BOXOAuth2UserIDKey;
  *
  * Service Settings on Box
  * =======================
- * **Note**: When setting up your service on Box, leave the OAuth2 reditrect URI blank.
- * The SDK will provide a custom redirect URI when issuing OAuth2 calls; doing so requires
- * that no redirect URI be set in your service settings.
+ * **Note**: When setting up your service on Box, make sure to set the OAuth2 redirect URI
+ * to the following format: boxsdk-YOUR_API_KEY_HERE://boxsdkoauth2redirect.
+ * The SDK will expect that redirect URI when issuing OAuth2 calls; doing so requires
+ * that the redirect URI is set correctly in your service settings (found under
+ * "My Applications" at developers.box.com).
  */
 @interface BOXOAuth2Session : NSObject
 
