@@ -25,7 +25,7 @@ Step 3: Import
 ```objectivec
 #import <BoxContentSDK/BOXContentSDK.h>
 ```
-Step 4: Set the Box Client ID and Client Secret that you obtain from [creating a developer account](http://developers.box.com/)
+Step 4: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md)
 ```objectivec
 [BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
 ```
@@ -51,6 +51,7 @@ Documentation
 -------------
 You can find guides and tutorials in the `doc` directory.
 
+* [App Setup](doc/Setup.md)
 * [Authentication](doc/Authentication.md)
 * [Files](doc/Files.md)
 * [Folders](doc/Folders.md)
