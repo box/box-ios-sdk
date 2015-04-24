@@ -43,7 +43,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 #define kMaxNTLMAuthFailuresPriorToExit 3
 
 - (void)cancel:(id)sender;
-- (void)completeServerTrustAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge shouldTrust:(BOOL)trust;
 - (void)clearCookies;
 
 @end
@@ -134,27 +133,12 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 #pragma mark - Private helper methods
 
-- (void)completeServerTrustAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge shouldTrust:(BOOL)trust
+- (void)completeServerTrustAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge
 {
-	if (trust)
-	{
-		BOXLog(@"Trust the host.");
-		SecTrustRef serverTrust = [[authenticationChallenge protectionSpace] serverTrust];
-		NSURLCredential *serverTrustCredential = [NSURLCredential credentialForTrust:serverTrust];
-		[[authenticationChallenge sender] useCredential:serverTrustCredential
-							 forAuthenticationChallenge:authenticationChallenge];
-	}
-	else
-	{
-		BOXLog(@"Do not trust the host. Presenting an error to the user.");
-		UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Failure", @"Alert view title: Title for failed SSO login due to authentication issue")
-																		message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
-																	   delegate:nil
-															  cancelButtonTitle:NSLocalizedString(@"OK", @"Button title: Dismiss the alert view")
-															  otherButtonTitles:nil];
-
-		[loginFailureAlertView show];
-	}
+    SecTrustRef serverTrust = [[authenticationChallenge protectionSpace] serverTrust];
+    NSURLCredential *serverTrustCredential = [NSURLCredential credentialForTrust:serverTrust];
+    [[authenticationChallenge sender] useCredential:serverTrustCredential
+                         forAuthenticationChallenge:authenticationChallenge];
 }
 
 - (void)clearCookies
@@ -322,17 +306,18 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 		if (shouldTrustServer)
 		{
-            [self completeServerTrustAuthenticationChallenge:challenge shouldTrust:shouldTrustServer];
+            [self completeServerTrustAuthenticationChallenge:challenge];
         }
 		else
 		{
-            UIAlertView *serverTrustAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Verify Server Identity", @"Alert view title: title for SSO server trust challenge")
-                                                                           message:[NSString stringWithFormat:NSLocalizedString(@"Login failed because app cannot verify the identity of \"%@\".", @"Alert view message: Message for SSO server trust challenge, giving the user the host of the server who's identity cannot be verified."), [[challenge protectionSpace] host]]
-                                                                          delegate:self
-                                                                 cancelButtonTitle:NSLocalizedString(@"OK", @"Button title: Dismiss the alert view")
-                                                                 otherButtonTitles:nil];
-            serverTrustAlertView.tag = BOX_SSO_SERVER_TRUST_ALERT_TAG;
-            [serverTrustAlertView show];
+            UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Failure", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                            message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
+                                                                           delegate:self
+                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"Button title: Dismiss the alert view")
+                                                                  otherButtonTitles:nil];
+            
+            loginFailureAlertView.tag = BOX_SSO_SERVER_TRUST_ALERT_TAG;
+            [loginFailureAlertView show];            
 		}
 	}
 	else
