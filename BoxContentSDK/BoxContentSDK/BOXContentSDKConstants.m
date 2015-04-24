@@ -59,7 +59,6 @@ BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI = @"BoxApi";
 NSString *const BOXOAuth2URLParameterAuthorizationStateKey = @"state";
 NSString *const BOXOAuth2URLParameterAuthorizationCodeKey = @"code";
 NSString *const BOXOAuth2URLParameterErrorCodeKey = @"error";
-NSString *const BOXOAuth2URLParameterStateKey = @"state";
 // token response
 NSString *const BOXOAuth2TokenJSONAccessTokenKey = @"access_token";
 NSString *const BOXOAuth2TokenJSONRefreshTokenKey = @"refresh_token";

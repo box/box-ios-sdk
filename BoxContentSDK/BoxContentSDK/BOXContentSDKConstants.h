@@ -64,7 +64,6 @@ extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI;
 extern NSString *const BOXOAuth2URLParameterAuthorizationStateKey;
 extern NSString *const BOXOAuth2URLParameterAuthorizationCodeKey;
 extern NSString *const BOXOAuth2URLParameterErrorCodeKey;
-extern NSString *const BOXOAuth2URLParameterStateKey;
 // token response
 extern NSString *const BOXOAuth2TokenJSONAccessTokenKey;
 extern NSString *const BOXOAuth2TokenJSONRefreshTokenKey;

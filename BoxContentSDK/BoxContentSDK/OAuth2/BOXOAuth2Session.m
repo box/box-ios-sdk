@@ -39,6 +39,15 @@ NSString *const BOXOAuth2UserIDKey = @"BOXOAuth2UserID";
 static NSString *staticKeychainIdentifierPrefix;
 static NSString *staticKeychainAccessGroup;
 
+@interface BOXOAuth2Session ()
+
+/**
+ * The randomly generated nonce used to prevent spoofing attack during login
+ */
+@property (nonatomic, readwrite, strong) NSString *nonce;
+
+@end
+
 @implementation BOXOAuth2Session
 
 @synthesize APIBaseURLString = _APIBaseURLString;
