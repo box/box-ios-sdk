@@ -12,17 +12,19 @@
 
 @implementation BOXModel
 
-- (instancetype)initWithJSON:(NSDictionary *)JSONResponse
+- (instancetype)initWithJSON:(NSDictionary *)JSONData
 {
     if (self = [super init]) {
+        self.JSONData = JSONData;
+        
         self.modelID = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyID
-                                                      inDictionary:JSONResponse
+                                                      inDictionary:JSONData
                                                    hasExpectedType:[NSString class]
                                                        nullAllowed:NO
                                                  suppressNullAsNil:NO];
 
         self.type = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyType
-                                                      inDictionary:JSONResponse
+                                                      inDictionary:JSONData
                                                    hasExpectedType:[NSString class]
                                                        nullAllowed:NO
                                                  suppressNullAsNil:NO];
