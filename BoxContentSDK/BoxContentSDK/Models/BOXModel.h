@@ -35,12 +35,17 @@ typedef enum {
 @property (nonatomic, readwrite, strong) NSString *type;
 
 /**
+ *  JSON response data.
+ */
+@property (nonatomic, readwrite, strong) NSDictionary *JSONData;
+
+/**
  *  Initialize with a dictionary from Box API response JSON.
  *
  *  @param Dictionary from Box API response JSON.
  *
  *  @return The model object.
  */
-- (instancetype)initWithJSON:(NSDictionary *)JSONResponse;
+- (instancetype)initWithJSON:(NSDictionary *)JSONData;
 
 @end
