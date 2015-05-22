@@ -265,8 +265,6 @@
 		C5C0861D1A42F584004DB48A /* BOXContentClient+Event.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C0861B1A42F584004DB48A /* BOXContentClient+Event.m */; };
 		C5C11A3F175DA92E0001EC88 /* NSString+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C11A3D175DA92E0001EC88 /* NSString+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5C11A40175DA92E0001EC88 /* NSString+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C11A3E175DA92E0001EC88 /* NSString+BOXAdditions.m */; };
-		C5C11A44175DACCE0001EC88 /* UIImage+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C11A42175DACCE0001EC88 /* UIImage+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C5C11A45175DACCE0001EC88 /* UIImage+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C11A43175DACCE0001EC88 /* UIImage+BOXAdditions.m */; };
 		C5D91C9B1A41CAE900AC8B8F /* BOXEventsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D91C991A41CAE900AC8B8F /* BOXEventsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5D91C9C1A41CAE900AC8B8F /* BOXEventsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91C9A1A41CAE900AC8B8F /* BOXEventsRequest.m */; };
 		C5D91CA01A41D25B00AC8B8F /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = C5D91C9F1A41D25B00AC8B8F /* events.json */; };
@@ -677,8 +675,6 @@
 		C5C0861B1A42F584004DB48A /* BOXContentClient+Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXContentClient+Event.m"; sourceTree = "<group>"; };
 		C5C11A3D175DA92E0001EC88 /* NSString+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BOXAdditions.h"; sourceTree = "<group>"; };
 		C5C11A3E175DA92E0001EC88 /* NSString+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BOXAdditions.m"; sourceTree = "<group>"; };
-		C5C11A42175DACCE0001EC88 /* UIImage+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BOXAdditions.h"; sourceTree = "<group>"; };
-		C5C11A43175DACCE0001EC88 /* UIImage+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BOXAdditions.m"; sourceTree = "<group>"; };
 		C5D91C991A41CAE900AC8B8F /* BOXEventsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXEventsRequest.h; sourceTree = "<group>"; };
 		C5D91C9A1A41CAE900AC8B8F /* BOXEventsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventsRequest.m; sourceTree = "<group>"; };
 		C5D91C9F1A41D25B00AC8B8F /* events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
@@ -1336,8 +1332,6 @@
 				E4FAD97F172CE2C50052AD11 /* NSURL+BOXURLHelper.m */,
 				C5C11A3D175DA92E0001EC88 /* NSString+BOXAdditions.h */,
 				C5C11A3E175DA92E0001EC88 /* NSString+BOXAdditions.m */,
-				C5C11A42175DACCE0001EC88 /* UIImage+BOXAdditions.h */,
-				C5C11A43175DACCE0001EC88 /* UIImage+BOXAdditions.m */,
 				AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */,
 				AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */,
 				15F9C4B71A3B8AE8006EC2EE /* NSDate+BOXAdditions.h */,
@@ -1596,7 +1590,6 @@
 				C5C0861C1A42F584004DB48A /* BOXContentClient+Event.h in Headers */,
 				E11BED501ADC050000A9216F /* BoxAppToAppFileMetadata.h in Headers */,
 				C5972A7C1A3F52F600225CBA /* BOXCollectionFavoritesRequest.h in Headers */,
-				C5C11A44175DACCE0001EC88 /* UIImage+BOXAdditions.h in Headers */,
 				150C27A41A69DC0E00099850 /* BOXContentClient+Folder.h in Headers */,
 				AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */,
 				0E24BF351A7B0C3700BD6C97 /* BOXItemShareRequest.h in Headers */,
@@ -1938,7 +1931,6 @@
 				15958E251A14338A00AEBCEE /* BOXFileUpdateRequest.m in Sources */,
 				C5C11A40175DA92E0001EC88 /* NSString+BOXAdditions.m in Sources */,
 				155170BB1A54872D004C00AF /* BOXFileVersion.m in Sources */,
-				C5C11A45175DACCE0001EC88 /* UIImage+BOXAdditions.m in Sources */,
 				C5972A7D1A3F52F600225CBA /* BOXCollectionFavoritesRequest.m in Sources */,
 				15280E521A37E70B008D4F5D /* BOXFolder.m in Sources */,
 				0E16F1131A426AB200BDDA21 /* BOXGroup.m in Sources */,
