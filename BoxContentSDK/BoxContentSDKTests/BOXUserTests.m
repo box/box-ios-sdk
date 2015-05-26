@@ -97,5 +97,46 @@
     XCTAssertEqualObjects(@"Furious George", user.enterprise.name);
 }
 
+- (void)test_that_user_with_all_fields_and_null_enterprise_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"user_all_fields_null_enterprise"];
+    BOXUser *user = [[BOXUser alloc] initWithJSON:dictionary];
+    
+    XCTAssertEqualObjects(@"13338532", user.modelID);
+    XCTAssertEqualObjects(@"Michelle Brown", user.name);
+    XCTAssertEqualObjects(@"booxqa@gmail.com", user.login);
+    XCTAssertEqualObjects([NSDate box_dateWithISO8601String:@"2011-09-02T09:38:01-07:00"], user.createdDate);
+    XCTAssertEqualObjects([NSDate box_dateWithISO8601String:@"2014-11-26T12:04:22-08:00"], user.modifiedDate);
+    XCTAssertEqualObjects(@"en", user.language);
+    XCTAssertEqualObjects(@"America/Los_Angeles", user.timeZone);
+    XCTAssertEqual(53687091200l, [user.spaceAmount longLongValue]);
+    XCTAssertEqual(6099293l, [user.spaceUsed longLongValue]);
+    XCTAssertEqual(262144000l, [user.maxUploadSize longLongValue]);
+    XCTAssertEqualObjects(@"active", user.status);
+    XCTAssertEqualObjects(@"Professional Ultimate Frisbee Player", user.jobTitle);
+    XCTAssertEqualObjects(@"604-423-4362", user.phone);
+    XCTAssertEqualObjects(@"100 Main Street, Vancouver BC, Canada", user.address);
+    XCTAssertEqualObjects([NSURL URLWithString:@"https://app.box.com/api/avatar/large/13338532"], user.avatarURL);
+    
+    XCTAssertEqualObjects(@"user", user.role);
+    NSArray *expectedTrackingCodes = @[
+                                       @{@"type" : @"tracking_code",
+                                         @"name" : @"tracking code 1",
+                                         @"value" : @"tracking code value 1"},
+                                       @{@"type" : @"tracking_code",
+                                         @"name" : @"tracking code 2",
+                                         @"value" : @"tracking code value 2"}
+                                       ];
+    XCTAssertEqualObjects(expectedTrackingCodes, user.trackingCodes);
+    XCTAssertEqual(BOXAPIBooleanYES, user.canSeeManagedUsers);
+    XCTAssertEqual(BOXAPIBooleanYES, user.isSyncEnabled);
+    XCTAssertEqual(BOXAPIBooleanYES, user.isExternalCollabRestricted);
+    XCTAssertEqual(BOXAPIBooleanNO, user.isExemptFromDeviceLimits);
+    XCTAssertEqual(BOXAPIBooleanNO, user.isExemptFromLoginVerification);
+    
+    XCTAssertNil(user.enterprise);
+}
+
+
 @end
                        

@@ -177,7 +177,8 @@
         NSDictionary *enterpriseDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyEnterprise
                                                                             inDictionary:JSONResponse
                                                                          hasExpectedType:[NSDictionary class]
-                                                                             nullAllowed:NO];
+                                                                             nullAllowed:YES
+                                                                       suppressNullAsNil:YES];
         if (enterpriseDictionary)
         {
             self.enterprise = [[BOXEnterpriseMini alloc] initWithJSON:enterpriseDictionary];
