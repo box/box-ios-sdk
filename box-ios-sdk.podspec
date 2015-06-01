@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 # Root specification
 
 s.name                  = "box-ios-sdk"
-s.version               = "1.0.4"
+s.version               = "1.0.5"
 s.summary               = "iOS SDK for the Box API"
 s.homepage              = "https://github.com/box/box-ios-sdk"
 s.license               = { :type => "Apache 2.0", :file => "LICENSE" }
@@ -42,7 +42,7 @@ sp.source_files              = "BoxContentSDK/BoxContentSDK/BOXLog.h"
 end
 
 s.subspec "no-arc" do |sp|
-sp.dependency                  "box-ios-content-sdk/logger"
+sp.dependency                  "box-ios-sdk/logger"
 sp.source_files              = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",
 "BoxContentSDK/BoxContentSDK/External/KeychainItemWrapper/BOXKeychainItemWrapper.{h,m}"
 sp.requires_arc              = false
