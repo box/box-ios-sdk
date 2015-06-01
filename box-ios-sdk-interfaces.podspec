@@ -3,13 +3,13 @@ Pod::Spec.new do |s|
 
 # Root specification
 
-s.name                  = "box-ios-content-sdk-interfaces"
-s.version               = "1.0.2"
-s.summary               = "iOS SDK for the Box V2 API."
-s.homepage              = "https://github.com/box/box-ios-content-sdk"
+s.name                  = "box-ios-sdk-interfaces"
+s.version               = "1.0.4"
+s.summary               = "iOS SDK for the Box API."
+s.homepage              = "https://github.com/box/box-ios-sdk"
 s.license               = { :type => "Apache 2.0", :file => "LICENSE" }
 s.author                = "Box"
-s.source                = { :git => "https://github.com/box/box-ios-content-sdk.git", :tag => "v#{s.version}" }
+s.source                = { :git => "https://github.com/box/box-ios-sdk.git", :tag => "v#{s.version}" }
 
 # Platform
 
