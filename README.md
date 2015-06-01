@@ -1,7 +1,7 @@
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
 [![Build Status](https://api.travis-ci.org/box/box-ios-content-sdk.svg)](https://travis-ci.org/box/box-ios-content-sdk)
 
-Box iOS Content SDK
+Box iOS SDK
 ===================
 
 This SDK makes it easy to use Box's [Content API](https://developers.box.com/docs/) in your iOS projects.
@@ -15,7 +15,7 @@ Quickstart
 ----------
 Step 1: Add to your Podfile
 ```
-pod 'box-ios-content-sdk'
+pod 'box-ios-sdk'
 ```
 Step 2: Install
 ```
