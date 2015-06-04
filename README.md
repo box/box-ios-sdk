@@ -25,9 +25,13 @@ Step 3: Import
 ```objectivec
 #import <BoxContentSDK/BOXContentSDK.h>
 ```
-Step 4: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md)
+Step 4: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md). 
 ```objectivec
-[BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  // The UIApplicationDelegate is a good place to do this.
+  [BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
+}
 ```
 Step 5: Authenticate a User
 ```objectivec
