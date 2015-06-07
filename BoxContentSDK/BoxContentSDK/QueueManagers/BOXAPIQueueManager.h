@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class BOXAPIOperation, BOXOAuth2Session, BOXAPIOAuth2ToJSONOperation;
+@class BOXAPIOperation, BOXOAuth2Session, BOXAPIOAuth2ToJSONOperation, BOXAbstractSession;
 
 /**
  * BOXAPIQueueManager is an abstract class you can use to encapsulate the enqueueing and running
@@ -38,7 +38,7 @@
  *
  * This object is owned by the BoxContentSDK instance.
  */
-@property (nonatomic, readwrite, weak) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readwrite, weak) BOXAbstractSession *session;
 
 /**
  * The set of all currently enqueued or in flight BOXAPIOAuth2ToJSONOperation instances.
@@ -54,7 +54,7 @@
  * Designated initializer
  * @param OAuth2Session This object is needed for locking
  */
-- (id)initWithOAuth2Session:(BOXOAuth2Session *)OAuth2Session;
+- (id)initWithSession:(BOXAbstractSession *)session;
 
 /** @name Enqueue Operations */
 

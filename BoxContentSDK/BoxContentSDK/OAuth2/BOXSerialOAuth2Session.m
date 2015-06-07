@@ -24,12 +24,12 @@
         BOXOAuth2TokenRequestClientIDKey : self.clientID,
         BOXOAuth2TokenRequestClientSecretKey : self.clientSecret,
     };
-
-    BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
-                                                                                   HTTPMethod:BOXAPIHTTPMethodPOST
-                                                                                         body:POSTParams
-                                                                                  queryParams:nil
-                                                                                OAuth2Session:self];
+    
+    BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc]initWithURL:self.grantTokensURL
+                                                                                  HTTPMethod:BOXAPIHTTPMethodPOST
+                                                                                        body:POSTParams
+                                                                                 queryParams:nil
+                                                                                     session:self];
 
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
@@ -43,7 +43,7 @@
         [self storeCredentialsToKeychain];
         
         // send success notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXOAuth2SessionDidRefreshTokensNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:self];
         
         if (block) {
             block(self, nil);
@@ -53,8 +53,8 @@
     operation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary)
     {
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
-                                                              forKey:BOXOAuth2AuthenticationErrorKey];
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXOAuth2SessionDidReceiveRefreshErrorNotification
+                                                              forKey:BOXAuthenticationErrorKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveRefreshErrorNotification
                                                             object:self
                                                           userInfo:errorInfo];
         

@@ -29,13 +29,13 @@
 
 - (id)init
 {
-    self = [self initWithOAuth2Session:nil];
+    self = [self initWithSession:nil];
     return self;
 }
 
-- (id)initWithOAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithSession:(BOXAbstractSession *)session
 {
-    self = [super initWithOAuth2Session:OAuth2Session];
+    self = [super initWithSession:session];
     if (self != nil)
     {
         _globalQueue = [[NSOperationQueue alloc] init];
@@ -59,7 +59,7 @@
 - (BOOL)enqueueOperation:(BOXAPIOperation *)operation
 {
     // lock on the OAuth2Session, which is the shared resource
-    @synchronized(self.OAuth2Session)
+    @synchronized(self.session)
     {
         [super enqueueOperation:operation];
 

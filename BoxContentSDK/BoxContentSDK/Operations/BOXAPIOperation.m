@@ -73,8 +73,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @implementation BOXAPIOperation
 
-@synthesize OAuth2Session = _OAuth2Session;
-@synthesize OAuth2AccessToken = _OAuth2AccessToken;
+@synthesize session = _session;
+@synthesize accessToken = _accessToken;
 
 // request properties
 @synthesize baseRequestURL = _baseRequestURL;
@@ -99,12 +99,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (id)init
 {
-    self = [self initWithURL:nil HTTPMethod:nil body:nil queryParams:nil OAuth2Session:nil];
+    self = [self initWithURL:nil HTTPMethod:nil body:nil queryParams:nil session:nil];
     BOXLog(@"Initialize operations with initWithURL:HTTPMethod:body:queryParams:OAuth2Session:. %@ cannot make an API call", self);
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
     self = [super init];
     if (self != nil)
@@ -112,7 +112,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _baseRequestURL = URL;
         _body = body;
         _queryStringParameters = queryParams;
-        _OAuth2Session = OAuth2Session;
+        _session = session;
 
         _APIRequest = nil;
         _connection = nil; // delay setting up the connection as long as possible so the OAuth2 credentials remain fresh
@@ -295,10 +295,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     BOXLog(@"BOXAPIOperation %@ was started", self);
     if (![self isCancelled])
     {
-        @synchronized(self.OAuth2Session)
+        @synchronized(self.session)
         {
             [self prepareAPIRequest];
-            self.OAuth2AccessToken = self.OAuth2Session.accessToken;
+            self.accessToken = self.session.accessToken;
         }
 
         if (self.error == nil && ![self isCancelled])
@@ -393,10 +393,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     // because we cannot easily test to make sure a notification is not sent when dealing asynchronously
     // Instead, we check to ensure this function was/wasn't called
     NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:self.error
-                                                          forKey:BOXOAuth2AuthenticationErrorKey];
+                                                          forKey:BOXAuthenticationErrorKey];
     NSDictionary *objectInfo = nil;
-    if (self.OAuth2Session.user.modelID) {
-        objectInfo = [NSDictionary dictionaryWithObject:self.OAuth2Session.user.modelID forKey:BOXOAuth2UserIDKey];
+    if (self.session.user.modelID) {
+        objectInfo = [NSDictionary dictionaryWithObject:self.session.user.modelID forKey:BOXUserIDKey];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification
                                                         object:objectInfo

@@ -39,15 +39,15 @@
 
 @implementation BOXAPIQueueManager
 
-@synthesize OAuth2Session = _OAuth2Session;
+@synthesize session = _session;
 @synthesize enqueuedOAuth2Operations = _enqueuedOAuth2Operations;
 
-- (id)initWithOAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithSession:(BOXAbstractSession *)session
 {
     self = [super init];
     if (self != nil)
     {
-        _OAuth2Session = OAuth2Session;
+        _session = session;
         _enqueuedOAuth2Operations = [NSMutableSet set];
     }
 
@@ -71,7 +71,7 @@
 
 - (void)OAuth2OperationDidComplete:(NSNotification *)notification
 {
-    @synchronized(self.OAuth2Session)
+    @synchronized(self.session)
     {
         BOXAPIOAuth2ToJSONOperation *operation = (BOXAPIOAuth2ToJSONOperation *)notification.object;
         BOXLog(@"%@ completed. Removing from set of OAuth2 dependencies", operation);

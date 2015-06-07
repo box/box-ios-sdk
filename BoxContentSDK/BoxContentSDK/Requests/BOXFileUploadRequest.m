@@ -105,7 +105,7 @@
                                                  HTTPMethod:BOXAPIHTTPMethodPOST
                                                        body:multipartBodyParameters
                                                 queryParams:nil
-                                              OAuth2Session:self.queueManager.OAuth2Session];
+                                              session:self.queueManager.session];
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
         NSInputStream *inputStream = [[NSInputStream alloc] initWithFileAtPath:self.localFilePath];

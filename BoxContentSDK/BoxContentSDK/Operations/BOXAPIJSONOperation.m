@@ -23,7 +23,7 @@
     NSDictionary *bodyCopy = [self.body copy];
     NSDictionary *queryStringParametersCopy = [self.queryStringParameters copy];
     
-    BOXAPIJSONOperation *operationCopy = [[BOXAPIJSONOperation allocWithZone:zone] initWithURL:URLCopy HTTPMethod:self.HTTPMethod body:bodyCopy queryParams:queryStringParametersCopy OAuth2Session:self.OAuth2Session];
+    BOXAPIJSONOperation *operationCopy = [[BOXAPIJSONOperation allocWithZone:zone] initWithURL:URLCopy HTTPMethod:self.HTTPMethod body:bodyCopy queryParams:queryStringParametersCopy session:self.session];
     operationCopy.success = [self.success copy];
     operationCopy.failure = [self.failure copy];
     operationCopy.timesReenqueued = self.timesReenqueued;
@@ -31,9 +31,9 @@
     return operationCopy;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams OAuth2Session:OAuth2Session];
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
     
     if (self != nil)
     {

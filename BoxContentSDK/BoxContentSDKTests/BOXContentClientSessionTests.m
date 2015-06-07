@@ -329,7 +329,7 @@
     id clientMock = [OCMockObject partialMockForObject:client];
     
     [[clientMock expect] logOut];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification object:@{BOXOAuth2UserIDKey : user.modelID}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification object:@{BOXUserIDKey : user.modelID}];
     [clientMock verify];
 }
 
@@ -372,7 +372,7 @@
     
     [[clientMockForUser1 expect] logOut];
     [[clientMockForUser2 reject] logOut];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification object:@{BOXOAuth2UserIDKey : user1.modelID}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification object:@{BOXUserIDKey : user1.modelID}];
     [clientMockForUser1 verify];
     [clientMockForUser2 verify];
 }

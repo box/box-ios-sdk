@@ -22,9 +22,9 @@
 
 @synthesize timesReenqueued = _timesReenqueued;
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams OAuth2Session:OAuth2Session];
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
     if (self != nil)
     {
         _timesReenqueued = 0;
@@ -35,11 +35,11 @@
 - (void)prepareAPIRequest
 {
     // If token has expired (or is very close to expiring), enqueue a token-refresh operation, which will become a dependency for this operation.
-    NSTimeInterval timeUntilTokenExpiry = [self.OAuth2Session.accessTokenExpiration timeIntervalSinceNow];
+    NSTimeInterval timeUntilTokenExpiry = [self.session.accessTokenExpiration timeIntervalSinceNow];
     if (timeUntilTokenExpiry < 60)
     {
         // Do a token refresh. This will become a depdency for the API operation.
-        [self.OAuth2Session performRefreshTokenGrant:self.OAuth2Session.accessToken withCompletionBlock:nil];
+        [self.session performRefreshTokenGrant:self.session.accessToken withCompletionBlock:nil];
         
         NSInteger errorCode;
         if (self.timesReenqueued == 0)
@@ -49,7 +49,7 @@
             // Make a copy of this operation and enqueue.
             BOXAPIJSONOperation *operationCopy = [self copy];
             operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
-            [self.OAuth2Session.queueManager enqueueOperation:operationCopy];
+            [self.session.queueManager enqueueOperation:operationCopy];
         }
         else
         {
@@ -61,7 +61,7 @@
     }
     else
     {
-        [self.OAuth2Session addAuthorizationParametersToRequest:self.APIRequest];
+        [self.session addAuthorizationParametersToRequest:self.APIRequest];
     }
 }
 
@@ -82,7 +82,7 @@
 - (void)handleExpiredOAuth2Token
 {
     // We rely on NSNotifications sent by performRefreshTokenGrant in this case so we're not setting a completion-block.
-    [self.OAuth2Session performRefreshTokenGrant:self.OAuth2AccessToken withCompletionBlock:nil];
+    [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
 }
 
 #pragma mark - NSURLConnectionDataDelegate
@@ -109,7 +109,7 @@
             operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
             // re-enqueue before adding OAuth2 operation so OAuth2 operation can be
             // added as a dependency
-            [self.OAuth2Session.queueManager enqueueOperation:operationCopy];
+            [self.session.queueManager enqueueOperation:operationCopy];
         }
         else
         {

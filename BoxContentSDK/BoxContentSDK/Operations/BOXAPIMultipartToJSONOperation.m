@@ -404,11 +404,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 #pragma mark - Upload operation initializers
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
     // do not pass body to super because we do not wish to JSON-encode it. The body will be converted to
     // NSDatas and appended as multipart form pieces
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:nil queryParams:queryParams OAuth2Session:OAuth2Session];
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:nil queryParams:queryParams session:session];
     if (self != nil)
     {
         _formPieces = [NSMutableArray array];
