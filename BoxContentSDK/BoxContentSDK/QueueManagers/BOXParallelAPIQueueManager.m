@@ -12,6 +12,7 @@
 #import "BOXAPIOAuth2ToJSONOperation.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXLog.h"
+#import "BOXAPIAppAuthOperation.h"
 
 @interface BOXParallelAPIQueueManager ()
 
@@ -64,7 +65,7 @@
         [super enqueueOperation:operation];
 
         // ensure that OAuth2 operations occur before all other operations
-        if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]])
+        if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppAuthOperation class]])
         {
             // hold a refernce to the pending OAuth2 operation so it can be added
             // as a dependency to all APIOperations enqueued before it finishes

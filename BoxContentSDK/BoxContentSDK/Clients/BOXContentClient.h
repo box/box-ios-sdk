@@ -6,6 +6,7 @@
 //
 
 #import "BOXOAuth2Session.h"
+#import "BOXAppUserSession.h"
 
 @class BOXAPIQueueManager;
 @class BOXRequest;
@@ -19,10 +20,7 @@
  */
 @property (nonatomic, readonly, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
-/**
- *  The SDK's OAuth2 session.
- */
-@property (nonatomic, readonly, strong) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readonly, strong) BOXAbstractSession *session;
 
 /**
  *  The base URL for all API operations including OAuth2.

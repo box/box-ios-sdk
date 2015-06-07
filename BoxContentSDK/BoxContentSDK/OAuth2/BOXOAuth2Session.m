@@ -34,9 +34,10 @@
 
 #pragma mark - Initialization
 
+
 - (instancetype)initWithClientID:(NSString *)ID secret:(NSString *)secret APIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
 {
-    if ([super initWithAPIBaseURL:baseURL queueManager:queueManager]) {
+    if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
         _clientID = ID;
         _clientSecret = secret;
         

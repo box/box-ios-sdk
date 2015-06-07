@@ -38,7 +38,7 @@
     NSTimeInterval timeUntilTokenExpiry = [self.session.accessTokenExpiration timeIntervalSinceNow];
     if (timeUntilTokenExpiry < 60)
     {
-        // Do a token refresh. This will become a depdency for the API operation.
+        // Do a token refresh. This will become a dependency for the API operation.
         [self.session performRefreshTokenGrant:self.session.accessToken withCompletionBlock:nil];
         
         NSInteger errorCode;

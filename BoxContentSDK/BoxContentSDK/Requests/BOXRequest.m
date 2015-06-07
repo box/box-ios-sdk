@@ -10,6 +10,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXISO8601DateFormatter.h"
+#import "BOXAppUserSession.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -80,6 +81,9 @@
 
 - (void)performRequest
 {
+    if ([self.queueManager.session isKindOfClass:[BOXAppUserSession class]] && self.queueManager.delegate == nil) {
+        [NSException raise:@"Invalid use of AppUsers" format:@"AccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient."];
+    }
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
     [self.queueManager enqueueOperation:self.operation];
 }

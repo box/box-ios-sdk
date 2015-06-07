@@ -16,7 +16,7 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BoxAppToAppApplication.h"
 #import "BoxAppToAppMessage.h"
-
+#import "BOXContentClient+AppUser.h"
 #import "BOXUserRequest.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
@@ -44,6 +44,15 @@
 }
 
 - (void)authenticateWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion forceInApp:(BOOL)forceInApp
+{
+    if ([self.session isKindOfClass:[BOXOAuth2Session class]] && !self.queueManager.delegate) {
+        [self authenticateOAuth2WithCompletionBlock:completion forceInApp:forceInApp];
+    } else {
+        [self autheticateAppUserWithCompletionBlock:completion];
+    }
+}
+
+- (void)authenticateOAuth2WithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion forceInApp:(BOOL)forceInApp
 {
     if (self.OAuth2Session.refreshToken.length > 0 && self.OAuth2Session.accessToken.length > 0) {
         BOXUserRequest *userRequest = [self currentUserRequest];
@@ -106,7 +115,7 @@
 - (void)logOut
 {
     [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:self.user.modelID];
-    [self.OAuth2Session revokeCredentials];
+    [self.session revokeCredentials];
     [self.queueManager cancelAllOperations];
 }
 
@@ -117,7 +126,7 @@
         BOXContentClient *client = [BOXContentClient clientForUser:user];
         [client logOut];
     }
-    [BOXOAuth2Session revokeAllCredentials];
+    [BOXAbstractSession revokeAllCredentials];
 }
 
 #pragma mark - Private Helpers
@@ -184,12 +193,12 @@
 
 - (void)setKeychainIdentifierPrefix:(NSString *)keychainIdentifierPrefix
 {
-    [[self.OAuth2Session class] setKeychainIdentifierPrefix:keychainIdentifierPrefix];
+    [BOXAbstractSession setKeychainIdentifierPrefix:keychainIdentifierPrefix];
 }
 
 - (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup
 {
-    [[self.OAuth2Session class] setKeychainAccessGroup:keychainAccessGroup];
+    [BOXAbstractSession setKeychainAccessGroup:keychainAccessGroup];
 }
 
 @end

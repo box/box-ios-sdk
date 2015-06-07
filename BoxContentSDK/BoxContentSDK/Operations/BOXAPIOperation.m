@@ -6,17 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIOperation.h"
+#import "BOXAPIOperation_Private.h"
 
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "NSString+BOXURLHelper.h"
-
-typedef enum {
-    BOXAPIOperationStateReady = 1,
-    BOXAPIOperationStateExecuting,
-    BOXAPIOperationStateFinished
-} BOXAPIOperationState;
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -58,16 +52,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
-#pragma mark - Thread keepalive
-+ (NSThread *)globalAPIOperationNetworkThread;
-+ (void)globalAPIOperationNetworkThreadEntryPoint:(id)sender;
-
-#pragma mark - Thread entry points for operation
-- (void)executeOperation;
 - (void)cancelConnection;
-
-#pragma mark - NSOperation state
-@property (nonatomic, readwrite, assign) BOXAPIOperationState state;
 
 @end
 
@@ -90,21 +75,19 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 // error handling
 @synthesize error = _error;
 
-@synthesize state = _state;
-
 - (NSString *)description
 {
     return [[super description] stringByAppendingFormat:@" %@ %@", self.HTTPMethod, self.baseRequestURL];
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [self initWithURL:nil HTTPMethod:nil body:nil queryParams:nil session:nil];
     BOXLog(@"Initialize operations with initWithURL:HTTPMethod:body:queryParams:OAuth2Session:. %@ cannot make an API call", self);
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
+- (instancetype)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
     self = [super init];
     if (self != nil)

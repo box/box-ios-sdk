@@ -12,7 +12,12 @@
 
 @interface BOXContentClient ()
 
+@property (nonatomic, readwrite, strong) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readwrite, strong) BOXAppUserSession *appSession;
+@property (nonatomic, readwrite, strong) BOXAbstractSession *session;
+
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;
+- (instancetype)initWithAppUsers:(BOOL)appUsers;
 
 @end

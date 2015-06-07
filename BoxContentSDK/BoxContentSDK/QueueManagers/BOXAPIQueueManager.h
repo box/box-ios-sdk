@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BOXAPIAccessTokenDelegate.h"
 
 @class BOXAPIOperation, BOXOAuth2Session, BOXAPIOAuth2ToJSONOperation, BOXAbstractSession;
 
@@ -47,6 +48,8 @@
  * This object is owned by the BoxContentSDK instance.
  */
 @property (nonatomic, readwrite, strong) NSMutableSet *enqueuedOAuth2Operations;
+
+@property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> delegate;
 
 /** @name Initializers */
 

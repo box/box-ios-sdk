@@ -62,6 +62,11 @@ typedef enum {
 } BOXContentSDKOAuth2Error;
 
 typedef enum {
+    BOXContentSDKAppUserErrorAccessTokenInvalid = 40000,
+    BOXContentSDKAppUserErrorAccessTokenExpirationInvalid = 40001
+} BOXContentSDKAppUserError;
+
+typedef enum {
     BOXContentSDKStreamErrorWriteFailed = 30000,
     BOXContentSDKStreamErrorReadFailed = 30001
 } BOXContentSDKStreamError;
