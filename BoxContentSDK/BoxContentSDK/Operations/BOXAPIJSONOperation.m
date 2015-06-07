@@ -133,7 +133,7 @@
     }
     else
     {
-        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && self.error.code == BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued)
+        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued)
         {
             // Do not fire failre block if request is going to be re-enqueued due to an expired token.
         }

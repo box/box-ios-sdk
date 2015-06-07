@@ -107,7 +107,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 	if (self.hasLoadedLoginPage == NO)
 	{
-		NSURLRequest *request = [[NSURLRequest alloc] initWithURL:self.SDKClient.OAuth2Session.authorizeURL];
+        BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
+		NSURLRequest *request = [[NSURLRequest alloc] initWithURL:OAuth2Session.authorizeURL];
 
 		UIWebView *webView = (UIWebView *)self.view;
 		[webView loadRequest:request];
@@ -179,16 +180,17 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 	}
 
 	// Figure out whether the scheme of this request is the redirect scheme used at the end of the authentication process
-	BOOL requestIsForLoginRedirectScheme = NO;
-	if ([self.SDKClient.OAuth2Session.redirectURIString length] > 0)
+    BOOL requestIsForLoginRedirectScheme = NO;
+    BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
+	if ([OAuth2Session.redirectURIString length] > 0)
 	{
-		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.SDKClient.OAuth2Session.redirectURIString] scheme]];
+		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:OAuth2Session.redirectURIString] scheme]];
 	}
 
 	if (requestIsForLoginRedirectScheme)
 	{
         __weak BOXAuthorizationViewController *me = self;
-        [self.SDKClient.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+        [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     if (me.completionBlock) {

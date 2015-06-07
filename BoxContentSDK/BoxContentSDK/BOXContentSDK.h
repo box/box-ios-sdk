@@ -10,9 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-// ANDREW STUFF (Remove this comment later)
-#import "BOXAbstractSession.h"
-
 // constants and logging
 #import "BOXContentSDKConstants.h"
 #import "BOXLog.h"
@@ -33,11 +30,12 @@
 #import "BOXContentClient+folder.h"
 #import "BOXContentClient+Bookmark.h"
 
-// OAuth2
+// Session
 #import "BOXAuthorizationViewController.h"
+#import "BOXAbstractSession.h"
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
-#import "BOXSerialOAuth2Session.h"
+#import "BOXAppUserSession.h"
 
 // AppToApp
 
@@ -102,6 +100,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXSerialAPIQueueManager.h"
 #import "BOXParallelAPIQueueManager.h"
+#import "BOXAPIAccessTokenDelegate.h"
 
 // API Operations
 #import "BOXAPIOperation.h"
@@ -111,6 +110,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
+#import "BOXAPIAppAuthOperation.h"
 
 // API models
 #import "BOXItem.h"

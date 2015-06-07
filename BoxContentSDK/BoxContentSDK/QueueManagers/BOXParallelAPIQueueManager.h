@@ -13,9 +13,9 @@
  * This queue manager allows many concurrent operations at a time. This means that at any
  * given time, only many API calls may be in progress.
  *
- * BOXParallelAPIQueueManager is intended to be used in conjunction with a BOXParallelOAuth2Session.
+ * BOXParallelAPIQueueManager is intended to be used in conjunction with a BOXParallelOAuth2Session/BOXAppUserSession.
  * Both classes assume many concurrent [BOXAPIOperations]([BOXAPIOperation])s. To ensure that the
- * tokens will not get thrashed by concurrent refreshes of the same token, BOXParallelOAuth2Session
+ * tokens will not get thrashed by concurrent refreshes of the same token, BOXParallelOAuth2Session/BOXAppUserSession
  * stores a set of all access tokens that have triggered a token refresh. All BOXAPIOperation instances
  * hold a copy of the token they were signed with and pass that to the OAuth2 session when attempting a
  * refresh. This prevents multiple refresh attempts from the same set of tokens.
@@ -52,7 +52,7 @@
 
 /**
  * In addition to calling super, this method sets `globalQueue.maxConcurrentOperationCount` to `1`
- * @param OAuth2Session This object is needed for locking
+ * @param session This object is needed for locking
  */
 - (id)initWithSession:(BOXAbstractSession *)session;
 
@@ -61,7 +61,7 @@
 /**
  * Enqueues operation to be executed. This method calls [BOXAPIQueueManager enqueueOperation:].
  *
- * This method synchronizes on OAuth2Session.
+ * This method synchronizes on session.
  *
  * @param operation The BOXAPIOperation to be enqueued for execution
  */

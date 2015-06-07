@@ -6,17 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIOperation.h"
+#import "BOXAPIOperation_Private.h"
 
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "NSString+BOXURLHelper.h"
-
-typedef enum {
-    BOXAPIOperationStateReady = 1,
-    BOXAPIOperationStateExecuting,
-    BOXAPIOperationStateFinished
-} BOXAPIOperationState;
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -58,16 +52,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
-#pragma mark - Thread keepalive
-+ (NSThread *)globalAPIOperationNetworkThread;
-+ (void)globalAPIOperationNetworkThreadEntryPoint:(id)sender;
-
-#pragma mark - Thread entry points for operation
-- (void)executeOperation;
 - (void)cancelConnection;
-
-#pragma mark - NSOperation state
-@property (nonatomic, readwrite, assign) BOXAPIOperationState state;
 
 @end
 
@@ -90,21 +75,24 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 // error handling
 @synthesize error = _error;
 
-@synthesize state = _state;
-
 - (NSString *)description
 {
     return [[super description] stringByAppendingFormat:@" %@ %@", self.HTTPMethod, self.baseRequestURL];
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [self initWithURL:nil HTTPMethod:nil body:nil queryParams:nil session:nil];
-    BOXLog(@"Initialize operations with initWithURL:HTTPMethod:body:queryParams:OAuth2Session:. %@ cannot make an API call", self);
+    BOXLog(@"Initialize operations with initWithURL:HTTPMethod:body:queryParams:session:. %@ cannot make an API call", self);
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
+- (instancetype)initWithSession:(BOXAbstractSession *)session
+{
+    return [self initWithURL:nil HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:session];
+}
+
+- (instancetype)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
     self = [super init];
     if (self != nil)
@@ -115,7 +103,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _session = session;
 
         _APIRequest = nil;
-        _connection = nil; // delay setting up the connection as long as possible so the OAuth2 credentials remain fresh
+        _connection = nil; // delay setting up the connection as long as possible so the authentication credentials remain fresh
 
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
@@ -366,17 +354,17 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     BOOL shouldLogout = NO;
     if ([error.domain isEqualToString:BOXContentSDKErrorDomain]) {
         NSDictionary *errorInfo = [error.userInfo objectForKey:BOXJSONErrorResponseKey];
-        NSString *errorType = [errorInfo objectForKey:BOXOAuth2URLParameterErrorCodeKey];
-        if ([errorType isEqualToString:BOXOAuth2TokenRequestErrorInvalidGrant]) {
+        NSString *errorType = [errorInfo objectForKey:BOXAuthURLParameterErrorCodeKey];
+        if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidGrant]) {
             shouldLogout = YES;
         } else if (error.code == BOXContentSDKAPIErrorUnauthorized) {
             // HTTP-401 - unauthorized
-            if ([errorType isEqualToString:BOXOAuth2TokenRequestErrorInvalidToken]) {
+            if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidToken]) {
                 BOXLog(@"Operation failure is due to invalid access token.");
                 
                 // Invalid access-token.
                 // We can't just log the user out because this is a state that is often recoverable through an acceess-token refresh.
-            } else if ([errorType isEqualToString:BOXOAuth2TokenRequestErrorInvalidRequest]) {
+            } else if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidRequest]) {
                 BOXLog(@"Operation failure is due to invalid request, possibly due to a missing access token in the request.");
             } else {
                 shouldLogout = YES;

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BOXAPIAccessTokenDelegate.h"
 
-@class BOXAPIOperation, BOXOAuth2Session, BOXAPIOAuth2ToJSONOperation, BOXAbstractSession;
+@class BOXAPIOperation, BOXAPIOAuth2ToJSONOperation, BOXAbstractSession;
 
 /**
  * BOXAPIQueueManager is an abstract class you can use to encapsulate the enqueueing and running
@@ -22,10 +23,10 @@
  * =================
  * Subclasses of BOXAPIQueueManager should override enqueueOperation:. It is important to call
  * this method's super in subclasses because the implementation in BOXAPIQueueManager listens
- * for notifications from the OAuth2Session in order to help implement locking the queue for
- * BOXAPIOAuth2ToJSONOperation instances.
+ * for notifications from the session in order to help implement locking the queue for
+ * BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation instances.
  *
- * Subclasses should ensure BOXAPIOAuth2ToJSONOperation instances are executed with the correct order
+ * Subclasses should ensure BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation instances are executed with the correct order
  * relative to other BOXAPIOperation instances. Subclasses should ensure that several refresh operations
  * are not executed at once; this has the potential to thrash the shared refresh token and cause a user
  * to become logged out.
@@ -33,7 +34,7 @@
 @interface BOXAPIQueueManager : NSObject
 
 /**
- * OAuth2Session should be used by subclasses to ensure that multiple
+ * session should be used by subclasses to ensure that multiple
  * refresh operations are not excecuted in parallel.
  *
  * This object is owned by the BoxContentSDK instance.
@@ -41,29 +42,31 @@
 @property (nonatomic, readwrite, weak) BOXAbstractSession *session;
 
 /**
- * The set of all currently enqueued or in flight BOXAPIOAuth2ToJSONOperation instances.
- * Subclasses should add these operations as dependencies of other, non-OAuth2 operations.
+ * The set of all currently enqueued or in flight BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation instances.
+ * Subclasses should add these operations as dependencies of other, non-Auth operations.
  *
  * This object is owned by the BoxContentSDK instance.
  */
-@property (nonatomic, readwrite, strong) NSMutableSet *enqueuedOAuth2Operations;
+@property (nonatomic, readwrite, strong) NSMutableSet *enqueuedAuthOperations;
+
+@property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> delegate;
 
 /** @name Initializers */
 
 /**
  * Designated initializer
- * @param OAuth2Session This object is needed for locking
+ * @param session This object is needed for locking
  */
 - (id)initWithSession:(BOXAbstractSession *)session;
 
 /** @name Enqueue Operations */
 
 /**
- * Set up this instance as an observer for notifications on operation if thew operation is a
- * BOXAPIOAuth2ToJSONOperation instance. Subclasses should enqueue operations received via this
+ * Set up this instance as an observer for notifications on operation if the operation is a
+ * BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation instance. Subclasses should enqueue operations received via this
  * method on an NSOperationQueue to be executed.
  *
- * This method synchronizes on OAuth2Session.
+ * This method synchronizes on session.
  *
  * @param operation The BOXAPIOperation to be enqueued for execution
  */

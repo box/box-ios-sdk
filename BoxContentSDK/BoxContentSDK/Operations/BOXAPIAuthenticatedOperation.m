@@ -38,13 +38,13 @@
     NSTimeInterval timeUntilTokenExpiry = [self.session.accessTokenExpiration timeIntervalSinceNow];
     if (timeUntilTokenExpiry < 60)
     {
-        // Do a token refresh. This will become a depdency for the API operation.
+        // Do a token refresh. This will become a dependency for the API operation.
         [self.session performRefreshTokenGrant:self.session.accessToken withCompletionBlock:nil];
         
         NSInteger errorCode;
         if (self.timesReenqueued == 0)
         {
-            errorCode = BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued;
+            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued;
             
             // Make a copy of this operation and enqueue.
             BOXAPIJSONOperation *operationCopy = [self copy];
@@ -53,7 +53,7 @@
         }
         else
         {
-            errorCode = BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCouldNotBeCompleted;
+            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted;
         }
         
         // Short-circuit this operation.
@@ -65,7 +65,7 @@
     }
 }
 
-- (BOOL)isOAuth2TokenExpired
+- (BOOL)isAccessTokenExpired
 {
     NSString *wwwAuthenticateHeader = [[self.HTTPResponse allHeaderFields] objectForKey:WWW_AUTHENTICATE_HEADER];
 
@@ -79,7 +79,7 @@
     return NO;
 }
 
-- (void)handleExpiredOAuth2Token
+- (void)handleExpiredAccessToken
 {
     // We rely on NSNotifications sent by performRefreshTokenGrant in this case so we're not setting a completion-block.
     [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
@@ -90,12 +90,12 @@
 {
     [super connection:connection didReceiveResponse:response];
 
-    BOOL isOAuth2TokenExpired = [self isOAuth2TokenExpired];
+    BOOL isOAuth2TokenExpired = [self isAccessTokenExpired];
 
     if (isOAuth2TokenExpired && self.timesReenqueued == 0)
     {
         BOXLog(@"OAuth2 access token is expired.");
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
 
         // re-enqueue operation in the same queue referred to by the OAuth2 session
         // if possible. This is only possible for BOXAPIJSONOperations.
@@ -113,15 +113,15 @@
         }
         else
         {
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
         }
 
         BOXLog(@"Attempting automatic OAuth2 token refresh");
-        [self handleExpiredOAuth2Token];
+        [self handleExpiredAccessToken];
     }
     else if (isOAuth2TokenExpired)
     {
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCouldNotBeCompleted userInfo:nil];
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted userInfo:nil];
     }
 }
 

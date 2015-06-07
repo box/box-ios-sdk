@@ -125,7 +125,7 @@
     }
     else
     {
-        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && (self.error.code == BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
+        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && (self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
                                                                       self.error.code == BOXContentSDKAPIErrorAccepted))
         {
             // Do not fire failre block if request is going to be re-enqueued due to an expired token, or a 202 response.
