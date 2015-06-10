@@ -3,10 +3,9 @@
 //  BoxContentSDK
 //
 
-#import "BOXFolderRequest.h"
-#import "BOXSharedLink.h"
+#import "BOXRequestWithSharedLinkHeader.h"
 
-@interface BOXFolderUpdateRequest : BOXFolderRequest
+@interface BOXFolderUpdateRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readonly, strong) NSString *folderID;
 @property (nonatomic, readwrite, strong) NSString *folderName;
@@ -26,6 +25,9 @@
 
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 
+@property (nonatomic, readwrite, assign) BOOL requestAllFolderFields;
+
 - (instancetype)initWithFolderID:(NSString *)folderID;
+- (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
 
 @end

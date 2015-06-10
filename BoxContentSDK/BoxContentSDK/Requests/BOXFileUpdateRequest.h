@@ -18,6 +18,8 @@
 
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 
+@property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
+
 - (instancetype)initWithFileID:(NSString *)fileID;
 
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock;

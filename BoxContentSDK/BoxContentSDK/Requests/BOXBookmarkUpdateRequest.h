@@ -19,6 +19,8 @@
 
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 
+@property (nonatomic, readwrite, assign) BOOL requestAllBookmarkFields;
+
 - (instancetype)initWithBookmarkID:(NSString *)bookmarkID;
 
 - (void)performRequestWithCompletion:(BOXBookmarkBlock)completionBlock;

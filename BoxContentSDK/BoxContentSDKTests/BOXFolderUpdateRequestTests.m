@@ -10,6 +10,7 @@
 #import "BOXFolderUpdateRequest.h"
 #import "BOXRequest_Private.h"
 #import "BOXFolder.h"
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFolderUpdateRequestTests : BOXRequestTestCase
 @end
@@ -62,6 +63,7 @@
     NSString *matchingEtag = @"5849054tsefs";
     
     BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID];
+    request.requestAllFolderFields = YES;
     request.folderName = newName;
     request.folderDescription = newDescription;
     request.parentID = newParentFolderID;
@@ -78,9 +80,14 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID]];
-    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
+    
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
+    
+    NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullFolderFieldsParameterString];
+    XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     
     // HTTP body assertions
     NSDictionary *expectedBodyDictionary = @{@"name" : newName,

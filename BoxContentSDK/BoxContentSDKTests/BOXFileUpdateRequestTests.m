@@ -9,6 +9,8 @@
 #import "BOXRequestTestCase.h"
 #import "BOXFileUpdateRequest.h"
 #import "BOXFile.h"
+#import "BOXRequest_Private.h"
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFileUpdateRequestTests : BOXRequestTestCase
 @end
@@ -56,6 +58,7 @@
     BOOL newSharedLinkPermissionCanPreview = YES;
     
     BOXFileUpdateRequest *request = [[BOXFileUpdateRequest alloc] initWithFileID:fileID];
+    request.requestAllFileFields = YES;
     request.fileName = newName;
     request.fileDescription = newDescription;
     request.parentID = newParentFolderID;
@@ -68,9 +71,14 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID]];
-    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
+    
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
+    
+    NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullFileFieldsParameterString];
+    XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     
     // HTTP body assertions
     NSDictionary *expectedBodyDictionary = @{@"name" : newName,

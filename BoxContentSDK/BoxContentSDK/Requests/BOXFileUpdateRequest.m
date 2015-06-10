@@ -46,6 +46,8 @@
                            subresource:nil
                                  subID:nil];
 
+    // Body
+    
     NSMutableDictionary *bodyDictionary = [[NSMutableDictionary alloc] init];
 
     if (self.fileName.length > 0) {
@@ -90,9 +92,17 @@
         bodyDictionary[BOXAPIObjectKeyParent] = parentID;
     }
 
+    // Query Params
+    
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllFileFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
+    }
+    
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPUT
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];
