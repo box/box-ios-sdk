@@ -12,14 +12,14 @@
 #import "BOXUserRequest.h"
 #import "BOXUser_Private.h"
 #import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIOperation_Private.h"
 
 @implementation BOXAppUserSession
 
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
-    // NOTE: Will cause CFNetwork internal error because NSURLRequest HTTPMethod is nil.
     __weak BOXAppUserSession *weakSelf = self;
-    BOXAPIAppAuthOperation *operation = [[BOXAPIAppAuthOperation alloc]initWithURL:nil HTTPMethod:nil body:nil queryParams:nil session:self];
+    BOXAPIAppAuthOperation *operation = [[BOXAPIAppAuthOperation alloc]initWithSession:self];
     operation.success = ^(NSString *accessToken, NSDate *accessTokenExpiration) {
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;
@@ -31,7 +31,6 @@
                 weakSelf.user = [[BOXUserMini alloc]initWithUserID:user.modelID name:user.name login:user.login];
                 [weakSelf storeCredentialsToKeychain];
                 
-                [[NSNotificationCenter defaultCenter]postNotificationName:BOXSessionDidBecomeAuthenticatedNotification object:weakSelf];
                 [[NSNotificationCenter defaultCenter]postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
                 
                 if (block) {
@@ -46,7 +45,15 @@
     };
     
     operation.failure = ^(NSError *error) {
-        NSLog(@"AppUserSession Failed!");
+        NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
+                                                              forKey:BOXAuthenticationErrorKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveAuthenticationErrorNotification
+                                                            object:self
+                                                          userInfo:errorInfo];
+        
+        if (block) {
+            block(self, error);
+        }
     };
     
     [self.queueManager enqueueOperation:operation];

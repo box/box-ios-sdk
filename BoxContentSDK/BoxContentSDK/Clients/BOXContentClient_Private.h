@@ -18,6 +18,5 @@
 
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;
-- (instancetype)initWithAppUsers:(BOOL)appUsers;
 
 @end

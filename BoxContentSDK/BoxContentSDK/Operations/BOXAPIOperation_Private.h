@@ -19,6 +19,9 @@ typedef enum {
 #pragma mark - NSOperation state
 @property (nonatomic, readwrite, assign) BOXAPIOperationState state;
 
+#pragma mark initializers
+- (instancetype)initWithSession:(BOXAbstractSession *)session;
+
 #pragma mark - Thread keepalive
 + (NSThread *)globalAPIOperationNetworkThread;
 + (void)globalAPIOperationNetworkThreadEntryPoint:(id)sender;

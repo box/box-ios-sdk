@@ -87,6 +87,11 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     return self;
 }
 
+- (instancetype)initWithSession:(BOXAbstractSession *)session
+{
+    return [self initWithURL:nil HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:session];
+}
+
 - (instancetype)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
     self = [super init];

@@ -54,13 +54,13 @@ static BOXContentClient *defaultInstance = nil;
                 BOXUserMini *storedUser = [storedUsers firstObject];
                 defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.modelID];
                 if (defaultInstance == nil) {
-                    defaultInstance = [[self alloc] initWithBOXUser:storedUser usingAppUsers:NO];
+                    defaultInstance = [[self alloc] initWithBOXUser:storedUser];
                     [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.modelID];
                 }
             }
             else
             {
-                defaultInstance = [[self alloc] initWithAppUsers:NO];
+                defaultInstance = [[self alloc] init];
             }
         }
     });
@@ -79,11 +79,8 @@ static BOXContentClient *defaultInstance = nil;
     {
         BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.modelID];
         if (client == nil) {
-            BOXOAuth2Session *session = [[BOXOAuth2Session alloc]init];
-            [session restoreCredentialsFromKeychainForUserWithID:user.modelID];
-            
             // Only OAuth2Session contain a refresh token. Otherwise it's an AppUserSession.
-            client = [[self alloc] initWithBOXUser:user usingAppUsers:(session.refreshToken == nil)];
+            client = [[self alloc] initWithBOXUser:user];
             
             [[[self class] SDKClients] setObject:client forKey:user.modelID];
         }
@@ -94,7 +91,7 @@ static BOXContentClient *defaultInstance = nil;
 
 + (BOXContentClient *)clientForNewSession
 {
-    return [[self alloc] initWithAppUsers:NO];
+    return [[self alloc] init];
 }
 
 + (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret
@@ -125,7 +122,7 @@ static BOXContentClient *defaultInstance = nil;
     staticAppToAppBoxAuthenticationEnabled = enabled;
 }
 
-- (instancetype)initWithAppUsers:(BOOL)appUsers
+- (instancetype)init
 {
     if (self = [super init])
     {
@@ -140,18 +137,12 @@ static BOXContentClient *defaultInstance = nil;
         // because sessions enqueue API operations to fetch access tokens and the queue
         // manager uses the session as a lock object when enqueuing operations.
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
-        
-        if (appUsers) {
-            _appSession = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL
-                                                      queueManager:_queueManager];
-            _queueManager.session = _appSession;
-        } else {
-            _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
+
+        _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
                                                                          secret:staticClientSecret
                                                                      APIBaseURL:BOXAPIBaseURL//FIXME:
                                                                    queueManager:_queueManager];
-            _queueManager.session = _OAuth2Session;
-        }
+        _queueManager.session = self.session;
         
         
         // Initialize our sharedlink helper with the default protocol implementation
@@ -181,10 +172,17 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
-- (instancetype)initWithBOXUser:(BOXUserMini *)user usingAppUsers:(BOOL)appUsers
+- (instancetype)initWithBOXUser:(BOXUserMini *)user
 {
-    if (self = [self initWithAppUsers:appUsers])
+    if (self = [self init])
     {
+        BOXOAuth2Session *session = [[BOXOAuth2Session alloc]init];
+        [session restoreCredentialsFromKeychainForUserWithID:user.modelID];
+        
+        if (session.refreshToken == nil) {
+            self.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+        }
+        
         [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
     }
     return self;
@@ -194,7 +192,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
     if (self.user.modelID && session.user.modelID && ![self.user.modelID isEqualToString:session.user.modelID]) {
-        [NSException raise:@"BOXUser mismatch." format:@"Client User: %@ does not match Session User: %@", self.user.modelID, self.session.user.modelID];
+        BOXAssertFail(@"BOXUser mismatch in BOXContentClient instance. Client User: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
     }
 }
 
@@ -288,11 +286,14 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)setSession:(BOXAbstractSession *)session
 {
-    if (self.OAuth2Session) {
+    if ([session isKindOfClass:[BOXOAuth2Session class]]) {
         _OAuth2Session = (BOXOAuth2Session *)session;
+        _appSession = nil;
     } else {
         _appSession = (BOXAppUserSession *)session;
+        _OAuth2Session = nil;
     }
+    self.queueManager.session = self.session;
 }
 
 #pragma mark - helper methods
