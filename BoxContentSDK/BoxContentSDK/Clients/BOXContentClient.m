@@ -172,6 +172,11 @@ static BOXContentClient *defaultInstance = nil;
                                                  selector:@selector(didReceiveUserWasLoggedOutNotification:)
                                                      name:BOXUserWasLoggedOutDueToErrorNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didReceiveAccessTokenRefreshedNotification:)
+                                                     name:BOXSessionDidRefreshTokensNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -185,6 +190,14 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
+- (void)didReceiveAccessTokenRefreshedNotification:(NSNotification *)notification
+{
+    BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
+    if (self.user.modelID && session.user.modelID && ![self.user.modelID isEqualToString:session.user.modelID]) {
+        [NSException raise:@"BOXUser mismatch." format:@"Client User: %@ does not match Session User: %@", self.user.modelID, self.session.user.modelID];
+    }
+}
+
 - (void)didReceiveUserWasLoggedOutNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = (NSDictionary *)notification.object;
@@ -196,8 +209,8 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)didReceiveSessionDidBecomeAuthenticatedNotification:(NSNotification *)notification
 {
-    // We should never have more than one BOXOAuth2Session pointing to the same user.
-    // When a BOXOAuth2Session becomes authenticated, any SDK clients that may have had a BOXOAuth2Session for the same
+    // We should never have more than one session pointing to the same user.
+    // When a session becomes authenticated, any SDK clients that may have had a session for the same
     // user should update to the most recently authenticated one.
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
     

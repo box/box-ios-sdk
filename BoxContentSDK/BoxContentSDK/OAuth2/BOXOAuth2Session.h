@@ -31,11 +31,11 @@
  * ===============
  * An OAuth2 session will issue the following notifications when the authorization state changes:
  *
- * - `BOXOAuth2SessionDidBecomeAuthenticatedNotification` upon successfully exchanging an authorization code for a
+ * - `BOXAuthSessionDidBecomeAuthenticatedNotification` upon successfully exchanging an authorization code for a
  *   set of tokens.
- * - `BOXOAuth2SessionDidReceiveAuthenricationErrorNotification` when the authorization code grant fails.
- * - `BOXOAuth2SessionDidRefreshTokensNotification` upon successfully refreshing an access token.
- * - `BOXOAuth2SessionDidReceiveRefreshErrorNotification` when a refresh attempt has failed (for example because
+ * - `BOXAuthSessionDidReceiveAuthenricationErrorNotification` when the authorization code grant fails.
+ * - `BOXAuthSessionDidRefreshTokensNotification` upon successfully refreshing an access token.
+ * - `BOXAuthSessionDidReceiveRefreshErrorNotification` when a refresh attempt has failed (for example because
  *   the refresh token has been revoked or is expired).
  *
  * Subclassing Notes
@@ -115,11 +115,11 @@
 /**
  * Exchange an authorization code for an access token and a refresh token.
  * 
- * This method should send the `BOXOAuth2SessionDidBecomeAuthenticatedNotification` notification when an
+ * This method should send the `BOXAuthSessionDidBecomeAuthenticatedNotification` notification when an
  * authorization code is successfully exchanged for an access token and a refresh
  * token.
  * 
- * This method should send the `BOXOAuth2SessionDidReceiveAuthenricationErrorNotification` notification
+ * This method should send the `BOXAuthSessionDidReceiveAuthenricationErrorNotification` notification
  * if an authorization code is not obtained from the authorization webview flow
  * (for example if the user denies authorizing your application).
  *
@@ -164,10 +164,10 @@
  *
  * This method may be called automatically by the SDK framework upon a failed API call.
  *
- * This method should send the `BOXOAuth2SessionDidRefreshTokensNotification` notification upon successfully
+ * This method should send the `BOXAuthSessionDidRefreshTokensNotification` notification upon successfully
  * exchanging a refresh token for a new access token and refresh token.
  *
- * This method should send the `BOXOAuth2SessionDidReceiveRefreshErrorNotification` notification if a refresh
+ * This method should send the `BOXAuthSessionDidReceiveRefreshErrorNotification` notification if a refresh
  * token cannot be exchanged for a new set of tokens (for example if it has been revoked or is expired)
  *
  * @param expiredAccessToken The access token that expired.

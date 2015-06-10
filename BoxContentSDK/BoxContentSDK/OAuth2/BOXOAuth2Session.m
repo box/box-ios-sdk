@@ -59,13 +59,13 @@
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block
 {
     NSDictionary *URLQueryParams = [URL box_queryDictionary];
-    NSString *serverNonce = [URLQueryParams valueForKey:BOXOAuth2URLParameterAuthorizationStateKey];
-    NSString *authorizationCode = [URLQueryParams valueForKey:BOXOAuth2URLParameterAuthorizationCodeKey];
-    NSString *authorizationError = [URLQueryParams valueForKey:BOXOAuth2URLParameterErrorCodeKey];
+    NSString *serverNonce = [URLQueryParams valueForKey:BOXAuthURLParameterAuthorizationStateKey];
+    NSString *authorizationCode = [URLQueryParams valueForKey:BOXAuthURLParameterAuthorizationCodeKey];
+    NSString *authorizationError = [URLQueryParams valueForKey:BOXAuthURLParameterErrorCodeKey];
 
     if ([serverNonce isEqualToString:self.nonce] == NO) {        
         NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain 
-                                                    code:BOXContentSDKOAuth2ErrorAccessTokenNonceMismatch
+                                                    code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
                                                 userInfo:nil];
         if (block) {
             block(nil, error);
@@ -75,7 +75,7 @@
     
     if (authorizationError != nil) {
         NSInteger errorCode = BOXContentSDKAPIErrorUnknownStatusCode;
-        if ([authorizationError isEqualToString:BOXOAuth2ErrorAccessDenied]) {
+        if ([authorizationError isEqualToString:BOXAuthErrorAccessDenied]) {
             errorCode = BOXContentSDKAPIErrorUserDeniedAccess;
         }
         NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
@@ -92,11 +92,11 @@
 
 
     NSDictionary *POSTParams = @{
-                                 BOXOAuth2TokenRequestGrantTypeKey : BOXOAuth2TokenRequestGrantTypeAuthorizationCode,
-                                 BOXOAuth2TokenRequestAuthorizationCodeKey : authorizationCode,
-                                 BOXOAuth2TokenRequestClientIDKey : self.clientID,
-                                 BOXOAuth2TokenRequestClientSecretKey : self.clientSecret,
-                                 BOXOAuth2TokenRequestRedirectURIKey : self.redirectURIString,
+                                 BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeAuthorizationCode,
+                                 BOXAuthTokenRequestAuthorizationCodeKey : authorizationCode,
+                                 BOXAuthTokenRequestClientIDKey : self.clientID,
+                                 BOXAuthTokenRequestClientSecretKey : self.clientSecret,
+                                 BOXAuthTokenRequestRedirectURIKey : self.redirectURIString,
                                  };
 
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[self grantTokensURL]
@@ -107,10 +107,10 @@
 
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        self.accessToken = [JSONDictionary valueForKey:BOXOAuth2TokenJSONAccessTokenKey];
-        self.refreshToken = [JSONDictionary valueForKey:BOXOAuth2TokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
-        NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXOAuth2TokenJSONExpiresInKey] integerValue];
+        NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
         self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
@@ -190,10 +190,10 @@
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
 {
     NSDictionary *POSTParams = @{
-                                 BOXOAuth2TokenRequestGrantTypeKey : BOXOAuth2TokenRequestGrantTypeRefreshToken,
-                                 BOXOAuth2TokenRequestRefreshTokenKey : self.refreshToken,
-                                 BOXOAuth2TokenRequestClientIDKey : self.clientID,
-                                 BOXOAuth2TokenRequestClientSecretKey : self.clientSecret,
+                                 BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
+                                 BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,
+                                 BOXAuthTokenRequestClientIDKey : self.clientID,
+                                 BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                  };
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
@@ -204,10 +204,10 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        self.accessToken = [JSONDictionary valueForKey:BOXOAuth2TokenJSONAccessTokenKey];
-        self.refreshToken = [JSONDictionary valueForKey:BOXOAuth2TokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
-        NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXOAuth2TokenJSONExpiresInKey] integerValue];
+        NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
         self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         

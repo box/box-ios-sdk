@@ -15,7 +15,7 @@
  *
  * This class is intended to be used in conjunction with a BOXSerialOAuth2Session. Both classes
  * assume one concurrent BOXAPIOperation. This assumption enables the locking strategy with regard
- * to OAuth2 token refresh to be simplified. Whenever any BOXAPIOAuth2ToJSONOperation is enqueued,
+ * to access token refresh to be simplified. Whenever any BOXAPIOAuth2ToJSONOperation is enqueued,
  * it is added as a dependency to all currently enqueued operations as well as operations enqueued
  * before the OAuth2 operation completes.
  */
@@ -42,7 +42,7 @@
 /**
  * Enqueues operation on globalQueue to be executed. This method calls [BOXAPIQueueManager enqueueOperation:].
  *
- * This method synchronizes on OAuth2Session.
+ * This method synchronizes on session.
  *
  * @param operation The BOXAPIOperation to be enqueued for execution
  */

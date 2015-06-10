@@ -49,7 +49,7 @@
         self.queueManager.session = self.session;
         self.queueManager.delegate = delegate;
     } else {
-        [NSException raise:@"AccessTokenDelegate invalid delegate." format:@"delegate must be non-nil when calling setAccessTokenDelegate:."];
+        [NSException raise:@"BOXAPIAccessTokenDelegate invalid delegate." format:@"delegate must be non-nil when calling setAccessTokenDelegate:."];
     }
 }
 

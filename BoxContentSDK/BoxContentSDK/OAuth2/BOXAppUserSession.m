@@ -32,6 +32,7 @@
                 [weakSelf storeCredentialsToKeychain];
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:BOXSessionDidBecomeAuthenticatedNotification object:weakSelf];
+                [[NSNotificationCenter defaultCenter]postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
                 
                 if (block) {
                     block(weakSelf, nil);

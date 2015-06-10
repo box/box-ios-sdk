@@ -56,23 +56,23 @@ BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI = @"BoxApi";
 
 // OAuth2 constants
 // Authorization code response
-NSString *const BOXOAuth2URLParameterAuthorizationStateKey = @"state";
-NSString *const BOXOAuth2URLParameterAuthorizationCodeKey = @"code";
-NSString *const BOXOAuth2URLParameterErrorCodeKey = @"error";
+NSString *const BOXAuthURLParameterAuthorizationStateKey = @"state";
+NSString *const BOXAuthURLParameterAuthorizationCodeKey = @"code";
+NSString *const BOXAuthURLParameterErrorCodeKey = @"error";
 // token response
-NSString *const BOXOAuth2TokenJSONAccessTokenKey = @"access_token";
-NSString *const BOXOAuth2TokenJSONRefreshTokenKey = @"refresh_token";
-NSString *const BOXOAuth2TokenJSONExpiresInKey = @"expires_in";
+NSString *const BOXAuthTokenJSONAccessTokenKey = @"access_token";
+NSString *const BOXAuthTokenJSONRefreshTokenKey = @"refresh_token";
+NSString *const BOXAuthTokenJSONExpiresInKey = @"expires_in";
 // token request
-NSString *const BOXOAuth2TokenRequestGrantTypeKey = @"grant_type";
-NSString *const BOXOAuth2TokenRequestAuthorizationCodeKey = @"code";
-NSString *const BOXOAuth2TokenRequestRefreshTokenKey = @"refresh_token";
-NSString *const BOXOAuth2TokenRequestClientIDKey = @"client_id";
-NSString *const BOXOAuth2TokenRequestClientSecretKey = @"client_secret";
-NSString *const BOXOAuth2TokenRequestRedirectURIKey = @"redirect_uri";
+NSString *const BOXAuthTokenRequestGrantTypeKey = @"grant_type";
+NSString *const BOXAuthTokenRequestAuthorizationCodeKey = @"code";
+NSString *const BOXAuthTokenRequestRefreshTokenKey = @"refresh_token";
+NSString *const BOXAuthTokenRequestClientIDKey = @"client_id";
+NSString *const BOXAuthTokenRequestClientSecretKey = @"client_secret";
+NSString *const BOXAuthTokenRequestRedirectURIKey = @"redirect_uri";
 
-NSString *const BOXOAuth2TokenRequestGrantTypeAuthorizationCode = @"authorization_code";
-NSString *const BOXOAuth2TokenRequestGrantTypeRefreshToken = @"refresh_token";
+NSString *const BOXAuthTokenRequestGrantTypeAuthorizationCode = @"authorization_code";
+NSString *const BOXAuthTokenRequestGrantTypeRefreshToken = @"refresh_token";
 
 // Auth Delegation
 NSString *const BOXOAuth2AuthDelegationNewClientKey = @"BOXOAuth2AuthDelegationNewClient";

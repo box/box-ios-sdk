@@ -10,8 +10,19 @@
 
 @interface BOXContentClient (AppUsers)
 
-
+/**
+ * The method sets the delegate for the BOXContentClient (Internally BOXAPIQueueManager).
+ *
+ * @param delegate The object that will act as the delegate.
+ */
 - (void)setAccessTokenDelegate:(id)delegate;
+
+/**
+ * The method autheticates a BOXUser instance based on an access token retrieved.
+ * @see fetchAccessTokenWithCompletion:
+ *
+ * @param completion The completion block to be run after authorization regardless of whether or not authorization is successful.
+ */
 - (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
 @end

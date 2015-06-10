@@ -10,37 +10,38 @@
 
 #import "BOXAPIOperation.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
+#import "BOXAPIAppAuthOperation.h"
 #import "BOXLog.h"
 
 /**
  * This internal extension provides a notification callback for completed
- * [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation).
+ * [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation) and [BOXAPIAppAuthOperation](BOXAPIAppAuthOperation).
  */
 @interface BOXAPIQueueManager ()
 
 /** @name BOXAPIQueueManager() methods */
 
 /**
- * This method listens for notifications of type `BOXOAuth2OperationDidComplete` received from
- * [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation) that indicate these
+ * This method listens for notifications of type `BOXAuthOperationDidComplete` received from
+ * [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation) and [BOXAPIAppAuthOpeartion](BOXAPIAppAuthOperation) that indicate these
  * operations have completed.
  *
- * Upon receiving this notification, the queue manager removes the BOXAPIOAuth2ToJSONOperation from
- * the set enqueuedOAuth2Operations, which means that future BOXAPIOperation instances will not
- * be dependent upon this BOXAPIOAuth2ToJSONOperation.
+ * Upon receiving this notification, the queue manager removes the BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation from
+ * the set enqueuedAuthOperations, which means that future BOXAPIOperation instances will not
+ * be dependent upon this BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation.
  *
  * @warning This method is defined in a private category in BOXAPIQueueManager.m
  *
- * @param notification the notification broadcast by a BOXAPIOAuth2ToJSONOperation when it completes
+ * @param notification the notification broadcast by a BOXAPIOAuth2ToJSONOperation/BOXAPIAppAuthOperation when it completes
  */
-- (void)OAuth2OperationDidComplete:(NSNotification *)notification;
+- (void)AuthOperationDidComplete:(NSNotification *)notification;
 
 @end
 
 @implementation BOXAPIQueueManager
 
 @synthesize session = _session;
-@synthesize enqueuedOAuth2Operations = _enqueuedOAuth2Operations;
+@synthesize enqueuedAuthOperations = _enqueuedAuthOperations;
 
 - (id)initWithSession:(BOXAbstractSession *)session
 {
@@ -48,7 +49,7 @@
     if (self != nil)
     {
         _session = session;
-        _enqueuedOAuth2Operations = [NSMutableSet set];
+        _enqueuedAuthOperations = [NSMutableSet set];
     }
 
     return self;
@@ -61,22 +62,22 @@
 
 - (BOOL)enqueueOperation:(BOXAPIOperation *)operation
 {
-    if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]])
+    if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppAuthOperation class]])
     {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OAuth2OperationDidComplete:) name:BOXOAuth2OperationDidCompleteNotification object:operation];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AuthOperationDidComplete:) name:BOXAuthOperationDidCompleteNotification object:operation];
     }
 
     return YES;
 }
 
-- (void)OAuth2OperationDidComplete:(NSNotification *)notification
+- (void)AuthOperationDidComplete:(NSNotification *)notification
 {
     @synchronized(self.session)
     {
-        BOXAPIOAuth2ToJSONOperation *operation = (BOXAPIOAuth2ToJSONOperation *)notification.object;
-        BOXLog(@"%@ completed. Removing from set of OAuth2 dependencies", operation);
-        [self.enqueuedOAuth2Operations removeObject:operation];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:BOXOAuth2OperationDidCompleteNotification object:operation];
+        BOXAPIOperation *operation = (BOXAPIOperation *)notification.object;
+        BOXLog(@"%@ completed. Removing from set of Auth dependencies", operation);
+        [self.enqueuedAuthOperations removeObject:operation];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:BOXAuthOperationDidCompleteNotification object:operation];
     }
 }
 
@@ -104,7 +105,7 @@
 
 - (void)cancelAllOperations
 {
-    for (BOXAPIOperation *operation in self.enqueuedOAuth2Operations) {
+    for (BOXAPIOperation *operation in self.enqueuedAuthOperations) {
         [operation cancel];
     }
 }

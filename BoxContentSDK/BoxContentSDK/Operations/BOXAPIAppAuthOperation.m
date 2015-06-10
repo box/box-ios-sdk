@@ -74,6 +74,8 @@
             self.failure(self.error);
         }
     }
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:BOXAuthOperationDidCompleteNotification object:self];
 }
 
 - (void)processResponseData:(NSData *)data

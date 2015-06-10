@@ -20,16 +20,19 @@
  */
 @property (nonatomic, readonly, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
+/**
+ * The SDK's session instance.
+ */
 @property (nonatomic, readonly, strong) BOXAbstractSession *session;
 
 /**
- *  The base URL for all API operations including OAuth2.
+ *  The base URL for all API operations including Authentication.
  */
 @property (nonatomic, readwrite, strong) NSString *APIBaseURL;
 
 /**
  *  The client's queue manager. All API calls are scheduled by this queue manager.
- *  The queueManager is shared with the OAuth2Session (for making authorization and refresh
+ *  The queueManager is shared with the session (for making authorization and refresh
  *  calls) and the filesManager and foldersManager (for making API calls).
  */
 @property (nonatomic, readwrite, strong) BOXAPIQueueManager *queueManager;
