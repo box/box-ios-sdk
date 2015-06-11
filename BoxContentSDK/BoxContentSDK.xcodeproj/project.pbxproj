@@ -214,6 +214,7 @@
 		86B18F031B241DF1000EAE8C /* BOXAPIAppAuthOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F011B241DF1000EAE8C /* BOXAPIAppAuthOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86B18F041B241DF1000EAE8C /* BOXAPIAppAuthOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B18F021B241DF1000EAE8C /* BOXAPIAppAuthOperation.m */; };
 		86B18F061B2428E3000EAE8C /* BOXAPIOperation_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */; };
+		86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */; };
 		AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF153B1417C346D6008D636C /* NSJSONSerialization+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */; };
 		C53EC2441A3873090007C8A7 /* BOXComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC2421A3873090007C8A7 /* BOXComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -635,6 +636,7 @@
 		86B18F011B241DF1000EAE8C /* BOXAPIAppAuthOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAPIAppAuthOperation.h; sourceTree = "<group>"; };
 		86B18F021B241DF1000EAE8C /* BOXAPIAppAuthOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAPIAppAuthOperation.m; sourceTree = "<group>"; };
 		86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIOperation_Private.h; sourceTree = "<group>"; };
+		86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppUserSessionTests.m; sourceTree = "<group>"; };
 		AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+BOXAdditions.h"; sourceTree = "<group>"; };
 		AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+BOXAdditions.m"; sourceTree = "<group>"; };
 		C53EC2421A3873090007C8A7 /* BOXComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXComment.h; sourceTree = "<group>"; };
@@ -842,12 +844,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		150D112D1A5DD498009B269D /* OAuth2 */ = {
+		150D112D1A5DD498009B269D /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */,
 				150D11331A5DD4B8009B269D /* BOXOauth2SessionTests.m */,
 			);
-			name = OAuth2;
+			name = Sessions;
 			sourceTree = "<group>";
 		};
 		15605D861A20132200C5EE5A /* BoxContentSDKTests */ = {
@@ -861,7 +864,7 @@
 				15F5EE531A20165800FBBE1D /* BOXContentSDKTestCase.m */,
 				15F5EE6F1A23FED600FBBE1D /* CannedResponses */,
 				15F5EE6C1A23B60300FBBE1D /* Clients */,
-				150D112D1A5DD498009B269D /* OAuth2 */,
+				150D112D1A5DD498009B269D /* Sessions */,
 				159A94391A2FD1620063B0FD /* Models */,
 				15F5EE4A1A20157100FBBE1D /* Requests */,
 				15605D941A2013B800C5EE5A /* Libraries */,
@@ -1808,6 +1811,7 @@
 				596BE96A1A39142900206660 /* BOXFileCopyRequestTests.m in Sources */,
 				C5972A451A3B348B00225CBA /* BOXCollectionTests.m in Sources */,
 				150D11341A5DD4B8009B269D /* BOXOauth2SessionTests.m in Sources */,
+				86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */,
 				159A94411A2FD19B0063B0FD /* BOXUserTests.m in Sources */,
 				C57E95E81A37611D0094D7B0 /* BOXFileCommentsRequestTests.m in Sources */,
 				C5972A751A3F3F8400225CBA /* BOXCollectionItemOperationRequestTests.m in Sources */,
