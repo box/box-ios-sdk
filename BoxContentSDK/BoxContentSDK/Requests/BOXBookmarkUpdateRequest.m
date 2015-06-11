@@ -47,6 +47,8 @@
                            subresource:nil
                                  subID:nil];
     
+    // Body
+    
     NSMutableDictionary *bodyDictionary = [[NSMutableDictionary alloc] init];
     
     if (self.URL != nil) {
@@ -97,9 +99,17 @@
         bodyDictionary[BOXAPIObjectKeyParent] = parentID;
     }
     
+    // Query Params
+    
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllBookmarkFields) {
+        queryParameters = @{BOXAPIParameterKeyFields : [self fullBookmarkFieldsParameterString]};
+    }
+    
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPUT
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];

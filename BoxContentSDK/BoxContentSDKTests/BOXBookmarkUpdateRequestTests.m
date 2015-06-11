@@ -9,6 +9,8 @@
 #import "BOXRequestTestCase.h"
 #import "BOXBookmarkUpdateRequest.h"
 #import "BOXBookmark.h"
+#import "NSURL+BOXURLHelper.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXBookmarkUpdateRequestTests : BOXRequestTestCase
 @end
@@ -57,6 +59,7 @@
     BOOL newSharedLinkPermissionCanPreview = YES;
     
     BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID];
+    request.requestAllBookmarkFields = YES;
     request.bookmarkName = newName;
     request.bookmarkDescription = newDescription;
     request.parentID = newParentFolderID;
@@ -70,9 +73,14 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
-    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
+    
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
+    
+    NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullBookmarkFieldsParameterString];
+    XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     
     // HTTP body assertions
     NSDictionary *expectedBodyDictionary = @{@"name" : newName,

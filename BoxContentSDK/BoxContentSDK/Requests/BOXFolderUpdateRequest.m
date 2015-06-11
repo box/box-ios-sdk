@@ -6,6 +6,8 @@
 #import "BOXRequest_Private.h"
 #import "BOXFolderUpdateRequest.h"
 #import "BOXAPIJSONOperation.h"
+#import "BOXFolder.h"
+#import "BOXSharedLinkHeadersHelper.h"
 
 @interface BOXFolderUpdateRequest ()
 
@@ -42,6 +44,8 @@
                                     ID:self.folderID
                            subresource:nil
                                  subID:nil];
+    
+    // Body
     
     NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
     
@@ -109,9 +113,17 @@
         bodyDictionary[BOXAPIObjectKeySyncState] = self.syncState;
     }
     
+    // Query Params
+    
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllFolderFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullFolderFieldsParameterString]};
+    }
+    
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPUT
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];
@@ -122,6 +134,45 @@
     [self addSharedLinkHeaderToRequest:JSONoperation.APIRequest];
     
     return JSONoperation;
+}
+
+- (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
+{
+    BOOL isMainThread = [NSThread isMainThread];
+    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+    
+    if (completionBlock) {
+        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+            
+            [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
+                                                                                   itemType:folder.type
+                                                                                  ancestors:folder.pathFolders];
+            
+            [BOXDispatchHelper callCompletionBlock:^{
+                completionBlock(folder, nil);
+            } onMainThread:isMainThread];
+        };
+        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            [BOXDispatchHelper callCompletionBlock:^{
+                completionBlock(nil, error);
+            } onMainThread:isMainThread];
+        };
+    }
+    
+    [self performRequest];
+}
+
+#pragma mark - Superclass overidden methods
+
+- (NSString *)itemIDForSharedLink
+{
+    return self.folderID;
+}
+
+- (BOXAPIItemType *)itemTypeForSharedLink
+{
+    return BOXAPIItemTypeFolder;
 }
 
 @end
