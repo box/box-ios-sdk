@@ -11,7 +11,7 @@
 #import "BOXKeychainItemWrapper.h"
 
 @interface BOXOAuth2Session ()
-- (void)didReceiveOAuth2RevokeSessionNotification:(NSNotification *)notification;
+- (void)didReceiveRevokeSessionNotification:(NSNotification *)notification;
 @end
 
 @interface BOXOauth2SessionTests : BOXContentSDKTestCase

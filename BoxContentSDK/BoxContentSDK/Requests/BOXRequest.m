@@ -10,6 +10,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXISO8601DateFormatter.h"
+#import "BOXAppUserSession.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -161,7 +162,7 @@
                                                                    HTTPMethod:HTTPMethod
                                                                          body:bodyDictionary
                                                                   queryParams:queryParameters
-                                                                OAuth2Session:self.queueManager.OAuth2Session];
+                                                                session:self.queueManager.session];
 
     // calling a nil block results in a crash, so only set the operation's success block if it is non-nil
     // BOXAPIJSONOperation initializes blocks to empty blocks
@@ -186,7 +187,7 @@
                                                                              HTTPMethod:HTTPMethod
                                                                         patchOperations:bodyArray
                                                                             queryParams:queryParameters
-                                                                          OAuth2Session:self.queueManager.OAuth2Session];
+                                                                          session:self.queueManager.session];
     
     // calling a nil block results in a crash, so only set the operation's success block if it is non-nil
     // BOXAPIJSONOperation initializes blocks to empty blocks
@@ -211,7 +212,7 @@
                                                                    HTTPMethod:HTTPMethod
                                                                          body:bodyDictionary
                                                                   queryParams:queryParameters
-                                                                OAuth2Session:self.queueManager.OAuth2Session];
+                                                                session:self.queueManager.session];
     if (successBlock != nil) {
         operation.successBlock = successBlock;
     }

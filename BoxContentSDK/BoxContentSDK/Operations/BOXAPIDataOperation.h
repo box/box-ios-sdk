@@ -41,8 +41,8 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  *
  * @warning Because BOXAPIDataOperation holds references to `NSStream`s, it cannot be copied. Because it
  * cannot be copied, BOXAPIDataOperation instances cannot be automatically retried by the SDK in the event
- * of an expired OAuth2 access token. In this case, the operation will fail with error code
- * `BoxContentSDKOAuth2ErrorAccessTokenExpiredOperationCannotBeReenqueued`.
+ * of an expired access token. In this case, the operation will fail with error code
+ * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
  */
 @interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate>
 
@@ -113,7 +113,6 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @see progressBlock
  */
 @property (nonatomic, readwrite, strong) NSString *fileID;
-
 
 /** @name Overridden methods */
 

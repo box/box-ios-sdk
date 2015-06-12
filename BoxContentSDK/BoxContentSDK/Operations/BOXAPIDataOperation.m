@@ -48,9 +48,9 @@
 @synthesize outputStreamHasSpaceAvailable = _outputStreamHasSpaceAvailable;
 @synthesize bytesReceived = _bytesReceived;
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams OAuth2Session:OAuth2Session];
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
 
     if (self != nil)
     {
@@ -125,7 +125,7 @@
     }
     else
     {
-        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && (self.error.code == BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
+        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && (self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
                                                                       self.error.code == BOXContentSDKAPIErrorAccepted))
         {
             // Do not fire failre block if request is going to be re-enqueued due to an expired token, or a 202 response.
@@ -291,7 +291,7 @@
     BOXAPIDataOperation *operationCopy = [self copy];
     operationCopy.timesReenqueued++;
     self.outputStream = nil;
-    [self.OAuth2Session.queueManager enqueueOperation:operationCopy];
+    [self.session.queueManager enqueueOperation:operationCopy];
     [self finish];
 }
 
@@ -312,7 +312,7 @@
                                                                                     HTTPMethod:self.HTTPMethod
                                                                                           body:bodyCopy
                                                                                    queryParams:queryStringParametersCopy
-                                                                                 OAuth2Session:self.OAuth2Session];
+                                                                                 session:self.session];
     operationCopy.outputStream = self.outputStream;
     operationCopy.outputStream.delegate = nil;
     operationCopy.timesReenqueued = self.timesReenqueued;

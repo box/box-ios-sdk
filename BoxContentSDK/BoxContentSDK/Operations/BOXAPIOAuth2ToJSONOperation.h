@@ -9,7 +9,7 @@
 #import "BOXAPIOperation.h"
 
 // This notification is sent when a BOXAPIOAuth2ToJSONOperation completes with either success or failure
-extern NSString *const BOXOAuth2OperationDidCompleteNotification;
+extern NSString *const BOXAuthOperationDidCompleteNotification;
 
 /**
  * BOXAPIOAuth2ToJSONOperation is a concrete subclass of BOXAPIOperation. This operation makes unauthenticated
@@ -20,7 +20,7 @@ extern NSString *const BOXOAuth2OperationDidCompleteNotification;
  * NSNotifications
  * ===============
  * Upon success and failure, this operation will broadcast an `NSNotification` on the default notification
- * center of type `BOXOAuth2OperationDidCompleteNotification`. This notification is used by BOXAPIQueueManager to assist
+ * center of type `BOXAuthOperationDidCompleteNotification`. This notification is used by BOXAPIQueueManager to assist
  * in locking during token refresh requests. You may listen to this notification in addition to the other
  * notifications in BOXOAuth2Session to manager a user's logged in state in your app.
  */

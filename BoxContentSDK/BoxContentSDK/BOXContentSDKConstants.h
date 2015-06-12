@@ -61,23 +61,23 @@ extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI;
 
 // OAuth2 constants
 // Authorization code response
-extern NSString *const BOXOAuth2URLParameterAuthorizationStateKey;
-extern NSString *const BOXOAuth2URLParameterAuthorizationCodeKey;
-extern NSString *const BOXOAuth2URLParameterErrorCodeKey;
+extern NSString *const BOXAuthURLParameterAuthorizationStateKey;
+extern NSString *const BOXAuthURLParameterAuthorizationCodeKey;
+extern NSString *const BOXAuthURLParameterErrorCodeKey;
 // token response
-extern NSString *const BOXOAuth2TokenJSONAccessTokenKey;
-extern NSString *const BOXOAuth2TokenJSONRefreshTokenKey;
-extern NSString *const BOXOAuth2TokenJSONExpiresInKey;
+extern NSString *const BOXAuthTokenJSONAccessTokenKey;
+extern NSString *const BOXAuthTokenJSONRefreshTokenKey;
+extern NSString *const BOXAuthTokenJSONExpiresInKey;
 // token request
-extern NSString *const BOXOAuth2TokenRequestGrantTypeKey;
-extern NSString *const BOXOAuth2TokenRequestAuthorizationCodeKey;
-extern NSString *const BOXOAuth2TokenRequestRefreshTokenKey;
-extern NSString *const BOXOAuth2TokenRequestClientIDKey;
-extern NSString *const BOXOAuth2TokenRequestClientSecretKey;
-extern NSString *const BOXOAuth2TokenRequestRedirectURIKey;
+extern NSString *const BOXAuthTokenRequestGrantTypeKey;
+extern NSString *const BOXAuthTokenRequestAuthorizationCodeKey;
+extern NSString *const BOXAuthTokenRequestRefreshTokenKey;
+extern NSString *const BOXAuthTokenRequestClientIDKey;
+extern NSString *const BOXAuthTokenRequestClientSecretKey;
+extern NSString *const BOXAuthTokenRequestRedirectURIKey;
 
-extern NSString *const BOXOAuth2TokenRequestGrantTypeAuthorizationCode;
-extern NSString *const BOXOAuth2TokenRequestGrantTypeRefreshToken;
+extern NSString *const BOXAuthTokenRequestGrantTypeAuthorizationCode;
+extern NSString *const BOXAuthTokenRequestGrantTypeRefreshToken;
 
 // Auth Delegation
 extern NSString *const BOXOAuth2AuthDelegationNewClientKey;

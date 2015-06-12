@@ -41,7 +41,7 @@
     self.fakeOAuth2Session.refreshToken = @"sample_refresh_token";
     self.fakeOAuth2Session.accessToken = @"sample_access_token";
     self.fakeOAuth2Session.accessTokenExpiration = [NSDate distantFuture];
-    self.fakeQueueManager.OAuth2Session = self.fakeOAuth2Session;
+    self.fakeQueueManager.session = self.fakeOAuth2Session;
 }
 
 - (void)tearDown
