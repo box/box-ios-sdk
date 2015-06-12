@@ -25,7 +25,7 @@
     BOXFolderRequest *folderRequest = [[BOXFolderRequest alloc] initWithFolderID:folderID];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@?limit=0", BOXAPIBaseURL, BOXAPIVersion, folderID]];
 
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -37,7 +37,7 @@
     BOXFolderRequest *folderRequest = [[BOXFolderRequest alloc] initWithFolderID:folderID isTrashed:YES];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@/trash", BOXAPIBaseURL, BOXAPIVersion, folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@/trash?limit=0", BOXAPIBaseURL, BOXAPIVersion, folderID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -75,7 +75,7 @@
     [folderRequest setNotMatchingEtags:notMatchingEtagsToUse];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@?limit=0", BOXAPIBaseURL, BOXAPIVersion, folderID];
     NSString *actualURL = [URLRequest.URL absoluteString];
     XCTAssertEqualObjects(expectedURL, actualURL);
     

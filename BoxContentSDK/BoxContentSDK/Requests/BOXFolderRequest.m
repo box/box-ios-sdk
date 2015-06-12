@@ -48,12 +48,16 @@
                            subresource:subresource
                                  subID:nil];
 
-    NSDictionary *queryParameters = nil;
+    NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
 
     if (self.requestAllFolderFields) {
-        queryParameters = @{BOXAPIParameterKeyFields: [self fullFolderFieldsParameterString]};
+        queryParameters[BOXAPIParameterKeyFields] = [self fullFolderFieldsParameterString];
     }
 
+    // We don't want to request the children through this request. We don't parse it, and it would be a waste
+    // of bandwidth/processing time.
+    queryParameters[@"limit"] = @"0";
+    
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET
                                               queryStringParameters:queryParameters

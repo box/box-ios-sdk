@@ -39,11 +39,6 @@
 @property (nonatomic, readwrite, strong) NSString *folderUploadEmailAddress;
 
 /**
- *  Child items of the folder. If set, the array contains BOXFolderMini, BOXFileMini and BOXBookmarkMini objects.
- */
-@property (nonatomic, readwrite, strong) NSArray *items;
-
-/**
  *  Whether this folder will be synced by the Box sync clients or not.
  *  Can be synced, not_synced, or partially_synced.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
