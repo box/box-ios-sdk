@@ -13,12 +13,19 @@
 #import "BOXContentClient_Private.h"
 #import "BOXFolderRequest.h"
 #import "BOXRequest_Private.h"
+#import "BOXContentClient+Authentication.h"
+#import "BOXContentSDKErrors.h"
+@interface BOXContentClientTestCase ()
+
+@property (nonatomic, readwrite, strong) NSString *accessToken;
+
+@end
 
 @implementation BOXContentClientTestCase
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-    completion(@"access_token", [NSDate dateWithTimeIntervalSinceNow:100], nil);
+    completion(self.accessToken, [NSDate dateWithTimeIntervalSinceNow:100], nil);
 }
 
 - (void)test_content_client_with_app_user
@@ -65,6 +72,7 @@
 // Access token is fed in from the delegate method "fetchAccessTokenWithCompletion:" above.
 - (void)test_request_authorization_header_is_signed_with_correct_access_token
 {
+    self.accessToken = @"access_token";
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:self];
     [client.queueManager.delegate fetchAccessTokenWithCompletion:^(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error) {
@@ -79,6 +87,26 @@
     NSString *actualAuthorizationHeader = [NSString stringWithFormat:@"%@: %@", @"Authorization", headers[@"Authorization"]];
     
     XCTAssertTrue([expectedAuthorizationHeader isEqualToString:actualAuthorizationHeader]);
+}
+
+- (void)test_content_client_returns_invalid_access_token_error
+{
+    self.accessToken = nil;
+    
+    BOXContentClient *client = [BOXContentClient clientForNewSession];
+    [client setAccessTokenDelegate:self];
+    
+    XCTestExpectation *clientExpectation = [self expectationWithDescription:@"expectation"];
+    [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
+        NSInteger expectedErrorCode = BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid;
+        NSString *expectedErrorDomain = @"accessToken and accessTokenExpiration should be non-nil";
+        
+        XCTAssert(expectedErrorCode == error.code);
+        XCTAssert([expectedErrorDomain isEqualToString:error.domain]);
+        [clientExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
 @end
