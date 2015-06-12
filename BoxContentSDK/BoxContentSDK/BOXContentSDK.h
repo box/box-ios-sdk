@@ -33,8 +33,9 @@
 // OAuth2
 #import "BOXAuthorizationViewController.h"
 #import "BOXOAuth2Session.h"
-#import "BOXSerialOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
+#import "BOXSerialOAuth2Session.h"
+#import "BOXAbstractSession.h"
 
 // AppToApp
 

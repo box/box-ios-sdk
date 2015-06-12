@@ -86,7 +86,7 @@
         void (^authCompletionBlock)(BOXUser *user, NSError *error) = client.authenticationCompletionBlock;
         client.authenticationCompletionBlock = nil;
 
-        [client.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:authenticationURL withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
+        [client.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:authenticationURL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             if (error) {
                 if (authCompletionBlock) {
                     authCompletionBlock(nil, error);

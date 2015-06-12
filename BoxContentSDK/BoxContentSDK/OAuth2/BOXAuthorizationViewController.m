@@ -188,7 +188,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 	if (requestIsForLoginRedirectScheme)
 	{
         __weak BOXAuthorizationViewController *me = self;
-        [self.SDKClient.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
+        [self.SDKClient.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     if (me.completionBlock) {

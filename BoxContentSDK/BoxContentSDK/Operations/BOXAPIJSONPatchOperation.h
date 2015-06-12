@@ -10,6 +10,6 @@
 
 @interface BOXAPIJSONPatchOperation : BOXAPIJSONOperation
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod patchOperations:(NSArray *)patchOperations queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session;
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod patchOperations:(NSArray *)patchOperations queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session;
 
 @end

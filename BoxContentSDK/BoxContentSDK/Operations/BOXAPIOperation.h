@@ -92,14 +92,14 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * The OAuth2 session is used to sign requests with an Authorization header including a Bearer token
  * @see [BOXOAuth2Session addAuthorizationParametersToRequest:]
  */
-@property (nonatomic, readwrite, weak) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readwrite, weak) BOXAbstractSession *session;
 
 /**
  * The OAuth2 access token this request was made with. This token is used to determine
  * whether this operation failing due to an expired token should cause the tokens to
  * be refreshed.
  */
-@property (nonatomic, readwrite, strong) NSString *OAuth2AccessToken;
+@property (nonatomic, readwrite, strong) NSString *accessToken;
 
 /** @name Request properties */
 
@@ -178,7 +178,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  *
  * @return An initialized BOXAPIOperation
  */
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session;
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session;
 
 #pragma mark - Accessors
 /** @name Accessors */

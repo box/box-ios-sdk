@@ -35,7 +35,7 @@
  * In addition to calling super, this method sets `globalQueue.maxConcurrentOperationCount` to `1`
  * @param OAuth2Session This object is needed for locking
  */
-- (id)initWithOAuth2Session:(BOXOAuth2Session *)OAuth2Session;
+- (id)initWithSession:(BOXAbstractSession *)session;
 
 /** @name Enqueue Operations */
 

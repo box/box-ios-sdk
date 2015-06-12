@@ -114,7 +114,6 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  */
 @property (nonatomic, readwrite, strong) NSString *fileID;
 
-
 /** @name Overridden methods */
 
 /**
