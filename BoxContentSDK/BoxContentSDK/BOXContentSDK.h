@@ -110,7 +110,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 
 // API models
 #import "BOXItem.h"

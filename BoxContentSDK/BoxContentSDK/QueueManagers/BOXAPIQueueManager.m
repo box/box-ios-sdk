@@ -10,7 +10,7 @@
 
 #import "BOXAPIOperation.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXLog.h"
 
 /**
@@ -62,7 +62,11 @@
 
 - (BOOL)enqueueOperation:(BOXAPIOperation *)operation
 {
-    if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppAuthOperation class]])
+    if ([self.session isKindOfClass:[BOXAppUserSession class]] && self.delegate == nil) {
+        BOXAssertFail(@"BOXAPIAccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient.");
+    }
+    
+    if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppUsersAuthOperation class]])
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AuthOperationDidComplete:) name:BOXAuthOperationDidCompleteNotification object:operation];
     }

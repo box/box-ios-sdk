@@ -21,7 +21,7 @@ typedef void (^BOXAPIAppAuthFailureBlock)(NSError *);
  * Failure to obtain an access token or access token expiration date will create an error 
  * and cause the failure block to be run upon completion of the operation.
  */
-@interface BOXAPIAppAuthOperation : BOXAPIOperation
+@interface BOXAPIAppUsersAuthOperation : BOXAPIOperation
 
 /**
  * The completion block to be run if authentication is successful.

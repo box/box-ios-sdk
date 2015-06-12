@@ -7,12 +7,12 @@
 //
 
 #import "BOXAPIOperation_Private.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 
 #define BOXAccessTokenKey @"BOXAccessTokenKey"
 #define BOXAccessTokenExpirationKey @"BOXAccessTokenExpirationKey"
 
-@implementation BOXAPIAppAuthOperation
+@implementation BOXAPIAppUsersAuthOperation
 
 - (void)start
 {
@@ -42,7 +42,7 @@
 {
     if (![self isCancelled]) {
         @synchronized(self.session) {
-            __weak BOXAPIAppAuthOperation *weakSelf = self;
+            __weak BOXAPIAppUsersAuthOperation *weakSelf = self;
             [self.session.queueManager.delegate fetchAccessTokenWithCompletion:^(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error) {
                 if (error == nil && accessToken && accessTokenExpiration) {
                     weakSelf.accessToken = accessToken;
