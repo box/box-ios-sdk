@@ -8,9 +8,11 @@
 
 #import "BOXContentClientTestCase.h"
 #import "BOXContentClient.h"
-#import "BOXContentClient+AppUser.h"
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXContentClient+Folder.h"
+#import "BOXContentClient_Private.h"
+#import "BOXFolderRequest.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXContentClientTestCase
 

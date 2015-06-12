@@ -62,9 +62,7 @@
 
 - (BOOL)enqueueOperation:(BOXAPIOperation *)operation
 {
-    if ([self.session isKindOfClass:[BOXAppUserSession class]] && self.delegate == nil) {
-        BOXAssertFail(@"BOXAPIAccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient.");
-    }
+    BOXAssert(![self.session isKindOfClass:[BOXAppUserSession class]] || self.delegate, @"BOXAPIAccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient.");
     
     if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppUsersAuthOperation class]])
     {

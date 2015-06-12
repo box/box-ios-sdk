@@ -10,7 +10,6 @@
 #import "BOXContentSDKTestCase.h"
 #import "BOXAppUserSession.h"
 #import "BOXAPIAccessTokenDelegate.h"
-#import "BOXContentClient+AppUser.h"
 #import "BOXContentClient_Private.h"
 #import "BOXKeychainItemWrapper.h"
 
