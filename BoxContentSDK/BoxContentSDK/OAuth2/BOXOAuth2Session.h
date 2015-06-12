@@ -184,9 +184,4 @@
  */
 - (void)reassignTokensFromSession:(BOXOAuth2Session *)session;
 
-#pragma mark - Request Authorization
-/** @name Request Signing */
-
-//+ (void)revokeAllCredentials;
-
 @end

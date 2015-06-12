@@ -10,9 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-// ANDREW STUFF (Remove this comment later)
-#import "BOXAbstractSession.h"
-
 // constants and logging
 #import "BOXContentSDKConstants.h"
 #import "BOXLog.h"
@@ -38,6 +35,7 @@
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
 #import "BOXSerialOAuth2Session.h"
+#import "BOXAbstractSession.h"
 
 // AppToApp
 
