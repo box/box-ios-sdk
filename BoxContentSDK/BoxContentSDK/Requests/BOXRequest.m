@@ -81,9 +81,7 @@
 
 - (void)performRequest
 {
-    if ([self.queueManager.session isKindOfClass:[BOXAppUserSession class]] && self.queueManager.delegate == nil) {
-        BOXAssertFail(@"BOXAPIAccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient.");
-    }
+    BOXAssert(![self.queueManager.session isKindOfClass:[BOXAppUserSession class]] || self.queueManager.delegate, @"BOXAPIAccessTokenDelegate must be set when using AppUsers. Please call setAccessTokenDelegate on BOXContentClient.");
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
     [self.queueManager enqueueOperation:self.operation];
 }

@@ -60,6 +60,7 @@
     XCTAssertThrows([client setAccessTokenDelegate:nil]);
 }
 
+// Access token is fed in from the delegate method "fetchAccessTokenWithCompletion:" above.
 - (void)test_request_authorization_header_is_signed_with_correct_access_token
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];

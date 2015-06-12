@@ -38,7 +38,6 @@
     NSMutableArray *users = [[NSMutableArray alloc]init];
     for (BOXUser *user in [BOXContentClient users]) {
         BOXContentClient *client = [BOXContentClient clientForUser:user];
-        
         if (   ([client.session isKindOfClass:[BOXOAuth2Session class]] && !self.isAppUsers)
             || ([client.session isKindOfClass:[BOXAppUserSession class]] && self.isAppUsers)) {
             [users addObject:user];
@@ -46,6 +45,8 @@
     }
     
     self.users = users;
+    
+    [self.tableView reloadData];
 }
 
 - (void)barButtonPressed:(UIBarButtonItem *)sender
@@ -70,16 +71,23 @@
                 [alertView show];
             }
         } else {
-            self.users = [self.users arrayByAddingObject:user];
-            [self.tableView reloadData];
+            BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];
+            
+            if ([tmpClient.user.modelID isEqualToString:client.user.modelID] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
+                [tmpClient logOut];
+                [self barButtonPressed:nil];
+            } else {
+                self.users = [self.users arrayByAddingObject:user];
+                [self.tableView reloadData];
+            }
         }
     }];
 }
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-#error Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
-    completion(@"your_access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
+#warning Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
+    completion(@"access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
 }
 
 #pragma mark - UITableViewDataSource

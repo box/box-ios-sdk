@@ -23,7 +23,8 @@
  * A convenience method used to authorize an access token.
  *
  * **Note** BOXAppUserSession does not post a BOXSessionDidBecomeAuthenticatedNotification. 
- * Instead it will always post a BOXSessionDidRefreshTokensNotification.
+ * Instead it will always post a BOXSessionDidRefreshTokensNotification as a replacement to BOXSessionDidBecomeAuthenticatedNotification
+ * since refresh and authorization of access tokens are the same when using AppUsers.
  *
  * @param block The completion block that runs after authorizing a access token regardless of whether authorization is successful or not.
  */

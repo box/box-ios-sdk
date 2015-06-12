@@ -31,7 +31,7 @@
     completion(@"accessToken", [NSDate dateWithTimeIntervalSince1970:1], nil);
 }
 
-- (void)test_retrieves_access_token_with_queue_manager
+- (void)test_queue_manager_retrieves_access_token
 {
     BOXAPIQueueManager *queueManager = [[BOXAPIQueueManager alloc]init];
     queueManager.delegate = self;
@@ -39,8 +39,8 @@
         NSString *expectedAccessToken = @"accessToken";
         NSDate *expectedAccessTokenExpiration = [NSDate dateWithTimeIntervalSince1970:1];
         
-        XCTAssertEqual(expectedAccessToken, accessToken);
-        XCTAssertEqual(expectedAccessTokenExpiration, accessTokenExpiration);
+        XCTAssert([expectedAccessToken isEqualToString:accessToken]);
+        XCTAssert([expectedAccessTokenExpiration isEqualToDate:accessTokenExpiration]);
         XCTAssertNil(error);
     }];
 }

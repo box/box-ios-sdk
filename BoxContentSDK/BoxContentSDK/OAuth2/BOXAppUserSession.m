@@ -66,7 +66,9 @@
 
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
-    [self performAuthorizationWithCompletionBlock:block];
+    @synchronized(self) {
+        [self performAuthorizationWithCompletionBlock:block];
+    }
 }
 
 @end
