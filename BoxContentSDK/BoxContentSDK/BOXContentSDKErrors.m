@@ -11,9 +11,9 @@
 NSString *const BOXContentSDKErrorDomain = @"com.box.contentsdk.errordomain";
 NSString *const BOXJSONErrorResponseKey = @"com.box.contentsdk.jsonerrorresponse";
 
-NSString *const BOXOAuth2TokenRequestErrorInvalidGrant = @"invalid_grant";
-NSString *const BOXOAuth2TokenRequestErrorInvalidToken = @"invalid_token";
-NSString *const BOXOAuth2TokenRequestErrorInvalidRequest = @"invalid_request";
+NSString *const BOXAuthTokenRequestErrorInvalidGrant = @"invalid_grant";
+NSString *const BOXAuthTokenRequestErrorInvalidToken = @"invalid_token";
+NSString *const BOXAuthTokenRequestErrorInvalidRequest = @"invalid_request";
 
 // User denied access to their Box account
-NSString *const BOXOAuth2ErrorAccessDenied = @"access_denied";
+NSString *const BOXAuthErrorAccessDenied = @"access_denied";

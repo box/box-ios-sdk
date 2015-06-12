@@ -29,6 +29,7 @@
 
 @synthesize APIBaseURL = _APIBaseURL;
 @synthesize OAuth2Session = _OAuth2Session;
+@synthesize appSession = _appSession;
 @synthesize queueManager = _queueManager;
 
 static NSString *staticClientID;
@@ -77,6 +78,9 @@ static BOXContentClient *defaultInstance = nil;
     @synchronized(synchronizer)
     {
         BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.modelID];
+        
+        // Note: Places where uses can log into the same account as an OAuth and AppUser which causes a conflict in SDKClients
+        
         if (client == nil) {
             client = [[self alloc] initWithBOXUser:user];
             [[[self class] SDKClients] setObject:client forKey:user.modelID];
@@ -130,33 +134,40 @@ static BOXContentClient *defaultInstance = nil;
         
         [self setAPIBaseURL:BOXAPIBaseURL];
         
-        // the circular reference between the queue manager and the OAuth2 session is necessary
-        // because the OAuth2 session enqueues API operations to fetch access tokens and the queue
-        // manager uses the OAuth2 session as a lock object when enqueuing operations.
+        // the circular reference between the queue manager and the session is necessary
+        // because sessions enqueue API operations to fetch access tokens and the queue
+        // manager uses the session as a lock object when enqueuing operations.
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
+
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
-                                                                     secret:staticClientSecret
-                                                                 APIBaseURL:BOXAPIBaseURL//FIXME:
-                                                               queueManager:_queueManager];
-        _queueManager.OAuth2Session = _OAuth2Session;
+                                                                         secret:staticClientSecret
+                                                                     APIBaseURL:BOXAPIBaseURL//FIXME:
+                                                                   queueManager:_queueManager];
+        _queueManager.session = self.session;
+        
         
         // Initialize our sharedlink helper with the default protocol implementation
         _sharedLinksHeaderHelper = [[BOXSharedLinkHeadersHelper alloc] initWithClient:self];
         [self setSharedLinkStorageDelegate:[[BOXSharedLinkHeadersDefaultManager alloc] init]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveOAuth2SessionDidBecomeAuthenticatedNotification:)
-                                                     name:BOXOAuth2SessionDidBecomeAuthenticatedNotification
+                                                 selector:@selector(didReceiveSessionDidBecomeAuthenticatedNotification:)
+                                                     name:BOXSessionDidBecomeAuthenticatedNotification
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveOAuth2SessionWasRevokedNotification:)
-                                                     name:BOXOAuth2SessionWasRevokedNotification
+                                                 selector:@selector(didReceiveSessionWasRevokedNotification:)
+                                                     name:BOXSessionWasRevokedNotification
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveUserWasLoggedOutNotification:)
                                                      name:BOXUserWasLoggedOutDueToErrorNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didReceiveAccessTokenRefreshedNotification:)
+                                                     name:BOXSessionDidRefreshTokensNotification
                                                    object:nil];
     }
     return self;
@@ -166,44 +177,53 @@ static BOXContentClient *defaultInstance = nil;
 {
     if (self = [self init])
     {
-        [_OAuth2Session restoreCredentialsFromKeychainForUserWithID:user.modelID];
+        BOXOAuth2Session *session = [[BOXOAuth2Session alloc]init];
+        [session restoreCredentialsFromKeychainForUserWithID:user.modelID];
+        
+        if (session.refreshToken == nil) {
+            self.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+        }
+        
+        [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
     }
     return self;
+}
+
+- (void)didReceiveAccessTokenRefreshedNotification:(NSNotification *)notification
+{
+    BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
+    BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
 }
 
 - (void)didReceiveUserWasLoggedOutNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = (NSDictionary *)notification.object;
-    NSString *userID = [userInfo objectForKey:BOXOAuth2UserIDKey];
+    NSString *userID = [userInfo objectForKey:BOXUserIDKey];
     if ([userID isEqualToString:self.user.modelID]) {
         [self logOut];
     }
 }
 
-- (void)didReceiveOAuth2SessionDidBecomeAuthenticatedNotification:(NSNotification *)notification
+- (void)didReceiveSessionDidBecomeAuthenticatedNotification:(NSNotification *)notification
 {
-    // We should never have more than one BOXOAuth2Session pointing to the same user.
-    // When a BOXOAuth2Session becomes authenticated, any SDK clients that may have had a BOXOAuth2Session for the same
+    // We should never have more than one session pointing to the same user.
+    // When a session becomes authenticated, any SDK clients that may have had a session for the same
     // user should update to the most recently authenticated one.
-    BOXOAuth2Session *session = (BOXOAuth2Session *) notification.object;
-    if ([session.user.modelID isEqualToString:self.OAuth2Session.user.modelID] && session != self.OAuth2Session)
-    {
+    BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
+    
+    if ([session.user.modelID isEqualToString:self.session.user.modelID] && session != self.session) {
         // In case there are any pending operations in the old session's queue, give them the latest tokens so they have
         // a good chance of succeeding.
-        BOXOAuth2Session *oldSession = self.OAuth2Session;
-        oldSession.accessToken = session.accessToken;
-        oldSession.accessTokenExpiration = session.accessTokenExpiration;
-        oldSession.refreshToken = session.refreshToken;
+        [self.session reassignTokensFromSession:session];
         
-        // Swap out the session (also have to swap out the queue mgr because the SDK client uses it to construct requests).
-        _OAuth2Session = session;
-        _queueManager = _OAuth2Session.queueManager;
+        self.session = session;
+        self.queueManager = self.session.queueManager;
     }
 }
 
-- (void)didReceiveOAuth2SessionWasRevokedNotification:(NSNotification *)notification
+- (void)didReceiveSessionWasRevokedNotification:(NSNotification *)notification
 {
-    NSString *userIDRevoked = [notification.userInfo objectForKey:BOXOAuth2UserIDKey];
+    NSString *userIDRevoked = [notification.userInfo objectForKey:BOXUserIDKey];
     if (userIDRevoked.length > 0)
     {
         [[[self class] SDKClients] removeObjectForKey:userIDRevoked];
@@ -217,12 +237,12 @@ static BOXContentClient *defaultInstance = nil;
 
 + (NSArray *)users
 {
-    return [BOXOAuth2Session usersInKeychain];
+    return [BOXAbstractSession usersInKeychain];
 }
 
 - (BOXUserMini *)user
 {
-    return self.OAuth2Session.user;
+    return self.session.user;
 }
 
 - (BOOL)appToAppBoxAuthenticationEnabled
@@ -233,7 +253,7 @@ static BOXContentClient *defaultInstance = nil;
 - (void)setAPIBaseURL:(NSString *)APIBaseURL
 {
     _APIBaseURL = APIBaseURL;
-    self.OAuth2Session.APIBaseURLString = APIBaseURL;
+    self.session.APIBaseURLString = APIBaseURL;
 }
 
 // Load the ressources bundle.
@@ -252,6 +272,27 @@ static BOXContentClient *defaultInstance = nil;
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate
 {
     self.sharedLinksHeaderHelper.delegate = delegate;
+}
+
+- (BOXAbstractSession *)session
+{
+    if (self.OAuth2Session) {
+        return self.OAuth2Session;
+    } else {
+        return self.appSession;
+    }
+}
+
+- (void)setSession:(BOXAbstractSession *)session
+{
+    if ([session isKindOfClass:[BOXOAuth2Session class]]) {
+        _OAuth2Session = (BOXOAuth2Session *)session;
+        _appSession = nil;
+    } else {
+        _appSession = (BOXAppUserSession *)session;
+        _OAuth2Session = nil;
+    }
+    self.queueManager.session = self.session;
 }
 
 #pragma mark - helper methods
@@ -277,7 +318,6 @@ static BOXContentClient *defaultInstance = nil;
     return _SDKClients;
 }
 
-// Only for unit testing
 + (void)resetInstancesForTesting
 {
     defaultInstance = nil;

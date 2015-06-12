@@ -29,12 +29,14 @@
 #import "BOXContentClient+File.h"
 #import "BOXContentClient+folder.h"
 #import "BOXContentClient+Bookmark.h"
+#import "BOXContentClient+AppUser.h"
 
-// OAuth2
+// Session
 #import "BOXAuthorizationViewController.h"
+#import "BOXAbstractSession.h"
 #import "BOXOAuth2Session.h"
-#import "BOXSerialOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
+#import "BOXAppUserSession.h"
 
 // AppToApp
 
@@ -108,6 +110,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
+#import "BOXAPIAppAuthOperation.h"
 
 // API models
 #import "BOXItem.h"

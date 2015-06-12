@@ -55,19 +55,24 @@ typedef enum {
 } BOXContentSDKJSONError;
 
 typedef enum {
-    BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued = 20000, // access token is expired. The failed request was reenqueued
-    BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCannotBeReenqueued = 20001, // access token is expired and the operation cannot be reenqueued because it cannot be copied
-    BOXContentSDKOAuth2ErrorAccessTokenExpiredOperationCouldNotBeCompleted = 20002, // Operation failed because access token is expired and could not be refreshed. Usually due to no internet connection
-    BOXContentSDKOAuth2ErrorAccessTokenNonceMismatch = 20003, // Operation failed because nonce returned by server didn't match the one used by app to authorize user.
-} BOXContentSDKOAuth2Error;
+    BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued = 20000, // access token is expired. The failed request was reenqueued
+    BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued = 20001, // access token is expired and the operation cannot be reenqueued because it cannot be copied
+    BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted = 20002, // Operation failed because access token is expired and could not be refreshed. Usually due to no internet connection
+    BOXContentSDKAuthErrorAccessTokenNonceMismatch = 20003, // Operation failed because nonce returned by server didn't match the one used by app to authorize user.
+} BOXContentSDKAuthError;
+
+typedef enum {
+    BOXContentSDKAppUserErrorAccessTokenInvalid = 40000,
+    BOXContentSDKAppUserErrorAccessTokenExpirationInvalid = 40001
+} BOXContentSDKAppUserError;
 
 typedef enum {
     BOXContentSDKStreamErrorWriteFailed = 30000,
     BOXContentSDKStreamErrorReadFailed = 30001
 } BOXContentSDKStreamError;
 
-extern NSString *const BOXOAuth2TokenRequestErrorInvalidGrant; // Invalid refresh token
-extern NSString *const BOXOAuth2TokenRequestErrorInvalidToken; // Invalid access token
-extern NSString *const BOXOAuth2TokenRequestErrorInvalidRequest; // Possibly a missing access token
+extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token
+extern NSString *const BOXAuthTokenRequestErrorInvalidToken; // Invalid access token
+extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a missing access token
 
-extern NSString *const BOXOAuth2ErrorAccessDenied; // User denied access to their Box account
+extern NSString *const BOXAuthErrorAccessDenied; // User denied access to their Box account

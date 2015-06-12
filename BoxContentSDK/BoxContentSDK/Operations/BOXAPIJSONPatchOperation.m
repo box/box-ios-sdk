@@ -12,9 +12,9 @@
 
 @implementation BOXAPIJSONPatchOperation
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod patchOperations:(NSArray *)patchOperations queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod patchOperations:(NSArray *)patchOperations queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
 {
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:@{} queryParams:queryParams OAuth2Session:OAuth2Session];
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:@{} queryParams:queryParams session:session];
     if (self != nil)
     {
         self.APIRequest.HTTPBody = [self encodeBody:(id)patchOperations];
