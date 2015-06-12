@@ -16,7 +16,6 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BoxAppToAppApplication.h"
 #import "BoxAppToAppMessage.h"
-#import "BOXContentClient+AppUser.h"
 #import "BOXUserRequest.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
@@ -74,6 +73,27 @@
             [self presentDefaultAuthenticationWithCompletionBlock:completion];
         }
     }
+}
+
+- (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
+{
+    __weak BOXContentClient *weakSelf = self;
+    [self.appSession performAuthorizationWithCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                if (completion) {
+                    completion(nil, error);
+                }
+            } else {
+                BOXUserRequest *userRequest = [weakSelf currentUserRequest];
+                [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
+                    if (completion) {
+                        completion(user, error);
+                    }
+                }];
+            }
+        });
+    }];
 }
 
 + (BOOL)canCompleteAuthenticationWithURL:(NSURL *)authenticationURL

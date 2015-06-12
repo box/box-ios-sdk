@@ -101,6 +101,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXSerialAPIQueueManager.h"
 #import "BOXParallelAPIQueueManager.h"
+#import "BOXAPIAccessTokenDelegate.h"
 
 // API Operations
 #import "BOXAPIOperation.h"
@@ -110,7 +111,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 
 // API models
 #import "BOXItem.h"

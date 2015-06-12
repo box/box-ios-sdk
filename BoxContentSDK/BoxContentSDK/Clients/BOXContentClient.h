@@ -56,6 +56,11 @@
 @property (nonatomic, readonly, strong) BOXUserMini *user;
 
 /**
+ * The delegate for the BOXContentClient instance (Internally BOXAPIQueueManager)
+ */
+@property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
+
+/**
  *  The list of Box users that have established a session through the SDK.
  *
  *  @return array of BOXUserMini model objects

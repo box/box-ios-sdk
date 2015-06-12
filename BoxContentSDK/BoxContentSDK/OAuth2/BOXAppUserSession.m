@@ -11,7 +11,7 @@
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXUserRequest.h"
 #import "BOXUser_Private.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXAPIOperation_Private.h"
 
 @implementation BOXAppUserSession
@@ -19,7 +19,7 @@
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
     __weak BOXAppUserSession *weakSelf = self;
-    BOXAPIAppAuthOperation *operation = [[BOXAPIAppAuthOperation alloc]initWithSession:self];
+    BOXAPIAppUsersAuthOperation *operation = [[BOXAPIAppUsersAuthOperation alloc]initWithSession:self];
     operation.success = ^(NSString *accessToken, NSDate *accessTokenExpiration) {
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;

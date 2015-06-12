@@ -18,6 +18,8 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXSharedLinkHeadersDefaultManager.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXUserRequest.h"
+#import "BOXContentClient+User.h"
 
 @interface BOXContentClient ()
 
@@ -294,6 +296,28 @@ static BOXContentClient *defaultInstance = nil;
         _OAuth2Session = nil;
     }
     self.queueManager.session = self.session;
+}
+
+#pragma mark - access token delegate
+- (id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+{
+    return self.queueManager.delegate;
+}
+
+- (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+{
+    BOXAssert(self.OAuth2Session.refreshToken == nil, @"BOXContentClients that use OAuth2 cannot have a delegate set.");
+    BOXAssert(accessTokenDelegate != nil, @"delegate must be non-nil when calling setAccessTokenDelegate:");
+    
+    // Switch from OAuth2Session to AppUserSession
+    // Since BOXContentClient instances are defaulted to OAuth2 instead of AppUsers, a BOXAppUserSession must be initialized.
+    // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
+    if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
+        self.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+    }
+    
+    // Since the OAuth2Session instance was nil-ed out, the queueManager now needs a new session instance which will be appSession.
+    self.queueManager.delegate = accessTokenDelegate;
 }
 
 #pragma mark - helper methods

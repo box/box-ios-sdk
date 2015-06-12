@@ -211,10 +211,10 @@
 		862EF28F1B1FBA880044526F /* BOXAppUserSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 862EF28D1B1FBA880044526F /* BOXAppUserSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		862EF2901B1FBA880044526F /* BOXAppUserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 862EF28E1B1FBA880044526F /* BOXAppUserSession.m */; };
 		86B18F001B2416B9000EAE8C /* BOXAPIAccessTokenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18EFF1B24141E000EAE8C /* BOXAPIAccessTokenDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86B18F031B241DF1000EAE8C /* BOXAPIAppAuthOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F011B241DF1000EAE8C /* BOXAPIAppAuthOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86B18F041B241DF1000EAE8C /* BOXAPIAppAuthOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B18F021B241DF1000EAE8C /* BOXAPIAppAuthOperation.m */; };
-		86B18F061B2428E3000EAE8C /* BOXAPIOperation_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */; };
 		86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */; };
+		86B18F031B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F011B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86B18F041B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B18F021B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m */; };
+		86B18F061B2428E3000EAE8C /* BOXAPIOperation_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */; };
 		AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF153B1417C346D6008D636C /* NSJSONSerialization+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */; };
 		C53EC2441A3873090007C8A7 /* BOXComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC2421A3873090007C8A7 /* BOXComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -633,10 +633,10 @@
 		862EF28E1B1FBA880044526F /* BOXAppUserSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BOXAppUserSession.m; path = OAuth2/BOXAppUserSession.m; sourceTree = "<group>"; };
 		862EF2921B1FE7650044526F /* BOXAbstractSession_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BOXAbstractSession_Private.h; path = OAuth2/BOXAbstractSession_Private.h; sourceTree = "<group>"; };
 		86B18EFF1B24141E000EAE8C /* BOXAPIAccessTokenDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIAccessTokenDelegate.h; sourceTree = "<group>"; };
-		86B18F011B241DF1000EAE8C /* BOXAPIAppAuthOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAPIAppAuthOperation.h; sourceTree = "<group>"; };
-		86B18F021B241DF1000EAE8C /* BOXAPIAppAuthOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAPIAppAuthOperation.m; sourceTree = "<group>"; };
-		86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIOperation_Private.h; sourceTree = "<group>"; };
 		86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppUserSessionTests.m; sourceTree = "<group>"; };
+		86B18F011B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAPIAppUsersAuthOperation.h; sourceTree = "<group>"; };
+		86B18F021B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAPIAppUsersAuthOperation.m; sourceTree = "<group>"; };
+		86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIOperation_Private.h; sourceTree = "<group>"; };
 		AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+BOXAdditions.h"; sourceTree = "<group>"; };
 		AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+BOXAdditions.m"; sourceTree = "<group>"; };
 		C53EC2421A3873090007C8A7 /* BOXComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXComment.h; sourceTree = "<group>"; };
@@ -1470,8 +1470,8 @@
 				E4FAD9A8172CE2C50052AD11 /* BOXAPIOperation.m */,
 				0ED881AA1A5F4793009FED90 /* BOXAPIJSONPatchOperation.h */,
 				0ED881AB1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m */,
-				86B18F011B241DF1000EAE8C /* BOXAPIAppAuthOperation.h */,
-				86B18F021B241DF1000EAE8C /* BOXAPIAppAuthOperation.m */,
+				86B18F011B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h */,
+				86B18F021B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m */,
 				86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */,
 			);
 			path = Operations;
@@ -1564,7 +1564,7 @@
 				5930AB551A23E149003970C6 /* BOXDispatchHelper.h in Headers */,
 				C53EC25E1A38855E0007C8A7 /* BOXCommentAddRequest.h in Headers */,
 				C53EC2A21A38A6090007C8A7 /* BOXCommentUpdateRequest.h in Headers */,
-				86B18F031B241DF1000EAE8C /* BOXAPIAppAuthOperation.h in Headers */,
+				86B18F031B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h in Headers */,
 				C5D91CA61A41E46000AC8B8F /* BOXEventsAdminLogsRequest.h in Headers */,
 				E1CAD4D51A16C85C006ECAFD /* BOXFileDeleteRequest.h in Headers */,
 				E4FAD9DE172CE2C50052AD11 /* BOXAPIJSONOperation.h in Headers */,
@@ -1947,7 +1947,7 @@
 				700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */,
 				15958E5A1A1445A300AEBCEE /* BOXContentClient+Authentication.m in Sources */,
 				15958E401A14338A00AEBCEE /* BOXFolderPaginatedItemsRequest.m in Sources */,
-				86B18F041B241DF1000EAE8C /* BOXAPIAppAuthOperation.m in Sources */,
+				86B18F041B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m in Sources */,
 				15958E551A14338A00AEBCEE /* BOXTrashedFolderRestoreRequest.m in Sources */,
 				E1CAD4DA1A16C85C006ECAFD /* BOXFolderCreateRequest.m in Sources */,
 				C562DB4B1A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.m in Sources */,
@@ -1983,7 +1983,6 @@
 				C5972A7D1A3F52F600225CBA /* BOXCollectionFavoritesRequest.m in Sources */,
 				15280E521A37E70B008D4F5D /* BOXFolder.m in Sources */,
 				0E16F1131A426AB200BDDA21 /* BOXGroup.m in Sources */,
-				8624C53D1B261E8C007CF43A /* BOXContentClient+AppUser.m in Sources */,
 				E1CAD4E91A16F262006ECAFD /* BOXUserRequest.m in Sources */,
 				0E16F1201A43774C00BDDA21 /* BOXCollaborationPendingRequest.m in Sources */,
 				E1CAD4DC1A16C85C006ECAFD /* BOXFolderDeleteRequest.m in Sources */,

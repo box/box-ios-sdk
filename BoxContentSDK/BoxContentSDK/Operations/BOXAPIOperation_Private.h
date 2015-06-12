@@ -29,4 +29,10 @@ typedef enum {
 #pragma mark - Thread entry points for operation
 - (void)executeOperation;
 
+#pragma mark error methods
+- (BOOL)shouldErrorTriggerLogout:(NSError *)error;
+
+#pragma notification methods
+- (void)sendLogoutNotification;
+
 @end

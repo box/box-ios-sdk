@@ -78,7 +78,7 @@
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-#error Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
+#warning Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
     completion(@"your_access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
 }
 

@@ -12,7 +12,7 @@
 #import "BOXAPIOAuth2ToJSONOperation.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXLog.h"
-#import "BOXAPIAppAuthOperation.h"
+#import "BOXAPIAppUsersAuthOperation.h"
 
 @interface BOXParallelAPIQueueManager ()
 
@@ -65,7 +65,7 @@
         [super enqueueOperation:operation];
 
         // ensure that authentication operations occur before all other operations
-        if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppAuthOperation class]])
+        if ([operation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] || [operation isKindOfClass:[BOXAPIAppUsersAuthOperation class]])
         {
             // hold a refernce to the pending authentication operation so it can be added
             // as a dependency to all APIOperations enqueued before it finishes
@@ -77,7 +77,7 @@
                 // authentication operations. For example, if a client requests 5 subsequent token refreshes,
                 // All authenticated operations should depend on these requests resolving, but these
                 // requests do not depend on each other
-                if (![enqueuedOperation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] && ![enqueuedOperation isKindOfClass:[BOXAPIAppAuthOperation class]])
+                if (![enqueuedOperation isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]] && ![enqueuedOperation isKindOfClass:[BOXAPIAppUsersAuthOperation class]])
                 {
                     [self addDependency:operation toOperation:enqueuedOperation];
                 }
