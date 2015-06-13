@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BOXSampleAccountsViewController : UITableViewController
+@interface BOXSampleAccountsViewController : UITableViewController <BOXAPIAccessTokenDelegate>
+
+- (instancetype)initWithAppUsers:(BOOL)appUsers;
 
 @end
 

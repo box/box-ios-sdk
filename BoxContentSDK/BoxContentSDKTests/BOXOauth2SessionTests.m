@@ -50,6 +50,7 @@
                                          @"user_login" : user.login,
                                          @"user_name" : user.name};
     
+    XCTAssertEqual(expectedDictionary.count, dictionary.count);
     XCTAssertEqualObjects(expectedDictionary, dictionary);
 }
 

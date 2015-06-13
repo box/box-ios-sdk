@@ -80,10 +80,11 @@ static BOXContentClient *defaultInstance = nil;
     @synchronized(synchronizer)
     {
         BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.modelID];
+        
+        // Note: Places where uses can log into the same account as an OAuth and AppUser which causes a conflict in SDKClients
+        
         if (client == nil) {
-            // Only OAuth2Session contain a refresh token. Otherwise it's an AppUserSession.
             client = [[self alloc] initWithBOXUser:user];
-            
             [[[self class] SDKClients] setObject:client forKey:user.modelID];
         }
         
@@ -193,9 +194,7 @@ static BOXContentClient *defaultInstance = nil;
 - (void)didReceiveAccessTokenRefreshedNotification:(NSNotification *)notification
 {
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
-    if (self.user.modelID && session.user.modelID && ![self.user.modelID isEqualToString:session.user.modelID]) {
-        BOXAssertFail(@"BOXUser mismatch in BOXContentClient instance. Client User: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
-    }
+    BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
 }
 
 - (void)didReceiveUserWasLoggedOutNotification:(NSNotification *)notification

@@ -7,12 +7,12 @@
 //
 
 #import "BOXAPIOperation_Private.h"
-#import "BOXAPIAppUsersAuthOperation.h"
+#import "BOXAPIAppAuthOperation.h"
 
 #define BOXAccessTokenKey @"BOXAccessTokenKey"
 #define BOXAccessTokenExpirationKey @"BOXAccessTokenExpirationKey"
 
-@implementation BOXAPIAppUsersAuthOperation
+@implementation BOXAPIAppAuthOperation
 
 - (void)start
 {
@@ -42,18 +42,17 @@
 {
     if (![self isCancelled]) {
         @synchronized(self.session) {
-            __weak BOXAPIAppUsersAuthOperation *weakSelf = self;
+            __weak BOXAPIAppAuthOperation *weakSelf = self;
             [self.session.queueManager.delegate fetchAccessTokenWithCompletion:^(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error) {
                 if (error == nil && accessToken && accessTokenExpiration) {
                     weakSelf.accessToken = accessToken;
                     weakSelf.accessTokenExpiration = accessTokenExpiration;
+                    [weakSelf finish];
                 } else if (!error) {
                     self.error = [[NSError alloc]initWithDomain:@"accessToken and accessTokenExpiration should be non-nil" code:BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid userInfo:nil];
                 } else {
                     self.error = error;
                 }
-                
-                [weakSelf finish];
             }];
         }
     }
@@ -91,11 +90,7 @@
 
 - (void)finish
 {
-    if (self.error.code == (BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid)
-        || [self shouldErrorTriggerLogout:self.error]) {
-        [self sendLogoutNotification];
-    }
-    
+    // TODO: Check if error exists, if so logout.
     [self performCompletionCallback];
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);

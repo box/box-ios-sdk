@@ -12,10 +12,20 @@
 @interface BOXSampleAccountsViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *users;
+@property (nonatomic, readwrite, assign) BOOL isAppUsers;
 
 @end
 
 @implementation BOXSampleAccountsViewController
+
+- (instancetype)initWithAppUsers:(BOOL)appUsers
+{
+    if ([self init]) {
+        self.isAppUsers = appUsers;
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,15 +33,31 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.title = @"Accounts";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(barButtonPressed:)];
     
-    self.users = [BOXContentClient users];
+    NSMutableArray *users = [[NSMutableArray alloc]init];
+    for (BOXUser *user in [BOXContentClient users]) {
+        BOXContentClient *client = [BOXContentClient clientForUser:user];
+        if (   ([client.session isKindOfClass:[BOXOAuth2Session class]] && !self.isAppUsers)
+            || ([client.session isKindOfClass:[BOXAppUserSession class]] && self.isAppUsers)) {
+            [users addObject:user];
+        }
+    }
+    
+    self.users = users;
+    
+    [self.tableView reloadData];
 }
 
-- (void)addAction:(id)sender
+- (void)barButtonPressed:(UIBarButtonItem *)sender
 {
     // Create a new client for the account we want to add.
     BOXContentClient *client = [BOXContentClient clientForNewSession];
+    
+    if (self.isAppUsers) {
+        [client setAccessTokenDelegate:self];
+    }
+    
     [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
         if (error) {
             if ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIUserCancelledError) {
@@ -45,12 +71,24 @@
                 [alertView show];
             }
         } else {
-            self.users = [self.users arrayByAddingObject:user];
-            [self.tableView reloadData];
+            BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];
+            
+            if ([tmpClient.user.modelID isEqualToString:client.user.modelID] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
+                [tmpClient logOut];
+                [self barButtonPressed:nil];
+            } else {
+                self.users = [self.users arrayByAddingObject:user];
+                [self.tableView reloadData];
+            }
         }
     }];
 }
 
+- (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
+{
+#warning Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
+    completion(@"your_access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -122,6 +160,10 @@
 {
     BOXUser *user = self.users[indexPath.row];
     BOXContentClient *client = [BOXContentClient clientForUser:user];
+    
+    if (self.isAppUsers) {
+        [client setAccessTokenDelegate:self];
+    }
     
     BOXSampleFolderViewController *folderListingController = [[BOXSampleFolderViewController alloc] initWithClient:client folderID:BOXAPIFolderIDRoot];
     [self.navigationController pushViewController:folderListingController animated:YES];
