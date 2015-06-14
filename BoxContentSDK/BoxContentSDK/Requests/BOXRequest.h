@@ -15,6 +15,7 @@
 @class BOXComment;
 @class BOXCollection;
 @class BOXFileVersion;
+@class BOXMetadata;
 
 typedef void (^BOXErrorBlock)(NSError *error);
 
@@ -54,6 +55,12 @@ typedef void (^BOXCollectionBlock)(BOXCollection *collection, NSError *error);
 typedef void (^BOXEventsBlock)(NSArray *events, NSString *nextStreamPosition, NSError *error);
 
 typedef void (^BOXFileVersionBlock)(BOXFileVersion *fileVersion, NSError *error);
+
+typedef void (^BOXMetadataBlock)(BOXMetadata *metadata, NSError *error);
+
+typedef void (^BOXMetadatasBlock)(NSArray *metadatas, NSError *error);
+
+typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *error);
 
 @interface BOXRequest : NSObject
 

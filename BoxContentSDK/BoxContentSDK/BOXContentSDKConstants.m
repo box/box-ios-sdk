@@ -27,6 +27,11 @@ NSString *const BOXAPIResourceCollections = @"collections";
 NSString *const BOXAPIResourceEvents = @"events";
 NSString *const BOXAPIResourceCollaborations = @"collaborations";
 NSString *const BOXAPIResourceSearch = @"search";
+NSString *const BOXAPIResourceMetadataTemplates = @"metadata_templates";
+
+// API Metadata Template Scope
+NSString *const BOXAPITemplateScopeEnterprise = @"enterprise";
+NSString *const BOXAPITemplateScopeGlobal = @"global";
 
 // API Subresources
 NSString *const BOXAPISubresourceItems = @"items";
@@ -158,10 +163,16 @@ NSString *const BOXAPIParameterKeyAncestorFolderIDs = @"ancestor_folder_ids";
 NSString *const BOXAPIParameterKeyContentTypes = @"content_types";
 NSString *const BOXAPIParameterKeyType = @"type";
 NSString *const BOXAPIParameterKeyQuery = @"query";
+NSString *const BOXAPIParameterKeyMDFilter = @"mdfilters";
 NSString *const BOXAPIParameterKeyMinWidth = @"min_width";
 NSString *const BOXAPIParameterKeyMinHeight = @"min_height";
 NSString *const BOXAPIParameterKeyMaxWidth = @"max_width";
 NSString *const BOXAPIParameterKeyMaxHeight = @"max_height";
+
+// Metadata Parameter Keys
+NSString *const BOXAPIParameterKeyTemplate = @"templateKey";
+NSString *const BOXAPIParameterKeyScope = @"scope";
+NSString *const BOXAPIParameterKeyFilter = @"filters";
 
 // Multipart parameter keys
 NSString *const BOXAPIMultipartParameterFieldKeyFile = @"file";
@@ -186,6 +197,9 @@ NSString *const BOXAPIObjectKeyCanSetShareAccess = @"can_set_share_access";
 NSString *const BOXAPIObjectKeyCanInviteCollaborator = @"can_invite_collaborator";
 
 NSString *const BOXAPIObjectKeyID = @"id";
+NSString *const BOXAPIObjectKeyKey = @"key";
+NSString *const BOXAPIObjectKeyDisplayName = @"displayName";
+NSString *const BOXAPIObjectKeyOptions = @"options";
 NSString *const BOXAPIObjectKeyType = @"type";
 NSString *const BOXAPIObjectKeySequenceID = @"sequence_id";
 NSString *const BOXAPIObjectKeyETag = @"etag";
@@ -261,6 +275,16 @@ NSString *const BOXAPIObjectKeySource = @"source";
 NSString *const BOXAPIObjectKeyAcknowledgedAt = @"acknowledged_at";
 NSString *const BOXAPIObjectKeyAccessibleBy = @"accessible_by";
 NSString *const BOXAPIObjectKeyEntries = @"entries";
+
+// API metadata object keys
+NSString *const BOXAPIMetadataObjectKeyID = @"$id";
+NSString *const BOXAPIMetadataObjectKeyType = @"$type";
+NSString *const BOXAPIMetadataObjectKeyScope = @"$scope";
+NSString *const BOXAPIMetadataObjectKeyTemplate = @"$template";
+NSString *const BOXAPIMetadataObjectKeyParent = @"$parent";
+NSString *const BOXAPIMetadataObjectKeyOperation = @"op";
+NSString *const BOXAPIMetadataObjectKeyPath = @"path";
+NSString *const BOXAPIMetadataObjectKeyValue = @"value";
 
 // API Folder IDs
 NSString *const BOXAPIFolderIDRoot = @"0";

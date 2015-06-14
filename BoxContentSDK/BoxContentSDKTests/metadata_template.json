@@ -1,0 +1,63 @@
+{
+    "templateKey": "customer",
+    "scope": "enterprise_490685",
+    "displayName": "Customer",
+    "fields": [
+               {
+                   "type": "string",
+                   "key": "customerTeam",
+                   "displayName": "Customer team"
+               },
+               {
+                   "type": "string",
+                   "key": "category",
+                   "displayName": "Category"
+               },
+               {
+                   "type": "string",
+                   "key": "brand",
+                   "displayName": "Brand"
+               },
+               {
+                   "type": "enum",
+                   "key": "fy",
+                   "displayName": "FY",
+                   "options": [
+                                   {
+                                       "key": "FY11"
+                                   },
+                                   {
+                                       "key": "FY12"
+                                   },
+                                   {
+                                       "key": "FY13"
+                                   },
+                                   {
+                                       "key": "FY14"
+                                   },
+                                   {
+                                       "key": "FY15"
+                                   }
+                               ]
+               },
+               {
+                   "type": "enum",
+                   "key": "qtr",
+                   "displayName": "Qtr",
+                   "options": [
+                                   {
+                                       "key": "First"
+                                   },
+                                   {
+                                       "key": "Second"
+                                   },
+                                   {
+                                       "key": "Third"
+                                   },
+                                   {
+                                       "key": "Fourth"
+                                   }
+                           ]
+               }
+           ]
+}

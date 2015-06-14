@@ -26,6 +26,7 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (instancetype)initWithSearchQuery:(NSString *)query inRange:(NSRange)range;
+- (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range;
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
 
 @end

@@ -208,10 +208,40 @@
 		862EF28C1B1FA12B0044526F /* BOXAbstractSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 862EF28A1B1FA12B0044526F /* BOXAbstractSession.m */; };
 		862EF28F1B1FBA880044526F /* BOXAppUserSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 862EF28D1B1FBA880044526F /* BOXAppUserSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		862EF2901B1FBA880044526F /* BOXAppUserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 862EF28E1B1FBA880044526F /* BOXAppUserSession.m */; };
+		864963C81B3099580084822D /* BOXMetadataRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 864963C71B3099580084822D /* BOXMetadataRequestTests.m */; };
+		8676E0BD1B2D653A00AC2677 /* BOXMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0BB1B2D653A00AC2677 /* BOXMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0BE1B2D653A00AC2677 /* BOXMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0BC1B2D653A00AC2677 /* BOXMetadata.m */; };
+		8676E0C11B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0BF1B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0C21B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0C01B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m */; };
+		8676E0C51B2D7EAC00AC2677 /* BOXRequest+Metadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0C31B2D7EAC00AC2677 /* BOXRequest+Metadata.h */; };
+		8676E0C61B2D7EAC00AC2677 /* BOXRequest+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0C41B2D7EAC00AC2677 /* BOXRequest+Metadata.m */; };
+		8676E0C91B2E36F200AC2677 /* BOXMetadataCreateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0C71B2E36F200AC2677 /* BOXMetadataCreateRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0CA1B2E36F200AC2677 /* BOXMetadataCreateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0C81B2E36F200AC2677 /* BOXMetadataCreateRequest.m */; };
+		8676E0CD1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0CB1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0CE1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0CC1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m */; };
+		8676E0D11B2F3FA400AC2677 /* BOXMetadataUpdateTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0CF1B2F3FA400AC2677 /* BOXMetadataUpdateTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0D21B2F3FA400AC2677 /* BOXMetadataUpdateTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0D01B2F3FA400AC2677 /* BOXMetadataUpdateTask.m */; };
+		8676E0D51B2F55FB00AC2677 /* BOXMetadataTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0D31B2F55FB00AC2677 /* BOXMetadataTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0D61B2F55FB00AC2677 /* BOXMetadataTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0D41B2F55FB00AC2677 /* BOXMetadataTemplate.m */; };
+		8676E0D91B2F575E00AC2677 /* BOXMetadataTemplateField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0D71B2F575E00AC2677 /* BOXMetadataTemplateField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0DA1B2F575E00AC2677 /* BOXMetadataTemplateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0D81B2F575E00AC2677 /* BOXMetadataTemplateField.m */; };
+		8676E0DD1B2F696C00AC2677 /* BOXMetadataKeyValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0DB1B2F696C00AC2677 /* BOXMetadataKeyValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0DE1B2F696C00AC2677 /* BOXMetadataKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0DC1B2F696C00AC2677 /* BOXMetadataKeyValue.m */; };
+		8676E0E11B2F69A300AC2677 /* BOXMetadataTemplateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8676E0DF1B2F69A300AC2677 /* BOXMetadataTemplateRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8676E0E21B2F69A300AC2677 /* BOXMetadataTemplateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0E01B2F69A300AC2677 /* BOXMetadataTemplateRequest.m */; };
+		8676E0E41B2FA78800AC2677 /* enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E31B2FA78800AC2677 /* enterprise_metadata.json */; };
+		8676E0E61B2FA7BE00AC2677 /* updated_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E51B2FA7BE00AC2677 /* updated_enterprise_metadata.json */; };
+		8676E0E81B2FA82D00AC2677 /* metadata_templates.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E71B2FA82D00AC2677 /* metadata_templates.json */; };
+		8676E0EA1B2FA89200AC2677 /* metadata_template.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E91B2FA89200AC2677 /* metadata_template.json */; };
+		8676E0EC1B2FB09C00AC2677 /* enterprise_metadatas.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0EB1B2FB09C00AC2677 /* enterprise_metadatas.json */; };
 		86B18F001B2416B9000EAE8C /* BOXAPIAccessTokenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18EFF1B24141E000EAE8C /* BOXAPIAccessTokenDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86B18F031B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F011B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86B18F041B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B18F021B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m */; };
 		86B18F061B2428E3000EAE8C /* BOXAPIOperation_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */; };
+		86C514A31B2BB3850078565C /* BOXMetadataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C514A11B2BB3850078565C /* BOXMetadataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86C514A41B2BB3850078565C /* BOXMetadataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C514A21B2BB3850078565C /* BOXMetadataRequest.m */; };
+		86C514A71B2BC1600078565C /* BOXContentClient+Metadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C514A51B2BC1600078565C /* BOXContentClient+Metadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86C514A81B2BC1600078565C /* BOXContentClient+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C514A61B2BC1600078565C /* BOXContentClient+Metadata.m */; };
 		86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */; };
 		AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF153B1417C346D6008D636C /* NSJSONSerialization+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */; };
@@ -628,10 +658,40 @@
 		862EF28D1B1FBA880044526F /* BOXAppUserSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXAppUserSession.h; path = OAuth2/BOXAppUserSession.h; sourceTree = "<group>"; };
 		862EF28E1B1FBA880044526F /* BOXAppUserSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BOXAppUserSession.m; path = OAuth2/BOXAppUserSession.m; sourceTree = "<group>"; };
 		862EF2921B1FE7650044526F /* BOXAbstractSession_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BOXAbstractSession_Private.h; path = OAuth2/BOXAbstractSession_Private.h; sourceTree = "<group>"; };
+		864963C71B3099580084822D /* BOXMetadataRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataRequestTests.m; sourceTree = "<group>"; };
+		8676E0BB1B2D653A00AC2677 /* BOXMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadata.h; sourceTree = "<group>"; };
+		8676E0BC1B2D653A00AC2677 /* BOXMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadata.m; sourceTree = "<group>"; };
+		8676E0BF1B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataDeleteRequest.h; sourceTree = "<group>"; };
+		8676E0C01B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataDeleteRequest.m; sourceTree = "<group>"; };
+		8676E0C31B2D7EAC00AC2677 /* BOXRequest+Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXRequest+Metadata.h"; sourceTree = "<group>"; };
+		8676E0C41B2D7EAC00AC2677 /* BOXRequest+Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXRequest+Metadata.m"; sourceTree = "<group>"; };
+		8676E0C71B2E36F200AC2677 /* BOXMetadataCreateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataCreateRequest.h; sourceTree = "<group>"; };
+		8676E0C81B2E36F200AC2677 /* BOXMetadataCreateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataCreateRequest.m; sourceTree = "<group>"; };
+		8676E0CB1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataUpdateRequest.h; sourceTree = "<group>"; };
+		8676E0CC1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataUpdateRequest.m; sourceTree = "<group>"; };
+		8676E0CF1B2F3FA400AC2677 /* BOXMetadataUpdateTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataUpdateTask.h; sourceTree = "<group>"; };
+		8676E0D01B2F3FA400AC2677 /* BOXMetadataUpdateTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataUpdateTask.m; sourceTree = "<group>"; };
+		8676E0D31B2F55FB00AC2677 /* BOXMetadataTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataTemplate.h; sourceTree = "<group>"; };
+		8676E0D41B2F55FB00AC2677 /* BOXMetadataTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataTemplate.m; sourceTree = "<group>"; };
+		8676E0D71B2F575E00AC2677 /* BOXMetadataTemplateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataTemplateField.h; sourceTree = "<group>"; };
+		8676E0D81B2F575E00AC2677 /* BOXMetadataTemplateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataTemplateField.m; sourceTree = "<group>"; };
+		8676E0DB1B2F696C00AC2677 /* BOXMetadataKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataKeyValue.h; sourceTree = "<group>"; };
+		8676E0DC1B2F696C00AC2677 /* BOXMetadataKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataKeyValue.m; sourceTree = "<group>"; };
+		8676E0DF1B2F69A300AC2677 /* BOXMetadataTemplateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataTemplateRequest.h; sourceTree = "<group>"; };
+		8676E0E01B2F69A300AC2677 /* BOXMetadataTemplateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataTemplateRequest.m; sourceTree = "<group>"; };
+		8676E0E31B2FA78800AC2677 /* enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enterprise_metadata.json; sourceTree = "<group>"; };
+		8676E0E51B2FA7BE00AC2677 /* updated_enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = updated_enterprise_metadata.json; sourceTree = "<group>"; };
+		8676E0E71B2FA82D00AC2677 /* metadata_templates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata_templates.json; sourceTree = "<group>"; };
+		8676E0E91B2FA89200AC2677 /* metadata_template.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata_template.json; sourceTree = "<group>"; };
+		8676E0EB1B2FB09C00AC2677 /* enterprise_metadatas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enterprise_metadatas.json; sourceTree = "<group>"; };
 		86B18EFF1B24141E000EAE8C /* BOXAPIAccessTokenDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIAccessTokenDelegate.h; sourceTree = "<group>"; };
 		86B18F011B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAPIAppUsersAuthOperation.h; sourceTree = "<group>"; };
 		86B18F021B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAPIAppUsersAuthOperation.m; sourceTree = "<group>"; };
 		86B18F051B2428AB000EAE8C /* BOXAPIOperation_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXAPIOperation_Private.h; sourceTree = "<group>"; };
+		86C514A11B2BB3850078565C /* BOXMetadataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXMetadataRequest.h; sourceTree = "<group>"; };
+		86C514A21B2BB3850078565C /* BOXMetadataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXMetadataRequest.m; sourceTree = "<group>"; };
+		86C514A51B2BC1600078565C /* BOXContentClient+Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+Metadata.h"; sourceTree = "<group>"; };
+		86C514A61B2BC1600078565C /* BOXContentClient+Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXContentClient+Metadata.m"; sourceTree = "<group>"; };
 		86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppUserSessionTests.m; sourceTree = "<group>"; };
 		AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+BOXAdditions.h"; sourceTree = "<group>"; };
 		AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+BOXAdditions.m"; sourceTree = "<group>"; };
@@ -936,6 +996,8 @@
 				150C27A31A69DC0E00099850 /* BOXContentClient+Folder.m */,
 				150C27A61A69DC2300099850 /* BOXContentClient+Bookmark.h */,
 				150C27A71A69DC2300099850 /* BOXContentClient+Bookmark.m */,
+				86C514A51B2BC1600078565C /* BOXContentClient+Metadata.h */,
+				86C514A61B2BC1600078565C /* BOXContentClient+Metadata.m */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -946,6 +1008,8 @@
 				15958E0F1A14338A00AEBCEE /* BOXRequest.h */,
 				E1CAD4D41A16C85C006ECAFD /* BOXRequest_Private.h */,
 				15958E101A14338A00AEBCEE /* BOXRequest.m */,
+				8676E0C31B2D7EAC00AC2677 /* BOXRequest+Metadata.h */,
+				8676E0C41B2D7EAC00AC2677 /* BOXRequest+Metadata.m */,
 				E18896E81A3BBA30007F7330 /* BOXRequestWithSharedLinkHeader.h */,
 				E18896E91A3BBA30007F7330 /* BOXRequestWithSharedLinkHeader.m */,
 				15958DF51A14338900AEBCEE /* BOXFileRequest.h */,
@@ -1059,6 +1123,16 @@
 				0E16F1531A4A042E00BDDA21 /* BOXTrashedItemArrayRequest.m */,
 				0E24BF331A7B0C3700BD6C97 /* BOXItemShareRequest.h */,
 				0E24BF341A7B0C3700BD6C97 /* BOXItemShareRequest.m */,
+				86C514A11B2BB3850078565C /* BOXMetadataRequest.h */,
+				86C514A21B2BB3850078565C /* BOXMetadataRequest.m */,
+				8676E0BF1B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.h */,
+				8676E0C01B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m */,
+				8676E0C71B2E36F200AC2677 /* BOXMetadataCreateRequest.h */,
+				8676E0C81B2E36F200AC2677 /* BOXMetadataCreateRequest.m */,
+				8676E0CB1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h */,
+				8676E0CC1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m */,
+				8676E0DF1B2F69A300AC2677 /* BOXMetadataTemplateRequest.h */,
+				8676E0E01B2F69A300AC2677 /* BOXMetadataTemplateRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1151,6 +1225,7 @@
 				157512551A577017006628C6 /* BOXBookmarkCreateRequestTests.m */,
 				3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */,
 				C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */,
+				864963C71B3099580084822D /* BOXMetadataRequestTests.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -1210,6 +1285,11 @@
 				0E60AB461A68AB4600955CD5 /* invalid_grant.json */,
 				0E60AB4C1A69C63500955CD5 /* invalid_token.json */,
 				15A073CD1B0BD6C900352D87 /* model.json */,
+				8676E0E31B2FA78800AC2677 /* enterprise_metadata.json */,
+				8676E0E51B2FA7BE00AC2677 /* updated_enterprise_metadata.json */,
+				8676E0E71B2FA82D00AC2677 /* metadata_templates.json */,
+				8676E0E91B2FA89200AC2677 /* metadata_template.json */,
+				8676E0EB1B2FB09C00AC2677 /* enterprise_metadatas.json */,
 			);
 			name = CannedResponses;
 			sourceTree = "<group>";
@@ -1430,6 +1510,16 @@
 				0E16F1111A426AB200BDDA21 /* BOXGroup.m */,
 				0EA4D2521A5C83D300196891 /* BOXAssetInputStream.h */,
 				0EA4D2531A5C83D300196891 /* BOXAssetInputStream.m */,
+				8676E0BB1B2D653A00AC2677 /* BOXMetadata.h */,
+				8676E0BC1B2D653A00AC2677 /* BOXMetadata.m */,
+				8676E0CF1B2F3FA400AC2677 /* BOXMetadataUpdateTask.h */,
+				8676E0D01B2F3FA400AC2677 /* BOXMetadataUpdateTask.m */,
+				8676E0D31B2F55FB00AC2677 /* BOXMetadataTemplate.h */,
+				8676E0D41B2F55FB00AC2677 /* BOXMetadataTemplate.m */,
+				8676E0D71B2F575E00AC2677 /* BOXMetadataTemplateField.h */,
+				8676E0D81B2F575E00AC2677 /* BOXMetadataTemplateField.m */,
+				8676E0DB1B2F696C00AC2677 /* BOXMetadataKeyValue.h */,
+				8676E0DC1B2F696C00AC2677 /* BOXMetadataKeyValue.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1518,6 +1608,7 @@
 				E1CAD4DB1A16C85C006ECAFD /* BOXFolderDeleteRequest.h in Headers */,
 				E11BED4D1ADC050000A9216F /* BoxAppToAppApplication.h in Headers */,
 				E1DD60331A3A8DBD00C4BD41 /* BOXBookmarkShareRequest.h in Headers */,
+				8676E0CD1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h in Headers */,
 				E11BED4C1ADC050000A9216F /* BoxAppToAppAnnotationKeys.h in Headers */,
 				C5B9B8201A39A76800B8EB1A /* BOXContentClient+Comment.h in Headers */,
 				E1DD603D1A3A8F1B00C4BD41 /* BOXFileShareRequest.h in Headers */,
@@ -1539,6 +1630,7 @@
 				E18896EA1A3BBA30007F7330 /* BOXRequestWithSharedLinkHeader.h in Headers */,
 				E11BED561ADC050000A9216F /* BoxAppToAppMessage.h in Headers */,
 				E1CAD4DD1A16C85C006ECAFD /* BOXRequest_Private.h in Headers */,
+				8676E0C51B2D7EAC00AC2677 /* BOXRequest+Metadata.h in Headers */,
 				E1DD603F1A3A8F1B00C4BD41 /* BOXFileUnshareRequest.h in Headers */,
 				157512521A576CBD006628C6 /* BOXBookmarkCreateRequest.h in Headers */,
 				E11035F61A200E6B00B46F6D /* BOXHashHelper.h in Headers */,
@@ -1559,6 +1651,7 @@
 				C53EC2A21A38A6090007C8A7 /* BOXCommentUpdateRequest.h in Headers */,
 				86B18F031B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.h in Headers */,
 				C5D91CA61A41E46000AC8B8F /* BOXEventsAdminLogsRequest.h in Headers */,
+				8676E0BD1B2D653A00AC2677 /* BOXMetadata.h in Headers */,
 				E1CAD4D51A16C85C006ECAFD /* BOXFileDeleteRequest.h in Headers */,
 				E4FAD9DE172CE2C50052AD11 /* BOXAPIJSONOperation.h in Headers */,
 				E4FAD9E0172CE2C50052AD11 /* BOXAPIMultipartToJSONOperation.h in Headers */,
@@ -1579,23 +1672,28 @@
 				C5972A6C1A3F22E900225CBA /* BOXCollectionItemsRequest.h in Headers */,
 				15958E271A14338A00AEBCEE /* BOXFileUploadRequest.h in Headers */,
 				15280E641A37E70B008D4F5D /* BOXSharedLink.h in Headers */,
+				8676E0D51B2F55FB00AC2677 /* BOXMetadataTemplate.h in Headers */,
 				0E16F1011A42390700BDDA21 /* BOXFolderCollaborationsRequest.h in Headers */,
 				150C27741A699AA400099850 /* BOXContentClient+FileVersion.h in Headers */,
 				C5972A5E1A3F229A00225CBA /* BOXItemSetCollectionsRequest.h in Headers */,
 				0E5E14571A40CE8C00B205F6 /* BOXCollaboration.h in Headers */,
 				15958E4B1A14338A00AEBCEE /* BOXFolderUnshareRequest.h in Headers */,
+				8676E0C91B2E36F200AC2677 /* BOXMetadataCreateRequest.h in Headers */,
 				C562DB631A486DF50002E510 /* BOXBookmarkCommentsRequest.h in Headers */,
+				8676E0E11B2F69A300AC2677 /* BOXMetadataTemplateRequest.h in Headers */,
 				E1A8FD551A38F28D00475089 /* BOXFolderShareRequest.h in Headers */,
 				15958E591A1445A300AEBCEE /* BOXContentClient+Authentication.h in Headers */,
 				C562DB1B1A44666E0002E510 /* BOXSharedLinkHeadersHelper.h in Headers */,
 				C562DB4A1A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.h in Headers */,
 				15958E331A14338A00AEBCEE /* BOXFolderUpdateRequest.h in Headers */,
 				1522C8E91A3FAFBC0075DC7D /* BOXBookmarkCopyRequest.h in Headers */,
+				86C514A71B2BC1600078565C /* BOXContentClient+Metadata.h in Headers */,
 				15958E451A14338A00AEBCEE /* BOXRequest.h in Headers */,
 				15958E1E1A14338A00AEBCEE /* BOXFileRequest.h in Headers */,
 				15958E391A14338A00AEBCEE /* BOXItemArrayRequest.h in Headers */,
 				15958E301A14338A00AEBCEE /* BOXFolderRequest.h in Headers */,
 				E1CAD4D91A16C85C006ECAFD /* BOXFolderCreateRequest.h in Headers */,
+				8676E0DD1B2F696C00AC2677 /* BOXMetadataKeyValue.h in Headers */,
 				86B18F001B2416B9000EAE8C /* BOXAPIAccessTokenDelegate.h in Headers */,
 				15958E211A14338A00AEBCEE /* BOXFileThumbnailRequest.h in Headers */,
 				C5D91C9B1A41CAE900AC8B8F /* BOXEventsRequest.h in Headers */,
@@ -1621,13 +1719,17 @@
 				E4CA6F56173F13C10089680F /* BOXParallelAPIQueueManager.h in Headers */,
 				C562DB4D1A4831430002E510 /* BOXSharedLinkStorageProtocol.h in Headers */,
 				E1CAD4D71A16C85C006ECAFD /* BOXFileDownloadRequest.h in Headers */,
+				8676E0C11B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.h in Headers */,
 				E4CA6F5E173F1C750089680F /* BOXParallelOAuth2Session.h in Headers */,
 				15280E6C1A37E731008D4F5D /* BOXEnterprise.h in Headers */,
 				C5C11A3F175DA92E0001EC88 /* NSString+BOXAdditions.h in Headers */,
 				159BFA371A43B7E800D10476 /* BOXFileUploadNewVersionRequest.h in Headers */,
 				C5C0861C1A42F584004DB48A /* BOXContentClient+Event.h in Headers */,
+				8676E0D91B2F575E00AC2677 /* BOXMetadataTemplateField.h in Headers */,
 				E11BED501ADC050000A9216F /* BoxAppToAppFileMetadata.h in Headers */,
+				8676E0D11B2F3FA400AC2677 /* BOXMetadataUpdateTask.h in Headers */,
 				C5972A7C1A3F52F600225CBA /* BOXCollectionFavoritesRequest.h in Headers */,
+				86C514A31B2BB3850078565C /* BOXMetadataRequest.h in Headers */,
 				150C27A41A69DC0E00099850 /* BOXContentClient+Folder.h in Headers */,
 				AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */,
 				0E24BF351A7B0C3700BD6C97 /* BOXItemShareRequest.h in Headers */,
@@ -1720,6 +1822,7 @@
 				E1F9AE181A3B845A00D44858 /* bookmark_default_fields_not_shared.json in Resources */,
 				E1F9AE191A3B845A00D44858 /* bookmark_default_fields_shared.json in Resources */,
 				15A073CE1B0BD6C900352D87 /* model.json in Resources */,
+				8676E0EC1B2FB09C00AC2677 /* enterprise_metadatas.json in Resources */,
 				0ED881B21A5F58EA009FED90 /* metadata.json in Resources */,
 				C5972A731A3F338400225CBA /* collections.json in Resources */,
 				0E60AB471A68AB4600955CD5 /* invalid_grant.json in Resources */,
@@ -1728,16 +1831,20 @@
 				1575124F1A575AF3006628C6 /* preflight_check_conflict.json in Resources */,
 				159A94471A2FE05F0063B0FD /* user_mini_fields.json in Resources */,
 				0E5E145F1A40DF7A00B205F6 /* collaboration.json in Resources */,
+				8676E0E81B2FA82D00AC2677 /* metadata_templates.json in Resources */,
 				0E16F15C1A4A0CA500BDDA21 /* trashed_items.json in Resources */,
 				59258FFD1A3A5BC00038B9EE /* get_items.json in Resources */,
 				C5972A9D1A40978E00225CBA /* event_all_fields.json in Resources */,
+				8676E0E61B2FA7BE00AC2677 /* updated_enterprise_metadata.json in Resources */,
 				E1F9AE151A3B843300D44858 /* file_default_fields_shared.json in Resources */,
 				15C8C9D31A268CC30010593D /* user_default_fields.json in Resources */,
 				0E16F14A1A44F3B500BDDA21 /* item_search_results.json in Resources */,
 				159A94491A2FE13E0063B0FD /* user_all_fields.json in Resources */,
 				E15595A51A2D4B8E0070ED1E /* folder_default_fields.json in Resources */,
 				153FE6B61B15060A008A1E49 /* user_all_fields_null_enterprise.json in Resources */,
+				8676E0E41B2FA78800AC2677 /* enterprise_metadata.json in Resources */,
 				0E60AB4D1A69C63500955CD5 /* invalid_token.json in Resources */,
+				8676E0EA1B2FA89200AC2677 /* metadata_template.json in Resources */,
 				C5972A471A3B350C00225CBA /* collection_all_fields.json in Resources */,
 				1575124D1A575ACE006628C6 /* preflight_check_success.json in Resources */,
 				0E16F1271A437FA900BDDA21 /* collaborations_pending.json in Resources */,
@@ -1832,6 +1939,7 @@
 				C5972AA01A40A11500225CBA /* BOXEventTests.m in Sources */,
 				0E16F1191A43600600BDDA21 /* BOXCollaborationRemoveRequestTests.m in Sources */,
 				E1A8FD621A3A2E5800475089 /* BOXFolderUnshareRequestTests.m in Sources */,
+				864963C81B3099580084822D /* BOXMetadataRequestTests.m in Sources */,
 				0E16F11C1A43630400BDDA21 /* BOXCollaborationUpdateRequestTests.m in Sources */,
 				0E16F1621A4A56E100BDDA21 /* BOXTrashedFolderRestoreRequestTests.m in Sources */,
 				0E5E14621A40E08B00B205F6 /* BOXCollaborationTests.m in Sources */,
@@ -1872,6 +1980,7 @@
 				C5972A791A3F4E2C00225CBA /* BOXContentClient+Collection.m in Sources */,
 				150C27A11A69DBFC00099850 /* BOXContentClient+File.m in Sources */,
 				C5D91CA71A41E46000AC8B8F /* BOXEventsAdminLogsRequest.m in Sources */,
+				8676E0D61B2F55FB00AC2677 /* BOXMetadataTemplate.m in Sources */,
 				C5972A6D1A3F22E900225CBA /* BOXCollectionItemsRequest.m in Sources */,
 				15958E2B1A14338A00AEBCEE /* BOXFileVersionsRequest.m in Sources */,
 				159BFA381A43B7E800D10476 /* BOXFileUploadNewVersionRequest.m in Sources */,
@@ -1895,6 +2004,7 @@
 				0E16F1021A42390700BDDA21 /* BOXFolderCollaborationsRequest.m in Sources */,
 				C53EC25F1A38855E0007C8A7 /* BOXCommentAddRequest.m in Sources */,
 				15958E1F1A14338A00AEBCEE /* BOXFileRequest.m in Sources */,
+				8676E0D21B2F3FA400AC2677 /* BOXMetadataUpdateTask.m in Sources */,
 				0E16F0EC1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m in Sources */,
 				E4FAD9D5172CE2C50052AD11 /* BOXAuthorizationViewController.m in Sources */,
 				0E16F1381A439CC000BDDA21 /* BOXSearchRequest.m in Sources */,
@@ -1902,6 +2012,7 @@
 				15280E4C1A37E70B008D4F5D /* BOXFileLock.m in Sources */,
 				E4FAD9D7172CE2C50052AD11 /* BOXOAuth2Session.m in Sources */,
 				C5B9B8211A39A76800B8EB1A /* BOXContentClient+Comment.m in Sources */,
+				8676E0CA1B2E36F200AC2677 /* BOXMetadataCreateRequest.m in Sources */,
 				3D64E4291ABA453100659466 /* NSError+BOXAdditions.m in Sources */,
 				C5972A401A3B313700225CBA /* BOXCollection.m in Sources */,
 				3DE35CAD1A5B57B500694F6D /* BOXFileVersionPromoteRequest.m in Sources */,
@@ -1910,6 +2021,7 @@
 				C5D91C9C1A41CAE900AC8B8F /* BOXEventsRequest.m in Sources */,
 				E1CAD4E31A16F166006ECAFD /* BOXContentClient+User.m in Sources */,
 				15958E2E1A14338A00AEBCEE /* BOXFolderCopyRequest.m in Sources */,
+				86C514A41B2BB3850078565C /* BOXMetadataRequest.m in Sources */,
 				0E16F1551A4A042F00BDDA21 /* BOXTrashedItemArrayRequest.m in Sources */,
 				15958E4C1A14338A00AEBCEE /* BOXFolderUnshareRequest.m in Sources */,
 				C5972A991A408CAE00225CBA /* BOXEvent.m in Sources */,
@@ -1925,9 +2037,12 @@
 				E11035F71A200E6B00B46F6D /* BOXHashHelper.m in Sources */,
 				E4FAD9E1172CE2C50052AD11 /* BOXAPIMultipartToJSONOperation.m in Sources */,
 				C5972A651A3F22C800225CBA /* BOXCollectionListRequest.m in Sources */,
+				8676E0DA1B2F575E00AC2677 /* BOXMetadataTemplateField.m in Sources */,
 				C57E95E31A3752E90094D7B0 /* BOXFileCommentsRequest.m in Sources */,
 				150C27A91A69DC2300099850 /* BOXContentClient+Bookmark.m in Sources */,
+				8676E0DE1B2F696C00AC2677 /* BOXMetadataKeyValue.m in Sources */,
 				157512531A576CBD006628C6 /* BOXBookmarkCreateRequest.m in Sources */,
+				8676E0E21B2F69A300AC2677 /* BOXMetadataTemplateRequest.m in Sources */,
 				0E5E146E1A41105000B205F6 /* BOXCollaborationRemoveRequest.m in Sources */,
 				E4FAD9E3172CE2C50052AD11 /* BOXAPIOAuth2ToJSONOperation.m in Sources */,
 				E4FAD9E5172CE2C50052AD11 /* BOXAPIOperation.m in Sources */,
@@ -1949,6 +2064,7 @@
 				15958E3D1A14338A00AEBCEE /* BOXSharedItemRequest.m in Sources */,
 				C562DB641A486DF50002E510 /* BOXBookmarkCommentsRequest.m in Sources */,
 				150C27751A699AA400099850 /* BOXContentClient+FileVersion.m in Sources */,
+				8676E0C61B2D7EAC00AC2677 /* BOXRequest+Metadata.m in Sources */,
 				15958E461A14338A00AEBCEE /* BOXRequest.m in Sources */,
 				15280E401A37E70B008D4F5D /* BOXBookmark.m in Sources */,
 				15F9C4D41A3BB7D2006EC2EE /* BOXBookmarkUpdateRequest.m in Sources */,
@@ -1969,11 +2085,13 @@
 				15280E3A1A37E70B008D4F5D /* BOXModel.m in Sources */,
 				E11BED511ADC050000A9216F /* BoxAppToAppFileMetadata.m in Sources */,
 				15958DF01A1432AB00AEBCEE /* BOXContentClient.m in Sources */,
+				8676E0CE1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m in Sources */,
 				15958E251A14338A00AEBCEE /* BOXFileUpdateRequest.m in Sources */,
 				862EF28C1B1FA12B0044526F /* BOXAbstractSession.m in Sources */,
 				C5C11A40175DA92E0001EC88 /* NSString+BOXAdditions.m in Sources */,
 				155170BB1A54872D004C00AF /* BOXFileVersion.m in Sources */,
 				C5972A7D1A3F52F600225CBA /* BOXCollectionFavoritesRequest.m in Sources */,
+				8676E0C21B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m in Sources */,
 				15280E521A37E70B008D4F5D /* BOXFolder.m in Sources */,
 				0E16F1131A426AB200BDDA21 /* BOXGroup.m in Sources */,
 				E1CAD4E91A16F262006ECAFD /* BOXUserRequest.m in Sources */,
@@ -1981,9 +2099,11 @@
 				E1CAD4DC1A16C85C006ECAFD /* BOXFolderDeleteRequest.m in Sources */,
 				E1DD60361A3A8DBD00C4BD41 /* BOXBookmarkUnshareRequest.m in Sources */,
 				E1CAD4D81A16C85C006ECAFD /* BOXFileDownloadRequest.m in Sources */,
+				8676E0BE1B2D653A00AC2677 /* BOXMetadata.m in Sources */,
 				15958E431A14338A00AEBCEE /* BOXPreflightCheckRequest.m in Sources */,
 				0EA4D2561A5C83D300196891 /* BOXAssetInputStream.m in Sources */,
 				15958E1C1A14338A00AEBCEE /* BOXFileCopyRequest.m in Sources */,
+				86C514A81B2BC1600078565C /* BOXContentClient+Metadata.m in Sources */,
 				E1DD603E1A3A8F1B00C4BD41 /* BOXFileShareRequest.m in Sources */,
 				15280E6E1A37E731008D4F5D /* BOXEnterprise.m in Sources */,
 				0E0823901A76CE2700222778 /* BOXContentSDKErrors.m in Sources */,

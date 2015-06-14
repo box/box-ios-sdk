@@ -1,0 +1,31 @@
+{
+    "entries": [
+                {
+                "$type": "marketingCollateral-1199c73f-11aa-439a-a7d0-e981fc6cc22f",
+                "$parent": "file_10559150999",
+                "$id": "2f76a16d-44af-44a8-b630-fc62e0f1d80c",
+                "$template": "marketingCollateral",
+                "$scope": "enterprise_42500",
+                "contentApproved": "yes",
+                "audience": "external"
+                },
+                {
+                "$type": "legal-05014851-9823-4d7d-9784-a6626b855e2b",
+                "$parent": "file_27243056898",
+                "$id": "8c76e8e1-1525-4cb8-a863-e61408336e24",
+                "$template": "legal",
+                "$scope": "enterprise_42500",
+                "clientNumber": "49281"
+                },
+                {
+                "$type": "properties",
+                "$parent": "file_10559150999",
+                "$id": "81f320f4-bd07-4c93-b2fb-e4614f4e5d8d",
+                "$template": "properties",
+                "$scope": "global",
+                "programmatic_key": "18282as3df9",
+                "my_app_id": "389"
+                }
+                ],
+    "limit": 20
+}
