@@ -58,12 +58,10 @@
         NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
         bodyDictionary[BOXAPIObjectKeyItem] = objectDictionary;
         
-        if (self.message) {
-            bodyDictionary[BOXAPIObjectKeyMessage] = self.message;
-        }
-        
         if (self.taggedMessage) {
             bodyDictionary[BOXAPIObjectKeyTaggedMessage] = self.taggedMessage;
+        } else if (self.message) {
+            bodyDictionary[BOXAPIObjectKeyMessage] = self.message;
         }
         
         operation = [self JSONOperationWithURL:url 
