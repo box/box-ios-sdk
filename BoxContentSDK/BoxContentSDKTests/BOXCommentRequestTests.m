@@ -8,6 +8,8 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXCommentRequest.h"
+#import "BOXRequest_Private.h"
+#import "NSURL+BOXURLHelper.h"
 #import "BOXComment.h"
 
 @interface BOXCommentRequestTests : BOXRequestTestCase
@@ -49,6 +51,22 @@
     }];
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_request_with_all_fields_has_expected_URLRequest_query_params
+{
+    NSString *commentID = @"987654";
+    
+    BOXCommentRequest *request = [[BOXCommentRequest  alloc] initWithCommentID:commentID];
+    request.requestAllItemFields = YES;
+    NSURLRequest *URLRequest = request.urlRequest;
+    
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/comments/%@", BOXAPIBaseURL, BOXAPIVersion, commentID];
+    NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
+    
+    NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullCommentFieldsParameterString];
+    XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 }
 
 @end

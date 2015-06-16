@@ -33,9 +33,15 @@
                            subresource:nil
                                  subID:nil];
     
-    operation = [self JSONOperationWithURL:url 
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    if (self.requestAllItemFields) {
+        parameters[BOXAPIParameterKeyFields] = [self fullCommentFieldsParameterString];
+    }
+    
+    operation = [self JSONOperationWithURL:url
                                 HTTPMethod:BOXAPIHTTPMethodGET 
-                     queryStringParameters:nil 
+                     queryStringParameters:parameters
                             bodyDictionary:nil 
                           JSONSuccessBlock:nil 
                               failureBlock:nil];
