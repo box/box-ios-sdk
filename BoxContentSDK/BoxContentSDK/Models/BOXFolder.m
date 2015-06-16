@@ -52,27 +52,6 @@
             self.folderUploadEmailAddress = folderUploadEmailDictionary[BOXAPIObjectKeyEmail];
         }
 
-        // Parse ItemCollection
-        NSDictionary *itemCollectionJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyItemCollection
-                                                                          inDictionary:JSONResponse
-                                                                       hasExpectedType:[NSDictionary class]
-                                                                           nullAllowed:NO];
-        NSArray *itemsJSONArray = itemCollectionJSON[BOXAPICollectionKeyEntries];
-        NSMutableArray *tempItems = [NSMutableArray array];
-        for (NSDictionary *itemDictionary in itemsJSONArray) {
-            NSString *itemType = [itemDictionary objectForKey:BOXAPIObjectKeyType];
-            if ([itemType isEqualToString:BOXAPIItemTypeFile]) {
-                [tempItems addObject:[[BOXFile alloc] initWithJSON:itemDictionary]];
-            } else if ([itemType isEqualToString:BOXAPIItemTypeFolder]) {
-                [tempItems addObject:[[BOXFolder alloc] initWithJSON:itemDictionary]];
-            } else if ([itemType isEqualToString:BOXAPIItemTypeWebLink]) {
-                [tempItems addObject:[[BOXBookmark alloc] initWithJSON:itemDictionary]];
-            } else {
-                [tempItems addObject:[[BOXItem alloc] initWithJSON:itemDictionary]];
-            }
-        }
-        self.items = [NSArray arrayWithArray:tempItems];
-
         // Parse SyncState.
         self.syncState = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySyncState
                                                         inDictionary:JSONResponse

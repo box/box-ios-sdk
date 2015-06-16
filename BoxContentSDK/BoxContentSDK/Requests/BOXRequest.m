@@ -251,7 +251,6 @@
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections,
                        BOXAPIObjectKeyFolderUploadEmail,
-                       BOXAPIObjectKeyItemCollection,
                        BOXAPIObjectKeySyncState,
                        BOXAPIObjectKeyHasCollaborations,
                        BOXAPIObjectKeyIsExternallyOwned,

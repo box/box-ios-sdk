@@ -75,18 +75,9 @@
     [self assertModel:parentFolder isEquivalentTo:folder.parentFolder];
     XCTAssertEqualObjects(@"0", folder.parentFolder.modelID);
 
-
     XCTAssertEqualObjects(@"active", folder.status);
     XCTAssertEqualObjects(nil, folder.folderUploadEmailAccess);
     XCTAssertEqualObjects(nil, folder.folderUploadEmailAddress);
-
-    BOXBookmark *item1 = [[BOXBookmark alloc] initWithJSON:@{@"type": @"web_link", @"id": @"6006481", @"sequence_id": @"0", @"etag": @"0", @"name": @"Box Dev", @"url": @"http://developers.box.com"}];
-    BOXBookmark *item2 = [[BOXBookmark alloc] initWithJSON:@{@"type": @"web_link", @"id": @"6006477", @"sequence_id": @"0", @"etag": @"0", @"name": @"Google", @"url": @"http://google.com"}];
-    BOXBookmark *item3 = [[BOXBookmark alloc] initWithJSON:@{@"type": @"web_link", @"id": @"6006479", @"sequence_id": @"0", @"etag": @"0", @"name": @"news.google.com", @"url": @"http://news.google.com"}];
-    NSArray *itemsArray = @[item1, item2, item3];
-    for (NSInteger i = 0; i < itemsArray.count; i++) {
-        [self assertModel:itemsArray[i] isEquivalentTo:folder.items[i]];
-    }
 
     XCTAssertNil(folder.allowedSharedLinkAccessLevels);
     XCTAssertNil(folder.syncState);
@@ -156,8 +147,6 @@
     XCTAssertEqualObjects(@"active", folder.status);
     XCTAssertEqualObjects(@"collaborators", folder.folderUploadEmailAccess);
     XCTAssertEqualObjects(@"bilbo.baggins@gmail.com", folder.folderUploadEmailAddress);
-
-    XCTAssertEqual(6, folder.items.count);
 
     NSArray *accessLevels = @[@"collaborators", @"open"];
     XCTAssertEqualObjects(accessLevels, folder.allowedSharedLinkAccessLevels);

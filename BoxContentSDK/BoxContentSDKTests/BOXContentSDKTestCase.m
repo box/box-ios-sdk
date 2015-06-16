@@ -93,7 +93,6 @@
             BOXFolder *folderB = (BOXFolder *)modelB;
             XCTAssertEqualObjects(folderA.folderUploadEmailAccess, folderB.folderUploadEmailAccess);
             XCTAssertEqualObjects(folderA.folderUploadEmailAddress, folderB.folderUploadEmailAddress);
-            [self assertItemCollection:folderA.items isEquivalentTo:folderB.items];
             XCTAssertEqualObjects(folderA.syncState, folderB.syncState);
             XCTAssertEqual(folderA.hasCollaborations, folderB.hasCollaborations);
             XCTAssertEqual(folderA.canDownload, folderB.canDownload);
