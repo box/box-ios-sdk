@@ -58,9 +58,9 @@
         NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
         bodyDictionary[BOXAPIObjectKeyItem] = objectDictionary;
         
-        if (self.taggedMessage) {
+        if ([self.taggedMessage length] != 0) {
             bodyDictionary[BOXAPIObjectKeyTaggedMessage] = self.taggedMessage;
-        } else if (self.message) {
+        } else if ([self.message length] != 0) {
             bodyDictionary[BOXAPIObjectKeyMessage] = self.message;
         }
         
