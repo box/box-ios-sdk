@@ -129,11 +129,6 @@ static BOXContentClient *defaultInstance = nil;
 {
     if (self = [super init])
     {
-        if (staticClientID.length == 0 || staticClientSecret.length == 0) {
-            [NSException raise:@"Set client ID and client secret first." format:@"You must set a client ID and client secret first."];
-            return nil;
-        }
-        
         [self setAPIBaseURL:BOXAPIBaseURL];
         
         // the circular reference between the queue manager and the session is necessary
@@ -330,6 +325,10 @@ static BOXContentClient *defaultInstance = nil;
     } else if ([request isKindOfClass:[BOXSharedItemRequest class]]) {
         BOXSharedItemRequest *shareItemRequest = (BOXSharedItemRequest *)request;
         shareItemRequest.sharedLinkHeadersHelper = self.sharedLinksHeaderHelper;
+    }
+    
+    if (self.OAuth2Session.refreshToken && (self.OAuth2Session.clientID.length == 0 || self.OAuth2Session.clientSecret.length == 0)) {
+        [NSException raise:@"Set client ID and client secret first." format:@"You must set a client ID and client secret first."];
     }
 }
 
