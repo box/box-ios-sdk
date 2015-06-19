@@ -11,7 +11,7 @@
 #import "BOXKeychainItemWrapper.h"
 
 @interface BOXOAuth2Session ()
-- (void)didReceiveOAuth2RevokeSessionNotification:(NSNotification *)notification;
+- (void)didReceiveRevokeSessionNotification:(NSNotification *)notification;
 @end
 
 @interface BOXOauth2SessionTests : BOXContentSDKTestCase
@@ -50,6 +50,7 @@
                                          @"user_login" : user.login,
                                          @"user_name" : user.name};
     
+    XCTAssertEqual(expectedDictionary.count, dictionary.count);
     XCTAssertEqualObjects(expectedDictionary, dictionary);
 }
 

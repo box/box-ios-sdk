@@ -8,9 +8,16 @@
 
 #import "BOXContentClient.h"
 
+@class BOXOAuth2Session;
+@class BOXAbstractSession;
+@class BOXAppUserSession;
 @class BOXRequest;
 
 @interface BOXContentClient ()
+
+@property (nonatomic, readwrite, strong) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readwrite, strong) BOXAppUserSession *appSession;
+@property (nonatomic, readwrite, strong) BOXAbstractSession *session;
 
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;

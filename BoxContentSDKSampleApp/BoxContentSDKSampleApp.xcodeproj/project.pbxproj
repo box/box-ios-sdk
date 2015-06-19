@@ -10,6 +10,7 @@
 		3D64E2DA1AB9013C00659466 /* libBoxContentSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */; };
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
+		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
 		C52D0A941A5C1C7A00CD4B56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */; };
@@ -73,6 +74,8 @@
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
+		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
+		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C52D0A931A5C1C7A00CD4B56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				C52D0ACB1A5D4D9600CD4B56 /* Helpers */,
 				C5745C2B1A5AF6CC00824FFA /* BOXSampleAppDelegate.h */,
 				C5745C2C1A5AF6CC00824FFA /* BOXSampleAppDelegate.m */,
+				86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */,
+				86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */,
 				C5745C2E1A5AF6CC00824FFA /* BOXSampleAccountsViewController.h */,
 				C5745C2F1A5AF6CC00824FFA /* BOXSampleAccountsViewController.m */,
 				C52D0A9D1A5C27A700CD4B56 /* BOXSampleFolderViewController.h */,
@@ -393,6 +398,7 @@
 				C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */,
 				C52D0A9F1A5C27A700CD4B56 /* BOXSampleFolderViewController.m in Sources */,
 				C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */,
+				86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */,
 				C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */,
 				3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */,
 				C52D0ABF1A5D4B4100CD4B56 /* BOXSampleThumbnailsHelper.m in Sources */,

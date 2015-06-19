@@ -38,6 +38,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * Concrete subclasses of BOXAPIOperation that may be instantiated are:
  *
  * - BOXAPIOAuth2ToJSONOperation
+ * - BOXAPIAppAuthOperation
  * - BOXAPIJSONOperation
  * - BOXAPIMultipartToJSONOperation
  * - BOXAPIDataOperation
@@ -89,17 +90,17 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 /** @name Authorization */
 
 /**
- * The OAuth2 session is used to sign requests with an Authorization header including a Bearer token
- * @see [BOXOAuth2Session addAuthorizationParametersToRequest:]
+ * The session is used to sign requests with an Authorization header including a Bearer token
+ * @see [BOXAbstractSession addAuthorizationParametersToRequest:]
  */
-@property (nonatomic, readwrite, weak) BOXOAuth2Session *OAuth2Session;
+@property (nonatomic, readwrite, weak) BOXAbstractSession *session;
 
 /**
- * The OAuth2 access token this request was made with. This token is used to determine
+ * The access token this request was made with. This token is used to determine
  * whether this operation failing due to an expired token should cause the tokens to
  * be refreshed.
  */
-@property (nonatomic, readwrite, strong) NSString *OAuth2AccessToken;
+@property (nonatomic, readwrite, strong) NSString *accessToken;
 
 /** @name Request properties */
 
@@ -124,7 +125,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 @property (nonatomic, readwrite, strong) NSDictionary *queryStringParameters;
 
 /**
- * The API request. This request is signed by OAuth2Session and is initialized in BOXAPIOperation's
+ * The API request. This request is signed by the session and is initialized in BOXAPIOperation's
  * designated initializer.
  */
 @property (nonatomic, readwrite, strong) NSMutableURLRequest *APIRequest;
@@ -174,11 +175,11 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * @param HTTPMethod one of GET, POST, PUT, DELETE, OPTIONS. Used to configure APIRequest
  * @param body Key value pairs to be encoded as the request body
  * @param queryParams Key value pairs to be encoded as part of the query string
- * @param OAuth2Session used for signing requests
+ * @param session used for signing requests
  *
  * @return An initialized BOXAPIOperation
  */
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams OAuth2Session:(BOXOAuth2Session *)OAuth2Session;
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session;
 
 #pragma mark - Accessors
 /** @name Accessors */
@@ -259,7 +260,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * A global lock to use when enqueuing operations and adding dependencies. This lock ensures that
  * all operation starts and dependency additions are serialized.
  *
- * BOXAPIQueueManagers depend on this serialization to ensure they do not add a BOXAPIOAuth2ToJSONOperation
+ * BOXAPIQueueManagers depend on this serialization to ensure they do not add a BOXAPIOAuth2ToJSONOperation or BOXAPIAppAuthOperation
  * as a dependency to an already-executing or soon-to-be-executing operation.
  *
  * @return A global lock for API operations to use.

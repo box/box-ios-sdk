@@ -104,7 +104,7 @@
     NSData *cannedResponseData =  [self cannedResponseDataWithName:@"invalid_grant"];
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
     [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil OAuth2Session:request.queueManager.OAuth2Session];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
 
     [request performRequest];
 
@@ -118,7 +118,7 @@
     
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
     [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil OAuth2Session:request.queueManager.OAuth2Session];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
     
     [request performRequest];
     
@@ -134,7 +134,7 @@
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:cannedResponseData];
     [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
     
-    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil OAuth2Session:request.queueManager.OAuth2Session];
+    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
     id operationMock = [OCMockObject partialMockForObject:operation];
     request.operation = operation;
     
@@ -194,7 +194,7 @@
 {
     BOXRequest *request = [[BOXRequest alloc] init];
     
-    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil OAuth2Session:request.queueManager.OAuth2Session];
+    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
     request.operation = operation;
     
     [request performRequest];
