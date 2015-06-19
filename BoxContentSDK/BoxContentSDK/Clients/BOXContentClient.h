@@ -5,12 +5,13 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXOAuth2Session.h"
-#import "BOXAppUserSession.h"
-
+@class BOXAbstractSession;
+@class BOXUser;
+@class BOXUserMini;
 @class BOXAPIQueueManager;
 @class BOXRequest;
 @class BOXSharedLinkHeadersHelper;
+@protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
 
 @interface BOXContentClient : NSObject
@@ -56,7 +57,11 @@
 @property (nonatomic, readonly, strong) BOXUserMini *user;
 
 /**
- * The delegate for the BOXContentClient instance (Internally BOXAPIQueueManager)
+ * The delegate for the BOXContentClient instance. Internally setting the BOXContentClient's delegate
+ * will automatically set the BOXAPIQueueManager's delegate and getting the delegate will return the
+ * BOXAPIQueueManager's delegate.
+ *
+ * Allows users to retrieve access tokens in a way that bypasses OAuth2 and uses App Users instead.
  */
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 

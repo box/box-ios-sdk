@@ -1,11 +1,12 @@
 //
-//  BOXClient+File.h
+//  BOXContentClient+File.h
 //  BoxContentSDK
 //
 //  Created by Rico Yao on 1/16/15.
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import "BOXContentSDKConstants.h"
 #import "BOXContentClient.h"
 
 @class BOXFileRequest;

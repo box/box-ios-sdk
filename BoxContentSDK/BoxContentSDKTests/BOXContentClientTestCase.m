@@ -15,6 +15,8 @@
 #import "BOXRequest_Private.h"
 #import "BOXContentClient+Authentication.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXAppUserSession.h"
+
 @interface BOXContentClientTestCase ()
 
 @property (nonatomic, readwrite, strong) NSString *accessToken;

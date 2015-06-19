@@ -263,7 +263,7 @@
 
 - (NSDictionary *)keychainDictionary
 {
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithDictionary:[super keychainDictionary]];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:[super keychainDictionary]];
     [dictionary setObject:self.refreshToken forKey:keychainRefreshTokenKey];
     return dictionary;
 }

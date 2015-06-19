@@ -3,7 +3,9 @@ App Users
 
 Authetication + Single User Mode
 --------------------
-The SDK does not handle authetication of an App User and so developers should conform to the BOXAccessTokenDelegate in order to autheticate accounts. Also, in order to use App Users, developers must set the delegate when initializing a BOXContentClient instance.
+When using App Users, developers should conform to BOXAPIAccessTokenDelegate protocol in order to
+retrieve an account's access token. Additionally, BOXContentClient instances using App Users
+should have its delegate set.
 
 ```objectivec
 @implementation BOXClass <BOXAPIAccessTokenDelegate>

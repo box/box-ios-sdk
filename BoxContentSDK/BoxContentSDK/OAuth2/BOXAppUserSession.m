@@ -19,19 +19,19 @@
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
     __weak BOXAppUserSession *weakSelf = self;
-    BOXAPIAppUsersAuthOperation *operation = [[BOXAPIAppUsersAuthOperation alloc]initWithSession:self];
+    BOXAPIAppUsersAuthOperation *operation = [[BOXAPIAppUsersAuthOperation alloc] initWithSession:self];
     operation.success = ^(NSString *accessToken, NSDate *accessTokenExpiration) {
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;
         
-        BOXUserRequest *userRequest = [[BOXUserRequest alloc]init];
+        BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
         userRequest.queueManager = weakSelf.queueManager;
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (user && !error) {
-                weakSelf.user = [[BOXUserMini alloc]initWithUserID:user.modelID name:user.name login:user.login];
+                weakSelf.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];
                 [weakSelf storeCredentialsToKeychain];
                 
-                [[NSNotificationCenter defaultCenter]postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
                 
                 if (block) {
                     block(weakSelf, nil);

@@ -8,6 +8,9 @@
 
 #import "BOXContentClient.h"
 
+@class BOXOAuth2Session;
+@class BOXAbstractSession;
+@class BOXAppUserSession;
 @class BOXRequest;
 
 @interface BOXContentClient ()
