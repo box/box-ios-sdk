@@ -48,7 +48,7 @@
                     weakSelf.accessToken = accessToken;
                     weakSelf.accessTokenExpiration = accessTokenExpiration;
                 } else if (!error) {
-                    self.error = [[NSError alloc]initWithDomain:@"accessToken and accessTokenExpiration should be non-nil" code:BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid userInfo:nil];
+                    self.error = [[NSError alloc] initWithDomain:@"accessToken and accessTokenExpiration should be non-nil" code:BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid userInfo:nil];
                 } else {
                     self.error = error;
                 }

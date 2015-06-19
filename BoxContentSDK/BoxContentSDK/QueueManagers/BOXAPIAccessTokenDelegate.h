@@ -7,21 +7,24 @@
 //
 
 /**
- * The method of authetication through AppUsers is known as Box Developer Edition. AppUsers allow developers
- * to bypass the OAuth2 aspect of authentication by allowing them to retrieve access tokens through their own
- * servers. The official documentation of AppUsers can be found in the link below.
+ * App Users are full-featured enterprise Box accounts that belong to your application not a Box user. Unlike typical Box accounts, 
+ * these accounts do not have an associated login and can only be accessed through the Content API by the controlling application 
+ * and associated Box User ID. This new user model allows your application to take advantage of groups, permissions, collaborations, 
+ * comments, tasks, and the many other features offered by the Box platform.
+ *
+ * For more information the documentation is linked below.
  * https://developers.box.com/developer-edition/#app_users
  *
  * BOXAPIAccessTokenDelegate allows developers to make network calls to their own servers to retrieve an access token
  * outside of the normal means of authentication (OAuth2).
  *
- * BOXAPIAccessTokenDelegate is a protocol that should only be conformed to if AppUsers is being used.
+ * BOXAPIAccessTokenDelegate is a protocol that should only be conformed to if App Users is being used.
  */
 @protocol BOXAPIAccessTokenDelegate <NSObject>
 
 /**
  * The method is meant to be used to make network requests to acquire access tokens and access token expiration dates.
  */
-- (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion;
+- (void)fetchAccessTokenWithCompletion:(void (^)(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error))completion;
 
 @end

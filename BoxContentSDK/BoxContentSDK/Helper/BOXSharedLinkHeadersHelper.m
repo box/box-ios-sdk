@@ -9,6 +9,7 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXItem.h"
 #import "BOXFolder.h"
+#import "BOXUser.h"
 #import "BOXContentClient.h"
 
 @interface BOXSharedLinkHeadersHelper ()

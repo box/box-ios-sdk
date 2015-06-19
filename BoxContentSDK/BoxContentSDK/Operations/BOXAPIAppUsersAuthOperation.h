@@ -1,5 +1,5 @@
 //
-//  BOXAPIAppAuthToJSONOperation.h
+//  BOXAPIAppUsersAuthOperation.h
 //  BoxContentSDK
 //
 //  Created by Andrew Chun on 6/6/15.
@@ -8,8 +8,8 @@
 
 #import <BoxContentSDK/BoxContentSDK.h>
 
-typedef void (^BOXAPIAppAuthSuccessBlock)(NSString *, NSDate *);
-typedef void (^BOXAPIAppAuthFailureBlock)(NSError *);
+typedef void (^BOXAPIAppUsersAuthSuccessBlock)(NSString *, NSDate *);
+typedef void (^BOXAPIAppUsersAuthFailureBlock)(NSError *);
 
 /**
  * BOXAPIAppAuthOperation is a concrete BOXAPIOperation subclass. This operation
@@ -30,7 +30,7 @@ typedef void (^BOXAPIAppAuthFailureBlock)(NSError *);
  * If you wish to interact with the UI in a callback block, dispatch to the main queue in the
  * callback block.
  */
-@property (nonatomic, readwrite, strong) BOXAPIAppAuthSuccessBlock success;
+@property (nonatomic, readwrite, strong) BOXAPIAppUsersAuthSuccessBlock success;
 
 /**
  * The completion block to be run if authetication fails.
@@ -39,36 +39,11 @@ typedef void (^BOXAPIAppAuthFailureBlock)(NSError *);
  * If you wish to interact with the UI in a callback block, dispatch to the main queue in the
  * callback block.
  */
-@property (nonatomic, readwrite, strong) BOXAPIAppAuthFailureBlock failure;
+@property (nonatomic, readwrite, strong) BOXAPIAppUsersAuthFailureBlock failure;
 
 /**
  * The access token's expiration date.
  */
 @property (nonatomic, readwrite, strong) NSDate *accessTokenExpiration;
-
-/**
- * Does nothing for BOXAPIAppAuthOperation since authorization hasn't occured yet.
- */
-- (void)prepareAPIRequest;
-
-/**
- * Call either a success or failure callback depending on whether or not an error occured during the request.
- */
-- (void)performCompletionCallback;
-
-/**
- * Does nothing for BOXAPIAppAuthOperation and should never be called.
- */
-- (void)processResponseData:(NSData *)data;
-
-/**
- * Does nothing for BOXAPIAppAuthOperation.
- */
-- (NSData *)encodeBody:(NSDictionary *)bodyDictionary;
-
-/**
- * Do not call this. It is used internally.
- */
-- (void)finish;
 
 @end

@@ -24,9 +24,9 @@ extern NSString *const BOXUserIDKey;
 /**
  * BOXAbstractSession is an abstract class you can use to encapsulate managing a set of
  * credentials, an access token and a refresh token. Because this class is abstract, you should
- * not instantiate it directly. It is advised you use BOXAppSession or BOXParallelOAuth2Session, 
+ * not instantiate it directly. It is advised you use BOXAppUserSession or BOXParallelOAuth2Session,
  * but subclassing is possible (see subclassing notes). This class does enforce its abstractness via calls to the
- * `BOXAbstract` macro, which will raise an `NSAssert` when `DEBUG=1`.
+ * `BOXAbstract` macro, which will assert on debug builds.
  *
  * Subclassing Notes
  * =================

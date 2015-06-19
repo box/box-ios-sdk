@@ -40,15 +40,15 @@
     if (self != nil)
     {
         _globalQueue = [[NSOperationQueue alloc] init];
-        _globalQueue.name = @"BOXSerialAPIQueueManager global queue";
+        _globalQueue.name = @"BOXParallelAPIQueueManager global queue";
         _globalQueue.maxConcurrentOperationCount = 8;
 
         _downloadsQueue = [[NSOperationQueue alloc] init];
-        _downloadsQueue.name = @"BOXSerialAPIQueueManager download queue";
+        _downloadsQueue.name = @"BOXParallelAPIQueueManager download queue";
         _downloadsQueue.maxConcurrentOperationCount = 2;
 
         _uploadsQueue = [[NSOperationQueue alloc] init];
-        _uploadsQueue.name = @"BOXSerialAPIQueueManager upload queue";
+        _uploadsQueue.name = @"BOXParallelAPIQueueManager upload queue";
         _uploadsQueue.maxConcurrentOperationCount = 2;
 
         _currentAccessTokenHasExpired = NO;

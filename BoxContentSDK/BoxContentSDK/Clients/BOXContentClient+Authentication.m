@@ -17,6 +17,7 @@
 #import "BoxAppToAppApplication.h"
 #import "BoxAppToAppMessage.h"
 #import "BOXUserRequest.h"
+#import "BOXAppUserSession.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
