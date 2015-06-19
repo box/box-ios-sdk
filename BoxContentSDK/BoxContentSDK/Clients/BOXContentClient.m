@@ -188,7 +188,9 @@ static BOXContentClient *defaultInstance = nil;
 - (void)didReceiveAccessTokenRefreshedNotification:(NSNotification *)notification
 {
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
-    BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
+    if (session == self.session) {
+        BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
+    }
 }
 
 - (void)didReceiveUserWasLoggedOutNotification:(NSNotification *)notification
