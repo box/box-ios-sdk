@@ -29,6 +29,7 @@
 #import "BOXContentClient+File.h"
 #import "BOXContentClient+folder.h"
 #import "BOXContentClient+Bookmark.h"
+#import "BOXContentClient+Metadata.h"
 
 // Session
 #import "BOXAuthorizationViewController.h"
@@ -95,6 +96,11 @@
 #import "BOXTrashedFolderRestoreRequest.h"
 #import "BOXTrashedFileRestoreRequest.h"
 #import "BOXItemShareRequest.h"
+#import "BOXMetadataRequest.h"
+#import "BOXMetadataDeleteRequest.h"
+#import "BOXMetadataCreateRequest.h"
+#import "BOXMetadataUpdateRequest.h"
+#import "BOXMetadataTemplateRequest.h"
 
 // API Operation queues
 #import "BOXAPIQueueManager.h"
@@ -125,5 +131,10 @@
 #import "BOXGroup.h"
 #import "BOXFileVersion.h"
 #import "BOXAssetInputStream.h"
+#import "BOXMetadata.h"
+#import "BOXMetadataKeyValue.h"
+#import "BOXMetadataUpdateTask.h"
+#import "BOXMetadataTemplate.h"
+#import "BOXMetadataTemplateField.h"
 
 

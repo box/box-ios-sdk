@@ -24,4 +24,20 @@
 - (BOXSearchRequest *)searchRequestWithQuery:(NSString *)query
                                      inRange:(NSRange)range;
 
+/**
+ * Generate a request to search for files and folders in a user's account using metadata tags. You can customize
+ * the search by setting properties of the BOXSearchRequest before executing it.
+ *
+ * @param templateKey The template to search for metadata tags in
+ * @param scope The scope to search for metadata templates in
+ * @param filters The metadata tags to filter for
+ * @param range An offset (NSRange location) and limit (NSRange limit). The maximum limit allowed is 200, default is 30.
+ *
+ * @return A request that can be customized and then executed.
+ */
+- (BOXSearchRequest *)searchMetadataRequestWithTemplateKey:(NSString *)templateKey
+                                                     scope:(NSString *)scope
+                                                   filters:(NSArray *)filters
+                                                   inRange:(NSRange)range;
+
 @end

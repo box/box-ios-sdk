@@ -1,0 +1,10 @@
+{
+    "$type": "marketingCollateral-1199c73f-11aa-439a-a7d0-e981fc6cc22f",
+    "$parent": "file_6122548033",
+    "$id": "d55c2a68-6032-447a-a5fd-2539c29db5fc",
+    "$template": "marketingCollateral",
+    "$scope": "enterprise_42500",
+    "audience": "internal",
+    "documentType": "presentation",
+    "competitiveDocument": "yes"
+}

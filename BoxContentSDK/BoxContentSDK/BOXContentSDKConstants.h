@@ -30,6 +30,11 @@ extern NSString *const BOXAPIResourceCollections;
 extern NSString *const BOXAPIResourceEvents;
 extern NSString *const BOXAPIResourceCollaborations;
 extern NSString *const BOXAPIResourceSearch;
+extern NSString *const BOXAPIResourceMetadataTemplates;
+
+// API Metadata Template Scope
+extern NSString *const BOXAPITemplateScopeEnterprise;
+extern NSString *const BOXAPITemplateScopeGlobal;
 
 // API Subresources
 extern NSString *const BOXAPISubresourceItems;
@@ -170,10 +175,16 @@ extern NSString *const BOXAPIParameterKeyAncestorFolderIDs;
 extern NSString *const BOXAPIParameterKeyContentTypes;
 extern NSString *const BOXAPIParameterKeyType;
 extern NSString *const BOXAPIParameterKeyQuery;
+extern NSString *const BOXAPIParameterKeyMDFilter;
 extern NSString *const BOXAPIParameterKeyMinWidth;
 extern NSString *const BOXAPIParameterKeyMinHeight;
 extern NSString *const BOXAPIParameterKeyMaxWidth;
 extern NSString *const BOXAPIParameterKeyMaxHeight;
+
+// Metadata Parameter Key
+extern NSString *const BOXAPIParameterKeyTemplate;
+extern NSString *const BOXAPIParameterKeyScope;
+extern NSString *const BOXAPIParameterKeyFilter;
 
 // Multipart parameter keys
 extern NSString *const BOXAPIMultipartParameterFieldKeyFile;
@@ -201,6 +212,9 @@ extern NSString *const BOXAPIObjectKeyCanSetShareAccess;
 extern NSString *const BOXAPIObjectKeyCanInviteCollaborator;
 
 extern NSString *const BOXAPIObjectKeyID;
+extern NSString *const BOXAPIObjectKeyKey;
+extern NSString *const BOXAPIObjectKeyDisplayName;
+extern NSString *const BOXAPIObjectKeyOptions;
 extern NSString *const BOXAPIObjectKeyType;
 extern NSString *const BOXAPIObjectKeySequenceID;
 extern NSString *const BOXAPIObjectKeyETag;
@@ -276,6 +290,17 @@ extern NSString *const BOXAPIObjectKeySource;
 extern NSString *const BOXAPIObjectKeyAcknowledgedAt;
 extern NSString *const BOXAPIObjectKeyAccessibleBy;
 extern NSString *const BOXAPIObjectKeyEntries;
+
+// API Metadata Object keys
+extern NSString *const BOXAPIMetadataObjectKeyID;
+extern NSString *const BOXAPIMetadataObjectKeyType;
+extern NSString *const BOXAPIMetadataObjectKeyScope;
+extern NSString *const BOXAPIMetadataObjectKeyTemplate;
+extern NSString *const BOXAPIMetadataObjectKeyParent;
+extern NSString *const BOXAPIMetadataObjectKeyOperation;
+extern NSString *const BOXAPIMetadataObjectKeyPath;
+extern NSString *const BOXAPIMetadataObjectKeyValue;
+
 // API Folder IDs
 extern NSString *const BOXAPIFolderIDRoot;
 extern NSString *const BOXAPIFolderIDTrash;

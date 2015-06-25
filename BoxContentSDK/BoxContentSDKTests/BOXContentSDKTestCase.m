@@ -19,6 +19,7 @@
 #import "BOXEvent.h"
 #import "BOXFileVersion.h"
 #import "BOXCollaboration.h"
+#import "BOXMetadata.h"
 
 @implementation BOXContentSDKTestCase
 
@@ -248,6 +249,16 @@
         [self assertModel:collaborationA.creator isEquivalentTo:collaborationB.creator];
         [self assertModel:collaborationA.folder isEquivalentTo:collaborationB.folder];
         [self assertModel:collaborationA.accessibleBy isEquivalentTo:collaborationB.accessibleBy];
+    }
+    else if ([modelA isKindOfClass:[BOXMetadata class]]) {
+        BOXMetadata *metadataA = (BOXMetadata *)modelA;
+        BOXMetadata *metadataB = (BOXMetadata *)modelB;
+        XCTAssertEqualObjects(metadataA.modelID, metadataB.modelID);
+        XCTAssertEqualObjects(metadataA.type, metadataB.type);
+        XCTAssertEqualObjects(metadataA.parent, metadataB.parent);
+        XCTAssertEqualObjects(metadataA.template, metadataB.template);
+        XCTAssertEqualObjects(metadataA.scope, metadataB.scope);
+        XCTAssertEqualObjects(metadataA.info, metadataB.info);
     }
     else
     {
