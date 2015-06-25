@@ -170,7 +170,6 @@
     }
     else {
         self.outputStream.delegate = nil;
-        [self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.outputStream close];
         _outputStream = nil;
     }
