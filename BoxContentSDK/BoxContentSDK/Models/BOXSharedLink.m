@@ -13,6 +13,9 @@
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
 {
     if (self = [super init]) {
+        
+        self.JSONData = JSONResponse;
+        
         NSString *urlString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
                                                              inDictionary:JSONResponse
                                                           hasExpectedType:[NSString class]

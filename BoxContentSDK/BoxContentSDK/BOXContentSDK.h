@@ -113,6 +113,8 @@
 #import "BOXItem.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
+#import "BOXFileLock.h"
+#import "BOXSharedLink.h"
 #import "BOXUser.h"
 #import "BOXBookmark.h"
 #import "BOXComment.h"
