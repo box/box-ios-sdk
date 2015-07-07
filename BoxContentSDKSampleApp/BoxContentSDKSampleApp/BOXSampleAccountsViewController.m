@@ -84,9 +84,23 @@
     }];
 }
 
+/** 
+ * fetchAccessTokenWithCompletion is a delegate method from the @see BOXAPIAccessTokenDelegate protocol.
+ *
+ * In order to use Developer's Edition (Aka App Users) to authenticate users with Box,
+ * fetchAccessTokenWithCompletion must be implemented and @see BOXContentCliet's delegate must be set.
+ * Authenticating users through the Developer's Edition bypasses OAuth2 and uses JWT Authentication instead.
+ *
+ * **NOTE**
+ * Access Token Expiration strings must be converted into NSDate's using the method [NSDate box_dateWithISO8601String:]
+ * Access Token Expiration dates must be converted into NSStrings using the method [NSDate box_ISO8601String]
+ *
+ * More details on how to retrieve access tokens through the Developer's Edition can be found in the link below.
+ * https://developers.box.com/developer-edition/
+ */
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-#warning Include logic to retrieve access token or use Developer Token found at https://developers.box.com/
+#warning Include logic to retrieve access token with the Developer's Edition (App Users) or use Developer Token found at https://developers.box.com/
     completion(@"your_access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
 }
 

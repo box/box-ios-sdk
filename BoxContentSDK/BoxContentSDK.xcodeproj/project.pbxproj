@@ -86,7 +86,7 @@
 		15280E401A37E70B008D4F5D /* BOXBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E2A1A37E70B008D4F5D /* BOXBookmark.m */; };
 		15280E441A37E70B008D4F5D /* BOXFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 15280E2B1A37E70B008D4F5D /* BOXFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		15280E461A37E70B008D4F5D /* BOXFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E2C1A37E70B008D4F5D /* BOXFile.m */; };
-		15280E4A1A37E70B008D4F5D /* BOXFileLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 15280E2D1A37E70B008D4F5D /* BOXFileLock.h */; };
+		15280E4A1A37E70B008D4F5D /* BOXFileLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 15280E2D1A37E70B008D4F5D /* BOXFileLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		15280E4C1A37E70B008D4F5D /* BOXFileLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E2E1A37E70B008D4F5D /* BOXFileLock.m */; };
 		15280E501A37E70B008D4F5D /* BOXFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 15280E2F1A37E70B008D4F5D /* BOXFolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		15280E521A37E70B008D4F5D /* BOXFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E301A37E70B008D4F5D /* BOXFolder.m */; };
