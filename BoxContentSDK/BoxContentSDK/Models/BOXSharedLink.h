@@ -71,6 +71,11 @@
 @property (nonatomic, readwrite, strong) NSNumber *previewCount;
 
 /**
+ *  JSON response data.
+ */
+@property (nonatomic, readwrite, strong) NSDictionary *JSONData;
+
+/**
  *  Initialize with API JSON response dictionary.
  *
  *  @param JSONResponse Dictionary from JSON response.
