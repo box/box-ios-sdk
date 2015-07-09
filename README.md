@@ -57,8 +57,10 @@ You can find guides and tutorials in the `doc` directory.
 
 * [App Setup](doc/Setup.md)
 * [Authentication](doc/Authentication.md)
+* [Developer's Edition (App Users)](doc/AppUsers.md)
 * [Files](doc/Files.md)
 * [Folders](doc/Folders.md)
+* [Metadata](doc/metadata.md)
 * [Comments](doc/Comments.md)
 * [Collaborations](doc/Collaborations.md)
 * [Events](doc/Events.md)
