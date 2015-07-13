@@ -189,6 +189,18 @@
 #pragma mark - Token Refresh
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
 {
+    if (!self.refreshToken || !self.clientID || !self.clientSecret) {
+        if (block) {
+            NSDictionary *userInfo = @{
+                                       NSUnderlyingErrorKey : @"No authenticated user associated with the request",
+                                       };
+            NSError *error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIErrorUnauthorized userInfo:userInfo];
+            block(nil, error);
+        }
+        
+        return;
+    }
+    
     NSDictionary *POSTParams = @{
                                  BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
                                  BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,

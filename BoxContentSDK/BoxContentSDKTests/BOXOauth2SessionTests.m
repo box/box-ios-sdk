@@ -307,6 +307,18 @@
     XCTAssertEqual(0, jsonString.length);
 }
 
+- (void)test_that_token_refresh_grant_throws_error_when_there_is_no_authenticated_user
+{
+    BOXOAuth2Session *session = [[BOXOAuth2Session alloc] init];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+    [session performRefreshTokenGrant:@"abc" withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
+        XCTAssertNotNil(error);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
 #pragma mark - Private Helper
 
 - (NSDate *)dateWithoutMillisecondsFromDate:(NSDate *)date
