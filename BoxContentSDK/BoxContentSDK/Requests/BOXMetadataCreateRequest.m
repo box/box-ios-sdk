@@ -104,7 +104,7 @@
     
     for (BOXMetadataKeyValue *task in tasks) {
         BOXAssert([task isKindOfClass:[BOXMetadataKeyValue class]],
-                  @"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", i);
+                  @"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
         ++i;
     }
     

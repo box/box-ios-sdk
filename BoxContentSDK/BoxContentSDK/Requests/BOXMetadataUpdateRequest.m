@@ -115,7 +115,7 @@
 {
     for (NSInteger i = 0; i < updateTasks.count; ++i) {
         BOXAssert([updateTasks[i] isKindOfClass:[BOXMetadataUpdateTask class]],
-                  @"All entries in updateInfo must be of type BOXMetadataUpdateTask. updateTasks[%lu] is not of type BOXMetadataUpdateTask.", i);
+                  @"All entries in updateInfo must be of type BOXMetadataUpdateTask. updateTasks[%lu] is not of type BOXMetadataUpdateTask.", (long)i);
     }
     _updateTasks = updateTasks;
 }
