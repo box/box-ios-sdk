@@ -100,13 +100,9 @@
 
 - (void)setTasks:(NSArray *)tasks
 {
-    NSInteger i = 0;
-    
-    for (BOXMetadataKeyValue *task in tasks) {
-        BOXAssert([task isKindOfClass:[BOXMetadataKeyValue class]],
+    for (NSUInteger i = 0; i < tasks.count; i++) {
+        BOXAssert([tasks[i] isKindOfClass:[BOXMetadataKeyValue class]],
                   @"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
-        ++i;
-        (void)task; // Junk to remove pod spec linting warning
     }
     
     _tasks = tasks;
