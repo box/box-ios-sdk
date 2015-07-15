@@ -186,7 +186,9 @@
 - (void)setFilters:(NSArray *)filters
 {
     for (BOXMetadataKeyValue *keyValue in filters) {
-        BOXAssert([keyValue isKindOfClass:[BOXMetadataKeyValue class]], @"All objects in filters must be of type BOXMetadataKeyValue.");
+        if (![keyValue isKindOfClass:[BOXMetadataKeyValue class]]) {
+            BOXAssertFail(@"All objects in filters must be of type BOXMetadataKeyValue.");
+        }
     }
     
     _filters = filters;
