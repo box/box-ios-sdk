@@ -103,8 +103,9 @@
     NSInteger i = 0;
     
     for (BOXMetadataKeyValue *task in tasks) {
-        BOXAssert([task isKindOfClass:[BOXMetadataKeyValue class]],
-                  @"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
+        if (![task isKindOfClass:[BOXMetadataKeyValue class]]) {
+            BOXAssertFail(@"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
+        }
         ++i;
     }
     
