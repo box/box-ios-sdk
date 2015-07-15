@@ -186,9 +186,8 @@
 - (void)setFilters:(NSArray *)filters
 {
     for (BOXMetadataKeyValue *keyValue in filters) {
-        if (![keyValue isKindOfClass:[BOXMetadataKeyValue class]]) {
-            BOXAssertFail(@"All objects in filters must be of type BOXMetadataKeyValue.");
-        }
+        BOXAssert([keyValue isKindOfClass:[BOXMetadataKeyValue class]], @"All objects in filters must be of type BOXMetadataKeyValue.");
+        (void)keyValue; // Junk to remove pod spec linting warning
     }
     
     _filters = filters;

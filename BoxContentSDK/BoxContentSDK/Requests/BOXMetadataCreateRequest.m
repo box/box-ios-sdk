@@ -103,10 +103,10 @@
     NSInteger i = 0;
     
     for (BOXMetadataKeyValue *task in tasks) {
-        if (![task isKindOfClass:[BOXMetadataKeyValue class]]) {
-            BOXAssertFail(@"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
-        }
+        BOXAssert([task isKindOfClass:[BOXMetadataKeyValue class]],
+                  @"All entries in tasks must be of type BOXMetadataKeyValue. tasks[%lu] is not of type BOXMetadataKeyValue.", (long)i);
         ++i;
+        (void)task; // Junk to remove pod spec linting warning
     }
     
     _tasks = tasks;
