@@ -28,12 +28,18 @@
                            subresource:nil
                                  subID:nil];
     
+    NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
+    
+    if (self.requestAllFolderFields) {
+        queryParameters[BOXAPIParameterKeyFields] = [self fullFolderFieldsParameterString];
+    }
+    
     NSDictionary *bodyDictionary = @{BOXAPIObjectKeyParent : @{BOXAPIObjectKeyID : self.parentFolderID},
                                      BOXAPIObjectKeyName : self.folderName};
 
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPOST
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];

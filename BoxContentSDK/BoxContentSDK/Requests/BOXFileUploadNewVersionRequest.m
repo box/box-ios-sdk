@@ -60,10 +60,16 @@
                                           ID:self.fileID
                                  subresource:BOXAPISubresourceContent];
     
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllFileFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
+    }
+    
     BOXAPIMultipartToJSONOperation *operation = [[BOXAPIMultipartToJSONOperation alloc] initWithURL:URL
                                                                                          HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                                body:nil
-                                                                                        queryParams:nil
+                                                                                        queryParams:queryParameters
                                                                                       session:self.queueManager.session];
     
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
