@@ -60,6 +60,7 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
+    __weak BOXTrashedItemArrayRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
@@ -73,7 +74,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                [items addObject:[self itemWithJSON:itemDictionary]];
+                [items addObject:[weakSelf itemWithJSON:itemDictionary]];
             }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);

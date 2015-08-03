@@ -38,7 +38,7 @@
                 }
             } else {
                 if (block) {
-                    block(self, error);
+                    block(weakSelf, error);
                 }
             }
         }];

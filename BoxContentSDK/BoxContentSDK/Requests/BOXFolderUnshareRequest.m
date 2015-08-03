@@ -57,13 +57,14 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
+    __weak BOXFolderUnshareRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
     if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
-            [self.sharedLinkHeadersHelper removeStoredInformationForItemWithID:folder.modelID itemType:folder.type];
+            [weakSelf.sharedLinkHeadersHelper removeStoredInformationForItemWithID:folder.modelID itemType:folder.type];
             
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
