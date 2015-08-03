@@ -87,8 +87,9 @@
     }
     
     if (completionBlock) {
+        __weak BOXFileThumbnailRequest *weakSelf = self;
         dataOperation.successBlock = ^(NSString *fileID, long long expectedTotalBytes) {
-            NSData *data = [self.outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+            NSData *data = [weakSelf.outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
             UIImage *image = [UIImage imageWithData:data scale:[[UIScreen mainScreen] scale]];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(image, nil);

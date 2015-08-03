@@ -59,7 +59,8 @@
 }
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
-{    
+{
+    __weak BOXFolderPaginatedItemsRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
@@ -73,7 +74,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                BOXItem *item = [self itemWithJSON:itemDictionary];
+                BOXItem *item = [weakSelf itemWithJSON:itemDictionary];
                 [items addObject:item];
                 
                 NSArray *pathFolders = nil;
@@ -85,7 +86,7 @@
                 } else if ([item isKindOfClass:[BOXBookmark class]]) {
                     pathFolders = [((BOXBookmark *) item) pathFolders];
                 }                
-                [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
+                [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
                                                                                        itemType:item.type
                                                                                       ancestors:pathFolders];
             }

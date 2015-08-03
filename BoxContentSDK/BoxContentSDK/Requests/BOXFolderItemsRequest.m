@@ -80,6 +80,7 @@
 
 - (void)performRequestWithCompletion:(BOXItemsBlock)completionBlock
 {
+    __weak BOXFolderItemsRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     
     NSMutableArray *results = [[NSMutableArray alloc] init];
@@ -94,7 +95,7 @@
     };
     
     BOXItemArrayCompletionBlock paginatedItemFetch = ^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error){
-        @synchronized(self) {
+        @synchronized(weakSelf) {
             if (error) {
                 localCompletionBlock(nil, error);
             } else {
@@ -107,19 +108,19 @@
                     // There is also different situation
                     // total count is 2222, kMaxRangeStep is 1000, we've covered first 1000 items.
                     // now (2222-1000) == 1222, so we shuold cover next 1000 items
-                    NSUInteger length = (totalCount - rangeEnd) > self.rangeStep ? self.rangeStep : (totalCount - rangeEnd);
-                    self.offset = rangeEnd;
-                    self.limit = length;
+                    NSUInteger length = (totalCount - rangeEnd) > weakSelf.rangeStep ? weakSelf.rangeStep : (totalCount - rangeEnd);
+                    weakSelf.offset = rangeEnd;
+                    weakSelf.limit = length;
                                         
                     // reset operation, so that boxrequest recreates new operation for next batch
-                    self.operation = nil;
+                    weakSelf.operation = nil;
                     
                     // if operation got cancelled while preparing for the next request, call cancellation block
-                    if (self.isCancelled) {
+                    if (weakSelf.isCancelled) {
                         error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
                         localCompletionBlock(nil, error);
                     } else {
-                        [self performPaginatedRequestWithCompletion:recursiveFetch];
+                        [weakSelf performPaginatedRequestWithCompletion:recursiveFetch];
                     }
                 } else {
                     NSArray *dedupedResults = [BOXFolderItemsRequest dedupeItemsByBoxID:results];

@@ -48,12 +48,13 @@
 
 - (void)performRequestWithCompletion:(BOXObjectsArrayCompletionBlock)completionBlock
 {
+    __weak BOXBookmarkCommentsRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *commentsOperation = (BOXAPIJSONOperation *)self.operation;
     if (completionBlock) {
         commentsOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock([self commentsFromJSONDictionary:JSONDictionary] ,nil);
+                completionBlock([weakSelf commentsFromJSONDictionary:JSONDictionary] ,nil);
             } onMainThread:isMainThread];
         };
         commentsOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
