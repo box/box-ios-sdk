@@ -13,6 +13,7 @@
 @property (nonatomic, readonly, strong) NSString *fileID;
 @property (nonatomic, readonly, strong) ALAsset *asset;
 @property (nonatomic, readonly, strong) ALAssetsLibrary *assetsLibrary;
+@property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 

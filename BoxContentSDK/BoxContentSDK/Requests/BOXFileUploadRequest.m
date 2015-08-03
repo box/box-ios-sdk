@@ -73,6 +73,12 @@
     NSURL *URL = [self uploadURLWithResource:BOXAPIResourceFiles
                                           ID:nil
                                  subresource:BOXAPISubresourceContent];
+    
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllFileFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
+    }
 
     // Body Form Elements Parameters
     // The only parameters allowed in multipart form requests for files are name, parent ID,
@@ -104,7 +110,7 @@
         [[BOXAPIMultipartToJSONOperation alloc] initWithURL:URL
                                                  HTTPMethod:BOXAPIHTTPMethodPOST
                                                        body:multipartBodyParameters
-                                                queryParams:nil
+                                                queryParams:queryParameters
                                               session:self.queueManager.session];
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {

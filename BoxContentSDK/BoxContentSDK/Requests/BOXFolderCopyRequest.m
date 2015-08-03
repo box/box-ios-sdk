@@ -27,6 +27,12 @@
                            subresource:BOXAPISubresourceCopy
                                  subID:nil];
     
+    NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
+    
+    if (self.requestAllFolderFields) {
+        queryParameters[BOXAPIParameterKeyFields] = [self fullFolderFieldsParameterString];
+    }
+    
     NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
     
     if (self.destinationFolderID.length > 0) {
@@ -39,7 +45,7 @@
     
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPOST
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];

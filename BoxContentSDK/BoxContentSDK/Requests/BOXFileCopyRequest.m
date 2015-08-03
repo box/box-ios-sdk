@@ -28,6 +28,12 @@
                                     ID:self.fileID
                            subresource:BOXAPISubresourceCopy
                                  subID:nil];
+    
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllFileFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
+    }
 
     NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
     
@@ -41,7 +47,7 @@
 
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPOST
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];

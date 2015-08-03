@@ -16,6 +16,7 @@
 @property (nonatomic, readonly, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, readwrite, strong) NSDate *contentCreatedAt;
 @property (nonatomic, readwrite, strong) NSDate *contentModifiedAt;
+@property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 // This setting uses the locally generated SHA1 hash of the file to ensure that the
 // file is not corrputed in transit. Settings this value to YES will result in a delay
 // before the upload actually begins as the hash is calculated. The default is NO.
