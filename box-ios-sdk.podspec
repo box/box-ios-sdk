@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 # Root specification
 
 s.name                  = "box-ios-sdk"
-s.version               = "1.0.8"
+s.version               = "1.1.0"
 s.summary               = "iOS SDK for the Box API"
 s.homepage              = "https://github.com/box/box-ios-sdk"
 s.license               = { :type => "Apache 2.0", :file => "LICENSE" }
@@ -34,6 +34,7 @@ s.ios.frameworks        = "Security", "QuartzCore", "AssetsLibrary"
 s.requires_arc          = true
 s.xcconfig              = { "OTHER_LDFLAGS" => "-ObjC -all_load" }
 s.ios.header_dir        = "BoxContentSDK"
+s.module_name           = "BoxContentSDK"
 
 # Subspecs
 
