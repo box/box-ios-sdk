@@ -165,7 +165,8 @@
                                                                                                 clientID:self.OAuth2Session.clientID
                                                                                                URLScheme:authURLScheme
                                                                                    authRedirectURIString:self.OAuth2Session.redirectURIString];
-        BoxAppToAppMessage *authMessage = [BoxAppToAppMessage boxAppAuthorizationMessageWithState:nil currentApplication:currentApplication];
+        BoxAppToAppMessage *authMessage = [BoxAppToAppMessage boxAppAuthorizationMessageWithState:self.OAuth2Session.nonce
+                                                                               currentApplication:currentApplication];
         BoxAppToAppStatus messageDidSend = [authMessage execute];
 
         didPresentDefaultAuthentication = (messageDidSend == BoxAppToAppStatusSuccess);

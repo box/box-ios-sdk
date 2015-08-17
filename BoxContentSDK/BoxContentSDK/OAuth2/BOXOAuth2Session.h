@@ -156,6 +156,12 @@
  */
 - (NSString *)redirectURIString;
 
+/**
+ * Returns the randomly generated nonce used to prevent spoofing attack during login
+ * @return generated nonce
+ */
+- (NSString *)nonce;
+
 #pragma mark - Token Refresh
 /** @name Token Refresh */
 
