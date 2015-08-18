@@ -18,9 +18,9 @@
 - (NSUInteger)getBytes:(uint8_t *)buffer fromOffset:(long long)offset length:(NSUInteger)length error:(NSError *__autoreleasing *)error
 {
     if (offset + length > self.size) {
-        length = self.size - offset;
+        length = (NSUInteger)(self.size - offset);
     }
-    NSRange range = NSMakeRange(offset, length);
+    NSRange range = NSMakeRange((NSUInteger)offset, length);
     [self.data getBytes:buffer range:range];
     return length;
 }
