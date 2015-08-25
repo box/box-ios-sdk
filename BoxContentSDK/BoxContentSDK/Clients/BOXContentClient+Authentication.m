@@ -98,7 +98,7 @@
     }];
 }
 
-+ (BOOL)canCompleteAuthenticationWithURL:(NSURL *)authenticationURL
++ (BOOL)canCompleteAppToAppAuthenticationWithURL:(NSURL *)authenticationURL
 {
     BOXContentClient *client = [[self SDKClients] objectForKey:BOXOAuth2AuthDelegationNewClientKey];
     BOOL authInProgress = (client != nil);
@@ -109,7 +109,7 @@
     return (authInProgress && URLIsAuthenticationCompletion);
 }
 
-+ (void)completeAuthenticationWithURL:(NSURL *)authenticationURL
++ (void)completeAppToAppAuthenticationWithURL:(NSURL *)authenticationURL
 {
     BOXContentClient *client = [[self SDKClients] objectForKey:BOXOAuth2AuthDelegationNewClientKey];
     if (client != nil) {
@@ -117,20 +117,7 @@
         void (^authCompletionBlock)(BOXUser *user, NSError *error) = client.authenticationCompletionBlock;
         client.authenticationCompletionBlock = nil;
 
-        [client.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:authenticationURL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
-            if (error) {
-                if (authCompletionBlock) {
-                    authCompletionBlock(nil, error);
-                }
-            } else {
-                BOXUserRequest *userRequest = [client currentUserRequest];
-                [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
-                    if (authCompletionBlock) {
-                        authCompletionBlock(user, error);
-                    }
-                }];
-            }
-        }];
+        [client completeAuthenticationWithURL:authenticationURL completionBlock:authCompletionBlock];
     }
 }
 
@@ -222,6 +209,28 @@
 - (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup
 {
     [BOXAbstractSession setKeychainAccessGroup:keychainAccessGroup];
+}
+
+@end
+
+@implementation BOXContentClient (AuthenticationPrivate)
+
+- (void)completeAuthenticationWithURL:(NSURL *)authenticationURL completionBlock:(void (^)(BOXUser *user, NSError *error))completion
+{
+    [self.OAuth2Session performAuthorizationCodeGrantWithReceivedURL:authenticationURL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+        if (error) {
+            if (completion) {
+                completion(nil, error);
+            }
+        } else {
+            BOXUserRequest *userRequest = [self currentUserRequest];
+            [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
+                if (completion) {
+                    completion(user, error);
+                }
+            }];
+        }
+    }];
 }
 
 @end

@@ -56,6 +56,7 @@
 }
 
 #pragma mark - Authorization
+
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block
 {
     NSDictionary *URLQueryParams = [URL box_queryDictionary];
@@ -73,7 +74,7 @@
         return;
     }
     
-    if (authorizationError != nil) {
+    if (authorizationError != nil || authorizationCode == nil) {
         NSInteger errorCode = BOXContentSDKAPIErrorUnknownStatusCode;
         if ([authorizationError isEqualToString:BOXAuthErrorAccessDenied]) {
             errorCode = BOXContentSDKAPIErrorUserDeniedAccess;

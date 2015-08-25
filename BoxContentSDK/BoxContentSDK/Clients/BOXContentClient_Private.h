@@ -23,3 +23,15 @@
 - (void)prepareRequest:(BOXRequest *)request;
 
 @end
+
+@interface BOXContentClient (AuthenticationPrivate)
+
+/**
+ *  Complete the user's authentication from the URL with which the app was launched.
+ *
+ *  @param authenticationURL    The URL with which the app was launched.
+ *  @param completionBlock      Called when the authentication has completed.
+ */
+- (void)completeAuthenticationWithURL:(NSURL *)authenticationURL completionBlock:(void (^)(BOXUser *user, NSError *error))completion;
+
+@end
