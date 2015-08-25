@@ -31,20 +31,20 @@
 - (void)authenticateInAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
 /**
- *  Discerns whether a launch URL is associated with Box authentication - if it is the return URL that should be used
+ *  Discerns whether a launch URL is associated with Box App-to-App authentication - if it is the return URL that should be used
  *  to complete the user's authentication in the case of authenticating App-to-App using the Box app.
  *
  *  @param authenticationURL    The URL with which the app was launched.
  */
-+ (BOOL)canCompleteAuthenticationWithURL:(NSURL *)authenticationURL;
++ (BOOL)canCompleteAppToAppAuthenticationWithURL:(NSURL *)authenticationURL;
 
 /**
- *  Complete the user's authentication to the account that is in use in the Box app.
+ *  Complete the user's authentication to the account that is in use in the Box app. (App-to-App)
  *  On completion, the original completionBlock will be called.
  *
  *  @param authenticationURL    The URL with which the app was launched.
  */
-+ (void)completeAuthenticationWithURL:(NSURL *)authenticationURL;
++ (void)completeAppToAppAuthenticationWithURL:(NSURL *)authenticationURL;
 
 /**
  *  Log out the user associated with this BOXContentClient. It is a good practice to call this when the user's session is no longer necessary.
