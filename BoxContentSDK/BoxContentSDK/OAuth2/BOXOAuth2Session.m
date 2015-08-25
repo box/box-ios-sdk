@@ -63,7 +63,7 @@
     NSString *authorizationCode = [URLQueryParams valueForKey:BOXAuthURLParameterAuthorizationCodeKey];
     NSString *authorizationError = [URLQueryParams valueForKey:BOXAuthURLParameterErrorCodeKey];
 
-    if ([serverNonce isEqualToString:self.nonce] == NO) {        
+    if ((_nonce || serverNonce) && [serverNonce isEqualToString:_nonce] == NO) {
         NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain 
                                                     code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
                                                 userInfo:nil];
