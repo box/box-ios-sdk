@@ -52,4 +52,12 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     return result_str;
 }
 
+- (BOOL)box_isEmptyOrWhitespacesOnly
+{
+    NSCharacterSet *nonWhitespaceCharacterSet = [[NSCharacterSet whitespaceAndNewlineCharacterSet] invertedSet];
+    BOOL isEmptyOrWhitespaces = ([self length] == 0 ||
+                                 [self rangeOfCharacterFromSet:nonWhitespaceCharacterSet].location == NSNotFound);
+    return isEmptyOrWhitespaces;
+}
+
 @end
