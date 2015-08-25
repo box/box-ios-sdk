@@ -21,4 +21,11 @@
  */
 + (NSString *)box_humanReadableStringForByteSize:(NSNumber *)size;
 
+/**
+ * Returns whether a string is empty or constructed completely
+ * of space and/or newline characters.
+ *
+ */
+- (BOOL)box_isEmptyOrWhitespacesOnly;
+
 @end
