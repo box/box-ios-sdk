@@ -34,12 +34,12 @@
 
 #pragma mark - Initialization
 
-
 - (instancetype)initWithClientID:(NSString *)ID secret:(NSString *)secret APIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
 {
     if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
         _clientID = ID;
         _clientSecret = secret;
+        _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveRevokeSessionNotification:)
@@ -181,11 +181,6 @@
 - (NSURL *)grantTokensURL
 {
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/token", self.APIBaseURLString]];
-}
-
-- (NSString *)redirectURIString
-{
-    return [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", self.clientID];
 }
 
 #pragma mark - Token Refresh

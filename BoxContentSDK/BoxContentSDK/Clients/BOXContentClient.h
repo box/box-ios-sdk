@@ -117,6 +117,23 @@
 + (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret;
 
 /**
+ * Client ID:
+ * The client identifier described in [Section 2.2 of the OAuth2 spec](http://tools.ietf.org/html/rfc6749#section-2.2)
+ * This is also known as an API key on Box. See the [Box OAuth2 documentation](http://developers.box.com/oauth/) for
+ * information on where to find this value.
+ *
+ * Client Secret:
+ * The client secret. This value is used during the authorization code grant and when refreshing tokens.
+ * This value should be a secret. DO NOT publish this value.
+ * See the [Box OAuth2 documentation](http://developers.box.com/oauth/) for
+ * information on where to find this value.
+ *
+ * Redirect UR:
+ * If you set a custom Redirect URI in your App's developer settings, set it here too.
+ */
++ (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret redirectURIString:(NSString *)redirectURIString;
+
+/**
  * This property controls whether clients should attempt authentication through the Box app
  * The default is NO and has to be set here because of the associated configuration that
  * has to be done.

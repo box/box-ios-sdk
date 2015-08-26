@@ -146,15 +146,15 @@
 - (NSURL *)authorizeURL;
 
 /**
- * Returns a string containing the URI to load after the user completes the webview authorization flow.
+ * A string containing the URI to load after the user completes the webview authorization flow.
  * This URI allows Box to redirect back to your app with an authorization code.
  *
  * @warning This should be a custom url scheme registered to your app.
- * @warning Do not register a redirect URI in the Box developer settings pages.
+ * @warning Do not set this to a custom value, unless you are also setting a custom redirect URI in your app's developer settings.
  *
  * @return Redirect URI string
  */
-- (NSString *)redirectURIString;
+@property (nonatomic, readwrite, strong) NSString *redirectURIString;
 
 /**
  * Returns the randomly generated nonce used to prevent spoofing attack during login
