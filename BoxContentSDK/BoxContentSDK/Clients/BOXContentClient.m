@@ -37,6 +37,7 @@
 
 static NSString *staticClientID;
 static NSString *staticClientSecret;
+static NSString *staticRedirectURIString;
 static BOOL staticAppToAppBoxAuthenticationEnabled = NO;
 static NSMutableDictionary *_SDKClients;
 static dispatch_once_t onceTokenForDefaultClient = 0;
@@ -121,6 +122,20 @@ static BOXContentClient *defaultInstance = nil;
     staticClientSecret = clientSecret;
 }
 
++ (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret redirectURIString:(NSString *)redirectURIString
+{
+    [self setClientID:clientID clientSecret:clientSecret];
+    
+    if (staticRedirectURIString.length > 0 && ![staticRedirectURIString isEqualToString:redirectURIString]) {
+        [NSException raise:@"Changing the redirect uri is not allowed." format:@"Cannot change redirect uri from %@ to %@", staticRedirectURIString, redirectURIString];
+        return;
+    }
+    
+    if (redirectURIString.length > 0) {
+        staticRedirectURIString = redirectURIString;
+    }
+}
+
 + (void)setAppToAppBoxAuthenticationEnabled:(BOOL)enabled
 {
     staticAppToAppBoxAuthenticationEnabled = enabled;
@@ -138,11 +153,14 @@ static BOXContentClient *defaultInstance = nil;
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
 
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
-                                                                         secret:staticClientSecret
-                                                                     APIBaseURL:BOXAPIBaseURL//FIXME:
-                                                                   queueManager:_queueManager];
+                                                                     secret:staticClientSecret
+                                                                 APIBaseURL:BOXAPIBaseURL
+                                                               queueManager:_queueManager];
         _queueManager.session = self.session;
         
+        if (staticRedirectURIString.length > 0) {
+            _OAuth2Session.redirectURIString = staticRedirectURIString;
+        }
         
         // Initialize our sharedlink helper with the default protocol implementation
         _sharedLinksHeaderHelper = [[BOXSharedLinkHeadersHelper alloc] initWithClient:self];
