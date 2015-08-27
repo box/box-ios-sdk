@@ -27,9 +27,14 @@
 @property (nonatomic, readonly, strong) BOXAbstractSession *session;
 
 /**
- *  The base URL for all API operations including Authentication.
+ *  The base URL for all API operations except for Authentication and Upload.
  */
 @property (nonatomic, readwrite, strong) NSString *APIBaseURL;
+
+/**
+ *  The base URL for all API Authentication operations.
+ */
+@property (nonatomic, readwrite, strong) NSString *APIAuthBaseURL;
 
 /**
  *  The client's queue manager. All API calls are scheduled by this queue manager.

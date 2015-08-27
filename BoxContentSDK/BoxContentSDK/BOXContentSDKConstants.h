@@ -13,6 +13,7 @@
 
 // API URLs
 extern NSString *const BOXAPIBaseURL;
+extern NSString *const BOXAPIAuthBaseURL;
 extern NSString *const BOXAPIUploadBaseURL;
 
 // API Versions

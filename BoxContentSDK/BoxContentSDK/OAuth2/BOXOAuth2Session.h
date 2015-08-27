@@ -103,14 +103,25 @@
  * @param ID your client ID, also known as API key.
  * @param secret your client secret. DO NOT publish this secret.
  * @param baseURL The base URL String for accessing the Box API.
+ * @param authBaseURL The base URL String for authenticating with the Box API.
  * @param queueManager The queue manager on which to enqueue [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation).
  *
  * @return A BOXOAuth2Session capable of authorizing a user and signing requests.
  */
-- (instancetype)initWithClientID:(NSString *)ID secret:(NSString *)secret APIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager;
+- (instancetype)initWithClientID:(NSString *)ID
+                          secret:(NSString *)secret
+                      APIBaseURL:(NSString *)baseURL
+                  APIAuthBaseURL:(NSString *)authBaseURL
+                    queueManager:(BOXAPIQueueManager *)queueManager;
 
 #pragma mark - Authorization
 /** @name Authorization */
+
+/**
+ * The base URL for API requests.
+ * @see BOXAPIAuthBaseURL
+ */
+@property (nonatomic, readwrite, strong) NSString *APIAuthBaseURLString;
 
 /**
  * Exchange an authorization code for an access token and a refresh token.

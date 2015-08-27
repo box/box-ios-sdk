@@ -56,10 +56,6 @@ extern NSString *const BOXUserIDKey;
 /**
  * The base URL for API requests.
  * @see BOXAPIBaseURL
- *
- * Used for granting authorization with OAuth2 as well.
- * @see grantTokensURL
- * @see authorizeURL
  */
 @property (nonatomic, readwrite, strong) NSString *APIBaseURLString;
 

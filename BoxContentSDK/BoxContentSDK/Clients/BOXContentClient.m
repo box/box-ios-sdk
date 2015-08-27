@@ -146,6 +146,7 @@ static BOXContentClient *defaultInstance = nil;
     if (self = [super init])
     {
         [self setAPIBaseURL:BOXAPIBaseURL];
+        [self setAPIAuthBaseURL:BOXAPIAuthBaseURL];
         
         // the circular reference between the queue manager and the session is necessary
         // because sessions enqueue API operations to fetch access tokens and the queue
@@ -154,7 +155,8 @@ static BOXContentClient *defaultInstance = nil;
 
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
                                                                      secret:staticClientSecret
-                                                                 APIBaseURL:BOXAPIBaseURL
+                                                                 APIBaseURL:_APIBaseURL
+                                                             APIAuthBaseURL:_APIAuthBaseURL
                                                                queueManager:_queueManager];
         _queueManager.session = self.session;
         
@@ -271,7 +273,15 @@ static BOXContentClient *defaultInstance = nil;
 - (void)setAPIBaseURL:(NSString *)APIBaseURL
 {
     _APIBaseURL = APIBaseURL;
-    self.session.APIBaseURLString = APIBaseURL;
+    self.session.APIBaseURLString = _APIBaseURL;
+}
+
+- (void)setAPIAuthBaseURL:(NSString *)APIAuthBaseURL
+{
+    _APIAuthBaseURL = APIAuthBaseURL;
+    if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
+        ((BOXOAuth2Session *)self.session).APIAuthBaseURLString = _APIAuthBaseURL;
+    }
 }
 
 // Load the ressources bundle.

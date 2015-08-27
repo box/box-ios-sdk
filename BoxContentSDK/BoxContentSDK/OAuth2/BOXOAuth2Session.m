@@ -34,19 +34,24 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithClientID:(NSString *)ID secret:(NSString *)secret APIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
+- (instancetype)initWithClientID:(NSString *)ID
+                          secret:(NSString *)secret
+                      APIBaseURL:(NSString *)baseURL
+                  APIAuthBaseURL:(NSString *)authBaseURL
+                    queueManager:(BOXAPIQueueManager *)queueManager
 {
     if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
+        _APIAuthBaseURLString = authBaseURL;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveRevokeSessionNotification:)
                                                      name:BOXSessionWasRevokedNotification
                                                    object:nil];
     }
-    
+
     return self;
 }
 
@@ -174,7 +179,7 @@
     NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
     NSString *authorizeURLString = [NSString stringWithFormat:
                                     @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
-                                    self.APIBaseURLString, self.clientID, self.nonce, encodedRedirectURI];
+                                    self.APIAuthBaseURLString, self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
 
