@@ -231,14 +231,16 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         return NO;
     }
 
-	// Figure out whether the scheme of this request is the redirect scheme used at the end of the authentication process
+	// Figure out whether this request is the redirect used at the end of the authentication process
     BOOL requestIsForLoginRedirectScheme = NO;
     BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
 	if ([OAuth2Session.redirectURIString length] > 0) {
 		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:OAuth2Session.redirectURIString] scheme]];
 	}
+    BOOL requestIsForLoginRedirection = (requestIsForLoginRedirectScheme &&
+                                         [[[request URL] absoluteString] hasPrefix:OAuth2Session.redirectURIString]);
 
-	if (requestIsForLoginRedirectScheme) {
+	if (requestIsForLoginRedirection) {
         __weak BOXAuthorizationViewController *me = self;
         [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
