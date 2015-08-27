@@ -13,5 +13,6 @@
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (void)performRequestWithCompletion:(BOXItemsBlock)completionBlock;
+- (void)performRequestWithCached:(BOXItemsBlock)cacheBlock refreshed:(BOXItemsBlock)refreshBlock;
 
 @end
