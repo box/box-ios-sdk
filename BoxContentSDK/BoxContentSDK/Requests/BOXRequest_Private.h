@@ -9,6 +9,7 @@
 #import "BOXDispatchHelper.h"
 #import "BOXRequest.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXRequestCache.h"
 
 @class BOXAPIQueueManager;
 
@@ -16,6 +17,7 @@
 
 @property (nonatomic, readwrite, strong) BOXAPIQueueManager *queueManager;
 @property (nonatomic, readwrite, strong) BOXAPIOperation *operation;
+@property (nonatomic, readwrite, strong) BOXRequestCache *requestCache;
 
 - (NSURL *)URLWithResource:(NSString *)resource
                         ID:(NSString *)ID

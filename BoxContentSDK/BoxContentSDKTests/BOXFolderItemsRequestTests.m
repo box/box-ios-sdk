@@ -20,7 +20,7 @@
 @end
 
 @interface BOXFolderItemsRequest ()
-- (void)performPaginatedRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
+- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock;
 - (NSUInteger)rangeStep;
 
 + (NSString *)uniqueHashForItem:(BOXItem *)item;
@@ -101,7 +101,7 @@
     XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyOffset], @"0");
 }
 
-- (void)mockPaginatedDupedDataRequestWithCompletion:(BOXItemArrayCompletionBlock)completion
+- (void)mockPaginatedDupedDataRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
 {
     static NSUInteger start = 0;
     static NSUInteger len = 3;
@@ -120,13 +120,13 @@
     
     NSArray *results = [self itemsFromResponseData:cannedData];
     
-    if (completion) {
-        completion(results, totalCount, range, nil);
+    if (refreshBlock) {
+        refreshBlock(results, totalCount, range, nil);
     }    
 }
 
 
-- (void)mockPaginatedRequestWithCompletion:(BOXItemArrayCompletionBlock)completion
+- (void)mockPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
 {
     static NSUInteger start = 0;
     static NSUInteger len = 3;
@@ -145,8 +145,8 @@
     
     NSArray *results = [self itemsFromResponseData:cannedData];
 
-    if (completion) {
-        completion(results, totalCount, range, nil);
+    if (refreshBlock) {
+        refreshBlock(results, totalCount, range, nil);
     }    
 }
 
@@ -156,7 +156,7 @@
     
     id requestMock = [OCMockObject partialMockForObject:request];
     
-    [[[requestMock stub] andCall:@selector(mockPaginatedDupedDataRequestWithCompletion:) onObject:self] performPaginatedRequestWithCompletion:OCMOCK_ANY];    
+    [[[requestMock stub] andCall:@selector(mockPaginatedDupedDataRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY];
     [[[requestMock stub] andReturnValue:OCMOCK_VALUE(3)] rangeStep];
     
     NSData *cannedData0_2 = [self cannedResponseDataWithName:@"get_items_0_2"];
@@ -193,7 +193,7 @@
         
     id requestMock = [OCMockObject partialMockForObject:request];
 
-    [[[requestMock stub] andCall:@selector(mockPaginatedRequestWithCompletion:) onObject:self] performPaginatedRequestWithCompletion:OCMOCK_ANY];    
+    [[[requestMock stub] andCall:@selector(mockPaginatedRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY];
     [[[requestMock stub] andReturnValue:OCMOCK_VALUE(3)] rangeStep];
     
     NSData *cannedData0_2 = [self cannedResponseDataWithName:@"get_items_0_2"];
