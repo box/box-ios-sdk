@@ -60,10 +60,36 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
+    [self performRequestWithCached:nil refreshed:completionBlock];
+}
+
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
-    if (completionBlock) {
+    
+    if (cacheBlock) {
+        if (self.requestCache) {
+            [self.requestCache fetchCacheResponseForRequest:self cacheBlock:^(NSDictionary *JSONDictionary) {
+                NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
+                NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
+                NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
+                NSArray *itemDictionaries = JSONDictionary[BOXAPICollectionKeyEntries];
+                NSUInteger capacity = itemDictionaries.count;
+                NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
+                
+                for (NSDictionary *itemDictionary in itemDictionaries) {
+                    BOXItem *item = [self itemWithJSON:itemDictionary];
+                    [items addObject:item];
+                }
+                [BOXDispatchHelper callCompletionBlock:^{
+                    cacheBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+                } onMainThread:isMainThread];
+            }];
+        }
+    }
+    
+    if (refreshBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
             NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
@@ -90,12 +116,21 @@
                                                                                       ancestors:pathFolders];
             }
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+                refreshBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+                
+                // Don't want to update cache for a subclass recursively calling this method.
+                if ([self isMemberOfClass:[BOXFolderPaginatedItemsRequest class]]) {
+                    [self.requestCache updateCacheForRequest:self withResponse:JSONDictionary];
+                }
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, 0, NSMakeRange(0, 0), error);
+                refreshBlock(nil, 0, NSMakeRange(0, 0), error);
+                // TODO: only if not network error
+                if ([self isMemberOfClass:[BOXFolderPaginatedItemsRequest class]]) {
+                    [self.requestCache removeCacheResponseForRequest:self];
+                }
             } onMainThread:isMainThread];
         };
     }
