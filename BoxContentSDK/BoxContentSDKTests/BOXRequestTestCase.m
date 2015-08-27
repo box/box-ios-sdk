@@ -37,7 +37,7 @@
     [NSURLProtocol registerClass:[BOXCannedURLProtocol class]];
     
     self.fakeQueueManager = [[BOXParallelAPIQueueManager alloc] init];
-    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id" secret:@"test_client_secret" APIBaseURL:BOXAPIBaseURL queueManager:self.fakeQueueManager];
+    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id" secret:@"test_client_secret" APIBaseURL:BOXAPIBaseURL APIAuthBaseURL:BOXAPIAuthBaseURL queueManager:self.fakeQueueManager];
     self.fakeOAuth2Session.refreshToken = @"sample_refresh_token";
     self.fakeOAuth2Session.accessToken = @"sample_access_token";
     self.fakeOAuth2Session.accessTokenExpiration = [NSDate distantFuture];

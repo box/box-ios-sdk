@@ -21,9 +21,13 @@
 
 @synthesize expiredOAuth2Tokens = _expiredOAuth2Tokens;
 
-- (id)initWithClientID:(NSString *)ID secret:(NSString *)secret APIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
+- (id)initWithClientID:(NSString *)ID
+                secret:(NSString *)secret
+            APIBaseURL:(NSString *)baseURL
+        APIAuthBaseURL:(NSString *)authBaseURL
+          queueManager:(BOXAPIQueueManager *)queueManager
 {
-    self = [super initWithClientID:ID secret:secret APIBaseURL:baseURL queueManager:queueManager];
+    self = [super initWithClientID:ID secret:secret APIBaseURL:baseURL APIAuthBaseURL:authBaseURL queueManager:queueManager];
     if (self != nil)
     {
         _expiredOAuth2Tokens = [NSMutableSet set];
