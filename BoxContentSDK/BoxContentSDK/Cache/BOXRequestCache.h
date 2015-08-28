@@ -18,5 +18,7 @@
 - (void)fetchCacheResponseForRequest:(BOXRequest *)request cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock;
 - (void)removeCacheResponseForRequest:(BOXRequest *)request;
 - (void)updateCacheForRequest:(BOXRequest *)request withResponse:(NSDictionary *)JSONDictionary;
-
+- (void)removeAllCachedResponses;
+- (void)clearForLogout;
+- (void)setCacheDirectory:(NSURL *)cacheDirectory;
 @end
