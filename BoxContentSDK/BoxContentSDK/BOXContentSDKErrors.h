@@ -59,6 +59,7 @@ typedef enum {
     BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued = 20001, // access token is expired and the operation cannot be reenqueued because it cannot be copied
     BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted = 20002, // Operation failed because access token is expired and could not be refreshed. Usually due to no internet connection
     BOXContentSDKAuthErrorAccessTokenNonceMismatch = 20003, // Operation failed because nonce returned by server didn't match the one used by app to authorize user.
+    BOXContentSDKAuthErrorNotPossible = 20004, // Operation failed because the specific type of auth is not possible (for example App-To-App auth delegation when the Box app is not installed).
 } BOXContentSDKAuthError;
 
 typedef enum {

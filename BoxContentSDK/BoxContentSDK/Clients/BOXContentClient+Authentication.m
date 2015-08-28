@@ -77,6 +77,29 @@
     }
 }
 
+- (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
+{
+    if (self.OAuth2Session.refreshToken.length > 0 && self.OAuth2Session.accessToken.length > 0) {
+        __weak BOXContentClient *weakSelf = self;
+        BOXUserRequest *userRequest = [self currentUserRequest];
+        [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
+            if (error) { //FIXME: This may cause problems offline
+                BOOL didAuthenticate = [weakSelf performAppToAppAuthenticationWithCompletionBlock:completion];
+                if (didAuthenticate == NO && completion != nil) {
+                    completion(nil, [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorNotPossible userInfo:nil]);
+                }
+            } else  if (completion) {
+                completion(user, nil);
+            }
+        }];
+    } else {
+        BOOL didAuthenticate = [self performAppToAppAuthenticationWithCompletionBlock:completion];
+        if (didAuthenticate == NO && completion != nil) {
+            completion(nil, [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorNotPossible userInfo:nil]);
+        }
+    }
+}
+
 - (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     __weak BOXContentClient *weakSelf = self;
@@ -142,7 +165,18 @@
 
 - (void)presentDefaultAuthenticationWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
-    BOOL didPresentDefaultAuthentication = NO;
+    BOOL didPresentDefaultAuthentication = [self performAppToAppAuthenticationWithCompletionBlock:completion];
+    if (didPresentDefaultAuthentication == NO) {
+        [self showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
+    }
+}
+
+// The completion block only gets called if App-To-App authentication is possible and attempted,
+// in which case the return value is YES. If the return value is NO, the completion block will not
+// get called.
+- (BOOL)performAppToAppAuthenticationWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
+{
+    BOOL didPerformAppToAppAuthentication = NO;
 
     if (self.appToAppBoxAuthenticationEnabled && [[BoxAppToAppApplication BoxApplication] isInstalled]) {
         NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
@@ -156,15 +190,15 @@
                                                                                currentApplication:currentApplication];
         BoxAppToAppStatus messageDidSend = [authMessage execute];
 
-        didPresentDefaultAuthentication = (messageDidSend == BoxAppToAppStatusSuccess);
+        didPerformAppToAppAuthentication = (messageDidSend == BoxAppToAppStatusSuccess);
     }
 
-    if (didPresentDefaultAuthentication) {
+    if (didPerformAppToAppAuthentication) {
         self.authenticationCompletionBlock = completion;
         [[[self class] SDKClients] setObject:self forKey:BOXOAuth2AuthDelegationNewClientKey];
-    } else {
-        [self showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
     }
+
+    return didPerformAppToAppAuthentication;
 }
 
 - (void)showWebViewAuthenticationViewControllerWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
