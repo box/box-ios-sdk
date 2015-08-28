@@ -31,6 +31,16 @@
 - (void)authenticateInAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
 /**
+ *  Authenticate a user. If necessary and possible, this will launch the Box app to allow the user to autmatically
+ *  be authenticated to that account.
+ *  If App-To-App authentication is not possible, an error is returned in the completion block.
+ *  If a user is already authenticated, then a UIViewController will not be presented and the completionBlock will be called.
+ *
+ *  @param completionBlock Called when the authentication has completed.
+ */
+- (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
+
+/**
  *  Discerns whether a launch URL is associated with Box App-to-App authentication - if it is the return URL that should be used
  *  to complete the user's authentication in the case of authenticating App-to-App using the Box app.
  *
