@@ -26,7 +26,6 @@
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
-@property (nonatomic, readwrite, strong) BOXRequestCache *requestCache;
 
 + (void)resetInstancesForTesting;
 @end
@@ -153,11 +152,8 @@ static BOXContentClient *defaultInstance = nil;
 {
     if (_requestCachingEnabled != enabled) {
         _requestCachingEnabled = enabled;
-        if (enabled) {
-            self.requestCache = [[BOXRequestCache alloc] initWithUserID:self.user.modelID cacheDirectory:cacheDirectory];
-        } else {
-            // TODO: clear & remove cache
-            self.requestCache = nil;
+        if (enabled && cacheDirectory) {
+            [self.requestCache setCacheDirectory:cacheDirectory];
         }
     }
 }
@@ -222,6 +218,8 @@ static BOXContentClient *defaultInstance = nil;
             self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
             [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
         }        
+        
+        self.requestCache = [[BOXRequestCache alloc] initWithUserID:user.modelID];
     }
     return self;
 }
@@ -371,7 +369,10 @@ static BOXContentClient *defaultInstance = nil;
 - (void)prepareRequest:(BOXRequest *)request
 {
     request.queueManager = self.queueManager;
-    request.requestCache = self.requestCache;
+    
+    if (self.isRequestCachingEnabled) {
+        request.requestCache = self.requestCache;
+    }
     
     if ([request conformsToProtocol:@protocol(BOXSharedLinkItemSource)]) {
         BOXRequestWithSharedLinkHeader *requestWithSharedLink = (BOXRequestWithSharedLinkHeader *)request;
