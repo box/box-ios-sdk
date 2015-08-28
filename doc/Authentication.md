@@ -17,13 +17,13 @@ BOXContentClient *contentClient = [BOXContentClient defaultClient];
 Alternatively, if you prefer to present View Controllers on your own:
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BoxAuthorizationViewController *boxAuthViewController = [[BoxAuthorizationViewController alloc] 
-	initWithinitWithSDKClient:contentClient 
-	completionBlock:^(BoxAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error) {
+BOXAuthorizationViewController *boxAuthViewController = [[BOXAuthorizationViewController alloc] 
+	initWithSDKClient:contentClient 
+	completionBlock:^(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error) {
 	// BOXUser is returned if authentication was successful.
 	// Otherwise, error will contain the reason for failure (e.g. network connection)
 	// You should dismiss authorizationViewController here.
-} cancelBlock:^(BoxAuthorizationViewController *authorizationViewController){
+} cancelBlock:^(BOXAuthorizationViewController *authorizationViewController){
 	// User has canceled the login process.
 	// You should dismiss authorizationViewController here.
 }];
