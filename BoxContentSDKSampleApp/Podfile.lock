@@ -1,0 +1,24 @@
+PODS:
+  - box-ios-sdk (1.0.9):
+    - box-ios-sdk/logger (= 1.0.9)
+    - box-ios-sdk/no-arc (= 1.0.9)
+    - PINCache
+  - box-ios-sdk/logger (1.0.9):
+    - PINCache
+  - box-ios-sdk/no-arc (1.0.9):
+    - box-ios-sdk/logger
+    - PINCache
+  - PINCache (2.0)
+
+DEPENDENCIES:
+  - box-ios-sdk (from `../`)
+
+EXTERNAL SOURCES:
+  box-ios-sdk:
+    :path: ../
+
+SPEC CHECKSUMS:
+  box-ios-sdk: a72464a888000590248d5d40aaf6c76aecfdaeab
+  PINCache: ca953ba93ce1edde056fdd99121ee65b295a08c9
+
+COCOAPODS: 0.37.2
