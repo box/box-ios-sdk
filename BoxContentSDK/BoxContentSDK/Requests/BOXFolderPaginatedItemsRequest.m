@@ -70,7 +70,7 @@
     
     if (cacheBlock) {
         if (self.requestCache) {
-            [self.requestCache fetchCacheResponseForRequest:self cacheBlock:^(NSDictionary *JSONDictionary) {
+            [self.requestCache fetchCacheForKey:self.requestCacheKey cacheBlock:^(NSDictionary *JSONDictionary) {
                 NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
                 NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
                 NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
@@ -79,7 +79,7 @@
                 NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
                 
                 for (NSDictionary *itemDictionary in itemDictionaries) {
-                    BOXItem *item = [self itemWithJSON:itemDictionary];
+                    BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                     [items addObject:item];
                 }
                 [BOXDispatchHelper callCompletionBlock:^{
@@ -99,7 +99,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                BOXItem *item = [self itemWithJSON:itemDictionary];
+                BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
                 
                 NSArray *pathFolders = nil;
@@ -117,20 +117,14 @@
             }
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(items, totalCount, NSMakeRange(offset, limit), nil);
-                
-                // Don't want to update cache for a subclass recursively calling this method.
-                if ([self isMemberOfClass:[BOXFolderPaginatedItemsRequest class]]) {
-                    [self.requestCache updateCacheForRequest:self withResponse:JSONDictionary];
-                }
+                [self.requestCache updateCacheForKey:self.requestCacheKey withResponse:JSONDictionary];
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(nil, 0, NSMakeRange(0, 0), error);
                 // TODO: only if not network error
-                if ([self isMemberOfClass:[BOXFolderPaginatedItemsRequest class]]) {
-                    [self.requestCache removeCacheResponseForRequest:self];
-                }
+                [self.requestCache removeCacheForKey:self.requestCacheKey];
             } onMainThread:isMainThread];
         };
     }

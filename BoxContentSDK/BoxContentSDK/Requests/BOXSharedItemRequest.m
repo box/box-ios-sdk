@@ -59,7 +59,7 @@
         BOOL isMainThread = [NSThread isMainThread];
         BOXAPIJSONOperation *sharedItemOperation = (BOXAPIJSONOperation *)self.operation;
         sharedItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXItem *item = [self itemWithJSON:JSONDictionary];
+            BOXItem *item = [BOXRequest itemWithJSON:JSONDictionary];
 
             // Store the shared link and password in case we need to do further API call on this item or any of its descendants.
             [self.sharedLinkHeadersHelper storeHeadersForItemWithID:item.modelID

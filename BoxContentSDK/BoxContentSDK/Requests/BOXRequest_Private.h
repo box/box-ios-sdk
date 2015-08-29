@@ -61,6 +61,8 @@
 
 - (NSString *)nonEmptyFilename:(NSString *)filename;
 
-- (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary;
++ (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary;
+
++ (NSArray *)itemsWithJSON:(NSDictionary *)JSONDictionary;
 
 @end
