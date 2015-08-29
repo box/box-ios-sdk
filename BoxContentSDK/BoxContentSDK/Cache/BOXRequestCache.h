@@ -15,9 +15,9 @@
 - (instancetype)initWithUserID:(NSString *)userID cacheDirectory:(NSURL *)cacheDirectory;
 - (instancetype)initWithUserID:(NSString *)userID;
 
-- (void)fetchCacheResponseForRequest:(BOXRequest *)request cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock;
-- (void)removeCacheResponseForRequest:(BOXRequest *)request;
-- (void)updateCacheForRequest:(BOXRequest *)request withResponse:(NSDictionary *)JSONDictionary;
+- (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock;
+- (void)removeCacheForKey:(NSString *)key;
+- (void)updateCacheForKey:(NSString *)key withResponse:(NSDictionary *)JSONDictionary;
 - (void)removeAllCachedResponses;
 - (void)clearForLogout;
 - (void)setCacheDirectory:(NSURL *)cacheDirectory;
