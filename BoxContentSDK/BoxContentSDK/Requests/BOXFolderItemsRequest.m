@@ -4,23 +4,18 @@
 //
 
 #import "BOXFolderItemsRequest.h"
-
 #import "BOXRequest_Private.h"
 #import "BOXFolderPaginatedItemsRequest.h"
-
-#import "BOXAPIJSONOperation.h"
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXItem.h"
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXFolderPaginatedItemsRequest_Private.h"
+#import "BOXContentSDKErrors.h"
 
 @interface BOXFolderItemsRequest ()
 @property (nonatomic) BOOL isCancelled;
-
-- (NSArray *)itemsFromJSONDictionary:(NSDictionary *)JSONDictionary;
-
 @end
 
 @implementation BOXFolderItemsRequest
@@ -28,9 +23,7 @@
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     if (self = [super init]) {
-        self.folderID = folderID;
-        self.limit = self.rangeStep;        
-        self.offset = 0;
+        _folderID = folderID;
     }
     
     return self;
@@ -88,15 +81,17 @@
 
 - (void)performRequestWithCached:(BOXItemsBlock)cacheBlock refreshed:(BOXItemsBlock)refreshBlock
 {
-    __weak BOXFolderItemsRequest *weakSelf = self;
+    BOXFolderItemsRequest *weakSelf = self;
+    NSString *cacheKey = self.requestCacheKey;
+    BOXRequestCache *requestCache = self.requestCache;
     
     if (cacheBlock) {
         if (self.requestCache) {
             void (^localCacheBlock)(NSDictionary *JSONDictionary) = ^void(NSDictionary *JSONDictionary) {
-                NSArray *items = [weakSelf itemsFromJSONDictionary:JSONDictionary];
+                NSArray *items = [BOXRequest itemsWithJSON:JSONDictionary];
                 cacheBlock(items, nil);
             };
-            [weakSelf.requestCache fetchCacheResponseForRequest:weakSelf cacheBlock:localCacheBlock];
+            [requestCache fetchCacheForKey:cacheKey cacheBlock:localCacheBlock];
         }
     }
     
@@ -119,7 +114,7 @@
                 if (error) {
                     localRefreshBlock(nil, error);
                     //TODO: only if not network error
-                    [weakSelf.requestCache removeCacheResponseForRequest:weakSelf];
+                    [requestCache removeCacheForKey:cacheKey];
                 } else {
                     [results addObjectsFromArray:items];
                     
@@ -131,60 +126,54 @@
                         // total count is 2222, kMaxRangeStep is 1000, we've covered first 1000 items.
                         // now (2222-1000) == 1222, so we shuold cover next 1000 items
                         NSUInteger length = (totalCount - rangeEnd) > weakSelf.rangeStep ? weakSelf.rangeStep : (totalCount - rangeEnd);
-                        weakSelf.offset = rangeEnd;
-                        weakSelf.limit = length;
-                        
-                        // reset operation, so that boxrequest recreates new operation for next batch
-                        weakSelf.operation = nil;
+                        NSUInteger offset = rangeEnd;
+                        NSUInteger limit = length;
+                        NSRange range = NSMakeRange(offset, limit);
                         
                         // if operation got cancelled while preparing for the next request, call cancellation block
                         if (weakSelf.isCancelled) {
                             error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
                             localRefreshBlock(nil, error);
                         } else {
-                            [weakSelf performPaginatedRequestWithCached:nil refreshed:recursiveFetch];
+                            [weakSelf performPaginatedRequestWithCached:nil
+                                                              refreshed:recursiveFetch
+                                                                inRange:range];
                         }
                     } else {
                         NSArray *dedupedResults = [BOXFolderItemsRequest dedupeItemsByBoxID:results];
                         localRefreshBlock(dedupedResults, nil);
-                        [weakSelf.requestCache updateCacheForRequest:weakSelf withResponse:[weakSelf JSONDictionaryFromItems:dedupedResults]];
+                        [requestCache updateCacheForKey:cacheKey withResponse:[BOXFolderItemsRequest JSONDictionaryFromItems:dedupedResults]];
                     }
                 }
             }
         };
         
         recursiveFetch = [paginatedRefreshItemFetch copy];
-        [self performPaginatedRequestWithCached:nil refreshed:paginatedRefreshItemFetch];
+        [self performPaginatedRequestWithCached:nil
+                                      refreshed:paginatedRefreshItemFetch
+                                        inRange:NSMakeRange(0, [self rangeStep])];
     }
 }
 
-- (void)performPaginatedRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
+- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock
+                                refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+                                  inRange:(NSRange)range
 {
-    // just call paginated request
-    [super performRequestWithCached:nil refreshed:completionBlock];
+    BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    paginatedRequest.queueManager = self.queueManager;
+    paginatedRequest.requestAllItemFields = self.requestAllItemFields;
+    [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }
 
-- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+- (NSString *)requestCacheKey
 {
-    // just call paginated request
-    [super performRequestWithCached:cacheBlock refreshed:refreshBlock];
+    // We don't have a real URL request so we need out own custom key
+    return [NSString stringWithFormat:@"BOXFolderItemsRequest_%@", self.folderID];
 }
-
 
 #pragma mark - Private Helpers
-- (NSArray *)itemsFromJSONDictionary:(NSDictionary *)JSONDictionary
-{
-    NSArray *itemsDicts = [JSONDictionary objectForKey:@"entries"];
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:itemsDicts.count];
-    
-    for (NSDictionary *dict in itemsDicts) {
-        [items addObject:[self itemWithJSON:dict]];
-    }
-    
-    return items;
-}
 
-- (NSDictionary *)JSONDictionaryFromItems:(NSArray *)items
++ (NSDictionary *)JSONDictionaryFromItems:(NSArray *)items
 {
     NSMutableArray *itemsDicts = [NSMutableArray arrayWithCapacity:items.count];
     
