@@ -110,10 +110,14 @@
 
 - (void)fetchCacheResponseForRequest:(BOXRequest *)request cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock
 {
+    BOOL isMainThread = [NSThread isMainThread];
+    
     if (cacheBlock) {
         PINCacheObjectBlock localCacheBlock = ^void(PINCache *cache, NSString *key, id __nullable object) {
             if ([object isKindOfClass:[NSDictionary class]]) {
-                cacheBlock(object);
+                [BOXDispatchHelper callCompletionBlock:^{
+                    cacheBlock(object);
+                } onMainThread:isMainThread];
             }
         };
         [self.cache objectForKey:[self keyForRequest:request] block:localCacheBlock];
