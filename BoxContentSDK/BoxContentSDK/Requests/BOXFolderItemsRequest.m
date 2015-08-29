@@ -178,7 +178,7 @@
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:itemsDicts.count];
     
     for (NSDictionary *dict in itemsDicts) {
-        [items addObject:[[BOXItem alloc] initWithJSON:dict]];
+        [items addObject:[self itemWithJSON:dict]];
     }
     
     return items;
