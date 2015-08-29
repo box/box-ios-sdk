@@ -108,7 +108,7 @@
     return [[self.cacheDirectory path] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@", CACHE_FOLDER, self.userID]];
 }
 
-- (void)fetchCacheResponseForRequest:(BOXRequest *)request cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock
+- (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock
 {
     BOOL isMainThread = [NSThread isMainThread];
     
@@ -120,30 +120,18 @@
                 } onMainThread:isMainThread];
             }
         };
-        [self.cache objectForKey:[self keyForRequest:request] block:localCacheBlock];
+        [self.cache objectForKey:key block:localCacheBlock];
     }
 }
 
-- (void)removeCacheResponseForRequest:(BOXRequest *)request
+- (void)removeCacheForKey:(NSString *)key
 {
-    [self.cache removeObjectForKey:[self keyForRequest:request]];
+    [self.cache removeObjectForKey:key];
 }
 
-- (void)updateCacheForRequest:(BOXRequest *)request withResponse:(NSDictionary *)JSONDictionary
+- (void)updateCacheForKey:(NSString *)key withResponse:(NSDictionary *)JSONDictionary
 {
-    [self.cache setObject:JSONDictionary forKey:[self keyForRequest:request] block:nil];
-}
-
-- (NSString *)keyForRequest:(BOXRequest *)request
-{
-    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithDictionary:request.operation.queryStringParameters];
-    if ([request isKindOfClass:[BOXFolderItemsRequest class]]) {
-        // We need to differentiate between fetching all items and an explicit paginated request.
-        [queryParams removeObjectForKey:BOXAPIParameterKeyLimit];
-        [queryParams removeObjectForKey:BOXAPIParameterKeyOffset];
-    }
-    
-    return [self sha1:[[request.operation requestURLWithURL:request.operation.baseRequestURL queryStringParameters:[queryParams copy]] absoluteString]];
+    [self.cache setObject:JSONDictionary forKey:key block:nil];
 }
 
 - (void)removeAllCachedResponses

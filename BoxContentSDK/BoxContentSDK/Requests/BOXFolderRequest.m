@@ -94,7 +94,7 @@
                 BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
                 cacheBlock(folder, nil);
             };
-            [weakSelf.requestCache fetchCacheResponseForRequest:weakSelf cacheBlock:localCacheBlock];
+            [weakSelf.requestCache fetchCacheForKey:weakSelf.requestCacheKey cacheBlock:localCacheBlock];
         }
     }
     
@@ -108,14 +108,14 @@
             
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(folder, nil);
-                [weakSelf.requestCache updateCacheForRequest:weakSelf withResponse:JSONDictionary];
+                [weakSelf.requestCache updateCacheForKey:weakSelf.requestCacheKey withResponse:JSONDictionary];
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(nil, error);
                 //TODO: only remove if API error, not connection error.
-                [weakSelf.requestCache removeCacheResponseForRequest:weakSelf];
+                [weakSelf.requestCache removeCacheForKey:weakSelf.requestCacheKey];
             } onMainThread:isMainThread];
         };
     }
