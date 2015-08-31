@@ -14,6 +14,11 @@
     //
 }
 
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    //
+}
+
 #pragma mark - Superclass overidden methods
 
 - (NSString *)itemIDForSharedLink

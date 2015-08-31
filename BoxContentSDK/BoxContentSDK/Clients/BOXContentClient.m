@@ -21,10 +21,12 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
+#import "BOXRequestCache.h"
 
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
+
 + (void)resetInstancesForTesting;
 @end
 
@@ -141,6 +143,21 @@ static BOXContentClient *defaultInstance = nil;
     staticAppToAppBoxAuthenticationEnabled = enabled;
 }
 
+- (void)setRequestCachingEnabled:(BOOL)enabled
+{
+    [self setRequestCachingEnabled:enabled cacheDirectory:nil];
+}
+
+- (void)setRequestCachingEnabled:(BOOL)enabled cacheDirectory:(NSURL *)cacheDirectory
+{
+    if (_requestCachingEnabled != enabled) {
+        _requestCachingEnabled = enabled;
+        if (enabled && cacheDirectory) {
+            [self.requestCache setCacheDirectory:cacheDirectory];
+        }
+    }
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -201,6 +218,8 @@ static BOXContentClient *defaultInstance = nil;
             self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
             [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
         }        
+        
+        self.requestCache = [[BOXRequestCache alloc] initWithUserID:user.modelID];
     }
     return self;
 }
@@ -350,6 +369,11 @@ static BOXContentClient *defaultInstance = nil;
 - (void)prepareRequest:(BOXRequest *)request
 {
     request.queueManager = self.queueManager;
+    
+    if (self.isRequestCachingEnabled) {
+        request.requestCache = self.requestCache;
+    }
+    
     if ([request conformsToProtocol:@protocol(BOXSharedLinkItemSource)]) {
         BOXRequestWithSharedLinkHeader *requestWithSharedLink = (BOXRequestWithSharedLinkHeader *)request;
         requestWithSharedLink.sharedLinkHeadersHelper = self.sharedLinksHeaderHelper;

@@ -10,5 +10,6 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock;
 
 @end
