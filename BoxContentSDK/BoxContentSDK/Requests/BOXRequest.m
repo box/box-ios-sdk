@@ -11,6 +11,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
+#import "NSString+BOXAdditions.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -494,7 +495,7 @@
 
 - (NSString *)requestCacheKey
 {
-    return [self.urlRequest.URL absoluteString];
+    return [[self.urlRequest.URL absoluteString] box_sha1];
 }
 
 @end
