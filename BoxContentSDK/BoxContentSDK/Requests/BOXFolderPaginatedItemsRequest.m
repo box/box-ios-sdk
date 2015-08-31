@@ -67,6 +67,7 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+    BOXRequestCache *requestCache = self.requestCache;
     
     if (cacheBlock) {
         if (self.requestCache) {
@@ -117,14 +118,14 @@
             }
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(items, totalCount, NSMakeRange(offset, limit), nil);
-                [self.requestCache updateCacheForKey:self.requestCacheKey withResponse:JSONDictionary];
+                [requestCache updateCacheForKey:self.requestCacheKey withResponse:JSONDictionary];
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(nil, 0, NSMakeRange(0, 0), error);
                 // TODO: only if not network error
-                [self.requestCache removeCacheForKey:self.requestCacheKey];
+                [requestCache removeCacheForKey:self.requestCacheKey];
             } onMainThread:isMainThread];
         };
     }
