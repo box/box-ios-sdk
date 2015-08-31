@@ -15,6 +15,7 @@
 
 #define BOX_SSO_SERVER_TRUST_ALERT_TAG (1)
 #define BOX_SSO_CREDENTIALS_ALERT_TAG (2)
+#define BOX_SSO_CONNECTION_ERROR_ALERT_TAG (3)
 
 // http://stackoverflow.com/a/5337804/527393
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -28,6 +29,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, strong) NSURLConnection *connection;
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
 @property (nonatomic, readwrite, strong) NSMutableData *connectionData;
+@property (nonatomic, readwrite, strong) NSError *connectionError;
 @property (nonatomic, readwrite, strong) NSURLAuthenticationChallenge *authenticationChallenge;
 @property (nonatomic, readwrite, strong) NSURLCredential *authenticationChallengeCredential;
 @property (nonatomic, readwrite, strong) NSMutableSet *hostsThatCanUseWebViewDirectly;
@@ -161,17 +163,22 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                                  message:(NSString *)message
                                    error:(NSError *)error
 {
+    // Failure at the connection layer implies we don't have anything to show in the web view,
+    // so instead of letting the user see the issue and exit/cancel themselves, we show an alert
+    // view with the error information and then call the completion block with that error.
     [[challenge sender] cancelAuthenticationChallenge:challenge];
     self.connection = nil;
     self.connectionResponse = nil;
     [self setWebViewCanBeUsedDirectly:NO forHost:connection.currentRequest.URL.host];
     
     if (self.view.window) {
+        self.connectionError = error;
         UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Unsuccessful", @"Alert view title: Title for failed SSO login due to authentication issue")
                                                                         message:message
-                                                                       delegate:nil
+                                                                       delegate:self
                                                               cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
                                                               otherButtonTitles:nil];
+        loginFailureAlertView.tag = BOX_SSO_CONNECTION_ERROR_ALERT_TAG;
         [loginFailureAlertView show];
     }
 }
@@ -510,7 +517,13 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
             NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIErrorServerCertError userInfo:nil];
             self.completionBlock(self, nil, error);            
         }
-	}
+    } else if (alertView.tag == BOX_SSO_CONNECTION_ERROR_ALERT_TAG) {
+        if (self.completionBlock) {
+            NSError *error = self.connectionError;
+            self.connectionError = nil;
+            self.completionBlock(self, nil, error);
+        }
+    }
 
 	// Clear out the authentication challenge in memory
 	self.authenticationChallenge = nil;
