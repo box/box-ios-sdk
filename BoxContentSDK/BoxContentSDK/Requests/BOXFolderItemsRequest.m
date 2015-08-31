@@ -161,6 +161,7 @@
 {
     BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
     paginatedRequest.queueManager = self.queueManager;
+    paginatedRequest.requestCache = self.requestCache;
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }
