@@ -6,12 +6,15 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <BoxContentSDK/BoxContentSDK.h>
-#import "BOXFolderPaginatedItemsRequest.h"
+#import "BOXRequestWithSharedLinkHeader.h"
 
-@interface BOXFolderItemsRequest : BOXFolderPaginatedItemsRequest
+@interface BOXFolderItemsRequest : BOXRequestWithSharedLinkHeader
+
+@property (nonatomic, readwrite, strong) NSString *folderID;
+@property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (void)performRequestWithCompletion:(BOXItemsBlock)completionBlock;
+- (void)performRequestWithCached:(BOXItemsBlock)cacheBlock refreshed:(BOXItemsBlock)refreshBlock;
 
 @end

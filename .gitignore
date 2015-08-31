@@ -20,3 +20,7 @@ buildArtifacts
 
 # Box localization files
 /output/*
+
+# Pods directories
+BoxContentSDK/Pods
+BoxContentSDKSampleApp/Pods
