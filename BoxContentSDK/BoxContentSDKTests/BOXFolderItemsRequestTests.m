@@ -9,6 +9,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXFolderItemsRequest.h"
 #import "NSURL+BOXURLHelper.h"
+#import "BOXRequest_Private.h"
 
 #import "BOXBookmark.h"
 #import "BOXFile.h"
@@ -20,7 +21,9 @@
 @end
 
 @interface BOXFolderItemsRequest ()
-- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock;
+- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock
+                                refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+                                  inRange:(NSRange)range;
 - (NSUInteger)rangeStep;
 
 + (NSString *)uniqueHashForItem:(BOXItem *)item;
@@ -76,29 +79,20 @@
     XCTAssertNotEqualObjects(fileHash, bookmarkHash);    
 }
 
-- (void)test_that_basic_request_has_expected_URLRequest_for_the_first_iteration
+- (void)test_that_basic_request_has_expected_paginated_request_setup_for_the_first_iteration
 {
     NSString *folderID = @"123";
     
     BOXFolderItemsRequest *request = [[BOXFolderItemsRequest alloc] initWithFolderID:folderID];
     request.requestAllItemFields = YES;
-        
-    NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@/items", BOXAPIBaseURL, BOXAPIVersion, folderID];
-    NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
+    id requestMock = [OCMockObject partialMockForObject:request];
     
-    XCTAssertEqualObjects(expectedURL, requestURL);
-    XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
+    [requestMock performRequestWithCached:nil refreshed:^(NSArray *items, NSError *error) {
+        // intentionally empty
+    }];
     
-    NSDictionary *requestURLParameters = [URLRequest.URL box_queryDictionary];
-    NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullItemFieldsParameterString];
-    NSString *requestFieldsString = [requestURLParameters[BOXAPIParameterKeyFields] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    XCTAssertEqualObjects(requestFieldsString, expectedFieldsString);
-    
-    XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyLimit], @"1000");
-    XCTAssertEqualObjects(requestURLParameters[BOXAPIParameterKeyOffset], @"0");
+    OCMVerify([requestMock performPaginatedRequestWithCached:nil refreshed:[OCMArg isNotNil] inRange:NSMakeRange(0, 1000)]);
 }
 
 - (void)mockPaginatedDupedDataRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
@@ -156,7 +150,7 @@
     
     id requestMock = [OCMockObject partialMockForObject:request];
     
-    [[[requestMock stub] andCall:@selector(mockPaginatedDupedDataRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY];
+    [[[[requestMock stub] ignoringNonObjectArgs] andCall:@selector(mockPaginatedDupedDataRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY inRange:NSMakeRange(0, 0)];
     [[[requestMock stub] andReturnValue:OCMOCK_VALUE(3)] rangeStep];
     
     NSData *cannedData0_2 = [self cannedResponseDataWithName:@"get_items_0_2"];
@@ -193,7 +187,7 @@
         
     id requestMock = [OCMockObject partialMockForObject:request];
 
-    [[[requestMock stub] andCall:@selector(mockPaginatedRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY];
+    [[[[requestMock stub] ignoringNonObjectArgs] andCall:@selector(mockPaginatedRequestWithCached:refreshed:) onObject:self] performPaginatedRequestWithCached:OCMOCK_ANY refreshed:OCMOCK_ANY inRange:NSMakeRange(0, 0)];
     [[[requestMock stub] andReturnValue:OCMOCK_VALUE(3)] rangeStep];
     
     NSData *cannedData0_2 = [self cannedResponseDataWithName:@"get_items_0_2"];
