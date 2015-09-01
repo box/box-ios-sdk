@@ -18,8 +18,7 @@
 @interface BOXRequestCache ()
 
 @property (nonatomic, readwrite, strong) PINCache *cache;
-@property (nonatomic, readwrite, copy) NSString *userID;
-@property (nonatomic, readwrite, strong) NSURL *cacheDirectory;
+@property (nonatomic, readwrite, strong) NSString *cachePath;
 
 @end
 
@@ -31,22 +30,8 @@
     
     if (self) {
         _userID = userID;
-        _cacheDirectory = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]];
     }
     
-    return self;
-}
-
-- (instancetype)initWithUserID:(NSString *)userID cacheDirectory:(NSURL *)cacheDirectory
-{
-    self = [self initWithUserID:userID];
-    
-    if (self) {
-        if (cacheDirectory != nil) {
-            _cacheDirectory = cacheDirectory;
-        }
-    }
-
     return self;
 }
 
@@ -95,19 +80,13 @@
     return _cache;
 }
 
-- (void)setCacheDirectory:(NSURL *)cacheDirectory
-{
-    if (_cacheDirectory != cacheDirectory) {
-        _cacheDirectory = cacheDirectory;
-        
-        // This will clear and delete the old cache. The new one will be created next time the cache is referenced.
-        [self clearForLogout];
-    }
-}
-
 - (NSString *)cachePath
 {
-    return [[self.cacheDirectory path] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@", CACHE_FOLDER, self.userID]];
+    if (_cachePath == nil) {
+        NSString *systemCacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        _cachePath = [systemCacheDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@", CACHE_FOLDER, self.userID]];
+    }
+    return _cachePath;
 }
 
 - (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock

@@ -143,21 +143,6 @@ static BOXContentClient *defaultInstance = nil;
     staticAppToAppBoxAuthenticationEnabled = enabled;
 }
 
-- (void)setRequestCachingEnabled:(BOOL)enabled
-{
-    [self setRequestCachingEnabled:enabled cacheDirectory:nil];
-}
-
-- (void)setRequestCachingEnabled:(BOOL)enabled cacheDirectory:(NSURL *)cacheDirectory
-{
-    if (_requestCachingEnabled != enabled) {
-        _requestCachingEnabled = enabled;
-        if (enabled && cacheDirectory) {
-            [self.requestCache setCacheDirectory:cacheDirectory];
-        }
-    }
-}
-
 - (instancetype)init
 {
     if (self = [super init])
@@ -217,9 +202,7 @@ static BOXContentClient *defaultInstance = nil;
         if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
             self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
             [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
-        }        
-        
-        self.requestCache = [[BOXRequestCache alloc] initWithUserID:user.modelID];
+        }
     }
     return self;
 }
@@ -366,11 +349,21 @@ static BOXContentClient *defaultInstance = nil;
 
 #pragma mark - helper methods
 
+- (BOXRequestCache *)requestCache
+{
+    if (self.user.modelID.length == 0) {
+        _requestCache = nil;
+    } else if (_requestCache == nil || ![_requestCache.userID isEqualToString:self.user.modelID]) {
+        _requestCache = [[BOXRequestCache alloc] initWithUserID:self.user.modelID];
+    }
+    return _requestCache;
+}
+
 - (void)prepareRequest:(BOXRequest *)request
 {
     request.queueManager = self.queueManager;
     
-    if (self.isRequestCachingEnabled) {
+    if (self.requestCachingEnabled) {
         request.requestCache = self.requestCache;
     }
     
