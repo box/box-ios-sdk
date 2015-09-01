@@ -55,7 +55,7 @@
  * This property reflects whether the client should cache API request responses. 
  * Its default is NO.
  */
-@property (nonatomic, readwrite, assign, getter=isRequestCachingEnabled) BOOL requestCachingEnabled;
+@property (nonatomic, readwrite, assign) BOOL requestCachingEnabled;
 
 /**
  * This property is used to temporarily hold the authentication completion block in the case of
@@ -168,14 +168,5 @@
  *  @param delegate The object that will receive the BOXSharedLinkStorageProtocol delegate callbacks.
  **/ 
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
-
-/**
- *  Allows directory for request cache to be specified. A cache subfolder will be created within this directory.
- *  If disabling request caching, the cacheDirectory param is ignored.
- *
- *  @param enabled        whether to enable or disable request caching.
- *  @param cacheDirectory directory location for the cache directory.
- */
-- (void)setRequestCachingEnabled:(BOOL)enabled cacheDirectory:(NSURL *)cacheDirectory;
 
 @end
