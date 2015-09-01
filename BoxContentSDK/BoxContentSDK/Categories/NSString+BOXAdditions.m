@@ -63,6 +63,8 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
 - (NSString *)box_sha1
 {
+    // Taken from http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
+    
     const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cstr length:self.length];
     
