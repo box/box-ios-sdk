@@ -27,21 +27,24 @@
 
 - (instancetype)initWithUserID:(NSString *)userID
 {
-    return [self initWithUserID:userID cacheDirectory:nil];
-}
-
-- (instancetype)initWithUserID:(NSString *)userID cacheDirectory:(NSURL *)cacheDirectory
-{
     self = [super init];
     
     if (self) {
         _userID = userID;
-        
-        if (!cacheDirectory) {
-            cacheDirectory = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]];
+        _cacheDirectory = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]];
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithUserID:(NSString *)userID cacheDirectory:(NSURL *)cacheDirectory
+{
+    self = [self initWithUserID:userID];
+    
+    if (self) {
+        if (cacheDirectory != nil) {
+            _cacheDirectory = cacheDirectory;
         }
-        
-        self.cacheDirectory = cacheDirectory;
     }
 
     return self;
@@ -72,7 +75,7 @@
         
         // This will allow the cache to be automatically be trimmed whenever it exceeds the byte limit.
         // In the future we can expose an interface to customize this.
-        _cache.diskCache.byteLimit = 500*1024*1024;
+        _cache.diskCache.byteLimit = 100*1024*1024;
         
         _cache.diskCache.didAddObjectBlock = ^(PINDiskCache *cache, NSString *key, id <NSCoding>  __nullable object, NSURL *fileURL) {
             [fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
