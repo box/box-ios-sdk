@@ -12,7 +12,8 @@
 
 @interface BOXRequestCache : NSObject
 
-- (instancetype)initWithUserID:(NSString *)userID cacheDirectory:(NSURL *)cacheDirectory;
+@property (nonatomic, readonly, copy) NSString *userID;
+
 - (instancetype)initWithUserID:(NSString *)userID;
 
 - (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock;
@@ -20,5 +21,4 @@
 - (void)updateCacheForKey:(NSString *)key withResponse:(NSDictionary *)JSONDictionary;
 - (void)removeAllCachedResponses;
 - (void)clearForLogout;
-- (void)setCacheDirectory:(NSURL *)cacheDirectory;
 @end
