@@ -148,7 +148,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         [[authenticationChallenge sender] useCredential:serverTrustCredential
                              forAuthenticationChallenge:authenticationChallenge];
     } else {
-        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Unsuccessful", @"Alert view title: Title for failed SSO login due to authentication issue")
+        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
                                                                         message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
                                                                        delegate:nil
                                                               cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
@@ -173,7 +173,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     
     if (self.view.window) {
         self.connectionError = error;
-        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Unsuccessful", @"Alert view title: Title for failed SSO login due to authentication issue")
+        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
                                                                         message:message
                                                                        delegate:self
                                                               cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
