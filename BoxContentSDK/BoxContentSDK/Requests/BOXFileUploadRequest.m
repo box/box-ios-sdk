@@ -156,30 +156,47 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIMultipartToJSONOperation *uploadOperation = (BOXAPIMultipartToJSONOperation *)self.operation;
-
-    if (progressBlock) {
-        uploadOperation.progressBlock = ^(unsigned long long totalBytes, unsigned long long bytesSent) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                progressBlock(bytesSent, totalBytes);
-            } onMainThread:isMainThread];
-        };
-    }
-
-    if (completionBlock) {
-        uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(file, nil);
-            } onMainThread:isMainThread];
-        };
-        uploadOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-            [BOXDispatchHelper callCompletionBlock:^{
+    
+    void (^perform)() = ^void() {
+        if (progressBlock) {
+            uploadOperation.progressBlock = ^(unsigned long long totalBytes, unsigned long long bytesSent) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    progressBlock(bytesSent, totalBytes);
+                } onMainThread:isMainThread];
+            };
+        }
+        
+        if (completionBlock) {
+            uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+                BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(file, nil);
+                } onMainThread:isMainThread];
+            };
+            uploadOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            };
+        }
+        
+        [self performRequest];
+    };
+    
+    // Unlike other operation types, BOXAPIMultipartToJSONOperation cannot be gracefully re-enqueued if the access token is expired (and can be refreshed).
+    // In order to minimize the risk of a failed request due to an expired access token, more aggressively check if it is expired, and refresh it manually
+    // beforehand if necessary.
+    if ([self.operation.session.accessTokenExpiration timeIntervalSinceNow] < 300) {
+        [self.operation.session performRefreshTokenGrant:self.operation.session.accessToken withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+            if (error) {
                 completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        };
+            } else {
+                perform();
+            }
+        }];
+    } else {
+        perform();
     }
-
-    [self performRequest];
 }
 
 #pragma mark - Helper Methods

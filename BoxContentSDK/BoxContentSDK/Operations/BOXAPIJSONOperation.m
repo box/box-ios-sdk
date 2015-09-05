@@ -147,4 +147,9 @@
     }
 }
 
+- (BOOL)canBeReenqueued
+{
+    return YES;
+}
+
 @end
