@@ -668,6 +668,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     }
 }
 
+- (BOOL)canBeReenqueued
+{
+    return NO;
+}
+
 - (void)dealloc
 {
     _outputStream.delegate = nil;

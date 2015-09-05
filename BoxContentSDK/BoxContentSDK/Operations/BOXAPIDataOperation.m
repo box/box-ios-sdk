@@ -322,4 +322,9 @@
     return operationCopy;
 }
 
+- (BOOL)canBeReenqueued
+{
+    return YES;
+}
+
 @end
