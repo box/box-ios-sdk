@@ -73,4 +73,11 @@
  */
 - (void)prepareAPIRequest;
 
+/**
+  * Whether or not the operation request can be re-enqueued automatically.
+  * In certain cases, the Operations layer can try to re-execute (once) upon failure (e.g. token needed refreshing).
+  * Sub-classes should override to indicate whether they are re-enqueueable or not.
+  */
+- (BOOL)canBeReenqueued;
+
 @end

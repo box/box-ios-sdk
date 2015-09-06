@@ -210,7 +210,6 @@
                                  BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                  };
     
-    __weak BOXOAuth2Session *weakSelf = self;
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
@@ -219,20 +218,20 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        weakSelf.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
-        weakSelf.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
-        weakSelf.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
+        self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
-        [weakSelf storeCredentialsToKeychain];
+        [self storeCredentialsToKeychain];
         
         // send success notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:self];
         
         if (block) {
-            block(weakSelf, nil);
+            block(self, nil);
         }
     };
     
@@ -241,11 +240,11 @@
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveRefreshErrorNotification
-                                                            object:weakSelf
+                                                            object:self
                                                           userInfo:errorInfo];
         
         if (block) {
-            block(weakSelf, error);
+            block(self, error);
         }
     };
     
