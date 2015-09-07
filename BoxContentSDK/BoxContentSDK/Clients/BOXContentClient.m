@@ -380,7 +380,6 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
-
 + (NSMutableDictionary *)SDKClients
 {
     if (_SDKClients == nil) {
