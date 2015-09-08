@@ -113,8 +113,9 @@
             @synchronized(weakSelf) {
                 if (error) {
                     localRefreshBlock(nil, error);
-                    //TODO: only if not network error
-                    [requestCache removeCacheForKey:cacheKey];
+                    if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                        [requestCache removeCacheForKey:cacheKey];
+                    }
                 } else {
                     [results addObjectsFromArray:items];
                     
