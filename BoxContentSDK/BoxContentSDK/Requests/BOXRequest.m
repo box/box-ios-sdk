@@ -9,6 +9,7 @@
 #import "BOXBookmark.h"
 #import "BOXAPIQueueManager.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXContentSDKErrors.h"
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
 #import "NSString+BOXAdditions.h"
@@ -496,6 +497,18 @@
 - (NSString *)requestCacheKey
 {
     return [[self.urlRequest.URL absoluteString] box_sha1];
+}
+
+- (BOOL)shouldRemoveCachedResponseForError:(NSError *)error
+{
+    if (error != nil && [error.domain isEqualToString:BOXContentSDKErrorDomain] &&
+        (error.code == BOXContentSDKAPIErrorUnauthorized ||
+         error.code == BOXContentSDKAPIErrorForbidden ||
+         error.code == BOXContentSDKAPIErrorNotFound)) {
+            return YES;
+        }
+    
+    return NO;
 }
 
 @end

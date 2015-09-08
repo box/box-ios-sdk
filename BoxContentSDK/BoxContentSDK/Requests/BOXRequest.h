@@ -78,5 +78,6 @@ typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *
 
 - (void)performRequest;
 - (void)cancel;
++ (BOOL)shouldRemoveCachedResponseForError:(NSError *)error;
 
 @end
