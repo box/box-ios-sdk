@@ -499,7 +499,7 @@
     return [[self.urlRequest.URL absoluteString] box_sha1];
 }
 
-- (BOOL)shouldRemoveCachedResponseForError:(NSError *)error
++ (BOOL)shouldRemoveCachedResponseForError:(NSError *)error
 {
     if (error != nil && [error.domain isEqualToString:BOXContentSDKErrorDomain] &&
         (error.code == BOXContentSDKAPIErrorUnauthorized ||
