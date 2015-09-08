@@ -114,8 +114,9 @@
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(nil, error);
-                //TODO: only remove if API error, not connection error.
-                [weakSelf.requestCache removeCacheForKey:weakSelf.requestCacheKey];
+                if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                    [weakSelf.requestCache removeCacheForKey:weakSelf.requestCacheKey];
+                }
             } onMainThread:isMainThread];
         };
     }

@@ -124,8 +124,9 @@
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(nil, 0, NSMakeRange(0, 0), error);
-                // TODO: only if not network error
-                [requestCache removeCacheForKey:self.requestCacheKey];
+                if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                    [requestCache removeCacheForKey:self.requestCacheKey];
+                }
             } onMainThread:isMainThread];
         };
     }
