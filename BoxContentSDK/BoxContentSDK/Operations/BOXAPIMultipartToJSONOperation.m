@@ -485,14 +485,6 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     }
 }
 
-- (void)cancel
-{
-    // Close the output stream before cancelling the operation
-    [self close];
-
-    [super cancel];
-}
-
 #pragma mark - Multipart Stream methods
 
 - (unsigned long long)contentLength
@@ -572,6 +564,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent
 {
+    if (self.isCancelled) {
+        [self close];
+        return;
+    }
+    
     if (streamEvent & NSStreamEventHasSpaceAvailable)
     {
         if (self.inputStream.streamStatus < NSStreamStatusOpen)
@@ -590,6 +587,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 {
     while ([self.outputStream hasSpaceAvailable])
     {
+        if (self.isCancelled) {
+            [self close];
+            return;
+        }
+        
         if (self.outputBuffer.length > 0)
         {
             NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.outputBuffer mutableBytes] maxLength:self.outputBuffer.length];
