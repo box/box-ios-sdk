@@ -29,7 +29,7 @@
  *  @param key        key associated with the request to retrieve.
  *  @param cacheBlock block to be executed when the cached request has been retrieved.
  */
-- (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock;
+- (NSDictionary *)fetchCacheForKey:(NSString *)key;
 
 /**
  *  Removes the cached response for the specified key.

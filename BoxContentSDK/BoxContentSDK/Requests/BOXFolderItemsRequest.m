@@ -81,20 +81,17 @@
 
 - (void)performRequestWithCached:(BOXItemsBlock)cacheBlock refreshed:(BOXItemsBlock)refreshBlock
 {
-    BOXFolderItemsRequest *weakSelf = self;
     NSString *cacheKey = self.requestCacheKey;
     BOXRequestCache *requestCache = self.requestCache;
-    
-    if (cacheBlock) {
-        if (self.requestCache) {
-            void (^localCacheBlock)(NSDictionary *JSONDictionary) = ^void(NSDictionary *JSONDictionary) {
-                NSArray *items = [BOXRequest itemsWithJSON:JSONDictionary];
-                cacheBlock(items, nil);
-            };
-            [requestCache fetchCacheForKey:cacheKey cacheBlock:localCacheBlock];
+    if (cacheBlock && requestCache) {
+        NSDictionary *JSONDictionary = [requestCache fetchCacheForKey:cacheKey];
+        if (JSONDictionary != nil) {
+            NSArray *itemsFromCache = [BOXRequest itemsWithJSON:JSONDictionary];
+            cacheBlock(itemsFromCache, nil);
         }
     }
     
+    BOXFolderItemsRequest *weakSelf = self;
     if (refreshBlock) {
         BOOL isMainThread = [NSThread isMainThread];
         

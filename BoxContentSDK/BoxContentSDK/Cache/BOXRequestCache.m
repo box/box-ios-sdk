@@ -89,20 +89,14 @@
     return _cachePath;
 }
 
-- (void)fetchCacheForKey:(NSString *)key cacheBlock:(void(^)(NSDictionary *dictionary))cacheBlock
+- (NSDictionary *)fetchCacheForKey:(NSString *)key
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    
-    if (cacheBlock) {
-        PINCacheObjectBlock localCacheBlock = ^void(PINCache *cache, NSString *key, id __nullable object) {
-            if ([object isKindOfClass:[NSDictionary class]]) {
-                [BOXDispatchHelper callCompletionBlock:^{
-                    cacheBlock(object);
-                } onMainThread:isMainThread];
-            }
-        };
-        [self.cache objectForKey:key block:localCacheBlock];
+    NSDictionary *dictionary = nil;
+    id object = [self.cache objectForKey:key];
+    if ([object isKindOfClass:[NSDictionary class]]) {
+        dictionary = (NSDictionary *)object;
     }
+    return dictionary;
 }
 
 - (void)removeCacheForKey:(NSString *)key

@@ -65,30 +65,27 @@
 
 - (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
 {
+    if (cacheBlock && self.requestCache) {
+        NSDictionary *JSONDictionary = [self.requestCache fetchCacheForKey:self.requestCacheKey];
+        if (JSONDictionary != nil) {
+            NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
+            NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
+            NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
+            NSArray *itemDictionaries = JSONDictionary[BOXAPICollectionKeyEntries];
+            NSUInteger capacity = itemDictionaries.count;
+            NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
+            
+            for (NSDictionary *itemDictionary in itemDictionaries) {
+                BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
+                [items addObject:item];
+            }
+            cacheBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+        };
+    }
+    
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
     BOXRequestCache *requestCache = self.requestCache;
-    
-    if (cacheBlock) {
-        if (self.requestCache) {
-            [self.requestCache fetchCacheForKey:self.requestCacheKey cacheBlock:^(NSDictionary *JSONDictionary) {
-                NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
-                NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
-                NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
-                NSArray *itemDictionaries = JSONDictionary[BOXAPICollectionKeyEntries];
-                NSUInteger capacity = itemDictionaries.count;
-                NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
-                
-                for (NSDictionary *itemDictionary in itemDictionaries) {
-                    BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
-                    [items addObject:item];
-                }
-                [BOXDispatchHelper callCompletionBlock:^{
-                    cacheBlock(items, totalCount, NSMakeRange(offset, limit), nil);
-                } onMainThread:isMainThread];
-            }];
-        }
-    }
     
     if (refreshBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
