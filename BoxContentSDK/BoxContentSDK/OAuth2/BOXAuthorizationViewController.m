@@ -45,6 +45,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, assign) NSInteger ntlmAuthFailures;
 @property (nonatomic, readwrite, assign) NSInteger authChallengeCycles;
 
+@property (nonatomic, readwrite, strong) UIActivityIndicatorView *activityIndicator;
+
 #define kMaxNTLMAuthFailuresPriorToExit 3
 #define kMaxAuthChallengeCycles 100
 
@@ -85,7 +87,9 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         _connectionData = [[NSMutableData alloc] init];
         _hostsThatCanUseWebViewDirectly = [NSMutableSet set];
         
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)]];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                                 target:self
+                                                                                                 action:@selector(cancel:)]];
         
         NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         _preexistingCookies = [[cookieStorage cookies] copy];
@@ -127,6 +131,16 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
     UIWebView *webView = (UIWebView *)self.view;
     [webView loadRequest:request];
+
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.activityIndicator.center = self.view.center;
 }
 
 #pragma mark - Actions
@@ -156,6 +170,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
         [loginFailureAlertView show];
     }
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)failAuthenticationWithConnection:(NSURLConnection *)connection
@@ -181,6 +196,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         loginFailureAlertView.tag = BOX_SSO_CONNECTION_ERROR_ALERT_TAG;
         [loginFailureAlertView show];
     }
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)clearCookies
@@ -238,6 +254,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         return NO;
     }
 
+    [self.activityIndicator startAnimating];
+
 	// Figure out whether this request is the redirect used at the end of the authentication process
     BOOL requestIsForLoginRedirectScheme = NO;
     BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
@@ -286,6 +304,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
 	BOXLogFunction();
+    [self.activityIndicator startAnimating];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -334,11 +353,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 		// The error is usually in HTML to be shown to the user.
 		[webView loadHTMLString:[error localizedDescription] baseURL:nil];
 	}
+
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 	BOXLogFunction();
+    [self.activityIndicator stopAnimating];
 }
 
 #pragma mark - NSURLConnectionDelegate methods
