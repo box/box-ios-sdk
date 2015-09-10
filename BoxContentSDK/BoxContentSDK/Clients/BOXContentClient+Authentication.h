@@ -72,7 +72,7 @@
  *
  *  @param keychainIdentifierPrefix prefix for keychain entries.
  */
-- (void)setKeychainIdentifierPrefix:(NSString *)keychainIdentifierPrefix;
++ (void)setKeychainIdentifierPrefix:(NSString *)keychainIdentifierPrefix;
 
 /**
  *  By default, the Content SDK stores some information in the keychain to persist the user's session with no access group defined.
@@ -80,6 +80,6 @@
  *
  *  @param keychainAccessGroup keychain access group
  */
-- (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup;
++ (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup;
 
 @end

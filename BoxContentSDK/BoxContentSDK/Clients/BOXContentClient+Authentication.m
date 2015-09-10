@@ -236,12 +236,12 @@
 
 #pragma mark - Keychain
 
-- (void)setKeychainIdentifierPrefix:(NSString *)keychainIdentifierPrefix
++ (void)setKeychainIdentifierPrefix:(NSString *)keychainIdentifierPrefix
 {
     [BOXAbstractSession setKeychainIdentifierPrefix:keychainIdentifierPrefix];
 }
 
-- (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup
++ (void)setKeychainAccessGroup:(NSString *)keychainAccessGroup
 {
     [BOXAbstractSession setKeychainAccessGroup:keychainAccessGroup];
 }
