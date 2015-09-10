@@ -147,6 +147,7 @@
 - (void)logOut
 {
     [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:self.user.modelID];
+    [self.requestCache clearForLogout];
     [self.session revokeCredentials];
     [self.queueManager cancelAllOperations];
 }

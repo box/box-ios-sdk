@@ -79,29 +79,48 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
+    [self performRequestWithCached:nil refreshed:completionBlock];
+}
+
+- (void)performRequestWithCached:(BOXFolderBlock)cacheBlock refreshed:(BOXFolderBlock)refreshBlock
+{
     __weak BOXFolderRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
-    if (completionBlock) {
+    
+    if (cacheBlock) {
+        if (self.requestCache) {
+            void (^localCacheBlock)(NSDictionary *JSONDictionary) = ^(NSDictionary *JSONDictionary) {
+                BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+                cacheBlock(folder, nil);
+            };
+            [weakSelf.requestCache fetchCacheForKey:weakSelf.requestCacheKey cacheBlock:localCacheBlock];
+        }
+    }
+    
+    if (refreshBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
             
             [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
-                                                                                   itemType:folder.type
-                                                                                  ancestors:folder.pathFolders];
-
+                                                                                       itemType:folder.type
+                                                                                      ancestors:folder.pathFolders];
+            
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(folder, nil);
+                refreshBlock(folder, nil);
+                [weakSelf.requestCache updateCacheForKey:weakSelf.requestCacheKey withResponse:JSONDictionary];
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
+                refreshBlock(nil, error);
+                if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                    [weakSelf.requestCache removeCacheForKey:weakSelf.requestCacheKey];
+                }
             } onMainThread:isMainThread];
         };
     }
-
+    
     [self performRequest];
 }
 

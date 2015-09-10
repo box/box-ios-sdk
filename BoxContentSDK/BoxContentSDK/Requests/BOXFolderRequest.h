@@ -18,5 +18,6 @@
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed;
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
+- (void)performRequestWithCached:(BOXFolderBlock)cacheBlock refreshed:(BOXFolderBlock)refreshBlock;
 
 @end

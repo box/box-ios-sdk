@@ -210,7 +210,6 @@
                                  BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                  };
     
-    __weak BOXOAuth2Session *weakSelf = self;
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
@@ -219,20 +218,20 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        weakSelf.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
-        weakSelf.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
-        weakSelf.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
+        self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
-        [weakSelf storeCredentialsToKeychain];
+        [self storeCredentialsToKeychain];
         
         // send success notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:self];
         
         if (block) {
-            block(weakSelf, nil);
+            block(self, nil);
         }
     };
     
@@ -241,15 +240,45 @@
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveRefreshErrorNotification
-                                                            object:weakSelf
+                                                            object:self
                                                           userInfo:errorInfo];
         
         if (block) {
-            block(weakSelf, error);
+            block(self, error);
         }
     };
     
     [self.queueManager enqueueOperation:operation];
+}
+
+#pragma mark - Token revoke
+
+- (void)revokeCredentials
+{
+    // Call this before '[super revokeCredentials]' otherwise we would have already lost our accessToken.
+    [self sendRevokeRequest];
+    
+    [super revokeCredentials];
+}
+
+/**
+ *  Send API request to revoke tokens. We don't care about the response to this request.
+ *  This will be called when we're about to wipe the token from keychain+memory, so we could not do anything
+ *  about successes/failures anyway.
+ */
+- (void)sendRevokeRequest
+{
+    // We don't go through any of our regular queues/operations because those get shut down upon logout.
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/revoke", BOXAPIBaseURL]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    NSData *postData = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&token=%@", self.clientID, self.clientSecret, self.accessToken] dataUsingEncoding:NSUTF8StringEncoding];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+    [connection start];
 }
 
 #pragma mark Token Helpers

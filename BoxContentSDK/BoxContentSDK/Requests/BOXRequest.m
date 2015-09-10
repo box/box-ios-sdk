@@ -9,8 +9,10 @@
 #import "BOXBookmark.h"
 #import "BOXAPIQueueManager.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXContentSDKErrors.h"
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
+#import "NSString+BOXAdditions.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -461,7 +463,7 @@
     return filename;
 }
 
-- (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary
++ (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary
 {
     BOXItem *item = nil;
 
@@ -478,6 +480,35 @@
     }
 
     return item;
+}
+
++ (NSArray *)itemsWithJSON:(NSDictionary *)JSONDictionary
+{
+    NSArray *itemsDicts = [JSONDictionary objectForKey:@"entries"];
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:itemsDicts.count];
+    
+    for (NSDictionary *dict in itemsDicts) {
+        [items addObject:[BOXRequest itemWithJSON:dict]];
+    }
+    
+    return items;
+}
+
+- (NSString *)requestCacheKey
+{
+    return [[self.urlRequest.URL absoluteString] box_sha1];
+}
+
++ (BOOL)shouldRemoveCachedResponseForError:(NSError *)error
+{
+    if (error != nil && [error.domain isEqualToString:BOXContentSDKErrorDomain] &&
+        (error.code == BOXContentSDKAPIErrorUnauthorized ||
+         error.code == BOXContentSDKAPIErrorForbidden ||
+         error.code == BOXContentSDKAPIErrorNotFound)) {
+            return YES;
+        }
+    
+    return NO;
 }
 
 @end

@@ -21,10 +21,12 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
+#import "BOXRequestCache.h"
 
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
+
 + (void)resetInstancesForTesting;
 @end
 
@@ -200,7 +202,7 @@ static BOXContentClient *defaultInstance = nil;
         if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
             self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
             [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
-        }        
+        }
     }
     return self;
 }
@@ -347,9 +349,24 @@ static BOXContentClient *defaultInstance = nil;
 
 #pragma mark - helper methods
 
+- (BOXRequestCache *)requestCache
+{
+    if (self.user.modelID.length == 0) {
+        _requestCache = nil;
+    } else if (_requestCache == nil || ![_requestCache.userID isEqualToString:self.user.modelID]) {
+        _requestCache = [[BOXRequestCache alloc] initWithUserID:self.user.modelID];
+    }
+    return _requestCache;
+}
+
 - (void)prepareRequest:(BOXRequest *)request
 {
     request.queueManager = self.queueManager;
+    
+    if (self.requestCachingEnabled) {
+        request.requestCache = self.requestCache;
+    }
+    
     if ([request conformsToProtocol:@protocol(BOXSharedLinkItemSource)]) {
         BOXRequestWithSharedLinkHeader *requestWithSharedLink = (BOXRequestWithSharedLinkHeader *)request;
         requestWithSharedLink.sharedLinkHeadersHelper = self.sharedLinksHeaderHelper;
@@ -362,7 +379,6 @@ static BOXContentClient *defaultInstance = nil;
         [NSException raise:@"Set client ID and client secret first." format:@"You must set a client ID and client secret first."];
     }
 }
-
 
 + (NSMutableDictionary *)SDKClients
 {
