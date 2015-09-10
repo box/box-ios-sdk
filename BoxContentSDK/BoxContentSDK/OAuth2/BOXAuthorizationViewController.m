@@ -45,7 +45,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, assign) NSInteger ntlmAuthFailures;
 @property (nonatomic, readwrite, assign) NSInteger authChallengeCycles;
 
-@property (nonatomic, readwrite, assign) BOOL hasFinishedLoadingLoginPage;
 @property (nonatomic, readwrite, strong) UIActivityIndicatorView *activityIndicator;
 
 #define kMaxNTLMAuthFailuresPriorToExit 3
@@ -121,15 +120,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 	webView.delegate = self;
 
 	self.view = webView;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    if (!self.hasFinishedLoadingLoginPage) {
-        [self.activityIndicator startAnimating];
-    }
 }
 
 - (void)viewDidLoad
