@@ -202,21 +202,17 @@
 {
     BoxAppToAppStatus status = BoxAppToAppStatusFailed;
 
-    // check if the target app is known to be installed
-    if ([self targetIsAvailable])
-    {
-        // launch the other application with the appropriate information
-        NSURL *actionURL = [BoxAppToAppAnnotationBuilder actionURLWithAction:self.action
-                                                                   urlScheme:self.receiverApplication.urlScheme
-                                                                    metadata:self.fileMetadata.allMetadata
-                                                           sourceApplication:self.currentApplication];
+    // launch the other application with the appropriate information
+    NSURL *actionURL = [BoxAppToAppAnnotationBuilder actionURLWithAction:self.action
+                                                               urlScheme:self.receiverApplication.urlScheme
+                                                                metadata:self.fileMetadata.allMetadata
+                                                       sourceApplication:self.currentApplication];
 
-        if (actionURL != nil)
+    if (actionURL != nil)
+    {
+        if ([[UIApplication sharedApplication] openURL:actionURL])
         {
-            if ([[UIApplication sharedApplication] openURL:actionURL])
-            {
-                status = BoxAppToAppStatusSuccess;
-            }
+            status = BoxAppToAppStatusSuccess;
         }
     }
 
@@ -303,11 +299,6 @@
     NSString *messageUrlScheme = _fileMetadata.allMetadata[BOX_APP_TO_APP_MESSAGE_URL_SCHEME_KEY];
     NSString *authRedirectUrlSchemeOfCurrentApp = scheme;
     return ([messageUrlScheme isEqualToString:authRedirectUrlSchemeOfCurrentApp]);
-}
-
-- (BOOL)targetIsAvailable
-{
-    return [_receiverApplication isInstalled];
 }
 
 - (NSString *)description
