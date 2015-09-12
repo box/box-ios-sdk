@@ -69,14 +69,17 @@
     NSString *authorizationCode = [URLQueryParams valueForKey:BOXAuthURLParameterAuthorizationCodeKey];
     NSString *authorizationError = [URLQueryParams valueForKey:BOXAuthURLParameterErrorCodeKey];
 
-    if ((_nonce || serverNonce) && [serverNonce isEqualToString:_nonce] == NO) {
-        NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain 
-                                                    code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
-                                                userInfo:nil];
-        if (block) {
-            block(nil, error);
+    NSString *authenticationRedirectURIScheme = [[NSURL URLWithString:self.redirectURIString] scheme];
+    if ([[URL scheme] isEqualToString:authenticationRedirectURIScheme]) {
+        if ((_nonce || serverNonce) && [serverNonce isEqualToString:_nonce] == NO) {
+            NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                        code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
+                                                    userInfo:nil];
+            if (block) {
+                block(nil, error);
+            }
+            return;
         }
-        return;
     }
     
     if (authorizationError != nil || authorizationCode == nil) {
