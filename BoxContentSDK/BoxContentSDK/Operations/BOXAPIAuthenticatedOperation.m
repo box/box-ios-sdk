@@ -34,35 +34,7 @@
 
 - (void)prepareAPIRequest
 {
-    // If token has expired (or is very close to expiring), enqueue a token-refresh operation, which will become a dependency for this operation.
-    NSTimeInterval timeUntilTokenExpiry = [self.session.accessTokenExpiration timeIntervalSinceNow];
-    if (timeUntilTokenExpiry < 60)
-    {
-        // Do a token refresh. This will become a dependency for the API operation.
-        [self handleExpiredAccessToken];
-        
-        NSInteger errorCode;
-        if (self.timesReenqueued == 0 && [self canBeReenqueued])
-        {
-            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued;
-            
-            // Make a copy of this operation and enqueue.
-            BOXAPIJSONOperation *operationCopy = [self copy];
-            operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
-            [self.session.queueManager enqueueOperation:operationCopy];
-        }
-        else
-        {
-            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued;
-        }
-        
-        // Short-circuit this operation.
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
-    }
-    else
-    {
-        [self.session addAuthorizationParametersToRequest:self.APIRequest];
-    }
+    [self.session addAuthorizationParametersToRequest:self.APIRequest];
 }
 
 - (BOOL)isAccessTokenExpired
