@@ -145,6 +145,9 @@
             }
         }
     }
+
+    self.success = nil;
+    self.failure = nil;
 }
 
 - (BOOL)canBeReenqueued

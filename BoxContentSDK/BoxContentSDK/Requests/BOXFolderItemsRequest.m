@@ -90,15 +90,11 @@
             cacheBlock(itemsFromCache, nil);
         }
     }
-    
-    BOXFolderItemsRequest *weakSelf = self;
+
     if (refreshBlock) {
         BOOL isMainThread = [NSThread isMainThread];
         
         NSMutableArray *results = [[NSMutableArray alloc] init];
-        
-        // used to work around warning on retain loop on paginatedItemFetch
-        __block BOXItemArrayCompletionBlock recursiveFetch = nil;
         
         BOXItemsBlock localRefreshBlock = ^(NSArray *items, NSError *error){
             [BOXDispatchHelper callCompletionBlock:^{
@@ -106,8 +102,13 @@
             } onMainThread:isMainThread];
         };
         
-        BOXItemArrayCompletionBlock paginatedRefreshItemFetch = ^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
-            @synchronized(weakSelf) {
+        // used to prevent retaining loop on paginatedItemFetch
+        __weak __block BOXItemArrayCompletionBlock recursiveFetch = nil;
+        BOXItemArrayCompletionBlock paginatedRefreshItemFetch = nil;
+
+        // this block is called recursively to fetch pages of items in folder
+        recursiveFetch = paginatedRefreshItemFetch = ^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+            @synchronized(self) {
                 if (error) {
                     localRefreshBlock(nil, error);
                     if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
@@ -123,17 +124,17 @@
                         // There is also different situation
                         // total count is 2222, kMaxRangeStep is 1000, we've covered first 1000 items.
                         // now (2222-1000) == 1222, so we shuold cover next 1000 items
-                        NSUInteger length = (totalCount - rangeEnd) > weakSelf.rangeStep ? weakSelf.rangeStep : (totalCount - rangeEnd);
+                        NSUInteger length = (totalCount - rangeEnd) > self.rangeStep ? self.rangeStep : (totalCount - rangeEnd);
                         NSUInteger offset = rangeEnd;
                         NSUInteger limit = length;
                         NSRange range = NSMakeRange(offset, limit);
                         
                         // if operation got cancelled while preparing for the next request, call cancellation block
-                        if (weakSelf.isCancelled) {
+                        if (self.isCancelled) {
                             error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
                             localRefreshBlock(nil, error);
                         } else {
-                            [weakSelf performPaginatedRequestWithCached:nil
+                            [self performPaginatedRequestWithCached:nil
                                                               refreshed:recursiveFetch
                                                                 inRange:range];
                         }
@@ -145,8 +146,7 @@
                 }
             }
         };
-        
-        recursiveFetch = [paginatedRefreshItemFetch copy];
+
         [self performPaginatedRequestWithCached:nil
                                       refreshed:paginatedRefreshItemFetch
                                         inRange:NSMakeRange(0, [self rangeStep])];
