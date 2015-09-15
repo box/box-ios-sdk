@@ -45,7 +45,6 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     if ([self.itemType isEqualToString:BOXAPIItemTypeFile]) {
         
         BOXFileRequest *request = [self.client fileInfoRequestWithID:self.itemID];
-        
         // We want to get all the fields for our file. Not setting this property to YES will result in the API returning only the default fields.
         request.requestAllFileFields = YES;
         [request performRequestWithCompletion:^(BOXFile *file, NSError *error) {

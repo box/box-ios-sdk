@@ -55,14 +55,13 @@
 - (void)authenticateOAuth2WithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion forceInApp:(BOOL)forceInApp
 {
     if (self.OAuth2Session.refreshToken.length > 0 && self.OAuth2Session.accessToken.length > 0) {
-        __weak BOXContentClient *weakSelf = self;
         BOXUserRequest *userRequest = [self currentUserRequest];
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (error) { //FIXME: This may cause problems offline
                 if (forceInApp) {
-                    [weakSelf showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
+                    [self showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
                 } else {
-                    [weakSelf presentDefaultAuthenticationWithCompletionBlock:completion];
+                    [self presentDefaultAuthenticationWithCompletionBlock:completion];
                 }
             } else  if (completion) {
                 completion(user, nil);

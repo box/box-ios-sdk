@@ -85,13 +85,12 @@
 
 - (void)performRequestWithCompletion:(BOXItemBlock)completionBlock
 {
-    __weak BOXItemSetCollectionsRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collectionAddItemOperation = (BOXAPIJSONOperation *)self.operation;
     
     if (completionBlock) {
         collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXItem *item = [weakSelf itemWithJSON:JSONDictionary];
+            BOXItem *item = [self itemWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(item, nil);
             } onMainThread:isMainThread];

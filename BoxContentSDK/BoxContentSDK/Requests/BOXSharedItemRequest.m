@@ -56,17 +56,16 @@
 - (void)performRequestWithCompletion:(BOXItemBlock)completion
 {
     if (completion) {
-        __weak BOXSharedItemRequest *weakSelf = self;
         BOOL isMainThread = [NSThread isMainThread];
         BOXAPIJSONOperation *sharedItemOperation = (BOXAPIJSONOperation *)self.operation;
         sharedItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXItem *item = [weakSelf itemWithJSON:JSONDictionary];
+            BOXItem *item = [self itemWithJSON:JSONDictionary];
 
             // Store the shared link and password in case we need to do further API call on this item or any of its descendants.
             [self.sharedLinkHeadersHelper storeHeadersForItemWithID:item.modelID
                                                            itemType:item.type
-                                                         sharedLink:weakSelf.sharedLinkURLString
-                                                           password:weakSelf.sharedLinkPassword];
+                                                         sharedLink:self.sharedLinkURLString
+                                                           password:self.sharedLinkPassword];
 
             [BOXDispatchHelper callCompletionBlock:^{
                 completion(item, nil);
