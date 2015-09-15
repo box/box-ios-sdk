@@ -55,13 +55,13 @@
             return;
         }
         
-        if (expiredAccessToken)
+        if (expiredAccessToken.length > 0)
         {
             [self.expiredOAuth2Tokens addObject:expiredAccessToken];
         }
         
         [super performRefreshTokenGrant:expiredAccessToken withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
-            if (error != nil && ![self isInvalidGrantError:error]) {
+            if (expiredAccessToken.length > 0 && error != nil && ![self isInvalidGrantError:error]) {
                 // If there was an error, remove from 'expiredOAuth2Tokens' so that we can try again. For example, if there was a network
                 // error, then we would not want to block ourselves from trying to refresh the tokens again later.
                 // The exception to this is if we get 'invalid_grant' in which case the token is not just expired, but is just dead. In that
