@@ -100,7 +100,7 @@
     
     XCTestExpectation *clientExpectation = [self expectationWithDescription:@"expectation"];
     [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
-        NSInteger expectedErrorCode = BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid;
+        NSInteger expectedErrorCode = BOXContentSDKAppUserErrorAccessTokenInvalid;
         NSString *expectedErrorDomain = @"accessToken and accessTokenExpiration should be non-nil";
         
         XCTAssert(expectedErrorCode == error.code);
