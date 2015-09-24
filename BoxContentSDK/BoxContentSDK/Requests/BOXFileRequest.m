@@ -73,7 +73,6 @@
 
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock
 {
-    __weak BOXFileRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
 
@@ -81,7 +80,7 @@
         fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             
-            [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:file.modelID
+            [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:file.modelID
                                                                                    itemType:file.type
                                                                                   ancestors:file.pathFolders];
 

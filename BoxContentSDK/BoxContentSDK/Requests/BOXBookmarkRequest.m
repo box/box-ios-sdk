@@ -58,7 +58,6 @@
 
 - (void)performRequestWithCompletion:(BOXBookmarkBlock)completionBlock
 {
-    __weak BOXBookmarkRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *bookmarkOperation = (BOXAPIJSONOperation *)self.operation;
 
@@ -66,7 +65,7 @@
         bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
             
-            [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:bookmark.modelID
+            [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:bookmark.modelID
                                                                                    itemType:BOXAPIItemTypeWebLink
                                                                                   ancestors:bookmark.pathFolders];
 

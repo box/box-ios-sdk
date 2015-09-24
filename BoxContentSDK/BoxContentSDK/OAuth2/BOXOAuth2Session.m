@@ -108,7 +108,6 @@
                                  BOXAuthTokenRequestRedirectURIKey : self.redirectURIString,
                                  };
 
-    __weak BOXOAuth2Session *weakSelf = self;
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[self grantTokensURL]
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
@@ -117,33 +116,33 @@
 
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        weakSelf.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
-        weakSelf.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
-        weakSelf.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
+        self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
         BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        userRequest.queueManager = weakSelf.queueManager;
+        userRequest.queueManager = self.queueManager;
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (user && !error)
             {
-                weakSelf.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];
-                [weakSelf storeCredentialsToKeychain];
+                self.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];
+                [self storeCredentialsToKeychain];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidBecomeAuthenticatedNotification object:weakSelf];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidBecomeAuthenticatedNotification object:self];
                 
                 if (block)
                 {
-                    block(weakSelf, nil);
+                    block(self, nil);
                 }
             }
             else
             {
                 if (block)
                 {
-                    block(weakSelf, error);
+                    block(self, error);
                 }
             }
         }];
@@ -154,11 +153,11 @@
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveAuthenticationErrorNotification
-                                                            object:weakSelf
+                                                            object:self
                                                           userInfo:errorInfo];
         
         if (block) {
-            block(weakSelf, error);
+            block(self, error);
         }
     };
 
@@ -213,7 +212,6 @@
                                  BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                  };
     
-    __weak BOXOAuth2Session *weakSelf = self;
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
@@ -222,20 +220,20 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        weakSelf.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
-        weakSelf.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
+        self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
+        self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
         BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
-        weakSelf.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
+        self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
-        [weakSelf storeCredentialsToKeychain];
+        [self storeCredentialsToKeychain];
         
         // send success notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:self];
         
         if (block) {
-            block(weakSelf, nil);
+            block(self, nil);
         }
     };
     
@@ -244,11 +242,11 @@
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveRefreshErrorNotification
-                                                            object:weakSelf
+                                                            object:self
                                                           userInfo:errorInfo];
         
         if (block) {
-            block(weakSelf, error);
+            block(self, error);
         }
     };
     

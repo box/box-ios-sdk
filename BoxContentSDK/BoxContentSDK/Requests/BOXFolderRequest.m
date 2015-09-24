@@ -79,7 +79,6 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
-    __weak BOXFolderRequest *weakSelf = self;
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
@@ -87,7 +86,7 @@
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
             
-            [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
+            [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
                                                                                    itemType:folder.type
                                                                                   ancestors:folder.pathFolders];
 
