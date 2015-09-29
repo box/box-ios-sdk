@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "box-ios-sdk-tests"
-  s.version      = "1.0.9"
+  s.version      = "1.0.10"
   s.summary      = "A common testing interface extracted from Content SDK."
   s.license      = { :type => "Apache 2.0", :file => "LICENSE" }
   s.author       = "Box"
