@@ -1,25 +1,25 @@
 //
-//  BoxAppToAppAnnotationKeys.h
+//  BOXAppToAppAnnotationKeys.h
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#pragma mark - BoxAppToAppApplication
+#pragma mark - BOXAppToAppApplication
 
 #define BOX_APP_TO_APP_APPLICATION_NAME_KEY @"BoxApplicationName"
 #define BOX_APP_TO_APP_APPLICATION_BUNDLE_ID_KEY @"BoxApplicationBundleID"
 #define BOX_APP_TO_APP_APPLICATION_CLIENT_ID_KEY @"BoxApplicationClientID"
 #define BOX_APP_TO_APP_APPLICATION_AUTH_REDIRECT_URI_STRING_KEY @"BoxApplicationAuthRedirectURIString"
 
-#pragma mark - BoxAppToAppMessage keys
+#pragma mark - BOXAppToAppMessage keys
 
 #define BOX_APP_TO_APP_MESSAGE_URL_SCHEME_KEY @"BoxMessageURLScheme"
 #define BOX_APP_TO_APP_MESSAGE_ACTION_KEY @"BoxMessageAction"
 
 #define BOX_APP_TO_APP_MESSAGE_RETURN_URL_SCHEME_KEY @"BoxMessageReturnURLScheme"
 
-#pragma mark - BoxAppToAppMessage actions
+#pragma mark - BOXAppToAppMessage actions
 
 #define BOX_APP_TO_APP_MESSAGE_ACTION_EDIT @"edit"         // ask another app to edit a specified file
 #define BOX_APP_TO_APP_MESSAGE_ACTION_CREATE @"create"     // ask another app to create a file in a specified folder
@@ -32,7 +32,7 @@
 #define BOX_APP_TO_APP_OAUTH2_REDIRECT_URI @"redirect_uri"
 #define BOX_APP_TO_APP_OAUTH2_STATE @"state"
 
-#pragma mark - BoxAppToAppMetadata
+#pragma mark - BOXAppToAppMetadata
 
 #define BOX_APP_TO_APP_METADATA_FILE_NAME_KEY @"BoxLocationFileName"
 #define BOX_APP_TO_APP_METADATA_FOLDER_NAME_KEY @"BoxLocationFolderName"

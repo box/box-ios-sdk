@@ -1,5 +1,5 @@
 //
-//  BoxAppToAppMessage.m
+//  BOXAppToAppMessage.m
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
@@ -7,19 +7,19 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BoxAppToAppMessage.h"
-#import "BoxAppToAppAnnotationKeys.h"
-#import "BoxAppToAppAnnotationBuilder.h"
-#import "BoxAppToAppApplication.h"
+#import "BOXAppToAppMessage.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppApplication.h"
 
-@implementation BoxAppToAppMessage
+@implementation BOXAppToAppMessage
 
-- (instancetype)initWithMessageType:(BoxAppToAppMessageType)messageType
-                 currentApplication:(BoxAppToAppApplication *)currentApplication
-                  senderApplication:(BoxAppToAppApplication *)senderApplication
-                receiverApplication:(BoxAppToAppApplication *)receiverApplication
+- (instancetype)initWithMessageType:(BOXAppToAppMessageType)messageType
+                 currentApplication:(BOXAppToAppApplication *)currentApplication
+                  senderApplication:(BOXAppToAppApplication *)senderApplication
+                receiverApplication:(BOXAppToAppApplication *)receiverApplication
                              action:(NSString *)action
-                       fileMetadata:(BoxAppToAppFileMetadata *)fileMetadata
+                       fileMetadata:(BOXAppToAppFileMetadata *)fileMetadata
                                 url:(NSURL *)url
 {
     if (self = [self init])
@@ -38,13 +38,13 @@
 
 - (instancetype)initWithURL:(NSURL *)url
              infoDictionary:(NSMutableDictionary *)infoDictionary
-         currentApplication:(BoxAppToAppApplication *)currentApplication
+         currentApplication:(BOXAppToAppApplication *)currentApplication
 {
-    BoxAppToAppApplication *senderApplication = [BoxAppToAppApplication appToAppApplicationWithInfo:infoDictionary];
-    NSString *action = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:infoDictionary forKey:BOX_APP_TO_APP_MESSAGE_ACTION_KEY];
-    BoxAppToAppFileMetadata *fileMetadata = [BoxAppToAppFileMetadata appToAppFileMetadataWithInfo:infoDictionary];
+    BOXAppToAppApplication *senderApplication = [BOXAppToAppApplication appToAppApplicationWithInfo:infoDictionary];
+    NSString *action = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:infoDictionary forKey:BOX_APP_TO_APP_MESSAGE_ACTION_KEY];
+    BOXAppToAppFileMetadata *fileMetadata = [BOXAppToAppFileMetadata appToAppFileMetadataWithInfo:infoDictionary];
 
-    return [self initWithMessageType:BoxAppToAppMessageTypeIncoming
+    return [self initWithMessageType:BOXAppToAppMessageTypeIncoming
                   currentApplication:currentApplication
                    senderApplication:senderApplication
                  receiverApplication:nil
@@ -53,9 +53,9 @@
                                  url:url];
 }
 
-+ (BoxAppToAppMessage *)appToAppMessageWithOpenURL:(NSURL *)openURL
++ (BOXAppToAppMessage *)appToAppMessageWithOpenURL:(NSURL *)openURL
                                  sourceApplication:(NSString *)sourceApplication
-                                currentApplication:(BoxAppToAppApplication *)application
+                                currentApplication:(BOXAppToAppApplication *)application
                                         annotation:(id)annotation
 {
     NSMutableDictionary *info = [self infoDictionaryFromOpenURL:openURL
@@ -65,9 +65,9 @@
     return [[self alloc] initWithURL:openURL infoDictionary:info currentApplication:application];
 }
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
-                                                    metadata:(BoxAppToAppFileMetadata *)metadata
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
+                                                    metadata:(BOXAppToAppFileMetadata *)metadata
 {
     return [self appToAppMessageWithTargetApplication:targetApplication
                                    currentApplication:currentApplication
@@ -75,12 +75,12 @@
                                              metadata:metadata];
 }
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                       action:(NSString *)action
-                                                    metadata:(BoxAppToAppFileMetadata *)metadata
+                                                    metadata:(BOXAppToAppFileMetadata *)metadata
 {
-    return [[self alloc] initWithMessageType:BoxAppToAppMessageTypeOutgoing
+    return [[self alloc] initWithMessageType:BOXAppToAppMessageTypeOutgoing
                           currentApplication:currentApplication
                            senderApplication:nil
                          receiverApplication:targetApplication
@@ -89,8 +89,8 @@
                                          url:nil];
 }
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                     fileName:(NSString *)fileName
 {
     return [self appToAppMessageWithTargetApplication:targetApplication
@@ -99,8 +99,8 @@
                                              fileName:fileName];
 }
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                       action:(NSString *)action
                                                     fileName:(NSString *)fileName
 {
@@ -110,19 +110,19 @@
     return [self appToAppMessageWithTargetApplication:targetApplication
                                    currentApplication:currentApplication
                                                action:action
-                                             metadata:[BoxAppToAppFileMetadata appToAppFileMetadataWithInfo:metadata]];
+                                             metadata:[BOXAppToAppFileMetadata appToAppFileMetadataWithInfo:metadata]];
 }
 
-+ (BoxAppToAppMessage *)boxAppAuthorizationMessageWithState:(NSString *)state
-                                         currentApplication:(BoxAppToAppApplication *)app
++ (BOXAppToAppMessage *)boxAppAuthorizationMessageWithState:(NSString *)state
+                                         currentApplication:(BOXAppToAppApplication *)app
 {
-    return [self appToAppAuthorizationMessageWithApplication:[BoxAppToAppApplication BoxApplication]
+    return [self appToAppAuthorizationMessageWithApplication:[BOXAppToAppApplication BoxApplication]
                                           currentApplication:app
                                                        state:state];
 }
 
-+ (BoxAppToAppMessage *)appToAppAuthorizationMessageWithApplication:(BoxAppToAppApplication *)authApp
-                                                 currentApplication:(BoxAppToAppApplication *)currentApp
++ (BOXAppToAppMessage *)appToAppAuthorizationMessageWithApplication:(BOXAppToAppApplication *)authApp
+                                                 currentApplication:(BOXAppToAppApplication *)currentApp
                                                               state:(NSString *)state
 {
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -136,8 +136,8 @@
         [info setObject:state forKey:BOX_APP_TO_APP_OAUTH2_STATE];
     }
 
-    BoxAppToAppFileMetadata *metadata = [BoxAppToAppFileMetadata appToAppFileMetadataWithInfo:info];
-    BoxAppToAppMessage *message = [BoxAppToAppMessage appToAppMessageWithTargetApplication:authApp
+    BOXAppToAppFileMetadata *metadata = [BOXAppToAppFileMetadata appToAppFileMetadataWithInfo:info];
+    BOXAppToAppMessage *message = [BOXAppToAppMessage appToAppMessageWithTargetApplication:authApp
                                                                         currentApplication:currentApp
                                                                                     action:BOX_APP_TO_APP_MESSAGE_ACTION_LOGIN
                                                                                   metadata:metadata];
@@ -198,12 +198,12 @@
 
 #pragma mark -
 
-- (BoxAppToAppStatus)execute
+- (BOXAppToAppStatus)execute
 {
-    BoxAppToAppStatus status = BoxAppToAppStatusFailed;
+    BOXAppToAppStatus status = BOXAppToAppStatusFailed;
 
     // launch the other application with the appropriate information
-    NSURL *actionURL = [BoxAppToAppAnnotationBuilder actionURLWithAction:self.action
+    NSURL *actionURL = [BOXAppToAppAnnotationBuilder actionURLWithAction:self.action
                                                                urlScheme:self.receiverApplication.urlScheme
                                                                 metadata:self.fileMetadata.allMetadata
                                                        sourceApplication:self.currentApplication];
@@ -212,7 +212,7 @@
     {
         if ([[UIApplication sharedApplication] openURL:actionURL])
         {
-            status = BoxAppToAppStatusSuccess;
+            status = BOXAppToAppStatusSuccess;
         }
     }
 
@@ -221,11 +221,11 @@
 
 #pragma mark - Action methods
 
-- (BOOL)isValidBoxAppToAppRequest
+- (BOOL)isValidBOXAppToAppRequest
 {
     BOOL result = NO;
 
-    // the minimal requirement for a BoxAppToAppRequest is that it has an action associated with it
+    // the minimal requirement for a BOXAppToAppRequest is that it has an action associated with it
     if ([self.action length] > 0)
     {
         result = YES;
@@ -303,9 +303,9 @@
 
 - (NSString *)description
 {
-    NSString *description = @"BoxAppToAppMessage: {\n";
+    NSString *description = @"BOXAppToAppMessage: {\n";
     description = [description stringByAppendingFormat:@"Message type: %@\n",
-                   self.messageType == BoxAppToAppMessageTypeIncoming ? @"Incoming" : @"Outgoing"];
+                   self.messageType == BOXAppToAppMessageTypeIncoming ? @"Incoming" : @"Outgoing"];
     description = [description stringByAppendingFormat:@"Sender app: %@\n", self.senderApplication];
     description = [description stringByAppendingFormat:@"Receiver app: %@\n", self.receiverApplication];
     description = [description stringByAppendingFormat:@"Action: %@\n", self.action];

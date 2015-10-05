@@ -314,15 +314,15 @@
 		C5D91CAA1A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */; };
 		E11035F61A200E6B00B46F6D /* BOXHashHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E11035F41A200E6B00B46F6D /* BOXHashHelper.h */; };
 		E11035F71A200E6B00B46F6D /* BOXHashHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E11035F51A200E6B00B46F6D /* BOXHashHelper.m */; };
-		E11BED491ADC050000A9216F /* BoxAppToAppAnnotationBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED3E1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E11BED4A1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED3F1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.m */; };
-		E11BED4C1ADC050000A9216F /* BoxAppToAppAnnotationKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED401ADC050000A9216F /* BoxAppToAppAnnotationKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E11BED4D1ADC050000A9216F /* BoxAppToAppApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED411ADC050000A9216F /* BoxAppToAppApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E11BED4E1ADC050000A9216F /* BoxAppToAppApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED421ADC050000A9216F /* BoxAppToAppApplication.m */; };
-		E11BED501ADC050000A9216F /* BoxAppToAppFileMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED431ADC050000A9216F /* BoxAppToAppFileMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E11BED511ADC050000A9216F /* BoxAppToAppFileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED441ADC050000A9216F /* BoxAppToAppFileMetadata.m */; };
-		E11BED561ADC050000A9216F /* BoxAppToAppMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED471ADC050000A9216F /* BoxAppToAppMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E11BED571ADC050000A9216F /* BoxAppToAppMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED481ADC050000A9216F /* BoxAppToAppMessage.m */; };
+		E11BED491ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED3E1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E11BED4A1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED3F1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m */; };
+		E11BED4C1ADC050000A9216F /* BOXAppToAppAnnotationKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED401ADC050000A9216F /* BOXAppToAppAnnotationKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E11BED4D1ADC050000A9216F /* BOXAppToAppApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED411ADC050000A9216F /* BOXAppToAppApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E11BED4E1ADC050000A9216F /* BOXAppToAppApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED421ADC050000A9216F /* BOXAppToAppApplication.m */; };
+		E11BED501ADC050000A9216F /* BOXAppToAppFileMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED431ADC050000A9216F /* BOXAppToAppFileMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E11BED511ADC050000A9216F /* BOXAppToAppFileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED441ADC050000A9216F /* BOXAppToAppFileMetadata.m */; };
+		E11BED561ADC050000A9216F /* BOXAppToAppMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED471ADC050000A9216F /* BOXAppToAppMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E11BED571ADC050000A9216F /* BOXAppToAppMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED481ADC050000A9216F /* BOXAppToAppMessage.m */; };
 		E155959A1A2D22C00070ED1E /* BOXBookmarkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E15595981A2D22C00070ED1E /* BOXBookmarkRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E155959B1A2D22C00070ED1E /* BOXBookmarkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E15595991A2D22C00070ED1E /* BOXBookmarkRequest.m */; };
 		E15595A01A2D41700070ED1E /* BOXFolderRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959E1A2D416F0070ED1E /* BOXFolderRequestTests.m */; };
@@ -764,15 +764,15 @@
 		E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E11035F41A200E6B00B46F6D /* BOXHashHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXHashHelper.h; sourceTree = "<group>"; };
 		E11035F51A200E6B00B46F6D /* BOXHashHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXHashHelper.m; sourceTree = "<group>"; };
-		E11BED3E1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAppToAppAnnotationBuilder.h; sourceTree = "<group>"; };
-		E11BED3F1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAppToAppAnnotationBuilder.m; sourceTree = "<group>"; };
-		E11BED401ADC050000A9216F /* BoxAppToAppAnnotationKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAppToAppAnnotationKeys.h; sourceTree = "<group>"; };
-		E11BED411ADC050000A9216F /* BoxAppToAppApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAppToAppApplication.h; sourceTree = "<group>"; };
-		E11BED421ADC050000A9216F /* BoxAppToAppApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAppToAppApplication.m; sourceTree = "<group>"; };
-		E11BED431ADC050000A9216F /* BoxAppToAppFileMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAppToAppFileMetadata.h; sourceTree = "<group>"; };
-		E11BED441ADC050000A9216F /* BoxAppToAppFileMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAppToAppFileMetadata.m; sourceTree = "<group>"; };
-		E11BED471ADC050000A9216F /* BoxAppToAppMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAppToAppMessage.h; sourceTree = "<group>"; };
-		E11BED481ADC050000A9216F /* BoxAppToAppMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAppToAppMessage.m; sourceTree = "<group>"; };
+		E11BED3E1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAppToAppAnnotationBuilder.h; sourceTree = "<group>"; };
+		E11BED3F1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppToAppAnnotationBuilder.m; sourceTree = "<group>"; };
+		E11BED401ADC050000A9216F /* BOXAppToAppAnnotationKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAppToAppAnnotationKeys.h; sourceTree = "<group>"; };
+		E11BED411ADC050000A9216F /* BOXAppToAppApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAppToAppApplication.h; sourceTree = "<group>"; };
+		E11BED421ADC050000A9216F /* BOXAppToAppApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppToAppApplication.m; sourceTree = "<group>"; };
+		E11BED431ADC050000A9216F /* BOXAppToAppFileMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAppToAppFileMetadata.h; sourceTree = "<group>"; };
+		E11BED441ADC050000A9216F /* BOXAppToAppFileMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppToAppFileMetadata.m; sourceTree = "<group>"; };
+		E11BED471ADC050000A9216F /* BOXAppToAppMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAppToAppMessage.h; sourceTree = "<group>"; };
+		E11BED481ADC050000A9216F /* BOXAppToAppMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppToAppMessage.m; sourceTree = "<group>"; };
 		E15595981A2D22C00070ED1E /* BOXBookmarkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXBookmarkRequest.h; sourceTree = "<group>"; };
 		E15595991A2D22C00070ED1E /* BOXBookmarkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXBookmarkRequest.m; sourceTree = "<group>"; };
 		E155959E1A2D416F0070ED1E /* BOXFolderRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderRequestTests.m; sourceTree = "<group>"; };
@@ -1341,15 +1341,15 @@
 		E11BED3D1ADC050000A9216F /* AppToApp */ = {
 			isa = PBXGroup;
 			children = (
-				E11BED3E1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.h */,
-				E11BED3F1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.m */,
-				E11BED401ADC050000A9216F /* BoxAppToAppAnnotationKeys.h */,
-				E11BED411ADC050000A9216F /* BoxAppToAppApplication.h */,
-				E11BED421ADC050000A9216F /* BoxAppToAppApplication.m */,
-				E11BED431ADC050000A9216F /* BoxAppToAppFileMetadata.h */,
-				E11BED441ADC050000A9216F /* BoxAppToAppFileMetadata.m */,
-				E11BED471ADC050000A9216F /* BoxAppToAppMessage.h */,
-				E11BED481ADC050000A9216F /* BoxAppToAppMessage.m */,
+				E11BED3E1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h */,
+				E11BED3F1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m */,
+				E11BED401ADC050000A9216F /* BOXAppToAppAnnotationKeys.h */,
+				E11BED411ADC050000A9216F /* BOXAppToAppApplication.h */,
+				E11BED421ADC050000A9216F /* BOXAppToAppApplication.m */,
+				E11BED431ADC050000A9216F /* BOXAppToAppFileMetadata.h */,
+				E11BED441ADC050000A9216F /* BOXAppToAppFileMetadata.m */,
+				E11BED471ADC050000A9216F /* BOXAppToAppMessage.h */,
+				E11BED481ADC050000A9216F /* BOXAppToAppMessage.m */,
 			);
 			path = AppToApp;
 			sourceTree = "<group>";
@@ -1606,10 +1606,10 @@
 				0E5E14651A40F82800B205F6 /* BOXCollaborationRequest.h in Headers */,
 				700C39371ACB455E00466CA9 /* BOXFolderItemsRequest.h in Headers */,
 				E1CAD4DB1A16C85C006ECAFD /* BOXFolderDeleteRequest.h in Headers */,
-				E11BED4D1ADC050000A9216F /* BoxAppToAppApplication.h in Headers */,
+				E11BED4D1ADC050000A9216F /* BOXAppToAppApplication.h in Headers */,
 				E1DD60331A3A8DBD00C4BD41 /* BOXBookmarkShareRequest.h in Headers */,
 				8676E0CD1B2E939A00AC2677 /* BOXMetadataUpdateRequest.h in Headers */,
-				E11BED4C1ADC050000A9216F /* BoxAppToAppAnnotationKeys.h in Headers */,
+				E11BED4C1ADC050000A9216F /* BOXAppToAppAnnotationKeys.h in Headers */,
 				C5B9B8201A39A76800B8EB1A /* BOXContentClient+Comment.h in Headers */,
 				E1DD603D1A3A8F1B00C4BD41 /* BOXFileShareRequest.h in Headers */,
 				E18896EF1A3BD144007F7330 /* BOXContentClient_Private.h in Headers */,
@@ -1628,7 +1628,7 @@
 				150C27A01A69DBFC00099850 /* BOXContentClient+File.h in Headers */,
 				E4FAD9C4172CE2C50052AD11 /* BOXISO8601DateFormatter.h in Headers */,
 				E18896EA1A3BBA30007F7330 /* BOXRequestWithSharedLinkHeader.h in Headers */,
-				E11BED561ADC050000A9216F /* BoxAppToAppMessage.h in Headers */,
+				E11BED561ADC050000A9216F /* BOXAppToAppMessage.h in Headers */,
 				E1CAD4DD1A16C85C006ECAFD /* BOXRequest_Private.h in Headers */,
 				8676E0C51B2D7EAC00AC2677 /* BOXRequest+Metadata.h in Headers */,
 				E1DD603F1A3A8F1B00C4BD41 /* BOXFileUnshareRequest.h in Headers */,
@@ -1661,7 +1661,7 @@
 				E155959A1A2D22C00070ED1E /* BOXBookmarkRequest.h in Headers */,
 				3D64E4281ABA453100659466 /* NSError+BOXAdditions.h in Headers */,
 				E4FAD9E8172CE2C50052AD11 /* BOXSerialAPIQueueManager.h in Headers */,
-				E11BED491ADC050000A9216F /* BoxAppToAppAnnotationBuilder.h in Headers */,
+				E11BED491ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h in Headers */,
 				E1CAD4E81A16F262006ECAFD /* BOXUserRequest.h in Headers */,
 				0E16F1541A4A042F00BDDA21 /* BOXTrashedItemArrayRequest.h in Headers */,
 				C5972A981A408CAE00225CBA /* BOXEvent.h in Headers */,
@@ -1726,7 +1726,7 @@
 				159BFA371A43B7E800D10476 /* BOXFileUploadNewVersionRequest.h in Headers */,
 				C5C0861C1A42F584004DB48A /* BOXContentClient+Event.h in Headers */,
 				8676E0D91B2F575E00AC2677 /* BOXMetadataTemplateField.h in Headers */,
-				E11BED501ADC050000A9216F /* BoxAppToAppFileMetadata.h in Headers */,
+				E11BED501ADC050000A9216F /* BOXAppToAppFileMetadata.h in Headers */,
 				8676E0D11B2F3FA400AC2677 /* BOXMetadataUpdateTask.h in Headers */,
 				C5972A7C1A3F52F600225CBA /* BOXCollectionFavoritesRequest.h in Headers */,
 				86C514A31B2BB3850078565C /* BOXMetadataRequest.h in Headers */,
@@ -1998,7 +1998,7 @@
 				0E5E146A1A41032200B205F6 /* BOXCollaborationCreateRequest.m in Sources */,
 				15958E3A1A14338A00AEBCEE /* BOXItemArrayRequest.m in Sources */,
 				15958E221A14338A00AEBCEE /* BOXFileThumbnailRequest.m in Sources */,
-				E11BED4A1ADC050000A9216F /* BoxAppToAppAnnotationBuilder.m in Sources */,
+				E11BED4A1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m in Sources */,
 				E1DD60401A3A8F1B00C4BD41 /* BOXFileUnshareRequest.m in Sources */,
 				C5C0861D1A42F584004DB48A /* BOXContentClient+Event.m in Sources */,
 				0E16F1021A42390700BDDA21 /* BOXFolderCollaborationsRequest.m in Sources */,
@@ -2029,10 +2029,10 @@
 				E4FAD9DD172CE2C50052AD11 /* BOXAPIDataOperation.m in Sources */,
 				E4FAD9DF172CE2C50052AD11 /* BOXAPIJSONOperation.m in Sources */,
 				15280E581A37E70B008D4F5D /* BOXItem.m in Sources */,
-				E11BED571ADC050000A9216F /* BoxAppToAppMessage.m in Sources */,
+				E11BED571ADC050000A9216F /* BOXAppToAppMessage.m in Sources */,
 				150C27991A69C2DE00099850 /* BOXContentClient+SharedLink.m in Sources */,
 				0ED881AD1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m in Sources */,
-				E11BED4E1ADC050000A9216F /* BoxAppToAppApplication.m in Sources */,
+				E11BED4E1ADC050000A9216F /* BOXAppToAppApplication.m in Sources */,
 				15958E521A14338A00AEBCEE /* BOXTrashedFileRestoreRequest.m in Sources */,
 				E11035F71A200E6B00B46F6D /* BOXHashHelper.m in Sources */,
 				E4FAD9E1172CE2C50052AD11 /* BOXAPIMultipartToJSONOperation.m in Sources */,
@@ -2083,7 +2083,7 @@
 				0E5E14591A40CE8C00B205F6 /* BOXCollaboration.m in Sources */,
 				C53EC2A31A38A6090007C8A7 /* BOXCommentUpdateRequest.m in Sources */,
 				15280E3A1A37E70B008D4F5D /* BOXModel.m in Sources */,
-				E11BED511ADC050000A9216F /* BoxAppToAppFileMetadata.m in Sources */,
+				E11BED511ADC050000A9216F /* BOXAppToAppFileMetadata.m in Sources */,
 				15958DF01A1432AB00AEBCEE /* BOXContentClient.m in Sources */,
 				8676E0CE1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m in Sources */,
 				15958E251A14338A00AEBCEE /* BOXFileUpdateRequest.m in Sources */,

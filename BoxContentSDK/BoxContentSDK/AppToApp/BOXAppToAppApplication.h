@@ -1,5 +1,5 @@
 //
-//  BoxAppToAppApplication.h
+//  BOXAppToAppApplication.h
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
@@ -9,7 +9,7 @@
 
 // Represents any app that supports Box app-to-app communication. This includes
 // the Box app itself, as well as all partner apps.
-@interface BoxAppToAppApplication : NSObject <NSCoding>
+@interface BOXAppToAppApplication : NSObject <NSCoding>
 
 @property (nonatomic, readonly, strong) NSString *name;
 @property (nonatomic, readonly, strong) NSString *bundleID;
@@ -17,12 +17,12 @@
 @property (nonatomic, readonly, strong) NSString *urlScheme;
 @property (nonatomic, readonly, strong) NSString *authRedirectURIString;
 
-+ (BoxAppToAppApplication *)appToAppApplicationWithInfo:(NSMutableDictionary *)info;
++ (BOXAppToAppApplication *)appToAppApplicationWithInfo:(NSMutableDictionary *)info;
 
 /**
- * You will probably use this function once, in order to create a BoxAppToAppApplication
+ * You will probably use this function once, in order to create a BOXAppToAppApplication
  * representing your own app, which you will then assign to
- * `BoxAppToAppManager.currentApplication`.
+ * `BOXAppToAppManager.currentApplication`.
  *
  * @param name The name of your application. For example, @"My App".
  * @param bundleID The bundle ID of your application. For example, @"com.example.my-bundle-id".
@@ -33,13 +33,13 @@
  *   receiving an authcode from the Box app. For example, @"myauthscheme://auth".
  *
  */
-+ (BoxAppToAppApplication *)appToAppApplicationWithName:(NSString *)name
++ (BOXAppToAppApplication *)appToAppApplicationWithName:(NSString *)name
                                                bundleID:(NSString *)bundleID
                                                clientID:(NSString *)clientID
                                               URLScheme:(NSString *)URLScheme
                                   authRedirectURIString:(NSString *)authRedirectURIString;
 
-+ (BoxAppToAppApplication *)BoxApplication;
++ (BOXAppToAppApplication *)BoxApplication;
 
 - (BOOL)isInstalled;
 

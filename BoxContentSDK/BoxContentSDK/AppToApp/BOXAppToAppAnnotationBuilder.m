@@ -1,31 +1,31 @@
 //
-//  BoxAppToAppAnnotationBuilder.m
+//  BOXAppToAppAnnotationBuilder.m
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BoxAppToAppAnnotationBuilder.h"
-#import "BoxAppToAppAnnotationKeys.h"
-#import "BoxAppToAppApplication.h"
+#import "BOXAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppApplication.h"
 
 #import "BOXLog.h"
 #import "NSString+BoxURLHelper.h"
 
 
-@interface BoxAppToAppAnnotationBuilder()
+@interface BOXAppToAppAnnotationBuilder()
 
 + (NSString *)stringFromObject:(id)object;
 + (NSString *)URLReadyStringForObject:(id)object;
 
 @end
 
-@implementation BoxAppToAppAnnotationBuilder
+@implementation BOXAppToAppAnnotationBuilder
 
 + (NSURL *)actionURLWithAction:(NSString *)action
                      urlScheme:(NSString *)urlScheme
                       metadata:(NSDictionary *)metadata
-             sourceApplication:(BoxAppToAppApplication *)app
+             sourceApplication:(BOXAppToAppApplication *)app
 {
     NSURL *actionURL = nil;
 
@@ -57,7 +57,7 @@
 
 + (NSDictionary *)annotationDictionaryWithAction:(NSString *)action
                                         metadata:(NSDictionary *)metadata
-                               sourceApplication:(BoxAppToAppApplication *)app
+                               sourceApplication:(BOXAppToAppApplication *)app
 {
     // start by copying the metadata
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithDictionary:metadata];
@@ -70,17 +70,17 @@
     result[BOX_APP_TO_APP_MESSAGE_ACTION_KEY] = action;
 
     // now, insert the return information
-    BoxAppToAppApplication *currentApplication = app;
+    BOXAppToAppApplication *currentApplication = app;
 
     // If you hit this assertion, it means you need to make the following call before
     // any app-to-app messages are processed:
     //
-    //     BoxAppToAppManager.currentApplication =
-    //         [BoxAppToAppApplication appToAppApplicationWithName:@"My App"
+    //     BOXAppToAppManager.currentApplication =
+    //         [BOXAppToAppApplication appToAppApplicationWithName:@"My App"
     //                                                    bundleID:@"com.example.my_bundle_id"
     //                                                   URLScheme:@"myapp"
     //                                       authRedirectURIString:@"myapp-auth://auth"];
-    BOXAssert(currentApplication != nil, @"BoxAppToAppManager.currentApplication has not been initialized");
+    BOXAssert(currentApplication != nil, @"BOXAppToAppManager.currentApplication has not been initialized");
 
     // note that [setValue:forKey:] is nil-safe, unlike "result[key] = value"
     [result setValue:currentApplication.name forKey:BOX_APP_TO_APP_APPLICATION_NAME_KEY];

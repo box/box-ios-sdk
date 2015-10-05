@@ -1,13 +1,13 @@
 //
-//  BoxAppToAppMetadata.m
+//  BOXAppToAppMetadata.m
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BoxAppToAppFileMetadata.h"
-#import "BoxAppToAppAnnotationKeys.h"
-#import "BoxAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppFileMetadata.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppAnnotationBuilder.h"
 
 void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
 {
@@ -15,13 +15,13 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
     [dict setValue:value forKey:key];
 }
 
-@interface BoxAppToAppFileMetadata()
+@interface BOXAppToAppFileMetadata()
 
 @property (nonatomic, readwrite, strong) NSDictionary *allMetadata;
 
 @end
 
-@implementation BoxAppToAppFileMetadata
+@implementation BOXAppToAppFileMetadata
 
 - (id)initWithInfo:(NSDictionary *)info
 {
@@ -33,20 +33,20 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
     return self;
 }
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithInfo:(NSDictionary *)info
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithInfo:(NSDictionary *)info
 {
-    return [[BoxAppToAppFileMetadata alloc] initWithInfo:info];
+    return [[BOXAppToAppFileMetadata alloc] initWithInfo:info];
 }
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BoxAppToAppFileMetadata *)originalMetadata changingFileNameTo:(NSString *)newFileName
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BOXAppToAppFileMetadata *)originalMetadata changingFileNameTo:(NSString *)newFileName
 {
     // by default, remove the fileID when you rename it, as it will upload as an entirely new file due to the changed name
     return [self appToAppFileMetadataWithMetadata:originalMetadata changingFileNameTo:newFileName fileID:nil];
 }
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BoxAppToAppFileMetadata *)originalMetadata changingFileNameTo:(NSString *)newFileName fileID:(NSString *)fileID
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BOXAppToAppFileMetadata *)originalMetadata changingFileNameTo:(NSString *)newFileName fileID:(NSString *)fileID
 {
-    BoxAppToAppFileMetadata *result = originalMetadata;
+    BOXAppToAppFileMetadata *result = originalMetadata;
     if ([newFileName isEqualToString:originalMetadata.fileName] == NO || fileID != nil)
     {
         NSMutableDictionary *updatedDictionary = [NSMutableDictionary dictionaryWithDictionary:originalMetadata.allMetadata];
@@ -56,13 +56,13 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
                      [newFileName pathExtension]);
         nilSafePut(updatedDictionary, BOX_APP_TO_APP_METADATA_FILE_ID_KEY, fileID);
 
-        result = [BoxAppToAppFileMetadata appToAppFileMetadataWithInfo:updatedDictionary];
+        result = [BOXAppToAppFileMetadata appToAppFileMetadataWithInfo:updatedDictionary];
     }
 
     return result;
 }
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
                                                 fileExtension:(NSString *)fileExtension
                                                    folderName:(NSString *)folderName
                                                      mimeType:(NSString *)mimeType
@@ -85,7 +85,7 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
     return [self appToAppFileMetadataWithInfo:info];
 }
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
                                                 fileExtension:(NSString *)fileExtension
                                                    folderPath:(NSString *)folderPath
                                                      mimeType:(NSString *)mimeType
@@ -97,7 +97,7 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
     NSString *folderName = [folderPath lastPathComponent];
     NSString *folderID = [folderPathByID lastPathComponent];
 
-    BoxAppToAppFileMetadata *initialMetadata = [self appToAppFileMetadataWithFileName:fileName
+    BOXAppToAppFileMetadata *initialMetadata = [self appToAppFileMetadataWithFileName:fileName
                                                                         fileExtension:fileExtension
                                                                            folderName:folderName
                                                                              mimeType:mimeType
@@ -114,61 +114,61 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
 
 - (NSString *)fileName
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FILE_NAME_KEY]];
 }
 
 - (NSString *)folderPathStringByName
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FOLDER_PATH_KEY]];
 }
 
 - (NSString *)folderName
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FOLDER_NAME_KEY]];
 }
 
 - (NSString *)fileExtension
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FILE_EXTENSION_KEY]];
 }
 
 - (NSString *)fileMimeType
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FILE_MIME_TYPE_KEY]];
 }
 
 - (NSString *)fileID
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FILE_ID_KEY]];
 }
 
 - (NSString *)folderID
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FOLDER_ID_KEY]];
 }
 
 - (NSString *)folderPathStringByID
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_FOLDER_PATH_BY_ID_KEY]];
 }
 
 - (NSString *)username
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_USERNAME_KEY]];
 }
 
 - (NSString *)userID
 {
-    return [BoxAppToAppAnnotationBuilder stringFromAnnotationString:
+    return [BOXAppToAppAnnotationBuilder stringFromAnnotationString:
             self.allMetadata[BOX_APP_TO_APP_METADATA_USER_ID_KEY]];
 }
 

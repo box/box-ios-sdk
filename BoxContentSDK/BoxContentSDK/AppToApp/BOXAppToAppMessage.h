@@ -1,26 +1,26 @@
 //
-//  BoxAppToAppMessage.h
+//  BOXAppToAppMessage.h
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "BoxAppToAppFileMetadata.h"
+#import "BOXAppToAppFileMetadata.h"
 
-@class BoxAppToAppApplication;
+@class BOXAppToAppApplication;
 
-typedef NS_ENUM(NSInteger, BoxAppToAppMessageType)
+typedef NS_ENUM(NSInteger, BOXAppToAppMessageType)
 {
-    BoxAppToAppMessageTypeIncoming,
-    BoxAppToAppMessageTypeOutgoing,
+    BOXAppToAppMessageTypeIncoming,
+    BOXAppToAppMessageTypeOutgoing,
 };
 
-typedef NS_ENUM(NSUInteger, BoxAppToAppStatus)
+typedef NS_ENUM(NSUInteger, BOXAppToAppStatus)
 {
-    BoxAppToAppStatusUnknown,
-    BoxAppToAppStatusSuccess,
-    BoxAppToAppStatusFailed,
+    BOXAppToAppStatusUnknown,
+    BOXAppToAppStatusSuccess,
+    BOXAppToAppStatusFailed,
 };
 
 /**
@@ -30,83 +30,83 @@ typedef NS_ENUM(NSUInteger, BoxAppToAppStatus)
  * For example, a command might be "edit the file with ID 1234", or "create a new file
  * of type .docx in folder 5678".
  */
- @interface BoxAppToAppMessage : NSObject <NSCoding>
+ @interface BOXAppToAppMessage : NSObject <NSCoding>
 
 /**
  * Indicates whether was an incoming message from another app, or an outgoing message
  * to another app.
  */
-@property (nonatomic, readonly) BoxAppToAppMessageType messageType;
+@property (nonatomic, readonly) BOXAppToAppMessageType messageType;
 
 /**
  * This describes the current application.
  * For incoming messages, it is the application that is receiving the message.
  * For outgoing messages, it is the application that is sending the message.
  */
-@property (nonatomic, readonly, strong) BoxAppToAppApplication *currentApplication;
+@property (nonatomic, readonly, strong) BOXAppToAppApplication *currentApplication;
 
 /**
  * This describes the application that sent the message to the current application.
  * Only valid for incoming messages.
  */
-@property (nonatomic, readonly, strong) BoxAppToAppApplication *senderApplication;
+@property (nonatomic, readonly, strong) BOXAppToAppApplication *senderApplication;
 
 /**
  * This describes the application that will receive, or did receive, the message.
  * Only valid for outgoing messages.
  */
-@property (nonatomic, readonly, strong) BoxAppToAppApplication *receiverApplication;
+@property (nonatomic, readonly, strong) BOXAppToAppApplication *receiverApplication;
 
 /** Generic information about the action */
 @property (nonatomic, readonly, strong) NSString *action; // e.g. create, edit, etc.
 
-/** The URL which was used to construct this BoxAppToAppMessage, or nil if there is no such URL */
+/** The URL which was used to construct this BOXAppToAppMessage, or nil if there is no such URL */
 @property (nonatomic, readonly, strong) NSURL *url;
 
 /**
  * For file-related messages (e.g. edit file, create file, etc.), this contains the
  * file id, parent folder id, etc.
  */
-@property (nonatomic, readwrite, strong) BoxAppToAppFileMetadata *fileMetadata;
+@property (nonatomic, readwrite, strong) BOXAppToAppFileMetadata *fileMetadata;
 
 /**
  * Creates an app-to-app message from the NSDictionary that was passed to
  * -[UIApplicationDelegate application:openURL:sourceApplication:annotation:].
  */
-+ (BoxAppToAppMessage *)appToAppMessageWithOpenURL:(NSURL *)openURL
++ (BOXAppToAppMessage *)appToAppMessageWithOpenURL:(NSURL *)openURL
                                  sourceApplication:(NSString *)sourceApplication
-                                currentApplication:(BoxAppToAppApplication *)currentApplication
+                                currentApplication:(BOXAppToAppApplication *)currentApplication
                                         annotation:(id)annotation;
 
 /** Use this method to generate a new API Info object for the purposes of sending a request to a specific application */
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
-                                                    metadata:(BoxAppToAppFileMetadata *)metadata; // assume edit action
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
+                                                    metadata:(BOXAppToAppFileMetadata *)metadata; // assume edit action
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                       action:(NSString *)action
-                                                    metadata:(BoxAppToAppFileMetadata *)metadata;
+                                                    metadata:(BOXAppToAppFileMetadata *)metadata;
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                     fileName:(NSString *)fileName; // assume edit action
 
-+ (BoxAppToAppMessage *)appToAppMessageWithTargetApplication:(BoxAppToAppApplication *)targetApplication
-                                          currentApplication:(BoxAppToAppApplication *)currentApplication
++ (BOXAppToAppMessage *)appToAppMessageWithTargetApplication:(BOXAppToAppApplication *)targetApplication
+                                          currentApplication:(BOXAppToAppApplication *)currentApplication
                                                       action:(NSString *)action
                                                     fileName:(NSString *)fileName;
 
-+ (BoxAppToAppMessage *)boxAppAuthorizationMessageWithState:(NSString *)state
-                                         currentApplication:(BoxAppToAppApplication *)app;
++ (BOXAppToAppMessage *)boxAppAuthorizationMessageWithState:(NSString *)state
+                                         currentApplication:(BOXAppToAppApplication *)app;
 
 /**
  * Perform a transaction
  */
-- (BoxAppToAppStatus)execute;
+- (BOXAppToAppStatus)execute;
 
 /** An app asking another app to do something (any of the following) */
-- (BOOL)isValidBoxAppToAppRequest;
+- (BOOL)isValidBOXAppToAppRequest;
 
 /** An app (e.g. the Box app) asking another app (e.g. from a partner) to edit a Box file */
 - (BOOL)isEditFileRequest;

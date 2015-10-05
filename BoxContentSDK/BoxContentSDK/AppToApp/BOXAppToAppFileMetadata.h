@@ -1,5 +1,5 @@
 //
-//  BoxAppToAppMetadata.h
+//  BOXAppToAppMetadata.h
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BoxAppToAppFileMetadata : NSObject <NSCoding>
+@interface BOXAppToAppFileMetadata : NSObject <NSCoding>
 
 @property (nonatomic, readonly, strong) NSString *fileName;               // e.g. "Cute kitty.jpg"
 @property (nonatomic, readonly, strong) NSString *folderName;             // e.g. "Kitten pictures"
@@ -22,14 +22,14 @@
 @property (nonatomic, readonly, strong) NSString *userID;                 // e.g. "124944941"
 @property (nonatomic, readonly, strong) NSDictionary *allMetadata;        // all the items in this list
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithInfo:(NSDictionary *)info;
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BoxAppToAppFileMetadata *)originalMetadata
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithInfo:(NSDictionary *)info;
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BOXAppToAppFileMetadata *)originalMetadata
                                            changingFileNameTo:(NSString *)newFileName;
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BoxAppToAppFileMetadata *)originalMetadata
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithMetadata:(BOXAppToAppFileMetadata *)originalMetadata
                                            changingFileNameTo:(NSString *)newFileName
                                                        fileID:(NSString *)fileID;
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
                                                 fileExtension:(NSString *)fileExtension
                                                    folderName:(NSString *)folderName
                                                      mimeType:(NSString *)mimeType
@@ -38,7 +38,7 @@
                                                      username:(NSString *)username
                                                        userID:(NSString *)userID;
 
-+ (BoxAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
++ (BOXAppToAppFileMetadata *)appToAppFileMetadataWithFileName:(NSString *)fileName
                                                 fileExtension:(NSString *)fileExtension
                                                    folderPath:(NSString *)folderPath
                                                      mimeType:(NSString *)mimeType

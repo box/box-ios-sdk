@@ -14,8 +14,8 @@
 #import "BOXAuthorizationViewController.h"
 #import "BOXUser.h"
 #import "BOXSharedLinkHeadersHelper.h"
-#import "BoxAppToAppApplication.h"
-#import "BoxAppToAppMessage.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppMessage.h"
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
 
@@ -125,7 +125,7 @@
     BOXContentClient *client = [[self SDKClients] objectForKey:BOXOAuth2AuthDelegationNewClientKey];
     BOOL authInProgress = (client != nil);
 
-    BoxAppToAppMessage *message = [BoxAppToAppMessage appToAppMessageWithOpenURL:authenticationURL sourceApplication:nil currentApplication:nil annotation:nil];
+    BOXAppToAppMessage *message = [BOXAppToAppMessage appToAppMessageWithOpenURL:authenticationURL sourceApplication:nil currentApplication:nil annotation:nil];
     BOOL URLIsAuthenticationCompletion = [message isAuthorizationForRedirectURLScheme:[client authenticationRedirectURIScheme]];
 
     return (authInProgress && URLIsAuthenticationCompletion);
@@ -177,19 +177,19 @@
 {
     BOOL didPerformAppToAppAuthentication = NO;
 
-    if (self.appToAppBoxAuthenticationEnabled && [[BoxAppToAppApplication BoxApplication] isInstalled]) {
+    if (self.appToAppBoxAuthenticationEnabled && [[BOXAppToAppApplication BoxApplication] isInstalled]) {
         NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
         NSString *authURLScheme = [self authenticationRedirectURIScheme];
-        BoxAppToAppApplication *currentApplication = [BoxAppToAppApplication appToAppApplicationWithName:[bundleID pathExtension]
+        BOXAppToAppApplication *currentApplication = [BOXAppToAppApplication appToAppApplicationWithName:[bundleID pathExtension]
                                                                                                 bundleID:bundleID
                                                                                                 clientID:self.OAuth2Session.clientID
                                                                                                URLScheme:authURLScheme
                                                                                    authRedirectURIString:self.OAuth2Session.redirectURIString];
-        BoxAppToAppMessage *authMessage = [BoxAppToAppMessage boxAppAuthorizationMessageWithState:self.OAuth2Session.nonce
+        BOXAppToAppMessage *authMessage = [BOXAppToAppMessage boxAppAuthorizationMessageWithState:self.OAuth2Session.nonce
                                                                                currentApplication:currentApplication];
-        BoxAppToAppStatus messageDidSend = [authMessage execute];
+        BOXAppToAppStatus messageDidSend = [authMessage execute];
 
-        didPerformAppToAppAuthentication = (messageDidSend == BoxAppToAppStatusSuccess);
+        didPerformAppToAppAuthentication = (messageDidSend == BOXAppToAppStatusSuccess);
     }
 
     if (didPerformAppToAppAuthentication) {

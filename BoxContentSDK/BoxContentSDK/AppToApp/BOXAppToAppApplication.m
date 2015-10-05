@@ -1,16 +1,16 @@
 //
-//  BoxAppToAppApplication.m
+//  BOXAppToAppApplication.m
 //  BoxSDK
 //
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BoxAppToAppApplication.h"
-#import "BoxAppToAppAnnotationKeys.h"
-#import "BoxAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppAnnotationBuilder.h"
 #import <UIKit/UIKit.h>
 
-@interface BoxAppToAppApplication()
+@interface BOXAppToAppApplication()
 
 @property (nonatomic, readwrite, strong) NSString *name;
 @property (nonatomic, readwrite, strong) NSString *bundleID;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation BoxAppToAppApplication
+@implementation BOXAppToAppApplication
 
 - (id)initWithName:(NSString *)name
           bundleID:(NSString *)bundleID
@@ -39,35 +39,35 @@ authRedirectURIString:(NSString *)authRedirectURIString;
     return self;
 }
 
-+ (BoxAppToAppApplication *)appToAppApplicationWithInfo:(NSMutableDictionary *)info
++ (BOXAppToAppApplication *)appToAppApplicationWithInfo:(NSMutableDictionary *)info
 {
-    NSString *name = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_NAME_KEY];
-    NSString *bundleID = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_BUNDLE_ID_KEY];
-    NSString *clientID = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_CLIENT_ID_KEY];
-    NSString *urlScheme = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_MESSAGE_RETURN_URL_SCHEME_KEY];
-    NSString *authRedirectURIString = [BoxAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_AUTH_REDIRECT_URI_STRING_KEY];
+    NSString *name = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_NAME_KEY];
+    NSString *bundleID = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_BUNDLE_ID_KEY];
+    NSString *clientID = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_CLIENT_ID_KEY];
+    NSString *urlScheme = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_MESSAGE_RETURN_URL_SCHEME_KEY];
+    NSString *authRedirectURIString = [BOXAppToAppAnnotationBuilder stringByDestructivelyParsingInfo:info forKey:BOX_APP_TO_APP_APPLICATION_AUTH_REDIRECT_URI_STRING_KEY];
 
-    return [[BoxAppToAppApplication alloc] initWithName:name
+    return [[BOXAppToAppApplication alloc] initWithName:name
                                                bundleID:bundleID
                                                clientID:clientID
                                               urlScheme:urlScheme
                                   authRedirectURIString:authRedirectURIString];
 }
 
-+ (BoxAppToAppApplication *)appToAppApplicationWithName:(NSString *)name
++ (BOXAppToAppApplication *)appToAppApplicationWithName:(NSString *)name
                                                bundleID:(NSString *)bundleID
                                                clientID:(NSString *)clientID
                                               URLScheme:(NSString *)URLScheme
                                   authRedirectURIString:(NSString *)authRedirectURIString
 {
-    return [[BoxAppToAppApplication alloc] initWithName:name
+    return [[BOXAppToAppApplication alloc] initWithName:name
                                                bundleID:bundleID
                                                clientID:clientID
                                               urlScheme:URLScheme
                                   authRedirectURIString:authRedirectURIString];
 }
 
-+ (BoxAppToAppApplication *)BoxApplication
++ (BOXAppToAppApplication *)BoxApplication
 {
     return [self appToAppApplicationWithName:@"Box"
                                     bundleID:@"net.box.BoxNet"
@@ -91,7 +91,7 @@ authRedirectURIString:(NSString *)authRedirectURIString;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"BoxAppToAppApplication %@ with bundleID %@", self.name, self.bundleID];
+    return [NSString stringWithFormat:@"BOXAppToAppApplication %@ with bundleID %@", self.name, self.bundleID];
 }
 
 #pragma mark - NSCoding
