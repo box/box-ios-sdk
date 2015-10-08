@@ -60,10 +60,34 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
+    [self performRequestWithCached:nil refreshed:completionBlock];
+}
+
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock && self.requestCache) {
+        NSDictionary *JSONDictionary = [self.requestCache fetchCacheForKey:self.requestCacheKey];
+        if (JSONDictionary != nil) {
+            NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
+            NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
+            NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
+            NSArray *itemDictionaries = JSONDictionary[BOXAPICollectionKeyEntries];
+            NSUInteger capacity = itemDictionaries.count;
+            NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
+            
+            for (NSDictionary *itemDictionary in itemDictionaries) {
+                BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
+                [items addObject:item];
+            }
+            cacheBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+        };
+    }
+    
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
-    if (completionBlock) {
+    BOXRequestCache *requestCache = self.requestCache;
+    
+    if (refreshBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
             NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
@@ -73,7 +97,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                BOXItem *item = [self itemWithJSON:itemDictionary];
+                BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
                 
                 NSArray *pathFolders = nil;
@@ -90,12 +114,16 @@
                                                                                       ancestors:pathFolders];
             }
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+                refreshBlock(items, totalCount, NSMakeRange(offset, limit), nil);
+                [requestCache updateCacheForKey:self.requestCacheKey withResponse:JSONDictionary];
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, 0, NSMakeRange(0, 0), error);
+                refreshBlock(nil, 0, NSMakeRange(0, 0), error);
+                if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                    [requestCache removeCacheForKey:self.requestCacheKey];
+                }
             } onMainThread:isMainThread];
         };
     }

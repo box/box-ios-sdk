@@ -253,6 +253,36 @@
     [self.queueManager enqueueOperation:operation];
 }
 
+#pragma mark - Token revoke
+
+- (void)revokeCredentials
+{
+    // Call this before '[super revokeCredentials]' otherwise we would have already lost our accessToken.
+    [self sendRevokeRequest];
+    
+    [super revokeCredentials];
+}
+
+/**
+ *  Send API request to revoke tokens. We don't care about the response to this request.
+ *  This will be called when we're about to wipe the token from keychain+memory, so we could not do anything
+ *  about successes/failures anyway.
+ */
+- (void)sendRevokeRequest
+{
+    // We don't go through any of our regular queues/operations because those get shut down upon logout.
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/revoke", BOXAPIBaseURL]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    NSData *postData = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&token=%@", self.clientID, self.clientSecret, self.accessToken] dataUsingEncoding:NSUTF8StringEncoding];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+    [connection start];
+}
+
 #pragma mark Token Helpers
 
 - (void)reassignTokensFromSession:(BOXOAuth2Session *)session

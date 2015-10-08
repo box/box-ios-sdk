@@ -9,6 +9,7 @@
 @class BOXUser;
 @class BOXUserMini;
 @class BOXAPIQueueManager;
+@class BOXRequestCache;
 @class BOXRequest;
 @class BOXSharedLinkHeadersHelper;
 @protocol BOXAPIAccessTokenDelegate;
@@ -49,6 +50,12 @@
  * because of the associated configuration that has to be done.
  */
 @property (nonatomic, readonly, assign) BOOL appToAppBoxAuthenticationEnabled;
+
+/**
+ * This property reflects whether the client should cache API request responses. 
+ * Its default is NO.
+ */
+@property (nonatomic, readwrite, assign) BOOL requestCachingEnabled;
 
 /**
  * This property is used to temporarily hold the authentication completion block in the case of

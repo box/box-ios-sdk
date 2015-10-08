@@ -4,17 +4,15 @@
 //
 
 #import "BOXFolderItemsRequest.h"
-
 #import "BOXRequest_Private.h"
 #import "BOXFolderPaginatedItemsRequest.h"
-
-#import "BOXAPIJSONOperation.h"
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXItem.h"
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXFolderPaginatedItemsRequest_Private.h"
+#import "BOXContentSDKErrors.h"
 
 @interface BOXFolderItemsRequest ()
 @property (nonatomic) BOOL isCancelled;
@@ -25,9 +23,7 @@
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     if (self = [super init]) {
-        self.folderID = folderID;
-        self.limit = self.rangeStep;        
-        self.offset = 0;
+        _folderID = folderID;
     }
     
     return self;
@@ -80,63 +76,113 @@
 
 - (void)performRequestWithCompletion:(BOXItemsBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-    
-    // used to work around warning on retain loop on paginatedItemFetch
-    __block BOXItemArrayCompletionBlock recursiveFetch = nil;
-    
-    BOXItemsBlock localCompletionBlock = ^(NSArray *items, NSError *error){
-        [BOXDispatchHelper callCompletionBlock:^{
-            completionBlock(items, error);
-        } onMainThread:isMainThread];
-    };
-    
-    BOXItemArrayCompletionBlock paginatedItemFetch = ^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error){
-        @synchronized(self) {
-            if (error) {
-                localCompletionBlock(nil, error);
-            } else {
-                [results addObjectsFromArray:items];
-                
-                NSUInteger rangeEnd = NSMaxRange(range);
-                if (rangeEnd < totalCount) {
-                    // if total count is 1200, kMaxRangeStep is 1000, we've covered first 1000 items.
-                    // now, (1200-1000) == 200, so we shuold cover next 200 items instead of 1000.
-                    // There is also different situation
-                    // total count is 2222, kMaxRangeStep is 1000, we've covered first 1000 items.
-                    // now (2222-1000) == 1222, so we shuold cover next 1000 items
-                    NSUInteger length = (totalCount - rangeEnd) > self.rangeStep ? self.rangeStep : (totalCount - rangeEnd);
-                    self.offset = rangeEnd;
-                    self.limit = length;
-                                        
-                    // reset operation, so that boxrequest recreates new operation for next batch
-                    self.operation = nil;
-                    
-                    // if operation got cancelled while preparing for the next request, call cancellation block
-                    if (self.isCancelled) {
-                        error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
-                        localCompletionBlock(nil, error);
-                    } else {
-                        [self performPaginatedRequestWithCompletion:recursiveFetch];
-                    }
-                } else {
-                    NSArray *dedupedResults = [BOXFolderItemsRequest dedupeItemsByBoxID:results];
-                    localCompletionBlock(dedupedResults, nil);
-                }
-            }
-        }
-    };
-    
-    recursiveFetch = [paginatedItemFetch copy];
-    [self performPaginatedRequestWithCompletion:paginatedItemFetch];
+    [self performRequestWithCached:nil refreshed:completionBlock];
 }
 
-- (void)performPaginatedRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
+- (void)performRequestWithCached:(BOXItemsBlock)cacheBlock refreshed:(BOXItemsBlock)refreshBlock
 {
-    // just call paginated request
-    [super performRequestWithCompletion:completionBlock];
+    NSString *cacheKey = self.requestCacheKey;
+    BOXRequestCache *requestCache = self.requestCache;
+    if (cacheBlock && requestCache) {
+        NSDictionary *JSONDictionary = [requestCache fetchCacheForKey:cacheKey];
+        if (JSONDictionary != nil) {
+            NSArray *itemsFromCache = [BOXRequest itemsWithJSON:JSONDictionary];
+            cacheBlock(itemsFromCache, nil);
+        }
+    }
+
+    if (refreshBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        
+        NSMutableArray *results = [[NSMutableArray alloc] init];
+        
+        BOXItemsBlock localRefreshBlock = ^(NSArray *items, NSError *error){
+            [BOXDispatchHelper callCompletionBlock:^{
+                refreshBlock(items, error);
+            } onMainThread:isMainThread];
+        };
+        
+        // used to prevent retaining loop on paginatedItemFetch
+        __weak __block BOXItemArrayCompletionBlock recursiveFetch = nil;
+        BOXItemArrayCompletionBlock paginatedRefreshItemFetch = nil;
+
+        // this block is called recursively to fetch pages of items in folder
+        recursiveFetch = paginatedRefreshItemFetch = ^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+            @synchronized(self) {
+                if (error) {
+                    localRefreshBlock(nil, error);
+                    if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
+                        [requestCache removeCacheForKey:cacheKey];
+                    }
+                } else {
+                    [results addObjectsFromArray:items];
+                    
+                    NSUInteger rangeEnd = NSMaxRange(range);
+                    if (rangeEnd < totalCount) {
+                        // if total count is 1200, kMaxRangeStep is 1000, we've covered first 1000 items.
+                        // now, (1200-1000) == 200, so we shuold cover next 200 items instead of 1000.
+                        // There is also different situation
+                        // total count is 2222, kMaxRangeStep is 1000, we've covered first 1000 items.
+                        // now (2222-1000) == 1222, so we shuold cover next 1000 items
+                        NSUInteger length = (totalCount - rangeEnd) > self.rangeStep ? self.rangeStep : (totalCount - rangeEnd);
+                        NSUInteger offset = rangeEnd;
+                        NSUInteger limit = length;
+                        NSRange range = NSMakeRange(offset, limit);
+                        
+                        // if operation got cancelled while preparing for the next request, call cancellation block
+                        if (self.isCancelled) {
+                            error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
+                            localRefreshBlock(nil, error);
+                        } else {
+                            [self performPaginatedRequestWithCached:nil
+                                                              refreshed:recursiveFetch
+                                                                inRange:range];
+                        }
+                    } else {
+                        NSArray *dedupedResults = [BOXFolderItemsRequest dedupeItemsByBoxID:results];
+                        localRefreshBlock(dedupedResults, nil);
+                        [requestCache updateCacheForKey:cacheKey withResponse:[BOXFolderItemsRequest JSONDictionaryFromItems:dedupedResults]];
+                    }
+                }
+            }
+        };
+
+        [self performPaginatedRequestWithCached:nil
+                                      refreshed:paginatedRefreshItemFetch
+                                        inRange:NSMakeRange(0, [self rangeStep])];
+    }
+}
+
+- (void)performPaginatedRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock
+                                refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+                                  inRange:(NSRange)range
+{
+    BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    paginatedRequest.queueManager = self.queueManager;
+    paginatedRequest.requestCache = self.requestCache;
+    paginatedRequest.requestAllItemFields = self.requestAllItemFields;
+    [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
+}
+
+- (NSString *)requestCacheKey
+{
+    // We don't have a real URL request so we need out own custom key
+    return [NSString stringWithFormat:@"BOXFolderItemsRequest_%@", self.folderID];
+}
+
+#pragma mark - Private Helpers
+
++ (NSDictionary *)JSONDictionaryFromItems:(NSArray *)items
+{
+    NSMutableArray *itemsDicts = [NSMutableArray arrayWithCapacity:items.count];
+    
+    for (BOXItem *item in items) {
+        [itemsDicts addObject:item.JSONData];
+    }
+    
+    NSDictionary *JSONDictionary = @{@"entries" : [itemsDicts copy]};
+    
+    return JSONDictionary;
 }
 
 
