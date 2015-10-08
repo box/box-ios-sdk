@@ -42,18 +42,19 @@
 {
     if (![self isCancelled]) {
         @synchronized(self.session) {
-            __weak BOXAPIAppUsersAuthOperation *weakSelf = self;
             [self.session.queueManager.delegate fetchAccessTokenWithCompletion:^(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error) {
                 if (error == nil && accessToken && accessTokenExpiration) {
-                    weakSelf.accessToken = accessToken;
-                    weakSelf.accessTokenExpiration = accessTokenExpiration;
+                    self.accessToken = accessToken;
+                    self.accessTokenExpiration = accessTokenExpiration;
                 } else if (!error) {
-                    self.error = [[NSError alloc] initWithDomain:@"accessToken and accessTokenExpiration should be non-nil" code:BOXContentSDKAppUserErrorAccessTokenInvalid | BOXContentSDKAppUserErrorAccessTokenExpirationInvalid userInfo:nil];
+                    self.error = [[NSError alloc] initWithDomain:@"accessToken and accessTokenExpiration should be non-nil"
+                                                            code:BOXContentSDKAppUserErrorAccessTokenInvalid
+                                                        userInfo:nil];
                 } else {
                     self.error = error;
                 }
                 
-                [weakSelf finish];
+                [self finish];
             }];
         }
     }
@@ -76,7 +77,8 @@
         }
     }
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:BOXAuthOperationDidCompleteNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXAuthOperationDidCompleteNotification
+                                                        object:self];
 }
 
 - (void)processResponseData:(NSData *)data
