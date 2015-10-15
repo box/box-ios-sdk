@@ -39,6 +39,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, strong) BOXContentClient *SDKClient;
 @property (nonatomic, readwrite, copy) BOXAuthCompletionBlock completionBlock;
 @property (nonatomic, readwrite, copy) BOXAuthCancelBlock cancelBlock;
+@property (nonatomic, readwrite, strong) NSURL *authorizeURL;
 @property (nonatomic, readwrite, strong) NSString *redirectURI;
 @property (nonatomic, readwrite, strong) NSDictionary *headers;
 
