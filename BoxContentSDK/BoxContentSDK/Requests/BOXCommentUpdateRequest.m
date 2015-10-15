@@ -59,12 +59,26 @@
 
     if (completionBlock) {
         commentAddOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            BOXComment *comment = [[BOXComment alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheUpdateCommentRequest:withComment:error:)]) {
+                [self.cacheClient cacheUpdateCommentRequest:self
+                                                withComment:comment
+                                                      error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
-                BOXComment *comment = [[BOXComment alloc] initWithJSON:JSONDictionary];
                 completionBlock(comment ,nil);
             } onMainThread:isMainThread];
         };
         commentAddOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheUpdateCommentRequest:withComment:error:)]) {
+                [self.cacheClient cacheUpdateCommentRequest:self
+                                                withComment:nil
+                                                      error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];

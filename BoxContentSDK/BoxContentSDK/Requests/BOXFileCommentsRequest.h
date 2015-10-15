@@ -13,5 +13,6 @@
 
 - (instancetype)initWithFileID:(NSString *)fileID;
 - (void)performRequestWithCompletion:(BOXObjectsArrayCompletionBlock)completionBlock;
-
+- (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXObjectsArrayCompletionBlock)refreshBlock;
 @end

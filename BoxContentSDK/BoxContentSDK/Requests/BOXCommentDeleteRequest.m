@@ -51,11 +51,21 @@
 
     if (completionBlock) {
         commentDeleteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
+                [self.cacheClient cacheDeleteCommentRequest:self error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
         };
         commentDeleteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
+                [self.cacheClient cacheDeleteCommentRequest:self error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];

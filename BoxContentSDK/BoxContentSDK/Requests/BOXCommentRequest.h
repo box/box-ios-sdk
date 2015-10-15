@@ -13,5 +13,7 @@
 
 - (instancetype)initWithCommentID:(NSString *)commentID;
 - (void)performRequestWithCompletion:(BOXCommentBlock)completionBlock;
+- (void)performRequestWithCached:(BOXCommentBlock)cacheBlock
+                       refreshed:(BOXCommentBlock)refreshBlock;
 
 @end
