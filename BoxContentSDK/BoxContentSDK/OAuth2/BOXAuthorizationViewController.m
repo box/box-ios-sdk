@@ -25,7 +25,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 @interface BOXAuthorizationViewController () <UIWebViewDelegate, NSURLConnectionDataDelegate, UIAlertViewDelegate>
 
-@property (nonatomic, readwrite, strong) NSString *redirectURIString;
 @property (nonatomic, readwrite, strong) NSURLConnection *connection;
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
 @property (nonatomic, readwrite, strong) NSMutableData *connectionData;
@@ -40,6 +39,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, strong) BOXContentClient *SDKClient;
 @property (nonatomic, readwrite, copy) BOXAuthCompletionBlock completionBlock;
 @property (nonatomic, readwrite, copy) BOXAuthCancelBlock cancelBlock;
+@property (nonatomic, readwrite, strong) NSString *redirectURI;
+@property (nonatomic, readwrite, strong) NSDictionary *headers;
 
 @property (nonatomic, readwrite, assign) BOOL isNTLMAuth;
 @property (nonatomic, readwrite, assign) NSInteger ntlmAuthFailures;
@@ -50,6 +51,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 #define kMaxNTLMAuthFailuresPriorToExit 3
 #define kMaxAuthChallengeCycles 100
 
+- (void)loadAuthorizationURL;
 - (void)cancel:(id)sender;
 - (void)completeServerTrustAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge shouldTrust:(BOOL)trust;
 - (void)failAuthenticationWithConnection:(NSURLConnection *)connection
@@ -64,14 +66,23 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 @implementation BOXAuthorizationViewController
 
+@synthesize authorizeURL = _authorizeURL;
+
 - (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock
 {
-    return [self initWithSDKClient:SDKClient headers:nil completionBlock:completionBlock cancelBlock:cancelBlock];
+    return [self initWithSDKClient:SDKClient
+                      authorizeURL:nil
+                       redirectURI:nil
+                           headers:nil
+                   completionBlock:completionBlock
+                       cancelBlock:cancelBlock];
 }
 
 - (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
+                     authorizeURL:(NSURL *)authorizeURL
+                      redirectURI:(NSString *)redirectURI
                           headers:(NSDictionary *)headers
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock
@@ -81,6 +92,9 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         _SDKClient = SDKClient;
         _completionBlock = completionBlock;
         _cancelBlock = cancelBlock;
+        _authorizeURL = authorizeURL;
+        _redirectURI = redirectURI;
+        _headers = headers;
         
         _ntlmAuthFailures = 0;
         _authChallengeCycles = 0;
@@ -126,21 +140,43 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
 	[super viewDidLoad];
 
-	BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:OAuth2Session.authorizeURL];
-
-    UIWebView *webView = (UIWebView *)self.view;
-    [webView loadRequest:request];
-
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityIndicator.hidesWhenStopped = YES;
-    [self.view addSubview:self.activityIndicator];
+    [self loadAuthorizationURL];
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     self.activityIndicator.center = self.view.center;
+}
+
+#pragma mark - property getters and setters
+
+- (NSURL *)authorizeURL
+{
+    if (_authorizeURL == nil) {
+        _authorizeURL = ((BOXOAuth2Session *)self.SDKClient.session).authorizeURL;
+    }
+
+    return _authorizeURL;
+}
+
+- (void)setAuthorizeURL:(NSURL *)authorizeURL
+{
+    if ([authorizeURL isEqual:self.authorizeURL] == NO) {
+        _authorizeURL = authorizeURL;
+        if (self.isViewLoaded) {
+            [self loadAuthorizationURL];
+        }
+    }
+}
+
+- (NSString *)redirectURI
+{
+    if (_redirectURI == nil) {
+        _redirectURI = ((BOXOAuth2Session *)self.SDKClient.session).redirectURIString;
+    }
+
+    return _redirectURI;
 }
 
 #pragma mark - Actions
@@ -153,6 +189,23 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 }
 
 #pragma mark - Private helper methods
+
+- (void)loadAuthorizationURL
+{
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.authorizeURL];
+    if (self.headers != nil) {
+        for (NSString *key in self.headers) {
+            NSString *value = [self.headers valueForKey:key];
+            [request addValue:value forHTTPHeaderField:key];
+        }
+    }
+    UIWebView *webView = (UIWebView *)self.view;
+    [webView loadRequest:[request copy]];
+}
 
 - (void)completeServerTrustAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge shouldTrust:(BOOL)trust
 {
@@ -258,14 +311,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 	// Figure out whether this request is the redirect used at the end of the authentication process
     BOOL requestIsForLoginRedirectScheme = NO;
-    BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
-	if ([OAuth2Session.redirectURIString length] > 0) {
-		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:OAuth2Session.redirectURIString] scheme]];
+	if ([self.redirectURI length] > 0) {
+		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.redirectURI] scheme]];
 	}
     BOOL requestIsForLoginRedirection = (requestIsForLoginRedirectScheme &&
-                                         [[[request URL] absoluteString] hasPrefix:OAuth2Session.redirectURIString]);
+                                         [[[request URL] absoluteString] hasPrefix:self.redirectURI]);
 
 	if (requestIsForLoginRedirection) {
+        BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
         __weak BOXAuthorizationViewController *me = self;
         [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
