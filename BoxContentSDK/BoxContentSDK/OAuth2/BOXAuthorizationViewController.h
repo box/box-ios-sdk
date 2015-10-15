@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BOXContentClient.h"
-#import "BOXUser.h"
+
+@class BOXContentClient;
+@class BOXUser;
 
 /**
  * BOXAuthorizationViewController is a UIViewController that displays a UIWebview
@@ -30,14 +31,36 @@
  */
 @interface BOXAuthorizationViewController : UIViewController
 
+/**
+ * The authroziation URL to be used.
+ */
+@property (nonatomic, readwrite, strong) NSURL *authorizeURL;
+
 /** @name Initializers */
 
 /**
  * Designated initializer.
- * @param completionBlock You will likely want to dismiss the authorizationViewController. If successful, a BoxUser object will be returned, otherwise an NSError will be returned.
- * @param completionBlock You will likely want to dismiss the authorizationViewController through this block.
+ * @param SDKClient         The SDKClient to use to authenticate a new account session.
+ * @param completionBlock   You will likely want to dismiss the authorizationViewController. If successful, a BoxUser object will be returned, otherwise an NSError will be returned.
+ * @param completionBlock   You will likely want to dismiss the authorizationViewController through this block.
  */
 - (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
+                  completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
+                      cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock;
+
+/**
+ * Advanced initializer.
+ * @param SDKClient         The SDKClient to use to authenticate a new account session.
+ * @param authorizeURL      The authorization URL to be used. Optional, a default value is used when nil.
+ * @param redirectURI       The redirect URI to be used, this has to match the redirect URI. Optional, a default value is used when nil.
+ * @param headers           Custom headers to use in the authorization request. Optional, defaults to nil.
+ * @param completionBlock   You will likely want to dismiss the authorizationViewController. If successful, a BoxUser object will be returned, otherwise an NSError will be returned.
+ * @param completionBlock   You will likely want to dismiss the authorizationViewController through this block.
+ */
+- (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
+                     authorizeURL:(NSURL *)authorizeURL
+                      redirectURI:(NSString *)redirectURI
+                          headers:(NSDictionary *)headers
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock;
 
