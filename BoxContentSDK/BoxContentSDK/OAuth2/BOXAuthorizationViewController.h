@@ -31,10 +31,6 @@
  */
 @interface BOXAuthorizationViewController : UIViewController
 
-/**
- * The authorization URL to be used.
- */
-@property (nonatomic, readwrite, strong) NSURL *authorizeURL;
 
 /** @name Initializers */
 
