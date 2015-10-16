@@ -32,7 +32,7 @@
                                                  hasExpectedType:[NSString class]
                                                      nullAllowed:NO];
         
-        self.template = [NSJSONSerialization box_ensureObjectForKey:BOXAPIMetadataObjectKeyTemplate
+        self.templateName = [NSJSONSerialization box_ensureObjectForKey:BOXAPIMetadataObjectKeyTemplate
                                                        inDictionary:JSONData
                                                     hasExpectedType:[NSString class]
                                                         nullAllowed:NO];

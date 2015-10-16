@@ -35,7 +35,7 @@
 @property (nonatomic, readwrite, strong) NSString *scope;
 
 /**
- * The template for the given scope of the BOXMetadataTemplateRequest.
+ * The template name for the given scope of the BOXMetadataTemplateRequest.
  *
  * Setting the template property will automatically cause BOXMetadataTemplateRequest to
  * return a single template schema instead of all template schemas available in the given
@@ -43,7 +43,7 @@
  *
  * Templates are handled on a enterprise by enterprise basis.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * Designated initializer. Returns a BOXMetadataTemplateRequest that allows users
@@ -55,7 +55,7 @@
  * @return A BOXMetadataTemplateRequest that allows users to retrieve the schema to
  *         retrieve the schema to a specific metadata template for a given scope.
  */
-- (instancetype)initWithScope:(NSString *)scope template:(NSString *)template;
+- (instancetype)initWithScope:(NSString *)scope template:(NSString *)templateName;
 
 /**
  * Designated initializer. Returns a BOXMetadataTemplateRequest that allows users

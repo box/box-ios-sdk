@@ -256,7 +256,7 @@
         XCTAssertEqualObjects(metadataA.modelID, metadataB.modelID);
         XCTAssertEqualObjects(metadataA.type, metadataB.type);
         XCTAssertEqualObjects(metadataA.parent, metadataB.parent);
-        XCTAssertEqualObjects(metadataA.template, metadataB.template);
+        XCTAssertEqualObjects(metadataA.templateName, metadataB.templateName);
         XCTAssertEqualObjects(metadataA.scope, metadataB.scope);
         XCTAssertEqualObjects(metadataA.info, metadataB.info);
     }

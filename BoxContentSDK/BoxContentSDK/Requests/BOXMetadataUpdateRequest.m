@@ -18,17 +18,17 @@
 
 @implementation BOXMetadataUpdateRequest
 
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template updateTasks:(NSArray *)updateTasks
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks
 {
-    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:template updateTasks:updateTasks];
+    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:templateName updateTasks:updateTasks];
 }
 
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template updateTasks:(NSArray *)updateTasks
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks
 {
     if (self = [super init]) {
         self.fileID = fileID;
         self.scope = scope;
-        self.template = template;
+        self.templateName = templateName;
         self.updateTasks = updateTasks;
     }
     
@@ -39,14 +39,14 @@
 {
     BOXAssert(self.fileID, @"BOXMetadataUpdateRequest FileID must not be nil.");
     BOXAssert(self.scope, @"BOXMetadataUpdateRequest Scope must not be nil.");
-    BOXAssert(self.template, @"BOXMetadataUpdateRequest Template must not be nil.");
+    BOXAssert(self.templateName, @"BOXMetadataUpdateRequest Template must not be nil.");
     BOXAssert(self.updateTasks, @"BOXMetadataUpdateRequest UpdateInfo must not be nil.");
     
     NSURL *URL = [self URLWithResource:BOXAPIResourceFiles
                                     ID:self.fileID
                            subresource:BOXAPISubresourceMetadata
                                  scope:self.scope
-                              template:self.template];
+                              template:self.templateName];
     
     NSDictionary *queryParameters = nil;
     

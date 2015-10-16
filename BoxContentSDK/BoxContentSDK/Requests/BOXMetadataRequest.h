@@ -28,12 +28,12 @@
 @property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;
 
 /**
- * The template for the given scope of the BOXMetadataRequest.
+ * The template name for the given scope of the BOXMetadataRequest.
  *
  * Templates are handled on a enterprise by enterprise basis. To see available metadata 
  * templates @see BOXMetadataTemplateRequest.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * The scope of the BOXMetadataRequest. Determines which templates are available.
@@ -52,7 +52,7 @@
  *
  * @return A BOXMetadataRequest that allows users to get metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template;
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName;
 
 /**
  * Returns a BOXMetadataRequest instance that allows users
@@ -65,7 +65,7 @@
  *
  * @return A BOXMetadataRequest that allows users to get metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template;
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName;
 
 /**
  * Performs the GET request to retrieve the desired metadata information.
