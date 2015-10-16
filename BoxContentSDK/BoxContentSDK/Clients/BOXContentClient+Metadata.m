@@ -11,17 +11,17 @@
 
 @implementation BOXContentClient (Metadata)
 
-- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID template:(NSString *)template
+- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID template:(NSString *)templateName
 {
-    BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:fileID template:template];
+    BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:fileID template:templateName];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template
+- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName
 {
-    BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:fileID scope:scope template:template];
+    BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:fileID scope:scope template:templateName];
     [self prepareRequest:request];
     
     return request;
@@ -35,49 +35,49 @@
     return request;
 }
 
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *)fileID template:(NSString *)template
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *)fileID template:(NSString *)templateName
 {
-    BOXMetadataDeleteRequest *request = [[BOXMetadataDeleteRequest alloc]initWithFileID:fileID template:template];
+    BOXMetadataDeleteRequest *request = [[BOXMetadataDeleteRequest alloc]initWithFileID:fileID template:templateName];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName
 {
-    BOXMetadataDeleteRequest *request = [[BOXMetadataDeleteRequest alloc]initWithFileID:fileID scope:scope template:template];
+    BOXMetadataDeleteRequest *request = [[BOXMetadataDeleteRequest alloc]initWithFileID:fileID scope:scope template:templateName];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID template:(NSString *)template tasks:(NSArray *)tasks;
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName tasks:(NSArray *)tasks;
 {
-    BOXMetadataCreateRequest *request = [[BOXMetadataCreateRequest alloc]initWithFileID:fileID template:template tasks:tasks];
+    BOXMetadataCreateRequest *request = [[BOXMetadataCreateRequest alloc]initWithFileID:fileID template:templateName tasks:tasks];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template tasks:(NSArray *)tasks
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName tasks:(NSArray *)tasks
 {
-    BOXMetadataCreateRequest *request = [[BOXMetadataCreateRequest alloc]initWithFileID:fileID scope:scope template:template tasks:tasks];
+    BOXMetadataCreateRequest *request = [[BOXMetadataCreateRequest alloc]initWithFileID:fileID scope:scope template:templateName tasks:tasks];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID template:(NSString *)template updateTasks:(NSArray *)updateTasks
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks
 {
-    BOXMetadataUpdateRequest *request = [[BOXMetadataUpdateRequest alloc]initWithFileID:fileID template:template updateTasks:updateTasks];
+    BOXMetadataUpdateRequest *request = [[BOXMetadataUpdateRequest alloc]initWithFileID:fileID template:templateName updateTasks:updateTasks];
     [self prepareRequest:request];
     
     return request;
 }
 
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template updateTasks:(NSArray *)updateTasks
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks
 {
-    BOXMetadataUpdateRequest *request = [[BOXMetadataUpdateRequest alloc]initWithFileID:fileID scope:scope template:template updateTasks:updateTasks];
+    BOXMetadataUpdateRequest *request = [[BOXMetadataUpdateRequest alloc]initWithFileID:fileID scope:scope template:templateName updateTasks:updateTasks];
     [self prepareRequest:request];
     
     return request;
@@ -99,9 +99,9 @@
     return request;
 }
 
-- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope template:(NSString *)template
+- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope template:(NSString *)templateName
 {
-    BOXMetadataTemplateRequest *request = [[BOXMetadataTemplateRequest alloc]initWithScope:scope template:template];
+    BOXMetadataTemplateRequest *request = [[BOXMetadataTemplateRequest alloc]initWithScope:scope template:templateName];
     [self prepareRequest:request];
     
     return request;

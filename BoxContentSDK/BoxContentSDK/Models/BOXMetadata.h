@@ -21,7 +21,7 @@
 /**
  * The template that the metadata information belongs to.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * The scope that the metadata's template belongs to.

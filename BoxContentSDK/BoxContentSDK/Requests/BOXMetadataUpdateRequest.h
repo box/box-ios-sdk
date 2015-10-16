@@ -33,12 +33,12 @@
 @property (nonatomic, readwrite, strong) NSString *scope;
 
 /**
- * The template for the given scope of the BOXMetadataUpdateRequest.
+ * The template name for the given scope of the BOXMetadataUpdateRequest.
  *
  * Templates are handled on a enterprise by enterprise basis. To see available metadata
  * templates @see BOXMetadataTemplateRequest.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * The information to populate the initial metadata's template with.
@@ -60,7 +60,7 @@
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template updateTasks:(NSArray *)updateTasks;
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
 
 /**
  * Designated initializer. Returns a BOXMetadataUpdateRequest instance that allows users
@@ -75,7 +75,7 @@
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template updateTasks:(NSArray *)updateTasks;
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
 
 /**
  * Performs the PUT request to update metadata information.

@@ -33,12 +33,12 @@
 @property (nonatomic, readwrite, strong) NSString *scope;
 
 /**
- * The template for the given scope of the BOXMetadataCreateRequest.
+ * The template name for the given scope of the BOXMetadataCreateRequest.
  *
  * Templates are handled on a enterprise by enterprise basis. To see available metadata
  * templates @see BOXMetadataTemplateRequest.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * The information to populate the initial metadata's template with.
@@ -60,7 +60,7 @@
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template tasks:(NSArray *)tasks;
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName tasks:(NSArray *)tasks;
 
 /**
  * Designated initializer. Returns a BOXMetadataCreateRequest instance that allows users
@@ -75,7 +75,7 @@
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template tasks:(NSArray *)tasks;
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName tasks:(NSArray *)tasks;
 
 /**
  * Performs the POST request to create metadata information.

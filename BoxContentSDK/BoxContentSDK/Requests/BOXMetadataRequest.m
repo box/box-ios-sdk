@@ -20,17 +20,17 @@
 
 @implementation BOXMetadataRequest
 
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName
 {
-    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:template];
+    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:templateName];
 }
 
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName
 {
     if (self = [super init]) {
         self.fileID = fileID;
         self.scope = scope;
-        self.template = template;
+        self.templateName = templateName;
     }
     
     return self;
@@ -39,13 +39,13 @@
 - (BOXAPIOperation *)createOperation
 {
     BOXAssert(self.fileID, @"BOXMetadataRequest FileID must be not be nil.");
-    BOXAssert((self.scope && self.template) || (!self.scope && !self.template), @"BOXMetadataRequest Scope and Template must both be set or both be nil");
+    BOXAssert((self.scope && self.templateName) || (!self.scope && !self.templateName), @"BOXMetadataRequest Scope and Template must both be set or both be nil");
     
     NSURL *URL = [self URLWithResource:BOXAPIResourceFiles
                                     ID:self.fileID
                            subresource:BOXAPISubresourceMetadata
                                  scope:self.scope
-                              template:self.template];
+                              template:self.templateName];
     
     // Are there query parameters for metedata?
     NSDictionary *queryParameters = nil;

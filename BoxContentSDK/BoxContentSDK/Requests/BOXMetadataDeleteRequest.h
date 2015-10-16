@@ -33,12 +33,12 @@
 @property (nonatomic, readwrite, strong) NSString *scope;
 
 /**
- * The template for the given scope of the BOXMetadataDeleteRequest.
+ * The template name for the given scope of the BOXMetadataDeleteRequest.
  *
  * Templates are handled on a enterprise by enterprise basis. To see available metadata
  * templates @see BOXMetadataTemplateRequest.
  */
-@property (nonatomic, readwrite, strong) NSString *template;
+@property (nonatomic, readwrite, strong) NSString *templateName;
 
 /**
  * Returns a BOXMetadataDeleteRequest instance that allows users
@@ -51,7 +51,7 @@
  *
  * @return A BOXMetadataDeleteRequest that allows users to delete metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template;
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName;
 
 /**
  * Designated initializer. Returns a BOXMetadataDeleteRequest instance that allows users
@@ -63,7 +63,7 @@
  *
  * @return A BOXMetadataDeleteRequest that allows users to delete metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template;
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName;
 
 
 /**
