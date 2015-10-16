@@ -14,7 +14,7 @@
                         ID:(NSString *)ID
                subresource:(NSString *)subresource
                      scope:(NSString *)scope
-                  template:(NSString *)template;
+                  template:(NSString *)templateName;
 
 - (NSURL *)URLWithBaseURL:(NSString *)baseURL
                APIVersion:(NSString *)APIVersion
@@ -22,6 +22,6 @@
                        ID:(NSString *)ID
               subresource:(NSString *)subresource
                     scope:(NSString *)scope
-                 template:(NSString *)template;
+                 template:(NSString *)templateName;
 
 @end

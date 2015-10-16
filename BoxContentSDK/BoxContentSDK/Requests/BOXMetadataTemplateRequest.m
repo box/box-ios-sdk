@@ -29,10 +29,10 @@
     return self;
 }
 
-- (instancetype)initWithScope:(NSString *)scope template:(NSString *)template
+- (instancetype)initWithScope:(NSString *)scope template:(NSString *)templateName
 {
     if (self = [self initWithScope:scope]) {
-        self.template = template;
+        self.templateName = templateName;
     }
     
     return self;
@@ -46,7 +46,7 @@
                                     ID:nil
                            subresource:nil
                                  scope:BOXAPITemplateScopeEnterprise
-                              template:self.template];
+                              template:self.templateName];
     
     NSDictionary *queryParameters = nil;
     
@@ -78,13 +78,13 @@
                 NSArray *entries = JSONDictionary[@"entries"];
                 if (entries) {
                     for (NSDictionary *currTemplate in entries) {
-                        BOXMetadataTemplate *template = [[BOXMetadataTemplate alloc]initWithJSON:currTemplate];
-                        [metadataTemplates addObject:template];
+                        BOXMetadataTemplate *templateObj = [[BOXMetadataTemplate alloc]initWithJSON:currTemplate];
+                        [metadataTemplates addObject:templateObj];
                     }
                     completionBlock(metadataTemplates, nil);
                 } else {
-                    BOXMetadataTemplate *template = [[BOXMetadataTemplate alloc]initWithJSON:JSONDictionary];
-                    completionBlock(@[template], nil);
+                    BOXMetadataTemplate *templateObj = [[BOXMetadataTemplate alloc]initWithJSON:JSONDictionary];
+                    completionBlock(@[templateObj], nil);
                 }
             } onMainThread:isMainThread];
         };

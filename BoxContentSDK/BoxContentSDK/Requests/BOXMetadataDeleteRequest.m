@@ -17,17 +17,17 @@
 
 @implementation BOXMetadataDeleteRequest
 
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)template
+- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName
 {
-    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:template];
+    return [self initWithFileID:fileID scope:BOXAPITemplateScopeEnterprise template:templateName];
 }
 
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template
+- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName
 {
     if (self = [super init]) {
         self.fileID = fileID;
         self.scope = scope;
-        self.template = template;
+        self.templateName = templateName;
     }
     
     return self;
@@ -37,13 +37,13 @@
 {
     BOXAssert(self.fileID, @"BOXMetadataDeleteRequest FileID must not be nil");
     BOXAssert(self.scope, @"BOXMetadataDeleteRequest Scope must not be nil");
-    BOXAssert(self.template, @"BOXMetadataDeleteRequest Template must not be nil");
+    BOXAssert(self.templateName, @"BOXMetadataDeleteRequest Template must not be nil");
     
     NSURL *URL = [self URLWithResource:BOXAPIResourceFiles
                                     ID:self.fileID
                            subresource:BOXAPISubresourceMetadata
                                  scope:self.scope
-                              template:self.template];
+                              template:self.templateName];
     
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodDELETE

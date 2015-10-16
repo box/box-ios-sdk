@@ -33,7 +33,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID template:(NSString *)template;
+- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID template:(NSString *)templateName;
 
 /**
  * Generate a request to retrieve metadata information about a file.
@@ -44,7 +44,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template;
+- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName;
 
 /**
  * Generate a request to retrieve all metadata information about a file.
@@ -65,7 +65,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID template:(NSString *)template;
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID template:(NSString *)templateName;
 
 /**
  * Generate a request to delete metadata information about a file.
@@ -76,7 +76,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID scope:(NSString *)scope template:(NSString *)template;
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID scope:(NSString *)scope template:(NSString *)templateName;
 
 /**
  * Generate a request to create metadata information for a file.
@@ -89,7 +89,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID template:(NSString *)template tasks:(NSArray *)tasks;
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName tasks:(NSArray *)tasks;
 
 /**
  * Generate a request to create metadata information for a file.
@@ -102,7 +102,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template tasks:(NSArray *)tasks;
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName tasks:(NSArray *)tasks;
 
 /**
  * Generate a request to update metadata information about a file.
@@ -115,7 +115,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID template:(NSString *)template updateTasks:(NSArray *)updateTasks;
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
 
 /**
  * Generate a request to update metadata information about a file.
@@ -128,7 +128,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)template updateTasks:(NSArray *)updateTasks;
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
 
 /**
  * Generate a request to retrieve a metadata template schema within a scope.
@@ -138,7 +138,7 @@
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope template:(NSString *)template;
+- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope template:(NSString *)templateName;
 
 /**
  * Generate a request to retrieve all metadata template schemas within a scope.

@@ -14,7 +14,7 @@
                         ID:(NSString *)ID
                subresource:(NSString *)subresource
                      scope:(NSString *)scope
-                  template:(NSString *)template
+                  template:(NSString *)templateName
 {
     return [self URLWithBaseURL:BOXAPIBaseURL
                      APIVersion:BOXAPIVersion
@@ -22,7 +22,7 @@
                              ID:ID
                     subresource:subresource
                           scope:scope
-                       template:template];
+                       template:templateName];
 }
 
 - (NSURL *)URLWithBaseURL:(NSString *)baseURL
@@ -31,7 +31,7 @@
                        ID:(NSString *)ID
               subresource:(NSString *)subresource
                     scope:(NSString *)scope
-                 template:(NSString *)template
+                 template:(NSString *)templateName
 {
     NSString *formatString = @"/%@";
     if ([baseURL hasSuffix:@"/"]) {
@@ -49,8 +49,8 @@
         }
         if (scope) {
             URLString = [URLString stringByAppendingFormat:@"/%@", scope];
-            if (template) {
-                URLString = [URLString stringByAppendingFormat:@"/%@", template];
+            if (templateName) {
+                URLString = [URLString stringByAppendingFormat:@"/%@", templateName];
                 
                 if ([resource isEqualToString:BOXAPIResourceMetadataTemplates]) {
                     URLString = [URLString stringByAppendingString:@"/schema"];
