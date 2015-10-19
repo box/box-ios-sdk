@@ -59,11 +59,27 @@
     
     if (completionBlock) {
         commentsOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            NSArray *comments = [self commentsFromJSONDictionary:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCommentsRequest:withComments:error:)]) {
+                [self.cacheClient cacheFileCommentsRequest:self
+                                              withComments:comments
+                                                     error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock([self commentsFromJSONDictionary:JSONDictionary] ,nil);
+                completionBlock(comments ,nil);
             } onMainThread:isMainThread];
         };
+
         commentsOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCommentsRequest:withComments:error:)]) {
+                [self.cacheClient cacheFileCommentsRequest:self
+                                              withComments:nil
+                                                     error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
@@ -71,6 +87,23 @@
     }
     
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXObjectsArrayCompletionBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileCommentsRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForFileCommentsRequest:self
+                                                   completion:^(NSArray *objects, NSError *error) {
+                                                       cacheBlock(objects, error);
+                                                   }];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:^(NSArray *objects, NSError *error) {
+        refreshBlock(objects, error);
+    }];
 }
 
 #pragma mark - Private Helpers
