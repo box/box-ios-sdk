@@ -84,10 +84,12 @@
 - (void)performRequestWithCached:(BOXCollaborationArrayCompletionBlock)cacheBlock
                        refreshed:(BOXCollaborationArrayCompletionBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderCollaborationsRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForFolderCollaborationsRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderCollaborationsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFolderCollaborationsRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];

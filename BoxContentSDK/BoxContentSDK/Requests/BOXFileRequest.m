@@ -115,10 +115,12 @@
 - (void)performRequestWithCached:(BOXFileBlock)cacheBlock
                        refreshed:(BOXFileBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForFileRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFileRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];

@@ -120,10 +120,12 @@
 - (void)performRequestWithCached:(BOXFolderBlock)cacheBlock
                        refreshed:(BOXFolderBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForFolderRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFolderRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];

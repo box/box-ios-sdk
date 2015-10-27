@@ -99,10 +99,12 @@
 - (void)performRequestWithCached:(BOXBookmarkBlock)cacheBlock
                        refreshed:(BOXBookmarkBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForBookmarkRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForBookmarkRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForBookmarkRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForBookmarkRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];

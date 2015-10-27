@@ -123,10 +123,12 @@
                             cached:(BOXImageBlock)cacheBlock
                          refreshed:(BOXImageBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileThumbnailRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForFileThumbnailRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileThumbnailRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFileThumbnailRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithProgress:progressBlock completion:refreshBlock];

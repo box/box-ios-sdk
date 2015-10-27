@@ -73,10 +73,12 @@
 - (void)performRequestWithCached:(BOXUserBlock)cacheBlock
                        refreshed:(BOXUserBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForUserRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForUserRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForUserRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForUserRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];

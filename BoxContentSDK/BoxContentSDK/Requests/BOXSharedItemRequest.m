@@ -97,10 +97,12 @@
 - (void)performRequestWithCached:(BOXItemBlock)cacheBlock
                        refreshed:(BOXItemBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForSharedItemRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForSharedItemRequest:self completion:cacheBlock];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForSharedItemRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForSharedItemRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
     [self performRequestWithCompletion:refreshBlock];
