@@ -88,18 +88,16 @@
 
 - (void)performRequestWithCached:(BOXCommentBlock)cacheBlock refreshed:(BOXCommentBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCommentRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForCommentRequest:self
-                                              completion:^(BOXComment *comment, NSError *error) {
-            cacheBlock(comment, error);
-        }];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCommentRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForCommentRequest:self
+                                                  completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
-    [self performRequestWithCompletion:^(BOXComment *comment, NSError *error) {
-        refreshBlock(comment, error);
-    }];
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

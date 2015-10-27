@@ -14,9 +14,12 @@
  */
 @property (nonatomic, readwrite, assign) BOOL requestAllFolderFields;
 @property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;//If-None-Match: Array of strings representing etag values
+@property (nonatomic, readonly, strong) NSString *folderID;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed;
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
+- (void)performRequestWithCached:(BOXFolderBlock)cacheBlock
+                       refreshed:(BOXFolderBlock)refreshBlock;
 
 @end

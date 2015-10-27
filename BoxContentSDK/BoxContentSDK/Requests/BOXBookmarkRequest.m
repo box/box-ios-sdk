@@ -69,11 +69,24 @@
                                                                                    itemType:BOXAPIItemTypeWebLink
                                                                                   ancestors:bookmark.pathFolders];
 
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkRequest:self
+                                          withBookmark:bookmark
+                                                 error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(bookmark, nil);
             } onMainThread:isMainThread];
         };
         bookmarkOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkRequest:self
+                                          withBookmark:nil
+                                                 error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
@@ -81,6 +94,20 @@
     }
 
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXBookmarkBlock)cacheBlock
+                       refreshed:(BOXBookmarkBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForBookmarkRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForBookmarkRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods

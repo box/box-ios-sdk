@@ -70,11 +70,21 @@
 
     if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderDeleteRequest:error:)]) {
+                [self.cacheClient cacheFolderDeleteRequest:self error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderDeleteRequest:error:)]) {
+                [self.cacheClient cacheFolderDeleteRequest:self error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];

@@ -17,6 +17,11 @@
 
 - (instancetype)initWithFileID:(NSString *)fileID size:(BOXThumbnailSize)size;
 
-- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXImageBlock)completionBlock;
+- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
+                        completion:(BOXImageBlock)completionBlock;
+
+- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
+                            cached:(BOXImageBlock)cacheBlock
+                         refreshed:(BOXImageBlock)refreshBlock;
 
 @end

@@ -53,11 +53,25 @@
     if (completionBlock) {
         bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCreateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkCreateRequest:self
+                                                withBookmark:bookmark
+                                                       error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(bookmark, nil);
             } onMainThread:isMainThread];
         };
         bookmarkOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCreateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkCreateRequest:self
+                                                withBookmark:nil
+                                                       error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];

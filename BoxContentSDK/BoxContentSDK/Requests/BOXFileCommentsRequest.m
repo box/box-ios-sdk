@@ -92,18 +92,16 @@
 - (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock
                        refreshed:(BOXObjectsArrayCompletionBlock)refreshBlock
 {
-    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileCommentsRequest:completion:)]) {
-        [self.cacheClient retrieveCacheForFileCommentsRequest:self
-                                                   completion:^(NSArray *objects, NSError *error) {
-                                                       cacheBlock(objects, error);
-                                                   }];
-    } else {
-        cacheBlock(nil, nil);
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileCommentsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFileCommentsRequest:self
+                                                       completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
-    [self performRequestWithCompletion:^(NSArray *objects, NSError *error) {
-        refreshBlock(objects, error);
-    }];
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Private Helpers

@@ -131,11 +131,25 @@
     if (completionBlock) {
         fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                withBookmark:bookmark
+                                                       error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(bookmark, nil);
             } onMainThread:isMainThread];
         };
         fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                withBookmark:nil
+                                                       error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
