@@ -112,6 +112,16 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIMultipartToJSONOperation *uploadOperation = (BOXAPIMultipartToJSONOperation *)self.operation;
+    
+    // Unlike other operation types, BOXAPIMultipartToJSONOperation cannot be gracefully re-enqueued if the access token is expired (and can be refreshed).
+    // In order to minimize the risk of a failed request due to an expired access token, more aggressively check if it is expired, and refresh it manually
+    // beforehand if necessary.
+    if ([self.operation.session.accessTokenExpiration timeIntervalSinceNow] < 300) {
+        // We rely on our operations layer to block the upload request until this is done, because
+        // BOXParallelOAuth2Session cannot reliably call the completion block. (See TODO in [BOXParallelOAuth2Session:performRefreshTokenGrant:withCompletionBlock]
+        [self.operation.session performRefreshTokenGrant:self.operation.session.accessToken withCompletionBlock:nil];
+    }
+    
     if (progressBlock) {
         uploadOperation.progressBlock = ^(unsigned long long totalBytes, unsigned long long bytesSent) {
             [BOXDispatchHelper callCompletionBlock:^{

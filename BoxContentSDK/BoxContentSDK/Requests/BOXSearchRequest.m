@@ -144,7 +144,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                [items addObject:[self itemWithJSON:itemDictionary]];
+                [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);

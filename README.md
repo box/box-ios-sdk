@@ -47,6 +47,17 @@ Sample App
 ----------
 A sample app can be found in the [BoxContentSDKSampleApp](../../tree/master/BoxContentSDKSampleApp) folder. The sample app demonstrates how to authenticate a user, and manage the user's files and folders.
 
+To execute the sample app:
+Step 1: Install Pods
+```
+cd BoxContentSDKSampleApp
+pod install
+```
+Step 2: Open Workspace
+```
+open BoxContentSDKSampleApp.xcworkspace
+```
+
 Tests
 -----
 Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.

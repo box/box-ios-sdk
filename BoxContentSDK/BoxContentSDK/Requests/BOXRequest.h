@@ -74,7 +74,10 @@ typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *
 @property (nonatomic, readwrite, strong) NSString *SDKIdentifier;
 @property (nonatomic, readwrite, strong) NSString *SDKVersion;
 
+@property (nonatomic, readonly, strong) NSString *requestCacheKey;
+
 - (void)performRequest;
 - (void)cancel;
++ (BOOL)shouldRemoveCachedResponseForError:(NSError *)error;
 
 @end

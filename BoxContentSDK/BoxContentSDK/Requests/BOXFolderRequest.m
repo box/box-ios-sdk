@@ -79,21 +79,23 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
+    __weak BOXFolderRequest *weakSelf = self;
+
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
     if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
-            
-            [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
-                                                                                   itemType:folder.type
-                                                                                  ancestors:folder.pathFolders];
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
-                [self.cacheClient cacheFolderRequest:self
-                                          withFolder:folder
-                                               error:nil];
+            [weakSelf.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
+                                                                                       itemType:folder.type
+                                                                                      ancestors:folder.pathFolders];
+
+            if ([weakSelf.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [weakSelf.cacheClient cacheFolderRequest:weakSelf
+                                              withFolder:folder
+                                                   error:nil];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{
@@ -102,10 +104,10 @@
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
-                [self.cacheClient cacheFolderRequest:self
-                                          withFolder:nil
-                                               error:error];
+            if ([weakSelf.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [weakSelf.cacheClient cacheFolderRequest:weakSelf
+                                              withFolder:nil
+                                                   error:error];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{
@@ -113,7 +115,7 @@
             } onMainThread:isMainThread];
         };
     }
-
+    
     [self performRequest];
 }
 

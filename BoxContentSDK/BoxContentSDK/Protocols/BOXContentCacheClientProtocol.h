@@ -171,6 +171,10 @@
                                withItems:(NSArray *)items
                                    error:(NSError *)error;
 
+- (void)cacheFolderItemsRequest:(BOXFolderItemsRequest *)request
+                      withItems:(NSArray *)items
+                          error:(NSError *)error;
+
 - (void)retrieveCacheForFolderItemsRequest:(BOXFolderItemsRequest *)request
                                 completion:(BOXItemsBlock)completionBlock;
 

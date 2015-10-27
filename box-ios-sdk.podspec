@@ -36,6 +36,7 @@ s.xcconfig              = { "OTHER_LDFLAGS" => "-ObjC -all_load" }
 s.ios.header_dir        = "BoxContentSDK"
 s.module_name           = "BoxContentSDK"
 
+s.dependency              "PINCache"
 # Subspecs
 
 s.subspec "logger" do |sp|
