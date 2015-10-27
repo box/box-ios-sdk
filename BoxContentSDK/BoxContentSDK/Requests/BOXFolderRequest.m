@@ -90,11 +90,24 @@
                                                                                    itemType:folder.type
                                                                                   ancestors:folder.pathFolders];
 
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderRequest:self
+                                          withFolder:folder
+                                               error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderRequest:self
+                                          withFolder:nil
+                                               error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
@@ -102,6 +115,18 @@
     }
 
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXFolderBlock)cacheBlock
+                       refreshed:(BOXFolderBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForFolderRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods

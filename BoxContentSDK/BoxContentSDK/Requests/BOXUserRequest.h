@@ -15,5 +15,7 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllUserFields;
 
 - (void)performRequestWithCompletion:(BOXUserBlock)completionBlock;
+- (void)performRequestWithCached:(BOXUserBlock)cacheBlock
+                       refreshed:(BOXUserBlock)refreshBlock;
 
 @end

@@ -42,11 +42,25 @@
     if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXUser *user = [[BOXUser alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheUserRequest:withUser:error:)]) {
+                [self.cacheClient cacheUserRequest:self
+                                          withUser:user
+                                             error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(user, nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheUserRequest:withUser:error:)]) {
+                [self.cacheClient cacheUserRequest:self
+                                          withUser:nil
+                                             error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
@@ -54,6 +68,18 @@
     }
 
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXUserBlock)cacheBlock
+                       refreshed:(BOXUserBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForUserRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForUserRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

@@ -51,11 +51,25 @@
     if (completionBlock) {
         fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                        withFolder:folder
+                                                             error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
         };
         fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                        withFolder:nil
+                                                             error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];

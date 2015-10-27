@@ -17,7 +17,9 @@
 #import "BOXFolderPaginatedItemsRequest_Private.h"
 
 @interface BOXFolderItemsRequest ()
+
 @property (nonatomic) BOOL isCancelled;
+
 @end
 
 @implementation BOXFolderItemsRequest
@@ -139,5 +141,16 @@
     [super performRequestWithCompletion:completionBlock];
 }
 
+- (void)performRequestWithCached:(BOXItemsBlock)cacheBlock
+                       refreshed:(BOXItemsBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderItemsRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForFolderItemsRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
+}
 
 @end

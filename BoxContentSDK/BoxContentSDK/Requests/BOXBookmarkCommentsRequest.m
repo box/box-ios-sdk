@@ -86,16 +86,12 @@
 {
     if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForBookmarkCommentsRequest:completion:)]) {
         [self.cacheClient retrieveCacheForBookmarkCommentsRequest:self
-                                                       completion:^(NSArray *objects, NSError *error) {
-                                                           cacheBlock(objects, error);
-                                                       }];
+                                                       completion:cacheBlock];
     } else {
         cacheBlock(nil, nil);
     }
 
-    [self performRequestWithCompletion:^(NSArray *objects, NSError *error) {
-        refreshBlock(objects, error);
-    }];
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Private Helpers

@@ -148,12 +148,25 @@
             [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
                                                                                    itemType:folder.type
                                                                                   ancestors:folder.pathFolders];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderUpdateRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderUpdateRequest:self
+                                                withFolder:folder
+                                                     error:nil];
+            }
             
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderUpdateRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderUpdateRequest:self
+                                                withFolder:nil
+                                                     error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];

@@ -8,8 +8,10 @@
 #import "BOXFileVersion.h"
 
 @interface BOXFileVersionPromoteRequest ()
-@property (nonatomic, readonly, strong) NSString *fileID;
-@property (nonatomic, readonly, strong) NSString *versionID;
+
+@property (nonatomic, readwrite, strong) NSString *fileID;
+@property (nonatomic, readwrite, strong) NSString *versionID;
+
 @end
 
 @implementation BOXFileVersionPromoteRequest
@@ -53,11 +55,25 @@
         versionPromoteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 BOXFileVersion *fileVersion = [[BOXFileVersion alloc] initWithJSON:JSONDictionary];
+
+                if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                    [self.cacheClient cacheFileVersionPromoteRequest:self
+                                                         withVersion:fileVersion
+                                                               error:nil];
+                }
+
                 completionBlock(fileVersion, nil);
             } onMainThread:isMainThread];
         };
         versionPromoteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
+
+                if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                    [self.cacheClient cacheFileVersionPromoteRequest:self
+                                                         withVersion:nil
+                                                               error:error];
+                }
+
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };

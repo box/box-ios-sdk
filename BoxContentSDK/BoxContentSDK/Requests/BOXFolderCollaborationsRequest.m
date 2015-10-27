@@ -9,7 +9,7 @@
 
 @interface BOXFolderCollaborationsRequest ()
 
-@property (nonatomic, readonly, strong) NSString *folderID;
+@property (nonatomic, readwrite, strong) NSString *folderID;
 
 @end
 
@@ -53,11 +53,25 @@
             for (NSDictionary *collaborationDictionary in collaborationDictionaries) {
                 [collaborations addObject:[[BOXCollaboration alloc] initWithJSON:collaborationDictionary]];
             }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCollaborationsRequest:withCollaborations:error:)]) {
+                [self.cacheClient cacheFolderCollaborationsRequest:self
+                                                withCollaborations:collaborations
+                                                             error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaborations, nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCollaborationsRequest:withCollaborations:error:)]) {
+                [self.cacheClient cacheFolderCollaborationsRequest:self
+                                                withCollaborations:nil
+                                                             error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
@@ -65,6 +79,18 @@
     }
     
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXCollaborationArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXCollaborationArrayCompletionBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderCollaborationsRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForFolderCollaborationsRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

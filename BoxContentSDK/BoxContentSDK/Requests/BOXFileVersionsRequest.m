@@ -10,7 +10,9 @@
 #import "BOXFileVersion.h"
 
 @interface BOXFileVersionsRequest ()
-@property (nonatomic, readonly, strong) NSString *fileID;
+
+@property (nonatomic, readwrite, strong) NSString *fileID;
+
 @end
 
 @implementation BOXFileVersionsRequest
@@ -48,11 +50,27 @@
     
     if (completionBlock) {
         commentsOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+
+            __block NSArray *fileVersions = [self fileVersionsFromJSONDictionary:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                [self.cacheClient cacheFileVersionsRequest:self
+                                              withVersions:fileVersions
+                                                     error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock([self fileVersionsFromJSONDictionary:JSONDictionary] ,nil);
+                completionBlock(fileVersions ,nil);
             } onMainThread:isMainThread];
         };
         commentsOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                [self.cacheClient cacheFileVersionsRequest:self
+                                              withVersions:nil
+                                                     error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
@@ -60,6 +78,18 @@
     }
     
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXObjectsArrayCompletionBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileVersionsRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForFileVersionsRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Private Helpers

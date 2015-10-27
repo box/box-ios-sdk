@@ -67,11 +67,24 @@
                                                          sharedLink:self.sharedLinkURLString
                                                            password:self.sharedLinkPassword];
 
+            if ([self.cacheClient respondsToSelector:@selector(cacheSharedItemRequest:withItem:error:)]) {
+                [self.cacheClient cacheSharedItemRequest:self
+                                                withItem:item
+                                                   error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completion(item, nil);
             } onMainThread:isMainThread];
         };
         sharedItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheSharedItemRequest:withItem:error:)]) {
+                [self.cacheClient cacheSharedItemRequest:self
+                                                withItem:nil
+                                                   error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completion(nil, error);
             } onMainThread:isMainThread];
@@ -79,6 +92,18 @@
     }
 
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXItemBlock)cacheBlock
+                       refreshed:(BOXItemBlock)refreshBlock
+{
+    if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForSharedItemRequest:completion:)]) {
+        [self.cacheClient retrieveCacheForSharedItemRequest:self completion:cacheBlock];
+    } else {
+        cacheBlock(nil, nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end
