@@ -85,10 +85,10 @@
     if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
-            
+
             [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
-                                                                                   itemType:folder.type
-                                                                                  ancestors:folder.pathFolders];
+                                                                                       itemType:folder.type
+                                                                                      ancestors:folder.pathFolders];
 
             if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
                 [self.cacheClient cacheFolderRequest:self
@@ -113,7 +113,7 @@
             } onMainThread:isMainThread];
         };
     }
-
+    
     [self performRequest];
 }
 
@@ -142,6 +142,5 @@
 {
     return BOXAPIItemTypeFolder;
 }
-
 
 @end

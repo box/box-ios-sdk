@@ -96,21 +96,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         _authorizeURL = authorizeURL;
         _redirectURI = redirectURI;
         _headers = headers;
-        
+
         _ntlmAuthFailures = 0;
         _authChallengeCycles = 0;
         _connectionData = [[NSMutableData alloc] init];
         _hostsThatCanUseWebViewDirectly = [NSMutableSet set];
-        
+
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                  target:self
                                                                                                  action:@selector(cancel:)]];
-        
+
         NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         _preexistingCookies = [[cookieStorage cookies] copy];
         _preexistingCookiePolicy = [cookieStorage cookieAcceptPolicy];
     }
-    
+
     return self;
 }
 
@@ -127,19 +127,19 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)loadView
 {
-	[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 
-	UIWebView *webView = [[UIWebView alloc] init];
-	[webView setScalesPageToFit:YES];
-	webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	webView.delegate = self;
+    UIWebView *webView = [[UIWebView alloc] init];
+    [webView setScalesPageToFit:YES];
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.delegate = self;
 
-	self.view = webView;
+    self.view = webView;
 }
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
 
     [self loadAuthorizationURL];
 }
@@ -239,7 +239,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     self.connection = nil;
     self.connectionResponse = nil;
     [self setWebViewCanBeUsedDirectly:NO forHost:connection.currentRequest.URL.host];
-    
+
     if (self.view.window) {
         self.connectionError = error;
         UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
@@ -255,17 +255,17 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)clearCookies
 {
-	BOXLog(@"Attempt to clear cookies");
-	NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-	NSArray *cookies = [[cookieStorage cookies] copy];
-	for (NSHTTPCookie *cookie in cookies)
-	{
-		if ([self.preexistingCookies containsObject:cookie] == NO)
-		{
-			[cookieStorage deleteCookie:cookie];
-			BOXLog(@"Clearing cookie with domain %@, name %@", cookie.domain, cookie.name);
-		}
-	}
+    BOXLog(@"Attempt to clear cookies");
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = [[cookieStorage cookies] copy];
+    for (NSHTTPCookie *cookie in cookies)
+    {
+        if ([self.preexistingCookies containsObject:cookie] == NO)
+        {
+            [cookieStorage deleteCookie:cookie];
+            BOXLog(@"Clearing cookie with domain %@, name %@", cookie.domain, cookie.name);
+        }
+    }
     //NOTE: Using standardUserDefaults because this is for saving system cookies.
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -290,16 +290,16 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-	BOXLog(@"Web view should start request %@ with navigation type %ld", request, (long)navigationType);
-	BOXLog(@"Request Headers \n%@", [request allHTTPHeaderFields]);
+    BOXLog(@"Web view should start request %@ with navigation type %ld", request, (long)navigationType);
+    BOXLog(@"Request Headers \n%@", [request allHTTPHeaderFields]);
 
-	// Before we proceed with handling this request, check if it's about:blank - if it is, do not attempt to load it.
-	// Background: We've run into a scenario where an admin included a support help-desk plugin on their SSO page
-	// which would (probably erroneously) first load about:blank, then attempt to load its icon. The web view would
-	// fail to load about:blank, which would cause the whole page to not appear. So we realized that we can and should
-	// generally protect against loading about:blank.
-	if ([request.URL isEqual:[NSURL URLWithString:@"about:blank"]]) {
-		return NO;
+    // Before we proceed with handling this request, check if it's about:blank - if it is, do not attempt to load it.
+    // Background: We've run into a scenario where an admin included a support help-desk plugin on their SSO page
+    // which would (probably erroneously) first load about:blank, then attempt to load its icon. The web view would
+    // fail to load about:blank, which would cause the whole page to not appear. So we realized that we can and should
+    // generally protect against loading about:blank.
+    if ([request.URL isEqual:[NSURL URLWithString:@"about:blank"]]) {
+        return NO;
     }
 
     // Mailto URLs can be encountered if there is a hyperlink for sending an email.
@@ -310,15 +310,15 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
     [self.activityIndicator startAnimating];
 
-	// Figure out whether this request is the redirect used at the end of the authentication process
+    // Figure out whether this request is the redirect used at the end of the authentication process
     BOOL requestIsForLoginRedirectScheme = NO;
-	if ([self.redirectURI length] > 0) {
-		requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.redirectURI] scheme]];
-	}
+    if ([self.redirectURI length] > 0) {
+        requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.redirectURI] scheme]];
+    }
     BOOL requestIsForLoginRedirection = (requestIsForLoginRedirectScheme &&
                                          [[[request URL] absoluteString] hasPrefix:self.redirectURI]);
 
-	if (requestIsForLoginRedirection) {
+    if (requestIsForLoginRedirection) {
         BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
         __weak BOXAuthorizationViewController *me = self;
         [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
@@ -334,7 +334,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                             me.completionBlock(me, user, error);
                         }
                     }];
-                }                
+                }
             });
         }];
     } else if (![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]]) {
@@ -346,74 +346,74 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         // b) The iFrame request has an invalid SSL certificate. We would normally want to pop up a warning dialog and let the user decide what to do.
         return YES;
     } else if ([self webViewCanBeUsedDirectlyForHost:request.URL.host] == NO) {
-		BOXLog(@"Was not authenticated, launching URLConnection and not loading the request in the web view");
-		self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-		BOXLog(@"URLConnection is %@", self.connection);
-		return NO;
-	}
+        BOXLog(@"Was not authenticated, launching URLConnection and not loading the request in the web view");
+        self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        BOXLog(@"URLConnection is %@", self.connection);
+        return NO;
+    }
 
-	return YES;
+    return YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-	BOXLogFunction();
+    BOXLogFunction();
     [self.activityIndicator startAnimating];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-	BOXLog(@"Web view %@ did fail load with error %@", webView, error);
+    BOXLog(@"Web view %@ did fail load with error %@", webView, error);
 
-	// The following error scenarios are benign and do not actually signify that loading the login page has failed:
-	// 1. WebKitErrorDomain > WebKitErrorFrameLoadInterruptedByPolicyChange - Indicates that a frame load was interrupted by a policy change.
-	//  These constants seem to only be declared for OS X in the WebKit framework, but we're seeing them in iOS.
-	// 2. NSURLErrorDomain > NSURLErrorCancelled - Returned when an asynchronous load is canceled. A Web Kit framework delegate will receive this error when it performs a cancel operation on a loading resource. Note that an NSURLConnection or NSURLDownload delegate will not receive this error if the download is canceled.
-	// 3. The load attempt was for an iframe rather than the full page
+    // The following error scenarios are benign and do not actually signify that loading the login page has failed:
+    // 1. WebKitErrorDomain > WebKitErrorFrameLoadInterruptedByPolicyChange - Indicates that a frame load was interrupted by a policy change.
+    //  These constants seem to only be declared for OS X in the WebKit framework, but we're seeing them in iOS.
+    // 2. NSURLErrorDomain > NSURLErrorCancelled - Returned when an asynchronous load is canceled. A Web Kit framework delegate will receive this error when it performs a cancel operation on a loading resource. Note that an NSURLConnection or NSURLDownload delegate will not receive this error if the download is canceled.
+    // 3. The load attempt was for an iframe rather than the full page
 
-	BOOL ignoreError = NO;
-	//NOTE: WebKitErrorDomain and WebKitErrorFrameLoadInterruptedByPolicyChange are only defined on OS X in the WebKit framework
-	// however the error is occuring on iOS, thus we use the values directly in the conditional below.
-	if ([[error domain] isEqualToString:@"WebKitErrorDomain"] && [error code] == 102) {
-		BOXLog(@"Ignoring error with code 102 (WebKitErrorFrameLoadInterruptedByPolicyChange)");
-		ignoreError = YES;
-	} else if ([[error domain] isEqualToString:NSURLErrorDomain] && [error code] == NSURLErrorCancelled) {
-		BOXLog(@"Ignoring error with code URLErrorCancelled");
-		ignoreError = YES;
-	} else if ([[error domain] isEqualToString:NSURLErrorDomain]) {
-		// Check if its just an iframe loading error
-		// Note - The suggested key for checking the failed URL is NSURLErrorFailingURLStringErrorKey.
-		// However, in testing, this was not found in iOS 5, and only the deprecated value NSErrorFailingURLStringKey
-		// was used.  We use the string value instead of the constant as the constant gives a (presumably erronous)
-		// deprecated (in iOS 4) warning.
-		NSString *requestURLString = [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey];
-		if ([requestURLString length] == 0) {
-			requestURLString = [[error userInfo] objectForKey:@"NSErrorFailingURLStringKey"];
-		}
-		
-		BOXLog(@"Checking if error is due to an iframe request.");
-		BOXLog(@"Request URL is %@ while main document URL is %@", requestURLString, [webView.request mainDocumentURL]);
-		
-		BOOL isMainDocumentURL = [requestURLString isEqualToString:[[webView.request mainDocumentURL] absoluteString]];
-		if (isMainDocumentURL == NO) {
-			// If the failing URL is not the main document URL, then the load error is in an iframe and can be ignored
-			BOXLog(@"Ignoring error as the load failure is in an iframe");
-			ignoreError = YES;
-		}
-	}
+    BOOL ignoreError = NO;
+    //NOTE: WebKitErrorDomain and WebKitErrorFrameLoadInterruptedByPolicyChange are only defined on OS X in the WebKit framework
+    // however the error is occuring on iOS, thus we use the values directly in the conditional below.
+    if ([[error domain] isEqualToString:@"WebKitErrorDomain"] && [error code] == 102) {
+        BOXLog(@"Ignoring error with code 102 (WebKitErrorFrameLoadInterruptedByPolicyChange)");
+        ignoreError = YES;
+    } else if ([[error domain] isEqualToString:NSURLErrorDomain] && [error code] == NSURLErrorCancelled) {
+        BOXLog(@"Ignoring error with code URLErrorCancelled");
+        ignoreError = YES;
+    } else if ([[error domain] isEqualToString:NSURLErrorDomain]) {
+        // Check if its just an iframe loading error
+        // Note - The suggested key for checking the failed URL is NSURLErrorFailingURLStringErrorKey.
+        // However, in testing, this was not found in iOS 5, and only the deprecated value NSErrorFailingURLStringKey
+        // was used.  We use the string value instead of the constant as the constant gives a (presumably erronous)
+        // deprecated (in iOS 4) warning.
+        NSString *requestURLString = [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey];
+        if ([requestURLString length] == 0) {
+            requestURLString = [[error userInfo] objectForKey:@"NSErrorFailingURLStringKey"];
+        }
 
-	if (ignoreError == NO) {
-		BOXLog(@"Presenting error");
-		// The error is usually in HTML to be shown to the user.
-		[webView loadHTMLString:[error localizedDescription] baseURL:nil];
-	}
+        BOXLog(@"Checking if error is due to an iframe request.");
+        BOXLog(@"Request URL is %@ while main document URL is %@", requestURLString, [webView.request mainDocumentURL]);
+
+        BOOL isMainDocumentURL = [requestURLString isEqualToString:[[webView.request mainDocumentURL] absoluteString]];
+        if (isMainDocumentURL == NO) {
+            // If the failing URL is not the main document URL, then the load error is in an iframe and can be ignored
+            BOXLog(@"Ignoring error as the load failure is in an iframe");
+            ignoreError = YES;
+        }
+    }
+
+    if (ignoreError == NO) {
+        BOXLog(@"Presenting error");
+        // The error is usually in HTML to be shown to the user.
+        [webView loadHTMLString:[error localizedDescription] baseURL:nil];
+    }
 
     [self.activityIndicator stopAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	BOXLogFunction();
+    BOXLogFunction();
     [self.activityIndicator stopAnimating];
 }
 
@@ -421,27 +421,27 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-	BOXLog(@"connection %@ did receive authentication challenge %@", connection, challenge);
+    BOXLog(@"connection %@ did receive authentication challenge %@", connection, challenge);
 
     // This is separate from the block below, it is just tracking if there is NTLM in any point
     // of the authorization.
     if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodNTLM]) {
         self.isNTLMAuth = YES;
     }
-    
-	if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-		BOXLog(@"Server trust authentication challenge");
-		SecTrustResultType trustResult = kSecTrustResultOtherError;
-		OSStatus status = SecTrustEvaluate([[challenge protectionSpace] serverTrust], &trustResult);
-		
+
+    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        BOXLog(@"Server trust authentication challenge");
+        SecTrustResultType trustResult = kSecTrustResultOtherError;
+        OSStatus status = SecTrustEvaluate([[challenge protectionSpace] serverTrust], &trustResult);
+
         // Allow a certificate if its status was evaluated successfully and the result is that it should be trusted
         BOOL shouldTrustServer = (status == errSecSuccess && (trustResult == kSecTrustResultProceed || trustResult == kSecTrustResultUnspecified));
 
-		[self completeServerTrustAuthenticationChallenge:challenge shouldTrust:shouldTrustServer];
-	} else {
-		BOXLog(@"Authentication challenge of type %@", [[challenge protectionSpace] authenticationMethod]);
+        [self completeServerTrustAuthenticationChallenge:challenge shouldTrust:shouldTrustServer];
+    } else {
+        BOXLog(@"Authentication challenge of type %@", [[challenge protectionSpace] authenticationMethod]);
 
-        
+
         if (self.authChallengeCycles > kMaxAuthChallengeCycles) {
             // Too many auth challenges, fail out
             BOXLog(@"Too many (%ld) authentication challenges - aborting.", (long)self.authChallengeCycles);
@@ -516,79 +516,79 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	BOXLog(@"Connection %@ did fail with error %@", connection, error);
-	if ([error code] != NSURLErrorUserCancelledAuthentication)
-	{
+    BOXLog(@"Connection %@ did fail with error %@", connection, error);
+    if ([error code] != NSURLErrorUserCancelledAuthentication)
+    {
         [self failAuthenticationWithConnection:connection challenge:nil message:[error localizedDescription] error:error];
-	}
+    }
 }
 
 #pragma mark - NSURLConnectionDataDelegate methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	BOXLog(@"Connection %@ did receive response %@", connection, response);
-	if ([response isKindOfClass:[NSHTTPURLResponse class]])
-	{
-		BOXLog(@"HTTP Headers were: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
-	}
-	self.connectionResponse = response;
-	[self.connectionData setLength:0];
+    BOXLog(@"Connection %@ did receive response %@", connection, response);
+    if ([response isKindOfClass:[NSHTTPURLResponse class]])
+    {
+        BOXLog(@"HTTP Headers were: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
+    }
+    self.connectionResponse = response;
+    [self.connectionData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-	BOXLog(@"Connection %@ did receive %lu bytes of data", connection, (unsigned long)[data length]);
-	[self.connectionData appendData:data];
+    BOXLog(@"Connection %@ did receive %lu bytes of data", connection, (unsigned long)[data length]);
+    [self.connectionData appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	BOXLog(@"Connection %@ did finish loading. Requesting that the webview load the data (%lu bytes) with reponse %@", connection, (unsigned long)[self.connectionData length], self.connectionResponse);
+    BOXLog(@"Connection %@ did finish loading. Requesting that the webview load the data (%lu bytes) with reponse %@", connection, (unsigned long)[self.connectionData length], self.connectionResponse);
     [self setWebViewCanBeUsedDirectly:YES forHost:connection.currentRequest.URL.host];
     [self setWebViewCanBeUsedDirectly:YES forHost:[self.connectionResponse URL].host];
-	[(UIWebView *)self.view loadData:self.connectionData
-							MIMEType:[self.connectionResponse MIMEType]
-					textEncodingName:[self.connectionResponse textEncodingName]
-							 baseURL:[self.connectionResponse URL]];
+    [(UIWebView *)self.view loadData:self.connectionData
+                            MIMEType:[self.connectionResponse MIMEType]
+                    textEncodingName:[self.connectionResponse textEncodingName]
+                             baseURL:[self.connectionResponse URL]];
 
-	self.connection = nil;
-	self.connectionResponse = nil;
+    self.connection = nil;
+    self.connectionResponse = nil;
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
-	// No cached response should be stored for the connection.
-	return nil;
+    // No cached response should be stored for the connection.
+    return nil;
 }
 
 #pragma mark - UIAlertView delegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	BOXLog(@"Alert view with tag %ld clicked button at index %ld", (long)alertView.tag, (long)buttonIndex);
-	if (alertView.tag == BOX_SSO_CREDENTIALS_ALERT_TAG) {
-		if (buttonIndex == alertView.cancelButtonIndex) {
-			BOXLog(@"Cancel");
-		} else {
-			UITextField *usernameField = nil;
-			UITextField *passwordField = nil;
-			if ([alertView alertViewStyle] == UIAlertViewStyleLoginAndPasswordInput) {
-				usernameField = [alertView textFieldAtIndex:0];
-				passwordField = [alertView textFieldAtIndex:1];
-			} else {
-				BOXAssertFail(@"The alert view is not of login and password input style. Cannot safely extract the user's credentials.");
-			}
+    BOXLog(@"Alert view with tag %ld clicked button at index %ld", (long)alertView.tag, (long)buttonIndex);
+    if (alertView.tag == BOX_SSO_CREDENTIALS_ALERT_TAG) {
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            BOXLog(@"Cancel");
+        } else {
+            UITextField *usernameField = nil;
+            UITextField *passwordField = nil;
+            if ([alertView alertViewStyle] == UIAlertViewStyleLoginAndPasswordInput) {
+                usernameField = [alertView textFieldAtIndex:0];
+                passwordField = [alertView textFieldAtIndex:1];
+            } else {
+                BOXAssertFail(@"The alert view is not of login and password input style. Cannot safely extract the user's credentials.");
+            }
 
-			BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
-			[self setWebViewCanBeUsedDirectly:YES forHost:self.connection.currentRequest.URL.host];
+            BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
+            [self setWebViewCanBeUsedDirectly:YES forHost:self.connection.currentRequest.URL.host];
             self.authenticationChallengeCredential = [NSURLCredential credentialWithUser:[usernameField text]
                                                                                 password:[passwordField text]
                                                                              persistence:NSURLCredentialPersistenceNone];
             [[self.authenticationChallenge sender] useCredential:self.authenticationChallengeCredential
                                       forAuthenticationChallenge:self.authenticationChallenge];
-		}
-	} else if (alertView.tag == BOX_SSO_SERVER_TRUST_ALERT_TAG) {
+        }
+    } else if (alertView.tag == BOX_SSO_SERVER_TRUST_ALERT_TAG) {
         if (self.completionBlock) {
             NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIErrorServerCertError userInfo:nil];
             self.completionBlock(self, nil, error);            
@@ -600,9 +600,9 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
             self.completionBlock(self, nil, error);
         }
     }
-
-	// Clear out the authentication challenge in memory
-	self.authenticationChallenge = nil;
+    
+    // Clear out the authentication challenge in memory
+    self.authenticationChallenge = nil;
 }
 
 @end

@@ -2318,10 +2318,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all-load",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = BoxContentSDK;
 				PUBLIC_HEADERS_FOLDER_PATH = include/BoxContentSDK;
 				SKIP_INSTALL = YES;

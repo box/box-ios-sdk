@@ -169,7 +169,16 @@
 
 - (void)cacheFolderPaginatedItemsRequest:(BOXFolderPaginatedItemsRequest *)request
                                withItems:(NSArray *)items
+                                   limit:(NSUInteger)limit
+                                  offset:(NSUInteger)offset
                                    error:(NSError *)error;
+
+- (void)retrieveCacheForPaginatedItemsRequest:(BOXFolderPaginatedItemsRequest *)request
+                                   completion:(BOXItemArrayCompletionBlock)completionBlock;
+
+- (void)cacheFolderItemsRequest:(BOXFolderItemsRequest *)request
+                      withItems:(NSArray *)items
+                          error:(NSError *)error;
 
 - (void)retrieveCacheForFolderItemsRequest:(BOXFolderItemsRequest *)request
                                 completion:(BOXItemsBlock)completionBlock;
