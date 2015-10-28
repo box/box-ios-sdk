@@ -648,7 +648,6 @@
 		596BE9691A39142900206660 /* BOXFileCopyRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileCopyRequestTests.m; sourceTree = "<group>"; };
 		596C9DFF1BCDBE8B00D85F19 /* BOXContentCacheClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXContentCacheClientProtocol.h; path = Protocols/BOXContentCacheClientProtocol.h; sourceTree = "<group>"; };
 		59AB005D1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderPaginatedItemsRequestTests.m; sourceTree = "<group>"; };
-		6B6CB11A164E9D49972D7C33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		700C39351ACB455E00466CA9 /* BOXFolderItemsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFolderItemsRequest.h; sourceTree = "<group>"; };
 		700C39361ACB455E00466CA9 /* BOXFolderItemsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderItemsRequest.m; sourceTree = "<group>"; };
 		704DBA201AD1F7D8001E28BB /* get_items_3_5_duped.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_items_3_5_duped.json; sourceTree = "<group>"; };
@@ -903,13 +902,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		112E46991B8D24CF009DD595 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cache;
-			sourceTree = "<group>";
-		};
 		150D112D1A5DD498009B269D /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1407,7 +1399,6 @@
 			isa = PBXGroup;
 			children = (
 				F05F80E717B3FD8C001182FB /* iOS */,
-				6B6CB11A164E9D49972D7C33 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1415,7 +1406,6 @@
 		E470434016D41DC500FED29A /* BoxContentSDK */ = {
 			isa = PBXGroup;
 			children = (
-				112E46991B8D24CF009DD595 /* Cache */,
 				86E6C40A1B23C84C00EA0E43 /* Sessions */,
 				C562DB411A4829EA0002E510 /* Protocols */,
 				5930AB501A23DD57003970C6 /* Helper */,
