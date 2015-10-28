@@ -246,7 +246,6 @@
 		86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */; };
 		AF153B1317C346D6008D636C /* NSJSONSerialization+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF153B1417C346D6008D636C /* NSJSONSerialization+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */; };
-		C2FB12AF4678255180204740 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6CB11A164E9D49972D7C33 /* libPods.a */; };
 		C53EC2441A3873090007C8A7 /* BOXComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC2421A3873090007C8A7 /* BOXComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C53EC2451A3873090007C8A7 /* BOXComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2431A3873090007C8A7 /* BOXComment.m */; };
 		C53EC25E1A38855E0007C8A7 /* BOXCommentAddRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC25C1A38855E0007C8A7 /* BOXCommentAddRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -649,7 +648,6 @@
 		596BE9691A39142900206660 /* BOXFileCopyRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileCopyRequestTests.m; sourceTree = "<group>"; };
 		596C9DFF1BCDBE8B00D85F19 /* BOXContentCacheClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXContentCacheClientProtocol.h; path = Protocols/BOXContentCacheClientProtocol.h; sourceTree = "<group>"; };
 		59AB005D1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderPaginatedItemsRequestTests.m; sourceTree = "<group>"; };
-		6939C0A4FA3374253E1D1ED2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6B6CB11A164E9D49972D7C33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		700C39351ACB455E00466CA9 /* BOXFolderItemsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFolderItemsRequest.h; sourceTree = "<group>"; };
 		700C39361ACB455E00466CA9 /* BOXFolderItemsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderItemsRequest.m; sourceTree = "<group>"; };
@@ -700,7 +698,6 @@
 		86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppUserSessionTests.m; sourceTree = "<group>"; };
 		AF153B1117C346D6008D636C /* NSJSONSerialization+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+BOXAdditions.h"; sourceTree = "<group>"; };
 		AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+BOXAdditions.m"; sourceTree = "<group>"; };
-		B4477D78CA86D8CB702F4EA9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C53EC2421A3873090007C8A7 /* BOXComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXComment.h; sourceTree = "<group>"; };
 		C53EC2431A3873090007C8A7 /* BOXComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXComment.m; sourceTree = "<group>"; };
 		C53EC25C1A38855E0007C8A7 /* BOXCommentAddRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCommentAddRequest.h; sourceTree = "<group>"; };
@@ -900,7 +897,6 @@
 				C54BBF701758539E00F5DAD8 /* QuartzCore.framework in Frameworks */,
 				E4FADA2B172CE35F0052AD11 /* UIKit.framework in Frameworks */,
 				E470433F16D41DC500FED29A /* Foundation.framework in Frameworks */,
-				C2FB12AF4678255180204740 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,15 +1317,6 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
-		5E4EA083A230A6DFCE0F5E48 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6939C0A4FA3374253E1D1ED2 /* Pods.debug.xcconfig */,
-				B4477D78CA86D8CB702F4EA9 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		86E6C40A1B23C84C00EA0E43 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,7 +1391,6 @@
 				E4081D901758728900F6D6AA /* BoxContentSDKResources */,
 				E470433D16D41DC500FED29A /* Frameworks */,
 				E470433C16D41DC500FED29A /* Products */,
-				5E4EA083A230A6DFCE0F5E48 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1795,13 +1781,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E470436016D41DC500FED29A /* Build configuration list for PBXNativeTarget "BoxContentSDK" */;
 			buildPhases = (
-				7C0AB185AF0B5727C30215B0 /* Check Pods Manifest.lock */,
 				E470433716D41DC500FED29A /* Sources */,
 				E470433816D41DC500FED29A /* Frameworks */,
 				E470433916D41DC500FED29A /* CopyFiles */,
 				E44A95D016E221A500356ADA /* Headers */,
 				E4D8DAF017D008E3003DC44E /* ShellScript */,
-				AF7646E4B7F830F50C91CDEC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1902,36 +1886,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7C0AB185AF0B5727C30215B0 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		AF7646E4B7F830F50C91CDEC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E4D8DAF017D008E3003DC44E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2195,7 +2149,6 @@
 /* Begin XCBuildConfiguration section */
 		15605D8F1A20132200C5EE5A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6939C0A4FA3374253E1D1ED2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -2241,7 +2194,6 @@
 		};
 		15605D901A20132200C5EE5A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4477D78CA86D8CB702F4EA9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -2343,7 +2295,6 @@
 		};
 		E470436116D41DC500FED29A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6939C0A4FA3374253E1D1ED2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				DSTROOT = /tmp/BoxContentSDK.dst;
@@ -2367,7 +2318,6 @@
 		};
 		E470436216D41DC500FED29A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4477D78CA86D8CB702F4EA9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				DSTROOT = /tmp/BoxContentSDK.dst;
