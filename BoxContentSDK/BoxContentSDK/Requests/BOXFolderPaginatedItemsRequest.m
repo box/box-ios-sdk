@@ -127,9 +127,9 @@
     if (cacheBlock) {
         if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForPaginatedItemsRequest:completion:)]) {
             [self.cacheClient retrieveCacheForPaginatedItemsRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, 0, NSMakeRange(0, 0), nil);
         }
-    } else {
-        cacheBlock(nil, 0, NSMakeRange(0, 0), nil);
     }
 
     [self performRequestWithCompletion:refreshBlock];
