@@ -18,7 +18,6 @@
 @property (nonatomic, readwrite, strong) BOXOAuth2Session *OAuth2Session;
 @property (nonatomic, readwrite, strong) BOXAppUserSession *appSession;
 @property (nonatomic, readwrite, strong) BOXAbstractSession *session;
-@property (nonatomic, readwrite, strong) BOXRequestCache *requestCache;
 
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;

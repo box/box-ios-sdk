@@ -28,9 +28,4 @@
  */
 - (BOOL)box_isEmptyOrWhitespacesOnly;
 
-/**
- *  Returns the SHA1 for a string.
- */
-- (NSString *)box_sha1;
-
 @end

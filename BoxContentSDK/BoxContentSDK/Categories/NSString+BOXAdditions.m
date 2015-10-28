@@ -12,7 +12,6 @@ long long const BOX_GIGABYTE = BOX_MEGABYTE * 1024;
 long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
 #import "NSString+BOXAdditions.h"
-#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (BOXAdditions)
 
@@ -25,28 +24,18 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     {
         double dSize = fileSize / (double)BOX_TERABYTE;
 		result_str = [NSString stringWithFormat:NSLocalizedString(@"%1.1f TB", @"File size in terabytes (example: 1 TB)"), dSize];
-    }
-	else if (fileSize >= BOX_GIGABYTE)
-	{
+    } else if (fileSize >= BOX_GIGABYTE) {
 		double dSize = fileSize / (double)BOX_GIGABYTE;
 		result_str = [NSString stringWithFormat:NSLocalizedString(@"%1.1f GB", @"File size in gigabytes (example: 1 GB)"), dSize];
-	}
-	else if (fileSize >= BOX_MEGABYTE)
-	{
+	} else if (fileSize >= BOX_MEGABYTE) {
 		double dSize = fileSize / (double)BOX_MEGABYTE;
 		result_str = [NSString stringWithFormat:NSLocalizedString(@"%1.1f MB", @"File size in megabytes (example: 1 MB)"), dSize];
-	}
-	else if (fileSize >= BOX_KILOBYTE)
-	{
+	} else if (fileSize >= BOX_KILOBYTE) {
 		double dSize = fileSize / (double)BOX_KILOBYTE;
 		result_str = [NSString stringWithFormat:NSLocalizedString(@"%1.1f KB", @"File size in kilobytes (example: 1 KB)"), dSize];
-	}
-    else if(fileSize > 0)
-    {
+	} else if(fileSize > 0) {
         result_str = [NSString stringWithFormat:NSLocalizedString(@"%1.1f B", @"File size in bytes (example: 1 B)"), fileSize];
-    }
-	else
-	{
+    } else {
 		result_str = NSLocalizedString(@"Empty", @"File size 0 bytes");
 	}
     
@@ -59,26 +48,6 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     BOOL isEmptyOrWhitespaces = ([self length] == 0 ||
                                  [self rangeOfCharacterFromSet:nonWhitespaceCharacterSet].location == NSNotFound);
     return isEmptyOrWhitespaces;
-}
-
-- (NSString *)box_sha1
-{
-    // Taken from http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
-    
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
-    
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes, (CC_LONG)data.length, digest);
-    
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH *2];
-    
-    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
-        [output appendFormat:@"%02x",digest[i]];
-    }
-    
-    return output;
 }
 
 @end
