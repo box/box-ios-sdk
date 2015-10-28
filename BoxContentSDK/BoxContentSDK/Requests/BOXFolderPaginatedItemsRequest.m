@@ -60,34 +60,10 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
-    [self performRequestWithCached:nil refreshed:completionBlock];
-}
-
-- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
-{
-    if (cacheBlock && self.requestCache) {
-        NSDictionary *JSONDictionary = [self.requestCache fetchCacheForKey:self.requestCacheKey];
-        if (JSONDictionary != nil) {
-            NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
-            NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
-            NSUInteger limit = [JSONDictionary[BOXAPIParameterKeyLimit] unsignedIntegerValue];
-            NSArray *itemDictionaries = JSONDictionary[BOXAPICollectionKeyEntries];
-            NSUInteger capacity = itemDictionaries.count;
-            NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
-            
-            for (NSDictionary *itemDictionary in itemDictionaries) {
-                BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
-                [items addObject:item];
-            }
-            cacheBlock(items, totalCount, NSMakeRange(offset, limit), nil);
-        };
-    }
-    
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-    BOXRequestCache *requestCache = self.requestCache;
-    
-    if (refreshBlock) {
+
+    if (completionBlock) {
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
             NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
@@ -99,7 +75,7 @@
             for (NSDictionary *itemDictionary in itemDictionaries) {
                 BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
-                
+
                 NSArray *pathFolders = nil;
 
                 if ([item isKindOfClass:[BOXFile class]]) {
@@ -108,41 +84,55 @@
                     pathFolders = [((BOXFolder *) item) pathFolders];
                 } else if ([item isKindOfClass:[BOXBookmark class]]) {
                     pathFolders = [((BOXBookmark *) item) pathFolders];
-                }                
+                }
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
                                                                                        itemType:item.type
                                                                                       ancestors:pathFolders];
             }
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:items
+                                                             limit:self.limit
+                                                            offset:self.offset
                                                              error:nil];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{
-                refreshBlock(items, totalCount, NSMakeRange(offset, limit), nil);
-                [requestCache updateCacheForKey:self.requestCacheKey withResponse:JSONDictionary];
+                completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:nil
+                                                             limit:0
+                                                            offset:0
                                                              error:error];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{
-                refreshBlock(nil, 0, NSMakeRange(0, 0), error);
-                if ([BOXRequest shouldRemoveCachedResponseForError:error]) {
-                    [requestCache removeCacheForKey:self.requestCacheKey];
-                }
+                completionBlock(nil, 0, NSMakeRange(0, 0), error);
+
             } onMainThread:isMainThread];
         };
     }
-
+    
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForPaginatedItemsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForPaginatedItemsRequest:self completion:cacheBlock];
+        }
+    } else {
+        cacheBlock(nil, 0, NSMakeRange(0, 0), nil);
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods

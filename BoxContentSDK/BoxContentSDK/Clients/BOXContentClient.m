@@ -21,7 +21,6 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
-#import "BOXRequestCache.h"
 
 @interface BOXContentClient ()
 
