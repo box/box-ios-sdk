@@ -60,11 +60,21 @@
     if (completionBlock) {
         collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationUpdateRequest:withCollaboration:error:)]) {
+                [self.cacheClient cacheCollaborationUpdateRequest:self
+                                                withCollaboration:collaboration
+                                                            error:nil];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaboration, nil);
             } onMainThread:isMainThread];
         };
         collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationUpdateRequest:withCollaboration:error:)]) {
+                [self.cacheClient cacheCollaborationUpdateRequest:self
+                                                withCollaboration:nil
+                                                            error:error];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
