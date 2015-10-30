@@ -82,11 +82,22 @@
     if (completionBlock) {
         collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+                [self.cacheClient cacheCollaborationCreateRequest:self
+                                                withCollaboration:collaboration
+                                                            error:nil];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaboration, nil);
             } onMainThread:isMainThread];
         };
         collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+                [self.cacheClient cacheCollaborationCreateRequest:self
+                                                withCollaboration:nil
+                                                            error:error];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];

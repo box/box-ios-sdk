@@ -43,11 +43,21 @@
                 [collaborations addObject:collaboration];
             }
             
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationPendingRequest:withCollaborations:error:)]) {
+                [self.cacheClient cacheCollaborationPendingRequest:self
+                                                withCollaborations:collaborations
+                                                            error:nil];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaborations, nil);
             } onMainThread:isMainThread];
         };
         collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationPendingRequest:withCollaborations:error:)]) {
+                [self.cacheClient cacheCollaborationPendingRequest:self
+                                                withCollaborations:nil
+                                                             error:error];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
@@ -55,6 +65,19 @@
     }
     
     [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXCollaborationArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXCollaborationArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCollaborationPendingRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForCollaborationPendingRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
+    }
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

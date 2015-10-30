@@ -48,6 +48,12 @@
 
 @class BOXUserRequest;
 
+@class BOXCollaborationRequest;
+@class BOXCollaborationCreateRequest;
+@class BOXCollaborationPendingRequest;
+@class BOXCollaborationRemoveRequest;
+@class BOXCollaborationUpdateRequest;
+
 @protocol BOXContentCacheClientProtocol <NSObject>
 
 @optional
@@ -220,5 +226,32 @@
 
 - (void)retrieveCacheForFileCommentsRequest:(BOXFileCommentsRequest *)request
                                  completion:(BOXObjectsArrayCompletionBlock)completionBlock;
+
+#pragma mark - Collaborations
+
+- (void)cacheCollaborationRequest:(BOXCollaborationRequest *)request
+                withCollaboration:(BOXCollaboration *)collaboration
+                            error:(NSError *)error;
+
+- (void)retrieveCacheForCollaborationRequest:(BOXCollaborationRequest *)request
+                                  completion:(BOXCollaborationBlock)completionBlock;
+
+- (void)cacheCollaborationCreateRequest:(BOXCollaborationCreateRequest *)request
+                      withCollaboration:(BOXCollaboration *)collaboration
+                                  error:(NSError *)error;
+
+- (void)cacheCollaborationPendingRequest:(BOXCollaborationPendingRequest *)request
+                      withCollaborations:(NSArray *)collaborations
+                                  error:(NSError *)error;
+
+- (void)retrieveCacheForCollaborationPendingRequest:(BOXCollaborationPendingRequest *)request
+                                         completion:(BOXCollaborationArrayCompletionBlock)completionBlock;
+
+- (void)cacheCollaborationRemoveRequest:(BOXCollaborationRemoveRequest *)request
+                                  error:(NSError *)error;
+
+- (void)cacheCollaborationUpdateRequest:(BOXCollaborationUpdateRequest *)request
+                      withCollaboration:(BOXCollaboration *)collaboration
+                                  error:(NSError *)error;
 
 @end
