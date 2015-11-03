@@ -13,6 +13,7 @@
 @property (nonatomic, readwrite, strong) NSString *groupID;
 @property (nonatomic, readwrite, strong) NSString *login;
 @property (nonatomic, readwrite, strong) BOXCollaborationRole *role;
+@property (nonatomic, readonly, strong) NSString *folderID;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (void)performRequestWithCompletion:(BOXCollaborationBlock)completionBlock;
