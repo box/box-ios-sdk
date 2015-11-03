@@ -8,12 +8,6 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXCollaboration.h"
 
-@interface BOXCollaborationCreateRequest ()
-
-@property (nonatomic, readonly, strong) NSString *folderID;
-
-@end
-
 @implementation BOXCollaborationCreateRequest
 
 - (instancetype)initWithFolderID:(NSString *)folderID
