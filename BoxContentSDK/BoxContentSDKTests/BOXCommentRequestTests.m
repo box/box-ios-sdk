@@ -11,6 +11,7 @@
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXComment.h"
+#import "BOXContentCacheTestClient.h"
 
 @interface BOXCommentRequestTests : BOXRequestTestCase
 
@@ -39,18 +40,69 @@
     BOXComment *expectedComment = [[BOXComment alloc] initWithJSON:expectedResults];
     
     BOXCommentRequest *commentRequest = [[BOXCommentRequest alloc] initWithCommentID:expectedComment.modelID];
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    commentRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:commentRequest];
+
+    [[cacheClientMock expect] cacheCommentRequest:commentRequest
+                                      withComment:[OCMArg isNotNil]
+                                            error:[OCMArg isNil]];
+    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg any]];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [commentRequest performRequestWithCompletion:^(BOXComment *comment, NSError *error) {
+
+    [commentRequest performRequestWithCached:^(BOXComment *comment, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(BOXComment *comment, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(comment);
         [self assertModel:comment isEquivalentTo:expectedComment];
-        
+
         [expectation fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
+}
+
+- (void)test_request_handles_error
+{
+    NSData *cannedData = [self cannedResponseDataWithName:@"comment_all_fields"];
+    NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:404 responseData:nil];
+
+    NSDictionary *expectedResults = [NSJSONSerialization JSONObjectWithData:cannedData options:kNilOptions error:nil];
+    BOXComment *expectedComment = [[BOXComment alloc] initWithJSON:expectedResults];
+
+    BOXCommentRequest *commentRequest = [[BOXCommentRequest alloc] initWithCommentID:expectedComment.modelID];
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    commentRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
+    [self setCannedURLResponse:response cannedResponseData:nil forRequest:commentRequest];
+
+    [[cacheClientMock expect] cacheCommentRequest:commentRequest
+                                      withComment:[OCMArg isNil]
+                                            error:[OCMArg isNotNil]];
+    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg any]];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+
+    [commentRequest performRequestWithCached:^(BOXComment *comment, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(BOXComment *comment, NSError *error) {
+        XCTAssertNotNil(error);
+        XCTAssertNil(comment);
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    
+    [cacheClientMock verify];
 }
 
 - (void)test_that_request_with_all_fields_has_expected_URLRequest_query_params

@@ -191,6 +191,7 @@
 		3DE35CB11A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */; };
 		3DE3A1D91AB112A5002E3FDA /* BOXKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DE3A1D71AB112A5002E3FDA /* BOXKeychainItemWrapper.h */; };
 		3DE3A1DA1AB112A5002E3FDA /* BOXKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3A1D81AB112A5002E3FDA /* BOXKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		590A1F7E1BE843B4008CB28D /* BOXContentCacheTestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */; settings = {ASSET_TAGS = (); }; };
 		59258FFD1A3A5BC00038B9EE /* get_items.json in Resources */ = {isa = PBXBuildFile; fileRef = 59258FFC1A3A5BC00038B9EE /* get_items.json */; };
 		5930AB551A23E149003970C6 /* BOXDispatchHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5930AB531A23E149003970C6 /* BOXDispatchHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5930AB561A23E149003970C6 /* BOXDispatchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930AB541A23E149003970C6 /* BOXDispatchHelper.m */; };
@@ -640,6 +641,8 @@
 		3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileVersionPromoteRequestTests.m; sourceTree = "<group>"; };
 		3DE3A1D71AB112A5002E3FDA /* BOXKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXKeychainItemWrapper.h; sourceTree = "<group>"; };
 		3DE3A1D81AB112A5002E3FDA /* BOXKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXKeychainItemWrapper.m; sourceTree = "<group>"; };
+		590A1F7C1BE843B4008CB28D /* BOXContentCacheTestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXContentCacheTestClient.h; sourceTree = "<group>"; };
+		590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentCacheTestClient.m; sourceTree = "<group>"; };
 		59258FFC1A3A5BC00038B9EE /* get_items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_items.json; sourceTree = "<group>"; };
 		5930AB531A23E149003970C6 /* BOXDispatchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXDispatchHelper.h; path = Helper/BOXDispatchHelper.h; sourceTree = "<group>"; };
 		5930AB541A23E149003970C6 /* BOXDispatchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BOXDispatchHelper.m; path = Helper/BOXDispatchHelper.m; sourceTree = "<group>"; };
@@ -1238,6 +1241,8 @@
 				159D32BB1A645BA10012CACB /* BOXContentClientTestCase.h */,
 				159D32BC1A645BA10012CACB /* BOXContentClientTestCase.m */,
 				159D32C31A645BB50012CACB /* BOXContentClientSessionTests.m */,
+				590A1F7C1BE843B4008CB28D /* BOXContentCacheTestClient.h */,
+				590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -1929,6 +1934,7 @@
 				C53EC2631A388E9F0007C8A7 /* BOXCommentAddRequestTests.m in Sources */,
 				158257A41A2576D100AB1FD4 /* BOXRequestTests.m in Sources */,
 				0E16F10D1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m in Sources */,
+				590A1F7E1BE843B4008CB28D /* BOXContentCacheTestClient.m in Sources */,
 				C5745BE51A5AE7FB00824FFA /* BOXFolderCollaborationsRequestTests.m in Sources */,
 				15F5EE541A20165800FBBE1D /* BOXContentSDKTestCase.m in Sources */,
 				C545A01C1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m in Sources */,
