@@ -73,10 +73,10 @@
 
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
+
         fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             
@@ -107,9 +107,8 @@
                     completionBlock(nil, error);
                 } onMainThread:isMainThread];
             };
+        [self performRequest];
     }
-
-    [self performRequest];
 }
 
 - (void)performRequestWithCached:(BOXFileBlock)cacheBlock

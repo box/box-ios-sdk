@@ -13,7 +13,11 @@
 @property (nonatomic, readonly, strong) NSString *commentID;
 
 - (instancetype)initWithCommentID:(NSString *)commentID;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXCommentBlock)completionBlock;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXCommentBlock)cacheBlock
                        refreshed:(BOXCommentBlock)refreshBlock;
 

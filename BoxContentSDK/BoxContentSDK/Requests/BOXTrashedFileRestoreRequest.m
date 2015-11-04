@@ -54,34 +54,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFileRestoreRequest:withFile:error:)]) {
-                [self.cacheClient cacheTrashedFileRestoreRequest:self
-                                                        withFile:file
-                                                           error:nil];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFileRestoreRequest:withFile:error:)]) {
+            [self.cacheClient cacheTrashedFileRestoreRequest:self
+                                                    withFile:file
+                                                       error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
-        };
-        fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFileRestoreRequest:withFile:error:)]) {
-                [self.cacheClient cacheTrashedFileRestoreRequest:self
-                                                        withFile:nil
-                                                           error:error];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFileRestoreRequest:withFile:error:)]) {
+            [self.cacheClient cacheTrashedFileRestoreRequest:self
+                                                    withFile:nil
+                                                       error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

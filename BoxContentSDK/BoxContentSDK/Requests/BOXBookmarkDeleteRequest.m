@@ -60,28 +60,30 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkDeleteRequest:error:)]) {
-                [self.cacheClient cacheBookmarkDeleteRequest:self error:nil];
-            }
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkDeleteRequest:error:)]) {
+            [self.cacheClient cacheBookmarkDeleteRequest:self error:nil];
+        }
 
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
-        };
-        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkDeleteRequest:error:)]) {
-                [self.cacheClient cacheBookmarkDeleteRequest:self error:error];
-            }
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkDeleteRequest:error:)]) {
+            [self.cacheClient cacheBookmarkDeleteRequest:self error:error];
+        }
 
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];
-        };
-    }
+        }
+    };
     
     [self performRequest];
 }

@@ -36,10 +36,10 @@
 
 - (void)performRequestWithCompletion:(BOXUserBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXUser *user = [[BOXUser alloc] initWithJSON:JSONDictionary];
 
@@ -65,9 +65,8 @@
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-
-    [self performRequest];
 }
 
 - (void)performRequestWithCached:(BOXUserBlock)cacheBlock

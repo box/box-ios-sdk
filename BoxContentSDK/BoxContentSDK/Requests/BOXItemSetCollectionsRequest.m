@@ -88,19 +88,21 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collectionAddItemOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             BOXItem *item = [self itemWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(item, nil);
             } onMainThread:isMainThread];
-        };
-        collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
+        }
+    };
     [self performRequest];
 }
 

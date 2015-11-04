@@ -60,34 +60,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+    folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCopyRequest:withFolder:error:)]) {
-                [self.cacheClient cacheFolderCopyRequest:self
-                                              withFolder:folder
-                                                   error:nil];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderCopyRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderCopyRequest:self
+                                          withFolder:folder
+                                               error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
-        };
-        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCopyRequest:withFolder:error:)]) {
-                [self.cacheClient cacheFolderCopyRequest:self
-                                              withFolder:nil
-                                                   error:error];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderCopyRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderCopyRequest:self
+                                          withFolder:nil
+                                               error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

@@ -90,9 +90,8 @@
                 completion(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-
-    [self performRequest];
 }
 
 - (void)performRequestWithCached:(BOXItemBlock)cacheBlock

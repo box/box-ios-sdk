@@ -26,7 +26,10 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (instancetype)initWithSearchQuery:(NSString *)query inRange:(NSRange)range;
+
 - (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
 
 @end
