@@ -50,7 +50,7 @@
     [[cacheClientMock expect] cacheCommentRequest:commentRequest
                                       withComment:[OCMArg isNotNil]
                                             error:[OCMArg isNil]];
-    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg any]];
+    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg isNotNil]];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 
@@ -88,7 +88,7 @@
     [[cacheClientMock expect] cacheCommentRequest:commentRequest
                                       withComment:[OCMArg isNil]
                                             error:[OCMArg isNotNil]];
-    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg any]];
+    [[cacheClientMock expect] retrieveCacheForCommentRequest:commentRequest completion:[OCMArg isNotNil]];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 

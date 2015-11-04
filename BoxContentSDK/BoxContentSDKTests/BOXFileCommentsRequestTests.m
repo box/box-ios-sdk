@@ -70,7 +70,7 @@
     [[cacheClientMock expect] cacheFileCommentsRequest:request
                                           withComments:[OCMArg isNotNil]
                                                  error:[OCMArg isNil]];
-    [[cacheClientMock expect] retrieveCacheForFileCommentsRequest:request completion:[OCMArg any]];
+    [[cacheClientMock expect] retrieveCacheForFileCommentsRequest:request completion:[OCMArg isNotNil]];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 
@@ -108,7 +108,7 @@
     [[cacheClientMock expect] cacheFileCommentsRequest:request
                                           withComments:[OCMArg isNil]
                                                  error:[OCMArg isNotNil]];
-    [[cacheClientMock expect] retrieveCacheForFileCommentsRequest:request completion:[OCMArg any]];
+    [[cacheClientMock expect] retrieveCacheForFileCommentsRequest:request completion:[OCMArg isNotNil]];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 

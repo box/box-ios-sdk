@@ -58,8 +58,10 @@
     
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:request];
 
-    [[cacheClientMock expect] cacheBookmarkCommentsRequest:request withComments:[OCMArg isNotNil] error:[OCMArg isNil]];
-    [[cacheClientMock expect] retrieveCacheForBookmarkCommentsRequest:request completion:[OCMArg any]];
+    [[cacheClientMock expect] cacheBookmarkCommentsRequest:request
+                                              withComments:[OCMArg isNotNil]
+                                                     error:[OCMArg isNil]];
+    [[cacheClientMock expect] retrieveCacheForBookmarkCommentsRequest:request completion:[OCMArg isNotNil]];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 
@@ -97,7 +99,7 @@
     [[cacheClientMock expect] cacheBookmarkCommentsRequest:request
                                               withComments:[OCMArg isNil]
                                                      error:[OCMArg isNotNil]];
-    [[cacheClientMock expect] retrieveCacheForBookmarkCommentsRequest:request completion:[OCMArg any]];
+    [[cacheClientMock expect] retrieveCacheForBookmarkCommentsRequest:request completion:[OCMArg isNotNil]];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
 
