@@ -14,7 +14,11 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXItemsBlock)completionBlock;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXItemsBlock)cacheBlock
                        refreshed:(BOXItemsBlock)refreshBlock;
 

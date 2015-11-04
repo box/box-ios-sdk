@@ -43,10 +43,10 @@
 
 - (void)performRequestWithCompletion:(BOXCollaborationArrayCompletionBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSArray *collaborationDictionaries = [JSONDictionary objectForKey:BOXAPICollectionKeyEntries];
             NSMutableArray *collaborations = [NSMutableArray arrayWithCapacity:collaborationDictionaries.count];
@@ -76,9 +76,8 @@
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 - (void)performRequestWithCached:(BOXCollaborationArrayCompletionBlock)cacheBlock

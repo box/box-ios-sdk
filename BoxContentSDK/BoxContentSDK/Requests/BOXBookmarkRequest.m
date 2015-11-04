@@ -58,10 +58,10 @@
 
 - (void)performRequestWithCompletion:(BOXBookmarkBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *bookmarkOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *bookmarkOperation = (BOXAPIJSONOperation *)self.operation;
+
         bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
             
@@ -91,9 +91,9 @@
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
-    }
 
-    [self performRequest];
+        [self performRequest];
+    }
 }
 
 - (void)performRequestWithCached:(BOXBookmarkBlock)cacheBlock

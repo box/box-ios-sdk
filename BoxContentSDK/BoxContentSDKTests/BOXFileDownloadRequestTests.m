@@ -153,7 +153,8 @@
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
     [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
     
-    [request performRequestWithProgress:nil completion:nil];
+    [request performRequestWithProgress:nil completion:^(NSError *error) {
+    }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
@@ -168,7 +169,8 @@
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
     [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
     
-    [request performRequestWithProgress:nil completion:nil];
+    [request performRequestWithProgress:nil completion:^(NSError *error) {
+    }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];}

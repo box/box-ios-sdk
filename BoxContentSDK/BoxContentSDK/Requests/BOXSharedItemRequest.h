@@ -15,8 +15,10 @@
 - (instancetype)initWithURL:(NSURL *)sharedLinkURL
                    password:(NSString *)password;
 
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXItemBlock)completion;
 
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXItemBlock)cacheBlock
                        refreshed:(BOXItemBlock)refreshBlock;
 

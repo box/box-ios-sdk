@@ -18,7 +18,11 @@
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXFolderBlock)cacheBlock
                        refreshed:(BOXFolderBlock)refreshBlock;
 

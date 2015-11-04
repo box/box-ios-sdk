@@ -49,29 +49,28 @@
 
     BOXAPIJSONOperation *commentDeleteOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        commentDeleteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    commentDeleteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
-                [self.cacheClient cacheDeleteCommentRequest:self error:nil];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
+            [self.cacheClient cacheDeleteCommentRequest:self error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
-        };
-        commentDeleteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    commentDeleteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
-                [self.cacheClient cacheDeleteCommentRequest:self error:error];
-            }
-
+        if ([self.cacheClient respondsToSelector:@selector(cacheDeleteCommentRequest:error:)]) {
+            [self.cacheClient cacheDeleteCommentRequest:self error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

@@ -14,7 +14,10 @@
  */
 @property (nonatomic, readwrite, assign) BOOL requestAllUserFields;
 
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXUserBlock)completionBlock;
+
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXUserBlock)cacheBlock
                        refreshed:(BOXUserBlock)refreshBlock;
 

@@ -54,10 +54,10 @@
 
 - (void)performRequestWithCompletion:(BOXObjectsArrayCompletionBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *commentsOperation = (BOXAPIJSONOperation *)self.operation;
-    
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *commentsOperation = (BOXAPIJSONOperation *)self.operation;
+
         commentsOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSArray *comments = [self commentsFromJSONDictionary:JSONDictionary];
 
@@ -84,9 +84,8 @@
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 - (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock

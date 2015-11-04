@@ -7,6 +7,7 @@
 
 @interface BOXCollectionListRequest : BOXRequest
 
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXCollectionArrayBlock)completionBlock;
 
 @end

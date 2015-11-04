@@ -79,6 +79,7 @@
 
 /**
  * Performs the GET request to retrieve metadata template schemas.
+ * Perform API request and any cache update only if completionBlock is not nil
  *
  * @param completionBlock The block of code to be run after the GET request has completed
  *                        regardless of success.
