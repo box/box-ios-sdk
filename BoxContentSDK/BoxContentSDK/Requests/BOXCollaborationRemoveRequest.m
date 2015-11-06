@@ -54,7 +54,7 @@
     collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
         if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
             [self.cacheClient cacheCollaborationRemoveRequest:self
-                                                        error:nil];
+                                                        error:error];
         }
         if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
