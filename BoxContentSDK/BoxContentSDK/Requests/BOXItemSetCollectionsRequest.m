@@ -93,9 +93,9 @@
             BOXItem *item = [self itemWithJSON:JSONDictionary];
 
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
-                [self.cacheClient cacheItemSetCollectionRequest:self
-                                                withUpdatedItem:item
-                                                          error:nil];
+                [self.cacheClient cacheItemSetCollectionsRequest:self
+                                                 withUpdatedItem:item
+                                                           error:nil];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{
@@ -107,9 +107,9 @@
         if (completionBlock) {
 
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
-                [self.cacheClient cacheItemSetCollectionRequest:self
-                                                withUpdatedItem:nil
-                                                          error:error];
+                [self.cacheClient cacheItemSetCollectionsRequest:self
+                                                 withUpdatedItem:nil
+                                                           error:error];
             }
 
             [BOXDispatchHelper callCompletionBlock:^{

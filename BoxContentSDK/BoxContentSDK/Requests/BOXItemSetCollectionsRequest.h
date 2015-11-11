@@ -6,7 +6,7 @@
 #import "BOXRequest_Private.h"
 
 /*
- * This request set a BOXItem to a list of collections. The return value is the updated BOXItem.
+ * This request associates a BOXItem to a list of collections. The return value is the updated BOXItem.
  */
 
 @interface BOXItemSetCollectionsRequest : BOXRequest

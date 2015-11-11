@@ -268,9 +268,9 @@
 - (void)retrieveCacheForCollectionListRequest:(BOXCollectionListRequest *)request
                                    completion:(BOXCollectionArrayBlock)completionBlock;
 
-- (void)cacheItemSetCollectionRequest:(BOXItemSetCollectionsRequest *)request
-                      withUpdatedItem:(BOXItem *)item
-                                error:(NSError *)error;
+- (void)cacheItemSetCollectionsRequest:(BOXItemSetCollectionsRequest *)request
+                       withUpdatedItem:(BOXItem *)item
+                                 error:(NSError *)error;
 
 - (void)cacheCollectionItemsRequest:(BOXCollectionItemsRequest *)request
                           withItems:(NSArray *)items
