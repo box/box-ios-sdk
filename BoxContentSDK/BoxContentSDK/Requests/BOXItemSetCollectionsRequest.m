@@ -91,6 +91,13 @@
     collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
         if (completionBlock) {
             BOXItem *item = [self itemWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
+                [self.cacheClient cacheItemSetCollectionRequest:self
+                                                withUpdatedItem:item
+                                                          error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(item, nil);
             } onMainThread:isMainThread];
@@ -98,6 +105,13 @@
     };
     collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
         if (completionBlock) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
+                [self.cacheClient cacheItemSetCollectionRequest:self
+                                                withUpdatedItem:nil
+                                                          error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];

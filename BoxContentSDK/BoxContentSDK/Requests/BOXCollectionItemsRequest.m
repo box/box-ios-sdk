@@ -11,6 +11,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *collectionID;
 @property (nonatomic, readwrite, assign) NSRange range;
+
 @end
 
 @implementation BOXCollectionItemsRequest
@@ -74,17 +75,44 @@
             for (NSDictionary *itemDictionary in itemDictionaries) {
                 [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionItemsRequest:withItems:error:)]) {
+                [self.cacheClient cacheCollectionItemsRequest:self
+                                                    withItems:items
+                                                        error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionItemsRequest:withItems:error:)]) {
+                [self.cacheClient cacheCollectionItemsRequest:self
+                                                    withItems:nil
+                                                        error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, 0, NSMakeRange(0, 0), error);
             } onMainThread:isMainThread];
         };
         [self performRequest];
     }
+}
+
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCollectionItemsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForCollectionItemsRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, 0, NSMakeRange(0,0), nil);
+        }
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end
