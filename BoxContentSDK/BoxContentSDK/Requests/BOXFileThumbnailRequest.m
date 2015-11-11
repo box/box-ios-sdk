@@ -91,46 +91,17 @@
         dataOperation.successBlock = ^(NSString *fileID, long long expectedTotalBytes) {
             NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
             UIImage *image = [UIImage imageWithData:data scale:[[UIScreen mainScreen] scale]];
-
-            if ([self.cacheClient respondsToSelector:@selector(cacheFileThumbnailRequest:withThumbnail:error:)]) {
-                [self.cacheClient cacheFileThumbnailRequest:self
-                                              withThumbnail:image
-                                                      error:nil];
-            }
-
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(image, nil);
             } onMainThread:isMainThread];
         };
         dataOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-
-            if ([self.cacheClient respondsToSelector:@selector(cacheFileThumbnailRequest:withThumbnail:error:)]) {
-                [self.cacheClient cacheFileThumbnailRequest:self
-                                              withThumbnail:nil
-                                                      error:error];
-            }
-
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
         [self performRequest];
     }
-}
-
-- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
-                            cached:(BOXImageBlock)cacheBlock
-                         refreshed:(BOXImageBlock)refreshBlock
-{
-    if (cacheBlock) {
-        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileThumbnailRequest:completion:)]) {
-            [self.cacheClient retrieveCacheForFileThumbnailRequest:self completion:cacheBlock];
-        } else {
-            cacheBlock(nil, nil);
-        }
-    }
-
-    [self performRequestWithProgress:progressBlock completion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods
