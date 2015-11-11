@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXRequestTestCase.h"
 #import "BOXCollectionItemsRequest.h"
 #import "BOXCollection.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
+#import "BOXContentCacheTestClient.h"
 
 @interface BOXCollectionItemsRequestTests : BOXRequestTestCase
 
@@ -38,8 +40,13 @@
 
 - (void)test_that_expected_items_are_returned_for_folder
 {
-    BOXCollectionItemsRequest *request = [[BOXCollectionItemsRequest alloc] initWithCollectionID:@"123" inRange:NSMakeRange(0, 5)];
-    
+    BOXCollectionItemsRequest *request = [[BOXCollectionItemsRequest alloc] initWithCollectionID:@"123"
+                                                                                         inRange:NSMakeRange(0, 5)];
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    request.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
     NSData *cannedData = [self cannedResponseDataWithName:@"get_items"];
     
     NSDictionary *expectedResults = [NSJSONSerialization JSONObjectWithData:cannedData options:kNilOptions error:nil];
@@ -63,9 +70,16 @@
     NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:200 responseData:cannedData];
     
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:request];
+
+    [[cacheClientMock expect] cacheCollectionItemsRequest:request
+                                                withItems:[OCMArg isNotNil]
+                                                    error:[OCMArg isNil]];
+    [[cacheClientMock expect] retrieveCacheForCollectionItemsRequest:request completion:[OCMArg isNotNil]];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithCompletion:^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+    [request performRequestWithCached:^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
         XCTAssertNil(error);
         XCTAssertEqual(items.count, expectedItems.count);
         XCTAssertEqual(totalCount, 24);
@@ -79,7 +93,38 @@
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
 }
 
+- (void)test_request_handles_error
+{
+    BOXCollectionItemsRequest *request = [[BOXCollectionItemsRequest alloc] initWithCollectionID:@"123"
+                                                                                         inRange:NSMakeRange(0, 5)];
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    request.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
+    NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:404 responseData:nil];
+
+    [self setCannedURLResponse:response cannedResponseData:nil forRequest:request];
+
+    [[cacheClientMock expect] cacheCollectionItemsRequest:request
+                                                withItems:[OCMArg isNil]
+                                                    error:[OCMArg isNotNil]];
+    [[cacheClientMock expect] retrieveCacheForCollectionItemsRequest:request completion:[OCMArg isNotNil]];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+    [request performRequestWithCached:^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error) {
+        XCTAssertNotNil(error);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
+}
 
 @end

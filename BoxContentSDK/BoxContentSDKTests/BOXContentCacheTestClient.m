@@ -69,4 +69,52 @@
     //Do nothing.
 }
 
+#pragma mark - Collections
+
+- (void)cacheCollectionListRequest:(BOXCollectionListRequest *)request
+                   withCollections:(NSArray *)collections
+                             error:(NSError *)error
+{
+    //Do nothing.
+}
+
+- (void)retrieveCacheForCollectionListRequest:(BOXCollectionListRequest *)request
+                                   completion:(BOXCollectionArrayBlock)completionBlock
+{
+    //Do nothing.
+}
+
+- (void)cacheItemSetCollectionsRequest:(BOXItemSetCollectionsRequest *)request
+                       withUpdatedItem:(BOXItem *)item
+                                 error:(NSError *)error
+{
+    //Do nothing.
+}
+
+- (void)cacheCollectionItemsRequest:(BOXCollectionItemsRequest *)request
+                          withItems:(NSArray *)items
+                              error:(NSError *)error
+{
+    //Do nothing.
+}
+
+- (void)retrieveCacheForCollectionItemsRequest:(BOXCollectionItemsRequest *)request
+                                    completion:(BOXItemArrayCompletionBlock)completionBlock
+{
+    //Do nothing.
+}
+
+- (void)cacheFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
+                        withCollection:(BOXCollection *)collection
+                                 error:(NSError *)error
+{
+    //Do nothing.
+}
+
+- (void)retrieveCacheForFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
+                                  completionBlock:(BOXCollectionBlock)completionBlock
+{
+    //Do nothing.
+}
+
 @end
