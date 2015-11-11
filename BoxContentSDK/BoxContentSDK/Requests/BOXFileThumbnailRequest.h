@@ -21,9 +21,4 @@
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
                         completion:(BOXImageBlock)completionBlock;
 
-//Perform API request and any cache update only if refreshBlock is not nil
-- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
-                            cached:(BOXImageBlock)cacheBlock
-                         refreshed:(BOXImageBlock)refreshBlock;
-
 @end

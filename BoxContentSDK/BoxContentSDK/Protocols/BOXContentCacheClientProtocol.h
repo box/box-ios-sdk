@@ -19,7 +19,6 @@
 @class BOXFileCopyRequest;
 @class BOXFileDeleteRequest;
 @class BOXFileDownloadRequest;
-@class BOXFileThumbnailRequest;
 @class BOXFileShareRequest;
 @class BOXFileUnshareRequest;
 @class BOXFileUpdateRequest;
@@ -120,13 +119,6 @@
 
 - (void)cacheFileDeleteRequest:(BOXFileDeleteRequest *)request
                          error:(NSError *)error;
-
-- (void)cacheFileThumbnailRequest:(BOXFileThumbnailRequest *)request
-                    withThumbnail:(UIImage *)thumbnail
-                            error:(NSError *)error;
-
-- (void)retrieveCacheForFileThumbnailRequest:(BOXFileThumbnailRequest *)request
-                                  completion:(BOXImageBlock)completionBlock;
 
 - (void)cacheFileUpdateRequest:(BOXFileUpdateRequest *)request
                       withFile:(BOXFile *)file
