@@ -54,6 +54,11 @@
 @class BOXCollaborationRemoveRequest;
 @class BOXCollaborationUpdateRequest;
 
+@class BOXCollectionListRequest;
+@class BOXItemSetCollectionsRequest;
+@class BOXCollectionItemsRequest;
+@class BOXCollectionFavoritesRequest;
+
 @protocol BOXContentCacheClientProtocol <NSObject>
 
 @optional
@@ -253,5 +258,32 @@
 - (void)cacheCollaborationUpdateRequest:(BOXCollaborationUpdateRequest *)request
                       withCollaboration:(BOXCollaboration *)collaboration
                                   error:(NSError *)error;
+
+#pragma mark - Collections
+
+- (void)cacheCollectionListRequest:(BOXCollectionListRequest *)request
+                   withCollections:(NSArray *)collections
+                             error:(NSError *)error;
+
+- (void)retrieveCacheForCollectionListRequest:(BOXCollectionListRequest *)request
+                                   completion:(BOXCollectionArrayBlock)completionBlock;
+
+- (void)cacheItemSetCollectionsRequest:(BOXItemSetCollectionsRequest *)request
+                       withUpdatedItem:(BOXItem *)item
+                                 error:(NSError *)error;
+
+- (void)cacheCollectionItemsRequest:(BOXCollectionItemsRequest *)request
+                          withItems:(NSArray *)items
+                              error:(NSError *)error;
+
+- (void)retrieveCacheForCollectionItemsRequest:(BOXCollectionItemsRequest *)request
+                                    completion:(BOXItemArrayCompletionBlock)completionBlock;
+
+- (void)cacheFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
+                        withCollection:(BOXCollection *)collection
+                                 error:(NSError *)error;
+
+- (void)retrieveCacheForFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
+                                  completionBlock:(BOXCollectionBlock)completionBlock;
 
 @end
