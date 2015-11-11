@@ -11,6 +11,9 @@
 
 @interface BOXItemSetCollectionsRequest : BOXRequest
 
+@property (nonatomic, readonly, strong) NSString *itemID;
+@property (nonatomic, readonly, strong) NSArray *collectionIDs;
+
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs;
 
