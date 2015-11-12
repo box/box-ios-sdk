@@ -92,7 +92,7 @@
         if (completionBlock) {
             BOXItem *item = [self itemWithJSON:JSONDictionary];
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
                 [self.cacheClient cacheItemSetCollectionsRequest:self
                                                  withUpdatedItem:item
                                                            error:nil];
@@ -106,7 +106,7 @@
     collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
         if (completionBlock) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionRequest:withUpdatedItem:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
                 [self.cacheClient cacheItemSetCollectionsRequest:self
                                                  withUpdatedItem:nil
                                                            error:error];
