@@ -89,7 +89,7 @@
     BOXAPIJSONOperation *collectionAddItemOperation = (BOXAPIJSONOperation *)self.operation;
     
     collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        if (completionBlock) {
+
             BOXItem *item = [self itemWithJSON:JSONDictionary];
 
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
@@ -97,25 +97,24 @@
                                                  withUpdatedItem:item
                                                            error:nil];
             }
-
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(item, nil);
-            } onMainThread:isMainThread];
-        }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(item, nil);
+                } onMainThread:isMainThread];
+            }
     };
     collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-        if (completionBlock) {
 
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
                 [self.cacheClient cacheItemSetCollectionsRequest:self
                                                  withUpdatedItem:nil
                                                            error:error];
             }
-
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
     };
     [self performRequest];
 }
