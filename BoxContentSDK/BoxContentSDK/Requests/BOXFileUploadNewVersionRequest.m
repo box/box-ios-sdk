@@ -130,14 +130,23 @@
         };
     }
     uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+        
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:file error:nil];
+        }
+        
         if (completionBlock) {
-            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
         }
     };
     uploadOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:nil error:error];
+        }
+        
         if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);

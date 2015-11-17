@@ -25,6 +25,8 @@
 @class BOXFileVersionsRequest;
 @class BOXFileVersionPromoteRequest;
 @class BOXTrashedFileRestoreRequest;
+@class BOXFileUploadRequest;
+@class BOXFileUploadNewVersionRequest;
 
 @class BOXFolderRequest;
 @class BOXFolderCreateRequest;
@@ -138,6 +140,14 @@
 - (void)cacheTrashedFileRestoreRequest:(BOXTrashedFileRestoreRequest *)request
                               withFile:(BOXFile *)file
                                  error:(NSError *)error;
+
+- (void)cacheFileUploadRequest:(BOXFileUploadRequest *)request
+                      withFile:(BOXFile *)file
+                         error:(NSError *)error;
+
+- (void)cacheFileUploadNewVersionRequest:(BOXFileUploadNewVersionRequest *)request
+                                withFile:(BOXFile *)file
+                                   error:(NSError *)error;
 
 #pragma mark - Folders
 
