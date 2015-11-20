@@ -27,7 +27,7 @@
 
 - (BOXAPIOperation *)createOperation
 {
-    BOXAPIOperation *operation = nil;
+    BOXAPIJSONOperation *operation = nil;
     
     NSURL *url = [self URLWithResource:BOXAPIResourceCollections 
                                     ID:self.collectionID 
