@@ -10,5 +10,6 @@
 @interface NSError (BOXAdditions)
 
 - (NSString *)box_localizedFailureReasonString;
+- (NSString *)box_localizedShortFailureReasonString;
 
 @end
