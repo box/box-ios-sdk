@@ -23,7 +23,7 @@
 typedef void (^BOXAuthCompletionBlock)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error);
 typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorizationViewController);
 
-@interface BOXAuthorizationViewController () <UIWebViewDelegate, NSURLConnectionDataDelegate, UIAlertViewDelegate>
+@interface BOXAuthorizationViewController () <NSURLConnectionDataDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, readwrite, strong) NSURLConnection *connection;
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
