@@ -8,12 +8,6 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXCollaboration.h"
 
-@interface BOXCollaborationCreateRequest ()
-
-@property (nonatomic, readonly, strong) NSString *folderID;
-
-@end
-
 @implementation BOXCollaborationCreateRequest
 
 - (instancetype)initWithFolderID:(NSString *)folderID
@@ -79,20 +73,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collaborationOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+    collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationCreateRequest:self
+                                            withCollaboration:collaboration
+                                                        error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaboration, nil);
             } onMainThread:isMainThread];
-        };
-        collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationCreateRequest:self
+                                            withCollaboration:nil
+                                                        error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
+
     [self performRequest];
 }
 

@@ -93,21 +93,22 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *metadataOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        metadataOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    metadataOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 BOXMetadata *metadata = [[BOXMetadata alloc]initWithJSON:JSONDictionary];
                 completionBlock(metadata, nil);
             } onMainThread:isMainThread];
-        };
-        
-        metadataOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+
+    metadataOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

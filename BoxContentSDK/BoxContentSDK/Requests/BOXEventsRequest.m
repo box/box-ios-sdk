@@ -49,10 +49,10 @@
 
 - (void)performRequestWithCompletion:(BOXEventsBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *eventsRequestOperation = (BOXAPIJSONOperation *)self.operation;
-    
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *eventsRequestOperation = (BOXAPIJSONOperation *)self.operation;
+
         eventsRequestOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
 
@@ -72,9 +72,8 @@
                 completionBlock(nil, nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 #pragma mark - Private Helpers

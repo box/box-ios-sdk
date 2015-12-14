@@ -57,20 +57,31 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collaborationOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+    collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXCollaboration *collaboration = [[BOXCollaboration alloc] initWithJSON:JSONDictionary];
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationUpdateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationUpdateRequest:self
+                                            withCollaboration:collaboration
+                                                        error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(collaboration, nil);
             } onMainThread:isMainThread];
-        };
-        collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationUpdateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationUpdateRequest:self
+                                            withCollaboration:nil
+                                                        error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

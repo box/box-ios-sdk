@@ -57,20 +57,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *commentAddOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        commentAddOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    commentAddOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXComment *comment = [[BOXComment alloc] initWithJSON:JSONDictionary];
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheUpdateCommentRequest:withComment:error:)]) {
+            [self.cacheClient cacheUpdateCommentRequest:self
+                                            withComment:comment
+                                                  error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
-                BOXComment *comment = [[BOXComment alloc] initWithJSON:JSONDictionary];
                 completionBlock(comment ,nil);
             } onMainThread:isMainThread];
-        };
-        commentAddOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    commentAddOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheUpdateCommentRequest:withComment:error:)]) {
+            [self.cacheClient cacheUpdateCommentRequest:self
+                                            withComment:nil
+                                                  error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

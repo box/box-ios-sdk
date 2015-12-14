@@ -79,29 +79,57 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
-            
+
             [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:folder.modelID
-                                                                                   itemType:folder.type
-                                                                                  ancestors:folder.pathFolders];
+                                                                                       itemType:folder.type
+                                                                                      ancestors:folder.pathFolders];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderRequest:self
+                                          withFolder:folder
+                                               error:nil];
+            }
 
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderRequest:withFolder:error:)]) {
+                [self.cacheClient cacheFolderRequest:self
+                                          withFolder:nil
+                                               error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
+
+        [self performRequest];
+    }
+    
+}
+
+- (void)performRequestWithCached:(BOXFolderBlock)cacheBlock
+                       refreshed:(BOXFolderBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFolderRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFolderRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
-    [self performRequest];
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods
@@ -115,6 +143,5 @@
 {
     return BOXAPIItemTypeFolder;
 }
-
 
 @end

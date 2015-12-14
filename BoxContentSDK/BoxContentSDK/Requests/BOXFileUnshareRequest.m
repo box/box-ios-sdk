@@ -59,20 +59,21 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
-        };
-        fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

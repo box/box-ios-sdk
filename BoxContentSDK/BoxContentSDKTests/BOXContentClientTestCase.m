@@ -61,7 +61,8 @@
     client.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL queueManager:client.queueManager];
     
     BOXFolderRequest *request = [client folderInfoRequestWithID:@"mock_id"];
-    XCTAssertThrows([request performRequestWithCompletion:nil]);
+    XCTAssertThrows([request performRequestWithCompletion:^(BOXFolder *folder, NSError *error) {
+    }]);
 }
 
 - (void)test_cant_set_nil_to_access_token_delegate

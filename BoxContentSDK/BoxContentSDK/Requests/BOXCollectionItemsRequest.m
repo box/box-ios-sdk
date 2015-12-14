@@ -11,6 +11,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *collectionID;
 @property (nonatomic, readwrite, assign) NSRange range;
+
 @end
 
 @implementation BOXCollectionItemsRequest
@@ -26,7 +27,7 @@
 
 - (BOXAPIOperation *)createOperation
 {
-    BOXAPIOperation *operation = nil;
+    BOXAPIJSONOperation *operation = nil;
     
     NSURL *url = [self URLWithResource:BOXAPIResourceCollections 
                                     ID:self.collectionID 
@@ -59,10 +60,10 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
             NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
@@ -72,20 +73,46 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                [items addObject:[self itemWithJSON:itemDictionary]];
+                [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionItemsRequest:withItems:error:)]) {
+                [self.cacheClient cacheCollectionItemsRequest:self
+                                                    withItems:items
+                                                        error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionItemsRequest:withItems:error:)]) {
+                [self.cacheClient cacheCollectionItemsRequest:self
+                                                    withItems:nil
+                                                        error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, 0, NSMakeRange(0, 0), error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCollectionItemsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForCollectionItemsRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, 0, NSMakeRange(0,0), nil);
+        }
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

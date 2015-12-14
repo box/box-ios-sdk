@@ -112,6 +112,16 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIMultipartToJSONOperation *uploadOperation = (BOXAPIMultipartToJSONOperation *)self.operation;
+    
+    // Unlike other operation types, BOXAPIMultipartToJSONOperation cannot be gracefully re-enqueued if the access token is expired (and can be refreshed).
+    // In order to minimize the risk of a failed request due to an expired access token, more aggressively check if it is expired, and refresh it manually
+    // beforehand if necessary.
+    if ([self.operation.session.accessTokenExpiration timeIntervalSinceNow] < 300) {
+        // We rely on our operations layer to block the upload request until this is done, because
+        // BOXParallelOAuth2Session cannot reliably call the completion block. (See TODO in [BOXParallelOAuth2Session:performRefreshTokenGrant:withCompletionBlock]
+        [self.operation.session performRefreshTokenGrant:self.operation.session.accessToken withCompletionBlock:nil];
+    }
+    
     if (progressBlock) {
         uploadOperation.progressBlock = ^(unsigned long long totalBytes, unsigned long long bytesSent) {
             [BOXDispatchHelper callCompletionBlock:^{
@@ -119,20 +129,30 @@
             } onMainThread:isMainThread];
         };
     }
-    if (completionBlock) {
-        uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+    uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+        
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:file error:nil];
+        }
+        
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
-        };
-        uploadOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    uploadOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:nil error:error];
+        }
+        
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXRequestTestCase.h"
 #import "BOXComment.h"
 #import "BOXCommentUpdateRequest.h"
+#import "BOXContentCacheTestClient.h"
 
 @interface BOXCommentUpdateRequestTests : BOXRequestTestCase
 
 @end
 
-
 @implementation BOXCommentUpdateRequestTests
-
 
 - (void)test_request_url_is_correct
 {
@@ -52,9 +52,20 @@
     BOXComment *expectedComment = [[BOXComment alloc] initWithJSON:expectedResults];
     
     BOXCommentUpdateRequest *commentUpdateRequest = [[BOXCommentUpdateRequest alloc] initWithCommentID:originalComment.modelID updatedMessage:expectedComment.message];
+
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    commentUpdateRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:commentUpdateRequest];
     
+    [[cacheClientMock expect] cacheUpdateCommentRequest:commentUpdateRequest
+                                            withComment:[OCMArg isNotNil]
+                                                  error:[OCMArg isNil]];
+
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+
     [commentUpdateRequest performRequestWithCompletion:^(BOXComment *comment, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(comment);
@@ -64,6 +75,46 @@
     }];
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
+}
+
+- (void)test_request_handles_error
+{
+    BOXComment *originalComment = [self comment];
+    originalComment.message = @"A different comment than the canned response";
+
+    NSData *cannedData = [self cannedResponseDataWithName:@"comment_all_fields"];
+    NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:404 responseData:cannedData];
+
+    NSDictionary *expectedResults = [NSJSONSerialization JSONObjectWithData:cannedData options:kNilOptions error:nil];
+    BOXComment *expectedComment = [[BOXComment alloc] initWithJSON:expectedResults];
+
+    BOXCommentUpdateRequest *commentUpdateRequest = [[BOXCommentUpdateRequest alloc] initWithCommentID:originalComment.modelID
+                                                                                        updatedMessage:expectedComment.message];
+
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    commentUpdateRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
+    [self setCannedURLResponse:response cannedResponseData:nil forRequest:commentUpdateRequest];
+
+    [[cacheClientMock expect] cacheUpdateCommentRequest:commentUpdateRequest
+                                            withComment:[OCMArg isNil]
+                                                  error:[OCMArg isNotNil]];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+
+    [commentUpdateRequest performRequestWithCompletion:^(BOXComment *comment, NSError *error) {
+        XCTAssertNotNil(error);
+        XCTAssertNil(comment);
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
 }
 
 #pragma mark - Private Helpers

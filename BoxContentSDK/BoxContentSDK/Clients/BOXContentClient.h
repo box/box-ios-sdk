@@ -13,6 +13,7 @@
 @class BOXSharedLinkHeadersHelper;
 @protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
+@protocol BOXContentCacheClientProtocol;
 
 @interface BOXContentClient : NSObject
 
@@ -20,6 +21,11 @@
  *  Allows the SDK to associate shared links with Box Items.
  */
 @property (nonatomic, readonly, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
+
+/**
+ *  By setting the cache client, the BOXContentClient will now support caching for BoxRequests.
+ */
+@property (nonatomic, readwrite, weak) id<BOXContentCacheClientProtocol> cacheClient;
 
 /**
  * The SDK's session instance.

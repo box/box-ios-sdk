@@ -50,19 +50,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *bookmarkOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(bookmark, nil);
-            } onMainThread:isMainThread];
-        };
-        bookmarkOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        };
-    }
+    bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCreateRequest:withBookmark:error:)]) {
+            [self.cacheClient cacheBookmarkCreateRequest:self
+                                            withBookmark:bookmark
+                                                   error:nil];
+        }
+        if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(bookmark, nil);
+                } onMainThread:isMainThread];
+        }
+    };
+    bookmarkOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCreateRequest:withBookmark:error:)]) {
+            [self.cacheClient cacheBookmarkCreateRequest:self
+                                            withBookmark:nil
+                                                   error:error];
+        }
+        if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+        }
+    };
     
     [self performRequest];
 }

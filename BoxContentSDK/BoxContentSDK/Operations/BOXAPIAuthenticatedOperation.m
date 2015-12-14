@@ -34,35 +34,7 @@
 
 - (void)prepareAPIRequest
 {
-    // If token has expired (or is very close to expiring), enqueue a token-refresh operation, which will become a dependency for this operation.
-    NSTimeInterval timeUntilTokenExpiry = [self.session.accessTokenExpiration timeIntervalSinceNow];
-    if (timeUntilTokenExpiry < 60)
-    {
-        // Do a token refresh. This will become a dependency for the API operation.
-        [self.session performRefreshTokenGrant:self.session.accessToken withCompletionBlock:nil];
-        
-        NSInteger errorCode;
-        if (self.timesReenqueued == 0)
-        {
-            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued;
-            
-            // Make a copy of this operation and enqueue.
-            BOXAPIJSONOperation *operationCopy = [self copy];
-            operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
-            [self.session.queueManager enqueueOperation:operationCopy];
-        }
-        else
-        {
-            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted;
-        }
-        
-        // Short-circuit this operation.
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
-    }
-    else
-    {
-        [self.session addAuthorizationParametersToRequest:self.APIRequest];
-    }
+    [self.session addAuthorizationParametersToRequest:self.APIRequest];
 }
 
 - (BOOL)isAccessTokenExpired
@@ -85,6 +57,11 @@
     [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
 }
 
+- (BOOL)canBeReenqueued
+{
+    return NO;
+}
+
 #pragma mark - NSURLConnectionDataDelegate
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -92,36 +69,23 @@
 
     BOOL isOAuth2TokenExpired = [self isAccessTokenExpired];
 
-    if (isOAuth2TokenExpired && self.timesReenqueued == 0)
+    if (isOAuth2TokenExpired)
     {
-        BOXLog(@"OAuth2 access token is expired.");
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
-
-        // re-enqueue operation in the same queue referred to by the OAuth2 session
-        // if possible. This is only possible for BOXAPIJSONOperations.
-        // BOXAPIDataOperations and BOXAPIMultipartToJSONOperations contain NSStream
-        // properties that cannot be copied. If an operation cannot be copied, an
-        // NSError indicating so is returned in this operation's failure callback.
-        if ([self isMemberOfClass:[BOXAPIJSONOperation class]])
+        [self handleExpiredAccessToken];
+        
+        // re-enqueue operation in the same queue referred to by the OAuth2 session if possible.
+        if ([self canBeReenqueued] && self.timesReenqueued == 0)
         {
-            BOXLog(@"Re-enqueueing operation that failed to authenticate");
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
+            
             BOXAPIJSONOperation *operationCopy = [self copy];
             operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
-            // re-enqueue before adding OAuth2 operation so OAuth2 operation can be
-            // added as a dependency
             [self.session.queueManager enqueueOperation:operationCopy];
         }
         else
         {
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
         }
-
-        BOXLog(@"Attempting automatic OAuth2 token refresh");
-        [self handleExpiredAccessToken];
-    }
-    else if (isOAuth2TokenExpired)
-    {
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCouldNotBeCompleted userInfo:nil];
     }
 }
 

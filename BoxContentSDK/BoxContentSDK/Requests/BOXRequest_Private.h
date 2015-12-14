@@ -9,11 +9,13 @@
 #import "BOXDispatchHelper.h"
 #import "BOXRequest.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXContentCacheClientProtocol.h"
 
 @class BOXAPIQueueManager;
 
 @interface BOXRequest ()
 
+@property (nonatomic, readwrite, assign) id<BOXContentCacheClientProtocol> cacheClient;
 @property (nonatomic, readwrite, strong) BOXAPIQueueManager *queueManager;
 @property (nonatomic, readwrite, strong) BOXAPIOperation *operation;
 
@@ -59,6 +61,8 @@
 
 - (NSString *)nonEmptyFilename:(NSString *)filename;
 
-- (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary;
++ (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary;
+
++ (NSArray *)itemsWithJSON:(NSDictionary *)JSONDictionary;
 
 @end
