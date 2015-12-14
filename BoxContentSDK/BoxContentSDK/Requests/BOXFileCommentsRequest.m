@@ -54,23 +54,53 @@
 
 - (void)performRequestWithCompletion:(BOXObjectsArrayCompletionBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *commentsOperation = (BOXAPIJSONOperation *)self.operation;
-    
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *commentsOperation = (BOXAPIJSONOperation *)self.operation;
+
         commentsOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            NSArray *comments = [self commentsFromJSONDictionary:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCommentsRequest:withComments:error:)]) {
+                [self.cacheClient cacheFileCommentsRequest:self
+                                              withComments:comments
+                                                     error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock([self commentsFromJSONDictionary:JSONDictionary] ,nil);
+                completionBlock(comments ,nil);
             } onMainThread:isMainThread];
         };
+
         commentsOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCommentsRequest:withComments:error:)]) {
+                [self.cacheClient cacheFileCommentsRequest:self
+                                              withComments:nil
+                                                     error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
+}
+
+- (void)performRequestWithCached:(BOXObjectsArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXObjectsArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileCommentsRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFileCommentsRequest:self
+                                                       completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Private Helpers

@@ -45,7 +45,7 @@
 
     if ([self.sharedLinkPassword length] > 0) {
         sharedLinkHeaderString =
-            [sharedLinkHeaderString stringByAppendingFormat:@"&%@=%@", BOXAPIObjectKeySharedLinkPassword, self.sharedLinkPassword];
+        [sharedLinkHeaderString stringByAppendingFormat:@"&%@=%@", BOXAPIObjectKeySharedLinkPassword, self.sharedLinkPassword];
     }
     [JSONOperation.APIRequest addValue:sharedLinkHeaderString
                     forHTTPHeaderField:BOXAPIHTTPHeaderBoxAPI];
@@ -59,7 +59,8 @@
         BOOL isMainThread = [NSThread isMainThread];
         BOXAPIJSONOperation *sharedItemOperation = (BOXAPIJSONOperation *)self.operation;
         sharedItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXItem *item = [self itemWithJSON:JSONDictionary];
+
+            BOXItem *item = [BOXRequest itemWithJSON:JSONDictionary];
 
             // Store the shared link and password in case we need to do further API call on this item or any of its descendants.
             [self.sharedLinkHeadersHelper storeHeadersForItemWithID:item.modelID
@@ -67,18 +68,44 @@
                                                          sharedLink:self.sharedLinkURLString
                                                            password:self.sharedLinkPassword];
 
+            if ([self.cacheClient respondsToSelector:@selector(cacheSharedItemRequest:withItem:error:)]) {
+                [self.cacheClient cacheSharedItemRequest:self
+                                                withItem:item
+                                                   error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completion(item, nil);
             } onMainThread:isMainThread];
         };
         sharedItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheSharedItemRequest:withItem:error:)]) {
+                [self.cacheClient cacheSharedItemRequest:self
+                                                withItem:nil
+                                                   error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completion(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
+}
 
-    [self performRequest];
+- (void)performRequestWithCached:(BOXItemBlock)cacheBlock
+                       refreshed:(BOXItemBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForSharedItemRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForSharedItemRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
+    }
+    
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 @end

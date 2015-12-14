@@ -60,10 +60,10 @@
 
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+
         folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSUInteger totalCount = [JSONDictionary[BOXAPICollectionKeyTotalCount] unsignedIntegerValue];
             NSUInteger offset = [JSONDictionary[BOXAPIParameterKeyOffset] unsignedIntegerValue];
@@ -73,7 +73,7 @@
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
             for (NSDictionary *itemDictionary in itemDictionaries) {
-                [items addObject:[self itemWithJSON:itemDictionary]];
+                [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
@@ -84,9 +84,8 @@
                 completionBlock(nil, 0, NSMakeRange(0, 0), error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 @end

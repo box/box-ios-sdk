@@ -59,18 +59,20 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
-    if (completionBlock) {
-        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
-        };
-        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];
-        };
-    }
+        }
+    };
     
     [self performRequest];
 }

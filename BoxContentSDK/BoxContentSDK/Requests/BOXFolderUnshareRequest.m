@@ -60,21 +60,23 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
-    if (completionBlock) {
-        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
             [self.sharedLinkHeadersHelper removeStoredInformationForItemWithID:folder.modelID itemType:folder.type];
             
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
-        };
-        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
+        }
+    };
     
     [self performRequest];
 }

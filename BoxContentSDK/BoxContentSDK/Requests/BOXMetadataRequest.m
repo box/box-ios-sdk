@@ -68,10 +68,10 @@
 
 - (void)performRequestWithCompletion:(BOXMetadatasBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *metadataOperation = (BOXAPIJSONOperation *)self.operation;
-    
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *metadataOperation = (BOXAPIJSONOperation *)self.operation;
+
         metadataOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             [BOXDispatchHelper callCompletionBlock:^{
                 NSArray *entries = JSONDictionary[@"entries"];
@@ -94,9 +94,8 @@
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 @end

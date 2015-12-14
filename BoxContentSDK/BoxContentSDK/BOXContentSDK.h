@@ -27,7 +27,7 @@
 #import "BOXContentClient+FileVersion.h"
 #import "BOXContentClient+SharedLink.h"
 #import "BOXContentClient+File.h"
-#import "BOXContentClient+folder.h"
+#import "BOXContentClient+Folder.h"
 #import "BOXContentClient+Bookmark.h"
 #import "BOXContentClient+Metadata.h"
 

@@ -58,7 +58,7 @@
 
 -(BOXAPIOperation *)createOperation
 {
-    BOXAPIOperation *operation = nil;
+    BOXAPIJSONOperation *operation = nil;
     
     NSURL *url = [self URLWithResource:self.resource 
                                     ID:self.itemID
@@ -88,19 +88,34 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collectionAddItemOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+
             BOXItem *item = [self itemWithJSON:JSONDictionary];
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(item, nil);
-            } onMainThread:isMainThread];
-        };
-        collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        };
-    }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
+                [self.cacheClient cacheItemSetCollectionsRequest:self
+                                                 withUpdatedItem:item
+                                                           error:nil];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(item, nil);
+                } onMainThread:isMainThread];
+            }
+    };
+    collectionAddItemOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
+                [self.cacheClient cacheItemSetCollectionsRequest:self
+                                                 withUpdatedItem:nil
+                                                           error:error];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+    };
     [self performRequest];
 }
 

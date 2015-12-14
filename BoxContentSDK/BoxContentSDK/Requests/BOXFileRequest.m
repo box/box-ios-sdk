@@ -73,10 +73,10 @@
 
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
-
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
+
         fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             
@@ -84,19 +84,45 @@
                                                                                    itemType:file.type
                                                                                   ancestors:file.pathFolders];
 
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileRequest:withFile:error:)]) {
+                [self.cacheClient cacheFileRequest:self
+                                          withFile:file
+                                             error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
         };
         fileOperation.failure =
             ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+                if ([self.cacheClient respondsToSelector:@selector(cacheFileRequest:withFile:error:)]) {
+                    [self.cacheClient cacheFileRequest:self
+                                              withFile:nil
+                                                 error:error];
+                }
+
                 [BOXDispatchHelper callCompletionBlock:^{
                     completionBlock(nil, error);
                 } onMainThread:isMainThread];
             };
+        [self performRequest];
+    }
+}
+
+- (void)performRequestWithCached:(BOXFileBlock)cacheBlock
+                       refreshed:(BOXFileBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForFileRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForFileRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
     }
 
-    [self performRequest];
+    [self performRequestWithCompletion:refreshBlock];
 }
 
 #pragma mark - Superclass overidden methods

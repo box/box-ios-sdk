@@ -17,6 +17,7 @@
 - (instancetype)initWithOutputStream:(NSOutputStream *)outputStream
                               fileID:(NSString *)fileID;
 
+//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXErrorBlock)completionBlock;
 
 @end

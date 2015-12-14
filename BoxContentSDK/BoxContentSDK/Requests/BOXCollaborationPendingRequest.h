@@ -14,4 +14,7 @@
 
 - (void)performRequestWithCompletion:(BOXCollaborationArrayCompletionBlock)completionBlock;
 
+- (void)performRequestWithCached:(BOXCollaborationArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXCollaborationArrayCompletionBlock)refreshBlock;
+
 @end

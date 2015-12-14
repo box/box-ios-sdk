@@ -11,7 +11,7 @@
 
 - (BOXAPIOperation *)createOperation
 {
-    BOXAPIOperation *operation = nil;
+    BOXAPIJSONOperation *operation = nil;
     
     NSURL *url = [self URLWithResource:BOXAPIResourceCollections
                                     ID:nil
@@ -29,33 +29,57 @@
 }
 
 - (void)performRequestWithCompletion:(BOXCollectionArrayBlock)completionBlock
-{        
-    BOOL isMainThread = [NSThread isMainThread];
-
-    BOXAPIJSONOperation *collectionListOperation = (BOXAPIJSONOperation *)self.operation;
-
+{
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *collectionListOperation = (BOXAPIJSONOperation *)self.operation;
+
         collectionListOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            NSArray *collectionsJSON = JSONDictionary[BOXAPICollectionKeyEntries];
+            NSMutableArray *collections = [NSMutableArray arrayWithCapacity:collectionsJSON.count];
+
+            for (NSDictionary *dict in collectionsJSON) {
+                [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
+            }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionListRequest:withCollections:error:)]) {
+                [self.cacheClient cacheCollectionListRequest:self
+                                             withCollections:collections
+                                                       error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
-                NSArray *collectionsJSON = JSONDictionary[BOXAPICollectionKeyEntries];
-                NSMutableArray *collections = [NSMutableArray arrayWithCapacity:collectionsJSON.count];
-                
-                for (NSDictionary *dict in collectionsJSON) {
-                    [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
-                }
                 completionBlock(collections, nil);
             } onMainThread:isMainThread];
         };
         collectionListOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheCollectionListRequest:withCollections:error:)]) {
+                [self.cacheClient cacheCollectionListRequest:self
+                                             withCollections:nil
+                                                       error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil,error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
+- (void)performRequestWithCached:(BOXCollectionArrayBlock)cacheBlock
+                       refreshed:(BOXCollectionArrayBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForCollectionListRequest:completion:)]) {
+            [self.cacheClient retrieveCacheForCollectionListRequest:self completion:cacheBlock];
+        } else {
+            cacheBlock(nil, nil);
+        }
+    }
 
+    [self performRequestWithCompletion:refreshBlock];
+}
 
 @end

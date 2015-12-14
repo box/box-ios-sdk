@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXRequestTestCase.h"
 #import "BOXCollectionListRequest.h"
 #import "BOXCollection.h"
+#import "BOXContentCacheTestClient.h"
 
 @interface BOXCollectionListRequestTests : BOXRequestTestCase
 
@@ -36,20 +38,64 @@
     }
     
     BOXCollectionListRequest *collectionListRequest = [[BOXCollectionListRequest alloc] init];
-        
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    collectionListRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
     [self setCannedURLResponse:[self cannedURLResponseWithStatusCode:200 responseData:data] cannedResponseData:data forRequest:collectionListRequest];
-    
+
+    [[cacheClientMock expect] cacheCollectionListRequest:collectionListRequest
+                                         withCollections:[OCMArg isNotNil]
+                                                   error:[OCMArg isNil]];
+    [[cacheClientMock expect] retrieveCacheForCollectionListRequest:collectionListRequest completion:[OCMArg isNotNil]];
+
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [collectionListRequest performRequestWithCompletion:^(NSArray *collections, NSError *error) {
-        
+    [collectionListRequest performRequestWithCached:^(NSArray *collections, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(NSArray *collections, NSError *error) {
         XCTAssertEqual(collections.count, expectedCollections.count);
+
         for (NSUInteger i = 0; i < collections.count; i++) {
             [self assertModel:collections[i] isEquivalentTo:expectedCollections[i]];
         }
+
         [expectation fulfill];
     }];
+
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [cacheClientMock verify];
 }
 
+- (void)test_request_handles_error
+{
+    BOXCollectionListRequest *collectionListRequest = [[BOXCollectionListRequest alloc] init];
+    BOXContentCacheTestClient *cacheClient = [[BOXContentCacheTestClient alloc] init];
+    collectionListRequest.cacheClient = cacheClient;
+
+    id cacheClientMock = [OCMockObject partialMockForObject:cacheClient];
+
+    [self setCannedURLResponse:[self cannedURLResponseWithStatusCode:404 responseData:nil]
+            cannedResponseData:nil
+                    forRequest:collectionListRequest];
+
+    [[cacheClientMock expect] cacheCollectionListRequest:collectionListRequest
+                                         withCollections:[OCMArg isNil]
+                                                   error:[OCMArg isNotNil]];
+    [[cacheClientMock expect] retrieveCacheForCollectionListRequest:collectionListRequest completion:[OCMArg isNotNil]];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+    [collectionListRequest performRequestWithCached:^(NSArray *collections, NSError *error) {
+        // Nothing should happen here.
+    } refreshed:^(NSArray *collections, NSError *error) {
+        XCTAssertNotNil(error);
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    
+    [cacheClientMock verify];
+}
 
 @end

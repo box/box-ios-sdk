@@ -9,7 +9,6 @@
 
 @class BOXSharedLinkHeadersHelper;
 
-
 @interface BOXRequestWithSharedLinkHeader : BOXRequest <BOXSharedLinkItemSource>
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinkHeadersHelper;

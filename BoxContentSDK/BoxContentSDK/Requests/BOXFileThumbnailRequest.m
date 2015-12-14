@@ -75,18 +75,18 @@
 
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXImageBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)self.operation;
-
-    if (progressBlock) {
-        dataOperation.progressBlock = ^(long long expectedTotalBytes, unsigned long long bytesReceived) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                progressBlock(bytesReceived, expectedTotalBytes);
-            } onMainThread:isMainThread];
-        };
-    }
-    
     if (completionBlock) {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)self.operation;
+
+        if (progressBlock) {
+            dataOperation.progressBlock = ^(long long expectedTotalBytes, unsigned long long bytesReceived) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    progressBlock(bytesReceived, expectedTotalBytes);
+                } onMainThread:isMainThread];
+            };
+        }
+
         NSOutputStream *outputStream = self.outputStream;
         dataOperation.successBlock = ^(NSString *fileID, long long expectedTotalBytes) {
             NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
@@ -100,9 +100,8 @@
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
         };
+        [self performRequest];
     }
-    
-    [self performRequest];
 }
 
 #pragma mark - Superclass overidden methods

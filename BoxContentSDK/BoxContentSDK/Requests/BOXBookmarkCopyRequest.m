@@ -54,19 +54,34 @@
 {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
-    if (completionBlock) {
-        fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+
+    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCopyRequest:withBookmark:error:)]) {
+            [self.cacheClient cacheBookmarkCopyRequest:self
+                                          withBookmark:bookmark
+                                                 error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(bookmark, nil);
             } onMainThread:isMainThread];
-        };
-        fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkCopyRequest:withBookmark:error:)]) {
+            [self.cacheClient cacheBookmarkCopyRequest:self
+                                          withBookmark:nil
+                                                 error:error];
+        }
+
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
             } onMainThread:isMainThread];
-        };
-    }
+        }
+    };
     
     [self performRequest];
 }

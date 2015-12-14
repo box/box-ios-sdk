@@ -8,12 +8,6 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXContentSDKConstants.h"
 
-@interface BOXCollaborationRemoveRequest ()
-
-@property (nonatomic, readonly, strong) NSString *collaborationID;
-
-@end
-
 @implementation BOXCollaborationRemoveRequest
 
 - (instancetype)initWithCollaborationID:(NSString *)collaborationID
@@ -46,19 +40,28 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *collaborationOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+    collaborationOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationRemoveRequest:self
+                                                        error:nil];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];
-        };
-        collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        }
+    };
+    collaborationOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheCollaborationCreateRequest:withCollaboration:error:)]) {
+            [self.cacheClient cacheCollaborationRemoveRequest:self
+                                                        error:error];
+        }
+        if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(error);
             } onMainThread:isMainThread];
-        };
-    }
-    
+        }
+    };
     [self performRequest];
 }
 

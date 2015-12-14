@@ -141,7 +141,8 @@
         NSDictionary *creatorJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCreatedBy
                                                                    inDictionary:JSONResponse
                                                                 hasExpectedType:[NSDictionary class]
-                                                                    nullAllowed:NO];
+                                                                    nullAllowed:YES
+                                                              suppressNullAsNil:YES];
         if (creatorJSON) {
             self.creator = [[BOXUserMini alloc] initWithJSON:creatorJSON];
         }

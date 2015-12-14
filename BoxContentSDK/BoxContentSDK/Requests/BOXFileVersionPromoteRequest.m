@@ -8,8 +8,10 @@
 #import "BOXFileVersion.h"
 
 @interface BOXFileVersionPromoteRequest ()
-@property (nonatomic, readonly, strong) NSString *fileID;
-@property (nonatomic, readonly, strong) NSString *versionID;
+
+@property (nonatomic, readwrite, strong) NSString *fileID;
+@property (nonatomic, readwrite, strong) NSString *versionID;
+
 @end
 
 @implementation BOXFileVersionPromoteRequest
@@ -49,20 +51,33 @@
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *versionPromoteOperation = (BOXAPIJSONOperation *)self.operation;
     
-    if (completionBlock) {
-        versionPromoteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                BOXFileVersion *fileVersion = [[BOXFileVersion alloc] initWithJSON:JSONDictionary];
+    versionPromoteOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        [BOXDispatchHelper callCompletionBlock:^{
+            BOXFileVersion *fileVersion = [[BOXFileVersion alloc] initWithJSON:JSONDictionary];
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                [self.cacheClient cacheFileVersionPromoteRequest:self
+                                                     withVersion:fileVersion
+                                                           error:nil];
+            }
+            if (completionBlock) {
                 completionBlock(fileVersion, nil);
-            } onMainThread:isMainThread];
-        };
-        versionPromoteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-            [BOXDispatchHelper callCompletionBlock:^{
+            }
+        } onMainThread:isMainThread];
+    };
+    versionPromoteOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        [BOXDispatchHelper callCompletionBlock:^{
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileVersionsRequest:withVersions:error:)]) {
+                [self.cacheClient cacheFileVersionPromoteRequest:self
+                                                     withVersion:nil
+                                                           error:error];
+            }
+            if (completionBlock) {
                 completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        };
-    }
-    
+            }
+        } onMainThread:isMainThread];
+    };
     [self performRequest];
 }
 
