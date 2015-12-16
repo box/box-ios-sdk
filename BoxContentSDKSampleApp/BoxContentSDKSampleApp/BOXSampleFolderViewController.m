@@ -11,6 +11,7 @@
 #import "BOXSampleItemCell.h"
 #import "BOXSampleProgressView.h"
 #import "BOXSampleLibraryAssetViewController.h"
+#import <Photos/Photos.h>
 
 @interface BOXSampleFolderViewController () <UIAlertViewDelegate>
 
@@ -181,7 +182,9 @@
 - (void)uploadAction:(id)sender
 {
     // See the progress
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (self.items.count > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
     
     BOXSampleProgressView *progressHeaderView = [[BOXSampleProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 50.0f)];
     self.tableView.tableHeaderView = progressHeaderView;
@@ -250,21 +253,28 @@
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     BOXSampleLibraryAssetViewController *libraryAssetViewController = [[BOXSampleLibraryAssetViewController alloc] initWithCollectionViewLayout:layout];
     
-    libraryAssetViewController.assetSelectionCompletionBlock = ^(NSArray *selectedPHAssetLocalPaths) {
-        for (NSURL *filePath in selectedPHAssetLocalPaths) {
-            
-            BOXFileUploadRequest *uploadRequest = [weakSelf.client fileUploadRequestToFolderWithID:weakSelf.folderID fromLocalFilePath:filePath.path];
-            uploadRequest.enableCheckForCorruptionInTransit = YES;
-            [uploadRequest performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
+    libraryAssetViewController.assetSelectionCompletionBlock = ^(NSArray *selectedPHAssets) {
+        for (PHAsset *asset in selectedPHAssets) {
+            PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
+            options.networkAccessAllowed = YES;
+            [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+                NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
+                NSString *filename = [fileURL.path lastPathComponent];
+                BOXFileUploadRequest *uploadRequest = [weakSelf.client fileUploadRequestToFolderWithID:weakSelf.folderID
+                                                                                              fromData:imageData
+                                                                                              fileName:filename];
+                uploadRequest.enableCheckForCorruptionInTransit = YES;
+                [uploadRequest performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
                 
-                if (error == nil) {
-                    [weakSelf updateDataSourceWithNewFile:file atIndex:NSNotFound];
-                    [weakSelf.tableView reloadData];
-                } else if (error.code == BOXContentSDKAPIErrorConflict) {
-                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Name conflict" message:@"File with same name already exists"  preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-                    [weakSelf presentViewController:alert animated:YES completion:nil];
-                }
+                    if (error == nil) {
+                        [weakSelf updateDataSourceWithNewFile:file atIndex:NSNotFound];
+                        [weakSelf.tableView reloadData];
+                    } else if (error.code == BOXContentSDKAPIErrorConflict) {
+                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Name conflict" message:@"File with same name already exists"  preferredStyle:UIAlertControllerStyleAlert];
+                        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                        [weakSelf presentViewController:alert animated:YES completion:nil];
+                    }
+                }];
             }];
         }
     };
