@@ -12,7 +12,6 @@
 @interface BOXSampleLibraryAssetViewController ()
 @property (nonatomic, readwrite, strong) PHFetchResult *assetsFetchResults;
 @property (nonatomic, readwrite, strong) NSMutableArray *selectedAssets;
-@property (nonatomic, readwrite, strong) NSMutableDictionary *assetLocations;
 @end
 
 @implementation BOXSampleLibraryAssetViewController
@@ -23,7 +22,6 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _selectedAssets = [NSMutableArray array];
-        _assetLocations = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -91,9 +89,6 @@ static NSString * const reuseIdentifier = @"Cell";
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:imageData]];
         cell.backgroundView = imageView;
         
-        NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
-        [self.assetLocations setObject:fileURL forKey:asset];
-        
     }];
         
     return cell;
@@ -124,11 +119,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)uploadAction:(id)sender
 {
-    NSMutableArray *selectedFilePaths = [NSMutableArray array];
-    for (PHAsset *asset in self.selectedAssets) {
-        [selectedFilePaths addObject:[self.assetLocations objectForKey:asset]];
-    }
-    self.assetSelectionCompletionBlock(selectedFilePaths);
+    self.assetSelectionCompletionBlock(self.selectedAssets);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
