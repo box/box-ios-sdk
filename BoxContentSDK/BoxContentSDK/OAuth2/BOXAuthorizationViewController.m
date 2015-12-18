@@ -180,12 +180,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     return _redirectURI;
 }
 
-- (void)setAdditionalTokenGrantParams:(NSDictionary *)additionalTokenGrantParams
-{
-    BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
-    OAuth2Session.additionalTokenGrantParams = additionalTokenGrantParams;
-}
-
 #pragma mark - Actions
 
 - (void)cancel:(id)sender
