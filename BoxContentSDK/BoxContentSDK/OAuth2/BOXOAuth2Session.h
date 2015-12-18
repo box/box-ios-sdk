@@ -124,11 +124,6 @@
 @property (nonatomic, readwrite, strong) NSString *APIAuthBaseURLString;
 
 /**
- * Custom parameters to use in the token grant request. Optional, defaults to nil.
- */
-@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParams;
-
-/**
  * Exchange an authorization code for an access token and a refresh token.
  * 
  * This method should send the `BOXAuthSessionDidBecomeAuthenticatedNotification` notification when an
@@ -171,6 +166,11 @@
  * @return Redirect URI string
  */
 @property (nonatomic, readwrite, strong) NSString *redirectURIString;
+
+/**
+ * Custom parameters to use in the token grant request. Optional, defaults to nil.
+ */
+@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParameters;
 
 /**
  * Returns the randomly generated nonce used to prevent spoofing attack during login

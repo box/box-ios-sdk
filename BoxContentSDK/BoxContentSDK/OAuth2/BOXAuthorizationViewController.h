@@ -31,11 +31,6 @@
  */
 @interface BOXAuthorizationViewController : UIViewController <UIWebViewDelegate>
 
-/**
- * Custom parameters to use in the token grant request. Optional, defaults to nil.
- */
-@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParams;
-
 /** @name Initializers */
 
 /**

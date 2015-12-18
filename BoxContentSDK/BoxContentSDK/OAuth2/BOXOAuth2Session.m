@@ -106,8 +106,8 @@
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       BOXAuthTokenRequestRedirectURIKey : self.redirectURIString,
                                                                                       }];
-    if (self.additionalTokenGrantParams.count > 0) {
-        [POSTParams addEntriesFromDictionary:self.additionalTokenGrantParams];
+    if (self.additionalTokenGrantParameters.count > 0) {
+        [POSTParams addEntriesFromDictionary:self.additionalTokenGrantParameters];
     }
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[self grantTokensURL]
