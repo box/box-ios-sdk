@@ -286,6 +286,15 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     return [self.hostsThatCanUseWebViewDirectly containsObject:host];
 }
 
+- (BOOL)isLoginRedirectionRequest:(NSURLRequest *)request
+{
+    BOOL requestIsForLoginRedirectScheme = NO;
+    if ([self.redirectURI length] > 0) {
+        requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.redirectURI] scheme]];
+    }
+    return (requestIsForLoginRedirectScheme && [[[request URL] absoluteString] hasPrefix:self.redirectURI]);
+}
+
 #pragma mark - UIWebViewDelegate methods
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -311,12 +320,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self.activityIndicator startAnimating];
 
     // Figure out whether this request is the redirect used at the end of the authentication process
-    BOOL requestIsForLoginRedirectScheme = NO;
-    if ([self.redirectURI length] > 0) {
-        requestIsForLoginRedirectScheme = [[[request URL] scheme] isEqualToString:[[NSURL URLWithString:self.redirectURI] scheme]];
-    }
-    BOOL requestIsForLoginRedirection = (requestIsForLoginRedirectScheme &&
-                                         [[[request URL] absoluteString] hasPrefix:self.redirectURI]);
+    BOOL requestIsForLoginRedirection = [self isLoginRedirectionRequest:request];
 
     if (requestIsForLoginRedirection) {
         BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
