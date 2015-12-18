@@ -124,6 +124,11 @@
 @property (nonatomic, readwrite, strong) NSString *APIAuthBaseURLString;
 
 /**
+ * Custom parameters to use in the token grant request. Optional, defaults to nil.
+ */
+@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParams;
+
+/**
  * Exchange an authorization code for an access token and a refresh token.
  * 
  * This method should send the `BOXAuthSessionDidBecomeAuthenticatedNotification` notification when an
