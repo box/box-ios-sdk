@@ -101,11 +101,6 @@
 
 @implementation BOXKeychainItemWrapper
 
-+ (id)keychainServiceIdentifier
-{
-    return kBOXSecIdentifier;
-}
-
 - (id)initWithIdentifier:(NSString *)identifier accessGroup:(NSString *)accessGroup
 {
     if (self = [super init])
@@ -398,6 +393,41 @@
     [defaultDictionary setObject:@"" forKey:(id)kSecValueData];
     
     return defaultDictionary;
+}
+
++ (NSArray *)allKeychainItemWrappersWithAccessGroup:(NSString *)accessGroup
+{
+    NSMutableDictionary *keychainQuery = [NSMutableDictionary dictionaryWithDictionary:@{(__bridge id)kSecReturnAttributes : (__bridge id)kCFBooleanTrue,
+                                                                                         (__bridge id)kSecMatchLimit : (__bridge id)kSecMatchLimitAll,
+                                                                                         (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
+                                                                                         (__bridge id)kSecAttrService : kBOXSecIdentifier}];
+    
+#if ! TARGET_IPHONE_SIMULATOR
+    // Ignore the access group if running on the iPhone simulator.
+    // Apps that are built for the simulator aren't signed, so there's no keychain access group
+    // for the simulator to check.
+    if (accessGroup.length > 0) {
+        [keychainQuery setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
+    }
+#endif
+    
+    NSMutableArray *keychainItemWrappers = [NSMutableArray array];
+    
+    CFArrayRef keychainQueryResult = NULL;
+    OSStatus queryStatus =  SecItemCopyMatching((__bridge CFDictionaryRef)keychainQuery, (CFTypeRef *)&keychainQueryResult);
+    if (queryStatus == 0 && keychainQueryResult != NULL) {
+        NSArray *keychainEntries = (NSArray *)keychainQueryResult;
+        for (NSDictionary *dict in keychainEntries)
+        {
+            NSObject *identifier = [dict objectForKey:((__bridge id)kSecAttrGeneric)];
+            if ([identifier isKindOfClass:[NSString class]]) {
+                BOXKeychainItemWrapper *keychainItemWrapper = [[BOXKeychainItemWrapper alloc] initWithIdentifier:(NSString *)identifier accessGroup:accessGroup];
+                [keychainItemWrappers addObject:keychainItemWrapper];
+            }
+        }
+    }
+    
+    return keychainItemWrappers;
 }
 
 @end
