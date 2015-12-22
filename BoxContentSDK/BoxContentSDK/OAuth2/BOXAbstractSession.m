@@ -207,7 +207,8 @@ static NSString *staticKeychainAccessGroup;
     // Query the keychain for entries with an identifier that has our keychainIdentifierPrefix.
     NSMutableDictionary *keychainQuery = [NSMutableDictionary dictionaryWithDictionary:@{(__bridge id)kSecReturnAttributes : (__bridge id)kCFBooleanTrue,
                                                                                          (__bridge id)kSecMatchLimit : (__bridge id)kSecMatchLimitAll,
-                                                                                         (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword}];
+                                                                                         (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
+                                                                                         (__bridge id)kSecAttrService : [BOXKeychainItemWrapper keychainServiceIdentifier]}];
     
 #if ! TARGET_IPHONE_SIMULATOR
     // Ignore the access group if running on the iPhone simulator.

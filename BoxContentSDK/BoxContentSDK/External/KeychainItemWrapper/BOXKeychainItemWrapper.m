@@ -101,6 +101,11 @@
 
 @implementation BOXKeychainItemWrapper
 
++ (id)keychainServiceIdentifier
+{
+    return kBOXSecIdentifier;
+}
+
 - (id)initWithIdentifier:(NSString *)identifier accessGroup:(NSString *)accessGroup
 {
     if (self = [super init])
