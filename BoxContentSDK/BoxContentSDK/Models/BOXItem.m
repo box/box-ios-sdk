@@ -50,6 +50,34 @@
     return NO;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXItemMini class]]) {
+        return NO;
+    }
+
+    BOXItemMini *item = (BOXItemMini *)object;
+
+    BOOL equalSequenceIDs = [self.sequenceID isEqualToString:item.sequenceID];
+    BOOL equalNames = [self.name isEqualToString:item.name];
+    BOOL equalTags = [self.etag isEqualToString:item.etag];
+
+    if (!(equalSequenceIDs && equalNames && equalTags)) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash] ^ [self.sequenceID hash] ^ [self.name hash] ^ [self.etag hash];
+}
+
 @end
 
 @implementation BOXItem
@@ -234,6 +262,41 @@
 - (BOOL)isBookmark
 {
     return NO;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXItem class]]) {
+        return NO;
+    }
+
+    BOXItem *item = (BOXItem *)object;
+
+    BOOL equalSequenceIDs = [self.sequenceID isEqualToString:item.sequenceID];
+    BOOL equalNames = [self.name isEqualToString:item.name];
+    BOOL equalTags = [self.etag isEqualToString:item.etag];
+    BOOL equalModifiedDates = [self.modifiedDate isEqual:item.modifiedDate];
+    BOOL equalContentModifiedDates = [self.contentModifiedDate isEqual:item.contentModifiedDate];
+
+    if (!(equalSequenceIDs && equalNames && equalTags && equalModifiedDates && equalContentModifiedDates)) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return  [super hash] ^
+            [self.sequenceID hash] ^
+            [self.name hash] ^
+            [self.etag hash] ^
+            [self.modifiedDate hash] ^
+            [self.contentModifiedDate hash];
 }
 
 @end

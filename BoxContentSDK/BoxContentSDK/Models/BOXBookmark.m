@@ -32,6 +32,30 @@
     return YES;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXBookmarkMini class]]) {
+        return NO;
+    }
+
+    BOXBookmarkMini *bookmark = (BOXBookmarkMini *)object;
+
+    if (![self.URL isEqual:bookmark.URL]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash];
+}
+
 @end
 
 @implementation BOXBookmark
@@ -97,6 +121,30 @@
 - (BOOL)isBookmark
 {
     return YES;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXBookmark class]]) {
+        return NO;
+    }
+
+    BOXBookmark *bookmark = (BOXBookmark *)object;
+
+    if (![self.URL isEqual:bookmark.URL]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash] ^ [self.URL hash];
 }
 
 @end

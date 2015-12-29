@@ -21,6 +21,24 @@
     return YES;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXFileMini class]]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash];
+}
+
 @end
 
 @implementation BOXFile
@@ -132,6 +150,30 @@
 - (BOOL)isFile
 {
     return YES;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXFile class]]) {
+        return NO;
+    }
+
+    BOXFile *file = (BOXFile *)object;
+
+    if (![self.SHA1 isEqualToString:file.SHA1]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash] ^ [self.SHA1 hash];
 }
 
 @end

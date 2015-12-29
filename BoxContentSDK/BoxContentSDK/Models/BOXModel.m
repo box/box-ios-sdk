@@ -32,4 +32,24 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXModel class]]) {
+        return NO;
+    }
+
+    BOXModel *model = (BOXModel *)object;
+
+    return [self.modelID isEqualToString:model.modelID] && [self.type isEqualToString:model.type];
+}
+
+- (NSUInteger)hash
+{
+    return [self.modelID hash] ^ [self.type hash];
+}
+
 @end
