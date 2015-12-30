@@ -29,6 +29,24 @@
     return [self.modelID isEqualToString:BOXAPIFolderIDRoot];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXFolderMini class]]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash];
+}
+
 @end
 
 @implementation BOXFolder
@@ -150,6 +168,24 @@
 - (BOOL)isRoot
 {
     return [self.modelID isEqualToString:BOXAPIFolderIDRoot];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+
+    if (![object isKindOfClass:[BOXFolder class]]) {
+        return NO;
+    }
+
+    return [super isEqual:object];
+}
+
+- (NSUInteger)hash
+{
+    return [super hash];
 }
 
 @end
