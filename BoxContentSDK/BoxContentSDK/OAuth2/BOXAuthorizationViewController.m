@@ -307,16 +307,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     // which would (probably erroneously) first load about:blank, then attempt to load its icon. The web view would
     // fail to load about:blank, which would cause the whole page to not appear. So we realized that we can and should
     // generally protect against loading about:blank.
-    if ([request.URL isEqual:[NSURL URLWithString:@"about:blank"]]) {
+    if ([[request.URL.absoluteString lowercaseString] isEqualToString:@"about:blank"]) {
         return NO;
     }
 
     // Mailto URLs can be encountered if there is a hyperlink for sending an email.
-    if ([[[request URL] scheme] isEqual:@"mailto"]) {
+    if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"]) {
         [[UIApplication sharedApplication] openURL:[request URL]];
         return NO;
     }
 
+    // Never load file:// urls.
+    if ([[request URL] isFileURL]) {
+        return NO;
+    }
+    
     [self.activityIndicator startAnimating];
 
     // Figure out whether this request is the redirect used at the end of the authentication process
