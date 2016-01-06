@@ -59,7 +59,7 @@
     for (NSInteger i = ancestors.count - 1; i >= 0; i --) {
         BOXFolderMini *folder = ancestors[i];
             
-        NSString *link = [self.delegate sharedLinkForItemWithID:folder.modelID itemType:itemType userID:self.userID];
+        NSString *link = [self.delegate sharedLinkForItemWithID:folder.modelID itemType:folder.type userID:self.userID];
         // We found a link in one of the ancestors of the file, we need to store this file that now would need the headers of its ancestors in any API request
         if (link) {
             [self.delegate storeSharedLink:link forItemWithIDKey:itemID itemTypeKey:itemType password:nil userIDKey:self.userID];
