@@ -10,7 +10,6 @@
 #import "BOXBookmark.h"
 
 @interface BOXBookmarkUpdateRequest ()
-
 @property (nonatomic, readwrite, strong) NSString *bookmarkID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanPreview;

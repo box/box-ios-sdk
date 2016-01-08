@@ -7,6 +7,7 @@
 
 @interface BOXFileUpdateRequest : BOXRequestWithSharedLinkHeader
 
+@property (nonatomic, readonly, strong) NSString *fileID;
 @property (nonatomic, readwrite, strong) NSString *fileName;
 @property (nonatomic, readwrite, strong) NSString *fileDescription;
 @property (nonatomic, readwrite, strong) NSString *parentID;

@@ -7,6 +7,7 @@
 
 @interface BOXBookmarkUpdateRequest : BOXRequestWithSharedLinkHeader
 
+@property (nonatomic, readonly, strong) NSString *bookmarkID;
 @property (nonatomic, readwrite, strong) NSURL *URL;
 @property (nonatomic, readwrite, strong) NSString *bookmarkName;
 @property (nonatomic, readwrite, strong) NSString *bookmarkDescription;
