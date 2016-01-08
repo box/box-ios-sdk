@@ -10,7 +10,6 @@
 #import "BOXFile.h"
 
 @interface BOXFileUpdateRequest ()
-
 @property (nonatomic, readwrite, strong) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanPreview;
