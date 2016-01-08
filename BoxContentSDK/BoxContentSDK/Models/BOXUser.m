@@ -183,6 +183,16 @@
         {
             self.enterprise = [[BOXEnterpriseMini alloc] initWithJSON:enterpriseDictionary];
         }
+        
+        self.isBoxNotesCreationEnabled = BOXAPIBooleanUnknown;
+        NSNumber *isBoxNotesCreationEnabledNumber = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyIsBoxNotesCreationEnabled
+                                                                                   inDictionary:JSONResponse
+                                                                                hasExpectedType:[NSNumber class]
+                                                                                    nullAllowed:NO];
+        if (isBoxNotesCreationEnabledNumber != nil)
+        {
+            self.isBoxNotesCreationEnabled = isBoxNotesCreationEnabledNumber.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
+        }
     }
     
     return self;
