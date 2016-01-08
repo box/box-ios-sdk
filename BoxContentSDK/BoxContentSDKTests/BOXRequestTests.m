@@ -92,7 +92,7 @@
 
 - (void)test_that_full_fields_string_for_users_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,name,login,created_at,modified_at,role,language,timezone,space_amount,space_used,max_upload_size,tracking_codes,can_see_managed_users,is_sync_enabled,is_external_collab_restricted,status,job_title,phone,address,avatar_url,is_exempt_from_device_limits,is_exempt_from_login_verification,enterprise";
+    NSString *expectedFieldsString = @"type,id,name,login,created_at,modified_at,role,language,timezone,space_amount,space_used,max_upload_size,tracking_codes,can_see_managed_users,is_sync_enabled,is_external_collab_restricted,status,job_title,phone,address,avatar_url,is_exempt_from_device_limits,is_exempt_from_login_verification,enterprise,is_boxnotes_creation_enabled";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullUserFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }

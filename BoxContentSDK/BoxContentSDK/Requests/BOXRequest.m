@@ -383,7 +383,8 @@
                        BOXAPIObjectKeyAvatarURL,
                        BOXAPIObjectKeyIsExemptFromDeviceLimits,
                        BOXAPIObjectKeyIsExemptFromLoginVerification,
-                       BOXAPIObjectKeyEnterprise];
+                       BOXAPIObjectKeyEnterprise,
+                       BOXAPIObjectKeyIsBoxNotesCreationEnabled];
     return [array componentsJoinedByString:@","];
 }
 

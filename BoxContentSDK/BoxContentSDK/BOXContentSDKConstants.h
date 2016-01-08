@@ -291,6 +291,7 @@ extern NSString *const BOXAPIObjectKeySource;
 extern NSString *const BOXAPIObjectKeyAcknowledgedAt;
 extern NSString *const BOXAPIObjectKeyAccessibleBy;
 extern NSString *const BOXAPIObjectKeyEntries;
+extern NSString *const BOXAPIObjectKeyIsBoxNotesCreationEnabled;
 
 // API Metadata Object keys
 extern NSString *const BOXAPIMetadataObjectKeyID;

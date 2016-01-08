@@ -276,6 +276,7 @@ NSString *const BOXAPIObjectKeySource = @"source";
 NSString *const BOXAPIObjectKeyAcknowledgedAt = @"acknowledged_at";
 NSString *const BOXAPIObjectKeyAccessibleBy = @"accessible_by";
 NSString *const BOXAPIObjectKeyEntries = @"entries";
+NSString *const BOXAPIObjectKeyIsBoxNotesCreationEnabled = @"is_boxnotes_creation_enabled";
 
 // API metadata object keys
 NSString *const BOXAPIMetadataObjectKeyID = @"$id";

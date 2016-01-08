@@ -147,4 +147,11 @@
  */
 @property (nonatomic, readwrite, strong) BOXEnterpriseMini *enterprise;
 
+/**
+ *  Whether or not this user can create BoxNotes.
+ *  Warning: By default, the Box API does not return this value, and it will be BOXAPIBooleanUnknown.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean isBoxNotesCreationEnabled;
+
 @end

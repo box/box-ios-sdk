@@ -95,6 +95,7 @@
     
     XCTAssertEqualObjects(@"17077211", user.enterprise.modelID);
     XCTAssertEqualObjects(@"Furious George", user.enterprise.name);
+    XCTAssertEqual(BOXAPIBooleanYES, user.isBoxNotesCreationEnabled);
 }
 
 - (void)test_that_user_with_all_fields_and_null_enterprise_is_parsed_correctly_from_json
@@ -133,6 +134,7 @@
     XCTAssertEqual(BOXAPIBooleanYES, user.isExternalCollabRestricted);
     XCTAssertEqual(BOXAPIBooleanNO, user.isExemptFromDeviceLimits);
     XCTAssertEqual(BOXAPIBooleanNO, user.isExemptFromLoginVerification);
+    XCTAssertEqual(BOXAPIBooleanNO, user.isBoxNotesCreationEnabled);
     
     XCTAssertNil(user.enterprise);
 }

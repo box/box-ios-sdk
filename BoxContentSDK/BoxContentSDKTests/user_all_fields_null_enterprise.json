@@ -32,5 +32,6 @@
     "is_external_collab_restricted": true,
     "is_exempt_from_device_limits": false,
     "is_exempt_from_login_verification": false,
-    "enterprise": null
+    "enterprise": null,
+    "is_boxnotes_creation_enabled": 0
 }
