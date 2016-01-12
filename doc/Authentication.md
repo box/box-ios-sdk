@@ -9,9 +9,8 @@ BOXContentClient *contentClient = [BOXContentClient defaultClient];
 [contentClient authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
 	// BOXUser is returned if authentication was successful.
 	// Otherwise, error will contain the reason for failure (e.g. network connection)
-} cancelBlock:^{
-	// User canceled the authentication process.
-}
+	// If the user canceled the authentication flow, error will be have domain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError
+}];
 ```
 
 Alternatively, if you prefer to present View Controllers on your own:
@@ -57,9 +56,7 @@ BOXContentClient *contentClient = [BOXContentClient clientForNewSession];
 [contentClient authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
 	// BOXUser is returned if authentication was successful.
 	// Otherwise, error will contain the reason for failure (e.g. network connection)	
-} cancelBlock:^{
-	// User canceled the authentication process.
-}
+}];
 ```
 
 Log all users out.
