@@ -292,6 +292,10 @@
 
 #pragma mark - Search
 
+- (void)cacheSearchRequest:(BOXSearchRequest *)request
+                 withItems:(NSArray *)items
+                     error:(NSError *)error;
+
 - (void)retrieveCacheForSearchRequest:(BOXSearchRequest *)request
                       completionBlock:(BOXItemArrayCompletionBlock)completionBlock;
 
