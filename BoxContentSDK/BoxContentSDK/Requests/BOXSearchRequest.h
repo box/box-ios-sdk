@@ -7,7 +7,10 @@
 
 @interface BOXSearchRequest : BOXRequest
 
-@property (nonatomic, readonly, strong)  NSString *query;
+@property (nonatomic, readonly, strong) NSString *query;
+@property (nonatomic, readonly, assign) NSUInteger limit;
+@property (nonatomic, readonly, assign) NSUInteger offset;
+
 @property (nonatomic, readwrite, strong) NSArray *fileExtensions;
 @property (nonatomic, readwrite, strong) NSDate *createdAtFromDate;
 @property (nonatomic, readwrite, strong) NSDate *createdAtToDate;

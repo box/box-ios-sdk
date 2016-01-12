@@ -146,11 +146,24 @@
             for (NSDictionary *itemDictionary in itemDictionaries) {
                 [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
+
+            if ([self.cacheClient respondsToSelector:@selector(cacheSearchRequest:withItems:error:)]) {
+                [self.cacheClient cacheSearchRequest:self
+                                           withItems:items
+                                               error:nil];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(items, totalCount, NSMakeRange(offset, limit), nil);
             } onMainThread:isMainThread];
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheSearchRequest:withItems:error:)]) {
+                [self.cacheClient cacheSearchRequest:self
+                                           withItems:nil
+                                               error:error];
+            }
+
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, 0, NSMakeRange(0, 0), error);
             } onMainThread:isMainThread];
