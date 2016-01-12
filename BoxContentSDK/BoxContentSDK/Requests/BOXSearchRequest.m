@@ -159,6 +159,20 @@
     }
 }
 
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXItemArrayCompletionBlock)refreshBlock
+{
+    if (cacheBlock) {
+        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForSearchRequest:completionBlock:)]) {
+            [self.cacheClient retrieveCacheForSearchRequest:self completionBlock:cacheBlock];
+        } else {
+            cacheBlock(nil, 0, NSMakeRange(0, 0), nil);
+        }
+    }
+
+    [self performRequestWithCompletion:refreshBlock];
+}
+
 - (NSString *)generateMetadataQuery
 {
     NSString *queryFormat = @"[{\"%@\":\"%@\", \"%@\":\"%@\", \"%@\":{%@}}]";
