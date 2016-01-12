@@ -60,6 +60,8 @@
 @class BOXCollectionItemsRequest;
 @class BOXCollectionFavoritesRequest;
 
+@class BOXSearchRequest;
+
 @protocol BOXContentCacheClientProtocol <NSObject>
 
 @optional
@@ -287,5 +289,10 @@
 
 - (void)retrieveCacheForFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
                                   completionBlock:(BOXCollectionBlock)completionBlock;
+
+#pragma mark - Search
+
+- (void)retrieveCacheForSearchRequest:(BOXSearchRequest *)request
+                      completionBlock:(BOXItemArrayCompletionBlock)completionBlock;
 
 @end

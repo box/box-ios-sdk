@@ -7,6 +7,7 @@
 
 @interface BOXSearchRequest : BOXRequest
 
+@property (nonatomic, readonly, strong)  NSString *query;
 @property (nonatomic, readwrite, strong) NSArray *fileExtensions;
 @property (nonatomic, readwrite, strong) NSDate *createdAtFromDate;
 @property (nonatomic, readwrite, strong) NSDate *createdAtToDate;
@@ -29,7 +30,11 @@
 
 - (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range;
 
-//Perform API request and any cache update only if refreshBlock is not nil
+//Perform API request only if completionBlock is not nil
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
+
+//Perform API and cache requests, with each request occurring only if it is not nil
+- (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock
+                       refreshed:(BOXItemArrayCompletionBlock)refreshBlock;
 
 @end
