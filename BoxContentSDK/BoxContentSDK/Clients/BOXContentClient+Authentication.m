@@ -257,6 +257,7 @@
             }
         } else {
             BOXUserRequest *userRequest = [self currentUserRequest];
+            userRequest.requestAllUserFields = YES;
             [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
                 if (completion) {
                     completion(user, error);
