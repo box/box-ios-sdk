@@ -207,12 +207,16 @@
         return;
     }
     
-    NSDictionary *POSTParams = @{
-                                 BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
-                                 BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,
-                                 BOXAuthTokenRequestClientIDKey : self.clientID,
-                                 BOXAuthTokenRequestClientSecretKey : self.clientSecret,
-                                 };
+    NSMutableDictionary *POSTParams = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                      BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
+                                                                                      BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,
+                                                                                      BOXAuthTokenRequestClientIDKey : self.clientID,
+                                                                                      BOXAuthTokenRequestClientSecretKey : self.clientSecret,
+                                                                                      }];
+    
+    if (self.additionalTokenGrantParameters.count > 0) {
+        [POSTParams addEntriesFromDictionary:self.additionalTokenGrantParameters];
+    }
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
