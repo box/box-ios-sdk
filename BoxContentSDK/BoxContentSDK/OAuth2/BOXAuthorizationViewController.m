@@ -338,6 +338,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                     }
                 } else {
                     BOXUserRequest *userRequest = [me.SDKClient currentUserRequest];
+                    userRequest.requestAllUserFields = YES;
                     [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
                         if (me.completionBlock) {
                             me.completionBlock(me, user, error);
