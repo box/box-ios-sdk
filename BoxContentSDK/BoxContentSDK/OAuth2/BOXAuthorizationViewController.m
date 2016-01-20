@@ -7,6 +7,7 @@
 //
 
 #import "BOXAuthorizationViewController.h"
+#import "BOXAuthorizationViewController_Private.h"
 #import "BOXLog.h"
 #import "BOXUser.h"
 #import "BOXContentClient+User.h"
@@ -123,6 +124,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
     [self clearCookies];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:_preexistingCookiePolicy];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadView
@@ -140,6 +142,11 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appBecameActive)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:[UIApplication sharedApplication]];
 
     [self loadAuthorizationURL];
 }
@@ -295,6 +302,18 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     return (requestIsForLoginRedirectScheme && [[[request URL] absoluteString] hasPrefix:self.redirectURI]);
 }
 
+- (void)appBecameActive
+{
+    [self runDeviceTrustChecks];
+}
+
+- (void)runDeviceTrustChecks
+{
+    if (self.deviceTrustDelegate != nil) {
+        [self.deviceTrustDelegate authorizationViewController:self runDeviceTrustForWebView:(UIWebView *)self.view];
+    }
+}
+
 #pragma mark - UIWebViewDelegate methods
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -425,6 +444,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     BOXLogFunction();
     [self.activityIndicator stopAnimating];
+    [self runDeviceTrustChecks];
 }
 
 #pragma mark - NSURLConnectionDelegate methods
