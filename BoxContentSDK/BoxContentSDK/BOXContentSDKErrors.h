@@ -78,4 +78,7 @@ extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh 
 extern NSString *const BOXAuthTokenRequestErrorInvalidToken; // Invalid access token
 extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a missing access token
 
+extern NSString *const BOXAuthErrorUnauthorizedDevice; // Device Pinning unauthorized device
+extern NSString *const BOXAuthErrorExceededDeviceLimit; // Device Pinning max devices allowed exceeded
+
 extern NSString *const BOXAuthErrorAccessDenied; // User denied access to their Box account

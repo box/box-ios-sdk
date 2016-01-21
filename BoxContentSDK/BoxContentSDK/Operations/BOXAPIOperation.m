@@ -357,6 +357,11 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         NSString *errorType = [errorInfo objectForKey:BOXAuthURLParameterErrorCodeKey];
         if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidGrant]) {
             shouldLogout = YES;
+        } else if (error.code == BOXContentSDKAPIErrorBadRequest) {
+            // Device Pinning
+            if ([errorType isEqualToString:BOXAuthErrorUnauthorizedDevice] || [errorType isEqualToString:BOXAuthErrorExceededDeviceLimit]) {
+                shouldLogout = YES;
+            }
         } else if (error.code == BOXContentSDKAPIErrorUnauthorized) {
             // HTTP-401 - unauthorized
             if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidToken]) {
