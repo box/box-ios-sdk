@@ -14,8 +14,10 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
 {
-    BOXAssert([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeCollaboration], @"Invalid type for object.");
-    
+    if (JSONResponse) {
+        BOXAssert([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeCollaboration], @"Invalid type for object.");
+    }
+
     if (self = [super initWithJSON:JSONResponse])
     {
         NSDictionary *creatorDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCreatedBy
