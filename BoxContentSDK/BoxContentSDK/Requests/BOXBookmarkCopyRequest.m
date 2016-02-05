@@ -28,6 +28,12 @@
                            subresource:BOXAPISubresourceCopy
                                  subID:nil];
     
+    NSDictionary *queryParameters = nil;
+    
+    if (self.requestAllBookmarkFields) {
+        queryParameters = @{BOXAPIParameterKeyFields: [self fullBookmarkFieldsParameterString]};
+    }
+    
     NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
     
     if (self.destinationFolderID.length > 0) {
@@ -40,7 +46,7 @@
     
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodPOST
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:bodyDictionary
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];
