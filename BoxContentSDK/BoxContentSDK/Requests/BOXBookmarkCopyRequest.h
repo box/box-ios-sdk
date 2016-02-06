@@ -7,6 +7,7 @@
 
 @interface BOXBookmarkCopyRequest : BOXRequestWithSharedLinkHeader
 
+@property (nonatomic, readwrite, assign) BOOL requestAllBookmarkFields;
 @property (nonatomic, readonly, strong) NSString *bookmarkID;
 @property (nonatomic, readonly, strong) NSString *destinationFolderID;
 @property (nonatomic, readwrite, strong) NSString *bookmarkName;
