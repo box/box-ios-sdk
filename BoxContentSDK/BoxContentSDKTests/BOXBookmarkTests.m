@@ -145,14 +145,14 @@
     XCTAssertEqualObjects(@"2759406491", bookmark.parentFolder.modelID);
 
     XCTAssertEqualObjects(@"active", bookmark.status);
-//    XCTAssertEqualObjects([NSNumber numberWithInteger:0], file.commentCount);
+    XCTAssertEqualObjects([NSNumber numberWithInteger:2], bookmark.commentCount);
     NSArray *accessLevels = @[@"collaborators", @"open"];
     XCTAssertEqualObjects(accessLevels, bookmark.allowedSharedLinkAccessLevels);
-//    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canComment);
-//    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canRename);
-//    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canDelete);
-//    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canShare);
-//    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canSetShareAccess);
+    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canComment);
+    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canRename);
+    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canDelete);
+    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canShare);
+    XCTAssertEqual(BOXAPIBooleanYES, bookmark.canSetShareAccess);
     
     XCTAssertFalse(bookmark.isFile);
     XCTAssertFalse(bookmark.isFolder);
