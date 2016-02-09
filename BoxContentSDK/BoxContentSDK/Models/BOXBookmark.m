@@ -53,12 +53,11 @@
 
         
         // Parse Permissions.
-        //FIXME: Uncomment when permissions are put back in (expected within a week or two from 12/5/2014).
-//        NSDictionary *permissions = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyPermissions
-//                                                                   inDictionary:JSONResponse
-//                                                                hasExpectedType:[NSDictionary class]
-//                                                                    nullAllowed:NO];
-//        [self parsePermssionsFromJSON:permissions];
+        NSDictionary *permissions = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyPermissions
+                                                                   inDictionary:JSONResponse
+                                                                hasExpectedType:[NSDictionary class]
+                                                                    nullAllowed:NO];
+        [self parsePermssionsFromJSON:permissions];
     }
 
     return self;
