@@ -34,9 +34,14 @@
                            subresource:nil
                                  subID:nil];
 
+    NSDictionary *queryParameters = nil;
+    if (self.requestAllItemFields) {
+        queryParameters = @{BOXAPIParameterKeyFields : [self fullItemFieldsParameterString]};
+    }
+    
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET
-                                              queryStringParameters:nil
+                                              queryStringParameters:queryParameters
                                                      bodyDictionary:nil
                                                    JSONSuccessBlock:nil
                                                        failureBlock:nil];

@@ -12,6 +12,8 @@
 
 @property (nonatomic, readonly, strong) NSString *sharedLinkURLString;
 
+@property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
+
 - (instancetype)initWithURL:(NSURL *)sharedLinkURL
                    password:(NSString *)password;
 
