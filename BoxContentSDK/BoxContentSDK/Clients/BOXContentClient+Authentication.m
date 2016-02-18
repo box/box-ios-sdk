@@ -231,6 +231,7 @@
         }
         [viewControllerToPresentOn presentViewController:navController animated:YES completion:nil];
 #else
+		// TODO: Implement Box Auth for OSX
 #endif
     });
 }
