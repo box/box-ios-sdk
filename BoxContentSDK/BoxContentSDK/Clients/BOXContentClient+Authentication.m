@@ -11,13 +11,18 @@
 #import "BOXContentClient+Authentication.h"
 #import "BOXContentClient+User.h"
 #import "BOXContentSDKErrors.h"
-#import "BOXAuthorizationViewController.h"
 #import "BOXUser.h"
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXAppToAppApplication.h"
 #import "BOXAppToAppMessage.h"
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
+
+#if TARGET_OS_IPHONE
+#import "BOXAuthorizationViewController.h"
+#else
+
+#endif
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
@@ -203,6 +208,7 @@
 - (void)showWebViewAuthenticationViewControllerWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+#if TARGET_OS_IPHONE
         BOXAuthorizationViewController *authorizationController = [[BOXAuthorizationViewController alloc] initWithSDKClient:self completionBlock:^(BOXAuthorizationViewController *authViewController, BOXUser *user, NSError *error) {
             [[authViewController navigationController] dismissViewControllerAnimated:YES completion:nil];
             if (completion) {
@@ -224,6 +230,8 @@
             viewControllerToPresentOn = viewControllerToPresentOn.presentedViewController;
         }
         [viewControllerToPresentOn presentViewController:navController animated:YES completion:nil];
+#else
+#endif
     });
 }
 

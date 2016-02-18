@@ -3,7 +3,12 @@
 //  BoxContentSDK
 //
 
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
+
 #import "NSDate+BOXAdditions.h"
 
 @class BOXCollaboration;
@@ -27,7 +32,11 @@ typedef void (^BOXFileBlock)(BOXFile *file, NSError *error);
 
 typedef void (^BOXFolderBlock)(BOXFolder *folder, NSError *error);
 
+#if TARGET_OS_IPHONE
 typedef void (^BOXImageBlock)(UIImage *image, NSError *error);
+#else
+typedef void (^BOXImageBlock)(NSImage *image, NSError *error);
+#endif
 
 typedef void (^BOXDictionaryBlock)(NSDictionary *dictionary, NSError *error);
 

@@ -13,7 +13,9 @@
 #import "BOXHashHelper.h"
 #import "NSString+BOXURLHelper.h"
 
+#if TARGET_OS_IPHONE
 #import <AssetsLibrary/AssetsLibrary.h>
+#endif
 
 @interface BOXFileUploadRequest ()
 
@@ -56,6 +58,7 @@
     return self;
 }
 
+#if TARGET_OS_IPHONE
 - (instancetype)initWithALAsset:(ALAsset *)asset
                   assetsLibrary:(ALAssetsLibrary *)assetsLibrary
                 targetForlderID:(NSString *)folderID
@@ -67,6 +70,7 @@
     
     return self;
 }
+#endif
 
 - (BOXAPIOperation *)createOperation
 {
@@ -130,6 +134,7 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:fileName
                                        MIMEType:nil];
+#if TARGET_OS_IPHONE
     } else if (self.asset != nil) {
         BOXAssetInputStream *inputStream =
             [[BOXAssetInputStream alloc] initWithAssetRepresentation:self.asset.defaultRepresentation
@@ -140,6 +145,7 @@
                                              fieldName:BOXAPIMultipartParameterFieldKeyFile
                                               filename:fileName
                                               MIMEType:nil];
+#endif
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
@@ -224,9 +230,11 @@
         hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
     } else if (self.fileData != nil) {
         hash = [BOXHashHelper sha1HashOfData:self.fileData];
+#if TARGET_OS_IPHONE
     } else if (self.asset != nil) {
         hash = [BOXHashHelper sha1HashOfALAsset:self.asset];
-    } else {
+#endif
+	} else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
     }
 

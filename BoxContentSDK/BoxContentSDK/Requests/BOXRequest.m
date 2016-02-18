@@ -441,13 +441,23 @@
 
 - (NSString *)userAgent
 {
+#if TARGET_OS_IPHONE
     NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                            self.SDKIdentifier,
                            self.SDKVersion,
                            [[UIDevice currentDevice] systemVersion],
                            [self modelID],
                            [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    
+#else
+	NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
+	NSString *osVersionString = [systemVersionDictionary objectForKey:@"ProductVersion"];
+	NSString *userAgent = [NSString stringWithFormat:@"%@/%@;Darwin/%@;Apple/%@",
+						   self.SDKIdentifier,
+						   self.SDKVersion,
+						   osVersionString,
+						   [self modelID]];
+#endif
+
     return userAgent;
 }
 

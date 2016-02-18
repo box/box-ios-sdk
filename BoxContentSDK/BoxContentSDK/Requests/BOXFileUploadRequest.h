@@ -24,7 +24,11 @@
 
 - (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID;
 - (instancetype)initWithName:(NSString *)fileName targetFolderID:(NSString *)folderID data:(NSData *)data;
+
+#if TARGET_OS_IPHONE
 - (instancetype)initWithALAsset:(ALAsset *)asset assetsLibrary:(ALAssetsLibrary *)assetsLibrary targetForlderID:(NSString *)folderID;
+#endif
+
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXFileBlock)completionBlock;
 
 @end

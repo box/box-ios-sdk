@@ -7,7 +7,6 @@
 //
 
 #import "BOXContentClient.h"
-#import <UIKit/UIKit.h>
 
 @class BOXUser;
 

@@ -27,7 +27,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#if TARGET_OS_IPHONE
 #include <AssetsLibrary/AssetsLibrary.h>
+#endif
 
 // Constants
 static const size_t FileHashDefaultChunkSizeForReadingData = 4096;
@@ -149,6 +152,7 @@ typedef struct _FileHashComputationContext {
     return [NSString stringWithCString:finaldigest encoding:NSASCIIStringEncoding];
 }
 
+#if TARGET_OS_IPHONE
 + (NSString *)sha1HashOfALAsset:(ALAsset *)asset
 {
     NSMutableString *hash = nil;
@@ -184,5 +188,6 @@ typedef struct _FileHashComputationContext {
     }
     return hash;
 }
+#endif
 
 @end
