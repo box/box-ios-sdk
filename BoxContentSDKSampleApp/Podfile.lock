@@ -14,6 +14,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  box-ios-sdk: a34a7c130e83e3d2380d2f6c1f16e589ba7788ba
+  box-ios-sdk: 9e2a8a9a9a0df746ef6dc0f9f39da6853b81645d
 
 COCOAPODS: 0.39.0
