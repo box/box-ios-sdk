@@ -37,7 +37,7 @@
 - (BOXCommentRequest *)commentInfoRequestWithID:(NSString *)commentID
 {
     BOXCommentRequest *request = [[BOXCommentRequest alloc] initWithCommentID:commentID];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -45,7 +45,7 @@
 - (BOXCommentAddRequest *)commentAddRequestForFileWithID:(NSString *)fileID message:(NSString *)message
 {
     BOXCommentAddRequest *request = [[BOXCommentAddRequest alloc] initWithFileID:fileID message:message];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -53,7 +53,7 @@
 - (BOXCommentAddRequest *)commentAddRequestForBookmarkWithID:(NSString *)bookmarkID message:(NSString *)message
 {
     BOXCommentAddRequest *request = [[BOXCommentAddRequest alloc] initWithBookmarkID:bookmarkID message:message];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -61,7 +61,7 @@
 - (BOXCommentAddRequest *)commentReplyRequestToCommentWithID:(NSString *)commentID message:(NSString *)message
 {
     BOXCommentAddRequest *request = [[BOXCommentAddRequest alloc] initWithCommentID:commentID message:message];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -69,7 +69,7 @@
 - (BOXCommentDeleteRequest *)commentDeleteRequestWithID:(NSString *)commentID
 {
     BOXCommentDeleteRequest *request = [[BOXCommentDeleteRequest alloc] initWithCommentID:commentID];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -78,7 +78,7 @@
 {
     BOXCommentUpdateRequest *request = [[BOXCommentUpdateRequest alloc] initWithCommentID:commentID 
                                                                            updatedMessage:newMessage];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
