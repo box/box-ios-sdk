@@ -168,9 +168,9 @@
 @property (nonatomic, readwrite, strong) NSString *redirectURIString;
 
 /**
- * Custom parameters to use in the token grant request. Optional, defaults to nil.
+ * Custom parameters to append to the POST method body. Optional, defaults to nil.
  */
-@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParameters;
+@property (nonatomic, readwrite, strong) NSDictionary *additionalCustomDictionaryParameters;
 
 /**
  * Returns the randomly generated nonce used to prevent spoofing attack during login
