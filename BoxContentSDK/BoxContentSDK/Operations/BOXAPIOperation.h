@@ -115,7 +115,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * @see [BOXAPIJSONOperation encodeBody:]
  * @see [BOXAPIMultipartToJSONOperation encodeBody:]
  */
-@property (nonatomic, readwrite, strong) NSDictionary *body;
+@property (nonatomic, readonly, strong) NSDictionary *body;
 
 /**
  * Key value pairs to be appended to baseRequestURL as part of the query string. Keys and values

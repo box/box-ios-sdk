@@ -97,14 +97,25 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     self = [super init];
     if (self != nil)
     {
+        
+        // If we are not a POST method, postParams will be nil and we will not add a body.
+        // If we are a POST method, all api calls will append our custom entries to the body prior to encoding.
+        NSMutableDictionary *POSTParams = [body mutableCopy];
+        if ([session isKindOfClass:[BOXOAuth2Session class]]) {
+            BOXOAuth2Session *currentSession = (BOXOAuth2Session *)session;
+            if (currentSession.additionalCustomDictionaryParameters.count > 0) {
+                [POSTParams addEntriesFromDictionary:currentSession.additionalCustomDictionaryParameters];
+            }
+        }
+        
         _baseRequestURL = URL;
-        _body = body;
+        _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
 
         _APIRequest = nil;
         _connection = nil; // delay setting up the connection as long as possible so the authentication credentials remain fresh
-
+        
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
 
