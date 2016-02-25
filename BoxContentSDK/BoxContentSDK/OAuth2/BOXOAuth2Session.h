@@ -170,7 +170,7 @@
 /**
  * Custom parameters to append to the POST method body. Optional, defaults to nil.
  */
-@property (nonatomic, readwrite, strong) NSDictionary *additionalCustomDictionaryParameters;
+@property (nonatomic, readwrite, strong) NSDictionary *additionalMessageParameters;
 
 /**
  * Returns the randomly generated nonce used to prevent spoofing attack during login
