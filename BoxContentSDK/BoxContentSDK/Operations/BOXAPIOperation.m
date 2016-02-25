@@ -103,8 +103,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         NSMutableDictionary *POSTParams = [body mutableCopy];
         if ([session isKindOfClass:[BOXOAuth2Session class]]) {
             BOXOAuth2Session *currentSession = (BOXOAuth2Session *)session;
-            if (currentSession.additionalCustomDictionaryParameters.count > 0) {
-                [POSTParams addEntriesFromDictionary:currentSession.additionalCustomDictionaryParameters];
+            if (currentSession.additionalMessageParameters.count > 0) {
+                [POSTParams addEntriesFromDictionary:currentSession.additionalMessageParameters];
             }
         }
         
