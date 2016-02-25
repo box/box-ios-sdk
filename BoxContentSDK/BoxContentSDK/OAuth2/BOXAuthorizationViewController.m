@@ -114,6 +114,26 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    UIWebView *webView = [[UIWebView alloc] init];
+    [webView setScalesPageToFit:YES];
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.delegate = self;
+    
+    self.view = webView;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self loadAuthorizationURL];
+}
+
 - (void)dealloc
 {
     UIWebView *webView = (UIWebView *)self.view;
@@ -123,25 +143,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
     [self clearCookies];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:_preexistingCookiePolicy];
-}
-
-- (void)loadView
-{
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-
-    UIWebView *webView = [[UIWebView alloc] init];
-    [webView setScalesPageToFit:YES];
-    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    webView.delegate = self;
-
-    self.view = webView;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    [self loadAuthorizationURL];
 }
 
 - (void)viewWillLayoutSubviews
@@ -239,18 +240,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     self.connection = nil;
     self.connectionResponse = nil;
     [self setWebViewCanBeUsedDirectly:NO forHost:connection.currentRequest.URL.host];
-
-    if (self.view.window) {
-        self.connectionError = error;
-        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                        message:message
-                                                                       delegate:self
-                                                              cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                              otherButtonTitles:nil];
-        loginFailureAlertView.tag = BOX_SSO_CONNECTION_ERROR_ALERT_TAG;
-        [loginFailureAlertView show];
-    }
+    
+    self.connectionError = error;
+    
     [self.activityIndicator stopAnimating];
+    
+    NSString *title = NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue");
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action) {
+                                                          if (self.completionBlock) {
+                                                              self.completionBlock(self, nil, error);
+                                                          }
+                                                      }]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)clearCookies

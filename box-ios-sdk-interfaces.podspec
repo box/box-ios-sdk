@@ -13,7 +13,7 @@ s.source                = { :git => "https://github.com/box/box-ios-sdk.git", :t
 
 # Platform
 
-s.ios.deployment_target = "7.0"
+s.ios.deployment_target = "8.0"
 
 # File patterns
 

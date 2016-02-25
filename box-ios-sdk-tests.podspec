@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   
   # Platform
 
-  s.ios.deployment_target = "7.0"
+  s.ios.deployment_target = "8.0"
 
   # File patterns
 
