@@ -511,7 +511,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                                                                                      message:nil
                                                                                     delegate:self
                                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
-                                                                           otherButtonTitles:NSLocalizedString(@"Submit", @"Alert view button: submit button for SSO authentication challenge"), nil];
+                                                                           otherButtonTitles:NSLocalizedString(@"Submit", @"Alert view button: submit button for authentication challenge"), nil];
                         challengeAlertView.tag = BOX_SSO_CREDENTIALS_ALERT_TAG;
                         challengeAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
                         // Change the login text field's placeholder text to Username (it defaults to Login).
