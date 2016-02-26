@@ -21,8 +21,8 @@
             BOXCollection *favoritesCollection = nil;
 
             for (NSDictionary *dict in collectionsJSON) {
-
-                if([dict[BOXAPIObjectKeyCollectionType] isEqualToString:BOXAPIFavoritesCollectionType]) {
+                if ([dict[BOXAPIObjectKeyCollectionType] isEqual:[NSNull null]] == NO &&
+                    [dict[BOXAPIObjectKeyCollectionType] isEqualToString:BOXAPIFavoritesCollectionType]) {
                     favoritesCollection = [[BOXCollection alloc] initWithJSON:dict];
                 }
             }
