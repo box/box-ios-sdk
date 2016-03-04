@@ -370,7 +370,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             shouldLogout = YES;
         } else if (error.code == BOXContentSDKAPIErrorBadRequest) {
             // Device Pinning
-            if ([errorType isEqualToString:BOXAuthErrorUnauthorizedDevice] || [errorType isEqualToString:BOXAuthErrorExceededDeviceLimit]) {
+            if ([errorType isEqualToString:BOXAuthErrorUnauthorizedDevice]
+                || [errorType isEqualToString:BOXAuthErrorExceededDeviceLimit]
+                || [errorType isEqualToString:BOXAuthErrorMissingDeviceId]
+                || [errorType isEqualToString:BOXAuthErrorUnsupportedDevicePinningRuntime])  {
                 shouldLogout = YES;
             }
         } else if (error.code == BOXContentSDKAPIErrorUnauthorized) {
