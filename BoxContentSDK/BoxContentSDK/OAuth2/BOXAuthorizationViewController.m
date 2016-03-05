@@ -321,13 +321,13 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     if ([[request URL] isFileURL]) {
         return NO;
     }
-    
-    [self.activityIndicator startAnimating];
 
     // Figure out whether this request is the redirect used at the end of the authentication process
     BOOL requestIsForLoginRedirection = [self isLoginRedirectionRequest:request];
 
     if (requestIsForLoginRedirection) {
+        [self.activityIndicator startAnimating];
+
         BOXOAuth2Session *OAuth2Session = (BOXOAuth2Session *)self.SDKClient.session;
         __weak BOXAuthorizationViewController *me = self;
         [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
@@ -357,6 +357,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         return YES;
     } else if ([self webViewCanBeUsedDirectlyForHost:request.URL.host] == NO) {
         BOXLog(@"Was not authenticated, launching URLConnection and not loading the request in the web view");
+        [self.activityIndicator startAnimating];
         self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         BOXLog(@"URLConnection is %@", self.connection);
         return NO;
