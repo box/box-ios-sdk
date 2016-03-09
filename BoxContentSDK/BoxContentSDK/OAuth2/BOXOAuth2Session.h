@@ -151,10 +151,20 @@
 - (NSURL *)grantTokensURL;
 
 /**
- * Returns the URL to load in a webview to start the authentication and authorization flow with Box.
+ * Returns the URL to load in a webview to start the authentication and authorization flow with Box
+ * using the default base URL string.
  * @return The URL to load in a webview to start the authentication and authorization flow with Box.
  */
 - (NSURL *)authorizeURL;
+
+/**
+ * Returns the URL to load in a webview to start the authentication and authorization flow with Box.
+ *
+ * @param baseURLString The base URL string to be used for the auth URL (ex: @"https://api.box.com")
+ *
+ * @return The URL to load in a webview to start the authentication and authorization flow with Box.
+ */
+- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString;
 
 /**
  * A string containing the URI to load after the user completes the webview authorization flow.
