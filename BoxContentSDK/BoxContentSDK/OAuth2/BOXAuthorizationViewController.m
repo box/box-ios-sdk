@@ -13,17 +13,13 @@
 #import "BOXUserRequest.h"
 #import "BOXContentSDKErrors.h"
 
-#define BOX_SSO_SERVER_TRUST_ALERT_TAG (1)
-#define BOX_SSO_CREDENTIALS_ALERT_TAG (2)
-#define BOX_SSO_CONNECTION_ERROR_ALERT_TAG (3)
-
 // http://stackoverflow.com/a/5337804/527393
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 typedef void (^BOXAuthCompletionBlock)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error);
 typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorizationViewController);
 
-@interface BOXAuthorizationViewController () <NSURLConnectionDataDelegate, UIAlertViewDelegate>
+@interface BOXAuthorizationViewController () <NSURLConnectionDataDelegate>
 
 @property (nonatomic, readwrite, strong) NSURLConnection *connection;
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
@@ -216,13 +212,17 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         [[authenticationChallenge sender] useCredential:serverTrustCredential
                              forAuthenticationChallenge:authenticationChallenge];
     } else {
-        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                        message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
-                                                                       delegate:nil
-                                                              cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                              otherButtonTitles:nil];
-
-        [loginFailureAlertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                                 message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                         }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     [self.activityIndicator stopAnimating];
 }
@@ -241,14 +241,32 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self setWebViewCanBeUsedDirectly:NO forHost:connection.currentRequest.URL.host];
 
     if (self.view.window) {
+        
         self.connectionError = error;
-        UIAlertView *loginFailureAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                        message:message
-                                                                       delegate:self
-                                                              cancelButtonTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                              otherButtonTitles:nil];
-        loginFailureAlertView.tag = BOX_SSO_CONNECTION_ERROR_ALERT_TAG;
-        [loginFailureAlertView show];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        __weak typeof(self) weakSelf = self;
+        void (^completion)(UIAlertAction *action) = ^void(UIAlertAction *action) {
+            [alertController dismissViewControllerAnimated:YES completion:nil];
+            
+            if (weakSelf.completionBlock) {
+                NSError *error = weakSelf.connectionError;
+                weakSelf.connectionError = nil;
+                weakSelf.completionBlock(weakSelf, nil, error);
+            }
+            // Clear out the authentication challenge in memory
+            weakSelf.authenticationChallenge = nil;
+        };
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:completion];
+        
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     [self.activityIndicator stopAnimating];
 }
@@ -507,17 +525,52 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                     } else {
                         BOXLog(@"Presenting modal username and password window");
                         self.authenticationChallenge = challenge;
-                        // Create the alert view
-                        UIAlertView *challengeAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please Log In", @"Alert view title: title for SSO authentication challenge")
-                                                                                     message:nil
-                                                                                    delegate:self
-                                                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
-                                                                           otherButtonTitles:NSLocalizedString(@"Submit", @"Alert view button: submit button for authentication challenge"), nil];
-                        challengeAlertView.tag = BOX_SSO_CREDENTIALS_ALERT_TAG;
-                        challengeAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-                        // Change the login text field's placeholder text to Username (it defaults to Login).
-                        [[challengeAlertView textFieldAtIndex:0] setPlaceholder:NSLocalizedString(@"Username", @"Alert view text placeholder: Placeholder for where to enter user name for SSO authentication challenge")];
-                        [challengeAlertView show];
+                        
+                        
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please Log In", @"Alert view title: title for SSO authentication challenge")
+                                                                                                 message:nil
+                                                                                          preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
+                                                                           style:UIAlertActionStyleCancel
+                                                                         handler:^(UIAlertAction *action) {
+                                                                             [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                                             BOXLog(@"Cancel");
+                                                                         }];
+                        UIAlertAction *submitAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Submit", @"Alert view button: submit button for authentication challenge")
+                                                                               style:UIAlertActionStyleDefault
+                                                                             handler:^(UIAlertAction *action) {
+                                                                                 [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                                                 
+                                                                                 BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
+                                                                                 [self setWebViewCanBeUsedDirectly:YES forHost:self.connection.currentRequest.URL.host];
+                                                                                 UITextField *login = alertController.textFields.firstObject;
+                                                                                 UITextField *password = alertController.textFields.lastObject;
+                                                                                 
+                                                                                 self.authenticationChallengeCredential = [NSURLCredential credentialWithUser:[login text]
+                                                                                                                                                     password:[password text]
+                                                                                                                                                  persistence:NSURLCredentialPersistenceNone];
+                                                                                 [[self.authenticationChallenge sender] useCredential:self.authenticationChallengeCredential
+                                                                                                           forAuthenticationChallenge:self.authenticationChallenge];
+                                                                                 
+                                                                                 // Clear out the authentication challenge in memory
+                                                                                 self.authenticationChallenge = nil;
+                                                                             }];
+                        
+                        [alertController addAction:cancelAction];
+                        [alertController addAction:submitAction];
+                        
+                        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+                         {
+                             textField.placeholder = NSLocalizedString(@"Username", @"Alert view text placeholder: Placeholder for where to enter user name for SSO authentication challenge");
+                         }];
+                        
+                        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                            textField.placeholder = NSLocalizedString(@"Password", @"Alert view text placeholder: Placeholder for where to enter password for SSO authentication challenge");
+                            textField.secureTextEntry = YES;
+                         }];
+                        
+                        [self presentViewController:alertController animated:YES completion:nil];
                     }
                 }
             }
@@ -571,49 +624,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     // No cached response should be stored for the connection.
     return nil;
-}
-
-#pragma mark - UIAlertView delegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    BOXLog(@"Alert view with tag %ld clicked button at index %ld", (long)alertView.tag, (long)buttonIndex);
-    if (alertView.tag == BOX_SSO_CREDENTIALS_ALERT_TAG) {
-        if (buttonIndex == alertView.cancelButtonIndex) {
-            BOXLog(@"Cancel");
-        } else {
-            UITextField *usernameField = nil;
-            UITextField *passwordField = nil;
-            if ([alertView alertViewStyle] == UIAlertViewStyleLoginAndPasswordInput) {
-                usernameField = [alertView textFieldAtIndex:0];
-                passwordField = [alertView textFieldAtIndex:1];
-            } else {
-                BOXAssertFail(@"The alert view is not of login and password input style. Cannot safely extract the user's credentials.");
-            }
-
-            BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
-            [self setWebViewCanBeUsedDirectly:YES forHost:self.connection.currentRequest.URL.host];
-            self.authenticationChallengeCredential = [NSURLCredential credentialWithUser:[usernameField text]
-                                                                                password:[passwordField text]
-                                                                             persistence:NSURLCredentialPersistenceNone];
-            [[self.authenticationChallenge sender] useCredential:self.authenticationChallengeCredential
-                                      forAuthenticationChallenge:self.authenticationChallenge];
-        }
-    } else if (alertView.tag == BOX_SSO_SERVER_TRUST_ALERT_TAG) {
-        if (self.completionBlock) {
-            NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIErrorServerCertError userInfo:nil];
-            self.completionBlock(self, nil, error);            
-        }
-    } else if (alertView.tag == BOX_SSO_CONNECTION_ERROR_ALERT_TAG) {
-        if (self.completionBlock) {
-            NSError *error = self.connectionError;
-            self.connectionError = nil;
-            self.completionBlock(self, nil, error);
-        }
-    }
-    
-    // Clear out the authentication challenge in memory
-    self.authenticationChallenge = nil;
 }
 
 @end
