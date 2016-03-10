@@ -13,6 +13,7 @@
 
 + (NSDate *)box_dateWithISO8601String:(NSString *)timestamp
 {
+    static NSString *token = @"boxdateformatter";
     static BOXISO8601DateFormatter *dateFormatter;
     static dispatch_once_t pred;
     
@@ -28,7 +29,10 @@
     NSDate *returnDate = nil;
     if (timestamp != nil)
     {
-        returnDate = [dateFormatter dateFromString:timestamp];
+        // Add @synchronized because this is not thread safe
+        @synchronized(token) {
+            returnDate = [dateFormatter dateFromString:timestamp];
+        }
     }
     
     return returnDate;
