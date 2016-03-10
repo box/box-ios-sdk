@@ -189,9 +189,11 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)loadAuthorizationURL
 {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityIndicator.hidesWhenStopped = YES;
-    [self.view addSubview:self.activityIndicator];
+    if (self.activityIndicator == nil) {
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicator.hidesWhenStopped = YES;
+        [self.view addSubview:self.activityIndicator];
+    }
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.authorizeURL];
     if (self.headers != nil) {

@@ -177,10 +177,15 @@
 
 - (NSURL *)authorizeURL
 {
+    return [self authorizeURLWithBaseURLString:self.APIAuthBaseURLString];
+}
+
+- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString
+{
     NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
     NSString *authorizeURLString = [NSString stringWithFormat:
                                     @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
-                                    self.APIAuthBaseURLString, self.clientID, self.nonce, encodedRedirectURI];
+                                    baseURLString, self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
 
