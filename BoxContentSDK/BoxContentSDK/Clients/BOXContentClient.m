@@ -72,6 +72,25 @@ static BOXContentClient *defaultInstance = nil;
     return defaultInstance;
 }
 
++ (void)refreshDefaultClientFromKeychain
+{
+    NSArray *usersFromKeychain = [BOXAbstractSession usersInKeychain];
+    
+    if (usersFromKeychain.count == 0)
+    {
+        [defaultInstance logOut];
+    }
+    else if (usersFromKeychain.count == 1)
+    {
+        BOXUserMini *storedUser = [usersFromKeychain firstObject];
+        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.modelID];
+    }
+    else {
+        [NSException raise:@"You cannot use 'defaultClient' if multiple users have established a session."
+                    format:@"Specify a user through clientForUser:"];
+    }
+}
+
 + (BOXContentClient *)clientForUser:(BOXUserMini *)user
 {
     if (user == nil)
