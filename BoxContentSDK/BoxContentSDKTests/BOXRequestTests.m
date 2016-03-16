@@ -112,6 +112,66 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+- (void)test_that_unauthorized_device_400_error_triggers_logout_notification
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"unauthorized_device"];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    [request performRequest];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_exceeded_device_limit_400_error_triggers_logout_notification
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"exceeded_device_limits"];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    [request performRequest];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_missing_device_id_400_error_triggers_logout_notification
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"missing_device_id"];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    [request performRequest];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_unsupported_device_pinning_runtime_400_error_triggers_logout_notification
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"unsupported_device_pinning_runtime"];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    [request performRequest];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
 - (void)test_that_unauthorized_401_error_triggers_logout_notification
 {
     BOXRequest *request = [[BOXRequest alloc] init];
