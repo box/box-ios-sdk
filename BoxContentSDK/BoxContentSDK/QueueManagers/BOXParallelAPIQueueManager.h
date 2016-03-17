@@ -48,6 +48,13 @@
  */
 @property (nonatomic, readwrite, strong) NSOperationQueue *uploadsQueue;
 
+/**
+ * The NSOperationQueue on which all small download operations such as thumbnail retrievals
+ * are enqueued. This queue is configured
+ * with `maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount`.
+ */
+@property (nonatomic, readwrite, strong) NSOperationQueue *smallDownloadsQueue;
+
 /** @name Designated initializer */
 
 /**

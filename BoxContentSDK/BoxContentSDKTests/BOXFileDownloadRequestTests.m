@@ -141,6 +141,15 @@
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);
 }
 
+- (void)test_that_operation_is_not_marked_as_small_download
+{
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:@"123"];
+    BOXAPIOperation *operation = [request operation];
+    XCTAssert([operation isKindOfClass:[BOXAPIDataOperation class]]);
+    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)operation;
+    XCTAssert(dataOperation.isSmallDownloadOperation == NO);
+}
+
 #pragma mark - Error Handling
 
 - (void)test_that_invalid_grant_400_error_triggers_logout_notification

@@ -67,7 +67,8 @@
                                                        failureBlock:nil];
     dataOperation.fileID = self.fileID;
     dataOperation.outputStream = self.outputStream;
-
+    dataOperation.isSmallDownloadOperation = YES;
+    
     [self addSharedLinkHeaderToRequest:dataOperation.APIRequest];
 
     return dataOperation;
