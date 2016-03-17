@@ -25,7 +25,7 @@
 @synthesize globalQueue = _globalQueue;
 @synthesize downloadsQueue = _downloadsQueue;
 @synthesize uploadsQueue = _uploadsQueue;
-
+@synthesize smallDownloadsQueue = _smallDownloadsQueue;
 @synthesize currentAccessTokenHasExpired = _currentAccessTokenHasExpired;
 
 - (id)init
@@ -51,6 +51,10 @@
         _uploadsQueue.name = @"BOXParallelAPIQueueManager upload queue";
         _uploadsQueue.maxConcurrentOperationCount = 2;
 
+        _smallDownloadsQueue = [[NSOperationQueue alloc] init];
+        _smallDownloadsQueue.name = @"BOXParallelAPIQueueManager small downloads queue";
+        _smallDownloadsQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+        
         _currentAccessTokenHasExpired = NO;
     }
 
@@ -105,10 +109,17 @@
             }
         }
 
+        
         if ([operation isKindOfClass:[BOXAPIDataOperation class]])
         {
-            [self.downloadsQueue addOperation:operation];
-            BOXLog(@"enqueued %@ on download queue", operation);
+            BOXAPIDataOperation *apiDataOperation = (BOXAPIDataOperation *)operation;
+            if (apiDataOperation.isSmallDownloadOperation) {
+                [self.smallDownloadsQueue addOperation:operation];
+                BOXLog(@"enqueued %@ on thumbnails download queue", operation);
+            } else {
+                [self.downloadsQueue addOperation:operation];
+                BOXLog(@"enqueued %@ on download queue", operation);
+            }
         }
         else if ([operation isKindOfClass:[BOXAPIMultipartToJSONOperation class]])
         {

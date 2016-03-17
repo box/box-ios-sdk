@@ -94,6 +94,13 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  */
 @property (nonatomic, readwrite, strong) BOXAPIDataProgressBlock progressBlock;
 
+
+/**
+ * Describes wether or not the operation is a small download such as a thumbnail retrieval.
+ * If it is, the operation will be run on a specific queue whose max concurrent operation count will be NSOperationQueueDefaultMaxConcurrentOperationCount
+ */
+@property (nonatomic, readwrite, assign) BOOL isSmallDownloadOperation;
+
 /**
  * Call success or failure depending on whether or not an error has occurred during the request.
  * @see successBlock
