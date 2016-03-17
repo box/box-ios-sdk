@@ -93,6 +93,13 @@
 + (BOXContentClient *)defaultClient;
 
 /**
+ *  Use this to refresh the default client based on the user currently stored in the keychain.
+ *  If there are no users in the keychain, this will log out the default client's current user.
+ *  NOTE: Currently not thread-safe.
+ */
++ (void)refreshDefaultClientFromKeychain;
+
+/**
  *  Get a BOXContentClient for a specific user that has an authenticated session. 
  *  You can obtain a list of users with through the 'users' method.
  *  NOTE: Unless you want to allow your app to manage multiple Box users at one time, it is simpler to use
