@@ -25,6 +25,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
 @property (nonatomic, readwrite, strong) NSMutableData *connectionData;
 @property (nonatomic, readwrite, strong) NSError *connectionError;
+@property (nonatomic, readwrite, strong) NSString *connectionErrorMessage;
 @property (nonatomic, readwrite, strong) NSURLAuthenticationChallenge *authenticationChallenge;
 @property (nonatomic, readwrite, strong) NSURLCredential *authenticationChallengeCredential;
 @property (nonatomic, readwrite, strong) NSMutableSet *hostsThatCanUseWebViewDirectly;
@@ -140,6 +141,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self loadAuthorizationURL];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.connectionError != nil) {
+        [self handleConnectionErrorWithError:self.connectionError message:self.connectionErrorMessage];
+    }
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -241,36 +250,49 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     self.connection = nil;
     self.connectionResponse = nil;
     [self setWebViewCanBeUsedDirectly:NO forHost:connection.currentRequest.URL.host];
-
+    
+    
+    // We can only handle the connection error if we're in the view hierarchy. It would be difficult to display UIAlertControllers when not sure we're in the view hierarchy. We will try again after viewDidAppear
     if (self.view.window) {
-        
+        [self handleConnectionErrorWithError:error message:message];
+    } else {
         self.connectionError = error;
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                                 message:message
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        
-        __weak typeof(self) weakSelf = self;
-        void (^completion)(UIAlertAction *action) = ^void(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-            
-            if (weakSelf.completionBlock) {
-                NSError *error = weakSelf.connectionError;
-                weakSelf.connectionError = nil;
-                weakSelf.completionBlock(weakSelf, nil, error);
-            }
-            // Clear out the authentication challenge in memory
-            weakSelf.authenticationChallenge = nil;
-        };
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:completion];
-        
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        self.connectionErrorMessage = message;
+        // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
+        if (self.completionBlock) {
+            self.completionBlock(self, nil, self.connectionError);
+        }
     }
+    
     [self.activityIndicator stopAnimating];
+}
+
+- (void)handleConnectionErrorWithError:(NSError *)error message:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    __weak typeof(self) weakSelf = self;
+    void (^completion)(UIAlertAction *action) = ^void(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+        
+        if (self.connectionError == nil && weakSelf.completionBlock) {
+            weakSelf.completionBlock(weakSelf, nil, error);
+        } else {
+            weakSelf.connectionError = nil;
+            weakSelf.connectionErrorMessage = nil;
+        }
+        // Clear out the authentication challenge in memory
+        weakSelf.authenticationChallenge = nil;
+    };
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:completion];
+    
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)clearCookies
