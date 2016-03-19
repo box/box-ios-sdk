@@ -43,6 +43,11 @@
 @property (nonatomic, readwrite, strong) NSString *APIAuthBaseURL;
 
 /**
+ *  The custom prefix for the user agent. If set, the prefix will be appended with ; followed by the default Box SDK user agent string.
+ */
+@property (nonatomic, readwrite, strong) NSString *userAgentPrefix;
+
+/**
  *  The client's queue manager. All API calls are scheduled by this queue manager.
  *  The queueManager is shared with the session (for making authorization and refresh
  *  calls) and the filesManager and foldersManager (for making API calls).

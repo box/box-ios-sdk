@@ -441,12 +441,18 @@
 
 - (NSString *)userAgent
 {
-    NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                           self.SDKIdentifier,
-                           self.SDKVersion,
-                           [[UIDevice currentDevice] systemVersion],
-                           [self modelID],
-                           [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    NSString *userAgent;
+    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
+                                  self.SDKIdentifier,
+                                  self.SDKVersion,
+                                  [[UIDevice currentDevice] systemVersion],
+                                  [self modelID],
+                                  [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    if (self.userAgentPrefix.length > 0) {
+        userAgent = [NSString stringWithFormat:@"%@;%@", self.userAgentPrefix, defaultUserAgent];
+    } else {
+        userAgent = defaultUserAgent;
+    }
     
     return userAgent;
 }
