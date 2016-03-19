@@ -95,6 +95,11 @@ extern NSString *const BOXUserIDKey;
 @property (nonatomic, readwrite, assign) BOOL credentialsPersistenceEnabled;
 
 /**
+ * Custom prefix for the user agent string.
+ */
+@property (nonatomic, readwrite, assign) NSString *userAgentPrefix;
+
+/**
  * Box user associated with the credentials.
  */
 @property (nonatomic, readonly , strong) BOXUserMini *user;
