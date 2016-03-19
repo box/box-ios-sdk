@@ -371,6 +371,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     request.queueManager = self.queueManager;
     request.cacheClient = self.cacheClient;
+    request.userAgentPrefix = self.userAgentPrefix;
 
     if ([request conformsToProtocol:@protocol(BOXSharedLinkItemSource)]) {
         BOXRequestWithSharedLinkHeader *requestWithSharedLink = (BOXRequestWithSharedLinkHeader *)request;
