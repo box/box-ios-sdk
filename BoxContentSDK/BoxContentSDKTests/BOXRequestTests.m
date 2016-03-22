@@ -41,7 +41,7 @@
 
 @interface BOXRequest ()
 
-- (NSString *)modelID;
+- (NSString *)deviceModelName;
 - (NSString *)userAgent;
 
 @end
@@ -214,14 +214,14 @@
     BOXRequest *request = [[BOXRequest alloc] init];
     
     id requestMock = [OCMockObject partialMockForObject:request];
-    NSString *fakeModelID = @"test_device";
-    [[[requestMock stub] andReturn:fakeModelID] modelID];
+    NSString *fakeDeviceModelName = @"test_device";
+    [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
     
     NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                                    BOX_CONTENT_SDK_IDENTIFIER,
                                    BOX_CONTENT_SDK_VERSION,
                                    [[UIDevice currentDevice] systemVersion],
-                                   fakeModelID,
+                                   fakeDeviceModelName,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
@@ -237,14 +237,36 @@
     request.SDKVersion = expectedSDKVersion;
     
     id requestMock = [OCMockObject partialMockForObject:request];
-    NSString *fakeModelID = @"test_device";
-    [[[requestMock stub] andReturn:fakeModelID] modelID];
+    NSString *fakeDeviceModelName = @"test_device";
+    [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
     
     NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
                                    expectedSDKIdentifier,
                                    expectedSDKVersion,
                                    [[UIDevice currentDevice] systemVersion],
-                                   fakeModelID,
+                                   fakeDeviceModelName,
+                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    
+    XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
+}
+
+- (void)test_that_user_agent_prefix_is_included_when_set
+{
+    NSString *expectedPrefix = @"test_prefix";
+    
+    BOXRequest *request = [[BOXRequest alloc] init];
+    request.userAgentPrefix = expectedPrefix;
+    
+    id requestMock = [OCMockObject partialMockForObject:request];
+    NSString *fakeDeviceModelName = @"test_device";
+    [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
+    
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@;%@/%@;iOS/%@;Apple/%@;%@",
+                                   expectedPrefix,
+                                   BOX_CONTENT_SDK_IDENTIFIER,
+                                   BOX_CONTENT_SDK_VERSION,
+                                   [[UIDevice currentDevice] systemVersion],
+                                   fakeDeviceModelName,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);

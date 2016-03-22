@@ -56,6 +56,8 @@
 		0ED881AD1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881AB1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m */; };
 		0ED881B21A5F58EA009FED90 /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ED881B11A5F58EA009FED90 /* metadata.json */; };
 		0ED881C81A60A84A009FED90 /* BOXInputStreamTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */; };
+		1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */; };
+		1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */; };
 		150413F11A45032A00EE99F3 /* BOXFileDownloadRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */; };
 		150414291A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */; };
 		150C27741A699AA400099850 /* BOXContentClient+FileVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -495,6 +497,8 @@
 		0ED881B11A5F58EA009FED90 /* metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata.json; sourceTree = "<group>"; };
 		0ED881C61A60A84A009FED90 /* BOXInputStreamTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXInputStreamTestHelper.h; sourceTree = "<group>"; };
 		0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXInputStreamTestHelper.m; sourceTree = "<group>"; };
+		1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BOXAdditions.h"; sourceTree = "<group>"; };
+		1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BOXAdditions.m"; sourceTree = "<group>"; };
 		150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileDownloadRequestTests.m; sourceTree = "<group>"; };
 		150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileThumbnailRequestTests.m; sourceTree = "<group>"; };
 		150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+FileVersion.h"; sourceTree = "<group>"; };
@@ -1471,6 +1475,8 @@
 				AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */,
 				15F9C4B71A3B8AE8006EC2EE /* NSDate+BOXAdditions.h */,
 				15F9C4B81A3B8AE8006EC2EE /* NSDate+BOXAdditions.m */,
+				1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */,
+				1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1666,6 +1672,7 @@
 				0ED881AC1A5F4793009FED90 /* BOXAPIJSONPatchOperation.h in Headers */,
 				155170BA1A54872D004C00AF /* BOXFileVersion.h in Headers */,
 				E4FAD9DA172CE2C50052AD11 /* BOXAPIAuthenticatedOperation.h in Headers */,
+				1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */,
 				15280E441A37E70B008D4F5D /* BOXFile.h in Headers */,
 				E4FAD9DC172CE2C50052AD11 /* BOXAPIDataOperation.h in Headers */,
 				0E16F11F1A43774C00BDDA21 /* BOXCollaborationPendingRequest.h in Headers */,
@@ -2084,6 +2091,7 @@
 				E4FAD9E9172CE2C50052AD11 /* BOXSerialAPIQueueManager.m in Sources */,
 				700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */,
 				15958E5A1A1445A300AEBCEE /* BOXContentClient+Authentication.m in Sources */,
+				1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */,
 				15958E401A14338A00AEBCEE /* BOXFolderPaginatedItemsRequest.m in Sources */,
 				86B18F041B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m in Sources */,
 				15958E551A14338A00AEBCEE /* BOXTrashedFolderRestoreRequest.m in Sources */,
