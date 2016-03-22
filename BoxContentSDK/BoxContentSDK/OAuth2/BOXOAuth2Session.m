@@ -123,7 +123,7 @@
         self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
         BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        userRequest.queueManager = self.queueManager;
+        [self prepareRequest:userRequest];
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (user && !error)
             {

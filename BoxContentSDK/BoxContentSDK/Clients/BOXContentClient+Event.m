@@ -9,13 +9,14 @@
 #import "BOXContentClient+Event.h"
 #import "BOXEventsRequest.h"
 #import "BOXEventsAdminLogsRequest.h"
+#import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient(EventAPI)
 
 - (BOXEventsRequest *)eventsRequestForCurrentUser
 {
     BOXEventsRequest *request = [[BOXEventsRequest alloc] init];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }
@@ -23,7 +24,7 @@
 - (BOXEventsAdminLogsRequest *)eventsRequestForEnterprise
 {
     BOXEventsAdminLogsRequest *request = [[BOXEventsAdminLogsRequest alloc] init];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
     
     return request;
 }

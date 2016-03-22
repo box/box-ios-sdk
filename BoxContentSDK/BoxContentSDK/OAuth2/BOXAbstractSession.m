@@ -10,6 +10,7 @@
 #import "BOXKeychainItemWrapper.h"
 #import "BOXUser.h"
 #import "BOXUser_Private.h"
+#import "BOXRequest_Private.h"
 
 #define keychainDefaultIdentifierPrefix @"BoxCredential_"
 #define keychainDefaultAccessGroup nil
@@ -303,6 +304,14 @@ static NSString *staticKeychainAccessGroup;
     self.accessToken = nil;
     self.accessTokenExpiration = nil;
     self.user = nil;
+}
+
+#pragma mark Request Helpers
+
+- (void)prepareRequest:(BOXRequest *)request
+{
+    request.queueManager = self.queueManager;
+    request.userAgentPrefix = self.userAgentPrefix;
 }
 
 @end

@@ -304,6 +304,12 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
+- (void)setUserAgentPrefix:(NSString *)userAgentPrefix
+{
+    _userAgentPrefix = userAgentPrefix;
+    self.session.userAgentPrefix = _userAgentPrefix;
+}
+
 // Load the ressources bundle.
 + (NSBundle *)resourcesBundle
 {
@@ -359,6 +365,7 @@ static BOXContentClient *defaultInstance = nil;
     // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
     if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
         self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+        self.session.userAgentPrefix = self.userAgentPrefix;
     }
     
     // Since the OAuth2Session instance was nil-ed out, the queueManager now needs a new session instance which will be appSession.

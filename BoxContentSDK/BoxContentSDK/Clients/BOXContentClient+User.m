@@ -8,6 +8,7 @@
 
 #import "BOXContentClient+User.h"
 #import "BOXUserRequest.h"
+#import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient (User)
 
@@ -16,7 +17,7 @@
     BOXUserRequest *request = nil;
 
     request = [[BOXUserRequest alloc] init];
-    request.queueManager = self.queueManager;
+    [self prepareRequest:request];
 
     return request;
 }
