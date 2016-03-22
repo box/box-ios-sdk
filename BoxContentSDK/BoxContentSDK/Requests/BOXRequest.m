@@ -13,8 +13,7 @@
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
 #import "NSString+BOXAdditions.h"
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#import "UIDevice+BOXAdditions.h"
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
@@ -404,21 +403,9 @@
     return [array componentsJoinedByString:@","];
 }
 
-- (NSString *)modelID
+- (NSString *)deviceModelName
 {
-    NSString *model = nil;
-    
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-
-    if (machine != NULL) {
-        sysctlbyname("hw.machine", machine, &size, NULL, 0);
-        model = [NSString stringWithUTF8String:machine];
-        free(machine);
-    }
-    
-    return model;
+    return [[UIDevice currentDevice] detailedModelName];
 }
 
 - (NSString *)SDKIdentifier
@@ -446,7 +433,7 @@
                                   self.SDKIdentifier,
                                   self.SDKVersion,
                                   [[UIDevice currentDevice] systemVersion],
-                                  [self modelID],
+                                  [self deviceModelName],
                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     if (self.userAgentPrefix.length > 0) {
         userAgent = [NSString stringWithFormat:@"%@;%@", self.userAgentPrefix, defaultUserAgent];
