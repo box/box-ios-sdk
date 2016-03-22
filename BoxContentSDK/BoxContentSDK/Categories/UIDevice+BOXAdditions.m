@@ -67,6 +67,8 @@
         return @"iPhone 6S";
     } else if ([modelID isEqualToString:@"iPhone8,2"]) {
         return @"iPhone 6S Plus";
+    } else if ([modelID isEqualToString:@"iPhone8,4"]) {
+        return @"iPhone SE";
     } else if ([modelID isEqualToString:@"iPod1,1"]) {
         return @"iPod touch 1st Generation";
     } else if ([modelID isEqualToString:@"iPod2,1"]) {
@@ -134,10 +136,14 @@
         return @"iPad Air 2 (WiFi)";
     } else if ([modelID isEqualToString:@"iPad5,4"]) {
         return @"iPad Air 2 (4G LTE)";
+    } else if ([modelID isEqualToString:@"iPad6,3"]) {
+        return @"iPad Pro 9.7-inch (WiFi)";
+    } else if ([modelID isEqualToString:@"iPad6,4"]) {
+        return @"iPad Pro 9.7-inch (4G LTE)";
     } else if ([modelID isEqualToString:@"iPad6,7"]) {
-        return @"iPad Pro (WiFi)";
+        return @"iPad Pro 12.9-inch (WiFi)";
     } else if ([modelID isEqualToString:@"iPad6,8"]) {
-        return @"iPad Pro (4G LTE)";
+        return @"iPad Pro 12.9-inch (4G LTE)";
     } else if ([modelID isEqualToString:@"i386"] || [modelID isEqualToString:@"x86_64"] || [modelID isEqualToString:@"x86_32"]) {
         return @"Simulator";
     }
