@@ -56,6 +56,8 @@
 		0ED881AD1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881AB1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m */; };
 		0ED881B21A5F58EA009FED90 /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ED881B11A5F58EA009FED90 /* metadata.json */; };
 		0ED881C81A60A84A009FED90 /* BOXInputStreamTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */; };
+		1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */; };
+		1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */; };
 		150413F11A45032A00EE99F3 /* BOXFileDownloadRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */; };
 		150414291A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */; };
 		150C27741A699AA400099850 /* BOXContentClient+FileVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -264,6 +266,10 @@
 		C53EC2A51A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2A41A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m */; };
 		C545A01C1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */; };
 		C54BBF701758539E00F5DAD8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54BBF6F1758539E00F5DAD8 /* QuartzCore.framework */; };
+		C55386351C98DBF0009E3B90 /* unauthorized_device.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386341C98DBF0009E3B90 /* unauthorized_device.json */; };
+		C55386391C98DF41009E3B90 /* exceeded_device_limits.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386361C98DF41009E3B90 /* exceeded_device_limits.json */; };
+		C553863A1C98DF41009E3B90 /* missing_device_id.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386371C98DF41009E3B90 /* missing_device_id.json */; };
+		C553863B1C98DF41009E3B90 /* unsupported_device_pinning_runtime.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386381C98DF41009E3B90 /* unsupported_device_pinning_runtime.json */; };
 		C562DB1B1A44666E0002E510 /* BOXSharedLinkHeadersHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C562DB191A44666E0002E510 /* BOXSharedLinkHeadersHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C562DB1C1A44666E0002E510 /* BOXSharedLinkHeadersHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C562DB1A1A44666E0002E510 /* BOXSharedLinkHeadersHelper.m */; };
 		C562DB4A1A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C562DB481A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -768,6 +774,8 @@
 		0ED881B11A5F58EA009FED90 /* metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata.json; sourceTree = "<group>"; };
 		0ED881C61A60A84A009FED90 /* BOXInputStreamTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXInputStreamTestHelper.h; sourceTree = "<group>"; };
 		0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXInputStreamTestHelper.m; sourceTree = "<group>"; };
+		1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BOXAdditions.h"; sourceTree = "<group>"; };
+		1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BOXAdditions.m"; sourceTree = "<group>"; };
 		150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileDownloadRequestTests.m; sourceTree = "<group>"; };
 		150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileThumbnailRequestTests.m; sourceTree = "<group>"; };
 		150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+FileVersion.h"; sourceTree = "<group>"; };
@@ -995,6 +1003,10 @@
 		C53EC2A41A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCommentUpdateRequestTests.m; sourceTree = "<group>"; };
 		C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXRequestWithSharedLinkHeadersTests.m; sourceTree = "<group>"; };
 		C54BBF6F1758539E00F5DAD8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C55386341C98DBF0009E3B90 /* unauthorized_device.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = unauthorized_device.json; sourceTree = "<group>"; };
+		C55386361C98DF41009E3B90 /* exceeded_device_limits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exceeded_device_limits.json; sourceTree = "<group>"; };
+		C55386371C98DF41009E3B90 /* missing_device_id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = missing_device_id.json; sourceTree = "<group>"; };
+		C55386381C98DF41009E3B90 /* unsupported_device_pinning_runtime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = unsupported_device_pinning_runtime.json; sourceTree = "<group>"; };
 		C562DB191A44666E0002E510 /* BOXSharedLinkHeadersHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXSharedLinkHeadersHelper.h; path = Helper/BOXSharedLinkHeadersHelper.h; sourceTree = "<group>"; };
 		C562DB1A1A44666E0002E510 /* BOXSharedLinkHeadersHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BOXSharedLinkHeadersHelper.m; path = Helper/BOXSharedLinkHeadersHelper.m; sourceTree = "<group>"; };
 		C562DB481A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXSharedLinkHeadersDefaultManager.h; path = Protocols/BOXSharedLinkHeadersDefaultManager.h; sourceTree = "<group>"; };
@@ -1545,6 +1557,9 @@
 		15F5EE6F1A23FED600FBBE1D /* CannedResponses */ = {
 			isa = PBXGroup;
 			children = (
+				C55386361C98DF41009E3B90 /* exceeded_device_limits.json */,
+				C55386371C98DF41009E3B90 /* missing_device_id.json */,
+				C55386381C98DF41009E3B90 /* unsupported_device_pinning_runtime.json */,
 				C5D91C9F1A41D25B00AC8B8F /* events.json */,
 				C5972A9C1A40978E00225CBA /* event_all_fields.json */,
 				0E5E145E1A40DF7900B205F6 /* collaboration.json */,
@@ -1586,6 +1601,7 @@
 				0ED881B11A5F58EA009FED90 /* metadata.json */,
 				0E60AB461A68AB4600955CD5 /* invalid_grant.json */,
 				0E60AB4C1A69C63500955CD5 /* invalid_token.json */,
+				C55386341C98DBF0009E3B90 /* unauthorized_device.json */,
 				15A073CD1B0BD6C900352D87 /* model.json */,
 				8676E0E31B2FA78800AC2677 /* enterprise_metadata.json */,
 				8676E0E51B2FA7BE00AC2677 /* updated_enterprise_metadata.json */,
@@ -1757,6 +1773,8 @@
 				AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */,
 				15F9C4B71A3B8AE8006EC2EE /* NSDate+BOXAdditions.h */,
 				15F9C4B81A3B8AE8006EC2EE /* NSDate+BOXAdditions.m */,
+				1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */,
+				1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1952,6 +1970,7 @@
 				0ED881AC1A5F4793009FED90 /* BOXAPIJSONPatchOperation.h in Headers */,
 				155170BA1A54872D004C00AF /* BOXFileVersion.h in Headers */,
 				E4FAD9DA172CE2C50052AD11 /* BOXAPIAuthenticatedOperation.h in Headers */,
+				1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */,
 				15280E441A37E70B008D4F5D /* BOXFile.h in Headers */,
 				E4FAD9DC172CE2C50052AD11 /* BOXAPIDataOperation.h in Headers */,
 				0E16F11F1A43774C00BDDA21 /* BOXCollaborationPendingRequest.h in Headers */,
@@ -2301,6 +2320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C553863A1C98DF41009E3B90 /* missing_device_id.json in Resources */,
 				E1F9AE181A3B845A00D44858 /* bookmark_default_fields_not_shared.json in Resources */,
 				59C8E3351BEAC0DE005FA4BB /* empty.json in Resources */,
 				E1F9AE191A3B845A00D44858 /* bookmark_default_fields_shared.json in Resources */,
@@ -2335,9 +2355,11 @@
 				70CC16A11ACCA8DD00C3CC80 /* get_items_3_5.json in Resources */,
 				155EFD5A1A252EF900F34254 /* file_all_fields.json in Resources */,
 				155170C41A5491CC004C00AF /* file_versions.json in Resources */,
+				C55386391C98DF41009E3B90 /* exceeded_device_limits.json in Resources */,
 				E1F9AE141A3B843300D44858 /* file_default_fields_not_shared.json in Resources */,
 				155170BF1A548D43004C00AF /* file_version.json in Resources */,
 				15F9C4BE1A3B9BAA006EC2EE /* shared_link.json in Resources */,
+				C55386351C98DBF0009E3B90 /* unauthorized_device.json in Resources */,
 				E15596181A3670F00070ED1E /* folder_mini_fields.json in Resources */,
 				E15596171A3670F00070ED1E /* bookmark_mini_fields.json in Resources */,
 				E155961C1A367A6D0070ED1E /* folder_all_fields.json in Resources */,
@@ -2346,6 +2368,7 @@
 				C5D91CA01A41D25B00AC8B8F /* events.json in Resources */,
 				159A944A1A2FE4F30063B0FD /* file_default_fields.json in Resources */,
 				593277AA1A313E1B005E9C72 /* file_mini_fields.json in Resources */,
+				C553863B1C98DF41009E3B90 /* unsupported_device_pinning_runtime.json in Resources */,
 				C57E95D91A3746D10094D7B0 /* comment_all_fields.json in Resources */,
 				C5972A381A3AFD6B00225CBA /* folder_default_fields_not_shared.json in Resources */,
 				E1A8FD681A3A3CFA00475089 /* folder_default_fields_shared.json in Resources */,
@@ -2551,6 +2574,7 @@
 				E4FAD9E9172CE2C50052AD11 /* BOXSerialAPIQueueManager.m in Sources */,
 				700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */,
 				15958E5A1A1445A300AEBCEE /* BOXContentClient+Authentication.m in Sources */,
+				1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */,
 				15958E401A14338A00AEBCEE /* BOXFolderPaginatedItemsRequest.m in Sources */,
 				86B18F041B241DF1000EAE8C /* BOXAPIAppUsersAuthOperation.m in Sources */,
 				15958E551A14338A00AEBCEE /* BOXTrashedFolderRestoreRequest.m in Sources */,

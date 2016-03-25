@@ -98,6 +98,15 @@
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);
 }
 
+- (void)test_that_operation_is_marked_as_small_download
+{
+    BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:@"123" size:BOXThumbnailSize64];
+    BOXAPIOperation *operation = [request operation];
+    XCTAssert([operation isKindOfClass:[BOXAPIDataOperation class]]);
+    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)operation;
+    XCTAssert(dataOperation.isSmallDownloadOperation);
+}
+
 #pragma mark - Private helper
 
 - (UIImage *)blankImageWithSize:(CGSize)size color:(UIColor *)color

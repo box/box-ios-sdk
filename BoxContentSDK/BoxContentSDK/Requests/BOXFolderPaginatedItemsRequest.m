@@ -75,19 +75,9 @@
             for (NSDictionary *itemDictionary in itemDictionaries) {
                 BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
-
-                NSArray *pathFolders = nil;
-
-                if ([item isKindOfClass:[BOXFile class]]) {
-                    pathFolders = [((BOXFile *)item) pathFolders];
-                } else if ([item isKindOfClass:[BOXFile class]]) {
-                    pathFolders = [((BOXFolder *) item) pathFolders];
-                } else if ([item isKindOfClass:[BOXBookmark class]]) {
-                    pathFolders = [((BOXBookmark *) item) pathFolders];
-                }
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
                                                                                        itemType:item.type
-                                                                                      ancestors:pathFolders];
+                                                                                      ancestors:item.pathFolders];
             }
 
             if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {

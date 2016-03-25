@@ -64,9 +64,15 @@
             bodyDictionary[BOXAPIObjectKeyMessage] = self.message;
         }
         
+        NSDictionary *queryParameters = nil;
+        
+        if (self.requestAllCommentFields) {
+            queryParameters = @{BOXAPIParameterKeyFields: [self fullCommentFieldsParameterString]};
+        }
+        
         operation = [self JSONOperationWithURL:url 
                                     HTTPMethod:BOXAPIHTTPMethodPOST 
-                         queryStringParameters:nil
+                         queryStringParameters:queryParameters
                                 bodyDictionary:bodyDictionary
                               JSONSuccessBlock:nil
                                   failureBlock:nil];

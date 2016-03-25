@@ -78,5 +78,7 @@ extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a mis
 
 extern NSString *const BOXAuthErrorUnauthorizedDevice; // Device Pinning unauthorized device
 extern NSString *const BOXAuthErrorExceededDeviceLimit; // Device Pinning max devices allowed exceeded
+extern NSString *const BOXAuthErrorMissingDeviceId;
+extern NSString *const BOXAuthErrorUnsupportedDevicePinningRuntime;
 
 extern NSString *const BOXAuthErrorAccessDenied; // User denied access to their Box account

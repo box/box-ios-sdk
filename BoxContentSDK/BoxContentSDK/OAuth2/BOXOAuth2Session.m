@@ -106,9 +106,6 @@
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       BOXAuthTokenRequestRedirectURIKey : self.redirectURIString,
                                                                                       }];
-    if (self.additionalTokenGrantParameters.count > 0) {
-        [POSTParams addEntriesFromDictionary:self.additionalTokenGrantParameters];
-    }
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[self grantTokensURL]
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
@@ -126,7 +123,7 @@
         self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
         BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        userRequest.queueManager = self.queueManager;
+        [self prepareRequest:userRequest];
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (user && !error)
             {
@@ -180,10 +177,15 @@
 
 - (NSURL *)authorizeURL
 {
+    return [self authorizeURLWithBaseURLString:self.APIAuthBaseURLString];
+}
+
+- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString
+{
     NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
     NSString *authorizeURLString = [NSString stringWithFormat:
                                     @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
-                                    self.APIAuthBaseURLString, self.clientID, self.nonce, encodedRedirectURI];
+                                    baseURLString, self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
 
@@ -213,10 +215,6 @@
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
-    
-    if (self.additionalTokenGrantParameters.count > 0) {
-        [POSTParams addEntriesFromDictionary:self.additionalTokenGrantParameters];
-    }
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST

@@ -53,7 +53,6 @@
 {
     BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID];
     request.bookmarkName = newName;
-    request.queueManager = self.queueManager;
     [self prepareRequest:request];
     
     return request;
@@ -62,7 +61,6 @@
 - (BOXBookmarkUpdateRequest *)bookmarkUpdateRequestWithID:(NSString *)bookmarkID
 {
     BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID];
-    request.queueManager = self.queueManager;
     [self prepareRequest:request];
     
     return request;
@@ -73,7 +71,6 @@
 {
     BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID];
     request.parentID = destinationFolderID;
-    request.queueManager = self.queueManager;
     [self prepareRequest:request];
     
     return request;

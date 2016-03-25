@@ -16,7 +16,9 @@ NSString *const BOXAuthTokenRequestErrorInvalidToken = @"invalid_token";
 NSString *const BOXAuthTokenRequestErrorInvalidRequest = @"invalid_request";
 
 NSString *const BOXAuthErrorUnauthorizedDevice = @"unauthorized_device";
-NSString *const BOXAuthErrorExceededDeviceLimit = @"exceeded_device_limit";
+NSString *const BOXAuthErrorExceededDeviceLimit = @"exceeded_device_limits";
+NSString *const BOXAuthErrorMissingDeviceId = @"missing_device_id";
+NSString *const BOXAuthErrorUnsupportedDevicePinningRuntime = @"unsupported_device_pinning_runtime";
 
 // User denied access to their Box account
 NSString *const BOXAuthErrorAccessDenied = @"access_denied";

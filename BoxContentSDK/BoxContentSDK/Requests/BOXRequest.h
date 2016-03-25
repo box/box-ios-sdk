@@ -77,6 +77,7 @@ typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *
 @property (nonatomic, readwrite, strong) NSString *baseURL;
 @property (nonatomic, readwrite, strong) NSString *uploadAPIVersion;
 @property (nonatomic, readwrite, strong) NSString *uploadBaseURL;
+@property (nonatomic, readwrite, strong) NSString *userAgentPrefix;
 
 @property (nonatomic, readonly, strong) NSURLRequest *urlRequest;
 

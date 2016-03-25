@@ -25,7 +25,8 @@
         weakSelf.accessTokenExpiration = accessTokenExpiration;
         
         BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        userRequest.queueManager = weakSelf.queueManager;
+        [weakSelf prepareRequest:userRequest];
+        
         [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
             if (user && !error) {
                 weakSelf.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];

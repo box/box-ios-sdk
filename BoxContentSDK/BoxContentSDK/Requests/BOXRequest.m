@@ -13,8 +13,10 @@
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
 #import "NSString+BOXAdditions.h"
-#include <sys/types.h>
-#include <sys/sysctl.h>
+
+#if TARGET_OS_IPHONE
+#import "UIDevice+BOXAdditions.h"
+#endif
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
@@ -404,21 +406,14 @@
     return [array componentsJoinedByString:@","];
 }
 
-- (NSString *)modelID
+- (NSString *)deviceModelName
 {
-    NSString *model = nil;
-    
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-
-    if (machine != NULL) {
-        sysctlbyname("hw.machine", machine, &size, NULL, 0);
-        model = [NSString stringWithUTF8String:machine];
-        free(machine);
-    }
-    
-    return model;
+#if TARGET_OS_IPHONE
+    return [[UIDevice currentDevice] detailedModelName];
+#else
+    //TODO: Get nice Mac model names
+    return nil;
+#endif
 }
 
 - (NSString *)SDKIdentifier
@@ -441,23 +436,30 @@
 
 - (NSString *)userAgent
 {
+	NSString *userAgent;
 #if TARGET_OS_IPHONE
-    NSString *userAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                           self.SDKIdentifier,
-                           self.SDKVersion,
-                           [[UIDevice currentDevice] systemVersion],
-                           [self modelID],
-                           [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
+                                  self.SDKIdentifier,
+                                  self.SDKVersion,
+                                  [[UIDevice currentDevice] systemVersion],
+                                  [self deviceModelName],
+                                  [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 #else
 	NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
 	NSString *osVersionString = [systemVersionDictionary objectForKey:@"ProductVersion"];
-	NSString *userAgent = [NSString stringWithFormat:@"%@/%@;Darwin/%@;Apple/%@",
-						   self.SDKIdentifier,
-						   self.SDKVersion,
-						   osVersionString,
-						   [self modelID]];
+	NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;Darwin/%@;Apple/%@",
+						          self.SDKIdentifier,
+						          self.SDKVersion,
+						          osVersionString,
+						          [self deviceModelName]];
 #endif
 
+	if (self.userAgentPrefix.length > 0) {
+        userAgent = [NSString stringWithFormat:@"%@;%@", self.userAgentPrefix, defaultUserAgent];
+    } else {
+        userAgent = defaultUserAgent;
+    }
+ 
     return userAgent;
 }
 

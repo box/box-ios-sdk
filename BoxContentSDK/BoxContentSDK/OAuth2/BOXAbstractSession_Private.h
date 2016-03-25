@@ -9,6 +9,8 @@
 #import "BOXAbstractSession.h"
 #import "BOXKeychainItemWrapper.h"
 
+@class BOXRequest;
+
 #define keychainUserIDKey @"user_id"
 #define keychainUserNameKey @"user_name"
 #define keychainAccessTokenKey @"access_token"
@@ -26,5 +28,12 @@
 + (NSString *)userIDFromKeychainIdentifier:(NSString *)identifier;
 
 + (BOXKeychainItemWrapper *)keychainItemWrapperForUserWithID:(NSString *)userID;
+
+/**
+ *  This method should mirror BOXContentClient's prepareRequest: for when the session needs to create a request.
+ *
+ *  @param request request to prepare.
+ */
+- (void)prepareRequest:(BOXRequest *)request;
 
 @end

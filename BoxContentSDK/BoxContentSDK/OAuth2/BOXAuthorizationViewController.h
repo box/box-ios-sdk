@@ -37,7 +37,7 @@
  * Designated initializer.
  * @param SDKClient         The SDKClient to use to authenticate a new account session.
  * @param completionBlock   You will likely want to dismiss the authorizationViewController. If successful, a BoxUser object will be returned, otherwise an NSError will be returned.
- * @param completionBlock   You will likely want to dismiss the authorizationViewController through this block.
+ * @param cancelBlock       You will likely want to dismiss the authorizationViewController through this block.
  */
 - (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
@@ -50,7 +50,7 @@
  * @param redirectURI       The redirect URI to be used, this has to match the redirect URI. Optional, a default value is used when nil.
  * @param headers           Custom headers to use in the authorization request. Optional, defaults to nil.
  * @param completionBlock   You will likely want to dismiss the authorizationViewController. If successful, a BoxUser object will be returned, otherwise an NSError will be returned.
- * @param completionBlock   You will likely want to dismiss the authorizationViewController through this block.
+ * @param cancelBlock       You will likely want to dismiss the authorizationViewController through this block.
  */
 - (instancetype)initWithSDKClient:(BOXContentClient *)SDKClient
                      authorizeURL:(NSURL *)authorizeURL

@@ -72,6 +72,25 @@ static BOXContentClient *defaultInstance = nil;
     return defaultInstance;
 }
 
++ (void)refreshDefaultClientFromKeychain
+{
+    NSArray *usersFromKeychain = [BOXAbstractSession usersInKeychain];
+    
+    if (usersFromKeychain.count == 0)
+    {
+        [defaultInstance logOut];
+    }
+    else if (usersFromKeychain.count == 1)
+    {
+        BOXUserMini *storedUser = [usersFromKeychain firstObject];
+        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.modelID];
+    }
+    else {
+        [NSException raise:@"You cannot use 'defaultClient' if multiple users have established a session."
+                    format:@"Specify a user through clientForUser:"];
+    }
+}
+
 + (BOXContentClient *)clientForUser:(BOXUserMini *)user
 {
     if (user == nil)
@@ -285,6 +304,12 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
+- (void)setUserAgentPrefix:(NSString *)userAgentPrefix
+{
+    _userAgentPrefix = userAgentPrefix;
+    self.session.userAgentPrefix = _userAgentPrefix;
+}
+
 // Load the ressources bundle.
 + (NSBundle *)resourcesBundle
 {
@@ -340,6 +365,7 @@ static BOXContentClient *defaultInstance = nil;
     // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
     if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
         self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+        self.session.userAgentPrefix = self.userAgentPrefix;
     }
     
     // Since the OAuth2Session instance was nil-ed out, the queueManager now needs a new session instance which will be appSession.
@@ -352,6 +378,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     request.queueManager = self.queueManager;
     request.cacheClient = self.cacheClient;
+    request.userAgentPrefix = self.userAgentPrefix;
 
     if ([request conformsToProtocol:@protocol(BOXSharedLinkItemSource)]) {
         BOXRequestWithSharedLinkHeader *requestWithSharedLink = (BOXRequestWithSharedLinkHeader *)request;

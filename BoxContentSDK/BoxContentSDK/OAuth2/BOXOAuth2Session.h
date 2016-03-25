@@ -151,10 +151,20 @@
 - (NSURL *)grantTokensURL;
 
 /**
- * Returns the URL to load in a webview to start the authentication and authorization flow with Box.
+ * Returns the URL to load in a webview to start the authentication and authorization flow with Box
+ * using the default base URL string.
  * @return The URL to load in a webview to start the authentication and authorization flow with Box.
  */
 - (NSURL *)authorizeURL;
+
+/**
+ * Returns the URL to load in a webview to start the authentication and authorization flow with Box.
+ *
+ * @param baseURLString The base URL string to be used for the auth URL (ex: @"https://api.box.com")
+ *
+ * @return The URL to load in a webview to start the authentication and authorization flow with Box.
+ */
+- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString;
 
 /**
  * A string containing the URI to load after the user completes the webview authorization flow.
@@ -168,9 +178,9 @@
 @property (nonatomic, readwrite, strong) NSString *redirectURIString;
 
 /**
- * Custom parameters to use in the token grant request. Optional, defaults to nil.
+ * Custom parameters to append to the POST method body. Optional, defaults to nil.
  */
-@property (nonatomic, readwrite, strong) NSDictionary *additionalTokenGrantParameters;
+@property (nonatomic, readwrite, strong) NSDictionary *additionalMessageParameters;
 
 /**
  * Returns the randomly generated nonce used to prevent spoofing attack during login

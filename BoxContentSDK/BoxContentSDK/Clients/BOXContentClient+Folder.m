@@ -124,7 +124,6 @@
 - (BOXTrashedItemArrayRequest *)trashedItemsRequestInRange:(NSRange)range
 {
     BOXTrashedItemArrayRequest *request = [[BOXTrashedItemArrayRequest alloc] initWithRange:range];
-    request.queueManager = self.queueManager;
     [self prepareRequest:request];
     
     return request;

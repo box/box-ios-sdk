@@ -43,6 +43,11 @@
 @property (nonatomic, readwrite, strong) NSString *APIAuthBaseURL;
 
 /**
+ *  The custom prefix for the user agent. If set, the prefix will be appended with ; followed by the default Box SDK user agent string.
+ */
+@property (nonatomic, readwrite, strong) NSString *userAgentPrefix;
+
+/**
  *  The client's queue manager. All API calls are scheduled by this queue manager.
  *  The queueManager is shared with the session (for making authorization and refresh
  *  calls) and the filesManager and foldersManager (for making API calls).
@@ -91,6 +96,13 @@
  *  @return An existing BOXContentClient if it already exists. Otherwise, a new BOXContentClient wil be created.
  */
 + (BOXContentClient *)defaultClient;
+
+/**
+ *  Use this to refresh the default client based on the user currently stored in the keychain.
+ *  If there are no users in the keychain, this will log out the default client's current user.
+ *  NOTE: Currently not thread-safe.
+ */
++ (void)refreshDefaultClientFromKeychain;
 
 /**
  *  Get a BOXContentClient for a specific user that has an authenticated session. 
