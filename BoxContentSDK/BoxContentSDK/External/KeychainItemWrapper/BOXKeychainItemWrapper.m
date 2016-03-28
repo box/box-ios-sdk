@@ -253,7 +253,8 @@
     
     // Acquire the password data from the attributes.
     NSData *passwordData = NULL;
-    if (SecItemCopyMatching((CFDictionaryRef)returnDictionary, (CFTypeRef *)&passwordData) == noErr)
+    OSStatus status = SecItemCopyMatching((CFDictionaryRef)returnDictionary, (CFTypeRef *)&passwordData);
+    if (status == noErr)
     {
         // Remove the search, class, and identifier key/value, we don't need them anymore.
         [returnDictionary removeObjectForKey:(id)kSecReturnData];
@@ -266,7 +267,7 @@
     else
     {
         // Don't do anything if nothing is found.
-        NSAssert(NO, @"Serious error, no matching item found in the keychain.\n");
+        NSAssert(NO, @"Serious error: %d, no matching item found in the keychain.\n", status);
     }
     
     [passwordData release];
