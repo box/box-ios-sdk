@@ -250,7 +250,9 @@
     // Add the proper search key and class attribute.
     [returnDictionary setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
     [returnDictionary setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-    
+    [returnDictionary removeObjectForKey:kSecAttrModificationDate];
+    [returnDictionary removeObjectForKey:kSecAttrCreationDate];
+
     // Acquire the password data from the attributes.
     NSData *passwordData = NULL;
     OSStatus status = SecItemCopyMatching((CFDictionaryRef)returnDictionary, (CFTypeRef *)&passwordData);
