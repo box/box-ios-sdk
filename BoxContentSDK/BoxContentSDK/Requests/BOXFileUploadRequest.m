@@ -7,13 +7,13 @@
 #import "BOXFileUploadRequest.h"
 
 #import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
 #import "BOXFile.h"
 #import "BOXLog.h"
 #import "BOXHashHelper.h"
 #import "NSString+BOXURLHelper.h"
 
 #if TARGET_OS_IPHONE
+#import "BOXAssetInputStream.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #endif
 
