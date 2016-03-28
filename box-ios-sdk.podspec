@@ -12,14 +12,16 @@ s.source                = { :git => "https://github.com/box/box-ios-sdk.git", :t
 
 # Platform
 
+s.osx.deployment_target = "10.10"
 s.ios.deployment_target = "7.0"
 
 # File patterns
 
-s.ios.source_files        = "BoxContentSDK/BoxContentSDK/*.{h,m}", "BoxContentSDK/BoxContentSDK/**/*.{h,m}"
-s.ios.exclude_files       = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",
+s.source_files        = "BoxContentSDK/BoxContentSDK/*.{h,m}", "BoxContentSDK/BoxContentSDK/**/*.{h,m}"
+s.exclude_files       = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",
 "BoxContentSDK/BoxContentSDK/External/KeychainItemWrapper/BOXKeychainItemWrapper.{h,m}"
-s.ios.public_header_files = "BoxContentSDK/BoxContentSDK/*.h", "BoxContentSDK/BoxContentSDK/**/*.h"
+s.osx.exclude_files   = "BoxContentSDK/BoxContentSDK/Models/BOXAssetInputStream.{h,m}", "BoxContentSDK/BoxContentSDK/Categories/UIDevice+BOXAdditions.{h,m}", "BoxContentSDK/BoxContentSDK/OAuth2/BOXAuthorizationViewController.{h,m}", "BoxContentSDK/BoxContentSDK/Models/BOXAssetInputStream.{h,m}"
+s.public_header_files = "BoxContentSDK/BoxContentSDK/*.h", "BoxContentSDK/BoxContentSDK/**/*.h"
 s.resource_bundle = {
   'BoxContentSDKResources' => [
      'BoxContentSDK/BoxContentSDKResources/Assets/*.*',
@@ -30,10 +32,11 @@ s.resource_bundle = {
 
 # Build settings
 
-s.ios.frameworks        = "Security", "QuartzCore", "AssetsLibrary"
+s.frameworks            = "Security", "QuartzCore"
+s.ios.frameworks        = "AssetsLibrary"
 s.requires_arc          = true
 s.xcconfig              = { "OTHER_LDFLAGS" => "-ObjC -all_load" }
-s.ios.header_dir        = "BoxContentSDK"
+s.header_dir            = "BoxContentSDK"
 s.module_name           = "BoxContentSDK"
 
 # Subspecs
