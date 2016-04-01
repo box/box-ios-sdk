@@ -217,11 +217,11 @@
     NSString *fakeDeviceModelName = @"test_device";
     [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
     
-    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                                   BOX_CONTENT_SDK_IDENTIFIER,
-                                   BOX_CONTENT_SDK_VERSION,
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"iOS/%@;Apple/%@;%@/%@;%@",
                                    [[UIDevice currentDevice] systemVersion],
                                    fakeDeviceModelName,
+                                   BOX_CONTENT_SDK_IDENTIFIER,
+                                   BOX_CONTENT_SDK_VERSION,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
@@ -240,11 +240,11 @@
     NSString *fakeDeviceModelName = @"test_device";
     [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
     
-    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                                   expectedSDKIdentifier,
-                                   expectedSDKVersion,
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"iOS/%@;Apple/%@;%@/%@;%@",
                                    [[UIDevice currentDevice] systemVersion],
                                    fakeDeviceModelName,
+                                   expectedSDKIdentifier,
+                                   expectedSDKVersion,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
@@ -261,12 +261,12 @@
     NSString *fakeDeviceModelName = @"test_device";
     [[[requestMock stub] andReturn:fakeDeviceModelName] deviceModelName];
     
-    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@;%@/%@;iOS/%@;Apple/%@;%@",
+    NSString *expectedUserAgent = [NSString stringWithFormat:@"%@;iOS/%@;Apple/%@;%@/%@;%@",
                                    expectedPrefix,
-                                   BOX_CONTENT_SDK_IDENTIFIER,
-                                   BOX_CONTENT_SDK_VERSION,
                                    [[UIDevice currentDevice] systemVersion],
                                    fakeDeviceModelName,
+                                   BOX_CONTENT_SDK_IDENTIFIER,
+                                   BOX_CONTENT_SDK_VERSION,
                                    [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
