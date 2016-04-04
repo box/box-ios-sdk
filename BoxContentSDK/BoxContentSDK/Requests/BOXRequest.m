@@ -429,11 +429,11 @@
 - (NSString *)userAgent
 {
     NSString *userAgent;
-    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                                  self.SDKIdentifier,
-                                  self.SDKVersion,
+    NSString *defaultUserAgent = [NSString stringWithFormat:@"iOS/%@;Apple/%@;%@/%@;%@",
                                   [[UIDevice currentDevice] systemVersion],
                                   [self deviceModelName],
+                                  self.SDKIdentifier,
+                                  self.SDKVersion,
                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     if (self.userAgentPrefix.length > 0) {
         userAgent = [NSString stringWithFormat:@"%@;%@", self.userAgentPrefix, defaultUserAgent];
