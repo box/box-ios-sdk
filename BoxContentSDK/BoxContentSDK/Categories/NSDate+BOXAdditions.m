@@ -40,6 +40,7 @@
 
 - (NSString *)box_ISO8601String
 {
+    static NSString *token = @"box_iso8601stringToken";
     static BOXISO8601DateFormatter *dateFormatter;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
@@ -49,8 +50,12 @@
         dateFormatter.includeTime = YES;
         dateFormatter.defaultTimeZone = [[NSTimeZone alloc] initWithName:@"UTC"];
     });
-    
-    return [dateFormatter stringFromDate:self];
+
+    NSString *dateString = nil;
+    @synchronized (token) {
+        dateString = [dateFormatter stringFromDate:self];
+    }
+    return dateString;
 }
 
 @end
