@@ -700,6 +700,7 @@ static BOOL is_leap_year(NSUInteger year);
 		unparsingFormatter = [[NSDateFormatter alloc] init];
 		unparsingFormatter.formatterBehavior = NSDateFormatterBehavior10_4;
 		unparsingFormatter.dateFormat = dateFormat;
+		unparsingFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
 		unparsingFormatter.calendar = unparsingCalendar;
 		unparsingFormatter.timeZone = timeZone;
 	}
