@@ -58,6 +58,7 @@
 		0ED881C81A60A84A009FED90 /* BOXInputStreamTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */; };
 		1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */; };
 		1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */; };
+		1280F5CD1CB5C70C0068907A /* BOXContentClient+Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15958E581A1445A300AEBCEE /* BOXContentClient+Authentication.m */; };
 		150413F11A45032A00EE99F3 /* BOXFileDownloadRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */; };
 		150414291A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */; };
 		150C27741A699AA400099850 /* BOXContentClient+FileVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -436,7 +437,6 @@
 		F0805BCE1C75491E00A26038 /* NSJSONSerialization+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF153B1217C346D6008D636C /* NSJSONSerialization+BOXAdditions.m */; };
 		F0805BCF1C75491E00A26038 /* NSDate+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9C4B81A3B8AE8006EC2EE /* NSDate+BOXAdditions.m */; };
 		F0805BD01C75491E00A26038 /* BOXContentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 15958DEB1A1432AB00AEBCEE /* BOXContentClient.m */; };
-		F0805BD11C75491E00A26038 /* BOXContentClient+Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15958E581A1445A300AEBCEE /* BOXContentClient+Authentication.m */; };
 		F0805BD21C75491E00A26038 /* BOXContentClient+User.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CAD4E11A16F166006ECAFD /* BOXContentClient+User.m */; };
 		F0805BD31C75491E00A26038 /* BOXContentClient+Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B9B81F1A39A76800B8EB1A /* BOXContentClient+Comment.m */; };
 		F0805BD41C75491E00A26038 /* BOXContentClient+Collection.m in Sources */ = {isa = PBXBuildFile; fileRef = C5972A771A3F4E2C00225CBA /* BOXContentClient+Collection.m */; };
@@ -547,9 +547,7 @@
 		F0805C3E1C75491F00A26038 /* BOXMetadataUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0CC1B2E939A00AC2677 /* BOXMetadataUpdateRequest.m */; };
 		F0805C3F1C75491F00A26038 /* BOXMetadataTemplateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676E0E01B2F69A300AC2677 /* BOXMetadataTemplateRequest.m */; };
 		F0805C401C75491F00A26038 /* BOXAppToAppAnnotationBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED3F1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m */; };
-		F0805C411C75491F00A26038 /* BOXAppToAppApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED421ADC050000A9216F /* BOXAppToAppApplication.m */; };
 		F0805C421C75491F00A26038 /* BOXAppToAppFileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED441ADC050000A9216F /* BOXAppToAppFileMetadata.m */; };
-		F0805C431C75491F00A26038 /* BOXAppToAppMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E11BED481ADC050000A9216F /* BOXAppToAppMessage.m */; };
 		F0805C441C75491F00A26038 /* BOXContentSDKErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */; };
 		F0805C451C75491F00A26038 /* BOXContentSDKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E44A95B016E21C5100356ADA /* BOXContentSDKConstants.m */; };
 		F0805C471C75499500A26038 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0805C461C75499500A26038 /* Security.framework */; };
@@ -2650,7 +2648,6 @@
 				F0805BCE1C75491E00A26038 /* NSJSONSerialization+BOXAdditions.m in Sources */,
 				F0805BCF1C75491E00A26038 /* NSDate+BOXAdditions.m in Sources */,
 				F0805BD01C75491E00A26038 /* BOXContentClient.m in Sources */,
-				F0805BD11C75491E00A26038 /* BOXContentClient+Authentication.m in Sources */,
 				F0805BD21C75491E00A26038 /* BOXContentClient+User.m in Sources */,
 				F0805BD31C75491E00A26038 /* BOXContentClient+Comment.m in Sources */,
 				F0805BD41C75491E00A26038 /* BOXContentClient+Collection.m in Sources */,
@@ -2731,6 +2728,7 @@
 				F0805C201C75491E00A26038 /* BOXBookmarkRequest.m in Sources */,
 				F0805C211C75491E00A26038 /* BOXBookmarkCommentsRequest.m in Sources */,
 				F0805C221C75491E00A26038 /* BOXBookmarkCopyRequest.m in Sources */,
+				1280F5CD1CB5C70C0068907A /* BOXContentClient+Authentication.m in Sources */,
 				F0805C231C75491E00A26038 /* BOXBookmarkCreateRequest.m in Sources */,
 				F0805C241C75491E00A26038 /* BOXBookmarkDeleteRequest.m in Sources */,
 				F0805C251C75491E00A26038 /* BOXBookmarkShareRequest.m in Sources */,
@@ -2761,9 +2759,7 @@
 				F0805C3E1C75491F00A26038 /* BOXMetadataUpdateRequest.m in Sources */,
 				F0805C3F1C75491F00A26038 /* BOXMetadataTemplateRequest.m in Sources */,
 				F0805C401C75491F00A26038 /* BOXAppToAppAnnotationBuilder.m in Sources */,
-				F0805C411C75491F00A26038 /* BOXAppToAppApplication.m in Sources */,
 				F0805C421C75491F00A26038 /* BOXAppToAppFileMetadata.m in Sources */,
-				F0805C431C75491F00A26038 /* BOXAppToAppMessage.m in Sources */,
 				F0805C441C75491F00A26038 /* BOXContentSDKErrors.m in Sources */,
 				F0805C451C75491F00A26038 /* BOXContentSDKConstants.m in Sources */,
 			);

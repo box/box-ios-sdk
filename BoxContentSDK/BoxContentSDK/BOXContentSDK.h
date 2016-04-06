@@ -5,7 +5,7 @@
 //  Created on 2/19/13.
 //  Copyright (c) 2013 Box. All rights reserved.
 //
-//  NOTE: this file is a mirror of BoxContentOSXSDK/BoxContentOSXSDK.h. Changes made here should be reflected there.
+//  NOTE: this file is a mirror of BoxCocoaSDK/BoxCocoaSDK.h. Changes made here should be reflected there.
 //
 
 #import <Foundation/Foundation.h>
@@ -34,10 +34,7 @@
 // Session
 #if TARGET_OS_IPHONE
 #import "BOXAuthorizationViewController.h"
-#else
-
 #endif
-
 #import "BOXAbstractSession.h"
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"

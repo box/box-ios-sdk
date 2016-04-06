@@ -20,7 +20,7 @@ s.ios.deployment_target = "7.0"
 s.source_files        = "BoxContentSDK/BoxContentSDK/*.{h,m}", "BoxContentSDK/BoxContentSDK/**/*.{h,m}"
 s.exclude_files       = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",
 "BoxContentSDK/BoxContentSDK/External/KeychainItemWrapper/BOXKeychainItemWrapper.{h,m}"
-s.osx.exclude_files   = "BoxContentSDK/BoxContentSDK/Models/BOXAssetInputStream.{h,m}", "BoxContentSDK/BoxContentSDK/Categories/UIDevice+BOXAdditions.{h,m}", "BoxContentSDK/BoxContentSDK/OAuth2/BOXAuthorizationViewController.{h,m}", "BoxContentSDK/BoxContentSDK/Models/BOXAssetInputStream.{h,m}"
+s.osx.exclude_files   = "BoxContentSDK/BoxContentSDK/Models/BOXAssetInputStream.{h,m}", "BoxContentSDK/BoxContentSDK/Categories/UIDevice+BOXAdditions.{h,m}", "BoxContentSDK/BoxContentSDK/OAuth2/BOXAuthorizationViewController.{h,m}", "BoxContentSDK/BoxContentSDK/AppToApp/*.*"
 s.public_header_files = "BoxContentSDK/BoxContentSDK/*.h", "BoxContentSDK/BoxContentSDK/**/*.h"
 s.resource_bundle = {
   'BoxContentSDKResources' => [

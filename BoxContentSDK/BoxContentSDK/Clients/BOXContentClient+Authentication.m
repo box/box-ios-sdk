@@ -13,13 +13,13 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUser.h"
 #import "BOXSharedLinkHeadersHelper.h"
-#import "BOXAppToAppApplication.h"
-#import "BOXAppToAppMessage.h"
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
 
 #if TARGET_OS_IPHONE
 #import "BOXAuthorizationViewController.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppMessage.h"
 #else
 
 #endif
@@ -81,6 +81,8 @@
     }
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     if (self.OAuth2Session.refreshToken.length > 0 && self.OAuth2Session.accessToken.length > 0) {
@@ -104,6 +106,8 @@
     }
 }
 
+#endif
+
 - (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     __weak BOXContentClient *weakSelf = self;
@@ -124,6 +128,8 @@
         });
     }];
 }
+
+#if TARGET_OS_IPHONE
 
 + (BOOL)canCompleteAppToAppAuthenticationWithURL:(NSURL *)authenticationURL
 {
@@ -148,6 +154,8 @@
     }
 }
 
+#endif
+
 - (void)logOut
 {
     [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:self.user.modelID];
@@ -169,11 +177,17 @@
 
 - (void)presentDefaultAuthenticationWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
+#if TARGET_OS_IPHONE
     BOOL didPresentDefaultAuthentication = [self performAppToAppAuthenticationWithCompletionBlock:completion];
+#else
+    BOOL didPresentDefaultAuthentication = NO;
+#endif
     if (didPresentDefaultAuthentication == NO) {
         [self showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
     }
 }
+
+#if TARGET_OS_IPHONE
 
 // The completion block only gets called if App-To-App authentication is possible and attempted,
 // in which case the return value is YES. If the return value is NO, the completion block will not
@@ -204,6 +218,8 @@
 
     return didPerformAppToAppAuthentication;
 }
+
+#endif
 
 - (void)showWebViewAuthenticationViewControllerWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {

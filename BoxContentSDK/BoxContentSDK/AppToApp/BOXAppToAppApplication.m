@@ -8,11 +8,7 @@
 #import "BOXAppToAppApplication.h"
 #import "BOXAppToAppAnnotationKeys.h"
 #import "BOXAppToAppAnnotationBuilder.h"
-#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
 
 @interface BOXAppToAppApplication()
 
@@ -86,13 +82,9 @@ authRedirectURIString:(NSString *)authRedirectURIString;
 
     if ([self.urlScheme length] > 0)
     {
-#if TARGET_OS_IPHONE
         NSString *testURLString = [self.urlScheme stringByAppendingString:@"://"];
         result = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:testURLString]];
-#else
-		// TODO: determine if schema is registered in OSX?
-#endif
-	}
+    }
 
     return result;
 }

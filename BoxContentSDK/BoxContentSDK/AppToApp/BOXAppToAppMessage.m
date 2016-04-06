@@ -5,11 +5,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
 
 #import "BOXAppToAppMessage.h"
 #import "BOXAppToAppAnnotationKeys.h"
@@ -214,11 +210,7 @@
 
     if (actionURL != nil)
     {
-#if TARGET_OS_IPHONE
         if ([[UIApplication sharedApplication] openURL:actionURL])
-#else
-		if ([[NSWorkspace sharedWorkspace] openURL:actionURL])
-#endif
         {
             status = BOXAppToAppStatusSuccess;
         }
