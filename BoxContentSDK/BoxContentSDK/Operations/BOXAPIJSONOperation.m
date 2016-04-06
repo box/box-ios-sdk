@@ -27,7 +27,14 @@
     operationCopy.success = [self.success copy];
     operationCopy.failure = [self.failure copy];
     operationCopy.timesReenqueued = self.timesReenqueued;
-    
+
+    // Migrate header fields (this is especially important for requests where some of the key
+    // information is in the headers, such as Shared Link requests for the underlying item).
+    NSDictionary *headers = [self.APIRequest allHTTPHeaderFields];
+    for (id key in headers) {
+        [operationCopy.APIRequest setValue:[headers objectForKey:key] forHTTPHeaderField:key];
+    }
+
     return operationCopy;
 }
 
