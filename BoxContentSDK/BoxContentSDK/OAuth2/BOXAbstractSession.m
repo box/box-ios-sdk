@@ -88,7 +88,7 @@ static NSString *staticKeychainAccessGroup;
 - (void)addAuthorizationParametersToRequest:(NSMutableURLRequest *)request
 {
     NSString *bearerToken = [NSString stringWithFormat:@"Bearer %@", self.accessToken];
-    [request addValue:bearerToken forHTTPHeaderField:BOXAPIHTTPHeaderAuthorization];
+    [request setValue:bearerToken forHTTPHeaderField:BOXAPIHTTPHeaderAuthorization];
 }
 
 #pragma mark - Keychain

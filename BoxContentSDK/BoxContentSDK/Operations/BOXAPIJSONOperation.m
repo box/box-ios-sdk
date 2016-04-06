@@ -60,7 +60,7 @@
     [super prepareAPIRequest];
     if ([self.HTTPMethod isEqualToString:BOXAPIHTTPMethodPOST] || [self.HTTPMethod isEqualToString:BOXAPIHTTPMethodPUT])
     {
-        [self.APIRequest addValue:BOX_API_CONTENT_TYPE_JSON forHTTPHeaderField:BOXAPIHTTPHeaderContentType];
+        [self.APIRequest setValue:BOX_API_CONTENT_TYPE_JSON forHTTPHeaderField:BOXAPIHTTPHeaderContentType];
     }
 }
 
