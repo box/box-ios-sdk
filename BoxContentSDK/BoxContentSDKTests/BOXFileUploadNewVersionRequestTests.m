@@ -11,8 +11,11 @@
 #import "BOXRequest_Private.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
-#import "ALAssetRepresentationMock.h"
 #import "BOXInputStreamTestHelper.h"
+
+#if TARGET_OS_IPHONE
+#import "ALAssetRepresentationMock.h"
+#endif
 
 @interface BOXAPIMultipartToJSONOperation ()
 // An array of BOXAPIMultipartPiece. In our tests, we want to inspect these.
@@ -236,6 +239,8 @@
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_has_expected_URLRequest
 {
     NSString *uploadData = @"hello";
@@ -351,6 +356,8 @@
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
 }
 
+#endif
+
 #pragma mark - Completion and Progress Blocks
 
 - (void)test_that_upload_from_local_file_calls_completion_and_progress_blocks
@@ -448,6 +455,8 @@
     XCTAssertEqual(1, finalProgressBlockCalls);
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_calls_completion_and_progress_blocks
 {
     NSString *uploadData = @"hello";
@@ -496,6 +505,8 @@
     XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
     XCTAssertEqual(1, finalProgressBlockCalls);
 }
+
+#endif
 
 #pragma mark - Post Data
 
@@ -574,6 +585,8 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_posts_expected_data
 {
     NSString *uploadData = @"hello";
@@ -612,5 +625,7 @@
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
+
+#endif
 
 @end
