@@ -406,15 +406,83 @@
     return [array componentsJoinedByString:@","];
 }
 
+#if TARGET_OS_IPHONE
+
 - (NSString *)deviceModelName
 {
-#if TARGET_OS_IPHONE
     return [[UIDevice currentDevice] detailedModelName];
-#else
-    //TODO: Get nice Mac model names
-    return nil;
-#endif
 }
+
+- (NSString *)OSName
+{
+    return @"iOS";
+}
+
+- (NSString *)OSVersion
+{
+    return [[UIDevice currentDevice] systemVersion];
+}
+
+- (NSString *)uniqueDeviceIdentifier
+{
+    return [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+}
+
+#else
+
+- (NSString *)deviceModelName
+{
+    // Source: http://stackoverflow.com/a/7377952/251038
+    // TODO: Convert model identifiers (like iMac11,3) to user-friendly model names
+    NSString *result = nil;
+    size_t len = 0;
+    sysctlbyname("hw.model", NULL, &len, NULL, 0);
+    if (len) {
+        char *model = malloc(len*sizeof(char));
+        sysctlbyname("hw.model", model, &len, NULL, 0);
+        result = [[NSString alloc] initWithCString:model encoding:NSUTF8StringEncoding];
+        free(model);
+    }
+
+    return result;
+}
+
+- (NSString *)OSName
+{
+    return @"OSX";
+}
+
+- (NSString *)OSVersion
+{
+    NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
+    NSString *osVersionString = [systemVersionDictionary objectForKey:@"ProductVersion"];
+    return osVersionString;
+}
+
+- (NSString *)uniqueDeviceIdentifier
+{
+    // Source: http://stackoverflow.com/a/5868967/251038
+    io_service_t platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
+                                                              IOServiceMatching("IOPlatformExpertDevice"));
+    CFStringRef serialNumberAsCFString = NULL;
+
+    if (platformExpert) {
+        serialNumberAsCFString = IORegistryEntryCreateCFProperty(platformExpert,
+                                                                 CFSTR(kIOPlatformSerialNumberKey),
+                                                                 kCFAllocatorDefault, 0);
+        IOObjectRelease(platformExpert);
+    }
+
+    NSString *serialNumberAsNSString = nil;
+    if (serialNumberAsCFString) {
+        serialNumberAsNSString = [NSString stringWithString:(__bridge NSString *)serialNumberAsCFString];
+        CFRelease(serialNumberAsCFString);
+    }
+
+    return serialNumberAsNSString;
+}
+
+#endif
 
 - (NSString *)SDKIdentifier
 {
@@ -436,23 +504,14 @@
 
 - (NSString *)userAgent
 {
-	NSString *userAgent;
-#if TARGET_OS_IPHONE
-    NSString *defaultUserAgent = [NSString stringWithFormat:@"iOS/%@;Apple/%@;%@/%@;%@",
-                                  [[UIDevice currentDevice] systemVersion],
+    NSString *userAgent;
+	NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;Apple/%@;%@/%@;%@",
+                                  [self OSName],
+                                  [self OSVersion],
                                   [self deviceModelName],
                                   self.SDKIdentifier,
                                   self.SDKVersion,
-                                  [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-#else
-	NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-	NSString *osVersionString = [systemVersionDictionary objectForKey:@"ProductVersion"];
-	NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;Darwin/%@;Apple/%@",
-						          self.SDKIdentifier,
-						          self.SDKVersion,
-						          osVersionString,
-						          [self deviceModelName]];
-#endif
+                                  [self uniqueDeviceIdentifier]];
 
 	if (self.userAgentPrefix.length > 0) {
         userAgent = [NSString stringWithFormat:@"%@;%@", self.userAgentPrefix, defaultUserAgent];
