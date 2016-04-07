@@ -425,7 +425,7 @@
 
 - (NSString *)uniqueDeviceIdentifier
 {
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 
 #else
