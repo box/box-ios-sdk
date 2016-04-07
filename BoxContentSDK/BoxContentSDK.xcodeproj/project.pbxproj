@@ -1167,7 +1167,7 @@
 		E4FAD9AD172CE2C50052AD11 /* BOXSerialAPIQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSerialAPIQueueManager.m; sourceTree = "<group>"; };
 		E4FADA2A172CE35F0052AD11 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E4FADA2D172CE9DC0052AD11 /* CHANGES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.md; sourceTree = "<group>"; };
-		F0805BB91C7548A400A26038 /* libBoxContentOSXSDK.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libBoxContentOSXSDK.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0805BB91C7548A400A26038 /* libBoxContentSDK-OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libBoxContentSDK-OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0805C461C75499500A26038 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		F0805C481C75499E00A26038 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		F0805C4A1C7549A900A26038 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1706,7 +1706,7 @@
 			children = (
 				E470433B16D41DC500FED29A /* libBoxContentSDK.a */,
 				15605D851A20132200C5EE5A /* BoxContentSDKTests.xctest */,
-				F0805BB91C7548A400A26038 /* libBoxContentOSXSDK.dylib */,
+				F0805BB91C7548A400A26038 /* libBoxContentSDK-OSX.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2259,9 +2259,9 @@
 			productReference = E470433B16D41DC500FED29A /* libBoxContentSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		F0805BB81C7548A400A26038 /* BoxContentOSXSDK */ = {
+		F0805BB81C7548A400A26038 /* BoxContentSDK-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F0805BC11C7548A400A26038 /* Build configuration list for PBXNativeTarget "BoxContentOSXSDK" */;
+			buildConfigurationList = F0805BC11C7548A400A26038 /* Build configuration list for PBXNativeTarget "BoxContentSDK-OSX" */;
 			buildPhases = (
 				F0805BB51C7548A400A26038 /* Sources */,
 				F0805BB61C7548A400A26038 /* Frameworks */,
@@ -2272,9 +2272,9 @@
 			);
 			dependencies = (
 			);
-			name = BoxContentOSXSDK;
+			name = "BoxContentSDK-OSX";
 			productName = BoxContentOSXSDK;
-			productReference = F0805BB91C7548A400A26038 /* libBoxContentOSXSDK.dylib */;
+			productReference = F0805BB91C7548A400A26038 /* libBoxContentSDK-OSX.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -2308,7 +2308,7 @@
 			targets = (
 				E470433A16D41DC500FED29A /* BoxContentSDK */,
 				15605D841A20132200C5EE5A /* BoxContentSDKTests */,
-				F0805BB81C7548A400A26038 /* BoxContentOSXSDK */,
+				F0805BB81C7548A400A26038 /* BoxContentSDK-OSX */,
 			);
 		};
 /* End PBXProject section */
@@ -3071,7 +3071,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F0805BC11C7548A400A26038 /* Build configuration list for PBXNativeTarget "BoxContentOSXSDK" */ = {
+		F0805BC11C7548A400A26038 /* Build configuration list for PBXNativeTarget "BoxContentSDK-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F0805BBF1C7548A400A26038 /* Debug */,
