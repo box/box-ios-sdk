@@ -438,11 +438,11 @@
 {
 	NSString *userAgent;
 #if TARGET_OS_IPHONE
-    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@;iOS/%@;Apple/%@;%@",
-                                  self.SDKIdentifier,
-                                  self.SDKVersion,
+    NSString *defaultUserAgent = [NSString stringWithFormat:@"iOS/%@;Apple/%@;%@/%@;%@",
                                   [[UIDevice currentDevice] systemVersion],
                                   [self deviceModelName],
+                                  self.SDKIdentifier,
+                                  self.SDKVersion,
                                   [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 #else
 	NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
