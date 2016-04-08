@@ -7,10 +7,12 @@
 #import "BOXFileUploadNewVersionRequest.h"
 
 #import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
 #import "BOXFile.h"
 
+#if TARGET_OS_IPHONE
+#import "BOXAssetInputStream.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#endif
 
 @interface BOXFileUploadNewVersionRequest ()
 
@@ -87,6 +89,7 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:@"" // Box API ignores the filename when uploading a new version.
                                        MIMEType:nil];
+#if TARGET_OS_IPHONE
     } else if (self.asset != nil) {
         BOXAssetInputStream *inputStream =
             [[BOXAssetInputStream alloc] initWithAssetRepresentation:self.asset.defaultRepresentation
@@ -97,7 +100,8 @@
                                              fieldName:BOXAPIMultipartParameterFieldKeyFile
                                               filename:@""
                                               MIMEType:nil];
-    } else {
+#endif
+	} else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
     

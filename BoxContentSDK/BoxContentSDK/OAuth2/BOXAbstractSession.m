@@ -227,7 +227,7 @@ static NSString *staticKeychainAccessGroup;
         NSArray* keychainEntries = (__bridge_transfer NSArray*)keychainQueryResult;
         for (NSDictionary *dict in keychainEntries)
         {
-            NSObject *object = [dict objectForKey:((__bridge id)kSecAttrGeneric)];
+            NSObject *object = [dict objectForKey:((__bridge id)kSecAttrAccount)];
             if (![object isKindOfClass:[NSString class]]) {
                 continue;
             }

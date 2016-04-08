@@ -122,7 +122,7 @@
     NSArray* keychainEntries = (__bridge_transfer NSArray*)keychainQueryResult;
     for (NSDictionary *dict in keychainEntries)
     {
-        NSString *keychainIdentifier = [dict objectForKey:((__bridge NSString *)kSecAttrGeneric)];
+        NSString *keychainIdentifier = [dict objectForKey:((__bridge NSString *)kSecAttrAccount)];
         if ([keychainIdentifier hasPrefix:@"BoxCredential_"])
         {
             NSString *userID = [keychainIdentifier stringByReplacingOccurrencesOfString:@"BoxCredential_" withString:@""];

@@ -7,7 +7,6 @@
 //
 
 #import "BOXContentClient.h"
-#import <UIKit/UIKit.h>
 
 @class BOXUser;
 
@@ -29,6 +28,8 @@
  *  @param completionBlock Called when the authentication has completed.
  */
 - (void)authenticateInAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
+
+#if TARGET_OS_IPHONE
 
 /**
  *  Authenticate a user. If necessary and possible, this will launch the Box app to allow the user to autmatically
@@ -55,6 +56,8 @@
  *  @param authenticationURL    The URL with which the app was launched.
  */
 + (void)completeAppToAppAuthenticationWithURL:(NSURL *)authenticationURL;
+
+#endif
 
 /**
  *  Log out the user associated with this BOXContentClient. It is a good practice to call this when the user's session is no longer necessary.

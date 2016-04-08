@@ -20,6 +20,7 @@
 #import "BOXFileVersion.h"
 #import "BOXCollaboration.h"
 #import "BOXMetadata.h"
+#import "BOXKeychainItemWrapper.h"
 
 @implementation BOXContentSDKTestCase
 
@@ -302,7 +303,8 @@
                            (__bridge id)kSecClassIdentity];
     
     for (id secClass in secClases) {
-        NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObjectsAndKeys:secClass, (__bridge id)kSecClass, nil];
+        NSDictionary *query = @{ (__bridge id)kSecClass: secClass,
+                                 (__bridge id)kSecAttrService: [BOXKeychainItemWrapper keychainServiceIdentifier] };
         SecItemDelete((__bridge CFDictionaryRef)query);
     }
 }

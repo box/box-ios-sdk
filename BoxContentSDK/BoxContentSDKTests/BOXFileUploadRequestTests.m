@@ -12,8 +12,11 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
 #import "BOXHashHelper.h"
-#import "ALAssetRepresentationMock.h"
 #import "BOXInputStreamTestHelper.h"
+
+#if TARGET_OS_IPHONE
+#import "ALAssetRepresentationMock.h"
+#endif
 
 @interface BOXAPIOperation ()
 - (void)sendLogoutNotification;
@@ -287,6 +290,8 @@
     XCTAssertEqualObjects([BOXHashHelper sha1HashOfData:[uploadData dataUsingEncoding:NSUTF8StringEncoding]], URLRequest.allHTTPHeaderFields[@"Content-MD5"]);
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_has_expected_URLRequest
 {
     NSString *fileNameOnServer = @"tempFile.jpg";
@@ -431,6 +436,8 @@
     XCTAssertEqualObjects([BOXHashHelper sha1HashOfData:[uploadData dataUsingEncoding:NSUTF8StringEncoding]], URLRequest.allHTTPHeaderFields[@"Content-MD5"]);
 }
 
+#endif
+
 #pragma mark - Completion and Progress Blocks
 
 - (void)test_that_upload_from_local_file_calls_completion_and_progress_blocks
@@ -534,6 +541,8 @@
     XCTAssertEqual(1, finalProgressBlockCalls);
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_calls_completion_and_progress_blocks
 {
     NSString *fileNameOnServer = @"tempFile.jpg";
@@ -589,6 +598,8 @@
     XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
     XCTAssertEqual(1, finalProgressBlockCalls);
 }
+
+#endif
 
 #pragma mark - Post Data
 
@@ -682,6 +693,8 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_upload_from_asset_posts_expected_data
 {
     NSString *fileNameOnServer = @"tempFile.jpg";
@@ -732,6 +745,8 @@
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
+
+#endif
 
 #pragma mark - Error Handling
 

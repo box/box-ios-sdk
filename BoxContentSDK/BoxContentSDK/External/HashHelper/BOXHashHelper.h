@@ -31,6 +31,8 @@
 + (NSData *)sha1HashDataOfData:(NSData *)data;
 + (NSString *)sha1HashOfData:(NSData *)data;
 
+#if TARGET_OS_IPHONE
 + (NSString *)sha1HashOfALAsset:(ALAsset *)asset;
+#endif
 
 @end

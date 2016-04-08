@@ -110,6 +110,7 @@
                                                  fromData:(NSData *)data
                                                  fileName:(NSString *)fileName;
 
+#if TARGET_OS_IPHONE
 /**
  *  Generate a request to upload an ALAsset to Box.
  *
@@ -122,6 +123,7 @@
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                               fromALAsset:(ALAsset *)asset
                                         withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
+#endif
 
 /**
  *  Generate a request to upload a new version of a file from a local file.
@@ -145,6 +147,7 @@
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                              fromData:(NSData *)data;
 
+#if TARGET_OS_IPHONE
 /**
  *  Generate a request to upload a new version of a file from ALAsset.
  *
@@ -156,6 +159,7 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                           fromALAsset:(ALAsset *)asset withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
+#endif
 
 /**
  *  Generate a request to download a file to a local filepath.

@@ -78,7 +78,12 @@ You can find guides and tutorials in the `doc` directory.
 * [Search](doc/Search.md)
 * [Users](doc/Users.md)
 
+ 
+OS X Support
+------------
+OS X support is purely experimental. Use at your own risk.
 
+ 
 Contributing
 ------------
 See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.

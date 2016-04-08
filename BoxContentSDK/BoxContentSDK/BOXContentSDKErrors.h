@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 // The domain for error responses from API calls
 extern NSString *const BOXContentSDKErrorDomain;
 

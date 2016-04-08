@@ -11,13 +11,18 @@
 #import "BOXContentClient+Authentication.h"
 #import "BOXContentClient+User.h"
 #import "BOXContentSDKErrors.h"
-#import "BOXAuthorizationViewController.h"
 #import "BOXUser.h"
 #import "BOXSharedLinkHeadersHelper.h"
-#import "BOXAppToAppApplication.h"
-#import "BOXAppToAppMessage.h"
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
+
+#if TARGET_OS_IPHONE
+#import "BOXAuthorizationViewController.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppMessage.h"
+#else
+
+#endif
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
@@ -76,6 +81,8 @@
     }
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     if (self.OAuth2Session.refreshToken.length > 0 && self.OAuth2Session.accessToken.length > 0) {
@@ -99,6 +106,8 @@
     }
 }
 
+#endif
+
 - (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     __weak BOXContentClient *weakSelf = self;
@@ -119,6 +128,8 @@
         });
     }];
 }
+
+#if TARGET_OS_IPHONE
 
 + (BOOL)canCompleteAppToAppAuthenticationWithURL:(NSURL *)authenticationURL
 {
@@ -143,6 +154,8 @@
     }
 }
 
+#endif
+
 - (void)logOut
 {
     [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:self.user.modelID];
@@ -164,11 +177,17 @@
 
 - (void)presentDefaultAuthenticationWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
+#if TARGET_OS_IPHONE
     BOOL didPresentDefaultAuthentication = [self performAppToAppAuthenticationWithCompletionBlock:completion];
+#else
+    BOOL didPresentDefaultAuthentication = NO;
+#endif
     if (didPresentDefaultAuthentication == NO) {
         [self showWebViewAuthenticationViewControllerWithCompletionBlock:completion];
     }
 }
+
+#if TARGET_OS_IPHONE
 
 // The completion block only gets called if App-To-App authentication is possible and attempted,
 // in which case the return value is YES. If the return value is NO, the completion block will not
@@ -200,9 +219,12 @@
     return didPerformAppToAppAuthentication;
 }
 
+#endif
+
 - (void)showWebViewAuthenticationViewControllerWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+#if TARGET_OS_IPHONE
         BOXAuthorizationViewController *authorizationController = [[BOXAuthorizationViewController alloc] initWithSDKClient:self completionBlock:^(BOXAuthorizationViewController *authViewController, BOXUser *user, NSError *error) {
             [[authViewController navigationController] dismissViewControllerAnimated:YES completion:nil];
             if (completion) {
@@ -224,6 +246,9 @@
             viewControllerToPresentOn = viewControllerToPresentOn.presentedViewController;
         }
         [viewControllerToPresentOn presentViewController:navController animated:YES completion:nil];
+#else
+		// TODO: Implement Box Auth for OSX
+#endif
     });
 }
 

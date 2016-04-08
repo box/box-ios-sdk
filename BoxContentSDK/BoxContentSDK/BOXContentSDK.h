@@ -32,7 +32,9 @@
 #import "BOXContentClient+Metadata.h"
 
 // Session
+#if TARGET_OS_IPHONE
 #import "BOXAuthorizationViewController.h"
+#endif
 #import "BOXAbstractSession.h"
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
@@ -132,7 +134,9 @@
 #import "BOXCollaboration.h"
 #import "BOXGroup.h"
 #import "BOXFileVersion.h"
+#if TARGET_OS_IPHONE
 #import "BOXAssetInputStream.h"
+#endif
 #import "BOXMetadata.h"
 #import "BOXMetadataKeyValue.h"
 #import "BOXMetadataUpdateTask.h"

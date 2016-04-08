@@ -40,6 +40,8 @@
 
 #pragma mark - Download data
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_thumbnail_request_returns_expected_thumbnail
 {
     BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:@"123" size:BOXThumbnailSize64];
@@ -98,6 +100,8 @@
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);
 }
 
+#endif
+
 - (void)test_that_operation_is_marked_as_small_download
 {
     BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:@"123" size:BOXThumbnailSize64];
@@ -109,6 +113,8 @@
 
 #pragma mark - Private helper
 
+#if TARGET_OS_IPHONE
+
 - (UIImage *)blankImageWithSize:(CGSize)size color:(UIColor *)color
 {
     UIGraphicsBeginImageContextWithOptions(size, YES, 0);
@@ -118,5 +124,7 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
+#endif
 
 @end

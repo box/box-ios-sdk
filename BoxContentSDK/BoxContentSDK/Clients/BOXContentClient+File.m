@@ -122,6 +122,7 @@
     return request;
 }
 
+#if TARGET_OS_IPHONE
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                               fromALAsset:(ALAsset *)asset
                                         withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary
@@ -131,6 +132,7 @@
     
     return request;
 }
+#endif
 
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                     fromLocalFilePath:(NSString *)localFilePath

@@ -209,6 +209,8 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+#if TARGET_OS_IPHONE
+
 - (void)test_that_user_agent_is_correct
 {
     BOXRequest *request = [[BOXRequest alloc] init];
@@ -271,6 +273,8 @@
     
     XCTAssertEqualObjects(expectedUserAgent, request.userAgent);
 }
+
+#endif
 
 - (void)test_that_user_agent_gets_set_when_performing_request
 {
