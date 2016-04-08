@@ -264,9 +264,10 @@
             // Failed to write from to output stream. The download cannot be completed
             BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
             NSError *streamWriteError = [self.outputStream streamError];
-            NSDictionary *userInfo = @{
-                NSUnderlyingErrorKey : streamWriteError,
-            };
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+            if (streamWriteError) {
+                [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
+            }
             NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
             [self abortWithError:downloadError];
 
