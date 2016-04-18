@@ -12,8 +12,8 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXISO8601DateFormatter.h"
 #import "BOXAppUserSession.h"
-#import "NSString+BOXAdditions.h"
-#import "UIDevice+BOXAdditions.h"
+#import "NSString+BOXContentSDKAdditions.h"
+#import "UIDevice+BOXContentSDKAdditions.h"
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 

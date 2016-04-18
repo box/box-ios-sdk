@@ -14,7 +14,7 @@
  *
  * This category is used by BoxModel subclasses to extract properties from [BoxModel rawResponseJSON].
  */
-@interface NSJSONSerialization (BOXAdditions)
+@interface NSJSONSerialization (BOXContentSDKAdditions)
 
 /** @name Reflection helpers */
 

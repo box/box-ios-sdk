@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIDevice (BOXAdditions)
+@interface UIDevice (BOXContentSDKAdditions)
 
 - (NSString *)detailedModelName;
 

@@ -5,10 +5,10 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "NSError+BOXAdditions.h"
+#import "NSError+BOXContentSDKAdditions.h"
 #import "BOXContentSDKErrors.h"
 
-@implementation NSError (BOXAdditions)
+@implementation NSError (BOXContentSDKAdditions)
 
 - (NSString *)box_localizedFailureReasonString
 {

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "NSDate+BOXAdditions.h"
+#import "NSDate+BOXContentSDKAdditions.h"
 #import "BoxISO8601DateFormatter.h"
 
-@implementation NSDate (BOXAdditions)
+@implementation NSDate (BOXContentSDKAdditions)
 
 + (NSDate *)box_dateWithISO8601String:(NSString *)timestamp
 {

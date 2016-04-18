@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (BOXAdditions)
+@interface NSDate (BOXContentSDKAdditions)
 
 + (NSDate *)box_dateWithISO8601String:(NSString *)timestamp;
 

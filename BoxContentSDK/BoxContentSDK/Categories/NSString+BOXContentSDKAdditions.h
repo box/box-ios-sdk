@@ -12,7 +12,7 @@
  * The BoxAdditions category on NSString provides a method for
  * generating strings representing file size.
  */
-@interface NSString (BOXAdditions)
+@interface NSString (BOXContentSDKAdditions)
 
 /**
  * Returns a readable string of the size of the item.

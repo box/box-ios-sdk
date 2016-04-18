@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "NSJSONSerialization+BOXAdditions.h"
+#import "NSJSONSerialization+BOXContentSDKAdditions.h"
 
 #import "BOXLog.h"
 
-@implementation NSJSONSerialization (BOXAdditions)
+@implementation NSJSONSerialization (BOXContentSDKAdditions)
 
 + (id)box_ensureObjectForKey:(NSString *)key inDictionary:(NSDictionary *)dictionary hasExpectedType:(Class)cls nullAllowed:(BOOL)nullAllowed
 {
