@@ -138,6 +138,10 @@
             }
         }
     }
+
+    self.successBlock = nil;
+    self.failureBlock = nil;
+    self.progressBlock = nil;
 }
 
 - (void)performProgressCallback
@@ -148,11 +152,18 @@
     }
 }
 
+- (void)dealloc
+{
+    if (self.outputStream) {
+        [self.outputStream close];
+        self.outputStream = nil;
+    }
+}
+
 - (void)cancel
 {
     // Close the output stream before cancelling the operation
     [self close];
-
     [super cancel];
 }
 
