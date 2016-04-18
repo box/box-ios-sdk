@@ -6,10 +6,10 @@
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import "UIDevice+BOXAdditions.h"
+#import "UIDevice+BOXContentSDKAdditions.h"
 #include <sys/sysctl.h>
 
-@implementation UIDevice (BOXAdditions)
+@implementation UIDevice (BOXContentSDKAdditions)
 
 /*
  From iOS 6.1 beta Downloads listing:

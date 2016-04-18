@@ -16,7 +16,7 @@
 #import "BOXKeychainItemWrapper.h"
 #import "BOXUserRequest.h"
 #import "BOXUser_Private.h"
-#import "NSDate+BOXAdditions.h"
+#import "NSDate+BOXContentSDKAdditions.h"
 #import "BOXAbstractSession_Private.h"
 
 #define keychainRefreshTokenKey @"refresh_token"

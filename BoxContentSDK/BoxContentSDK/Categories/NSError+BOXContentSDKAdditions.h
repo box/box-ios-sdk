@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSError (BOXAdditions)
+@interface NSError (BOXContentSDKAdditions)
 
 - (NSString *)box_localizedFailureReasonString;
 - (NSString *)box_localizedShortFailureReasonString;

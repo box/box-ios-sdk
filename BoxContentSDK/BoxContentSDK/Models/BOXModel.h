@@ -5,8 +5,8 @@
 //
 
 #import "BOXContentSDKConstants.h"
-#import "NSJSONSerialization+BOXAdditions.h"
-#import "NSDate+BOXAdditions.h"
+#import "NSJSONSerialization+BOXContentSDKAdditions.h"
+#import "NSDate+BOXContentSDKAdditions.h"
 #import "BOXLog.h"
 
 /**
