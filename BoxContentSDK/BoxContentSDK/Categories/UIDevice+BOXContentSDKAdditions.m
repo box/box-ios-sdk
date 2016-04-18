@@ -11,6 +11,132 @@
 
 @implementation UIDevice (BOXContentSDKAdditions)
 
+- (NSString *)modelID
+{
+    NSString *model = nil;
+    
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+    
+    // check that machine was correctly allocated by malloc.
+    // Not checking is considered a security vulnerability by Veracode
+    if (machine != NULL) {
+        sysctlbyname("hw.machine", machine, &size, NULL, 0);
+        model = [NSString stringWithUTF8String:machine];
+        free(machine);
+    }
+    
+    return model;
+}
+
++ (BOOL)isSingleCore
+{
+    static NSArray *singleCoreMachines = nil;
+    static NSString *machine = nil;
+    
+    if (machine == nil) {
+        size_t size;
+        sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+        char *name = NULL;
+        if ((name = malloc(size)) != NULL) {
+            sysctlbyname("hw.machine", name, &size, NULL, 0);
+            machine = [NSString stringWithUTF8String:name];
+            free(name);
+        }
+    }
+    
+    if (singleCoreMachines == nil) {
+        singleCoreMachines = @[
+                               //@"i386",      //Simulator
+                               //@"x86_64",    //Simulator
+                               @"iPhone1,1", //iPhone
+                               @"iPhone1,2", //iPhone 3G
+                               @"iPhone2,1", //iPhone 3GS
+                               @"iPhone3,1", //iPhone 4
+                               //@"iPhone4,1", //iPhone 4S
+                               //@"iPhone5,1", //iPhone 5
+                               @"iPod1,1",   //iPod 1
+                               @"iPod2,1",   //iPod 2
+                               @"iPod3,1",   //iPod 3
+                               @"iPod4,1",   //iPod 4
+                               //@"iPod5,1",   //iPod 5
+                               @"iPad",      //iPad 1
+                               //@"iPad2,1",   //iPad 2 Wifi
+                               //@"iPad2,2",   //iPad 2 GSM
+                               //@"iPad2,3",   //iPad 2 CDMA
+                               //@"iPad2,4",   //iPad 2 Wifi + New Chip
+                               //@"iPad2,5",   //iPad Mini Wifi
+                               //@"iPad2,6",   //iPad Mini GSM
+                               //@"iPad3,1",   //iPad 3 Wifi
+                               //@"iPad3,2",   //iPad 3 GSM
+                               //@"iPad3,3",   //iPad 3 CDMA
+                               ];
+    }
+    
+    return [singleCoreMachines containsObject:machine];
+}
+
++ (BOXiOSVersion)iOSVersion
+{
+    static BOXiOSVersion __iOSVersion = BOXiOSVersionUnknown;
+    if (__iOSVersion == BOXiOSVersionUnknown) {
+        NSString *iOSVersionString = [[UIDevice currentDevice] systemVersion];
+        
+        NSArray *versionComponents = [iOSVersionString componentsSeparatedByString:@"."];
+        NSUInteger componentCount = [versionComponents count];
+        NSUInteger majorVersion = componentCount ? [[versionComponents objectAtIndex:0] intValue] : 0;
+        NSUInteger minorVersion = componentCount > 1 ? [[versionComponents objectAtIndex:1] intValue] : 0;
+        
+        if (majorVersion < 7) {
+            __iOSVersion = BOXiOSVersionTooOld;
+        } else if (majorVersion == 7) {
+            if (minorVersion == 0) {
+                __iOSVersion = BOXiOSVersion7;
+            } else if (minorVersion == 1) {
+                __iOSVersion = BOXiOSVersion7_1;
+            }
+        } else if (majorVersion == 8) {
+            __iOSVersion = BOXiOSVersion8;
+        } else if (majorVersion == 9) {
+            __iOSVersion = BOXiOSVersion9;
+        } else if (majorVersion > 9) {
+            __iOSVersion = BOXiOSVersionLatest;
+        }
+    }
+    return __iOSVersion;
+}
+
+- (BOOL)isIpad
+{
+    return [self userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+}
+
+- (BOOL)isIphone
+{
+    return [self userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
+}
+
+- (BOOL)isRunningiOS71
+{
+    return [UIDevice iOSVersion] == BOXiOSVersion7_1;
+}
+
+- (BOOL)isRunningiOS7xOrEarlier
+{
+    return [UIDevice iOSVersion] < BOXiOSVersion8;
+}
+
+- (NSString *)deviceName
+{
+    return self.name;
+}
+
+- (NSString *)deviceTypeString
+{
+    return ([self isIpad]) ? @"iPad" : @"iPhone";
+}
+
 /*
  From iOS 6.1 beta Downloads listing:
  iPad Wi-Fi (3rd generation)
@@ -149,25 +275,6 @@
     }
     
     return modelID;
-}
-
-- (NSString *)modelID
-{
-    NSString *model = nil;
-    
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-    
-    // check that machine was correctly allocated by malloc.
-    // Not checking is considered a security vulnerability by Veracode
-    if (machine != NULL) {
-        sysctlbyname("hw.machine", machine, &size, NULL, 0);
-        model = [NSString stringWithUTF8String:machine];
-        free(machine);
-    }
-    
-    return model;
 }
 
 @end
