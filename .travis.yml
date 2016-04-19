@@ -5,4 +5,4 @@ before_install:
 podfile: BoxContentSDK/Podfile
 osx_image: xcode6.4
 script: 
-  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator8.4 -workspace BoxContentSDK/BoxContentSDK.xcworkspace -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator8.4 -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
