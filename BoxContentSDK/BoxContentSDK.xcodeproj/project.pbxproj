@@ -321,6 +321,7 @@
 		C5D91CA61A41E46000AC8B8F /* BOXEventsAdminLogsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D91CA41A41E46000AC8B8F /* BOXEventsAdminLogsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5D91CA71A41E46000AC8B8F /* BOXEventsAdminLogsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA51A41E46000AC8B8F /* BOXEventsAdminLogsRequest.m */; };
 		C5D91CAA1A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */; };
+		C5EE89701CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */; };
 		E11035F61A200E6B00B46F6D /* BOXHashHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E11035F41A200E6B00B46F6D /* BOXHashHelper.h */; };
 		E11035F71A200E6B00B46F6D /* BOXHashHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E11035F51A200E6B00B46F6D /* BOXHashHelper.m */; };
 		E11BED491ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED3E1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -780,6 +781,7 @@
 		C5D91CA41A41E46000AC8B8F /* BOXEventsAdminLogsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXEventsAdminLogsRequest.h; sourceTree = "<group>"; };
 		C5D91CA51A41E46000AC8B8F /* BOXEventsAdminLogsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventsAdminLogsRequest.m; sourceTree = "<group>"; };
 		C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventAdminLogsRequestTests.m; sourceTree = "<group>"; };
+		C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringBoxContentSDKAdditionsTests.m; sourceTree = "<group>"; };
 		E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E11035F41A200E6B00B46F6D /* BOXHashHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXHashHelper.h; sourceTree = "<group>"; };
 		E11035F51A200E6B00B46F6D /* BOXHashHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXHashHelper.m; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 				15F5EE791A23FFC400FBBE1D /* BOXCannedURLProtocol.m */,
 				15F5EE521A20165800FBBE1D /* BOXContentSDKTestCase.h */,
 				15F5EE531A20165800FBBE1D /* BOXContentSDKTestCase.m */,
+				C5EE896E1CC69DF50076CE2F /* Categories */,
 				15F5EE6F1A23FED600FBBE1D /* CannedResponses */,
 				15F5EE6C1A23B60300FBBE1D /* Clients */,
 				150D112D1A5DD498009B269D /* Sessions */,
@@ -1354,6 +1357,14 @@
 				596C9DFF1BCDBE8B00D85F19 /* BOXContentCacheClientProtocol.h */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		C5EE896E1CC69DF50076CE2F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		E11035F31A200E6B00B46F6D /* HashHelper */ = {
@@ -1981,6 +1992,7 @@
 				0E16F1621A4A56E100BDDA21 /* BOXTrashedFolderRestoreRequestTests.m in Sources */,
 				0E5E14621A40E08B00B205F6 /* BOXCollaborationTests.m in Sources */,
 				0E16F1231A437EE800BDDA21 /* BOXCollaborationPendingRequestTests.m in Sources */,
+				C5EE89701CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m in Sources */,
 				E1A8FD611A3A2E5800475089 /* BOXFolderShareRequestTests.m in Sources */,
 				15C8C9C71A268AD00010593D /* BOXUserRequestTests.m in Sources */,
 				C5D91CA31A41D35200AC8B8F /* BOXEventsRequestTests.m in Sources */,
