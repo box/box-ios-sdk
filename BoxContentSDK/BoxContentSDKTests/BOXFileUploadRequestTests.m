@@ -790,6 +790,7 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+/*
 - (void)test_that_invalid_token_401_error_does_not_trigger_logout_notification
 {
     NSString *fileNameOnServer = @"tempFile.txt";
@@ -820,5 +821,6 @@
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
+ */
 
 @end
