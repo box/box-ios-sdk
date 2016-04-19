@@ -116,32 +116,31 @@
 
 - (void)performCompletionCallback
 {
-    if (self.error == nil)
-    {
-        if (self.successBlock)
-        {
+    BOOL shouldClearCompletionBlocks = NO;
+
+    if (self.error == nil) {
+        if (self.successBlock) {
             self.successBlock(self.fileID, [self contentLength]);
         }
-    }
-    else
-    {
-        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] && (self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
-                                                                      self.error.code == BOXContentSDKAPIErrorAccepted))
-        {
+        shouldClearCompletionBlocks = YES;
+    } else {
+        if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] &&
+            (self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
+             self.error.code == BOXContentSDKAPIErrorAccepted)) {
             // Do not fire failre block if request is going to be re-enqueued due to an expired token, or a 202 response.
-        }
-        else
-        {
-            if (self.failureBlock)
-            {
+        } else {
+            if (self.failureBlock) {
                 self.failureBlock(self.APIRequest, self.HTTPResponse, self.error);
             }
+            shouldClearCompletionBlocks = YES;
         }
     }
 
-    self.successBlock = nil;
-    self.failureBlock = nil;
-    self.progressBlock = nil;
+    if (shouldClearCompletionBlocks) {
+        self.successBlock = nil;
+        self.failureBlock = nil;
+        self.progressBlock = nil;
+    }
 }
 
 - (void)performProgressCallback
