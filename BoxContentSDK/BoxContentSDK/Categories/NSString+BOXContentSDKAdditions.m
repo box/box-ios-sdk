@@ -50,4 +50,86 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     return isEmptyOrWhitespaces;
 }
 
+- (NSString *)box_pathExtensionAccountingForZippedPackages
+{
+    NSString *extension = nil;
+    
+    if ([self box_hasTwoFileExtensions]) {
+        extension = [[self stringByDeletingPathExtension] pathExtension];
+    } else {
+        extension = [self pathExtension];
+    }
+    
+    return extension;
+}
+
+- (BOOL)box_hasTwoFileExtensions
+{
+    NSString *tmp = self;
+    // So far we have 5 cases : .pages.zip, .key.zip, .keynote.zip, .numbers.zip, .rtfd.zip.
+    if ([[tmp pathExtension] isEqualToString:@"zip"]) {
+        tmp = [tmp stringByDeletingPathExtension];
+        
+        if ([[tmp pathExtension] isEqualToString:@"pages"] || [[tmp pathExtension] isEqualToString:@"key"] || [[tmp pathExtension] isEqualToString:@"keynote"] || [[tmp pathExtension] isEqualToString:@"numbers"] || [[tmp pathExtension] isEqualToString:@"rtfd"]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (NSString *)box_stringByTrimmingTrailingSpaces
+{
+    NSString *tmp = self;
+    
+    if (self.length > 0 && ([self characterAtIndex:(self.length - 1)] == ' ')) {
+        NSError *error = nil;
+        // Regex to look for white-spaces at the end of string
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" +$" options:NSRegularExpressionCaseInsensitive error:&error];
+        
+        if (!error) {
+            // Search for trailing white-spaces in a string and replace trailing white-spaces with empty string
+            tmp = [regex stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, [self length]) withTemplate:@""];
+        }
+    }
+    
+    return tmp;
+}
+
+- (NSString *)box_stringByDeletingMultiplePathExtensionsIfNecessary
+{
+    NSString *tmp = self;
+    tmp = [tmp stringByDeletingPathExtension];
+    
+    if ([self box_hasTwoFileExtensions]) {
+        tmp = [tmp stringByDeletingPathExtension];
+    }
+    
+    return tmp;
+}
+
+- (NSString *)box_fileNameExtensionAccountingForEmptyName
+{
+    // Get the path extension from the file name.
+    NSString *string = [[self lastPathComponent] pathExtension];
+    
+    // pathExtension returns an empty string if there are no characters before the pathExtension (e.g ".jpg" or ".m4a")
+    // Just simulating a correct name to correctly find the extension, since they are still valid files that can be previewed.
+    if (string.length == 0) {
+        NSString *tmp = [NSString stringWithFormat:@"tmp%@", self.lastPathComponent];
+        string = [tmp box_pathExtensionAccountingForZippedPackages];
+    }
+    
+    return string;
+}
+
+- (NSString *)box_stringByAddingURLPercentEscapes
+{
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                 (__bridge CFStringRef)self,
+                                                                                 NULL,
+                                                                                 (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                 kCFStringEncodingUTF8);
+}
+
 @end
