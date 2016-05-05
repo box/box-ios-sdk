@@ -39,6 +39,17 @@
 
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void(^)(BOXOAuth2Session *session, NSError *error))block
 {
+    [self performRefreshTokenGrant:expiredAccessToken
+        newAccessTokenExpirationAt:nil
+       newRefreshTokenExpirationAt:nil
+               withCompletionBlock:block];
+}
+
+- (void)performRefreshTokenGrant:(NSString *)expiredAccessToken
+      newAccessTokenExpirationAt:(NSString *)accessTokenExpirationTimestamp
+     newRefreshTokenExpirationAt:(NSString *)refreshTokenExpirationTimestamp
+             withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
+{
     @synchronized(self)
     {
         if ([self.expiredOAuth2Tokens containsObject:expiredAccessToken])
@@ -60,7 +71,10 @@
             [self.expiredOAuth2Tokens addObject:expiredAccessToken];
         }
         
-        [super performRefreshTokenGrant:expiredAccessToken withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+        [super performRefreshTokenGrant:expiredAccessToken
+             newAccessTokenExpirationAt:accessTokenExpirationTimestamp
+            newRefreshTokenExpirationAt:refreshTokenExpirationTimestamp
+                    withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             if (expiredAccessToken.length > 0 && error != nil && ![self isInvalidGrantError:error]) {
                 // If there was an error, remove from 'expiredOAuth2Tokens' so that we can try again. For example, if there was a network
                 // error, then we would not want to block ourselves from trying to refresh the tokens again later.

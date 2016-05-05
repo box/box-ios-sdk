@@ -195,7 +195,19 @@
 }
 
 #pragma mark - Token Refresh
+
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
+{
+    [self performRefreshTokenGrant:expiredAccessToken
+        newAccessTokenExpirationAt:nil
+       newRefreshTokenExpirationAt:nil
+               withCompletionBlock:block];
+}
+
+- (void)performRefreshTokenGrant:(NSString *)expiredAccessToken
+      newAccessTokenExpirationAt:(NSNumber *)accessTokenExpirationTimestamp
+     newRefreshTokenExpirationAt:(NSNumber *)refreshTokenExpirationTimestamp
+             withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
 {
     if (!self.refreshToken || !self.clientID || !self.clientSecret) {
         if (block) {
@@ -215,6 +227,13 @@
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
+    if (accessTokenExpirationTimestamp) {
+        [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
+    }
+    
+    if (refreshTokenExpirationTimestamp) {
+        [POSTParams setObject:refreshTokenExpirationTimestamp forKey:BOXAuthTokenRequestRefreshTokenExpiresAtKey];
+    }
     
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:self.grantTokensURL
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
@@ -228,7 +247,10 @@
         self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
-        BOXAssert(accessTokenExpiresIn >= 0, @"accessTokenExpiresIn value is negative");
+        if (accessTokenExpiresIn < 0) {
+            // When requesting an access token that expires immediately, this value can sometimes be -1, which isn't ideal but is technically correct.
+            BOXLog(@"Warning: accessTokenExpiresIn value is negative");
+        }
         self.accessTokenExpiration = [NSDate dateWithTimeIntervalSinceNow:accessTokenExpiresIn];
         
         [self storeCredentialsToKeychain];
