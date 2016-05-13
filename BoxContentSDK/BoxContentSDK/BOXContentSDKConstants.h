@@ -81,6 +81,10 @@ extern NSString *const BOXAuthTokenRequestRefreshTokenKey;
 extern NSString *const BOXAuthTokenRequestClientIDKey;
 extern NSString *const BOXAuthTokenRequestClientSecretKey;
 extern NSString *const BOXAuthTokenRequestRedirectURIKey;
+extern NSString *const BOXAuthTokenRequestDeviceIDKey;
+extern NSString *const BOXAuthTokenRequestDeviceNameKey;
+extern NSString *const BOXAuthTokenRequestAccessTokenExpiresAtKey;
+extern NSString *const BOXAuthTokenRequestRefreshTokenExpiresAtKey;
 
 extern NSString *const BOXAuthTokenRequestGrantTypeAuthorizationCode;
 extern NSString *const BOXAuthTokenRequestGrantTypeRefreshToken;

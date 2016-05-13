@@ -203,8 +203,29 @@
  * token cannot be exchanged for a new set of tokens (for example if it has been revoked or is expired)
  *
  * @param expiredAccessToken The access token that expired.
+ * @param block              The completion block to be called when the token refresh has finished.
  */
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void(^)(BOXOAuth2Session *session, NSError *error))block;
+
+/**
+ * This method exchanges a refresh token for a new access token and refresh token with specific expiration times.
+ * Expiration times must be sooner than the defaults of 60 minutes for the access token and 60 days for the refresh token.
+ *
+ * This method should send the `BOXAuthSessionDidRefreshTokensNotification` notification upon successfully
+ * exchanging a refresh token for a new access token and refresh token.
+ *
+ * This method should send the `BOXAuthSessionDidReceiveRefreshErrorNotification` notification if a refresh
+ * token cannot be exchanged for a new set of tokens (for example if it has been revoked or is expired)
+ *
+ * @param expiredAccessToken                The access token that expired.
+ * @param accessTokenExpirationTimestamp    Unix timestamp for when the access token should expire (or nil for the default).
+ * @param refreshTokenExpirationTimestamp   Unix timestamp for when the refresh token should expire (or nil for the default).
+ * @param block                             The completion block to be called when the token refresh has finished.
+ */
+- (void)performRefreshTokenGrant:(NSString *)expiredAccessToken
+      newAccessTokenExpirationAt:(NSNumber *)accessTokenExpirationTimestamp
+     newRefreshTokenExpirationAt:(NSNumber *)refreshTokenExpirationTimestamp
+             withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block;
 
 #pragma mark Token Helpers
 /** @name Token Helpers */

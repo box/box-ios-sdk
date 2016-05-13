@@ -76,6 +76,10 @@ NSString *const BOXAuthTokenRequestRefreshTokenKey = @"refresh_token";
 NSString *const BOXAuthTokenRequestClientIDKey = @"client_id";
 NSString *const BOXAuthTokenRequestClientSecretKey = @"client_secret";
 NSString *const BOXAuthTokenRequestRedirectURIKey = @"redirect_uri";
+NSString *const BOXAuthTokenRequestDeviceIDKey = @"box_device_id";
+NSString *const BOXAuthTokenRequestDeviceNameKey = @"box_device_name";
+NSString *const BOXAuthTokenRequestAccessTokenExpiresAtKey = @"box_access_token_expires_at";
+NSString *const BOXAuthTokenRequestRefreshTokenExpiresAtKey = @"box_refresh_token_expires_at";
 
 NSString *const BOXAuthTokenRequestGrantTypeAuthorizationCode = @"authorization_code";
 NSString *const BOXAuthTokenRequestGrantTypeRefreshToken = @"refresh_token";
