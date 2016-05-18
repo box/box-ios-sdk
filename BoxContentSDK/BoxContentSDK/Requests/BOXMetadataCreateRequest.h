@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <BoxContentSDK/BoxContentSDK.h>
+#import <BoxContentSDK/BOXContentSDK.h>
 
 /**
  * BOXMetadataCreateRequest is a concrete implementation of BOXRequest that allows users to
