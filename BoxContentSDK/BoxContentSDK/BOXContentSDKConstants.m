@@ -10,7 +10,7 @@
 
 // API URLs
 NSString *const BOXAPIBaseURL = @"https://api.box.com";
-NSString *const BOXAPIAuthBaseURL = @"https://app.box.com/api";
+NSString *const BOXAPIAuthBaseURL = @"https://account.box.com/api";
 NSString *const BOXAPIUploadBaseURL = @"https://upload.box.com/api";
 
 // API Versions
