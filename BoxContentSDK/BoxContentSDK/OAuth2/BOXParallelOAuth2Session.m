@@ -82,6 +82,10 @@
                 // case, we don't want to ever try refreshing that again.
                 [self.expiredOAuth2Tokens removeObject:expiredAccessToken];
             }
+                        
+            if (block) {
+                block(session, error);
+            }
         }];
     }
 }
