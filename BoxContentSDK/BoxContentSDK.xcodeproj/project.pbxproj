@@ -310,6 +310,8 @@
 		C5972A991A408CAE00225CBA /* BOXEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C5972A971A408CAE00225CBA /* BOXEvent.m */; };
 		C5972A9D1A40978E00225CBA /* event_all_fields.json in Resources */ = {isa = PBXBuildFile; fileRef = C5972A9C1A40978E00225CBA /* event_all_fields.json */; };
 		C5972AA01A40A11500225CBA /* BOXEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5972A9F1A40A11500225CBA /* BOXEventTests.m */; };
+		C59CF52F1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C59CF52D1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C59CF5301CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CF52E1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.m */; };
 		C5B9B8201A39A76800B8EB1A /* BOXContentClient+Comment.h in Headers */ = {isa = PBXBuildFile; fileRef = C5B9B81E1A39A76800B8EB1A /* BOXContentClient+Comment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5B9B8211A39A76800B8EB1A /* BOXContentClient+Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B9B81F1A39A76800B8EB1A /* BOXContentClient+Comment.m */; };
 		C5C0861C1A42F584004DB48A /* BOXContentClient+Event.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C0861A1A42F584004DB48A /* BOXContentClient+Event.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -770,6 +772,8 @@
 		C5972A971A408CAE00225CBA /* BOXEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEvent.m; sourceTree = "<group>"; };
 		C5972A9C1A40978E00225CBA /* event_all_fields.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = event_all_fields.json; sourceTree = "<group>"; };
 		C5972A9F1A40A11500225CBA /* BOXEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventTests.m; sourceTree = "<group>"; };
+		C59CF52D1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+ExtensionSafeAdditions.h"; sourceTree = "<group>"; };
+		C59CF52E1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+ExtensionSafeAdditions.m"; sourceTree = "<group>"; };
 		C5B9B81E1A39A76800B8EB1A /* BOXContentClient+Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+Comment.h"; sourceTree = "<group>"; };
 		C5B9B81F1A39A76800B8EB1A /* BOXContentClient+Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXContentClient+Comment.m"; sourceTree = "<group>"; };
 		C5C0861A1A42F584004DB48A /* BOXContentClient+Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+Event.h"; sourceTree = "<group>"; };
@@ -1474,6 +1478,8 @@
 		E4FAD97B172CE2C50052AD11 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				C59CF52D1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.h */,
+				C59CF52E1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.m */,
 				C596054F1CC5917E0096DD59 /* UIDevice+BOXContentSDKAdditions.h */,
 				C59605501CC5917E0096DD59 /* UIDevice+BOXContentSDKAdditions.m */,
 				C59605511CC5917E0096DD59 /* NSDate+BOXContentSDKAdditions.h */,
@@ -1682,6 +1688,7 @@
 				E4FAD9D6172CE2C50052AD11 /* BOXOAuth2Session.h in Headers */,
 				1522C9001A3FCC950075DC7D /* BOXBookmarkDeleteRequest.h in Headers */,
 				0EA4D2541A5C83D300196891 /* BOXAssetInputStream.h in Headers */,
+				C59CF52F1CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.h in Headers */,
 				0ED881AC1A5F4793009FED90 /* BOXAPIJSONPatchOperation.h in Headers */,
 				155170BA1A54872D004C00AF /* BOXFileVersion.h in Headers */,
 				E4FAD9DA172CE2C50052AD11 /* BOXAPIAuthenticatedOperation.h in Headers */,
@@ -2047,6 +2054,7 @@
 				1522C8EA1A3FAFBC0075DC7D /* BOXBookmarkCopyRequest.m in Sources */,
 				0E5E146A1A41032200B205F6 /* BOXCollaborationCreateRequest.m in Sources */,
 				15958E3A1A14338A00AEBCEE /* BOXItemArrayRequest.m in Sources */,
+				C59CF5301CFF99D500978B97 /* UIApplication+ExtensionSafeAdditions.m in Sources */,
 				15958E221A14338A00AEBCEE /* BOXFileThumbnailRequest.m in Sources */,
 				E11BED4A1ADC050000A9216F /* BOXAppToAppAnnotationBuilder.m in Sources */,
 				E1DD60401A3A8F1B00C4BD41 /* BOXFileUnshareRequest.m in Sources */,

@@ -8,6 +8,7 @@
 #import "BOXAppToAppApplication.h"
 #import "BOXAppToAppAnnotationKeys.h"
 #import "BOXAppToAppAnnotationBuilder.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
 #import <UIKit/UIKit.h>
 
 @interface BOXAppToAppApplication()
@@ -83,7 +84,7 @@ authRedirectURIString:(NSString *)authRedirectURIString;
     if ([self.urlScheme length] > 0)
     {
         NSString *testURLString = [self.urlScheme stringByAppendingString:@"://"];
-        result = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:testURLString]];
+        result = [[UIApplication box_sharedApplication] box_canOpenURL:[NSURL URLWithString:testURLString]];
     }
 
     return result;

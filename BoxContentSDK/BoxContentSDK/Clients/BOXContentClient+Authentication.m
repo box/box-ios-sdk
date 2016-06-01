@@ -18,6 +18,7 @@
 #import "BOXAppToAppMessage.h"
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
@@ -215,7 +216,7 @@
                 completion(nil, error);
             }
         }];
-        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        UIViewController *rootViewController = [[[[UIApplication box_sharedApplication] delegate] window] rootViewController];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authorizationController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
         // if there are presented view controllers, we need to present the auth controller on the topmost presented view controller

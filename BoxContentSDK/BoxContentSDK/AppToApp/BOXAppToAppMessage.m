@@ -11,6 +11,7 @@
 #import "BOXAppToAppAnnotationKeys.h"
 #import "BOXAppToAppAnnotationBuilder.h"
 #import "BOXAppToAppApplication.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
 
 @implementation BOXAppToAppMessage
 
@@ -210,7 +211,7 @@
 
     if (actionURL != nil)
     {
-        if ([[UIApplication sharedApplication] openURL:actionURL])
+        if ([[UIApplication box_sharedApplication] box_openURL:actionURL])
         {
             status = BOXAppToAppStatusSuccess;
         }
