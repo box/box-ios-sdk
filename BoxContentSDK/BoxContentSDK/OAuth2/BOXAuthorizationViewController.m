@@ -12,6 +12,7 @@
 #import "BOXContentClient+User.h"
 #import "BOXUserRequest.h"
 #import "BOXContentSDKErrors.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
 
 // http://stackoverflow.com/a/5337804/527393
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -355,7 +356,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
     // Mailto URLs can be encountered if there is a hyperlink for sending an email.
     if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"]) {
-        [[UIApplication sharedApplication] openURL:[request URL]];
+        [[UIApplication box_sharedApplication] box_openURL:[request URL]];
         return NO;
     }
 
