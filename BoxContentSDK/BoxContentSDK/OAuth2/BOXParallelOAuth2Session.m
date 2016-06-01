@@ -46,8 +46,8 @@
 }
 
 - (void)performRefreshTokenGrant:(NSString *)expiredAccessToken
-      newAccessTokenExpirationAt:(NSString *)accessTokenExpirationTimestamp
-     newRefreshTokenExpirationAt:(NSString *)refreshTokenExpirationTimestamp
+      newAccessTokenExpirationAt:(NSNumber *)accessTokenExpirationTimestamp
+     newRefreshTokenExpirationAt:(NSNumber *)refreshTokenExpirationTimestamp
              withCompletionBlock:(void (^)(BOXOAuth2Session *session, NSError *error))block
 {
     @synchronized(self)
