@@ -8,7 +8,7 @@
 
 /**
  *  This category's purpose is to allow successful compilation when using BOXContentSDK in an extension.
- *  If the target you're running is an extension, simply add the build flag TARGET_IS_EXTENSION to it to avoid any build failures because of unsafe API calls.
+ *  If the target you're running is not an extension extension, simply add the build flag TARGET_IS_NOT_EXTENSION to it to avoid any build failures because of unsafe API calls.
  */
 @interface UIApplication (ExtensionSafeAdditions)
 
