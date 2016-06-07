@@ -10,7 +10,7 @@
 
 + (UIApplication *)box_sharedApplication
 {
-#ifdef TARGET_IS_NOT_EXTENSION
+#ifndef BOX_TARGET_IS_EXTENSION
     // If we are compiling from a non-extension target, use the regular sharedApplication.
     return [UIApplication sharedApplication];
 #else
@@ -21,7 +21,7 @@
 
 - (BOOL)box_canOpenURL:(NSURL *)url
 {
-#ifdef TARGET_IS_NOT_EXTENSION
+#ifndef BOX_TARGET_IS_EXTENSION
     // If we are compiling from a non-extension target, use the regular sharedApplication.
     return [[UIApplication sharedApplication] canOpenURL:url];
 #else
@@ -32,7 +32,7 @@
 
 - (BOOL)box_openURL:(NSURL*)url
 {
-#ifdef TARGET_IS_NOT_EXTENSION
+#ifndef BOX_TARGET_IS_EXTENSION
     // If we are compiling from a non-extension target, use the regular sharedApplication.
     return [[UIApplication sharedApplication] openURL:url];
 #else
