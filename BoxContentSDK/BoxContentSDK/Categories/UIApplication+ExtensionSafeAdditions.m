@@ -8,37 +8,65 @@
 
 @implementation UIApplication (ExtensionSafeAdditions)
 
-+ (UIApplication *)box_sharedApplication
++ (BOOL)box_isRunningExtension
 {
-#ifndef BOX_TARGET_IS_EXTENSION
-    // If we are compiling from a non-extension target, use the regular sharedApplication.
-    return [UIApplication sharedApplication];
-#else
-    // If we are compiling from an extension, return nil here since UIApplication isn't extension-safe.
-    return nil;
-#endif
+    return [[[NSBundle mainBundle] executablePath] containsString:@".appex/"];
 }
 
++ (UIApplication *)box_sharedApplication
+{
+    UIApplication *application = nil;
+    if ([UIApplication box_isRunningExtension] == NO) {
+        // If we are compiling from a non-extension target, use the regular sharedApplication.
+        application = [UIApplication performSelector:@selector(sharedApplication)];
+    }
+    
+    return application;
+}
+         
 - (BOOL)box_canOpenURL:(NSURL *)url
 {
-#ifndef BOX_TARGET_IS_EXTENSION
-    // If we are compiling from a non-extension target, use the regular sharedApplication.
-    return [[UIApplication sharedApplication] canOpenURL:url];
-#else
-    // If we are compiling from an extension, do nothing and return NO here since UIApplication isn't extension-safe.
-    return NO;
-#endif
+    BOOL result = NO;
+    if ([UIApplication box_isRunningExtension] == NO) {
+        // If we are compiling from a non-extension target, use the regular sharedApplication.
+        UIApplication *application = [[self class] box_sharedApplication];
+        if ([application respondsToSelector:@selector(canOpenURL:)]) {
+            result = [application performSelector:@selector(canOpenURL:) withObject:url];
+        }
+    }
+    
+    return result;
 }
 
 - (BOOL)box_openURL:(NSURL*)url
 {
-#ifndef BOX_TARGET_IS_EXTENSION
-    // If we are compiling from a non-extension target, use the regular sharedApplication.
-    return [[UIApplication sharedApplication] openURL:url];
-#else
-    // If we are compiling from an extension, do nothing and return NO here since UIApplication isn't extension-safe.
-    return NO;
-#endif
+    BOOL result = NO;
+    if ([UIApplication box_isRunningExtension] == NO) {
+        // If we are compiling from a non-extension target, use the regular sharedApplication.
+        UIApplication *application = [[self class] box_sharedApplication];
+        if ([application respondsToSelector:@selector(openURL:)]) {
+            result = [application performSelector:@selector(openURL:) withObject:url];
+        }
+    }
+    
+    return result;
+}
+
+- (UIWindow *)box_window
+{
+    UIWindow *window = nil;
+    if ([UIApplication box_isRunningExtension] == NO) {
+        // If we are compiling from a non-extension target, use the regular sharedApplication.
+        UIApplication *application = [[self class] box_sharedApplication];
+        if ([application respondsToSelector:@selector(delegate)]) {
+            id <UIApplicationDelegate> delegate = [application performSelector:@selector(delegate)];
+            if ([delegate respondsToSelector:@selector(window)]) {
+                window = [delegate performSelector:@selector(window)];
+            }
+        }
+    }
+    
+    return window;
 }
 
 @end
