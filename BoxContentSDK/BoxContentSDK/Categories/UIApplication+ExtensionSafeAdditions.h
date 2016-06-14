@@ -19,4 +19,6 @@
 
 - (BOOL)box_canOpenURL:(NSURL *)url;
 
+- (UIWindow *)box_window;
+
 @end
