@@ -21,7 +21,7 @@ should have its delegate set.
 
   BOXContentClient *client = [BOXContentClient defaultClient];
   [client setAccessTokenDelegate: self];
-  [client autheticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
+  [client authenticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
     if (error) {
       //Do stuff in case of error.
     } else {
@@ -70,7 +70,7 @@ Authenticate a new account:
 ```objectivec
 BOXContentClient *client = [BOXContentClient clientForNewSession];
 [client setAccessTokenDelegate: self];
-[client autheticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
+[client authenticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
   if (error) {
     //Do stuff in case of error.
   } else {
