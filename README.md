@@ -8,7 +8,7 @@ This SDK makes it easy to use Box's [Content API](https://developers.box.com/doc
 
 Developer Setup
 ---------------
-* Ensure you have the latest version of [XCode](https://developer.apple.com/xcode/) installed.
+* Ensure you have the latest version of [Xcode](https://developer.apple.com/xcode/) installed.
 * We encourage you to use [CocoaPods](http://cocoapods.org/) to import the SDK into your project. CocoaPods is a simple, but powerful dependency management tool. If you do not already use CocoaPods, it's very easy to [get started](http://guides.cocoapods.org/using/getting-started.html).
 
 Quickstart
@@ -60,7 +60,7 @@ open BoxContentSDKSampleApp.xcworkspace
 
 Tests
 -----
-Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
+Tests can be found in the 'BoxContentSDKTests' target. [Use Xcode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 Documentation
 -------------
