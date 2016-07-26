@@ -1,0 +1,56 @@
+"representations": {
+    "entries": [
+        {
+            "representation": "original",
+            "properties": {},
+            "status": "success",
+            "details": {},
+            "links": {
+                "content": {
+                    "type": "asset",
+                    "url": "https://dl.boxcloud.com/api/2.0/files/123456/versions/1234567/representations/original/content/"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/files/123456/versions/1234567/representations/original"
+                }
+            }
+        },
+        {
+            "representation": "png",
+            "properties": {
+                "dimensions": "1024x1024"
+            },
+            "status": "none",
+            "details": {},
+            "links": {
+                "content": {
+                    "type": "asset",
+                    "url": "https://dl.boxcloud.com/api/2.0/files/123456/versions/1234567/representations/png_1024x1024/content/"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/files/123456/versions/1234567/representations/png_1024x1024"
+                }
+            }
+        },
+        {
+            "representation": "jpg",
+            "properties": {
+                "dimensions": "1024x1024"
+            },
+            "status": "error",
+            "details": {
+                "code": "200",
+                "message": "We're sorry, the server encountered an unexpected error."
+            },
+            "links": {
+                "content": {
+                    "type": "asset",
+                    "url": "https://dl.boxcloud.com/api/2.0/files/123456/versions/1234567/representations/jpg_1024x1024/content/"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/files/123456/versions/1234567/representations/jpg_1024x1024"
+                }
+            }
+        }
+    ]
+}
