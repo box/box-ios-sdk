@@ -134,6 +134,30 @@ BOXCollaborationRole *const BOXCollaborationRoleViewer = @"viewer";
 BOXCollaborationRole *const BOXCollaborationRolePreviewer = @"previewer";
 BOXCollaborationRole *const BOXCollaborationRoleUploader = @"uploader";
 
+// Representation Type
+BOXRepresentationType *const BOXRepresentationTypeOriginal = @"original";
+BOXRepresentationType *const BOXRepresentationTypePDF = @"pdf";
+BOXRepresentationType *const BOXRepresentationTypeMP4 = @"mp4";
+BOXRepresentationType *const BOXRepresentationTypeMP3 = @"mp3";
+BOXRepresentationType *const BOXRepresentationTypePNG = @"png";
+BOXRepresentationType *const BOXRepresentationTypeJPG = @"jpg";
+BOXRepresentationType *const BOXRepresentationType3D = @"3d";
+BOXRepresentationType *const BOXRepresentationTypeFilmstrip = @"filmstrip";
+BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
+BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
+BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
+BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
+
+// Representation Status
+BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";
+BOXRepresentationStatus *const BOXRepresentationStatusPending = @"pending";
+BOXRepresentationStatus *const BOXRepresentationStatusNone = @"none";
+BOXRepresentationStatus *const BOXRepresentationStatusError = @"error";
+
+// Representation Dimensions
+BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024 = @"1024x1024";
+BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048 = @"2048x2048";
+
 // Folder Upload Email Access Levels
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen = @"open";
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelCollaborators = @"collaborators";
@@ -277,6 +301,14 @@ NSString *const BOXAPIObjectKeyAcknowledgedAt = @"acknowledged_at";
 NSString *const BOXAPIObjectKeyAccessibleBy = @"accessible_by";
 NSString *const BOXAPIObjectKeyEntries = @"entries";
 NSString *const BOXAPIObjectKeyIsBoxNotesCreationEnabled = @"is_boxnotes_creation_enabled";
+NSString *const BOXAPIObjectKeyRepresentations = @"representations";
+NSString *const BOXAPIObjectKeyRepresentation = @"representation";
+NSString *const BOXAPIObjectKeyProperties = @"properties";
+NSString *const BOXAPIObjectKeyDetails = @"details";
+NSString *const BOXAPIObjectKeyLinks = @"links";
+NSString *const BOXAPIObjectKeyContent = @"content";
+NSString *const BOXAPIObjectKeyInfo = @"info";
+NSString *const BOXAPIObjectKeyDimensions = @"dimensions";
 
 // API metadata object keys
 NSString *const BOXAPIMetadataObjectKeyID = @"$id";
@@ -303,7 +335,7 @@ NSString *const BOXAPIEventStreamTypeChanges = @"changes";
 NSString *const BOXAPIEventStreamTypeSync = @"sync";
 NSString *const BOXAPIEventStreamTypeAdminLogs = @"admin_logs";
 
-// Standart Events
+// Standard Events
 NSString *const BOXAPIEventTypeItemCreate = @"ITEM_CREATE";
 NSString *const BOXAPIEventTypeItemUpload = @"ITEM_UPLOAD";
 NSString *const BOXAPIEventTypeCommentCreate = @"COMMENT_CREATE";

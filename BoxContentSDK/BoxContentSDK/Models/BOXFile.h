@@ -89,4 +89,6 @@
  */
 @property (nonatomic, readwrite, strong) BOXFileLock *lock;
 
+@property (nonatomic, readwrite, strong) NSArray *representations;
+
 @end

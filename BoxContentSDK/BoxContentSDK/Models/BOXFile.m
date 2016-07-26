@@ -6,6 +6,7 @@
 
 #import "BOXFile.h"
 #import "BOXFileLock.h"
+#import "BOXRepresentation.h"
 
 @implementation BOXFileMini
 
@@ -78,6 +79,22 @@
                                                              nullAllowed:YES];
         if (lock && ![lock isKindOfClass:[NSNull class]]) {
             self.lock = [[BOXFileLock alloc] initWithJSON:lock];
+        }
+        
+        // Parse Representations.
+        NSDictionary *representationsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyRepresentations
+                                                                          inDictionary:JSONResponse
+                                                                       hasExpectedType:[NSDictionary class]
+                                                                           nullAllowed:NO];
+        NSArray *representations = representationsJSON[BOXAPIObjectKeyEntries];
+        if (representations) {
+            NSMutableArray *tempRepresentations = [NSMutableArray array];
+            
+            for (NSDictionary *representationJSON in representations) {
+                BOXRepresentation *representation = [[BOXRepresentation alloc] initWithJSON:representationJSON];
+                [tempRepresentations addObject:representation];
+            }
+            self.representations = [NSArray arrayWithArray:tempRepresentations];
         }
 
     }
