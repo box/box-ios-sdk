@@ -19,7 +19,7 @@
  */
 
 // Header file
-#import "BOXHashHelper.h"
+#import <BoxContentSDK/BOXHashHelper.h>
 
 // System framework and libraries
 #define COMMON_DIGEST_FOR_OPENSSL

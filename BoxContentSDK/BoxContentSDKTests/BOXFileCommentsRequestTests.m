@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXFileCommentsRequest.h"
-#import "BOXRequest_Private.h"
-#import "NSURL+BOXURLHelper.h"
-#import "BoxComment.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXFileCommentsRequest.h"
+#import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
+#import "BoxComment.h"
+
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFileCommentsRequest ()
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "NSJSONSerialization+BOXContentSDKAdditions.h"
+#import <BoxContentSDK/BOXLog.h>
 
-#import "BOXLog.h"
+#import <BoxContentSDK/NSJSONSerialization+BOXContentSDKAdditions.h>
 
 @implementation NSJSONSerialization (BOXContentSDKAdditions)
 

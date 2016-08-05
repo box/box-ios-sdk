@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataUpdateRequest.h"
-#import "BOXRequest+Metadata.h"
-#import "BOXMetadataUpdateTask.h"
+#import <BoxContentSDK/BOXMetadataUpdateRequest.h>
+#import <BoxContentSDK/BOXMetadataUpdateTask.h>
+
+#import <BoxContentSDK/BOXRequest+Metadata.h>
 
 @interface BOXMetadataUpdateRequest ()
 

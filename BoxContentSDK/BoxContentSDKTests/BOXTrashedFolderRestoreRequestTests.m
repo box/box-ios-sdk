@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXFolder.h"
 #import "BOXRequestTestCase.h"
 #import "BOXTrashedFolderRestoreRequest.h"
-#import "BOXFolder.h"
 
 @interface BOXTrashedFolderRestoreRequestTests : BOXRequestTestCase
 

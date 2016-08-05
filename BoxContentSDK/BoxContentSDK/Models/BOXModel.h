@@ -4,10 +4,11 @@
 //
 //
 
-#import "BOXContentSDKConstants.h"
-#import "NSJSONSerialization+BOXContentSDKAdditions.h"
-#import "NSDate+BOXContentSDKAdditions.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXLog.h>
+
+#import <BoxContentSDK/NSDate+BOXContentSDKAdditions.h>
+#import <BoxContentSDK/NSJSONSerialization+BOXContentSDKAdditions.h>
 
 /**
  Base class for all BOXModel objects.

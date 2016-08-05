@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+@import Foundation;
+
 /**
  * App Users are full-featured enterprise Box accounts that belong to your application not a Box user. Unlike typical Box accounts, 
  * these accounts do not have an associated login and can only be accessed through the Content API by the controlling application 

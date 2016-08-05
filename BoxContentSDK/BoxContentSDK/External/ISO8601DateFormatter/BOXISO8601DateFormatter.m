@@ -4,12 +4,14 @@
  *Copyright 2009–2013 Peter Hosey. All rights reserved.
  */
 
+@import Foundation;
+
 #import <float.h>
-#import <Foundation/Foundation.h>
+
 #if TARGET_OS_IPHONE
 #	import <UIKit/UIKit.h>
 #endif
-#import "BOXISO8601DateFormatter.h"
+#import <BoxContentSDK/BOXISO8601DateFormatter.h>
 
 #ifndef DEFAULT_TIME_SEPARATOR
 #	define DEFAULT_TIME_SEPARATOR ':'

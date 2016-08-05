@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest.h"
+#import <BoxContentSDK/BOXRequest.h>
 
 @interface BOXCommentUpdateRequest : BOXRequest
 

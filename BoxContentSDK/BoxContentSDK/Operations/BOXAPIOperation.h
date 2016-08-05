@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-#import "BOXOAuth2Session.h"
-
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXOAuth2Session.h>
 
 // Success and Failure callbacks
 //

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXBookmarkCreateRequest.h"
 #import "BOXBookmark.h"
+#import "BOXBookmarkCreateRequest.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXBookmarkCreateRequestTests : BOXRequestTestCase
 @end

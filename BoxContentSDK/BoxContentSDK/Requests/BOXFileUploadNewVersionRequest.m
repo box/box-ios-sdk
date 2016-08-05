@@ -3,14 +3,14 @@
 //  BoxContentSDK
 //
 
+@import AssetsLibrary;
+
+#import <BoxContentSDK/BOXAPIMultipartToJSONOperation.h>
+#import <BoxContentSDK/BOXAssetInputStream.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFileUploadNewVersionRequest.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXFileUploadNewVersionRequest.h"
-
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
-#import "BOXFile.h"
-
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface BOXFileUploadNewVersionRequest ()
 

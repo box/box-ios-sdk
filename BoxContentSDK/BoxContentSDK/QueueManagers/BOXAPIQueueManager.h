@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BOXAPIAccessTokenDelegate.h"
+@import Foundation;
+
+#import <BoxContentSDK/BOXAPIAccessTokenDelegate.h>
 
 @class BOXAPIOperation, BOXAPIOAuth2ToJSONOperation, BOXAbstractSession;
 

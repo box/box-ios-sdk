@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest.h"
+#import <BoxContentSDK/BOXRequest.h>
 
 //FIXME: Rename this request class
 // From API Docs: Used to retrieve all pending collaboration invites for this user.

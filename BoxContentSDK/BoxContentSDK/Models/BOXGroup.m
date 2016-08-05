@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXGroup.h"
+#import <BoxContentSDK/BOXGroup.h>
 
 @implementation BOXGroup
 

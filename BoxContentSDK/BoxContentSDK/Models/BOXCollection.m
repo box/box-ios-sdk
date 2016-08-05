@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollection.h"
+#import <BoxContentSDK/BOXCollection.h>
 
 @implementation BOXCollection
 

@@ -6,11 +6,12 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXKeychainItemWrapper.h>
+#import <BoxContentSDK/BOXUser.h>
+
 #import "BOXAbstractSession_Private.h"
-#import "BOXKeychainItemWrapper.h"
-#import "BOXUser.h"
-#import "BOXUser_Private.h"
 #import "BOXRequest_Private.h"
+#import "BOXUser_Private.h"
 
 #define keychainDefaultIdentifierPrefix @"BoxCredential_"
 #define keychainDefaultAccessGroup nil

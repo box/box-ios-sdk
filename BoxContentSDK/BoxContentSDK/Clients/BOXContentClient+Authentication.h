@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
+
+#import <BoxContentSDK/BOXContentClient.h>
 
 @class BOXUser;
 

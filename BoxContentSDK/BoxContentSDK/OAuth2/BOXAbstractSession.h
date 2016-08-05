@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BOXAPIQueueManager.h"
-#import "BOXUser.h"
+@import Foundation;
+
+#import <BoxContentSDK/BOXAPIQueueManager.h>
+#import <BoxContentSDK/BOXUser.h>
 
 #pragma mark Notifications
 extern NSString *const BOXSessionDidBecomeAuthenticatedNotification;

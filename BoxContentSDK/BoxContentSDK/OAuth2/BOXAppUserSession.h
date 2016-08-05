@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXAbstractSession.h"
+#import <BoxContentSDK/BOXAbstractSession.h>
 
 /**
  * BOXAppUserSession is an implementation of the abstract class BOXAbstractSession.

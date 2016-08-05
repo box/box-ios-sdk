@@ -7,7 +7,7 @@
 //
 
 #import <BoxContentSDK/BOXContentSDK.h>
-#import "BOXMetadataRequest.h"
+#import <BoxContentSDK/BOXMetadataRequest.h>
 
 @class BOXMetadataRequest;
 @class BOXMetadataDeleteRequest;

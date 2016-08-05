@@ -3,9 +3,8 @@
 //  BoxContentSDK
 //
 
-#import "BOXTrashedFileRestoreRequest.h"
-
-#import "BOXFile.h"
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXTrashedFileRestoreRequest.h>
 
 @interface BOXTrashedFileRestoreRequest ()
 

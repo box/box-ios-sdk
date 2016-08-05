@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXPreflightCheckRequest.h"
+#import <BoxContentSDK/BOXPreflightCheckRequest.h>
 
 @implementation BOXPreflightCheckRequest
 

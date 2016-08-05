@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXModelTestCase.h"
 #import "BOXCollection.h"
+#import "BOXModelTestCase.h"
 
 @interface BOXCollectionTests : BOXModelTestCase    
 

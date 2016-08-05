@@ -3,10 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXTrashedItemArrayRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXTrashedItemArrayRequest.h>
 
-#import "BOXAPIJSONOperation.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXTrashedItemArrayRequest ()
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXRequestWithSharedLinkHeader.h"
+#import <BoxContentSDK/BOXRequestWithSharedLinkHeader.h>
 
 @interface BOXFolderItemsRequest : BOXRequestWithSharedLinkHeader
 

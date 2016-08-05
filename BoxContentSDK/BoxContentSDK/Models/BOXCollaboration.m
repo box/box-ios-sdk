@@ -5,10 +5,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollaboration.h"
-#import "BOXUser.h"
-#import "BOXGroup.h"
-#import "BOXFolder.h"
+#import <BoxContentSDK/BOXCollaboration.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXGroup.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @implementation BOXCollaboration
 

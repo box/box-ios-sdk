@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXFileUnshareRequest.h"
-#import "BOXRequest_Private.h"
-#import "NSURL+BOXURLHelper.h"
 #import "BOXFile.h"
+#import "BOXFileUnshareRequest.h"
+#import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
+
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFileUnshareRequestTests : BOXRequestTestCase
 @end

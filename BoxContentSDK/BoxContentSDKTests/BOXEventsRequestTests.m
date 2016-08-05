@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
 #import "BOXEvent.h"
 #import "BOXEventsRequest.h"
-#import "NSURL+BOXURLHelper.h"
+#import "BOXRequestTestCase.h"
 
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXEventsRequestTests : BOXRequestTestCase
 

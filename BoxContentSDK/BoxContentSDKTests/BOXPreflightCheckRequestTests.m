@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXPreflightCheckRequest.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXPreflightCheckRequest.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXPreflightCheckRequestTests : BOXRequestTestCase
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataUpdateTask.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXMetadataUpdateTask.h>
 
 @implementation BOXMetadataUpdateTask
 

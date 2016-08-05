@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXRequestTestCase.h"
-#import "BOXCollectionItemsRequest.h"
+#import "BOXBookmark.h"
 #import "BOXCollection.h"
+#import "BOXCollectionItemsRequest.h"
+#import "BOXContentCacheTestClient.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
-#import "BOXBookmark.h"
-#import "BOXContentCacheTestClient.h"
+#import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXCollectionItemsRequestTests : BOXRequestTestCase
 

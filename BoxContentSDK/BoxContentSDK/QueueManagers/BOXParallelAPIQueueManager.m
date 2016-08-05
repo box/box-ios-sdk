@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXParallelAPIQueueManager.h"
-
-#import "BOXAPIDataOperation.h"
-#import "BOXAPIOAuth2ToJSONOperation.h"
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXLog.h"
-#import "BOXAPIAppUsersAuthOperation.h"
+#import <BoxContentSDK/BOXAPIAppUsersAuthOperation.h>
+#import <BoxContentSDK/BOXAPIDataOperation.h>
+#import <BoxContentSDK/BOXAPIMultipartToJSONOperation.h>
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXParallelAPIQueueManager.h>
 
 @interface BOXParallelAPIQueueManager ()
 

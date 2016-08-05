@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXModel.h"
+#import <BoxContentSDK/BOXModel.h>
 
 @class BOXFolderMini;
 @class BOXUserMini;

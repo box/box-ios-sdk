@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXItemShareRequest.h"
-#import "BOXAPIOperation.h"
+#import <BoxContentSDK/BOXAPIOperation.h>
+#import <BoxContentSDK/BOXItemShareRequest.h>
 
 @implementation BOXItemShareRequest
 

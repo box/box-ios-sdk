@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIQueueManager.h"
+#import <BoxContentSDK/BOXAPIQueueManager.h>
 
 /**
  * BOXParallelAPIQueueManager is an implementation of the abstract class BOXAPIQueueManager.

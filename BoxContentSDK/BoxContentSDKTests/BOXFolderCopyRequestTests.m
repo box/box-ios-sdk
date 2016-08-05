@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXFolderCopyRequest.h"
 #import "BOXFolder.h"
+#import "BOXFolderCopyRequest.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXFolderCopyRequestTests : BOXRequestTestCase
 @end

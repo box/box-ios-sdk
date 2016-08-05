@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXFolderDeleteRequest.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXFolderDeleteRequest.h"
-#import "BOXAPIJSONOperation.h"
 
 @interface BOXFolderDeleteRequest ()
 @property (nonatomic, readwrite, assign) BOOL isTrashed;

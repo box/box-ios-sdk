@@ -3,17 +3,18 @@
 //  BoxContentSDK
 //
 
+@import AssetsLibrary;
+
+#import <BoxContentSDK/BOXAPIMultipartToJSONOperation.h>
+#import <BoxContentSDK/BOXAssetInputStream.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFileUploadRequest.h>
+#import <BoxContentSDK/BOXHashHelper.h>
+#import <BoxContentSDK/BOXLog.h>
+
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXFileUploadRequest.h"
-
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
-#import "BOXFile.h"
-#import "BOXLog.h"
-#import "BOXHashHelper.h"
-#import "NSString+BOXURLHelper.h"
-
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface BOXFileUploadRequest ()
 

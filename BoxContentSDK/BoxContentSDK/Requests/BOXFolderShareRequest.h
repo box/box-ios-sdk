@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXItemShareRequest.h"
+#import <BoxContentSDK/BOXItemShareRequest.h>
 
 @interface BOXFolderShareRequest : BOXItemShareRequest
 

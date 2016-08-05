@@ -6,19 +6,22 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import <BOXContentSDK/BOXOAuth2Session.h>
+#import <BoxContentSDK/BOXAppToAppApplication.h>
+#import <BoxContentSDK/BOXAppToAppMessage.h>
+#import <BoxContentSDK/BOXAppUserSession.h>
+#import <BoxContentSDK/BOXAuthorizationViewController.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
+#import <BoxContentSDK/BOXUser.h>
+#import <BoxContentSDK/BOXUserRequest.h>
 #import <objc/runtime.h>
+
+#import <BoxContentSDK/BOXContentClient+Authentication.h>
+#import <BoxContentSDK/BOXContentClient+User.h>
+#import <BoxContentSDK/UIApplication+ExtensionSafeAdditions.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+Authentication.h"
-#import "BOXContentClient+User.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXAuthorizationViewController.h"
-#import "BOXUser.h"
-#import "BOXSharedLinkHeadersHelper.h"
-#import "BOXAppToAppApplication.h"
-#import "BOXAppToAppMessage.h"
-#import "BOXUserRequest.h"
-#import "BOXAppUserSession.h"
-#import "UIApplication+ExtensionSafeAdditions.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"

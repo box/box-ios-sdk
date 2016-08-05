@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXEvent.h"
-#import "BOXUser.h"
-#import "BOXFile.h"
-#import "BOXBookmark.h"
-#import "BOXFolder.h"
-#import "BOXComment.h"
-#import "BOXCollaboration.h"
-#import "BOXCollection.h"
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXCollaboration.h>
+#import <BoxContentSDK/BOXCollection.h>
+#import <BoxContentSDK/BOXComment.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXEvent.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @implementation BOXEvent
 

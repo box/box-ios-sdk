@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentClient+FileVersion.h"
+#import <BoxContentSDK/BOXFileVersionPromoteRequest.h>
+#import <BoxContentSDK/BOXFileVersionsRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+FileVersion.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXFileVersionsRequest.h"
-#import "BOXFileVersionPromoteRequest.h"
 
 @implementation BOXContentClient (FileVersion)
 

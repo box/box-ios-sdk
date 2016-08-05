@@ -6,14 +6,17 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentClient+SharedLink.h"
-#import "BOXSharedItemRequest.h"
-#import "BOXFolderShareRequest.h"
-#import "BOXFolderUnshareRequest.h"
-#import "BOXFileShareRequest.h"
-#import "BOXFileUnshareRequest.h"
-#import "BOXBookmarkShareRequest.h"
-#import "BOXBookmarkUnshareRequest.h"
+#import <BoxContentSDK/BOXBookmarkShareRequest.h>
+#import <BoxContentSDK/BOXBookmarkUnshareRequest.h>
+#import <BoxContentSDK/BOXFileShareRequest.h>
+#import <BoxContentSDK/BOXFileUnshareRequest.h>
+#import <BoxContentSDK/BOXFolderShareRequest.h>
+#import <BoxContentSDK/BOXFolderUnshareRequest.h>
+#import <BoxContentSDK/BOXSharedItemRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+SharedLink.h>
+
+#import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient (SharedLink)
 

@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BOXSharedLinkStorageProtocol.h"
+@import Foundation;
+
+#import <BoxContentSDK/BOXSharedLinkStorageProtocol.h>
 
 @class BOXContentClient;
 

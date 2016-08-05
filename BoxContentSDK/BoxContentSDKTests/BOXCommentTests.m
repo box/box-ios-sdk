@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXModelTestCase.h"
 #import "BOXComment.h"
-#import "BOXUser.h"
-#import "BOXItem.h"
 #import "BOXFile.h"
+#import "BOXItem.h"
+#import "BOXModelTestCase.h"
+#import "BOXUser.h"
 
 @interface BOXCommentsTests : BOXModelTestCase
 @end

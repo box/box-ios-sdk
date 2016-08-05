@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXFolderItemsRequest.h"
-#import "NSURL+BOXURLHelper.h"
-#import "BOXRequest_Private.h"
-
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
+#import "BOXFolderItemsRequest.h"
 #import "BOXItem.h"
+#import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFolderItemsRequestTests : BOXRequestTestCase
 @end

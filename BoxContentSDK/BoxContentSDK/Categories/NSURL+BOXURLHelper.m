@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXLog.h"
-#import "NSURL+BOXURLHelper.h"
+#import <BoxContentSDK/BOXLog.h>
+
+#import <BoxContentSDK/NSURL+BOXURLHelper.h>
 
 @implementation NSURL (BOXURLHelper)
 

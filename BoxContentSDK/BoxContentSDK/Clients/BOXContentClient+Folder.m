@@ -6,18 +6,20 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXFolderCollaborationsRequest.h>
+#import <BoxContentSDK/BOXFolderCopyRequest.h>
+#import <BoxContentSDK/BOXFolderCreateRequest.h>
+#import <BoxContentSDK/BOXFolderDeleteRequest.h>
+#import <BoxContentSDK/BOXFolderItemsRequest.h>
+#import <BoxContentSDK/BOXFolderPaginatedItemsRequest.h>
+#import <BoxContentSDK/BOXFolderRequest.h>
+#import <BoxContentSDK/BOXFolderUpdateRequest.h>
+#import <BoxContentSDK/BOXTrashedFolderRestoreRequest.h>
+#import <BoxContentSDK/BOXTrashedItemArrayRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Folder.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+Folder.h"
-#import "BOXFolderRequest.h"
-#import "BOXFolderUpdateRequest.h"
-#import "BOXFolderCreateRequest.h"
-#import "BOXFolderDeleteRequest.h"
-#import "BOXFolderCopyRequest.h"
-#import "BOXFolderCollaborationsRequest.h"
-#import "BOXFolderItemsRequest.h"
-#import "BOXFolderPaginatedItemsRequest.h"
-#import "BOXTrashedItemArrayRequest.h"
-#import "BOXTrashedFolderRestoreRequest.h"
 
 @implementation BOXContentClient (Folder)
 

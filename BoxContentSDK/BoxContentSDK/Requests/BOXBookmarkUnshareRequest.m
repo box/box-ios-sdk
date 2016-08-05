@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXBookmarkUnshareRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXBookmarkUnshareRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXBookmark.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXBookmarkUnshareRequest ()
 

@@ -6,7 +6,9 @@
 //  Copyright © 2015 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
+#import <BOXContentSDK/BOXRequest.h>
 
 @class BOXBookmarkRequest;
 @class BOXBookmarkCopyRequest;

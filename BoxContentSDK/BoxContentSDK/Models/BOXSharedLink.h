@@ -4,8 +4,8 @@
 //
 //
 
-#import "BOXModel.h"
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXModel.h>
 
 /**
  *  Represents a shared link.

@@ -7,7 +7,7 @@
 //
 
 #import <BoxContentSDK/BOXContentSDK.h>
-#import "BOXRequest.h"
+#import <BoxContentSDK/BOXRequest.h>
 
 /**
  * BOXMetdataRequest is a concrete implementation of BOXRequest that allows users to 

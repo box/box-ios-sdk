@@ -3,13 +3,13 @@
 //  BoxContentSDK
 //
 
-#import "BOXAPIDataOperation.h"
-#import "BOXAPIJSONOperation.h"
-#import "BOXAPIJSONPatchOperation.h"
-#import "BOXDispatchHelper.h"
-#import "BOXRequest.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXContentCacheClientProtocol.h"
+#import <BoxContentSDK/BOXAPIDataOperation.h>
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXAPIJSONPatchOperation.h>
+#import <BoxContentSDK/BOXContentCacheClientProtocol.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXDispatchHelper.h>
+#import <BoxContentSDK/BOXRequest.h>
 
 @class BOXAPIQueueManager;
 

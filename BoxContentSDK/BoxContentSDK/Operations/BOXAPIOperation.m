@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIOperation_Private.h"
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
 
-#import "BOXContentSDKErrors.h"
-#import "BOXLog.h"
-#import "NSString+BOXURLHelper.h"
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
+
+#import "BOXAPIOperation_Private.h"
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {

@@ -5,13 +5,12 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXAppToAppAnnotationBuilder.h"
-#import "BOXAppToAppAnnotationKeys.h"
-#import "BOXAppToAppApplication.h"
+#import <BoxContentSDK/BOXAppToAppAnnotationBuilder.h>
+#import <BoxContentSDK/BOXAppToAppAnnotationKeys.h>
+#import <BoxContentSDK/BOXAppToAppApplication.h>
+#import <BoxContentSDK/BOXLog.h>
 
-#import "BOXLog.h"
-#import "NSString+BoxURLHelper.h"
-
+#import <BoxContentSDK/NSString+BoxURLHelper.h>
 
 @interface BOXAppToAppAnnotationBuilder()
 

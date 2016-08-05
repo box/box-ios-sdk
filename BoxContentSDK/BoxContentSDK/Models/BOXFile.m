@@ -4,8 +4,8 @@
 //
 //
 
-#import "BOXFile.h"
-#import "BOXFileLock.h"
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFileLock.h>
 
 @implementation BOXFileMini
 

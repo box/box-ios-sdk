@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #define BOX_CONTENT_SDK_IDENTIFIER @"box-content-sdk"
 #define BOX_CONTENT_SDK_VERSION @"1.0.10"

@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXComment.h"
-#import "BOXUser.h"
-#import "BOXItem.h"
-#import "BOXFile.h"
-#import "BOXBookmark.h"
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXComment.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXItem.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @implementation BOXComment
 

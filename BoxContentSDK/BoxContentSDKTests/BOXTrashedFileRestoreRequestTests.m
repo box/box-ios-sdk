@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXFile.h"
 #import "BOXRequestTestCase.h"
 #import "BOXTrashedFileRestoreRequest.h"
-#import "BOXFile.h"
 
 @interface BOXTrashedFileRestoreRequestTests : BOXRequestTestCase
 

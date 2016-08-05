@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequestWithSharedLinkHeader.h"
+#import <BoxContentSDK/BOXRequestWithSharedLinkHeader.h>
 
 @interface BOXFolderUnshareRequest : BOXRequestWithSharedLinkHeader
 

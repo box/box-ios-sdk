@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
 #import "BOXEventsAdminLogsRequest.h"
+#import "BOXRequestTestCase.h"
+
 #import "NSURL+BOXURLHelper.h"
 
 @interface BOXEventAdminLogsRequestTests : BOXRequestTestCase

@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentClient+Metadata.h"
-#import "BOXMetadataRequest.h"
+#import <BoxContentSDK/BOXMetadataRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Metadata.h>
+
+#import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient (Metadata)
 

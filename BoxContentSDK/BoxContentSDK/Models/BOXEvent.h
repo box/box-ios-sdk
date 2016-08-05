@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXModel.h"
+#import <BoxContentSDK/BOXModel.h>
 
 @class BOXUser;
 

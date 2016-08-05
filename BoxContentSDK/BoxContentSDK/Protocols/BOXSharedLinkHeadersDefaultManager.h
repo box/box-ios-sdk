@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXSharedLinkStorageProtocol.h"
+#import <BoxContentSDK/BOXSharedLinkStorageProtocol.h>
 
 @interface BOXSharedLinkHeadersDefaultManager : NSObject <BOXSharedLinkStorageProtocol>
 

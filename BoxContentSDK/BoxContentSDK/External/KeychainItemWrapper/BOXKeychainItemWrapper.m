@@ -47,9 +47,10 @@
  
  */
 
-#import "BOXKeychainItemWrapper.h"
-#import <Security/Security.h>
-#import "BOXLog.h"
+@import Security;
+
+#import <BoxContentSDK/BOXKeychainItemWrapper.h>
+#import <BoxContentSDK/BOXLog.h>
 
 /*
  

@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXCollectionFavoritesRequest.h"
+#import <BoxContentSDK/BOXCollection.h>
+#import <BoxContentSDK/BOXCollectionFavoritesRequest.h>
 
-#import "BOXCollection.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXCollectionFavoritesRequest 
 

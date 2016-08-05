@@ -5,6 +5,7 @@
 //
 
 #import "BOXContentSDKTestCase.h"
+
 #import "NSString+BOXContentSDKAdditions.h"
 
 @interface NSStringBoxContentSDKAdditionsTests : BOXContentSDKTestCase

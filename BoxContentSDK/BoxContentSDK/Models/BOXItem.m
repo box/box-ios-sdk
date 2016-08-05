@@ -3,12 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXItem.h"
-
-#import "BOXFolder.h"
-#import "BOXUser.h"
-#import "BOXSharedLink.h"
-#import "BOXCollection.h"
+#import <BoxContentSDK/BOXCollection.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXItem.h>
+#import <BoxContentSDK/BOXSharedLink.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @implementation BOXItemMini
 

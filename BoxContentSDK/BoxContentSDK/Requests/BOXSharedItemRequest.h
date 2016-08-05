@@ -3,8 +3,9 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXSharedLinkHeadersHelper.h"
 
 @interface BOXSharedItemRequest : BOXRequest
 

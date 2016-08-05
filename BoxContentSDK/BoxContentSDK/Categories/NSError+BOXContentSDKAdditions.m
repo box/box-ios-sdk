@@ -5,8 +5,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "NSError+BOXContentSDKAdditions.h"
-#import "BOXContentSDKErrors.h"
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+
+#import <BoxContentSDK/NSError+BOXContentSDKAdditions.h>
 
 @implementation NSError (BOXContentSDKAdditions)
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
 #import "BOXFileDeleteRequest.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXFileDeleteRequestTests : BOXRequestTestCase
 @end

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFolder.h"
-#import "BOXFile.h"
-#import "BOXBookmark.h"
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFolder.h>
 
 @implementation BOXFolderMini
 

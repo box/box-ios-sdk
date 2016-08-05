@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFileVersion.h"
+#import <BoxContentSDK/BOXFileVersion.h>
 
 @implementation BOXFileVersion
 

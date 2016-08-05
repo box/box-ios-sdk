@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // Represents any app that supports Box app-to-app communication. This includes
 // the Box app itself, as well as all partner apps.

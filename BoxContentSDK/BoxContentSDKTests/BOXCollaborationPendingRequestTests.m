@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
+#import "BOXCollaboration.h"
 #import "BOXCollaborationPendingRequest.h"
 #import "BOXContentSDKConstants.h"
-#import "BOXCollaboration.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXCollaborationPendingRequestTests : BOXRequestTestCase
 

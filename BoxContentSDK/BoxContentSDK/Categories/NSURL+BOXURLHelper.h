@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  * Provides query string parsing extensions to `NSURL`.

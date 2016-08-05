@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIJSONOperation.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
 
 typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsigned long long bytesSent);
 

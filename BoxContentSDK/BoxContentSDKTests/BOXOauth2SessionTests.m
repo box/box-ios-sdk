@@ -7,8 +7,8 @@
 //
 
 #import "BOXContentSDKTestCase.h"
-#import "BOXOAuth2Session.h"
 #import "BOXKeychainItemWrapper.h"
+#import "BOXOAuth2Session.h"
 
 @interface BOXOAuth2Session ()
 - (void)didReceiveRevokeSessionNotification:(NSNotification *)notification;

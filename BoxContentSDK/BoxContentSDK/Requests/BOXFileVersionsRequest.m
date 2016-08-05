@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXFileVersionsRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXFileVersion.h>
+#import <BoxContentSDK/BOXFileVersionsRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXFileVersion.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXFileVersionsRequest ()
 

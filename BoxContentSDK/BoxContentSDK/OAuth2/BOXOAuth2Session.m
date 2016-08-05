@@ -6,18 +6,20 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXOAuth2Session.h"
-#import "BOXLog.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXAPIOAuth2ToJSONOperation.h"
-#import "NSString+BOXURLHelper.h"
-#import "NSURL+BOXURLHelper.h"
-#import "BOXKeychainItemWrapper.h"
-#import "BOXUserRequest.h"
-#import "BOXUser_Private.h"
-#import "NSDate+BOXContentSDKAdditions.h"
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXKeychainItemWrapper.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXOAuth2Session.h>
+#import <BoxContentSDK/BOXUserRequest.h>
+
+#import <BoxContentSDK/NSDate+BOXContentSDKAdditions.h>
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
+#import <BoxContentSDK/NSURL+BOXURLHelper.h>
+
 #import "BOXAbstractSession_Private.h"
+#import "BOXUser_Private.h"
 
 #define keychainRefreshTokenKey @"refresh_token"
 

@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentClient+Search.h"
+#import <BoxContentSDK/BOXSearchRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Search.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXSearchRequest.h"
 
 @implementation BOXContentClient (Search)
 

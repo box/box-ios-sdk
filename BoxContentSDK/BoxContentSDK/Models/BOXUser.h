@@ -4,8 +4,8 @@
 //
 //
 
-#import "BOXModel.h"
-#import "BOXEnterprise.h"
+#import <BoxContentSDK/BOXEnterprise.h>
+#import <BoxContentSDK/BOXModel.h>
 
 /**
  *  A compact representation of a User with only a few properties.

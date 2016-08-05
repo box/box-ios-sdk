@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXRequest_Private.h"
-#import "BOXFileUploadRequest.h"
+#import "ALAssetRepresentationMock.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
+#import "BOXFileUploadRequest.h"
 #import "BOXHashHelper.h"
-#import "ALAssetRepresentationMock.h"
 #import "BOXInputStreamTestHelper.h"
+#import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXAPIOperation ()
 - (void)sendLogoutNotification;

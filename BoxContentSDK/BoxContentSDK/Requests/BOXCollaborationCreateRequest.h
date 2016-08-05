@@ -3,8 +3,8 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest.h"
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXRequest.h>
 
 @interface BOXCollaborationCreateRequest : BOXRequest
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
 
 // API URLs
 NSString *const BOXAPIBaseURL = @"https://api.box.com";

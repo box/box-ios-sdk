@@ -7,7 +7,7 @@
 // Version: 8a4bc9723f18c1710fc218ee3c3311aa6c2e7e31
 // Last commit: 11/29/15
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 ///Which of ISO 8601's three date formats the formatter should produce.
 typedef NS_ENUM(NSUInteger, BOXISO8601DateFormat) {

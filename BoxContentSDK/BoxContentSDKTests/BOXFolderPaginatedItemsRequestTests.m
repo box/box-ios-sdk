@@ -3,13 +3,13 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequestTestCase.h"
-
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXFolderPaginatedItemsRequest.h"
+#import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
+
 #import "NSURL+BOXURLHelper.h"
 
 @interface BOXFolderPaginatedItemsRequestTests : BOXRequestTestCase

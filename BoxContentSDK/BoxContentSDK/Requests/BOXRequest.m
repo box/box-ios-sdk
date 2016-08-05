@@ -3,17 +3,19 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXAPIQueueManager.h>
+#import <BoxContentSDK/BOXAppUserSession.h>
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXISO8601DateFormatter.h>
+
+#import <BoxContentSDK/NSString+BOXContentSDKAdditions.h>
+#import <BoxContentSDK/UIDevice+BOXContentSDKAdditions.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXBookmark.h"
-#import "BOXAPIQueueManager.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXISO8601DateFormatter.h"
-#import "BOXAppUserSession.h"
-#import "NSString+BOXContentSDKAdditions.h"
-#import "UIDevice+BOXContentSDKAdditions.h"
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 

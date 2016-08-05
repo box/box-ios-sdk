@@ -3,16 +3,16 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXFolderPaginatedItemsRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXFolderPaginatedItemsRequest.h>
+#import <BoxContentSDK/BOXItem.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXItem.h"
-#import "BOXSharedLinkHeadersHelper.h"
 #import "BOXFolderPaginatedItemsRequest_Private.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXFolderPaginatedItemsRequest
 

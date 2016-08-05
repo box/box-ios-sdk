@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXFile.h"
+#import "BOXFileDownloadRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
-#import "BOXFileDownloadRequest.h"
-#import "BOXFile.h"
 
 @interface BOXAPIOperation ()
 - (void)sendLogoutNotification;

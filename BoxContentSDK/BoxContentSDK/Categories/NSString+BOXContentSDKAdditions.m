@@ -11,7 +11,7 @@ long long const BOX_MEGABYTE = BOX_KILOBYTE * 1024;
 long long const BOX_GIGABYTE = BOX_MEGABYTE * 1024;
 long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
-#import "NSString+BOXContentSDKAdditions.h"
+#import <BoxContentSDK/NSString+BOXContentSDKAdditions.h>
 
 @implementation NSString (BOXContentSDKAdditions)
 

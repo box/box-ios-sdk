@@ -6,11 +6,12 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import "BOXMetadataRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXUserRequest.h"
-#import "NSURL+BOXURLHelper.h"
-#import "BOXMetadataRequest.h"
+
 #import "BOXRequest+Metadata.h"
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXMetadataRequestTests : BOXRequestTestCase
 @end

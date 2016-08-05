@@ -4,7 +4,7 @@
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import "UIApplication+ExtensionSafeAdditions.h"
+#import <BoxContentSDK/UIApplication+ExtensionSafeAdditions.h>
 
 @implementation UIApplication (ExtensionSafeAdditions)
 

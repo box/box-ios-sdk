@@ -3,9 +3,9 @@
 //  BoxContentSDK
 //
 
-#import "BOXItemArrayRequest.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXItemArrayRequest.h>
+#import <BoxContentSDK/BOXLog.h>
 
 @implementation BOXItemArrayRequest
 

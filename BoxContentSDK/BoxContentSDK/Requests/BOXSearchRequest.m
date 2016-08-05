@@ -3,10 +3,11 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXMetadataKeyValue.h>
+#import <BoxContentSDK/BOXSearchRequest.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXSearchRequest.h"
-#import "BOXAPIJSONOperation.h"
-#import "BOXMetadataKeyValue.h"
 
 @interface BOXSearchRequest ()
 

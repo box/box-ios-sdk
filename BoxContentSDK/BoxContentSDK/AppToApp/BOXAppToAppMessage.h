@@ -5,8 +5,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BOXAppToAppFileMetadata.h"
+@import Foundation;
+
+#import <BoxContentSDK/BOXAppToAppFileMetadata.h>
 
 @class BOXAppToAppApplication;
 

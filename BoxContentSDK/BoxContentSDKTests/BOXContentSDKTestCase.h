@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import <OCMock/OCMock.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 
 @class BOXModel;
 @class BOXSharedLink;

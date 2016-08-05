@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXRequestTestCase.h"
-#import "BOXCommentAddRequest.h"
-#import "BOXFile.h"
-#import "BOXComment.h"
 #import "BOXBookmark.h"
+#import "BOXComment.h"
+#import "BOXCommentAddRequest.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXFile.h"
+#import "BOXRequestTestCase.h"
 
 @interface BOXCommentAddRequestTests : BOXRequestTestCase
 

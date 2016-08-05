@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadata.h"
+#import <BoxContentSDK/BOXMetadata.h>
 
 @implementation BOXMetadata
 

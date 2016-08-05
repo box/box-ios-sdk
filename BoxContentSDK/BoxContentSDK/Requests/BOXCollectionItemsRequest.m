@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXCollectionItemsRequest.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXCollectionItemsRequest.h"
-#import "BOXAPIJSONOperation.h"
 
 @interface BOXCollectionItemsRequest ()
 
