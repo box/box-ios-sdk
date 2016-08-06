@@ -30,6 +30,9 @@
 #import <BoxContentSDK/BOXContentClient+SharedLink.h>
 #import <BoxContentSDK/BOXContentClient+User.h>
 
+// Content Cache
+#import <BoxContentSDK/BOXContentCacheClientProtocol.h>
+
 // Session
 #import <BoxContentSDK/BOXAbstractSession.h>
 #import <BoxContentSDK/BOXAppUserSession.h>
@@ -38,6 +41,11 @@
 #import <BoxContentSDK/BOXParallelOAuth2Session.h>
 
 // AppToApp
+//#import <BoxContentSDK/BOXAppToAppAnnotationBuilder.h>
+//#import <BoxContentSDK/BOXAppToAppAnnotationKeys.h>
+//#import <BoxContentSDK/BOXAppToAppApplication.h>
+//#import <BoxContentSDK/BOXAppToAppFileMetadata.h>
+//#import <BoxContentSDK/BOXAppToAppMessage.h>
 
 // Requests
 #import <BoxContentSDK/BOXBookmarkCommentsRequest.h>
