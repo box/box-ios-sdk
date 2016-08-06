@@ -8,12 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BOXAPIAccessTokenDelegate.h"
-#import "BOXAppUserSession.h"
-#import "BOXContentClient_Private.h"
 #import "BOXContentSDKTestCase.h"
+#import "BOXContentClient_Private.h"
 #import "BOXKeychainItemWrapper.h"
-#import "BOXOAuth2Session.h"
 
 @interface BOXAppUserSessionTests : BOXContentSDKTestCase <BOXAPIAccessTokenDelegate>
 

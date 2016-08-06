@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXAPIJSONOperation.h"
 #import "BOXModelTestCase.h"
 
 @implementation BOXModelTestCase

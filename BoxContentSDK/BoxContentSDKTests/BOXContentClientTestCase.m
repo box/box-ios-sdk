@@ -6,17 +6,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXAPIAccessTokenDelegate.h"
-#import "BOXAppUserSession.h"
-#import "BOXContentClient.h"
 #import "BOXContentClientTestCase.h"
 #import "BOXContentClient_Private.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXFolderRequest.h"
 #import "BOXRequest_Private.h"
-
-#import "BOXContentClient+Authentication.h"
-#import "BOXContentClient+Folder.h"
 
 @interface BOXContentClientTestCase ()
 

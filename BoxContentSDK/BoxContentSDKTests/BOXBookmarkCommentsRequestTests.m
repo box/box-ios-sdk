@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmarkCommentsRequest.h"
-#import "BOXComment.h"
 #import "BOXContentCacheTestClient.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"

@@ -3,10 +3,6 @@
 //  BoxContentSDK
 //
 
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
 

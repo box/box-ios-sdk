@@ -6,11 +6,6 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXFolderItemsRequest.h"
-#import "BOXItem.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
 

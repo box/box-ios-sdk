@@ -7,10 +7,8 @@
 //
 
 #import "BOXContentCacheTestClient.h"
-#import "BOXFileCommentsRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
-#import "BoxComment.h"
 
 #import "NSURL+BOXURLHelper.h"
 

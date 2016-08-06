@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFileVersion.h"
 #import "BOXModelTestCase.h"
-#import "BOXUser.h"
 
 @interface BOXFileVersionTests : BOXModelTestCase
 @end

@@ -6,20 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmark.h"
-#import "BOXCollaboration.h"
-#import "BOXCollection.h"
-#import "BOXComment.h"
 #import "BOXContentSDKTestCase.h"
-#import "BOXEvent.h"
-#import "BOXFile.h"
-#import "BOXFileLock.h"
-#import "BOXFileVersion.h"
-#import "BOXFolder.h"
-#import "BOXItem.h"
-#import "BOXMetadata.h"
-#import "BOXSharedLink.h"
-#import "BOXUser.h"
 
 @implementation BOXContentSDKTestCase
 

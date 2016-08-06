@@ -7,11 +7,8 @@
 //
 
 #import "BOXContentClientTestCase.h"
-#import "BOXContentSDK.h"
 #import "BOXUser_Private.h"
 #import "BOXContentClient_Private.h"
-
-#import "BOXContentClient+Authentication.h"
 
 @interface BOXContentClient ()
 

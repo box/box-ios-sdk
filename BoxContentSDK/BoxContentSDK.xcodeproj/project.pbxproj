@@ -416,6 +416,16 @@
 		E1F9AE191A3B845A00D44858 /* bookmark_default_fields_shared.json in Resources */ = {isa = PBXBuildFile; fileRef = E1F9AE171A3B845A00D44858 /* bookmark_default_fields_shared.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0D5359A21D55985D00378D70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E470433316D41DC500FED29A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D6146B11D55571B00ABCACB;
+			remoteInfo = BoxContentSDK;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0D6146B21D55571B00ABCACB /* BoxContentSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BoxContentSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKErrors.m; sourceTree = "<group>"; };
@@ -1759,6 +1769,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0D5359A31D55985D00378D70 /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKTests;
 			productName = BoxSDKTests;
@@ -2099,6 +2110,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0D5359A31D55985D00378D70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D6146B11D55571B00ABCACB /* BoxContentSDK */;
+			targetProxy = 0D5359A21D55985D00378D70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0D6146B81D55571B00ABCACB /* Debug */ = {

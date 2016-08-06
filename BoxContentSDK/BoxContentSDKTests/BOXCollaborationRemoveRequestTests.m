@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollaborationRemoveRequest.h"
-#import "BOXContentSDKConstants.h"
 #import "BOXRequestTestCase.h"
 
 @interface BOXCollaborationRemoveRequestTests : BOXRequestTestCase

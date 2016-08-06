@@ -4,7 +4,6 @@
 //
 
 #import "BOXContentCacheTestClient.h"
-#import "BOXRequest.h"
 
 @implementation BOXContentCacheTestClient
 

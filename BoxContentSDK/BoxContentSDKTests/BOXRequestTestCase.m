@@ -6,12 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXBookmark.h"
 #import "BOXCannedURLProtocol.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXParallelAPIQueueManager.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
 

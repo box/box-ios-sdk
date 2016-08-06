@@ -6,10 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollaboration.h"
-#import "BOXFolder.h"
 #import "BOXModelTestCase.h"
-#import "BOXUser.h"
 
 @interface BOXCollaborationTests : BOXModelTestCase
 @end

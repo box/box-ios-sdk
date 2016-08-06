@@ -6,14 +6,10 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentClient.h"
-#import "BOXFileRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXSharedLinkHeadersDefaultManager.h"
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXUser.h"
-
-#import "BOXContentClient+File.h"
 
 @interface BOXSharedLinkHeadersHelper ()
 

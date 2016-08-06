@@ -6,9 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollaboration.h"
-#import "BOXCollaborationRequest.h"
-#import "BOXContentSDKConstants.h"
 #import "BOXRequestTestCase.h"
 
 #import "NSURL+BOXURLHelper.h"

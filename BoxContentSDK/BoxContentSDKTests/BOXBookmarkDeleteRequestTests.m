@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmarkDeleteRequest.h"
 #import "BOXRequestTestCase.h"
 
 @interface BOXBookmarkDeleteRequestTests : BOXRequestTestCase

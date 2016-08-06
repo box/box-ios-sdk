@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmark.h"
-#import "BOXBookmarkCopyRequest.h"
 #import "BOXRequestTestCase.h"
 
 @interface BOXBookmarkCopyRequestTests : BOXRequestTestCase

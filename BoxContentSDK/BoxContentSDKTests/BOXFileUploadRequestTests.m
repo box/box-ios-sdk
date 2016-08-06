@@ -7,9 +7,6 @@
 //
 
 #import "ALAssetRepresentationMock.h"
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXFile.h"
-#import "BOXFileUploadRequest.h"
 #import "BOXHashHelper.h"
 #import "BOXInputStreamTestHelper.h"
 #import "BOXRequestTestCase.h"

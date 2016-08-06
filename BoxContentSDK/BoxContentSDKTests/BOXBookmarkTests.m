@@ -3,10 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXBookmark.h"
-#import "BOXFolder.h"
 #import "BOXModelTestCase.h"
-#import "BOXUser.h"
 
 @interface BOXBookmarkTests : BOXModelTestCase
 @end

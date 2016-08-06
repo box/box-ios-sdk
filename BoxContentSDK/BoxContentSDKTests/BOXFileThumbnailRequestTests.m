@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFileThumbnailRequest.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
 

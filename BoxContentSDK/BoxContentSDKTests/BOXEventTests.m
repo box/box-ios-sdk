@@ -6,14 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmark.h"
-#import "BOXCollection.h"
-#import "BOXComment.h"
-#import "BOXEvent.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
 #import "BOXModelTestCase.h"
-#import "BOXUser.h"
 
 @interface BOXEventTests : BOXModelTestCase
 

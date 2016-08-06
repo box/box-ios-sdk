@@ -6,10 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFolder.h"
 #import "BOXRequestTestCase.h"
-#import "BOXSharedItemRequest.h"
-#import "BOXSharedLink.h"
 
 @interface BOXSharedItemRequestTests : BOXRequestTestCase
 @end

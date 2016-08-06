@@ -6,9 +6,6 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXCollaboration.h"
-#import "BOXCollaborationCreateRequest.h"
-#import "BOXFolder.h"
 #import "BOXRequestTestCase.h"
 
 @interface BOXCollaborationCreateRequestTests : BOXRequestTestCase

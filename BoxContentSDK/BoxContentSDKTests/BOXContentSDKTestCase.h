@@ -9,10 +9,7 @@
 #import <OCMock/OCMock.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-
-@class BOXModel;
-@class BOXSharedLink;
-@class BOXFileLock;
+#import <BoxContentSDK/BoxContentSDK.h>
 
 @interface BOXContentSDKTestCase : XCTestCase
 
