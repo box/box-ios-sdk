@@ -74,7 +74,7 @@
         [super performRefreshTokenGrant:expiredAccessToken
              newAccessTokenExpirationAt:accessTokenExpirationTimestamp
             newRefreshTokenExpirationAt:refreshTokenExpirationTimestamp
-                    withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
+                    withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
             if (expiredAccessToken.length > 0 && error != nil && ![self isInvalidGrantError:error]) {
                 // If there was an error, remove from 'expiredOAuth2Tokens' so that we can try again. For example, if there was a network
                 // error, then we would not want to block ourselves from trying to refresh the tokens again later.
@@ -84,6 +84,7 @@
             }
                         
             if (block) {
+                BOXAssert(!session || [session isKindOfClass:BOXOAuth2Session.class], @"Expecting a BOXOAuth2Session, got %@", session);
                 block(session, error);
             }
         }];

@@ -55,7 +55,7 @@
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
  * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  * @param updateTasks The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.
@@ -70,7 +70,7 @@
  *
  * @param fileID The ID of the desired file.
  * @param scope The scope of the templates desired for creating a metadata template instance.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  * @param updateTasks The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.

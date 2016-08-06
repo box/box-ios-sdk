@@ -55,7 +55,7 @@
  * **NOTE** tasks must only contain instances of @see BOXMetadataKeyValue.
  *
  * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  * @param tasks The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.
@@ -70,7 +70,7 @@
  *
  * @param fileID The ID of the desired file.
  * @param scope The scope of the templates desired for creating a metadata template instance.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  * @param tasks The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.

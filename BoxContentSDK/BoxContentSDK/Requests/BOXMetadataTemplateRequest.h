@@ -51,7 +51,7 @@
  * to retrieve the schema to a specific metadata template for a given scope.
  *
  * @param scope The scope to look for templates.
- * @param template The template for the desired schema.
+ * @param templateName The template for the desired schema.
  *
  * @return A BOXMetadataTemplateRequest that allows users to retrieve the schema to
  *         retrieve the schema to a specific metadata template for a given scope.

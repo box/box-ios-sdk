@@ -48,7 +48,7 @@
  *
  * @param fileID The ID of the desired file.
  * @param scope The scope of the templates desired for retrieving metadata.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  *
  * @return A BOXMetadataRequest that allows users to get metadata information on a given file.
  */
@@ -61,7 +61,7 @@
  * **NOTE** Scope is defaulted to @see BOXAPIScopeEnterprise in this initializer.
  *
  * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  *
  * @return A BOXMetadataRequest that allows users to get metadata information on a given file.
  */

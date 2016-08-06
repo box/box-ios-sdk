@@ -29,7 +29,7 @@
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  *
  * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -40,7 +40,7 @@
  *
  * @param fileID File ID.
  * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -61,7 +61,7 @@
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  *
  * @param fileID File ID.
- * @param template Template information that should be deleted.
+ * @param templateName Template information that should be deleted.
  *
  * @return A request that can be customized and then executed.
  */
@@ -72,7 +72,7 @@
  *
  * @param fileID File ID.
  * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -85,7 +85,7 @@
  * **NOTE** All objects in tasks must be of type @see BOXMetadataKeyValue.
  *
  * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -98,7 +98,7 @@
  *
  * @param fileID File ID.
  * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -111,7 +111,7 @@
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
  * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -124,7 +124,7 @@
  *
  * @param fileID File ID.
  * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -134,7 +134,7 @@
  * Generate a request to retrieve a metadata template schema within a scope.
  *
  * @param scope Scope to see which templates are available.
- * @param template Template whose schema will be returned.
+ * @param templateName Template whose schema will be returned.
  *
  * @return A request that can be customized and then executed.
  */
