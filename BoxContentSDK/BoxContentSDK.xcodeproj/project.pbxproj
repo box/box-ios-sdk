@@ -180,7 +180,7 @@
 		0D61476A1D55588800ABCACB /* BOXContentClient+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C514A61B2BC1600078565C /* BOXContentClient+Metadata.m */; };
 		0D61476B1D55588800ABCACB /* BOXHashHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E11035F51A200E6B00B46F6D /* BOXHashHelper.m */; };
 		0D61476C1D55588800ABCACB /* BOXKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3A1D81AB112A5002E3FDA /* BOXKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0D61476D1D55588800ABCACB /* BOXISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD983172CE2C50052AD11 /* BOXISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0D61476D1D55588800ABCACB /* BOXISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD983172CE2C50052AD11 /* BOXISO8601DateFormatter.m */; };
 		0D61476E1D55588800ABCACB /* BOXEnterprise.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E6B1A37E731008D4F5D /* BOXEnterprise.m */; };
 		0D61476F1D55588800ABCACB /* BOXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E281A37E70B008D4F5D /* BOXModel.m */; };
 		0D6147701D55588800ABCACB /* BOXBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E2A1A37E70B008D4F5D /* BOXBookmark.m */; };

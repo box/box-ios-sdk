@@ -46,17 +46,9 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
     NSDateFormatter *unparsingFormatter;
 
     NSCalendar *parsingCalendar, *unparsingCalendar;
-
-    NSTimeZone *defaultTimeZone;
-    BOXISO8601DateFormat format;
-    unichar timeSeparator;
-    unichar timeZoneSeparator;
-    BOOL includeTime;
-    BOOL useMillisecondPrecision;
-    BOOL parsesStrictly;
 }
 
-@property(nonatomic, retain) NSTimeZone *defaultTimeZone;
+@property (nonatomic, strong) NSTimeZone *defaultTimeZone;
 
 #pragma mark Parsing
 /*!
@@ -85,7 +77,7 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
  *
  * This property does not affect unparsing. The formatter always creates valid ISO 8601 strings. Any invalid string (loosely, any string that would require turning this property off to re-parse) should be considered a bug; please report it.
  */
-@property BOOL parsesStrictly;
+@property (nonatomic) BOOL parsesStrictly;
 
 /*!
  *	@brief	Parse a string into individual date components.
@@ -163,7 +155,7 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
  *
  *	@details	See ISO8601DateFormat for possible values.
  */
-@property BOXISO8601DateFormat format;
+@property (nonatomic) BOXISO8601DateFormat format;
 /*!
  *	@brief	Whether strings should include time of day.
  *
@@ -172,14 +164,14 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
  *	@sa	timeSeparator
  *	@sa	timeZoneSeparator
  */
-@property BOOL includeTime;
+@property (nonatomic) BOOL includeTime;
 /*!
  *	@brief	Whether strings should include millisecond precision time.
  *
  *	@details	If `YES`, strings include three millisecond digits. Only has an effect if `includeTime` is `YES`
  *
  */
-@property BOOL useMillisecondPrecision;
+@property (nonatomic) BOOL useMillisecondPrecision;
 /*!
  *	@brief	The character to use to separate components of the time of day.
  *
@@ -192,7 +184,7 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
  *	@sa	includeTime
  *	@sa	timeZoneSeparator
  */
-@property unichar timeSeparator;
+@property (nonatomic) unichar timeSeparator;
 /*!
  *	@brief	The character to use to separate the hour and minute in a time zone specification.
  *
@@ -205,7 +197,7 @@ extern const unichar BOXISO8601DefaultTimeSeparatorCharacter;
  *	@sa	includeTime
  *	@sa	timeSeparator
  */
-@property unichar timeZoneSeparator;
+@property (nonatomic) unichar timeZoneSeparator;
 
 /*!
  *	@brief	Produce a string that represents a date in UTC.
