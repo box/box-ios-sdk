@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+@import BoxContentSDK;
+
 #import "BOXFolderCollaborationsRequest.h"
 #import "BOXRequestTestCase.h"
 

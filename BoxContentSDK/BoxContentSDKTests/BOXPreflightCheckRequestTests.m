@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import "BOXContentSDKConstants.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXPreflightCheckRequest.h"
 #import "BOXRequestTestCase.h"

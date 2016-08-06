@@ -12,6 +12,7 @@
 #import "BOXContentCacheTestClient.h"
 #import "BOXFile.h"
 #import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXCommentAddRequestTests : BOXRequestTestCase
 

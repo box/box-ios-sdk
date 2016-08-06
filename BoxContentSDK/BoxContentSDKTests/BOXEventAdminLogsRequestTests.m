@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXContentSDKConstants.h"
 #import "BOXEventsAdminLogsRequest.h"
 #import "BOXRequestTestCase.h"
 
