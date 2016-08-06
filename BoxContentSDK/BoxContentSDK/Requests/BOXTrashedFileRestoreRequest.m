@@ -6,6 +6,8 @@
 #import <BoxContentSDK/BOXFile.h>
 #import <BoxContentSDK/BOXTrashedFileRestoreRequest.h>
 
+#import "BOXRequest_Private.h"
+
 @interface BOXTrashedFileRestoreRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *fileID;

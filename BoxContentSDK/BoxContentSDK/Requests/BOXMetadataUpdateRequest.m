@@ -11,6 +11,8 @@
 
 #import <BoxContentSDK/BOXRequest+Metadata.h>
 
+#import "BOXRequest_Private.h"
+
 @interface BOXMetadataUpdateRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *fileID;

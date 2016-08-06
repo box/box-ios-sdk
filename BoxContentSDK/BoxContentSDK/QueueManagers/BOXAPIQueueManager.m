@@ -10,6 +10,7 @@
 #import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
 #import <BoxContentSDK/BOXAPIOperation.h>
 #import <BoxContentSDK/BOXAPIQueueManager.h>
+#import <BoxContentSDK/BOXAppUserSession.h>
 #import <BoxContentSDK/BOXLog.h>
 
 /**

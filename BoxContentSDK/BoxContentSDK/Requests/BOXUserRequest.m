@@ -8,6 +8,8 @@
 #import <BoxContentSDK/BOXUser.h>
 #import <BoxContentSDK/BOXUserRequest.h>
 
+#import "BOXRequest_Private.h"
+
 @implementation BOXUserRequest
 
 - (BOXAPIOperation *)createOperation

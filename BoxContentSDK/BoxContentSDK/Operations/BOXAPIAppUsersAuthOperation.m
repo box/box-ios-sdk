@@ -7,6 +7,8 @@
 //
 
 #import <BoxContentSDK/BOXAPIAppUsersAuthOperation.h>
+#import <BoxContentSDK/BoxContentSDKErrors.h>
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
 
 #import "BOXAPIOperation_Private.h"
 

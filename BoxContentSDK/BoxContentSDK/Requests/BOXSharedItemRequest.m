@@ -7,6 +7,8 @@
 #import <BoxContentSDK/BOXSharedItemRequest.h>
 #import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
 
+#import "BOXRequest_Private.h"
+
 @interface BOXSharedItemRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *sharedLinkURLString;

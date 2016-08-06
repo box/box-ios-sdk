@@ -6,6 +6,8 @@
 #import <BoxContentSDK/BOXFolder.h>
 #import <BoxContentSDK/BOXTrashedFolderRestoreRequest.h>
 
+#import "BOXRequest_Private.h"
+
 @implementation BOXTrashedFolderRestoreRequest
 
 - (instancetype)initWithFolderID:(NSString *)folderID
