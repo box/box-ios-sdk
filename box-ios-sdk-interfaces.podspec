@@ -1,6 +1,5 @@
 Pod::Spec.new do |s|
 
-
 # Root specification
 
 s.name                  = "box-ios-sdk-interfaces"
@@ -13,10 +12,9 @@ s.source                = { :git => "https://github.com/box/box-ios-sdk.git", :t
 
 # Platform
 
-s.ios.deployment_target = "7.0"
+s.ios.deployment_target = "8.0"
 
 # File patterns
-
 
 s.ios.source_files        = "BoxContentSDK/BoxContentSDK/*.{h}", "BoxContentSDK/BoxContentSDK/**/*.{h}"
 s.ios.exclude_files       = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",

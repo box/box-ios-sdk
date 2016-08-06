@@ -820,9 +820,6 @@
 		E1F9AE161A3B845A00D44858 /* bookmark_default_fields_not_shared.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bookmark_default_fields_not_shared.json; sourceTree = "<group>"; };
 		E1F9AE171A3B845A00D44858 /* bookmark_default_fields_shared.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bookmark_default_fields_shared.json; sourceTree = "<group>"; };
 		E4081D8E1758728900F6D6AA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		E4081D921758728900F6D6AA /* BoxContentSDKResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoxContentSDKResources-Info.plist"; sourceTree = "<group>"; };
-		E4081D941758728900F6D6AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E4081D961758728900F6D6AA /* BoxContentSDKResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BoxContentSDKResources-Prefix.pch"; sourceTree = "<group>"; };
 		E4081E4D175EF1B900F6D6AA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E40C7A48174BFDB500477760 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E44A95B016E21C5100356ADA /* BOXContentSDKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKConstants.m; sourceTree = "<group>"; };
@@ -1358,30 +1355,11 @@
 			path = AppToApp;
 			sourceTree = "<group>";
 		};
-		E4081D901758728900F6D6AA /* BoxContentSDKResources */ = {
-			isa = PBXGroup;
-			children = (
-				E4081D911758728900F6D6AA /* Supporting Files */,
-			);
-			path = BoxContentSDKResources;
-			sourceTree = "<group>";
-		};
-		E4081D911758728900F6D6AA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E4081D921758728900F6D6AA /* BoxContentSDKResources-Info.plist */,
-				E4081D931758728900F6D6AA /* InfoPlist.strings */,
-				E4081D961758728900F6D6AA /* BoxContentSDKResources-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		E470433216D41DC500FED29A = {
 			isa = PBXGroup;
 			children = (
 				E470434016D41DC500FED29A /* BoxContentSDK */,
 				15605D861A20132200C5EE5A /* BoxContentSDKTests */,
-				E4081D901758728900F6D6AA /* BoxContentSDKResources */,
 				E470433D16D41DC500FED29A /* Frameworks */,
 				E470433C16D41DC500FED29A /* Products */,
 			);
@@ -2121,17 +2099,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		E4081D931758728900F6D6AA /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4081D941758728900F6D6AA /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0D6146B81D55571B00ABCACB /* Debug */ = {

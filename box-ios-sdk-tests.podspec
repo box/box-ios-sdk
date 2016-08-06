@@ -1,4 +1,3 @@
-
 Pod::Spec.new do |s|
 
   s.name         = "box-ios-sdk-tests"
@@ -8,14 +7,14 @@ Pod::Spec.new do |s|
   s.author       = "Box"
   s.homepage     = "https://github.com/box/box-ios-sdk"
   s.source       = { :git => "https://github.com/box/box-ios-sdk.git", :tag => "v#{s.version}" }
-  
+
   # Platform
 
-  s.ios.deployment_target = "7.0"
+  s.ios.deployment_target = "8.0"
 
   # File patterns
 
-  s.source_files = "BoxContentSDK/BoxContentSDKTests/BOXCannedResponse.{h,m}", 
+  s.source_files = "BoxContentSDK/BoxContentSDKTests/BOXCannedResponse.{h,m}",
   "BoxContentSDK/BoxContentSDKTests/BOXCannedURLProtocol.{h,m}",
   "BoxContentSDK/BoxContentSDKTests/BOXInputStreamTestHelper.{h,m}",
   "BoxContentSDK/BoxContentSDKTests/BOXModelTestCase.{h,m}",
