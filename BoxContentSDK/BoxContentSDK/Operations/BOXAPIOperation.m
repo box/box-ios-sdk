@@ -83,9 +83,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (instancetype)init
 {
-    self = [self initWithURL:nil HTTPMethod:nil body:nil queryParams:nil session:nil];
-    BOXLog(@"Initialize operations with initWithURL:HTTPMethod:body:queryParams:session:. %@ cannot make an API call", self);
-    return self;
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"-[BOXAPIOperation init] not implemented"
+                                 userInfo:nil];
 }
 
 - (instancetype)initWithSession:(BOXAbstractSession *)session

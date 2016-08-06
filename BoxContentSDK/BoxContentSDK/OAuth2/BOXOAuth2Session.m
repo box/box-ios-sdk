@@ -42,7 +42,8 @@
                   APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
 {
-    if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
+    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager];
+    if (self) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
@@ -73,7 +74,7 @@
 
     NSString *authenticationRedirectURIScheme = [[NSURL URLWithString:self.redirectURIString] scheme];
     if ([[URL scheme] isEqualToString:authenticationRedirectURIScheme]) {
-        if ((_nonce || serverNonce) && [serverNonce isEqualToString:_nonce] == NO) {
+        if ((_nonce || serverNonce) && [serverNonce isEqual:_nonce] == NO) {
             NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                         code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
                                                     userInfo:nil];
