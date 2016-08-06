@@ -39,27 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3D64E2D01AB900EC00659466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E470433B16D41DC500FED29A;
-			remoteInfo = BoxContentSDK;
-		};
-		3D64E2D21AB900EC00659466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15605D851A20132200C5EE5A;
-			remoteInfo = BoxContentSDKTests;
-		};
-		3D9780FA1ABB900500DB1A2F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E470433A16D41DC500FED29A;
-			remoteInfo = BoxContentSDK;
-		};
 		C5745C3E1A5AF6CC00824FFA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
@@ -71,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		0A9C7DE1CFABC1AEDAD5EFAB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoxContentSDK.xcodeproj; path = ../BoxContentSDK/BoxContentSDK.xcodeproj; sourceTree = "<group>"; };
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
@@ -145,15 +123,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D64E2C91AB900EC00659466 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */,
-				3D64E2D31AB900EC00659466 /* BoxContentSDKTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		79B88AA4A04D2B7D56779877 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +176,6 @@
 		C5745C1B1A5AF6CC00824FFA = {
 			isa = PBXGroup;
 			children = (
-				3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				C5745C251A5AF6CC00824FFA /* Products */,
@@ -298,7 +266,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3D9780FB1ABB900500DB1A2F /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKSampleApp;
 			productName = BoxSDKSampleApp;
@@ -352,12 +319,6 @@
 			mainGroup = C5745C1B1A5AF6CC00824FFA;
 			productRefGroup = C5745C251A5AF6CC00824FFA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3D64E2C91AB900EC00659466 /* Products */;
-					ProjectRef = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
@@ -365,23 +326,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBoxContentSDK.a;
-			remoteRef = 3D64E2D01AB900EC00659466 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3D64E2D31AB900EC00659466 /* BoxContentSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BoxContentSDKTests.xctest;
-			remoteRef = 3D64E2D21AB900EC00659466 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C5745C221A5AF6CC00824FFA /* Resources */ = {
@@ -489,11 +433,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3D9780FB1ABB900500DB1A2F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BoxContentSDK;
-			targetProxy = 3D9780FA1ABB900500DB1A2F /* PBXContainerItemProxy */;
-		};
 		C5745C3F1A5AF6CC00824FFA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */;
@@ -607,7 +546,6 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
@@ -628,7 +566,6 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
