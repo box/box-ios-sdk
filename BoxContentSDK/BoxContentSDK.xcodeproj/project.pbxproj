@@ -1748,6 +1748,7 @@
 				0D6146AE1D55571B00ABCACB /* Frameworks */,
 				0D6146AF1D55571B00ABCACB /* Headers */,
 				0D6146B01D55571B00ABCACB /* Resources */,
+				0DD396921D58EC9B005763A3 /* Copy product to Carthage/Build/iOS */,
 			);
 			buildRules = (
 			);
@@ -1880,6 +1881,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DD396921D58EC9B005763A3 /* Copy product to Carthage/Build/iOS */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy product to Carthage/Build/iOS";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CARTHAGE_BUILD_DIR=\"$SRCROOT/../Carthage/Build\"\n\n# Only copy if the build folder is a symlink\nif [ -L \"$CARTHAGE_BUILD_DIR\" ]; then\n  rsync --delete -av \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}\"* \"$CARTHAGE_BUILD_DIR/iOS\"\nfi";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D6146AD1D55571B00ABCACB /* Sources */ = {
