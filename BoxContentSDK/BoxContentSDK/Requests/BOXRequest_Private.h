@@ -8,9 +8,8 @@
 #import <BoxContentSDK/BOXAPIJSONPatchOperation.h>
 #import <BoxContentSDK/BOXContentCacheClientProtocol.h>
 #import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXDispatchHelper.h>
 #import <BoxContentSDK/BOXRequest.h>
-
-#import "BOXDispatchHelper.h"
 
 @class BOXAPIQueueManager;
 

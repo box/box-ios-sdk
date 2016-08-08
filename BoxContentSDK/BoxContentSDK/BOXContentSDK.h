@@ -146,3 +146,5 @@
 #import <BoxContentSDK/BOXSharedLink.h>
 #import <BoxContentSDK/BOXUser.h>
 
+// Helpers
+#import <BoxContentSDK/BOXDispatchHelper.h>
