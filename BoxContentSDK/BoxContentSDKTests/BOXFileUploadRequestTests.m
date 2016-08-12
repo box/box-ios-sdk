@@ -15,10 +15,6 @@
 #import "ALAssetRepresentationMock.h"
 #import "BOXInputStreamTestHelper.h"
 
-@interface BOXAPIOperation ()
-- (void)sendLogoutNotification;
-@end
-
 @interface BOXAPIMultipartToJSONOperation ()
 // An array of BOXAPIMultipartPiece. In our tests, we want to inspect these.
 @property (nonatomic, readwrite, strong) NSMutableArray *formPieces;
@@ -787,37 +783,6 @@
     }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-}
-
-- (void)test_that_invalid_token_401_error_does_not_trigger_logout_notification
-{
-    NSString *fileNameOnServer = @"tempFile.txt";
-    NSDate *contentCreatedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-100];
-    NSDate *contentModifiedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-200];
-    NSString *uploadData = @"hello";
-    NSString *targetFolderID = @"123";
-    
-    // Canned response json.
-    NSData *cannedResponseData = [self cannedResponseDataWithName:@"invalid_token"];
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
-    
-    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithName:fileNameOnServer targetFolderID:targetFolderID data:[uploadData dataUsingEncoding:NSUTF8StringEncoding]];
-    request.fileName = fileNameOnServer;
-    request.contentCreatedAt = contentCreatedAtDateOnServer;
-    request.contentModifiedAt = contentModifiedAtDateOnServer;
-    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    
-    id operationMock = [OCMockObject partialMockForObject:request.operation];
-    [[operationMock reject] sendLogoutNotification];
-
-    // We have to delay completion of test until request is finished or it can interfere with other tests.
-    XCTestExpectation *requestExpectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
-        [operationMock verify];
-        [requestExpectation fulfill];
-    }];
-    
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
