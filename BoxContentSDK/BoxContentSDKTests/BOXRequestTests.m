@@ -46,10 +46,6 @@
 
 @end
 
-@interface BOXAPIOperation ()
-- (void)sendLogoutNotification;
-@end
-
 @interface BOXRequestTests : BOXRequestTestCase
 @end
 
@@ -183,29 +179,6 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-}
-
-- (void)test_that_invalid_token_401_error_does_not_trigger_logout_notification
-{
-    BOXRequest *request = [[BOXRequest alloc] init];
-    
-    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"invalid_token"];
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:cannedResponseData];
-    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    
-    BOXAPIOperation *operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
-    id operationMock = [OCMockObject partialMockForObject:operation];
-    request.operation = operation;
-    
-    [[operationMock reject] sendLogoutNotification];
-    
-    XCTestExpectation *requestExpectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithCompletion:^{
-        [operationMock verify];
-        [requestExpectation fulfill];
-    }];
-    
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
