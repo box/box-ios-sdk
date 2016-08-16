@@ -37,7 +37,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     if (self.requestAllItemFields) {
-        parameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterString];
+        parameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     }
         
     if (self.range.length > 0) {

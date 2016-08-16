@@ -167,6 +167,7 @@
     paginatedRequest.queueManager = self.queueManager;
     paginatedRequest.sharedLinkHeadersHelper = self.sharedLinkHeadersHelper;
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
+    paginatedRequest.fieldsToExclude = self.fieldsToExclude;
     paginatedRequest.userAgentPrefix = self.userAgentPrefix;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }
