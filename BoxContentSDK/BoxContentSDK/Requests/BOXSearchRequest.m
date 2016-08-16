@@ -68,7 +68,7 @@
     queryParameters[queryKey] = self.query;
 
     if (self.requestAllItemFields) {
-        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterString];
+        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     }
     
     if (self.fileExtensions) {
