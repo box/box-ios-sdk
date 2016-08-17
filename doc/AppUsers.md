@@ -8,7 +8,16 @@ retrieve an account's access token. Additionally, BOXContentClient instances usi
 should have its delegate set.
 
 ```objectivec
-@implementation BOXClass <BOXAPIAccessTokenDelegate>
+@implementation MyClass <BOXAPIAccessTokenDelegate>
+
+- (instancetype)init
+{
+  if (self = [super init]) {
+    BOXContentClient *client = [BOXContentClient defaultClient];
+    [client setAccessTokenDelegate:self];
+  }
+  return self;
+}
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate, NSError *))completion
 {
@@ -19,7 +28,6 @@ should have its delegate set.
 - (void)buttonPressed:(UIButton *)button
 {
   BOXContentClient *client = [BOXContentClient defaultClient];
-  [client setAccessTokenDelegate: self]; // Don't forget to set yourself as the delegate
   [client autheticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
     if (error) {
       //Do stuff in case of error.
