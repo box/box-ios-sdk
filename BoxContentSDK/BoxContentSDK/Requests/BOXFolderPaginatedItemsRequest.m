@@ -37,7 +37,7 @@
     NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
 
     if (self.requestAllItemFields) {
-        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterString];
+        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     }
 
     if (self.limit != 0) {
