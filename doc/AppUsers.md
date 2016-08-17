@@ -12,8 +12,10 @@ should have its delegate set.
 
 - (void)init
 {
-  BOXContentClient *client = [BOXContentClient defaultClient];
-  [client setAccessTokenDelegate:self];
+  if (self = [super init]) {
+    BOXContentClient *client = [BOXContentClient defaultClient];
+    [client setAccessTokenDelegate:self];
+  }
 }
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate, NSError *))completion
@@ -24,6 +26,7 @@ should have its delegate set.
 
 - (void)buttonPressed:(UIButton *)button
 {
+  BOXContentClient *client = [BOXContentClient defaultClient];
   [client autheticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
     if (error) {
       //Do stuff in case of error.
