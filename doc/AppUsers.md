@@ -10,12 +10,13 @@ should have its delegate set.
 ```objectivec
 @implementation MyClass <BOXAPIAccessTokenDelegate>
 
-- (void)init
+- (instancetype)init
 {
   if (self = [super init]) {
     BOXContentClient *client = [BOXContentClient defaultClient];
     [client setAccessTokenDelegate:self];
   }
+  return self;
 }
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate, NSError *))completion
