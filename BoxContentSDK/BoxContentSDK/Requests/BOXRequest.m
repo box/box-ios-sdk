@@ -345,6 +345,17 @@
     return [[set array] componentsJoinedByString:@","];
 }
 
+- (NSString *)fullItemFieldsParameterStringExcludingFields:(NSArray *)excludedFields
+{
+    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSet];
+    [set addObjectsFromArray:[self fullFolderFieldsArray]];
+    [set addObjectsFromArray:[self fullFileFieldsArray]];
+    [set addObjectsFromArray:[self fullBookmarkFieldsArray]];
+
+    [set removeObjectsInArray:excludedFields];
+    return [[set array] componentsJoinedByString:@","];
+}
+
 - (NSString *)fullCommentFieldsParameterString
 {
     NSArray *array = @[BOXAPIObjectKeyMessage,

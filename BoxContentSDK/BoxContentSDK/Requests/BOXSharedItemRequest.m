@@ -35,8 +35,9 @@
                                  subID:nil];
 
     NSDictionary *queryParameters = nil;
+
     if (self.requestAllItemFields) {
-        queryParameters = @{BOXAPIParameterKeyFields : [self fullItemFieldsParameterString]};
+        queryParameters = @{BOXAPIParameterKeyFields :[self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude]};
     }
     
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL

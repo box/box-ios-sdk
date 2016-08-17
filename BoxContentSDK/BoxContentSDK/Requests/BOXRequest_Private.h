@@ -55,6 +55,7 @@
 - (NSString *)fullFolderFieldsParameterString;
 - (NSString *)fullBookmarkFieldsParameterString;
 - (NSString *)fullItemFieldsParameterString;
+- (NSString *)fullItemFieldsParameterStringExcludingFields:(NSArray *)excludedFields;
 - (NSString *)fullCommentFieldsParameterString;
 - (NSString *)fullUserFieldsParameterString;
 - (NSString *)fullCollaborationFieldsParameterString;
