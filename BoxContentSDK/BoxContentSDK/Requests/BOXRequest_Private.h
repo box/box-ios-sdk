@@ -10,6 +10,8 @@
 #import "BOXRequest.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXContentCacheClientProtocol.h"
+#import "BOXStreamOperation.h"
+#import "BOXAPIHeadOperation.h"
 
 @class BOXAPIQueueManager;
 
@@ -48,6 +50,18 @@
                                bodyDictionary:(NSDictionary *)bodyDictionary
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock;
+
+- (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
+                                  HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                successBlock:(BOXDownloadSuccessBlock)successBlock
+                                failureBlock:(BOXDownloadFailureBlock)failureBlock;
+
+- (BOXAPIHeadOperation *)headOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                        queryStringParameters:(NSDictionary *)queryParameters
+                               bodyDictionary:(NSDictionary *)bodyDictionary
+                                 successBlock:(BOXAPIHeaderSuccessBlock)successBlock
+                                 failureBlock:(BOXAPIHeaderFailureBlock)failureBlock;
 
 - (BOXAPIOperation *)createOperation;
 
