@@ -7,7 +7,7 @@
 //
 
 #import "BOXRepresentation.h"
-#import "NSJSONSerialization+BOXAdditions.h"
+#import "NSJSONSerialization+BOXContentSDKAdditions.h"
 #import "BOXContentSDKConstants.h"
 
 @implementation BOXRepresentation
