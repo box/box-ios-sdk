@@ -100,11 +100,18 @@
             __iOSVersion = BOXiOSVersion8;
         } else if (majorVersion == 9) {
             __iOSVersion = BOXiOSVersion9;
-        } else if (majorVersion > 9) {
+        } else if (majorVersion == 10) {
+            __iOSVersion = BOXiOSVersion10;
+        } else if (majorVersion > 10) {
             __iOSVersion = BOXiOSVersionLatest;
         }
     }
     return __iOSVersion;
+}
+
++ (BOOL)isRunningiOS10xOrLater
+{
+    return [UIDevice iOSVersion] >= BOXiOSVersion10;
 }
 
 - (BOOL)isIpad
