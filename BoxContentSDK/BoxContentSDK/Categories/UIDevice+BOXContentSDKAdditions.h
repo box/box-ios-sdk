@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, BOXiOSVersion) {
     BOXiOSVersion7_1,
     BOXiOSVersion8,
     BOXiOSVersion9,
+    BOXiOSVersion10,
     BOXiOSVersionLatest
 };
 
@@ -33,5 +34,6 @@ typedef NS_ENUM(NSUInteger, BOXiOSVersion) {
 - (NSString *)modelID;
 - (NSString *)deviceTypeString;
 - (NSString *)detailedModelName;
++ (BOOL)isRunningiOS10xOrLater;
 
 @end
