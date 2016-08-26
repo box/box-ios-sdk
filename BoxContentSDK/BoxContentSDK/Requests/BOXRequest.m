@@ -493,7 +493,7 @@
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:itemsDicts.count];
     
     for (NSDictionary *dict in itemsDicts) {
-        [items addObject:[BOXRequest itemWithJSON:dict]];
+        [items addObject:[self itemWithJSON:dict]];
     }
     
     return items;

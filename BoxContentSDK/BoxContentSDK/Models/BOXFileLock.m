@@ -13,7 +13,7 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
 {
-    if (self = [super init]) {
+    if (self = [super initWithJSON:JSONResponse]) {
         NSString *createdDate = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCreatedAt
                                                                 inDictionary:JSONResponse
                                                              hasExpectedType:[NSString class]
