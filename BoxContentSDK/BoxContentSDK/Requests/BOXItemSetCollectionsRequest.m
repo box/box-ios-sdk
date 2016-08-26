@@ -90,7 +90,7 @@
     
     collectionAddItemOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
 
-            BOXItem *item = [self itemWithJSON:JSONDictionary];
+            BOXItem *item = [[self class] itemWithJSON:JSONDictionary];
 
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
                 [self.cacheClient cacheItemSetCollectionsRequest:self
@@ -117,25 +117,6 @@
             }
     };
     [self performRequest];
-}
-
-- (BOXItem *)itemWithJSON:(NSDictionary *)JSONDictionary
-{
-    BOXItem *item = nil;
-    
-    NSString *itemType = [JSONDictionary objectForKey:BOXAPIObjectKeyType];
-
-    if ([itemType isEqualToString:BOXAPIItemTypeFile]) {
-        item = [[BOXFile alloc] initWithJSON:JSONDictionary];
-    } else if ([itemType isEqualToString:BOXAPIItemTypeFolder]) {
-        item = [[BOXFolder alloc] initWithJSON:JSONDictionary];
-    } else if ([itemType isEqualToString:BOXAPIItemTypeWebLink]) {
-        item = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
-    } else {
-        item = [[BOXItem alloc] initWithJSON:JSONDictionary];
-    }
-    
-    return item;
 }
 
 @end
