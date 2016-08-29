@@ -62,7 +62,8 @@
         NSString *link = [self.delegate sharedLinkForItemWithID:folder.modelID itemType:folder.type userID:self.userID];
         // We found a link in one of the ancestors of the file, we need to store this file that now would need the headers of its ancestors in any API request
         if (link) {
-            [self.delegate storeSharedLink:link forItemWithIDKey:itemID itemTypeKey:itemType password:nil userIDKey:self.userID];
+            NSString *password = [self.delegate passwordForSharedItemWithID:folder.modelID itemType:folder.type userID:self.userID];
+            [self.delegate storeSharedLink:link forItemWithIDKey:itemID itemTypeKey:itemType password:password userIDKey:self.userID];
             break;
         }
     }
