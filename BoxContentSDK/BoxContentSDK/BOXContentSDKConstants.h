@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define BOX_CONTENT_SDK_IDENTIFIER @"box-content-sdk"
-#define BOX_CONTENT_SDK_VERSION @"1.0.10"
+#define BOX_CONTENT_SDK_VERSION @"1.0.13"
 
 // API URLs
 extern NSString *const BOXAPIBaseURL;
