@@ -237,10 +237,12 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)didReceiveUserWasLoggedOutNotification:(NSNotification *)notification
 {
-    NSDictionary *userInfo = (NSDictionary *)notification.object;
-    NSString *userID = [userInfo objectForKey:BOXUserIDKey];
-    if ([userID isEqualToString:self.user.modelID]) {
-        [self logOut];
+    if ([notification.object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *userInfo = (NSDictionary *)notification.object;
+        NSString *userID = [userInfo objectForKey:BOXUserIDKey];
+        if ([userID isEqualToString:self.user.modelID]) {
+            [self logOut];
+        }
     }
 }
 
