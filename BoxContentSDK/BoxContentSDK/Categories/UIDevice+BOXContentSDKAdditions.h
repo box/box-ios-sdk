@@ -26,14 +26,12 @@ typedef NS_ENUM(NSUInteger, BOXiOSVersion) {
 + (BOOL)isSingleCore;
 - (BOOL)isIpad;
 - (BOOL)isIphone;
-- (BOOL)isRunningiOS71;
-- (BOOL)isRunningiOS7xOrEarlier;
++ (BOOL)isRunningiOS10xOrLater;
 
 - (NSString *)deviceName;
 
 - (NSString *)modelID;
 - (NSString *)deviceTypeString;
 - (NSString *)detailedModelName;
-+ (BOOL)isRunningiOS10xOrLater;
 
 @end

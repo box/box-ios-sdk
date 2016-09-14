@@ -124,16 +124,6 @@
     return [self userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
 }
 
-- (BOOL)isRunningiOS71
-{
-    return [UIDevice iOSVersion] == BOXiOSVersion7_1;
-}
-
-- (BOOL)isRunningiOS7xOrEarlier
-{
-    return [UIDevice iOSVersion] < BOXiOSVersion8;
-}
-
 - (NSString *)deviceName
 {
     return self.name;
