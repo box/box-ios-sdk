@@ -31,13 +31,9 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(canOpenURL:)]) {
-            NSMethodSignature *sig = [application methodSignatureForSelector:@selector(canOpenURL:)];
-            NSInvocation *canOpenURL = [NSInvocation invocationWithMethodSignature:sig];
-            canOpenURL.target = application;
-            canOpenURL.selector = @selector(canOpenURL:);
-            [canOpenURL setArgument:&url atIndex:2];
-            [canOpenURL invoke];
-            [canOpenURL getReturnValue:&result];
+            // Although `performSelector:` is declared to return an `id`, it is in practice castable to a `BOOL` when the
+            // selector returns one.
+            result = (BOOL)[application performSelector:@selector(canOpenURL:) withObject:url];
         }
     }
     
@@ -51,7 +47,9 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(openURL:)]) {
-            result = [[application performSelector:@selector(openURL:) withObject:url] boolValue];
+            // Although `performSelector:` is declared to return an `id`, it is in practice castable to a `BOOL` when the
+            // selector returns one.
+            result = (BOOL)[application performSelector:@selector(openURL:) withObject:url];
         }
     }
     
