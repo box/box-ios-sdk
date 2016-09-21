@@ -31,7 +31,13 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(canOpenURL:)]) {
-            result = [application performSelector:@selector(canOpenURL:) withObject:url];
+            NSMethodSignature *sig = [application methodSignatureForSelector:@selector(canOpenURL:)];
+            NSInvocation *canOpenURL = [NSInvocation invocationWithMethodSignature:sig];
+            canOpenURL.target = application;
+            canOpenURL.selector = @selector(canOpenURL:);
+            [canOpenURL setArgument:&url atIndex:2];
+            [canOpenURL invoke];
+            [canOpenURL getReturnValue:&result];
         }
     }
     
@@ -45,7 +51,7 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(openURL:)]) {
-            result = [application performSelector:@selector(openURL:) withObject:url];
+            result = [[application performSelector:@selector(openURL:) withObject:url] boolValue];
         }
     }
     

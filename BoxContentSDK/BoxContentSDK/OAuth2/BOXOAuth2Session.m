@@ -40,7 +40,8 @@
                   APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
 {
-    if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
+    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager];
+    if (self) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
@@ -167,7 +168,8 @@
 {    
     if (_nonce == nil) {
         NSMutableData * data = [[NSMutableData alloc] initWithLength:32];
-        SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
+        int result = SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
+        NSAssert(result == 0, @"Failed to get secure random bytes.");
         NSData *encodedData = [data base64EncodedDataWithOptions:0];
         _nonce = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
     }
