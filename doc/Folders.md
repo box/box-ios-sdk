@@ -15,7 +15,7 @@ Get the items in a Box Folder
 --------------------------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXFoderItemsRequest *folderItemsRequest = [contentClient folderItemsRequestWithID:@"folder-id"];
+BOXFolderItemsRequest *folderItemsRequest = [contentClient folderItemsRequestWithID:@"folder-id"];
 [folderItemsRequest performRequestWithCompletion:^(NSArray *items, NSError *error) {
 	// If successful, items will be non-nil and contain the list of items; otherwise, error will be non-nil.
 }];
