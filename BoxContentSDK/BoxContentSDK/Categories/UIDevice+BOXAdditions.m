@@ -69,6 +69,14 @@
         return @"iPhone 6S Plus";
     } else if ([modelID isEqualToString:@"iPhone8,4"]) {
         return @"iPhone SE";
+    } else if ([modelID isEqualToString:@"iPhone9,1"]) {
+        return @"iPhone 7 (CDMA)";
+    } else if ([modelID isEqualToString:@"iPhone9,2"]) {
+        return @"iPhone 7 Plus (CDMA)";
+    } else if ([modelID isEqualToString:@"iPhone9,3"]) {
+        return @"iPhone 7";
+    } else if ([modelID isEqualToString:@"iPhone9,4"]) {
+        return @"iPhone 7 Plus";
     } else if ([modelID isEqualToString:@"iPod1,1"]) {
         return @"iPod touch 1st Generation";
     } else if ([modelID isEqualToString:@"iPod2,1"]) {
