@@ -4,11 +4,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXUser.h"
-#import "BOXCollection.h"
 
 @interface BOXFileTests : BOXModelTestCase
 @end

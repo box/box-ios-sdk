@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXEventsRequest.h"
+#import <BoxContentSDK/BOXEventsRequest.h>
 
 @interface BOXEventsAdminLogsRequest : BOXEventsRequest
 

@@ -7,15 +7,9 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFolderItemsRequest.h"
-#import "NSURL+BOXURLHelper.h"
 #import "BOXRequest_Private.h"
 
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXItem.h"
-
+#import "NSURL+BOXURLHelper.h"
 
 @interface BOXFolderItemsRequestTests : BOXRequestTestCase
 @end

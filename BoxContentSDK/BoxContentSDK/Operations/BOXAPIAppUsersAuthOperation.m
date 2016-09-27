@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXAPIAppUsersAuthOperation.h>
+#import <BoxContentSDK/BoxContentSDKErrors.h>
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+
 #import "BOXAPIOperation_Private.h"
-#import "BOXAPIAppUsersAuthOperation.h"
 
 #define BOXAccessTokenKey @"BOXAccessTokenKey"
 #define BOXAccessTokenExpirationKey @"BOXAccessTokenExpirationKey"

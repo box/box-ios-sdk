@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXItemArrayRequest.h"
+#import <BoxContentSDK/BOXItemArrayRequest.h>
 
 @interface BOXCollectionItemsRequest : BOXItemArrayRequest
 

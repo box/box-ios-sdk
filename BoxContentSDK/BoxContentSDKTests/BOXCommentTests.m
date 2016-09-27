@@ -7,10 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXComment.h"
-#import "BOXUser.h"
-#import "BOXItem.h"
-#import "BOXFile.h"
 
 @interface BOXCommentsTests : BOXModelTestCase
 @end

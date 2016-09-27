@@ -7,11 +7,8 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFileRequest.h"
-#import "BOXContentClient+File.h"
-#import "BOXContentClient.h"
-#import "BOXSharedLinkHeadersHelper.h"
 #import "BOXSharedLinkHeadersDefaultManager.h"
+#import "BOXSharedLinkHeadersHelper.h"
 #import "BOXUser.h"
 
 @interface BOXSharedLinkHeadersHelper ()

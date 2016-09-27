@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXBookmarkCopyRequest.h>
+#import <BoxContentSDK/BOXBookmarkCreateRequest.h>
+#import <BoxContentSDK/BOXBookmarkDeleteRequest.h>
+#import <BoxContentSDK/BOXBookmarkRequest.h>
+#import <BoxContentSDK/BOXBookmarkUpdateRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Bookmark.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+Bookmark.h"
-#import "BOXBookmarkRequest.h"
-#import "BOXBookmarkUpdateRequest.h"
-#import "BOXBookmarkCopyRequest.h"
-#import "BOXBookmarkCreateRequest.h"
-#import "BOXBookmarkDeleteRequest.h"
 
 @implementation BOXContentClient (Bookmark)
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentSDKConstants.h"
-#import "BOXContentClient.h"
+#import <BoxContentSDK/BOXContentClient.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
 
 @class BOXCollaborationRequest;
 @class BOXFolderCollaborationsRequest;

@@ -7,8 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXFileVersion.h"
-#import "BOXUser.h"
 
 @interface BOXFileVersionTests : BOXModelTestCase
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFolderCollaborationsRequest.h"
 
 @interface BOXFolderCollaborationsRequestTests : BOXRequestTestCase
 @end

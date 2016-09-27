@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFileVersionPromoteRequest.h"
-#import "BOXFileVersion.h"
 
 @interface BOXFileVersionPromoteRequestTests : BOXRequestTestCase
 @end

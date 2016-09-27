@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXFileLock.h"
-#import "BOXUser.h"
+#import <BoxContentSDK/BOXFileLock.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @implementation BOXFileLock
 

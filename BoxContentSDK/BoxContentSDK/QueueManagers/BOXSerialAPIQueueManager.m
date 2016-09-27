@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXSerialAPIQueueManager.h"
-
-#import "BOXAPIOperation.h"
-#import "BOXAPIOAuth2ToJSONOperation.h"
-#import "BOXAPIAppUsersAuthOperation.h"
-#import "BOXLog.h"
-#import "BOXOAuth2Session.h"
+#import <BoxContentSDK/BOXAPIAppUsersAuthOperation.h>
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXAPIOperation.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXOAuth2Session.h>
+#import <BoxContentSDK/BOXSerialAPIQueueManager.h>
 
 @implementation BOXSerialAPIQueueManager
 

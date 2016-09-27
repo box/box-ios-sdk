@@ -5,13 +5,14 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-#import "BOXAppToAppMessage.h"
-#import "BOXAppToAppAnnotationKeys.h"
-#import "BOXAppToAppAnnotationBuilder.h"
-#import "BOXAppToAppApplication.h"
-#import "UIApplication+ExtensionSafeAdditions.h"
+#import <BoxContentSDK/BOXAppToAppAnnotationBuilder.h>
+#import <BoxContentSDK/BOXAppToAppAnnotationKeys.h>
+#import <BoxContentSDK/BOXAppToAppApplication.h>
+#import <BoxContentSDK/BOXAppToAppMessage.h>
+
+#import <BoxContentSDK/UIApplication+ExtensionSafeAdditions.h>
 
 @implementation BOXAppToAppMessage
 

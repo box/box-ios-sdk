@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXBookmarkCreateRequest.h"
-#import "BOXBookmark.h"
 
 @interface BOXBookmarkCreateRequestTests : BOXRequestTestCase
 @end

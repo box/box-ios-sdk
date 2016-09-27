@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataTemplateRequest.h"
-#import "BOXRequest+Metadata.h"
+#import <BoxContentSDK/BOXMetadataTemplateRequest.h>
+
+#import <BoxContentSDK/BOXRequest+Metadata.h>
+
+#import "BOXRequest_Private.h"
 
 @interface BOXMetadataTemplateRequest ()
 

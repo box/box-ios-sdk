@@ -3,10 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXFileDownloadRequest.h"
+#import <BoxContentSDK/BOXAPIDataOperation.h>
+#import <BoxContentSDK/BOXFileDownloadRequest.h>
 
-#import "BOXAPIDataOperation.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXFileDownloadRequest ()
 

@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient+Comment.h"
+#import <BoxContentSDK/BOXBookmarkCommentsRequest.h>
+#import <BoxContentSDK/BOXCommentAddRequest.h>
+#import <BoxContentSDK/BOXCommentDeleteRequest.h>
+#import <BoxContentSDK/BOXCommentRequest.h>
+#import <BoxContentSDK/BOXCommentUpdateRequest.h>
+#import <BoxContentSDK/BOXFileCommentsRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Comment.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXCommentRequest.h"
-#import "BOXFileCommentsRequest.h"
-#import "BOXBookmarkCommentsRequest.h"
-#import "BOXCommentAddRequest.h"
-#import "BOXCommentDeleteRequest.h"
-#import "BOXCommentUpdateRequest.h"
 
 @implementation BOXContentClient (CommentAPI)
 

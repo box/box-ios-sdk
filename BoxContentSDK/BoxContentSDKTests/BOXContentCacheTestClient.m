@@ -3,7 +3,6 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest.h"
 #import "BOXContentCacheTestClient.h"
 
 @implementation BOXContentCacheTestClient

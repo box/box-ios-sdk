@@ -7,7 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXBookmarkDeleteRequest.h"
 
 @interface BOXBookmarkDeleteRequestTests : BOXRequestTestCase
 @end

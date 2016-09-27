@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXItem.h"
+#import <BoxContentSDK/BOXItem.h>
 
 /**
  *  A compact representation of a Folder with only a few properties.

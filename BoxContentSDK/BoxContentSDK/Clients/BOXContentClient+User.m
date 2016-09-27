@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient+User.h"
-#import "BOXUserRequest.h"
+#import <BoxContentSDK/BOXUserRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+User.h>
+
 #import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient (User)

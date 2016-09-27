@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXParallelOAuth2Session.h"
-#import "BOXAPIOAuth2ToJSONOperation.h"
-#import "BOXLog.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXContentSDKErrors.h"
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXParallelOAuth2Session.h>
 
 @interface BOXParallelOAuth2Session ()
 
@@ -84,6 +84,7 @@
             }
                         
             if (block) {
+                BOXAssert(!session || [session isKindOfClass:BOXOAuth2Session.class], @"Expecting a BOXOAuth2Session, got %@", session);
                 block(session, error);
             }
         }];

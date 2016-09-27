@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "NSString+BOXURLHelper.h"
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
 
 @implementation NSString (BOXURLHelper)
 

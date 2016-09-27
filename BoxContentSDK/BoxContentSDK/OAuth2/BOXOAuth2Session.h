@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-#import "BOXAPIQueueManager.h"
-#import "BOXUser.h"
-#import "BOXAbstractSession.h"
+#import <BoxContentSDK/BOXAPIQueueManager.h>
+#import <BoxContentSDK/BOXAbstractSession.h>
+#import <BoxContentSDK/BOXUser.h>
 
 /**
  * BOXOAuth2Session is an abstract class you can use to encapsulate managing a set of OAuth2
@@ -137,7 +137,7 @@
  * @param URL The URL received as a result of the OAuth2 server invoking the redirect URI. This URL will
  * contain query string params needed to complete the authorization_code grant type.
  *
- * @param Completion block with an updated BOXOAuth2Session.
+ * @param block Completion block with an updated BOXOAuth2Session.
  *
  * @warning This method is intended to be called from your application delegate in response to
  * `application:openURL:sourceApplication:annotation:`.

@@ -3,11 +3,12 @@
 //  BoxContentSDK
 //
 
-#import "BOXUserRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXUser.h>
+#import <BoxContentSDK/BOXUserRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXUser.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXUserRequest
 

@@ -7,7 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXModel.h"
 
 @interface BOXModelTests : BOXModelTestCase
 @end

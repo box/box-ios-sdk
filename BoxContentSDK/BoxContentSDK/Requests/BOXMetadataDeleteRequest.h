@@ -47,7 +47,7 @@
  * **NOTE** Scope is defaulted to @see BOXAPIScopeEnterprise in this initializer.
  *
  * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  *
  * @return A BOXMetadataDeleteRequest that allows users to delete metadata information on a given file.
  */
@@ -59,7 +59,7 @@
  *
  * @param fileID The ID of the desired file.
  * @param scope The scope of the templates desired for deleting metadata.
- * @param template The templateKey of the desired metadata information for the given file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
  *
  * @return A BOXMetadataDeleteRequest that allows users to delete metadata information on a given file.
  */

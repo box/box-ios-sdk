@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIOAuth2ToJSONOperation.h"
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
 
-#import "BOXLog.h"
-#import "BOXContentSDKErrors.h"
-#import "NSString+BOXURLHelper.h"
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
 
 #define BOX_OAUTH2_AUTHORIZATION_CODE_GRANT_PARAMETER_COUNT  (5)
 

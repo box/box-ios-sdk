@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIQueueManager.h"
+#import <BoxContentSDK/BOXAPIQueueManager.h>
 
 /**
  * BOXSerialAPIQueueManager is an implementation of the abstract class BOXAPIQueueManager.
@@ -33,7 +33,7 @@
 
 /**
  * In addition to calling super, this method sets `globalQueue.maxConcurrentOperationCount` to `1`
- * @param OAuth2Session This object is needed for locking
+ * @param session This object is needed for locking
  */
 - (id)initWithSession:(BOXAbstractSession *)session;
 

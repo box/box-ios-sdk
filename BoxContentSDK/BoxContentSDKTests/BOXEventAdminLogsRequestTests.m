@@ -7,7 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXEventsAdminLogsRequest.h"
+
 #import "NSURL+BOXURLHelper.h"
 
 @interface BOXEventAdminLogsRequestTests : BOXRequestTestCase

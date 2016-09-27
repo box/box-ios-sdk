@@ -7,7 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXCollection.h"
 
 @interface BOXCollectionTests : BOXModelTestCase    
 

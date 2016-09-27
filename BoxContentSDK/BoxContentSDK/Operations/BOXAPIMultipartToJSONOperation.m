@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIMultipartToJSONOperation.h"
-
-#import "BOXContentSDKErrors.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXAPIMultipartToJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
 
 #define BOX_API_MULTIPART_CONTENT_DISPOSITION (@"Content-Disposition")
 #define BOX_API_MULTIPART_CONTENT_TYPE        (@"Content-Type")

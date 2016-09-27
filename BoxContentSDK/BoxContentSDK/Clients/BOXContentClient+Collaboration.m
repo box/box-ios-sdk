@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXCollaborationCreateRequest.h>
+#import <BoxContentSDK/BOXCollaborationPendingRequest.h>
+#import <BoxContentSDK/BOXCollaborationRemoveRequest.h>
+#import <BoxContentSDK/BOXCollaborationRequest.h>
+#import <BoxContentSDK/BOXCollaborationUpdateRequest.h>
+#import <BoxContentSDK/BOXFolderCollaborationsRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Collaboration.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+Collaboration.h"
-#import "BOXCollaborationRequest.h"
-#import "BOXFolderCollaborationsRequest.h"
-#import "BOXCollaborationCreateRequest.h"
-#import "BOXCollaborationRemoveRequest.h"
-#import "BOXCollaborationUpdateRequest.h"
-#import "BOXCollaborationPendingRequest.h"
 
 @implementation BOXContentClient (CollaborationAPI)
 

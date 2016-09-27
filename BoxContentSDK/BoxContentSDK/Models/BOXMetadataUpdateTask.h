@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BOXMetadataKeyValue.h"
+@import Foundation;
+
+#import <BoxContentSDK/BOXMetadataKeyValue.h>
 
 /**
  * ENUM that defines all possible operations available to the BOXMetadataUpdateTask class.

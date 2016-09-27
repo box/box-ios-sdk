@@ -3,16 +3,17 @@
 //  BoxContentSDK
 //
 
-#import "BOXFolderItemsRequest.h"
-#import "BOXRequest_Private.h"
-#import "BOXFolderPaginatedItemsRequest.h"
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXItem.h"
-#import "BOXSharedLinkHeadersHelper.h"
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXFolderItemsRequest.h>
+#import <BoxContentSDK/BOXFolderPaginatedItemsRequest.h>
+#import <BoxContentSDK/BOXItem.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
+
 #import "BOXFolderPaginatedItemsRequest_Private.h"
-#import "BOXContentSDKErrors.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXFolderItemsRequest ()
 @property (nonatomic) BOOL isCancelled;

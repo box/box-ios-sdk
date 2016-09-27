@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXDispatchHelper.h>
+#import <BoxContentSDK/BOXMetadata.h>
+#import <BoxContentSDK/BOXMetadataRequest.h>
+
+#import <BoxContentSDK/BOXRequest+Metadata.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXMetadataRequest.h"
-#import "BOXMetadata.h"
-#import "BOXDispatchHelper.h"
-#import "BOXRequest+Metadata.h"
 
 @interface BOXMetadataRequest ()
 

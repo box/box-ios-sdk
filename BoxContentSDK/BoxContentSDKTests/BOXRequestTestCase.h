@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentSDKTestCase.h"
 #import "BOXCannedResponse.h"
+#import "BOXContentSDKTestCase.h"
 
 @class BOXRequest;
 

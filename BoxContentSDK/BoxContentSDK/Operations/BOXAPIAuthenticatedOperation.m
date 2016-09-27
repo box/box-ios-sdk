@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIAuthenticatedOperation.h"
-
-#import "BOXAPIJSONOperation.h"
-#import "BOXLog.h"
-#import "BOXContentSDKErrors.h"
+#import <BoxContentSDK/BOXAPIAuthenticatedOperation.h>
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
 
 #define WWW_AUTHENTICATE_HEADER           (@"WWW-Authenticate")
 

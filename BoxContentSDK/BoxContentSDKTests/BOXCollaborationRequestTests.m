@@ -7,10 +7,8 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXCollaborationRequest.h"
-#import "BOXCollaboration.h"
+
 #import "NSURL+BOXURLHelper.h"
-#import "BOXContentSDKConstants.h"
 
 @interface BOXCollaborationRequestTests : BOXRequestTestCase
 

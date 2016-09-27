@@ -7,15 +7,8 @@
 //
 
 #import "BOXContentClientTestCase.h"
-#import "BOXContentClient.h"
-#import "BOXAPIAccessTokenDelegate.h"
-#import "BOXContentClient+Folder.h"
 #import "BOXContentClient_Private.h"
-#import "BOXFolderRequest.h"
 #import "BOXRequest_Private.h"
-#import "BOXContentClient+Authentication.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXAppUserSession.h"
 
 @interface BOXContentClientTestCase ()
 

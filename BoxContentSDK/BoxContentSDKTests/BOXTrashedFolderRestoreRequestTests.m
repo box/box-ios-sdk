@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXTrashedFolderRestoreRequest.h"
-#import "BOXFolder.h"
 
 @interface BOXTrashedFolderRestoreRequestTests : BOXRequestTestCase
 

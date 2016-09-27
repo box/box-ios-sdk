@@ -5,8 +5,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXModel.h"
-#import "BOXContentSDKConstants.h"
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXModel.h>
 
 @class BOXUserMini;
 @class BOXFolderMini;

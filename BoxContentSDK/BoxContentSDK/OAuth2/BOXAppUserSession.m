@@ -6,13 +6,14 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXAbstractSession_Private.h"
-#import "BOXAppUserSession.h"
-#import "BOXAPIAccessTokenDelegate.h"
-#import "BOXUserRequest.h"
-#import "BOXUser_Private.h"
-#import "BOXAPIAppUsersAuthOperation.h"
+#import <BoxContentSDK/BOXAPIAccessTokenDelegate.h>
+#import <BoxContentSDK/BOXAPIAppUsersAuthOperation.h>
+#import <BoxContentSDK/BOXAppUserSession.h>
+#import <BoxContentSDK/BOXUserRequest.h>
+
 #import "BOXAPIOperation_Private.h"
+#import "BOXAbstractSession_Private.h"
+#import "BOXUser_Private.h"
 
 @implementation BOXAppUserSession
 

@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXFileUpdateRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXFile.h>
+#import <BoxContentSDK/BOXFileUpdateRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXFile.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXFileUpdateRequest ()
 @property (nonatomic, readwrite, strong) NSString *fileID;

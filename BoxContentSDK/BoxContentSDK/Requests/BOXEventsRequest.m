@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXEventsRequest.h"
+#import <BoxContentSDK/BOXEvent.h>
+#import <BoxContentSDK/BOXEventsRequest.h>
 
-#import "BOXEvent.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXEventsRequest
 

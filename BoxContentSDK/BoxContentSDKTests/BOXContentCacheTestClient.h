@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXContentCacheClientProtocol.h"
+#import <BoxContentSDK/BoxContentSDK.h>
 
 @interface BOXContentCacheTestClient : NSObject <BOXContentCacheClientProtocol>
 

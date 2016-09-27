@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataTemplateField.h"
+#import <BoxContentSDK/BOXMetadataTemplateField.h>
 
 @implementation BOXMetadataTemplateField
 

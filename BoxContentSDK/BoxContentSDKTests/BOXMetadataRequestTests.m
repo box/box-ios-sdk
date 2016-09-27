@@ -7,10 +7,8 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXUserRequest.h"
+
 #import "NSURL+BOXURLHelper.h"
-#import "BOXMetadataRequest.h"
-#import "BOXRequest+Metadata.h"
 
 @interface BOXMetadataRequestTests : BOXRequestTestCase
 @end

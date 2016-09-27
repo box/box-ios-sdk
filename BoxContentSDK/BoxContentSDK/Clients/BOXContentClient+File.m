@@ -6,19 +6,20 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXFileCopyRequest.h>
+#import <BoxContentSDK/BOXFileDeleteRequest.h>
+#import <BoxContentSDK/BOXFileDownloadRequest.h>
+#import <BoxContentSDK/BOXFileRequest.h>
+#import <BoxContentSDK/BOXFileThumbnailRequest.h>
+#import <BoxContentSDK/BOXFileUpdateRequest.h>
+#import <BoxContentSDK/BOXFileUploadNewVersionRequest.h>
+#import <BoxContentSDK/BOXFileUploadRequest.h>
+#import <BoxContentSDK/BOXPreflightCheckRequest.h>
+#import <BoxContentSDK/BOXTrashedFileRestoreRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+File.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+File.h"
-#import "BOXFileRequest.h"
-#import "BOXFileCopyRequest.h"
-#import "BOXFileDeleteRequest.h"
-#import "BOXFileDownloadRequest.h"
-#import "BOXFileUpdateRequest.h"
-#import "BOXFileUploadRequest.h"
-#import "BOXFileDownloadRequest.h"
-#import "BOXTrashedFileRestoreRequest.h"
-#import "BOXFileThumbnailRequest.h"
-#import "BOXPreflightCheckRequest.h"
-#import "BOXFileUploadNewVersionRequest.h"
 
 @implementation BOXContentClient (File)
 

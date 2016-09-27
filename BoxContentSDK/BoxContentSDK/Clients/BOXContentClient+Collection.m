@@ -6,11 +6,13 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient+Collection.h"
-#import "BOXCollectionListRequest.h"
-#import "BOXCollectionItemsRequest.h"
-#import "BOXItemSetCollectionsRequest.h"
-#import "BOXCollectionFavoritesRequest.h"
+#import <BoxContentSDK/BOXCollectionFavoritesRequest.h>
+#import <BoxContentSDK/BOXCollectionItemsRequest.h>
+#import <BoxContentSDK/BOXCollectionListRequest.h>
+#import <BoxContentSDK/BOXItemSetCollectionsRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Collection.h>
+
 #import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient (CollectionAPI)

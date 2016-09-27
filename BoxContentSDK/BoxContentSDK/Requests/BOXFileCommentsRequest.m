@@ -3,10 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXFileCommentsRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXComment.h>
+#import <BoxContentSDK/BOXFileCommentsRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXComment.h"
 #import "BOXRequest_Private.h"
 
 @interface BOXFileCommentsRequest ()

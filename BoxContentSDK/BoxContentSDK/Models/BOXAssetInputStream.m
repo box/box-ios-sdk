@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXAssetInputStream.h"
-#import "BOXLog.h"
-#import <AssetsLibrary/AssetsLibrary.h>
+@import AssetsLibrary;
+
+#import <BoxContentSDK/BOXAssetInputStream.h>
+#import <BoxContentSDK/BOXLog.h>
 
 @interface NSStream (BoundPairAdditions)
 + (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize;

@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIDataOperation.h"
-
-#import "BOXContentSDKErrors.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXAPIDataOperation.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
 
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2

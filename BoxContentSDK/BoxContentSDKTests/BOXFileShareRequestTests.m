@@ -7,10 +7,9 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFileShareRequest.h"
 #import "BOXRequest_Private.h"
+
 #import "NSURL+BOXURLHelper.h"
-#import "BOXFile.h"
 
 @interface BOXFileShareRequestTests : BOXRequestTestCase
 @end

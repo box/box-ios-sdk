@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXFileDeleteRequest.h>
+
 #import "BOXRequest_Private.h"
-#import "BOXFileDeleteRequest.h"
-#import "BOXAPIJSONOperation.h"
 
 @interface BOXFileDeleteRequest ()
 

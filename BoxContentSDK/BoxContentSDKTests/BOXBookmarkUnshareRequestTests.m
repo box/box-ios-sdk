@@ -7,10 +7,9 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXBookmarkUnshareRequest.h"
 #import "BOXRequest_Private.h"
+
 #import "NSURL+BOXURLHelper.h"
-#import "BOXBookmark.h"
 
 @interface BOXBookmarkUnshareRequestTests : BOXRequestTestCase
 @end

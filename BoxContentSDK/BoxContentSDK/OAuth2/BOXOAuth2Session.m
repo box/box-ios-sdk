@@ -6,18 +6,20 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXOAuth2Session.h"
-#import "BOXLog.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXAPIOAuth2ToJSONOperation.h"
-#import "NSString+BOXURLHelper.h"
-#import "NSURL+BOXURLHelper.h"
-#import "BOXKeychainItemWrapper.h"
-#import "BOXUserRequest.h"
-#import "BOXUser_Private.h"
-#import "NSDate+BOXContentSDKAdditions.h"
+#import <BoxContentSDK/BOXAPIOAuth2ToJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXKeychainItemWrapper.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXOAuth2Session.h>
+#import <BoxContentSDK/BOXUserRequest.h>
+
+#import <BoxContentSDK/NSDate+BOXContentSDKAdditions.h>
+#import <BoxContentSDK/NSString+BOXURLHelper.h>
+#import <BoxContentSDK/NSURL+BOXURLHelper.h>
+
 #import "BOXAbstractSession_Private.h"
+#import "BOXUser_Private.h"
 
 #define keychainRefreshTokenKey @"refresh_token"
 
@@ -40,7 +42,8 @@
                   APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
 {
-    if ([self initWithAPIBaseURL:baseURL queueManager:queueManager]) {
+    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager];
+    if (self) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
@@ -71,7 +74,7 @@
 
     NSString *authenticationRedirectURIScheme = [[NSURL URLWithString:self.redirectURIString] scheme];
     if ([[URL scheme] isEqualToString:authenticationRedirectURIScheme]) {
-        if ((_nonce || serverNonce) && [serverNonce isEqualToString:_nonce] == NO) {
+        if ((_nonce || serverNonce) && [serverNonce isEqual:_nonce] == NO) {
             NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                         code:BOXContentSDKAuthErrorAccessTokenNonceMismatch
                                                     userInfo:nil];

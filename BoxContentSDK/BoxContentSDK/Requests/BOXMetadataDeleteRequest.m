@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXRequest+Metadata.h"
-#import "BOXMetadataDeleteRequest.h"
+#import <BoxContentSDK/BOXMetadataDeleteRequest.h>
+
+#import <BoxContentSDK/BOXRequest+Metadata.h>
+
+#import "BOXRequest_Private.h"
 
 @interface BOXMetadataDeleteRequest ()
 

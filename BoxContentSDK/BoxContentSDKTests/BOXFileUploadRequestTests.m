@@ -6,14 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "ALAssetRepresentationMock.h"
+#import "BOXHashHelper.h"
+#import "BOXInputStreamTestHelper.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
-#import "BOXFileUploadRequest.h"
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXFile.h"
-#import "BOXHashHelper.h"
-#import "ALAssetRepresentationMock.h"
-#import "BOXInputStreamTestHelper.h"
 
 @interface BOXAPIMultipartToJSONOperation ()
 // An array of BOXAPIMultipartPiece. In our tests, we want to inspect these.

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient.h"
+#import <BoxContentSDK/BOXContentClient.h>
 
 @class BOXOAuth2Session;
 @class BOXAbstractSession;
@@ -29,8 +29,8 @@
 /**
  *  Complete the user's authentication from the URL with which the app was launched.
  *
- *  @param authenticationURL    The URL with which the app was launched.
- *  @param completionBlock      Called when the authentication has completed.
+ *  @param authenticationURL  The URL with which the app was launched.
+ *  @param completion         Called when the authentication has completed.
  */
 - (void)completeAuthenticationWithURL:(NSURL *)authenticationURL completionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 

@@ -6,22 +6,19 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataUpdateTask.h"
-#import "BOXLog.h"
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXMetadataUpdateTask.h>
 
 @implementation BOXMetadataUpdateTask
 
-- (instancetype)initWithOperation:(BOXMetadataUpdateOperation)operation path:(NSString *)path value:(NSString *)value
+- (instancetype)initWithOperation:(BOXMetadataUpdateOperation)operation path:(nonnull NSString *)path value:(NSString *)value
 {
     if (self = [self init]) {
-        NSString *formatString = nil;
-        if (path) {
-            formatString = @"/%@";
-            if ([path characterAtIndex:0] == '/') {
-                formatString = @"%@";
-            }
+        NSString *formatString = @"/%@";
+        if ([path characterAtIndex:0] == '/') {
+            formatString = @"%@";
         }
-        
+
         self.value = value;
         self.path = [NSString stringWithFormat:formatString, path];
         self.operation = operation;

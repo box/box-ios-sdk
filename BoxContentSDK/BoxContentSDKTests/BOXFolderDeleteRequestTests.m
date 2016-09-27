@@ -7,7 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFolderDeleteRequest.h"
 
 @interface BOXFolderDeleteRequestTests : BOXRequestTestCase
 @end

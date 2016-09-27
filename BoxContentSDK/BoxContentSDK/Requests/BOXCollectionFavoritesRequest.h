@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXCollectionListRequest.h"
+#import <BoxContentSDK/BOXCollectionListRequest.h>
 
 @interface BOXCollectionFavoritesRequest : BOXCollectionListRequest
 

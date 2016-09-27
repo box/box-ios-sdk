@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXPreflightCheckRequest.h"
-#import "BOXContentSDKErrors.h"
 
 @interface BOXPreflightCheckRequestTests : BOXRequestTestCase
 @end

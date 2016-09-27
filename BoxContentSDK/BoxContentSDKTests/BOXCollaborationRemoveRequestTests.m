@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXCollaborationRemoveRequest.h"
-#import "BOXContentSDKConstants.h"
 
 @interface BOXCollaborationRemoveRequestTests : BOXRequestTestCase
 

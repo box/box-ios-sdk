@@ -8,11 +8,8 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXSearchRequest.h"
+
 #import "NSURL+BOXURLHelper.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXBookmark.h"
 
 @interface BOXRequest ()
 

@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXBookmarkUpdateRequest.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXBookmarkUpdateRequest.h>
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXBookmark.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXBookmarkUpdateRequest ()
 @property (nonatomic, readwrite, strong) NSString *bookmarkID;

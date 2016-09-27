@@ -7,19 +7,6 @@
 //
 
 #import "BOXContentSDKTestCase.h"
-#import "BOXItem.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXBookmark.h"
-#import "BOXUser.h"
-#import "BOXSharedLink.h"
-#import "BOXFileLock.h"
-#import "BOXComment.h"
-#import "BOXCollection.h"
-#import "BOXEvent.h"
-#import "BOXFileVersion.h"
-#import "BOXCollaboration.h"
-#import "BOXMetadata.h"
 
 @implementation BOXContentSDKTestCase
 

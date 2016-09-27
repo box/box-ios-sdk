@@ -6,7 +6,7 @@
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef NS_ENUM(NSUInteger, BOXiOSVersion) {
     BOXiOSVersionUnknown,

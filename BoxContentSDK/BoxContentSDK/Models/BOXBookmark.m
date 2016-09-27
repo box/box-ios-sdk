@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXBookmark.h"
+#import <BoxContentSDK/BOXBookmark.h>
 
 @implementation BOXBookmarkMini
 

@@ -6,7 +6,8 @@
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import "UIDevice+BOXContentSDKAdditions.h"
+#import <BoxContentSDK/UIDevice+BOXContentSDKAdditions.h>
+
 #include <sys/sysctl.h>
 
 @implementation UIDevice (BOXContentSDKAdditions)

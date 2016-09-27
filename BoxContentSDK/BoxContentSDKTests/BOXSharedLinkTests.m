@@ -7,7 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXSharedLink.h"
 
 @interface BOXSharedLinkTests : BOXModelTestCase
 @end

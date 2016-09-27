@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIJSONOperation.h"
-#import "BOXContentSDKErrors.h"
+#import <BoxContentSDK/BOXAPIJSONOperation.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
 
 #define BOX_API_CONTENT_TYPE_JSON  (@"application/json")
 

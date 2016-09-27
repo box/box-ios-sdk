@@ -7,9 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXCollaborationPendingRequest.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXCollaboration.h"
 
 @interface BOXCollaborationPendingRequestTests : BOXRequestTestCase
 

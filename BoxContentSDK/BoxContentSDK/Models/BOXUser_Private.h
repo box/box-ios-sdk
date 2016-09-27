@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXUser.h"
+#import <BoxContentSDK/BOXUser.h>
 
 @interface BOXUserMini ()
 

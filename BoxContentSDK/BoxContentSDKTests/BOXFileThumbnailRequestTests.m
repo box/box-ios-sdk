@@ -7,7 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFileThumbnailRequest.h"
 #import "BOXRequest_Private.h"
 
 @interface BOXFileThumbnailRequestTests : BOXRequestTestCase

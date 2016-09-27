@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXSharedLinkHeadersHelper.h"
-#import "BOXItem.h"
-#import "BOXFolder.h"
-#import "BOXUser.h"
-#import "BOXContentClient.h"
+#import <BoxContentSDK/BOXContentClient.h>
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXItem.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
+#import <BoxContentSDK/BOXUser.h>
 
 @interface BOXSharedLinkHeadersHelper ()
 

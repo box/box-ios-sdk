@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
-#import "BOXFolderUnshareRequest.h"
+#import <BoxContentSDK/BOXFolder.h>
+#import <BoxContentSDK/BOXFolderUnshareRequest.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
 
-#import "BOXFolder.h"
-#import "BOXSharedLinkHeadersHelper.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXFolderUnshareRequest ()
 

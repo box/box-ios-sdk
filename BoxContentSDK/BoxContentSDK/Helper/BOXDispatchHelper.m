@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXDispatchHelper.h"
+#import <BoxContentSDK/BOXDispatchHelper.h>
 
 @implementation BOXDispatchHelper
 

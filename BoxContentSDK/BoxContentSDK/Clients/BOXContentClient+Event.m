@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentClient+Event.h"
-#import "BOXEventsRequest.h"
-#import "BOXEventsAdminLogsRequest.h"
+#import <BoxContentSDK/BOXEventsAdminLogsRequest.h>
+#import <BoxContentSDK/BOXEventsRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Event.h>
+
 #import "BOXContentClient_Private.h"
 
 @implementation BOXContentClient(EventAPI)

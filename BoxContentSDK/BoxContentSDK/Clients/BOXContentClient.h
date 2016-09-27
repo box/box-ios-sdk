@@ -5,6 +5,8 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+@import Foundation;
+
 @class BOXAbstractSession;
 @class BOXUser;
 @class BOXUserMini;

@@ -3,9 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXCollectionListRequest.h"
+#import <BoxContentSDK/BOXCollection.h>
+#import <BoxContentSDK/BOXCollectionListRequest.h>
 
-#import "BOXCollection.h"
+#import "BOXRequest_Private.h"
 
 @implementation BOXCollectionListRequest
 

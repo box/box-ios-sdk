@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
+#import <BoxContentSDK/BOXRequest.h>
 
 @interface BOXPreflightCheckRequest : BOXRequest
 

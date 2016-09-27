@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXMetadataTemplate.h"
-#import "BoxISO8601DateFormatter.h"
+#import <BoxContentSDK/BOXMetadataTemplate.h>
+#import <BoxContentSDK/BoxISO8601DateFormatter.h>
 
 @implementation BOXMetadataTemplate
 

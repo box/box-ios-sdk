@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIAuthenticatedOperation.h"
+#import <BoxContentSDK/BOXAPIAuthenticatedOperation.h>
 
 // expectedTotalBytes may be NSURLResponseUnknownLength if the operation is unable to determine the
 // content-length of the download

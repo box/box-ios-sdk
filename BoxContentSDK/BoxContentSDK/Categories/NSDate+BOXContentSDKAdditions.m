@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "NSDate+BOXContentSDKAdditions.h"
-#import "BoxISO8601DateFormatter.h"
+#import <BoxContentSDK/BoxISO8601DateFormatter.h>
+
+#import <BoxContentSDK/NSDate+BOXContentSDKAdditions.h>
 
 @implementation NSDate (BOXContentSDKAdditions)
 

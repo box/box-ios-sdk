@@ -6,21 +6,24 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import <BoxContentSDK/BOXAPIQueueManager.h>
+#import <BoxContentSDK/BOXAppUserSession.h>
+#import <BoxContentSDK/BOXContentSDKConstants.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXParallelAPIQueueManager.h>
+#import <BoxContentSDK/BOXParallelOAuth2Session.h>
+#import <BoxContentSDK/BOXRequestWithSharedLinkHeader.h>
+#import <BoxContentSDK/BOXSharedItemRequest.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersDefaultManager.h>
+#import <BoxContentSDK/BOXSharedLinkHeadersHelper.h>
+#import <BoxContentSDK/BOXUser.h>
+#import <BoxContentSDK/BOXUserRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+Authentication.h>
+#import <BoxContentSDK/BOXContentClient+User.h>
+
 #import "BOXContentClient_Private.h"
-#import "BOXContentClient+Authentication.h"
-#import "BOXAPIQueueManager.h"
-#import "BOXContentSDKConstants.h"
-#import "BOXParallelOAuth2Session.h"
-#import "BOXAppUserSession.h"
-#import "BOXParallelAPIQueueManager.h"
-#import "BOXUser.h"
-#import "BOXRequestWithSharedLinkHeader.h"
-#import "BOXSharedItemRequest.h"
-#import "BOXSharedLinkHeadersHelper.h"
-#import "BOXSharedLinkHeadersDefaultManager.h"
-#import "BOXContentSDKErrors.h"
-#import "BOXUserRequest.h"
-#import "BOXContentClient+User.h"
+#import "BOXRequest_Private.h"
 
 @interface BOXContentClient ()
 

@@ -16,7 +16,6 @@
 
 #import "OCMRecorder.h"
 
-
 @interface OCMStubRecorder : OCMRecorder
 
 - (id)andReturn:(id)anObject;

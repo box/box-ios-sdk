@@ -7,8 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXFolderCopyRequest.h"
-#import "BOXFolder.h"
 
 @interface BOXFolderCopyRequestTests : BOXRequestTestCase
 @end

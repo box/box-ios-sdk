@@ -6,13 +6,15 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAuthorizationViewController.h"
-#import "BOXLog.h"
-#import "BOXUser.h"
-#import "BOXContentClient+User.h"
-#import "BOXUserRequest.h"
-#import "BOXContentSDKErrors.h"
-#import "UIApplication+ExtensionSafeAdditions.h"
+#import <BOXContentSDK/BOXOAuth2Session.h>
+#import <BoxContentSDK/BOXAuthorizationViewController.h>
+#import <BoxContentSDK/BOXContentSDKErrors.h>
+#import <BoxContentSDK/BOXLog.h>
+#import <BoxContentSDK/BOXUser.h>
+#import <BoxContentSDK/BOXUserRequest.h>
+
+#import <BoxContentSDK/BOXContentClient+User.h>
+#import <BoxContentSDK/UIApplication+ExtensionSafeAdditions.h>
 
 // http://stackoverflow.com/a/5337804/527393
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)

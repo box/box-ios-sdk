@@ -4,7 +4,7 @@
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**
  *  This category's purpose is to allow successful compilation when using BOXContentSDK in an extension.

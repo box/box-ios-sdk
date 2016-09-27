@@ -6,15 +6,9 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
+#import "BOXCannedURLProtocol.h"
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
-#import "BOXCannedURLProtocol.h"
-#import "BOXParallelAPIQueueManager.h"
-#import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXBookmark.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-
 
 @interface BOXAPIMultipartToJSONOperation ()
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent;

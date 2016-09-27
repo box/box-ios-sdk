@@ -7,9 +7,6 @@
 //
 
 #import "BOXRequestTestCase.h"
-#import "BOXSharedItemRequest.h"
-#import "BOXFolder.h"
-#import "BOXSharedLink.h"
 
 @interface BOXSharedItemRequestTests : BOXRequestTestCase
 @end

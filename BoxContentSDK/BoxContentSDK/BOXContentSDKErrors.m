@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentSDKErrors.h"
+#import <BoxContentSDK/BOXContentSDKErrors.h>
 
 NSString *const BOXContentSDKErrorDomain = @"com.box.contentsdk.errordomain";
 NSString *const BOXJSONErrorResponseKey = @"com.box.contentsdk.jsonerrorresponse";

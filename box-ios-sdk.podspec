@@ -12,7 +12,7 @@ s.source                = { :git => "https://github.com/box/box-ios-sdk.git", :t
 
 # Platform
 
-s.ios.deployment_target = "7.0"
+s.ios.deployment_target = "8.0"
 
 # File patterns
 
@@ -20,13 +20,6 @@ s.ios.source_files        = "BoxContentSDK/BoxContentSDK/*.{h,m}", "BoxContentSD
 s.ios.exclude_files       = "BoxContentSDK/BoxContentSDK/External/ISO8601DateFormatter/BOXISO8601DateFormatter.{h,m}",
 "BoxContentSDK/BoxContentSDK/External/KeychainItemWrapper/BOXKeychainItemWrapper.{h,m}"
 s.ios.public_header_files = "BoxContentSDK/BoxContentSDK/*.h", "BoxContentSDK/BoxContentSDK/**/*.h"
-s.resource_bundle = {
-  'BoxContentSDKResources' => [
-     'BoxContentSDK/BoxContentSDKResources/Assets/*.*',
-     'BoxContentSDK/BoxContentSDKResources/Icons/*.*',
-     'BoxContentSDK/BoxContentSDKResources/*.lproj'
-  ]
-}
 
 # Build settings
 

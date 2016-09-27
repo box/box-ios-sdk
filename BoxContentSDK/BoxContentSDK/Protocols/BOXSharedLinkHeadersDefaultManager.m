@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXSharedLinkHeadersDefaultManager.h"
+#import <BoxContentSDK/BOXSharedLinkHeadersDefaultManager.h>
 
 @interface BOXSharedLinkHeadersDefaultManager ()
 

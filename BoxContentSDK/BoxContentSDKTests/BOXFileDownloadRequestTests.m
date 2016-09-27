@@ -8,8 +8,6 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
-#import "BOXFileDownloadRequest.h"
-#import "BOXFile.h"
 
 @interface BOXFileDownloadRequestTests : BOXRequestTestCase
 @end

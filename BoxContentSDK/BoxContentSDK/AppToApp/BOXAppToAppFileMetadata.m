@@ -5,9 +5,9 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXAppToAppFileMetadata.h"
-#import "BOXAppToAppAnnotationKeys.h"
-#import "BOXAppToAppAnnotationBuilder.h"
+#import <BoxContentSDK/BOXAppToAppAnnotationBuilder.h>
+#import <BoxContentSDK/BOXAppToAppAnnotationKeys.h>
+#import <BoxContentSDK/BOXAppToAppFileMetadata.h>
 
 void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
 {

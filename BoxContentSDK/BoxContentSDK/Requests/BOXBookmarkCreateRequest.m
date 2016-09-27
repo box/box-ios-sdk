@@ -3,8 +3,10 @@
 //  BoxContentSDK
 //
 
-#import "BOXBookmarkCreateRequest.h"
-#import "BOXBookmark.h"
+#import <BoxContentSDK/BOXBookmark.h>
+#import <BoxContentSDK/BOXBookmarkCreateRequest.h>
+
+#import "BOXRequest_Private.h"
 
 @implementation BOXBookmarkCreateRequest
 

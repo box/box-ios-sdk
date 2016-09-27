@@ -7,13 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXEvent.h"
-#import "BOXUser.h"
-#import "BOXFile.h"
-#import "BOXFolder.h"
-#import "BOXBookmark.h"
-#import "BOXComment.h"
-#import "BOXCollection.h"
 
 @interface BOXEventTests : BOXModelTestCase
 

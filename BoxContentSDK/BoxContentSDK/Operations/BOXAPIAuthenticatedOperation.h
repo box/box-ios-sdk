@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import "BOXAPIOperation.h"
+#import <BoxContentSDK/BOXAPIOperation.h>
 
 // @TODO: Fill in Error Conditions header
 

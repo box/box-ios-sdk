@@ -7,7 +7,6 @@
 //
 
 #import "BOXContentSDKTestCase.h"
-#import "BOXAPIAccessTokenDelegate.h"
 
 @interface BOXContentClientTestCase : BOXContentSDKTestCase <BOXAPIAccessTokenDelegate>
 

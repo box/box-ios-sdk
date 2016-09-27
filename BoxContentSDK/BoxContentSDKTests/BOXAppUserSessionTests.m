@@ -7,12 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "BOXContentSDKTestCase.h"
-#import "BOXAppUserSession.h"
-#import "BOXAPIAccessTokenDelegate.h"
 #import "BOXContentClient_Private.h"
 #import "BOXKeychainItemWrapper.h"
-#import "BOXOAuth2Session.h"
 
 @interface BOXAppUserSessionTests : BOXContentSDKTestCase <BOXAPIAccessTokenDelegate>
 

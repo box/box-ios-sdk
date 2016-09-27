@@ -7,7 +7,6 @@
 //
 
 #import "BOXModelTestCase.h"
-#import "BOXAPIJSONOperation.h"
 
 @implementation BOXModelTestCase
 
@@ -15,10 +14,8 @@
 {
     NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:cannedName ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    BOXAPIJSONOperation *dummyOperation = [[BOXAPIJSONOperation alloc] init];
-    [dummyOperation processResponseData:data];
-    NSDictionary *dictionary = dummyOperation.responseJSON;
-    return dictionary;
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    return [dictionary isKindOfClass:NSDictionary.class] ? dictionary : nil;
 }
 
 @end
