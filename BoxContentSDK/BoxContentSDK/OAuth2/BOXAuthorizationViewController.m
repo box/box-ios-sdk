@@ -13,6 +13,9 @@
 #import "BOXUserRequest.h"
 #import "BOXContentSDKErrors.h"
 #import "UIApplication+ExtensionSafeAdditions.h"
+#import "BOXContentClient+Authentication.h"
+#import "BOXOAuth2Session.h"
+#import "BOXAppUserSession.h"
 
 // http://stackoverflow.com/a/5337804/527393
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -139,7 +142,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     [super viewDidLoad];
 
-    [self loadAuthorizationURL];
+    if ([self.SDKClient.session isKindOfClass:[BOXOAuth2Session class]]) {
+        [self loadAuthorizationURL];
+    } else if ([self.SDKClient.session isKindOfClass:[BOXAppUserSession class]]) {
+        __weak BOXAuthorizationViewController *me = self;
+        [self.SDKClient autheticateAppUserWithCompletionBlock:^(BOXUser *user, NSError *error) {
+            self.completionBlock(me, user, error);
+        }];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

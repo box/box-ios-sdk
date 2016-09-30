@@ -41,6 +41,11 @@
 - (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
 /**
+ * Authenticate in app users mode, which uses an access token delegate.
+ */
+- (void)autheticateAppUserWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
+
+/**
  *  Discerns whether a launch URL is associated with Box App-to-App authentication - if it is the return URL that should be used
  *  to complete the user's authentication in the case of authenticating App-to-App using the Box app.
  *
