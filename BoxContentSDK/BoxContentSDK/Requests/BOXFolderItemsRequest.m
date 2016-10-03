@@ -15,7 +15,10 @@
 #import "BOXContentSDKErrors.h"
 
 @interface BOXFolderItemsRequest ()
+
 @property (nonatomic) BOOL isCancelled;
+@property (nonatomic, readwrite, strong) BOXFolderPaginatedItemsRequest *paginatedRequest;
+
 @end
 
 @implementation BOXFolderItemsRequest
@@ -34,6 +37,8 @@
     @synchronized(self) {
         [super cancel];
         self.isCancelled = YES;
+        [self.paginatedRequest cancel];
+        self.paginatedRequest = nil;
     }
 }
 
@@ -95,6 +100,8 @@
         NSMutableArray *results = [[NSMutableArray alloc] init];
 
         BOXItemsBlock localRefreshBlock = ^(NSArray *items, NSError *error){
+            self.paginatedRequest = nil;
+
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(items, error);
             } onMainThread:isMainThread];
@@ -169,6 +176,7 @@
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
     paginatedRequest.fieldsToExclude = self.fieldsToExclude;
     paginatedRequest.userAgentPrefix = self.userAgentPrefix;
+    self.paginatedRequest = paginatedRequest;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }
 
