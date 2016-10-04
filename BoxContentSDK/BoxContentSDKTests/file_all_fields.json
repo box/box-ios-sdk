@@ -73,5 +73,24 @@
                     "name": "Favorites",
                     "collection_type": "favorites"
                     }
-                    ]
+                    ],
+    "representations": {
+        "entries": [
+            {
+                "representation": "original",
+                "properties": {},
+                "status": "success",
+                "details": {},
+                "links": {
+                    "content": {
+                        "type": "asset",
+                        "url": "https://dl.boxcloud.com/api/2.0/files/123/versions/1234/representations/original/content/"
+                    },
+                    "info": {
+                        "url": "https://api.box.com/2.0/files/123/versions/1234/representations/original"
+                    }
+                }
+            }
+        ]
+    }
 }
