@@ -44,8 +44,8 @@ static NSString *staticKeychainAccessGroup;
 
 - (instancetype)initWithAPIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
 {
-    if ([self init])
-    {
+    self = [self init];
+    if (self) {
         _APIBaseURLString = baseURL;
         _queueManager = queueManager;
     }

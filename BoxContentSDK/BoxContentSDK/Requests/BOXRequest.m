@@ -224,6 +224,48 @@
     return operation;
 }
 
+- (BOXAPIHeadOperation *)headOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                        queryStringParameters:(NSDictionary *)queryParameters
+                               bodyDictionary:(NSDictionary *)bodyDictionary
+                                 successBlock:(BOXAPIHeaderSuccessBlock)successBlock
+                                 failureBlock:(BOXAPIHeaderFailureBlock)failureBlock
+{
+    BOXAPIHeadOperation *operation = [[BOXAPIHeadOperation alloc] initWithURL:URL
+                                                                   HTTPMethod:HTTPMethod
+                                                                         body:bodyDictionary
+                                                                  queryParams:queryParameters
+                                                                      session:self.queueManager.session];
+    if (successBlock != nil) {
+        operation.successBlock = successBlock;
+    }
+    if (failureBlock != nil) {
+        operation.failureBlock = failureBlock;
+    }
+    
+    return operation;
+}
+
+- (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                 successBlock:(BOXDownloadSuccessBlock)successBlock
+                                 failureBlock:(BOXDownloadFailureBlock)failureBlock
+{
+    BOXStreamOperation *operation = [[BOXStreamOperation alloc] initWithURL:URL
+                                                                   HTTPMethod:HTTPMethod
+                                                                         body:nil
+                                                                  queryParams:nil
+                                                                      session:self.queueManager.session];
+    if (successBlock != nil) {
+        operation.successBlock = successBlock;
+    }
+    if (failureBlock != nil) {
+        operation.failureBlock = failureBlock;
+    }
+    
+    return operation;
+}
+
 - (NSArray *)fullFolderFieldsArray
 {
     NSArray *array = @[BOXAPIObjectKeyType,
@@ -268,6 +310,39 @@
 
 - (NSArray *)fullFileFieldsArray
 {
+#ifdef BOX_REPRESENTATIONS_ENDPOINT
+    NSArray *array = @[BOXAPIObjectKeyType,
+                       BOXAPIObjectKeyID,
+                       BOXAPIObjectKeySequenceID,
+                       BOXAPIObjectKeyETag,
+                       BOXAPIObjectKeySHA1,
+                       BOXAPIObjectKeyName,
+                       BOXAPIObjectKeyDescription,
+                       BOXAPIObjectKeySize,
+                       BOXAPIObjectKeyPathCollection,
+                       BOXAPIObjectKeyCreatedAt,
+                       BOXAPIObjectKeyModifiedAt,
+                       BOXAPIObjectKeyTrashedAt,
+                       BOXAPIObjectKeyPurgedAt,
+                       BOXAPIObjectKeyContentCreatedAt,
+                       BOXAPIObjectKeyContentModifiedAt,
+                       BOXAPIObjectKeyCreatedBy,
+                       BOXAPIObjectKeyModifiedBy,
+                       BOXAPIObjectKeyOwnedBy,
+                       BOXAPIObjectKeySharedLink,
+                       BOXAPIObjectKeyParent,
+                       BOXAPIObjectKeyItemStatus,
+                       BOXAPIObjectKeyVersionNumber,
+                       BOXAPIObjectKeyCommentCount,
+                       BOXAPIObjectKeyPermissions,
+                       BOXAPIObjectKeyLock,
+                       BOXAPIObjectKeyExtension,
+                       BOXAPIObjectKeyIsPackage,
+                       BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
+                       BOXAPIObjectKeyCollections,
+                       BOXAPIObjectKeyRepresentations];
+    return array;
+#else
     NSArray *array = @[BOXAPIObjectKeyType,
                        BOXAPIObjectKeyID,
                        BOXAPIObjectKeySequenceID,
@@ -298,6 +373,7 @@
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections];
     return array;
+#endif
 }
 
 - (NSString *)fullFileFieldsParameterString

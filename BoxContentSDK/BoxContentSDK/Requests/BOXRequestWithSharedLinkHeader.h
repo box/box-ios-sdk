@@ -14,5 +14,6 @@
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinkHeadersHelper;
 
 - (void)addSharedLinkHeaderToRequest:(NSMutableURLRequest *)request;
+- (NSString *)sharedLinkHeaderString;
 
 @end

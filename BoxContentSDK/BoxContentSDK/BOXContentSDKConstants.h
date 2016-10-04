@@ -149,6 +149,38 @@ extern BOXCollaborationRole *const BOXCollaborationRoleViewer;
 extern BOXCollaborationRole *const BOXCollaborationRolePreviewer;
 extern BOXCollaborationRole *const BOXCollaborationRoleUploader;
 
+// Representation Type
+typedef NSString BOXRepresentationType;
+extern BOXRepresentationType *const BOXRepresentationTypeOriginal;
+extern BOXRepresentationType *const BOXRepresentationTypePDF;
+extern BOXRepresentationType *const BOXRepresentationTypeMP4;
+extern BOXRepresentationType *const BOXRepresentationTypeMP3;
+extern BOXRepresentationType *const BOXRepresentationTypePNG;
+extern BOXRepresentationType *const BOXRepresentationTypeJPG;
+extern BOXRepresentationType *const BOXRepresentationType3D;
+extern BOXRepresentationType *const BOXRepresentationTypeFilmstrip;
+extern BOXRepresentationType *const BOXRepresentationTypeDASH;
+extern BOXRepresentationType *const BOXRepresentationTypeHLS;
+extern BOXRepresentationType *const BOXRepresentationTypeCrocodoc;
+extern BOXRepresentationType *const BOXRepresentationTypeDICOM;
+
+// Representation Status
+typedef NSString BOXRepresentationStatus;
+extern BOXRepresentationStatus *const BOXRepresentationStatusSuccess;
+extern BOXRepresentationStatus *const BOXRepresentationStatusPending;
+extern BOXRepresentationStatus *const BOXRepresentationStatusNone;
+extern BOXRepresentationStatus *const BOXRepresentationStatusError;
+
+// Representation content type
+typedef NSString BOXRepresentationContentType;
+extern BOXRepresentationContentType *const BOXRepresentationContentTypeAsset;
+extern BOXRepresentationContentType *const BOXRepresentationContentTypeManifest;
+
+// Representation dimensions
+typedef NSString BOXRepresentationDimensions;
+extern BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024;
+extern BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048;
+
 // Folder upload email access level
 typedef NSString BOXFolderUploadEmailAccessLevel;
 extern BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen;
@@ -296,6 +328,14 @@ extern NSString *const BOXAPIObjectKeyAcknowledgedAt;
 extern NSString *const BOXAPIObjectKeyAccessibleBy;
 extern NSString *const BOXAPIObjectKeyEntries;
 extern NSString *const BOXAPIObjectKeyIsBoxNotesCreationEnabled;
+extern NSString *const BOXAPIObjectKeyRepresentations;
+extern NSString *const BOXAPIObjectKeyRepresentation;
+extern NSString *const BOXAPIObjectKeyProperties;
+extern NSString *const BOXAPIObjectKeyDetails;
+extern NSString *const BOXAPIObjectKeyLinks;
+extern NSString *const BOXAPIObjectKeyContent;
+extern NSString *const BOXAPIObjectKeyInfo;
+extern NSString *const BOXAPIObjectKeyDimensions;
 
 // API Metadata Object keys
 extern NSString *const BOXAPIMetadataObjectKeyID;
@@ -321,7 +361,7 @@ extern NSString *const BOXAPIEventStreamTypeChanges;
 extern NSString *const BOXAPIEventStreamTypeSync;
 extern NSString *const BOXAPIEventStreamTypeAdminLogs;
 
-// Standart Events
+// Standard Events
 extern NSString *const BOXAPIEventTypeItemCreate;
 extern NSString *const BOXAPIEventTypeItemUpload;
 extern NSString *const BOXAPIEventTypeCommentCreate;

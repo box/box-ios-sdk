@@ -31,7 +31,9 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(canOpenURL:)]) {
-            result = [application performSelector:@selector(canOpenURL:) withObject:url];
+            // Although `performSelector:` is declared to return an `id`, it is in practice castable to a `BOOL` when the
+            // selector returns one.
+            result = (BOOL)[application performSelector:@selector(canOpenURL:) withObject:url];
         }
     }
     
@@ -45,7 +47,9 @@
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
         if ([application respondsToSelector:@selector(openURL:)]) {
-            result = [application performSelector:@selector(openURL:) withObject:url];
+            // Although `performSelector:` is declared to return an `id`, it is in practice castable to a `BOOL` when the
+            // selector returns one.
+            result = (BOOL)[application performSelector:@selector(openURL:) withObject:url];
         }
     }
     
