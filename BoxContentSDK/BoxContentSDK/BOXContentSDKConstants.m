@@ -46,6 +46,7 @@ NSString *const BOXAPISubresourceCurrent = @"current";
 NSString *const BOXAPISubresourceMetadata = @"metadata";
 
 // HTTP Method Names
+BOXAPIHTTPMethod *const BOXAPIHTTPMethodHEAD = @"HEAD";
 BOXAPIHTTPMethod *const BOXAPIHTTPMethodDELETE = @"DELETE";
 BOXAPIHTTPMethod *const BOXAPIHTTPMethodGET = @"GET";
 BOXAPIHTTPMethod *const BOXAPIHTTPMethodOPTIONS = @"OPTIONS";

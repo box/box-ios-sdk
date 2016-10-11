@@ -17,7 +17,6 @@
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
-
 @implementation BOXRequest
 
 - (BOXAPIQueueManager *)queueManager
