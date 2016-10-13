@@ -24,6 +24,10 @@ extern NSString *const BOXJSONErrorResponseKey;
 typedef enum {
     // 202 Accepted: operation could not be completed at this time and is in progress
     BOXContentSDKAPIErrorAccepted = 202,
+    
+    // 3xx errors
+    BOXContentSDKAPIErrorTemporaryRedirection = 302,
+    
     // 4xx errors
     BOXContentSDKAPIErrorBadRequest = 400,
     BOXContentSDKAPIErrorUnauthorized = 401,

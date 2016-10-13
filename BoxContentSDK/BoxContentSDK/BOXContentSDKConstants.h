@@ -50,6 +50,7 @@ extern NSString *const BOXAPISubresourceMetadata;
 
 // HTTP Method Names
 typedef NSString BOXAPIHTTPMethod;
+extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodHEAD;
 extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodDELETE;
 extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodGET;
 extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodOPTIONS;
