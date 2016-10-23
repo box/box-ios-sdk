@@ -45,12 +45,12 @@ When you no longer need the session, it is a good practice to logout.
 ```objectivec
 BOXUser *user = //Get the desired BOXUser instance.
 BOXContentClient *contentClient = [BOXContentClient clientForUser:user];
-[contentClient logOut]
+[contentClient logOut];
 ```
 
 Multi-Account Mode
 ------------------------
-Implement the BOXAccessTokenDelegate method to retrieve the access token for corresponding user.
+Implement the BOXAPIAccessTokenDelegate method to retrieve the access token for corresponding user.
 ```objectivec
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError))completion
 {
@@ -77,7 +77,7 @@ Authenticate a new account:
 ```objectivec
 BOXContentClient *client = [BOXContentClient clientForNewSession];
 [client setAccessTokenDelegate: self];
-[client autheticateWithCompletionBlock: ^(BOXUser *user, NSError *error){
+[client autheticateAppUserWithCompletionBlock: ^(BOXUser *user, NSError *error){
   if (error) {
     //Do stuff in case of error.
   } else {
