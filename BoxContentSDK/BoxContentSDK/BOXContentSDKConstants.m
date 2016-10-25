@@ -44,6 +44,7 @@ NSString *const BOXAPISubresourceVersions = @"versions";
 NSString *const BOXAPISubresourceThumnailPNG = @"thumbnail.png";
 NSString *const BOXAPISubresourceCurrent = @"current";
 NSString *const BOXAPISubresourceMetadata = @"metadata";
+NSString *const BOXAPISubresourceAvatar = @"avatar";
 
 // HTTP Method Names
 BOXAPIHTTPMethod *const BOXAPIHTTPMethodHEAD = @"HEAD";
@@ -198,6 +199,7 @@ NSString *const BOXAPIParameterKeyMinWidth = @"min_width";
 NSString *const BOXAPIParameterKeyMinHeight = @"min_height";
 NSString *const BOXAPIParameterKeyMaxWidth = @"max_width";
 NSString *const BOXAPIParameterKeyMaxHeight = @"max_height";
+NSString *const BOXAPIParameterKeyAvatarType = @"pic_type";
 
 // Metadata Parameter Keys
 NSString *const BOXAPIParameterKeyTemplate = @"templateKey";

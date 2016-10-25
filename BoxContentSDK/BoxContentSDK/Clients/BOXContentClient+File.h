@@ -19,7 +19,6 @@
 @class BOXFileUploadNewVersionRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXPreflightCheckRequest;
-@class BOXFileThumbnailRequest;
 @class ALAsset;
 @class ALAssetsLibrary;
 

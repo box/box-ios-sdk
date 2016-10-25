@@ -47,6 +47,7 @@ extern NSString *const BOXAPISubresourceVersions;
 extern NSString *const BOXAPISubresourceThumnailPNG;
 extern NSString *const BOXAPISubresourceCurrent;
 extern NSString *const BOXAPISubresourceMetadata;
+extern NSString *const BOXAPISubresourceAvatar;
 
 // HTTP Method Names
 typedef NSString BOXAPIHTTPMethod;
@@ -218,6 +219,7 @@ extern NSString *const BOXAPIParameterKeyMinWidth;
 extern NSString *const BOXAPIParameterKeyMinHeight;
 extern NSString *const BOXAPIParameterKeyMaxWidth;
 extern NSString *const BOXAPIParameterKeyMaxHeight;
+extern NSString *const BOXAPIParameterKeyAvatarType;
 
 // Metadata Parameter Key
 extern NSString *const BOXAPIParameterKeyTemplate;
@@ -434,5 +436,12 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
     BOXThumbnailSize64 = 64,
     BOXThumbnailSize128 = 128,
     BOXThumbnailSize256 = 256
+};
+
+typedef NS_ENUM(NSUInteger, BOXAvatarType) {
+    BOXAvatarTypeUnspecified = 0,
+    BOXAvatarTypeSmall,
+    BOXAvatarTypeLarge,
+    BOXAvatarTypeProfile
 };
 

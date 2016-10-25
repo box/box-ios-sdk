@@ -1,62 +1,59 @@
 //
-//  BOXFileThumbnailRequest.m
+//  BOXUserAvatarRequest.m
 //  BoxContentSDK
 //
 
 #import "BOXRequest_Private.h"
-#import "BOXFileThumbnailRequest.h"
+#import "BOXUserAvatarRequest.h"
 
 #import "BOXAPIDataOperation.h"
 
-@interface BOXFileThumbnailRequest ()
+@interface BOXUserAvatarRequest ()
 
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 
 @end
 
-@implementation BOXFileThumbnailRequest
+@implementation BOXUserAvatarRequest
 
-- (instancetype)initWithFileID:(NSString *)fileID
+- (instancetype)initWithUserID:(NSString *)userID
 {
     if (self = [super init]) {
-        _fileID = fileID;
+        _userID = userID;
         _outputStream = [[NSOutputStream alloc] initToMemory];
-    }
-    return self;
-}
 
-- (instancetype)initWithFileID:(NSString *)fileID size:(BOXThumbnailSize)size
-{
-    if (self = [self initWithFileID:fileID]) {
-        _maxWidth = [NSNumber numberWithInteger:size];
-        _maxHeight = [NSNumber numberWithInteger:size];
+        _avatarType = BOXAvatarTypeUnspecified;
     }
+
     return self;
 }
 
 - (BOXAPIOperation *)createOperation
 {
-    NSURL *URL = [self URLWithResource:BOXAPIResourceFiles
-                                    ID:self.fileID
-                           subresource:BOXAPISubresourceThumnailPNG
+    NSURL *URL = [self URLWithResource:BOXAPIResourceUsers
+                                    ID:self.userID
+                           subresource:BOXAPISubresourceAvatar
                                  subID:nil];
-    
+
     NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
 
-    if (self.minWidth) {
-        queryParameters[BOXAPIParameterKeyMinWidth] = [NSString stringWithFormat:@"%lld", [self.minWidth longLongValue]];
+    NSString *avatarTypeString = nil;
+    switch (self.avatarType) {
+        case BOXAvatarTypeSmall:
+            avatarTypeString = @"small";
+            break;
+        case BOXAvatarTypeLarge:
+            avatarTypeString = @"large";
+            break;
+        case BOXAvatarTypeProfile:
+            avatarTypeString = @"profile";
+            break;
+        case BOXAvatarTypeUnspecified:
+        default:
+            break;
     }
-
-    if (self.minHeight) {
-        queryParameters[BOXAPIParameterKeyMinHeight] = [NSString stringWithFormat:@"%lld", [self.minHeight longLongValue]];
-    }
-
-    if (self.maxWidth) {
-        queryParameters[BOXAPIParameterKeyMaxWidth] = [NSString stringWithFormat:@"%lld", [self.maxWidth longLongValue]];
-    }
-
-    if (self.maxHeight) {
-        queryParameters[BOXAPIParameterKeyMaxHeight] = [NSString stringWithFormat:@"%lld", [self.maxHeight longLongValue]];
+    if ([avatarTypeString length] > 0) {
+        queryParameters[BOXAPIParameterKeyAvatarType] = avatarTypeString;
     }
 
     BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
@@ -65,11 +62,9 @@
                                                      bodyDictionary:nil
                                                        successBlock:nil
                                                        failureBlock:nil];
-    dataOperation.modelID = self.fileID;
+    dataOperation.modelID = self.userID;
     dataOperation.outputStream = self.outputStream;
     dataOperation.isSmallDownloadOperation = YES;
-    
-    [self addSharedLinkHeaderToRequest:dataOperation.APIRequest];
 
     return dataOperation;
 }
@@ -91,7 +86,8 @@
         NSOutputStream *outputStream = self.outputStream;
         dataOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
             NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
-            UIImage *image = [UIImage imageWithData:data scale:[[UIScreen mainScreen] scale]];
+            UIImage *image = [UIImage imageWithData:data
+                                              scale:[[UIScreen mainScreen] scale]];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(image, nil);
             } onMainThread:isMainThread];
@@ -103,18 +99,6 @@
         };
         [self performRequest];
     }
-}
-
-#pragma mark - Superclass overidden methods
-
-- (NSString *)itemIDForSharedLink
-{
-    return self.fileID;
-}
-
-- (BOXAPIItemType *)itemTypeForSharedLink
-{
-    return BOXAPIItemTypeFile;
 }
 
 @end

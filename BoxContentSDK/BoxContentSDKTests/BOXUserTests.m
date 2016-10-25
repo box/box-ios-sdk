@@ -76,6 +76,7 @@
     XCTAssertEqualObjects(@"604-423-4362", user.phone);
     XCTAssertEqualObjects(@"100 Main Street, Vancouver BC, Canada", user.address);
     XCTAssertEqualObjects([NSURL URLWithString:@"https://app.box.com/api/avatar/large/13338532"], user.avatarURL);
+    XCTAssertEqual(BOXAPIBooleanYES, user.hasCustomAvatar);
     
     XCTAssertEqualObjects(@"user", user.role);
     NSArray *expectedTrackingCodes = @[
@@ -118,6 +119,7 @@
     XCTAssertEqualObjects(@"604-423-4362", user.phone);
     XCTAssertEqualObjects(@"100 Main Street, Vancouver BC, Canada", user.address);
     XCTAssertEqualObjects([NSURL URLWithString:@"https://app.box.com/api/avatar/large/13338532"], user.avatarURL);
+    XCTAssertEqual(BOXAPIBooleanYES, user.hasCustomAvatar);
     
     XCTAssertEqualObjects(@"user", user.role);
     NSArray *expectedTrackingCodes = @[

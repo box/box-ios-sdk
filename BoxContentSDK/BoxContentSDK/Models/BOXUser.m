@@ -12,7 +12,8 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
 {
-    BOXAssert([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeUser], @"Invalid type for object.");
+    BOXAssert(([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeUser] ||
+               JSONResponse == nil), @"Invalid type for object.");
     
     if (self = [super initWithJSON:JSONResponse])
     {
@@ -112,6 +113,15 @@
                                                                     nullAllowed:NO];
         if (avatarURLString) {
             self.avatarURL = [NSURL URLWithString:avatarURLString];
+        }
+        
+        self.hasCustomAvatar = BOXAPIBooleanUnknown;
+        NSNumber *hasCustomAvatarNumber = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyHasCustomAvatar
+                                                                         inDictionary:JSONResponse
+                                                                      hasExpectedType:[NSNumber class]
+                                                                          nullAllowed:NO];
+        if (hasCustomAvatarNumber != nil) {
+            self.hasCustomAvatar = hasCustomAvatarNumber.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
         }
         
         self.role = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyRole
