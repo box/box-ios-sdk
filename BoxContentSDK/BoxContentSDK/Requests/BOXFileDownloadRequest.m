@@ -58,7 +58,7 @@
                                                        successBlock:nil
                                                        failureBlock:nil];
 
-    dataOperation.fileID = self.fileID;
+    dataOperation.modelID = self.fileID;
     
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
@@ -88,7 +88,7 @@
             };
         }
 
-        fileOperation.successBlock = ^(NSString *fileID, long long expectedTotalBytes) {
+        fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil);
             } onMainThread:isMainThread];

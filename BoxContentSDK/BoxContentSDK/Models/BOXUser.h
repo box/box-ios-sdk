@@ -92,6 +92,11 @@
 @property (nonatomic, readwrite, strong) NSURL *avatarURL;
 
 /**
+ *  Whether this user has a custom avatar set.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean hasCustomAvatar;
+
+/**
  *  This user’s enterprise role. Can be admin, coadmin, or user.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.

@@ -1,5 +1,5 @@
 //
-//  BOXClient+UserAPI.h
+//  BOXClient+User.h
 //  BoxContentSDK
 //
 //  Created on 11/14/14.
@@ -7,8 +7,10 @@
 //
 
 #import "BOXContentClient.h"
+#import "BOXContentSDKConstants.h"
 
 @class BOXUserRequest;
+@class BOXUserAvatarRequest;
 
 @interface BOXContentClient (UserAPI)
 
@@ -18,5 +20,16 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXUserRequest *)currentUserRequest;
+
+/**
+ *  Generate a request to retrieve the avatar of a user.
+ *
+ *  @param userID   The ID of the user whose avatar is being fetched.
+ *  @param type     The avatar size type (small, large, profile, etc.).
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXUserAvatarRequest *)userAvatarRequestWithID:(NSString *)userID
+                                             type:(BOXAvatarType)type;
 
 @end

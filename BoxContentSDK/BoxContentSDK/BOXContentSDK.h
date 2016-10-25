@@ -41,6 +41,7 @@
 // Requests
 #import "BOXRequest.h"
 #import "BOXUserRequest.h"
+#import "BOXUserAvatarRequest.h"
 #import "BOXSharedItemRequest.h"
 #import "BOXFileRequest.h"
 #import "BOXBookmarkRequest.h"

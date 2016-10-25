@@ -41,7 +41,7 @@
 @synthesize successBlock = _successBlock;
 @synthesize failureBlock = _failureBlock;
 @synthesize progressBlock = _progressBlock;
-@synthesize fileID = _fileID;
+@synthesize modelID = _modelID;
 
 @synthesize outputStream = _outputStream;
 @synthesize receivedDataBuffer = _receivedDataBuffer;
@@ -120,7 +120,7 @@
 
     if (self.error == nil) {
         if (self.successBlock) {
-            self.successBlock(self.fileID, [self contentLength]);
+            self.successBlock(self.modelID, [self contentLength]);
         }
         shouldClearCompletionBlocks = YES;
     } else {

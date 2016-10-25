@@ -466,6 +466,7 @@
                        BOXAPIObjectKeyPhone,
                        BOXAPIObjectKeyAddress,
                        BOXAPIObjectKeyAvatarURL,
+                       BOXAPIObjectKeyHasCustomAvatar,
                        BOXAPIObjectKeyIsExemptFromDeviceLimits,
                        BOXAPIObjectKeyIsExemptFromLoginVerification,
                        BOXAPIObjectKeyEnterprise,
