@@ -39,7 +39,14 @@
 
 - (NSUInteger)rangeStep
 {
-    return 1000;
+    NSUInteger rangeStep = 1000;
+    
+    // Root folder has better performance with a smaller page size
+    if ([self.folderID isEqualToString:BOXAPIFolderIDRoot]) {
+        rangeStep = 100;
+    }
+    
+    return rangeStep;
 }
 
 + (NSString *)uniqueHashForItem:(BOXItem *)item
