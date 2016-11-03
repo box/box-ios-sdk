@@ -13,8 +13,13 @@
 
 - (NSDictionary *)box_queryDictionary
 {
+    return [[self class] box_queryDictionaryWithString:self.query];
+}
+
++ (NSDictionary *)box_queryDictionaryWithString:(NSString *)queryString
+{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSArray *keyValuePairs = [self.query componentsSeparatedByString:@"&"];
+    NSArray *keyValuePairs = [queryString componentsSeparatedByString:@"&"];
     NSArray *keyValuePairComponents = nil;
 
     for (NSString *keyValuePair in keyValuePairs)

@@ -19,4 +19,12 @@
  */
 - (NSDictionary *)box_queryDictionary;
 
+/**
+ * Returns the key value pairs given a URL's query string.
+ * @param queryString : The URL query string to be broken down into it's key-value pairs.
+ *
+ * @return The key value pairs in the provided query string.
+ */
++ (NSDictionary *)box_queryDictionaryWithString:(NSString *)queryString;
+
 @end
