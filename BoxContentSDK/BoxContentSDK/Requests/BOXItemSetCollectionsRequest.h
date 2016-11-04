@@ -13,6 +13,7 @@
 
 @property (nonatomic, readonly, strong) NSString *itemID;
 @property (nonatomic, readonly, strong) NSArray *collectionIDs;
+@property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs;

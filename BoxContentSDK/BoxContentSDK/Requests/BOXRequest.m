@@ -402,7 +402,8 @@
                        BOXAPIObjectKeySharedLink,
                        BOXAPIObjectKeyCommentCount,
                        BOXAPIObjectKeyPermissions,
-                       BOXAPIObjectKeyAllowedSharedLinkAccessLevels];
+                       BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
+                       BOXAPIObjectKeyCollections];
     return array;
 }
 
