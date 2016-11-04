@@ -56,7 +56,7 @@
                            resource:BOXAPIResourceBookmarks];
 }
 
--(BOXAPIOperation *)createOperation
+- (BOXAPIOperation *)createOperation
 {
     BOXAPIJSONOperation *operation = nil;
     
@@ -64,18 +64,21 @@
                                     ID:self.itemID
                            subresource:nil
                                  subID:nil];
-    
+
+    NSDictionary *queryParameters = nil;
+    if (self.requestAllItemFields) {
+        queryParameters = @{BOXAPIParameterKeyFields :[self fullItemFieldsParameterString]};
+    }
+
     NSMutableArray *bodyContent = [NSMutableArray array];
-    
     for (NSString *collectionID in self.collectionIDs) {
         [bodyContent addObject:@{BOXAPIObjectKeyID : collectionID}];
     }
-        
     NSDictionary *bodyDictionary = @{BOXAPIObjectKeyCollections : bodyContent};
     
     operation = [self JSONOperationWithURL:url 
                                 HTTPMethod:BOXAPIHTTPMethodPUT
-                     queryStringParameters:nil
+                     queryStringParameters:queryParameters
                             bodyDictionary:bodyDictionary
                           JSONSuccessBlock:nil
                               failureBlock:nil];
