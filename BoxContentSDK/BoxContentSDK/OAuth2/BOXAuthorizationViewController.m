@@ -470,7 +470,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         BOXLog(@"Presenting error");
         // The error is usually in HTML to be shown to the user.
         // box.com is a placeholder to prevent file:// from being accessed.
-        [webView loadHTMLString:[error localizedDescription] baseURL:@"https://www.box.com"];
+        [webView loadHTMLString:[error localizedDescription] baseURL:[NSURL URLWithString:@"https://www.box.com"]];
     }
 
     [self.activityIndicator stopAnimating];
