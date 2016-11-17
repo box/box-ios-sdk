@@ -469,8 +469,10 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     if (ignoreError == NO) {
         BOXLog(@"Presenting error");
         // The error is usually in HTML to be shown to the user.
-        // box.com is a placeholder to prevent file:// from being accessed.
-        [webView loadHTMLString:[error localizedDescription] baseURL:[NSURL URLWithString:@"https://www.box.com"]];
+        // Use about:blank as a placeholder to prevent access to the file-system scope
+        // (nil and file:// URLs would allow scoped access to the file-system).
+        // Not using box.com since when the error is not valid HTML, the base URL gets loaded.
+        [webView loadHTMLString:[error localizedDescription] baseURL:[NSURL URLWithString:@"about:blank"]];
     }
 
     [self.activityIndicator stopAnimating];
