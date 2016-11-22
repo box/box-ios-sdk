@@ -9,6 +9,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXUser.h"
 #import "BOXCollection.h"
+#import "BOXRepresentation.h"
 
 @interface BOXFileTests : BOXModelTestCase
 @end
@@ -174,6 +175,25 @@
     
     for (NSUInteger i = 0; i < file.collections.count ; i++) {
         [self assertModel:file.collections[i] isEquivalentTo:expectedCollections[i]];
+    }
+    
+    NSDictionary *representationsDictionary = dictionary[BOXAPIObjectKeyRepresentations];
+    NSArray *representationsJSON = [representationsDictionary objectForKey:@"entries"];
+    NSMutableArray *expectedRepresentations = [NSMutableArray arrayWithCapacity:representationsJSON.count];
+    for (NSDictionary *dict in representationsJSON) {
+        [expectedRepresentations addObject:[[BOXRepresentation alloc] initWithJSON:dict]];
+    }
+    
+    XCTAssertEqual(file.representations.count, expectedRepresentations.count);
+    for (NSUInteger i = 0; i < file.representations.count; i++) {
+        BOXRepresentation *representation = file.representations[i];
+        BOXRepresentation *expectedRepresentation = expectedRepresentations[i];
+        XCTAssertEqualObjects(representation.status, expectedRepresentation.status);
+        XCTAssertEqualObjects(representation.type, expectedRepresentation.type);
+        XCTAssertEqualObjects(representation.contentURL, expectedRepresentation.contentURL);
+        XCTAssertEqualObjects(representation.infoURL, expectedRepresentation.infoURL);
+        XCTAssertEqualObjects(representation.dimensions, expectedRepresentation.dimensions);
+        XCTAssertEqualObjects(representation.details, expectedRepresentation.details);
     }
     
     XCTAssertTrue(file.isFile);

@@ -296,7 +296,8 @@
                        BOXAPIObjectKeyExtension,
                        BOXAPIObjectKeyIsPackage,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
-                       BOXAPIObjectKeyCollections];
+                       BOXAPIObjectKeyCollections,
+                       BOXAPIObjectKeyRepresentations];
     return array;
 }
 

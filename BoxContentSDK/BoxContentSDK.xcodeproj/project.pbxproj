@@ -58,6 +58,9 @@
 		0ED881C81A60A84A009FED90 /* BOXInputStreamTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */; };
 		1137DEE51CA0D84300EA75F9 /* UIDevice+BOXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */; };
 		1137DEE61CA0D84300EA75F9 /* UIDevice+BOXAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */; };
+		119F0FBF1D39C61E0079FFD9 /* BOXRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = 119F0FBD1D39C61E0079FFD9 /* BOXRepresentation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		119F0FC01D39C61E0079FFD9 /* BOXRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 119F0FBE1D39C61E0079FFD9 /* BOXRepresentation.m */; };
+		11E465461D86006900E267B1 /* representations.json in Resources */ = {isa = PBXBuildFile; fileRef = 11E465451D86006900E267B1 /* representations.json */; };
 		150413F11A45032A00EE99F3 /* BOXFileDownloadRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */; };
 		150414291A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */; };
 		150C27741A699AA400099850 /* BOXContentClient+FileVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -499,6 +502,9 @@
 		0ED881C71A60A84A009FED90 /* BOXInputStreamTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXInputStreamTestHelper.m; sourceTree = "<group>"; };
 		1137DEE31CA0D84300EA75F9 /* UIDevice+BOXAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BOXAdditions.h"; sourceTree = "<group>"; };
 		1137DEE41CA0D84300EA75F9 /* UIDevice+BOXAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BOXAdditions.m"; sourceTree = "<group>"; };
+		119F0FBD1D39C61E0079FFD9 /* BOXRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXRepresentation.h; sourceTree = "<group>"; };
+		119F0FBE1D39C61E0079FFD9 /* BOXRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXRepresentation.m; sourceTree = "<group>"; };
+		11E465451D86006900E267B1 /* representations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = representations.json; sourceTree = "<group>"; };
 		150413F01A45032A00EE99F3 /* BOXFileDownloadRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileDownloadRequestTests.m; sourceTree = "<group>"; };
 		150414281A4A43A100EE99F3 /* BOXFileThumbnailRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileThumbnailRequestTests.m; sourceTree = "<group>"; };
 		150C27721A699AA400099850 /* BOXContentClient+FileVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+FileVersion.h"; sourceTree = "<group>"; };
@@ -1264,6 +1270,7 @@
 		15F5EE6F1A23FED600FBBE1D /* CannedResponses */ = {
 			isa = PBXGroup;
 			children = (
+				11E465451D86006900E267B1 /* representations.json */,
 				C55386361C98DF41009E3B90 /* exceeded_device_limits.json */,
 				C55386371C98DF41009E3B90 /* missing_device_id.json */,
 				C55386381C98DF41009E3B90 /* unsupported_device_pinning_runtime.json */,
@@ -1549,6 +1556,8 @@
 				8676E0D81B2F575E00AC2677 /* BOXMetadataTemplateField.m */,
 				8676E0DB1B2F696C00AC2677 /* BOXMetadataKeyValue.h */,
 				8676E0DC1B2F696C00AC2677 /* BOXMetadataKeyValue.m */,
+				119F0FBD1D39C61E0079FFD9 /* BOXRepresentation.h */,
+				119F0FBE1D39C61E0079FFD9 /* BOXRepresentation.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1744,6 +1753,7 @@
 				15958E3C1A14338A00AEBCEE /* BOXSharedItemRequest.h in Headers */,
 				15280E381A37E70B008D4F5D /* BOXModel.h in Headers */,
 				15958E1B1A14338A00AEBCEE /* BOXFileCopyRequest.h in Headers */,
+				119F0FBF1D39C61E0079FFD9 /* BOXRepresentation.h in Headers */,
 				C57E95E21A3752E90094D7B0 /* BOXFileCommentsRequest.h in Headers */,
 				15958E2A1A14338A00AEBCEE /* BOXFileVersionsRequest.h in Headers */,
 				0E5E14691A41032200B205F6 /* BOXCollaborationCreateRequest.h in Headers */,
@@ -1883,6 +1893,7 @@
 				0E16F1271A437FA900BDDA21 /* collaborations_pending.json in Resources */,
 				E155961A1A367A570070ED1E /* bookmark_all_fields.json in Resources */,
 				70CC16A11ACCA8DD00C3CC80 /* get_items_3_5.json in Resources */,
+				11E465461D86006900E267B1 /* representations.json in Resources */,
 				155EFD5A1A252EF900F34254 /* file_all_fields.json in Resources */,
 				155170C41A5491CC004C00AF /* file_versions.json in Resources */,
 				C55386391C98DF41009E3B90 /* exceeded_device_limits.json in Resources */,
@@ -2066,6 +2077,7 @@
 				E4FAD9DD172CE2C50052AD11 /* BOXAPIDataOperation.m in Sources */,
 				E4FAD9DF172CE2C50052AD11 /* BOXAPIJSONOperation.m in Sources */,
 				15280E581A37E70B008D4F5D /* BOXItem.m in Sources */,
+				119F0FC01D39C61E0079FFD9 /* BOXRepresentation.m in Sources */,
 				E11BED571ADC050000A9216F /* BOXAppToAppMessage.m in Sources */,
 				150C27991A69C2DE00099850 /* BOXContentClient+SharedLink.m in Sources */,
 				0ED881AD1A5F4793009FED90 /* BOXAPIJSONPatchOperation.m in Sources */,
