@@ -1,3 +1,7 @@
+source "https://github.com/CocoaPods/Old-Specs"
+
+platform :ios, '9.0'
+
 target "BoxContentSDKSampleApp" do
 	pod 'box-ios-sdk', :path => '../'
 end
