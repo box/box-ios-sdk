@@ -9,6 +9,8 @@
 #import "BOXAbstractSession_Private.h"
 #import "BOXKeychainItemWrapper.h"
 #import "BOXUser.h"
+#import "BOXURLSessionIdentifier.h"
+#import "BOXURLSessionDelegate.h"
 #import "BOXUser_Private.h"
 #import "BOXRequest_Private.h"
 
@@ -31,6 +33,8 @@ static NSString *staticKeychainAccessGroup;
 
 @property (nonatomic, readwrite, strong) BOXNSURLSessionManager *urlSessionManager;
 
+@property (nonatomic, readonly) NSLock *sessionLock;
+
 @end
 
 @implementation BOXAbstractSession
@@ -39,8 +43,9 @@ static NSString *staticKeychainAccessGroup;
 {
     if (self = [super init]) {
         _credentialsPersistenceEnabled = YES;
+        _sessionLock = [[NSLock alloc] init];
     }
-    
+
     return self;
 }
 
@@ -52,8 +57,48 @@ static NSString *staticKeychainAccessGroup;
         _queueManager = queueManager;
         _urlSessionManager = urlSessionManager;
     }
-    
+
     return self;
+}
+
+#pragma mark - URL Sessions
+
+@synthesize defaultSession = _defaultSession;
+@synthesize backgroundSession = _backgroundSession;
+
+- (NSURLSession *)defaultSession
+{
+    NSURLSession *session;
+    [self.sessionLock lock];
+    {
+        if (!_defaultSession) {
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+            _defaultSession = [NSURLSession sessionWithConfiguration:config];
+        }
+        session = _defaultSession;
+    }
+    [self.sessionLock unlock];
+
+    return session;
+}
+
+- (NSURLSession *)backgroundSession
+{
+    NSURLSession *session;
+    [self.sessionLock lock];
+    {
+        if (!_backgroundSession) {
+            BOXAssert(self.user, @"A user is required for upload and download.");
+            BOXURLSessionIdentifier *identifier = [[BOXURLSessionIdentifier alloc] initWithUser:self.user];
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier.stringValue];
+            BOXURLSessionDelegate *sessionDelegate = [[BOXURLSessionDelegate alloc] init];
+            _backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:sessionDelegate delegateQueue:nil];
+        }
+        session = _backgroundSession;
+    }
+    [self.sessionLock unlock];
+
+    return session;
 }
 
 #pragma mark - Access Token Authorization
@@ -150,7 +195,7 @@ static NSString *staticKeychainAccessGroup;
         NSDictionary *dictionary = [self keychainDictionary];
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
+
         BOXKeychainItemWrapper *keychainItemWrapper = [[self class]keychainItemWrapperForUserWithID:self.user.modelID];
         [keychainItemWrapper resetKeychainItem];
         [keychainItemWrapper setObject:jsonString forKey:(__bridge id)kSecValueData];
@@ -176,9 +221,9 @@ static NSString *staticKeychainAccessGroup;
     {
         BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.modelID];
         [keychainWrapper resetKeychainItem];
-        
+
         [self clearCurrentSessionWithUserID:userID];
-        
+
         // There may be other instances of BOXAbstractSession that are linked to this account. Let them know that they need to wipe credentials as well.
         // (see didReceiveRevokeSessionNotification:)
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BOXSessionWasRevokedNotification
@@ -196,7 +241,7 @@ static NSString *staticKeychainAccessGroup;
         {
             BOXKeychainItemWrapper *keychainWrapper = [self keychainItemWrapperForUserWithID:user.modelID];
             [keychainWrapper resetKeychainItem];
-            
+
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BOXSessionWasRevokedNotification
                                                                                                  object:nil
                                                                                                userInfo:@{BOXUserIDKey : user.modelID}]];
@@ -207,13 +252,13 @@ static NSString *staticKeychainAccessGroup;
 + (NSArray *)usersInKeychain
 {
     NSMutableArray *users = [NSMutableArray array];
-    
+
     // Query the keychain for entries with an identifier that has our keychainIdentifierPrefix.
     NSMutableDictionary *keychainQuery = [NSMutableDictionary dictionaryWithDictionary:@{(__bridge id)kSecReturnAttributes : (__bridge id)kCFBooleanTrue,
                                                                                          (__bridge id)kSecMatchLimit : (__bridge id)kSecMatchLimitAll,
                                                                                          (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
                                                                                          (__bridge id)kSecAttrService : [BOXKeychainItemWrapper keychainServiceIdentifier]}];
-    
+
 #if ! TARGET_IPHONE_SIMULATOR
     // Ignore the access group if running on the iPhone simulator.
     // Apps that are built for the simulator aren't signed, so there's no keychain access group
@@ -222,7 +267,7 @@ static NSString *staticKeychainAccessGroup;
         [keychainQuery setObject:[self keychainAccessGroup] forKey:(__bridge id)kSecAttrAccessGroup];
     }
 #endif
-    
+
     CFArrayRef keychainQueryResult = NULL;
     OSStatus queryStatus =  SecItemCopyMatching((__bridge CFDictionaryRef)keychainQuery, (CFTypeRef *)&keychainQueryResult);
     if (queryStatus == 0 && keychainQueryResult != NULL)
@@ -234,7 +279,7 @@ static NSString *staticKeychainAccessGroup;
             if (![object isKindOfClass:[NSString class]]) {
                 continue;
             }
-            
+
             NSString *keychainIdentifier = (NSString *) object;
             if ([keychainIdentifier hasPrefix:[self keychainIdentifierPrefix]])
             {
@@ -257,13 +302,13 @@ static NSString *staticKeychainAccessGroup;
             }
         }
     }
-    
+
     NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         BOXUserMini *userA = (BOXUserMini *) a;
         BOXUserMini *userB = (BOXUserMini *) b;
         return [userA.login compare:userB.login options:NSCaseInsensitiveSearch];
     }];
-    
+
     return sortedUsers;
 }
 
@@ -276,7 +321,7 @@ static NSString *staticKeychainAccessGroup;
                                  keychainAccessTokenKey : self.accessToken,
                                  keychainUserLoginKey : self.user.login,
                                  keychainAccessTokenExpirationKey : [self.accessTokenExpiration box_ISO8601String]};
-    
+
     return dictionary;
 }
 
@@ -287,7 +332,7 @@ static NSString *staticKeychainAccessGroup;
     NSString *userLoginFromKeychain = [dictionary objectForKey:keychainUserLoginKey];
     NSString *accessTokenFromKeychain = [dictionary objectForKey:keychainAccessTokenKey];
     NSString *accessTokenExpirationAsStringFromKeychain = [dictionary objectForKey:keychainAccessTokenExpirationKey];
-    
+
     if (userIDFromKeychain.length > 0 &&
         userLoginFromKeychain.length > 0 &&
         accessTokenFromKeychain.length > 0 &&
@@ -296,7 +341,7 @@ static NSString *staticKeychainAccessGroup;
         self.user = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
                                                    name:userNameFromKeychain
                                                   login:userLoginFromKeychain];
-        
+
         self.accessToken = accessTokenFromKeychain;
         self.accessTokenExpiration = [NSDate box_dateWithISO8601String:accessTokenExpirationAsStringFromKeychain];
     }

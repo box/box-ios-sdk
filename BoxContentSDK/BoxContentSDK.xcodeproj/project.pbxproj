@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DB689A81E0221D900FF2309 /* BOXURLSessionIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DB689A61E0221D900FF2309 /* BOXURLSessionIdentifier.h */; };
 		0DB689A91E0221D900FF2309 /* BOXURLSessionIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB689A71E0221D900FF2309 /* BOXURLSessionIdentifier.m */; };
+		0DB689AE1E034B0B00FF2309 /* BOXURLSessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB689AC1E034B0B00FF2309 /* BOXURLSessionDelegate.m */; };
 		0E0823901A76CE2700222778 /* BOXContentSDKErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */; };
 		0E16F0EB1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E16F0E91A411ED400BDDA21 /* BOXCollaborationUpdateRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E16F0EC1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F0EA1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m */; };
@@ -467,6 +467,8 @@
 /* Begin PBXFileReference section */
 		0DB689A61E0221D900FF2309 /* BOXURLSessionIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BOXURLSessionIdentifier.h; path = Helper/BOXURLSessionIdentifier.h; sourceTree = "<group>"; };
 		0DB689A71E0221D900FF2309 /* BOXURLSessionIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BOXURLSessionIdentifier.m; path = Helper/BOXURLSessionIdentifier.m; sourceTree = "<group>"; };
+		0DB689AB1E034B0B00FF2309 /* BOXURLSessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXURLSessionDelegate.h; sourceTree = "<group>"; };
+		0DB689AC1E034B0B00FF2309 /* BOXURLSessionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXURLSessionDelegate.m; sourceTree = "<group>"; };
 		0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKErrors.m; sourceTree = "<group>"; };
 		0E16F0E91A411ED400BDDA21 /* BOXCollaborationUpdateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCollaborationUpdateRequest.h; sourceTree = "<group>"; };
 		0E16F0EA1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCollaborationUpdateRequest.m; sourceTree = "<group>"; };
@@ -1393,6 +1395,8 @@
 				6A4893121E049445008E30BE /* BOXNSURLSessionDelegate.m */,
 				0DB689A61E0221D900FF2309 /* BOXURLSessionIdentifier.h */,
 				0DB689A71E0221D900FF2309 /* BOXURLSessionIdentifier.m */,
+				0DB689AB1E034B0B00FF2309 /* BOXURLSessionDelegate.h */,
+				0DB689AC1E034B0B00FF2309 /* BOXURLSessionDelegate.m */,
 			);
 			name = Sessions;
 			sourceTree = "<group>";
@@ -1697,7 +1701,6 @@
 				0E5E146D1A41105000B205F6 /* BOXCollaborationRemoveRequest.h in Headers */,
 				3DE3A1D91AB112A5002E3FDA /* BOXKeychainItemWrapper.h in Headers */,
 				150C27981A69C2DE00099850 /* BOXContentClient+SharedLink.h in Headers */,
-				0DB689A81E0221D900FF2309 /* BOXURLSessionIdentifier.h in Headers */,
 				15280E3E1A37E70B008D4F5D /* BOXBookmark.h in Headers */,
 				0E5E14651A40F82800B205F6 /* BOXCollaborationRequest.h in Headers */,
 				6A48930F1E049419008E30BE /* BOXNSURLSessionManager.h in Headers */,
@@ -2163,6 +2166,7 @@
 				8676E0E21B2F69A300AC2677 /* BOXMetadataTemplateRequest.m in Sources */,
 				0E5E146E1A41105000B205F6 /* BOXCollaborationRemoveRequest.m in Sources */,
 				E4FAD9E3172CE2C50052AD11 /* BOXAPIOAuth2ToJSONOperation.m in Sources */,
+				0DB689AE1E034B0B00FF2309 /* BOXURLSessionDelegate.m in Sources */,
 				E4FAD9E5172CE2C50052AD11 /* BOXAPIOperation.m in Sources */,
 				862EF2901B1FBA880044526F /* BOXAppUserSession.m in Sources */,
 				0E5E14721A4116EA00B205F6 /* BOXContentClient+Collaboration.m in Sources */,
