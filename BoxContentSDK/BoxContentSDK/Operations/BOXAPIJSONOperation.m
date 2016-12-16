@@ -11,11 +11,18 @@
 
 #define BOX_API_CONTENT_TYPE_JSON  (@"application/json")
 
+@interface BOXAPIJSONOperation()
+
+@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
+
+@end
+
 @implementation BOXAPIJSONOperation
 
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize responseJSON = _responseJSON;
+@synthesize sessionTask = _sessionTask;
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -86,6 +93,24 @@
     }
     
     return JSONEncodedBody;
+}
+
+- (BOOL)shouldUseSessionTask
+{
+    return YES;
+}
+
+- (NSURLSessionTask *)sessionTask
+{
+    if (_sessionTask == nil) {
+        __weak BOXAPIJSONOperation *weakSelf = self;
+
+        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+        }];
+    }
+    return _sessionTask;
 }
 
 - (void)processResponseData:(NSData *)data
