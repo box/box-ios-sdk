@@ -52,6 +52,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
+@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
 - (void)cancelConnection;
 
 @end
@@ -289,6 +290,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
+- (BOOL)shouldUseSessionTask
+{
+    return NO;
+}
+
+- (NSURLSessionTask *)sessionTask
+{
+    return nil;
+}
+
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
@@ -302,9 +313,13 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
-            self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
-            BOXLog(@"Starting %@", self);
-            [self startURLConnection];
+            if (self.shouldUseSessionTask == YES && self.sessionTask != nil) {
+                [self.sessionTask resume];
+            } else {
+                self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
+                BOXLog(@"Starting %@", self);
+                [self startURLConnection];
+            }
         }
         else
         {
@@ -345,6 +360,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self.connection cancel];
         [self connection:self.connection didFailWithError:self.error];
     }
+
+    if (self.sessionTask != nil) {
+        [self.sessionTask cancel];
+    }
 }
 
 - (void)finish
@@ -354,6 +373,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     [self performCompletionCallback];
     self.connection = nil;
+    self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
 }

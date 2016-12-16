@@ -21,6 +21,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
+#import "BOXNSURLSessionManager.h"
 
 @interface BOXContentClient ()
 
@@ -173,11 +174,14 @@ static BOXContentClient *defaultInstance = nil;
         // manager uses the session as a lock object when enqueuing operations.
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
 
+        _urlSessionManager = [[BOXNSURLSessionManager alloc] init];
+
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
                                                                      secret:staticClientSecret
                                                                  APIBaseURL:_APIBaseURL
                                                              APIAuthBaseURL:_APIAuthBaseURL
-                                                               queueManager:_queueManager];
+                                                               queueManager:_queueManager
+                                                          urlSessionManager:_urlSessionManager];
         _queueManager.session = self.session;
         
         if (staticRedirectURIString.length > 0) {
@@ -218,7 +222,7 @@ static BOXContentClient *defaultInstance = nil;
         [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
         
         if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
-            self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+            self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager urlSessionManager:self.urlSessionManager];
             [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
         }
     }
@@ -366,7 +370,7 @@ static BOXContentClient *defaultInstance = nil;
     // Since BOXContentClient instances are defaulted to OAuth2 instead of App Users, a BOXAppUserSession must be initialized.
     // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
     if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
-        self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager];
+        self.session = [[BOXAppUserSession alloc] initWithAPIBaseURL:self.APIBaseURL queueManager:self.queueManager urlSessionManager:self.urlSessionManager];
         self.session.userAgentPrefix = self.userAgentPrefix;
     }
     

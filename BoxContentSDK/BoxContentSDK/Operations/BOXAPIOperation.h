@@ -11,6 +11,7 @@
 #import "BOXOAuth2Session.h"
 
 #import "BOXContentSDKConstants.h"
+#import "BOXNSURLSessionManager.h"
 
 // Success and Failure callbacks
 //
@@ -94,7 +95,6 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * @see [BOXAbstractSession addAuthorizationParametersToRequest:]
  */
 @property (nonatomic, readwrite, weak) BOXAbstractSession *session;
-
 /**
  * The access token this request was made with. This token is used to determine
  * whether this operation failing due to an expired token should cause the tokens to
@@ -134,6 +134,8 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * The URL connection is lazily instantiated when the BOXAPIOperation begins executing.
  */
 @property (nonatomic, readwrite, strong) NSURLConnection *connection;
+
+@property (nonatomic, readonly, strong) NSURLSessionTask *sessionTask;
 
 /** @name Request response properties */
 

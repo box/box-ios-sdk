@@ -27,8 +27,9 @@
             APIBaseURL:(NSString *)baseURL
         APIAuthBaseURL:(NSString *)authBaseURL
           queueManager:(BOXAPIQueueManager *)queueManager
+     urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
 {
-    self = [super initWithClientID:ID secret:secret APIBaseURL:baseURL APIAuthBaseURL:authBaseURL queueManager:queueManager];
+    self = [super initWithClientID:ID secret:secret APIBaseURL:baseURL APIAuthBaseURL:authBaseURL queueManager:queueManager urlSessionManager:urlSessionManager];
     if (self != nil)
     {
         _expiredOAuth2Tokens = [NSMutableSet set];
