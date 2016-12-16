@@ -39,8 +39,9 @@
                       APIBaseURL:(NSString *)baseURL
                   APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
 {
-    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager];
+    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {
         _clientID = ID;
         _clientSecret = secret;

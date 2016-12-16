@@ -12,12 +12,14 @@
 @class BOXAbstractSession;
 @class BOXAppUserSession;
 @class BOXRequest;
+@class BOXNSURLSessionManager;
 
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXOAuth2Session *OAuth2Session;
 @property (nonatomic, readwrite, strong) BOXAppUserSession *appSession;
 @property (nonatomic, readwrite, strong) BOXAbstractSession *session;
+@property (nonatomic, readwrite, strong) BOXNSURLSessionManager *urlSessionManager;
 
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;
