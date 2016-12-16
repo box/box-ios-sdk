@@ -89,4 +89,32 @@
     }
 }
 
+#pragma mark - for session handling
+
+- (void)processResponse:(NSURLResponse *)response
+{
+    [super processResponse:response];
+
+    BOOL isOAuth2TokenExpired = [self isAccessTokenExpired];
+
+    if (isOAuth2TokenExpired)
+    {
+        [self handleExpiredAccessToken];
+
+        // re-enqueue operation in the same queue referred to by the OAuth2 session if possible.
+        if ([self canBeReenqueued] && self.timesReenqueued == 0)
+        {
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
+
+            BOXAPIJSONOperation *operationCopy = [self copy];
+            operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
+            [self.session.queueManager enqueueOperation:operationCopy];
+        }
+        else
+        {
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
+        }
+    }
+}
+
 @end

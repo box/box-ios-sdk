@@ -104,13 +104,10 @@
 {
     if (_sessionTask == nil) {
         __weak BOXAPIJSONOperation *weakSelf = self;
-        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            [weakSelf processResponseData:data];
-            if (weakSelf.error == nil) {
-                BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-                weakSelf.error = error;
-            }
-            [weakSelf finish];
+
+        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
         }];
     }
     return _sessionTask;

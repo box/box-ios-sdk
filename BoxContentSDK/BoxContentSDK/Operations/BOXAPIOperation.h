@@ -255,6 +255,10 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 - (void)performCompletionCallback;
 
+- (void)processResponse:(NSURLResponse *)response;
+
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
+
 #pragma mark - Lock
 /** @name Lock */
 

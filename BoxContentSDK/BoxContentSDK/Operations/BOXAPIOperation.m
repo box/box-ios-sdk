@@ -433,6 +433,33 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 #pragma mark - NSURLConnectionDataDelegate
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    [self processResponse:response];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
+    if (self.error == nil)
+    {
+        self.error = error;
+    }
+    [self finish];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
+    [self processResponseData:self.responseData];
+    [self finish];
+}
+
+- (void)processResponse:(NSURLResponse *)response
+{
     self.HTTPResponse = (NSHTTPURLResponse *)response;
 
     if (self.HTTPResponse.statusCode == 202 || self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300)
@@ -487,25 +514,15 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
+#pragma mark - url session task handler
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-    if (self.error == nil)
-    {
+    [self processResponse:response];
+    [self processResponseData:data];
+    if (self.error == nil) {
         self.error = error;
     }
-    [self finish];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
-    [self processResponseData:self.responseData];
     [self finish];
 }
 
