@@ -52,6 +52,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
+@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
 - (void)cancelConnection;
 
 @end
@@ -289,6 +290,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
+- (BOOL)shouldUseSessionTask
+{
+    return NO;
+}
+
+- (NSURLSessionTask *)sessionTask
+{
+    return nil;
+}
+
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
@@ -302,9 +313,15 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
-            self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
-            BOXLog(@"Starting %@", self);
-            [self startURLConnection];
+            //TODO: remove shouldUseSessionTask and this condition after switching
+            //completely from NSURLConnection to NSURLSessionTask
+            if (self.shouldUseSessionTask == YES && self.sessionTask != nil) {
+                [self.sessionTask resume];
+            } else {
+                self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
+                BOXLog(@"Starting %@", self);
+                [self startURLConnection];
+            }
         }
         else
         {
@@ -345,6 +362,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self.connection cancel];
         [self connection:self.connection didFailWithError:self.error];
     }
+
+    if (self.sessionTask != nil) {
+        [self.sessionTask cancel];
+    }
 }
 
 - (void)finish
@@ -354,6 +375,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     [self performCompletionCallback];
     self.connection = nil;
+    self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
 }
@@ -413,6 +435,33 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 #pragma mark - NSURLConnectionDataDelegate
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    [self processResponse:response];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
+    if (self.error == nil)
+    {
+        self.error = error;
+    }
+    [self finish];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
+    [self processResponseData:self.responseData];
+    [self finish];
+}
+
+- (void)processResponse:(NSURLResponse *)response
+{
     self.HTTPResponse = (NSHTTPURLResponse *)response;
 
     if (self.HTTPResponse.statusCode == 202 || self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300)
@@ -467,25 +516,15 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
+#pragma mark - url session task handler
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-    if (self.error == nil)
-    {
+    [self processResponse:response];
+    [self processResponseData:data];
+    if (self.error == nil) {
         self.error = error;
     }
-    [self finish];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
-    [self processResponseData:self.responseData];
     [self finish];
 }
 

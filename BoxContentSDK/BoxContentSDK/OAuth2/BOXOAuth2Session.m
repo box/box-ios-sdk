@@ -38,8 +38,9 @@
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
                     queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
 {
-    self = [self initWithQueueManager:queueManager];
+    self = [self initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {
         _clientID = ID;
         _clientSecret = secret;

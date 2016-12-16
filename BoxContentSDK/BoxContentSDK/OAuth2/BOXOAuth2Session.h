@@ -111,6 +111,8 @@
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
                     queueManager:(BOXAPIQueueManager *)queueManager;
+                    queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager;
 
 #pragma mark - Authorization
 /** @name Authorization */
