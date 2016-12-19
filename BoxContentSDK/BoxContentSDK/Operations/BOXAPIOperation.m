@@ -313,7 +313,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
-            //TODO: remove shouldUseSessionTask and this condition after switching
+            //FIXME: remove shouldUseSessionTask and this condition after switching
             //completely from NSURLConnection to NSURLSessionTask
             if (self.shouldUseSessionTask == YES && self.sessionTask != nil) {
                 [self.sessionTask resume];
