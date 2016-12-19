@@ -27,7 +27,7 @@
 - (NSURLSession *)defaultSession
 {
     if (_defaultSession == nil) {
-        //TODO: revisit configuration for url session and its operation queue
+        //FIXME: revisit configuration for url session and its operation queue
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -44,7 +44,7 @@
 - (NSURLSession *)backgroundSession
 {
     if (_backgroundSession == nil) {
-        //TODO: revisit configuration for url session and its operation queue
+        //FIXME: revisit configuration for url session and its operation queue
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
