@@ -16,11 +16,16 @@
 
 NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
 
+@interface BOXAPIOAuth2ToJSONOperation()
+@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
+@end
+
 @implementation BOXAPIOAuth2ToJSONOperation
 
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize responseJSON = _responseJSON;
+@synthesize sessionTask = _sessionTask;
 
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary
 {
@@ -42,6 +47,24 @@ NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDi
 - (void)prepareAPIRequest
 {
     // OAuth2 requests are unauthenticated; they carry the client id and client secret
+}
+
+- (BOOL)shouldUseSessionTask
+{
+    return YES;
+}
+
+- (NSURLSessionTask *)sessionTask
+{
+    if (_sessionTask == nil) {
+        __weak BOXAPIOAuth2ToJSONOperation *weakSelf = self;
+
+        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+                                                    }];
+    }
+    return _sessionTask;
 }
 
 - (void)processResponseData:(NSData *)data

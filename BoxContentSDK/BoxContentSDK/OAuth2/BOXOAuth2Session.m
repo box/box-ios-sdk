@@ -300,9 +300,9 @@
     NSData *postData = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&token=%@", self.clientID, self.clientSecret, self.accessToken] dataUsingEncoding:NSUTF8StringEncoding];
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
-    [connection start];
+
+    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTask:request completionHandler:nil];
+    [sessionTask resume];
 }
 
 #pragma mark Token Helpers
