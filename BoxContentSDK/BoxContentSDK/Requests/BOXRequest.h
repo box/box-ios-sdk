@@ -54,6 +54,8 @@ typedef void (^BOXCollectionBlock)(BOXCollection *collection, NSError *error);
 
 typedef void (^BOXEventsBlock)(NSArray *events, NSString *nextStreamPosition, NSError *error);
 
+typedef void (^BOXRecentItemsBlock)(NSArray *recentItems, NSString *nextMarker, NSError *error);
+
 typedef void (^BOXFileVersionBlock)(BOXFileVersion *fileVersion, NSError *error);
 
 typedef void (^BOXMetadataBlock)(BOXMetadata *metadata, NSError *error);
