@@ -79,7 +79,20 @@
 
 - (BOOL)shouldUseSessionTask
 {
-    return NO;
+    return YES;
+}
+
+- (NSURLSessionTask *)createSessionTask
+{
+    NSURLSessionTask *sessionTask;
+    __weak BOXAPIDataOperation *weakSelf = self;
+
+    if (self.destinationPath != nil) {
+        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest operation:weakSelf];
+    } else {
+        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest operation:weakSelf];
+    }
+    return sessionTask;
 }
 
 - (void)processResponseData:(NSData *)data
@@ -156,6 +169,12 @@
     }
 }
 
+- (void)finish
+{
+    [super finish];
+    [self close];
+}
+
 - (void)dealloc
 {
     if (self.outputStream) {
@@ -202,8 +221,13 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [super connection:connection didReceiveResponse:response];
-    
-    if (self.error.code == BOXContentSDKAPIErrorAccepted) {
+    [self processIntermediateResponse:response];
+}
+
+- (void)processIntermediateResponse:(NSURLResponse *)response
+{
+    self.HTTPResponse = (NSHTTPURLResponse *)response;
+    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
         double delay = [self reenqueDelay];
@@ -224,10 +248,17 @@
         // If we received an error, don't write the response data to the output stream
         [super connection:connection didReceiveData:data];
     } else {
+        [self processIntermediateData:data];
+    }
+}
+
+- (void)processIntermediateData:(NSData *)data
+{
+    if (self.HTTPResponse.statusCode >= 200 && self.HTTPResponse.statusCode < 300) {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
         [self.receivedDataBuffer appendData:data];
-        
+
         // If the output stream does have space available, trigger the writeDataToOutputStream
         // handler so the data is consumed by the output stream. This state would occur if
         // an NSStreamEventHasSpaceAvailable event was received but receivedDataBuffer was
@@ -293,8 +324,10 @@
             self.bytesReceived += bytesWrittenToOutputStream;
             [self performProgressCallback];
 
+            if (bytesWrittenToOutputStream <= self.receivedDataBuffer.length) {
             // truncate buffer by removing the consumed bytes from the front
-            [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
+                [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
+            }
         }
     }
 }
