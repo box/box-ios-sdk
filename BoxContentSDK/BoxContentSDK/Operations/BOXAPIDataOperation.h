@@ -62,9 +62,17 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @warning If you are manually reading from this output stream (for example with
  * a `CFStreamCreateBoundPair`) do not let data sit in the stream or you risk causing
  * a large file to buffer entirely in memory.
+ *
+ * If destinationPath is provided, outputStream will be ignored
+ * Using outputStream to consume data will not allow the request to be executed in the background if the app is killed/suspended
  */
 @property (nonatomic, readwrite, strong) NSOutputStream *outputStream;
 
+/**
+ * The location for output file. If provided, outputStream will be ignored
+ * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ */
+@property (nonatomic, readwrite, strong) NSString *destinationPath;
 /** @name Callbacks */
 
 /**
@@ -136,6 +144,17 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @return nil
  */
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary;
+
+/**
+ * This method is called to provide batches of data to outputStream of this operation
+ * as request consumes one data batch at a time
+ */
+- (void)processIntermediateData:(NSData *)data;
+
+/**
+ * This method is called to provide an intermediate response while receiving data batches
+ */
+- (void)processIntermediateResponse:(NSURLResponse *)response;
 
 /**
  * This method is called with by BOXAPIOperation with the assumption that all

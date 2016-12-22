@@ -16,8 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
 @property (nonatomic, readwrite, strong) NSURLSession *defaultSession;
 
-//Background NSURLSession to be used by NSURLSessionTask which needs to be run in the background e.g. download, upload
-@property (nonatomic, readwrite, strong) NSURLSession *backgroundSession;
+//Advanced NSURLSession to be used by NSURLSessionTask which needs a delegate to handle specific tasks
+//during the life of a session/task, and to be run in the background e.g. download, upload
+@property (nonatomic, readwrite, strong) NSURLSession *advancedSession;
 
 //Delegate for background NSURLSession to handle its callbacks
 @property (nonatomic, readwrite, strong) BOXNSURLSessionDelegate *sessionDelegate;
@@ -47,19 +48,19 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 
 - (NSURLSession *)backgroundSession
 {
-    if (_backgroundSession == nil) {
+    if (_advancedSession == nil) {
         //FIXME: revisit configuration for url session and its operation queue
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"com.box.BOXNSURLSessionManager.background";
+        queue.name = @"com.box.BOXNSURLSessionManager.advanced";
         queue.maxConcurrentOperationCount = 8;
 
-        _backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:queue];
+        _advancedSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:queue];
     }
-    return _backgroundSession;
+    return _advancedSession;
 }
 
 - (BOXNSURLSessionDelegate *)sessionDelegate
@@ -75,9 +76,18 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request
+- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation
 {
-    return [self.backgroundSession downloadTaskWithRequest:request];
+    NSURLSessionTask *task = [self.backgroundSession dataTaskWithRequest:request];
+    [self.sessionDelegate mapSessionTaskId:task.taskIdentifier withOperation:operation];
+    return task;
+}
+
+- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation
+{
+    NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
+    [self.sessionDelegate mapSessionTaskId:task.taskIdentifier withOperation:operation];
+    return task;
 }
 
 - (NSURLSessionDownloadTask *)createDownloadTaskWithResumeData:(NSData *)resumeData
