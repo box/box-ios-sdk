@@ -41,6 +41,7 @@
 
 - (void)storeThumbnailForItemWithID:(NSString *)itemID userID:(NSString *)userID thumbnail:(UIImage *)thumbnail
 {
+    if (thumbnail == nil) return;
     [self.thumbnailCache setObject:thumbnail forKey:[self keyForItemID:itemID userID:userID]];
 }
 

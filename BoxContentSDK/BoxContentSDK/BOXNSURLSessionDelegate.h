@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BOXAPIOperation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
  Class to handle delegate callbacks for NSURLSession
  */
 @interface BOXNSURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
+
+- (void)mapSessionTaskId:(NSUInteger)sessionTaskId withOperation:(BOXAPIOperation *)operation;
 
 @end
 

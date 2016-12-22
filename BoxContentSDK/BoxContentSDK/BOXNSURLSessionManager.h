@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class BOXAPIDataOperation;
+
 /**
  This class is responsible for creating different NSURLSessionTask
  */
@@ -24,8 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Create a NSURLSessionDownloadTask which can be run in the background
  */
-- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request;
+- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation;
 
+- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation;
 /**
  Create a NSURLSessionDownloadTask to be resumed
  */
