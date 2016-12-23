@@ -14,6 +14,7 @@
 #import "BOXAppUserSession.h"
 #import "NSString+BOXContentSDKAdditions.h"
 #import "UIDevice+BOXContentSDKAdditions.h"
+#import "BOXContentClient.h"
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
@@ -38,37 +39,19 @@
     return _operation;
 }
 
-- (NSString *)APIVersion
-{
-    if (_APIVersion == nil) {
-        _APIVersion = BOXAPIVersion;
-    }
-    
-    return _APIVersion;
-}
-
 - (NSString *)baseURL
 {
     if (_baseURL == nil) {
-        _baseURL = BOXAPIBaseURL;
+        _baseURL = [BOXContentClient APIBaseURL];
     }
 
     return _baseURL;
 }
 
-- (NSString *)uploadAPIVersion
-{
-    if (_uploadAPIVersion == nil) {
-        _uploadAPIVersion = BOXAPIUploadAPIVersion;
-    }
-    
-    return _uploadAPIVersion;
-}
-
 - (NSString *)uploadBaseURL
 {
     if (_uploadBaseURL == nil) {
-        _uploadBaseURL = BOXAPIUploadBaseURL;
+        _uploadBaseURL = [BOXContentClient APIUploadBaseURL];
     }
     
     return _uploadBaseURL;
@@ -102,14 +85,8 @@
                subresource:(NSString *)subresource
                      subID:(NSString *)subID
                    baseURL:(NSString *)baseURL
-                APIVersion:(NSString *)APIVersion
 {
-    NSString *formatString = @"/%@";
-    if ([baseURL hasSuffix:@"/"]) {
-        formatString = @"%@"; // do not append a trailing slash if the base url already has one
-    }
-
-    NSString *URLString = [baseURL stringByAppendingFormat:formatString, APIVersion];
+    NSString *URLString = baseURL;
 
     if (resource != nil) {
         URLString = [URLString stringByAppendingFormat:@"/%@", resource];
@@ -135,8 +112,7 @@
     return [self URLWithResource:resource ID:ID
                      subresource:subresource
                            subID:subID
-                         baseURL:self.baseURL
-                      APIVersion:self.APIVersion];
+                         baseURL:self.baseURL];
 }
 
 - (NSURL *)uploadURLWithResource:(NSString *)resource
@@ -147,8 +123,7 @@
                               ID:ID
                      subresource:subresource
                            subID:nil
-                         baseURL:self.uploadBaseURL
-                      APIVersion:self.uploadAPIVersion];
+                         baseURL:self.uploadBaseURL];
 }
 
 - (BOXAPIJSONOperation *)JSONOperationWithURL:(NSURL *)URL

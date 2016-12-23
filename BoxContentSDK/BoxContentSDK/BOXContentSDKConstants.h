@@ -11,15 +11,6 @@
 #define BOX_CONTENT_SDK_IDENTIFIER @"box-content-sdk"
 #define BOX_CONTENT_SDK_VERSION @"1.0.14"
 
-// API URLs
-extern NSString *const BOXAPIBaseURL;
-extern NSString *const BOXAPIAuthBaseURL;
-extern NSString *const BOXAPIUploadBaseURL;
-
-// API Versions
-extern NSString *const BOXAPIVersion;
-extern NSString *const BOXAPIUploadAPIVersion;
-
 // API Resources
 extern NSString *const BOXAPIResourceFolders;
 extern NSString *const BOXAPIResourceFiles;

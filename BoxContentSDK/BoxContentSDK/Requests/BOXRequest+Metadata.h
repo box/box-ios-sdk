@@ -17,7 +17,6 @@
                   template:(NSString *)templateName;
 
 - (NSURL *)URLWithBaseURL:(NSString *)baseURL
-               APIVersion:(NSString *)APIVersion
                  resource:(NSString *)resource
                        ID:(NSString *)ID
               subresource:(NSString *)subresource

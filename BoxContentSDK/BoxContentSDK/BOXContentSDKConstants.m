@@ -8,15 +8,6 @@
 
 #import "BOXContentSDKConstants.h"
 
-// API URLs
-NSString *const BOXAPIBaseURL = @"https://api.box.com";
-NSString *const BOXAPIAuthBaseURL = @"https://account.box.com/api";
-NSString *const BOXAPIUploadBaseURL = @"https://upload.box.com/api";
-
-// API Versions
-NSString *const BOXAPIVersion = @"2.0";
-NSString *const BOXAPIUploadAPIVersion = @"2.1";
-
 // API Resources
 NSString *const BOXAPIResourceFolders = @"folders";
 NSString *const BOXAPIResourceFiles = @"files";

@@ -110,18 +110,10 @@
  */
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
-                      APIBaseURL:(NSString *)baseURL
-                  APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager;
 
 #pragma mark - Authorization
 /** @name Authorization */
-
-/**
- * The base URL for API requests.
- * @see BOXAPIAuthBaseURL
- */
-@property (nonatomic, readwrite, strong) NSString *APIAuthBaseURLString;
 
 /**
  * Exchange an authorization code for an access token and a refresh token.
@@ -156,15 +148,6 @@
  * @return The URL to load in a webview to start the authentication and authorization flow with Box.
  */
 - (NSURL *)authorizeURL;
-
-/**
- * Returns the URL to load in a webview to start the authentication and authorization flow with Box.
- *
- * @param baseURLString The base URL string to be used for the auth URL (ex: @"https://api.box.com")
- *
- * @return The URL to load in a webview to start the authentication and authorization flow with Box.
- */
-- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString;
 
 /**
  * A string containing the URI to load after the user completes the webview authorization flow.
