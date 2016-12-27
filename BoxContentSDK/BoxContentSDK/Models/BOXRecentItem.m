@@ -50,7 +50,7 @@
                                                                      nullAllowed:YES
                                                                suppressNullAsNil:YES];
         if (sharedLinkString != nil) {
-            self.sharedLink = [NSURL URLWithString:sharedLinkString];
+            self.sharedLinkURL = [NSURL URLWithString:sharedLinkString];
         }
     }
 
