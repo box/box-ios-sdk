@@ -110,6 +110,7 @@ extern BOXAPIItemType *const BOXAPIItemTypeEvent;
 extern BOXAPIItemType *const BOXAPIItemTypeCollaboration;
 extern BOXAPIItemType *const BOXAPIItemTypeGroup;
 extern BOXAPIItemType *const BOXAPIItemTypeFileVersion;
+extern BOXAPIItemType *const BOXAPIItemTypeRecentItem;
 
 // Shared Link Access Levels
 typedef NSString BOXSharedLinkAccessLevel;

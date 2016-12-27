@@ -104,6 +104,7 @@ BOXAPIItemType *const BOXAPIItemTypeEvent = @"event";
 BOXAPIItemType *const BOXAPIItemTypeCollaboration = @"collaboration";
 BOXAPIItemType *const BOXAPIItemTypeGroup = @"group";
 BOXAPIItemType *const BOXAPIItemTypeFileVersion = @"file_version";
+BOXAPIItemType *const BOXAPIItemTypeRecentItem = @"recent_item";
 
 // Shared Link Access Levels
 BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelOpen = @"open";

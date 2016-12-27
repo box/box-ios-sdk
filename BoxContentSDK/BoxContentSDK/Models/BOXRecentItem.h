@@ -39,6 +39,6 @@
  URL for the shared link that was used to access the item by the user.
  nil if not applicable
  */
-@property (nonatomic, readwrite, strong) NSURL *sharedLink;
+@property (nonatomic, readwrite, strong) NSURL *sharedLinkURL;
 
 @end
