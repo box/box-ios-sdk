@@ -375,9 +375,11 @@ extern NSString *const BOXAPIEventStreamTypeAdminLogs;
 
 // API Recent Items Constants
 extern NSString *const BOXAPIRecentItemsListTypeShared;
+extern NSString *const BOXAPIRecentItemsInteractionTypeOpen;
 extern NSString *const BOXAPIRecentItemsInteractionTypePreview;
 extern NSString *const BOXAPIRecentItemsInteractionTypeComment;
 extern NSString *const BOXAPIRecentItemsInteractionTypeModification;
+extern NSString *const BOXAPIRecentItemsInteractionTypeUpload;
 
 // Standard Events
 extern NSString *const BOXAPIEventTypeItemCreate;
