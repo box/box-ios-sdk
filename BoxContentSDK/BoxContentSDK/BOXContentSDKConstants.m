@@ -353,9 +353,11 @@ NSString *const BOXAPIEventStreamTypeAdminLogs = @"admin_logs";
 
 // API Recent Items Constants
 NSString *const BOXAPIRecentItemsListTypeShared = @"shared";
-NSString *const BOXAPIRecentItemsInteractionTypePreview = @"preview";
-NSString *const BOXAPIRecentItemsInteractionTypeComment = @"comment";
-NSString *const BOXAPIRecentItemsInteractionTypeModification = @"modification";
+NSString *const BOXAPIRecentItemsInteractionTypeOpen = @"item_open";
+NSString *const BOXAPIRecentItemsInteractionTypePreview = @"item_preview";
+NSString *const BOXAPIRecentItemsInteractionTypeComment = @"item_comment";
+NSString *const BOXAPIRecentItemsInteractionTypeModification = @"item_modify";
+NSString *const BOXAPIRecentItemsInteractionTypeUpload = @"item_upload";
 
 // Standard Events
 NSString *const BOXAPIEventTypeItemCreate = @"ITEM_CREATE";
