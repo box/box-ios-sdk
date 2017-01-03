@@ -9,11 +9,8 @@
 #import <Foundation/Foundation.h>
 
 /**
- * Class to handle delegate callbacks for NSURLSession
- *
- * FIXME: implement interface NSURLSessionStreamDelegate as well.
- * Note: NSURLSessionStreamDelegate only available on iOS9+
+ Class to handle delegate callbacks for NSURLSession
  */
-@interface BOXNSURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate>
+@interface BOXNSURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
 
 @end
