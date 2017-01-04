@@ -684,4 +684,9 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     _outputStream.delegate = nil;
 }
 
+- (BOOL)shouldUseSessionTask
+{
+    return NO;
+}
+
 @end

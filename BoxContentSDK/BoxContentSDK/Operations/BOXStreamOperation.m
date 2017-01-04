@@ -218,4 +218,9 @@
     return YES;
 }
 
+- (BOOL)shouldUseSessionTask
+{
+    return NO;
+}
+
 @end

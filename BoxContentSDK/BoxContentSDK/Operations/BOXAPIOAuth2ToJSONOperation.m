@@ -49,24 +49,6 @@ NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDi
     // OAuth2 requests are unauthenticated; they carry the client id and client secret
 }
 
-- (BOOL)shouldUseSessionTask
-{
-    return YES;
-}
-
-- (NSURLSessionTask *)sessionTask
-{
-    if (_sessionTask == nil) {
-        __weak BOXAPIOAuth2ToJSONOperation *weakSelf = self;
-
-        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
-                                                    }];
-    }
-    return _sessionTask;
-}
-
 - (void)processResponseData:(NSData *)data
 {
     NSError *JSONError = nil;
