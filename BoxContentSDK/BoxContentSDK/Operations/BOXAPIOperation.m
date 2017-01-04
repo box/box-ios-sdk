@@ -292,12 +292,20 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (BOOL)shouldUseSessionTask
 {
-    return NO;
+    return YES;
 }
 
 - (NSURLSessionTask *)sessionTask
 {
-    return nil;
+    if (_sessionTask == nil) {
+        __weak BOXAPIOperation *weakSelf = self;
+
+        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+                                                    }];
+    }
+    return _sessionTask;
 }
 
 - (void)executeOperation

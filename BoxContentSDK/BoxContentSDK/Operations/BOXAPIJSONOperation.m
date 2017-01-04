@@ -95,24 +95,6 @@
     return JSONEncodedBody;
 }
 
-- (BOOL)shouldUseSessionTask
-{
-    return YES;
-}
-
-- (NSURLSessionTask *)sessionTask
-{
-    if (_sessionTask == nil) {
-        __weak BOXAPIJSONOperation *weakSelf = self;
-
-        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
-        }];
-    }
-    return _sessionTask;
-}
-
 - (void)processResponseData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode == 204) // 204 No Content has no body, so don't decode it

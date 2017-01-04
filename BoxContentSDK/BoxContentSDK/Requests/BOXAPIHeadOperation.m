@@ -70,7 +70,13 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [super connection:connection didReceiveResponse:response];
-    
+    [self processResponse:response];
+}
+
+- (void)processResponse:(NSURLResponse *)response
+{
+    [super processResponse:response];
+
     if (self.error.code == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
