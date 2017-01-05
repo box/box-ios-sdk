@@ -9,6 +9,8 @@
 #import "BOXNSURLSessionManager.h"
 #import "BOXNSURLSessionDelegate.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BOXNSURLSessionManager()
 
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
@@ -22,6 +24,8 @@
 
 @end
 
+static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionManager.backgroundSessionIdentifier";
+
 @implementation BOXNSURLSessionManager
 
 - (NSURLSession *)defaultSession
@@ -33,8 +37,8 @@
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"Default NSURLSession queue";
-        queue.maxConcurrentOperationCount = 100;
+        queue.name = @"com.box.BOXNSURLSessionManager.default";
+        queue.maxConcurrentOperationCount = 8;
 
         _defaultSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:queue];
     }
@@ -47,11 +51,11 @@
         //FIXME: revisit configuration for url session and its operation queue
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"Background NSURLSession queue";
-        queue.maxConcurrentOperationCount = 100;
+        queue.name = @"com.box.BOXNSURLSessionManager.background";
+        queue.maxConcurrentOperationCount = 8;
 
         _backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:queue];
     }
@@ -71,11 +75,6 @@
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDataTask *)createLoginTask:(NSURL *)url
-{
-    return [self.backgroundSession dataTaskWithURL:url];
-}
-
 - (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request
 {
     return [self.backgroundSession downloadTaskWithRequest:request];
@@ -92,3 +91,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

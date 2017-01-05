@@ -16,16 +16,11 @@
 
 NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
 
-@interface BOXAPIOAuth2ToJSONOperation()
-@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
-@end
-
 @implementation BOXAPIOAuth2ToJSONOperation
 
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize responseJSON = _responseJSON;
-@synthesize sessionTask = _sessionTask;
 
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary
 {
