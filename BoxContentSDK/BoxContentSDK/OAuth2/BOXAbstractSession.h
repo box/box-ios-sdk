@@ -58,7 +58,7 @@ extern NSString *const BOXUserIDKey;
  * The BOXAPIQueueManager on which to enqueue [BOXAPIOAuth2ToJSONOperation](BOXAPIOAuth2ToJSONOperation) or [BOXAPIAppAuthOperation](BOXAPIAppAuthOperation).
  */
 @property (nonatomic, readwrite, weak) BOXAPIQueueManager *queueManager;
-@property (nonatomic, readwrite, strong) BOXNSURLSessionManager *urlSessionManager;
+@property (nonatomic, readonly, strong) BOXNSURLSessionManager *urlSessionManager;
 
 #pragma mark Authorization Properties
 /** @name Authorization Properties */

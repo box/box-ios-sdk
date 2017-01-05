@@ -29,6 +29,8 @@ static NSString *staticKeychainAccessGroup;
 
 @interface BOXAbstractSession ()
 
+@property (nonatomic, readwrite, strong) BOXNSURLSessionManager *urlSessionManager;
+
 @end
 
 @implementation BOXAbstractSession

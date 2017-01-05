@@ -52,7 +52,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
-@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
 - (void)cancelConnection;
 
 @end
@@ -295,17 +294,14 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     return YES;
 }
 
-- (NSURLSessionTask *)sessionTask
+- (NSURLSessionTask *)createSessionTask
 {
-    if (_sessionTask == nil) {
-        __weak BOXAPIOperation *weakSelf = self;
-
-        _sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                        [weakSelf finishURLSessionTaskWithData:data response:response error:error];
-                                                    }];
-    }
-    return _sessionTask;
+    __weak BOXAPIOperation *weakSelf = self;
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+                                                }];
+    return sessionTask;
 }
 
 - (void)executeOperation
@@ -323,7 +319,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         {
             //FIXME: remove shouldUseSessionTask and this condition after switching
             //completely from NSURLConnection to NSURLSessionTask
-            if (self.shouldUseSessionTask == YES && self.sessionTask != nil) {
+            if (self.shouldUseSessionTask == YES) {
+                if (self.sessionTask == nil) {
+                    self.sessionTask = [self createSessionTask];
+                }
                 [self.sessionTask resume];
             } else {
                 self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class is responsible for creating different NSURLSessionTask
  */
@@ -18,11 +20,6 @@
  and its completionHandler will be called upon completion of the task
  */
 - (NSURLSessionDataTask *)createDataTask:(NSURLRequest *)request completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler;
-
-/**
- Create a NSURLSessionDataTask responsible for login
- */
-- (NSURLSessionDataTask *)createLoginTask:(NSURL *)url;
 
 /**
  Create a NSURLSessionDownloadTask which can be run in the background
@@ -40,3 +37,5 @@
 - (NSURLSessionUploadTask *)createUploadTask:(NSURLRequest *)request fromFile:(NSURL *)fileURL;
 
 @end
+
+NS_ASSUME_NONNULL_END

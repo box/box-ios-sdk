@@ -8,6 +8,8 @@
 
 #import "BOXNSURLSessionDelegate.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
     FIXME: implement details for the callbacks of interfaces
      NSURLSessionDelegate
@@ -21,3 +23,5 @@
 @implementation BOXNSURLSessionDelegate
 
 @end
+
+NS_ASSUME_NONNULL_END

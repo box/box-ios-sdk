@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, BOXAPIOperationState) {
 #pragma mark - NSOperation state
 @property (nonatomic, readwrite, assign) BOXAPIOperationState state;
 
+@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
+
 #pragma mark initializers
 - (instancetype)initWithSession:(BOXAbstractSession *)session;
 
@@ -34,5 +36,8 @@ typedef NS_ENUM(NSUInteger, BOXAPIOperationState) {
 
 #pragma notification methods
 - (void)sendLogoutNotification;
+
+//to create an NSURLSessionTask appropriate for this type of api operation
+- (NSURLSessionTask *)createSessionTask;
 
 @end
