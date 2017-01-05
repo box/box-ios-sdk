@@ -11,18 +11,11 @@
 
 #define BOX_API_CONTENT_TYPE_JSON  (@"application/json")
 
-@interface BOXAPIJSONOperation()
-
-@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
-
-@end
-
 @implementation BOXAPIJSONOperation
 
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize responseJSON = _responseJSON;
-@synthesize sessionTask = _sessionTask;
 
 - (id)copyWithZone:(NSZone *)zone
 {
