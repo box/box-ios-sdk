@@ -85,12 +85,11 @@
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
-    __weak BOXAPIDataOperation *weakSelf = self;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest taskDelegate:weakSelf];
+        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     } else {
-        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest taskDelegate:weakSelf];
+        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
