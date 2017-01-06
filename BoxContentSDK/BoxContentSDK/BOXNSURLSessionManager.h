@@ -36,18 +36,28 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)processIntermediateData:(NSData *)data;
 
+@end
+
+@protocol BOXNSURLSessionDownloadTaskDelegate <BOXNSURLSessionTaskDelegate>
+
+@optional
+
+/**
+ * Output stream to write data into. If destinationPath is provided, outputStream will be ignored
+ * Using outputStream to consume data will not allow the request to be executed in the background if the app is killed/suspended
+ */
+- (NSOutputStream *)outputStream;
+
+/**
+ * The location for output file. If provided, outputStream will be ignored
+ * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ */
+- (NSString *)destinationPath;
+
 /**
  * To be called to report ongoing progress of the task
  */
 - (void)progressWithExpectedTotalBytes:(long long)expectedTotalBytes totalBytesReceived:(unsigned long long)totalBytesReceived;
-
-@end
-
-@protocol BOXNSURLSessionDownloadTaskDelegate <NSObject>
-
-@optional
-- (NSString *)destinationPath;
-- (NSOutputStream *)outputStream;
 
 @end
 
@@ -65,12 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Create a NSURLSessionDownloadTask which can be run in the background and download to an outputstream
  */
-- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
+- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionDataTask which can be run to download data into a destination path but not run in the background
  */
-- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
+- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionDownloadTask to be resumed

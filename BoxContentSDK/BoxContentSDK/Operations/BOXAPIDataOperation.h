@@ -44,7 +44,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
  */
-@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate>
+@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate, BOXNSURLSessionDownloadTaskDelegate>
 
 /** @name Streams */
 
