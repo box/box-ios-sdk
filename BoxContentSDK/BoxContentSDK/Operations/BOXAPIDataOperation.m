@@ -88,9 +88,9 @@
     __weak BOXAPIDataOperation *weakSelf = self;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest operation:weakSelf];
+        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest taskDelegate:weakSelf];
     } else {
-        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest operation:weakSelf];
+        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest taskDelegate:weakSelf];
     }
     return sessionTask;
 }
@@ -224,19 +224,6 @@
     [self processIntermediateResponse:response];
 }
 
-- (void)processIntermediateResponse:(NSURLResponse *)response
-{
-    self.HTTPResponse = (NSHTTPURLResponse *)response;
-    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
-        // If we get a 202, it means the content is not yet ready on Box's servers.
-        // Re-enqueue after a certain amount of time.
-        double delay = [self reenqueDelay];
-        [self performSelector:@selector(reenqueOperationDueTo202Response) withObject:self afterDelay:delay];
-    } else {
-        [self.outputStream open];
-    }
-}
-
 // Override this delegate method from the default BOXAPIOperation implementation
 // By default, BOXAPIOperation buffers all received data from the connection in
 // self.responseData. This operation differs in that it should write its received
@@ -249,6 +236,35 @@
         [super connection:connection didReceiveData:data];
     } else {
         [self processIntermediateData:data];
+    }
+}
+
+
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [super connection:connection didFailWithError:error];
+    [self close];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [super connectionDidFinishLoading:connection];
+    [self close];
+}
+
+#pragma mark - BOXNSURLSessionTaskDelegate
+
+- (void)processIntermediateResponse:(NSURLResponse *)response
+{
+    self.HTTPResponse = (NSHTTPURLResponse *)response;
+    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
+        // If we get a 202, it means the content is not yet ready on Box's servers.
+        // Re-enqueue after a certain amount of time.
+        double delay = [self reenqueDelay];
+        [self performSelector:@selector(reenqueOperationDueTo202Response) withObject:self afterDelay:delay];
+    } else {
+        [self.outputStream open];
     }
 }
 
@@ -271,16 +287,11 @@
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)progressWithExpectedTotalBytes:(long long)expectedTotalBytes totalBytesReceived:(unsigned long long)totalBytesReceived
 {
-    [super connection:connection didFailWithError:error];
-    [self close];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [super connectionDidFinishLoading:connection];
-    [self close];
+    if (self.progressBlock != nil) {
+        self.progressBlock(expectedTotalBytes, totalBytesReceived);
+    }
 }
 
 #pragma mark - NSStream Delegate
@@ -295,37 +306,37 @@
 
 - (void)writeDataToOutputStream
 {
-    while ([self.outputStream hasSpaceAvailable])
-    {
-        if (self.receivedDataBuffer.length == 0)
+    @synchronized (self) {
+        while ([self.outputStream hasSpaceAvailable])
         {
-            self.outputStreamHasSpaceAvailable = YES;
-            return; // bail out because we have nothing to write
-        }
-
-        NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes] maxLength:self.receivedDataBuffer.length];
-
-        if (bytesWrittenToOutputStream == -1)
-        {
-            // Failed to write from to output stream. The download cannot be completed
-            BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
-            NSError *streamWriteError = [self.outputStream streamError];
-            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-            if (streamWriteError) {
-                [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
+            if (self.receivedDataBuffer.length == 0)
+            {
+                self.outputStreamHasSpaceAvailable = YES;
+                return; // bail out because we have nothing to write
             }
-            NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
-            [self abortWithError:downloadError];
 
-            return; // Bail out due to error
-        }
-        else
-        {
-            self.bytesReceived += bytesWrittenToOutputStream;
-            [self performProgressCallback];
+            NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes] maxLength:self.receivedDataBuffer.length];
 
-            if (bytesWrittenToOutputStream <= self.receivedDataBuffer.length) {
-            // truncate buffer by removing the consumed bytes from the front
+            if (bytesWrittenToOutputStream == -1)
+            {
+                // Failed to write from to output stream. The download cannot be completed
+                BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
+                NSError *streamWriteError = [self.outputStream streamError];
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                if (streamWriteError) {
+                    [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
+                }
+                NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
+                [self abortWithError:downloadError];
+
+                return; // Bail out due to error
+            }
+            else
+            {
+                self.bytesReceived += bytesWrittenToOutputStream;
+                [self performProgressCallback];
+
+                // truncate buffer by removing the consumed bytes from the front
                 [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
             }
         }

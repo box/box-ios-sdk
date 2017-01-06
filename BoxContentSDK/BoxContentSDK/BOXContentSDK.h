@@ -36,7 +36,6 @@
 #import "BOXParallelOAuth2Session.h"
 #import "BOXAppUserSession.h"
 #import "BOXNSURLSessionManager.h"
-#import "BOXNSURLSessionDelegate.h"
 
 // AppToApp
 
