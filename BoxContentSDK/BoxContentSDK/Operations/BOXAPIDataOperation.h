@@ -146,17 +146,6 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary;
 
 /**
- * This method is called to provide batches of data to outputStream of this operation
- * as request consumes one data batch at a time
- */
-- (void)processIntermediateData:(NSData *)data;
-
-/**
- * This method is called to provide an intermediate response while receiving data batches
- */
-- (void)processIntermediateResponse:(NSURLResponse *)response;
-
-/**
  * This method is called with by BOXAPIOperation with the assumption that all
  * data received from the `NSURLConnection` is buffered. This operation
  * streams all received data to its output stream, so do nothing in this method.
