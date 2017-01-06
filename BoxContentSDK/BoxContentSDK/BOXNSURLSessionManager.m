@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //a map to associate a session task with its task delegate
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
-@property (nonatomic, readonly, strong) NSMutableDictionary *sessionIdToTaskDelegate;
+@property (nonatomic, readonly, strong) NSMapTable *sessionIdToTaskDelegate;
 
 @end
 
@@ -35,7 +35,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 {
     self = [super init];
     if (self != nil) {
-        _sessionIdToTaskDelegate = [NSMutableDictionary new];
+        _sessionIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
     }
     return self;
 }
