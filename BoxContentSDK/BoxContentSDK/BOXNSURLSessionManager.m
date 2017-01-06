@@ -146,8 +146,12 @@ didFinishDownloadingToURL:(NSURL *)location
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
-    if ([taskDelegate respondsToSelector:@selector(progressWithExpectedTotalBytes:totalBytesReceived:)]) {
-        [taskDelegate progressWithExpectedTotalBytes:totalBytesExpectedToWrite totalBytesReceived:totalBytesWritten];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
+        id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+
+        if ([downloadTaskDelegate respondsToSelector:@selector(progressWithExpectedTotalBytes:totalBytesReceived:)]) {
+            [downloadTaskDelegate progressWithExpectedTotalBytes:totalBytesExpectedToWrite totalBytesReceived:totalBytesWritten];
+        }
     }
 }
 
