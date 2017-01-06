@@ -535,6 +535,13 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [self finish];
 }
 
+#pragma mark - BOXNSURLSessionTaskDelegate
+
+- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+{
+    [self finishURLSessionTaskWithData:nil response:response error:error];
+}
+
 #pragma mark - Lock
 + (NSRecursiveLock *)APIOperationGlobalLock
 {

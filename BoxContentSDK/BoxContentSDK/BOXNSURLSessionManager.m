@@ -7,11 +7,10 @@
 //
 
 #import "BOXNSURLSessionManager.h"
-#import "BOXNSURLSessionDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BOXNSURLSessionManager()
+@interface BOXNSURLSessionManager() <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
 
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
 @property (nonatomic, readwrite, strong) NSURLSession *defaultSession;
@@ -20,14 +19,26 @@ NS_ASSUME_NONNULL_BEGIN
 //during the life of a session/task, and to be run in the background e.g. download, upload
 @property (nonatomic, readwrite, strong) NSURLSession *advancedSession;
 
-//Delegate for background NSURLSession to handle its callbacks
-@property (nonatomic, readwrite, strong) BOXNSURLSessionDelegate *sessionDelegate;
+//a map to associate a session task with its task delegate
+//during session/task's delegate callbacks, we call appropriate methods on task delegate
+@property (nonatomic, readonly, strong) NSMutableDictionary *sessionIdToTaskDelegate;
 
 @end
 
 static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionManager.backgroundSessionIdentifier";
 
 @implementation BOXNSURLSessionManager
+
+@synthesize sessionIdToTaskDelegate = _sessionIdToTaskDelegate;
+
+- (id)init
+{
+    self = [super init];
+    if (self != nil) {
+        _sessionIdToTaskDelegate = [NSMutableDictionary new];
+    }
+    return self;
+}
 
 - (NSURLSession *)defaultSession
 {
@@ -46,7 +57,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return _defaultSession;
 }
 
-- (NSURLSession *)backgroundSession
+- (NSURLSession *)advancedSession
 {
     if (_advancedSession == nil) {
         //FIXME: revisit configuration for url session and its operation queue
@@ -58,17 +69,23 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
         queue.name = @"com.box.BOXNSURLSessionManager.advanced";
         queue.maxConcurrentOperationCount = 8;
 
-        _advancedSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:queue];
+        _advancedSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
     }
     return _advancedSession;
 }
 
-- (BOXNSURLSessionDelegate *)sessionDelegate
+- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
 {
-    if (_sessionDelegate == nil) {
-        _sessionDelegate = [[BOXNSURLSessionDelegate alloc] init];
+    @synchronized (self.sessionIdToTaskDelegate) {
+        [self.sessionIdToTaskDelegate setObject:taskDelegate forKey:@(sessionTaskId)];
     }
-    return _sessionDelegate;
+}
+
+- (void)dessociateSessionTaskId:(NSUInteger)sessionTaskId
+{
+    @synchronized (self.sessionIdToTaskDelegate) {
+        [self.sessionIdToTaskDelegate removeObjectForKey:@(sessionTaskId)];
+    }
 }
 
 - (NSURLSessionDataTask *)createDataTask:(NSURLRequest *)request completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler
@@ -76,28 +93,105 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation
+- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.backgroundSession dataTaskWithRequest:request];
-    [self.sessionDelegate mapSessionTaskId:task.taskIdentifier withOperation:operation];
+    NSURLSessionTask *task = [self.advancedSession dataTaskWithRequest:request];
+    [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request operation:(BOXAPIDataOperation *)operation
+- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
-    [self.sessionDelegate mapSessionTaskId:task.taskIdentifier withOperation:operation];
+    NSURLSessionTask *task = [self.advancedSession downloadTaskWithRequest:request];
+    [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
 - (NSURLSessionDownloadTask *)createDownloadTaskWithResumeData:(NSData *)resumeData
 {
-    return [self.backgroundSession downloadTaskWithResumeData:resumeData];
+    return [self.advancedSession downloadTaskWithResumeData:resumeData];
 }
 
 - (NSURLSessionUploadTask *)createUploadTask:(NSURLRequest *)request fromFile:(NSURL *)fileURL
 {
-    return [self.backgroundSession uploadTaskWithRequest:request fromFile:fileURL];
+    return [self.advancedSession uploadTaskWithRequest:request fromFile:fileURL];
+}
+
+#pragma mark - implementations for NSURLSession-related delegates for advanced session
+
+#pragma mark - NSURLSessionDownloadDelegate
+
+/* Sent when a download task that has completed a download.  The delegate should
+ * copy or move the file at the given location to a new location as it will be
+ * removed when the delegate message returns. URLSession:task:didCompleteWithError: will
+ * still be called.
+ */
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
+didFinishDownloadingToURL:(NSURL *)location
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
+        id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+
+        if ([downloadTaskDelegate respondsToSelector:@selector(destinationPath)]) {
+            [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:downloadTaskDelegate.destinationPath error:nil];
+        }
+    }
+}
+
+/* Sent periodically to notify the delegate of download progress. */
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
+      didWriteData:(int64_t)bytesWritten
+ totalBytesWritten:(int64_t)totalBytesWritten
+totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    if ([taskDelegate respondsToSelector:@selector(progressWithExpectedTotalBytes:totalBytesReceived:)]) {
+        [taskDelegate progressWithExpectedTotalBytes:totalBytesExpectedToWrite totalBytesReceived:totalBytesWritten];
+    }
+}
+
+#pragma mark - NSURLSessionDataDelegate
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+didReceiveResponse:(NSURLResponse *)response
+ completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    if ([taskDelegate respondsToSelector:@selector(processIntermediateResponse:)]) {
+        [taskDelegate processIntermediateResponse:response];
+    }
+
+    if (completionHandler != nil) {
+        completionHandler(NSURLSessionResponseAllow);
+    }
+}
+
+/* Sent when data is available for the delegate to consume.  It is
+ * assumed that the delegate will retain and not copy the data.  As
+ * the data may be discontiguous, you should use
+ * [NSData enumerateByteRangesUsingBlock:] to access it.
+ */
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+    didReceiveData:(NSData *)data
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    if ([taskDelegate respondsToSelector:@selector(processIntermediateData:)]) {
+        [taskDelegate processIntermediateData:data];
+    }
+}
+
+#pragma mark - NSURLSessionTaskDelegate
+
+/* Sent as the last message related to a specific task.  Error may be
+ * nil, which implies that no error occurred and this task is complete.
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+didCompleteWithError:(nullable NSError *)error
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
+    [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
+    [self dessociateSessionTaskId:task.taskIdentifier];
 }
 
 @end
