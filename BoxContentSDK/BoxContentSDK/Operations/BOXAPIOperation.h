@@ -11,6 +11,7 @@
 #import "BOXOAuth2Session.h"
 
 #import "BOXContentSDKConstants.h"
+#import "BOXNSURLSessionManager.h"
 
 // Success and Failure callbacks
 //
@@ -237,12 +238,28 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 /** @name Process API call results */
 
 /**
+ * Process the received response from the request including extracting error and reenqueue operation if needed
+ *
+ * @param response The response received from Box as a result of the API call.
+ */
+- (void)processResponse:(NSURLResponse *)response;
+
+/**
  * Process the received data from the request and create a response that may be used
  * in performCompletionCallback
  *
  * @param data The data received from Box as a result of the API call.
  */
 - (void)processResponseData:(NSData *)data;
+
+/**
+ * To be called to finish the operation for a NSURLSessionTask upon its completion
+ *
+ * @param data      The data received from Box as a result of the API call.
+ * @param response  The response received from Box as a result of the API call.
+ * @param error     An error in the NSURLErrorDomain
+ */
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
 
 #pragma mark - callbacks
 /** @name Callbacks */

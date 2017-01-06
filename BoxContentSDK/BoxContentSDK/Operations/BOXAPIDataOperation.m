@@ -77,6 +77,11 @@
     return nil;
 }
 
+- (BOOL)shouldUseSessionTask
+{
+    return NO;
+}
+
 - (void)processResponseData:(NSData *)data
 {
     // Empty data assumes that all data received from the NSURLConnection is buffered. This operation
