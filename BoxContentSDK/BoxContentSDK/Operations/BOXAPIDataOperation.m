@@ -272,7 +272,9 @@
     if (self.HTTPResponse.statusCode >= 200 && self.HTTPResponse.statusCode < 300) {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
-        [self.receivedDataBuffer appendData:data];
+        @synchronized (self.receivedDataBuffer) {
+            [self.receivedDataBuffer appendData:data];
+        }
 
         // If the output stream does have space available, trigger the writeDataToOutputStream
         // handler so the data is consumed by the output stream. This state would occur if
@@ -305,7 +307,7 @@
 
 - (void)writeDataToOutputStream
 {
-    @synchronized (self) {
+    @synchronized (self.receivedDataBuffer) {
         while ([self.outputStream hasSpaceAvailable])
         {
             if (self.receivedDataBuffer.length == 0)
