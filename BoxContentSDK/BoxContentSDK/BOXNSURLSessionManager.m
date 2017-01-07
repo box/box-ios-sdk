@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //a map to associate a session task with its task delegate
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
-@property (nonatomic, readonly, strong) NSMapTable *sessionIdToTaskDelegate;
+@property (nonatomic, readonly, strong) NSMapTable *sessionTaskIdToTaskDelegate;
 
 @end
 
@@ -29,13 +29,13 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 
 @implementation BOXNSURLSessionManager
 
-@synthesize sessionIdToTaskDelegate = _sessionIdToTaskDelegate;
+@synthesize sessionTaskIdToTaskDelegate = _sessionTaskIdToTaskDelegate;
 
 - (id)init
 {
     self = [super init];
     if (self != nil) {
-        _sessionIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
+        _sessionTaskIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
     }
     return self;
 }
@@ -76,15 +76,15 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 
 - (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
 {
-    @synchronized (self.sessionIdToTaskDelegate) {
-        [self.sessionIdToTaskDelegate setObject:taskDelegate forKey:@(sessionTaskId)];
+    @synchronized (self.sessionTaskIdToTaskDelegate) {
+        [self.sessionTaskIdToTaskDelegate setObject:taskDelegate forKey:@(sessionTaskId)];
     }
 }
 
 - (void)dessociateSessionTaskId:(NSUInteger)sessionTaskId
 {
-    @synchronized (self.sessionIdToTaskDelegate) {
-        [self.sessionIdToTaskDelegate removeObjectForKey:@(sessionTaskId)];
+    @synchronized (self.sessionTaskIdToTaskDelegate) {
+        [self.sessionTaskIdToTaskDelegate removeObjectForKey:@(sessionTaskId)];
     }
 }
 
@@ -129,7 +129,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
     if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
         id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
@@ -145,7 +145,7 @@ didFinishDownloadingToURL:(NSURL *)location
  totalBytesWritten:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
     if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
         id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
@@ -161,7 +161,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
     if ([taskDelegate respondsToSelector:@selector(processIntermediateResponse:)]) {
         [taskDelegate processIntermediateResponse:response];
     }
@@ -179,7 +179,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
     if ([taskDelegate respondsToSelector:@selector(processIntermediateData:)]) {
         [taskDelegate processIntermediateData:data];
     }
@@ -193,7 +193,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
     [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
     [self dessociateSessionTaskId:task.taskIdentifier];
 }
