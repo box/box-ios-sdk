@@ -62,13 +62,9 @@
     
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
-    
-    if (self.outputStream != nil) {
-        dataOperation.outputStream = self.outputStream;
-    } else {
-        dataOperation.outputStream = [[NSOutputStream alloc] initToFileAtPath:self.destinationPath append:NO];
-    }
 
+    dataOperation.outputStream = self.outputStream;
+    dataOperation.destinationPath = self.destinationPath;
     [self addSharedLinkHeaderToRequest:dataOperation.APIRequest];
 
     return dataOperation;
