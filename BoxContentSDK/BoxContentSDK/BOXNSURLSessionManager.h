@@ -61,10 +61,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol BOXNSURLSessionManagerDelegate <NSObject>
+
+/**
+ * Sent when a download session task has finish downloading into a url location
+ */
+- (void)downloadTask:(NSUInteger)sessionTaskId didFinishDownloadingToURL:(NSURL *)location;
+
+/**
+ * Sent when a session task finishes
+ */
+- (void)finishURLSessionTask:(NSUInteger)sessionTaskId withResponse:(NSURLResponse *)response error:(NSError *)error;
+
+@end
+
 /**
  This class is responsible for creating different NSURLSessionTask
  */
 @interface BOXNSURLSessionManager : NSObject
+
+/**
+ * A delegate to handle callbacks from session tasks that do not have associated task delegates
+ * This is possible if the background tasks were created outside of this BOXNSURLSessionManager (e.g. app restarts)
+ * A task delegate can always be re-associated back with a session task by calling associateSessionTaskId:withTaskDelegate:
+ */
+@property (nonatomic, strong, readwrite) id<BOXNSURLSessionManagerDelegate> delegate;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
@@ -91,6 +112,16 @@ NS_ASSUME_NONNULL_BEGIN
  Create a NSURLSessionUploadTask which can be run in background
  */
 - (NSURLSessionUploadTask *)createUploadTask:(NSURLRequest *)request fromFile:(NSURL *)fileURL;
+
+/**
+ * Associate a session task with its task delegate to handle callbacks for it
+ */
+- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate;
+
+/**
+ * Dessociate a session task with its task delegate so the task delegate will no longer handle callbacks for the task
+ */
+- (void)dessociateSessionTaskId:(NSUInteger)sessionTaskId;
 
 @end
 

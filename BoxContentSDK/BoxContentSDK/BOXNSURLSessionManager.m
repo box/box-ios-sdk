@@ -74,6 +74,8 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return _advancedSession;
 }
 
+#pragma mark - public methods
+
 - (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
 {
     @synchronized (self.sessionTaskIdToTaskDelegate) {
@@ -136,6 +138,8 @@ didFinishDownloadingToURL:(NSURL *)location
         if ([downloadTaskDelegate respondsToSelector:@selector(destinationPath)]) {
             [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:downloadTaskDelegate.destinationPath error:nil];
         }
+    } else {
+        [self.delegate downloadTask:downloadTask.taskIdentifier didFinishDownloadingToURL:location];
     }
 }
 
@@ -194,7 +198,11 @@ didReceiveResponse:(NSURLResponse *)response
 didCompleteWithError:(nullable NSError *)error
 {
     id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
-    [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
+    if (taskDelegate != nil) {
+        [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
+    } else {
+        [self.delegate finishURLSessionTask:task.taskIdentifier withResponse:task.response error:error];
+    }
     [self dessociateSessionTaskId:task.taskIdentifier];
 }
 
