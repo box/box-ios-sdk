@@ -177,6 +177,7 @@
 - (void)dealloc
 {
     if (self.outputStream) {
+        self.outputStream.delegate = nil;
         [self.outputStream close];
         self.outputStream = nil;
     }
@@ -238,8 +239,6 @@
     }
 }
 
-
-
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [super connection:connection didFailWithError:error];
@@ -288,10 +287,10 @@
     }
 }
 
-- (void)progressWithExpectedTotalBytes:(long long)expectedTotalBytes totalBytesReceived:(unsigned long long)totalBytesReceived
+- (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     if (self.progressBlock != nil) {
-        self.progressBlock(expectedTotalBytes, totalBytesReceived);
+        self.progressBlock(totalBytesExpectedToWrite, totalBytesWritten);
     }
 }
 
