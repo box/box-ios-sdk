@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //a map to associate a session task with its task delegate
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
-@property (nonatomic, readonly, strong) NSMapTable *sessionTaskIdToTaskDelegate;
+@property (nonatomic, readonly, strong) NSMapTable<NSNumber *, id<BOXNSURLSessionTaskDelegate>> *sessionTaskIdToTaskDelegate;
 
 @end
 
@@ -135,7 +135,7 @@ didFinishDownloadingToURL:(NSURL *)location
     if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
         id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
-        if ([downloadTaskDelegate respondsToSelector:@selector(destinationPath)]) {
+        if ([downloadTaskDelegate respondsToSelector:@selector(destinationPath)] && downloadTaskDelegate.destinationPath != nil) {
             [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:downloadTaskDelegate.destinationPath error:nil];
         }
     } else {
@@ -153,8 +153,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
         id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
-        if ([downloadTaskDelegate respondsToSelector:@selector(progressWithExpectedTotalBytes:totalBytesReceived:)]) {
-            [downloadTaskDelegate progressWithExpectedTotalBytes:totalBytesExpectedToWrite totalBytesReceived:totalBytesWritten];
+        if ([downloadTaskDelegate respondsToSelector:@selector(progressWithTotalBytesWritten:totalBytesExpectedToWrite:)]) {
+            [downloadTaskDelegate progressWithTotalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }
     }
 }
@@ -169,10 +169,7 @@ didReceiveResponse:(NSURLResponse *)response
     if ([taskDelegate respondsToSelector:@selector(processIntermediateResponse:)]) {
         [taskDelegate processIntermediateResponse:response];
     }
-
-    if (completionHandler != nil) {
-        completionHandler(NSURLSessionResponseAllow);
-    }
+    completionHandler(NSURLSessionResponseAllow);
 }
 
 /* Sent when data is available for the delegate to consume.  It is

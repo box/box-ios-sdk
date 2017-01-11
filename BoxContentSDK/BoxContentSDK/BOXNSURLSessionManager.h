@@ -50,14 +50,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The location for output file. If provided, outputStream will be ignored
- * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ * Using destinationPath to consume data will allow request to be executed in the background
+ * if the app is killed/suspended and resume upon app restarts/resumes
+ * If download finishes successfully, i.e. at the time finishURLSessionTaskWithResponse:error:
+ *   method gets called, if no error, the downloaded file will be available at destinationPath
+ * The task delegate will be responsible for the downloaded file onwards
  */
 - (NSString *)destinationPath;
 
 /**
  * To be called to report ongoing progress of the task
  */
-- (void)progressWithExpectedTotalBytes:(long long)expectedTotalBytes totalBytesReceived:(unsigned long long)totalBytesReceived;
+- (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
 
 @end
 
@@ -114,7 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURLSessionUploadTask *)createUploadTask:(NSURLRequest *)request fromFile:(NSURL *)fileURL;
 
 /**
- * Associate a session task with its task delegate to handle callbacks for it
+ * Associate a session task with its task delegate to handle callbacks for it, taskDelegate is not retained
  */
 - (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate;
 
