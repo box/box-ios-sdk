@@ -76,6 +76,15 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 
 #pragma mark - public methods
 
+- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion
+{
+    if (completion != nil) {
+        [self.advancedSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+            completion(uploadTasks, downloadTasks);
+        }];
+    }
+}
+
 - (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
 {
     @synchronized (self.sessionTaskIdToTaskDelegate) {

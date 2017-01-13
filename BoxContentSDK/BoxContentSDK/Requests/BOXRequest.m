@@ -208,17 +208,31 @@
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock
 {
+    return [self dataOperationWithURL:URL HTTPMethod:HTTPMethod queryStringParameters:queryParameters bodyDictionary:bodyDictionary successBlock:successBlock failureBlock:failureBlock sessionTask:nil sessionTaskReplacedBlock:nil];
+}
+
+- (BOXAPIDataOperation *)dataOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                        queryStringParameters:(NSDictionary *)queryParameters
+                               bodyDictionary:(NSDictionary *)bodyDictionary
+                                 successBlock:(BOXDownloadSuccessBlock)successBlock
+                                 failureBlock:(BOXDownloadFailureBlock)failureBlock
+                                  sessionTask:(NSURLSessionTask *)sessionTask
+                      sessionTaskReplacedBlock:(BOXSessionTaskReplacedBlock)sessionTaskReplacedBlock
+{
     BOXAPIDataOperation *operation = [[BOXAPIDataOperation alloc] initWithURL:URL
                                                                    HTTPMethod:HTTPMethod
                                                                          body:bodyDictionary
                                                                   queryParams:queryParameters
-                                                                session:self.queueManager.session];
+                                                                      session:self.queueManager.session
+                                                                  sessionTask:sessionTask];
     if (successBlock != nil) {
         operation.successBlock = successBlock;
     }
     if (failureBlock != nil) {
         operation.failureBlock = failureBlock;
     }
+    operation.sessionTaskReplacedBlock = sessionTaskReplacedBlock;
 
     return operation;
 }

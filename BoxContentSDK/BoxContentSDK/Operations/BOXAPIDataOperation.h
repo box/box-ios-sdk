@@ -130,6 +130,8 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  */
 @property (nonatomic, readwrite, strong) NSString *modelID;
 
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session sessionTask:(NSURLSessionTask *)sessionTask;
+
 /** @name Overridden methods */
 
 /**
