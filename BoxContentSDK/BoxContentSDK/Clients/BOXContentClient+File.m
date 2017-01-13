@@ -21,6 +21,8 @@
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
 
+#import "BOXContentClient+File.h"
+
 @implementation BOXContentClient (File)
 
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
@@ -83,6 +85,17 @@
     BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID];
     [self prepareRequest:request];
     
+    return request;
+}
+
+- (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
+                                      toLocalFilePath:(NSString *)localFilePath
+                                         downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                            downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
+{
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID downloadTask:downloadTask downloadTaskReplacedBlock:downloadTaskReplacedBlock];
+    [self prepareRequest:request];
+
     return request;
 }
 
