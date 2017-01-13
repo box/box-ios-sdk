@@ -135,8 +135,8 @@ didFinishDownloadingToURL:(NSURL *)location
     if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
         id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
-        if ([downloadTaskDelegate respondsToSelector:@selector(destinationPath)] && downloadTaskDelegate.destinationPath != nil) {
-            [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:downloadTaskDelegate.destinationPath error:nil];
+        if ([downloadTaskDelegate respondsToSelector:@selector(didFinishDownloadingToURL:)]) {
+            [downloadTaskDelegate didFinishDownloadingToURL:location];
         }
     } else {
         [self.delegate downloadTask:downloadTask.taskIdentifier didFinishDownloadingToURL:location];

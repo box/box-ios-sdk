@@ -73,6 +73,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
  */
 @property (nonatomic, readwrite, strong) NSString *destinationPath;
+
 /** @name Callbacks */
 
 /**

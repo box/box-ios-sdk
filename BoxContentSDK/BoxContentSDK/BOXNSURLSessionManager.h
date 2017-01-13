@@ -43,25 +43,16 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- * Output stream to write data into. If destinationPath is provided, outputStream will be ignored
- * Using outputStream to consume data will not allow the request to be executed in the background if the app is killed/suspended
- */
-- (NSOutputStream *)outputStream;
-
-/**
- * The location for output file. If provided, outputStream will be ignored
- * Using destinationPath to consume data will allow request to be executed in the background
- * if the app is killed/suspended and resume upon app restarts/resumes
- * If download finishes successfully, i.e. at the time finishURLSessionTaskWithResponse:error:
- *   method gets called, if no error, the downloaded file will be available at destinationPath
- * The task delegate will be responsible for the downloaded file onwards
- */
-- (NSString *)destinationPath;
-
-/**
  * To be called to report ongoing progress of the task
  */
 - (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
+
+/**
+ * Notify that the file has been downloaded to the location
+ * The delegate should copy or move the file at the given location to a new location as it will be
+ * removed when the delegate message returns.
+ */
+- (void)didFinishDownloadingToURL:(NSURL *)location;
 
 @end
 
