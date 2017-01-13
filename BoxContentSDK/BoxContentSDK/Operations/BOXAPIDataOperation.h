@@ -44,7 +44,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
  */
-@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate>
+@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate, BOXNSURLSessionDownloadTaskDelegate>
 
 /** @name Streams */
 
@@ -62,8 +62,17 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @warning If you are manually reading from this output stream (for example with
  * a `CFStreamCreateBoundPair`) do not let data sit in the stream or you risk causing
  * a large file to buffer entirely in memory.
+ *
+ * If destinationPath is provided, outputStream will be ignored
+ * Using outputStream to consume data will not allow the request to be executed in the background if the app is killed/suspended
  */
 @property (nonatomic, readwrite, strong) NSOutputStream *outputStream;
+
+/**
+ * The location for output file. If provided, outputStream will be ignored
+ * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ */
+@property (nonatomic, readwrite, strong) NSString *destinationPath;
 
 /** @name Callbacks */
 

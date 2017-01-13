@@ -86,7 +86,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * - performCompletionCallback
  *
  */
-@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate>
+@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate, BOXNSURLSessionTaskDelegate>
 
 /** @name Authorization */
 
@@ -234,7 +234,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 - (void)startURLConnection;
 
-#pragma mark - Process API call results
+#pragma mark - Process API call results BOXNSURLSessionTaskDelegate
 /** @name Process API call results */
 
 /**
@@ -251,15 +251,6 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * @param data The data received from Box as a result of the API call.
  */
 - (void)processResponseData:(NSData *)data;
-
-/**
- * To be called to finish the operation for a NSURLSessionTask upon its completion
- *
- * @param data      The data received from Box as a result of the API call.
- * @param response  The response received from Box as a result of the API call.
- * @param error     An error in the NSURLErrorDomain
- */
-- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
 
 #pragma mark - callbacks
 /** @name Callbacks */
