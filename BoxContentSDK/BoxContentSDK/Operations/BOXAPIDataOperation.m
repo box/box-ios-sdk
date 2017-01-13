@@ -294,6 +294,17 @@
     }
 }
 
+- (void)didFinishDownloadingToURL:(NSURL *)location
+{
+    if (self.destinationPath != nil) {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:self.destinationPath error:&error];
+        if (self.error == nil) {
+            self.error = error;
+        }
+    }
+}
+
 #pragma mark - NSStream Delegate
 
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)eventCode
