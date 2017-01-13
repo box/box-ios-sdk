@@ -51,6 +51,15 @@
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock;
 
+- (BOXAPIDataOperation *)dataOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                        queryStringParameters:(NSDictionary *)queryParameters
+                               bodyDictionary:(NSDictionary *)bodyDictionary
+                                 successBlock:(BOXDownloadSuccessBlock)successBlock
+                                 failureBlock:(BOXDownloadFailureBlock)failureBlock
+                                  sessionTask:(NSURLSessionTask *)sessionTask
+                      sessionTaskReplacedBlock:(BOXSessionTaskReplacedBlock)sessionTaskReplacedBlock;
+
 - (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
                                 successBlock:(BOXDownloadSuccessBlock)successBlock

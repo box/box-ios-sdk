@@ -8,6 +8,7 @@
 
 #import "BOXSampleFileDetailsController.h"
 #import "BOXSampleProgressView.h"
+#import "BOXSampleAppSessionManager.h"
 
 NS_ENUM(NSInteger, FileDetailsControllerSection) {
     FileDetailsControllerSectionFileInfo = 0,
@@ -208,18 +209,22 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
-    
-    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath];
+    NSString *itemID = self.itemID;
+    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath downloadTask:nil downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
+        [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
+        NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
+        BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
+        [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
+    }];
+
     [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-        if (error == nil) {
             self.tableView.tableHeaderView = nil;
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Your file was downloaded in the documents directory." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
-        }
+        NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alertView show];
     }];
     
 //    //Alternative donwload method via a NSOutputStream

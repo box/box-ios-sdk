@@ -7,7 +7,7 @@
 //
 
 #import "BOXAPIDataOperation.h"
-
+#import "BOXAPIOperation_Private.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 
@@ -60,6 +60,15 @@
         _bytesReceived = 0;
     }
 
+    return self;
+}
+
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session sessionTask:(NSURLSessionTask *)sessionTask
+{
+    self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    if (self != nil) {
+        self.sessionTask = sessionTask;
+    }
     return self;
 }
 
@@ -389,6 +398,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
+    operationCopy.sessionTaskReplacedBlock = [self.sessionTaskReplacedBlock copy];
     
     return operationCopy;
 }

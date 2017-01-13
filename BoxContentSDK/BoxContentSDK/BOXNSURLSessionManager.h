@@ -118,6 +118,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)dessociateSessionTaskId:(NSUInteger)sessionTaskId;
 
+/**
+ * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
+ */
+- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
