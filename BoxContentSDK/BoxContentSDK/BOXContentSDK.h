@@ -131,7 +131,6 @@
 #import "BOXCollaboration.h"
 #import "BOXGroup.h"
 #import "BOXFileVersion.h"
-#import "BOXAssetInputStream.h"
 #import "BOXMetadata.h"
 #import "BOXMetadataKeyValue.h"
 #import "BOXMetadataUpdateTask.h"
