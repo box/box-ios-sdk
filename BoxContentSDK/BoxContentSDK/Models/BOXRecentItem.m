@@ -34,15 +34,11 @@
                                                            hasExpectedType:[NSString class]
                                                                nullAllowed:NO];
 
-// FIXME (12/20/16): the API currently returns the interaction date in Unix Time format, but this will soon change to
-// ISO-8601. In order to avoid hitting a type-checking assertion when this change is made on the back-end,
-// this field will be left unpopulated until the type is finalized.
-//        NSNumber *interactionDate = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInteractedAt
-//                                                                   inDictionary:JSONData
-//                                                                hasExpectedType:[NSNumber class]
-//                                                                    nullAllowed:NO];
-//        NSTimeInterval interactionDateInterval = interactionDate.doubleValue;
-//        self.interactionDate = [NSDate dateWithTimeIntervalSince1970:interactionDateInterval];
+        NSString *interactionDate = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInteractedAt
+                                                                   inDictionary:JSONData
+                                                                hasExpectedType:[NSString class]
+                                                                    nullAllowed:NO];
+        self.interactionDate = [NSDate box_dateWithISO8601String:interactionDate];
 
         NSString *sharedLinkString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySharedLink
                                                                     inDictionary:JSONData
