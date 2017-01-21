@@ -211,10 +211,14 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath downloadTask:nil downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
-        [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
-        NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
-        BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
-        [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
+        if (oldSessionTask != nil) {
+            [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
+        }
+        if (newSessionTask != nil) {
+            NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
+            BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
+            [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
+        }
     }];
 
     [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {

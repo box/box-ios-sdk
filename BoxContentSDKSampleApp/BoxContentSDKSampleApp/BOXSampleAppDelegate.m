@@ -12,6 +12,8 @@
 
 @interface BOXSampleAppDelegate () <BOXNSURLSessionManagerDelegate>
 
+@property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;
+
 @end
 
 @implementation BOXSampleAppDelegate
@@ -25,7 +27,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authenticationController];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
-
+    self.sessionIdToRequest = [[NSMutableDictionary alloc] init];
     [self setUpSessionManager];
 
     return YES;
@@ -36,50 +38,78 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         BOXNSURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
-        manager.delegate = self;
-
-        [manager pendingBackgroundDownloadUploadSessionTasks:^(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
-            [self recoverDownloadTasks:downloadTasks];
-        }];
-
+        [manager setUpWithDelegate:self];
     });
 }
 
-- (void)recoverDownloadTasks:(NSArray<NSURLSessionDownloadTask *> *)downloadTasks
+- (void)recoverDownloadTask:(NSURLSessionDownloadTask *)downloadTask
 {
     BOXContentClient *client = [BOXContentClient defaultClient];
     BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+    BOXSampleAppSessionInfo *info = [appSessionManager getSessionTaskInfo:downloadTask.taskIdentifier];
 
-    for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
-        BOXSampleAppSessionInfo *info = [appSessionManager getSessionTaskInfo:downloadTask.taskIdentifier];
-
+    if (info != nil) {
         NSLog(@"reconnect download task info %@", info);
-        if (info != nil) {
-            BOXFileDownloadRequest *request = [client fileDownloadRequestWithID:info.associateId toLocalFilePath:info.destinationPath downloadTask:downloadTask downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
+
+        BOXFileDownloadRequest *request = [client fileDownloadRequestWithID:info.associateId toLocalFilePath:info.destinationPath downloadTask:downloadTask downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
+            //persist info for background download task so we can reconnect delegate to handle the download task's callbacks
+            if (oldSessionTask != nil) {
                 [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
+            }
+            if (newSessionTask != nil) {
                 NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
                 BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:info.associateId destinationPath:info.destinationPath];
                 [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
-            }];
+            }
+        }];
+        //register download task and its equivalent request to allow cancelling of request
+        //if download task finishes before request starts and becomes its delegate
+        @synchronized (self.sessionIdToRequest) {
+            self.sessionIdToRequest[@(downloadTask.taskIdentifier)] = request;
+        }
+        [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+            NSLog(@"download request progress %lld/%lld, info (%@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.associateId, info.destinationPath);
+        } completion:^(NSError *error) {
+            NSLog(@"download request completed, error: %@, info (%@, %@)", error, info.associateId, info.destinationPath);
+            [appSessionManager removeSessionTaskId:downloadTask.taskIdentifier];
+        }];
+    } else {
+        NSLog(@"unrecognized downloadTask %lu", downloadTask.taskIdentifier);
+    }
+}
 
-            [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-                NSLog(@"download request info (%@, %@): %lld/%lld", info.associateId, info.destinationPath, totalBytesTransferred, totalBytesExpectedToTransfer);
-            } completion:^(NSError *error) {
-                NSLog(@"download request info (%@, %@) error: %@", info.associateId, info.destinationPath, error);
-                [appSessionManager removeSessionTaskId:downloadTask.taskIdentifier];
-            }];
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
+   totalBytesWritten:(int64_t)totalBytesWritten
+totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    NSLog(@"sessionTaskId %lu, totalBytesWritten %lld, totalBytesExpectedToWrite %lld", (unsigned long)downloadTask.taskIdentifier, totalBytesWritten, totalBytesExpectedToWrite);
+    [self recoverDownloadTask:downloadTask];
+}
+
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    NSLog(@"sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
+    @synchronized (self.sessionIdToRequest) {
+        if (self.sessionIdToRequest[@(downloadTask.taskIdentifier)] != nil) {
+            BOXFileDownloadRequest *request = self.sessionIdToRequest[@(downloadTask.taskIdentifier)];
+            [request cancel];
+            [self.sessionIdToRequest removeObjectForKey:@(downloadTask.taskIdentifier)];
         }
     }
 }
 
-- (void)downloadTask:(NSUInteger)sessionTaskId didFinishDownloadingToURL:(NSURL *)location
+- (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error
 {
-    NSLog(@"sessionTaskId %lu location %@", (unsigned long)sessionTaskId, location);
-}
-
-- (void)finishURLSessionTask:(NSUInteger)sessionTaskId withResponse:(NSURLResponse *)response error:(NSError *)error
-{
-    NSLog(@"sessionTaskId %lu, response %@, error %@", sessionTaskId, response, error);
+    //could be called to handle any session task whose delegate might have gone away like thumbnail requests if scrolled past them
+    NSLog(@"sessionTaskId %lu, response %@, error %@", sessionTask.taskIdentifier, response, error);
+    @synchronized (self.sessionIdToRequest) {
+        if (self.sessionIdToRequest[@(sessionTask.taskIdentifier)] != nil) {
+            BOXFileDownloadRequest *request = self.sessionIdToRequest[@(sessionTask.taskIdentifier)];
+            [request cancel];
+            [self.sessionIdToRequest removeObjectForKey:@(sessionTask.taskIdentifier)];
+        }
+    }
+    [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:sessionTask.taskIdentifier];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
