@@ -59,14 +59,21 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol BOXNSURLSessionManagerDelegate <NSObject>
 
 /**
+ * Notify delegate about download progress
+ */
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
+   totalBytesWritten:(int64_t)totalBytesWritten
+totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
+
+/**
  * Sent when a download session task has finish downloading into a url location
  */
-- (void)downloadTask:(NSUInteger)sessionTaskId didFinishDownloadingToURL:(NSURL *)location;
+- (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location;
 
 /**
  * Sent when a session task finishes
  */
-- (void)finishURLSessionTask:(NSUInteger)sessionTaskId withResponse:(NSURLResponse *)response error:(NSError *)error;
+- (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error;
 
 @end
 
@@ -76,11 +83,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BOXNSURLSessionManager : NSObject
 
 /**
- * A delegate to handle callbacks from session tasks that do not have associated task delegates
- * This is possible if the background tasks were created outside of this BOXNSURLSessionManager (e.g. app restarts)
- * A task delegate can always be re-associated back with a session task by calling associateSessionTaskId:withTaskDelegate:
+ * This method needs to be called once to set up the manager to be ready to perform other public methods
+ * @param delegate  handle callbacks from session tasks that do not have associated task delegates
+ *                  possible if the background tasks were created outside of BOXNSURLSessionManager (e.g. app restarts)
+ *                  A task delegate can always be re-associated with a session task by calling
+ *                  associateSessionTaskId:withTaskDelegate:
  */
-@property (nonatomic, strong, readwrite) id<BOXNSURLSessionManagerDelegate> delegate;
+- (void)setUpWithDelegate:(id<BOXNSURLSessionManagerDelegate>)delegate;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,

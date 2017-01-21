@@ -68,6 +68,9 @@
     self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
     if (self != nil) {
         self.sessionTask = sessionTask;
+        if (sessionTask != nil) {
+            [self.session.urlSessionManager associateSessionTaskId:sessionTask.taskIdentifier withTaskDelegate:self];
+        }
     }
     return self;
 }
@@ -305,12 +308,30 @@
 
 - (void)didFinishDownloadingToURL:(NSURL *)location
 {
-    if (self.destinationPath != nil) {
-        NSError *error = nil;
-        [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:self.destinationPath error:&error];
-        if (self.error == nil) {
-            self.error = error;
+    //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
+    //is called to report file move/replace error if any
+    @synchronized (self) {
+        if (self.destinationPath != nil) {
+            NSError *error = nil;
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
+
+            if (![fileManager fileExistsAtPath:self.destinationPath]) {
+                [fileManager moveItemAtURL:location toURL:destURL error:&error];
+            } else {
+                [fileManager replaceItemAtURL:destURL withItemAtURL:location backupItemName:nil options:nil resultingItemURL:nil error:&error];
+            }
+            if (self.error == nil) {
+                self.error = error;
+            }
         }
+    }
+}
+
+- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+{
+    @synchronized (self) {
+        [super finishURLSessionTaskWithResponse:response error:error];
     }
 }
 
