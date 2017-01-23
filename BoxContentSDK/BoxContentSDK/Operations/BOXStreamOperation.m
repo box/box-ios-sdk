@@ -209,7 +209,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
-    operationCopy.sessionTaskReplacedBlock = [self.sessionTaskReplacedBlock copy];
+    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     return operationCopy;
 }
