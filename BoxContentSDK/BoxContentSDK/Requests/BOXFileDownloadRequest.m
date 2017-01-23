@@ -14,7 +14,7 @@
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
 @property (nonatomic, readwrite, strong) NSURLSessionDownloadTask *downloadTask;
-@property (nonatomic, readwrite, strong) BOXSessionTaskReplacedBlock downloadTaskReplacedBlock;
+@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock downloadTaskReplacedBlock;
 @end
 
 @implementation BOXFileDownloadRequest
