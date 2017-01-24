@@ -124,6 +124,16 @@
 }
 
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
+                                         fromLocalFilePath:(NSString *)localFilePath
+                                       tempUploadFilePath:(NSString *)tempUploadFilePath
+{
+    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithPath:localFilePath targetFolderID:folderID tempUploadFilePath:tempUploadFilePath];
+    [self prepareRequest:request];
+
+    return request;
+}
+
+- (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                                  fromData:(NSData *)data
                                                  fileName:(NSString *)fileName
 {
@@ -149,6 +159,16 @@
     BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath];
     [self prepareRequest:request];
     
+    return request;
+}
+
+- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
+                                                     fromLocalFilePath:(NSString *)localFilePath
+                                                   tempUploadFilePath:(NSString *)tempUploadFilePath
+{
+    BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath tempUploadFilePath:tempUploadFilePath];
+    [self prepareRequest:request];
+
     return request;
 }
 

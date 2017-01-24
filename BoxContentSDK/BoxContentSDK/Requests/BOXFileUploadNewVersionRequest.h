@@ -18,6 +18,10 @@
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 
 - (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath;
+
+//initialize a request which will run in the background even if app terminates if tempUploadFilePath is provided
+- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath tempUploadFilePath:(NSString *)tempUploadFilePath;
+
 - (instancetype)initWithFileID:(NSString *)fileID data:(NSData *)data;
 - (instancetype)initWithFileID:(NSString *)fileID
                        ALAsset:(ALAsset *)asset
