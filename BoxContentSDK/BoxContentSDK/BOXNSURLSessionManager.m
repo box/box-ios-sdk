@@ -140,28 +140,39 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
     NSURLSessionTask *task = [self.progressSession dataTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
     NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    return [self.backgroundSession downloadTaskWithResumeData:resumeData];
+    NSURLSessionDownloadTask *task = [self.backgroundSession downloadTaskWithResumeData:resumeData];
+    [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
+    return task;
 }
 
-- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL
+- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate
 {
-    return [self.backgroundSession uploadTaskWithRequest:request fromFile:fileURL];
+    NSURLSessionUploadTask *task = [self.backgroundSession uploadTaskWithRequest:request fromFile:fileURL];
+    [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
+    return task;
+}
+
+- (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate
+{
+    NSURLSessionUploadTask *task = [self.progressSession uploadTaskWithStreamedRequest:request];
+    [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
+    return task;
 }
 
 #pragma mark - implementations for NSURLSession-related delegates for advanced session
@@ -233,6 +244,25 @@ didReceiveResponse:(NSURLResponse *)response
     }
 }
 
+/* Sent periodically to notify the delegate of upload progress.  This
+ * information is also available as properties of the task.
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+   didSendBodyData:(int64_t)bytesSent
+    totalBytesSent:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionUploadTaskDelegate)]) {
+        id<BOXNSURLSessionUploadTaskDelegate> uploadTaskDelegate = taskDelegate;
+        if ([uploadTaskDelegate respondsToSelector:@selector(progressWithTotalBytesSent:totalBytesExpectedToSend:)]) {
+            [uploadTaskDelegate progressWithTotalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
+        }
+    } else {
+        [self.defaultDelegate uploadTask:task totalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
+    }
+}
+
 #pragma mark - NSURLSessionTaskDelegate
 
 /* Sent as the last message related to a specific task.  Error may be
@@ -250,6 +280,23 @@ didCompleteWithError:(nullable NSError *)error
     [self dessociateSessionTaskId:task.taskIdentifier];
 }
 
+/* Sent if a task requires a new, unopened body stream.  This may be
+ * necessary when authentication has failed for any request that
+ * involves a body stream.
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+ needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler
+{
+    NSInputStream *inputStream = nil;
+
+    if (task.originalRequest.HTTPBodyStream && [task.originalRequest.HTTPBodyStream conformsToProtocol:@protocol(NSCopying)]) {
+        inputStream = [task.originalRequest.HTTPBodyStream copy];
+    }
+
+    if (completionHandler) {
+        completionHandler(inputStream);
+    }
+}
 @end
 
 NS_ASSUME_NONNULL_END
