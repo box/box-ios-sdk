@@ -56,6 +56,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol BOXNSURLSessionUploadTaskDelegate <BOXNSURLSessionTaskDelegate>
+
+@optional
+
+/**
+ * To be called to report ongoing progress of the task
+ */
+- (void)progressWithTotalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+
+
+@end
+
 @protocol BOXNSURLSessionManagerDelegate <NSObject>
 
 /**
@@ -69,6 +81,13 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
  * Sent when a download session task has finish downloading into a url location
  */
 - (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location;
+
+/**
+ * Notify delegate about upload progress
+ */
+- (void)uploadTask:(NSURLSessionDataTask *)sessionTask
+    totalBytesSent:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 /**
  * Sent when a session task finishes
@@ -111,12 +130,17 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
 /**
  Create a NSURLSessionDownloadTask to be resumed
  */
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData;
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionUploadTask which can be run in background
  */
-- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL;
+- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate;
+
+/**
+ Create a non-background upload task given stream request
+ */
+- (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate;
 
 /**
  * Associate a session task with its task delegate to handle callbacks for it, taskDelegate is not retained

@@ -20,6 +20,7 @@
 @property (nonatomic, readwrite, strong) BOXFolder *folder;
 @property (nonatomic, readwrite, strong) BOXContentClient *client;
 @property (nonatomic, readwrite, strong) BOXRequest *request;
+@property (nonatomic, readwrite, strong) BOXRequest *nonBackgroundUploadRequest;
 
 @end
 
@@ -40,10 +41,11 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(retrieveItems) forControlEvents:UIControlEventValueChanged];
-    
+
+    UIBarButtonItem *uploadBgButton = [[UIBarButtonItem alloc] initWithTitle:@"UploadBg" style:UIBarButtonItemStylePlain target:self action:@selector(uploadBackgroundAction:)];
     UIBarButtonItem *uploadButton = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStylePlain target:self action:@selector(uploadAction:)];
     UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(importAction:)];
-    self.navigationItem.rightBarButtonItems = @[uploadButton, importButton];
+    self.navigationItem.rightBarButtonItems = @[uploadBgButton, uploadButton, importButton];
     
     // Get the current folder's informations
     BOXFolderRequest *folderRequest = [self.client folderInfoRequestWithID:self.folderID];
@@ -61,6 +63,8 @@
     
     [self.request cancel];
     self.request = nil;
+    [self.nonBackgroundUploadRequest cancel];
+    self.nonBackgroundUploadRequest = nil;
 }
 
 - (void)retrieveItems
@@ -181,6 +185,16 @@
 
 - (void)uploadAction:(id)sender
 {
+    [self upload:NO];
+}
+
+- (void)uploadBackgroundAction:(id)sender
+{
+    [self upload:YES];
+}
+
+- (void)upload:(BOOL)background
+{
     // See the progress
     if (self.items.count > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -203,11 +217,13 @@
     }
     
     NSString *path = [[NSBundle mainBundle] pathForResource:dummyImageName ofType:nil];
-    NSData *data = [NSData dataWithContentsOfFile:path];
     
     // Create our blocks
     BOXFileBlock completionBlock = ^void(BOXFile *file, NSError *error) {
         if (error == nil) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Upload Succeeded" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alertView show];
+            self.tableView.tableHeaderView = nil;
             [self updateDataSourceWithNewFile:file atIndex:indexOfFile];
             [self.tableView reloadData];
         } else {
@@ -220,24 +236,33 @@
     {
         progressHeaderView.progressView.progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
     };
-    
+
     // We did not find a file named similarly, we can upload normally the file.
+    NSString *tempPath = background == NO ? nil : [path stringByAppendingString:@".temp"];
     if (indexOfFile == NSNotFound) {
-        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestToFolderWithID:self.folderID fromData:data fileName:dummyImageName];
+        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestToFolderWithID:self.folderID fromLocalFilePath:path tempUploadFilePath:tempPath];
+        if (background == NO) {
+            self.nonBackgroundUploadRequest = uploadRequest;
+        }
         uploadRequest.enableCheckForCorruptionInTransit = YES;
         [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
             completionBlock(file, error);
         }];
     }
     // We already found the item. We will upload a new version of the file. 
     // Alternatively, we can also rename the file and upload it like a regular new file via a BOXFileUploadRequest
     else {
-        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestWithID:fileID fromData:data];
+        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestWithID:fileID fromLocalFilePath:path tempUploadFilePath:tempPath];
+        if (background == NO) {
+            self.nonBackgroundUploadRequest = newVersionRequest;
+        }
         [newVersionRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
             completionBlock(file, error);
         }];
     }   

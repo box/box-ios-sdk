@@ -88,7 +88,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 - (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
-    NSLog(@"sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
+    NSLog(@"downloadTask sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
     @synchronized (self.sessionIdToRequest) {
         if (self.sessionIdToRequest[@(downloadTask.taskIdentifier)] != nil) {
             BOXFileDownloadRequest *request = self.sessionIdToRequest[@(downloadTask.taskIdentifier)];
@@ -96,6 +96,13 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
             [self.sessionIdToRequest removeObjectForKey:@(downloadTask.taskIdentifier)];
         }
     }
+}
+
+- (void)uploadTask:(NSURLSessionDataTask *)sessionTask
+    totalBytesSent:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    NSLog(@"uploadTask sessionTaskId %lu", sessionTask.taskIdentifier);
 }
 
 - (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error
