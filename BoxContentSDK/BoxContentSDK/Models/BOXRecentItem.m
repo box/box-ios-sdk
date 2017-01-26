@@ -40,7 +40,7 @@
                                                                     nullAllowed:NO];
         self.interactionDate = [NSDate box_dateWithISO8601String:interactionDate];
 
-        NSString *sharedLinkString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySharedLink
+        NSString *sharedLinkString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInteractionSharedLink
                                                                     inDictionary:JSONData
                                                                  hasExpectedType:[NSString class]
                                                                      nullAllowed:YES
