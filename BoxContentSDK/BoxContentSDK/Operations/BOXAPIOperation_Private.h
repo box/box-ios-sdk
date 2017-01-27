@@ -8,11 +8,11 @@
 
 #import "BOXAPIOperation.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, BOXAPIOperationState) {
     BOXAPIOperationStateReady = 1,
     BOXAPIOperationStateExecuting,
     BOXAPIOperationStateFinished
-} BOXAPIOperationState;
+};
 
 @interface BOXAPIOperation ()
 
