@@ -297,7 +297,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (NSURLSessionTask *)createSessionTask
 {
     __weak BOXAPIOperation *weakSelf = self;
-    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTaskWithRequest:self.APIRequest
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                     [weakSelf finishURLSessionTaskWithData:data response:response error:error];
                                                 }];
@@ -539,9 +539,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    if (response != nil) {
-        [self processResponse:response];
-    }
+    [self processResponse:response];
+
     if (data != nil) {
         [self processResponseData:data];
     }
