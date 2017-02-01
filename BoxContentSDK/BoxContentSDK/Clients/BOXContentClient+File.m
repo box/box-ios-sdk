@@ -20,8 +20,6 @@
 #import "BOXPreflightCheckRequest.h"
 #import "BOXFileUploadNewVersionRequest.h"
 
-#import "BOXContentClient+File.h"
-
 @implementation BOXContentClient (File)
 
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID

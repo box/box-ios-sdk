@@ -5,6 +5,7 @@
 
 #import "BOXRequestWithSharedLinkHeader.h"
 #import "BOXAPIOperation.h"
+
 @interface BOXFileDownloadRequest : BOXRequestWithSharedLinkHeader
 
 // This is not the etag of a particular version of the file, nor the sequential version number,

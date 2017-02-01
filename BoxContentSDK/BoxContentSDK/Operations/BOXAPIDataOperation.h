@@ -130,7 +130,24 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  */
 @property (nonatomic, readwrite, strong) NSString *modelID;
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session sessionTask:(NSURLSessionTask *)sessionTask;
+/**
+ * Initializer. This initializer sets up APIRequest based on its input parameters
+ *
+ * @param URL the baseRequestURL
+ * @param HTTPMethod one of GET, POST, PUT, DELETE, OPTIONS. Used to configure APIRequest
+ * @param body Key value pairs to be encoded as the request body
+ * @param queryParams Key value pairs to be encoded as part of the query string
+ * @param session used for signing requests
+ * @param urlSessionTask used for actual execution of the API request
+ *
+ * @return An initialized BOXAPIOperation
+ */
+- (id)initWithURL:(NSURL *)URL
+       HTTPMethod:(NSString *)HTTPMethod
+             body:(NSDictionary *)body
+      queryParams:(NSDictionary *)queryParams
+          session:(BOXAbstractSession *)session
+      urlSessionTask:(NSURLSessionTask *)urlSessionTask;
 
 /** @name Overridden methods */
 

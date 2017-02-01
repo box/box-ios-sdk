@@ -308,7 +308,7 @@
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
 
-    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTask:request completionHandler:nil];
+    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTaskWithRequest:request completionHandler:nil];
     [sessionTask resume];
 }
 

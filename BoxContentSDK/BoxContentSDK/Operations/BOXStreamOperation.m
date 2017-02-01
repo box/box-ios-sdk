@@ -9,6 +9,7 @@
 #import "BOXStreamOperation.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
+#import "BOXAPIOperation_Private.h"
 
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2
@@ -138,6 +139,7 @@
 - (void)abortWithError:(NSError *)error
 {
     [self.connection cancel];
+    [self.sessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 
