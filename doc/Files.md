@@ -44,7 +44,7 @@ Download to a local file path:
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
 NSString *localFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.jpg"];
 BOXFileDownloadRequest *boxRequest = [contentClient fileDownloadRequestWithID:@"file-id" toLocalFilePath:localFilePath];
-[request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+[boxRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
 	// Update a progress bar, etc.
 } completion:^(NSError *error) {
 	// Download has completed. If it failed, error will contain reason (e.g. network connection)
@@ -57,7 +57,7 @@ BOXContentClient *contentClient = [BOXContentClient defaultClient];
 NSString *localFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.jpg"];
 NSOutputStream *outputStream = [NSOutputStream localFilePath append:NO];
 BOXFileDownloadRequest *boxRequest = [contentClient fileDownloadRequestWithID:@"file-id" outputStream];
-[request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+[boxRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
 	// Update a progress bar, etc.
 } completion:^(NSError *error) {
 	// Download has completed. If it failed, error will contain reason (e.g. network connection)
