@@ -7,6 +7,7 @@
 //
 
 #import "BOXAPIMultipartToJSONOperation.h"
+#import "BOXAPIOperation_Private.h"
 
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
@@ -542,6 +543,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 {
     [self close];
     [self.connection cancel];
+    [self.sessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 

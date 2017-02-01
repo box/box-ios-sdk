@@ -15,9 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
 @property (nonatomic, readwrite, strong) NSURLSession *defaultSession;
 
-//Advanced NSURLSession to be used by NSURLSessionTask which needs a delegate to handle specific tasks
-//during the life of a session/task, and to be run in the background e.g. download, upload
-@property (nonatomic, readwrite, strong) NSURLSession *advancedSession;
+//Progress NSURLSession to be used by NSURLSessionTask which needs progress reporting during the life of the tasks
+//but does not need to be in the background. e.g. non-background download, upload tasks
+@property (nonatomic, readwrite, strong) NSURLSession *progressSession;
+
+//Background NSURLSession to be used by downloads/uploads which needs to be run in the background even if app terminates
+@property (nonatomic, readwrite, strong) NSURLSession *backgroundSession;
+
+//A delegate to handle callbacks from session tasks that do not have associated task delegates
+//This is possible if the background tasks were created outside of this BOXNSURLSessionManager (e.g. app restarts)
+//A task delegate can always be re-associated back with a session task by calling associateSessionTaskId:withTaskDelegate:
+@property (nonatomic, strong, readwrite) id<BOXNSURLSessionManagerDelegate> defaultDelegate;
 
 //a map to associate a session task with its task delegate
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
@@ -40,7 +48,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return self;
 }
 
-- (NSURLSession *)defaultSession
+- (NSURLSession *)createDefaultSession
 {
     if (_defaultSession == nil) {
         //FIXME: revisit configuration for url session and its operation queue
@@ -57,24 +65,61 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return _defaultSession;
 }
 
-- (NSURLSession *)advancedSession
+- (NSURLSession *)createProgressSession
 {
-    if (_advancedSession == nil) {
+    if (_progressSession == nil) {
+        //FIXME: revisit configuration for url session and its operation queue
+        //arbitrary maxConcurrentOperationCount given that the number should not go above
+        //the max number of concurrent Box api operations
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        queue.name = @"com.box.BOXNSURLSessionManager.progress";
+        queue.maxConcurrentOperationCount = 8;
+
+        _progressSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
+    }
+    return _progressSession;
+}
+
+- (NSURLSession *)createBackgroundSession
+{
+    if (_backgroundSession == nil) {
         //FIXME: revisit configuration for url session and its operation queue
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"com.box.BOXNSURLSessionManager.advanced";
+        queue.name = @"com.box.BOXNSURLSessionManager.background";
         queue.maxConcurrentOperationCount = 8;
 
-        _advancedSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
+        _backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
     }
-    return _advancedSession;
+    return _backgroundSession;
 }
 
 #pragma mark - public methods
+
+- (void)setUpWithDefaultDelegate:(id<BOXNSURLSessionManagerDelegate>)delegate
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.defaultDelegate = delegate;
+        self.defaultSession = [self createDefaultSession];
+        self.progressSession = [self createProgressSession];
+        self.backgroundSession = [self createBackgroundSession];
+    });
+}
+
+- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * uploadTasks, NSArray<NSURLSessionDownloadTask *> * downloadTasks))completion
+{
+    if (completion != nil) {
+        [self.backgroundSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+            completion(uploadTasks, downloadTasks);
+        }];
+    }
+}
 
 - (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
 {
@@ -90,33 +135,33 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     }
 }
 
-- (NSURLSessionDataTask *)createDataTask:(NSURLRequest *)request completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler
+- (NSURLSessionDataTask *)createDataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler
 {
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDataTask *)createDataTaskForDownload:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.advancedSession dataTaskWithRequest:request];
+    NSURLSessionTask *task = [self.progressSession dataTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionTaskDelegate, BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.advancedSession downloadTaskWithRequest:request];
+    NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createDownloadTaskWithResumeData:(NSData *)resumeData
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData
 {
-    return [self.advancedSession downloadTaskWithResumeData:resumeData];
+    return [self.backgroundSession downloadTaskWithResumeData:resumeData];
 }
 
-- (NSURLSessionUploadTask *)createUploadTask:(NSURLRequest *)request fromFile:(NSURL *)fileURL
+- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL
 {
-    return [self.advancedSession uploadTaskWithRequest:request fromFile:fileURL];
+    return [self.backgroundSession uploadTaskWithRequest:request fromFile:fileURL];
 }
 
 #pragma mark - implementations for NSURLSession-related delegates for advanced session
@@ -139,7 +184,7 @@ didFinishDownloadingToURL:(NSURL *)location
             [downloadTaskDelegate didFinishDownloadingToURL:location];
         }
     } else {
-        [self.delegate downloadTask:downloadTask.taskIdentifier didFinishDownloadingToURL:location];
+        [self.defaultDelegate downloadTask:downloadTask didFinishDownloadingToURL:location];
     }
 }
 
@@ -156,6 +201,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
         if ([downloadTaskDelegate respondsToSelector:@selector(progressWithTotalBytesWritten:totalBytesExpectedToWrite:)]) {
             [downloadTaskDelegate progressWithTotalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }
+    } else {
+        [self.defaultDelegate downloadTask:downloadTask totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     }
 }
 
@@ -198,7 +245,7 @@ didCompleteWithError:(nullable NSError *)error
     if (taskDelegate != nil) {
         [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
     } else {
-        [self.delegate finishURLSessionTask:task.taskIdentifier withResponse:task.response error:error];
+        [self.defaultDelegate finishURLSessionTask:task withResponse:task.response error:error];
     }
     [self dessociateSessionTaskId:task.taskIdentifier];
 }

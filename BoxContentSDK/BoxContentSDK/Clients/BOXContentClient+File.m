@@ -86,6 +86,17 @@
 }
 
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
+                                      toLocalFilePath:(NSString *)localFilePath
+                                         downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                            downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
+{
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID downloadTask:downloadTask downloadTaskReplacedBlock:downloadTaskReplacedBlock];
+    [self prepareRequest:request];
+
+    return request;
+}
+
+- (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                        toOutputStream:(NSOutputStream *)outputStream
 {
     BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithOutputStream:outputStream fileID:fileID];

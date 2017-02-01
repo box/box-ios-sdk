@@ -7,7 +7,7 @@
 //
 
 #import "BOXAPIDataOperation.h"
-
+#import "BOXAPIOperation_Private.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 
@@ -63,6 +63,18 @@
     return self;
 }
 
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask
+{
+    self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    if (self != nil) {
+        self.sessionTask = urlSessionTask;
+        if (urlSessionTask != nil) {
+            [self.session.urlSessionManager associateSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
+        }
+    }
+    return self;
+}
+
 - (void)prepareAPIRequest
 {
     [super prepareAPIRequest];
@@ -87,9 +99,9 @@
     NSURLSessionTask *sessionTask;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     } else {
-        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
@@ -213,6 +225,7 @@
 {
     [self close];
     [self.connection cancel];
+    [self.sessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 
@@ -296,12 +309,30 @@
 
 - (void)didFinishDownloadingToURL:(NSURL *)location
 {
-    if (self.destinationPath != nil) {
-        NSError *error = nil;
-        [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:self.destinationPath error:&error];
-        if (self.error == nil) {
-            self.error = error;
+    //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
+    //is called to report file move/replace error if any
+    @synchronized (self) {
+        if (self.destinationPath != nil) {
+            NSError *error = nil;
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
+
+            if (![fileManager fileExistsAtPath:self.destinationPath]) {
+                [fileManager moveItemAtURL:location toURL:destURL error:&error];
+            } else {
+                [fileManager replaceItemAtURL:destURL withItemAtURL:location backupItemName:nil options:nil resultingItemURL:nil error:&error];
+            }
+            if (self.error == nil) {
+                self.error = error;
+            }
         }
+    }
+}
+
+- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+{
+    @synchronized (self) {
+        [super finishURLSessionTaskWithResponse:response error:error];
     }
 }
 
@@ -389,6 +420,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
+    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     return operationCopy;
 }

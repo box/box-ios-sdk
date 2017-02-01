@@ -8,6 +8,7 @@
 
 #import "BOXContentSDKConstants.h"
 #import "BOXContentClient.h"
+#import "BOXAPIOperation.h"
 
 @class BOXFileRequest;
 @class BOXFileCopyRequest;
@@ -166,6 +167,26 @@
  */
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                       toLocalFilePath:(NSString *)localFilePath;
+
+/**
+ *  Generate a request to download a file to a local filepath with an existing downloadTask
+ *
+ *  @param fileID        File ID.
+ *  @param localFilePath Path to local file.
+ *  @param downloadTask  NSURLSessionDownloadTask to be used for the actual download.
+ *                       If nil, a new downloadTask will be created
+ *  @param downloadTaskReplacedBlock    to get notified when download task used by the
+ *                                      request has been changed, so the caller of this method
+ *                                      could correctly re-associate their request with the new
+ *                                      download task, which is needed for the caller to know how
+ *                                      to handle downloadTask upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
+                                      toLocalFilePath:(NSString *)localFilePath
+                                         downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                            downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock;
 
 /**
  *  Generate a request to download a file to an outputstream.

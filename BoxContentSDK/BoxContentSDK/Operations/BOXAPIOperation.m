@@ -297,7 +297,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (NSURLSessionTask *)createSessionTask
 {
     __weak BOXAPIOperation *weakSelf = self;
-    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTask:self.APIRequest
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTaskWithRequest:self.APIRequest
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                     [weakSelf finishURLSessionTaskWithData:data response:response error:error];
                                                 }];
@@ -311,6 +311,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     {
         @synchronized(self.session)
         {
+            //Note: if sessionTask exists, we cannot change its API request
+            //make sure you recreate sessionTask with the new API request if needed
             [self prepareAPIRequest];
             self.accessToken = self.session.accessToken;
         }
@@ -346,6 +348,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
         [self finish];
     }
+}
+
+- (void)setSessionTask:(NSURLSessionTask *)sessionTask
+{
+    NSURLSessionTask *oldSessionTask = _sessionTask;
+    _sessionTask = sessionTask;
+    if (_sessionTaskReplacedBlock != nil) {
+        _sessionTaskReplacedBlock(oldSessionTask, _sessionTask);
+    }
+
 }
 
 - (void)cancel
@@ -528,7 +540,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
     [self processResponse:response];
-    [self processResponseData:data];
+
+    if (data != nil) {
+        [self processResponseData:data];
+    }
     if (self.error == nil) {
         self.error = error;
     }
