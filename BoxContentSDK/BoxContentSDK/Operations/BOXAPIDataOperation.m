@@ -63,13 +63,13 @@
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session sessionTask:(NSURLSessionTask *)sessionTask
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask
 {
     self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
     if (self != nil) {
-        self.sessionTask = sessionTask;
-        if (sessionTask != nil) {
-            [self.session.urlSessionManager associateSessionTaskId:sessionTask.taskIdentifier withTaskDelegate:self];
+        self.sessionTask = urlSessionTask;
+        if (urlSessionTask != nil) {
+            [self.session.urlSessionManager associateSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
         }
     }
     return self;
@@ -99,9 +99,9 @@
     NSURLSessionTask *sessionTask;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     } else {
-        sessionTask = [self.session.urlSessionManager createDataTaskForDownload:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
@@ -225,6 +225,7 @@
 {
     [self close];
     [self.connection cancel];
+    [self.sessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 

@@ -37,7 +37,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         BOXNSURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
-        [manager setUpWithDelegate:self];
+        [manager setUpWithDefaultDelegate:self];
     });
 }
 

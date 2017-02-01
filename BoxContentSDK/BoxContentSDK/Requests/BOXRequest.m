@@ -200,7 +200,7 @@
                                                                          body:bodyDictionary
                                                                   queryParams:queryParameters
                                                                       session:self.queueManager.session
-                                                                  sessionTask:sessionTask];
+                                                                  urlSessionTask:sessionTask];
     if (successBlock != nil) {
         operation.successBlock = successBlock;
     }

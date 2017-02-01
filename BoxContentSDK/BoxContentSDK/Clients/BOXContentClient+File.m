@@ -21,8 +21,6 @@
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
 
-#import "BOXContentClient+File.h"
-
 @implementation BOXContentClient (File)
 
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
