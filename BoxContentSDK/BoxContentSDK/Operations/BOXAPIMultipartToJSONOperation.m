@@ -365,7 +365,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 @interface BOXAPIMultipartToJSONOperation ()
 {
-    dispatch_once_t _pred;
+    BOOL _streamsInitialized;
 }
 
 @property (nonatomic, readwrite, strong) NSMutableArray *formPieces;
@@ -509,7 +509,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (void)initStreams
 {
-    dispatch_once(&_pred, ^{
+    @synchronized (self) {
+        if (_streamsInitialized) {
+            return;
+        }
+        _streamsInitialized = YES;
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
         CFStreamCreateBoundPair(NULL, &readStream, &writeStream, BOX_API_OUTPUT_STREAM_BUFFER_SIZE);
@@ -526,7 +530,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
         BOXAPIMultipartPiece *finalPiece = [self.formPieces lastObject];
         finalPiece.hasFinalBoundary = YES;
-    });
+    }
 }
 
 - (void)close
