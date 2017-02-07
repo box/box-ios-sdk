@@ -20,12 +20,37 @@
     return self;
 }
 
+- (id)initWithAssociateId:(NSString *)associateId folderId:(NSString *)folderId tempUploadFilePath:(NSString *)tempUploadFilePath
+{
+    self = [super init];
+    if (self != nil) {
+        _associateId = associateId;
+        _folderId = folderId;
+        _tempUploadFilePath = tempUploadFilePath;
+    }
+    return self;
+}
+
+- (id)initWithAssociateId:(NSString *)associateId fileId:(NSString *)fileId tempUploadFilePath:(NSString *)tempUploadFilePath
+{
+    self = [super init];
+    if (self != nil) {
+        _associateId = associateId;
+        _fileId = fileId;
+        _tempUploadFilePath = tempUploadFilePath;
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [self init])
     {
         self.associateId = [aDecoder decodeObjectForKey:@"associateId"];
         self.destinationPath = [aDecoder decodeObjectForKey:@"destinationPath"];
+        self.folderId = [aDecoder decodeObjectForKey:@"folderId"];
+        self.fileId = [aDecoder decodeObjectForKey:@"fileId"];
+        self.tempUploadFilePath = [aDecoder decodeObjectForKey:@"tempUploadFilePath"];
     }
     return self;
 }
@@ -34,14 +59,18 @@
 {
     [aCoder encodeObject:self.associateId forKey:@"associateId"];
     [aCoder encodeObject:self.destinationPath forKey:@"destinationPath"];
+    [aCoder encodeObject:self.folderId forKey:@"folderId"];
+    [aCoder encodeObject:self.folderId forKey:@"fileId"];
+    [aCoder encodeObject:self.tempUploadFilePath forKey:@"tempUploadFilePath"];
 }
 
 @end
 
 @interface BOXSampleAppSessionManager()
 
-@property (nonatomic, strong, readwrite) NSMutableDictionary <NSNumber *, BOXSampleAppSessionInfo *> *sessionTaskIdMap;
-
+@property (nonatomic, strong, readwrite) NSMutableDictionary <NSNumber *, BOXSampleAppSessionInfo *> *urlSessionTaskIdMap;
+@property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, NSNumber *> *requestIdToUrlSessionTaskIdMap;
+@property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, BOXSampleAppSessionInfo *> *requestIdToUrlSessionInfoMap;
 @end
 
 
@@ -67,45 +96,64 @@ static NSString *sessionTaskIdToAssociateIdKey = @"sessionTaskIdToAssociateId";
     return self;
 }
 
-- (void)saveSessionTaskId:(NSUInteger)sessionTaskId withInfo:(BOXSampleAppSessionInfo *)info;
+- (void)removeRequestId:(NSString *)requestId
 {
-    @synchronized (self.sessionTaskIdMap) {
-        self.sessionTaskIdMap[@(sessionTaskId)] = info;
+    NSUInteger urlSessionTaskId = 0;
+    if (self.requestIdToUrlSessionTaskIdMap[requestId] != nil) {
+        urlSessionTaskId = [self.requestIdToUrlSessionTaskIdMap[requestId] unsignedIntegerValue];
+    }
+    @synchronized (self.requestIdToUrlSessionTaskIdMap) {
+        [self.requestIdToUrlSessionTaskIdMap removeObjectForKey:requestId];
+    }
+    [self removeSessionTaskId:urlSessionTaskId];
+}
+
+- (void)saveSessionInfo:(BOXSampleAppSessionInfo *)sessionInfo withRequestId:(NSString *)requestId
+{
+    @synchronized (self.urlSessionTaskIdMap) {
+        //FIXME: persist connection between requestId and sessionInfo, and sessionTaskId if exists
         [self persistSessionTaskMap];
+    }
+}
+
+- (void)saveUrlSessionTaskId:(NSUInteger)urlSessionTaskId withRequestId:(NSString *)requestId
+{
+    @synchronized (self.requestIdToUrlSessionTaskIdMap) {
+        self.requestIdToUrlSessionTaskIdMap[requestId] = @(urlSessionTaskId);
     }
 }
 
 - (void)removeSessionTaskId:(NSUInteger)sessionTaskId
 {
-    @synchronized (self.sessionTaskIdMap) {
-        [self.sessionTaskIdMap removeObjectForKey:@(sessionTaskId)];
+    @synchronized (self.urlSessionTaskIdMap) {
+        [self.urlSessionTaskIdMap removeObjectForKey:@(sessionTaskId)];
         [self persistSessionTaskMap];
     }
 }
 
 - (BOXSampleAppSessionInfo *)getSessionTaskInfo:(NSUInteger)sessionTaskId
 {
-    return self.sessionTaskIdMap[@(sessionTaskId)];
+    return self.urlSessionTaskIdMap[@(sessionTaskId)];
 }
 
 - (void)persistSessionTaskMap
 {
-    @synchronized (self.sessionTaskIdMap) {
+    @synchronized (self.urlSessionTaskIdMap) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSData *encodedMap = [NSKeyedArchiver archivedDataWithRootObject:self.sessionTaskIdMap];
+        NSData *encodedMap = [NSKeyedArchiver archivedDataWithRootObject:self.urlSessionTaskIdMap];
         [defaults setObject:encodedMap forKey:sessionTaskIdToAssociateIdKey];
     }
 }
 
 - (void)populateSessionTaskIdMap
 {
-    @synchronized (self.sessionTaskIdMap) {
+    @synchronized (self.urlSessionTaskIdMap) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *encodedMap = [defaults objectForKey:sessionTaskIdToAssociateIdKey];
-        self.sessionTaskIdMap = [NSKeyedUnarchiver unarchiveObjectWithData:encodedMap];
+        self.urlSessionTaskIdMap = [NSKeyedUnarchiver unarchiveObjectWithData:encodedMap];
 
-        if (self.sessionTaskIdMap == nil) {
-            self.sessionTaskIdMap = [NSMutableDictionary new];
+        if (self.urlSessionTaskIdMap == nil) {
+            self.urlSessionTaskIdMap = [NSMutableDictionary new];
         }
     }
 }

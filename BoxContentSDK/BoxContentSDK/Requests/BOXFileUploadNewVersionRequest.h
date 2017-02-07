@@ -16,12 +16,14 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
+@property (nonatomic, readwrite, strong) NSURLSessionTask *initialSessionTask;
 
 - (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath;
 
 //initialize a request which will run in the background even if app terminates if uploadMultipartCopyFilePath is provided
 - (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
 
+- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath;
 - (instancetype)initWithFileID:(NSString *)fileID data:(NSData *)data;
 - (instancetype)initWithFileID:(NSString *)fileID
                        ALAsset:(ALAsset *)asset

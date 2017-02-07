@@ -99,6 +99,7 @@
 
 /**
  *  Generate a request to upload a local file to Box in background unless uploadMultipartCopyFilePath is not provided
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
  *
  *  @param folderID      Folder ID of the folder to upload the file into.
  *  @param localFilePath Path to local file to be uploaded.
@@ -124,6 +125,31 @@
                                                  fileName:(NSString *)fileName;
 
 /**
+ *  Generate a request to upload a byte-buffer to Box.
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
+ *
+ *  @param folderID Folder ID of the folder to upload the file into.
+ *  @param data     File contents to be uploaded.
+ *  @param fileName Name of the file to be uploaded.
+ *  @param tempUploadFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param uploadTask    NSURLSessionUploadTask to be used for the actual upload.
+ *                       If nil, a new uploadTask will be created
+ *  @param uploadTaskReplacedBlock  to get notified when upload task used by the
+ *                                  request has been changed, so the caller of this method
+ *                                  could correctly re-associate their request with the new
+ *                                  upload task, which is needed for the caller to know how
+ *                                  to handle upload task upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
+                                                 fromData:(NSData *)data
+                                                 fileName:(NSString *)fileName
+                                       tempUploadFilePath:(NSString *)tempUploadFilePath
+                                               uploadTask:(NSURLSessionUploadTask *)uploadTask
+                                  uploadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)uploadTaskReplacedBlock;
+
+/**
  *  Generate a request to upload an ALAsset to Box.
  *
  *  @param folderID      Folder ID of the folder to upload the file into.
@@ -137,6 +163,31 @@
                                         withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
 
 /**
+ *  Generate a request to upload an ALAsset to Box.
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
+ *
+ *  @param folderID      Folder ID of the folder to upload the file into.
+ *  @param asset         ALAsset to be uploaded.
+ *  @param assetsLibrary ALAssetsLibrary.
+ *  @param tempUploadFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param uploadTask    NSURLSessionUploadTask to be used for the actual upload.
+ *                       If nil, a new uploadTask will be created
+ *  @param uploadTaskReplacedBlock  to get notified when upload task used by the
+ *                                  request has been changed, so the caller of this method
+ *                                  could correctly re-associate their request with the new
+ *                                  upload task, which is needed for the caller to know how
+ *                                  to handle upload task upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
+                                              fromALAsset:(ALAsset *)asset
+                                        withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary
+                                       tempUploadFilePath:(NSString *)tempUploadFilePath
+                                               uploadTask:(NSURLSessionUploadTask *)uploadTask
+                                  uploadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)uploadTaskReplacedBlock;
+
+/**
  *  Generate a request to upload a new version of a file from a local file.
  *
  *  @param fileID        File ID.
@@ -148,7 +199,8 @@
                                                     fromLocalFilePath:(NSString *)localFilePath;
 
 /**
- *  Generate a request to upload a new version of a file from a local file in the background
+ *  Generate a request to upload a new version of a file from a local file.
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
  *  (continue running even if app terminates) unless uploadMultipartCopyFilePath is not provided.
  *
  *  @param fileID        File ID.
@@ -173,6 +225,29 @@
                                                              fromData:(NSData *)data;
 
 /**
+ *  Generate a request to upload a new version of a file from a byte-buffer.
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
+ *
+ *  @param fileID File ID.
+ *  @param data   Data to be uploaded.
+ *  @param tempUploadFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param uploadTask    NSURLSessionUploadTask to be used for the actual upload.
+ *                       If nil, a new uploadTask will be created
+ *  @param uploadTaskReplacedBlock  to get notified when upload task used by the
+ *                                  request has been changed, so the caller of this method
+ *                                  could correctly re-associate their request with the new
+ *                                  upload task, which is needed for the caller to know how
+ *                                  to handle upload task upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
+                                                             fromData:(NSData *)data
+                                                   tempUploadFilePath:(NSString *)tempUploadFilePath
+                                                           uploadTask:(NSURLSessionUploadTask *)uploadTask
+                                              uploadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)uploadTaskReplacedBlock;
+
+/**
  *  Generate a request to upload a new version of a file from ALAsset.
  *
  *  @param fileID        File ID.
@@ -183,6 +258,30 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                           fromALAsset:(ALAsset *)asset withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
+/**
+ *  Generate a request to upload a new version of a file from ALAsset.
+ *  If tempUploadFilePath is provided, upload will be run in background, which allows it to run even if app terminates
+ *
+ *  @param fileID        File ID.
+ *  @param asset         ALAsset.
+ *  @param assetsLibrary ALAssetsLibrary.
+ *  @param tempUploadFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param uploadTask    NSURLSessionUploadTask to be used for the actual upload.
+ *                       If nil, a new uploadTask will be created
+ *  @param uploadTaskReplacedBlock  to get notified when upload task used by the
+ *                                  request has been changed, so the caller of this method
+ *                                  could correctly re-associate their request with the new
+ *                                  upload task, which is needed for the caller to know how
+ *                                  to handle upload task upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
+                                                          fromALAsset:(ALAsset *)asset
+                                                    withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary
+                                                   tempUploadFilePath:(NSString *)tempUploadFilePath
+                                                           uploadTask:(NSURLSessionUploadTask *)uploadTask
+                                              uploadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)uploadTaskReplacedBlock;
 
 /**
  *  Generate a request to download a file to a local filepath.

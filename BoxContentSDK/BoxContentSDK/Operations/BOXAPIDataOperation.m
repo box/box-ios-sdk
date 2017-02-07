@@ -67,10 +67,7 @@
 {
     self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
     if (self != nil) {
-        self.sessionTask = urlSessionTask;
-        if (urlSessionTask != nil) {
-            [self.session.urlSessionManager associateSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
-        }
+        self.urlSessionTask = urlSessionTask;
     }
     return self;
 }
@@ -99,11 +96,17 @@
     NSURLSessionTask *sessionTask;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest];
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest];
     }
     return sessionTask;
+}
+
+- (void)urlSessionTaskWillResume
+{
+    //make this operation the delegate for the sessionTask to handle the task's callbacks accordingly
+    [self.session.urlSessionManager taskDelegate:self becomesDelegateForSessionTaskId:self.urlSessionTask.taskIdentifier];
 }
 
 - (void)processResponseData:(NSData *)data
@@ -225,7 +228,7 @@
 {
     [self close];
     [self.connection cancel];
-    [self.sessionTask cancel];
+    [self.urlSessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 
@@ -425,7 +428,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
-    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
+    operationCopy.urlSessionTaskReplacedBlock = self.urlSessionTaskReplacedBlock;
     
     return operationCopy;
 }

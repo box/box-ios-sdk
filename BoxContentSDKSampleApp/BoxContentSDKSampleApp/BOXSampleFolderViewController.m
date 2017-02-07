@@ -12,6 +12,7 @@
 #import "BOXSampleProgressView.h"
 #import "BOXSampleLibraryAssetViewController.h"
 #import <Photos/Photos.h>
+#import "BOXSampleAppSessionManager.h"
 
 @interface BOXSampleFolderViewController () <UIAlertViewDelegate>
 
@@ -203,7 +204,7 @@
     BOXSampleProgressView *progressHeaderView = [[BOXSampleProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 50.0f)];
     self.tableView.tableHeaderView = progressHeaderView;
     
-    NSString *dummyImageName = @"Logo_Box_Blue_Whitebg_480x480.jpg";
+    NSString *dummyImageName = background == NO ? @"Logo_Box_Blue_Whitebg_480x480.jpg" : @"large_video.mov";
     
     // check if the file is already in the current folder, if it is, we need to upload a new version instead of performing a regular upload.
     NSInteger indexOfFile = NSNotFound;
@@ -239,6 +240,8 @@
 
     // We did not find a file named similarly, we can upload normally the file.
     NSString *tempPath = background == NO ? nil : [path stringByAppendingString:@".temp"];
+    NSString *requestId = [NSString stringWithFormat:@"%08X", arc4random()];
+
     if (indexOfFile == NSNotFound) {
         BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath];
         if (background == NO) {
@@ -248,6 +251,7 @@
         [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            [[BOXSampleAppSessionManager defaultManager] removeRequestId:requestId];
             [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
             completionBlock(file, error);
         }];
@@ -262,6 +266,7 @@
         [newVersionRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            [[BOXSampleAppSessionManager defaultManager] removeRequestId:requestId];
             [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
             completionBlock(file, error);
         }];

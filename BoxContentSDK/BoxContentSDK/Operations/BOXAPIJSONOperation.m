@@ -27,7 +27,7 @@
     operationCopy.success = [self.success copy];
     operationCopy.failure = [self.failure copy];
     operationCopy.timesReenqueued = self.timesReenqueued;
-    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
+    operationCopy.urlSessionTaskReplacedBlock = self.urlSessionTaskReplacedBlock;
 
     // Migrate header fields (this is especially important for requests where some of the key
     // information is in the headers, such as Shared Link requests for the underlying item).

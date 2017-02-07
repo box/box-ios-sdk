@@ -80,8 +80,10 @@
                                                                                          HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                                body:nil
                                                                                         queryParams:queryParameters
-                                                                                      session:self.queueManager.session];
-    
+                                                                                            session:self.queueManager.session
+                                                                                     urlSessionTask:self.initialSessionTask];
+    //operation.urlSessionTaskReplacedBlock = self.uploadTaskReplacedBlock;
+
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
         operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
         [operation appendMultipartPieceWithFilePath:self.localFilePath

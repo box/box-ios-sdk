@@ -22,11 +22,14 @@
 // before the upload actually begins as the hash is calculated. The default is NO.
 @property (nonatomic, readwrite, assign) BOOL enableCheckForCorruptionInTransit;
 
+@property (nonatomic, readwrite, strong) NSURLSessionTask *initialSessionTask;
+
 - (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID;
 
 //initialize a request which will run in the background even if app terminates if uploadMultipartCopyFilePath is provided
 - (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
 
+- (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID;
 - (instancetype)initWithName:(NSString *)fileName targetFolderID:(NSString *)folderID data:(NSData *)data;
 - (instancetype)initWithALAsset:(ALAsset *)asset assetsLibrary:(ALAssetsLibrary *)assetsLibrary targetForlderID:(NSString *)folderID;
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXFileBlock)completionBlock;

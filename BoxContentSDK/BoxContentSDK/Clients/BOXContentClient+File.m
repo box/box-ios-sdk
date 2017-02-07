@@ -90,7 +90,9 @@
                                          downloadTask:(NSURLSessionDownloadTask *)downloadTask
                             downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
 {
-    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID downloadTask:downloadTask downloadTaskReplacedBlock:downloadTaskReplacedBlock];
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID];
+    request.initialDownloadTask = downloadTask;
+    request.downloadTaskReplacedBlock = downloadTaskReplacedBlock;
     [self prepareRequest:request];
 
     return request;
@@ -136,7 +138,7 @@
 {
     BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithName:fileName targetFolderID:folderID data:data];
     [self prepareRequest:request];
-    
+
     return request;
 }
 
@@ -146,7 +148,7 @@
 {
     BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithALAsset:asset assetsLibrary:assetsLibrary targetForlderID:folderID];
     [self prepareRequest:request];
-    
+
     return request;
 }
 
@@ -171,7 +173,7 @@
 {
     BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID data:data];
     [self prepareRequest:request];
-    
+
     return request;
 }
 
@@ -181,7 +183,7 @@
 {
     BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID ALAsset:asset assetsLibrary:assetsLibrary];
     [self prepareRequest:request];
-    
+
     return request;
 }
 

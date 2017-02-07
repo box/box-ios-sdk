@@ -210,14 +210,14 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
+    NSString *requestId = [NSString stringWithFormat:@"%08X", arc4random()];
+
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath downloadTask:nil downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
-        if (oldSessionTask != nil) {
-            [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
-        }
-        if (newSessionTask != nil) {
-            NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
+        if (newSessionTask == nil) {
+            [[BOXSampleAppSessionManager defaultManager] removeRequestId:requestId];
+        } else {
             BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
-            [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
+            [[BOXSampleAppSessionManager defaultManager] saveSessionInfo:info withRequestId:requestId];
         }
     }];
 
@@ -225,7 +225,8 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-            self.tableView.tableHeaderView = nil;
+        [[BOXSampleAppSessionManager defaultManager] removeRequestId:requestId];
+        self.tableView.tableHeaderView = nil;
         NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alertView show];

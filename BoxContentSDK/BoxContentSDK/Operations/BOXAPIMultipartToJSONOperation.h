@@ -58,6 +58,22 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
 - (unsigned long long)contentLength;
 
 /**
+ * This initializer sets up APIRequest based on its input parameters
+ *
+ * @param URL the baseRequestURL
+ * @param HTTPMethod one of GET, POST, PUT, DELETE, OPTIONS. Used to configure APIRequest
+ * @param body Key value pairs to be encoded as the request body
+ * @param queryParams Key value pairs to be encoded as part of the query string
+ * @param session used for signing requests
+ * @param urlSessionTask if provided, will be used for executing API request.
+ *                          The session task used might be replaced as needed,
+ *                          use sessionTaskReplacedBlock to be notified.
+ *
+ * @return An initialized BOXAPIOperation
+ */
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask;
+
+/**
  * Append the contents of file at filePath as a multipart piece in the multipart form data. Data will be
  * attached with a Content-Disposition header derived from fieldName and filename.
  *

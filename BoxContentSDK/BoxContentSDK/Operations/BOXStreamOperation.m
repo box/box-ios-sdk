@@ -139,7 +139,7 @@
 - (void)abortWithError:(NSError *)error
 {
     [self.connection cancel];
-    [self.sessionTask cancel];
+    [self.urlSessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 
@@ -211,7 +211,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
-    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
+    operationCopy.urlSessionTaskReplacedBlock = self.urlSessionTaskReplacedBlock;
     
     return operationCopy;
 }

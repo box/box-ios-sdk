@@ -11,6 +11,7 @@
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
+		6AC5A2781E4A9367001CDB4C /* large_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6AC5A2771E4A9367001CDB4C /* large_video.mov */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		983E98E82C544700D923D044 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CB12F14FE607574C024622 /* libPods-BoxContentSDKSampleApp.a */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
@@ -56,6 +57,7 @@
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
 		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
+		6AC5A2771E4A9367001CDB4C /* large_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = large_video.mov; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
 		87CB12F14FE607574C024622 /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 		C52D0AA21A5C2AB300CD4B56 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				6AC5A2771E4A9367001CDB4C /* large_video.mov */,
 				C55FE3211A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg */,
 				C52D0AA31A5C2AB300CD4B56 /* icon-file-generic.png */,
 				C52D0AA41A5C2AB300CD4B56 /* icon-file-generic@2x.png */,
@@ -337,6 +340,7 @@
 				C52D0A941A5C1C7A00CD4B56 /* Main.storyboard in Resources */,
 				E11BED371ADBE5CA00A9216F /* icon-folder-external.png in Resources */,
 				C52D0AAC1A5C2AB300CD4B56 /* icon-folder-shared@2x.png in Resources */,
+				6AC5A2781E4A9367001CDB4C /* large_video.mov in Resources */,
 				C52D0AAD1A5C2AB300CD4B56 /* icon-folder.png in Resources */,
 				C52D0AAA1A5C2AB300CD4B56 /* icon-file-generic@2x.png in Resources */,
 				C5745C381A5AF6CC00824FFA /* LaunchScreen.xib in Resources */,

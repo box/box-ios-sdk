@@ -138,7 +138,9 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @param body Key value pairs to be encoded as the request body
  * @param queryParams Key value pairs to be encoded as part of the query string
  * @param session used for signing requests
- * @param urlSessionTask used for actual execution of the API request
+ * @param urlSessionTask if provided, will be used for executing API request.
+ *                          The session task used might be replaced as needed,
+ *                          use sessionTaskReplacedBlock to be notified.
  *
  * @return An initialized BOXAPIOperation
  */
@@ -147,7 +149,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
              body:(NSDictionary *)body
       queryParams:(NSDictionary *)queryParams
           session:(BOXAbstractSession *)session
-      urlSessionTask:(NSURLSessionTask *)urlSessionTask;
+   urlSessionTask:(NSURLSessionTask *)urlSessionTask;
 
 /** @name Overridden methods */
 

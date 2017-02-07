@@ -36,7 +36,6 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 }
 
 @property (nonatomic, readwrite, strong) BOXMultipartBodyStream *inputStream;
-
 - (NSDictionary *)HTTPHeaders;
 
 // called on stream read error
@@ -45,6 +44,15 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 @end
 
 @implementation BOXAPIMultipartToJSONOperation
+
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask
+{
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    if (self != nil) {
+        self.urlSessionTask = urlSessionTask;
+    }
+    return self;
+}
 
 #pragma mark - Append data to upload operation
 
@@ -85,11 +93,17 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     NSURLSessionTask *sessionTask;
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url];
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest];
     }
     return sessionTask;
+}
+
+- (void)urlSessionTaskWillResume
+{
+    //make this operation the delegate for the sessionTask to handle the task's callbacks accordingly
+    [self.session.urlSessionManager taskDelegate:self becomesDelegateForSessionTaskId:self.urlSessionTask.taskIdentifier];
 }
 
 - (void)progressWithTotalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
@@ -170,7 +184,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 - (void)abortWithError:(NSError *)error
 {
     [self.connection cancel];
-    [self.sessionTask cancel];
+    [self.urlSessionTask cancel];
     [self connection:self.connection didFailWithError:error];
 }
 

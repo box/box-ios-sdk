@@ -19,7 +19,7 @@ typedef enum {
 #pragma mark - NSOperation state
 @property (nonatomic, readwrite, assign) BOXAPIOperationState state;
 
-@property (nonatomic, readwrite, strong) NSURLSessionTask *sessionTask;
+@property (nonatomic, readwrite, strong) NSURLSessionTask *urlSessionTask;
 
 #pragma mark initializers
 - (instancetype)initWithSession:(BOXAbstractSession *)session;
@@ -27,6 +27,13 @@ typedef enum {
 #pragma mark - Thread keepalive
 + (NSThread *)globalAPIOperationNetworkThread;
 + (void)globalAPIOperationNetworkThreadEntryPoint:(id)sender;
+
+/**
+ * method to call right before urlSessionTask is resumed
+ * e.g. used by upload/download task to assign urlSessionTask's delegate
+ * to handle callbacks from the urlSessionTask
+ */
+- (void)urlSessionTaskWillResume;
 
 #pragma mark - Thread entry points for operation
 - (void)executeOperation;

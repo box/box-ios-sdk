@@ -304,6 +304,11 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     return sessionTask;
 }
 
+- (void)urlSessionTaskWillResume
+{
+    //Do nothing by default
+}
+
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
@@ -322,10 +327,11 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             //FIXME: remove shouldUseSessionTask and this condition after switching
             //completely from NSURLConnection to NSURLSessionTask
             if (self.shouldUseSessionTask == YES) {
-                if (self.sessionTask == nil) {
-                    self.sessionTask = [self createSessionTask];
+                if (self.urlSessionTask == nil) {
+                    self.urlSessionTask = [self createSessionTask];
                 }
-                [self.sessionTask resume];
+                [self urlSessionTaskWillResume];
+                [self.urlSessionTask resume];
             } else {
                 self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
                 BOXLog(@"Starting %@", self);
@@ -350,14 +356,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)setSessionTask:(NSURLSessionTask *)sessionTask
+- (void)setUrlSessionTask:(NSURLSessionTask *)urlSessionTask
 {
-    NSURLSessionTask *oldSessionTask = _sessionTask;
-    _sessionTask = sessionTask;
-    if (_sessionTaskReplacedBlock != nil) {
-        _sessionTaskReplacedBlock(oldSessionTask, _sessionTask);
+    NSURLSessionTask *oldSessionTask = _urlSessionTask;
+    _urlSessionTask = urlSessionTask;
+    if (_urlSessionTaskReplacedBlock != nil) {
+        _urlSessionTaskReplacedBlock(oldSessionTask, _urlSessionTask);
     }
-
+    if (oldSessionTask != nil && _urlSessionTask == nil) {
+        [self.session.urlSessionManager taskDelegate:self stopsBeingDelegateForSessionTaskId:oldSessionTask.taskIdentifier];
+    }
 }
 
 - (void)cancel
@@ -382,8 +390,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self connection:self.connection didFailWithError:self.error];
     }
 
-    if (self.sessionTask != nil) {
-        [self.sessionTask cancel];
+    if (self.urlSessionTask != nil) {
+        [self.urlSessionTask cancel];
     }
 }
 
@@ -394,7 +402,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     [self performCompletionCallback];
     self.connection = nil;
-    self.sessionTask = nil;
+    self.urlSessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
 }

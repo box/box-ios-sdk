@@ -162,7 +162,10 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  */
 @property (nonatomic, readwrite, strong) NSError *error;
 
-@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock sessionTaskReplacedBlock;
+/**
+ * Notify when the url session task used for the operation has changed
+ */
+@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock urlSessionTaskReplacedBlock;
 
 /**
  * Do not call this. It is used internally.

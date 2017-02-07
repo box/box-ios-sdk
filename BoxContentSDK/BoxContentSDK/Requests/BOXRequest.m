@@ -232,7 +232,7 @@
     if (failureBlock != nil) {
         operation.failureBlock = failureBlock;
     }
-    operation.sessionTaskReplacedBlock = sessionTaskReplacedBlock;
+    operation.urlSessionTaskReplacedBlock = sessionTaskReplacedBlock;
 
     return operation;
 }
