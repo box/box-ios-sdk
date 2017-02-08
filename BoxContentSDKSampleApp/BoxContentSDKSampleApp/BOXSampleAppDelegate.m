@@ -10,7 +10,7 @@
 #import "BOXAuthenticationPickerViewController.h"
 #import "BOXSampleAppSessionManager.h"
 
-@interface BOXSampleAppDelegate () <BOXNSURLSessionManagerDelegate>
+@interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;
 
@@ -20,8 +20,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [BOXContentClient setClientID:@"666hanme8zg4f7am8zqyewyv2d5lhyku" clientSecret:@"9YinUc54qsQVWuSkyMr25wT7GU9FXP6q"];
-    
+#warning Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
+    [BOXContentClient setClientID:@"client-id" clientSecret:@"client-secret"];
+
     BOXAuthenticationPickerViewController *authenticationController = [[BOXAuthenticationPickerViewController alloc]init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authenticationController];
     self.window.rootViewController = navController;
@@ -36,7 +37,7 @@
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        BOXNSURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
+        BOXURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
         [manager setUpWithDefaultDelegate:self];
     });
 }
@@ -78,7 +79,7 @@
 }
 
 - (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
-   totalBytesWritten:(int64_t)totalBytesWritten
+  didWriteTotalBytes:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     NSLog(@"sessionTaskId %lu, totalBytesWritten %lld, totalBytesExpectedToWrite %lld", (unsigned long)downloadTask.taskIdentifier, totalBytesWritten, totalBytesExpectedToWrite);
@@ -97,14 +98,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     }
 }
 
-- (void)uploadTask:(NSURLSessionDataTask *)sessionTask
-    totalBytesSent:(int64_t)totalBytesSent
+- (void)sessionTask:(NSURLSessionTask *)sessionTask
+  didSendTotalBytes:(int64_t)totalBytesSent
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     NSLog(@"uploadTask sessionTaskId %lu", sessionTask.taskIdentifier);
 }
 
-- (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
     //could be called to handle any session task whose delegate might have gone away like thumbnail requests if scrolled past them
     NSLog(@"sessionTaskId %lu, response %@, error %@", sessionTask.taskIdentifier, response, error);

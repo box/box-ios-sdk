@@ -112,7 +112,7 @@
                           secret:(NSString *)secret
                     queueManager:(BOXAPIQueueManager *)queueManager;
                     queueManager:(BOXAPIQueueManager *)queueManager
-               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager;
+               urlSessionManager:(BOXURLSessionManager *)urlSessionManager;
 
 #pragma mark - Authorization
 /** @name Authorization */

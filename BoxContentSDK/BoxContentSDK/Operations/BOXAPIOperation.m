@@ -550,9 +550,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [self finish];
 }
 
-#pragma mark - BOXNSURLSessionTaskDelegate
+#pragma mark - BOXURLSessionTaskDelegate
 
-- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
     [self finishURLSessionTaskWithData:nil response:response error:error];
 }

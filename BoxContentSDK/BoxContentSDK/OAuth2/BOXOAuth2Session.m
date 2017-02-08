@@ -38,7 +38,7 @@
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
                     queueManager:(BOXAPIQueueManager *)queueManager
-               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
+               urlSessionManager:(BOXURLSessionManager *)urlSessionManager
 {
     self = [self initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {

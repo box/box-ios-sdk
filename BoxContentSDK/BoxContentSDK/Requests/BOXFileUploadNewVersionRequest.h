@@ -14,8 +14,8 @@
 
 - (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath;
 
-//initialize a request which will run in the background even if app terminates if tempUploadFilePath is provided
-- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath tempUploadFilePath:(NSString *)tempUploadFilePath;
+//initialize a request which will run in the background even if app terminates if uploadMultipartCopyFilePath is provided
+- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
 
 - (instancetype)initWithFileID:(NSString *)fileID data:(NSData *)data;
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXFileBlock)completionBlock;

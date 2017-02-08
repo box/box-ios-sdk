@@ -21,7 +21,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
-#import "BOXNSURLSessionManager.h"
+#import "BOXURLSessionManager.h"
 
 // Default API URLs
 NSString *const BOXDefaultAPIBaseURL = @"https://api.box.com/2.0";
@@ -180,7 +180,7 @@ static BOXContentClient *defaultInstance = nil;
         // manager uses the session as a lock object when enqueuing operations.
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
 
-        _urlSessionManager = [[BOXNSURLSessionManager alloc] init];
+        _urlSessionManager = [[BOXURLSessionManager alloc] init];
 
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
                                                                      secret:staticClientSecret
