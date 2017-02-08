@@ -246,6 +246,15 @@ forHTTPHeaderField:(NSString *)field;
                               constructingBodyWithBlock:(nullable void (^)(id <BOXMultipartFormData> formData))block
                                                   error:(NSError * _Nullable __autoreleasing *)error;
 
+/**
+ Get a multipart-formatted input stream which could be used as HTTPBodyStream for a NSURLRequest
+
+ @param parameters The parameters to be encoded and set in the request HTTP body.
+ @param boundary multi-part form boundary
+ @param block A block that takes a single argument and appends data to the HTTP body. The block argument is an object adopting the `BOXMultipartFormData` protocol.
+
+ @return An `BOXMultipartBodyStream` object
+ */
 - (BOXMultipartBodyStream *)multipartInputStreamWithParameters:(NSDictionary *)parameters
                                                      boundary:(NSString *)boundary
                                     constructingBodyWithBlock:(void (^)(id <BOXMultipartFormData> formData))block;
