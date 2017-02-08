@@ -21,7 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #warning Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
-    [BOXContentClient setClientID:@"mr484mz72rq0gxvvbgc9a79q96kbws5l" clientSecret:@"E6jgm6foaRFKRTl5FB0MtcRZBCEM4UC8"];
+    [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
     
     BOXAuthenticationPickerViewController *authenticationController = [[BOXAuthenticationPickerViewController alloc]init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authenticationController];
