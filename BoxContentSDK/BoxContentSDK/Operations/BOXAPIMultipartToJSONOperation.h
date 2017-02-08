@@ -34,13 +34,13 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
  */
-@interface BOXAPIMultipartToJSONOperation : BOXAPIJSONOperation <NSStreamDelegate, BOXNSURLSessionUploadTaskDelegate>
+@interface BOXAPIMultipartToJSONOperation : BOXAPIJSONOperation <NSStreamDelegate>
 
 /**
  * Location to write a multi-part formatted file of the uploaded content into for background upload
  * If nil, upload will be a non-background upload
  */
-@property (nonatomic, readwrite, strong) NSString *tempUploadFilePath;
+@property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
 
 /** @name Callbacks */
 

@@ -240,7 +240,7 @@
     // We did not find a file named similarly, we can upload normally the file.
     NSString *tempPath = background == NO ? nil : [path stringByAppendingString:@".temp"];
     if (indexOfFile == NSNotFound) {
-        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestToFolderWithID:self.folderID fromLocalFilePath:path tempUploadFilePath:tempPath];
+        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath];
         if (background == NO) {
             self.nonBackgroundUploadRequest = uploadRequest;
         }
@@ -255,7 +255,7 @@
     // We already found the item. We will upload a new version of the file. 
     // Alternatively, we can also rename the file and upload it like a regular new file via a BOXFileUploadRequest
     else {
-        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestWithID:fileID fromLocalFilePath:path tempUploadFilePath:tempPath];
+        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath];
         if (background == NO) {
             self.nonBackgroundUploadRequest = newVersionRequest;
         }

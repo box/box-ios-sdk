@@ -27,7 +27,7 @@
             APIBaseURL:(NSString *)baseURL
         APIAuthBaseURL:(NSString *)authBaseURL
           queueManager:(BOXAPIQueueManager *)queueManager
-     urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
+     urlSessionManager:(BOXURLSessionManager *)urlSessionManager
 {
     self = [super initWithClientID:ID secret:secret APIBaseURL:baseURL APIAuthBaseURL:authBaseURL queueManager:queueManager urlSessionManager:urlSessionManager];
     if (self != nil)
