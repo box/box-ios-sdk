@@ -29,7 +29,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 #pragma mark - Upload Operation
 
-@interface BOXAPIMultipartToJSONOperation ()
+@interface BOXAPIMultipartToJSONOperation () <BOXURLSessionUploadTaskDelegate>
 {
     dispatch_once_t _pred;
 }
@@ -78,14 +78,14 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (BOOL)shouldRunInBackground
 {
-    return self.tempUploadFilePath != nil;
+    return self.uploadMultipartCopyFilePath != nil;
 }
 
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
     if (self.shouldRunInBackground == YES) {
-        NSURL *url = [[NSURL alloc] initFileURLWithPath:self.tempUploadFilePath];
+        NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
         sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self];
     } else {
         sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
@@ -109,13 +109,13 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     }
 }
 
-- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
     @synchronized (self) {
         if (error == nil && self.error == nil && self.responseJSON == nil) {
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:nil];
         }
-        [super finishURLSessionTaskWithResponse:response error:error];
+        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
     }
 }
 
@@ -126,10 +126,10 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     [self.APIRequest setAllHTTPHeaderFields:[self HTTPHeaders]];
     [self.APIRequest setHTTPBodyStream:self.inputStream];
 
-    //if provided tempUploadFilePath, write the APIRequest's HTTPBodyStream into a multi-part formatted file
+    //if provided uploadMultipartCopyFilePath, write the APIRequest's HTTPBodyStream into a multi-part formatted file
     //which is required for background upload
     if (self.shouldRunInBackground == YES) {
-        NSURL *tempUploadFileURL = [[NSURL alloc] initFileURLWithPath:self.tempUploadFilePath];
+        NSURL *tempUploadFileURL = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
         dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         __weak BOXAPIMultipartToJSONOperation *weakSelf = self;
 

@@ -39,7 +39,7 @@
                       APIBaseURL:(NSString *)baseURL
                   APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
-               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
+               urlSessionManager:(BOXURLSessionManager *)urlSessionManager
 {
     self = [self initWithAPIBaseURL:baseURL queueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {

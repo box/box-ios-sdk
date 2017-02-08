@@ -1,16 +1,17 @@
 //
-//  BOXNSURLSessionManager.m
+//  BOXURLSessionManager.m
 //  BoxContentSDK
 //
 //  Created by Thuy Nguyen on 12/15/16.
 //  Copyright © 2016 Box. All rights reserved.
 //
 
-#import "BOXNSURLSessionManager.h"
+#import "BOXURLSessionManager.h"
+#import "BOXLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BOXNSURLSessionManager() <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
+@interface BOXURLSessionManager() <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
 
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
 @property (nonatomic, readwrite, strong) NSURLSession *defaultSession;
@@ -23,19 +24,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readwrite, strong) NSURLSession *backgroundSession;
 
 //A delegate to handle callbacks from session tasks that do not have associated task delegates
-//This is possible if the background tasks were created outside of this BOXNSURLSessionManager (e.g. app restarts)
+//This is possible if the background tasks were created outside of this BOXURLSessionManager (e.g. app restarts)
 //A task delegate can always be re-associated back with a session task by calling associateSessionTaskId:withTaskDelegate:
-@property (nonatomic, strong, readwrite) id<BOXNSURLSessionManagerDelegate> defaultDelegate;
+@property (nonatomic, strong, readwrite) id<BOXURLSessionManagerDelegate> defaultDelegate;
 
 //a map to associate a session task with its task delegate
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
-@property (nonatomic, readonly, strong) NSMapTable<NSNumber *, id<BOXNSURLSessionTaskDelegate>> *sessionTaskIdToTaskDelegate;
+@property (nonatomic, readonly, strong) NSMapTable<NSNumber *, id<BOXURLSessionTaskDelegate>> *sessionTaskIdToTaskDelegate;
 
 @end
 
-static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionManager.backgroundSessionIdentifier";
+static const NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
 
-@implementation BOXNSURLSessionManager
+@implementation BOXURLSessionManager
 
 @synthesize sessionTaskIdToTaskDelegate = _sessionTaskIdToTaskDelegate;
 
@@ -57,7 +58,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"com.box.BOXNSURLSessionManager.default";
+        queue.name = @"com.box.BOXURLSessionManager.default";
         queue.maxConcurrentOperationCount = 8;
 
         _defaultSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:queue];
@@ -74,7 +75,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"com.box.BOXNSURLSessionManager.progress";
+        queue.name = @"com.box.BOXURLSessionManager.progress";
         queue.maxConcurrentOperationCount = 8;
 
         _progressSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
@@ -91,7 +92,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        queue.name = @"com.box.BOXNSURLSessionManager.background";
+        queue.name = @"com.box.BOXURLSessionManager.background";
         queue.maxConcurrentOperationCount = 8;
 
         _backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
@@ -101,7 +102,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 
 #pragma mark - public methods
 
-- (void)setUpWithDefaultDelegate:(id<BOXNSURLSessionManagerDelegate>)delegate
+- (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -121,7 +122,7 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     }
 }
 
-- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate
+- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate
 {
     @synchronized (self.sessionTaskIdToTaskDelegate) {
         [self.sessionTaskIdToTaskDelegate setObject:taskDelegate forKey:@(sessionTaskId)];
@@ -140,35 +141,35 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
     return [self.defaultSession dataTaskWithRequest:request completionHandler:completionHandler];
 }
 
-- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
 {
     NSURLSessionTask *task = [self.progressSession dataTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
 {
     NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
 {
     NSURLSessionDownloadTask *task = [self.backgroundSession downloadTaskWithResumeData:resumeData];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate
+- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
 {
     NSURLSessionUploadTask *task = [self.backgroundSession uploadTaskWithRequest:request fromFile:fileURL];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
-- (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionUploadTaskDelegate>)taskDelegate
+- (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
 {
     NSURLSessionUploadTask *task = [self.progressSession uploadTaskWithStreamedRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
@@ -187,14 +188,14 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXNSURLSessionMa
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
-    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
-        id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionDownloadTaskDelegate)]) {
+        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
-        if ([downloadTaskDelegate respondsToSelector:@selector(didFinishDownloadingToURL:)]) {
-            [downloadTaskDelegate didFinishDownloadingToURL:location];
+        if ([downloadTaskDelegate respondsToSelector:@selector(downloadTask:didFinishDownloadingToURL:)]) {
+            [downloadTaskDelegate downloadTask:downloadTask didFinishDownloadingToURL:location];
         }
-    } else {
+    } else if ([self.defaultDelegate respondsToSelector:@selector(downloadTask:didFinishDownloadingToURL:)]) {
         [self.defaultDelegate downloadTask:downloadTask didFinishDownloadingToURL:location];
     }
 }
@@ -205,15 +206,15 @@ didFinishDownloadingToURL:(NSURL *)location
  totalBytesWritten:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
-    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionDownloadTaskDelegate)]) {
-        id<BOXNSURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionDownloadTaskDelegate)]) {
+        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
 
-        if ([downloadTaskDelegate respondsToSelector:@selector(progressWithTotalBytesWritten:totalBytesExpectedToWrite:)]) {
-            [downloadTaskDelegate progressWithTotalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+        if ([downloadTaskDelegate respondsToSelector:@selector(downloadTask:didWriteTotalBytes:totalBytesExpectedToWrite:)]) {
+            [downloadTaskDelegate downloadTask:downloadTask didWriteTotalBytes:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }
-    } else {
-        [self.defaultDelegate downloadTask:downloadTask totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+    } else if ([self.defaultDelegate respondsToSelector:@selector(downloadTask:didWriteTotalBytes:totalBytesExpectedToWrite:)]) {
+        [self.defaultDelegate downloadTask:downloadTask didWriteTotalBytes:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     }
 }
 
@@ -223,7 +224,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
     if ([taskDelegate respondsToSelector:@selector(processIntermediateResponse:)]) {
         [taskDelegate processIntermediateResponse:response];
     }
@@ -238,7 +239,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(dataTask.taskIdentifier)];
     if ([taskDelegate respondsToSelector:@selector(processIntermediateData:)]) {
         [taskDelegate processIntermediateData:data];
     }
@@ -252,14 +253,14 @@ didReceiveResponse:(NSURLResponse *)response
     totalBytesSent:(int64_t)totalBytesSent
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
-    if ([taskDelegate conformsToProtocol:@protocol(BOXNSURLSessionUploadTaskDelegate)]) {
-        id<BOXNSURLSessionUploadTaskDelegate> uploadTaskDelegate = taskDelegate;
-        if ([uploadTaskDelegate respondsToSelector:@selector(progressWithTotalBytesSent:totalBytesExpectedToSend:)]) {
-            [uploadTaskDelegate progressWithTotalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
+    if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionUploadTaskDelegate)]) {
+        id<BOXURLSessionUploadTaskDelegate> uploadTaskDelegate = taskDelegate;
+        if ([uploadTaskDelegate respondsToSelector:@selector(sessionTask:didSendTotalBytes:totalBytesExpectedToSend:)]) {
+            [uploadTaskDelegate sessionTask:task didSendTotalBytes:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
         }
-    } else {
-        [self.defaultDelegate uploadTask:task totalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
+    } else if ([self.defaultDelegate respondsToSelector:@selector(sessionTask:didSendTotalBytes:totalBytesExpectedToSend:)]) {
+        [self.defaultDelegate sessionTask:task didSendTotalBytes:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
     }
 }
 
@@ -271,11 +272,11 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error
 {
-    id<BOXNSURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
+    id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
     if (taskDelegate != nil) {
-        [taskDelegate finishURLSessionTaskWithResponse:task.response error:error];
+        [taskDelegate sessionTask:task didFinishWithResponse:task.response error:error];
     } else {
-        [self.defaultDelegate finishURLSessionTask:task withResponse:task.response error:error];
+        [self.defaultDelegate sessionTask:task didFinishWithResponse:task.response error:error];
     }
     [self dessociateSessionTaskId:task.taskIdentifier];
 }
@@ -291,6 +292,8 @@ didCompleteWithError:(nullable NSError *)error
 
     if (task.originalRequest.HTTPBodyStream && [task.originalRequest.HTTPBodyStream conformsToProtocol:@protocol(NSCopying)]) {
         inputStream = [task.originalRequest.HTTPBodyStream copy];
+    } else {
+        BOXLog(@"needNewBodyStream failed to get an new input stream from %@", task.originalRequest.HTTPBodyStream);
     }
 
     if (completionHandler) {

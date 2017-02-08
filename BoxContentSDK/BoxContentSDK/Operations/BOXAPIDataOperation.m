@@ -264,7 +264,7 @@
     [self close];
 }
 
-#pragma mark - BOXNSURLSessionTaskDelegate
+#pragma mark - BOXURLSessionTaskDelegate
 
 - (void)processIntermediateResponse:(NSURLResponse *)response
 {
@@ -329,10 +329,10 @@
     }
 }
 
-- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
     @synchronized (self) {
-        [super finishURLSessionTaskWithResponse:response error:error];
+        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
     }
 }
 

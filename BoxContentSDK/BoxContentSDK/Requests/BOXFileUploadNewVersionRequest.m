@@ -15,7 +15,7 @@
 @interface BOXFileUploadNewVersionRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
-@property (nonatomic, readwrite, strong) NSString *tempUploadFilePath;
+@property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
@@ -32,11 +32,11 @@
     return self;
 }
 
-- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath tempUploadFilePath:(NSString *)tempUploadFilePath
+- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
 {
     self = [self initWithFileID:fileID localPath:localPath];
     if (self != nil) {
-        self.tempUploadFilePath = tempUploadFilePath;
+        self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
     }
     return self;
 }
@@ -83,7 +83,7 @@
                                                                                       session:self.queueManager.session];
     
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
-        operation.tempUploadFilePath = self.tempUploadFilePath;
+        operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
         [operation appendMultipartPieceWithFilePath:self.localFilePath
                                           fieldName:BOXAPIMultipartParameterFieldKeyFile
                                            filename:@""

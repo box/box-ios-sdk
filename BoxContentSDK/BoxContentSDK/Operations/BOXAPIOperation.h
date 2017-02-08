@@ -11,7 +11,7 @@
 #import "BOXOAuth2Session.h"
 
 #import "BOXContentSDKConstants.h"
-#import "BOXNSURLSessionManager.h"
+#import "BOXURLSessionManager.h"
 
 // Success and Failure callbacks
 //
@@ -87,7 +87,7 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  * - performCompletionCallback
  *
  */
-@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate, BOXNSURLSessionTaskDelegate>
+@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate, BOXURLSessionTaskDelegate>
 
 /** @name Authorization */
 
@@ -237,7 +237,7 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  */
 - (void)startURLConnection;
 
-#pragma mark - Process API call results BOXNSURLSessionTaskDelegate
+#pragma mark - Process API call results BOXURLSessionTaskDelegate
 /** @name Process API call results */
 
 /**

@@ -24,8 +24,8 @@
 
 - (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID;
 
-//initialize a request which will run in the background even if app terminates if tempUploadFilePath is provided
-- (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID tempUploadFilePath:(NSString *)tempUploadFilePath;
+//initialize a request which will run in the background even if app terminates if uploadMultipartCopyFilePath is provided
+- (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
 
 - (instancetype)initWithName:(NSString *)fileName targetFolderID:(NSString *)folderID data:(NSData *)data;
 - (instancetype)initWithALAsset:(ALAsset *)asset assetsLibrary:(ALAssetsLibrary *)assetsLibrary targetForlderID:(NSString *)folderID;
