@@ -1,5 +1,5 @@
 //
-//  BOXNSURLSessionManager.h
+//  BOXURLSessionManager.h
 //  BoxContentSDK
 //
 //  Created by Thuy Nguyen on 12/15/16.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol BOXNSURLSessionTaskDelegate <NSObject>
+@protocol BOXURLSessionTaskDelegate <NSObject>
 
 /**
  * To be called to finish the operation for a NSURLSessionTask upon its completion
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param response  The response received from Box as a result of the API call.
  * @param error     An error in the NSURLErrorDomain
  */
-- (void)finishURLSessionTaskWithResponse:(NSURLResponse *)response error:(NSError *)error;
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error;
 
 @optional
 
@@ -38,31 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol BOXNSURLSessionDownloadTaskDelegate <BOXNSURLSessionTaskDelegate>
+
+@protocol BOXURLSessionDownloadTaskDelegate <BOXURLSessionTaskDelegate>
 
 @optional
-
-/**
- * To be called to report ongoing progress of the task
- */
-- (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
-
-/**
- * Notify that the file has been downloaded to the location
- * The delegate should copy or move the file at the given location to a new location as it will be
- * removed when the delegate message returns.
- */
-- (void)didFinishDownloadingToURL:(NSURL *)location;
-
-@end
-
-@protocol BOXNSURLSessionManagerDelegate <NSObject>
 
 /**
  * Notify delegate about download progress
  */
 - (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
-   totalBytesWritten:(int64_t)totalBytesWritten
+   didWriteTotalBytes:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
 
 /**
@@ -70,27 +55,40 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
  */
 - (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location;
 
-/**
- * Sent when a session task finishes
- */
-- (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error;
+@end
 
+
+@protocol BOXURLSessionUploadTaskDelegate <BOXURLSessionTaskDelegate>
+
+@optional
+
+/**
+ * Notify delegate about upload progress
+ */
+- (void)sessionTask:(NSURLSessionTask *)sessionTask
+    didSendTotalBytes:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+
+@end
+
+
+@protocol BOXURLSessionManagerDelegate <BOXURLSessionDownloadTaskDelegate, BOXURLSessionUploadTaskDelegate>
 @end
 
 /**
  This class is responsible for creating different NSURLSessionTask
  */
-@interface BOXNSURLSessionManager : NSObject
+@interface BOXURLSessionManager : NSObject
 
 /**
  * This method needs to be called once to set up the manager to be ready to perform other public methods
  * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
- *                          possible if the background tasks were created outside of BOXNSURLSessionManager
+ *                          possible if the background tasks were created outside of BOXURLSessionManager
  *                          (e.g. app restarts)
  *                          A task delegate can always be re-associated with a session task by calling
  *                          associateSessionTaskId:withTaskDelegate:
  */
-- (void)setUpWithDefaultDelegate:(id<BOXNSURLSessionManagerDelegate>)defaultDelegate;
+- (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)defaultDelegate;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
@@ -101,27 +99,32 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite;
 /**
  Create a NSURLSessionDownloadTask which can be run in the background and download to an outputstream
  */
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionDataTask which can be run to download data into a destination path but not run in the background
  */
-- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXNSURLSessionDownloadTaskDelegate>)taskDelegate;
+- (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionDownloadTask to be resumed
  */
-- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData;
+- (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a NSURLSessionUploadTask which can be run in background
  */
-- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL;
+- (NSURLSessionUploadTask *)createBackgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate;
+
+/**
+ Create a non-background upload task given stream request
+ */
+- (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate;
 
 /**
  * Associate a session task with its task delegate to handle callbacks for it, taskDelegate is not retained
  */
-- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXNSURLSessionTaskDelegate> )taskDelegate;
+- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate;
 
 /**
  * Dessociate a session task with its task delegate so the task delegate will no longer handle callbacks for the task

@@ -10,7 +10,7 @@
 #import "BOXAuthenticationPickerViewController.h"
 #import "BOXSampleAppSessionManager.h"
 
-@interface BOXSampleAppDelegate () <BOXNSURLSessionManagerDelegate>
+@interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;
 
@@ -37,7 +37,7 @@
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        BOXNSURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
+        BOXURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
         [manager setUpWithDefaultDelegate:self];
     });
 }
@@ -79,7 +79,7 @@
 }
 
 - (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
-   totalBytesWritten:(int64_t)totalBytesWritten
+  didWriteTotalBytes:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     NSLog(@"sessionTaskId %lu, totalBytesWritten %lld, totalBytesExpectedToWrite %lld", (unsigned long)downloadTask.taskIdentifier, totalBytesWritten, totalBytesExpectedToWrite);
@@ -88,7 +88,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 - (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
-    NSLog(@"sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
+    NSLog(@"downloadTask sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
     @synchronized (self.sessionIdToRequest) {
         if (self.sessionIdToRequest[@(downloadTask.taskIdentifier)] != nil) {
             BOXFileDownloadRequest *request = self.sessionIdToRequest[@(downloadTask.taskIdentifier)];
@@ -98,7 +98,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     }
 }
 
-- (void)finishURLSessionTask:(NSURLSessionTask *)sessionTask withResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask
+  didSendTotalBytes:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    NSLog(@"uploadTask sessionTaskId %lu", sessionTask.taskIdentifier);
+}
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
     //could be called to handle any session task whose delegate might have gone away like thumbnail requests if scrolled past them
     NSLog(@"sessionTaskId %lu, response %@, error %@", sessionTask.taskIdentifier, response, error);

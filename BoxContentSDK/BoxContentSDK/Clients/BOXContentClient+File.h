@@ -98,6 +98,19 @@
                                         fromLocalFilePath:(NSString *)localFilePath;
 
 /**
+ *  Generate a request to upload a local file to Box in background unless uploadMultipartCopyFilePath is not provided
+ *
+ *  @param folderID      Folder ID of the folder to upload the file into.
+ *  @param localFilePath Path to local file to be uploaded.
+ *  @param uploadMultipartCopyFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadRequest *)fileUploadRequestInBackgroundToFolderWithID:(NSString *)folderID
+                                                    fromLocalFilePath:(NSString *)localFilePath
+                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
+
+/**
  *  Generate a request to upload a byte-buffer to Box.
  *
  *  @param folderID Folder ID of the folder to upload the file into.
@@ -133,6 +146,20 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                     fromLocalFilePath:(NSString *)localFilePath;
+
+/**
+ *  Generate a request to upload a new version of a file from a local file in the background
+ *  (continue running even if app terminates) unless uploadMultipartCopyFilePath is not provided.
+ *
+ *  @param fileID        File ID.
+ *  @param localFilePath Path to local file to be uploaded.
+ *  @param uploadMultipartCopyFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestInBackgroundWithFileID:(NSString *)fileID
+                                                                    fromLocalFilePath:(NSString *)localFilePath
+                                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
 
 /**
  *  Generate a request to upload a new version of a file from a byte-buffer.

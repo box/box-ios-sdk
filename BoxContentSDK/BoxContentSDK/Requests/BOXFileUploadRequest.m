@@ -18,6 +18,7 @@
 @interface BOXFileUploadRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
+@property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
@@ -42,6 +43,17 @@
         _localFilePath = filePath;
     }
 
+    return self;
+}
+
+- (instancetype)initWithPath:(NSString *)filePath
+              targetFolderID:(NSString *)folderID
+ uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+{
+    self = [self initWithPath:filePath targetFolderID:folderID];
+    if (self != nil) {
+        self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
+    }
     return self;
 }
 
@@ -114,17 +126,12 @@
                                               session:self.queueManager.session];
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
-        NSInputStream *inputStream = [[NSInputStream alloc] initWithFileAtPath:self.localFilePath];
+        operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
 
-        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:self.localFilePath
-                                                                                        error:nil];
-        unsigned long long contentLength = [fileAttributes fileSize];
-
-        [operation appendMultipartPieceWithInputStream:inputStream
-                                         contentLength:contentLength
-                                             fieldName:BOXAPIMultipartParameterFieldKeyFile
-                                              filename:fileName
-                                              MIMEType:nil];
+        [operation appendMultipartPieceWithFilePath:self.localFilePath
+                                          fieldName:BOXAPIMultipartParameterFieldKeyFile
+                                           filename:fileName
+                                           MIMEType:nil];
     } else if (self.fileData != nil) {
         [operation appendMultipartPieceWithData:self.fileData
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
