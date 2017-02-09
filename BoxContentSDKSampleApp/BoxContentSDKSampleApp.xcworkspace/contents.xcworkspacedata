@@ -4,7 +4,4 @@
    <FileRef
       location = "group:BoxContentSDKSampleApp.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Carthage/Checkouts/box-ios-sdk/BoxContentSDK/BoxContentSDK.xcodeproj">
-   </FileRef>
 </Workspace>

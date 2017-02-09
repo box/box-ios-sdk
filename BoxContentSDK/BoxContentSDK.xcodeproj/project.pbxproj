@@ -371,6 +371,7 @@
 		599B1A871E4BE6DD00709C27 /* BOXContentSDKErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F4693517264439000CAD86 /* BOXContentSDKErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A881E4BE6DD00709C27 /* BOXContentSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E4CF273516DC4A5100F5979E /* BOXContentSDKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A891E4BE6DD00709C27 /* BOXLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C3289716D6F447002DC905 /* BOXLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		599B1A9A1E4BFA5E00709C27 /* BOXAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E4FAD996172CE2C50052AD11 /* BOXAuthorizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59AB005E1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB005D1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m */; };
 		59C8E3351BEAC0DE005FA4BB /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 59C8E3341BEAC0DE005FA4BB /* empty.json */; };
 		63832CFC1E3A84B300F7211E /* BOXRecentItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832CFB1E3A84B200F7211E /* BOXRecentItemTests.m */; };
@@ -1677,6 +1678,7 @@
 			files = (
 				599B19F21E4BE6DC00709C27 /* BOXOAuth2Session.h in Headers */,
 				599B19F31E4BE6DC00709C27 /* BOXParallelOAuth2Session.h in Headers */,
+				599B1A9A1E4BFA5E00709C27 /* BOXAuthorizationViewController.h in Headers */,
 				599B19F41E4BE6DC00709C27 /* BOXAbstractSession.h in Headers */,
 				599B19F51E4BE6DC00709C27 /* BOXAppUserSession.h in Headers */,
 				599B19F61E4BE6DC00709C27 /* BOXAbstractSession_Private.h in Headers */,
@@ -2493,6 +2495,7 @@
 				599B19601E4BE65700709C27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E470433616D41DC500FED29A /* Build configuration list for PBXProject "BoxContentSDK" */ = {
 			isa = XCConfigurationList;
