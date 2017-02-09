@@ -111,7 +111,7 @@
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
                                                                                   queryParams:nil
-                                                                                session:self];
+                                                                                      session:self];
 
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
@@ -235,7 +235,7 @@
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
                                                                                   queryParams:nil
-                                                                                session:self];
+                                                                                      session:self];
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
@@ -294,14 +294,20 @@
 {
     // We don't go through any of our regular queues/operations because those get shut down upon logout.
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/revoke", [BOXContentClient OAuth2BaseURL]]]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:BOXAPIHTTPMethodPOST];
+    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:BOXAPIHTTPHeaderContentType];
     
     NSData *postData = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&token=%@", self.clientID, self.clientSecret, self.accessToken] dataUsingEncoding:NSUTF8StringEncoding];
-    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:BOXAPIHTTPHeaderContentLength];
     [request setHTTPBody:postData];
 
-    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTaskWithRequest:request completionHandler:nil];
+    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTaskWithRequest:request completionHandler:^(NSData * _Nonnull data, NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+        if (error == nil) {
+            BOXLog(@"Logout 'revoke' API call succeeded.");
+        } else {
+            BOXLog(@"Logout 'revoke' API call failed %@.", error);
+        }
+    }];
     [sessionTask resume];
 }
 
