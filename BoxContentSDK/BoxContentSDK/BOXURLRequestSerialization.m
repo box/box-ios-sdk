@@ -172,7 +172,7 @@ NSArray * BOXQueryStringPairsFromKeyAndValue(NSString *key, id value) {
                     stringEncoding:(NSStringEncoding)encoding
                           boundary:(NSString *)boundary;
 - (NSMutableURLRequest *)requestByFinalizingMultipartFormData;
-- (NSInputStream *)getBodyStream;
+- (BOXMultipartBodyStream *)getBodyStream;
 @end
 
 #pragma mark -

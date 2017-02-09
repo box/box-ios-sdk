@@ -12,6 +12,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 
+//FIXME: These are duplicated with BOXContentSDKConstants.h
 #define BOX_API_MULTIPART_CONTENT_TYPE        (@"Content-Type")
 #define BOX_API_MULTIPART_CONTENT_LENGTH      (@"Content-Length")
 
@@ -37,8 +38,6 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 @property (nonatomic, readwrite, strong) BOXMultipartBodyStream *inputStream;
 
 - (NSDictionary *)HTTPHeaders;
-
-- (void)close;
 
 // called on stream read error
 - (void)abortWithError:(NSError *)error;

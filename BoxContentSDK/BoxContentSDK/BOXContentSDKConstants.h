@@ -62,6 +62,7 @@ extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodPUT;
 typedef NSString BOXAPIHTTPHeader;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderAuthorization;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentType;
+extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentLength;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch;

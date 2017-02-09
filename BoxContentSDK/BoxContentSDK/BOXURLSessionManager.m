@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-static const NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
+static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
 
 @implementation BOXURLSessionManager
 
@@ -143,14 +143,14 @@ static const NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionMana
 
 - (NSURLSessionDataTask *)createNonBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.progressSession dataTaskWithRequest:request];
+    NSURLSessionDataTask *task = [self.progressSession dataTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
 
 - (NSURLSessionDownloadTask *)createBackgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
 {
-    NSURLSessionTask *task = [self.backgroundSession downloadTaskWithRequest:request];
+    NSURLSessionDownloadTask *task = [self.backgroundSession downloadTaskWithRequest:request];
     [self associateSessionTaskId:task.taskIdentifier withTaskDelegate:taskDelegate];
     return task;
 }
@@ -190,7 +190,7 @@ didFinishDownloadingToURL:(NSURL *)location
 {
     id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
     if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionDownloadTaskDelegate)]) {
-        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = (id<BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
         if ([downloadTaskDelegate respondsToSelector:@selector(downloadTask:didFinishDownloadingToURL:)]) {
             [downloadTaskDelegate downloadTask:downloadTask didFinishDownloadingToURL:location];
@@ -208,7 +208,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(downloadTask.taskIdentifier)];
     if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionDownloadTaskDelegate)]) {
-        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = taskDelegate;
+        id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = (id<BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
         if ([downloadTaskDelegate respondsToSelector:@selector(downloadTask:didWriteTotalBytes:totalBytesExpectedToWrite:)]) {
             [downloadTaskDelegate downloadTask:downloadTask didWriteTotalBytes:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
@@ -255,7 +255,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     id<BOXURLSessionTaskDelegate> taskDelegate = [self.sessionTaskIdToTaskDelegate objectForKey:@(task.taskIdentifier)];
     if ([taskDelegate conformsToProtocol:@protocol(BOXURLSessionUploadTaskDelegate)]) {
-        id<BOXURLSessionUploadTaskDelegate> uploadTaskDelegate = taskDelegate;
+        id<BOXURLSessionUploadTaskDelegate> uploadTaskDelegate = (id<BOXURLSessionUploadTaskDelegate>)taskDelegate;
         if ([uploadTaskDelegate respondsToSelector:@selector(sessionTask:didSendTotalBytes:totalBytesExpectedToSend:)]) {
             [uploadTaskDelegate sessionTask:task didSendTotalBytes:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
         }
