@@ -320,7 +320,12 @@
             if (![fileManager fileExistsAtPath:self.destinationPath]) {
                 [fileManager moveItemAtURL:location toURL:destURL error:&error];
             } else {
-                [fileManager replaceItemAtURL:destURL withItemAtURL:location backupItemName:nil options:nil resultingItemURL:nil error:&error];
+                [fileManager replaceItemAtURL:destURL
+                                withItemAtURL:location
+                               backupItemName:nil
+                                      options:NSFileManagerItemReplacementUsingNewMetadataOnly
+                             resultingItemURL:nil
+                                        error:&error];
             }
             if (self.error == nil) {
                 self.error = error;

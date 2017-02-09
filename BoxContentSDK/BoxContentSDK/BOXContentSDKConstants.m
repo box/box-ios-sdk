@@ -58,6 +58,7 @@ BOXAPIHTTPMethod *const BOXAPIHTTPMethodPUT = @"PUT";
 // HTTP Header Names
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderAuthorization = @"Authorization";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentType = @"Content-Type";
+BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentLength = @"Content-Length";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5 = @"Content-MD5";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch = @"If-Match";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch = @"If-None-Match";

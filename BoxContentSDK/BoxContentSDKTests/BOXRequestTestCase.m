@@ -25,6 +25,7 @@
 
 @property (nonatomic, readwrite, strong) BOXOAuth2Session *fakeOAuth2Session;
 @property (nonatomic, readwrite, strong) BOXParallelAPIQueueManager *fakeQueueManager;
+@property (nonatomic, readwrite, strong) BOXURLSessionManager *fakeURLSessionManager;
 
 @end
 
@@ -37,7 +38,8 @@
     [NSURLProtocol registerClass:[BOXCannedURLProtocol class]];
     
     self.fakeQueueManager = [[BOXParallelAPIQueueManager alloc] init];
-    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id" secret:@"test_client_secret" APIBaseURL:BOXAPIBaseURL APIAuthBaseURL:BOXAPIAuthBaseURL queueManager:self.fakeQueueManager];
+    self.fakeURLSessionManager = [[BOXURLSessionManager alloc] init];
+    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id" secret:@"test_client_secret" APIBaseURL:BOXAPIBaseURL APIAuthBaseURL:BOXAPIAuthBaseURL queueManager:self.fakeQueueManager urlSessionManager:self.fakeURLSessionManager];
     self.fakeOAuth2Session.refreshToken = @"sample_refresh_token";
     self.fakeOAuth2Session.accessToken = @"sample_access_token";
     self.fakeOAuth2Session.accessTokenExpiration = [NSDate distantFuture];
@@ -50,6 +52,7 @@
     [NSURLProtocol unregisterClass:[BOXCannedURLProtocol class]];
     
     self.fakeQueueManager = nil;
+    self.fakeURLSessionManager = nil;
     self.fakeOAuth2Session = nil;
     
     [super tearDown];
@@ -90,7 +93,10 @@
     if (responseData) {
         [headerFields setObject:[NSString stringWithFormat:@"%lu", (unsigned long)responseData.length] forKey:@"Content-Length"];
     }
-    NSHTTPURLResponse *cannedResponse = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:statusCode HTTPVersion:@"HTTP/1.1" headerFields:headerFields];
+    NSHTTPURLResponse *cannedResponse = [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"https://api.box.com"]
+                                                                    statusCode:statusCode
+                                                                   HTTPVersion:@"HTTP/1.1"
+                                                                  headerFields:headerFields];
     return cannedResponse;
 }
 
