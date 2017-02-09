@@ -269,6 +269,7 @@
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
 				599B1AA41E4C090A00709C27 /* CopyFiles */,
+				591805DF1E4D30C0004E1B28 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -362,6 +363,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		591805DF1E4D30C0004E1B28 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/BoxContentSDK.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C5745C201A5AF6CC00824FFA /* Sources */ = {
