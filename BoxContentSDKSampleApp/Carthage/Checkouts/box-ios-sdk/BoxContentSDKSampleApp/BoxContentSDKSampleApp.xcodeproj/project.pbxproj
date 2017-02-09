@@ -35,7 +35,6 @@
 		C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */; };
 		E11BED371ADBE5CA00A9216F /* icon-folder-external.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED351ADBE5CA00A9216F /* icon-folder-external.png */; };
 		E11BED381ADBE5CA00A9216F /* icon-folder-external@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */; };
-		FF72D1037A58022AA799D120 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACFEAB9B52E3382F929F4277 /* libPods-BoxContentSDKSampleApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = E470433A16D41DC500FED29A;
+			remoteGlobalIDString = 599B19591E4BE65700709C27;
 			remoteInfo = BoxContentSDK;
 		};
 		C5745C3E1A5AF6CC00824FFA /* PBXContainerItemProxy */ = {
@@ -131,7 +130,6 @@
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
-				FF72D1037A58022AA799D120 /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +146,8 @@
 		3D64E2C91AB900EC00659466 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */,
 				3D64E2D31AB900EC00659466 /* BoxContentSDKTests.xctest */,
+				3D64E2D11AB900EC00659466 /* BoxContentSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,12 +286,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */;
 			buildPhases = (
-				4A15E9F68B6D9619C0146C33 /* 📦 Check Pods Manifest.lock */,
 				C5745C201A5AF6CC00824FFA /* Sources */,
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
-				2BE3D336859314A5AA3D46AA /* 📦 Copy Pods Resources */,
-				966EC888F9815C28566AA8AE /* 📦 Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,10 +362,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */ = {
+		3D64E2D11AB900EC00659466 /* BoxContentSDK.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBoxContentSDK.a;
+			fileType = wrapper.framework;
+			path = BoxContentSDK.framework;
 			remoteRef = 3D64E2D01AB900EC00659466 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -411,54 +406,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2BE3D336859314A5AA3D46AA /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4A15E9F68B6D9619C0146C33 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		966EC888F9815C28566AA8AE /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C5745C201A5AF6CC00824FFA /* Sources */ = {
@@ -521,7 +468,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C5745C451A5AF6CC00824FFA /* Debug */ = {
+		599B1A8E1E4BED8700709C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -539,16 +486,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -556,10 +497,44 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		599B1A8F1E4BED8700709C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
+				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/system",
+					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = BoxContentSDKSampleApp;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+			};
+			name = Debug;
+		};
+		599B1A901E4BED8700709C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = BoxContentSDKSampleAppTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxContentSDKSampleApp.app/BoxContentSDKSampleApp";
 			};
 			name = Debug;
 		};
@@ -599,29 +574,8 @@
 			};
 			name = Release;
 		};
-		C5745C481A5AF6CC00824FFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B81DA21B0DE0A8E8C921AED1 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
-				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/lib/system",
-					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = BoxContentSDKSampleApp;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-			};
-			name = Debug;
-		};
 		C5745C491A5AF6CC00824FFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A1772C788E54674F1E91003 /* Pods-BoxContentSDKSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -638,25 +592,6 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 			};
 			name = Release;
-		};
-		C5745C4B1A5AF6CC00824FFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = BoxContentSDKSampleAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxContentSDKSampleApp.app/BoxContentSDKSampleApp";
-			};
-			name = Debug;
 		};
 		C5745C4C1A5AF6CC00824FFA /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -679,8 +614,8 @@
 		C5745C1F1A5AF6CC00824FFA /* Build configuration list for PBXProject "BoxContentSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C451A5AF6CC00824FFA /* Debug */,
 				C5745C461A5AF6CC00824FFA /* Release */,
+				599B1A8E1E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -688,8 +623,8 @@
 		C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C481A5AF6CC00824FFA /* Debug */,
 				C5745C491A5AF6CC00824FFA /* Release */,
+				599B1A8F1E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -697,8 +632,8 @@
 		C5745C4A1A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C4B1A5AF6CC00824FFA /* Debug */,
 				C5745C4C1A5AF6CC00824FFA /* Release */,
+				599B1A901E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
