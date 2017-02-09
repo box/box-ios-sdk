@@ -1,0 +1,442 @@
+{
+    "total_count": 6,
+    "entries": [
+                {
+                "type": "file",
+                "id": "172245607",
+                "sequence_id": "1",
+                "etag": "1",
+                "sha1": "f89d97c5eea0a68e2cec911s932eca34a52355d2",
+                "name": "Box for Sales - Empowering Your Mobile Worker White paper 2pg (External).pdf",
+                "description": "This is old and needs to be updated - but general themes still apply",
+                "size": 408979,
+                "path_collection": {
+                "total_count": 2,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            },
+                            {
+                            "type": "folder",
+                            "id": "2150506",
+                            "sequence_id": "1",
+                            "etag": "1",
+                            "name": "Marketing Active Work"
+                            }
+                            ]
+                },
+                "created_at": "2014-05-17T12:59:45-07:00",
+                "modified_at": "2014-05-17T13:00:20-07:00",
+                "trashed_at": null,
+                "purged_at": null,
+                "content_created_at": "2014-05-17T12:58:58-07:00",
+                "content_modified_at": "2014-05-17T12:58:58-07:00",
+                "created_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "owned_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "shared_link": null,
+                "parent": {
+                "type": "folder",
+                "id": "2150506",
+                "sequence_id": "1",
+                "etag": "1",
+                "name": "Marketing Active Work"
+                },
+                "item_status": "active"
+                },
+                {
+                "type": "file",
+                "id": "462362456",
+                "sequence_id": "1",
+                "etag": "1",
+                "sha1": "f89d97c5eea0a68e2cec911s932eca34a52355d2",
+                "name": "fosgojfdogjiosjfdoigjsdfgsdfgfdg.pdf",
+                "description": "This is old and needs to be updated - but general themes still apply",
+                "size": 408979,
+                "path_collection": {
+                "total_count": 2,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            },
+                            {
+                            "type": "folder",
+                            "id": "2150506",
+                            "sequence_id": "1",
+                            "etag": "1",
+                            "name": "Marketing Active Work"
+                            }
+                            ]
+                },
+                "created_at": "2014-05-17T12:59:45-07:00",
+                "modified_at": "2014-05-17T13:00:20-07:00",
+                "trashed_at": null,
+                "purged_at": null,
+                "content_created_at": "2014-05-17T12:58:58-07:00",
+                "content_modified_at": "2014-05-17T12:58:58-07:00",
+                "created_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "owned_by": {
+                "type": "user",
+                "id": "19551097",
+                "name": "Ted Blosser",
+                "login": "ted@box.com"
+                },
+                "shared_link": null,
+                "parent": {
+                "type": "folder",
+                "id": "2150506",
+                "sequence_id": "1",
+                "etag": "1",
+                "name": "Marketing Active Work"
+                },
+                "item_status": "active"
+                },
+                {
+                "type": "web_link",
+                "id": "6006481",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Box Developer Site",
+                "url": "https://developers.box.com/",
+                "created_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "created_at": "2014-12-01T15:19:36-08:00",
+                "modified_at": "2014-12-01T15:19:36-08:00",
+                "parent": {
+                "type": "folder",
+                "id": "2759406491",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "bookmarks yo"
+                },
+                "description": "",
+                "item_status": "active",
+                "trashed_at": null,
+                "purged_at": null,
+                "shared_link": null,
+                "path_collection": {
+                "total_count": 2,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            },
+                            {
+                            "type": "folder",
+                            "id": "2759406491",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "bookmarks yo"
+                            }
+                            ]
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "owned_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                }
+                },
+                {
+                "type": "web_link",
+                "id": "6006481",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Box Developer Site",
+                "url": "https://developers.box.com/",
+                "created_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Weblink",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "created_at": "2014-12-01T15:19:36-08:00",
+                "modified_at": "2014-12-01T15:19:36-08:00",
+                "parent": {
+                "type": "folder",
+                "id": "2759406491",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "bookmarks yo"
+                },
+                "description": "",
+                "item_status": "active",
+                "trashed_at": null,
+                "purged_at": null,
+                "shared_link": null,
+                "path_collection": {
+                "total_count": 2,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            },
+                            {
+                            "type": "folder",
+                            "id": "2759406491",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "bookmarks yo"
+                            }
+                            ]
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "owned_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                }
+                },
+                {
+                "type": "folder",
+                "id": "2759406491",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "bookmarks yo",
+                "created_at": "2014-12-01T15:18:33-08:00",
+                "modified_at": "2014-12-01T15:18:33-08:00",
+                "description": "",
+                "size": 0,
+                "path_collection": {
+                "total_count": 1,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            }
+                            ]
+                },
+                "created_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "trashed_at": null,
+                "purged_at": null,
+                "content_created_at": "2014-12-01T15:18:33-08:00",
+                "content_modified_at": "2014-12-01T15:18:33-08:00",
+                "owned_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "shared_link": null,
+                "folder_upload_email": null,
+                "parent": {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+                },
+                "item_status": "active",
+                "item_collection": {
+                "total_count": 3,
+                "entries": [
+                            {
+                            "type": "web_link",
+                            "id": "6006481",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "Box Dev",
+                            "url": "http://developers.box.com"
+                            },
+                            {
+                            "type": "web_link",
+                            "id": "6006477",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "Google",
+                            "url": "http://google.com"
+                            },
+                            {
+                            "type": "web_link",
+                            "id": "6006479",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "news.google.com",
+                            "url": "http://news.google.com"
+                            }
+                            ],
+                "offset": 0,
+                "limit": 100,
+                "order": [
+                          {
+                          "by": "type",
+                          "direction": "ASC"
+                          },
+                          {
+                          "by": "name",
+                          "direction": "ASC"
+                          }
+                          ]
+                }
+                },
+                {
+                "type": "folder",
+                "id": "2759406491",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "second folder",
+                "created_at": "2014-12-01T15:18:33-08:00",
+                "modified_at": "2014-12-01T15:18:33-08:00",
+                "description": "",
+                "size": 0,
+                "path_collection": {
+                "total_count": 1,
+                "entries": [
+                            {
+                            "type": "folder",
+                            "id": "0",
+                            "sequence_id": null,
+                            "etag": null,
+                            "name": "All Files"
+                            }
+                            ]
+                },
+                "created_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "modified_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "trashed_at": null,
+                "purged_at": null,
+                "content_created_at": "2014-12-01T15:18:33-08:00",
+                "content_modified_at": "2014-12-01T15:18:33-08:00",
+                "owned_by": {
+                "type": "user",
+                "id": "15220407",
+                "name": "Thisisaverylongfirstname Middlename Andlastname",
+                "login": "boxinternalqa+ttest33@gmail.com"
+                },
+                "shared_link": null,
+                "folder_upload_email": null,
+                "parent": {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+                },
+                "item_status": "active",
+                "item_collection": {
+                "total_count": 3,
+                "entries": [
+                            {
+                            "type": "web_link",
+                            "id": "6006481",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "Box Dev",
+                            "url": "http://developers.box.com"
+                            },
+                            {
+                            "type": "web_link",
+                            "id": "6006477",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "Google",
+                            "url": "http://google.com"
+                            },
+                            {
+                            "type": "web_link",
+                            "id": "6006479",
+                            "sequence_id": "0",
+                            "etag": "0",
+                            "name": "news.google.com",
+                            "url": "http://news.google.com"
+                            }
+                            ],
+                "offset": 0,
+                "limit": 100,
+                "order": [
+                          {
+                          "by": "type",
+                          "direction": "ASC"
+                          },
+                          {
+                          "by": "name",
+                          "direction": "ASC"
+                          }
+                          ]
+                }
+                }
+
+                ],
+    "limit": 30,
+    "offset": 0
+}

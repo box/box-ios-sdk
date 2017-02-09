@@ -1,0 +1,3 @@
+target "BoxContentSDKSampleApp" do
+	pod 'box-ios-sdk', :path => '../'
+end

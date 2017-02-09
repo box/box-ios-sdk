@@ -1,0 +1,8 @@
+language: objective-c
+before_install:
+  - gem install xcpretty
+  - gem install cocoapods -v '0.38.2'
+podfile: BoxContentSDK/Podfile
+osx_image: xcode8.2.1
+script: 
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}

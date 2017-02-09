@@ -1,0 +1,15 @@
+{
+    "url": "https://www.box.com/s/aaa",
+    "download_url": "https://www.box.com/s/bbb",
+    "vanity_url": "https://www.box.com/s/ccc",
+    "is_password_enabled": true,
+    "unshared_at": "2012-12-12T10:53:43-08:00",
+    "download_count": 123,
+    "preview_count": 456,
+    "access": "collaborators",
+    "effectiveAccess": "collaborators",
+    "permissions": {
+        "can_download": true,
+        "can_preview": true
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "type":"web_link",
+    "id":"6006481",
+    "etag":"0",
+    "sequence_id":"0",
+    "name":"Box Developer Site",
+    "url":"https:\/\/developers.box.com\/",
+    "created_at":"2014-12-01T15:19:36-08:00",
+    "modified_at":"2014-12-01T15:19:36-08:00",
+    "description":"",
+    "comment_count": 2,
+    "path_collection":{
+        "total_count":2,
+        "entries":[
+                   {
+                   "type":"folder",
+                   "id":"0",
+                   "sequence_id":null,
+                   "etag":null,
+                   "name":"All Files"
+                   },
+                   {
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   }
+                   ]
+    },
+    "trashed_at":null,
+    "purged_at":null,
+    "created_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "modified_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "owned_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "parent":{
+        "type":"folder",
+        "id":"2759406491",
+        "sequence_id":"0",
+        "etag":"0",
+        "name":"bookmarks yo"
+    },
+    "item_status":"active",
+    "shared_link":null,
+    "permissions": {
+        "can_comment": true,
+        "can_delete": true,
+        "can_rename": true,
+        "can_set_share_access": true,
+        "can_share": true,
+    },
+    "allowed_shared_link_access_levels":[
+                                         "collaborators",
+                                         "open"
+                                         ],
+    "collections": [
+                    {
+                    "type": "collection",
+                    "id": "10047",
+                    "name": "Favorites",
+                    "collection_type": "favorites"
+                    }
+                    ]
+}
