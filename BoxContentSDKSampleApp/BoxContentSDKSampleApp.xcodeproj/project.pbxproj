@@ -10,7 +10,7 @@
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
 		599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 599B1A911E4BF44200709C27 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		599B1A981E4BF51D00709C27 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 599B1A971E4BF51D00709C27 /* BoxContentSDK.framework.dSYM */; };
+		599B1AA61E4C092A00709C27 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 599B1AA51E4C092A00709C27 /* BoxContentSDK.framework.dSYM */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
@@ -61,13 +61,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		599B1A961E4BF50200709C27 /* CopyFiles */ = {
+		599B1AA41E4C090A00709C27 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 7;
+			dstSubfolderSpec = 16;
 			files = (
-				599B1A981E4BF51D00709C27 /* BoxContentSDK.framework.dSYM in CopyFiles */,
+				599B1AA61E4C092A00709C27 /* BoxContentSDK.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +78,7 @@
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
 		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
-		599B1A971E4BF51D00709C27 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
+		599B1AA51E4C092A00709C27 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,7 +184,7 @@
 		C5745C1B1A5AF6CC00824FFA = {
 			isa = PBXGroup;
 			children = (
-				599B1A971E4BF51D00709C27 /* BoxContentSDK.framework.dSYM */,
+				599B1AA51E4C092A00709C27 /* BoxContentSDK.framework.dSYM */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				C5745C251A5AF6CC00824FFA /* Products */,
@@ -268,7 +268,7 @@
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
-				599B1A961E4BF50200709C27 /* CopyFiles */,
+				599B1AA41E4C090A00709C27 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -462,6 +462,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
@@ -532,6 +533,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
