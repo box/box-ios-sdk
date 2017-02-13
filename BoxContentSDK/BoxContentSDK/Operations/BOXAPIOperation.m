@@ -8,6 +8,7 @@
 
 #import "BOXAPIOperation_Private.h"
 
+#import "BOXOAuth2Session.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "NSString+BOXURLHelper.h"

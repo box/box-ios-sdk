@@ -19,6 +19,7 @@
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
 #import "UIApplication+ExtensionSafeAdditions.h"
+#import "BOXOAuth2Session.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
