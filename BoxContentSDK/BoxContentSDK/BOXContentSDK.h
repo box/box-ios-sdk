@@ -127,6 +127,7 @@
 #import "BOXUser.h"
 #import "BOXBookmark.h"
 #import "BOXComment.h"
+
 #import "BOXCollection.h"
 #import "BOXEvent.h"
 #import "BOXCollaboration.h"
@@ -138,4 +139,6 @@
 #import "BOXMetadataTemplate.h"
 #import "BOXMetadataTemplateField.h"
 
-
+// Catagories
+#import "NSString+BOXContentSDKAdditions.h"
+#import "NSError+BOXContentSDKAdditions.h"
