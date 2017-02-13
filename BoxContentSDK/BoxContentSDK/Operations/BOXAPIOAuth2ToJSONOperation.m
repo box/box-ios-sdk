@@ -14,7 +14,7 @@
 
 #define BOX_OAUTH2_AUTHORIZATION_CODE_GRANT_PARAMETER_COUNT  (5)
 
-NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
+
 
 @implementation BOXAPIOAuth2ToJSONOperation
 

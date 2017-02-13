@@ -8,6 +8,7 @@
 
 #import "BOXAPIOperation_Private.h"
 #import "BOXAPIAppUsersAuthOperation.h"
+#import "BoxContentSDKErrors.h"
 
 #define BOXAccessTokenKey @"BOXAccessTokenKey"
 #define BOXAccessTokenExpirationKey @"BOXAccessTokenExpirationKey"
