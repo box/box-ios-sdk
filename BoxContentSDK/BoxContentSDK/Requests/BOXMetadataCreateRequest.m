@@ -8,6 +8,13 @@
 
 #import "BOXMetadataCreateRequest.h"
 #import "BOXRequest+Metadata.h"
+#import "BOXContentSDKConstants.h"
+#import "BOXLog.h"
+#import "BOXAPIOperation.h"
+#import "BOXMetadataKeyValue.h"
+#import "BOXAPIJSONOperation.h"
+#import "BOXRequest_Private.h"
+#import "BOXMetadata.h"
 
 @interface BOXMetadataCreateRequest ()
 
