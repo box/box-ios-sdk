@@ -8,6 +8,8 @@
 
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
+#import "BOXAPIQueueManager.h"
+#import "BOXAbstractSession.h"
 
 @interface BOXFileUploadNewVersionRequest ()
 
