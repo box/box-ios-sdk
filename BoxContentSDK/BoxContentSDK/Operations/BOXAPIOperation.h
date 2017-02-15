@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "BOXContentSDKConstants.h"
 #import "BOXURLSessionManager.h"
-#import "BOXAbstractSession.h"
+
+@class BOXAbstractSession;
 
 // Success and Failure callbacks
 //

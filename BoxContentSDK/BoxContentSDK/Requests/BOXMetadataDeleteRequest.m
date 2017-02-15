@@ -11,6 +11,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXRequest_Private.h"
+#import "BOXLog.h"
 
 @interface BOXMetadataDeleteRequest ()
 

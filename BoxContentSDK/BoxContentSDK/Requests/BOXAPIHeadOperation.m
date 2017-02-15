@@ -8,6 +8,7 @@
 
 #import "BOXAPIHeadOperation.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXAbstractSession.h"
 
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2

@@ -11,6 +11,7 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXAbstractSession.h"
 
 #define WWW_AUTHENTICATE_HEADER           (@"WWW-Authenticate")
 

@@ -8,6 +8,7 @@
 
 #import "BOXItemShareRequest.h"
 #import "BOXAPIOperation.h"
+#import "BOXLog.h"
 
 @implementation BOXItemShareRequest
 

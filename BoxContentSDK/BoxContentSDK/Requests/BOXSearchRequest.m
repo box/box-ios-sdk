@@ -7,6 +7,7 @@
 #import "BOXSearchRequest.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXMetadataKeyValue.h"
+#import "BOXLog.h"
 
 @interface BOXSearchRequest ()
 

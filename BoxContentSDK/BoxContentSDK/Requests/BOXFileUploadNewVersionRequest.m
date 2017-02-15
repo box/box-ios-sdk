@@ -9,6 +9,8 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAssetInputStream.h"
 #import "BOXFile.h"
+#import "BOXAPIQueueManager.h"
+#import "BOXAbstractSession.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
