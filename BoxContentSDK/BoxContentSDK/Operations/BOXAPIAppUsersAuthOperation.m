@@ -8,6 +8,9 @@
 
 #import "BOXAPIOperation_Private.h"
 #import "BOXAPIAppUsersAuthOperation.h"
+#import "BoxContentSDKErrors.h"
+#import "BOXLog.h"
+#import "BOXAbstractSession.h"
 
 #define BOXAccessTokenKey @"BOXAccessTokenKey"
 #define BOXAccessTokenExpirationKey @"BOXAccessTokenExpirationKey"

@@ -12,6 +12,8 @@
 #import "BOXLog.h"
 #import "BOXHashHelper.h"
 #import "NSString+BOXURLHelper.h"
+#import "BOXAPIQueueManager.h"
+#import "BOXAbstractSession.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 

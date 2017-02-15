@@ -10,6 +10,8 @@
 #import "BOXAuthenticationPickerViewController.h"
 #import "BOXSampleAppSessionManager.h"
 
+#import <BoxContentSDK/BOXContentSDK.h>
+
 @interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;

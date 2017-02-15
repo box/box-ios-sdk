@@ -8,9 +8,9 @@
 
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXAPIOperation_Private.h"
-
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
+#import "BOXAbstractSession.h"
 
 //FIXME: These are duplicated with BOXContentSDKConstants.h
 #define BOX_API_MULTIPART_CONTENT_TYPE        (@"Content-Type")

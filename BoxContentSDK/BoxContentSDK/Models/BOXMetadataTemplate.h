@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <BoxContentSDK/BOXContentSDK.h>
+#import "BOXModel.h"
 
 /**
  * Represents metadata template information. Aka, The schema for a template.
