@@ -53,7 +53,10 @@
 {
     // Create a new client for the account we want to add.
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    
+
+    BOXURLSessionManager *manager = client.session.urlSessionManager;
+    [manager setUpWithDefaultDelegate:((id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate])];
+
     if (self.isAppUsers) {
         [client setAccessTokenDelegate:self];
     }
