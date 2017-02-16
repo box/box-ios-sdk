@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
 @property (nonatomic, readonly, strong) NSMapTable<NSNumber *, id<BOXURLSessionTaskDelegate>> *sessionTaskIdToTaskDelegate;
 
+// Used to enforce the Session Manager setup only occurs once per instance.
+@property (nonatomic, readwrite, assign) BOOL hasCompletedSetup;
+
 @end
 
 static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
@@ -45,6 +48,7 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
     self = [super init];
     if (self != nil) {
         _sessionTaskIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
+        _hasCompletedSetup = NO;
     }
     return self;
 }
@@ -104,13 +108,15 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
 
 - (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.defaultDelegate = delegate;
-        self.defaultSession = [self createDefaultSession];
-        self.progressSession = [self createProgressSession];
-        self.backgroundSession = [self createBackgroundSession];
-    });
+    @synchronized (self) {
+        if (self.hasCompletedSetup == NO) {
+            self.defaultDelegate = delegate;
+            self.defaultSession = [self createDefaultSession];
+            self.progressSession = [self createProgressSession];
+            self.backgroundSession = [self createBackgroundSession];
+            self.hasCompletedSetup = YES;
+        }
+    }
 }
 
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * uploadTasks, NSArray<NSURLSessionDownloadTask *> * downloadTasks))completion

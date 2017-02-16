@@ -30,22 +30,13 @@
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     self.sessionIdToRequest = [[NSMutableDictionary alloc] init];
-    [self setUpSessionManager];
 
     return YES;
 }
 
-- (void)setUpSessionManager
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        BOXURLSessionManager *manager = [BOXContentClient defaultClient].session.urlSessionManager;
-        [manager setUpWithDefaultDelegate:self];
-    });
-}
-
 - (void)recoverDownloadTask:(NSURLSessionDownloadTask *)downloadTask
 {
+    //FIXME: NOTE the sample app does NOT use the default client, need to grab the current active client.
     BOXContentClient *client = [BOXContentClient defaultClient];
     BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
     BOXSampleAppSessionInfo *info = [appSessionManager getSessionTaskInfo:downloadTask.taskIdentifier];
@@ -146,7 +137,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
 {
     NSLog(@"handleEventsForBackgroundURLSession identifier %@", identifier);
-    [self setUpSessionManager];
+    //FIXME: Need to get the BOXContentClient for the currently logged in user and set up its URL session manager
+//    BOXURLSessionManager *manager = client.session.urlSessionManager;
+//    [manager setUpWithDefaultDelegate:self];
     completionHandler();
 }
 
