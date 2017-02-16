@@ -42,11 +42,10 @@ static NSString *staticKeychainAccessGroup;
     return self;
 }
 
-- (instancetype)initWithAPIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager
 {
     self = [self init];
     if (self) {
-        _APIBaseURLString = baseURL;
         _queueManager = queueManager;
     }
     
