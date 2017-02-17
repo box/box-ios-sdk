@@ -487,7 +487,6 @@ didReceiveResponse:(nonnull NSURLResponse *)response
     [self.connectionData appendData:data];
 }
 
-<<<<<<< 14236c28b0e2dc976ccbb09732ee90ff6d4a3c52
 - (void)URLSession:(NSURLSession *)session
           dataTask:(NSURLSessionDataTask *)dataTask
  willCacheResponse:(NSCachedURLResponse *)proposedResponse
@@ -499,8 +498,6 @@ didReceiveResponse:(nonnull NSURLResponse *)response
     }
 }
 
-=======
->>>>>>> Update NSURLConnection to NSURLSession in the auth flow code
 #pragma mark - NSURLSessionTaskDelegate methods
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(nonnull NSURLAuthenticationChallenge *)challenge completionHandler:(nonnull void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
