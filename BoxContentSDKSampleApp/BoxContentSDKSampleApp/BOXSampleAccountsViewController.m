@@ -40,6 +40,7 @@
         BOXContentClient *client = [BOXContentClient clientForUser:user];
         if (   ([client.session isKindOfClass:[BOXOAuth2Session class]] && !self.isAppUsers)
             || ([client.session isKindOfClass:[BOXAppUserSession class]] && self.isAppUsers)) {
+            [client.urlSessionManager setUpWithDefaultDelegate:((id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate])];
             [users addObject:user];
         }
     }
