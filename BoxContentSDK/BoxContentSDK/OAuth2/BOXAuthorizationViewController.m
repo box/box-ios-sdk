@@ -100,7 +100,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         _connectionData = [[NSMutableData alloc] init];
         _hostsThatCanUseWebViewDirectly = [NSMutableSet set];
 
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _URLSession = [NSURLSession sessionWithConfiguration:sessionConfiguration
                                                     delegate:self
                                                delegateQueue:nil];
@@ -485,6 +485,17 @@ didReceiveResponse:(nonnull NSURLResponse *)response
 {
     BOXLog(@"URLSessionDataTask %@ did receive %lu bytes of data", dataTask, (unsigned long)[data length]);
     [self.connectionData appendData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
+ willCacheResponse:(NSCachedURLResponse *)proposedResponse
+ completionHandler:(void (^)(NSCachedURLResponse *cachedResponse))completionHandler
+{
+    // No cached response should be stored for the URL session.
+    if (completionHandler) {
+        completionHandler(nil);
+    }
 }
 
 #pragma mark - NSURLSessionTaskDelegate methods
