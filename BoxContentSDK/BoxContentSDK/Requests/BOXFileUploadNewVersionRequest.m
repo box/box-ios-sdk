@@ -7,10 +7,7 @@
 #import "BOXFileUploadNewVersionRequest.h"
 
 #import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
 #import "BOXFile.h"
-
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface BOXFileUploadNewVersionRequest ()
 
@@ -36,19 +33,6 @@
     if (self = [super init]) {
         _fileData = data;
         _fileID = fileID;
-    }
-    
-    return self;
-}
-
-- (instancetype)initWithFileID:(NSString *)fileID
-                       ALAsset:(ALAsset *)asset
-                 assetsLibrary:(ALAssetsLibrary *)assetsLibrary
-{
-    if (self = [super init]) {
-        _fileID = fileID;
-        _asset = asset;
-        _assetsLibrary = assetsLibrary;
     }
     
     return self;
@@ -87,17 +71,7 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:@"" // Box API ignores the filename when uploading a new version.
                                        MIMEType:nil];
-    } else if (self.asset != nil) {
-        BOXAssetInputStream *inputStream =
-            [[BOXAssetInputStream alloc] initWithAssetRepresentation:self.asset.defaultRepresentation
-                                                       assetsLibrary:self.assetsLibrary];
-
-        [operation appendMultipartPieceWithInputStream:inputStream
-                                         contentLength:self.asset.defaultRepresentation.size
-                                             fieldName:BOXAPIMultipartParameterFieldKeyFile
-                                              filename:@""
-                                              MIMEType:nil];
-    } else {
+    }  else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
     

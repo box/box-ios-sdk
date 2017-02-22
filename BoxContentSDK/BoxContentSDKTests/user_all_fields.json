@@ -15,6 +15,7 @@
     "phone": "604-423-4362",
     "address": "100 Main Street, Vancouver BC, Canada",
     "avatar_url": "https://app.box.com/api/avatar/large/13338532",
+    "has_custom_avatar": true,
     "role": "user",
     "tracking_codes": [
     {

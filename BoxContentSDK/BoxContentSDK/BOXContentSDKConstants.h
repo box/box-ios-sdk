@@ -11,15 +11,6 @@
 #define BOX_CONTENT_SDK_IDENTIFIER @"box-content-sdk"
 #define BOX_CONTENT_SDK_VERSION @"1.0.14"
 
-// API URLs
-extern NSString *const BOXAPIBaseURL;
-extern NSString *const BOXAPIAuthBaseURL;
-extern NSString *const BOXAPIUploadBaseURL;
-
-// API Versions
-extern NSString *const BOXAPIVersion;
-extern NSString *const BOXAPIUploadAPIVersion;
-
 // API Resources
 extern NSString *const BOXAPIResourceFolders;
 extern NSString *const BOXAPIResourceFiles;
@@ -32,6 +23,7 @@ extern NSString *const BOXAPIResourceEvents;
 extern NSString *const BOXAPIResourceCollaborations;
 extern NSString *const BOXAPIResourceSearch;
 extern NSString *const BOXAPIResourceMetadataTemplates;
+extern NSString *const BOXAPIResourceRecentItems;
 
 // API Metadata Template Scope
 extern NSString *const BOXAPITemplateScopeEnterprise;
@@ -47,6 +39,7 @@ extern NSString *const BOXAPISubresourceVersions;
 extern NSString *const BOXAPISubresourceThumnailPNG;
 extern NSString *const BOXAPISubresourceCurrent;
 extern NSString *const BOXAPISubresourceMetadata;
+extern NSString *const BOXAPISubresourceAvatar;
 
 // HTTP Method Names
 typedef NSString BOXAPIHTTPMethod;
@@ -108,6 +101,7 @@ extern BOXAPIItemType *const BOXAPIItemTypeEvent;
 extern BOXAPIItemType *const BOXAPIItemTypeCollaboration;
 extern BOXAPIItemType *const BOXAPIItemTypeGroup;
 extern BOXAPIItemType *const BOXAPIItemTypeFileVersion;
+extern BOXAPIItemType *const BOXAPIItemTypeRecentItem;
 
 // Shared Link Access Levels
 typedef NSString BOXSharedLinkAccessLevel;
@@ -218,6 +212,11 @@ extern NSString *const BOXAPIParameterKeyMinWidth;
 extern NSString *const BOXAPIParameterKeyMinHeight;
 extern NSString *const BOXAPIParameterKeyMaxWidth;
 extern NSString *const BOXAPIParameterKeyMaxHeight;
+extern NSString *const BOXAPIParameterKeyAvatarType;
+
+// Recent Items Parameter Keys
+extern NSString *const BOXAPIParameterKeyNextMarker;
+extern NSString *const BOXAPIParameterKeyListType;
 
 // Metadata Parameter Key
 extern NSString *const BOXAPIParameterKeyTemplate;
@@ -261,6 +260,7 @@ extern NSString *const BOXAPIObjectKeyName;
 extern NSString *const BOXAPIObjectKeyCreatedAt;
 extern NSString *const BOXAPIObjectKeyModifiedAt;
 extern NSString *const BOXAPIObjectKeyExpiresAt;
+extern NSString *const BOXAPIObjectKeyInteractedAt;
 extern NSString *const BOXAPIObjectKeyContentCreatedAt;
 extern NSString *const BOXAPIObjectKeyContentModifiedAt;
 extern NSString *const BOXAPIObjectKeyTrashedAt;
@@ -323,6 +323,8 @@ extern NSString *const BOXAPIObjectKeySharedLinkPassword;
 extern NSString *const BOXAPIObjectKeyCollectionType;
 extern NSString *const BOXAPIObjectKeyEventID;
 extern NSString *const BOXAPIObjectKeyEventType;
+extern NSString *const BOXAPIObjectKeyInteractionSharedLink;
+extern NSString *const BOXAPIObjectKeyInteractionType;
 extern NSString *const BOXAPIObjectKeySessionID;
 extern NSString *const BOXAPIObjectKeySource;
 extern NSString *const BOXAPIObjectKeyAcknowledgedAt;
@@ -361,6 +363,14 @@ extern NSString *const BOXAPIEventStreamTypeAll;
 extern NSString *const BOXAPIEventStreamTypeChanges;
 extern NSString *const BOXAPIEventStreamTypeSync;
 extern NSString *const BOXAPIEventStreamTypeAdminLogs;
+
+// API Recent Items Constants
+extern NSString *const BOXAPIRecentItemsListTypeShared;
+extern NSString *const BOXAPIRecentItemsInteractionTypeOpen;
+extern NSString *const BOXAPIRecentItemsInteractionTypePreview;
+extern NSString *const BOXAPIRecentItemsInteractionTypeComment;
+extern NSString *const BOXAPIRecentItemsInteractionTypeModification;
+extern NSString *const BOXAPIRecentItemsInteractionTypeUpload;
 
 // Standard Events
 extern NSString *const BOXAPIEventTypeItemCreate;
@@ -434,5 +444,12 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
     BOXThumbnailSize64 = 64,
     BOXThumbnailSize128 = 128,
     BOXThumbnailSize256 = 256
+};
+
+typedef NS_ENUM(NSUInteger, BOXAvatarType) {
+    BOXAvatarTypeUnspecified = 0,
+    BOXAvatarTypeSmall,
+    BOXAvatarTypeLarge,
+    BOXAvatarTypeProfile
 };
 

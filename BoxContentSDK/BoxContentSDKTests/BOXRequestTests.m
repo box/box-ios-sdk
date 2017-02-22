@@ -71,7 +71,7 @@
 
 - (void)test_that_full_fields_string_for_bookmarks_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,url,created_at,modified_at,description,path_collection,trashed_at,purged_at,created_by,modified_by,owned_by,parent,item_status,shared_link,comment_count,permissions,allowed_shared_link_access_levels";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,url,created_at,modified_at,description,path_collection,trashed_at,purged_at,created_by,modified_by,owned_by,parent,item_status,shared_link,comment_count,permissions,allowed_shared_link_access_levels,collections";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullBookmarkFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }
@@ -96,7 +96,7 @@
 
 - (void)test_that_full_fields_string_for_users_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,name,login,created_at,modified_at,role,language,timezone,space_amount,space_used,max_upload_size,tracking_codes,can_see_managed_users,is_sync_enabled,is_external_collab_restricted,status,job_title,phone,address,avatar_url,is_exempt_from_device_limits,is_exempt_from_login_verification,enterprise,is_boxnotes_creation_enabled";
+    NSString *expectedFieldsString = @"type,id,name,login,created_at,modified_at,role,language,timezone,space_amount,space_used,max_upload_size,tracking_codes,can_see_managed_users,is_sync_enabled,is_external_collab_restricted,status,job_title,phone,address,avatar_url,has_custom_avatar,is_exempt_from_device_limits,is_exempt_from_login_verification,enterprise,is_boxnotes_creation_enabled";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullUserFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }

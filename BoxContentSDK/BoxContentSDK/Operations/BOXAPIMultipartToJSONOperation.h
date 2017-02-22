@@ -114,14 +114,14 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
 
 #pragma mark - Multipart Form pieces
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, BOXAPIMultipartPieceState) {
     BOXAPIMultipartPieceStateNotOpen = 0,
     BOXAPIMultipartPieceStateInitialBoundary,
     BOXAPIMultipartPieceStateHeaders,
     BOXAPIMultipartPieceStateBodyData,
     BOXAPIMultipartPieceStateFinalBoundary,
     BOXAPIMultipartPieceStateClosed,
-} BOXAPIMultipartPieceState;
+};
 
 /**
  * This class encapsulates one multipart form parameter. It provides one

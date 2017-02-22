@@ -10,7 +10,7 @@
 
 // expectedTotalBytes may be NSURLResponseUnknownLength if the operation is unable to determine the
 // content-length of the download
-typedef void (^BOXDownloadSuccessBlock)(NSString *fileID, long long expectedTotalBytes);
+typedef void (^BOXDownloadSuccessBlock)(NSString *modelID, long long expectedTotalBytes);
 typedef void (^BOXDownloadFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error);
 // expectedTotalBytes may be NSURLResponseUnknownLength if the operation is unable to determine the
 // content-length of the download
@@ -119,7 +119,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * The fileID associated with this download request. This value is passed to progressBlock.
  * @see progressBlock
  */
-@property (nonatomic, readwrite, strong) NSString *fileID;
+@property (nonatomic, readwrite, strong) NSString *modelID;
 
 /** @name Overridden methods */
 

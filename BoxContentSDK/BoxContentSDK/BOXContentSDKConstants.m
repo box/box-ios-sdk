@@ -8,15 +8,6 @@
 
 #import "BOXContentSDKConstants.h"
 
-// API URLs
-NSString *const BOXAPIBaseURL = @"https://api.box.com";
-NSString *const BOXAPIAuthBaseURL = @"https://account.box.com/api";
-NSString *const BOXAPIUploadBaseURL = @"https://upload.box.com/api";
-
-// API Versions
-NSString *const BOXAPIVersion = @"2.0";
-NSString *const BOXAPIUploadAPIVersion = @"2.1";
-
 // API Resources
 NSString *const BOXAPIResourceFolders = @"folders";
 NSString *const BOXAPIResourceFiles = @"files";
@@ -29,6 +20,7 @@ NSString *const BOXAPIResourceEvents = @"events";
 NSString *const BOXAPIResourceCollaborations = @"collaborations";
 NSString *const BOXAPIResourceSearch = @"search";
 NSString *const BOXAPIResourceMetadataTemplates = @"metadata_templates";
+NSString *const BOXAPIResourceRecentItems = @"recent_items";
 
 // API Metadata Template Scope
 NSString *const BOXAPITemplateScopeEnterprise = @"enterprise";
@@ -44,6 +36,7 @@ NSString *const BOXAPISubresourceVersions = @"versions";
 NSString *const BOXAPISubresourceThumnailPNG = @"thumbnail.png";
 NSString *const BOXAPISubresourceCurrent = @"current";
 NSString *const BOXAPISubresourceMetadata = @"metadata";
+NSString *const BOXAPISubresourceAvatar = @"avatar";
 
 // HTTP Method Names
 BOXAPIHTTPMethod *const BOXAPIHTTPMethodHEAD = @"HEAD";
@@ -102,6 +95,7 @@ BOXAPIItemType *const BOXAPIItemTypeEvent = @"event";
 BOXAPIItemType *const BOXAPIItemTypeCollaboration = @"collaboration";
 BOXAPIItemType *const BOXAPIItemTypeGroup = @"group";
 BOXAPIItemType *const BOXAPIItemTypeFileVersion = @"file_version";
+BOXAPIItemType *const BOXAPIItemTypeRecentItem = @"recent_item";
 
 // Shared Link Access Levels
 BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelOpen = @"open";
@@ -198,6 +192,11 @@ NSString *const BOXAPIParameterKeyMinWidth = @"min_width";
 NSString *const BOXAPIParameterKeyMinHeight = @"min_height";
 NSString *const BOXAPIParameterKeyMaxWidth = @"max_width";
 NSString *const BOXAPIParameterKeyMaxHeight = @"max_height";
+NSString *const BOXAPIParameterKeyAvatarType = @"pic_type";
+
+// Recent Items Parameter Keys
+NSString *const BOXAPIParameterKeyNextMarker = @"next_marker";
+NSString *const BOXAPIParameterKeyListType = @"list_type";
 
 // Metadata Parameter Keys
 NSString *const BOXAPIParameterKeyTemplate = @"templateKey";
@@ -238,6 +237,7 @@ NSString *const BOXAPIObjectKeyName = @"name";
 NSString *const BOXAPIObjectKeyCreatedAt = @"created_at";
 NSString *const BOXAPIObjectKeyModifiedAt = @"modified_at";
 NSString *const BOXAPIObjectKeyExpiresAt = @"expires_at";
+NSString *const BOXAPIObjectKeyInteractedAt = @"interacted_at";
 NSString *const BOXAPIObjectKeyContentCreatedAt = @"content_created_at";
 NSString *const BOXAPIObjectKeyContentModifiedAt = @"content_modified_at";
 NSString *const BOXAPIObjectKeyTrashedAt = @"trashed_at";
@@ -300,6 +300,8 @@ NSString *const BOXAPIObjectKeySharedLinkPassword = @"shared_link_password";
 NSString *const BOXAPIObjectKeyCollectionType = @"collection_type";
 NSString *const BOXAPIObjectKeyEventID = @"event_id";
 NSString *const BOXAPIObjectKeyEventType = @"event_type";
+NSString *const BOXAPIObjectKeyInteractionSharedLink = @"interaction_shared_link";
+NSString *const BOXAPIObjectKeyInteractionType = @"interaction_type";
 NSString *const BOXAPIObjectKeySessionID = @"session_id";
 NSString *const BOXAPIObjectKeySource = @"source";
 NSString *const BOXAPIObjectKeyAcknowledgedAt = @"acknowledged_at";
@@ -339,6 +341,14 @@ NSString *const BOXAPIEventStreamTypeAll = @"all";
 NSString *const BOXAPIEventStreamTypeChanges = @"changes";
 NSString *const BOXAPIEventStreamTypeSync = @"sync";
 NSString *const BOXAPIEventStreamTypeAdminLogs = @"admin_logs";
+
+// API Recent Items Constants
+NSString *const BOXAPIRecentItemsListTypeShared = @"shared";
+NSString *const BOXAPIRecentItemsInteractionTypeOpen = @"item_open";
+NSString *const BOXAPIRecentItemsInteractionTypePreview = @"item_preview";
+NSString *const BOXAPIRecentItemsInteractionTypeComment = @"item_comment";
+NSString *const BOXAPIRecentItemsInteractionTypeModification = @"item_modify";
+NSString *const BOXAPIRecentItemsInteractionTypeUpload = @"item_upload";
 
 // Standard Events
 NSString *const BOXAPIEventTypeItemCreate = @"ITEM_CREATE";
