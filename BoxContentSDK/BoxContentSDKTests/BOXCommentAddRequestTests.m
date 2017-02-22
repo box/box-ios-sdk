@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXCommentAddRequest.h"
 #import "BOXFile.h"
 #import "BOXComment.h"
@@ -24,7 +25,7 @@
     BOXFile *file = [self file];
     BOXCommentAddRequest *commentAddRequest = [[BOXCommentAddRequest alloc] initWithFileID:file.modelID message:nil];
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceComments]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceComments]];
     XCTAssertEqualObjects(commentAddRequest.urlRequest.URL, url);
     XCTAssertEqualObjects(commentAddRequest.urlRequest.HTTPMethod, BOXAPIHTTPMethodPOST);
 }

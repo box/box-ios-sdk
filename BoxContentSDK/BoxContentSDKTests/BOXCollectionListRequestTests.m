@@ -8,6 +8,7 @@
 
 #import "BOXRequest_Private.h"
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXCollectionListRequest.h"
 #import "BOXCollection.h"
 #import "BOXContentCacheTestClient.h"
@@ -20,7 +21,7 @@
 
 - (void)test_url_request_is_correct
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceCollections]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceCollections]];
     BOXCollectionListRequest *request = [[BOXCollectionListRequest alloc] init];
     
     XCTAssertEqualObjects(url, request.urlRequest.URL);

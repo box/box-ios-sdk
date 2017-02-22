@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
+#import "BOXContentClient.h"
 #import "BOXFileDownloadRequest.h"
 #import "BOXFile.h"
 
@@ -24,7 +25,7 @@
     BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -47,7 +48,7 @@
     request.versionID = versionID;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content?version=%@", BOXAPIBaseURL, BOXAPIVersion, fileID, versionID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content?version=%@", [BOXContentClient APIBaseURL], fileID, versionID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);

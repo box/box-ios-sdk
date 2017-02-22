@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileUnshareRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
@@ -25,7 +26,7 @@
     BOXFileUnshareRequest *fileRequest = [[BOXFileUnshareRequest alloc] initWithFileID:fileID];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
@@ -51,7 +52,7 @@
     [fileRequest setMatchingEtag:matchingEtagToUse];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

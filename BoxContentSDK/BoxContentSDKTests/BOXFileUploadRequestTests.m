@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
+#import "BOXContentClient.h"
 #import "BOXFileUploadRequest.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
@@ -52,7 +53,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/content", [BOXContentClient APIUploadBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -118,7 +119,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/content", [BOXContentClient APIUploadBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -176,7 +177,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/content", [BOXContentClient APIUploadBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -233,7 +234,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/content", [BOXContentClient APIUploadBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     

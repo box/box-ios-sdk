@@ -10,6 +10,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXCollectionItemsRequest.h"
 #import "BOXCollection.h"
+#import "BOXContentClient.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
@@ -29,7 +30,7 @@
     
     BOXCollection *collection = [[BOXCollection alloc] initWithJSON:dict];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@",BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceCollections, collection.modelID, BOXAPISubresourceItems]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceCollections, collection.modelID, BOXAPISubresourceItems]];
     
     BOXCollectionItemsRequest *collectionItemsRequest = [[BOXCollectionItemsRequest alloc] initWithCollectionID:collection.modelID inRange:NSMakeRange(0, 0)];
     XCTAssertEqualObjects(url, collectionItemsRequest.urlRequest.URL);

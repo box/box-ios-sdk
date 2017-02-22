@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXSharedItemRequest.h"
 #import "BOXFolder.h"
 #import "BOXSharedLink.h"
@@ -25,7 +26,7 @@
                                                                            password:nil];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/shared_items", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shared_items", [BOXContentClient APIBaseURL]]];
 
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -43,7 +44,7 @@
                                                                            password:password];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/shared_items", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shared_items", [BOXContentClient APIBaseURL]]];
 
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);

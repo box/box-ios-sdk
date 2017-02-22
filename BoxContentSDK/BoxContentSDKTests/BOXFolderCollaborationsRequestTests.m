@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFolderCollaborationsRequest.h"
 
 @interface BOXFolderCollaborationsRequestTests : BOXRequestTestCase
@@ -22,7 +23,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@/collaborations", BOXAPIBaseURL, BOXAPIVersion,folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/folders/%@/collaborations", [BOXContentClient APIBaseURL], folderID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }

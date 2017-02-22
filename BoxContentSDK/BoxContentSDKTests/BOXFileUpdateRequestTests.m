@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileUpdateRequest.h"
 #import "BOXFile.h"
 #import "BOXRequest_Private.h"
@@ -25,7 +26,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
     
@@ -73,7 +74,7 @@
     // URL assertions
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

@@ -13,6 +13,7 @@
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
+#import "BOXContentClient.h"
 
 @interface BOXRequest ()
 
@@ -32,7 +33,7 @@
     BOXSearchRequest *request = [[BOXSearchRequest alloc] initWithSearchQuery:searchQuery inRange:NSMakeRange(2, 10)];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/search", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/search", [BOXContentClient APIBaseURL]];
     NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     
     XCTAssertEqualObjects(expectedURL, requestURL);
@@ -52,7 +53,7 @@
     request.requestAllItemFields = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/search", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/search", [BOXContentClient APIBaseURL]];
     NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     
     XCTAssertEqualObjects(expectedURL, requestURL);
@@ -71,7 +72,7 @@
     request.type = BOXAPIItemTypeFile;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/search", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/search", [BOXContentClient APIBaseURL]];
     NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     
     XCTAssertEqualObjects(expectedURL, requestURL);

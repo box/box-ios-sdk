@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXEvent.h"
 #import "BOXEventsRequest.h"
 #import "NSURL+BOXURLHelper.h"
@@ -20,7 +21,7 @@
 
 - (void)test_url_request_is_correct_with_default_values
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceEvents]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceEvents]];
     BOXEventsRequest *request = [[BOXEventsRequest alloc] init];
     
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, request.urlRequest.HTTPMethod);
@@ -29,7 +30,7 @@
 
 - (void)test_url_request_is_correct_with_all_values
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceEvents]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceEvents]];
     BOXEventsRequest *request = [[BOXEventsRequest alloc] init];
     request.streamType = BOXEventsStreamTypeChanges;
     request.limit = 200;

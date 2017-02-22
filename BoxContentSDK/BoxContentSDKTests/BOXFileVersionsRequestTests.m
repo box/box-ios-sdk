@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileVersionsRequest.h"
 #import "BOXFileVersion.h"
 
@@ -22,7 +23,7 @@
     NSString *fileID = @"123";
     BOXFileVersionsRequest *request = [[BOXFileVersionsRequest alloc] initWithFileID:fileID];
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/versions", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/versions", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, request.urlRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, request.urlRequest.HTTPMethod);

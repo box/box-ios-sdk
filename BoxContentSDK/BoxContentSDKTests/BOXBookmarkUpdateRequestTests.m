@@ -9,6 +9,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXBookmarkUpdateRequest.h"
 #import "BOXBookmark.h"
+#import "BOXContentClient.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXRequest_Private.h"
 
@@ -25,7 +26,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
     
@@ -75,7 +76,7 @@
     // URL assertions
     XCTAssertEqualObjects(@"PUT", URLRequest.HTTPMethod);
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

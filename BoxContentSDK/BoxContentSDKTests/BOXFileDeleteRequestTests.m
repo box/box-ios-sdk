@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileDeleteRequest.h"
 
 @interface BOXFileDeleteRequestTests : BOXRequestTestCase
@@ -24,7 +25,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
     
@@ -51,7 +52,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/trash", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/trash", [BOXContentClient APIBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
 }

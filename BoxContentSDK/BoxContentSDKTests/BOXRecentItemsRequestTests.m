@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXRecentItem.h"
 #import "BOXRecentItemsRequest.h"
@@ -20,7 +21,7 @@
 
 - (void)test_url_request_is_correct_with_default_values
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceRecentItems];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceRecentItems];
     NSURL *url = [NSURL URLWithString:urlString];
     BOXRecentItemsRequest *request = [[BOXRecentItemsRequest alloc] init];
 
@@ -30,7 +31,7 @@
 
 - (void)test_url_request_is_correct_with_all_values
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceRecentItems];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceRecentItems];
     NSURL *url = [NSURL URLWithString:urlString];
 
     BOXRecentItemsRequest *request = [[BOXRecentItemsRequest alloc] init];

@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXBookmarkShareRequest.h"
+#import "BOXContentClient.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXBookmark.h"
@@ -25,7 +26,7 @@
     BOXBookmarkShareRequest *bookmarkRequest = [[BOXBookmarkShareRequest alloc] initWithBookmarkID:bookmarkID];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
@@ -50,7 +51,7 @@
     [bookmarkRequest setAccessLevel:accessLevel];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -67,7 +68,7 @@
     [bookmarkRequest setExpirationDate:expirationDate];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -83,7 +84,7 @@
     [bookmarkRequest setCanDownload:YES];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -99,7 +100,7 @@
     [bookmarkRequest setCanDownload:NO];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -115,7 +116,7 @@
     [bookmarkRequest setCanPreview:YES];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -131,7 +132,7 @@
     [bookmarkRequest setCanPreview:NO];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -148,7 +149,7 @@
     [bookmarkRequest setMatchingEtag:matchingEtagToUse];
     NSURLRequest *URLRequest = bookmarkRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
