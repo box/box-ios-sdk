@@ -195,6 +195,7 @@ NSString *const BOXAPIParameterKeyMaxHeight = @"max_height";
 NSString *const BOXAPIParameterKeyAvatarType = @"pic_type";
 
 // Recent Items Parameter Keys
+NSString *const BOXAPIParameterKeyMarker = @"marker";
 NSString *const BOXAPIParameterKeyNextMarker = @"next_marker";
 NSString *const BOXAPIParameterKeyListType = @"list_type";
 
