@@ -56,7 +56,7 @@ Create a new Box Folder
 -----------------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXFolderCreateRequest *folderCreateRequest = [contentClient folderCreateRequestWithName:@"New Folder" parentFolderID:BoxAPIFolderIDRoot];
+BOXFolderCreateRequest *folderCreateRequest = [contentClient folderCreateRequestWithName:@"New Folder" parentFolderID:BOXAPIFolderIDRoot];
 [folderCreateRequest performRequestWithCompletion:^(BOXFolder *folder, NSError *error) {
 	// If successful, folder will be non-nil and represent the newly created folder on Box; otherwise, error will be non-nil.
 }];

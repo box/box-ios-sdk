@@ -32,7 +32,7 @@ BOXAuthorizationViewController *boxAuthViewController = [[BOXAuthorizationViewCo
 When you no longer need the session, it is a good practice to logout.
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-[contentClient logOut]
+[contentClient logOut];
 ```
 
 Multi-Account Mode

@@ -5,7 +5,7 @@ Get Specific Box File Metadata Template Instance Information
 ----------------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXFileRequest *metadataInfoRequest = [contentClient metadataInfoRequestWithFileID:@"your_file_id" template: @"your_template"];
+BOXMetadataRequest *metadataInfoRequest = [contentClient metadataInfoRequestWithFileID:@"your_file_id" template: @"your_template"];
 [metadataInfoRequest performRequestWithCompletion:^(NSArray *metadatas, NSError *error) {
 	// If successful, metadatas will be non-nil; otherwise, error will be non-nil.
 }];
@@ -25,7 +25,7 @@ Create a Box File Metadata Template Instance
 -----------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXMetadataTask *task = [[BOXMetadataTask alloc] initWithPath:@"your_path" value:@"your_value"];
+BOXMetadataKeyValue *task = [[BOXMetadataKeyValue alloc] initWithPath:@"your_path" value:@"your_value"];
 BOXMetadataCreateRequest *metadataCreateRequest = [contentClient metadataCreateRequestWithFileID:@"your_file_id" template:@"your_template" tasks:@[task, ...];
 [metadataCreateRequest performRequestWithCompletion:^(BOXMetadata *metadata, NSError *error){
 	// If successful, metadata will be non-nil; otherwise, error will be non-nil.
@@ -37,7 +37,7 @@ Delete a Box File Metadata Template Instance
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
 BOXMetadataDeleteRequest *metadataDeleteRequest = [contentClient metadataDeleteRequestWithFileID:@"your_file_id" template:@"your_template"];
-[fileDeleteRequest performRequestWithCompletion:^(NSError *error) {
+[metadataDeleteRequest performRequestWithCompletion:^(NSError *error) {
 	// If successful, error will be nil.
 }];
 ```
@@ -58,8 +58,8 @@ Get Specific Box Template Information
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
 BOXMetadataTemplateRequest *metadataTemplateRequest = [contentClient metadataTemplateInfoRequestWithScope:@"your_scope" template:@"your_template"];
-[metadataTemplateRequest performRequestWithCompletion:^(BOXMetadataTemplate *template, NSError *error){
-	// If successful, template will be non-nil; otherwise, error will be non-nil.
+[metadataTemplateRequest performRequestWithCompletion:^(NSArray *metadataTemplates, NSError *error){
+	// If successful, metadataTemplates will be non-nil; otherwise, error will be non-nil.
 }];
 ```
 
@@ -67,7 +67,7 @@ Get All Box Template Information
 -----------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXMetadataTemplateRequest *metadataTemplateRequest = [contentClient metadataTemplatesInforRequest];
-metadataTemplateRequest performRequestWithCompletion:^(NSArray *templates, NSError *error) {
+BOXMetadataTemplateRequest *metadataTemplateRequest = [contentClient metadataTemplatesInfoRequest];
+[metadataTemplateRequest performRequestWithCompletion:^(NSArray *templates, NSError *error) {
 	// If successful, templates will be non-nil; otherwise, error will be non-nil.
 }];

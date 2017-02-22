@@ -18,8 +18,8 @@ BOXContentClient *contentClient = [BOXContentClient defaultClient];
 BOXFileUpdateRequest *fileUpdateRequest = [contentClient fileUpdateRequestWithID:@"file-id"];
 
 // Update properties.
-fileUpdateRequest.fileName = @"new file name.jpg"
-fileUpdateRequest.fileDescription = @"new file description."
+fileUpdateRequest.fileName = @"new file name.jpg";
+fileUpdateRequest.fileDescription = @"new file description.";
 
 [fileUpdateRequest performRequestWithCompletion:^(BOXFile *file, NSError *error) {
 	// If successful, file will be non-nil and contain updated properties.
@@ -55,8 +55,9 @@ Download to an arbitrary NSOutputStream:
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
 NSString *localFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.jpg"];
-NSOutputStream *outputStream = [NSOutputStream localFilePath append:NO];
-BOXFileDownloadRequest *boxRequest = [contentClient fileDownloadRequestWithID:@"file-id" outputStream];
+NSURL *localFileURL = [NSURL fileURLWithPath:localFilePath];
+NSOutputStream *outputStream = [[NSOutputStream alloc] initWithURL:localFileURL append:NO];
+BOXFileDownloadRequest *boxRequest = [contentClient fileDownloadRequestWithID:@"file-id" toOutputStream:outputStream];
 [boxRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
 	// Update a progress bar, etc.
 } completion:^(NSError *error) {
@@ -70,7 +71,7 @@ Upload from a local file:
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
 NSString *localFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.jpg"];
-BOXFileUploadRequest *uploadRequest = [contentClient fileUploadRequestToFolderWithID:BoxAPIFolderIDRoot fromLocalFilePath:localFilePath];
+BOXFileUploadRequest *uploadRequest = [contentClient fileUploadRequestToFolderWithID:BOXAPIFolderIDRoot fromLocalFilePath:localFilePath];
 
 // Optional: By default the name of the file on the local filesystem will be used as the name on Box. However, you can
 // set a different name for the file by configuring the request:
@@ -85,7 +86,7 @@ uploadRequest.fileName = @"A different file name.jpg";
 Upload from NSData:
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXFileUploadRequest *uploadRequest = [contentClient fileUploadRequestToFolderWithID:BoxAPIFolderIDRoot fromData:[@"sample_data" dataUsingEncoding:NSUTF8StringEncoding] fileName:@"sample_file.txt"];
+BOXFileUploadRequest *uploadRequest = [contentClient fileUploadRequestToFolderWithID:BOXAPIFolderIDRoot fromData:[@"sample_data" dataUsingEncoding:NSUTF8StringEncoding] fileName:@"sample_file.txt"];
 [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
 	// Update a progress bar, etc.
 } completion:^(BOXFile *file, NSError *error) {
