@@ -234,23 +234,23 @@
     return operation;
 }
 
-- (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
-                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
-                                 successBlock:(BOXDownloadSuccessBlock)successBlock
-                                 failureBlock:(BOXDownloadFailureBlock)failureBlock
+- (BOXStreamOperation *)dataStreamOperationWithURL:(NSURL *)URL
+                                        HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                      successBlock:(BOXDownloadSuccessBlock)successBlock
+                                      failureBlock:(BOXDownloadFailureBlock)failureBlock
 {
     BOXStreamOperation *operation = [[BOXStreamOperation alloc] initWithURL:URL
-                                                                   HTTPMethod:HTTPMethod
-                                                                         body:nil
-                                                                  queryParams:nil
-                                                                      session:self.queueManager.session];
+                                                                 HTTPMethod:HTTPMethod
+                                                                       body:nil
+                                                                queryParams:nil
+                                                                    session:self.queueManager.session];
     if (successBlock != nil) {
         operation.successBlock = successBlock;
     }
     if (failureBlock != nil) {
         operation.failureBlock = failureBlock;
     }
-    
+
     return operation;
 }
 

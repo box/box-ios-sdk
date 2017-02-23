@@ -60,10 +60,10 @@
                                   sessionTask:(NSURLSessionTask *)sessionTask
                       sessionTaskReplacedBlock:(BOXSessionTaskReplacedBlock)sessionTaskReplacedBlock;
 
-- (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
-                                  HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
-                                successBlock:(BOXDownloadSuccessBlock)successBlock
-                                failureBlock:(BOXDownloadFailureBlock)failureBlock;
+- (BOXStreamOperation *)dataStreamOperationWithURL:(NSURL *)URL
+                                        HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                      successBlock:(BOXDownloadSuccessBlock)successBlock
+                                      failureBlock:(BOXDownloadFailureBlock)failureBlock;
 
 - (BOXAPIHeadOperation *)headOperationWithURL:(NSURL *)URL
                                    HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
