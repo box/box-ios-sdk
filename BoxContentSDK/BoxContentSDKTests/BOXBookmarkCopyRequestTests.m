@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXBookmarkCopyRequest.h"
 #import "BOXBookmark.h"
 
@@ -26,7 +27,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@/copy", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@/copy", [BOXContentClient APIBaseURL], bookmarkID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -57,7 +58,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@/copy", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@/copy", [BOXContentClient APIBaseURL], bookmarkID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     

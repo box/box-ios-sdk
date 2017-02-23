@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXTrashedItemArrayRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
@@ -28,7 +29,7 @@
     request.requestAllItemFields = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/trash/items", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/trash/items", [BOXContentClient APIBaseURL]];
     NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     
     XCTAssertEqualObjects(expectedURL, requestURL);

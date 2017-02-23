@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFolderShareRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
@@ -25,7 +26,7 @@
     BOXFolderShareRequest *folderRequest = [[BOXFolderShareRequest alloc] initWithFolderID:folderID];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
@@ -51,7 +52,7 @@
     [folderRequest setAccessLevel:accessLevel];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -68,7 +69,7 @@
     [folderRequest setExpirationDate:expirationDate];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -84,7 +85,7 @@
     [folderRequest setCanDownload:YES];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -100,7 +101,7 @@
     [folderRequest setCanDownload:NO];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -116,7 +117,7 @@
     [folderRequest setCanPreview:YES];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -132,7 +133,7 @@
     [folderRequest setCanPreview:NO];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -149,7 +150,7 @@
     [folderRequest setMatchingEtag:matchingEtagToUse];
     NSURLRequest *URLRequest = folderRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

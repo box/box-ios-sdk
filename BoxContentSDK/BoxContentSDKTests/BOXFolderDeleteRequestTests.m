@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFolderDeleteRequest.h"
 
 @interface BOXFolderDeleteRequestTests : BOXRequestTestCase
@@ -22,7 +23,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@?recursive=true", BOXAPIBaseURL, BOXAPIVersion, folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/folders/%@?recursive=true", [BOXContentClient APIBaseURL], folderID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
 }
@@ -45,7 +46,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@/trash", BOXAPIBaseURL, BOXAPIVersion, folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/folders/%@/trash", [BOXContentClient APIBaseURL], folderID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
 }
@@ -61,7 +62,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders/%@", BOXAPIBaseURL, BOXAPIVersion, folderID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/folders/%@", [BOXContentClient APIBaseURL], folderID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
     

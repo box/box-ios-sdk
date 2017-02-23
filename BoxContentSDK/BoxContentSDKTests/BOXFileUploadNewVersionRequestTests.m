@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXRequest_Private.h"
 #import "BOXAPIMultipartToJSONOperation.h"
@@ -51,7 +52,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -106,7 +107,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -151,7 +152,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
@@ -197,7 +198,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     

@@ -58,7 +58,7 @@
 - (void)test_app_users_should_require_delegate_set
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    client.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL queueManager:client.queueManager];
+    client.session = [[BOXAppUserSession alloc] initWithQueueManager:client.queueManager];
     
     BOXFolderRequest *request = [client folderInfoRequestWithID:@"mock_id"];
     XCTAssertThrows([request performRequestWithCompletion:^(BOXFolder *folder, NSError *error) {

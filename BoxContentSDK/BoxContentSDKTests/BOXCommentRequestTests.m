@@ -12,6 +12,7 @@
 #import "NSURL+BOXURLHelper.h"
 #import "BOXComment.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXContentClient.h"
 
 @interface BOXCommentRequestTests : BOXRequestTestCase
 
@@ -25,7 +26,7 @@
     NSString *commentID = @"987654";
     
     BOXCommentRequest *commentDeleteRequest = [[BOXCommentRequest  alloc] initWithCommentID:commentID];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceComments, commentID]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceComments, commentID]];
     
     XCTAssertEqualObjects(url, commentDeleteRequest.urlRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, commentDeleteRequest.urlRequest.HTTPMethod);
@@ -113,7 +114,7 @@
     request.requestAllItemFields = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/comments/%@", BOXAPIBaseURL, BOXAPIVersion, commentID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/comments/%@", [BOXContentClient APIBaseURL], commentID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
