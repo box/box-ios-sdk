@@ -17,8 +17,7 @@
 
 @interface BOXStreamOperation ()
 
-// Buffer data received from the connection in an NSData. Write to the
-// output stream from this NSData when space becomes availble
+// Buffer data received. Write to the output stream from this data object when space becomes available.
 @property (nonatomic, readwrite, strong) NSMutableData *receivedDataBuffer;
 
 @property (nonatomic, readwrite, assign) unsigned long long bytesReceived;
@@ -62,7 +61,7 @@
 
 - (void)processResponseData:(NSData *)data
 {
-    // Empty data assumes that all data received from the NSURLConnection is buffered. This operation
+    // Empty data assumes that all data received from the network is buffered. This operation
     // streams all received data to its output stream, so do nothing.
     if (data.length == 0) {
         return;
@@ -76,7 +75,7 @@
         NSDictionary *userInfo = @{
                                    NSUnderlyingErrorKey : JSONError,
                                    };
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];;
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];
     }
     else if ([decodedJSON isKindOfClass:[NSDictionary class]] == NO)
     {
@@ -139,18 +138,18 @@
 
 - (void)abortWithError:(NSError *)error
 {
-    [self.connection cancel];
     [self.sessionTask cancel];
-    [self connection:self.connection didFailWithError:error];
+    [self sessionTask:self.sessionTask didFinishWithResponse:self.sessionTask.response error:error];
 }
 
-#pragma mark - NSURLConnectionDelegate
+#pragma mark - BOXURLSessionTaskDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
-    [super connection:connection didReceiveResponse:response];
-    
-    if (self.error.code == BOXContentSDKAPIErrorAccepted) {
+    [super sessionTask:sessionTask didFinishWithResponse:response error:error];
+
+    if (error != nil &&
+        error.code == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
         double delay = [self reenqueDelay];
@@ -159,21 +158,22 @@
 }
 
 // Override this delegate method from the default BOXAPIOperation implementation
+// (may not even be implemented in the first place as it is optional).
 // By default, BOXAPIOperation buffers all received data from the connection in
 // self.responseData. This operation differs in that it should write its received
 // data immediately to its output stream. Failure to do so will cause downloads to
 // be buffered entirely in memory.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+- (void)processIntermediateData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
         // If we received an error, don't write the response data to the output stream
-        [super connection:connection didReceiveData:data];
+        [super processIntermediateData:data];
     } else {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
         [self.receivedDataBuffer appendData:data];
         self.bytesReceived += data.length;
-        NSLog(@"Bytes received: %lu", (unsigned long)data.length);
+        BOXLog(@"Bytes received: %lu", (unsigned long)data.length);
         if (self.progressBlock && data.length > 0) {
             self.progressBlock(data, self.contentLength);
         }
@@ -224,7 +224,7 @@
 
 - (BOOL)shouldUseSessionTask
 {
-    return NO;
+    return YES;
 }
 
 @end
