@@ -88,7 +88,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 + (BOXURLSessionManager *)sharedInstance;
 
 /**
- * This method needs to be called once to set up the manager to be ready to support background upload/download tasks.
+ * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
  * If this method has not been called, all background task creations will fail
  * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
  *                          possible if the background tasks were created outside of BOXURLSessionManager
