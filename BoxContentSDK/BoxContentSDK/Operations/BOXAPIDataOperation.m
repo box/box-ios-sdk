@@ -301,14 +301,14 @@
     }
 }
 
-- (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteTotalBytes:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     if (self.progressBlock != nil) {
         self.progressBlock(totalBytesExpectedToWrite, totalBytesWritten);
     }
 }
 
-- (void)didFinishDownloadingToURL:(NSURL *)location
+- (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location
 {
     //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
     //is called to report file move/replace error if any
