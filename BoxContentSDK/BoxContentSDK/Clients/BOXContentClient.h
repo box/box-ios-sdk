@@ -14,6 +14,7 @@
 @protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
 @protocol BOXContentCacheClientProtocol;
+@protocol BOXURLSessionManagerDelegate;
 
 @interface BOXContentClient : NSObject
 
@@ -179,5 +180,8 @@
  *  @param delegate The object that will receive the BOXSharedLinkStorageProtocol delegate callbacks.
  **/ 
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
+
+
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)defaultDelegate;
 
 @end
