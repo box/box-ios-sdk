@@ -43,12 +43,24 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
 
 @synthesize sessionTaskIdToTaskDelegate = _sessionTaskIdToTaskDelegate;
 
++ (BOXURLSessionManager *)sharedInstance
+{
+    static id sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (id)init
 {
     self = [super init];
     if (self != nil) {
         _sessionTaskIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
         _hasCompletedSetup = NO;
+        [self createDefaultSession];
+        [self createProgressSession];
     }
     return self;
 }
@@ -106,14 +118,12 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
 
 #pragma mark - public methods
 
-- (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
 {
     @synchronized (self) {
         if (self.hasCompletedSetup == NO) {
             self.defaultDelegate = delegate;
-            self.defaultSession = [self createDefaultSession];
-            self.progressSession = [self createProgressSession];
-            self.backgroundSession = [self createBackgroundSession];
+            [self createBackgroundSession];
             self.hasCompletedSetup = YES;
         }
     }

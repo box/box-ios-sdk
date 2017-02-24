@@ -14,6 +14,7 @@
 @protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
 @protocol BOXContentCacheClientProtocol;
+@protocol BOXURLSessionManagerDelegate;
 
 @interface BOXContentClient : NSObject
 
@@ -181,4 +182,7 @@
 + (void)setOAuth2BaseURL:(NSString *)OAuth2BaseURL;
 + (void)setAPIAuthBaseURL:(NSString *)APIAuthBaseURL;
 + (void)setAPIUploadBaseURL:(NSString *)APIUploadBaseURL;
+
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)defaultDelegate;
+
 @end

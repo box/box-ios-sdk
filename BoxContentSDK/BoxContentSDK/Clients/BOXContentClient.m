@@ -180,7 +180,7 @@ static BOXContentClient *defaultInstance = nil;
         // manager uses the session as a lock object when enqueuing operations.
         _queueManager = [[BOXParallelAPIQueueManager alloc] init];
 
-        _urlSessionManager = [[BOXURLSessionManager alloc] init];
+        _urlSessionManager = [BOXURLSessionManager sharedInstance];
 
         _OAuth2Session = [[BOXParallelOAuth2Session alloc] initWithClientID:staticClientID
                                                                      secret:staticClientSecret
@@ -366,6 +366,13 @@ static BOXContentClient *defaultInstance = nil;
     
     // Since the OAuth2Session instance was nil-ed out, the queueManager now needs a new session instance which will be appSession.
     self.queueManager.delegate = accessTokenDelegate;
+}
+
+# pragma mark - background tasks support
+
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)defaultDelegate
+{
+    [self.urlSessionManager setUpToSupportBackgroundTasksWithDefaultDelegate:defaultDelegate];
 }
 
 #pragma mark - helper methods
