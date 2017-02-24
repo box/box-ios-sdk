@@ -41,7 +41,7 @@
     }
 
     if (self.nextMarker != nil) {
-        queryParameters[BOXAPIParameterKeyNextMarker] = self.nextMarker;
+        queryParameters[BOXAPIParameterKeyMarker] = self.nextMarker;
     }
 
     if (self.listType != nil) {

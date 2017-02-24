@@ -215,6 +215,7 @@ extern NSString *const BOXAPIParameterKeyMaxHeight;
 extern NSString *const BOXAPIParameterKeyAvatarType;
 
 // Recent Items Parameter Keys
+extern NSString *const BOXAPIParameterKeyMarker;
 extern NSString *const BOXAPIParameterKeyNextMarker;
 extern NSString *const BOXAPIParameterKeyListType;
 
