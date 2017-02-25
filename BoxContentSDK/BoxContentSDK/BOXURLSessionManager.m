@@ -32,9 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
 @property (nonatomic, readonly, strong) NSMapTable<NSNumber *, id<BOXURLSessionTaskDelegate>> *sessionTaskIdToTaskDelegate;
 
-// Used to enforce the Session Manager setup only occurs once per instance.
-@property (nonatomic, readwrite, assign) BOOL hasCompletedSetup;
-
 @end
 
 static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
@@ -43,12 +40,23 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
 
 @synthesize sessionTaskIdToTaskDelegate = _sessionTaskIdToTaskDelegate;
 
++ (BOXURLSessionManager *)sharedInstance
+{
+    static id sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (id)init
 {
     self = [super init];
     if (self != nil) {
         _sessionTaskIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
-        _hasCompletedSetup = NO;
+        [self createDefaultSession];
+        [self createProgressSession];
     }
     return self;
 }
@@ -106,17 +114,10 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
 
 #pragma mark - public methods
 
-- (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
 {
-    @synchronized (self) {
-        if (self.hasCompletedSetup == NO) {
-            self.defaultDelegate = delegate;
-            self.defaultSession = [self createDefaultSession];
-            self.progressSession = [self createProgressSession];
-            self.backgroundSession = [self createBackgroundSession];
-            self.hasCompletedSetup = YES;
-        }
-    }
+    self.defaultDelegate = delegate;
+    [self createBackgroundSession];
 }
 
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * uploadTasks, NSArray<NSURLSessionDownloadTask *> * downloadTasks))completion

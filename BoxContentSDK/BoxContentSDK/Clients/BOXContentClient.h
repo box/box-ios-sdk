@@ -14,6 +14,7 @@
 @protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
 @protocol BOXContentCacheClientProtocol;
+@protocol BOXURLSessionManagerDelegate;
 
 @interface BOXContentClient : NSObject
 
@@ -179,5 +180,18 @@
  *  @param delegate The object that will receive the BOXSharedLinkStorageProtocol delegate callbacks.
  **/ 
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
+
+/**
+ * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
+ * Should be called as soon as possible after BOXContentClient instance is created to allow support for background tasks.
+ *
+ * If this method has not been called, all background task creations will fail
+ * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
+ *                          possible if the background tasks were created outside of BOXURLSessionManager
+ *                          (e.g. app restarts)
+ *                          A task delegate can always be re-associated with a session task by calling
+ *                          associateSessionTaskId:withTaskDelegate:
+ */
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate;
 
 @end

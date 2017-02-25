@@ -81,14 +81,22 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 @interface BOXURLSessionManager : NSObject
 
 /**
- * This method needs to be called once to set up the manager to be ready to perform other public methods
+ * Should only use sharedInstance instead of creating a new instance of BOXURLSessionManager
+ * BOXURLSessionManager is responsible for a unique background NSURLSession for the app
+ * with BOXURLSessionManager itself as delegate
+ */
++ (BOXURLSessionManager *)sharedInstance;
+
+/**
+ * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
+ * If this method has not been called, all background task creations will fail
  * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
  *                          possible if the background tasks were created outside of BOXURLSessionManager
  *                          (e.g. app restarts)
  *                          A task delegate can always be re-associated with a session task by calling
  *                          associateSessionTaskId:withTaskDelegate:
  */
-- (void)setUpWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)defaultDelegate;
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
