@@ -7,15 +7,12 @@
 #import "BOXFileUploadRequest.h"
 
 #import "BOXAPIMultipartToJSONOperation.h"
-#import "BOXAssetInputStream.h"
 #import "BOXFile.h"
 #import "BOXLog.h"
 #import "BOXHashHelper.h"
 #import "NSString+BOXURLHelper.h"
 #import "BOXAPIQueueManager.h"
 #import "BOXAbstractSession.h"
-
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface BOXFileUploadRequest ()
 
@@ -67,18 +64,6 @@
         _fileData = data;
     }
 
-    return self;
-}
-
-- (instancetype)initWithALAsset:(ALAsset *)asset
-                  assetsLibrary:(ALAssetsLibrary *)assetsLibrary
-                targetForlderID:(NSString *)folderID
-{    
-    if (self = [self initWithName:asset.defaultRepresentation.filename targetFolderID:folderID] ) {
-        _asset = asset;
-        _assetsLibrary = assetsLibrary;
-    }
-    
     return self;
 }
 
@@ -139,16 +124,6 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:fileName
                                        MIMEType:nil];
-    } else if (self.asset != nil) {
-        BOXAssetInputStream *inputStream =
-            [[BOXAssetInputStream alloc] initWithAssetRepresentation:self.asset.defaultRepresentation
-                                                       assetsLibrary:self.assetsLibrary];
-
-        [operation appendMultipartPieceWithInputStream:inputStream
-                                         contentLength:self.asset.defaultRepresentation.size
-                                             fieldName:BOXAPIMultipartParameterFieldKeyFile
-                                              filename:fileName
-                                              MIMEType:nil];
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
@@ -233,8 +208,6 @@
         hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
     } else if (self.fileData != nil) {
         hash = [BOXHashHelper sha1HashOfData:self.fileData];
-    } else if (self.asset != nil) {
-        hash = [BOXHashHelper sha1HashOfALAsset:self.asset];
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
     }

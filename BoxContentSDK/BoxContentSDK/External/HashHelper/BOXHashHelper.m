@@ -27,7 +27,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <AssetsLibrary/AssetsLibrary.h>
 
 // Constants
 static const size_t FileHashDefaultChunkSizeForReadingData = 4096;
@@ -147,42 +146,6 @@ typedef struct _FileHashComputationContext {
     }
 
     return [NSString stringWithCString:finaldigest encoding:NSASCIIStringEncoding];
-}
-
-+ (NSString *)sha1HashOfALAsset:(ALAsset *)asset
-{
-    NSMutableString *hash = nil;
-    ALAssetRepresentation *representation = [asset defaultRepresentation];
-    long long offset = 0;
-    long long length = [representation size];
-    
-    uint8_t buffer[FileHashDefaultChunkSizeForReadingData];
-    NSError *error = nil;
-    
-    CC_SHA1_CTX sha1Object;
-    CC_SHA1_Init(&sha1Object);
-    
-    do {
-        NSUInteger bytesRead = [representation getBytes:buffer fromOffset:offset length:FileHashDefaultChunkSizeForReadingData error:&error];
-        if (error || bytesRead == 0) {
-            break;
-        }
-        CC_SHA1_Update(&sha1Object, (const void *)buffer, (CC_LONG)bytesRead);
-        offset += bytesRead;
-    } while (offset < length);
-    
-    if (offset == length) {
-        unsigned char digest[CC_SHA1_DIGEST_LENGTH];
-        CC_SHA1_Final(digest, &sha1Object);
-        
-        hash = [NSMutableString string];
-        
-        NSInteger i;
-        for (i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
-            [hash appendFormat:@"%02x", (uint8_t)digest[i]];
-        }
-    }
-    return hash;
 }
 
 @end

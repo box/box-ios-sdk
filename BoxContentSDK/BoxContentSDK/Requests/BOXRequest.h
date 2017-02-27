@@ -54,6 +54,8 @@ typedef void (^BOXCollectionBlock)(BOXCollection *collection, NSError *error);
 
 typedef void (^BOXEventsBlock)(NSArray *events, NSString *nextStreamPosition, NSError *error);
 
+typedef void (^BOXRecentItemsBlock)(NSArray *recentItems, NSString *nextMarker, NSError *error);
+
 typedef void (^BOXFileVersionBlock)(BOXFileVersion *fileVersion, NSError *error);
 
 typedef void (^BOXMetadataBlock)(BOXMetadata *metadata, NSError *error);
@@ -64,9 +66,7 @@ typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *
 
 @interface BOXRequest : NSObject
 
-@property (nonatomic, readwrite, strong) NSString *APIVersion;
 @property (nonatomic, readwrite, strong) NSString *baseURL;
-@property (nonatomic, readwrite, strong) NSString *uploadAPIVersion;
 @property (nonatomic, readwrite, strong) NSString *uploadBaseURL;
 @property (nonatomic, readwrite, strong) NSString *userAgentPrefix;
 

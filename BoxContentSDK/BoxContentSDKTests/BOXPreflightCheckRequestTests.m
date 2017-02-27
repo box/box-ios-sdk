@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXPreflightCheckRequest.h"
+#import "BOXContentClient.h"
 #import "BOXContentSDKErrors.h"
 
 @interface BOXPreflightCheckRequestTests : BOXRequestTestCase
@@ -27,7 +28,7 @@
     request.fileSize = fileSize;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/content", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/content", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"OPTIONS", URLRequest.HTTPMethod);
@@ -50,7 +51,7 @@
     request.fileSize = fileSize;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"OPTIONS", URLRequest.HTTPMethod);

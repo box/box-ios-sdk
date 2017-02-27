@@ -20,8 +20,6 @@
 @class BOXFileUploadNewVersionRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXPreflightCheckRequest;
-@class ALAsset;
-@class ALAssetsLibrary;
 
 @interface BOXContentClient (File)
 
@@ -124,19 +122,6 @@
                                                  fileName:(NSString *)fileName;
 
 /**
- *  Generate a request to upload an ALAsset to Box.
- *
- *  @param folderID      Folder ID of the folder to upload the file into.
- *  @param asset         ALAsset to be uploaded.
- *  @param assetsLibrary ALAssetsLibrary.
- *
- *  @return A request that can be customized and then executed.
- */
-- (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
-                                              fromALAsset:(ALAsset *)asset
-                                        withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
-
-/**
  *  Generate a request to upload a new version of a file from a local file.
  *
  *  @param fileID        File ID.
@@ -171,18 +156,6 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                              fromData:(NSData *)data;
-
-/**
- *  Generate a request to upload a new version of a file from ALAsset.
- *
- *  @param fileID        File ID.
- *  @param asset         ALAsset.
- *  @param assetsLibrary ALAssetsLibrary.
- *
- *  @return A request that can be customized and then executed.
- */
-- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
-                                                          fromALAsset:(ALAsset *)asset withAssetsLibrary:(ALAssetsLibrary *)assetsLibrary;
 
 /**
  *  Generate a request to download a file to a local filepath.

@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXCollaborationRemoveRequest.h"
+#import "BOXContentClient.h"
 #import "BOXContentSDKConstants.h"
 
 @interface BOXCollaborationRemoveRequestTests : BOXRequestTestCase
@@ -22,7 +23,7 @@
     BOXCollaborationRemoveRequest *request = [[BOXCollaborationRemoveRequest alloc] initWithCollaborationID:collabID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/collaborations/%@", BOXAPIBaseURL, BOXAPIVersion, collabID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/collaborations/%@", [BOXContentClient APIBaseURL], collabID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodDELETE, URLRequest.HTTPMethod);

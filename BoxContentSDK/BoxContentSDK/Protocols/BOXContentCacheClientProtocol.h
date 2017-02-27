@@ -60,6 +60,8 @@
 @class BOXCollectionItemsRequest;
 @class BOXCollectionFavoritesRequest;
 
+@class BOXRecentItemsRequest;
+
 @class BOXSearchRequest;
 
 @protocol BOXContentCacheClientProtocol <NSObject>
@@ -289,6 +291,15 @@
 
 - (void)retrieveCacheForFavoriteCollectionRequest:(BOXCollectionFavoritesRequest *)request
                                   completionBlock:(BOXCollectionBlock)completionBlock;
+
+#pragma mark - Recent Items
+
+- (void)cacheRecentItemsRequest:(BOXRecentItemsRequest *)request
+                withRecentItems:(NSArray *)items
+                          error:(NSError *)error;
+
+- (void)retrieveCacheForRecentItemsRequest:(BOXRecentItemsRequest *)request
+                           completionBlock:(BOXRecentItemsBlock)completionBLock;
 
 #pragma mark - Search
 

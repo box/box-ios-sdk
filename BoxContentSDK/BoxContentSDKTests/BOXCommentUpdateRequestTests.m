@@ -11,6 +11,7 @@
 #import "BOXComment.h"
 #import "BOXCommentUpdateRequest.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXContentClient.h"
 
 @interface BOXCommentUpdateRequestTests : BOXRequestTestCase
 
@@ -23,7 +24,7 @@
     NSString *commentID = @"98765";
     BOXCommentUpdateRequest *commentUpdateRequest = [[BOXCommentUpdateRequest alloc] initWithCommentID:commentID updatedMessage:nil]; 
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceComments, commentID]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceComments, commentID]];
     XCTAssertEqualObjects(commentUpdateRequest.urlRequest.URL, url);
     XCTAssertEqualObjects(commentUpdateRequest.urlRequest.HTTPMethod, BOXAPIHTTPMethodPUT);
 }

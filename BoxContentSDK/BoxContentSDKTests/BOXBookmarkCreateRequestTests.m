@@ -9,6 +9,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXBookmarkCreateRequest.h"
 #import "BOXBookmark.h"
+#import "BOXContentClient.h"
 
 @interface BOXBookmarkCreateRequestTests : BOXRequestTestCase
 @end
@@ -29,7 +30,7 @@
     request.bookmarkDescription = bookmarkDescription;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);

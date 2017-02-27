@@ -12,6 +12,7 @@
 #import "BOXItem.h"
 #import "BOXFile.h"
 #import "BOXItemSetCollectionsRequest.h"
+#import "BOXContentClient.h"
 #import "BOXContentCacheTestClient.h"
 
 @interface BOXCollectionItemOperationRequestTests : BOXRequestTestCase
@@ -27,7 +28,7 @@
     
     BOXFile *file = [[BOXFile alloc] initWithJSON:dict];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceFiles, file.modelID]];    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceFiles, file.modelID]];
     
     BOXItemSetCollectionsRequest *itemAdditionRequest = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:file.modelID collectionIDs:@[@"10047", @"1234"]];
                                                          
@@ -57,7 +58,7 @@
     
     BOXFile *file = [[BOXFile alloc] initWithJSON:dict];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceFiles, file.modelID]];    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceFiles, file.modelID]];    
     BOXItemSetCollectionsRequest *itemAdditionRequest = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:file.modelID collectionIDs:nil];
     
     XCTAssertEqualObjects(url, itemAdditionRequest.urlRequest.URL);

@@ -71,7 +71,7 @@
 
 - (void)test_that_full_fields_string_for_bookmarks_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,url,created_at,modified_at,description,path_collection,trashed_at,purged_at,created_by,modified_by,owned_by,parent,item_status,shared_link,comment_count,permissions,allowed_shared_link_access_levels";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,url,created_at,modified_at,description,path_collection,trashed_at,purged_at,created_by,modified_by,owned_by,parent,item_status,shared_link,comment_count,permissions,allowed_shared_link_access_levels,collections";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullBookmarkFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }

@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXUserAvatarRequest.h"
 #import "BOXRequest_Private.h"
 
@@ -24,7 +25,7 @@
     BOXUserAvatarRequest *request = [[BOXUserAvatarRequest alloc] initWithUserID:userID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/avatar", BOXAPIBaseURL, BOXAPIVersion, userID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/avatar", [BOXContentClient APIBaseURL], userID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -37,7 +38,7 @@
     request.avatarType = BOXAvatarTypeLarge;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/avatar?pic_type=large", BOXAPIBaseURL, BOXAPIVersion, userID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/avatar?pic_type=large", [BOXContentClient APIBaseURL], userID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
