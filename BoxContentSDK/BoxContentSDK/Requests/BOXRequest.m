@@ -284,7 +284,6 @@
 
 - (NSArray *)fullFileFieldsArray
 {
-#ifdef BOX_REPRESENTATIONS_ENDPOINT
     NSArray *array = @[BOXAPIObjectKeyType,
                        BOXAPIObjectKeyID,
                        BOXAPIObjectKeySequenceID,
@@ -316,38 +315,6 @@
                        BOXAPIObjectKeyCollections,
                        BOXAPIObjectKeyRepresentations];
     return array;
-#else
-    NSArray *array = @[BOXAPIObjectKeyType,
-                       BOXAPIObjectKeyID,
-                       BOXAPIObjectKeySequenceID,
-                       BOXAPIObjectKeyETag,
-                       BOXAPIObjectKeySHA1,
-                       BOXAPIObjectKeyName,
-                       BOXAPIObjectKeyDescription,
-                       BOXAPIObjectKeySize,
-                       BOXAPIObjectKeyPathCollection,
-                       BOXAPIObjectKeyCreatedAt,
-                       BOXAPIObjectKeyModifiedAt,
-                       BOXAPIObjectKeyTrashedAt,
-                       BOXAPIObjectKeyPurgedAt,
-                       BOXAPIObjectKeyContentCreatedAt,
-                       BOXAPIObjectKeyContentModifiedAt,
-                       BOXAPIObjectKeyCreatedBy,
-                       BOXAPIObjectKeyModifiedBy,
-                       BOXAPIObjectKeyOwnedBy,
-                       BOXAPIObjectKeySharedLink,
-                       BOXAPIObjectKeyParent,
-                       BOXAPIObjectKeyItemStatus,
-                       BOXAPIObjectKeyVersionNumber,
-                       BOXAPIObjectKeyCommentCount,
-                       BOXAPIObjectKeyPermissions,
-                       BOXAPIObjectKeyLock,
-                       BOXAPIObjectKeyExtension,
-                       BOXAPIObjectKeyIsPackage,
-                       BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
-                       BOXAPIObjectKeyCollections];
-    return array;
-#endif
 }
 
 - (NSString *)fullFileFieldsParameterString
