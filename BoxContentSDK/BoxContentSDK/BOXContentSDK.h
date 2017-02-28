@@ -142,3 +142,5 @@
 // Catagories
 #import "NSString+BOXContentSDKAdditions.h"
 #import "NSError+BOXContentSDKAdditions.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
+#import "UIDevice+BOXContentSDKAdditions.h"
