@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFolderCreateRequest.h"
 #import "BOXFolder.h"
 
@@ -22,7 +23,7 @@
     BOXFolderCreateRequest *request = [[BOXFolderCreateRequest alloc] initWithFolderName:folderName parentFolderID:parentFolderID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/folders", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/folders", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);

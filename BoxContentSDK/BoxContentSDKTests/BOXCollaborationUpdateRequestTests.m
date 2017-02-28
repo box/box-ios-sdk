@@ -9,6 +9,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXCollaborationUpdateRequest.h"
 #import "BOXCollaboration.h"
+#import "BOXContentClient.h"
 
 @interface BOXCollaborationUpdateRequestTests : BOXRequestTestCase
 
@@ -24,7 +25,7 @@
     request.role = role;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/collaborations/%@", BOXAPIBaseURL, BOXAPIVersion, collabID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/collaborations/%@", [BOXContentClient APIBaseURL], collabID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodPUT, URLRequest.HTTPMethod);

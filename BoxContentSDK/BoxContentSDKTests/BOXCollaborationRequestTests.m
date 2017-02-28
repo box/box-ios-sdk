@@ -9,6 +9,7 @@
 #import "BOXRequestTestCase.h"
 #import "BOXCollaborationRequest.h"
 #import "BOXCollaboration.h"
+#import "BOXContentClient.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXContentSDKConstants.h"
 
@@ -24,7 +25,7 @@
     BOXCollaborationRequest *request = [[BOXCollaborationRequest alloc] initWithCollaborationID:collabID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/collaborations/%@", BOXAPIBaseURL, BOXAPIVersion, collabID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/collaborations/%@", [BOXContentClient APIBaseURL], collabID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -36,7 +37,7 @@
     BOXCollaborationRequest *request = [[BOXCollaborationRequest alloc] initWithCollaborationID:collabID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/collaborations/%@", BOXAPIBaseURL, BOXAPIVersion, collabID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/collaborations/%@", [BOXContentClient APIBaseURL], collabID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
 }

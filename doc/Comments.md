@@ -35,7 +35,7 @@ Reply to an Existing Comment
 ----------------------------
 ```objectivec
 BOXContentClient *contentClient = [BOXContentClient defaultClient];
-BOXCommentReplyRequest *commentReplyRequest = [contentClient commentReplyRequestToCommentWithID:@"comment-id" message:@"Comment message"];
+BOXCommentAddRequest *commentReplyRequest = [contentClient commentReplyRequestToCommentWithID:@"comment-id" message:@"Comment message"];
 [commentReplyRequest performRequestWithCompletion:^(BOXComment *comment, NSError *error) {
 	// If successful, comment will be non-nil; otherwise, error will be non-nil.
 }];

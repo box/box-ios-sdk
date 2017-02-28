@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileShareRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
@@ -25,7 +26,7 @@
     BOXFileShareRequest *fileRequest = [[BOXFileShareRequest alloc] initWithFileID:fileID];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
@@ -51,7 +52,7 @@
     [fileRequest setAccessLevel:accessLevel];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -68,7 +69,7 @@
     [fileRequest setExpirationDate:expirationDate];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -84,7 +85,7 @@
     [fileRequest setCanDownload:YES];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -100,7 +101,7 @@
     [fileRequest setCanDownload:NO];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -116,7 +117,7 @@
     [fileRequest setCanPreview:YES];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
@@ -132,7 +133,7 @@
     [fileRequest setCanPreview:NO];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
     
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURL, actualURL);
     
@@ -149,7 +150,7 @@
     [fileRequest setMatchingEtag:matchingEtagToUse];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
 
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

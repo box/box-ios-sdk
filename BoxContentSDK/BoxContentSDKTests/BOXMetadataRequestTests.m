@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXUserRequest.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXMetadataRequest.h"
@@ -22,7 +23,7 @@
     BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:@"31850566363" scope:BOXAPITemplateScopeEnterprise template:@"productSpecs"];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/31850566363/metadata/enterprise/productSpecs", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/31850566363/metadata/enterprise/productSpecs", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -33,7 +34,7 @@
     BOXMetadataRequest *request = [[BOXMetadataRequest alloc]initWithFileID:@"31850566363" scope:nil template:nil];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/31850566363/metadata", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/31850566363/metadata", [BOXContentClient APIBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }
@@ -43,7 +44,7 @@
     BOXMetadataTemplateRequest *request = [[BOXMetadataTemplateRequest alloc]initWithScope:BOXAPITemplateScopeEnterprise template:@"productSpecs"];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/metadata_templates/enterprise/productSpecs/schema", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/metadata_templates/enterprise/productSpecs/schema", [BOXContentClient APIBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }
@@ -53,7 +54,7 @@
     BOXMetadataTemplateRequest *request = [[BOXMetadataTemplateRequest alloc]initWithScope:BOXAPITemplateScopeEnterprise];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/metadata_templates/enterprise", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/metadata_templates/enterprise", [BOXContentClient APIBaseURL]]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }

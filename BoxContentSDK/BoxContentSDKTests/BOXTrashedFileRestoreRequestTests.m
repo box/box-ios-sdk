@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXTrashedFileRestoreRequest.h"
 #import "BOXFile.h"
 
@@ -22,7 +23,7 @@
     BOXTrashedFileRestoreRequest *fileRequest = [[BOXTrashedFileRestoreRequest alloc] initWithFileID:fileID];
     NSURLRequest *URLRequest = fileRequest.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodPOST, URLRequest.HTTPMethod);
@@ -38,7 +39,7 @@
     fileRequest.parentFolderID = parentFolderID;
     NSURLRequest *URLRequest = fileRequest.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodPOST, URLRequest.HTTPMethod);

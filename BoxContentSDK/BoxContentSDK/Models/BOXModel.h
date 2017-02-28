@@ -18,11 +18,11 @@
  Some model object properties are not necessarily set because the API did not return a value for them.
  For boolean properties, we allow for an "unknown" state by using this enum instead of a BOOL.
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, BOXAPIBoolean) {
     BOXAPIBooleanUnknown = 0,
     BOXAPIBooleanYES,
     BOXAPIBooleanNO,
-} BOXAPIBoolean;
+};
 
 /**
  *  Primary key ID of the model object.
