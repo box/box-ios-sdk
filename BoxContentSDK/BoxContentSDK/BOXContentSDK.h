@@ -144,3 +144,8 @@
 #import "NSError+BOXContentSDKAdditions.h"
 #import "UIApplication+ExtensionSafeAdditions.h"
 #import "UIDevice+BOXContentSDKAdditions.h"
+#import "NSString+BOXContentSDKAdditions.h"
+#import "NSURL+BOXURLHelper.h"
+#import "NSString+BOXURLHelper.h"
+#import "NSJSONSerialization+BOXCOntentSDKAdditions.h"
+#import "NSDate+BOXContentSDKAdditions.h"
