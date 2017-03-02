@@ -36,7 +36,16 @@
 #import "BOXParallelOAuth2Session.h"
 #import "BOXAppUserSession.h"
 
+// Protocols
+#import "BOXSharedLinkStorageProtocol.h"
+#import "BOXSharedLinkItemSource.h"
+
 // AppToApp
+#import "BOXAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppFileMetadata.h"
+#import "BOXAppToAppMessage.h"
 
 // Requests
 #import "BOXRequest.h"
@@ -101,6 +110,8 @@
 #import "BOXMetadataUpdateRequest.h"
 #import "BOXMetadataTemplateRequest.h"
 #import "BOXStreamOperation.h"
+#import "BOXRecentItemsRequest.h"
+#import "BOXRecentItemsRequest.h"
 
 // API Operation queues
 #import "BOXAPIQueueManager.h"
@@ -149,3 +160,8 @@
 #import "NSString+BOXURLHelper.h"
 #import "NSJSONSerialization+BOXCOntentSDKAdditions.h"
 #import "NSDate+BOXContentSDKAdditions.h"
+
+// External
+#import "BOXHashHelper.h"
+#import "BOXKeychainItemWrapper.h"
+#import "BOXISO8601DateFormatter.h"
