@@ -15,7 +15,7 @@
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2
 
-@interface BOXStreamOperation ()
+@interface BOXStreamOperation () <BOXURLSessionDownloadTaskDelegate>
 
 // Buffer data received. Write to the output stream from this data object when space becomes available.
 @property (nonatomic, readwrite, strong) NSMutableData *receivedDataBuffer;
@@ -57,6 +57,13 @@
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary
 {
     return nil;
+}
+
+- (NSURLSessionTask *)createSessionTask
+{
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest
+                                                                                                  taskDelegate:self];
+    return sessionTask;
 }
 
 - (void)processResponseData:(NSData *)data
@@ -143,13 +150,15 @@
 }
 
 #pragma mark - BOXURLSessionTaskDelegate
+//NOTE: Currently not implementing BOXURLSessionDownloadTaskDelegate methods on purpose.
+// For the stream, only the direct data and response handling is required.
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)processIntermediateResponse:(NSURLResponse *)response
 {
-    [super sessionTask:sessionTask didFinishWithResponse:response error:error];
-
-    if (error != nil &&
-        error.code == BOXContentSDKAPIErrorAccepted) {
+    [super processIntermediateResponse:response];
+    
+    if (self.error != nil &&
+        self.error.code == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
         double delay = [self reenqueDelay];
