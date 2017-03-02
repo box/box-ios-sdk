@@ -57,6 +57,7 @@
                                                        successBlock:nil
                                                        failureBlock:nil];
     
+    BOXAssert(self.representation != nil, @"A representation must be specified.");
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
     
@@ -112,3 +113,4 @@
 }
 
 @end
+

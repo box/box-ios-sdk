@@ -10,6 +10,8 @@
 
 @class BOXRepresentation;
 
+
+
 @interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader
 
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
@@ -20,7 +22,6 @@
                               fileID:(NSString *)fileID
                       representation:(BOXRepresentation *)representation;
 
-//Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXErrorBlock)completionBlock;
 
 @end

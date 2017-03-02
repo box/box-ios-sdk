@@ -18,6 +18,8 @@
 
 @implementation BOXFileRepresentionListViewControllerTableViewController
 
+static NSString *cellIdentifier = @"representationCell";
+
 - (instancetype)initWithFile:(BOXFile *)file contentClient:(BOXContentClient *)contentClient
 {
     if (self = [super init]) {
@@ -25,6 +27,12 @@
         _client = contentClient;
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
 }
 
 #pragma mark - Table view data source
@@ -39,14 +47,9 @@
     return self.file.representations.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *UserTableViewCellIdentifier = @"representationCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UserTableViewCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:UserTableViewCellIdentifier];
-    }
     BOXRepresentation *rep = self.file.representations[indexPath.row];
     cell.textLabel.text = rep.type;
     return cell;
@@ -87,10 +90,7 @@
         
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [controller addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:controller animated:YES completion:nil];
-        });
+        [self presentViewController:controller animated:YES completion:nil];
     }];
 }
 
