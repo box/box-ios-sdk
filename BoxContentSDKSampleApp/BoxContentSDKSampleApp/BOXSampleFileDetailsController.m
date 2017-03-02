@@ -8,6 +8,8 @@
 
 #import "BOXSampleFileDetailsController.h"
 #import "BOXSampleProgressView.h"
+#import <BoxContentSDK/BOXRepresentation.h>
+#import "BOXFileRepresentionListViewControllerTableViewController.h"
 
 NS_ENUM(NSInteger, FileDetailsControllerSection) {
     FileDetailsControllerSectionFileInfo = 0,
@@ -97,7 +99,7 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
             rows = 2;
             break;
         case FileDetailsControllerSectionDownload:
-            rows = 1;
+            rows = 2;
             break;
         default:
             break;
@@ -171,6 +173,13 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
                 } else {
                     cell.textLabel.textColor = [UIColor lightGrayColor];
                 }
+            } else if (indexPath.row == 1) {
+                cell.textLabel.text = @"See Representations";
+                if ([self.item isKindOfClass:[BOXFile class]]) {
+                    cell.textLabel.textColor = [UIColor blackColor];
+                } else {
+                    cell.textLabel.textColor = [UIColor lightGrayColor];
+                }
             }
             break;
         default:
@@ -192,11 +201,23 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self downloadCurrentItem];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        [self downloadCurrentItem];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.row == 1) {
+        if (self.item.isFile) {
+            [self displayRepresentations];
+        }
+    }
 }
 
 #pragma mark - Private Helpers
+
+- (void)displayRepresentations
+{
+    BOXFileRepresentionListViewControllerTableViewController *controller = [[BOXFileRepresentionListViewControllerTableViewController alloc] initWithFile:(BOXFile *)self.item contentClient:self.client];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)downloadCurrentItem
 {
