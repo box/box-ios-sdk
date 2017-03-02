@@ -270,6 +270,9 @@
 		C53EC2A31A38A6090007C8A7 /* BOXCommentUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2A11A38A6090007C8A7 /* BOXCommentUpdateRequest.m */; };
 		C53EC2A51A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2A41A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m */; };
 		C545A01C1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */; };
+		C54851951E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C54851931E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h */; };
+		C54851961E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C54851941E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m */; };
+		C54851971E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C54851941E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m */; };
 		C54BBF701758539E00F5DAD8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54BBF6F1758539E00F5DAD8 /* QuartzCore.framework */; };
 		C55386351C98DBF0009E3B90 /* unauthorized_device.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386341C98DBF0009E3B90 /* unauthorized_device.json */; };
 		C55386391C98DF41009E3B90 /* exceeded_device_limits.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386361C98DF41009E3B90 /* exceeded_device_limits.json */; };
@@ -748,6 +751,8 @@
 		C53EC2A11A38A6090007C8A7 /* BOXCommentUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCommentUpdateRequest.m; sourceTree = "<group>"; };
 		C53EC2A41A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCommentUpdateRequestTests.m; sourceTree = "<group>"; };
 		C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXRequestWithSharedLinkHeadersTests.m; sourceTree = "<group>"; };
+		C54851931E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileRepresentationDownloadRequest.h; sourceTree = "<group>"; };
+		C54851941E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileRepresentationDownloadRequest.m; sourceTree = "<group>"; };
 		C54BBF6F1758539E00F5DAD8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C55386341C98DBF0009E3B90 /* unauthorized_device.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = unauthorized_device.json; sourceTree = "<group>"; };
 		C55386361C98DF41009E3B90 /* exceeded_device_limits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exceeded_device_limits.json; sourceTree = "<group>"; };
@@ -1193,6 +1198,8 @@
 				116D14391D6FDA3D006ECC59 /* BOXAPIHeadOperation.m */,
 				AA73ED031E36C2250010F6D8 /* BOXRecentItemsRequest.h */,
 				AA73ED041E36C2250010F6D8 /* BOXRecentItemsRequest.m */,
+				C54851931E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h */,
+				C54851941E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1761,6 +1768,7 @@
 				C5972A981A408CAE00225CBA /* BOXEvent.h in Headers */,
 				E1DD60351A3A8DBD00C4BD41 /* BOXBookmarkUnshareRequest.h in Headers */,
 				86B18F061B2428E3000EAE8C /* BOXAPIOperation_Private.h in Headers */,
+				C54851951E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h in Headers */,
 				C53EC2441A3873090007C8A7 /* BOXComment.h in Headers */,
 				C53EC29C1A389FAE0007C8A7 /* BOXCommentRequest.h in Headers */,
 				C5972A6C1A3F22E900225CBA /* BOXCollectionItemsRequest.h in Headers */,
@@ -2038,6 +2046,7 @@
 				0E16F10D1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m in Sources */,
 				590A1F7E1BE843B4008CB28D /* BOXContentCacheTestClient.m in Sources */,
 				C5745BE51A5AE7FB00824FFA /* BOXFolderCollaborationsRequestTests.m in Sources */,
+				C54851971E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */,
 				15F5EE541A20165800FBBE1D /* BOXContentSDKTestCase.m in Sources */,
 				C545A01C1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m in Sources */,
 				15280E9B1A39442E008D4F5D /* BOXFolderUpdateRequestTests.m in Sources */,
@@ -2212,6 +2221,7 @@
 				862EF28C1B1FA12B0044526F /* BOXAbstractSession.m in Sources */,
 				C59605621CC5917E0096DD59 /* NSString+BOXContentSDKAdditions.m in Sources */,
 				155170BB1A54872D004C00AF /* BOXFileVersion.m in Sources */,
+				C54851961E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */,
 				C5972A7D1A3F52F600225CBA /* BOXCollectionFavoritesRequest.m in Sources */,
 				8676E0C21B2D7E2D00AC2677 /* BOXMetadataDeleteRequest.m in Sources */,
 				15280E521A37E70B008D4F5D /* BOXFolder.m in Sources */,
