@@ -210,7 +210,10 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
-    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath downloadTask:nil downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
+    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
+                                                             toLocalFilePath:finalPath
+                                                                downloadTask:nil
+                                                   downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
         if (oldSessionTask != nil) {
             [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
         }
@@ -225,7 +228,7 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-            self.tableView.tableHeaderView = nil;
+        self.tableView.tableHeaderView = nil;
         NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alertView show];

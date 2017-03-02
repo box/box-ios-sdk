@@ -123,7 +123,7 @@
         NSDictionary *userInfo = @{
                                    NSUnderlyingErrorKey : JSONError,
                                    };
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];;
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];
     }
     else if ([decodedJSON isKindOfClass:[NSDictionary class]] == NO)
     {
@@ -245,12 +245,7 @@
 // be buffered entirely in memory.
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
-        // If we received an error, don't write the response data to the output stream
-        [super connection:connection didReceiveData:data];
-    } else {
-        [self processIntermediateData:data];
-    }
+    [self processIntermediateData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -269,6 +264,8 @@
 
 - (void)processIntermediateResponse:(NSURLResponse *)response
 {
+    [super processIntermediateResponse:response];
+
     self.HTTPResponse = (NSHTTPURLResponse *)response;
     if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
@@ -282,7 +279,10 @@
 
 - (void)processIntermediateData:(NSData *)data
 {
-    if (self.HTTPResponse.statusCode >= 200 && self.HTTPResponse.statusCode < 300) {
+    if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
+        // If we received an error, don't write the response data to the output stream
+        [super processIntermediateData:data];
+    } else {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
         @synchronized (self.receivedDataBuffer) {
@@ -301,35 +301,45 @@
     }
 }
 
-- (void)progressWithTotalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteTotalBytes:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     if (self.progressBlock != nil) {
         self.progressBlock(totalBytesExpectedToWrite, totalBytesWritten);
     }
 }
 
-- (void)didFinishDownloadingToURL:(NSURL *)location
+- (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location
 {
     //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
     //is called to report file move/replace error if any
     @synchronized (self) {
-        if (self.destinationPath != nil) {
-            NSError *error = nil;
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
+        NSHTTPURLResponse *HTTPResponse = nil;
+        if ([sessionTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
+            HTTPResponse = (NSHTTPURLResponse *)sessionTask.response;
+        }
+        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode >= 300) {
+            // If we received an error, don't write the response data to the destination path
+            self.responseData = [NSData dataWithContentsOfURL:location];
+            [[NSFileManager defaultManager] removeItemAtURL:location error:nil];
+        } else {
+            if (self.destinationPath != nil) {
+                NSError *error = nil;
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
 
-            if (![fileManager fileExistsAtPath:self.destinationPath]) {
-                [fileManager moveItemAtURL:location toURL:destURL error:&error];
-            } else {
-                [fileManager replaceItemAtURL:destURL
-                                withItemAtURL:location
-                               backupItemName:nil
-                                      options:NSFileManagerItemReplacementUsingNewMetadataOnly
-                             resultingItemURL:nil
-                                        error:&error];
-            }
-            if (self.error == nil) {
-                self.error = error;
+                if (![fileManager fileExistsAtPath:self.destinationPath]) {
+                    [fileManager moveItemAtURL:location toURL:destURL error:&error];
+                } else {
+                    [fileManager replaceItemAtURL:destURL
+                                    withItemAtURL:location
+                                   backupItemName:nil
+                                          options:NSFileManagerItemReplacementUsingNewMetadataOnly
+                                 resultingItemURL:nil
+                                            error:&error];
+                }
+                if (self.error == nil) {
+                    self.error = error;
+                }
             }
         }
     }

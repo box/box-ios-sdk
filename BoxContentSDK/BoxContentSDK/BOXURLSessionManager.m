@@ -136,7 +136,7 @@ static NSString *backgroundSessionIdentifier = @"com.box.BOXURLSessionManager.ba
     }
 }
 
-- (void)dessociateSessionTaskId:(NSUInteger)sessionTaskId
+- (void)deassociateSessionTaskId:(NSUInteger)sessionTaskId
 {
     @synchronized (self.sessionTaskIdToTaskDelegate) {
         [self.sessionTaskIdToTaskDelegate removeObjectForKey:@(sessionTaskId)];
@@ -285,7 +285,7 @@ didCompleteWithError:(nullable NSError *)error
     } else {
         [self.defaultDelegate sessionTask:task didFinishWithResponse:task.response error:error];
     }
-    [self dessociateSessionTaskId:task.taskIdentifier];
+    [self deassociateSessionTaskId:task.taskIdentifier];
 }
 
 /* Sent if a task requires a new, unopened body stream.  This may be

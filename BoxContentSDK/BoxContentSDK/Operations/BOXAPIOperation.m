@@ -555,7 +555,17 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
-    [self finishURLSessionTaskWithData:nil response:response error:error];
+    [self finishURLSessionTaskWithData:self.responseData response:response error:error];
+}
+
+- (void)processIntermediateResponse:(NSURLResponse *)response
+{
+    [self processResponse:response];
+}
+
+- (void)processIntermediateData:(NSData *)data
+{
+    [self.responseData appendData:data];
 }
 
 #pragma mark - Lock
