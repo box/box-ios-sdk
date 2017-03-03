@@ -77,6 +77,12 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKStreamError) {
     BOXContentSDKStreamErrorReadFailed = 30001
 };
 
+typedef NS_ENUM(NSUInteger, BOXContentSDKCacheError) {
+    BOXContentSDKSCacheErrorArchiveFailed = 40000,
+    BOXContentSDKSCacheErrorFileCreateFailed = 40001,
+    BOXContentSDKSCacheErrorNoValidSessionTaskGivenUserIdAssociateId = 40002
+};
+
 extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token
 extern NSString *const BOXAuthTokenRequestErrorInvalidToken; // Invalid access token
 extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a missing access token
