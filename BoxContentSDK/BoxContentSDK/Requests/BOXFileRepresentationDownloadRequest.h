@@ -10,9 +10,9 @@
 
 @class BOXRepresentation;
 
-
-
 @interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader
+
+@property (nonatomic, readwrite, strong) NSString *versionID;
 
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID

@@ -24,16 +24,6 @@
     return representation;
 }
 
-- (void)test_request_has_correct_URL
-{
-    NSString *fileID = @"123";
-    BOXRepresentation *rep = [self testRepresentation];
-    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
-    
-    XCTAssertEqualObjects(rep.contentURL.absoluteString, request.urlRequest.URL.absoluteString);
-    XCTAssertEqualObjects(@"GET", request.urlRequest.HTTPMethod);
-}
-
 - (void)test_shared_link_properties
 {
     NSString *fileID = @"123";
@@ -82,6 +72,22 @@
     XCTAssert(dataOperation.isSmallDownloadOperation == NO);
 }
 
+- (void)test_that_correct_version_is_downloaded
+{
+    NSString *fileID = @"123";
+    NSString *version = @"98765432";
+    BOXRepresentation *rep = [self testRepresentation];
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
+    request.versionID = version;
+    
+    BOOL result = [request.urlRequest.URL.absoluteString containsString:[NSString stringWithFormat:@"versions/%@", version]];
+    XCTAssertTrue(result);
+    
+    request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
+    result = [request.urlRequest.URL.absoluteString containsString:@"versions/current"];
+    XCTAssertTrue(result);
+}
+
 #pragma mark - Error Handling
 
 - (void)test_that_invalid_grant_400_error_triggers_logout_notification
@@ -116,6 +122,7 @@
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
+
 
 # pragma mark - private helpers
 

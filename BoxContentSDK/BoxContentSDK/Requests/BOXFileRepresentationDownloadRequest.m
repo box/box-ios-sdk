@@ -45,10 +45,32 @@
     return self;
 }
 
+- (NSURL *)representationURL
+{
+    NSURL *url = self.representation.contentURL;
+    
+    NSString *urlString = url.absoluteString;
+    NSRange versionStartRange = [urlString rangeOfString:@"versions/"];
+    NSRange versionEndRange = [urlString rangeOfString:@"/representations"];
+    
+    NSInteger startIndex = versionStartRange.location + versionStartRange.length;
+    
+    NSString *versionString = [urlString substringWithRange:NSMakeRange(startIndex, versionEndRange.location - startIndex)];
+    NSString *newVersionString = nil;
+    
+    if (self.versionID.length > 0) {
+        newVersionString = self.versionID;
+    } else {
+        newVersionString = @"current";
+    }
+    urlString = [urlString stringByReplacingOccurrencesOfString:versionString withString:newVersionString];
+    
+    return url = [NSURL URLWithString:urlString];
+}
+
 - (BOXAPIOperation *)createOperation
 {
-    NSURL *URL = self.representation.contentURL;
-    
+    NSURL *URL = [self representationURL];
     
     BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET
