@@ -540,7 +540,11 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    [self processResponse:response];
+    if (self.HTTPResponse == nil) {
+        // If the response has not already been handled (some, but not all, operations get
+        // 'processResponse:' earlier in the process) handle it here.
+        [self processResponse:response];
+    }
 
     if (data != nil) {
         [self processResponseData:data];
