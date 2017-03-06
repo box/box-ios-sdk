@@ -24,6 +24,7 @@
 		C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */; };
 		C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB21A5B00B40060E41B /* QuartzCore.framework */; };
 		C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB41A5B00BA0060E41B /* Security.framework */; };
+		C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */; };
 		C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
 		C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */; };
 		C55FE3221A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55FE3211A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg */; };
@@ -39,27 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3D64E2D01AB900EC00659466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E470433B16D41DC500FED29A;
-			remoteInfo = BoxContentSDK;
-		};
-		3D64E2D21AB900EC00659466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15605D851A20132200C5EE5A;
-			remoteInfo = BoxContentSDKTests;
-		};
-		3D9780FA1ABB900500DB1A2F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E470433A16D41DC500FED29A;
-			remoteInfo = BoxContentSDK;
-		};
 		C5745C3E1A5AF6CC00824FFA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
@@ -71,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		0A9C7DE1CFABC1AEDAD5EFAB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoxContentSDK.xcodeproj; path = ../BoxContentSDK/BoxContentSDK.xcodeproj; sourceTree = "<group>"; };
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
@@ -98,6 +77,8 @@
 		C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleItemCell.m; sourceTree = "<group>"; };
 		C540BEB21A5B00B40060E41B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C540BEB41A5B00BA0060E41B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileRepresentionListViewControllerTableViewController.h; sourceTree = "<group>"; };
+		C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileRepresentionListViewControllerTableViewController.m; sourceTree = "<group>"; };
 		C55FE2FC1A5D96EE00032032 /* BOXSampleFileDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleFileDetailsController.h; sourceTree = "<group>"; };
 		C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleFileDetailsController.m; sourceTree = "<group>"; };
 		C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleProgressView.h; sourceTree = "<group>"; };
@@ -145,15 +126,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D64E2C91AB900EC00659466 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */,
-				3D64E2D31AB900EC00659466 /* BoxContentSDKTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		79B88AA4A04D2B7D56779877 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +179,6 @@
 		C5745C1B1A5AF6CC00824FFA = {
 			isa = PBXGroup;
 			children = (
-				3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				C5745C251A5AF6CC00824FFA /* Products */,
@@ -241,6 +212,8 @@
 				C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */,
 				3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */,
 				3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */,
+				C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */,
+				C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */,
 				C52D0AC81A5D4D8F00CD4B56 /* BOXSampleItemCell.h */,
 				C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */,
 				C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */,
@@ -294,11 +267,11 @@
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				2BE3D336859314A5AA3D46AA /* 📦 Copy Pods Resources */,
 				966EC888F9815C28566AA8AE /* 📦 Embed Pods Frameworks */,
+				FD4C4308FD0B5817D795CEBE /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3D9780FB1ABB900500DB1A2F /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKSampleApp;
 			productName = BoxSDKSampleApp;
@@ -352,12 +325,6 @@
 			mainGroup = C5745C1B1A5AF6CC00824FFA;
 			productRefGroup = C5745C251A5AF6CC00824FFA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3D64E2C91AB900EC00659466 /* Products */;
-					ProjectRef = 3D64E2C81AB900EC00659466 /* BoxContentSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
@@ -365,23 +332,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3D64E2D11AB900EC00659466 /* libBoxContentSDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBoxContentSDK.a;
-			remoteRef = 3D64E2D01AB900EC00659466 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3D64E2D31AB900EC00659466 /* BoxContentSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BoxContentSDKTests.xctest;
-			remoteRef = 3D64E2D21AB900EC00659466 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C5745C221A5AF6CC00824FFA /* Resources */ = {
@@ -458,6 +408,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD4C4308FD0B5817D795CEBE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -475,6 +440,7 @@
 				C52D0ABF1A5D4B4100CD4B56 /* BOXSampleThumbnailsHelper.m in Sources */,
 				C5745C2D1A5AF6CC00824FFA /* BOXSampleAppDelegate.m in Sources */,
 				C5745C2A1A5AF6CC00824FFA /* main.m in Sources */,
+				C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,11 +455,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3D9780FB1ABB900500DB1A2F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BoxContentSDK;
-			targetProxy = 3D9780FA1ABB900500DB1A2F /* PBXContainerItemProxy */;
-		};
 		C5745C3F1A5AF6CC00824FFA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */;
