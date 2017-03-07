@@ -26,8 +26,6 @@
 
 - (long long)contentLength;
 
-- (void)abortWithError:(NSError *)error;
-
 @end
 
 @implementation BOXStreamOperation
@@ -146,12 +144,6 @@
 //    return [self.HTTPResponse expectedContentLength];
 }
 
-- (void)abortWithError:(NSError *)error
-{
-    [self.sessionTask cancel];
-    [self sessionTask:self.sessionTask didFinishWithResponse:self.sessionTask.response error:error];
-}
-
 #pragma mark - BOXURLSessionTaskDelegate
 //NOTE: Currently not implementing BOXURLSessionDownloadTaskDelegate methods on purpose.
 // For the stream, only the direct data and response handling is required.
@@ -230,11 +222,6 @@
 }
 
 - (BOOL)canBeReenqueued
-{
-    return YES;
-}
-
-- (BOOL)shouldUseSessionTask
 {
     return YES;
 }
