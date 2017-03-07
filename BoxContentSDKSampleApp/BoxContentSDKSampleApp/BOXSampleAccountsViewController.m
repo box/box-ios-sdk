@@ -65,12 +65,19 @@
             if ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIUserCancelledError) {
                 BOXLog(@"Authentication was cancelled, please try again.");
             } else {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                    message:@"Login failed, please try again"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"OK", nil];
-                [alertView show];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                         message:@"Login failed, please try again"
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }];
+                [alertController addAction:OKAction];
+                [self presentViewController:alertController
+                                   animated:YES
+                                 completion:nil];
             }
         } else {
             BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];

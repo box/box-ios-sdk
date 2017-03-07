@@ -137,49 +137,76 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         BOXItem *item = self.items[indexPath.row];
         NSString *message = [NSString stringWithFormat:@"This will delete \n%@\nAre you sure you wish to continue ?", item.name];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
-        alertView.tag = indexPath.row;
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete"
+                                                               style:UIAlertActionStyleDestructive
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 BOXItem *item = self.items[indexPath.row];
+
+                                                                 BOXErrorBlock errorBlock = ^void(NSError *error) {
+                                                                     if (error) {
+                                                                         [self dismissViewControllerAnimated:YES
+                                                                                                  completion:^{
+                                                                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                                                                                                               message:@"Could not delete this item."
+                                                                                                                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                                                                                                      UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                                                                                                         style:UIAlertActionStyleDefault
+                                                                                                                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                                                                                                                           [self dismissViewControllerAnimated:YES
+                                                                                                                                                                                    completion:nil];
+                                                                                                                                                       }];
+                                                                                                      [alertController addAction:OKAction];
+                                                                                                      [self presentViewController:alertController
+                                                                                                                         animated:YES
+                                                                                                                       completion:nil];
+                                                                                                  }];
+                                                                     } else {
+                                                                         NSMutableArray *array = [NSMutableArray arrayWithArray:self.items];
+                                                                         [array removeObject:item];
+                                                                         self.items = [array copy];
+                                                                         [self.tableView reloadData];
+                                                                         [self dismissViewControllerAnimated:YES
+                                                                                                  completion:nil];
+                                                                     }
+                                                                 };
+                                                                 
+                                                                 if ([item isKindOfClass:[BOXFolder class]]) {
+                                                                     BOXFolderDeleteRequest *request = [self.client folderDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else if ([item isKindOfClass:[BOXFile class]]) {
+                                                                     BOXFileDeleteRequest *request = [self.client fileDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else if ([item isKindOfClass:[BOXBookmark class]]) {
+                                                                     BOXBookmarkDeleteRequest *request = [self.client bookmarkDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }
+                                                             }];
+        [alertController addAction:deleteAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self dismissViewControllerAnimated:YES
+                                                                                      completion:nil];
+                                                         }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
     }
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != alertView.cancelButtonIndex) {
-        BOXItem *item = self.items[alertView.tag];
-        
-        BOXErrorBlock errorBlock = ^void(NSError *error) {
-            if (error) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Could not delete this item."  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alertView show];
-            } else {
-                NSMutableArray *array = [NSMutableArray arrayWithArray:self.items];
-                [array removeObject:item];
-                self.items = [array copy];
-                [self.tableView reloadData];
-            }
-        };
-        
-        if ([item isKindOfClass:[BOXFolder class]]) {
-            BOXFolderDeleteRequest *request = [self.client folderDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        } else if ([item isKindOfClass:[BOXFile class]]) {
-            BOXFileDeleteRequest *request = [self.client fileDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        } else if ([item isKindOfClass:[BOXBookmark class]]) {
-            BOXBookmarkDeleteRequest *request = [self.client bookmarkDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        }
-    }
-}
 
 #pragma mark - Callbacks
 
@@ -221,16 +248,38 @@
     // Create our blocks
     BOXFileBlock completionBlock = ^void(BOXFile *file, NSError *error) {
         if (error == nil) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Upload Succeeded" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:@"Upload Succeeded"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self dismissViewControllerAnimated:YES
+                                                                                          completion:nil];
+                                                             }];
+            [alertController addAction:OKAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
             self.tableView.tableHeaderView = nil;
             [self updateDataSourceWithNewFile:file atIndex:indexOfFile];
             [self.tableView reloadData];
         } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Upload Failed" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:@"Upload Failed"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self dismissViewControllerAnimated:YES
+                                                                                          completion:nil];
+                                                             }];
+            [alertController addAction:OKAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
         }
-        self.tableView.tableHeaderView = nil;       
+        self.tableView.tableHeaderView = nil;
     };
     BOXProgressBlock progressBlock = ^void(long long totalBytesTransferred, long long totalBytesExpectedToTransfer)
     {
