@@ -50,23 +50,41 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (void)appendMultipartPieceWithData:(NSData *)data fieldName:(NSString *)fieldName filename:(NSString *)filename MIMEType:(NSString *)MIMEType
 {
-    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body boundary:BOXAPIMultipartFormBoundary constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
-        [formData appendPartWithFileData:data name:fieldName fileName:filename mimeType:MIMEType];
-    }];
+    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body
+                                                                                        boundary:BOXAPIMultipartFormBoundary
+                                                                       constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
+                                                                           [formData appendPartWithFileData:data
+                                                                                                       name:fieldName
+                                                                                                   fileName:filename
+                                                                                                   mimeType:MIMEType];
+                                                                       }];
 }
 
 - (void)appendMultipartPieceWithInputStream:(NSInputStream *)inputStream contentLength:(unsigned long long)length fieldName:(NSString *)fieldName filename:(NSString *)filename MIMEType:(NSString *)MIMEType
 {
-    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body boundary:BOXAPIMultipartFormBoundary constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
-        [formData appendPartWithInputStream:inputStream name:fieldName fileName:filename length:length mimeType:MIMEType];
-    }];
+    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body
+                                                                                        boundary:BOXAPIMultipartFormBoundary
+                                                                       constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
+                                                                           [formData appendPartWithInputStream:inputStream
+                                                                                                          name:fieldName
+                                                                                                      fileName:filename
+                                                                                                        length:length
+                                                                                                      mimeType:MIMEType];
+                                                                       }];
 }
 
 - (void)appendMultipartPieceWithFilePath:(NSString *)filePath fieldName:(NSString *)fieldName filename:(NSString *)filename MIMEType:(NSString *)MIMEType
 {
-    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body boundary:BOXAPIMultipartFormBoundary constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
-        [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:fieldName fileName:filename mimeType:MIMEType error:nil];
-    }];
+    self.inputStream = [[BOXHTTPRequestSerializer serializer] multipartInputStreamWithParameters:self.body
+                                                                                        boundary:BOXAPIMultipartFormBoundary
+                                                                       constructingBodyWithBlock:^(id<BOXMultipartFormData> formData) {
+    
+                                                                           [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath]
+                                                                                                      name:fieldName
+                                                                                                  fileName:filename
+                                                                                                  mimeType:MIMEType
+                                                                                                     error:nil];
+                                                                       }];
 }
 #pragma mark -
 
@@ -92,7 +110,9 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     return sessionTask;
 }
 
-- (void)progressWithTotalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+- (void)sessionTask:(NSURLSessionTask *)sessionTask
+  didSendTotalBytes:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     if (self.progressBlock) {
         self.progressBlock(totalBytesExpectedToSend, totalBytesSent);
@@ -123,6 +143,8 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
     [super prepareAPIRequest];
 
     [self.APIRequest setAllHTTPHeaderFields:[self HTTPHeaders]];
+    // Attach the body stream to the request. The input stream is expected to already
+    // be configured via a call to one of the multipart stream preparation methods.
     [self.APIRequest setHTTPBodyStream:self.inputStream];
 
     //if provided uploadMultipartCopyFilePath, write the APIRequest's HTTPBodyStream into a multi-part formatted file
@@ -133,13 +155,13 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
         __weak BOXAPIMultipartToJSONOperation *weakSelf = self;
 
         self.APIRequest = [[BOXHTTPRequestSerializer serializer] requestWithMultipartFormRequest:self.APIRequest
-                                                   writingStreamContentsToFile:tempUploadFileURL
-                                                             completionHandler:^(NSError * error){
-                                                                 if (error != nil) {
-                                                                     [weakSelf abortWithError:error];
-                                                                 }
-                                                                 dispatch_semaphore_signal(sema);
-        }];
+                                                                     writingStreamContentsToFile:tempUploadFileURL
+                                                                               completionHandler:^(NSError * error) {
+                                                                                   if (error != nil) {
+                                                                                       [weakSelf abortWithError:error];
+                                                                                   }
+                                                                                   dispatch_semaphore_signal(sema);
+                                                                               }];
 
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
     }
@@ -169,9 +191,8 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (void)abortWithError:(NSError *)error
 {
-    [self.connection cancel];
+    self.error = error;
     [self.sessionTask cancel];
-    [self connection:self.connection didFailWithError:error];
 }
 
 - (BOOL)canBeReenqueued
