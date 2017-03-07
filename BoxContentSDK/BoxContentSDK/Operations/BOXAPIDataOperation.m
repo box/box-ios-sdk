@@ -59,6 +59,9 @@
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
         _outputStreamHasSpaceAvailable = YES; // attempt to write to the output stream as soon as we receive data
         _bytesReceived = 0;
+
+        // Initialize the responseData object to mutable data
+        self.responseData = [NSMutableData data];
     }
 
     return self;
