@@ -27,7 +27,6 @@ s.ios.public_header_files = "BoxContentSDK/BoxContentSDK/*.h", "BoxContentSDK/Bo
 
 s.ios.frameworks        = "Security", "QuartzCore", "AssetsLibrary"
 s.requires_arc          = true
-s.xcconfig              = { "OTHER_LDFLAGS" => "-ObjC -all_load" }
 s.ios.header_dir        = "BoxContentSDK"
 s.module_name           = "BoxContentSDK"
 
