@@ -230,12 +230,23 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     } completion:^(NSError *error) {
         self.tableView.tableHeaderView = nil;
         NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self dismissViewControllerAnimated:YES
+                                                                                      completion:nil];
+                                                         }];
+        [alertController addAction:OKAction];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
     }];
     
 //    //Alternative donwload method via a NSOutputStream
-//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];    
+//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];
 //    BOXFileDownloadRequest *request = [client fileDownloadRequestWithFileID:self.itemID toOutputStream:outputStream];
 //    [request performRequestWithProgress:nil completion:^(NSError *error) {
 //        // your file data here
