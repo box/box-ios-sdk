@@ -88,11 +88,6 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 }
 #pragma mark -
 
-- (BOOL)shouldUseSessionTask
-{
-    return YES;
-}
-
 - (BOOL)shouldRunInBackground
 {
     return self.uploadMultipartCopyFilePath != nil;
@@ -191,7 +186,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
 - (void)abortWithError:(NSError *)error
 {
-    self.error = error;
+    if (self.error == nil) {
+        self.error = error;
+    }
     [self.sessionTask cancel];
 }
 

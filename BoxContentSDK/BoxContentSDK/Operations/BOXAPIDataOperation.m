@@ -93,11 +93,6 @@
     return nil;
 }
 
-- (BOOL)shouldUseSessionTask
-{
-    return YES;
-}
-
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
@@ -112,7 +107,7 @@
 
 - (void)processResponseData:(NSData *)data
 {
-    // Empty data assumes that all data received from the NSURLConnection is buffered. This operation
+    // Empty data assumes that all data received from the network is buffered. This operation
     // streams all received data to its output stream, so do nothing.
     if (data.length == 0) {
         return;
@@ -228,39 +223,10 @@
 - (void)abortWithError:(NSError *)error
 {
     [self close];
-    [self.connection cancel];
+    if (self.error == nil) {
+        self.error = error;
+    }
     [self.sessionTask cancel];
-    [self connection:self.connection didFailWithError:error];
-}
-
-#pragma mark - NSURLConnectionDelegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [super connection:connection didReceiveResponse:response];
-    [self processIntermediateResponse:response];
-}
-
-// Override this delegate method from the default BOXAPIOperation implementation
-// By default, BOXAPIOperation buffers all received data from the connection in
-// self.responseData. This operation differs in that it should write its received
-// data immediately to its output stream. Failure to do so will cause downloads to
-// be buffered entirely in memory.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self processIntermediateData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [super connection:connection didFailWithError:error];
-    [self close];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [super connectionDidFinishLoading:connection];
-    [self close];
 }
 
 #pragma mark - BOXURLSessionTaskDelegate
@@ -280,6 +246,11 @@
     }
 }
 
+// Override this delegate method from the default BOXAPIOperation implementation
+// By default, BOXAPIOperation buffers all received data from the connection in
+// self.responseData. This operation differs in that it should write its received
+// data immediately to its output stream. Failure to do so will cause downloads to
+// be buffered entirely in memory.
 - (void)processIntermediateData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {

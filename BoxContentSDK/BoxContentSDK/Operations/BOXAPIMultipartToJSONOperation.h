@@ -45,7 +45,7 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
 /** @name Callbacks */
 
 /**
- * progressBlock is called every time data is successfully written [self.connection]([BOXAPIOperation connection])'s
+ * progressBlock is called every time data is successfully written to the network connection's
  * HTTPBodyStream.
  */
 @property (nonatomic, readwrite, strong) BOXAPIMultipartProgressBlock progressBlock;
@@ -89,7 +89,7 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
  * attached with a Content-Disposition header derived from fieldName and filename.
  *
  * The inputStream is never buffered. It is read incrementally and immediately streamed to this
- * operation's NSURLConnection.
+ * operation's network connection.
  *
  * @param inputStream A stream containing the data to include in the body of this multipart piece.
  * @param length The length in bytes of the data backing inputStream. This parameter is required

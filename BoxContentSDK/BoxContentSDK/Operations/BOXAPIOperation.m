@@ -67,7 +67,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 @synthesize body = _body;
 @synthesize queryStringParameters = _queryStringParameters;
 @synthesize APIRequest = _APIRequest;
-@synthesize connection = _connection;
 
 // request response properties
 @synthesize responseData = _responseData;
@@ -113,9 +112,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
+        // delay setting up the session task as long as possible so the authentication credentials remain fresh
 
         _APIRequest = nil;
-        _connection = nil; // delay setting up the connection as long as possible so the authentication credentials remain fresh
         
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
@@ -207,11 +206,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     BOXAbstract();
 }
 
-- (void)startURLConnection
-{
-    [self.connection start];
-}
-
 #pragma mark - Process API call results
 - (void)processResponseData:(NSData *)data
 {
@@ -293,11 +287,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
-- (BOOL)shouldUseSessionTask
-{
-    return YES;
-}
-
 - (NSURLSessionTask *)createSessionTask
 {
     __weak BOXAPIOperation *weakSelf = self;
@@ -323,18 +312,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
-            //FIXME: remove shouldUseSessionTask and this condition after switching
-            //completely from NSURLConnection to NSURLSessionTask
-            if (self.shouldUseSessionTask == YES) {
-                if (self.sessionTask == nil) {
-                    self.sessionTask = [self createSessionTask];
-                }
-                [self.sessionTask resume];
-            } else {
-                self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
-                BOXLog(@"Starting %@", self);
-                [self startURLConnection];
+            if (self.sessionTask == nil) {
+                self.sessionTask = [self createSessionTask];
             }
+            [self.sessionTask resume];
         }
         else
         {
@@ -380,12 +361,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
 
-    if (self.connection)
-    {
-        [self.connection cancel];
-        [self connection:self.connection didFailWithError:self.error];
-    }
-
     if (self.sessionTask != nil) {
         [self.sessionTask cancel];
     }
@@ -397,7 +372,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self sendLogoutNotification];
     }
     [self performCompletionCallback];
-    self.connection = nil;
     self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
@@ -453,34 +427,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification
                                                         object:objectInfo
                                                       userInfo:errorInfo];
-}
-
-#pragma mark - NSURLConnectionDataDelegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [self processResponse:response];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-    if (self.error == nil)
-    {
-        self.error = error;
-    }
-    [self finish];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
-    [self processResponseData:self.responseData];
-    [self finish];
 }
 
 - (void)processResponse:(NSURLResponse *)response
