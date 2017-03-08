@@ -48,6 +48,9 @@
     {
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
         _bytesReceived = 0;
+
+        // Initialize the responseData object to mutable data
+        self.responseData = [NSMutableData data];
     }
     
     return self;

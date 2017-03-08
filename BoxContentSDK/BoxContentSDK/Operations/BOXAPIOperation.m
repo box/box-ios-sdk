@@ -125,7 +125,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         _APIRequest = APIRequest;
 
-        _responseData = [NSMutableData data];
+        //NOTE: This data object needs to be initialized for the subclasses that are going to use it
+        // (see BOXAPIDataOperation as an example). Some subclasses will not use this object and for
+        // correct processing it needs to remain nil rather than an empty mutable data object.
+        _responseData = nil;
 
         self.state = BOXAPIOperationStateReady;
     }
@@ -482,6 +485,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)processResponse:(NSURLResponse *)response
 {
+    //NOTE: A nil response object will result in an error. This method expects to process a valid
+    // server response and should not be called with a nil or unknown response (unless an error is
+    // desirable for those scenarios).
+    //FIXME: Should evaluate a more specific error code for a nil response to seperate from an unknown response.
     self.HTTPResponse = (NSHTTPURLResponse *)response;
 
     if (self.HTTPResponse.statusCode == 202 || self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300)
@@ -540,18 +547,27 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    if (self.HTTPResponse == nil) {
+    if (self.HTTPResponse == nil && response != nil) {
         // If the response has not already been handled (some, but not all, operations get
-        // 'processResponse:' earlier in the process) handle it here.
+        // 'processResponse:' earlier in the process), handle it here.
+        // Also, do not handle a nil response. That could happen if there was a failure on the whole
+        // network connection, for example. In that case, there is no response.
         [self processResponse:response];
     }
 
     if (data != nil) {
+        // If the data object is nil, ignore it. Otherwise we need to process the data.
         [self processResponseData:data];
     }
+
+    //FIXME: Need to evaluate moving this to be the first step in this method. If that were
+    // the case, more changes may be necessary around setting of self.error in the response
+    // and data processing.
     if (self.error == nil) {
+        // If we do not already have an error set, use the passed in error.
         self.error = error;
     }
+
     [self finish];
 }
 

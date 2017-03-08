@@ -242,7 +242,7 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
 /**
  * Process the received response from the request including extracting error and reenqueue operation if needed
  *
- * @param response The response received from Box as a result of the API call.
+ * @param response The response received from Box as a result of the API call. A nil response will result in an error.
  */
 - (void)processResponse:(NSURLResponse *)response;
 
