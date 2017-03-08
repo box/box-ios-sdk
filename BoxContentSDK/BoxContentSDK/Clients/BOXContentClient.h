@@ -182,7 +182,7 @@
  *                          A task delegate can always be re-associated with a session task by calling
  *                          associateSessionTaskId:withTaskDelegate:
  */
-- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate;
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
 
 /**
  *  API base URLs.

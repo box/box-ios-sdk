@@ -20,7 +20,7 @@
 - (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID;
 
 //initialize a request which will run in the background even if app terminates if uploadMultipartCopyFilePath is provided
-- (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
+- (instancetype)initWithPath:(NSString *)filePath targetFolderID:(NSString *)folderID uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath associateId:(NSString *)associateId;
 
 - (instancetype)initWithName:(NSString *)fileName targetFolderID:(NSString *)folderID data:(NSData *)data;
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXFileBlock)completionBlock;

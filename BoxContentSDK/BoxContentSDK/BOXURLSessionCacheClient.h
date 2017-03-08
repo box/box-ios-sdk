@@ -21,9 +21,17 @@
 
 @end
 
+@interface BOXURLBackgroundSessionIdAndSessionTaskId : NSObject
+
+@property (nonatomic, copy, readwrite) NSString *backgroundSessionId;
+@property (nonatomic, assign, readwrite) NSUInteger sessionTaskId;
+
+@end
+
 @protocol BOXURLSessionCacheClientDelegate <NSObject>
 
 @optional
+
 // allow delegate to encrypt data before BOXURLSessionCacheClient persists it to disk
 - (NSData *)encryptData:(NSData *)data;
 
@@ -64,6 +72,11 @@
  * Delegate to allow encrypting data before persisting to disk, and can be left unset.
  */
 @property (nonatomic, weak, readwrite) id<BOXURLSessionCacheClientDelegate> delegate;
+
+/**
+ * Specify root dir for all cache data
+ */
+- (id)initWithCacheRootDir:(NSString *)cacheRootDir;
 
 /**
  * Cache the relationship between the session task and the user who started it as well as its equivalent associateId
@@ -159,5 +172,11 @@
  * @return YES if succeeded, NO if failed
  */
 - (BOOL)deleteCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+
+- (NSString *)destinationFilePathGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId;
+
+- (NSData *)responseDataGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId;
+
+- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 @end

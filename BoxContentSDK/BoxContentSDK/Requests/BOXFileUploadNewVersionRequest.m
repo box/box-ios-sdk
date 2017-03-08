@@ -15,6 +15,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
+@property (nonatomic, readwrite, strong) NSString *associateId;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
@@ -31,11 +32,12 @@
     return self;
 }
 
-- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+- (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath associateId:(NSString *)associateId
 {
     self = [self initWithFileID:fileID localPath:localPath];
     if (self != nil) {
         self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
+        self.associateId = associateId;
     }
     return self;
 }
@@ -70,6 +72,7 @@
     
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
         operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
+        operation.associateId = self.associateId;
         [operation appendMultipartPieceWithFilePath:self.localFilePath
                                           fieldName:BOXAPIMultipartParameterFieldKeyFile
                                            filename:@""

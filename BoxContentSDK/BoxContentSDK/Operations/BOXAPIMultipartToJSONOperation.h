@@ -42,6 +42,8 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
  */
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
 
+@property (nonatomic, readwrite, strong) NSString *associateId;
+
 /** @name Callbacks */
 
 /**

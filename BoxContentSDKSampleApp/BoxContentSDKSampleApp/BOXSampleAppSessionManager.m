@@ -58,6 +58,12 @@ static NSString *sessionTaskIdToAssociateIdKey = @"sessionTaskIdToAssociateId";
     return defaultManager;
 }
 
++ (NSString *)rootCacheDir
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [paths objectAtIndex:0];
+}
+
 - (id)init
 {
     self = [super init];

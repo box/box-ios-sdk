@@ -96,11 +96,13 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
+    NSString *userId = self.session.user.modelID;
+
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId];
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager foregroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
@@ -114,7 +116,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     @synchronized (self) {
         if (data != nil) {
@@ -123,13 +125,13 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
 {
     @synchronized (self) {
         if (error == nil && self.error == nil && self.responseJSON == nil) {
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:nil];
         }
-        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
+        [super sessionTask:sessionTask didFinishWithResponse:response responseData:responseData error:error];
     }
 }
 

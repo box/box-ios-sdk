@@ -370,9 +370,9 @@ static BOXContentClient *defaultInstance = nil;
 
 # pragma mark - background tasks support
 
-- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
 {
-    [self.urlSessionManager setUpToSupportBackgroundTasksWithDefaultDelegate:delegate];
+    [self.urlSessionManager setUpToSupportBackgroundTasksWithDefaultDelegate:delegate rootCacheDir:rootCacheDir];
 }
 
 #pragma mark - helper methods

@@ -301,7 +301,7 @@
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:BOXAPIHTTPHeaderContentLength];
     [request setHTTPBody:postData];
 
-    NSURLSessionTask *sessionTask = [self.urlSessionManager createDataTaskWithRequest:request completionHandler:^(NSData * _Nonnull data, NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+    NSURLSessionTask *sessionTask = [self.urlSessionManager dataTaskWithRequest:request completionHandler:^(NSData * _Nonnull data, NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
         if (error == nil) {
             BOXLog(@"Logout 'revoke' API call succeeded.");
         } else {

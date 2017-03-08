@@ -20,6 +20,7 @@
 @interface BOXSampleAppSessionManager : NSObject
 
 + (id)defaultManager;
++ (NSString *)rootCacheDir;
 
 - (BOXSampleAppSessionInfo *)getSessionTaskInfo:(NSUInteger)sessionTaskId;
 - (void)saveSessionTaskId:(NSUInteger)sessionTaskId withInfo:(BOXSampleAppSessionInfo *)info;

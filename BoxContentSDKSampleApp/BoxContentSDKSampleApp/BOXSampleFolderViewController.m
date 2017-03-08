@@ -78,6 +78,21 @@
         if (error == nil) {
             self.items = items;
             [self.tableView reloadData];
+        } else {
+            NSString *errorMsg = [NSString stringWithFormat:@"Failed to retrieve items %@", error];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:errorMsg
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
         }
         [self.refreshControl endRefreshing];
     }];

@@ -185,8 +185,7 @@
  */
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                       toLocalFilePath:(NSString *)localFilePath
-                                         downloadTask:(NSURLSessionDownloadTask *)downloadTask
-                            downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock;
+                                          associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to download a file to an outputstream.

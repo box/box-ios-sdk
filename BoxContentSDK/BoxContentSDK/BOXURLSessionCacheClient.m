@@ -11,12 +11,14 @@
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
 
-@interface BOXURLBackgroundSessionIdAndSessionTaskId : NSObject
 
-@property (nonatomic, copy, readwrite) NSString *backgroundSessionId;
-@property (nonatomic, assign, readwrite) NSUInteger sessionTaskId;
-
+@implementation BOXURLSessionTaskCachedInfo
 @end
+
+
+@implementation BOXURLBackgroundSessionIdAndSessionTaskId
+@end
+
 
 @interface BOXURLSessionCacheClient()
 
@@ -24,9 +26,6 @@
 
 @end
 
-@implementation BOXURLSessionTaskCachedInfo
-
-@end
 
 @implementation BOXURLSessionCacheClient
 
@@ -39,8 +38,8 @@
             NSString *cacheDir = [cacheRootDir stringByAppendingPathComponent:BOXURLSessionTaskCacheDirectoryName];
             if ([[NSFileManager defaultManager] fileExistsAtPath:cacheDir isDirectory:&isDir] == NO || isDir == NO) {
                 NSError *error = nil;
-                [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:YES attributes:nil error:&error];
-                BOXAssert(error != nil, @"Failed to create cacheDir %@ with error %@", cacheDir, error);
+                BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:YES attributes:nil error:&error];
+                BOXAssert(success, @"Failed to create cacheDir %@ with error %@", cacheDir, error);
             }
             self.cacheDir = cacheDir;
         }
@@ -137,7 +136,7 @@
         if (error != nil) {
             *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
         }
-        return NO;
+        return nil;
     }
 
     NSError *err;
@@ -160,6 +159,8 @@
     NSString *dir = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
 
     BOXURLSessionTaskCachedInfo *cachedInfo = [[BOXURLSessionTaskCachedInfo alloc] init];
+    cachedInfo.backgroundSessionId = backgroundSessionId;
+    cachedInfo.sessionTaskId = sessionTaskId;
 
     //get all files under sessions/$backgroundSessionId/$sessionTaskId
     NSArray *filePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:error];
@@ -168,10 +169,7 @@
         NSString *filePath = [dir stringByAppendingPathComponent:fileName];
 
         //decrypt data found at filePath
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        if ([self.delegate respondsToSelector:@selector(decryptData:)]) {
-            data = [self.delegate decryptData:data];
-        }
+        NSData *data = [self unencryptedDataAtFilePath:filePath];
 
         //parse decrypted data based on its file name
         if ([fileName isEqualToString:BOXURLSessionTaskCacheDestinationFilePath]) {
@@ -187,6 +185,32 @@
         }
     }
     return cachedInfo;
+}
+
+- (NSString *)destinationFilePathGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
+{
+    NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:BOXURLSessionTaskCacheFileTypeDestinationFilePath];
+
+    //decrypt data found at filePath
+    NSData *data = [self unencryptedDataAtFilePath:filePath];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
+
+- (NSData *)responseDataGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
+{
+    NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:BOXURLSessionTaskCacheFileTypeResponseData];
+
+    //decrypt data found at filePath
+    return [self unencryptedDataAtFilePath:filePath];
+}
+
+- (NSData *)unencryptedDataAtFilePath:(NSString *)filePath
+{
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    if ([self.delegate respondsToSelector:@selector(decryptData:)]) {
+        data = [self.delegate decryptData:data];
+    }
+    return data;
 }
 
 - (BOOL)deleteCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
@@ -235,27 +259,8 @@
     BOOL success = [self createDirForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId error:&error];
 
     if (success == YES && error == nil) {
-        NSString *path = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
         //persist data to sessions/$backgroundSessionId/$sessionTaskId/$fileType
-
-        switch (type) {
-            case BOXURLSessionTaskCacheFileTypeDestinationFilePath:
-                path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheDestinationFilePath];
-                break;
-            case BOXURLSessionTaskCacheFileTypeResumeData:
-                path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResumeData];
-                break;
-            case BOXURLSessionTaskCacheFileTypeResponse:
-                path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResponse];
-                break;
-            case BOXURLSessionTaskCacheFileTypeResponseData:
-                path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResponseData];
-                break;
-            case BOXURLSessionTaskCacheFileTypeError:
-                path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheError];
-                break;
-        }
-
+        NSString *path = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:type];
         success = [self cacheAndAttemptToEncryptData:data atPath:path error:&error];
     }
 
@@ -263,6 +268,31 @@
         (*outError) = error;
     }
     return success;
+}
+
+- (NSString *)filePathForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId type:(BOXURLSessionTaskCacheFileType)type
+{
+    NSString *path = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
+    //persist data to sessions/$backgroundSessionId/$sessionTaskId/$fileType
+
+    switch (type) {
+        case BOXURLSessionTaskCacheFileTypeDestinationFilePath:
+            path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheDestinationFilePath];
+            break;
+        case BOXURLSessionTaskCacheFileTypeResumeData:
+            path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResumeData];
+            break;
+        case BOXURLSessionTaskCacheFileTypeResponse:
+            path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResponse];
+            break;
+        case BOXURLSessionTaskCacheFileTypeResponseData:
+            path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheResponseData];
+            break;
+        case BOXURLSessionTaskCacheFileTypeError:
+            path = [path stringByAppendingPathComponent:BOXURLSessionTaskCacheError];
+            break;
+    }
+    return path;
 }
 
 - (BOOL)cacheAndAttemptToEncryptData:(NSData *)data atPath:(NSString *)path error:(NSError **)outError
@@ -358,6 +388,8 @@
 
 - (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
 {
+    if (userId == nil || associateId == nil) return nil;
+
     NSString *dir = [self dirPathOfUserSessionTaskGivenUserId:userId associateId:associateId];
     NSError *err;
     BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = nil;

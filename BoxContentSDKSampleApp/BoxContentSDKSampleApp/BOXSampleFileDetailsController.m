@@ -210,19 +210,11 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
+    //FIXME: create random associateId and save it to cache
+    NSString *associateId = @"";
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
                                                              toLocalFilePath:finalPath
-                                                                downloadTask:nil
-                                                   downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
-        if (oldSessionTask != nil) {
-            [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
-        }
-        if (newSessionTask != nil) {
-            NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
-            BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
-            [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
-        }
-    }];
+                                                                 associateId:associateId];
 
     [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;

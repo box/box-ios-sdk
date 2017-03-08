@@ -28,8 +28,7 @@
  */
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
-                            downloadTask:(NSURLSessionDownloadTask *)downloadTask
-               downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock;
+                             associateId:(NSString *)associateId;
 
 /**
  * request will download file into outputStream, and the file download cannot continue

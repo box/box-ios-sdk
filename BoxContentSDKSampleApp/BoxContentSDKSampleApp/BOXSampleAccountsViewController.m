@@ -8,6 +8,7 @@
 
 #import "BOXSampleAccountsViewController.h"
 #import "BOXSampleFolderViewController.h"
+#import "BOXSampleAppSessionManager.h"
 
 @interface BOXSampleAccountsViewController ()
 
@@ -40,7 +41,7 @@
         BOXContentClient *client = [BOXContentClient clientForUser:user];
         if (   ([client.session isKindOfClass:[BOXOAuth2Session class]] && !self.isAppUsers)
             || ([client.session isKindOfClass:[BOXAppUserSession class]] && self.isAppUsers)) {
-            [client setUpToSupportBackgroundTasksWithDefaultDelegate:((id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate])];
+            [client setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate] rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
             [users addObject:user];
         }
     }
@@ -54,7 +55,7 @@
 {
     // Create a new client for the account we want to add.
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setUpToSupportBackgroundTasksWithDefaultDelegate:((id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate])];
+    [client setUpToSupportBackgroundTasksWithDefaultDelegate:((id<BOXURLSessionManagerDelegate>)[[UIApplication sharedApplication] delegate]) rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
 
     if (self.isAppUsers) {
         [client setAccessTokenDelegate:self];
