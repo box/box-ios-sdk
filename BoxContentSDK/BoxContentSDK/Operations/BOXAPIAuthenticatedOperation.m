@@ -63,13 +63,6 @@
     return NO;
 }
 
-#pragma mark - NSURLConnectionDataDelegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [super connection:connection didReceiveResponse:response];
-    [self processResponse:response];
-}
-
 - (void)processResponse:(NSURLResponse *)response
 {
     [super processResponse:response];

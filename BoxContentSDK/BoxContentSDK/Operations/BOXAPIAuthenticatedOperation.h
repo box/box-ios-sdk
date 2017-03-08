@@ -41,7 +41,7 @@
  * permanenetly.
  *
  * @see handleAccessTokenExpired:
- * @see connection:didReceiveResponse:
+ * @see processResponse:
  */
 @property (nonatomic, readwrite, assign) NSUInteger timesReenqueued;
 

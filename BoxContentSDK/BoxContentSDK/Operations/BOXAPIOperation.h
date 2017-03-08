@@ -47,12 +47,12 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  * An API call is considered to have succeeded if it returns with an HTTP status code in the
  * 2xx range, with an exception made for 202. 202, 3xx, 4xx, and 5xx are all treated as errors.
  *
- * NSURLConnectionDataDelegate
+ * BOXURLSessionTaskDelegate
  * ===========================
- * BOXAPIOperation instances issue API calls using NSURLConnection. Each BOXAPIOperation acts
- * as the delegate for its own API call. [BOXAPIOperations](BOXAPIOperation) are not concurrent
- * NSOperations, so they keep the runloop they are running on open during the lifetime of the
- * request to enable receiving delegate callbacks.
+ * BOXAPIOperation instances issue API calls using NSURLSession. Each BOXAPIOperation acts
+ * as the delegate for its own API call's session task. [BOXAPIOperations](BOXAPIOperation) are
+ * not concurrent NSOperations, so they keep the runloop they are running on open during the
+ * lifetime of the request to enable receiving delegate callbacks, with the exception of background tasks.
  *
  * By default, a BOXAPIOperation will buffer received data in memory to be proccessed after the connection
  * terminates. See BOXAPIDataOperation for a subclass that does not use this default behavior.
@@ -86,7 +86,7 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  * - performCompletionCallback
  *
  */
-@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate, BOXURLSessionTaskDelegate>
+@interface BOXAPIOperation : NSOperation <BOXURLSessionTaskDelegate>
 
 /** @name Authorization */
 
@@ -130,11 +130,6 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  * designated initializer.
  */
 @property (nonatomic, readwrite, strong) NSMutableURLRequest *APIRequest;
-
-/**
- * The URL connection is lazily instantiated when the BOXAPIOperation begins executing.
- */
-@property (nonatomic, readwrite, strong) NSURLConnection *connection;
 
 /** @name Request response properties */
 
@@ -230,11 +225,6 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  * For example, BOXAPIAuthenticatedOperation signs requests with an Authorization header
  */
 - (void)prepareAPIRequest;
-
-/**
- * Prepare the BOXAPIOperation to receive delegate callbacks for connection and start connection.
- */
-- (void)startURLConnection;
 
 #pragma mark - Process API call results BOXURLSessionTaskDelegate
 /** @name Process API call results */
