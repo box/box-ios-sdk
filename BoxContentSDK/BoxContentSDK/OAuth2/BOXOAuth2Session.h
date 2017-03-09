@@ -110,10 +110,19 @@
  */
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
-                    queueManager:(BOXAPIQueueManager *)queueManager;
+                      APIBaseURL:(NSString *)baseURL
+                  APIAuthBaseURL:(NSString *)authBaseURL
+                    queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager;
 
 #pragma mark - Authorization
 /** @name Authorization */
+
+/**
+ * The base URL for API requests.
+ * @see BOXAPIAuthBaseURL
+ */
+@property (nonatomic, readwrite, strong) NSString *APIAuthBaseURLString;
 
 /**
  * Exchange an authorization code for an access token and a refresh token.

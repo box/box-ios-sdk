@@ -37,13 +37,17 @@
 
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
+                      APIBaseURL:(NSString *)baseURL
+                  APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXNSURLSessionManager *)urlSessionManager
 {
-    self = [self initWithQueueManager:queueManager];
+    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
+        _APIAuthBaseURLString = authBaseURL;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveRevokeSessionNotification:)
