@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BOXURLSessionTaskCachedInfo : NSObject
+//@see comments above BOXURLSessionCacheClient for detailed explaination of those properties
 
 @property (nonatomic, strong, readwrite) NSString *backgroundSessionId;
 @property (nonatomic, assign, readwrite) NSUInteger sessionTaskId;
@@ -22,6 +23,7 @@
 
 @protocol BOXURLSessionCacheClientDelegate <NSObject>
 
+@optional
 // allow delegate to encrypt data before BOXURLSessionCacheClient persists it to disk
 - (NSData *)encryptData:(NSData *)data;
 
@@ -53,15 +55,23 @@
  */
 @interface BOXURLSessionCacheClient : NSObject
 
+/**
+ * Initialize BOXURLSessionCacheClient with a root directory for caching. Cannot be nil.
+ */
+- (id)initWithCacheRootDir:(NSString *)cacheRootDir;
+
+/**
+ * Delegate to allow encrypting data before persisting to disk, and can be left unset.
+ */
 @property (nonatomic, weak, readwrite) id<BOXURLSessionCacheClientDelegate> delegate;
 
 /**
  * Cache the relationship between the session task and the user who started it as well as its equivalent associateId
  *
- * @param userId                Id of user started the session task
- * @param associateId           Id to associate with the session task
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param error                 error if fail to get
  *
  * @return YES if succeeded, NO if failed
@@ -71,8 +81,8 @@
 /**
  * Cache destinationFilePath of a background download session task
  *
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param destinationFilePath   destination file path of downloaded file, applicable for background download task only
  * @param error                 error if fail to cache
  *
@@ -83,8 +93,8 @@
 /**
  * Cache resumeData of of a background download session task
  *
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param resumeData            resume data to resume background download session task from
  * @param error                 error if fail to cache
  *
@@ -95,8 +105,8 @@
 /**
  * Cache responseData of a background session task
  *
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param responseData          response data from the session task
  * @param error                 error if fail to cache
  *
@@ -107,8 +117,8 @@
 /**
  * Cache response of a background session task
  *
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param response              NSURLResponse from the session task
  * @param error                 error if fail to cache
  *
@@ -119,8 +129,8 @@
 /**
  * Cache client-side error of a background session task
  *
- * @param backgroundSessionId   Id of the background session
- * @param sessionTaskId         Id of the session task
+ * @param backgroundSessionId   Id of the background session. Cannot be nil
+ * @param sessionTaskId         Id of the session task. Cannot be nil
  * @param taskError             store client-side NSError of the session task
  * @param error                 error if fail to cache
  *
@@ -131,19 +141,19 @@
 /**
  * Get all cached data of the background session task associated with this userId and associateId
  *
- * @param userId            Id of user started the session task
- * @param associateId       Id to associate with the session task
+ * @param userId            Id of user started the session task. Cannot be nil
+ * @param associateId       Id to associate with the session task. Cannot be nil
  * @param error             error if fail to get
  *
  * @return BOXURLSessionTaskCache   all cached data of the session task
  */
-- (BOXURLSessionTaskCachedInfo *)getCacheForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOXURLSessionTaskCachedInfo *)cachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  * Delete all cached data of the background session task associated with this userId and associateId
  *
- * @param userId            Id of user started the session task
- * @param associateId       Id to associate with the session task
+ * @param userId            Id of user started the session task. Cannot be nil
+ * @param associateId       Id to associate with the session task. Cannot be nil
  * @param error             error if fail to delete
  *
  * @return YES if succeeded, NO if failed
