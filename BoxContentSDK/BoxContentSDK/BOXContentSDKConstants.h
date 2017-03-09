@@ -443,9 +443,9 @@ extern NSString *const BOXAPIEnterpriseEventTypeItemSync;
 extern NSString *const BOXAPIEnterpriseEventTypeItemUnsync;
 
 //urlsessiontask cache dir, file prefix
-extern NSString *const BOXURLSessionTaskCacheDirName;
-extern NSString *const BOXURLSessionTaskCacheSessionsDirName;
-extern NSString *const BOXURLSessionTaskCacheUsersDirName;
+extern NSString *const BOXURLSessionTaskCacheDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheSessionsDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheUsersDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheDestinationFilePath;
 extern NSString *const BOXURLSessionTaskCacheResumeData;
 extern NSString *const BOXURLSessionTaskCacheResponse;
