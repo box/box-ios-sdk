@@ -421,3 +421,14 @@ NSString *const BOXAPIEnterpriseEventTypeCollaborationInvite = @"COLLABORATION_I
 NSString *const BOXAPIEnterpriseEventTypeCollaborationExpiration = @"COLLABORATION_EXPIRATION";
 NSString *const BOXAPIEnterpriseEventTypeItemSync = @"ITEM_SYNC";
 NSString *const BOXAPIEnterpriseEventTypeItemUnsync = @"ITEM_UNSYNC";
+
+
+//urlsessiontask cache dir, file prefix
+NSString *const BOXURLSessionTaskCacheDirectoryName = @"BOXURLSessionCache";
+NSString *const BOXURLSessionTaskCacheSessionsDirectoryName = @"sessions";
+NSString *const BOXURLSessionTaskCacheUsersDirName = @"users";
+NSString *const BOXURLSessionTaskCacheDestinationFilePath = @"destinationFilePath";
+NSString *const BOXURLSessionTaskCacheResumeData = @"resumeData";
+NSString *const BOXURLSessionTaskCacheResponse = @"response";
+NSString *const BOXURLSessionTaskCacheResponseData = @"responseData";
+NSString *const BOXURLSessionTaskCacheError = @"error";
