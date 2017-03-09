@@ -73,7 +73,7 @@
     if (self != nil) {
         self.sessionTask = urlSessionTask;
         if (urlSessionTask != nil) {
-            [self.session.urlSessionManager associateSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
+            [self.session.urlSessionManager associateBackgroundSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
         }
     }
     return self;

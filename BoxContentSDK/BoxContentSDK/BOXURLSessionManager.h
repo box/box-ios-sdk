@@ -130,14 +130,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSURLSessionUploadTask *)createNonBackgroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate;
 
 /**
- * Associate a session task with its task delegate to handle callbacks for it, taskDelegate is not retained
+ * Associate a background session task with its task delegate to handle callbacks for it, taskDelegate is not retained
  */
-- (void)associateSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate;
-
-/**
- * Dessociate a session task with its task delegate so the task delegate will no longer handle callbacks for the task
- */
-- (void)deassociateSessionTaskId:(NSUInteger)sessionTaskId;
+- (void)associateBackgroundSessionTaskId:(NSUInteger)sessionTaskId withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate;
 
 /**
  * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
