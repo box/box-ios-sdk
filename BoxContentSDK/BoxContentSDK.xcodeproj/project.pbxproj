@@ -374,6 +374,7 @@
 		599B1A9D1E4C01B300709C27 /* BOXParallelOAuth2Session.h in Headers */ = {isa = PBXBuildFile; fileRef = E4CA6F5C173F1C750089680F /* BOXParallelOAuth2Session.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59AB005E1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB005D1A3943BD005A6D89 /* BOXFolderPaginatedItemsRequestTests.m */; };
 		59C8E3351BEAC0DE005FA4BB /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 59C8E3341BEAC0DE005FA4BB /* empty.json */; };
+		59F270201E7351BA00B95BC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4081D931758728900F6D6AA /* InfoPlist.strings */; };
 		63832CFC1E3A84B300F7211E /* BOXRecentItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832CFB1E3A84B200F7211E /* BOXRecentItemTests.m */; };
 		63832CFE1E3A899E00F7211E /* recent_item_default_fields.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832CFD1E3A899E00F7211E /* recent_item_default_fields.json */; };
 		63832D001E3A9A8200F7211E /* recent_item_default_fields_shared.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832CFF1E3A9A8200F7211E /* recent_item_default_fields_shared.json */; };
@@ -1975,6 +1976,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59F270201E7351BA00B95BC1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
