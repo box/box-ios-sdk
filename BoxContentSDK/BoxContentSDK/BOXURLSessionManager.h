@@ -128,7 +128,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return a background download task. Nil if already completed
  */
-- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId;
+- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file into a destination file path.
@@ -140,7 +140,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return a background download task. Nil if already completed
  */
-- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId;
+- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
@@ -154,7 +154,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return a background upload task. Nil if already completed
  */
-- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId;
+- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  Retrieve session task's cached info associated with userId and associateId

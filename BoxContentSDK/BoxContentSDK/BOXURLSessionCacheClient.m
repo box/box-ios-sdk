@@ -51,13 +51,13 @@
 {
     if (userId == nil || associateId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
         }
         return NO;
     }
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -76,7 +76,7 @@
 {
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -88,7 +88,7 @@
 {
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -99,7 +99,7 @@
 {
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -110,7 +110,7 @@
 {
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -122,7 +122,7 @@
 {
     if (backgroundSessionId == nil || sessionTaskId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
         }
         return NO;
     }
@@ -134,20 +134,20 @@
 {
     if (userId == nil || associateId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
         }
         return nil;
     }
 
     NSError *err;
-    BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdGivenUserId:userId associateId:associateId error:&err];
+    BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&err];
 
     if (backgroundSessionIdAndSessionTaskId == nil) {
         if (error != nil) {
             if (err != nil) {
                 *error = err;
             } else {
-                *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidSessionForUserId userInfo:nil];
+                *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorNoValidSessionForUserId userInfo:nil];
             }
         }
         return nil;
@@ -187,7 +187,7 @@
     return cachedInfo;
 }
 
-- (NSString *)destinationFilePathGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
+- (NSString *)destinationFilePathForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
 {
     NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:BOXURLSessionTaskCacheFileTypeDestinationFilePath];
 
@@ -196,7 +196,7 @@
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
-- (NSData *)responseDataGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
+- (NSData *)responseDataForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
 {
     NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:BOXURLSessionTaskCacheFileTypeResponseData];
 
@@ -217,13 +217,13 @@
 {
     if (userId == nil || associateId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
         }
         return NO;
     }
 
     NSError *err = nil;
-    BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdGivenUserId:userId associateId:associateId error:&err];
+    BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&err];
     if (backgroundSessionIdAndSessionTaskId == nil) {
         if (err != nil) {
             if (error != nil) {
@@ -270,10 +270,10 @@
     return success;
 }
 
+// Return file path of sessions/$backgroundSessionId/$sessionTaskId/$fileType
 - (NSString *)filePathForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId type:(BOXURLSessionTaskCacheFileType)type
 {
     NSString *path = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
-    //persist data to sessions/$backgroundSessionId/$sessionTaskId/$fileType
 
     switch (type) {
         case BOXURLSessionTaskCacheFileTypeDestinationFilePath:
@@ -345,7 +345,7 @@
     if (success == YES) {
         success = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
         if (success == NO && error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXURLSessionTaskCacheError code:BOXContentSDKURLSessionCacheErrorFileCreateFailed userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorFileCreateFailed userInfo:nil];
         }
     }
     return success;
@@ -386,9 +386,14 @@
     return res;
 }
 
-- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
+- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
 {
-    if (userId == nil || associateId == nil) return nil;
+    if (userId == nil || associateId == nil) {
+        if (error != nil) {
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId userInfo:nil];
+        }
+        return nil;
+    }
 
     NSString *dir = [self dirPathOfUserSessionTaskGivenUserId:userId associateId:associateId];
     NSError *err;

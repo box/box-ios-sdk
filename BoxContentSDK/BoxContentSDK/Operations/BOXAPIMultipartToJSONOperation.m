@@ -100,7 +100,9 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId];
+        NSError *error = nil;
+        sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId error:&error];
+        BOXAssert(error != nil, @"Error getting background upload task %@", error);
     } else {
         sessionTask = [self.session.urlSessionManager foregroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
     }

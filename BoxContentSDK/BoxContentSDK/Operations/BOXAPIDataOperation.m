@@ -87,7 +87,9 @@
     NSString *userId = self.session.user.modelID;
 
     if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self userId:userId associateId:self.associateId];
+        NSError *error = nil;
+        sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self userId:userId associateId:self.associateId error:&error];
+        BOXAssert(error != nil, @"Error getting background upload task %@", error);
     } else {
         sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }
