@@ -43,6 +43,9 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * cannot be copied, BOXAPIDataOperation instances cannot be automatically retried by the SDK in the event
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
+ *
+ * BOXAPIDataOperation supports both foreground and background downloads
+ * By default, download is foreground unless associateId and destinationPath properties are provided
  */
 @interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate, BOXURLSessionDownloadTaskDelegate>
 

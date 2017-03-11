@@ -21,6 +21,7 @@
 
 + (id)defaultManager;
 + (NSString *)rootCacheDir;
++ (NSString *)generateRandomStringWithLength:(NSInteger)length;
 
 - (BOXSampleAppSessionInfo *)getSessionTaskInfo:(NSUInteger)sessionTaskId;
 - (void)saveSessionTaskId:(NSUInteger)sessionTaskId withInfo:(BOXSampleAppSessionInfo *)info;

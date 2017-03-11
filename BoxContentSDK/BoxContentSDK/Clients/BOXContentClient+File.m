@@ -116,7 +116,7 @@
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                         fromLocalFilePath:(NSString *)localFilePath
 {
-    return [self fileUploadRequestInBackgroundToFolderWithID:folderID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil];
+    return [self fileUploadRequestInBackgroundToFolderWithID:folderID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil associateId:nil];
 }
 
 - (BOXFileUploadRequest *)fileUploadRequestInBackgroundToFolderWithID:(NSString *)folderID
@@ -143,7 +143,7 @@
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                     fromLocalFilePath:(NSString *)localFilePath
 {
-    return [self fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil];
+    return [self fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil associateId:nil];
 }
 
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestInBackgroundWithFileID:(NSString *)fileID

@@ -54,6 +54,7 @@
     self = [self initWithPath:filePath targetFolderID:folderID];
     if (self != nil) {
         self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
+        self.associateId = associateId;
     }
     return self;
 }

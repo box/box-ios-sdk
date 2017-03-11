@@ -11,6 +11,7 @@
 #import "BOXSampleItemCell.h"
 #import "BOXSampleProgressView.h"
 #import "BOXSampleLibraryAssetViewController.h"
+#import "BOXSampleAppSessionManager.h"
 #import <Photos/Photos.h>
 
 @interface BOXSampleFolderViewController () <UIAlertViewDelegate>
@@ -280,8 +281,9 @@
             [self updateDataSourceWithNewFile:file atIndex:indexOfFile];
             [self.tableView reloadData];
         } else {
+            NSString *errMsg = [NSString stringWithFormat:@"Upload Failed. %@", error];
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                                     message:@"Upload Failed"
+                                                                                     message:errMsg
                                                                               preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
                                                                style:UIAlertActionStyleDefault
@@ -302,9 +304,15 @@
     };
 
     // We did not find a file named similarly, we can upload normally the file.
-    NSString *tempPath = background == NO ? nil : [path stringByAppendingString:@".temp"];
+    NSString *tempPath = nil;
+    NSString *associateId = nil;
+    if (background == YES) {
+        tempPath = [path stringByAppendingString:@".temp"];
+        associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+    }
     if (indexOfFile == NSNotFound) {
-        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath];
+        //FIXME: save associateId to cache for reconnection later
+        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
         if (background == NO) {
             self.nonBackgroundUploadRequest = uploadRequest;
         }
@@ -319,7 +327,7 @@
     // We already found the item. We will upload a new version of the file. 
     // Alternatively, we can also rename the file and upload it like a regular new file via a BOXFileUploadRequest
     else {
-        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath];
+        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
         if (background == NO) {
             self.nonBackgroundUploadRequest = newVersionRequest;
         }

@@ -305,7 +305,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         NSString *userId = self.session.user.modelID;
         NSError *error = nil;
-        BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
+        BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
 
         if (cachedInfo.response != nil && error == nil) {
             //get valid cached info for session task, finish this operation

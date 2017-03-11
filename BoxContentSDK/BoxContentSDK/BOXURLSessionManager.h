@@ -90,16 +90,33 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 + (BOXURLSessionManager *)sharedInstance;
 
 /**
- * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
+ * This method needs to be called once in main app to set up the manager to be ready to
+ * support background upload/download tasks.
  * If this method has not been called, all background task creations will fail
- * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
- *                          possible if the background tasks were created outside of BOXURLSessionManager
- *                          (e.g. app restarts)
- *                          A task delegate can always be re-associated with a session task by calling
- *                          associateSessionTaskId:withTaskDelegate:
+ *
+ * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data
  */
-- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+
+/**
+ * This method needs to be called once in app extensions to set up the manager to be ready to
+ * support background upload/download tasks.
+ * If this method has not been called, all background task creations will fail
+ *
+ * @param backgroundSessionId background session id to create background session with
+ * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
+ * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
+ *                          as rootCacheDir for main app to allow main app takes over background session
+ *                          tasks created from extensions
+ */
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+
+/**
+ * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
+ * should share the same rootCacheDir as the main app to work properly
+ */
+- (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
@@ -157,7 +174,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
- Retrieve session task's cached info associated with userId and associateId
+ Retrieve completed session task's cached info associated with userId and associateId
 
  @param userId          userId that this task belongs to
  @param associateId     an id that uniquely identify the session task for this userId
@@ -165,7 +182,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return session task's cached info
  */
-- (BOXURLSessionTaskCachedInfo *)sessionTaskCachedInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOXURLSessionTaskCachedInfo *)sessionTaskCompletedCachedInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  Clean up session task's cached info associated with userId and associateId.

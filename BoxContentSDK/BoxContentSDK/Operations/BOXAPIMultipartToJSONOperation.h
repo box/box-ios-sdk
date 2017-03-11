@@ -33,16 +33,17 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
  * cannot be copied, BOXAPIMultipartToJSONOperation instances cannot be automatically retried by the SDK in the event
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
+ *
+ * BOXAPIMultipartToJSONOperation supports both foreground and background uploads
+ * By default, upload is foreground unless associateId and uploadMultipartCopyFilePath properties are provided
  */
-@interface BOXAPIMultipartToJSONOperation : BOXAPIJSONOperation <NSStreamDelegate>
+@interface BOXAPIMultipartToJSONOperation : BOXAPIJSONOperation <NSStreamDelegate, BOXURLSessionUploadTaskDelegate>
 
 /**
  * Location to write a multi-part formatted file of the uploaded content into for background upload
  * If nil, upload will be a non-background upload
  */
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
-
-@property (nonatomic, readwrite, strong) NSString *associateId;
 
 /** @name Callbacks */
 

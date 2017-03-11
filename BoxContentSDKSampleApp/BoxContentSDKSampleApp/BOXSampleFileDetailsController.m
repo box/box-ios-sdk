@@ -211,7 +211,7 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
     //FIXME: create random associateId and save it to cache
-    NSString *associateId = @"";
+    NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
                                                              toLocalFilePath:finalPath
                                                                  associateId:associateId];

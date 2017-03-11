@@ -370,9 +370,19 @@ static BOXContentClient *defaultInstance = nil;
 
 # pragma mark - background tasks support
 
-- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
++ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
 {
-    [self.urlSessionManager setUpToSupportBackgroundTasksWithDefaultDelegate:delegate rootCacheDir:rootCacheDir];
+    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
+}
+
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
+{
+    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir];
+}
+
++ (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId
+{
+    [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionId:backgroundSessionId];
 }
 
 #pragma mark - helper methods

@@ -101,12 +101,14 @@
  *  @param folderID      Folder ID of the folder to upload the file into.
  *  @param localFilePath Path to local file to be uploaded.
  *  @param uploadMultipartCopyFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
  *
  *  @return A request that can be customized and then executed.
  */
 - (BOXFileUploadRequest *)fileUploadRequestInBackgroundToFolderWithID:(NSString *)folderID
                                                     fromLocalFilePath:(NSString *)localFilePath
-                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
+                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                          associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to upload a byte-buffer to Box.
@@ -144,7 +146,8 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestInBackgroundWithFileID:(NSString *)fileID
                                                                     fromLocalFilePath:(NSString *)localFilePath
-                                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath;
+                                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                                          associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to upload a new version of a file from a byte-buffer.

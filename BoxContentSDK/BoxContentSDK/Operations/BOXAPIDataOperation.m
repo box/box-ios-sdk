@@ -37,6 +37,11 @@
 
 @end
 
+/* *
+ * To make a new BOXAPIOperation support background download similarly to BOXAPIDataOperation, implement
+ * protocol BOXURLSessionDownloadTaskDelegate and override its createSessionTask exposed from BOXAPIOperation_Private.h
+ * to return a foreground download or background download accordingly
+ */
 @implementation BOXAPIDataOperation
 
 @synthesize successBlock = _successBlock;
@@ -81,15 +86,20 @@
     return nil;
 }
 
+- (NSString *)destinationFilePath
+{
+    return self.destinationPath;
+}
+
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
     NSString *userId = self.session.user.modelID;
 
-    if (self.destinationPath != nil) {
+    if (self.destinationPath != nil && self.associateId != nil) {
         NSError *error = nil;
         sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self userId:userId associateId:self.associateId error:&error];
-        BOXAssert(error != nil, @"Error getting background upload task %@", error);
+        BOXAssert(error == nil, @"Error getting background upload task %@", error);
     } else {
         sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }

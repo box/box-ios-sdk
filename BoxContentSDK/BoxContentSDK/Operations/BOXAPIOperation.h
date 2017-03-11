@@ -155,7 +155,11 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 @property (nonatomic, readwrite, strong) NSError *error;
 
-
+/**
+ * Stores a unique Id to associate with a background download or upload task
+ * Useful to reconnect to the task upon app restarts, or to resume a previously
+ * cancelled background download
+ */
 @property (nonatomic, readwrite, strong) NSString *associateId;
 
 /**
