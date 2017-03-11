@@ -20,6 +20,8 @@
 @class BOXFileUploadNewVersionRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXPreflightCheckRequest;
+@class BOXFileRepresentationDownloadRequest;
+@class BOXRepresentation;
 
 @interface BOXContentClient (File)
 
@@ -266,5 +268,32 @@
 - (BOXPreflightCheckRequest *)fileUploadPreflightCheckRequestForNewFileVersionWithID:(NSString *)fileID
                                                                                 name:(NSString *)fileName
                                                                                 size:(NSUInteger)fileSize;
+
+/**
+ *  Generate a request to download a given representation of a file to a local filepath.
+ *
+ *  @param fileID          File ID.
+ *  @param localFilePath   Local filepath.
+ *  @param representation  BOXRepresentation to be downloaded
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation;
+
+/**
+ *  Generate a request to download a given representation file to an outputstream.
+ *
+ *  @param fileID          File ID.
+ *  @param outputStream    Outputstream to which downloaded file data will be written.
+ *  @param representation  BOXRepresentation to be downloaded
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                   toOutputStream:(NSOutputStream *)outputStream
+                                                                   representation:(BOXRepresentation *)representation;
+
 
 @end

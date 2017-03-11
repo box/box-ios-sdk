@@ -19,6 +19,7 @@
 #import "BOXFileThumbnailRequest.h"
 #import "BOXPreflightCheckRequest.h"
 #import "BOXFileUploadNewVersionRequest.h"
+#import "BOXFileRepresentationDownloadRequest.h"
 
 @implementation BOXContentClient (File)
 
@@ -211,5 +212,26 @@
     return request;
 }
 
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation
+{
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:localFilePath
+                                                                                                                    fileID:fileID
+                                                                                                            representation:representation];
+    [self prepareRequest:request];
+    return request;
+}
+
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                   toOutputStream:(NSOutputStream *)outputStream
+                                                                   representation:(BOXRepresentation *)representation
+{
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithOutputStream:outputStream
+                                                                                                                fileID:fileID
+                                                                                                        representation:representation];
+    [self prepareRequest:request];
+    return request;
+}
 
 @end

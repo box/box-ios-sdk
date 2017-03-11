@@ -27,6 +27,7 @@
 		C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */; };
 		C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB21A5B00B40060E41B /* QuartzCore.framework */; };
 		C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB41A5B00BA0060E41B /* Security.framework */; };
+		C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */; };
 		C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
 		C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */; };
 		C55FE3221A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55FE3211A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg */; };
@@ -78,6 +79,8 @@
 		C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleItemCell.m; sourceTree = "<group>"; };
 		C540BEB21A5B00B40060E41B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C540BEB41A5B00BA0060E41B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileRepresentionListViewControllerTableViewController.h; sourceTree = "<group>"; };
+		C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileRepresentionListViewControllerTableViewController.m; sourceTree = "<group>"; };
 		C55FE2FC1A5D96EE00032032 /* BOXSampleFileDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleFileDetailsController.h; sourceTree = "<group>"; };
 		C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleFileDetailsController.m; sourceTree = "<group>"; };
 		C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleProgressView.h; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */,
 				3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */,
 				3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */,
+				C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */,
+				C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */,
 				C52D0AC81A5D4D8F00CD4B56 /* BOXSampleItemCell.h */,
 				C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */,
 				C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */,
@@ -402,6 +407,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FD4C4308FD0B5817D795CEBE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -420,6 +440,7 @@
 				C5745C2D1A5AF6CC00824FFA /* BOXSampleAppDelegate.m in Sources */,
 				6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C2A1A5AF6CC00824FFA /* main.m in Sources */,
+				C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
