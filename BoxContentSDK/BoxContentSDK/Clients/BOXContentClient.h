@@ -183,7 +183,7 @@
 + (void)setAPIAuthBaseURL:(NSString *)APIAuthBaseURL;
 + (void)setAPIUploadBaseURL:(NSString *)APIUploadBaseURL;
 
- * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
+/* This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
  * Should be called as soon as possible after BOXContentClient instance is created to allow support for background tasks.
  *
  * If this method has not been called, all background task creations will fail

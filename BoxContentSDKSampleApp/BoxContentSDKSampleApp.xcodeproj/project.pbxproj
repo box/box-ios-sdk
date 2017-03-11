@@ -38,6 +38,8 @@
 		C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */; };
 		E11BED371ADBE5CA00A9216F /* icon-folder-external.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED351ADBE5CA00A9216F /* icon-folder-external.png */; };
 		E11BED381ADBE5CA00A9216F /* icon-folder-external@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */; };
+		E1B857BD1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B857BC1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m */; };
+		E1B857BE1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B857BC1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxSDKSampleAppTests.m; sourceTree = "<group>"; };
 		E11BED351ADBE5CA00A9216F /* icon-folder-external.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external.png"; sourceTree = "<group>"; };
 		E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external@2x.png"; sourceTree = "<group>"; };
+		E1B857BB1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileRepresentionListViewControllerTableViewController.h; sourceTree = "<group>"; };
+		E1B857BC1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileRepresentionListViewControllerTableViewController.m; sourceTree = "<group>"; };
 		F9EEE865F11B4AC3E4B76C63 /* Pods-BoxContentSDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +217,8 @@
 				C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */,
 				6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */,
 				6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */,
+				E1B857BB1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.h */,
+				E1B857BC1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m */,
 				C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */,
 				C5745C341A5AF6CC00824FFA /* Images.xcassets */,
 				C5745C361A5AF6CC00824FFA /* LaunchScreen.xib */,
@@ -411,6 +417,7 @@
 			files = (
 				C5745C301A5AF6CC00824FFA /* BOXSampleAccountsViewController.m in Sources */,
 				C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */,
+				E1B857BD1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 				C52D0A9F1A5C27A700CD4B56 /* BOXSampleFolderViewController.m in Sources */,
 				C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */,
 				86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */,
@@ -429,6 +436,7 @@
 			files = (
 				6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */,
+				E1B857BE1E7396A2007FFC58 /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
