@@ -556,6 +556,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response
 {
     @synchronized (self) {
+        //FIXME: review if we need to check for response != nil before processing
         [self processResponse:response];
     }
 }
@@ -563,7 +564,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     @synchronized (self) {
-        [self.responseData appendData:data];
+        if (data != nil) {
+            [self.responseData appendData:data];
+        }
     }
 }
 

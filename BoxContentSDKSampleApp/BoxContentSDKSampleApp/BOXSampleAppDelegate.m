@@ -29,9 +29,8 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authenticationController];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
-    });
+
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
     self.sessionIdToRequest = [[NSMutableDictionary alloc] init];
 
     //FIXME: ask content client to reconnect to background sessions it knows of??

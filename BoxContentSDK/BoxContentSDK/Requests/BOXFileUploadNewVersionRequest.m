@@ -15,7 +15,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
-@property (nonatomic, readwrite, strong) NSString *associateId;
+@property (nonatomic, readwrite, copy) NSString *associateId;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
