@@ -5,7 +5,7 @@
 
 #import "BOXRequest_Private.h"
 #import "BOXFileDownloadRequest.h"
-
+#import "BOXLog.h"
 #import "BOXAPIDataOperation.h"
 
 @interface BOXFileDownloadRequest ()
@@ -13,7 +13,8 @@
 @property (nonatomic, readonly, strong) NSString *destinationPath;
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
-
+@property (nonatomic, readwrite, strong) NSURLSessionDownloadTask *downloadTask;
+@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock downloadTaskReplacedBlock;
 @end
 
 @implementation BOXFileDownloadRequest
@@ -27,6 +28,19 @@
     }
     return self;
 }
+
+
+- (instancetype)initWithLocalDestination:(NSString *)destinationPath
+                                  fileID:(NSString *)fileID
+                            downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
+{
+    self = [self initWithLocalDestination:destinationPath fileID:fileID];
+    self.downloadTask = downloadTask;
+    self.downloadTaskReplacedBlock = downloadTaskReplacedBlock;
+    return self;
+}
+
 - (instancetype)initWithOutputStream:(NSOutputStream *)outputStream
                               fileID:(NSString *)fileID
 {
@@ -36,7 +50,6 @@
     }
     return self;
 }
-
 
 - (BOXAPIOperation *)createOperation
 {
@@ -56,19 +69,17 @@
                                               queryStringParameters:queryParameters
                                                      bodyDictionary:nil
                                                        successBlock:nil
-                                                       failureBlock:nil];
+                                                       failureBlock:nil
+                                                        sessionTask:self.downloadTask
+                                            sessionTaskReplacedBlock:self.downloadTaskReplacedBlock];
 
     dataOperation.modelID = self.fileID;
     
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
-    
-    if (self.outputStream != nil) {
-        dataOperation.outputStream = self.outputStream;
-    } else {
-        dataOperation.outputStream = [[NSOutputStream alloc] initToFileAtPath:self.destinationPath append:NO];
-    }
 
+    dataOperation.outputStream = self.outputStream;
+    dataOperation.destinationPath = self.destinationPath;
     [self addSharedLinkHeaderToRequest:dataOperation.APIRequest];
 
     return dataOperation;

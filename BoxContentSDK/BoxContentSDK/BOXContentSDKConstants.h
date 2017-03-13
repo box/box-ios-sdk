@@ -54,6 +54,7 @@ extern BOXAPIHTTPMethod *const BOXAPIHTTPMethodPUT;
 typedef NSString BOXAPIHTTPHeader;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderAuthorization;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentType;
+extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentLength;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch;
@@ -88,6 +89,7 @@ extern NSString *const BOXOAuth2AuthDelegationNewClientKey;
 
 // Notifications
 extern NSString *const BOXUserWasLoggedOutDueToErrorNotification;
+extern NSString *const BOXAuthOperationDidCompleteNotification;
 
 // Item Types
 typedef NSString BOXAPIItemType;
@@ -439,6 +441,24 @@ extern NSString *const BOXAPIEnterpriseEventTypeCollaborationInvite;
 extern NSString *const BOXAPIEnterpriseEventTypeCollaborationExpiration;
 extern NSString *const BOXAPIEnterpriseEventTypeItemSync;
 extern NSString *const BOXAPIEnterpriseEventTypeItemUnsync;
+
+//urlsessiontask cache dir, file prefix
+extern NSString *const BOXURLSessionTaskCacheDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheSessionsDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheUsersDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheDestinationFilePath;
+extern NSString *const BOXURLSessionTaskCacheResumeData;
+extern NSString *const BOXURLSessionTaskCacheResponse;
+extern NSString *const BOXURLSessionTaskCacheResponseData;
+extern NSString *const BOXURLSessionTaskCacheError;
+
+typedef NS_ENUM(NSUInteger, BOXURLSessionTaskCacheFileType) {
+    BOXURLSessionTaskCacheFileTypeDestinationFilePath = 0,
+    BOXURLSessionTaskCacheFileTypeResumeData = 1,
+    BOXURLSessionTaskCacheFileTypeResponse = 2,
+    BOXURLSessionTaskCacheFileTypeResponseData = 3,
+    BOXURLSessionTaskCacheFileTypeError = 4
+};
 
 typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
     BOXThumbnailSize32 = 32,

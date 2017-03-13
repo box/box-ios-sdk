@@ -35,6 +35,7 @@
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
 #import "BOXAppUserSession.h"
+#import "BOXURLSessionManager.h"
 
 // AppToApp
 
@@ -138,5 +139,6 @@
 #import "BOXMetadataUpdateTask.h"
 #import "BOXMetadataTemplate.h"
 #import "BOXMetadataTemplateField.h"
+#import "BOXRepresentation.h"
 
 

@@ -11,6 +11,7 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXAbstractSession.h"
 
 #define WWW_AUTHENTICATE_HEADER           (@"WWW-Authenticate")
 
@@ -62,22 +63,21 @@
     return NO;
 }
 
-#pragma mark - NSURLConnectionDataDelegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)processResponse:(NSURLResponse *)response
 {
-    [super connection:connection didReceiveResponse:response];
+    [super processResponse:response];
 
     BOOL isOAuth2TokenExpired = [self isAccessTokenExpired];
 
     if (isOAuth2TokenExpired)
     {
         [self handleExpiredAccessToken];
-        
+
         // re-enqueue operation in the same queue referred to by the OAuth2 session if possible.
         if ([self canBeReenqueued] && self.timesReenqueued == 0)
         {
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
-            
+
             BOXAPIJSONOperation *operationCopy = [self copy];
             operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
             [self.session.queueManager enqueueOperation:operationCopy];

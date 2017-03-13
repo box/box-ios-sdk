@@ -9,6 +9,7 @@
 #import "BOXFileRepresentationDownloadRequest.h"
 #import "BOXRepresentation.h"
 #import "BOXAPIDataOperation.h"
+#import "BOXLog.h"
 #import "BOXRequest_Private.h"
 
 @interface BOXFileRepresentationDownloadRequest ()

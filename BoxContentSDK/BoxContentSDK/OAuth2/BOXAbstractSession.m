@@ -29,6 +29,8 @@ static NSString *staticKeychainAccessGroup;
 
 @interface BOXAbstractSession ()
 
+@property (nonatomic, readwrite, strong) BOXURLSessionManager *urlSessionManager;
+
 @end
 
 @implementation BOXAbstractSession
@@ -42,11 +44,12 @@ static NSString *staticKeychainAccessGroup;
     return self;
 }
 
-- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager urlSessionManager:(BOXURLSessionManager *)urlSessionManager
 {
     self = [self init];
     if (self) {
         _queueManager = queueManager;
+        _urlSessionManager = urlSessionManager;
     }
     
     return self;

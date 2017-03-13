@@ -8,7 +8,7 @@
 
 #import "BOXSampleFileDetailsController.h"
 #import "BOXSampleProgressView.h"
-#import <BoxContentSDK/BOXRepresentation.h>
+#import "BOXSampleAppSessionManager.h"
 #import "BOXFileRepresentionListViewControllerTableViewController.h"
 
 NS_ENUM(NSInteger, FileDetailsControllerSection) {
@@ -229,22 +229,44 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
-    
-    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath];
+    NSString *itemID = self.itemID;
+    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
+                                                             toLocalFilePath:finalPath
+                                                                downloadTask:nil
+                                                   downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
+        if (oldSessionTask != nil) {
+            [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
+        }
+        if (newSessionTask != nil) {
+            NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
+            BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:itemID destinationPath:finalPath];
+            [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
+        }
+    }];
+
     [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-        if (error == nil) {
-            self.tableView.tableHeaderView = nil;
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Your file was downloaded in the documents directory." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
-        }
+        self.tableView.tableHeaderView = nil;
+        NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self dismissViewControllerAnimated:YES
+                                                                                      completion:nil];
+                                                         }];
+        [alertController addAction:OKAction];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
     }];
     
 //    //Alternative donwload method via a NSOutputStream
-//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];    
+//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];
 //    BOXFileDownloadRequest *request = [client fileDownloadRequestWithFileID:self.itemID toOutputStream:outputStream];
 //    [request performRequestWithProgress:nil completion:^(NSError *error) {
 //        // your file data here

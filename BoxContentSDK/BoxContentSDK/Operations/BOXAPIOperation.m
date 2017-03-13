@@ -8,6 +8,7 @@
 
 #import "BOXAPIOperation_Private.h"
 
+#import "BOXOAuth2Session.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "NSString+BOXURLHelper.h"
@@ -66,7 +67,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 @synthesize body = _body;
 @synthesize queryStringParameters = _queryStringParameters;
 @synthesize APIRequest = _APIRequest;
-@synthesize connection = _connection;
 
 // request response properties
 @synthesize responseData = _responseData;
@@ -112,9 +112,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
+        // delay setting up the session task as long as possible so the authentication credentials remain fresh
 
         _APIRequest = nil;
-        _connection = nil; // delay setting up the connection as long as possible so the authentication credentials remain fresh
         
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
@@ -124,7 +124,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         _APIRequest = APIRequest;
 
-        _responseData = [NSMutableData data];
+        //NOTE: This data object needs to be initialized for the subclasses that are going to use it
+        // (see BOXAPIDataOperation as an example). Some subclasses will not use this object and for
+        // correct processing it needs to remain nil rather than an empty mutable data object.
+        _responseData = nil;
 
         self.state = BOXAPIOperationStateReady;
     }
@@ -201,11 +204,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)prepareAPIRequest
 {
     BOXAbstract();
-}
-
-- (void)startURLConnection
-{
-    [self.connection start];
 }
 
 #pragma mark - Process API call results
@@ -289,6 +287,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
+- (NSURLSessionTask *)createSessionTask
+{
+    __weak BOXAPIOperation *weakSelf = self;
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTaskWithRequest:self.APIRequest
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+                                                }];
+    return sessionTask;
+}
+
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
@@ -296,15 +304,18 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     {
         @synchronized(self.session)
         {
+            //Note: if sessionTask exists, we cannot change its API request
+            //make sure you recreate sessionTask with the new API request if needed
             [self prepareAPIRequest];
             self.accessToken = self.session.accessToken;
         }
 
         if (self.error == nil && ![self isCancelled])
         {
-            self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
-            BOXLog(@"Starting %@", self);
-            [self startURLConnection];
+            if (self.sessionTask == nil) {
+                self.sessionTask = [self createSessionTask];
+            }
+            [self.sessionTask resume];
         }
         else
         {
@@ -324,6 +335,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
+- (void)setSessionTask:(NSURLSessionTask *)sessionTask
+{
+    NSURLSessionTask *oldSessionTask = _sessionTask;
+    _sessionTask = sessionTask;
+    if (_sessionTaskReplacedBlock != nil) {
+        _sessionTaskReplacedBlock(oldSessionTask, _sessionTask);
+    }
+
+}
+
 - (void)cancel
 {
     [self performSelector:@selector(cancelConnection) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
@@ -340,10 +361,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
 
-    if (self.connection)
-    {
-        [self.connection cancel];
-        [self connection:self.connection didFailWithError:self.error];
+    if (self.sessionTask != nil) {
+        [self.sessionTask cancel];
     }
 }
 
@@ -353,7 +372,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self sendLogoutNotification];
     }
     [self performCompletionCallback];
-    self.connection = nil;
+    self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
 }
@@ -410,9 +429,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                                                       userInfo:errorInfo];
 }
 
-#pragma mark - NSURLConnectionDataDelegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)processResponse:(NSURLResponse *)response
 {
+    //NOTE: A nil response object will result in an error. This method expects to process a valid
+    // server response and should not be called with a nil or unknown response (unless an error is
+    // desirable for those scenarios).
+    //FIXME: Should evaluate a more specific error code for a nil response to seperate from an unknown response.
     self.HTTPResponse = (NSHTTPURLResponse *)response;
 
     if (self.HTTPResponse.statusCode == 202 || self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300)
@@ -467,26 +489,49 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
+#pragma mark - url session task handler
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-    if (self.error == nil)
-    {
+    if (self.HTTPResponse == nil && response != nil) {
+        // If the response has not already been handled (some, but not all, operations get
+        // 'processResponse:' earlier in the process), handle it here.
+        // Also, do not handle a nil response. That could happen if there was a failure on the whole
+        // network connection, for example. In that case, there is no response.
+        [self processResponse:response];
+    }
+
+    if (data != nil) {
+        // If the data object is nil, ignore it. Otherwise we need to process the data.
+        [self processResponseData:data];
+    }
+
+    //FIXME: Need to evaluate moving this to be the first step in this method. If that were
+    // the case, more changes may be necessary around setting of self.error in the response
+    // and data processing.
+    if (self.error == nil) {
+        // If we do not already have an error set, use the passed in error.
         self.error = error;
     }
+
     [self finish];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+#pragma mark - BOXURLSessionTaskDelegate
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
-    [self processResponseData:self.responseData];
-    [self finish];
+    [self finishURLSessionTaskWithData:self.responseData response:response error:error];
+}
+
+- (void)processIntermediateResponse:(NSURLResponse *)response
+{
+    [self processResponse:response];
+}
+
+- (void)processIntermediateData:(NSData *)data
+{
+    [self.responseData appendData:data];
 }
 
 #pragma mark - Lock

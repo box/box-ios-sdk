@@ -65,7 +65,7 @@ typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalB
 @property (nonatomic, readwrite, strong) BOXDownloadFailureBlock failureBlock;
 
 /**
- * Called when the API call successfully receives bytes from the `NSURLConnection`.
+ * Called when the API call successfully receives bytes from the network.
  *
  * **Note**: All callbacks are executed on the same queue as the BOXAPIOperation they are associated with.
  * If you wish to interact with the UI in a callback block, dispatch to the main queue in the
@@ -81,7 +81,7 @@ typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalB
 - (void)performCompletionCallback;
 
 /**
- * When data is successfully received from [self.connection]([BOXAPIOperation connection]),
+ * When data is successfully received over the network,
  * this method is called to trigger progressBlock.
  * @see progressBlock
  */
@@ -111,8 +111,8 @@ typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalB
 
 /**
  * This method is called with by BOXAPIOperation with the assumption that all
- * data received from the `NSURLConnection` is buffered. This operation
- * streams all received data to its output stream, so do nothing in this method.
+ * data received from the network is buffered. This operation streams all
+ * received data to its output stream, so do nothing in this method.
  *
  * @param data This data should be empty.
  */

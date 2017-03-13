@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "BOXOAuth2Session.h"
-
 #import "BOXContentSDKConstants.h"
+#import "BOXURLSessionManager.h"
+
+@class BOXAbstractSession;
 
 // Success and Failure callbacks
 //
@@ -25,6 +25,7 @@ typedef void (^BOXAPIJSONFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 // These types of callback blocks are used for Box APIs that return binary data, such as downloads
 typedef void (^BOXAPIDataSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *bodyData);
 typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSData *bodyData);
+typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask);
 
 /**
  * BOXAPIOpertation is an abstract base class for all Box API call operations. BOXAPIOperation is
@@ -46,12 +47,12 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * An API call is considered to have succeeded if it returns with an HTTP status code in the
  * 2xx range, with an exception made for 202. 202, 3xx, 4xx, and 5xx are all treated as errors.
  *
- * NSURLConnectionDataDelegate
+ * BOXURLSessionTaskDelegate
  * ===========================
- * BOXAPIOperation instances issue API calls using NSURLConnection. Each BOXAPIOperation acts
- * as the delegate for its own API call. [BOXAPIOperations](BOXAPIOperation) are not concurrent
- * NSOperations, so they keep the runloop they are running on open during the lifetime of the
- * request to enable receiving delegate callbacks.
+ * BOXAPIOperation instances issue API calls using NSURLSession. Each BOXAPIOperation acts
+ * as the delegate for its own API call's session task. [BOXAPIOperations](BOXAPIOperation) are
+ * not concurrent NSOperations, so they keep the runloop they are running on open during the
+ * lifetime of the request to enable receiving delegate callbacks, with the exception of background tasks.
  *
  * By default, a BOXAPIOperation will buffer received data in memory to be proccessed after the connection
  * terminates. See BOXAPIDataOperation for a subclass that does not use this default behavior.
@@ -85,7 +86,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * - performCompletionCallback
  *
  */
-@interface BOXAPIOperation : NSOperation <NSURLConnectionDataDelegate>
+@interface BOXAPIOperation : NSOperation <BOXURLSessionTaskDelegate>
 
 /** @name Authorization */
 
@@ -130,11 +131,6 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 @property (nonatomic, readwrite, strong) NSMutableURLRequest *APIRequest;
 
-/**
- * The URL connection is lazily instantiated when the BOXAPIOperation begins executing.
- */
-@property (nonatomic, readwrite, strong) NSURLConnection *connection;
-
 /** @name Request response properties */
 
 /**
@@ -159,6 +155,8 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  * @see performCompletionCallback
  */
 @property (nonatomic, readwrite, strong) NSError *error;
+
+@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock sessionTaskReplacedBlock;
 
 /**
  * Do not call this. It is used internally.
@@ -228,13 +226,15 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 - (void)prepareAPIRequest;
 
-/**
- * Prepare the BOXAPIOperation to receive delegate callbacks for connection and start connection.
- */
-- (void)startURLConnection;
-
-#pragma mark - Process API call results
+#pragma mark - Process API call results BOXURLSessionTaskDelegate
 /** @name Process API call results */
+
+/**
+ * Process the received response from the request including extracting error and reenqueue operation if needed
+ *
+ * @param response The response received from Box as a result of the API call. A nil response will result in an error.
+ */
+- (void)processResponse:(NSURLResponse *)response;
 
 /**
  * Process the received data from the request and create a response that may be used

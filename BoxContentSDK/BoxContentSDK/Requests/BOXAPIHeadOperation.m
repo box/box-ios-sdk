@@ -8,6 +8,7 @@
 
 #import "BOXAPIHeadOperation.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXAbstractSession.h"
 
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2
@@ -27,6 +28,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.timesReenqueued = self.timesReenqueued;
+    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     // Migrate header fields (this is especially important for requests where some of the key
     // information is in the headers, such as Shared Link requests for the underlying item).
@@ -67,10 +69,10 @@
     return JSONEncodedBody;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)processResponse:(NSURLResponse *)response
 {
-    [super connection:connection didReceiveResponse:response];
-    
+    [super processResponse:response];
+
     if (self.error.code == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.

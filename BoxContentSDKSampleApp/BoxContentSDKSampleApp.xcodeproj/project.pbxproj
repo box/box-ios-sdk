@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */; };
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
+		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
+		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
@@ -36,7 +39,6 @@
 		C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */; };
 		E11BED371ADBE5CA00A9216F /* icon-folder-external.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED351ADBE5CA00A9216F /* icon-folder-external.png */; };
 		E11BED381ADBE5CA00A9216F /* icon-folder-external@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */; };
-		FF72D1037A58022AA799D120 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACFEAB9B52E3382F929F4277 /* libPods-BoxContentSDKSampleApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,15 +52,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A9C7DE1CFABC1AEDAD5EFAB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
-		7A1772C788E54674F1E91003 /* Pods-BoxContentSDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
+		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
-		ACFEAB9B52E3382F929F4277 /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B81DA21B0DE0A8E8C921AED1 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C52D0A931A5C1C7A00CD4B56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,8 +100,7 @@
 		C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxSDKSampleAppTests.m; sourceTree = "<group>"; };
 		E11BED351ADBE5CA00A9216F /* icon-folder-external.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external.png"; sourceTree = "<group>"; };
 		E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external@2x.png"; sourceTree = "<group>"; };
-		F6434393254E898754C5BA42 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F7A06A5D74A2C2DD0556D560 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +113,7 @@
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
-				FF72D1037A58022AA799D120 /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
+				0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,13 +127,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		79B88AA4A04D2B7D56779877 /* Pods */ = {
+		1D013461979FCB58E6009842 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F6434393254E898754C5BA42 /* Pods.debug.xcconfig */,
-				F7A06A5D74A2C2DD0556D560 /* Pods.release.xcconfig */,
-				B81DA21B0DE0A8E8C921AED1 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */,
-				7A1772C788E54674F1E91003 /* Pods-BoxContentSDKSampleApp.release.xcconfig */,
+				ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */,
+				36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -145,8 +144,7 @@
 				C540BEB41A5B00BA0060E41B /* Security.framework */,
 				C540BEB21A5B00B40060E41B /* QuartzCore.framework */,
 				C52D0A871A5C18D100CD4B56 /* Foundation.framework */,
-				0A9C7DE1CFABC1AEDAD5EFAB /* libPods.a */,
-				ACFEAB9B52E3382F929F4277 /* libPods-BoxContentSDKSampleApp.a */,
+				99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,7 +181,7 @@
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				C5745C251A5AF6CC00824FFA /* Products */,
 				C52D0A8D1A5C18ED00CD4B56 /* Frameworks */,
-				79B88AA4A04D2B7D56779877 /* Pods */,
+				1D013461979FCB58E6009842 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -218,6 +216,8 @@
 				C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */,
 				C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */,
 				C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */,
+				6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */,
+				6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */,
 				C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */,
 				C5745C341A5AF6CC00824FFA /* Images.xcassets */,
 				C5745C361A5AF6CC00824FFA /* LaunchScreen.xib */,
@@ -261,13 +261,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */;
 			buildPhases = (
-				4A15E9F68B6D9619C0146C33 /* 📦 Check Pods Manifest.lock */,
+				1AC630AA0F479BA941CDFAC9 /* [CP] Check Pods Manifest.lock */,
 				C5745C201A5AF6CC00824FFA /* Sources */,
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
-				2BE3D336859314A5AA3D46AA /* 📦 Copy Pods Resources */,
-				966EC888F9815C28566AA8AE /* 📦 Embed Pods Frameworks */,
-				FD4C4308FD0B5817D795CEBE /* Embed Pods Frameworks */,
+				A77481B959EA9596086ACBA3 /* [CP] Embed Pods Frameworks */,
+				882FACF6EC21A89613A9E814 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -363,14 +362,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2BE3D336859314A5AA3D46AA /* 📦 Copy Pods Resources */ = {
+		1AC630AA0F479BA941CDFAC9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		882FACF6EC21A89613A9E814 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,44 +392,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4A15E9F68B6D9619C0146C33 /* 📦 Check Pods Manifest.lock */ = {
+		A77481B959EA9596086ACBA3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		966EC888F9815C28566AA8AE /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD4C4308FD0B5817D795CEBE /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +423,7 @@
 				3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */,
 				C52D0ABF1A5D4B4100CD4B56 /* BOXSampleThumbnailsHelper.m in Sources */,
 				C5745C2D1A5AF6CC00824FFA /* BOXSampleAppDelegate.m in Sources */,
+				6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C2A1A5AF6CC00824FFA /* main.m in Sources */,
 				C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 			);
@@ -448,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,12 +548,13 @@
 		};
 		C5745C481A5AF6CC00824FFA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B81DA21B0DE0A8E8C921AED1 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */;
+			baseConfigurationReference = ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
@@ -582,12 +569,13 @@
 		};
 		C5745C491A5AF6CC00824FFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A1772C788E54674F1E91003 /* Pods-BoxContentSDKSampleApp.release.xcconfig */;
+			baseConfigurationReference = 36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",

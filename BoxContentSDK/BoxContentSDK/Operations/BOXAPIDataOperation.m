@@ -7,9 +7,10 @@
 //
 
 #import "BOXAPIDataOperation.h"
-
+#import "BOXAPIOperation_Private.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
+#import "BOXAbstractSession.h"
 
 #define MAX_REENQUE_DELAY 60
 #define REENQUE_BASE_DELAY 0.2
@@ -58,8 +59,23 @@
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
         _outputStreamHasSpaceAvailable = YES; // attempt to write to the output stream as soon as we receive data
         _bytesReceived = 0;
+
+        // Initialize the responseData object to mutable data
+        self.responseData = [NSMutableData data];
     }
 
+    return self;
+}
+
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask
+{
+    self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    if (self != nil) {
+        self.sessionTask = urlSessionTask;
+        if (urlSessionTask != nil) {
+            [self.session.urlSessionManager associateBackgroundSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
+        }
+    }
     return self;
 }
 
@@ -77,9 +93,21 @@
     return nil;
 }
 
+- (NSURLSessionTask *)createSessionTask
+{
+    NSURLSessionTask *sessionTask;
+
+    if (self.destinationPath != nil) {
+        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+    } else {
+        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+    }
+    return sessionTask;
+}
+
 - (void)processResponseData:(NSData *)data
 {
-    // Empty data assumes that all data received from the NSURLConnection is buffered. This operation
+    // Empty data assumes that all data received from the network is buffered. This operation
     // streams all received data to its output stream, so do nothing.
     if (data.length == 0) {
         return;
@@ -93,7 +121,7 @@
         NSDictionary *userInfo = @{
                                    NSUnderlyingErrorKey : JSONError,
                                    };
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];;
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];
     }
     else if ([decodedJSON isKindOfClass:[NSDictionary class]] == NO)
     {
@@ -151,9 +179,16 @@
     }
 }
 
+- (void)finish
+{
+    [super finish];
+    [self close];
+}
+
 - (void)dealloc
 {
     if (self.outputStream) {
+        self.outputStream.delegate = nil;
         [self.outputStream close];
         self.outputStream = nil;
     }
@@ -188,17 +223,20 @@
 - (void)abortWithError:(NSError *)error
 {
     [self close];
-    [self.connection cancel];
-    [self connection:self.connection didFailWithError:error];
+    if (self.error == nil) {
+        self.error = error;
+    }
+    [self.sessionTask cancel];
 }
 
-#pragma mark - NSURLConnectionDelegate
+#pragma mark - BOXURLSessionTaskDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)processIntermediateResponse:(NSURLResponse *)response
 {
-    [super connection:connection didReceiveResponse:response];
-    
-    if (self.error.code == BOXContentSDKAPIErrorAccepted) {
+    [super processIntermediateResponse:response];
+
+    self.HTTPResponse = (NSHTTPURLResponse *)response;
+    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
         double delay = [self reenqueDelay];
@@ -213,16 +251,18 @@
 // self.responseData. This operation differs in that it should write its received
 // data immediately to its output stream. Failure to do so will cause downloads to
 // be buffered entirely in memory.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+- (void)processIntermediateData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
         // If we received an error, don't write the response data to the output stream
-        [super connection:connection didReceiveData:data];
+        [super processIntermediateData:data];
     } else {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
-        [self.receivedDataBuffer appendData:data];
-        
+        @synchronized (self.receivedDataBuffer) {
+            [self.receivedDataBuffer appendData:data];
+        }
+
         // If the output stream does have space available, trigger the writeDataToOutputStream
         // handler so the data is consumed by the output stream. This state would occur if
         // an NSStreamEventHasSpaceAvailable event was received but receivedDataBuffer was
@@ -235,16 +275,55 @@
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteTotalBytes:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
-    [super connection:connection didFailWithError:error];
-    [self close];
+    if (self.progressBlock != nil) {
+        self.progressBlock(totalBytesExpectedToWrite, totalBytesWritten);
+    }
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location
 {
-    [super connectionDidFinishLoading:connection];
-    [self close];
+    //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
+    //is called to report file move/replace error if any
+    @synchronized (self) {
+        NSHTTPURLResponse *HTTPResponse = nil;
+        if ([sessionTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
+            HTTPResponse = (NSHTTPURLResponse *)sessionTask.response;
+        }
+        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode >= 300) {
+            // If we received an error, don't write the response data to the destination path
+            self.responseData = [NSData dataWithContentsOfURL:location];
+            [[NSFileManager defaultManager] removeItemAtURL:location error:nil];
+        } else {
+            if (self.destinationPath != nil) {
+                NSError *error = nil;
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
+
+                if (![fileManager fileExistsAtPath:self.destinationPath]) {
+                    [fileManager moveItemAtURL:location toURL:destURL error:&error];
+                } else {
+                    [fileManager replaceItemAtURL:destURL
+                                    withItemAtURL:location
+                                   backupItemName:nil
+                                          options:NSFileManagerItemReplacementUsingNewMetadataOnly
+                                 resultingItemURL:nil
+                                            error:&error];
+                }
+                if (self.error == nil) {
+                    self.error = error;
+                }
+            }
+        }
+    }
+}
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
+{
+    @synchronized (self) {
+        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
+    }
 }
 
 #pragma mark - NSStream Delegate
@@ -259,37 +338,39 @@
 
 - (void)writeDataToOutputStream
 {
-    while ([self.outputStream hasSpaceAvailable])
-    {
-        if (self.receivedDataBuffer.length == 0)
+    @synchronized (self.receivedDataBuffer) {
+        while ([self.outputStream hasSpaceAvailable])
         {
-            self.outputStreamHasSpaceAvailable = YES;
-            return; // bail out because we have nothing to write
-        }
-
-        NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes] maxLength:self.receivedDataBuffer.length];
-
-        if (bytesWrittenToOutputStream == -1)
-        {
-            // Failed to write from to output stream. The download cannot be completed
-            BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
-            NSError *streamWriteError = [self.outputStream streamError];
-            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-            if (streamWriteError) {
-                [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
+            if (self.receivedDataBuffer.length == 0)
+            {
+                self.outputStreamHasSpaceAvailable = YES;
+                return; // bail out because we have nothing to write
             }
-            NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
-            [self abortWithError:downloadError];
 
-            return; // Bail out due to error
-        }
-        else
-        {
-            self.bytesReceived += bytesWrittenToOutputStream;
-            [self performProgressCallback];
+            NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes] maxLength:self.receivedDataBuffer.length];
 
-            // truncate buffer by removing the consumed bytes from the front
-            [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
+            if (bytesWrittenToOutputStream == -1)
+            {
+                // Failed to write from to output stream. The download cannot be completed
+                BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
+                NSError *streamWriteError = [self.outputStream streamError];
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                if (streamWriteError) {
+                    [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
+                }
+                NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
+                [self abortWithError:downloadError];
+
+                return; // Bail out due to error
+            }
+            else
+            {
+                self.bytesReceived += bytesWrittenToOutputStream;
+                [self performProgressCallback];
+
+                // truncate buffer by removing the consumed bytes from the front
+                [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
+            }
         }
     }
 }
@@ -329,6 +410,7 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
+    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     return operationCopy;
 }

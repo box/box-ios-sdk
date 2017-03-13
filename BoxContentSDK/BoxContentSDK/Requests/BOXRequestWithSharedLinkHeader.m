@@ -5,7 +5,7 @@
 
 #import "BOXRequest_Private.h"
 #import "BOXRequestWithSharedLinkHeader.h"
-
+#import "BOXLog.h"
 #import "BOXSharedLinkHeadersHelper.h"
 
 @interface BOXRequestWithSharedLinkHeader()

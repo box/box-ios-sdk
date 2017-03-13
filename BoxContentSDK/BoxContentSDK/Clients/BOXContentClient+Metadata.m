@@ -8,6 +8,11 @@
 
 #import "BOXContentClient+Metadata.h"
 #import "BOXMetadataRequest.h"
+#import "BOXContentClient_Private.h"
+#import "BOXMetadataDeleteRequest.h"
+#import "BOXMetadataCreateRequest.h"
+#import "BOXMetadataUpdateRequest.h"
+#import "BOXMetadataTemplateRequest.h"
 
 @implementation BOXContentClient (Metadata)
 

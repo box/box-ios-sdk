@@ -12,6 +12,7 @@
 #import "BOXAPIOAuth2ToJSONOperation.h"
 #import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXLog.h"
+#import "BOXAppUserSession.h"
 
 /**
  * This internal extension provides a notification callback for completed
