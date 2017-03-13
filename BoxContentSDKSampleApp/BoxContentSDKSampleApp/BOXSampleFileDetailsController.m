@@ -210,8 +210,16 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
     NSString *itemID = self.itemID;
-    //FIXME: create random associateId and save it to cache
     NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+
+    //save information about this background download to allow reconnection to it upon app restarts
+    NSString *userId = self.client.user.modelID;
+    BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+    BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
+    info.fileID = self.itemID;
+    info.destinationPath = finalPath;
+    [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
+
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
                                                              toLocalFilePath:finalPath
                                                                  associateId:associateId];

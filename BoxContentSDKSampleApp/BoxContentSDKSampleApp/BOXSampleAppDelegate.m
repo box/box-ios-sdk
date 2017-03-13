@@ -37,35 +37,6 @@
     return YES;
 }
 
-- (void)recoverDownloadTask:(NSURLSessionDownloadTask *)downloadTask
-{
-    //FIXME: NOTE the sample app does NOT use the default client, need to grab the current active client.
-    BOXContentClient *client = [BOXContentClient defaultClient];
-    BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
-    BOXSampleAppSessionInfo *info = [appSessionManager getSessionTaskInfo:downloadTask.taskIdentifier];
-
-    if (info != nil) {
-        NSLog(@"reconnect download task info %@", info);
-        //FIXME: retrieve associateId from cache
-        NSString *associateId = @"";
-        BOXFileDownloadRequest *request = [client fileDownloadRequestWithID:info.associateId toLocalFilePath:info.destinationPath associateId:associateId];
-
-        //register download task and its equivalent request to allow cancelling of request
-        //if download task finishes before request starts and becomes its delegate
-        @synchronized (self.sessionIdToRequest) {
-            self.sessionIdToRequest[@(downloadTask.taskIdentifier)] = request;
-        }
-        [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-            NSLog(@"download request progress %lld/%lld, info (%@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.associateId, info.destinationPath);
-        } completion:^(NSError *error) {
-            NSLog(@"download request completed, error: %@, info (%@, %@)", error, info.associateId, info.destinationPath);
-            [appSessionManager removeSessionTaskId:downloadTask.taskIdentifier];
-        }];
-    } else {
-        NSLog(@"unrecognized downloadTask %lu", downloadTask.taskIdentifier);
-    }
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -309,6 +309,16 @@
     if (background == YES) {
         tempPath = [path stringByAppendingString:@".temp"];
         associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+
+        //save information about this background upload to allow reconnection to it upon app restarts
+        NSString *userId = self.client.user.modelID;
+        BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+        BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
+        info.fileID = fileID;
+        info.folderID = self.folderID;
+        info.uploadFromLocalFilePath = path;
+        info.uploadMultipartCopyFilePath = tempPath;
+        [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
     }
     if (indexOfFile == NSNotFound) {
         //FIXME: save associateId to cache for reconnection later
