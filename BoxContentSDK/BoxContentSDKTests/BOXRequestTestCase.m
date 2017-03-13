@@ -14,7 +14,7 @@
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
-
+#import "BOXOAuth2Session.h"
 
 @interface BOXAPIMultipartToJSONOperation ()
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent;
