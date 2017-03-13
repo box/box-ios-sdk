@@ -25,7 +25,6 @@ typedef void (^BOXAPIJSONFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 // These types of callback blocks are used for Box APIs that return binary data, such as downloads
 typedef void (^BOXAPIDataSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *bodyData);
 typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSData *bodyData);
-typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask);
 
 /**
  * BOXAPIOpertation is an abstract base class for all Box API call operations. BOXAPIOperation is
@@ -156,7 +155,12 @@ typedef void (^BOXSessionTaskReplacedBlock)(NSURLSessionTask *oldSessionTask, NS
  */
 @property (nonatomic, readwrite, strong) NSError *error;
 
-@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock sessionTaskReplacedBlock;
+/**
+ * Stores a unique Id to associate with a background download or upload task
+ * Useful to reconnect to the task upon app restarts, or to resume a previously
+ * cancelled background download
+ */
+@property (nonatomic, readwrite, copy) NSString *associateId;
 
 /**
  * Do not call this. It is used internally.

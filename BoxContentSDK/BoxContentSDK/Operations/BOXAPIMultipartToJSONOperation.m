@@ -30,7 +30,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 #pragma mark - Upload Operation
 
-@interface BOXAPIMultipartToJSONOperation () <BOXURLSessionUploadTaskDelegate>
+@interface BOXAPIMultipartToJSONOperation ()
 {
     dispatch_once_t _pred;
 }
@@ -44,6 +44,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 @end
 
+/* *
+ * To make a new BOXAPIOperation support background upload similarly to BOXAPIMultipartToJSONOperation, implement
+ * protocol BOXURLSessionUploadTaskDelegate and override its createSessionTask exposed from BOXAPIOperation_Private.h
+ * to return a foreground upload or background upload accordingly
+ */
 @implementation BOXAPIMultipartToJSONOperation
 
 #pragma mark - Append data to upload operation
@@ -96,11 +101,15 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
+    NSString *userId = self.session.user.modelID;
+
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self];
+        NSError *error = nil;
+        sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId error:&error];
+        BOXAssert(error == nil, @"Error getting background upload task %@", error);
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager foregroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
@@ -114,22 +123,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     @synchronized (self) {
         if (data != nil) {
             [self processResponseData:data];
         }
-    }
-}
-
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
-{
-    @synchronized (self) {
-        if (error == nil && self.error == nil && self.responseJSON == nil) {
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:nil];
-        }
-        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
     }
 }
 

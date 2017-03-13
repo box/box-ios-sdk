@@ -172,6 +172,29 @@
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
 
 /**
+ * This method needs to be called once in main app to be ready to
+ * support background upload/download tasks.
+ * If this method has not been called, all background task creations will fail
+ *
+ * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
+ * @param rootCacheDir      root directory for caching background session tasks' data
+ */
++ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+
+/**
+ * This method needs to be called once in app extensions to be ready to
+ * support background upload/download tasks.
+ * If this method has not been called, all background task creations will fail
+ *
+ * @param backgroundSessionId background session id to create background session with
+ * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
+ * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
+ *                          as rootCacheDir for main app to allow main app takes over background session
+ *                          tasks created from extensions
+ */
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir;
+
+/**
  * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
  * Should be called as soon as possible after BOXContentClient instance is created to allow support for background tasks.
  *
@@ -182,7 +205,7 @@
  *                          A task delegate can always be re-associated with a session task by calling
  *                          associateSessionTaskId:withTaskDelegate:
  */
-- (void)setUpToSupportBackgroundTasksWithDefaultDelegate:(id<BOXURLSessionManagerDelegate>)delegate;
++ (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId;
 
 /**
  *  API base URLs.

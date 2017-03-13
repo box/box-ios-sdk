@@ -58,6 +58,25 @@ static NSString *sessionTaskIdToAssociateIdKey = @"sessionTaskIdToAssociateId";
     return defaultManager;
 }
 
++ (NSString *)rootCacheDir
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [paths objectAtIndex:0];
+}
+
++ (NSString *)generateRandomStringWithLength:(NSInteger)length
+{
+    NSString *letters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:length];
+
+    for (NSInteger i = 0; i < length; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+
+    return randomString;
+}
+
 - (id)init
 {
     self = [super init];

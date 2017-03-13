@@ -21,9 +21,19 @@
 
 @end
 
+@interface BOXURLBackgroundSessionIdAndSessionTaskId : NSObject
+
+@property (nonatomic, copy, readwrite) NSString *backgroundSessionId;
+@property (nonatomic, assign, readwrite) NSUInteger sessionTaskId;
+
+- (id)initWithBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId;
+
+@end
+
 @protocol BOXURLSessionCacheClientDelegate <NSObject>
 
 @optional
+
 // allow delegate to encrypt data before BOXURLSessionCacheClient persists it to disk
 - (NSData *)encryptData:(NSData *)data;
 
@@ -36,11 +46,12 @@
  * BOXURLSessionCacheClient is used to persist data for background download/upload session tasks to provide to task delegates
  * for processing once the task delegates are ready.
  *
- * BOXURLSessionCacheClient will require a root directory to cache its data at initialization, and it will create the sub directory
- * structures to persist data accordingly.
+ * BOXURLSessionCacheClient will require a root directory to cache its data at initialization, and it will create the
+ * sub directory structures to persist data accordingly.
  *
- * 1. To store data specific to a background session task uniquely identified by background session id and session task id,
- * we use sub-directory /sessions/$backgroundSessionId/$sessionTaskId, which will contain up to 5 files:
+ * 1. To store data specific to an on-going background session task uniquely identified by background session id
+ * and session task id, we use sub-directory onGoingSessionTasks/$backgroundSessionId/$sessionTaskId,
+ * which will contain up to 6 files:
  *
  * - destinationFilePath: store the destination file path of downloaded file, applicable for background download task only
  * - resumeData:          store the resume data of background download task which allows us to resume
@@ -49,9 +60,13 @@
  * - responseData:        store the response data (could contain error from server)
  * - response:            store NSURLResponse
  * - error:               store client-side NSError
+ * - userIdAndAssociateId:store userId and associateId that this session task associates with
  *
  * 2. To keep track of whose user and its associateId the session task belongs to, we save backgroundSessionId and sessionTaskId
- * as a file name under sub-directory /users/$userId/$associateId with format $backgroundSessionId-$sessionTaskId
+ * as a file name under sub-directory users/$userId/$associateId/info with format $backgroundSessionId-$sessionTaskId
+ *
+ * 3. Once session tasks complete, their cached info under onGoingSessionTasks/$backgroundSessionId/$sessionTaskId dir
+ * will be moved into users/$userId/$associateId/completed dir
  */
 @interface BOXURLSessionCacheClient : NSObject
 
@@ -64,6 +79,11 @@
  * Delegate to allow encrypting data before persisting to disk, and can be left unset.
  */
 @property (nonatomic, weak, readwrite) id<BOXURLSessionCacheClientDelegate> delegate;
+
+/**
+ * Specify root dir for all cache data
+ */
+- (id)initWithCacheRootDir:(NSString *)cacheRootDir;
 
 /**
  * Cache the relationship between the session task and the user who started it as well as its equivalent associateId
@@ -139,7 +159,7 @@
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId taskError:(NSData *)taskError error:(NSError **)error;
 
 /**
- * Get all cached data of the background session task associated with this userId and associateId
+ * Get all cached data of the completed background session task associated with this userId and associateId
  *
  * @param userId            Id of user started the session task. Cannot be nil
  * @param associateId       Id to associate with the session task. Cannot be nil
@@ -147,7 +167,7 @@
  *
  * @return BOXURLSessionTaskCache   all cached data of the session task
  */
-- (BOXURLSessionTaskCachedInfo *)cachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOXURLSessionTaskCachedInfo *)completedCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError;
 
 /**
  * Delete all cached data of the background session task associated with this userId and associateId
@@ -159,5 +179,80 @@
  * @return YES if succeeded, NO if failed
  */
 - (BOOL)deleteCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+
+/**
+ * Get cached destination file path for a download session task
+ *
+ * @param backgroundSessionId   Id of the background session
+ * @param sessionTaskId         Id of the session task
+ *
+ * @return destination file path
+ */
+- (NSString *)destinationFilePathForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId;
+
+/**
+ * Get cached response data for a session task
+ *
+ * @param backgroundSessionId   Id of the background session
+ * @param sessionTaskId         Id of the session task
+ *
+ * @return destination file path
+ */
+- (NSData *)responseDataForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId;
+
+/**
+ * Get background session Id and session task Id associate with userId and associateId
+ *
+ * @param userId        Id of user started the session task
+ * @param associateId   Id to associate with the session tas
+ * @param error         error retrieving background session Id and session task Id
+ *
+ * @return BOXURLBackgroundSessionIdAndSessionTaskId associate with userId and associateId
+ */
+- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+
+/**
+ * Call to complete a session task by moving its cached info from on-going session tasks' subdir into users' completed subdir
+ *
+ * @param backgroundSessionId   Id of the background session
+ * @param sessionTaskId         Id of the session task
+ * @param error                 error if fail to complete
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)completeSessionTaskForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)outError;
+
+/**
+ * Call to complete all on-going session tasks of a background session unless in the excludingSessionTaskIds list
+ *
+ * @param backgroundSessionId       Id of the background session
+ * @param excludingSessionTaskIds   Ids of session tasks to keep
+ * @param error                     error if fail to complete any session tasks
+ *
+ * @return YES if succeeded, NO if failed to complete any session tasks
+ */
+- (BOOL)completeOnGoingSessionTasksForBackgroundSessionId:(NSString *)backgroundSessionId excludingSessionTaskIds:(NSSet *)excludingSessionTaskIds error:(NSError **)outError;
+
+/**
+ * Check if session task associated with this userId and associateId has completed
+ *
+ * @param userId            Id of user started the session task. Cannot be nil
+ * @param associateId       Id to associate with the session task. Cannot be nil
+ *
+ * @return YES if completed, NO if not
+ */
+- (BOOL)isSessionTaskCompletedForUserId:(NSString *)userId associateId:(NSString *)associateId;
+
+/**
+ * Clean up on-going session tasks' cached info of backgroundSessionId.
+ * This does not clean up info relating to user and completed cached info, which
+ * can be done using deleteCachedInfoForUserId:associateId:error
+ *
+ * @param backgroundSessionId   Id of the background session
+ * @param error                 error if fail to complete
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error;
 
 @end

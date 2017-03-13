@@ -37,6 +37,11 @@
 
 @end
 
+/* *
+ * To make a new BOXAPIOperation support background download similarly to BOXAPIDataOperation, implement
+ * protocol BOXURLSessionDownloadTaskDelegate and override its createSessionTask exposed from BOXAPIOperation_Private.h
+ * to return a foreground download or background download accordingly
+ */
 @implementation BOXAPIDataOperation
 
 @synthesize successBlock = _successBlock;
@@ -67,18 +72,6 @@
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session urlSessionTask:(NSURLSessionTask *)urlSessionTask
-{
-    self = [self initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
-    if (self != nil) {
-        self.sessionTask = urlSessionTask;
-        if (urlSessionTask != nil) {
-            [self.session.urlSessionManager associateBackgroundSessionTaskId:urlSessionTask.taskIdentifier withTaskDelegate:self];
-        }
-    }
-    return self;
-}
-
 - (void)prepareAPIRequest
 {
     [super prepareAPIRequest];
@@ -93,14 +86,22 @@
     return nil;
 }
 
+- (NSString *)destinationFilePath
+{
+    return self.destinationPath;
+}
+
 - (NSURLSessionTask *)createSessionTask
 {
     NSURLSessionTask *sessionTask;
+    NSString *userId = self.session.user.modelID;
 
-    if (self.destinationPath != nil) {
-        sessionTask = [self.session.urlSessionManager createBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+    if (self.destinationPath != nil && self.associateId != nil) {
+        NSError *error = nil;
+        sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self userId:userId associateId:self.associateId error:&error];
+        BOXAssert(error == nil, @"Error getting background upload task %@", error);
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
 }
@@ -231,9 +232,9 @@
 
 #pragma mark - BOXURLSessionTaskDelegate
 
-- (void)processIntermediateResponse:(NSURLResponse *)response
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response
 {
-    [super processIntermediateResponse:response];
+    [super sessionTask:sessionTask processIntermediateResponse:response];
 
     self.HTTPResponse = (NSHTTPURLResponse *)response;
     if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
@@ -251,11 +252,11 @@
 // self.responseData. This operation differs in that it should write its received
 // data immediately to its output stream. Failure to do so will cause downloads to
 // be buffered entirely in memory.
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
         // If we received an error, don't write the response data to the output stream
-        [super processIntermediateData:data];
+        [super sessionTask:sessionTask processIntermediateData:data];
     } else {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
@@ -279,50 +280,6 @@
 {
     if (self.progressBlock != nil) {
         self.progressBlock(totalBytesExpectedToWrite, totalBytesWritten);
-    }
-}
-
-- (void)downloadTask:(NSURLSessionTask *)sessionTask didFinishDownloadingToURL:(NSURL *)location
-{
-    //synchronize to make sure this method finishes before finishURLSessionTaskWithResponse
-    //is called to report file move/replace error if any
-    @synchronized (self) {
-        NSHTTPURLResponse *HTTPResponse = nil;
-        if ([sessionTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
-            HTTPResponse = (NSHTTPURLResponse *)sessionTask.response;
-        }
-        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode >= 300) {
-            // If we received an error, don't write the response data to the destination path
-            self.responseData = [NSData dataWithContentsOfURL:location];
-            [[NSFileManager defaultManager] removeItemAtURL:location error:nil];
-        } else {
-            if (self.destinationPath != nil) {
-                NSError *error = nil;
-                NSFileManager *fileManager = [NSFileManager defaultManager];
-                NSURL *destURL = [[NSURL alloc] initFileURLWithPath:self.destinationPath];
-
-                if (![fileManager fileExistsAtPath:self.destinationPath]) {
-                    [fileManager moveItemAtURL:location toURL:destURL error:&error];
-                } else {
-                    [fileManager replaceItemAtURL:destURL
-                                    withItemAtURL:location
-                                   backupItemName:nil
-                                          options:NSFileManagerItemReplacementUsingNewMetadataOnly
-                                 resultingItemURL:nil
-                                            error:&error];
-                }
-                if (self.error == nil) {
-                    self.error = error;
-                }
-            }
-        }
-    }
-}
-
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
-{
-    @synchronized (self) {
-        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
     }
 }
 
@@ -410,7 +367,6 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
-    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     return operationCopy;
 }
