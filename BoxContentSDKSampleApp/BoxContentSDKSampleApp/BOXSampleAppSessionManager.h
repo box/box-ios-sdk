@@ -30,6 +30,6 @@
 
 - (void)removeUserId:(NSString *)userId associateId:(NSString *)associateId;
 
-- (NSDictionary *)sessionTaskInfoAndAssociateIdsForUserId:(NSString *)userId;
+- (NSDictionary *)associateIdToSessionTaskInfoForUserId:(NSString *)userId;
 
 @end

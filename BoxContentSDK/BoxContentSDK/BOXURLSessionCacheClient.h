@@ -255,4 +255,24 @@
  */
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error;
 
+/**
+ * Get all associateIds with backgroundSessionId and sessionTaskId pairs created by userId
+ *
+ * @param userId    Id of user started the session tasks. Cannot be nil
+ * @param error     error if failed to retrieve
+ *
+ * @return NSDictionary of associateId to backgroundSessionId and sessionTaskId
+ */
+- (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Get all associateIds used to create session tasks with userId
+ *
+ * @param userId    Id of user started the session tasks. Cannot be nil
+ * @param error     error if failed to retrieve
+ *
+ * @return array of associateIds used to create session tasks with userId
+ */
+- (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error;
+
 @end

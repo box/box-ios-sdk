@@ -111,7 +111,7 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
     }
 }
 
-- (NSDictionary *)sessionTaskInfoAndAssociateIdsForUserId:(NSString *)userId
+- (NSDictionary *)associateIdToSessionTaskInfoForUserId:(NSString *)userId
 {
     @synchronized (self.userIdToAssociateIdAndSessionTaskInfo) {
         return self.userIdToAssociateIdAndSessionTaskInfo[userId];
