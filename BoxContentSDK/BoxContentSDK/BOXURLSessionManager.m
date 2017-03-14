@@ -436,12 +436,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 //      before we populate pending tasks upon app restart, we will return nil,
 //      unless resumeDownloadData is provided for an un-finished download task,
 //      re-create the download task with resumeDownloadData and return that
-- (NSURLSessionTask *)backgroundTaskWithRequest:(NSURLRequest *)request orResumeDownloadData:(NSData *)resumeDownloadData orUploadFromFile:(NSURL *)uploadFromFileURL taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError
+- (NSURLSessionTask *)backgroundTaskWithRequest:(NSURLRequest *)request orResumeDownloadData:(NSData *)resumeDownloadData orUploadFromFile:(NSURL *)uploadFromFileURL taskDelegate:(id <BOXURLSessionTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError
 {
     //FIXME: ensure background session has finished populating pending session tasks before continue
     BOXBackgroundSessionIdAndTask *backgroundSessionIdAndTask = [self existingBackgroundSessionTaskGivenUserId:userId associateId:associateId];
     NSString *backgroundSessionId = nil;
     NSURLSessionTask *sessionTask = nil;
+    BOOL newBackgroundDownloadTaskCreated = NO;
 
     if (backgroundSessionIdAndTask == nil) {
         //have not created session task for this userId with associatedId before
@@ -450,6 +451,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             sessionTask = [self.backgroundSession uploadTaskWithRequest:request fromFile:uploadFromFileURL];
         } else if (request != nil) {
             sessionTask = [self.backgroundSession downloadTaskWithRequest:request];
+            newBackgroundDownloadTaskCreated = YES;
         } else {
             sessionTask = [self.backgroundSession downloadTaskWithResumeData:resumeDownloadData];
         }
@@ -470,13 +472,20 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
     NSError *error = nil;
 
-    BOOL success = [self persistBackgroundSessionTaskWithSessionId:backgroundSessionId sessionTask:sessionTask taskDelegate:taskDelegate userId:userId associateId:associateId error:&error];
-    if (success == NO || error != nil) {
-        //if we fail to persist data needed to support background session tasks, cancel the one we created and do not return it
-        [sessionTask cancel];
-        success = [self cleanUpSessionTaskInfoGivenUserId:userId associateId:associateId error:&error];
-        BOXAssert(success, @"Failed to clean up session task after failing to persist its cached info", error);
-        sessionTask = nil;
+    if (sessionTask != nil) {
+        BOOL success = [self persistBackgroundSessionTaskWithSessionId:backgroundSessionId sessionTask:sessionTask taskDelegate:taskDelegate userId:userId associateId:associateId error:&error];
+        if (success == NO || error != nil) {
+            //if we fail to persist data needed to support background session tasks, cancel the one we created and do not return it
+            [sessionTask cancel];
+            success = [self cleanUpSessionTaskInfoGivenUserId:userId associateId:associateId error:&error];
+            BOXAssert(success, @"Failed to clean up session task after failing to persist its cached info", error);
+            sessionTask = nil;
+        } else if (newBackgroundDownloadTaskCreated == YES && [taskDelegate conformsToProtocol:@protocol(BOXURLSessionDownloadTaskDelegate)] == YES) {
+            //for a new background download task, we need to cache destinationFilePath to be used later
+
+            id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = (id<BOXURLSessionDownloadTaskDelegate>)taskDelegate;
+            success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTask.taskIdentifier destinationFilePath:downloadTaskDelegate.destinationFilePath error:&error];
+        }
     }
     if (outError != nil) {
         *outError = error;
