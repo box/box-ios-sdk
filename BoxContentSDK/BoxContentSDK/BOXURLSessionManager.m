@@ -401,6 +401,48 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return success;
 }
 
+- (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError
+{
+    //FIXME: make sure set up is completed, and prevents any new tasks created for this userId while we clean it up
+
+    if (userId != nil) {
+        NSError *error = nil;
+
+        //cancel on-going session tasks associated with this userId
+        [self cancelOnGoingSessionTasksForUserId:userId error:&error];
+        BOXAssert(error == nil, @"Failed to cancel on-going session tasks with error %@", error);
+
+        //clean up memory entries and cached info of all session tasks associated with this userId
+        NSArray *associateIds = [self.cacheClient associateIdsForUserId:userId error:&error];
+        for (NSString *associateId in associateIds) {
+            [self cleanUpSessionTaskInfoGivenUserId:userId associateId:associateId error:&error];
+        }
+        if (outError != nil) {
+            *outError = error;
+        }
+    }
+}
+
+- (void)cancelOnGoingSessionTasksForUserId:(NSArray *)userId error:(NSError **)error
+{
+    NSDictionary *associateIdToBackgroundSessionIdAndSessionTaskId = [self.cacheClient associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:error];
+
+    for (NSString *associateId in associateIdToBackgroundSessionIdAndSessionTaskId.allKeys) {
+        // Check if session task is still on-going, only then cancel it
+        // There can only be one on-going session task of a backgroundSessionId and sessionTaskId,
+        // but there can be multiple completed session tasks of the same backgroundSessionId and sessionTaskId
+        if ([self.cacheClient isSessionTaskCompletedForUserId:userId associateId:associateId] == NO) {
+
+            BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = associateIdToBackgroundSessionIdAndSessionTaskId[associateId];
+            NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
+            NSUInteger sessionTaskId = backgroundSessionIdAndSessionTaskId.sessionTaskId;
+
+            NSURLSessionTask *sessionTask = [self existingBackgroundSessionTaskForSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
+            [sessionTask cancel];
+        }
+    }
+}
+
 #pragma mark - Private Helpers
 
 - (BOOL)cleanUpBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error
@@ -414,6 +456,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return [self.cacheClient cleanUpOnGoingCachedInfoOfBackgroundSessionId:backgroundSessionId error:error];
 }
 
+// Return background session Id and sessionTask for this userId and associateId
+// If we have never seen the combination of userId and associateId before, return nil
+// If we have, backgroundSessionId will not be nil, but sessionTask might be nil if the task has completed
 - (BOXBackgroundSessionIdAndTask *)existingBackgroundSessionTaskGivenUserId:(NSString *)userId associateId:(NSString *)associateId
 {
     NSError *error = nil;
@@ -467,6 +512,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
                 NSURLSession *session = [self backgroundSessionForId:backgroundSessionId];
                 sessionTask = [session downloadTaskWithResumeData:resumeDownloadData];
+                newBackgroundDownloadTaskCreated = YES;
             }
         }
     }
@@ -710,11 +756,9 @@ didCompleteWithError:(nullable NSError *)error
         //notify its taskDelegate about the completion with response, responseData, and error
         NSData *responseData = [self.cacheClient responseDataForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
 
-        if (!(error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled)) {
-            //the task finished, not cancelled, update its cache info accordingly
-            success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier error:&err];
-            BOXAssert(success, @"failed to cache error for background session task", err);
-        }
+        //the task finished/cancelled, update its cache info accordingly
+        success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier error:&err];
+        BOXAssert(success, @"failed to cache error for background session task", err);
 
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
         [taskDelegate sessionTask:task didFinishWithResponse:task.response responseData:responseData error:error];

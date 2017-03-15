@@ -201,6 +201,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  */
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
 
+- (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError;
+
 @end
 
 NS_ASSUME_NONNULL_END

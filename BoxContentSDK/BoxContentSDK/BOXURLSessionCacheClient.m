@@ -404,6 +404,48 @@
     return success;
 }
 
+- (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
+{
+    if (userId == nil) {
+        return nil;
+    }
+
+    NSError *error = nil;
+    NSArray *associateIds = [self associateIdsForUserId:userId error:&error];
+    NSMutableDictionary *associateIdToBackgroundSessionIdAndSessionTaskIds = [NSMutableDictionary new];
+
+    //iterate through users/$userId/$associateId subdirs to get its backgroundSessionId and sessionTaskId
+    for (NSString *associateId in associateIds) {
+
+        BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&error];
+
+        if (backgroundSessionIdAndSessionTaskId != nil) {
+            associateIdToBackgroundSessionIdAndSessionTaskIds[associateId] = backgroundSessionIdAndSessionTaskId;
+        } else if (error == nil) {
+            //we do not have valid backgroundSessionId and sessionTaskId for a previously seen userId and associateId,
+            //something must have failed, clean up the cache dir for future usage
+            [self deleteCachedInfoForUserId:userId associateId:associateId error:&error];
+        }
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
+    return [associateIdToBackgroundSessionIdAndSessionTaskIds copy];
+}
+
+// Return associateIds under users/$userId dir
+- (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error
+{
+    NSString *dirPath = [self dirPathOfUserId:userId];
+    NSArray *associateIds = nil;
+
+    BOOL isDir = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] == YES && isDir == YES) {
+        associateIds = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirPath error:error];
+    }
+    return associateIds;
+}
+
 #pragma mark - private helpers
 
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error
