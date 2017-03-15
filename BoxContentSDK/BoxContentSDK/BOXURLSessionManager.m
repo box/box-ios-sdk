@@ -406,19 +406,29 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     //FIXME: make sure set up is completed, and prevents any new tasks created for this userId while we clean it up
 
     if (userId != nil) {
-        NSError *error = nil;
+        NSError *finalError = nil;
 
         //cancel on-going session tasks associated with this userId
-        [self cancelOnGoingSessionTasksForUserId:userId error:&error];
-        BOXAssert(error == nil, @"Failed to cancel on-going session tasks with error %@", error);
+        [self cancelOnGoingSessionTasksForUserId:userId error:&finalError];
+        BOXAssert(finalError == nil, @"Failed to cancel on-going session tasks with error %@", finalError);
 
         //clean up memory entries and cached info of all session tasks associated with this userId
-        NSArray *associateIds = [self.cacheClient associateIdsForUserId:userId error:&error];
+        NSArray *associateIds = [self.cacheClient associateIdsForUserId:userId error:&finalError];
         for (NSString *associateId in associateIds) {
+            NSError *error = nil;
             [self cleanUpSessionTaskInfoGivenUserId:userId associateId:associateId error:&error];
+            if (error != nil && finalError == nil) {
+                finalError = error;
+            }
         }
+
+        if (finalError == nil) {
+            BOOL success = [self.cacheClient cleanUpForUserIdIfEmpty:userId error:&finalError];
+            BOXAssert(success, @"Failed to clean up user id when cancelling and cleaning up tasks with error %@", finalError);
+        }
+
         if (outError != nil) {
-            *outError = error;
+            *outError = finalError;
         }
     }
 }
@@ -646,7 +656,10 @@ didFinishDownloadingToURL:(NSURL *)location
                 destinationFilePath = [self.cacheClient destinationFilePathForBackgroundSessionId:session.configuration.identifier sessionTaskId:downloadTask.taskIdentifier];
             }
             success = [self moveDownloadedFileAtTemporaryURL:location toDestinationFilePath:destinationFilePath error:&error];
-            BOXAssert(success, @"failed to cache response for background download session task", error);
+            if (success == NO) {
+                NSLog(@"Failed to move downloaded file at temporary location %@ to %@ with error %@", location, destinationFilePath, error);
+            }
+            //FIXME: review if we should cache error failing to cache data or to move temporary file to destination path
         }
     }
 }
@@ -748,17 +761,17 @@ didCompleteWithError:(nullable NSError *)error
         NSString *backgroundSessionId = session.configuration.identifier;
 
         BOOL success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier response:task.response error:&err];
-        BOXAssert(success, @"failed to cache response for background session task", err);
+        BOXAssert(success, @"failed to cache response for background session task with error %@", err);
 
-        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier response:error error:&err];
-        BOXAssert(success, @"failed to cache error for background session task", err);
+        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier taskError:error error:&err];
+        BOXAssert(success, @"failed to cache error for background session task with error %@", err);
 
         //notify its taskDelegate about the completion with response, responseData, and error
         NSData *responseData = [self.cacheClient responseDataForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
 
         //the task finished/cancelled, update its cache info accordingly
         success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier error:&err];
-        BOXAssert(success, @"failed to cache error for background session task", err);
+        BOXAssert(success, @"failed to complete session task for background session task with error %@", err);
 
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
         [taskDelegate sessionTask:task didFinishWithResponse:task.response responseData:responseData error:error];

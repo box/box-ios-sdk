@@ -136,7 +136,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 /**
  Retrieve a NSURLSessionDownloadTask to be run in the background to download file into a destination file path.
- If there is an existing task for userId and associateId, return that, else create a new one
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
 
  @param request         request to create download task with
  @param taskDelegate    the delegate to receive callback for the session task
@@ -148,7 +150,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
- Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file into a destination file path.
+ Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file
+ into a destination file path.
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished,
+ return a new one using resumeData.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one using resumeData.
 
  @param resumeData      data to resume download session task from
  @param taskDelegate    the delegate to receive callback for the session task
@@ -161,7 +168,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 /**
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
- If there is an existing task for userId and associateId, return that, else create a new one
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
 
  @param request         request to create upload task with
  @param fileURL         url of the source file to upload

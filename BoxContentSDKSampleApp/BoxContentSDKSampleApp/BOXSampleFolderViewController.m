@@ -306,12 +306,12 @@
     // We did not find a file named similarly, we can upload normally the file.
     NSString *tempPath = nil;
     NSString *associateId = nil;
+    NSString *userId = self.client.user.modelID;
     if (background == YES) {
         tempPath = [path stringByAppendingString:@".temp"];
         associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
         //save information about this background upload to allow reconnection to it upon app restarts
-        NSString *userId = self.client.user.modelID;
         BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
         BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
         info.fileID = fileID;
@@ -321,7 +321,6 @@
         [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
     }
     if (indexOfFile == NSNotFound) {
-        //FIXME: save associateId to cache for reconnection later
         BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
         if (background == NO) {
             self.nonBackgroundUploadRequest = uploadRequest;
@@ -330,7 +329,9 @@
         [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
-            [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+            if (background == YES) {
+                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+            }
             completionBlock(file, error);
         }];
     }
@@ -344,7 +345,9 @@
         [newVersionRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
-            [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+            if (background == YES) {
+                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+            }
             completionBlock(file, error);
         }];
     }   

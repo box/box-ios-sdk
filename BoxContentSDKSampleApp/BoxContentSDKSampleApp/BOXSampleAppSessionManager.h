@@ -32,4 +32,6 @@
 
 - (NSDictionary *)associateIdToSessionTaskInfoForUserId:(NSString *)userId;
 
+- (void)cleanUpForUserId:(NSString *)userId;
+
 @end

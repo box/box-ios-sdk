@@ -189,7 +189,7 @@
                                               // Logout the user so that we remove any credential informations.
                                               BOXUser *user = self.users[indexPath.row];
                                               [[BOXContentClient clientForUser:user] logOut];
-                                              
+                                              [[BOXSampleAppSessionManager defaultManager] cleanUpForUserId:user.modelID];
                                               NSMutableArray *mutableUsers = [self.users mutableCopy];
                                               [mutableUsers removeObject:user];
                                               self.users = [mutableUsers copy];

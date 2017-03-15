@@ -104,6 +104,14 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
     }
 }
 
+- (void)cleanUpForUserId:(NSString *)userId
+{
+    @synchronized (self.userIdToAssociateIdAndSessionTaskInfo) {
+        [self.userIdToAssociateIdAndSessionTaskInfo removeObjectForKey:userId];
+        [self persistSessionTaskMap];
+    }
+}
+
 - (BOXSampleAppSessionInfo *)getSessionTaskInfoForUserId:(NSString *)userId associateId:(NSString *)associateId
 {
     @synchronized (self.userIdToAssociateIdAndSessionTaskInfo[userId]) {

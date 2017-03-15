@@ -132,6 +132,16 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
+{
+    @synchronized (self) {
+        if ([self shouldRunInBackground] == YES) {
+            [[NSFileManager defaultManager] removeItemAtPath:self.uploadMultipartCopyFilePath error:nil];
+        }
+        [super sessionTask:sessionTask didFinishWithResponse:response responseData:responseData error:error];
+    }
+}
+
 - (void)prepareAPIRequest
 {
     [super prepareAPIRequest];

@@ -185,7 +185,6 @@
         return YES;
     }
 
-    NSError *error = nil;
     BOOL success = YES;
     BOXUserIdAndAssociateId *userIdAndAssociateId = [self userIdAndAssociateIdForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
 
@@ -198,7 +197,6 @@
 
         //move session task info from on-going session task at onGoingSessionTasks/$backgroundSessionId/$sessionTaskId
         //to completed dir under users/$userId/$associateId/completed/
-
         success = [[NSFileManager defaultManager] moveItemAtPath:onGoingSessionTaskDir toPath:completedDir error:outError];
     } else {
         NSString *onGoingSessionTaskDir = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
@@ -367,39 +365,88 @@
     return data;
 }
 
-- (BOOL)deleteCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
+- (BOOL)deleteCachedInfoForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError
 {
     if (userId == nil || associateId == nil) {
-        if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId userInfo:nil];
+        if (outError != nil) {
+            *outError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId userInfo:nil];
         }
         return NO;
     }
 
-    NSError *err = nil;
     //delete both on-going and completed cached info
-    BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&err];
-    if (backgroundSessionIdAndSessionTaskId == nil) {
-        if (err != nil) {
-            if (error != nil) {
-                *error = err;
-            }
-            return NO;
-        }
-        return YES;
-    }
 
-    NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
-    NSUInteger sessionTaskId = backgroundSessionIdAndSessionTaskId.sessionTaskId;
+    BOOL success = YES;
+    NSError *error = nil;
 
-    //clean up onGoingSessionTasks/$backgroundSessionId/$sessionTaskId/*
-    NSString *dir = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
-    BOOL success = [self deleteDirectory:dir error:error];
+    success = [self cleanUpOnGoingSessionTaskOfUserId:userId associateId:associateId error:&error];
 
     if (success == YES) {
         //clean up users/$userId/$associateId/*
-        dir = [self dirPathOfSessionTaskGivenUserId:userId associateId:associateId];
-        success = [self deleteDirectory:dir error:error];
+        NSString *dir = [self dirPathOfSessionTaskGivenUserId:userId associateId:associateId];
+        success = [self deleteDirectory:dir error:&error];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
+    return success;
+}
+
+- (BOOL)cleanUpOnGoingSessionTaskOfUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError
+{
+    BOOL success = YES;
+    NSError *error = nil;
+
+    if ([self isSessionTaskCompletedForUserId:userId associateId:associateId] == NO) {
+        //find backgroundSessionId and sessionTaskId associated with userId and associateId
+        BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&error];
+
+        if (backgroundSessionIdAndSessionTaskId == nil) {
+            if (error != nil) {
+                //failed to retrieve backgroundSessionId and sessionTaskId for userId and associateId
+                if (outError != nil) {
+                    *outError = error;
+                }
+                return NO;
+            }
+        }
+
+        //clean up onGoingSessionTasks/$backgroundSessionId/$sessionTaskId/*
+
+        NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
+        NSUInteger sessionTaskId = backgroundSessionIdAndSessionTaskId.sessionTaskId;
+
+        NSString *dir = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
+        success = [self deleteDirectory:dir error:&error];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
+    return success;
+}
+
+- (BOOL)cleanUpForUserIdIfEmpty:(NSString *)userId error:(NSError **)outError
+{
+    NSString *dirPath = [self dirPathOfUserId:userId];
+    BOOL isDir = NO;
+    NSError *error = nil;
+    BOOL success = YES;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] == YES && isDir == YES) {
+        NSArray *fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirPath error:&error];
+
+        if (fileNames != nil && error == nil && fileNames.count == 0) {
+            //only remove users/$userId dir if it is empty
+            success = [[NSFileManager defaultManager] removeItemAtPath:dirPath error:&error];
+
+        } else {
+            if (fileNames.count > 0) {
+                error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorDirectoryIsNotEmpty userInfo:nil];
+            }
+            success = NO;
+        }
+    }
+    if (outError != nil) {
+        *outError = error;
     }
     return success;
 }
@@ -410,13 +457,13 @@
         return nil;
     }
 
-    NSError *error = nil;
-    NSArray *associateIds = [self associateIdsForUserId:userId error:&error];
+    NSError *finalError = nil;
+    NSArray *associateIds = [self associateIdsForUserId:userId error:&finalError];
     NSMutableDictionary *associateIdToBackgroundSessionIdAndSessionTaskIds = [NSMutableDictionary new];
 
     //iterate through users/$userId/$associateId subdirs to get its backgroundSessionId and sessionTaskId
     for (NSString *associateId in associateIds) {
-
+        NSError *error = nil;
         BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId associateId:associateId error:&error];
 
         if (backgroundSessionIdAndSessionTaskId != nil) {
@@ -426,9 +473,13 @@
             //something must have failed, clean up the cache dir for future usage
             [self deleteCachedInfoForUserId:userId associateId:associateId error:&error];
         }
+
+        if (error != nil && finalError == nil) {
+            finalError = error;
+        }
     }
     if (outError != nil) {
-        *outError = error;
+        *outError = finalError;
     }
     return [associateIdToBackgroundSessionIdAndSessionTaskIds copy];
 }
@@ -553,12 +604,24 @@
     return success;
 }
 
-- (BOOL)deleteDirectory:(NSString *)directoryPath error:(NSError **)error
+- (BOOL)deleteDirectory:(NSString *)directoryPath error:(NSError **)outError
 {
     BOOL isDir = NO;
     BOOL success = YES;
+    NSError *error = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir] == YES && isDir == YES) {
-        success = [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:error];
+        success = [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:&error];
+        if (error != nil) {
+            error = error.userInfo[NSUnderlyingErrorKey];
+            if (error.domain == NSCocoaErrorDomain && error.code == NSFileNoSuchFileError) {
+                //if cannot remove because of no such file or directory, consider that a success
+                success = YES;
+                error = nil;
+            }
+        }
+    }
+    if (outError != nil) {
+        *outError = error;
     }
     return success;
 }
