@@ -195,17 +195,13 @@
 + (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir;
 
 /**
- * This method needs to be called at least once to set up the manager to be ready to support background upload/download tasks.
- * Should be called as soon as possible after BOXContentClient instance is created to allow support for background tasks.
+ * This method needs to be called in the main app to allow it reconnecting to background session tasks created by
+ * background session started from extension
  *
- * If this method has not been called, all background task creations will fail
- * @param defaultDelegate   handle callbacks from session tasks that do not have associated task delegates
- *                          possible if the background tasks were created outside of BOXURLSessionManager
- *                          (e.g. app restarts)
- *                          A task delegate can always be re-associated with a session task by calling
- *                          associateSessionTaskId:withTaskDelegate:
+ * @param backgroundSessionId   Id of background session from extension
+ * @param error                 error reconnecting which the background session
  */
-+ (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId;
++ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error;
 
 /**
  *  API base URLs.

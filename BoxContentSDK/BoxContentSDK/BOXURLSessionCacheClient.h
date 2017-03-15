@@ -70,6 +70,11 @@
  * 3. Once session tasks complete, their cached info under onGoingSessionTasks/$backgroundSessionId/$sessionTaskId dir
  * will be moved into users/$userId/$associateId/completed dir
  *
+ * 4. Both app and extensions share the same cache hierarchy given associateId is expected to be globally unique
+ * and app has a unique background session id, as well as extension has a unique background session id per run.
+ * Once extension terminates and app takes over its background session, we will cache extension's background session id
+ * under extensionSessions/$backgroundSessionId to allow the app to connect to background session tasks from extensions.
+ *
  * NOTE: there can only be one on-going backgroundSessionId and sessionTaskId at any time,
  *       but there can be more than one completed session tasks with that backgroundSessionId and sessionTaskId
  *       under users/$userId/$associateId/completed/* until they are cleaned up
@@ -291,5 +296,21 @@
  * @return array of associateIds used to create session tasks with userId
  */
 - (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Cache backgroundSessionId from extension into extensionSessions/$backgroundSessionId file
+ *
+ * @param backgroundSessionId   Id to cache
+ * @param error                 error if failed to cache
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
+
+/**
+ * Return
+ */
+- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
+
 
 @end

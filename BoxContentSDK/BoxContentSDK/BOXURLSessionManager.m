@@ -183,10 +183,36 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     //used by main app to create and reuse one NSURLSession
     [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionIdentifierForMainApp delegate:delegate rootCacheDir:rootCacheDir];
+
+    NSError *error = nil;
+    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIdsFromExtensionsWithError:&error];
+    BOXAssert(error == nil, @"Failed to retrieve backgroundSessionIds from extensions with error %@", error);
+
+    for (NSString *extensionSessionId in extensionSessionIds) {
+        [self reconnectWithBackgroundSessionIdFromExtension:extensionSessionId error:&error];
+    }
 }
 
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
+// Return string in the format $backgroundSessionIdentifierForMainApp_$randomString
++ (NSString *)randomExtensionBackgroundSessionId
 {
+    NSString *letters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    int length = 32;
+
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:length];
+
+    for (NSInteger i = 0; i < length; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+    return [NSString stringWithFormat:@"%@_%@", backgroundSessionIdentifierForMainApp, randomString];
+}
+
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
+{
+    //this method is expected to call once by an extension to create its own background session
+    //if extension restarts, it will get a different backgroundSessionId given that its previous background session
+    //will now be handled by the main app (app got woken up about background sessions from a terminated extension)
+    NSString *backgroundSessionId = [BOXURLSessionManager randomExtensionBackgroundSessionId];
     [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir];
 }
 
@@ -194,6 +220,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     BOOL firstSetUp = NO;
     @synchronized (self) {
+        //create one _backgroundSession which can provide new session tasks for this app
+        //or this extension if called from extension
         if (_backgroundSession == nil) {
             _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:8];
             firstSetUp = YES;
@@ -209,12 +237,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
-- (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error
 {
     if ([self backgroundSessionForId:backgroundSessionId] == nil) {
 
         NSURLSession *backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:-1];
         [self populatePendingSessionTasksForBackgroundSession:backgroundSession];
+        [self.cacheClient cacheBackgroundSessionIdFromExtension:backgroundSessionId error:error];
     }
 }
 
@@ -381,8 +410,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (success == YES) {
             NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
             if (backgroundSessionId != nil && [backgroundSessionId isEqualToString:[self backgroundSessionIdentifier]] == NO) {
-                //this background session created from extensions or previous runs of the app,
-                //clean it up if it has no more pending tasks
+                //this background session is not self's backgroundSession so we must be running inside the main app
+                //and this background session is from extension, clean it up if it has no more pending tasks
                 BOOL shouldCleanUp = NO;
                 @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionId]) {
                     NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionId];
@@ -390,7 +419,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                 }
                 if (shouldCleanUp == YES) {
                     success = [self cleanUpBackgroundSessionId:backgroundSessionId error:&error];
-
+                    NSURLSession *backgroundSession = [self backgroundSessionForId:backgroundSessionId];
+                    [backgroundSession invalidateAndCancel];
                 }
             }
         }

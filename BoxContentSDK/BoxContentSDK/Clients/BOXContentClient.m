@@ -380,9 +380,9 @@ static BOXContentClient *defaultInstance = nil;
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir];
 }
 
-+ (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId
++ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error
 {
-    [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionId:backgroundSessionId];
+    [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId error:error];
 }
 
 #pragma mark - helper methods

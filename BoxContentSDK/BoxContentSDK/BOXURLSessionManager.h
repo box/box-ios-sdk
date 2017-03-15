@@ -102,21 +102,20 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 /**
  * This method needs to be called once in app extensions to set up the manager to be ready to
  * support background upload/download tasks.
- * If this method has not been called, all background task creations will fail
+ * If this method has not been called, all background task creations will fail in extensions
  *
- * @param backgroundSessionId background session id to create background session with
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
  */
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
 
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
  * should share the same rootCacheDir as the main app to work properly
  */
-- (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId;
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,

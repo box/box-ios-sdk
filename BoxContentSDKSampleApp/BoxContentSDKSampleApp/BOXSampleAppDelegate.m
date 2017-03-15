@@ -65,7 +65,10 @@
     //FIXME: Need to get the BOXContentClient for the currently logged in user and set up its URL session manager
     [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
 
-    [BOXContentClient reconnectWithBackgroundSessionId:identifier];
+    NSError *error = nil;
+    [BOXContentClient reconnectWithBackgroundSessionIdFromExtension:identifier error:&error];
+    BOXAssert(error == nil, @"Failed to reconnect with background session from extension with error %@", error);
+
     completionHandler();
 }
 

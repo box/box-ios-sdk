@@ -502,7 +502,11 @@
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error
 {
     NSString *dirPath = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId];
-    return [self deleteDirectory:dirPath error:error];
+    BOOL success = [self deleteDirectory:dirPath error:error];
+    if (success == YES) {
+        success = [self cleanUpExtensionBackgrounSessionIdIfExists:backgroundSessionId error:error];
+    }
+    return success;
 }
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
@@ -572,6 +576,40 @@
     return [finalData writeToFile:path options:NSDataWritingAtomic error:outError];
 }
 
+// Delete file extensionSessions/$backgroundSessionId if backgroundSessionId is from extension
+- (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString *)backgroundSessionId error:(NSError **)outError
+{
+    NSString *filePath = [self filePathOfExtensionBackgrounSessionId:backgroundSessionId];
+    BOOL success = YES;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == YES) {
+        success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:outError];
+    }
+    return success;
+}
+
+- (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError
+{
+    NSString *filePath = [self filePathOfExtensionBackgrounSessionId:backgroundSessionId];
+    return [self createFile:filePath error:outError];
+}
+
+- (NSString *)filePathOfExtensionBackgrounSessionId:(NSString *)backgroundSessionId
+{
+    NSString *dirPath = [self dirPathOfExtensionSessions];
+    return [dirPath stringByAppendingPathComponent:backgroundSessionId];
+}
+
+- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error
+{
+    NSString *dirPath = [self dirPathOfExtensionSessions];
+    BOOL isDir = NO;
+    NSArray *ids = [NSArray new];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] == YES && isDir == YES) {
+        ids = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self dirPathOfExtensionSessions] error:error];
+    }
+    return ids;
+}
+
 // Create dir if not exists, users/$userId/$associateId/$backgroundSessionId-$sessionTaskId
 - (BOOL)createFileForUserId:(NSString *)userId associateId:(NSString *)associateId backgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)error
 {
@@ -631,9 +669,12 @@
     NSString *dir = [path stringByDeletingLastPathComponent];
     BOOL success = [self createDirectory:dir error:error];
     if (success == YES) {
-        success = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
-        if (success == NO && error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorFileCreateFailed userInfo:nil];
+        BOOL isDir = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] == NO || isDir == YES) {
+            success = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
+            if (success == NO && error != nil) {
+                *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorFileCreateFailed userInfo:nil];
+            }
         }
     }
     return success;
@@ -649,6 +690,12 @@
 - (NSString *)dirPathOfSessionTaskWithBackgroundSessionId:(NSString *)backgroundSessionId
 {
     return [[self.cacheDir stringByAppendingPathComponent:BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName] stringByAppendingPathComponent:backgroundSessionId];
+}
+
+// Return dir path extensionSessions/
+- (NSString *)dirPathOfExtensionSessions
+{
+    return [self.cacheDir stringByAppendingPathComponent:BOXURLSessionTaskCacheExtensionSessionsDirectoryName];
 }
 
 // Return dir path users/$userId/$associateId/$backgroundSessionId-$sessionTaskId
