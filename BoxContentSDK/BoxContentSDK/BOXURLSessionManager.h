@@ -102,21 +102,20 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 /**
  * This method needs to be called once in app extensions to set up the manager to be ready to
  * support background upload/download tasks.
- * If this method has not been called, all background task creations will fail
+ * If this method has not been called, all background task creations will fail in extensions
  *
- * @param backgroundSessionId background session id to create background session with
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
  */
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
 
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
  * should share the same rootCacheDir as the main app to work properly
  */
-- (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId;
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
@@ -136,7 +135,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 /**
  Retrieve a NSURLSessionDownloadTask to be run in the background to download file into a destination file path.
- If there is an existing task for userId and associateId, return that, else create a new one
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
 
  @param request         request to create download task with
  @param taskDelegate    the delegate to receive callback for the session task
@@ -148,7 +149,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
- Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file into a destination file path.
+ Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file
+ into a destination file path.
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished,
+ return a new one using resumeData.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one using resumeData.
 
  @param resumeData      data to resume download session task from
  @param taskDelegate    the delegate to receive callback for the session task
@@ -161,7 +167,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 /**
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
- If there is an existing task for userId and associateId, return that, else create a new one
+ If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
+ If have not seen this userId and associateId before or have cleaned it up
+ using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
 
  @param request         request to create upload task with
  @param fileURL         url of the source file to upload

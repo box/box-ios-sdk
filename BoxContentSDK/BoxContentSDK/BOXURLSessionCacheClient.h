@@ -61,12 +61,23 @@
  * - response:            store NSURLResponse
  * - error:               store client-side NSError
  * - userIdAndAssociateId:store userId and associateId that this session task associates with
+ *                          (this file is only used internally to help refer back to $userId and $associateId
+ *                          that started this session task)
  *
  * 2. To keep track of whose user and its associateId the session task belongs to, we save backgroundSessionId and sessionTaskId
  * as a file name under sub-directory users/$userId/$associateId/info with format $backgroundSessionId-$sessionTaskId
  *
  * 3. Once session tasks complete, their cached info under onGoingSessionTasks/$backgroundSessionId/$sessionTaskId dir
  * will be moved into users/$userId/$associateId/completed dir
+ *
+ * 4. Both app and extensions share the same cache hierarchy given associateId is expected to be globally unique
+ * and app has a unique background session id, as well as extension has a unique background session id per run.
+ * Once extension terminates and app takes over its background session, we will cache extension's background session id
+ * under extensionSessions/$backgroundSessionId to allow the app to connect to background session tasks from extensions.
+ *
+ * NOTE: there can only be one on-going backgroundSessionId and sessionTaskId at any time,
+ *       but there can be more than one completed session tasks with that backgroundSessionId and sessionTaskId
+ *       under users/$userId/$associateId/completed/* until they are cleaned up
  */
 @interface BOXURLSessionCacheClient : NSObject
 
@@ -256,6 +267,17 @@
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error;
 
 /**
+ * Clean up users/$userId directory if empty. Expected to be used at logout
+ * after cleaning up on user's session tasks
+ *
+ * @param userId    Id of user
+ * @param error     error if fail to complete
+ *
+ * @return YES if successfully cleaned up users/$userId directory, NO if failed
+ */
+- (BOOL)cleanUpForUserIdIfEmpty:(NSString *)userId error:(NSError **)error;
+
+/**
  * Get all associateIds with backgroundSessionId and sessionTaskId pairs created by userId
  *
  * @param userId    Id of user started the session tasks. Cannot be nil
@@ -274,5 +296,21 @@
  * @return array of associateIds used to create session tasks with userId
  */
 - (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Cache backgroundSessionId from extension into extensionSessions/$backgroundSessionId file
+ *
+ * @param backgroundSessionId   Id to cache
+ * @param error                 error if failed to cache
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
+
+/**
+ * Return
+ */
+- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
+
 
 @end

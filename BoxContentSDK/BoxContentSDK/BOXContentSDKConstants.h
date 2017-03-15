@@ -446,6 +446,7 @@ extern NSString *const BOXAPIEnterpriseEventTypeItemUnsync;
 extern NSString *const BOXURLSessionTaskCacheDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheUsersDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheExtensionSessionsDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheDestinationFilePath;
 extern NSString *const BOXURLSessionTaskCacheResumeData;
 extern NSString *const BOXURLSessionTaskCacheResponse;

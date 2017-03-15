@@ -183,10 +183,36 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     //used by main app to create and reuse one NSURLSession
     [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionIdentifierForMainApp delegate:delegate rootCacheDir:rootCacheDir];
+
+    NSError *error = nil;
+    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIdsFromExtensionsWithError:&error];
+    BOXAssert(error == nil, @"Failed to retrieve backgroundSessionIds from extensions with error %@", error);
+
+    for (NSString *extensionSessionId in extensionSessionIds) {
+        [self reconnectWithBackgroundSessionIdFromExtension:extensionSessionId error:&error];
+    }
 }
 
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
+// Return string in the format $backgroundSessionIdentifierForMainApp_$randomString
++ (NSString *)randomExtensionBackgroundSessionId
 {
+    NSString *letters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    int length = 32;
+
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:length];
+
+    for (NSInteger i = 0; i < length; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+    return [NSString stringWithFormat:@"%@_%@", backgroundSessionIdentifierForMainApp, randomString];
+}
+
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
+{
+    //this method is expected to call once by an extension to create its own background session
+    //if extension restarts, it will get a different backgroundSessionId given that its previous background session
+    //will now be handled by the main app (app got woken up about background sessions from a terminated extension)
+    NSString *backgroundSessionId = [BOXURLSessionManager randomExtensionBackgroundSessionId];
     [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir];
 }
 
@@ -194,6 +220,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     BOOL firstSetUp = NO;
     @synchronized (self) {
+        //create one _backgroundSession which can provide new session tasks for this app
+        //or this extension if called from extension
         if (_backgroundSession == nil) {
             _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:8];
             firstSetUp = YES;
@@ -209,12 +237,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
-- (void)reconnectWithBackgroundSessionId:(NSString *)backgroundSessionId
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error
 {
     if ([self backgroundSessionForId:backgroundSessionId] == nil) {
 
         NSURLSession *backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:-1];
         [self populatePendingSessionTasksForBackgroundSession:backgroundSession];
+        [self.cacheClient cacheBackgroundSessionIdFromExtension:backgroundSessionId error:error];
     }
 }
 
@@ -381,8 +410,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (success == YES) {
             NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
             if (backgroundSessionId != nil && [backgroundSessionId isEqualToString:[self backgroundSessionIdentifier]] == NO) {
-                //this background session created from extensions or previous runs of the app,
-                //clean it up if it has no more pending tasks
+                //this background session is not self's backgroundSession so we must be running inside the main app
+                //and this background session is from extension, clean it up if it has no more pending tasks
                 BOOL shouldCleanUp = NO;
                 @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionId]) {
                     NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionId];
@@ -390,7 +419,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                 }
                 if (shouldCleanUp == YES) {
                     success = [self cleanUpBackgroundSessionId:backgroundSessionId error:&error];
-
+                    NSURLSession *backgroundSession = [self backgroundSessionForId:backgroundSessionId];
+                    [backgroundSession invalidateAndCancel];
                 }
             }
         }
@@ -406,19 +436,29 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     //FIXME: make sure set up is completed, and prevents any new tasks created for this userId while we clean it up
 
     if (userId != nil) {
-        NSError *error = nil;
+        NSError *finalError = nil;
 
         //cancel on-going session tasks associated with this userId
-        [self cancelOnGoingSessionTasksForUserId:userId error:&error];
-        BOXAssert(error == nil, @"Failed to cancel on-going session tasks with error %@", error);
+        [self cancelOnGoingSessionTasksForUserId:userId error:&finalError];
+        BOXAssert(finalError == nil, @"Failed to cancel on-going session tasks with error %@", finalError);
 
         //clean up memory entries and cached info of all session tasks associated with this userId
-        NSArray *associateIds = [self.cacheClient associateIdsForUserId:userId error:&error];
+        NSArray *associateIds = [self.cacheClient associateIdsForUserId:userId error:&finalError];
         for (NSString *associateId in associateIds) {
+            NSError *error = nil;
             [self cleanUpSessionTaskInfoGivenUserId:userId associateId:associateId error:&error];
+            if (error != nil && finalError == nil) {
+                finalError = error;
+            }
         }
+
+        if (finalError == nil) {
+            BOOL success = [self.cacheClient cleanUpForUserIdIfEmpty:userId error:&finalError];
+            BOXAssert(success, @"Failed to clean up user id when cancelling and cleaning up tasks with error %@", finalError);
+        }
+
         if (outError != nil) {
-            *outError = error;
+            *outError = finalError;
         }
     }
 }
@@ -646,7 +686,10 @@ didFinishDownloadingToURL:(NSURL *)location
                 destinationFilePath = [self.cacheClient destinationFilePathForBackgroundSessionId:session.configuration.identifier sessionTaskId:downloadTask.taskIdentifier];
             }
             success = [self moveDownloadedFileAtTemporaryURL:location toDestinationFilePath:destinationFilePath error:&error];
-            BOXAssert(success, @"failed to cache response for background download session task", error);
+            if (success == NO) {
+                NSLog(@"Failed to move downloaded file at temporary location %@ to %@ with error %@", location, destinationFilePath, error);
+            }
+            //FIXME: review if we should cache error failing to cache data or to move temporary file to destination path
         }
     }
 }
@@ -748,17 +791,17 @@ didCompleteWithError:(nullable NSError *)error
         NSString *backgroundSessionId = session.configuration.identifier;
 
         BOOL success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier response:task.response error:&err];
-        BOXAssert(success, @"failed to cache response for background session task", err);
+        BOXAssert(success, @"failed to cache response for background session task with error %@", err);
 
-        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier response:error error:&err];
-        BOXAssert(success, @"failed to cache error for background session task", err);
+        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier taskError:error error:&err];
+        BOXAssert(success, @"failed to cache error for background session task with error %@", err);
 
         //notify its taskDelegate about the completion with response, responseData, and error
         NSData *responseData = [self.cacheClient responseDataForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
 
         //the task finished/cancelled, update its cache info accordingly
         success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier error:&err];
-        BOXAssert(success, @"failed to cache error for background session task", err);
+        BOXAssert(success, @"failed to complete session task for background session task with error %@", err);
 
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
         [taskDelegate sessionTask:task didFinishWithResponse:task.response responseData:responseData error:error];
