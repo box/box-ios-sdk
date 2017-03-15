@@ -40,4 +40,6 @@ typedef NS_ENUM(NSUInteger, BOXAPIOperationState) {
 //to create an NSURLSessionTask appropriate for this type of api operation
 - (NSURLSessionTask *)createSessionTask;
 
+- (BOOL)shouldAllowResume;
+
 @end

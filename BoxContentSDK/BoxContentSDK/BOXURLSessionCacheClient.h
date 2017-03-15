@@ -308,9 +308,30 @@
 - (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
 
 /**
- * Return
+ * Return all background session ids known to the app from extensions
+ * which were cached previously using cacheBackgroundSessionIdFromExtension:error
  */
 - (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
 
+/**
+ * Return resumeData of a completed session task associated with the userId and associateId
+ *
+ * @param userId        Id of user started the session task. Cannot be nil
+ * @param associateId   Id associate with the session task for this user
+ *
+ * @return resume data for background download task which has completed
+ */
+- (NSData *)resumeDataForUserId:(NSString *)userId associateId:(NSString *)associateId;
+
+/**
+ * Resume a completed download task by deleting its completed dir under users/$userId/$associateId
+ *
+ * @param userId        Id of user started the session task. Cannot be nil
+ * @param associateId   Id associate with the session task for this user
+ * @param error         error if failed to resume
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)resumeCompletedDownloadSessionTaskForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 @end

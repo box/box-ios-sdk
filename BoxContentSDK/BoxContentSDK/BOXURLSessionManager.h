@@ -149,23 +149,6 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
- Retrieve a NSURLSessionDownloadTask given a resume data to be run in the background to download file
- into a destination file path.
- If there is an existing task for userId and associateId and it's on-going, return that; if it finished,
- return a new one using resumeData.
- If have not seen this userId and associateId before or have cleaned it up
- using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one using resumeData.
-
- @param resumeData      data to resume download session task from
- @param taskDelegate    the delegate to receive callback for the session task
- @param userId          userId that this task belongs to
- @param associateId     an id to associate with this session task to retrieve cache for or clean up later
-
- @return a background download task. Nil if already completed
- */
-- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithResumeData:(NSData *)resumeData taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
-
-/**
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
  If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
  If have not seen this userId and associateId before or have cleaned it up
@@ -210,6 +193,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
 
 - (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError;
+
+- (void)cacheResumeData:resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 @end
 

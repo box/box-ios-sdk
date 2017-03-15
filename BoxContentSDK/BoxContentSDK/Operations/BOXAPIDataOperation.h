@@ -77,6 +77,12 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  */
 @property (nonatomic, readwrite, strong) NSString *destinationPath;
 
+/**
+ * This indicates whether background download should be cancelled with intention to resume
+ * so we maintain resume information to allow a later operation to resume the download from where it was left off
+ */
+@property (nonatomic, readwrite, assign) BOOL allowResume;
+
 /** @name Callbacks */
 
 /**

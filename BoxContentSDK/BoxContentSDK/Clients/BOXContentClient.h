@@ -192,7 +192,7 @@
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
  */
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir;
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir;
 
 /**
  * This method needs to be called in the main app to allow it reconnecting to background session tasks created by

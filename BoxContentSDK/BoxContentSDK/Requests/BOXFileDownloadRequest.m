@@ -121,4 +121,11 @@
     return BOXAPIItemTypeFile;
 }
 
+- (void)cancelWithIntentionToResume
+{
+    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)self.operation;
+    dataOperation.allowResume = YES;
+    [self cancel];
+}
+
 @end
