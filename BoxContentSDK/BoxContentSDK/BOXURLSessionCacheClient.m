@@ -343,6 +343,21 @@
     return [self unencryptedDataAtFilePath:filePath];
 }
 
+- (NSData *)resumeDataForUserId:(NSString *)userId associateId:(NSString *)associateId
+{
+    NSString *dirPath = [self completedDirForSessionTaskOfUserId:userId associateId:associateId];
+    NSString *filePath = [dirPath stringByAppendingPathComponent:BOXURLSessionTaskCacheResumeData];
+    //decrypt data found at filePath
+    return [self unencryptedDataAtFilePath:filePath];
+}
+
+- (BOOL)resumeCompletedDownloadSessionTaskForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
+{
+    //delete completed dir under users/$userId/$associateId/completed
+    NSString *dirPath = [self completedDirForSessionTaskOfUserId:userId associateId:associateId];
+    return [self deleteDirectory:dirPath error:error];
+}
+
 - (BOXUserIdAndAssociateId *)userIdAndAssociateIdForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
 {
     NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:BOXURLSessionTaskCacheFileTypeUserIdAndAssociateId];

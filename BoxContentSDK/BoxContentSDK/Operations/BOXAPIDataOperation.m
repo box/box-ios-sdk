@@ -64,6 +64,7 @@
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
         _outputStreamHasSpaceAvailable = YES; // attempt to write to the output stream as soon as we receive data
         _bytesReceived = 0;
+        self.allowResume = NO;
 
         // Initialize the responseData object to mutable data
         self.responseData = [NSMutableData data];
@@ -104,6 +105,11 @@
         sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
     }
     return sessionTask;
+}
+
+- (BOOL)shouldAllowResume
+{
+    return self.allowResume;
 }
 
 - (void)processResponseData:(NSData *)data

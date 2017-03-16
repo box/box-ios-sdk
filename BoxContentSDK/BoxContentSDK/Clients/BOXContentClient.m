@@ -375,9 +375,9 @@ static BOXContentClient *defaultInstance = nil;
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
 }
 
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
 {
-    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir];
+    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
 }
 
 + (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error
