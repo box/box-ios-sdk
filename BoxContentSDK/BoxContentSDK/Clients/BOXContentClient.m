@@ -370,12 +370,12 @@ static BOXContentClient *defaultInstance = nil;
 
 # pragma mark - background tasks support
 
-+ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
++ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
 {
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
 }
 
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
 {
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
 }
