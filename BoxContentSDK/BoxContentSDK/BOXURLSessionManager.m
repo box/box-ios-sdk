@@ -57,7 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BOXURLSessionManager() <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
+@interface BOXURLSessionManager() <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate> {
+    //A semaphore to make sure we wait until background session finishes setting up before providing background session tasks
+    dispatch_semaphore_t backgroundSessionSetupSemphore;
+}
 
 //Default NSURLSession to be used by NSURLSessionTask which does not need to be run in the background
 @property (nonatomic, readwrite, strong) NSURLSession *defaultSession;
@@ -83,9 +86,16 @@ NS_ASSUME_NONNULL_BEGIN
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
 @property (nonatomic, readonly, strong) NSMutableDictionary<NSString *, NSMutableDictionary<NSNumber *, BOXSessionTaskAndDelegate *> *> *backgroundSessionIdToSessionTask;
 
+//A map to associate backgroundSessionId and equivalent background NSURLSession objects that this BOXURLSessionManager knows about
+//If inside an app, there will be one background session for app, and 0 or more from previous runs of extensions
+//If inside an extension, there will be one background session for extension
 @property (nonatomic, readonly, strong) NSMutableDictionary<NSString *, NSURLSession *> *backgroundSessionIdToSession;
 
+//A cache client to cache background session task-related data to file system for retrieval after app restarts
 @property (nonatomic, readwrite, strong) BOXURLSessionCacheClient *cacheClient;
+
+//Indicate if background session's setup has completed
+@property (nonatomic, readwrite, assign) BOOL finishSettingUpBackgroundSession;
 
 @end
 
@@ -115,8 +125,17 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         _backgroundSessionIdToSession = [NSMutableDictionary new];
         [self createDefaultSession];
         [self createProgressSession];
+        self.finishSettingUpBackgroundSession = NO;
+        backgroundSessionSetupSemphore = dispatch_semaphore_create(0);
     }
     return self;
+}
+
+- (void)waitForBackgroundSessionSetUpToFinish
+{
+    if (self.finishSettingUpBackgroundSession == NO) {
+        dispatch_semaphore_wait(backgroundSessionSetupSemphore, DISPATCH_TIME_FOREVER);
+    }
 }
 
 - (NSURLSession *)createDefaultSession
@@ -265,6 +284,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         NSError *error = nil;
         BOOL success = [self.cacheClient completeOnGoingSessionTasksForBackgroundSessionId:backgroundSessionId excludingSessionTaskIds:pendingSessionTaskIds error:&error];
         BOXAssert(success, @"Failed to complete tasks which are no longer in pending with error %@", error);
+        self.finishSettingUpBackgroundSession = YES;
+        dispatch_semaphore_signal(backgroundSessionSetupSemphore);
     }];
 }
 
@@ -515,7 +536,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 //      re-create the download task with resume data and return that
 - (NSURLSessionTask *)backgroundTaskWithRequest:(NSURLRequest *)request orUploadFromFile:(NSURL *)uploadFromFileURL taskDelegate:(id <BOXURLSessionTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)outError
 {
-    //FIXME: ensure background session has finished populating pending session tasks before continue
+    [self waitForBackgroundSessionSetUpToFinish];
+
     BOXBackgroundSessionIdAndTask *backgroundSessionIdAndTask = [self existingBackgroundSessionTaskGivenUserId:userId associateId:associateId];
     NSString *backgroundSessionId = nil;
     NSURLSessionTask *sessionTask = nil;
