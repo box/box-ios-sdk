@@ -57,8 +57,7 @@
                                bodyDictionary:(NSDictionary *)bodyDictionary
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock
-                                  sessionTask:(NSURLSessionTask *)sessionTask
-                      sessionTaskReplacedBlock:(BOXSessionTaskReplacedBlock)sessionTaskReplacedBlock;
+                                  associateId:(NSString *)associateId;
 
 - (BOXStreamOperation *)dataStreamOperationWithURL:(NSURL *)URL
                                         HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod

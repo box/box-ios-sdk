@@ -53,7 +53,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
-- (void)cancelConnection;
+- (void)cancelSessionTask;
 
 @end
 
@@ -287,14 +287,50 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     __weak BOXAPIOperation *weakSelf = self;
-    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createDataTaskWithRequest:self.APIRequest
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager dataTaskWithRequest:self.APIRequest
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                     [weakSelf finishURLSessionTaskWithData:data response:response error:error];
                                                 }];
+    NSError *error = nil;
+    if (sessionTask == nil) {
+        error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
     return sessionTask;
+}
+
+- (void)executeSessionTask
+{
+    if (self.sessionTask == nil) {
+        //no session task to execute with, this happens for a background download/upload operation
+        //retrieve cached info to finish
+
+        NSString *userId = self.session.user.modelID;
+        NSError *error = nil;
+        BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
+
+        if (cachedInfo.response != nil && error == nil) {
+            //get valid cached info for session task, finish this operation
+
+            [self sessionTask:self.sessionTask didFinishWithResponse:cachedInfo.response responseData:cachedInfo.responseData error:cachedInfo.error];
+        } else {
+            //fail to retrieve cached info for session task, finish this operation with error
+
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+            if (error != nil) {
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            }
+            self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo userInfo:userInfo];
+            [self finish];
+        }
+    } else {
+        [self.sessionTask resume];
+    }
 }
 
 - (void)executeOperation
@@ -312,10 +348,19 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
+            NSError *error = nil;
             if (self.sessionTask == nil) {
-                self.sessionTask = [self createSessionTask];
+                self.sessionTask = [self createSessionTaskWithError:&error];
             }
-            [self.sessionTask resume];
+            if (error == nil) {
+                [self executeSessionTask];
+            } else {
+                BOXLog(@"BOXAPIOperation %@ failed to create session task to execute API request", self);
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+                self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateSessionTask userInfo:userInfo];
+                [self finish];
+            }
         }
         else
         {
@@ -335,24 +380,14 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)setSessionTask:(NSURLSessionTask *)sessionTask
-{
-    NSURLSessionTask *oldSessionTask = _sessionTask;
-    _sessionTask = sessionTask;
-    if (_sessionTaskReplacedBlock != nil) {
-        _sessionTaskReplacedBlock(oldSessionTask, _sessionTask);
-    }
-
-}
-
 - (void)cancel
 {
-    [self performSelector:@selector(cancelConnection) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
     [super cancel];
     BOXLog(@"BOXAPIOperation %@ was cancelled", self);
 }
 
-- (void)cancelConnection
+- (void)cancelSessionTask
 {
     NSDictionary *errorInfo = nil;
     if (self.baseRequestURL)
@@ -362,7 +397,30 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
 
     if (self.sessionTask != nil) {
-        [self.sessionTask cancel];
+        if ([self shouldAllowResume] == YES && [self.sessionTask isKindOfClass:[NSURLSessionDownloadTask class]] == YES) {
+            //if session task is a background download and it was cancelled with intention to resume,
+            //acquire resumeData to later resume the download from where it was left off
+            NSURLSessionDownloadTask *downloadTask = (NSURLSessionDownloadTask *)self.sessionTask;
+            NSString *userId = self.session.user.modelID;
+            __weak BOXAPIOperation *weakSelf = self;
+            [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+                /**
+                 * Note: as of Mar 15, 2017, Box's download API does not satisfy the requirement to allow
+                 * us taking use of resumable download from NSURLSession. resumeData will be nil
+                 * A download can be resumed only if the following conditions are met:
+                 *   The resource has not changed since you first requested it
+                 *   The task is an HTTP or HTTPS GET request
+                 *   The server provides either the ETag or Last-Modified header (or both) in its response
+                 *   The server supports byte-range requests
+                 *   The temporary file hasn’t been deleted by the system in response to disk space pressure
+                 */
+                if (resumeData != nil) {
+                    [weakSelf.session.urlSessionManager cacheResumeData:resumeData forUserId:userId associateId:self.associateId];
+                }
+            }];
+        } else {
+            [self.sessionTask cancel];
+        }
     }
 }
 
@@ -372,9 +430,24 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self sendLogoutNotification];
     }
     [self performCompletionCallback];
+
+    NSString *userId = self.session.user.modelID;
+    NSError *error = nil;
+
+    if ([self shouldAllowResume] == NO) {
+        //clean up cached info for session task if any
+        BOOL success = [self.session.urlSessionManager cleanUpBackgroundSessionTaskIfExistForUserId:userId associateId:self.associateId error:&error];
+        BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+    }
     self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
+}
+
+
+- (BOOL)shouldAllowResume
+{
+    return NO;
 }
 
 #pragma mark - Helper Methods
@@ -519,19 +592,28 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 #pragma mark - BOXURLSessionTaskDelegate
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
 {
-    [self finishURLSessionTaskWithData:self.responseData response:response error:error];
+    @synchronized (self) {
+        [self finishURLSessionTaskWithData:(responseData != nil ? responseData : self.responseData) response:response error:error];
+    }
 }
 
-- (void)processIntermediateResponse:(NSURLResponse *)response
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response
 {
-    [self processResponse:response];
+    @synchronized (self) {
+        //FIXME: review if we need to check for response != nil before processing
+        [self processResponse:response];
+    }
 }
 
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
-    [self.responseData appendData:data];
+    @synchronized (self) {
+        if (data != nil) {
+            [self.responseData appendData:data];
+        }
+    }
 }
 
 #pragma mark - Lock

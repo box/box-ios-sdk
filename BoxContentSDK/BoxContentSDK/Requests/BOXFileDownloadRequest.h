@@ -28,8 +28,7 @@
  */
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
-                            downloadTask:(NSURLSessionDownloadTask *)downloadTask
-               downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock;
+                             associateId:(NSString *)associateId;
 
 /**
  * request will download file into outputStream, and the file download cannot continue
@@ -39,5 +38,10 @@
                               fileID:(NSString *)fileID;
 
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXErrorBlock)completionBlock;
+
+/**
+ * Call this to cancel background download with intention to resume from where it left off in a later request
+ */
+- (void)cancelWithIntentionToResume;
 
 @end

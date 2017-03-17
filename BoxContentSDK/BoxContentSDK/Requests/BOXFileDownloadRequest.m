@@ -13,8 +13,7 @@
 @property (nonatomic, readonly, strong) NSString *destinationPath;
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
-@property (nonatomic, readwrite, strong) NSURLSessionDownloadTask *downloadTask;
-@property (nonatomic, readwrite, copy) BOXSessionTaskReplacedBlock downloadTaskReplacedBlock;
+@property (nonatomic, readwrite, copy) NSString *associateId;
 @end
 
 @implementation BOXFileDownloadRequest
@@ -32,12 +31,10 @@
 
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
-                            downloadTask:(NSURLSessionDownloadTask *)downloadTask
-                downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
+                             associateId:(NSString *)associateId
 {
     self = [self initWithLocalDestination:destinationPath fileID:fileID];
-    self.downloadTask = downloadTask;
-    self.downloadTaskReplacedBlock = downloadTaskReplacedBlock;
+    self.associateId = associateId;
     return self;
 }
 
@@ -70,8 +67,7 @@
                                                      bodyDictionary:nil
                                                        successBlock:nil
                                                        failureBlock:nil
-                                                        sessionTask:self.downloadTask
-                                            sessionTaskReplacedBlock:self.downloadTaskReplacedBlock];
+                                                        associateId:self.associateId];
 
     dataOperation.modelID = self.fileID;
     
@@ -123,6 +119,13 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeFile;
+}
+
+- (void)cancelWithIntentionToResume
+{
+    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)self.operation;
+    dataOperation.allowResume = YES;
+    [self cancel];
 }
 
 @end

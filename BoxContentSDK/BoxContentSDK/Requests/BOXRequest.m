@@ -183,7 +183,7 @@
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock
 {
-    return [self dataOperationWithURL:URL HTTPMethod:HTTPMethod queryStringParameters:queryParameters bodyDictionary:bodyDictionary successBlock:successBlock failureBlock:failureBlock sessionTask:nil sessionTaskReplacedBlock:nil];
+    return [self dataOperationWithURL:URL HTTPMethod:HTTPMethod queryStringParameters:queryParameters bodyDictionary:bodyDictionary successBlock:successBlock failureBlock:failureBlock associateId:nil];
 }
 
 - (BOXAPIDataOperation *)dataOperationWithURL:(NSURL *)URL
@@ -192,22 +192,21 @@
                                bodyDictionary:(NSDictionary *)bodyDictionary
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock
-                                  sessionTask:(NSURLSessionTask *)sessionTask
-                      sessionTaskReplacedBlock:(BOXSessionTaskReplacedBlock)sessionTaskReplacedBlock
+                                  associateId:(NSString *)associateId
 {
     BOXAPIDataOperation *operation = [[BOXAPIDataOperation alloc] initWithURL:URL
                                                                    HTTPMethod:HTTPMethod
                                                                          body:bodyDictionary
                                                                   queryParams:queryParameters
-                                                                      session:self.queueManager.session
-                                                                  urlSessionTask:sessionTask];
+                                                                      session:self.queueManager.session];
+    operation.associateId = associateId;
+
     if (successBlock != nil) {
         operation.successBlock = successBlock;
     }
     if (failureBlock != nil) {
         operation.failureBlock = failureBlock;
     }
-    operation.sessionTaskReplacedBlock = sessionTaskReplacedBlock;
 
     return operation;
 }

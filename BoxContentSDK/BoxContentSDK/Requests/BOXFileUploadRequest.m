@@ -18,6 +18,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
+@property (nonatomic, readwrite, copy) NSString *associateId;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
@@ -48,10 +49,12 @@
 - (instancetype)initWithPath:(NSString *)filePath
               targetFolderID:(NSString *)folderID
  uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                 associateId:(NSString *)associateId
 {
     self = [self initWithPath:filePath targetFolderID:folderID];
     if (self != nil) {
         self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
+        self.associateId = associateId;
     }
     return self;
 }
@@ -114,7 +117,7 @@
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
         operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
-
+        operation.associateId = self.associateId;
         [operation appendMultipartPieceWithFilePath:self.localFilePath
                                           fieldName:BOXAPIMultipartParameterFieldKeyFile
                                            filename:fileName
@@ -159,7 +162,9 @@
     }
     
     uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+        //for background upload, it's possible to have invalid JSONDictionary even if we succeeded
+        //if the app crashes before we could cache the response data
+        BOXFile *file = JSONDictionary == nil ? nil : [[BOXFile alloc] initWithJSON:JSONDictionary];
 
         if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadRequest:withFile:error:)]) {
             [self.cacheClient cacheFileUploadRequest:self withFile:file error:nil];

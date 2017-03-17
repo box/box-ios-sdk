@@ -88,10 +88,9 @@
 
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                       toLocalFilePath:(NSString *)localFilePath
-                                         downloadTask:(NSURLSessionDownloadTask *)downloadTask
-                            downloadTaskReplacedBlock:(BOXSessionTaskReplacedBlock)downloadTaskReplacedBlock
+                                          associateId:(NSString *)associateId
 {
-    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID downloadTask:downloadTask downloadTaskReplacedBlock:downloadTaskReplacedBlock];
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID associateId:associateId];
     [self prepareRequest:request];
 
     return request;
@@ -118,14 +117,15 @@
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                         fromLocalFilePath:(NSString *)localFilePath
 {
-    return [self fileUploadRequestInBackgroundToFolderWithID:folderID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil];
+    return [self fileUploadRequestInBackgroundToFolderWithID:folderID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil associateId:nil];
 }
 
 - (BOXFileUploadRequest *)fileUploadRequestInBackgroundToFolderWithID:(NSString *)folderID
                                                     fromLocalFilePath:(NSString *)localFilePath
                                           uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                          associateId:(NSString *)associateId
 {
-    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithPath:localFilePath targetFolderID:folderID uploadMultipartCopyFilePath:uploadMultipartCopyFilePath];
+    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithPath:localFilePath targetFolderID:folderID uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateId:associateId];
     [self prepareRequest:request];
 
     return request;
@@ -144,14 +144,15 @@
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                     fromLocalFilePath:(NSString *)localFilePath
 {
-    return [self fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil];
+    return [self fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:localFilePath uploadMultipartCopyFilePath:nil associateId:nil];
 }
 
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestInBackgroundWithFileID:(NSString *)fileID
                                                                 fromLocalFilePath:(NSString *)localFilePath
                                                       uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                                      associateId:(NSString *)associateId
 {
-    BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath uploadMultipartCopyFilePath:uploadMultipartCopyFilePath];
+    BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateId:associateId];
     [self prepareRequest:request];
 
     return request;

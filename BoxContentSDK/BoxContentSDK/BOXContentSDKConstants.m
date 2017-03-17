@@ -425,10 +425,12 @@ NSString *const BOXAPIEnterpriseEventTypeItemUnsync = @"ITEM_UNSYNC";
 
 //urlsessiontask cache dir, file prefix
 NSString *const BOXURLSessionTaskCacheDirectoryName = @"BOXURLSessionCache";
-NSString *const BOXURLSessionTaskCacheSessionsDirectoryName = @"sessions";
-NSString *const BOXURLSessionTaskCacheUsersDirName = @"users";
+NSString *const BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName = @"onGoingSessionTasks";
+NSString *const BOXURLSessionTaskCacheUsersDirectoryName = @"users";
+NSString *const BOXURLSessionTaskCacheExtensionSessionsDirectoryName = @"extensionSessions";
 NSString *const BOXURLSessionTaskCacheDestinationFilePath = @"destinationFilePath";
 NSString *const BOXURLSessionTaskCacheResumeData = @"resumeData";
 NSString *const BOXURLSessionTaskCacheResponse = @"response";
 NSString *const BOXURLSessionTaskCacheResponseData = @"responseData";
 NSString *const BOXURLSessionTaskCacheError = @"error";
+NSString *const BOXURLSessionTaskCacheUserIdAndAssociateId = @"userIdAndAssociateId";
