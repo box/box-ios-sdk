@@ -60,10 +60,17 @@
     return nil;
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError;
 {
-    NSURLSessionTask *sessionTask = [self.session.urlSessionManager createNonBackgroundDownloadTaskWithRequest:self.APIRequest
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest
                                                                                                   taskDelegate:self];
+    NSError *error = nil;
+    if (sessionTask == nil) {
+        error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
     return sessionTask;
 }
 
@@ -148,9 +155,9 @@
 //NOTE: Currently not implementing BOXURLSessionDownloadTaskDelegate methods on purpose.
 // For the stream, only the direct data and response handling is required.
 
-- (void)processIntermediateResponse:(NSURLResponse *)response
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response
 {
-    [super processIntermediateResponse:response];
+    [super sessionTask:sessionTask processIntermediateResponse:response];
     
     if (self.error != nil &&
         self.error.code == BOXContentSDKAPIErrorAccepted) {
@@ -167,11 +174,11 @@
 // self.responseData. This operation differs in that it should write its received
 // data immediately to its output stream. Failure to do so will cause downloads to
 // be buffered entirely in memory.
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     if (self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300) {
         // If we received an error, don't write the response data to the output stream
-        [super processIntermediateData:data];
+        [super sessionTask:sessionTask processIntermediateData:data];
     } else {
         // Buffer received data in an NSMutableData ivar because the output stream
         // may not have space available for writing
@@ -216,7 +223,6 @@
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
     operationCopy.progressBlock = [self.progressBlock copy];
-    operationCopy.sessionTaskReplacedBlock = self.sessionTaskReplacedBlock;
     
     return operationCopy;
 }

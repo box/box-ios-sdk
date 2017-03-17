@@ -77,11 +77,20 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKStreamError) {
     BOXContentSDKStreamErrorReadFailed = 30001
 };
 
-typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionCacheError) {
+typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
     BOXContentSDKURLSessionCacheErrorFileCreateFailed = 50000,
-    BOXContentSDKURLSessionCacheErrorNoValidSessionForUserId = 50001,
-    BOXContentSDKURLSessionCacheErrorNoValidUserIdOrAssociateId = 50002,
-    BOXContentSDKURLSessionCacheErrorNoValidBackgroundSessionIdOrSessionTaskId = 50003
+    BOXContentSDKURLSessionCacheErrorInvalidSessionTaskForUserId = 50001,
+    BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId = 50002,
+    BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId = 50003,
+    BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo = 50004,
+    BOXContentSDKURLSessionCacheErrorInvalidCompletedSessionTaskForUserId = 50005,
+    BOXContentSDKURLSessionErrorInvalidDestinationFilePath = 50006,
+    BOXContentSDKURLSessionCacheErrorDirectoryIsNotEmpty = 50007,
+    BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes = 50008,
+    BOXContentSDKURLSessionFailToReconnectBecauseBackgroundSessionIsNotSupported = 50009,
+    BOXContentSDKURLSessionFailToCreateSessionTask = 50010,
+    BOXContentSDKURLSessionInvalidSessionTask = 50011,
+    BOXContentSDKURLSessionInvalidBackgroundSession = 50012
 };
 
 extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token

@@ -444,20 +444,23 @@ extern NSString *const BOXAPIEnterpriseEventTypeItemUnsync;
 
 //urlsessiontask cache dir, file prefix
 extern NSString *const BOXURLSessionTaskCacheDirectoryName;
-extern NSString *const BOXURLSessionTaskCacheSessionsDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheUsersDirectoryName;
+extern NSString *const BOXURLSessionTaskCacheExtensionSessionsDirectoryName;
 extern NSString *const BOXURLSessionTaskCacheDestinationFilePath;
 extern NSString *const BOXURLSessionTaskCacheResumeData;
 extern NSString *const BOXURLSessionTaskCacheResponse;
 extern NSString *const BOXURLSessionTaskCacheResponseData;
 extern NSString *const BOXURLSessionTaskCacheError;
+extern NSString *const BOXURLSessionTaskCacheUserIdAndAssociateId;
 
 typedef NS_ENUM(NSUInteger, BOXURLSessionTaskCacheFileType) {
     BOXURLSessionTaskCacheFileTypeDestinationFilePath = 0,
     BOXURLSessionTaskCacheFileTypeResumeData = 1,
     BOXURLSessionTaskCacheFileTypeResponse = 2,
     BOXURLSessionTaskCacheFileTypeResponseData = 3,
-    BOXURLSessionTaskCacheFileTypeError = 4
+    BOXURLSessionTaskCacheFileTypeError = 4,
+    BOXURLSessionTaskCacheFileTypeUserIdAndAssociateId = 5
 };
 
 typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {

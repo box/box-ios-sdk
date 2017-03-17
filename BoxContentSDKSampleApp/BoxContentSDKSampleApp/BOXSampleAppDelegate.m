@@ -14,8 +14,6 @@
 
 @interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
-@property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;
-
 @end
 
 @implementation BOXSampleAppDelegate
@@ -29,87 +27,11 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:authenticationController];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
-    self.sessionIdToRequest = [[NSMutableDictionary alloc] init];
 
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to set up to support background tasks with error %@", error);
+    }];
     return YES;
-}
-
-- (void)recoverDownloadTask:(NSURLSessionDownloadTask *)downloadTask
-{
-    //FIXME: NOTE the sample app does NOT use the default client, need to grab the current active client.
-    BOXContentClient *client = [BOXContentClient defaultClient];
-    BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
-    BOXSampleAppSessionInfo *info = [appSessionManager getSessionTaskInfo:downloadTask.taskIdentifier];
-
-    if (info != nil) {
-        NSLog(@"reconnect download task info %@", info);
-
-        BOXFileDownloadRequest *request = [client fileDownloadRequestWithID:info.associateId toLocalFilePath:info.destinationPath downloadTask:downloadTask downloadTaskReplacedBlock:^(NSURLSessionTask *oldSessionTask, NSURLSessionTask *newSessionTask) {
-            //persist info for background download task so we can reconnect delegate to handle the download task's callbacks
-            if (oldSessionTask != nil) {
-                [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:oldSessionTask.taskIdentifier];
-            }
-            if (newSessionTask != nil) {
-                NSUInteger sessionTaskId = newSessionTask.taskIdentifier;
-                BOXSampleAppSessionInfo *info = [[BOXSampleAppSessionInfo alloc] initWithAssociateId:info.associateId destinationPath:info.destinationPath];
-                [[BOXSampleAppSessionManager defaultManager] saveSessionTaskId:sessionTaskId withInfo:info];
-            }
-        }];
-        //register download task and its equivalent request to allow cancelling of request
-        //if download task finishes before request starts and becomes its delegate
-        @synchronized (self.sessionIdToRequest) {
-            self.sessionIdToRequest[@(downloadTask.taskIdentifier)] = request;
-        }
-        [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-            NSLog(@"download request progress %lld/%lld, info (%@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.associateId, info.destinationPath);
-        } completion:^(NSError *error) {
-            NSLog(@"download request completed, error: %@, info (%@, %@)", error, info.associateId, info.destinationPath);
-            [appSessionManager removeSessionTaskId:downloadTask.taskIdentifier];
-        }];
-    } else {
-        NSLog(@"unrecognized downloadTask %lu", downloadTask.taskIdentifier);
-    }
-}
-
-- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask
-  didWriteTotalBytes:(int64_t)totalBytesWritten
-totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
-{
-    NSLog(@"sessionTaskId %lu, totalBytesWritten %lld, totalBytesExpectedToWrite %lld", (unsigned long)downloadTask.taskIdentifier, totalBytesWritten, totalBytesExpectedToWrite);
-    [self recoverDownloadTask:downloadTask];
-}
-
-- (void)downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
-{
-    NSLog(@"downloadTask sessionTaskId %lu location %@", (unsigned long)downloadTask.taskIdentifier, location);
-    @synchronized (self.sessionIdToRequest) {
-        if (self.sessionIdToRequest[@(downloadTask.taskIdentifier)] != nil) {
-            BOXFileDownloadRequest *request = self.sessionIdToRequest[@(downloadTask.taskIdentifier)];
-            [request cancel];
-            [self.sessionIdToRequest removeObjectForKey:@(downloadTask.taskIdentifier)];
-        }
-    }
-}
-
-- (void)sessionTask:(NSURLSessionTask *)sessionTask
-  didSendTotalBytes:(int64_t)totalBytesSent
-totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
-{
-    NSLog(@"uploadTask sessionTaskId %lu", sessionTask.taskIdentifier);
-}
-
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
-{
-    //could be called to handle any session task whose delegate might have gone away like thumbnail requests if scrolled past them
-    NSLog(@"sessionTaskId %lu, response %@, error %@", sessionTask.taskIdentifier, response, error);
-    @synchronized (self.sessionIdToRequest) {
-        if (self.sessionIdToRequest[@(sessionTask.taskIdentifier)] != nil) {
-            BOXFileDownloadRequest *request = self.sessionIdToRequest[@(sessionTask.taskIdentifier)];
-            [request cancel];
-            [self.sessionIdToRequest removeObjectForKey:@(sessionTask.taskIdentifier)];
-        }
-    }
-    [[BOXSampleAppSessionManager defaultManager] removeSessionTaskId:sessionTask.taskIdentifier];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -137,9 +59,13 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
 {
     NSLog(@"handleEventsForBackgroundURLSession identifier %@", identifier);
-    //FIXME: Need to get the BOXContentClient for the currently logged in user and set up its URL session manager
-//    BOXURLSessionManager *manager = client.session.urlSessionManager;
-//    [manager setUpWithDefaultDelegate:self];
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to set up to support background tasks with error %@", error);
+    }];
+    [BOXContentClient reconnectWithBackgroundSessionIdFromExtension:identifier completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to reconnect with background session from extension with error %@", error);
+    }];
+
     completionHandler();
 }
 

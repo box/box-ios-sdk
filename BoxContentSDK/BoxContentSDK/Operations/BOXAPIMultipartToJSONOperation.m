@@ -30,7 +30,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 #pragma mark - Upload Operation
 
-@interface BOXAPIMultipartToJSONOperation () <BOXURLSessionUploadTaskDelegate>
+@interface BOXAPIMultipartToJSONOperation ()
 {
     dispatch_once_t _pred;
 }
@@ -44,6 +44,11 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 @end
 
+/* *
+ * To make a new BOXAPIOperation support background upload similarly to BOXAPIMultipartToJSONOperation, implement
+ * protocol BOXURLSessionUploadTaskDelegate and override its createSessionTaskWithError: exposed from BOXAPIOperation_Private.h
+ * to return a foreground upload or background upload accordingly
+ */
 @implementation BOXAPIMultipartToJSONOperation
 
 #pragma mark - Append data to upload operation
@@ -90,17 +95,26 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (BOOL)shouldRunInBackground
 {
-    return self.uploadMultipartCopyFilePath != nil;
+    return self.uploadMultipartCopyFilePath != nil && self.associateId != nil;
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
+    NSString *userId = self.session.user.modelID;
+
+    NSError *error = nil;
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        sessionTask = [self.session.urlSessionManager createBackgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId error:&error];
     } else {
-        sessionTask = [self.session.urlSessionManager createNonBackgroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        sessionTask = [self.session.urlSessionManager foregroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        if (sessionTask == nil) {
+            error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+        }
+    }
+    if (outError != nil) {
+        *outError = error;
     }
     return sessionTask;
 }
@@ -114,7 +128,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)processIntermediateData:(NSData *)data
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
 {
     @synchronized (self) {
         if (data != nil) {
@@ -123,13 +137,13 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
 {
     @synchronized (self) {
-        if (error == nil && self.error == nil && self.responseJSON == nil) {
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:nil];
+        if ([self shouldRunInBackground] == YES) {
+            [[NSFileManager defaultManager] removeItemAtPath:self.uploadMultipartCopyFilePath error:nil];
         }
-        [super sessionTask:sessionTask didFinishWithResponse:response error:error];
+        [super sessionTask:sessionTask didFinishWithResponse:response responseData:responseData error:error];
     }
 }
 

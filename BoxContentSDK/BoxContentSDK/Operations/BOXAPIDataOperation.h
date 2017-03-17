@@ -43,6 +43,9 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * cannot be copied, BOXAPIDataOperation instances cannot be automatically retried by the SDK in the event
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
+ *
+ * BOXAPIDataOperation supports both foreground and background downloads
+ * By default, download is foreground unless associateId and destinationPath properties are provided
  */
 @interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate, BOXURLSessionDownloadTaskDelegate>
 
@@ -70,9 +73,17 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 
 /**
  * The location for output file. If provided, outputStream will be ignored
- * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ * Using destinationPath to consume data will allow request to be executed in the background
+ * if the app is killed/suspended and resume upon app restarts/resumes
+ * To support background download, make sure associateId is valid as well
  */
 @property (nonatomic, readwrite, strong) NSString *destinationPath;
+
+/**
+ * This indicates whether background download should be cancelled with intention to resume
+ * so we maintain resume information to allow a later operation to resume the download from where it was left off
+ */
+@property (nonatomic, readwrite, assign) BOOL allowResume;
 
 /** @name Callbacks */
 
@@ -129,25 +140,6 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @see progressBlock
  */
 @property (nonatomic, readwrite, strong) NSString *modelID;
-
-/**
- * Initializer. This initializer sets up APIRequest based on its input parameters
- *
- * @param URL the baseRequestURL
- * @param HTTPMethod one of GET, POST, PUT, DELETE, OPTIONS. Used to configure APIRequest
- * @param body Key value pairs to be encoded as the request body
- * @param queryParams Key value pairs to be encoded as part of the query string
- * @param session used for signing requests
- * @param urlSessionTask used for actual execution of the API request
- *
- * @return An initialized BOXAPIOperation
- */
-- (id)initWithURL:(NSURL *)URL
-       HTTPMethod:(NSString *)HTTPMethod
-             body:(NSDictionary *)body
-      queryParams:(NSDictionary *)queryParams
-          session:(BOXAbstractSession *)session
-      urlSessionTask:(NSURLSessionTask *)urlSessionTask;
 
 /** @name Overridden methods */
 
