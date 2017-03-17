@@ -665,8 +665,8 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir] == YES && isDir == YES) {
         success = [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:&error];
         if (error != nil) {
-            error = error.userInfo[NSUnderlyingErrorKey];
-            if (error.domain == NSCocoaErrorDomain && error.code == NSFileNoSuchFileError) {
+            NSError *underlyingError = error.userInfo[NSUnderlyingErrorKey];
+            if (underlyingError.domain == NSCocoaErrorDomain && underlyingError.code == NSFileNoSuchFileError) {
                 //if cannot remove because of no such file or directory, consider that a success
                 success = YES;
                 error = nil;
@@ -713,12 +713,13 @@
     return [self.cacheDir stringByAppendingPathComponent:BOXURLSessionTaskCacheExtensionSessionsDirectoryName];
 }
 
-// Return dir path users/$userId/$associateId/$backgroundSessionId-$sessionTaskId
+// Return dir path users/$userId/$associateId
 - (NSString *)dirPathOfSessionTaskGivenUserId:(NSString *)userId associateId:(NSString *)associateId
 {
     return [[self dirPathOfUserId:userId] stringByAppendingPathComponent:associateId];
 }
 
+// Return dir path users/$userId/$associateId/info
 - (NSString *)dirPathOfSessionTaskFileGivenUserId:(NSString *)userId associateId:(NSString *)associateId
 {
     return [[self dirPathOfSessionTaskGivenUserId:userId associateId:associateId] stringByAppendingPathComponent:@"info"];

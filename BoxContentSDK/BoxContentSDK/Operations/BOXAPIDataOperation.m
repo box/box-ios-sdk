@@ -236,6 +236,13 @@
     [self.sessionTask cancel];
 }
 
+#pragma mark - BOXURLSessionDownloadTaskDelegate
+
+- (NSString *)destinationFilePath
+{
+    return self.destinationPath;
+}
+
 #pragma mark - BOXURLSessionTaskDelegate
 
 - (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response

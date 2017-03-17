@@ -84,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 //a map to associate a background session to its session task and session task delegate
 //there can be more than one background session at a time as an app takes over background sessions created from app extensions
 //during session/task's delegate callbacks, we call appropriate methods on task delegate
+//map backgroundSessionId -> sessionTaskId -> (sessionTask, taskDelegate)
 @property (nonatomic, readonly, strong) NSMutableDictionary<NSString *, NSMutableDictionary<NSNumber *, BOXSessionTaskAndDelegate *> *> *backgroundSessionIdToSessionTask;
 
 //A map to associate backgroundSessionId and equivalent background NSURLSession objects that this BOXURLSessionManager knows about
@@ -91,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 //If inside an extension, there will be one background session for extension
 @property (nonatomic, readonly, strong) NSMutableDictionary<NSString *, NSURLSession *> *backgroundSessionIdToSession;
 
-//A cache client to cache background session task-related data to file system for retrieval after app restarts
+//A cache client to cache background session task-related data to file system for retrieval by task delegate
 @property (nonatomic, readwrite, strong) BOXURLSessionCacheClient *cacheClient;
 
 //Indicate if background session's setup has completed
@@ -148,7 +149,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         queue.name = @"com.box.BOXURLSessionManager.default";
-        queue.maxConcurrentOperationCount = 8;
+        queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
 
         _defaultSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:queue];
     }
@@ -165,7 +166,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         queue.name = @"com.box.BOXURLSessionManager.progress";
-        queue.maxConcurrentOperationCount = 8;
+        queue.maxConcurrentOperationCount = 40;
 
         _progressSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
     }
@@ -242,7 +243,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         //create one _backgroundSession which can provide new session tasks for this app
         //or this extension if called from extension
         if (_backgroundSession == nil) {
-            _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:8];
+            _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:40];
             firstSetUp = YES;
         }
     }
@@ -315,11 +316,6 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (NSString *)backgroundSessionIdentifier
 {
     return self.backgroundSession.configuration.identifier;
-}
-
-- (void)associateBackgroundSessionTask:(NSURLSessionTask *)sessionTask withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate
-{
-    [self associateSessionId:self.backgroundSessionIdentifier sessionTask:sessionTask withTaskDelegate:taskDelegate];
 }
 
 - (void)associateProgressSessionTask:(NSURLSessionTask *)sessionTask withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate
@@ -423,7 +419,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (success == YES) {
             NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
             if (backgroundSessionId != nil && [backgroundSessionId isEqualToString:[self backgroundSessionIdentifier]] == NO) {
-                //this background session is not self's backgroundSession so we must be running inside the main app
+                //this background session is not self.backgroundSession so we must be running inside the main app
                 //and this background session is from extension, clean it up if it has no more pending tasks
                 BOOL shouldCleanUp = NO;
                 @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionId]) {

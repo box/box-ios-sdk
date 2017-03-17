@@ -143,6 +143,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  @param taskDelegate    the delegate to receive callback for the session task
  @param userId          userId that this task belongs to
  @param associateId     an id to associate with this session task to retrieve cache for or clean up later
+ @param error           error if failed to create background task
 
  @return a background download task. Nil if already completed
  */
@@ -159,6 +160,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  @param taskDelegate    the delegate to receive callback for the session task
  @param userId          userId that this task belongs to
  @param associateId     an id to associate with this session task to retrieve cache for or clean up later
+ @param error           error if failed to create background task
 
  @return a background upload task. Nil if already completed
  */
