@@ -186,7 +186,6 @@
  * support background upload/download tasks.
  * If this method has not been called, all background task creations will fail
  *
- * @param backgroundSessionId background session id to create background session with
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session

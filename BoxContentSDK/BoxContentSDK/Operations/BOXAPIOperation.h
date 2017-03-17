@@ -158,7 +158,7 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 /**
  * Stores a unique Id to associate with a background download or upload task
  * Useful to reconnect to the task upon app restarts, or to resume a previously
- * cancelled background download
+ * cancelled background download. Optional for non-background tasks.
  */
 @property (nonatomic, readwrite, copy) NSString *associateId;
 
