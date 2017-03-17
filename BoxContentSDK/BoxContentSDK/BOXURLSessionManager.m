@@ -466,7 +466,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return success;
 }
 
-- (void)cancelAndCleanUpBackgroundSessionTasksIfExistForUserId:(NSString *)userId error:(NSError **)outError
+- (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError
 {
     //FIXME: make sure set up is completed, and prevents any new tasks created for this userId while we clean it up
 
