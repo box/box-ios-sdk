@@ -221,9 +221,11 @@
         // for 202, we are going to re-enqueue so we don't want to mess with the stream.
     }
     else {
-        self.outputStream.delegate = nil;
-        [self.outputStream close];
-        _outputStream = nil;
+        @synchronized (self.receivedDataBuffer) {
+            self.outputStream.delegate = nil;
+            [self.outputStream close];
+            _outputStream = nil;
+        }
     }
 }
 
