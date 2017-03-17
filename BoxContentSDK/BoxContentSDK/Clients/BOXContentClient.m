@@ -370,19 +370,19 @@ static BOXContentClient *defaultInstance = nil;
 
 # pragma mark - background tasks support
 
-+ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
++ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 {
-    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
+    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
 }
 
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 {
-    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir];
+    [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
 }
 
-+ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error
++ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
 {
-    [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId error:error];
+    [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId completion:completionBlock];
 }
 
 #pragma mark - helper methods

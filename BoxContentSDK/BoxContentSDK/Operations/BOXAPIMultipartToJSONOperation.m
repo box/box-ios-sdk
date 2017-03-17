@@ -46,7 +46,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 /* *
  * To make a new BOXAPIOperation support background upload similarly to BOXAPIMultipartToJSONOperation, implement
- * protocol BOXURLSessionUploadTaskDelegate and override its createSessionTask exposed from BOXAPIOperation_Private.h
+ * protocol BOXURLSessionUploadTaskDelegate and override its createSessionTaskWithError: exposed from BOXAPIOperation_Private.h
  * to return a foreground upload or background upload accordingly
  */
 @implementation BOXAPIMultipartToJSONOperation
@@ -95,21 +95,26 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 
 - (BOOL)shouldRunInBackground
 {
-    return self.uploadMultipartCopyFilePath != nil;
+    return self.uploadMultipartCopyFilePath != nil && self.associateId != nil;
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
     NSString *userId = self.session.user.modelID;
 
+    NSError *error = nil;
     if (self.shouldRunInBackground == YES) {
         NSURL *url = [[NSURL alloc] initFileURLWithPath:self.uploadMultipartCopyFilePath];
-        NSError *error = nil;
         sessionTask = [self.session.urlSessionManager backgroundUploadTaskWithRequest:self.APIRequest fromFile:url taskDelegate:self userId:userId associateId:self.associateId error:&error];
-        BOXAssert(error == nil, @"Error getting background upload task %@", error);
     } else {
         sessionTask = [self.session.urlSessionManager foregroundUploadTaskWithStreamedRequest:self.APIRequest taskDelegate:self];
+        if (sessionTask == nil) {
+            error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+        }
+    }
+    if (outError != nil) {
+        *outError = error;
     }
     return sessionTask;
 }

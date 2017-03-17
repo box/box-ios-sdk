@@ -14,8 +14,6 @@
 
 @interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
-@property (nonatomic, strong, readwrite) NSMutableDictionary *sessionIdToRequest;
-
 @end
 
 @implementation BOXSampleAppDelegate
@@ -30,10 +28,9 @@
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 
-    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
-    self.sessionIdToRequest = [[NSMutableDictionary alloc] init];
-
-    //FIXME: ask content client to reconnect to background sessions it knows of??
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to set up to support background tasks with error %@", error);
+    }];
     return YES;
 }
 
@@ -62,12 +59,12 @@
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
 {
     NSLog(@"handleEventsForBackgroundURLSession identifier %@", identifier);
-    //FIXME: Need to get the BOXContentClient for the currently logged in user and set up its URL session manager
-    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]];
-
-    NSError *error = nil;
-    [BOXContentClient reconnectWithBackgroundSessionIdFromExtension:identifier error:&error];
-    BOXAssert(error == nil, @"Failed to reconnect with background session from extension with error %@", error);
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to set up to support background tasks with error %@", error);
+    }];
+    [BOXContentClient reconnectWithBackgroundSessionIdFromExtension:identifier completion:^(NSError *error) {
+        BOXAssert(error == nil, @"Failed to reconnect with background session from extension with error %@", error);
+    }];
 
     completionHandler();
 }
