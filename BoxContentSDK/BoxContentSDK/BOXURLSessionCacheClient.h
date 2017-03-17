@@ -77,12 +77,13 @@
  *
  * NOTE: there can only be one on-going backgroundSessionId and sessionTaskId at any time,
  *       but there can be more than one completed session tasks with that backgroundSessionId and sessionTaskId
- *       under users/$userId/$associateId/completed/* until they are cleaned up
+ *       under users/$userId/$associateId/completed/... until they are cleaned up
  */
 @interface BOXURLSessionCacheClient : NSObject
 
 /**
- * Initialize BOXURLSessionCacheClient with a root directory for caching. Cannot be nil.
+ * Initialize BOXURLSessionCacheClient with a root directory for all cache data.
+ * Cannot be nil.
  */
 - (id)initWithCacheRootDir:(NSString *)cacheRootDir;
 
@@ -90,11 +91,6 @@
  * Delegate to allow encrypting data before persisting to disk, and can be left unset.
  */
 @property (nonatomic, weak, readwrite) id<BOXURLSessionCacheClientDelegate> delegate;
-
-/**
- * Specify root dir for all cache data
- */
-- (id)initWithCacheRootDir:(NSString *)cacheRootDir;
 
 /**
  * Cache the relationship between the session task and the user who started it as well as its equivalent associateId
