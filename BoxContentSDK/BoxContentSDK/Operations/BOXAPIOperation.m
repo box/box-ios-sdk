@@ -287,13 +287,20 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     __weak BOXAPIOperation *weakSelf = self;
     NSURLSessionTask *sessionTask = [self.session.urlSessionManager dataTaskWithRequest:self.APIRequest
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                     [weakSelf finishURLSessionTaskWithData:data response:response error:error];
                                                 }];
+    NSError *error = nil;
+    if (sessionTask == nil) {
+        error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
     return sessionTask;
 }
 
@@ -341,10 +348,19 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         if (self.error == nil && ![self isCancelled])
         {
+            NSError *error = nil;
             if (self.sessionTask == nil) {
-                self.sessionTask = [self createSessionTask];
+                self.sessionTask = [self createSessionTaskWithError:&error];
             }
-            [self executeSessionTask];
+            if (error == nil) {
+                [self executeSessionTask];
+            } else {
+                BOXLog(@"BOXAPIOperation %@ failed to create session task to execute API request", self);
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+                self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateSessionTask userInfo:userInfo];
+                [self finish];
+            }
         }
         else
         {

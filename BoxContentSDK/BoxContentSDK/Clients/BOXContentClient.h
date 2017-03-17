@@ -178,8 +178,9 @@
  *
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data
+ * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-+ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
++ (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 
 /**
  * This method needs to be called once in app extensions to be ready to
@@ -190,17 +191,18 @@
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
+ * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 
 /**
  * This method needs to be called in the main app to allow it reconnecting to background session tasks created by
  * background session started from extension
  *
  * @param backgroundSessionId   Id of background session from extension
- * @param error                 error reconnecting which the background session
+ * @param completeion           block to execute upon completion of reconnecting to background session
  */
-+ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error;
++ (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
 
 /**
  *  API base URLs.

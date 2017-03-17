@@ -85,7 +85,11 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
     BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo = 50004,
     BOXContentSDKURLSessionCacheErrorInvalidCompletedSessionTaskForUserId = 50005,
     BOXContentSDKURLSessionErrorInvalidDestinationFilePath = 50006,
-    BOXContentSDKURLSessionCacheErrorDirectoryIsNotEmpty = 50007
+    BOXContentSDKURLSessionCacheErrorDirectoryIsNotEmpty = 50007,
+    BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes = 50008,
+    BOXContentSDKURLSessionFailToReconnectBecauseBackgroundSessionIsNotSupported = 50009,
+    BOXContentSDKURLSessionFailToCreateSessionTask = 50010,
+    BOXContentSDKURLSessionInvalidSessionTask = 50011
 };
 
 extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token

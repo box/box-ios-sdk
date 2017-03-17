@@ -96,8 +96,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  *
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data
+ * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 
 /**
  * This method needs to be called once in app extensions to set up the manager to be ready to
@@ -108,14 +109,18 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
+ * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir;
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
  * should share the same rootCacheDir as the main app to work properly
+ *
+ * @param backgroundSessionId   Id of background session to reconnect with
+ * @param completeion           block to execute upon completion of reconnecting to background session
  */
-- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)error;
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
@@ -194,9 +199,15 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  */
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
 
+/**
+ * Cancel and clean up all background session tasks associated with this user
+ */
 - (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError;
 
-- (void)cacheResumeData:resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
+/**
+ * Cache resumeData for background download session task of this userId and associateId
+ */
+- (BOOL)cacheResumeData:resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 @end
 

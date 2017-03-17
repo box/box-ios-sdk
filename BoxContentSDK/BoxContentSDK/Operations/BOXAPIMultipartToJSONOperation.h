@@ -41,7 +41,7 @@ typedef void (^BOXAPIMultipartProgressBlock)(unsigned long long totalBytes, unsi
 
 /**
  * Location to write a multi-part formatted file of the uploaded content into for background upload
- * If nil, upload will be a non-background upload
+ * If nil, upload will be a non-background upload. For background upload, also make sure to have a valid associateId as well
  */
 @property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
 

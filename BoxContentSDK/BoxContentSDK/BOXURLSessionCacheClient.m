@@ -174,7 +174,7 @@
         }
         return NO;
     }
-    NSData *data = error == nil ? nil : [NSKeyedArchiver archivedDataWithRootObject:taskError];
+    NSData *data = taskError == nil ? nil : [NSKeyedArchiver archivedDataWithRootObject:taskError];
     return [self cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId data:data type:BOXURLSessionTaskCacheFileTypeError error:error];
 }
 

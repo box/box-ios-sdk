@@ -60,10 +60,17 @@
     return nil;
 }
 
-- (NSURLSessionTask *)createSessionTask
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError;
 {
     NSURLSessionTask *sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest
                                                                                                   taskDelegate:self];
+    NSError *error = nil;
+    if (sessionTask == nil) {
+        error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
     return sessionTask;
 }
 
