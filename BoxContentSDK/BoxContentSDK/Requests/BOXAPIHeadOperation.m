@@ -76,7 +76,13 @@
         // If we get a 202, it means the content is not yet ready on Box's servers.
         // Re-enqueue after a certain amount of time.
         double delay = [self reenqueDelay];
-        [self performSelector:@selector(reenqueOperationDueTo202Response) withObject:self afterDelay:delay];
+        dispatch_queue_t currentQueue = [[NSOperationQueue currentQueue] underlyingQueue];
+        if (currentQueue == nil) {
+            currentQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self reenqueOperationDueTo202Response];
+        });
     }
 }
 
@@ -108,7 +114,7 @@
         if ([self.error.domain isEqualToString:BOXContentSDKErrorDomain] &&
             (self.error.code == BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued ||
              self.error.code == BOXContentSDKAPIErrorAccepted)) {
-                // Do not fire failre block if request is going to be re-enqueued due to an expired token, or a 202 response.
+                // Do not fire failure block if request is going to be re-enqueued due to an expired token, or a 202 response.
             } else {
                 if (self.failureBlock) {
                     self.failureBlock(self.APIRequest, self.HTTPResponse, self.error);
