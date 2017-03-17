@@ -142,7 +142,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  Retrieve a NSURLSessionDownloadTask to be run in the background to download file into a destination file path.
  If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
  If have not seen this userId and associateId before or have cleaned it up
- using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
+ using cleanUpBackgroundSessionTaskIfExistForUserId:associateId:error, return a new one.
 
  @param request         request to create download task with
  @param taskDelegate    the delegate to receive callback for the session task
@@ -150,7 +150,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  @param associateId     an id to associate with this session task to retrieve cache for or clean up later
  @param error           error if failed to create background task
 
- @return a background download task. Nil if already completed
+ @return a background download task. Nil if already completed, or failed to get one because
+ background session has not finished setting up. Wait for completionBlock of
+ oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:rootCacheDir:completion in main app or
+ oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:rootCacheDir:completion
  */
 - (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
@@ -158,7 +161,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
  If there is an existing task for userId and associateId and it's on-going, return that; if it finished, return nil.
  If have not seen this userId and associateId before or have cleaned it up
- using cleanUpSessionTaskInfoGivenUserId:associateId:error, return a new one.
+ using cleanUpBackgroundSessionTaskIfExistForUserId:associateId:error, return a new one.
 
  @param request         request to create upload task with
  @param fileURL         url of the source file to upload
@@ -167,7 +170,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  @param associateId     an id to associate with this session task to retrieve cache for or clean up later
  @param error           error if failed to create background task
 
- @return a background upload task. Nil if already completed
+ @return a background upload task. Nil if already completed, or failed to get one because
+ background session has not finished setting up. Wait for completionBlock of
+ oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:rootCacheDir:completion in main app or
+ oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:rootCacheDir:completion
  */
 - (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
@@ -192,7 +198,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return YES if successfully clean up, NO otherwise
  */
-- (BOOL)cleanUpSessionTaskInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOOL)cleanUpBackgroundSessionTaskIfExistForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
  * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
@@ -207,7 +213,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 /**
  * Cache resumeData for background download session task of this userId and associateId
  */
-- (BOOL)cacheResumeData:resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
+- (BOOL)cacheResumeData:(NSData *)resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 @end
 

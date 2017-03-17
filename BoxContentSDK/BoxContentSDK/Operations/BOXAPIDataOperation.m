@@ -87,11 +87,6 @@
     return nil;
 }
 
-- (NSString *)destinationFilePath
-{
-    return self.destinationPath;
-}
-
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;

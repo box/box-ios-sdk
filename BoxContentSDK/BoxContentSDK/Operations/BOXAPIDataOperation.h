@@ -73,7 +73,9 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 
 /**
  * The location for output file. If provided, outputStream will be ignored
- * Using destinationPath to consume data will allow request to be executed in the background if the app is killed/suspended and resume upon app restarts/resumes
+ * Using destinationPath to consume data will allow request to be executed in the background
+ * if the app is killed/suspended and resume upon app restarts/resumes
+ * To support background download, make sure associateId is valid as well
  */
 @property (nonatomic, readwrite, strong) NSString *destinationPath;
 
