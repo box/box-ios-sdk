@@ -295,7 +295,7 @@
     return [[self fullFolderFieldsArray] componentsJoinedByString:@","];
 }
 
-- (NSArray *)fullFileFieldsArray
+- (NSArray<NSString *> *)fullFileFieldsArray
 {
     NSArray *array = @[BOXAPIObjectKeyType,
                        BOXAPIObjectKeyID,
@@ -325,8 +325,7 @@
                        BOXAPIObjectKeyExtension,
                        BOXAPIObjectKeyIsPackage,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
-                       BOXAPIObjectKeyCollections,
-                       BOXAPIObjectKeyRepresentations];
+                       BOXAPIObjectKeyCollections];
     return array;
 }
 
