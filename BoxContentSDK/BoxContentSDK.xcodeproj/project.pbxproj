@@ -261,6 +261,7 @@
 		AA73ED061E36C2250010F6D8 /* BOXRecentItemsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA73ED041E36C2250010F6D8 /* BOXRecentItemsRequest.m */; };
 		AA73ED091E36C2620010F6D8 /* BOXContentClient+RecentItems.h in Headers */ = {isa = PBXBuildFile; fileRef = AA73ED071E36C2620010F6D8 /* BOXContentClient+RecentItems.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA73ED0A1E36C2620010F6D8 /* BOXContentClient+RecentItems.m in Sources */ = {isa = PBXBuildFile; fileRef = AA73ED081E36C2620010F6D8 /* BOXContentClient+RecentItems.m */; };
+		AAB054801E79FFC00034E6B7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */; };
 		C53EC2441A3873090007C8A7 /* BOXComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC2421A3873090007C8A7 /* BOXComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C53EC2451A3873090007C8A7 /* BOXComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2431A3873090007C8A7 /* BOXComment.m */; };
 		C53EC25E1A38855E0007C8A7 /* BOXCommentAddRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C53EC25C1A38855E0007C8A7 /* BOXCommentAddRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -954,6 +955,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB054801E79FFC00034E6B7 /* MobileCoreServices.framework in Frameworks */,
 				15605D8B1A20132200C5EE5A /* libBoxContentSDK.a in Frameworks */,
 				15605DA01A2013B800C5EE5A /* libOCMock.a in Frameworks */,
 			);
