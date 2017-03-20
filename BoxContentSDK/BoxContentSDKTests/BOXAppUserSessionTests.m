@@ -59,8 +59,8 @@
     BOXAPIQueueManager *queueManager = [[BOXAPIQueueManager alloc]init];
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     XCTAssert([client.session isKindOfClass:[BOXOAuth2Session class]]);
-    
-    BOXAppUserSession *expectedSession = [[BOXAppUserSession alloc] initWithQueueManager:queueManager];
+    BOXURLSessionManager *urlSessionManager = [[BOXURLSessionManager alloc] init];
+    BOXAppUserSession *expectedSession = [[BOXAppUserSession alloc] initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     client.session = expectedSession;
     
     XCTAssertEqual(expectedSession.queueManager, queueManager);
@@ -73,7 +73,8 @@
 - (void)test_store_keychain_with_app_users
 {
     BOXAPIQueueManager *queueManager = [[BOXAPIQueueManager alloc]init];
-    BOXAppUserSession *session = [[BOXAppUserSession alloc] initWithQueueManager:queueManager];
+    BOXURLSessionManager *urlSessionManager = [[BOXURLSessionManager alloc] init];
+    BOXAppUserSession *session = [[BOXAppUserSession alloc] initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     BOXUserMini *user = [[BOXUserMini alloc]init];
     
     user.modelID = @"782";

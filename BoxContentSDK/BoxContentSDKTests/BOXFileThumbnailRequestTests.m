@@ -10,6 +10,7 @@
 #import "BOXContentClient.h"
 #import "BOXFileThumbnailRequest.h"
 #import "BOXRequest_Private.h"
+#import "BOXParallelAPIQueueManager.h"
 
 @interface BOXFileThumbnailRequestTests : BOXRequestTestCase
 @end
@@ -83,7 +84,6 @@
     [[[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
         numberOfOperationsEnqueued++;
     }] andForwardToRealObject] enqueueOperation:OCMOCK_ANY];
-    
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
     [request performRequestWithProgress:nil completion:^(UIImage *image, NSError *error) {
         XCTAssertNil(error);

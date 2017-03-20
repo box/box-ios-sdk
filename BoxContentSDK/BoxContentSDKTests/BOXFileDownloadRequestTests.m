@@ -11,6 +11,7 @@
 #import "BOXContentClient.h"
 #import "BOXFileDownloadRequest.h"
 #import "BOXFile.h"
+#import "BOXParallelAPIQueueManager.h"
 
 @interface BOXFileDownloadRequestTests : BOXRequestTestCase
 @end
@@ -119,11 +120,12 @@
     
     // We expect the queueManager to re-enque after each 202 is received.
     __block NSInteger numberOfOperationsEnqueued = 0;
-    id queueManagerMock = [OCMockObject partialMockForObject:request.queueManager];
-    [[[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
+    BOXAPIQueueManager *queueManager = request.queueManager;
+    id queueManagerMock = [OCMockObject partialMockForObject:queueManager];
+    id realObj = [[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
         numberOfOperationsEnqueued++;
-    }] andForwardToRealObject] enqueueOperation:OCMOCK_ANY];
-    
+    }] andForwardToRealObject];
+    [realObj enqueueOperation:OCMOCK_ANY];
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
     [request performRequestWithProgress:nil completion:^(NSError *error) {
         XCTAssertNil(error);
