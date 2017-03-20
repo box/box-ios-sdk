@@ -12,6 +12,13 @@
 #import "NSURL+BOXURLHelper.h"
 #import "BOXMetadataRequest.h"
 #import "BOXRequest+Metadata.h"
+#import "BOXMetadataTemplateRequest.h"
+#import "BOXMetadataKeyValue.h"
+#import "BOXMetadataCreateRequest.h"
+#import "BOXMetadataDeleteRequest.h"
+#import "BOXMetadataUpdateRequest.h"
+#import "BOXMetadata.h"
+#import "BOXMetadataUpdateTask.h"
 
 @interface BOXMetadataRequestTests : BOXRequestTestCase
 @end

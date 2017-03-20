@@ -210,6 +210,7 @@
 		6AA425721E39743800EF2677 /* BOXURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA425701E39743800EF2677 /* BOXURLRequestSerialization.m */; };
 		6AA6380B1E69FA9700F8FD4F /* BOXURLSessionCacheClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA638091E69FA9700F8FD4F /* BOXURLSessionCacheClient.h */; };
 		6AA6380C1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6380A1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m */; };
+		6AAB688E1E8093730054153A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */; };
 		700C39371ACB455E00466CA9 /* BOXFolderItemsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 700C39351ACB455E00466CA9 /* BOXFolderItemsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C39361ACB455E00466CA9 /* BOXFolderItemsRequest.m */; };
 		704DBA211AD1F7D8001E28BB /* get_items_3_5_duped.json in Resources */ = {isa = PBXBuildFile; fileRef = 704DBA201AD1F7D8001E28BB /* get_items_3_5_duped.json */; };
@@ -954,6 +955,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AAB688E1E8093730054153A /* MobileCoreServices.framework in Frameworks */,
 				15605D8B1A20132200C5EE5A /* libBoxContentSDK.a in Frameworks */,
 				15605DA01A2013B800C5EE5A /* libOCMock.a in Frameworks */,
 			);

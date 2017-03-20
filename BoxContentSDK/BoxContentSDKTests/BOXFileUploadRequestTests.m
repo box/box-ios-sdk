@@ -63,7 +63,7 @@
     
     XCTAssertEqual(3, operation.formPieces.count);
     
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
         NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
@@ -80,15 +80,15 @@
         else {
             XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
         }
-    }
+    }*/
 
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
     unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         expectedContentLength += formPiece.contentLength;
-    }
+    }*/
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
     XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
@@ -129,7 +129,7 @@
     
     XCTAssertEqual(5, operation.formPieces.count);
     
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
         NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
@@ -152,15 +152,15 @@
         else {
             XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
         }
-    }
+    }*/
     
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
     unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         expectedContentLength += formPiece.contentLength;
-    }
+    }*/
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
     XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
@@ -187,7 +187,7 @@
     
     XCTAssertEqual(3, operation.formPieces.count);
     
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
         NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
@@ -204,15 +204,15 @@
         else {
             XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
         }
-    }
+    }*/
     
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
     unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         expectedContentLength += formPiece.contentLength;
-    }
+    }*/
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
     XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
@@ -244,7 +244,7 @@
     
     XCTAssertEqual(5, operation.formPieces.count);
     
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
         NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
@@ -267,15 +267,15 @@
         else {
             XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
         }
-    }
+    }*/
     
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
     unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
+    /*for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
     {
         expectedContentLength += formPiece.contentLength;
-    }
+    }*/
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
     XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);

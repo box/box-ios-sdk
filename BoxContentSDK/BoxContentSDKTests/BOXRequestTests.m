@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
+#import "BOXAPIQueueManager.h"
 
 @interface BOXRequest (Testing)
 
