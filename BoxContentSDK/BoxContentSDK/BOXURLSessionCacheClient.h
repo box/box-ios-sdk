@@ -163,7 +163,7 @@
  *
  * @return YES if succeeded, NO if failed
  */
-- (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId taskError:(NSData *)taskError error:(NSError **)error;
+- (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId taskError:(NSError *)taskError error:(NSError **)error;
 
 /**
  * Get all cached data of the completed background session task associated with this userId and associateId

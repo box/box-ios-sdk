@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param responseData  The response data received from Box as a result of the API call. Will be nil for foreground session tasks
  * @param error         An error in the NSURLErrorDomain
  */
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error;
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(nullable NSData *)responseData error:(NSError *)error;
 
 @optional
 

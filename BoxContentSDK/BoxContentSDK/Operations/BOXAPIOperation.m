@@ -592,7 +592,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 #pragma mark - BOXURLSessionTaskDelegate
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(nullable NSData *)responseData error:(NSError *)error
 {
     @synchronized (self) {
         [self finishURLSessionTaskWithData:(responseData != nil ? responseData : self.responseData) response:response error:error];

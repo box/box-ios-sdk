@@ -209,6 +209,7 @@ NSString *const BOXAPIParameterKeyFilter = @"filters";
 // Multipart parameter keys
 NSString *const BOXAPIMultipartParameterFieldKeyFile = @"file";
 NSString *const BOXAPIMultipartParameterFieldKeyParentID = @"parent_id";
+NSString *const BOXAPIMultipartFormBoundary = @"0xBoXSdKMulTiPaRtFoRmBoUnDaRy";
 
 // API object keys
 NSString *const BOXAPIObjectKeyAccess = @"access";

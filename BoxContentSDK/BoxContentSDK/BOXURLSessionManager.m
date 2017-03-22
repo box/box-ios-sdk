@@ -95,6 +95,8 @@ NS_ASSUME_NONNULL_BEGIN
 //Indicate if background session's setup has completed
 @property (nonatomic, readwrite, assign) BOOL didFinishSettingUpBackgroundSession;
 
+@property (nonatomic, readwrite, strong) NSArray<Class> *protocolClasses;
+
 @end
 
 static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
@@ -116,8 +118,14 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
 - (id)init
 {
+    return [self initWithProtocolClasses:nil];
+}
+
+- (id)initWithProtocolClasses:(nullable NSArray *)protocolClasses
+{
     self = [super init];
     if (self != nil) {
+        _protocolClasses = protocolClasses;
         _progressSessionTaskIdToTaskDelegate = [NSMapTable strongToWeakObjectsMapTable];
         _backgroundSessionIdToSessionTask = [NSMutableDictionary new];
         _backgroundSessionIdToSession = [NSMutableDictionary new];
@@ -135,7 +143,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-
+        if (self.protocolClasses != nil) {
+            sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
+        }
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         queue.name = @"com.box.BOXURLSessionManager.default";
         queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
@@ -152,7 +162,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-
+        if (self.protocolClasses != nil) {
+            sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
+        }
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         queue.name = @"com.box.BOXURLSessionManager.progress";
         queue.maxConcurrentOperationCount = 40;
@@ -165,7 +177,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
-
+    if (self.protocolClasses != nil) {
+        sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
+    }
     NSOperationQueue *queue = nil; //use default queue of NSURLSession by default, unless background task is for main app
     if (maxConcurrentOperationCount > 0) {
         queue = [[NSOperationQueue alloc] init];

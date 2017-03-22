@@ -229,6 +229,7 @@ extern NSString *const BOXAPIParameterKeyFilter;
 // Multipart parameter keys
 extern NSString *const BOXAPIMultipartParameterFieldKeyFile;
 extern NSString *const BOXAPIMultipartParameterFieldKeyParentID;
+extern NSString *const BOXAPIMultipartFormBoundary;
 
 // API object keys
 extern NSString *const BOXAPIObjectKeyAccess;
