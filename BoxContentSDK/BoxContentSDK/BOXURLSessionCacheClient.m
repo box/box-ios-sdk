@@ -103,9 +103,9 @@
         }
         return NO;
     }
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -122,9 +122,9 @@
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId destinationFilePath:(NSString *)destinationFilePath error:(NSError **)error
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -134,9 +134,9 @@
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId responseData:(NSData *)responseData error:(NSError **)error
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -145,9 +145,9 @@
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId resumeData:(NSData *)resumeData error:(NSError **)error
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -156,9 +156,9 @@
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId response:(NSURLResponse *)response error:(NSError **)error
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -168,9 +168,9 @@
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId taskError:(NSError *)taskError error:(NSError **)error
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId userInfo:nil];
         }
         return NO;
     }
@@ -181,7 +181,7 @@
 //Call to complete a session task by moving its cached info from on-going session tasks' subdir into users' completed subdir
 - (BOOL)completeSessionTaskForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)outError
 {
-    if (backgroundSessionId == nil || sessionTaskId == nil) {
+    if (backgroundSessionId == nil) {
         return YES;
     }
 
