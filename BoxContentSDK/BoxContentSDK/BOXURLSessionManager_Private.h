@@ -8,8 +8,8 @@
 
 @interface BOXURLSessionManager()
 
-// Initialize with additional protocol classes when setting up configurations for internal NSURLSessions of BOXURLSessionManager
-// Currently, to be used by test cases
+// Initialize with additional protocol classes that handle requests in internal NSURLSessions of BOXURLSessionManager
+// Currently used by test cases to control the expected responses/data for API requests without reaching the server
 - (_Nullable id)initWithProtocolClasses:(NSArray * _Nullable)protocolClasses;
 
 @end

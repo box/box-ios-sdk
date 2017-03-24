@@ -95,7 +95,9 @@ NS_ASSUME_NONNULL_BEGIN
 //Indicate if background session's setup has completed
 @property (nonatomic, readwrite, assign) BOOL didFinishSettingUpBackgroundSession;
 
-@property (nonatomic, readwrite, strong) NSArray<Class> *protocolClasses;
+//An array of extra protocol subclasses that handle requests in NSURLSession
+//Currently used by test cases to control the expected responses/data for API requests without reaching the server
+@property (nonatomic, readwrite, copy) NSArray<Class> *protocolClasses;
 
 @end
 
