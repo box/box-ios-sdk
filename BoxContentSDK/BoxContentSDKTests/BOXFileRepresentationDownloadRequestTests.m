@@ -58,6 +58,8 @@
     
     NSData *data = [NSData dataWithContentsOfFile:localFilePath];
     XCTAssertEqualObjects(cannedResponseData, data);
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_operation_is_not_marked_as_small_download

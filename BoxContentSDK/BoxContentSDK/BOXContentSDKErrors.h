@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
     BOXContentSDKURLSessionCacheErrorFileCreateFailed = 50000,
     BOXContentSDKURLSessionCacheErrorInvalidSessionTaskForUserId = 50001,
     BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId = 50002,
-    BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionIdOrSessionTaskId = 50003,
+    BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId = 50003,
     BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo = 50004,
     BOXContentSDKURLSessionCacheErrorInvalidCompletedSessionTaskForUserId = 50005,
     BOXContentSDKURLSessionErrorInvalidDestinationFilePath = 50006,

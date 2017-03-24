@@ -11,6 +11,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "BOXAbstractSession.h"
+#import "BOXContentSDKConstants.h"
 
 //FIXME: These are duplicated with BOXContentSDKConstants.h
 #define BOX_API_MULTIPART_CONTENT_TYPE        (@"Content-Type")
@@ -19,8 +20,6 @@
 #define BOX_API_OUTPUT_STREAM_BUFFER_SIZE     (32u << 10) // 32 KiB
 
 #pragma mark - Form Boundary Helpers
-
-static NSString *const BOXAPIMultipartFormBoundary = @"0xBoXSdKMulTiPaRtFoRmBoUnDaRy";
 
 static NSString * BOXAPIMultipartContentTypeHeader(void)
 {
@@ -137,7 +136,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(nullable NSData *)responseData error:(NSError *)error
 {
     @synchronized (self) {
         if ([self shouldRunInBackground] == YES) {

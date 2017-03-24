@@ -79,6 +79,8 @@
     
     NSData *data = [NSData dataWithContentsOfFile:localFilePath];
     XCTAssertEqualObjects(cannedResponseData, data);
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_download_to_output_stream_request_returns_expected_download_data

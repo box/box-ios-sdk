@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param responseData  The response data received from Box as a result of the API call. Will be nil for foreground session tasks
  * @param error         An error in the NSURLErrorDomain
  */
-- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(NSData *)responseData error:(NSError *)error;
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(nullable NSData *)responseData error:(NSError *)error;
 
 @optional
 
@@ -43,12 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol BOXURLSessionDownloadTaskDelegate <BOXURLSessionTaskDelegate>
 
+@optional
+
 /**
- * Destination file path to move downloaded file into
+ * Destination file path to move downloaded file into for background download
  */
 - (NSString *)destinationFilePath;
-
-@optional
 
 /**
  * Notify delegate about download progress
@@ -98,7 +98,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @param rootCacheDir      root directory for caching background session tasks' data
  * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
+- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)( NSError * _Nullable error))completionBlock;
 
 /**
  * This method needs to be called once in app extensions to set up the manager to be ready to
@@ -111,7 +111,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  *                          tasks created from extensions
  * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
@@ -120,7 +120,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @param backgroundSessionId   Id of background session to reconnect with
  * @param completeion           block to execute upon completion of reconnecting to background session
  */
-- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
