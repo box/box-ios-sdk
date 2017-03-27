@@ -406,6 +406,10 @@
 		C57E95DB1A3747230094D7B0 /* BOXCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E95DA1A3747230094D7B0 /* BOXCommentTests.m */; };
 		C57E95E81A37611D0094D7B0 /* BOXFileCommentsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E95E71A37611D0094D7B0 /* BOXFileCommentsRequestTests.m */; };
 		C57E95EA1A3762BC0094D7B0 /* get_comments.json in Resources */ = {isa = PBXBuildFile; fileRef = C57E95E91A3762BC0094D7B0 /* get_comments.json */; };
+		C58A47451E89C70C0098360F /* BOXCannedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 156B01A01A535FEA00F01FF1 /* BOXCannedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C58A47461E89C70C0098360F /* BOXCannedURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE781A23FFC400FBBE1D /* BOXCannedURLProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C58A47471E89C70C0098360F /* BOXContentSDKTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE521A20165800FBBE1D /* BOXContentSDKTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C58A47481E89C70C0098360F /* BOXRequestTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE4B1A20158A00FBBE1D /* BOXRequestTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5972A381A3AFD6B00225CBA /* folder_default_fields_not_shared.json in Resources */ = {isa = PBXBuildFile; fileRef = E1A8FD651A3A3A6600475089 /* folder_default_fields_not_shared.json */; };
 		C5972A451A3B348B00225CBA /* BOXCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5972A441A3B348B00225CBA /* BOXCollectionTests.m */; };
 		C5972A471A3B350C00225CBA /* collection_all_fields.json in Resources */ = {isa = PBXBuildFile; fileRef = C5972A461A3B350C00225CBA /* collection_all_fields.json */; };
@@ -419,6 +423,13 @@
 		C5D91CA31A41D35200AC8B8F /* BOXEventsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA21A41D35200AC8B8F /* BOXEventsRequestTests.m */; };
 		C5D91CAA1A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */; };
 		C5EE89701CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */; };
+		C5F668A01E89CDE700A3DD36 /* BOXContentSDKTestFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C5F6689E1E89CDE700A3DD36 /* BOXContentSDKTestFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5F668A61E89CE1F00A3DD36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */; };
+		C5F668A71E89CE2800A3DD36 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15605D951A2013B800C5EE5A /* libOCMock.a */; };
+		C5F668AA1E89CE9600A3DD36 /* BOXRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F5EE4C1A20158A00FBBE1D /* BOXRequestTestCase.m */; };
+		C5F668AB1E89CEFA00A3DD36 /* BOXCannedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */; };
+		C5F668AC1E89CEFC00A3DD36 /* BOXCannedURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F5EE791A23FFC400FBBE1D /* BOXCannedURLProtocol.m */; };
+		C5F668AD1E89CEFE00A3DD36 /* BOXContentSDKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F5EE531A20165800FBBE1D /* BOXContentSDKTestCase.m */; };
 		E13FB7591DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E13FB7581DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m */; };
 		E15595A01A2D41700070ED1E /* BOXFolderRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959E1A2D416F0070ED1E /* BOXFolderRequestTests.m */; };
 		E15595A11A2D41700070ED1E /* BOXBookmarkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959F1A2D416F0070ED1E /* BOXBookmarkRequestTests.m */; };
@@ -446,6 +457,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		599B1A8A1E4BE9A500709C27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E470433316D41DC500FED29A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 599B19591E4BE65700709C27;
+			remoteInfo = BoxContentSDK;
+		};
+		C5F668A81E89CE3500A3DD36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E470433316D41DC500FED29A /* Project object */;
 			proxyType = 1;
@@ -805,6 +823,11 @@
 		C5D91CA51A41E46000AC8B8F /* BOXEventsAdminLogsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventsAdminLogsRequest.m; sourceTree = "<group>"; };
 		C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventAdminLogsRequestTests.m; sourceTree = "<group>"; };
 		C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringBoxContentSDKAdditionsTests.m; sourceTree = "<group>"; };
+		C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BOXContentSDKTestFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F6689E1E89CDE700A3DD36 /* BOXContentSDKTestFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXContentSDKTestFramework.h; sourceTree = "<group>"; };
+		C5F6689F1E89CDE700A3DD36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5F668A41E89CE1A00A3DD36 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E11035F41A200E6B00B46F6D /* BOXHashHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXHashHelper.h; sourceTree = "<group>"; };
 		E11035F51A200E6B00B46F6D /* BOXHashHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXHashHelper.m; sourceTree = "<group>"; };
@@ -938,6 +961,15 @@
 				599B19F01E4BE6B800709C27 /* QuartzCore.framework in Frameworks */,
 				599B19EF1E4BE6B300709C27 /* UIKit.framework in Frameworks */,
 				599B19EE1E4BE6AE00709C27 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5F668981E89CDE700A3DD36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F668A61E89CE1F00A3DD36 /* XCTest.framework in Frameworks */,
+				C5F668A71E89CE2800A3DD36 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1401,6 +1433,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		C5F6689D1E89CDE700A3DD36 /* BOXContentSDKTestFramework */ = {
+			isa = PBXGroup;
+			children = (
+				C5F6689E1E89CDE700A3DD36 /* BOXContentSDKTestFramework.h */,
+				C5F6689F1E89CDE700A3DD36 /* Info.plist */,
+			);
+			path = BOXContentSDKTestFramework;
+			sourceTree = "<group>";
+		};
 		E11035F31A200E6B00B46F6D /* HashHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1450,6 +1491,7 @@
 				E470434016D41DC500FED29A /* BoxContentSDK */,
 				15605D861A20132200C5EE5A /* BoxContentSDKTests */,
 				E4081D901758728900F6D6AA /* BoxContentSDKResources */,
+				C5F6689D1E89CDE700A3DD36 /* BOXContentSDKTestFramework */,
 				E470433D16D41DC500FED29A /* Frameworks */,
 				E470433C16D41DC500FED29A /* Products */,
 			);
@@ -1460,6 +1502,7 @@
 			children = (
 				15605D851A20132200C5EE5A /* BoxContentSDKTests.xctest */,
 				599B195A1E4BE65700709C27 /* BoxContentSDK.framework */,
+				C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1467,6 +1510,8 @@
 		E470433D16D41DC500FED29A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5F668A41E89CE1A00A3DD36 /* XcodeKit.framework */,
+				C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */,
 				F05F80E717B3FD8C001182FB /* iOS */,
 			);
 			name = Frameworks;
@@ -1833,6 +1878,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C58A47441E89C6F30098360F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C58A47451E89C70C0098360F /* BOXCannedResponse.h in Headers */,
+				C58A47461E89C70C0098360F /* BOXCannedURLProtocol.h in Headers */,
+				C58A47471E89C70C0098360F /* BOXContentSDKTestCase.h in Headers */,
+				C58A47481E89C70C0098360F /* BOXRequestTestCase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5F668991E89CDE700A3DD36 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F668A01E89CDE700A3DD36 /* BOXContentSDKTestFramework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1843,6 +1907,7 @@
 				15605D811A20132200C5EE5A /* Sources */,
 				15605D821A20132200C5EE5A /* Frameworks */,
 				15605D831A20132200C5EE5A /* Resources */,
+				C58A47441E89C6F30098360F /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1872,6 +1937,25 @@
 			productReference = 599B195A1E4BE65700709C27 /* BoxContentSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		C5F6689B1E89CDE700A3DD36 /* BOXContentSDKTestFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5F668A11E89CDE700A3DD36 /* Build configuration list for PBXNativeTarget "BOXContentSDKTestFramework" */;
+			buildPhases = (
+				C5F668971E89CDE700A3DD36 /* Sources */,
+				C5F668981E89CDE700A3DD36 /* Frameworks */,
+				C5F668991E89CDE700A3DD36 /* Headers */,
+				C5F6689A1E89CDE700A3DD36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5F668A91E89CE3500A3DD36 /* PBXTargetDependency */,
+			);
+			name = BOXContentSDKTestFramework;
+			productName = BOXContentSDKTestFramework;
+			productReference = C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1885,6 +1969,10 @@
 						CreatedOnToolsVersion = 6.1;
 					};
 					599B19591E4BE65700709C27 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					C5F6689B1E89CDE700A3DD36 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -1904,6 +1992,7 @@
 			targets = (
 				15605D841A20132200C5EE5A /* BoxContentSDKTests */,
 				599B19591E4BE65700709C27 /* BoxContentSDK */,
+				C5F6689B1E89CDE700A3DD36 /* BOXContentSDKTestFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -1977,6 +2066,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				59F270201E7351BA00B95BC1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5F6689A1E89CDE700A3DD36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2217,6 +2313,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5F668971E89CDE700A3DD36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F668AA1E89CE9600A3DD36 /* BOXRequestTestCase.m in Sources */,
+				C5F668AB1E89CEFA00A3DD36 /* BOXCannedResponse.m in Sources */,
+				C5F668AD1E89CEFE00A3DD36 /* BOXContentSDKTestCase.m in Sources */,
+				C5F668AC1E89CEFC00A3DD36 /* BOXCannedURLProtocol.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2224,6 +2331,11 @@
 			isa = PBXTargetDependency;
 			target = 599B19591E4BE65700709C27 /* BoxContentSDK */;
 			targetProxy = 599B1A8A1E4BE9A500709C27 /* PBXContainerItemProxy */;
+		};
+		C5F668A91E89CE3500A3DD36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 599B19591E4BE65700709C27 /* BoxContentSDK */;
+			targetProxy = C5F668A81E89CE3500A3DD36 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2249,11 +2361,11 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2297,12 +2409,12 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2350,13 +2462,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDK/BoxContentSDK-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BoxContentSDKFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = Box.BoxContentSDKFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2388,18 +2503,97 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDK/BoxContentSDK-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BoxContentSDKFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = Box.BoxContentSDKFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C5F668A21E89CDE700A3DD36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
+				INFOPLIST_FILE = BOXContentSDKTestFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.BOXContentSDKTestFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C5F668A31E89CDE700A3DD36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
+				INFOPLIST_FILE = BOXContentSDKTestFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.BOXContentSDKTestFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2502,6 +2696,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C5F668A11E89CDE700A3DD36 /* Build configuration list for PBXNativeTarget "BOXContentSDKTestFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F668A21E89CDE700A3DD36 /* Debug */,
+				C5F668A31E89CDE700A3DD36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		E470433616D41DC500FED29A /* Build configuration list for PBXProject "BoxContentSDK" */ = {
 			isa = XCConfigurationList;
