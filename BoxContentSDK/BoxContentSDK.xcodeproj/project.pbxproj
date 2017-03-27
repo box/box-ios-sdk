@@ -430,6 +430,10 @@
 		C5F668AB1E89CEFA00A3DD36 /* BOXCannedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */; };
 		C5F668AC1E89CEFC00A3DD36 /* BOXCannedURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F5EE791A23FFC400FBBE1D /* BOXCannedURLProtocol.m */; };
 		C5F668AD1E89CEFE00A3DD36 /* BOXContentSDKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F5EE531A20165800FBBE1D /* BOXContentSDKTestCase.m */; };
+		C5F668B11E89D86600A3DD36 /* BOXCannedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 156B01A01A535FEA00F01FF1 /* BOXCannedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5F668B21E89D86600A3DD36 /* BOXCannedURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE781A23FFC400FBBE1D /* BOXCannedURLProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5F668B31E89D86600A3DD36 /* BOXContentSDKTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE521A20165800FBBE1D /* BOXContentSDKTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5F668B41E89D86F00A3DD36 /* BOXRequestTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F5EE4B1A20158A00FBBE1D /* BOXRequestTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E13FB7591DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E13FB7581DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m */; };
 		E15595A01A2D41700070ED1E /* BOXFolderRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959E1A2D416F0070ED1E /* BOXFolderRequestTests.m */; };
 		E15595A11A2D41700070ED1E /* BOXBookmarkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959F1A2D416F0070ED1E /* BOXBookmarkRequestTests.m */; };
@@ -1894,6 +1898,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5F668A01E89CDE700A3DD36 /* BOXContentSDKTestFramework.h in Headers */,
+				C5F668B11E89D86600A3DD36 /* BOXCannedResponse.h in Headers */,
+				C5F668B21E89D86600A3DD36 /* BOXCannedURLProtocol.h in Headers */,
+				C5F668B41E89D86F00A3DD36 /* BOXRequestTestCase.h in Headers */,
+				C5F668B31E89D86600A3DD36 /* BOXContentSDKTestCase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2704,6 +2712,7 @@
 				C5F668A31E89CDE700A3DD36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E470433616D41DC500FED29A /* Build configuration list for PBXProject "BoxContentSDK" */ = {
 			isa = XCConfigurationList;
