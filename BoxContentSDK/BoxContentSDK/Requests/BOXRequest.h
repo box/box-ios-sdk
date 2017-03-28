@@ -16,6 +16,9 @@
 @class BOXCollection;
 @class BOXFileVersion;
 @class BOXMetadata;
+@class BOXEvent;
+@class BOXRecentItem;
+@class BOXMetadataTemplate;
 
 typedef void (^BOXErrorBlock)(NSError *error);
 
@@ -29,16 +32,14 @@ typedef void (^BOXFolderBlock)(BOXFolder *folder, NSError *error);
 
 typedef void (^BOXImageBlock)(UIImage *image, NSError *error);
 
-typedef void (^BOXDictionaryBlock)(NSDictionary *dictionary, NSError *error);
-
 typedef void (^BOXProgressBlock)(long long totalBytesTransferred,
                                  long long totalBytesExpectedToTransfer);
 
-typedef void (^BOXItemArrayCompletionBlock)(NSArray *items, NSUInteger totalCount, NSRange range, NSError *error);
+typedef void (^BOXItemArrayCompletionBlock)(NSArray <BOXItem *> *items, NSUInteger totalCount, NSRange range, NSError *error);
 
-typedef void (^BOXItemsBlock)(NSArray *items, NSError *error);
+typedef void (^BOXItemsBlock)(NSArray <BOXItem *> *items, NSError *error);
 
-typedef void (^BOXCollaborationArrayCompletionBlock)(NSArray *collaborations, NSError *error);
+typedef void (^BOXCollaborationArrayCompletionBlock)(NSArray <BOXCollaboration *> *collaborations, NSError *error);
 
 typedef void (^BOXBookmarkBlock)(BOXBookmark *bookmark, NSError *error);
 
@@ -48,21 +49,21 @@ typedef void (^BOXObjectsArrayCompletionBlock)(NSArray *objects, NSError *error)
 
 typedef void (^BOXCommentBlock)(BOXComment *comment, NSError *error);
 
-typedef void (^BOXCollectionArrayBlock)(NSArray *collections, NSError *error);
+typedef void (^BOXCollectionArrayBlock)(NSArray <BOXCollection *> *collections, NSError *error);
 
 typedef void (^BOXCollectionBlock)(BOXCollection *collection, NSError *error);
 
-typedef void (^BOXEventsBlock)(NSArray *events, NSString *nextStreamPosition, NSError *error);
+typedef void (^BOXEventsBlock)(NSArray <BOXEvent *> *events, NSString *nextStreamPosition, NSError *error);
 
-typedef void (^BOXRecentItemsBlock)(NSArray *recentItems, NSString *nextMarker, NSError *error);
+typedef void (^BOXRecentItemsBlock)(NSArray <BOXRecentItem *> *recentItems, NSString *nextMarker, NSError *error);
 
 typedef void (^BOXFileVersionBlock)(BOXFileVersion *fileVersion, NSError *error);
 
 typedef void (^BOXMetadataBlock)(BOXMetadata *metadata, NSError *error);
 
-typedef void (^BOXMetadatasBlock)(NSArray *metadatas, NSError *error);
+typedef void (^BOXMetadatasBlock)(NSArray <BOXMetadata *> *metadatas, NSError *error);
 
-typedef void (^BOXMetadataTemplatesBlock) (NSArray *metadataTemplates, NSError *error);
+typedef void (^BOXMetadataTemplatesBlock) (NSArray <BOXMetadataTemplate *>*metadataTemplates, NSError *error);
 
 @interface BOXRequest : NSObject
 
