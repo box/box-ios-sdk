@@ -12,7 +12,7 @@
 #import "BOXAPIOperation_Private.h"
 #import "BOXAbstractSession.h"
 
-#define MAX_REENQUE_DELAY 60
+#define MAX_REENQUE_DELAY 15
 #define REENQUE_BASE_DELAY 0.2
 
 @interface BOXStreamOperation () <BOXURLSessionDownloadTaskDelegate>
