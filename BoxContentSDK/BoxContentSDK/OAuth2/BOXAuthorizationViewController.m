@@ -36,6 +36,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 @property (nonatomic, readwrite, assign) NSHTTPCookieAcceptPolicy preexistingCookiePolicy;
 
 @property (nonatomic, readwrite, strong) BOXContentClient *SDKClient;
+//NOTE: For this object to get properly deallocated, the URL Sesssion object has to be invalidated before
+// the completion blocks are called (since it holds a strong reference to its delegate until it is invalidated).
 @property (nonatomic, readwrite, copy) BOXAuthCompletionBlock completionBlock;
 @property (nonatomic, readwrite, copy) BOXAuthCancelBlock cancelBlock;
 @property (nonatomic, readwrite, strong) NSURL *authorizeURL;
@@ -102,7 +104,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _URLSession = [NSURLSession sessionWithConfiguration:sessionConfiguration
-                                                    delegate:self
+                                                    delegate:self //NOTE: The URL Session holds a strong reference on its delegate until it is invalidated
                                                delegateQueue:nil];
 
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -122,7 +124,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     UIWebView *webView = (UIWebView *)self.view;
     webView.delegate = nil;
     [webView stopLoading];
-    [_URLSession invalidateAndCancel];
 
     [self clearCookies];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:_preexistingCookiePolicy];
@@ -149,7 +150,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     } else if ([self.SDKClient.session isKindOfClass:[BOXAppUserSession class]]) {
         __weak BOXAuthorizationViewController *me = self;
         [self.SDKClient autheticateAppUserWithCompletionBlock:^(BOXUser *user, NSError *error) {
-            self.completionBlock(me, user, error);
+            [me prepareForDismissal];
+            me.completionBlock(me, user, error);
         }];
     }
 }
@@ -167,6 +169,11 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     [super viewWillLayoutSubviews];
     self.activityIndicator.center = self.view.center;
+}
+
+- (void)prepareForDismissal
+{
+    [self.URLSession invalidateAndCancel];
 }
 
 #pragma mark - property getters and setters
@@ -203,6 +210,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 - (void)cancel:(id)sender
 {
+    [self prepareForDismissal];
+
     if (self.cancelBlock) {
         self.cancelBlock(self);
     }
@@ -246,6 +255,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         self.connectionError = error;
         self.connectionErrorMessage = message;
         // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
+        [self prepareForDismissal];
         if (self.completionBlock) {
             self.completionBlock(self, nil, self.connectionError);
         }
@@ -265,6 +275,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         [alertController dismissViewControllerAnimated:YES completion:nil];
         
         if (self.connectionError == nil && weakSelf.completionBlock) {
+            [weakSelf prepareForDismissal];
             weakSelf.completionBlock(weakSelf, nil, error);
         } else {
             weakSelf.connectionError = nil;
@@ -361,6 +372,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         __weak BOXAuthorizationViewController *me = self;
         [OAuth2Session performAuthorizationCodeGrantWithReceivedURL:request.URL withCompletionBlock:^(BOXAbstractSession *session, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [me prepareForDismissal];
+
                 if (error) {
                     if (me.completionBlock) {
                         me.completionBlock(me, nil, error);
