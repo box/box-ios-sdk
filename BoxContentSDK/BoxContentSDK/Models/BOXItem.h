@@ -8,6 +8,7 @@
 @class BOXFolderMini;
 @class BOXUserMini;
 @class BOXSharedLink;
+@class BOXCollection;
 
 /**
  *  A compact representation of a Box Item with only a few properties.
@@ -89,7 +90,7 @@
 /**
  *   An ordered array representing the "path" of the item, starting with the root.
  */
-@property (nonatomic, readwrite, strong) NSArray *pathFolders;
+@property (nonatomic, readwrite, strong) NSArray <BOXFolderMini *> *pathFolders;
 
 /**
  *  If the item is in the trash, the date in which it was moved to the trash.
@@ -136,7 +137,7 @@
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
  */
-@property (nonatomic, readwrite, strong) NSArray *allowedSharedLinkAccessLevels;
+@property (nonatomic, readwrite, strong) NSArray <NSString *> *allowedSharedLinkAccessLevels;
 
 /**
  *  The folder that contains this item.
@@ -151,7 +152,7 @@
 /**
  *  The collections that this item belongs to. An array of BoxCollection objects.
  */
-@property (nonatomic, readwrite, strong) NSArray *collections;
+@property (nonatomic, readwrite, strong) NSArray <BOXCollection *> *collections;
 
 /**
  *  Whether a shared link can be created for the item.
