@@ -78,6 +78,10 @@
 		596598E71E9D7C0400431413 /* BOXURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA425701E39743800EF2677 /* BOXURLRequestSerialization.m */; };
 		596598E81E9D7C1D00431413 /* BOXURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A48930E1E049419008E30BE /* BOXURLSessionManager.m */; };
 		596598E91E9D7C2100431413 /* BOXURLSessionCacheClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6380A1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m */; };
+		596598EB1E9D7F3000431413 /* BOXURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A48930D1E049419008E30BE /* BOXURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		596598EC1E9D7F3000431413 /* BOXURLSessionCacheClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA638091E69FA9700F8FD4F /* BOXURLSessionCacheClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		596598ED1E9D7F3000431413 /* BOXURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA4256F1E39743800EF2677 /* BOXURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		596598EE1E9D7F3000431413 /* BOXFileRepresentationDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C54851931E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		596BE96A1A39142900206660 /* BOXFileCopyRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 596BE9691A39142900206660 /* BOXFileCopyRequestTests.m */; };
 		599B19621E4BE67600709C27 /* BOXAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD997172CE2C50052AD11 /* BOXAuthorizationViewController.m */; };
 		599B19631E4BE67600709C27 /* BOXOAuth2Session.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD999172CE2C50052AD11 /* BOXOAuth2Session.m */; };
@@ -384,15 +388,7 @@
 		63832D001E3A9A8200F7211E /* recent_item_default_fields_shared.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832CFF1E3A9A8200F7211E /* recent_item_default_fields_shared.json */; };
 		63832D021E3AA68500F7211E /* BOXRecentItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832D011E3AA68500F7211E /* BOXRecentItemsRequestTests.m */; };
 		63832D041E3AAAB000F7211E /* recent_items.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832D031E3AAAB000F7211E /* recent_items.json */; };
-		6A48930F1E049419008E30BE /* BOXURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A48930D1E049419008E30BE /* BOXURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A4893101E049419008E30BE /* BOXURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A48930E1E049419008E30BE /* BOXURLSessionManager.m */; };
-		6AA425711E39743800EF2677 /* BOXURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA4256F1E39743800EF2677 /* BOXURLRequestSerialization.h */; };
-		6AA425721E39743800EF2677 /* BOXURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA425701E39743800EF2677 /* BOXURLRequestSerialization.m */; };
-		6AA6380B1E69FA9700F8FD4F /* BOXURLSessionCacheClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA638091E69FA9700F8FD4F /* BOXURLSessionCacheClient.h */; };
-		6AA6380C1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6380A1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m */; };
 		6AAB688E1E8093730054153A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */; };
-		700C39371ACB455E00466CA9 /* BOXFolderItemsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 700C39351ACB455E00466CA9 /* BOXFolderItemsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C39361ACB455E00466CA9 /* BOXFolderItemsRequest.m */; };
 		704DBA211AD1F7D8001E28BB /* get_items_3_5_duped.json in Resources */ = {isa = PBXBuildFile; fileRef = 704DBA201AD1F7D8001E28BB /* get_items_3_5_duped.json */; };
 		70881FA01ACF67ED0023CDF3 /* BOXFolderItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC169C1ACCA06300C3CC80 /* BOXFolderItemsRequestTests.m */; };
 		70CC169F1ACCA8AD00C3CC80 /* get_items_0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 70CC169E1ACCA8AD00C3CC80 /* get_items_0_2.json */; };
@@ -409,8 +405,6 @@
 		C53EC29F1A38A1640007C8A7 /* BOXCommentRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC29E1A38A1640007C8A7 /* BOXCommentRequestTests.m */; };
 		C53EC2A51A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2A41A38A8AB0007C8A7 /* BOXCommentUpdateRequestTests.m */; };
 		C545A01C1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C545A01B1A7681E2004C38B3 /* BOXRequestWithSharedLinkHeadersTests.m */; };
-		C54851951E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C54851931E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h */; };
-		C54851961E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C54851941E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m */; };
 		C548519D1E68E2A9005D973B /* BOXFileRepresentationDownloadRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C548519C1E68E2A9005D973B /* BOXFileRepresentationDownloadRequestTests.m */; };
 		C55386351C98DBF0009E3B90 /* unauthorized_device.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386341C98DBF0009E3B90 /* unauthorized_device.json */; };
 		C55386391C98DF41009E3B90 /* exceeded_device_limits.json in Resources */ = {isa = PBXBuildFile; fileRef = C55386361C98DF41009E3B90 /* exceeded_device_limits.json */; };
@@ -439,8 +433,6 @@
 		C5D91CA31A41D35200AC8B8F /* BOXEventsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA21A41D35200AC8B8F /* BOXEventsRequestTests.m */; };
 		C5D91CAA1A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */; };
 		C5EE89701CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */; };
-		C5F668A61E89CE1F00A3DD36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */; };
-		C5F668A71E89CE2800A3DD36 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15605D951A2013B800C5EE5A /* libOCMock.a */; };
 		E13FB7591DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E13FB7581DBFD5AA00B08141 /* BOXUserAvatarRequestTests.m */; };
 		E15595A01A2D41700070ED1E /* BOXFolderRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959E1A2D416F0070ED1E /* BOXFolderRequestTests.m */; };
 		E15595A11A2D41700070ED1E /* BOXBookmarkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E155959F1A2D416F0070ED1E /* BOXBookmarkRequestTests.m */; };
@@ -468,13 +460,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		599B1A8A1E4BE9A500709C27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E470433316D41DC500FED29A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 599B19591E4BE65700709C27;
-			remoteInfo = BoxContentSDK;
-		};
-		C5F668A81E89CE3500A3DD36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E470433316D41DC500FED29A /* Project object */;
 			proxyType = 1;
@@ -845,7 +830,6 @@
 		C5D91CA91A42E12900AC8B8F /* BOXEventAdminLogsRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEventAdminLogsRequestTests.m; sourceTree = "<group>"; };
 		C5EE896F1CC69DFF0076CE2F /* NSStringBoxContentSDKAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringBoxContentSDKAdditionsTests.m; sourceTree = "<group>"; };
 		C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BOXContentSDKTestFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F6689E1E89CDE700A3DD36 /* BOXContentSDKTestFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXContentSDKTestFramework.h; sourceTree = "<group>"; };
 		C5F6689F1E89CDE700A3DD36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5F668A41E89CE1A00A3DD36 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -983,15 +967,6 @@
 				599B19F01E4BE6B800709C27 /* QuartzCore.framework in Frameworks */,
 				599B19EF1E4BE6B300709C27 /* UIKit.framework in Frameworks */,
 				599B19EE1E4BE6AE00709C27 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5F668981E89CDE700A3DD36 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5F668A61E89CE1F00A3DD36 /* XCTest.framework in Frameworks */,
-				C5F668A71E89CE2800A3DD36 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1534,7 +1509,6 @@
 			children = (
 				15605D851A20132200C5EE5A /* BoxContentSDKTests.xctest */,
 				599B195A1E4BE65700709C27 /* BoxContentSDK.framework */,
-				C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1907,6 +1881,10 @@
 				599B1A9B1E4C01B300709C27 /* BOXAuthorizationViewController.h in Headers */,
 				599B1A9C1E4C01B300709C27 /* BOXOAuth2Session.h in Headers */,
 				599B1A9D1E4C01B300709C27 /* BOXParallelOAuth2Session.h in Headers */,
+				596598EB1E9D7F3000431413 /* BOXURLSessionManager.h in Headers */,
+				596598EC1E9D7F3000431413 /* BOXURLSessionCacheClient.h in Headers */,
+				596598ED1E9D7F3000431413 /* BOXURLRequestSerialization.h in Headers */,
+				596598EE1E9D7F3000431413 /* BOXFileRepresentationDownloadRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1918,18 +1896,6 @@
 				C58A47461E89C70C0098360F /* BOXCannedURLProtocol.h in Headers */,
 				C58A47471E89C70C0098360F /* BOXContentSDKTestCase.h in Headers */,
 				C58A47481E89C70C0098360F /* BOXRequestTestCase.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5F668991E89CDE700A3DD36 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A48930F1E049419008E30BE /* BOXURLSessionManager.h in Headers */,
-				700C39371ACB455E00466CA9 /* BOXFolderItemsRequest.h in Headers */,
-				6AA6380B1E69FA9700F8FD4F /* BOXURLSessionCacheClient.h in Headers */,
-				6AA425711E39743800EF2677 /* BOXURLRequestSerialization.h in Headers */,
-				C54851951E68AD02005D973B /* BOXFileRepresentationDownloadRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,25 +1939,6 @@
 			productReference = 599B195A1E4BE65700709C27 /* BoxContentSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C5F6689B1E89CDE700A3DD36 /* BOXContentSDKTestFramework */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5F668A11E89CDE700A3DD36 /* Build configuration list for PBXNativeTarget "BOXContentSDKTestFramework" */;
-			buildPhases = (
-				C5F668971E89CDE700A3DD36 /* Sources */,
-				C5F668981E89CDE700A3DD36 /* Frameworks */,
-				C5F668991E89CDE700A3DD36 /* Headers */,
-				C5F6689A1E89CDE700A3DD36 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C5F668A91E89CE3500A3DD36 /* PBXTargetDependency */,
-			);
-			name = BOXContentSDKTestFramework;
-			productName = BOXContentSDKTestFramework;
-			productReference = C5F6689C1E89CDE700A3DD36 /* BOXContentSDKTestFramework.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2005,10 +1952,6 @@
 						CreatedOnToolsVersion = 6.1;
 					};
 					599B19591E4BE65700709C27 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
-					};
-					C5F6689B1E89CDE700A3DD36 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -2028,7 +1971,6 @@
 			targets = (
 				15605D841A20132200C5EE5A /* BoxContentSDKTests */,
 				599B19591E4BE65700709C27 /* BoxContentSDK */,
-				C5F6689B1E89CDE700A3DD36 /* BOXContentSDKTestFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -2102,13 +2044,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				59F270201E7351BA00B95BC1 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5F6689A1E89CDE700A3DD36 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2354,18 +2289,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5F668971E89CDE700A3DD36 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6AA6380C1E69FA9700F8FD4F /* BOXURLSessionCacheClient.m in Sources */,
-				6A4893101E049419008E30BE /* BOXURLSessionManager.m in Sources */,
-				6AA425721E39743800EF2677 /* BOXURLRequestSerialization.m in Sources */,
-				700C39381ACB455E00466CA9 /* BOXFolderItemsRequest.m in Sources */,
-				C54851961E68AD02005D973B /* BOXFileRepresentationDownloadRequest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2373,11 +2296,6 @@
 			isa = PBXTargetDependency;
 			target = 599B19591E4BE65700709C27 /* BoxContentSDK */;
 			targetProxy = 599B1A8A1E4BE9A500709C27 /* PBXContainerItemProxy */;
-		};
-		C5F668A91E89CE3500A3DD36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 599B19591E4BE65700709C27 /* BoxContentSDK */;
-			targetProxy = C5F668A81E89CE3500A3DD36 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2566,82 +2484,6 @@
 			};
 			name = Release;
 		};
-		C5F668A21E89CDE700A3DD36 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
-				INFOPLIST_FILE = BOXContentSDKTestFramework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.BOXContentSDKTestFramework;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C5F668A31E89CDE700A3DD36 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = NO;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
-				INFOPLIST_FILE = BOXContentSDKTestFramework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/BoxContentSDKTests/Libraries";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.BOXContentSDKTestFramework;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		E470435E16D41DC500FED29A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2735,15 +2577,6 @@
 			buildConfigurations = (
 				599B195F1E4BE65700709C27 /* Debug */,
 				599B19601E4BE65700709C27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C5F668A11E89CDE700A3DD36 /* Build configuration list for PBXNativeTarget "BOXContentSDKTestFramework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5F668A21E89CDE700A3DD36 /* Debug */,
-				C5F668A31E89CDE700A3DD36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
