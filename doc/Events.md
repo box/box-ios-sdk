@@ -8,7 +8,7 @@ BOXContentClient *contentClient = [BOXContentClient defaultClient];
 BOXEventsRequest *eventsRequest = [contentClient eventsRequestForCurrentUser];
 
 // See API documentation for configuring stream position and stream type:
-// https://developers.box.com/docs/#events
+// https://docs.box.com/reference#events
 eventsRequest.streamType = BOXEventsStreamTypeAll;
 eventsRequest.streamPosition = @"0";
 

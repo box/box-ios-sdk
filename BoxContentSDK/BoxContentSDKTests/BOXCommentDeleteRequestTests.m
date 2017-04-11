@@ -11,6 +11,7 @@
 #import "BOXComment.h"
 #import "BOXCommentDeleteRequest.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXContentClient.h"
 
 @interface BOXCommentDeleteRequestTests : BOXRequestTestCase
 
@@ -23,7 +24,7 @@
     NSString *commentID = @"987654";
     
     BOXCommentDeleteRequest *commentDeleteRequest = [[BOXCommentDeleteRequest alloc] initWithCommentID:commentID];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceComments, commentID]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceComments, commentID]];
 
     XCTAssertEqualObjects(url, commentDeleteRequest.urlRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodDELETE, commentDeleteRequest.urlRequest.HTTPMethod);

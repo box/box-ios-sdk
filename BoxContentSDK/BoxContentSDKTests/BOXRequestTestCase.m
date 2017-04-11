@@ -14,7 +14,8 @@
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
-
+#import "BOXOAuth2Session.h"
+#import "BOXURLSessionManager_Private.h"
 
 @interface BOXAPIMultipartToJSONOperation ()
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent;
@@ -25,6 +26,7 @@
 
 @property (nonatomic, readwrite, strong) BOXOAuth2Session *fakeOAuth2Session;
 @property (nonatomic, readwrite, strong) BOXParallelAPIQueueManager *fakeQueueManager;
+@property (nonatomic, readwrite, strong) BOXURLSessionManager *fakeURLSessionManager;
 
 @end
 
@@ -37,7 +39,11 @@
     [NSURLProtocol registerClass:[BOXCannedURLProtocol class]];
     
     self.fakeQueueManager = [[BOXParallelAPIQueueManager alloc] init];
-    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id" secret:@"test_client_secret" APIBaseURL:BOXAPIBaseURL APIAuthBaseURL:BOXAPIAuthBaseURL queueManager:self.fakeQueueManager];
+    self.fakeURLSessionManager = [[BOXURLSessionManager alloc] initWithProtocolClasses:@[[BOXCannedURLProtocol class]]];
+    self.fakeOAuth2Session = [[BOXOAuth2Session alloc] initWithClientID:@"test_client_id"
+                                                                 secret:@"test_client_secret"
+                                                           queueManager:self.fakeQueueManager
+						      urlSessionManager:self.fakeURLSessionManager];
     self.fakeOAuth2Session.refreshToken = @"sample_refresh_token";
     self.fakeOAuth2Session.accessToken = @"sample_access_token";
     self.fakeOAuth2Session.accessTokenExpiration = [NSDate distantFuture];
@@ -50,6 +56,7 @@
     [NSURLProtocol unregisterClass:[BOXCannedURLProtocol class]];
     
     self.fakeQueueManager = nil;
+    self.fakeURLSessionManager = nil;
     self.fakeOAuth2Session = nil;
     
     [super tearDown];
@@ -90,7 +97,10 @@
     if (responseData) {
         [headerFields setObject:[NSString stringWithFormat:@"%lu", (unsigned long)responseData.length] forKey:@"Content-Length"];
     }
-    NSHTTPURLResponse *cannedResponse = [[NSHTTPURLResponse alloc] initWithURL:nil statusCode:statusCode HTTPVersion:@"HTTP/1.1" headerFields:headerFields];
+    NSHTTPURLResponse *cannedResponse = [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"https://api.box.com"]
+                                                                    statusCode:statusCode
+                                                                   HTTPVersion:@"HTTP/1.1"
+                                                                  headerFields:headerFields];
     return cannedResponse;
 }
 
@@ -117,20 +127,24 @@
     return string;
 }
 
-// Helper method to make it easier to verify that the posted body stream contains what we expect.
-// Sorting the multipart pieces alphabetically makes it easier to match it against an expected array of pieces.
 - (NSArray *)sortedMultiPartPiecesFromBodyData:(NSData *)bodyData
 {
     NSString *string = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
-    NSArray *array = [string componentsSeparatedByString:@"--0xBoXSdKMulTiPaRtFoRmBoUnDaRy"];
+    return [self sortedMultiPartPiecesFromBodyDataString:string];
+}
+
+- (NSArray *)sortedMultiPartPiecesFromBodyDataString:(NSString *)bodyDataString
+{
+    NSString *boundaryString = [NSString stringWithFormat:@"--%@", BOXAPIMultipartFormBoundary];
+    NSArray *array = [bodyDataString componentsSeparatedByString:boundaryString];
     array = [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [(NSString *)obj1 compare:(NSString *)obj2 options:NSNumericSearch];
     }];
-    
+
     XCTAssertEqualObjects(@"", [array firstObject]);
     XCTAssertEqualObjects(@"--\r\n", [array lastObject]);
     array = [array subarrayWithRange:NSMakeRange(1, array.count-2)];
-    
+
     return array;
 }
 

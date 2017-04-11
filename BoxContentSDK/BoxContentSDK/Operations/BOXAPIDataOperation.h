@@ -43,8 +43,11 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * cannot be copied, BOXAPIDataOperation instances cannot be automatically retried by the SDK in the event
  * of an expired access token. In this case, the operation will fail with error code
  * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
+ *
+ * BOXAPIDataOperation supports both foreground and background downloads
+ * By default, download is foreground unless associateId and destinationPath properties are provided
  */
-@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate>
+@interface BOXAPIDataOperation : BOXAPIAuthenticatedOperation <NSStreamDelegate, BOXURLSessionDownloadTaskDelegate>
 
 /** @name Streams */
 
@@ -62,8 +65,25 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
  * @warning If you are manually reading from this output stream (for example with
  * a `CFStreamCreateBoundPair`) do not let data sit in the stream or you risk causing
  * a large file to buffer entirely in memory.
+ *
+ * If destinationPath is provided, outputStream will be ignored
+ * Using outputStream to consume data will not allow the request to be executed in the background if the app is killed/suspended
  */
 @property (nonatomic, readwrite, strong) NSOutputStream *outputStream;
+
+/**
+ * The location for output file. If provided, outputStream will be ignored
+ * Using destinationPath to consume data will allow request to be executed in the background
+ * if the app is killed/suspended and resume upon app restarts/resumes
+ * To support background download, make sure associateId is valid as well
+ */
+@property (nonatomic, readwrite, strong) NSString *destinationPath;
+
+/**
+ * This indicates whether background download should be cancelled with intention to resume
+ * so we maintain resume information to allow a later operation to resume the download from where it was left off
+ */
+@property (nonatomic, readwrite, assign) BOOL allowResume;
 
 /** @name Callbacks */
 
@@ -86,7 +106,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 @property (nonatomic, readwrite, strong) BOXDownloadFailureBlock failureBlock;
 
 /**
- * Called when the API call successfully receives bytes from the `NSURLConnection`.
+ * Called when the API call successfully receives bytes from the network connection.
  *
  * **Note**: All callbacks are executed on the same queue as the BOXAPIOperation they are associated with.
  * If you wish to interact with the UI in a callback block, dispatch to the main queue in the
@@ -109,7 +129,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 - (void)performCompletionCallback;
 
 /**
- * When data is successfully received from [self.connection]([BOXAPIOperation connection]),
+ * When data is successfully received from the network connection,
  * this method is called to trigger progressBlock.
  * @see progressBlock
  */
@@ -139,7 +159,7 @@ typedef void (^BOXAPIDataProgressBlock)(long long expectedTotalBytes, unsigned l
 
 /**
  * This method is called with by BOXAPIOperation with the assumption that all
- * data received from the `NSURLConnection` is buffered. This operation
+ * data received from the network connection is buffered. This operation
  * streams all received data to its output stream, so do nothing in this method.
  *
  * @param data This data should be empty.

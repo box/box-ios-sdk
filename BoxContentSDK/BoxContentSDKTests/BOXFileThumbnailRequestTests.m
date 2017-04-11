@@ -7,8 +7,10 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileThumbnailRequest.h"
 #import "BOXRequest_Private.h"
+#import "BOXParallelAPIQueueManager.h"
 
 @interface BOXFileThumbnailRequestTests : BOXRequestTestCase
 @end
@@ -23,7 +25,7 @@
     BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:fileID size:BOXThumbnailSize64];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/thumbnail.png?max_width=%lu&max_height=%lu", BOXAPIBaseURL, BOXAPIVersion, fileID, (unsigned long)BOXThumbnailSize64, (unsigned long)BOXThumbnailSize64]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/thumbnail.png?max_width=%lu&max_height=%lu", [BOXContentClient APIBaseURL], fileID, (unsigned long)BOXThumbnailSize64, (unsigned long)BOXThumbnailSize64]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -82,7 +84,6 @@
     [[[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
         numberOfOperationsEnqueued++;
     }] andForwardToRealObject] enqueueOperation:OCMOCK_ANY];
-    
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
     [request performRequestWithProgress:nil completion:^(UIImage *image, NSError *error) {
         XCTAssertNil(error);

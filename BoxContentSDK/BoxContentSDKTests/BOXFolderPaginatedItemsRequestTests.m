@@ -4,7 +4,7 @@
 //
 
 #import "BOXRequestTestCase.h"
-
+#import "BOXContentClient.h"
 #import "BOXBookmark.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
@@ -27,7 +27,7 @@
     request.requestAllItemFields = YES;
     NSURLRequest *URLRequest = request.urlRequest;
 
-    NSString *expectedURL = [NSString stringWithFormat:@"%@/%@/folders/%@/items", BOXAPIBaseURL, BOXAPIVersion, folderID];
+    NSString *expectedURL = [NSString stringWithFormat:@"%@/folders/%@/items", [BOXContentClient APIBaseURL], folderID];
     NSString *requestURL = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
 
     XCTAssertEqualObjects(expectedURL, requestURL);

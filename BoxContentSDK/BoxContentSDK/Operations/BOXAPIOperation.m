@@ -8,6 +8,7 @@
 
 #import "BOXAPIOperation_Private.h"
 
+#import "BOXOAuth2Session.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "NSString+BOXURLHelper.h"
@@ -52,7 +53,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 @interface BOXAPIOperation()
 
-- (void)cancelConnection;
+- (void)cancelSessionTask;
 
 @end
 
@@ -66,7 +67,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 @synthesize body = _body;
 @synthesize queryStringParameters = _queryStringParameters;
 @synthesize APIRequest = _APIRequest;
-@synthesize connection = _connection;
 
 // request response properties
 @synthesize responseData = _responseData;
@@ -112,9 +112,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
+        // delay setting up the session task as long as possible so the authentication credentials remain fresh
 
         _APIRequest = nil;
-        _connection = nil; // delay setting up the connection as long as possible so the authentication credentials remain fresh
         
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
@@ -124,7 +124,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
         _APIRequest = APIRequest;
 
-        _responseData = [NSMutableData data];
+        //NOTE: This data object needs to be initialized for the subclasses that are going to use it
+        // (see BOXAPIDataOperation as an example). Some subclasses will not use this object and for
+        // correct processing it needs to remain nil rather than an empty mutable data object.
+        _responseData = nil;
 
         self.state = BOXAPIOperationStateReady;
     }
@@ -201,11 +204,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)prepareAPIRequest
 {
     BOXAbstract();
-}
-
-- (void)startURLConnection
-{
-    [self.connection start];
 }
 
 #pragma mark - Process API call results
@@ -289,6 +287,52 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
+- (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
+{
+    __weak BOXAPIOperation *weakSelf = self;
+    NSURLSessionTask *sessionTask = [self.session.urlSessionManager dataTaskWithRequest:self.APIRequest
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    [weakSelf finishURLSessionTaskWithData:data response:response error:error];
+                                                }];
+    NSError *error = nil;
+    if (sessionTask == nil) {
+        error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidSessionTask userInfo:nil];
+    }
+    if (outError != nil) {
+        *outError = error;
+    }
+    return sessionTask;
+}
+
+- (void)executeSessionTask
+{
+    if (self.sessionTask == nil) {
+        //no session task to execute with, this happens for a background download/upload operation
+        //retrieve cached info to finish
+
+        NSString *userId = self.session.user.modelID;
+        NSError *error = nil;
+        BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
+
+        if (cachedInfo.response != nil && error == nil) {
+            //get valid cached info for session task, finish this operation
+
+            [self sessionTask:self.sessionTask didFinishWithResponse:cachedInfo.response responseData:cachedInfo.responseData error:cachedInfo.error];
+        } else {
+            //fail to retrieve cached info for session task, finish this operation with error
+
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+            if (error != nil) {
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            }
+            self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo userInfo:userInfo];
+            [self finish];
+        }
+    } else {
+        [self.sessionTask resume];
+    }
+}
+
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
@@ -296,15 +340,27 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     {
         @synchronized(self.session)
         {
+            //Note: if sessionTask exists, we cannot change its API request
+            //make sure you recreate sessionTask with the new API request if needed
             [self prepareAPIRequest];
             self.accessToken = self.session.accessToken;
         }
 
         if (self.error == nil && ![self isCancelled])
         {
-            self.connection = [[NSURLConnection alloc] initWithRequest:self.APIRequest delegate:self];
-            BOXLog(@"Starting %@", self);
-            [self startURLConnection];
+            NSError *error = nil;
+            if (self.sessionTask == nil) {
+                self.sessionTask = [self createSessionTaskWithError:&error];
+            }
+            if (error == nil) {
+                [self executeSessionTask];
+            } else {
+                BOXLog(@"BOXAPIOperation %@ failed to create session task to execute API request", self);
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+                self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateSessionTask userInfo:userInfo];
+                [self finish];
+            }
         }
         else
         {
@@ -326,12 +382,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)cancel
 {
-    [self performSelector:@selector(cancelConnection) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
     [super cancel];
     BOXLog(@"BOXAPIOperation %@ was cancelled", self);
 }
 
-- (void)cancelConnection
+- (void)cancelSessionTask
 {
     NSDictionary *errorInfo = nil;
     if (self.baseRequestURL)
@@ -340,10 +396,31 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
 
-    if (self.connection)
-    {
-        [self.connection cancel];
-        [self connection:self.connection didFailWithError:self.error];
+    if (self.sessionTask != nil) {
+        if ([self shouldAllowResume] == YES && [self.sessionTask isKindOfClass:[NSURLSessionDownloadTask class]] == YES) {
+            //if session task is a background download and it was cancelled with intention to resume,
+            //acquire resumeData to later resume the download from where it was left off
+            NSURLSessionDownloadTask *downloadTask = (NSURLSessionDownloadTask *)self.sessionTask;
+            NSString *userId = self.session.user.modelID;
+            __weak BOXAPIOperation *weakSelf = self;
+            [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+                /**
+                 * Note: as of Mar 15, 2017, Box's download API does not satisfy the requirement to allow
+                 * us taking use of resumable download from NSURLSession. resumeData will be nil
+                 * A download can be resumed only if the following conditions are met:
+                 *   The resource has not changed since you first requested it
+                 *   The task is an HTTP or HTTPS GET request
+                 *   The server provides either the ETag or Last-Modified header (or both) in its response
+                 *   The server supports byte-range requests
+                 *   The temporary file hasn’t been deleted by the system in response to disk space pressure
+                 */
+                if (resumeData != nil) {
+                    [weakSelf.session.urlSessionManager cacheResumeData:resumeData forUserId:userId associateId:self.associateId];
+                }
+            }];
+        } else {
+            [self.sessionTask cancel];
+        }
     }
 }
 
@@ -353,9 +430,24 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         [self sendLogoutNotification];
     }
     [self performCompletionCallback];
-    self.connection = nil;
+
+    NSString *userId = self.session.user.modelID;
+    NSError *error = nil;
+
+    if ([self shouldAllowResume] == NO) {
+        //clean up cached info for session task if any
+        BOOL success = [self.session.urlSessionManager cleanUpBackgroundSessionTaskIfExistForUserId:userId associateId:self.associateId error:&error];
+        BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+    }
+    self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
     BOXLog(@"BOXAPIOperation %@ finished with state %d", self, self.state);
+}
+
+
+- (BOOL)shouldAllowResume
+{
+    return NO;
 }
 
 #pragma mark - Helper Methods
@@ -410,9 +502,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                                                       userInfo:errorInfo];
 }
 
-#pragma mark - NSURLConnectionDataDelegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)processResponse:(NSURLResponse *)response
 {
+    //NOTE: A nil response object will result in an error. This method expects to process a valid
+    // server response and should not be called with a nil or unknown response (unless an error is
+    // desirable for those scenarios).
+    //FIXME: Should evaluate a more specific error code for a nil response to seperate from an unknown response.
     self.HTTPResponse = (NSHTTPURLResponse *)response;
 
     if (self.HTTPResponse.statusCode == 202 || self.HTTPResponse.statusCode < 200 || self.HTTPResponse.statusCode >= 300)
@@ -467,26 +562,58 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
+#pragma mark - url session task handler
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)finishURLSessionTaskWithData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did fail with error %@", self, error);
-    if (self.error == nil)
-    {
+    if (self.HTTPResponse == nil && response != nil) {
+        // If the response has not already been handled (some, but not all, operations get
+        // 'processResponse:' earlier in the process), handle it here.
+        // Also, do not handle a nil response. That could happen if there was a failure on the whole
+        // network connection, for example. In that case, there is no response.
+        [self processResponse:response];
+    }
+
+    if (data != nil) {
+        // If the data object is nil, ignore it. Otherwise we need to process the data.
+        [self processResponseData:data];
+    }
+
+    //FIXME: Need to evaluate moving this to be the first step in this method. If that were
+    // the case, more changes may be necessary around setting of self.error in the response
+    // and data processing.
+    if (self.error == nil) {
+        // If we do not already have an error set, use the passed in error.
         self.error = error;
     }
+
     [self finish];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+#pragma mark - BOXURLSessionTaskDelegate
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask didFinishWithResponse:(NSURLResponse *)response responseData:(nullable NSData *)responseData error:(NSError *)error
 {
-    BOXLog(@"BOXAPIOperation %@ did finish loading", self);
-    [self processResponseData:self.responseData];
-    [self finish];
+    @synchronized (self) {
+        [self finishURLSessionTaskWithData:(responseData != nil ? responseData : self.responseData) response:response error:error];
+    }
+}
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateResponse:(NSURLResponse *)response
+{
+    @synchronized (self) {
+        //FIXME: review if we need to check for response != nil before processing
+        [self processResponse:response];
+    }
+}
+
+- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
+{
+    @synchronized (self) {
+        if (data != nil) {
+            [self.responseData appendData:data];
+        }
+    }
 }
 
 #pragma mark - Lock

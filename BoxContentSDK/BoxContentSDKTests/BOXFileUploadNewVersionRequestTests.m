@@ -7,10 +7,12 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXRequest_Private.h"
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
+#import "BOXContentSDKConstants.h"
 
 @interface BOXAPIMultipartToJSONOperation ()
 // An array of BOXAPIMultipartPiece. In our tests, we want to inspect these.
@@ -37,7 +39,7 @@
 {
     NSString *localFileName = @"tempFile.txt";
     NSString *uploadData = @"hello";
-    
+
     NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
     NSURL *localFileURL = [temporaryDirectoryURL URLByAppendingPathComponent:localFileName];
     NSError *writeError = nil;
@@ -51,39 +53,30 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
     // Multi part form body
     XCTAssertTrue([request.operation isKindOfClass:[BOXAPIMultipartToJSONOperation class]]);
     BOXAPIMultipartToJSONOperation *operation = (BOXAPIMultipartToJSONOperation *)request.operation;
-    
-    XCTAssertEqual(1, operation.formPieces.count);
-    
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
-        NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
-        
-        if ([contentDisposition isEqualToString:[NSString stringWithFormat:@"form-data; name=\"file\"; filename=\"\""]]) {
-            XCTAssertEqualObjects(uploadData, bodyDataString);
-        }
-        else {
-            XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
-        }
-    }
-    
+
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
-    unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        expectedContentLength += formPiece.contentLength;
-    }
+
+    NSArray *expectedPieces = @[[NSString stringWithFormat:@"\r\nContent-Disposition: form-data; name=\"file\"; filename=\"\"\r\n\r\n%@\r\n", uploadData]];
+    NSString *bodyDataString = [self stringFromInputStream:operation.APIRequest.HTTPBodyStream];
+    NSArray *actualPieces = [self sortedMultiPartPiecesFromBodyDataString:bodyDataString];
+    XCTAssertEqualObjects(expectedPieces, actualPieces);
+
+    unsigned long long expectedContentLength = operation.contentLength;
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
-    XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
+
+    NSString *expectedContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOXAPIMultipartFormBoundary];
+    XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_upload_from_local_file_with_matching_etag_has_expected_URLRequest
@@ -106,40 +99,33 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
     // Multi part form body
     XCTAssertTrue([request.operation isKindOfClass:[BOXAPIMultipartToJSONOperation class]]);
     BOXAPIMultipartToJSONOperation *operation = (BOXAPIMultipartToJSONOperation *)request.operation;
-    
-    XCTAssertEqual(1, operation.formPieces.count);
-    
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
-        NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
-        
-        if ([contentDisposition isEqualToString:@"form-data; name=\"file\"; filename=\"\""]) {
-            XCTAssertEqualObjects(uploadData, bodyDataString);
-        }
-        else {
-            XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
-        }
-    }
-    
+
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
-    unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        expectedContentLength += formPiece.contentLength;
-    }
+
+    NSArray *expectedPieces = @[[NSString stringWithFormat:@"\r\nContent-Disposition: form-data; name=\"file\"; filename=\"\"\r\n\r\n%@\r\n", uploadData]];
+    NSString *bodyDataString = [self stringFromInputStream:operation.APIRequest.HTTPBodyStream];
+    NSArray *actualPieces = [self sortedMultiPartPiecesFromBodyDataString:bodyDataString];
+    XCTAssertEqualObjects(expectedPieces, actualPieces);
+
+    unsigned long long expectedContentLength = operation.contentLength;
+
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
-    XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
+
+    NSString *expectedContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOXAPIMultipartFormBoundary];
+    XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
+
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_upload_from_data_has_expected_URLRequest
@@ -151,39 +137,29 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
     // Multi part form body
     XCTAssertTrue([request.operation isKindOfClass:[BOXAPIMultipartToJSONOperation class]]);
     BOXAPIMultipartToJSONOperation *operation = (BOXAPIMultipartToJSONOperation *)request.operation;
-    
-    XCTAssertEqual(1, operation.formPieces.count);
-    
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
-        NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
-        
-        if ([contentDisposition isEqualToString:[NSString stringWithFormat:@"form-data; name=\"file\"; filename=\"\""]]) {
-            XCTAssertEqualObjects(uploadData, bodyDataString);
-        }
-        else {
-            XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
-        }
-    }
-    
+
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
-    unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        expectedContentLength += formPiece.contentLength;
-    }
+
+    NSArray *expectedPieces = @[[NSString stringWithFormat:@"\r\nContent-Disposition: form-data; name=\"file\"; filename=\"\"\r\n\r\n%@\r\n", uploadData]];
+    NSString *bodyDataString = [self stringFromInputStream:operation.APIRequest.HTTPBodyStream];
+    NSArray *actualPieces = [self sortedMultiPartPiecesFromBodyDataString:bodyDataString];
+    XCTAssertEqualObjects(expectedPieces, actualPieces);
+
+    unsigned long long expectedContentLength = operation.contentLength;
+
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
-    XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
+
+    NSString *expectedContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOXAPIMultipartFormBoundary];
+    XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
 }
 
 - (void)test_that_upload_from_data_with_content_dates_and_matching_etag_has_expected_URLRequest
@@ -197,43 +173,40 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIUploadBaseURL, BOXAPIUploadAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIUploadBaseURL], fileID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"POST", URLRequest.HTTPMethod);
     
     // Multi part form body
     XCTAssertTrue([request.operation isKindOfClass:[BOXAPIMultipartToJSONOperation class]]);
     BOXAPIMultipartToJSONOperation *operation = (BOXAPIMultipartToJSONOperation *)request.operation;
-    
-    XCTAssertEqual(1, operation.formPieces.count);
-    
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        NSString *contentDisposition = formPiece.headers[@"Content-Disposition"];
-        NSString *bodyDataString = [self stringFromInputStream:formPiece.bodyInputStream];
-        
-        if ([contentDisposition isEqualToString:@"form-data; name=\"file\"; filename=\"\""]) {
-            XCTAssertEqualObjects(uploadData, bodyDataString);
-        }
-        else {
-            XCTFail(@"Unexpected multipart form piece encountered: %@", formPiece);
-        }
-    }
-    
+
     // HTTP Headers
     [request.operation prepareAPIRequest]; // BOXAPIMultipartToJSONOperation does not populate headers until prepareAPIRequest
-    unsigned long long expectedContentLength = 0;
-    for (BOXAPIMultipartPiece *formPiece in operation.formPieces)
-    {
-        expectedContentLength += formPiece.contentLength;
-    }
+
+    NSArray *expectedPieces = @[[NSString stringWithFormat:@"\r\nContent-Disposition: form-data; name=\"file\"; filename=\"\"\r\n\r\n%@\r\n", uploadData]];
+    NSString *bodyDataString = [self stringFromInputStream:operation.APIRequest.HTTPBodyStream];
+    NSArray *actualPieces = [self sortedMultiPartPiecesFromBodyDataString:bodyDataString];
+    XCTAssertEqualObjects(expectedPieces, actualPieces);
+
+    unsigned long long expectedContentLength = operation.contentLength;
+
     NSString *expectedContentLengthString = [NSString stringWithFormat:@"%llu", expectedContentLength];
     XCTAssertEqualObjects(expectedContentLengthString, URLRequest.allHTTPHeaderFields[@"Content-Length"]);
-    XCTAssertEqualObjects(@"multipart/form-data; boundary=0xBoXSdKMulTiPaRtFoRmBoUnDaRy", URLRequest.allHTTPHeaderFields[@"Content-Type"]);
+
+    NSString *expectedContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOXAPIMultipartFormBoundary];
+    XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
+
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
 }
 
 #pragma mark - Completion and Progress Blocks
+
+/*
+ // NOTE: NSURLProtocol has known limitations which won't call NSURLSessionTaskDelegate's method
+ // URLSession:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend
+ // to allow us to validate progress block being called
+ // Uncomment the following 2 tests if limitations are lifted
 
 - (void)test_that_upload_from_local_file_calls_completion_and_progress_blocks
 {
@@ -329,6 +302,7 @@
     XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
     XCTAssertEqual(1, finalProgressBlockCalls);
 }
+ */
 
 #pragma mark - Post Data
 
@@ -372,6 +346,8 @@
     }];
     
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_upload_from_data_posts_expected_data

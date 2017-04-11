@@ -29,6 +29,8 @@
 
 - (NSArray *)sortedMultiPartPiecesFromBodyData:(NSData *)bodyData;
 
+- (NSArray *)sortedMultiPartPiecesFromBodyDataString:(NSString *)bodyDataString;
+
 - (void)setFakeQueueManagerForRequest:(BOXRequest *)request;
 
 - (NSArray *)itemsFromResponseData:(NSData *)data;

@@ -13,6 +13,8 @@
 #import "BOXContentClient_Private.h"
 #import "BOXKeychainItemWrapper.h"
 #import "BOXOAuth2Session.h"
+#import "BOXCannedURLProtocol.h"
+#import "BOXURLSessionManager_Private.h"
 
 @interface BOXAppUserSessionTests : BOXContentSDKTestCase <BOXAPIAccessTokenDelegate>
 
@@ -59,8 +61,8 @@
     BOXAPIQueueManager *queueManager = [[BOXAPIQueueManager alloc]init];
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     XCTAssert([client.session isKindOfClass:[BOXOAuth2Session class]]);
-    
-    BOXAppUserSession *expectedSession = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL queueManager:queueManager];
+    BOXURLSessionManager *urlSessionManager = [[BOXURLSessionManager alloc] initWithProtocolClasses:@[[BOXCannedURLProtocol class]]];
+    BOXAppUserSession *expectedSession = [[BOXAppUserSession alloc] initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     client.session = expectedSession;
     
     XCTAssertEqual(expectedSession.queueManager, queueManager);
@@ -73,7 +75,8 @@
 - (void)test_store_keychain_with_app_users
 {
     BOXAPIQueueManager *queueManager = [[BOXAPIQueueManager alloc]init];
-    BOXAppUserSession *session = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL queueManager:queueManager];
+    BOXURLSessionManager *urlSessionManager = [[BOXURLSessionManager alloc] initWithProtocolClasses:@[[BOXCannedURLProtocol class]]];
+    BOXAppUserSession *session = [[BOXAppUserSession alloc] initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     BOXUserMini *user = [[BOXUserMini alloc]init];
     
     user.modelID = @"782";

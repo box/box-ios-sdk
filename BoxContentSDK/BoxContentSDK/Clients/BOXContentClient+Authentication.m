@@ -19,6 +19,7 @@
 #import "BOXUserRequest.h"
 #import "BOXAppUserSession.h"
 #import "UIApplication+ExtensionSafeAdditions.h"
+#import "BOXOAuth2Session.h"
 
 #define keychainDefaultIdentifier @"BoxCredential"
 #define keychainRefreshTokenKey @"refresh_token"
@@ -146,9 +147,13 @@
 
 - (void)logOut
 {
-    [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:self.user.modelID];
+    NSString *userId = self.user.modelID;
+    [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:userId];
     [self.session revokeCredentials];
     [self.queueManager cancelAllOperations];
+    NSError *error = nil;
+    [self.urlSessionManager cancelAndCleanUpBackgroundSessionTasksForUserId:userId error:&error];
+    BOXAssert(error == nil, @"Failed to cancel and clean up background session tasks upon user logout %@", error);
 }
 
 + (void)logOutAll

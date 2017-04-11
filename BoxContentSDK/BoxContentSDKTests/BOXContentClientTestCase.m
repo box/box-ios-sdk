@@ -16,6 +16,9 @@
 #import "BOXContentClient+Authentication.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXAppUserSession.h"
+#import "BOXOAuth2Session.h"
+#import "BOXCannedURLProtocol.h"
+#import "BOXURLSessionManager_Private.h"
 
 @interface BOXContentClientTestCase ()
 
@@ -58,7 +61,8 @@
 - (void)test_app_users_should_require_delegate_set
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    client.session = [[BOXAppUserSession alloc]initWithAPIBaseURL:BOXAPIBaseURL queueManager:client.queueManager];
+    BOXURLSessionManager *urlSessionManager = [[BOXURLSessionManager alloc] initWithProtocolClasses:@[[BOXCannedURLProtocol class]]];
+    client.session = [[BOXAppUserSession alloc] initWithQueueManager:client.queueManager urlSessionManager:urlSessionManager];
     
     BOXFolderRequest *request = [client folderInfoRequestWithID:@"mock_id"];
     XCTAssertThrows([request performRequestWithCompletion:^(BOXFolder *folder, NSError *error) {

@@ -11,6 +11,7 @@
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BoxComment.h"
+#import "BOXContentClient.h"
 #import "BOXContentCacheTestClient.h"
 
 @interface BOXFileCommentsRequest ()
@@ -32,7 +33,7 @@
     NSString *fileID = @"12345";
     BOXFileCommentsRequest *request = [[BOXFileCommentsRequest alloc] initWithFileID:fileID];
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/comments", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/comments", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, request.urlRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, request.urlRequest.HTTPMethod);
@@ -133,7 +134,7 @@
     request.requestAllItemFields = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/files/%@/comments", BOXAPIBaseURL, BOXAPIVersion, fileID];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/files/%@/comments", [BOXContentClient APIBaseURL], fileID];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

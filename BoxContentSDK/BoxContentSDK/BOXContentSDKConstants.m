@@ -8,15 +8,6 @@
 
 #import "BOXContentSDKConstants.h"
 
-// API URLs
-NSString *const BOXAPIBaseURL = @"https://api.box.com";
-NSString *const BOXAPIAuthBaseURL = @"https://account.box.com/api";
-NSString *const BOXAPIUploadBaseURL = @"https://upload.box.com/api";
-
-// API Versions
-NSString *const BOXAPIVersion = @"2.0";
-NSString *const BOXAPIUploadAPIVersion = @"2.1";
-
 // API Resources
 NSString *const BOXAPIResourceFolders = @"folders";
 NSString *const BOXAPIResourceFiles = @"files";
@@ -58,6 +49,7 @@ BOXAPIHTTPMethod *const BOXAPIHTTPMethodPUT = @"PUT";
 // HTTP Header Names
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderAuthorization = @"Authorization";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentType = @"Content-Type";
+BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentLength = @"Content-Length";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5 = @"Content-MD5";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch = @"If-Match";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch = @"If-None-Match";
@@ -92,6 +84,7 @@ NSString *const BOXOAuth2AuthDelegationNewClientKey = @"BOXOAuth2AuthDelegationN
 
 // Notifications
 NSString *const BOXUserWasLoggedOutDueToErrorNotification = @"BOXUserWasLoggedOutDueToErrorNotification";
+NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
 
 // Item Types
 BOXAPIItemType *const BOXAPIItemTypeFile = @"file";
@@ -204,6 +197,7 @@ NSString *const BOXAPIParameterKeyMaxHeight = @"max_height";
 NSString *const BOXAPIParameterKeyAvatarType = @"pic_type";
 
 // Recent Items Parameter Keys
+NSString *const BOXAPIParameterKeyMarker = @"marker";
 NSString *const BOXAPIParameterKeyNextMarker = @"next_marker";
 NSString *const BOXAPIParameterKeyListType = @"list_type";
 
@@ -215,6 +209,7 @@ NSString *const BOXAPIParameterKeyFilter = @"filters";
 // Multipart parameter keys
 NSString *const BOXAPIMultipartParameterFieldKeyFile = @"file";
 NSString *const BOXAPIMultipartParameterFieldKeyParentID = @"parent_id";
+NSString *const BOXAPIMultipartFormBoundary = @"0xBoXSdKMulTiPaRtFoRmBoUnDaRy";
 
 // API object keys
 NSString *const BOXAPIObjectKeyAccess = @"access";
@@ -427,3 +422,16 @@ NSString *const BOXAPIEnterpriseEventTypeCollaborationInvite = @"COLLABORATION_I
 NSString *const BOXAPIEnterpriseEventTypeCollaborationExpiration = @"COLLABORATION_EXPIRATION";
 NSString *const BOXAPIEnterpriseEventTypeItemSync = @"ITEM_SYNC";
 NSString *const BOXAPIEnterpriseEventTypeItemUnsync = @"ITEM_UNSYNC";
+
+
+//urlsessiontask cache dir, file prefix
+NSString *const BOXURLSessionTaskCacheDirectoryName = @"BOXURLSessionCache";
+NSString *const BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName = @"onGoingSessionTasks";
+NSString *const BOXURLSessionTaskCacheUsersDirectoryName = @"users";
+NSString *const BOXURLSessionTaskCacheExtensionSessionsDirectoryName = @"extensionSessions";
+NSString *const BOXURLSessionTaskCacheDestinationFilePath = @"destinationFilePath";
+NSString *const BOXURLSessionTaskCacheResumeData = @"resumeData";
+NSString *const BOXURLSessionTaskCacheResponse = @"response";
+NSString *const BOXURLSessionTaskCacheResponseData = @"responseData";
+NSString *const BOXURLSessionTaskCacheError = @"error";
+NSString *const BOXURLSessionTaskCacheUserIdAndAssociateId = @"userIdAndAssociateId";

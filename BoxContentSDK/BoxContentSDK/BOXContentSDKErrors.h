@@ -77,6 +77,22 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKStreamError) {
     BOXContentSDKStreamErrorReadFailed = 30001
 };
 
+typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
+    BOXContentSDKURLSessionCacheErrorFileCreateFailed = 50000,
+    BOXContentSDKURLSessionCacheErrorInvalidSessionTaskForUserId = 50001,
+    BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId = 50002,
+    BOXContentSDKURLSessionCacheErrorInvalidBackgroundSessionId = 50003,
+    BOXContentSDKURLSessionCacheErrorFailToRetrieveCachedInfo = 50004,
+    BOXContentSDKURLSessionCacheErrorInvalidCompletedSessionTaskForUserId = 50005,
+    BOXContentSDKURLSessionErrorInvalidDestinationFilePath = 50006,
+    BOXContentSDKURLSessionCacheErrorDirectoryIsNotEmpty = 50007,
+    BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes = 50008,
+    BOXContentSDKURLSessionFailToReconnectBecauseBackgroundSessionIsNotSupported = 50009,
+    BOXContentSDKURLSessionFailToCreateSessionTask = 50010,
+    BOXContentSDKURLSessionInvalidSessionTask = 50011,
+    BOXContentSDKURLSessionInvalidBackgroundSession = 50012
+};
+
 extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token
 extern NSString *const BOXAuthTokenRequestErrorInvalidToken; // Invalid access token
 extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a missing access token

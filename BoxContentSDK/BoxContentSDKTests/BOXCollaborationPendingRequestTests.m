@@ -10,6 +10,7 @@
 #import "BOXCollaborationPendingRequest.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXCollaboration.h"
+#import "BOXContentClient.h"
 
 @interface BOXCollaborationPendingRequestTests : BOXRequestTestCase
 
@@ -22,7 +23,7 @@
     BOXCollaborationPendingRequest *request = [[BOXCollaborationPendingRequest alloc] init];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/collaborations?status=pending", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/collaborations?status=pending", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, URLRequest.HTTPMethod);

@@ -8,6 +8,7 @@
 
 #import "BOXContentSDKConstants.h"
 #import "BOXContentClient.h"
+#import "BOXAPIOperation.h"
 
 @class BOXFileRequest;
 @class BOXFileCopyRequest;
@@ -19,6 +20,8 @@
 @class BOXFileUploadNewVersionRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXPreflightCheckRequest;
+@class BOXFileRepresentationDownloadRequest;
+@class BOXRepresentation;
 
 @interface BOXContentClient (File)
 
@@ -95,6 +98,21 @@
                                         fromLocalFilePath:(NSString *)localFilePath;
 
 /**
+ *  Generate a request to upload a local file to Box in background unless uploadMultipartCopyFilePath is not provided
+ *
+ *  @param folderID      Folder ID of the folder to upload the file into.
+ *  @param localFilePath Path to local file to be uploaded.
+ *  @param uploadMultipartCopyFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadRequest *)fileUploadRequestInBackgroundToFolderWithID:(NSString *)folderID
+                                                    fromLocalFilePath:(NSString *)localFilePath
+                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                          associateId:(NSString *)associateId;
+
+/**
  *  Generate a request to upload a byte-buffer to Box.
  *
  *  @param folderID Folder ID of the folder to upload the file into.
@@ -119,6 +137,21 @@
                                                     fromLocalFilePath:(NSString *)localFilePath;
 
 /**
+ *  Generate a request to upload a new version of a file from a local file in the background
+ *  (continue running even if app terminates) unless uploadMultipartCopyFilePath is not provided.
+ *
+ *  @param fileID        File ID.
+ *  @param localFilePath Path to local file to be uploaded.
+ *  @param uploadMultipartCopyFilePath Path to write the multi-part formatted temporary file for upload in the background
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestInBackgroundWithFileID:(NSString *)fileID
+                                                                    fromLocalFilePath:(NSString *)localFilePath
+                                                          uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                                                                          associateId:(NSString *)associateId;
+
+/**
  *  Generate a request to upload a new version of a file from a byte-buffer.
  *
  *  @param fileID File ID.
@@ -139,6 +172,25 @@
  */
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                       toLocalFilePath:(NSString *)localFilePath;
+
+/**
+ *  Generate a request to download a file to a local filepath with an existing downloadTask
+ *
+ *  @param fileID        File ID.
+ *  @param localFilePath Path to local file.
+ *  @param downloadTask  NSURLSessionDownloadTask to be used for the actual download.
+ *                       If nil, a new downloadTask will be created
+ *  @param downloadTaskReplacedBlock    to get notified when download task used by the
+ *                                      request has been changed, so the caller of this method
+ *                                      could correctly re-associate their request with the new
+ *                                      download task, which is needed for the caller to know how
+ *                                      to handle downloadTask upon app restart
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
+                                      toLocalFilePath:(NSString *)localFilePath
+                                          associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to download a file to an outputstream.
@@ -218,5 +270,32 @@
 - (BOXPreflightCheckRequest *)fileUploadPreflightCheckRequestForNewFileVersionWithID:(NSString *)fileID
                                                                                 name:(NSString *)fileName
                                                                                 size:(NSUInteger)fileSize;
+
+/**
+ *  Generate a request to download a given representation of a file to a local filepath.
+ *
+ *  @param fileID          File ID.
+ *  @param localFilePath   Local filepath.
+ *  @param representation  BOXRepresentation to be downloaded
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation;
+
+/**
+ *  Generate a request to download a given representation file to an outputstream.
+ *
+ *  @param fileID          File ID.
+ *  @param outputStream    Outputstream to which downloaded file data will be written.
+ *  @param representation  BOXRepresentation to be downloaded
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                   toOutputStream:(NSOutputStream *)outputStream
+                                                                   representation:(BOXRepresentation *)representation;
+
 
 @end

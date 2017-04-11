@@ -11,10 +11,14 @@
 #import "BOXLog.h"
 #import "BOXHashHelper.h"
 #import "NSString+BOXURLHelper.h"
+#import "BOXAPIQueueManager.h"
+#import "BOXAbstractSession.h"
 
 @interface BOXFileUploadRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
+@property (nonatomic, readwrite, strong) NSString *uploadMultipartCopyFilePath;
+@property (nonatomic, readwrite, copy) NSString *associateId;
 @property (nonatomic, readwrite, strong) NSData *fileData;
 
 @end
@@ -39,6 +43,19 @@
         _localFilePath = filePath;
     }
 
+    return self;
+}
+
+- (instancetype)initWithPath:(NSString *)filePath
+              targetFolderID:(NSString *)folderID
+ uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
+                 associateId:(NSString *)associateId
+{
+    self = [self initWithPath:filePath targetFolderID:folderID];
+    if (self != nil) {
+        self.uploadMultipartCopyFilePath = uploadMultipartCopyFilePath;
+        self.associateId = associateId;
+    }
     return self;
 }
 
@@ -99,17 +116,12 @@
                                               session:self.queueManager.session];
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
-        NSInputStream *inputStream = [[NSInputStream alloc] initWithFileAtPath:self.localFilePath];
-
-        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:self.localFilePath
-                                                                                        error:nil];
-        unsigned long long contentLength = [fileAttributes fileSize];
-
-        [operation appendMultipartPieceWithInputStream:inputStream
-                                         contentLength:contentLength
-                                             fieldName:BOXAPIMultipartParameterFieldKeyFile
-                                              filename:fileName
-                                              MIMEType:nil];
+        operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
+        operation.associateId = self.associateId;
+        [operation appendMultipartPieceWithFilePath:self.localFilePath
+                                          fieldName:BOXAPIMultipartParameterFieldKeyFile
+                                           filename:fileName
+                                           MIMEType:nil];
     } else if (self.fileData != nil) {
         [operation appendMultipartPieceWithData:self.fileData
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
@@ -150,7 +162,9 @@
     }
     
     uploadOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+        //for background upload, it's possible to have invalid JSONDictionary even if we succeeded
+        //if the app crashes before we could cache the response data
+        BOXFile *file = JSONDictionary == nil ? nil : [[BOXFile alloc] initWithJSON:JSONDictionary];
 
         if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadRequest:withFile:error:)]) {
             [self.cacheClient cacheFileUploadRequest:self withFile:file error:nil];

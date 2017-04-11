@@ -11,6 +11,7 @@
 #import "BOXBookmarkCommentsRequest.h"
 #import "BOXComment.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXContentClient.h"
 
 @interface BOXBookmarkCommentsRequestTests : BOXRequestTestCase
 @end
@@ -24,7 +25,7 @@
     NSString *bookmarkID = @"12345";
     BOXBookmarkCommentsRequest *request = [[BOXBookmarkCommentsRequest alloc] initWithBookmarkID:bookmarkID];
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@/comments", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@/comments", [BOXContentClient APIBaseURL], bookmarkID]];
     
     XCTAssertEqualObjects(expectedURL, request.urlRequest.URL);
     XCTAssertEqualObjects(BOXAPIHTTPMethodGET, request.urlRequest.HTTPMethod);

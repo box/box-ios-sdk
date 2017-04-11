@@ -18,6 +18,7 @@
 #import "BOXUser_Private.h"
 #import "NSDate+BOXContentSDKAdditions.h"
 #import "BOXAbstractSession_Private.h"
+#import "BOXContentClient.h"
 
 #define keychainRefreshTokenKey @"refresh_token"
 
@@ -36,16 +37,14 @@
 
 - (instancetype)initWithClientID:(NSString *)ID
                           secret:(NSString *)secret
-                      APIBaseURL:(NSString *)baseURL
-                  APIAuthBaseURL:(NSString *)authBaseURL
                     queueManager:(BOXAPIQueueManager *)queueManager
+               urlSessionManager:(BOXURLSessionManager *)urlSessionManager
 {
-    self = [self initWithAPIBaseURL:baseURL queueManager:queueManager];
+    self = [self initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
     if (self) {
         _clientID = ID;
         _clientSecret = secret;
         _redirectURIString = [NSString stringWithFormat:@"boxsdk-%@://boxsdkoauth2redirect", _clientID];
-        _APIAuthBaseURLString = authBaseURL;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveRevokeSessionNotification:)
@@ -112,7 +111,7 @@
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
                                                                                   queryParams:nil
-                                                                                session:self];
+                                                                                      session:self];
 
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
@@ -179,21 +178,16 @@
 
 - (NSURL *)authorizeURL
 {
-    return [self authorizeURLWithBaseURLString:self.APIAuthBaseURLString];
-}
-
-- (NSURL *)authorizeURLWithBaseURLString:(NSString *)baseURLString
-{
     NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
     NSString *authorizeURLString = [NSString stringWithFormat:
                                     @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
-                                    baseURLString, self.clientID, self.nonce, encodedRedirectURI];
+                                    [BOXContentClient APIAuthBaseURL], self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
 
 - (NSURL *)grantTokensURL
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/token", self.APIBaseURLString]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/token", [BOXContentClient OAuth2BaseURL]]];
 }
 
 #pragma mark - Token Refresh
@@ -241,7 +235,7 @@
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
                                                                                   queryParams:nil
-                                                                                session:self];
+                                                                                      session:self];
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
@@ -299,16 +293,22 @@
 - (void)sendRevokeRequest
 {
     // We don't go through any of our regular queues/operations because those get shut down upon logout.
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/revoke", BOXAPIBaseURL]]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth2/revoke", [BOXContentClient OAuth2BaseURL]]]];
+    [request setHTTPMethod:BOXAPIHTTPMethodPOST];
+    [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:BOXAPIHTTPHeaderContentType];
     
     NSData *postData = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&token=%@", self.clientID, self.clientSecret, self.accessToken] dataUsingEncoding:NSUTF8StringEncoding];
-    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)postData.length] forHTTPHeaderField:BOXAPIHTTPHeaderContentLength];
     [request setHTTPBody:postData];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
-    [connection start];
+
+    NSURLSessionTask *sessionTask = [self.urlSessionManager dataTaskWithRequest:request completionHandler:^(NSData * _Nonnull data, NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+        if (error == nil) {
+            BOXLog(@"Logout 'revoke' API call succeeded.");
+        } else {
+            BOXLog(@"Logout 'revoke' API call failed %@.", error);
+        }
+    }];
+    [sessionTask resume];
 }
 
 #pragma mark Token Helpers

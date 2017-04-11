@@ -8,6 +8,8 @@
 
 #import "BOXSampleFileDetailsController.h"
 #import "BOXSampleProgressView.h"
+#import "BOXSampleAppSessionManager.h"
+#import "BOXFileRepresentionListViewControllerTableViewController.h"
 
 NS_ENUM(NSInteger, FileDetailsControllerSection) {
     FileDetailsControllerSectionFileInfo = 0,
@@ -22,6 +24,8 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
 @property (nonatomic, readwrite, strong) BOXItem *item;
 @property (nonatomic ,readwrite, strong) BOXAPIItemType *itemType;
 @property (nonatomic, readwrite, strong) BOXContentClient *client;
+@property (nonatomic, readwrite, strong) BOXFileDownloadRequest *lastDownloadWithResumeRequest;
+@property (nonatomic, readwrite, copy) NSString *lastDownloadWithResumeAssociateId;
 
 @end
 
@@ -97,7 +101,7 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
             rows = 2;
             break;
         case FileDetailsControllerSectionDownload:
-            rows = 1;
+            rows = 3;
             break;
         default:
             break;
@@ -171,6 +175,15 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
                 } else {
                     cell.textLabel.textColor = [UIColor lightGrayColor];
                 }
+            } else if (indexPath.row == 1) {
+                cell.textLabel.text = @"Download with Resume";
+                if ([self.item isKindOfClass:[BOXFile class]]) {
+                    cell.textLabel.textColor = [UIColor blackColor];
+                } else {
+                    cell.textLabel.textColor = [UIColor lightGrayColor];
+                }
+            } else {
+                cell.textLabel.text = @"See Representations";
             }
             break;
         default:
@@ -192,38 +205,115 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self downloadCurrentItem];
+    if (indexPath.row == 0) {
+        [self downloadCurrentItem];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.row == 1) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString *label = cell.textLabel.text;
+
+        // Click "Download with Resume" to create a new bg download
+        // Click "Cancel Download" to cancel current download
+        // Click "Resume Download", resume it
+        // Upon completion of download or resume, the label goes back to "Download with Resume"
+
+        if ([label isEqualToString:@"Download with Resume"] == YES) {
+            self.lastDownloadWithResumeAssociateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+            self.lastDownloadWithResumeRequest = [self downloadCurrentItemWithAssociateId:self.lastDownloadWithResumeAssociateId completion:^(NSError *error) {
+                if ([cell.textLabel.text isEqualToString:@"Resume Download"] == NO) {
+                    cell.textLabel.text = @"Download with Resume";
+                }
+            }];
+            cell.textLabel.text = @"Cancel Download";
+        } else if ([label isEqualToString:@"Cancel Download"] == YES) {
+            [self.lastDownloadWithResumeRequest cancelWithIntentionToResume];
+            cell.textLabel.text = @"Resume Download";
+        } else if ([label isEqualToString:@"Resume Download"] == YES) {
+            self.lastDownloadWithResumeRequest = [self downloadCurrentItemWithAssociateId:self.lastDownloadWithResumeAssociateId completion:^(NSError *error) {
+                cell.textLabel.text = @"Download with Resume";
+            }];
+            cell.textLabel.text = @"Cancel Download";
+        }
+    } else {
+        if (self.item.isFile) {
+            [self displayRepresentations];
+        }
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Private Helpers
 
+- (void)displayRepresentations
+{
+    BOXFileRepresentionListViewControllerTableViewController *controller = [[BOXFileRepresentionListViewControllerTableViewController alloc] initWithFile:(BOXFile *)self.item contentClient:self.client];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
+#pragma mark - Private Helpers
 - (void)downloadCurrentItem
 {
-    // Setup some UI to track our download progress
-    BOXSampleProgressView *progressHeaderView = [[BOXSampleProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 50.0f)];
-    self.tableView.tableHeaderView = progressHeaderView;
+    NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+    [self downloadCurrentItemWithAssociateId:associateId completion:nil];
+}
 
+- (BOXFileDownloadRequest *)downloadCurrentItemWithAssociateId:(NSString *)associateId completion:(BOXErrorBlock)completionBlock
+{
     // Setup our download path (the download can alternatively be done via a NSOutputStream using fileDownloadRequestWithFileID:toOutputStream:
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
-    
-    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID toLocalFilePath:finalPath];
+
+    //save information about this background download to allow reconnection to it upon app restarts
+    NSString *userId = self.client.user.modelID;
+    BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+    BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
+    info.fileID = self.itemID;
+    info.destinationPath = finalPath;
+    [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
+
+    // Setup some UI to track our download progress
+    BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
+                                                             toLocalFilePath:finalPath
+                                                                 associateId:associateId];
+    [self performRequest:request associateId:associateId completion:completionBlock];
+    return request;
+}
+
+- (void)performRequest:(BOXFileDownloadRequest *)request associateId:(NSString *)associateId completion:(BOXErrorBlock)completionBlock
+{
+    NSString *userId = self.client.user.modelID;
+    BOXSampleProgressView *progressHeaderView = [[BOXSampleProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 50.0f)];
+    self.tableView.tableHeaderView = progressHeaderView;
+
     [request performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-        if (error == nil) {
-            self.tableView.tableHeaderView = nil;
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Your file was downloaded in the documents directory." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
+        [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+        self.tableView.tableHeaderView = nil;
+        NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self dismissViewControllerAnimated:YES
+                                                                                      completion:nil];
+                                                         }];
+        [alertController addAction:OKAction];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
+        if (completionBlock != nil) {
+            completionBlock(error);
         }
     }];
-    
+
 //    //Alternative donwload method via a NSOutputStream
-//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];    
+//    NSOutputStream *outputStream = [[NSOutputStream alloc] initToMemory];
 //    BOXFileDownloadRequest *request = [client fileDownloadRequestWithFileID:self.itemID toOutputStream:outputStream];
 //    [request performRequestWithProgress:nil completion:^(NSError *error) {
 //        // your file data here

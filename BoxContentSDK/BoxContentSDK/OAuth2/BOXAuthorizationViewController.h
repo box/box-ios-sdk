@@ -59,4 +59,15 @@
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock;
 
+/**
+ * Helper method to be used when the BOXAuthorizationViewController needs to be dismissed
+ * externally. For example, an app presented the Authorization View Controller but needs
+ * to dismiss it without user action or any normal completion of the authorization process
+ * (because of an incoming event for example). Before dismissing, it must call prepare for
+ * dismissal.
+ * This method is already used internally in all of the expected cases such as the user
+ * cancelling and authorization completion (success and failure).
+ */
+- (void)prepareForDismissal;
+
 @end

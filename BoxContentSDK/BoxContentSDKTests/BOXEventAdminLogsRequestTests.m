@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXEventsAdminLogsRequest.h"
 #import "NSURL+BOXURLHelper.h"
 
@@ -19,7 +20,7 @@
 
 - (void)test_url_request_is_correct_with_all_values
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", BOXAPIBaseURL, BOXAPIVersion, BOXAPIResourceEvents]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [BOXContentClient APIBaseURL], BOXAPIResourceEvents]];
     BOXEventsAdminLogsRequest *request = [[BOXEventsAdminLogsRequest alloc] init];
     request.limit = 200;
     NSString *streamPosition = @"DFLSDFKGJFDLGKJFDSGF";

@@ -37,6 +37,7 @@
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
 #import "BOXAppUserSession.h"
+#import "BOXURLSessionManager.h"
 
 // Protocols
 #import "BOXSharedLinkStorageProtocol.h"
@@ -116,6 +117,7 @@
 #import "BOXStreamOperation.h"
 #import "BOXRecentItemsRequest.h"
 #import "BOXRecentItemsRequest.h"
+#import "BOXFileRepresentationDownloadRequest.h"
 
 // API Operation queues
 #import "BOXAPIQueueManager.h"

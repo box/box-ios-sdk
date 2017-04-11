@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import <BoxContentSDK/BOXContentSDK.h>
+#import "BOXRequest.h"
 
 @interface BOXRequest (Metadata)
 
@@ -17,7 +17,6 @@
                   template:(NSString *)templateName;
 
 - (NSURL *)URLWithBaseURL:(NSString *)baseURL
-               APIVersion:(NSString *)APIVersion
                  resource:(NSString *)resource
                        ID:(NSString *)ID
               subresource:(NSString *)subresource

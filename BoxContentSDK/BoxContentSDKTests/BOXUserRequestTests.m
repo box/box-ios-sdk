@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXContentClient.h"
 #import "BOXUserRequest.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXUser.h"
@@ -23,7 +24,7 @@
     BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
     NSURLRequest *URLRequest = userRequest.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/me", BOXAPIBaseURL, BOXAPIVersion]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/me", [BOXContentClient APIBaseURL]]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -35,7 +36,7 @@
     [userRequest setRequestAllUserFields:YES];
     NSURLRequest *URLRequest = userRequest.urlRequest;
     
-    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/%@/users/me", BOXAPIBaseURL, BOXAPIVersion];
+    NSString *expectedURLWithoutQueryString = [NSString stringWithFormat:@"%@/users/me", [BOXContentClient APIBaseURL]];
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@", URLRequest.URL.scheme, URLRequest.URL.host, URLRequest.URL.path];
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     

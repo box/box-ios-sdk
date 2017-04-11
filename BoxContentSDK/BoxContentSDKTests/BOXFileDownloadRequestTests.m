@@ -8,8 +8,10 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXRequest_Private.h"
+#import "BOXContentClient.h"
 #import "BOXFileDownloadRequest.h"
 #import "BOXFile.h"
+#import "BOXParallelAPIQueueManager.h"
 
 @interface BOXFileDownloadRequestTests : BOXRequestTestCase
 @end
@@ -24,7 +26,7 @@
     BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID];
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content", BOXAPIBaseURL, BOXAPIVersion, fileID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content", [BOXContentClient APIBaseURL], fileID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -47,7 +49,7 @@
     request.versionID = versionID;
     NSURLRequest *URLRequest = request.urlRequest;
     
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/files/%@/content?version=%@", BOXAPIBaseURL, BOXAPIVersion, fileID, versionID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/files/%@/content?version=%@", [BOXContentClient APIBaseURL], fileID, versionID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
@@ -77,6 +79,8 @@
     
     NSData *data = [NSData dataWithContentsOfFile:localFilePath];
     XCTAssertEqualObjects(cannedResponseData, data);
+
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
 - (void)test_that_download_to_output_stream_request_returns_expected_download_data
@@ -118,11 +122,12 @@
     
     // We expect the queueManager to re-enque after each 202 is received.
     __block NSInteger numberOfOperationsEnqueued = 0;
-    id queueManagerMock = [OCMockObject partialMockForObject:request.queueManager];
-    [[[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
+    BOXAPIQueueManager *queueManager = request.queueManager;
+    id queueManagerMock = [OCMockObject partialMockForObject:queueManager];
+    id realObj = [[[queueManagerMock stub] andDo:^(NSInvocation *invocation) {
         numberOfOperationsEnqueued++;
-    }] andForwardToRealObject] enqueueOperation:OCMOCK_ANY];
-    
+    }] andForwardToRealObject];
+    [realObj enqueueOperation:OCMOCK_ANY];
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
     [request performRequestWithProgress:nil completion:^(NSError *error) {
         XCTAssertNil(error);

@@ -51,10 +51,18 @@
                                  successBlock:(BOXDownloadSuccessBlock)successBlock
                                  failureBlock:(BOXDownloadFailureBlock)failureBlock;
 
-- (BOXStreamOperation *)dataOperationWithURL:(NSURL *)URL
-                                  HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
-                                successBlock:(BOXDownloadSuccessBlock)successBlock
-                                failureBlock:(BOXDownloadFailureBlock)failureBlock;
+- (BOXAPIDataOperation *)dataOperationWithURL:(NSURL *)URL
+                                   HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                        queryStringParameters:(NSDictionary *)queryParameters
+                               bodyDictionary:(NSDictionary *)bodyDictionary
+                                 successBlock:(BOXDownloadSuccessBlock)successBlock
+                                 failureBlock:(BOXDownloadFailureBlock)failureBlock
+                                  associateId:(NSString *)associateId;
+
+- (BOXStreamOperation *)dataStreamOperationWithURL:(NSURL *)URL
+                                        HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                      successBlock:(BOXDownloadSuccessBlock)successBlock
+                                      failureBlock:(BOXDownloadFailureBlock)failureBlock;
 
 - (BOXAPIHeadOperation *)headOperationWithURL:(NSURL *)URL
                                    HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod

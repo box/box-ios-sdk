@@ -11,6 +11,7 @@
 #import "BOXSampleItemCell.h"
 #import "BOXSampleProgressView.h"
 #import "BOXSampleLibraryAssetViewController.h"
+#import "BOXSampleAppSessionManager.h"
 #import <Photos/Photos.h>
 
 @interface BOXSampleFolderViewController () <UIAlertViewDelegate>
@@ -20,6 +21,7 @@
 @property (nonatomic, readwrite, strong) BOXFolder *folder;
 @property (nonatomic, readwrite, strong) BOXContentClient *client;
 @property (nonatomic, readwrite, strong) BOXRequest *request;
+@property (nonatomic, readwrite, strong) BOXRequest *nonBackgroundUploadRequest;
 
 @end
 
@@ -40,10 +42,11 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(retrieveItems) forControlEvents:UIControlEventValueChanged];
-    
+
+    UIBarButtonItem *uploadBgButton = [[UIBarButtonItem alloc] initWithTitle:@"UploadBg" style:UIBarButtonItemStylePlain target:self action:@selector(uploadBackgroundAction:)];
     UIBarButtonItem *uploadButton = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStylePlain target:self action:@selector(uploadAction:)];
     UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(importAction:)];
-    self.navigationItem.rightBarButtonItems = @[uploadButton, importButton];
+    self.navigationItem.rightBarButtonItems = @[uploadBgButton, uploadButton, importButton];
     
     // Get the current folder's informations
     BOXFolderRequest *folderRequest = [self.client folderInfoRequestWithID:self.folderID];
@@ -61,6 +64,8 @@
     
     [self.request cancel];
     self.request = nil;
+    [self.nonBackgroundUploadRequest cancel];
+    self.nonBackgroundUploadRequest = nil;
 }
 
 - (void)retrieveItems
@@ -74,6 +79,21 @@
         if (error == nil) {
             self.items = items;
             [self.tableView reloadData];
+        } else {
+            NSString *errorMsg = [NSString stringWithFormat:@"Failed to retrieve items %@", error];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:errorMsg
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
         }
         [self.refreshControl endRefreshing];
     }];
@@ -133,53 +153,90 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         BOXItem *item = self.items[indexPath.row];
         NSString *message = [NSString stringWithFormat:@"This will delete \n%@\nAre you sure you wish to continue ?", item.name];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
-        alertView.tag = indexPath.row;
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete"
+                                                               style:UIAlertActionStyleDestructive
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 BOXItem *item = self.items[indexPath.row];
+
+                                                                 BOXErrorBlock errorBlock = ^void(NSError *error) {
+                                                                     if (error) {
+                                                                         [self dismissViewControllerAnimated:YES
+                                                                                                  completion:^{
+                                                                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                                                                                                               message:@"Could not delete this item."
+                                                                                                                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                                                                                                      UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                                                                                                         style:UIAlertActionStyleDefault
+                                                                                                                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                                                                                                                           [self dismissViewControllerAnimated:YES
+                                                                                                                                                                                    completion:nil];
+                                                                                                                                                       }];
+                                                                                                      [alertController addAction:OKAction];
+                                                                                                      [self presentViewController:alertController
+                                                                                                                         animated:YES
+                                                                                                                       completion:nil];
+                                                                                                  }];
+                                                                     } else {
+                                                                         NSMutableArray *array = [NSMutableArray arrayWithArray:self.items];
+                                                                         [array removeObject:item];
+                                                                         self.items = [array copy];
+                                                                         [self.tableView reloadData];
+                                                                         [self dismissViewControllerAnimated:YES
+                                                                                                  completion:nil];
+                                                                     }
+                                                                 };
+                                                                 
+                                                                 if ([item isKindOfClass:[BOXFolder class]]) {
+                                                                     BOXFolderDeleteRequest *request = [self.client folderDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else if ([item isKindOfClass:[BOXFile class]]) {
+                                                                     BOXFileDeleteRequest *request = [self.client fileDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else if ([item isKindOfClass:[BOXBookmark class]]) {
+                                                                     BOXBookmarkDeleteRequest *request = [self.client bookmarkDeleteRequestWithID:item.modelID];
+                                                                     [request performRequestWithCompletion:^(NSError *error) {
+                                                                         errorBlock (error);
+                                                                     }];
+                                                                 } else {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }
+                                                             }];
+        [alertController addAction:deleteAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self dismissViewControllerAnimated:YES
+                                                                                      completion:nil];
+                                                         }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:nil];
     }
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != alertView.cancelButtonIndex) {
-        BOXItem *item = self.items[alertView.tag];
-        
-        BOXErrorBlock errorBlock = ^void(NSError *error) {
-            if (error) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Could not delete this item."  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alertView show];
-            } else {
-                NSMutableArray *array = [NSMutableArray arrayWithArray:self.items];
-                [array removeObject:item];
-                self.items = [array copy];
-                [self.tableView reloadData];
-            }
-        };
-        
-        if ([item isKindOfClass:[BOXFolder class]]) {
-            BOXFolderDeleteRequest *request = [self.client folderDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        } else if ([item isKindOfClass:[BOXFile class]]) {
-            BOXFileDeleteRequest *request = [self.client fileDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        } else if ([item isKindOfClass:[BOXBookmark class]]) {
-            BOXBookmarkDeleteRequest *request = [self.client bookmarkDeleteRequestWithID:item.modelID];
-            [request performRequestWithCompletion:^(NSError *error) {
-                errorBlock (error);
-            }];
-        }
-    }
-}
 
 #pragma mark - Callbacks
 
 - (void)uploadAction:(id)sender
+{
+    [self upload:NO];
+}
+
+- (void)uploadBackgroundAction:(id)sender
+{
+    [self upload:YES];
+}
+
+- (void)upload:(BOOL)background
 {
     // See the progress
     if (self.items.count > 0) {
@@ -203,41 +260,94 @@
     }
     
     NSString *path = [[NSBundle mainBundle] pathForResource:dummyImageName ofType:nil];
-    NSData *data = [NSData dataWithContentsOfFile:path];
     
     // Create our blocks
     BOXFileBlock completionBlock = ^void(BOXFile *file, NSError *error) {
         if (error == nil) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:@"Upload Succeeded"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self dismissViewControllerAnimated:YES
+                                                                                          completion:nil];
+                                                             }];
+            [alertController addAction:OKAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
+            self.tableView.tableHeaderView = nil;
             [self updateDataSourceWithNewFile:file atIndex:indexOfFile];
             [self.tableView reloadData];
         } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Upload Failed" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
+            NSString *errMsg = [NSString stringWithFormat:@"Upload Failed. %@", error];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                     message:errMsg
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self dismissViewControllerAnimated:YES
+                                                                                          completion:nil];
+                                                             }];
+            [alertController addAction:OKAction];
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:nil];
         }
-        self.tableView.tableHeaderView = nil;       
+        self.tableView.tableHeaderView = nil;
     };
     BOXProgressBlock progressBlock = ^void(long long totalBytesTransferred, long long totalBytesExpectedToTransfer)
     {
         progressHeaderView.progressView.progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
     };
-    
+
     // We did not find a file named similarly, we can upload normally the file.
+    NSString *tempPath = nil;
+    NSString *associateId = nil;
+    NSString *userId = self.client.user.modelID;
+    if (background == YES) {
+        tempPath = [path stringByAppendingString:@".temp"];
+        associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+
+        //save information about this background upload to allow reconnection to it upon app restarts
+        BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+        BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
+        info.fileID = fileID;
+        info.folderID = self.folderID;
+        info.uploadFromLocalFilePath = path;
+        info.uploadMultipartCopyFilePath = tempPath;
+        [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
+    }
     if (indexOfFile == NSNotFound) {
-        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestToFolderWithID:self.folderID fromData:data fileName:dummyImageName];
+        BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+        if (background == NO) {
+            self.nonBackgroundUploadRequest = uploadRequest;
+        }
         uploadRequest.enableCheckForCorruptionInTransit = YES;
         [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            if (background == YES) {
+                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+            }
             completionBlock(file, error);
         }];
     }
     // We already found the item. We will upload a new version of the file. 
     // Alternatively, we can also rename the file and upload it like a regular new file via a BOXFileUploadRequest
     else {
-        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestWithID:fileID fromData:data];
+        BOXFileUploadNewVersionRequest *newVersionRequest = [self.client fileUploadNewVersionRequestInBackgroundWithFileID:fileID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+        if (background == NO) {
+            self.nonBackgroundUploadRequest = newVersionRequest;
+        }
         [newVersionRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
+            if (background == YES) {
+                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+            }
             completionBlock(file, error);
         }];
     }   

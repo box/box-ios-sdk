@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BOXAPIQueueManager.h"
 #import "BOXUser.h"
+#import "BOXURLSessionManager.h"
 
 #pragma mark Notifications
 extern NSString *const BOXSessionDidBecomeAuthenticatedNotification;
@@ -54,15 +55,10 @@ extern NSString *const BOXUserIDKey;
 /** @name SDK framework objects */
 
 /**
- * The base URL for API requests.
- * @see BOXAPIBaseURL
- */
-@property (nonatomic, readwrite, strong) NSString *APIBaseURLString;
-
-/**
  * The BOXAPIQueueManager on which to enqueue [BOXAPIOAuth2ToJSONOperation](BOXAPIOAuth2ToJSONOperation) or [BOXAPIAppAuthOperation](BOXAPIAppAuthOperation).
  */
 @property (nonatomic, readwrite, weak) BOXAPIQueueManager *queueManager;
+@property (nonatomic, readonly, strong) BOXURLSessionManager *urlSessionManager;
 
 #pragma mark Authorization Properties
 /** @name Authorization Properties */
@@ -115,7 +111,7 @@ extern NSString *const BOXUserIDKey;
  *
  * @return A BOXAbstractSession capable of authorizing a user and signing requests.
  */
-- (instancetype)initWithAPIBaseURL:(NSString *)baseURL queueManager:(BOXAPIQueueManager *)queueManager;
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager urlSessionManager:(BOXURLSessionManager *)urlSessionManager;
 
 #pragma mark Access Token Authorization
 /** @name Token Authorization */

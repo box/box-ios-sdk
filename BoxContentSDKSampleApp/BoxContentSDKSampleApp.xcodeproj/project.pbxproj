@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */; };
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
 		591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */; };
 		599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 599B1A911E4BF44200709C27 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
+		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
@@ -26,6 +29,7 @@
 		C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */; };
 		C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB21A5B00B40060E41B /* QuartzCore.framework */; };
 		C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB41A5B00BA0060E41B /* Security.framework */; };
+		C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */; };
 		C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
 		C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */; };
 		C55FE3221A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55FE3211A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg */; };
@@ -79,6 +83,8 @@
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
 		591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
 		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
+		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,6 +105,8 @@
 		C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleItemCell.m; sourceTree = "<group>"; };
 		C540BEB21A5B00B40060E41B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C540BEB41A5B00BA0060E41B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileRepresentionListViewControllerTableViewController.h; sourceTree = "<group>"; };
+		C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileRepresentionListViewControllerTableViewController.m; sourceTree = "<group>"; };
 		C55FE2FC1A5D96EE00032032 /* BOXSampleFileDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleFileDetailsController.h; sourceTree = "<group>"; };
 		C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleFileDetailsController.m; sourceTree = "<group>"; };
 		C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleProgressView.h; sourceTree = "<group>"; };
@@ -184,7 +192,6 @@
 		C5745C1B1A5AF6CC00824FFA = {
 			isa = PBXGroup;
 			children = (
-				591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				C5745C251A5AF6CC00824FFA /* Products */,
@@ -217,10 +224,14 @@
 				C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */,
 				3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */,
 				3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */,
+				C54851991E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.h */,
+				C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */,
 				C52D0AC81A5D4D8F00CD4B56 /* BOXSampleItemCell.h */,
 				C52D0AC91A5D4D8F00CD4B56 /* BOXSampleItemCell.m */,
 				C55FE31E1A5ED76400032032 /* BOXSampleProgressView.h */,
 				C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */,
+				6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */,
+				6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */,
 				C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */,
 				C5745C341A5AF6CC00824FFA /* Images.xcassets */,
 				C5745C361A5AF6CC00824FFA /* LaunchScreen.xib */,
@@ -395,7 +406,9 @@
 				3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */,
 				C52D0ABF1A5D4B4100CD4B56 /* BOXSampleThumbnailsHelper.m in Sources */,
 				C5745C2D1A5AF6CC00824FFA /* BOXSampleAppDelegate.m in Sources */,
+				6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C2A1A5AF6CC00824FFA /* main.m in Sources */,
+				C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

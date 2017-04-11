@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXBookmarkDeleteRequest.h"
+#import "BOXContentClient.h"
 
 @interface BOXBookmarkDeleteRequestTests : BOXRequestTestCase
 @end
@@ -24,7 +25,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@", [BOXContentClient APIBaseURL], bookmarkID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
     
@@ -50,7 +51,7 @@
     NSURLRequest *URLRequest = request.urlRequest;
 
     // URL assertions
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/web_links/%@/trash", BOXAPIBaseURL, BOXAPIVersion, bookmarkID]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/web_links/%@/trash", [BOXContentClient APIBaseURL], bookmarkID]];
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"DELETE", URLRequest.HTTPMethod);
 }

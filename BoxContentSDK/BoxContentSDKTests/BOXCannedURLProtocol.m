@@ -65,8 +65,8 @@
             [request.HTTPBodyStream open];
             NSMutableData *dataFromStream = [NSMutableData data];
             uint8_t byteBuffer[4096];
-            NSInteger bytesRead;
-            while ((bytesRead = [request.HTTPBodyStream read:byteBuffer maxLength:4096]) != 0) {
+            NSInteger bytesRead = 0;
+            while ([request.HTTPBodyStream hasBytesAvailable] == YES && (bytesRead = [request.HTTPBodyStream read:byteBuffer maxLength:4096]) != 0) {
                 if (bytesRead > 0) {
                     [dataFromStream appendBytes:byteBuffer length:bytesRead];
                 }

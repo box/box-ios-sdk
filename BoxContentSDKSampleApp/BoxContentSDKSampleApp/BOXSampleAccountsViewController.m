@@ -8,6 +8,7 @@
 
 #import "BOXSampleAccountsViewController.h"
 #import "BOXSampleFolderViewController.h"
+#import "BOXSampleAppSessionManager.h"
 
 @interface BOXSampleAccountsViewController ()
 
@@ -42,6 +43,7 @@
             || ([client.session isKindOfClass:[BOXAppUserSession class]] && self.isAppUsers)) {
             [users addObject:user];
         }
+        [self reconnectWithBackgroundTasks:client];
     }
     
     self.users = users;
@@ -49,11 +51,66 @@
     [self.tableView reloadData];
 }
 
+- (void)reconnectWithBackgroundTasks:(BOXContentClient *)client
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSString *userId = client.user.modelID;
+        BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+        NSDictionary *associateIdToSessionTaskInfo = [appSessionManager associateIdToSessionTaskInfoForUserId:userId];
+
+        for (NSString *associateId in associateIdToSessionTaskInfo.allKeys) {
+            BOXSampleAppSessionInfo *info = associateIdToSessionTaskInfo[associateId];
+            if (info.destinationPath != nil) {
+                //recreate download task
+                BOXFileDownloadRequest *downloadRequest = [client fileDownloadRequestWithID:info.fileID toLocalFilePath:info.destinationPath associateId:associateId];
+
+                [downloadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+                    NSLog(@"!!!!!!!download request progress %lld/%lld, info (%@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.fileID, info.destinationPath);
+                } completion:^(NSError *error) {
+                    NSLog(@"!!!!!!!download request completed, error: %@, info (%@, %@)", error, info.fileID, info.destinationPath);
+                    [appSessionManager removeUserId:userId associateId:associateId];
+                }];
+            } else {
+                //Note: for simulator testing purposes, we need to re-create the path to the dummy upload file
+                //instead of the previous simulator path which no longer exists after app restarts
+                NSString *dummyImageName = @"Logo_Box_Blue_Whitebg_480x480.jpg";
+                NSString *path = [[NSBundle mainBundle] pathForResource:dummyImageName ofType:nil];
+                NSString *tempPath = [path stringByAppendingString:@".temp"];
+
+                if (info.fileID != nil) {
+
+                    //recreate new version upload task
+                    BOXFileUploadNewVersionRequest *newVersionRequest = [client fileUploadNewVersionRequestInBackgroundWithFileID:info.fileID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+
+                    [newVersionRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+                        NSLog(@"!!!!!!!new version upload request progress %lld/%lld, info (%@, %@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.fileID, info.uploadFromLocalFilePath, info.uploadMultipartCopyFilePath);
+                    } completion:^(BOXFile *file, NSError *error) {
+                        [appSessionManager removeUserId:userId associateId:associateId];
+                    }];
+                } else {
+
+                    //recreate new file upload task
+                    BOXFileUploadRequest *uploadRequest = [client fileUploadRequestInBackgroundToFolderWithID:info.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+
+                    [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
+                        NSLog(@"!!!!!!new file upload request progress %lld/%lld, info (%@, %@, %@)", totalBytesTransferred, totalBytesExpectedToTransfer, info.folderID, info.uploadFromLocalFilePath, info.uploadMultipartCopyFilePath);
+                    } completion:^(BOXFile *file, NSError *error) {
+                        [appSessionManager removeUserId:userId associateId:associateId];
+                    }];
+                }
+            }
+        }
+    });
+}
+
 - (void)barButtonPressed:(UIBarButtonItem *)sender
 {
     // Create a new client for the account we want to add.
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    
+
+    [self reconnectWithBackgroundTasks:client];
+
     if (self.isAppUsers) {
         [client setAccessTokenDelegate:self];
     }
@@ -63,12 +120,19 @@
             if ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIUserCancelledError) {
                 BOXLog(@"Authentication was cancelled, please try again.");
             } else {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                    message:@"Login failed, please try again"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"OK", nil];
-                [alertView show];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                         message:@"Login failed, please try again"
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [self dismissViewControllerAnimated:YES
+                                                                                              completion:nil];
+                                                                 }];
+                [alertController addAction:OKAction];
+                [self presentViewController:alertController
+                                   animated:YES
+                                 completion:nil];
             }
         } else {
             BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];
@@ -125,7 +189,7 @@
                                               // Logout the user so that we remove any credential informations.
                                               BOXUser *user = self.users[indexPath.row];
                                               [[BOXContentClient clientForUser:user] logOut];
-                                              
+                                              [[BOXSampleAppSessionManager defaultManager] cleanUpForUserId:user.modelID];
                                               NSMutableArray *mutableUsers = [self.users mutableCopy];
                                               [mutableUsers removeObject:user];
                                               self.users = [mutableUsers copy];
