@@ -50,9 +50,16 @@
     NSDictionary *queryParameters = nil;
 
     if (self.requestAllFileFields) {
-        queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
-    }
+        NSString *fieldString = [self fullFileFieldsParameterString];
+        
+        // Include the representations field in the request for high definition video content
+        if (self.requestHighDefinitionVideo == YES) {
+            fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
+        }
 
+        queryParameters = @{BOXAPIParameterKeyFields:fieldString};
+    }
+    
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET
                                               queryStringParameters:queryParameters
@@ -66,6 +73,13 @@
                             forHTTPHeaderField:BOXAPIHTTPHeaderIfNoneMatch];
         }
     }
+    
+    // Add the header to specify HLS video streaming contentUrl
+    if (self.requestHighDefinitionVideo == YES) {
+        [JSONOperation.APIRequest addValue:[NSString stringWithFormat:@"[%@]", BOXRepresentationTypeHLS]
+                        forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
+    }
+    
     [self addSharedLinkHeaderToRequest:JSONOperation.APIRequest];
 
     return JSONOperation;

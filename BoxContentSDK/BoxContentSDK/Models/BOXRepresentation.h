@@ -19,8 +19,6 @@
 
 @property (nonatomic, readwrite, strong) NSURL *contentURL;
 
-@property (nonatomic, readwrite, strong) BOXRepresentationContentType *contentType;
-
 @property (nonatomic, readwrite, strong) NSDictionary *details;
 
 @property (nonatomic, readwrite, strong) BOXRepresentationDimensions *dimensions;

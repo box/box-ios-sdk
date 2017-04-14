@@ -59,6 +59,7 @@ extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch;
 extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI;
+extern BOXAPIHTTPHeader *const BOXAPIHTTPHeaderXRepHints;
 
 // OAuth2 constants
 // Authorization code response
@@ -161,17 +162,18 @@ extern BOXRepresentationType *const BOXRepresentationTypeHLS;
 extern BOXRepresentationType *const BOXRepresentationTypeCrocodoc;
 extern BOXRepresentationType *const BOXRepresentationTypeDICOM;
 
+// Representations URL Template
+extern NSString *const BOXRepresentationTemplateKeyAccessPath;
+
+// Representation Template Value
+extern NSString *const BOXRepresentationTemplateValueHLSManifiest;
+
 // Representation Status
 typedef NSString BOXRepresentationStatus;
 extern BOXRepresentationStatus *const BOXRepresentationStatusSuccess;
 extern BOXRepresentationStatus *const BOXRepresentationStatusPending;
 extern BOXRepresentationStatus *const BOXRepresentationStatusNone;
 extern BOXRepresentationStatus *const BOXRepresentationStatusError;
-
-// Representation content type
-typedef NSString BOXRepresentationContentType;
-extern BOXRepresentationContentType *const BOXRepresentationContentTypeAsset;
-extern BOXRepresentationContentType *const BOXRepresentationContentTypeManifest;
 
 // Representation dimensions
 typedef NSString BOXRepresentationDimensions;
@@ -284,6 +286,7 @@ extern NSString *const BOXAPIObjectKeyItemStatus;
 extern NSString *const BOXAPIObjectKeyItemCollection;
 extern NSString *const BOXAPIObjectKeySyncState;
 extern NSString *const BOXAPIObjectKeyURL;
+extern NSString *const BOXAPIObjectKeyURLTemplate;
 extern NSString *const BOXAPIObjectKeyDownloadURL;
 extern NSString *const BOXAPIObjectKeyVanityURL;
 extern NSString *const BOXAPIObjectKeyIsPasswordEnabled;
@@ -297,6 +300,7 @@ extern NSString *const BOXAPIObjectKeyTrackingCodes;
 extern NSString *const BOXAPIObjectKeyCanSeeManagedUsers;
 extern NSString *const BOXAPIObjectKeyIsSyncEnabled;
 extern NSString *const BOXAPIObjectKeyStatus;
+extern NSString *const BOXAPIObjectKeyState;
 extern NSString *const BOXAPIObjectKeyJobTitle;
 extern NSString *const BOXAPIObjectKeyPhone;
 extern NSString *const BOXAPIObjectKeyAddress;

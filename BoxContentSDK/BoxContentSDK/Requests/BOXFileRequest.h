@@ -8,6 +8,12 @@
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
+
+/*
+ * Setting this value to YES for a video file request will include high definition video content where supported
+ */
+@property (nonatomic, readwrite, assign) BOOL requestHighDefinitionVideo;
+
 @property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;//If-None-Match: Array of strings representing etag values
 
 @property (nonatomic, readonly, strong) NSString *fileID;
