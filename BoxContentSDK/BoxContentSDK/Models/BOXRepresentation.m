@@ -24,14 +24,19 @@
                                                     nullAllowed:NO];
         
         NSDictionary *propertiesJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyProperties
-                                                                  inDictionary:JSONResponse
-                                                               hasExpectedType:[NSDictionary class]
-                                                                   nullAllowed:NO];
+                                                                      inDictionary:JSONResponse
+                                                                   hasExpectedType:[NSDictionary class]
+                                                                       nullAllowed:NO];
         
         self.dimensions = [propertiesJSON objectForKey:BOXAPIObjectKeyDimensions];
         
-        self.status = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyStatus
-                                                     inDictionary:JSONResponse
+        NSDictionary *statusObject = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyStatus
+                                                                    inDictionary:JSONResponse
+                                                                 hasExpectedType:[NSDictionary class]
+                                                                     nullAllowed:NO];
+        
+        self.status = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyState
+                                                     inDictionary:statusObject
                                                   hasExpectedType:[NSString class]
                                                       nullAllowed:NO];
         
@@ -41,27 +46,26 @@
                                                                     nullAllowed:NO];
         self.details = detailsJSON;
         
-        NSDictionary *linksJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyLinks
-                                                                 inDictionary:JSONResponse
-                                                              hasExpectedType:[NSDictionary class]
-                                                                  nullAllowed:NO];
+        NSDictionary *contentJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyContent
+                                                                   inDictionary:JSONResponse
+                                                                hasExpectedType:[NSDictionary class]
+                                                                    nullAllowed:NO];
         
-        NSDictionary *contentJSON = linksJSON[BOXAPIObjectKeyContent];
-        
-        NSString *contentURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
-                                                             inDictionary:contentJSON
-                                                          hasExpectedType:[NSString class]
-                                                              nullAllowed:NO];
+        NSString *contentURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURLTemplate
+                                                                    inDictionary:contentJSON
+                                                                 hasExpectedType:[NSString class]
+                                                                     nullAllowed:NO];
         if (contentURLString.length > 0) {
+            if ([self.type isEqualToString:BOXRepresentationTypeHLS]) {
+                contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:BOXRepresentationTemplateValueHLSManifiest];
+            }
             self.contentURL = [NSURL URLWithString:contentURLString];
         }
         
-        self.contentType = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyType
-                                                          inDictionary:contentJSON
-                                                       hasExpectedType:[NSString class]
-                                                           nullAllowed:NO];
-        
-        NSDictionary *infoJSON = linksJSON[BOXAPIObjectKeyInfo];
+        NSDictionary *infoJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInfo
+                                                                inDictionary:JSONResponse
+                                                             hasExpectedType:[NSDictionary class]
+                                                                 nullAllowed:NO];
         
         self.infoURL = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
                                                       inDictionary:infoJSON

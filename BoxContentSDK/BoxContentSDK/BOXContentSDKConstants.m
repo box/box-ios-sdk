@@ -54,6 +54,7 @@ BOXAPIHTTPHeader *const BOXAPIHTTPHeaderContentMD5 = @"Content-MD5";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfMatch = @"If-Match";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderIfNoneMatch = @"If-None-Match";
 BOXAPIHTTPHeader *const BOXAPIHTTPHeaderBoxAPI = @"BoxApi";
+BOXAPIHTTPHeader *const BOXAPIHTTPHeaderXRepHints = @"X-Rep-Hints";
 
 // OAuth2 constants
 // Authorization code response
@@ -148,6 +149,12 @@ BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
 BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
 BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
 BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
+
+// Representations URL Template
+NSString *const BOXRepresentationTemplateKeyAccessPath = @"{+asset_path}";
+
+// Representation Template Value
+NSString *const BOXRepresentationTemplateValueHLSManifiest = @"master.m3u8";
 
 // Representation Status
 BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";
@@ -261,6 +268,7 @@ NSString *const BOXAPIObjectKeyItemStatus = @"item_status";
 NSString *const BOXAPIObjectKeyItemCollection = @"item_collection";
 NSString *const BOXAPIObjectKeySyncState = @"sync_state";
 NSString *const BOXAPIObjectKeyURL = @"url";
+NSString *const BOXAPIObjectKeyURLTemplate = @"url_template";
 NSString *const BOXAPIObjectKeyDownloadURL = @"download_url";
 NSString *const BOXAPIObjectKeyVanityURL = @"vanity_url";
 NSString *const BOXAPIObjectKeyIsPasswordEnabled = @"is_password_enabled";
@@ -274,6 +282,7 @@ NSString *const BOXAPIObjectKeyTrackingCodes = @"tracking_codes";
 NSString *const BOXAPIObjectKeyCanSeeManagedUsers = @"can_see_managed_users";
 NSString *const BOXAPIObjectKeyIsSyncEnabled = @"is_sync_enabled";
 NSString *const BOXAPIObjectKeyStatus = @"status";
+NSString *const BOXAPIObjectKeyState = @"state";
 NSString *const BOXAPIObjectKeyJobTitle = @"job_title";
 NSString *const BOXAPIObjectKeyPhone = @"phone";
 NSString *const BOXAPIObjectKeyAddress = @"address";
