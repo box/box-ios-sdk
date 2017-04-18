@@ -14,6 +14,9 @@ extern NSString *const BOXContentSDKErrorDomain;
 // A key for the userInfo dictionary to look up the underlying JSON error response from the API
 extern NSString *const BOXJSONErrorResponseKey;
 
+// A key for the error response dictionary to look up the underlying error code from the API
+extern NSString *const BOXErrorInfoCodeKey;
+
 // The BoxContentSDK framework may also return other NSError objects from other dmains, such as
 // * JSON parsing
 // * NSURLError domain
@@ -103,3 +106,5 @@ extern NSString *const BOXAuthErrorMissingDeviceId;
 extern NSString *const BOXAuthErrorUnsupportedDevicePinningRuntime;
 
 extern NSString *const BOXAuthErrorAccessDenied; // User denied access to their Box account
+
+extern NSString *const BOXRequestErrorRecentSimilarComment;
