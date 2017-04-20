@@ -68,10 +68,22 @@
             NSArray *recentsJSON = JSONDictionary[BOXAPICollectionKeyEntries];
             NSMutableArray<BOXRecentItem *> *mutableRecentItems = [NSMutableArray arrayWithCapacity:recentsJSON.count];
 
+            BOXSharedLinkHeadersHelper *sharedLinkHelper = [[BOXContentClient defaultClient] sharedLinksHeaderHelper];
             for (id itemJSON in recentsJSON) {
                 if ([itemJSON isKindOfClass:[NSDictionary class]]) {
                     BOXRecentItem *recentItem = [[BOXRecentItem alloc] initWithJSON:itemJSON];
                     [mutableRecentItems addObject:recentItem];
+
+                    // Recent items could have been accessed on another end-point with a shared link.
+                    // In that case, we need to update the shared link header helper with this information.
+                    if (recentItem.sharedLinkURL != nil) {
+                        //FIXME: (adempsey, 2/28/17): currently does not support passwords. Items with
+                        // password-protected shared links are not currently returned by the recents API.
+                        [sharedLinkHelper storeHeadersForItemWithID:recentItem.item.modelID
+                                                           itemType:recentItem.item.type
+                                                         sharedLink:recentItem.sharedLinkURL.absoluteString
+                                                           password:nil];
+                    }
                 }
             }
 
