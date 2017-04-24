@@ -75,13 +75,13 @@
                                                                                                   nullAllowed:YES
                                                                                             suppressNullAsNil:YES]]; // Will be null for pending collaborations
         
-        NSDictionary *folderDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyItem
-                                                                        inDictionary:JSONResponse
-                                                                     hasExpectedType:[NSDictionary class]
-                                                                         nullAllowed:YES
-                                                                   suppressNullAsNil:YES];
-        if (folderDictionary) {
-            self.folder = [[BOXFolderMini alloc] initWithJSON:folderDictionary];
+        NSDictionary *itemDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyItem
+                                                                      inDictionary:JSONResponse
+                                                                   hasExpectedType:[NSDictionary class]
+                                                                       nullAllowed:YES
+                                                                 suppressNullAsNil:YES];
+        if (itemDictionary) {
+            self.item = [[BOXItemMini alloc] initWithJSON:itemDictionary];
         }
     }
     

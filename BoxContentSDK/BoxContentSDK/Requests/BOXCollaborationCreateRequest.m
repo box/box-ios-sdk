@@ -8,12 +8,19 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXCollaboration.h"
 
+@interface BOXCollaborationCreateRequest()
+
+@property (nonatomic, readwrite, strong) BOXAPIItemType *itemType;
+
+@end
+
 @implementation BOXCollaborationCreateRequest
 
-- (instancetype)initWithFolderID:(NSString *)folderID
+- (instancetype)initWithItemType:(BOXAPIItemType *)type itemID:(NSString *)itemID;
 {
     if (self = [super init]) {
-        _folderID = folderID;
+        _itemID = itemID;
+        _itemType = type;
     }
     return self;
 }
@@ -27,8 +34,8 @@
     
     NSMutableDictionary *bodyDictionary = [NSMutableDictionary dictionary];
     
-    NSDictionary *itemDictionary = @{BOXAPIObjectKeyID : self.folderID,
-                                     BOXAPIObjectKeyType : BOXAPIItemTypeFolder};
+    NSDictionary *itemDictionary = @{BOXAPIObjectKeyID : self.itemID,
+                                     BOXAPIObjectKeyType : self.itemType};
     
     bodyDictionary[BOXAPIObjectKeyItem] = itemDictionary;
     

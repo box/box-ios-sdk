@@ -67,6 +67,7 @@
 #import "BOXBookmarkCommentsRequest.h"
 #import "BOXFolderRequest.h"
 #import "BOXFileCommentsRequest.h"
+#import "BOXFileCollaborationsRequest.h"
 #import "BOXFileCopyRequest.h"
 #import "BOXFileDeleteRequest.h"
 #import "BOXFileDownloadRequest.h"

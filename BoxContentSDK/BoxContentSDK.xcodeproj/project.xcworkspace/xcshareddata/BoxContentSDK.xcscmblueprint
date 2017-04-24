@@ -4,12 +4,12 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "28039AA224B3CB26291955C07B4CF393BAD605E2" : 0,
+    "26EF5C070CC298451F3181AEF1B69B41CCDABACA" : 9223372036854775807,
     "7242F32EC849D482A99C13FA855F3F56DD1FE6F6" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "71074ED8-FE5B-4238-88DB-0DEC1BAD4473",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "28039AA224B3CB26291955C07B4CF393BAD605E2" : "..\/..\/..",
+    "26EF5C070CC298451F3181AEF1B69B41CCDABACA" : "..\/..\/..",
     "7242F32EC849D482A99C13FA855F3F56DD1FE6F6" : "box-ios-sdk\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "BoxContentSDK",
@@ -19,7 +19,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitenterprise.inside-box.net:Box\/box-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "28039AA224B3CB26291955C07B4CF393BAD605E2"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "26EF5C070CC298451F3181AEF1B69B41CCDABACA"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:box\/box-ios-sdk.git",
