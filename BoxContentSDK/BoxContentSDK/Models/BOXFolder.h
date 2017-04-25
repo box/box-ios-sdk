@@ -77,13 +77,6 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canUpload;
 
 /**
- *  Indicates permission for the current user can invite users into the folder as collaborators.
- *  Warning: By default, the Box API does not return this value, and it will be nil.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, assign) BOXAPIBoolean canInviteCollaborator;
-
-/**
  *  Whether non-owners can invite collaborators to this folder.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
