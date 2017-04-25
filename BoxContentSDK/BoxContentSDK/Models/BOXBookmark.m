@@ -98,4 +98,9 @@
     return YES;
 }
 
+- (BOXAPIBoolean)canInviteCollaborator
+{
+    return BOXAPIBooleanNO;
+}
+
 @end
