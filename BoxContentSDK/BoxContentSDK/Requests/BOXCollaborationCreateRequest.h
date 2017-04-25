@@ -17,7 +17,6 @@
 @property (nonatomic, readonly, strong) NSString *itemID;
 @property (nonatomic, readonly, strong) BOXAPIItemType *type;
 
-
 - (instancetype)initWithItemType:(BOXAPIItemType *)type itemID:(NSString *)itemID;
 
 - (void)performRequestWithCompletion:(BOXCollaborationBlock)completionBlock;
