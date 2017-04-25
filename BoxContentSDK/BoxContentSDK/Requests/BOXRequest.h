@@ -41,6 +41,8 @@ typedef void (^BOXItemsBlock)(NSArray <BOXItem *> *items, NSError *error);
 
 typedef void (^BOXCollaborationArrayCompletionBlock)(NSArray <BOXCollaboration *> *collaborations, NSError *error);
 
+typedef void (^BOXFileCollaborationArrayCompletionBlock)(NSArray <BOXCollaboration *> *collaborations, NSString *nextMarker, NSError *error);
+
 typedef void (^BOXBookmarkBlock)(BOXBookmark *bookmark, NSError *error);
 
 typedef void (^BOXUserBlock)(BOXUser *user, NSError *error);

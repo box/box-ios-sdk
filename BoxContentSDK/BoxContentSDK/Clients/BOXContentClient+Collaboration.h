@@ -10,6 +10,7 @@
 #import "BOXContentClient.h"
 
 @class BOXCollaborationRequest;
+@class BOXFileCollaborationsRequest;
 @class BOXFolderCollaborationsRequest;
 @class BOXCollaborationCreateRequest;
 @class BOXCollaborationRemoveRequest;
@@ -75,6 +76,54 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXCollaborationCreateRequest *)collaborationAddRequestToFolderWithID:(NSString *)folderID groupID:(NSString *)groupID role:(BOXCollaborationRole *)role;
+
+/**
+ *  Generate a request to retrieve the Collaborations in a file.
+ *
+ *  @param fileID File ID.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileCollaborationsRequest *)collaborationsRequestForFileWithID:(NSString *)fileID;
+
+/**
+ *  Generate a request to collaborate an existing Box User by User-ID to a file.
+ *
+ *  @param fileID   File ID.
+ *  @param userID   User ID of the Box user that will be added.
+ *  @param role     Collaboration role.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXCollaborationCreateRequest *)collaborationAddRequestToFileWithID:(NSString *)fileID
+                                                                userID:(NSString *)userID
+                                                                  role:(BOXCollaborationRole *)role;
+
+/**
+ *  Generate a request to collaborate an someone (usually identified by email address) to a file.
+ *
+ *  @param fileID    File ID.
+ *  @param userLogin User-Login or email address of the person that will be added.
+ *  @param role      Collaboration role.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXCollaborationCreateRequest *)collaborationAddRequestToFileWithID:(NSString *)fileID
+                                                             userLogin:(NSString *)userLogin
+                                                                  role:(BOXCollaborationRole *)role;
+
+/**
+ *  Generate a request to collaborate a group to a file.
+ *
+ *  @param fileID   File ID.
+ *  @param groupID  Group ID to be added.
+ *  @param role     Collaboration role.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXCollaborationCreateRequest *)collaborationAddRequestToFileWithID:(NSString *)fileID
+                                                               groupID:(NSString *)groupID
+                                                                  role:(BOXCollaborationRole *)role;
 
 /**
  *  Generate a request to delete a Collaboration.
