@@ -11,6 +11,7 @@
 @interface BOXCollaborationCreateRequest()
 
 @property (nonatomic, readwrite, strong) BOXAPIItemType *itemType;
+@property (nonatomic, readwrite, strong) NSString *itemID;
 
 @end
 
