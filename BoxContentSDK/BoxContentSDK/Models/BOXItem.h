@@ -183,9 +183,10 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canDelete;
 
 /**
- *  Indicates permission for the current user can invite users into the folder as collaborators.
+ *  Indicates permission for the current user can invite users to the folder/file as collaborators.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
+ *  This property will always return NO for BOXBookmark because weblinks currently do not support collaborators.
  */
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canInviteCollaborator;
 
