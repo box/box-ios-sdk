@@ -465,7 +465,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             if ([errorType isEqualToString:BOXAuthErrorUnauthorizedDevice]
                 || [errorType isEqualToString:BOXAuthErrorExceededDeviceLimit]
                 || [errorType isEqualToString:BOXAuthErrorMissingDeviceId]
-                || [errorType isEqualToString:BOXAuthErrorUnsupportedDevicePinningRuntime])  {
+                || [errorType isEqualToString:BOXAuthErrorUnsupportedDevicePinningRuntime]
+                || [errorType isEqualToString:BOXAuthErrorAccountDeactivated])  {
                 shouldLogout = YES;
             }
         } else if (error.code == BOXContentSDKAPIErrorUnauthorized) {
