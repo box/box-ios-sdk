@@ -178,13 +178,7 @@
  *
  *  @param fileID        File ID.
  *  @param localFilePath Path to local file.
- *  @param downloadTask  NSURLSessionDownloadTask to be used for the actual download.
- *                       If nil, a new downloadTask will be created
- *  @param downloadTaskReplacedBlock    to get notified when download task used by the
- *                                      request has been changed, so the caller of this method
- *                                      could correctly re-associate their request with the new
- *                                      download task, which is needed for the caller to know how
- *                                      to handle downloadTask upon app restart
+ *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
  *
  *  @return A request that can be customized and then executed.
  */

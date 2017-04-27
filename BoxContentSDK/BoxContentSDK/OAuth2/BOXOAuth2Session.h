@@ -100,11 +100,10 @@
 /**
  * Designated initializer. Returns a BOXOAuth2Session capable of authorizing a user and signing requests.
  *
- * @param ID your client ID, also known as API key.
- * @param secret your client secret. DO NOT publish this secret.
- * @param baseURL The base URL String for accessing the Box API.
- * @param authBaseURL The base URL String for authenticating with the Box API.
+ * @param ID                your client ID, also known as API key.
+ * @param secret            your client secret. DO NOT publish this secret.
  * @param queueManager The queue manager on which to enqueue [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation).
+ * @param urlSessionManager The base URL String for accessing the Box API.
  *
  * @return A BOXOAuth2Session capable of authorizing a user and signing requests.
  */
@@ -127,15 +126,16 @@
  * if an authorization code is not obtained from the authorization webview flow
  * (for example if the user denies authorizing your application).
  *
- * @param URL The URL received as a result of the OAuth2 server invoking the redirect URI. This URL will
- * contain query string params needed to complete the authorization_code grant type.
+ * @param URL   The URL received as a result of the OAuth2 server invoking the redirect URI. This URL will
+ *              contain query string params needed to complete the authorization_code grant type.
  *
- * @param Completion block with an updated BOXOAuth2Session.
+ * @param block callback block with an updated BOXOAuth2Session.
  *
  * @warning This method is intended to be called from your application delegate in response to
  * `application:openURL:sourceApplication:annotation:`.
  */
-- (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block;
+- (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL
+                                 withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block;
 
 /**
  * Returns the URL to POST to for exchanging an authorization code or refresh token for a new set of tokens.
@@ -189,7 +189,8 @@
  * @param expiredAccessToken The access token that expired.
  * @param block              The completion block to be called when the token refresh has finished.
  */
-- (void)performRefreshTokenGrant:(NSString *)expiredAccessToken withCompletionBlock:(void(^)(BOXOAuth2Session *session, NSError *error))block;
+- (void)performRefreshTokenGrant:(NSString *)expiredAccessToken
+             withCompletionBlock:(void(^)(BOXOAuth2Session *session, NSError *error))block;
 
 /**
  * This method exchanges a refresh token for a new access token and refresh token with specific expiration times.

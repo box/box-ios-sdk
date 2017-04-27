@@ -54,13 +54,15 @@
  * **NOTE** Scope is defaulted to @see BOXAPIScopeEnterprise in this initializer.
  * **NOTE** tasks must only contain instances of @see BOXMetadataKeyValue.
  *
- * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
- * @param tasks The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
+ * @param fileID       The ID of the desired file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
+ * @param tasks        The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName tasks:(NSArray *)tasks;
+- (instancetype)initWithFileID:(NSString *)fileID
+                      template:(NSString *)templateName
+                         tasks:(NSArray *)tasks;
 
 /**
  * Designated initializer. Returns a BOXMetadataCreateRequest instance that allows users
@@ -68,14 +70,17 @@
  *
  * **NOTE** tasks must only contain instances of @see BOXMetadataKeyValue.
  *
- * @param fileID The ID of the desired file.
- * @param scope The scope of the templates desired for creating a metadata template instance.
- * @param template The templateKey of the desired metadata information for the given file.
- * @param tasks The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
+ * @param fileID       The ID of the desired file.
+ * @param scope        The scope of the templates desired for creating a metadata template instance.
+ * @param templateName The templateKey of the desired metadata information for the given file.
+ * @param tasks        The collection of custom metadata key/value pairs to apply with BOXMetadataKeyValue objects.
  *
  * @return A BOXMetadataCreateRequest that allows users to create metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName tasks:(NSArray *)tasks;
+- (instancetype)initWithFileID:(NSString *)fileID
+                         scope:(NSString *)scope
+                      template:(NSString *)templateName
+                         tasks:(NSArray *)tasks;
 
 /**
  * Performs the POST request to create metadata information.

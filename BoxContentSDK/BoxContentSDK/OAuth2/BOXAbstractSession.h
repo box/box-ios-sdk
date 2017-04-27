@@ -106,8 +106,8 @@ extern NSString *const BOXUserIDKey;
 /**
  * Designated initializer. Returns a BOXAbstractSession capable of authorizing a user and signing requests.
  *
- * @param baseURL The base URL String for accessing the Box API.
- * @param queueManager The queue manager on which to enqueue [BOXAPIToJSONOperations](BOXAPIToJSONOperation).
+ * @param urlSessionManager The base URL String for accessing the Box API.
+ * @param queueManager      The queue manager on which to enqueue [BOXAPIToJSONOperations](BOXAPIToJSONOperation).
  *
  * @return A BOXAbstractSession capable of authorizing a user and signing requests.
  */
@@ -124,7 +124,8 @@ extern NSString *const BOXUserIDKey;
  * @param URL The URL received will authorize an access token. (Optional)
  * @param block The completion block to run after authorization of an access token succeeds/fails
  */
-- (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block;
+- (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL
+                                 withCompletionBlock:(void (^)(BOXAbstractSession *session, NSError *error))block;
 
 #pragma mark Access Token Refresh
 /** @name Token Refresh */

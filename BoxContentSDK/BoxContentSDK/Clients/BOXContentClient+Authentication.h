@@ -18,7 +18,7 @@
  *  or launch the Box app to allow the user to automatically be authenticated to that account (if possible).
  *  If a user is already authenticated, then a UIViewController will not be presented and the completionBlock will be called.
  *
- *  @param completionBlock Called when the authentication has completed.
+ *  @param completion Called when the authentication has completed.
  */
 - (void)authenticateWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
@@ -26,7 +26,7 @@
  *  Authenticate a user. If necessary, this will present a UIViewController to allow the user to enter their credentials.
  *  If a user is already authenticated, then a UIViewController will not be presented and the completionBlock will be called.
  *
- *  @param completionBlock Called when the authentication has completed.
+ *  @param completion Called when the authentication has completed.
  */
 - (void)authenticateInAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
@@ -36,7 +36,7 @@
  *  If App-To-App authentication is not possible, an error is returned in the completion block.
  *  If a user is already authenticated, then a UIViewController will not be presented and the completionBlock will be called.
  *
- *  @param completionBlock Called when the authentication has completed.
+ *  @param completion Called when the authentication has completed.
  */
 - (void)authenticateAppToAppWithCompletionBlock:(void (^)(BOXUser *user, NSError *error))completion;
 
