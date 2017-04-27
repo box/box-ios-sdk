@@ -142,6 +142,11 @@
         if (canSetShareAccess) {
             self.canSetShareAccess = canSetShareAccess.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
         }
+        
+        NSNumber *canInviteCollaborator = permissions[BOXAPIObjectKeyCanInviteCollaborator];
+        if (canInviteCollaborator != nil) {
+            self.canInviteCollaborator = canInviteCollaborator.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
+        }
     }
 }
 

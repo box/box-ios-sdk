@@ -125,6 +125,7 @@
     {
         BOXItemMini *itemA = (BOXItemMini *)modelA;
         BOXItemMini *itemB = (BOXItemMini *)modelB;
+        XCTAssertEqualObjects(itemA.type, itemB.type);
         XCTAssertEqualObjects(itemA.name, itemB.name);
         XCTAssertEqualObjects(itemA.sequenceID, itemB.sequenceID);
         XCTAssertEqualObjects(itemA.etag, itemB.etag);
@@ -141,10 +142,6 @@
             BOXBookmarkMini *webLinkA = (BOXBookmarkMini *)modelA;
             BOXBookmarkMini *webLinkB = (BOXBookmarkMini *)modelB;
             XCTAssertEqualObjects(webLinkA.URL, webLinkB.URL);
-        }
-        else
-        {
-            XCTFail(@"You must implement an equivalency test for class %@", NSStringFromClass([modelA class]));
         }
     }
     else if ([modelA isKindOfClass:[BOXUser class]])
@@ -247,7 +244,7 @@
         XCTAssertEqualObjects(collaborationA.role, collaborationB.role);
         XCTAssertEqualObjects(collaborationA.acknowledgedDate, collaborationB.acknowledgedDate);
         [self assertModel:collaborationA.creator isEquivalentTo:collaborationB.creator];
-        [self assertModel:collaborationA.folder isEquivalentTo:collaborationB.folder];
+        [self assertModel:collaborationA.item isEquivalentTo:collaborationB.item];
         [self assertModel:collaborationA.accessibleBy isEquivalentTo:collaborationB.accessibleBy];
     }
     else if ([modelA isKindOfClass:[BOXMetadata class]]) {

@@ -26,4 +26,5 @@ BoxContentSDK/Pods
 BoxContentSDKSampleApp/Pods
 
 #Carthage Checkout
-BOXContentSDKSampleApp/Carthage
+Carthage/
+BOXContentSDKSampleApp/Carthage/
