@@ -96,9 +96,11 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  *
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data
- * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
+ * @param completionBlock   block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)( NSError * _Nullable error))completionBlock;
+- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+                                                 rootCacheDir:(NSString *)rootCacheDir
+                                                   completion:(nullable void (^)( NSError * _Nullable error))completionBlock;
 
 /**
  * This method needs to be called once in app extensions to set up the manager to be ready to
@@ -109,34 +111,40 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
- * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
+ * @param completionBlock       block to execute upon completion of setup, indicating background tasks can be provided
  */
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+                                                       rootCacheDir:(NSString *)rootCacheDir
+                                                         completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
  * should share the same rootCacheDir as the main app to work properly
  *
  * @param backgroundSessionId   Id of background session to reconnect with
- * @param completeion           block to execute upon completion of reconnecting to background session
+ * @param completionBlock           block to execute upon completion of reconnecting to background session
  */
-- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
+- (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId
+                                           completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
  Create a NSURLSessionDataTask which does not need to be run in background,
  and its completionHandler will be called upon completion of the task
  */
-- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler;
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                            completionHandler:(void (^)(NSData * data, NSURLResponse * response, NSError * error))completionHandler;
 
 /**
  Create a NSURLSessionDataTask which can be run in foreground to download data
  */
-- (NSURLSessionDataTask *)foregroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate;
+- (NSURLSessionDataTask *)foregroundDownloadTaskWithRequest:(NSURLRequest *)request
+                                               taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate;
 
 /**
  Create a foreground upload task given stream request
  */
-- (NSURLSessionUploadTask *)foregroundUploadTaskWithStreamedRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate;
+- (NSURLSessionUploadTask *)foregroundUploadTaskWithStreamedRequest:(NSURLRequest *)request
+                                                       taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate;
 
 /**
  Retrieve a NSURLSessionDownloadTask to be run in the background to download file into a destination file path.
@@ -155,7 +163,11 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:rootCacheDir:completion in main app or
  oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:rootCacheDir:completion
  */
-- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (NSURLSessionDownloadTask *)backgroundDownloadTaskWithRequest:(NSURLRequest *)request
+                                                   taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
+                                                         userId:(NSString *)userId
+                                                    associateId:(NSString *)associateId
+                                                          error:(NSError **)error;
 
 /**
  Retrieve a NSURLSessionUploadTask which can be run in the background to upload file given an source file.
@@ -175,7 +187,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:rootCacheDir:completion in main app or
  oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:rootCacheDir:completion
  */
-- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request
+                                                   fromFile:(NSURL *)fileURL
+                                               taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
+                                                     userId:(NSString *)userId
+                                                associateId:(NSString *)associateId
+                                                      error:(NSError **)error;
 
 /**
  Retrieve completed session task's cached info associated with userId and associateId
@@ -186,7 +203,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
  @return session task's cached info
  */
-- (BOXURLSessionTaskCachedInfo *)sessionTaskCompletedCachedInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOXURLSessionTaskCachedInfo *)sessionTaskCompletedCachedInfoGivenUserId:(NSString *)userId
+                                                               associateId:(NSString *)associateId
+                                                                     error:(NSError **)error;
 
 /**
  Clean up session task's cached info associated with userId and associateId.
