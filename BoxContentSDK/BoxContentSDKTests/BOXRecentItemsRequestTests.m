@@ -41,7 +41,7 @@
 
     NSMutableDictionary *expectedParameters = [NSMutableDictionary dictionary];
     expectedParameters[BOXAPIParameterKeyLimit] = @"2";
-    expectedParameters[BOXAPIParameterKeyMarker] = @"b2Zmc2V0PTIK";
+    expectedParameters[BOXAPIParameterKeyNextMarker] = @"b2Zmc2V0PTIK";
     expectedParameters[BOXAPIParameterKeyListType] = BOXAPIRecentItemsListTypeShared;
 
     NSString *actualURLWithoutQueryString = [NSString stringWithFormat:@"%@://%@%@",
