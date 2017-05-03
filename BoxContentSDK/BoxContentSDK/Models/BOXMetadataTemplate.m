@@ -7,7 +7,7 @@
 //
 
 #import "BOXMetadataTemplate.h"
-#import "BoxISO8601DateFormatter.h"
+#import "BOXISO8601DateFormatter.h"
 #import "BOXMetadataTemplateField.h"
 
 @implementation BOXMetadataTemplate

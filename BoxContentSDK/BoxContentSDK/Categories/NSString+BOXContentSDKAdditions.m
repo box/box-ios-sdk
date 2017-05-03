@@ -125,11 +125,8 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
 - (NSString *)box_stringByAddingURLPercentEscapes
 {
-    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                 (__bridge CFStringRef)self,
-                                                                                 NULL,
-                                                                                 (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                 kCFStringEncodingUTF8);
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]"] invertedSet];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
 }
 
 @end
