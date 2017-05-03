@@ -81,25 +81,12 @@ typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalB
 - (void)performCompletionCallback;
 
 /**
- * When data is successfully received over the network,
- * this method is called to trigger progressBlock.
- * @see progressBlock
- */
-- (void)performProgressCallback;
-
-/**
  * The fileID associated with this download request. This value is passed to progressBlock.
  * @see progressBlock
  */
 @property (nonatomic, readwrite, strong) NSString *fileID;
 
 /** @name Overridden methods */
-
-/**
- * In addition to calling [super]([BOXAPIAuthenticatedOperation prepareAPIRequest]), schedule outputStream
- * in the current run loop and set `outputStream.delegate` to `self`.
- */
-- (void)prepareAPIRequest;
 
 /**
  * BOXAPIDataOperation should only ever be GET requests so there should not be a body.

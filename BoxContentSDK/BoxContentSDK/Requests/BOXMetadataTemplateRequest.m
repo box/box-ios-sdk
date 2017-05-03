@@ -8,7 +8,7 @@
 
 #import "BOXMetadataTemplateRequest.h"
 #import "BOXRequest+Metadata.h"
-#import "BoxContentSDKConstants.h"
+#import "BOXContentSDKConstants.h"
 #import "BOXAPIOperation.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXRequest_Private.h"
