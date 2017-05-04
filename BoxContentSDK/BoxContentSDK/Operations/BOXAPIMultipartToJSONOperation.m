@@ -50,6 +50,17 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
  */
 @implementation BOXAPIMultipartToJSONOperation
 
+- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
+{
+    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    if (self != nil) {
+        // Initialize the responseData object to mutable data
+        self.responseData = [NSMutableData data];
+    }
+    
+    return self;
+}
+
 #pragma mark - Append data to upload operation
 
 - (void)appendMultipartPieceWithData:(NSData *)data fieldName:(NSString *)fieldName filename:(NSString *)filename MIMEType:(NSString *)MIMEType
@@ -124,15 +135,6 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     if (self.progressBlock) {
         self.progressBlock(totalBytesExpectedToSend, totalBytesSent);
-    }
-}
-
-- (void)sessionTask:(NSURLSessionTask *)sessionTask processIntermediateData:(NSData *)data
-{
-    @synchronized (self) {
-        if (data != nil) {
-            [self processResponseData:data];
-        }
     }
 }
 
