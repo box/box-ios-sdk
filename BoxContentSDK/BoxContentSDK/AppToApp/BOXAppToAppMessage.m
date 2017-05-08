@@ -188,7 +188,7 @@
             {
                 NSString *key = pair[0];
                 NSString *value = pair[1];
-                value = [value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                value = [value stringByRemovingPercentEncoding];
                 result[key] = value;
             }
         }

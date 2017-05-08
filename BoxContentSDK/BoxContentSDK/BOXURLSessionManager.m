@@ -115,6 +115,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
     });
+    
     return sharedInstance;
 }
 
@@ -135,6 +136,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         [self createProgressSession];
         _didFinishSettingUpBackgroundSession = NO;
     }
+    
     return self;
 }
 
@@ -154,6 +156,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         _defaultSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:queue];
     }
+    
     return _defaultSession;
 }
 
@@ -173,16 +176,20 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         _progressSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
     }
+    
     return _progressSession;
 }
 
 - (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
+    
     if (self.protocolClasses != nil) {
         sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
     }
+    
     NSOperationQueue *queue = nil; //use default queue of NSURLSession by default, unless background task is for main app
+    
     if (maxConcurrentOperationCount > 0) {
         queue = [[NSOperationQueue alloc] init];
         queue.name = @"com.box.BOXURLSessionManager.background";
@@ -191,6 +198,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:queue];
     [self recordBackgroundSession:backgroundSession];
+    
     return backgroundSession;
 }
 
@@ -199,6 +207,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     if (_cacheClient == nil) {
         _cacheClient = [[BOXURLSessionCacheClient alloc] initWithCacheRootDir:rootCacheDir];
     }
+    
     return _cacheClient;
 }
 
@@ -298,6 +307,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (completionBlock != nil) {
             completionBlock(error);
         }
+        
         return;
     }
     NSString *backgroundSessionId = backgroundSession.configuration.identifier;
@@ -309,6 +319,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             [self associateSessionId:backgroundSessionId sessionTask:uploadTask withTaskDelegate:nil];
             [pendingSessionTaskIds addObject:@(uploadTask.taskIdentifier)];
         }
+        
         for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
             [self associateSessionId:backgroundSessionId sessionTask:downloadTask withTaskDelegate:nil];
             [pendingSessionTaskIds addObject:@(downloadTask.taskIdentifier)];
@@ -317,6 +328,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         BOOL success = [self.cacheClient completeOnGoingSessionTasksForBackgroundSessionId:backgroundSessionId excludingSessionTaskIds:pendingSessionTaskIds error:&error];
         BOXAssert(success, @"Failed to complete tasks which are no longer in pending with error %@", error);
         self.didFinishSettingUpBackgroundSession = YES;
+        
         if (completionBlock != nil) {
             completionBlock(error);
         }
@@ -337,7 +349,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
-- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * uploadTasks, NSArray<NSURLSessionDownloadTask *> * downloadTasks))completionBlock
+- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nullable uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nullable downloadTasks))completionBlock
 {
     if (completionBlock != nil) {
         if (self.supportBackgroundSessionTasks == NO) {
@@ -360,9 +372,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     [self associateSessionId:nil sessionTask:sessionTask withTaskDelegate:taskDelegate];
 }
 
-- (void)associateSessionId:(NSString *)sessionId
+- (void)associateSessionId:(nullable NSString *)sessionId
                sessionTask:(NSURLSessionTask *)sessionTask
-          withTaskDelegate:(id <BOXURLSessionTaskDelegate> )taskDelegate
+          withTaskDelegate:(nullable id <BOXURLSessionTaskDelegate> )taskDelegate
 {
     NSUInteger sessionTaskId = sessionTask.taskIdentifier;
 
@@ -408,6 +420,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     NSURLSessionDataTask *task = [self.progressSession dataTaskWithRequest:request];
     [self associateProgressSessionTask:task withTaskDelegate:taskDelegate];
+    
     return task;
 }
 
@@ -415,6 +428,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     NSURLSessionUploadTask *task = [self.progressSession uploadTaskWithStreamedRequest:request];
     [self associateProgressSessionTask:task withTaskDelegate:taskDelegate];
+    
     return task;
 }
 
@@ -427,20 +441,42 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     if (request == nil || taskDelegate == nil || userId == nil || associateId == nil) {
         return nil;
     }
-    return [self backgroundTaskWithRequest:request
-                          orUploadFromFile:nil
-                              taskDelegate:taskDelegate
-                                    userId:userId
-                               associateId:associateId
-                                     error:error];
+
+    NSURLSessionTask *task = [self backgroundTaskWithRequest:request
+                                            orUploadFromFile:nil
+                                                taskDelegate:taskDelegate
+                                                      userId:userId
+                                                 associateId:associateId
+                                                       error:error];
+    if ([task isKindOfClass:[NSURLSessionDownloadTask class]]) {
+        return (NSURLSessionDownloadTask *) task;
+    }
+
+    return nil;
 }
 
-- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate userId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
+- (NSURLSessionUploadTask *)backgroundUploadTaskWithRequest:(NSURLRequest *)request
+                                                   fromFile:(NSURL *)fileURL
+                                               taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
+                                                     userId:(NSString *)userId
+                                                associateId:(NSString *)associateId
+                                                      error:(NSError **)error
 {
     if (request == nil || fileURL == nil || taskDelegate == nil || userId == nil || associateId == nil) {
         return nil;
     }
-    return [self backgroundTaskWithRequest:request orUploadFromFile:fileURL taskDelegate:taskDelegate userId:userId associateId:associateId error:error];
+
+    NSURLSessionTask *task = [self backgroundTaskWithRequest:request
+                                            orUploadFromFile:fileURL
+                                                taskDelegate:taskDelegate
+                                                      userId:userId
+                                                 associateId:associateId
+                                                       error:error];
+    if ([task isKindOfClass:[NSURLSessionUploadTask class]]) {
+        return (NSURLSessionUploadTask *) task;
+    }
+
+    return nil;
 }
 
 - (BOXURLSessionTaskCachedInfo *)sessionTaskCompletedCachedInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
@@ -491,6 +527,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     if (outError != nil) {
         *outError = error;
     }
+    
     return success;
 }
 
@@ -548,21 +585,25 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
 #pragma mark - Private Helpers
 
-- (BOOL)cleanUpBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error
+- (BOOL)cleanUpBackgroundSessionId:(NSString *)backgroundSessionId
+                             error:(NSError **)error
 {
     @synchronized (self.backgroundSessionIdToSessionTask) {
         [self.backgroundSessionIdToSessionTask removeObjectForKey:backgroundSessionId];
     }
+    
     @synchronized (self.backgroundSessionIdToSession) {
         [self.backgroundSessionIdToSession removeObjectForKey:backgroundSessionId];
     }
+    
     return [self.cacheClient cleanUpOnGoingCachedInfoOfBackgroundSessionId:backgroundSessionId error:error];
 }
 
 // Return background session Id and sessionTask for this userId and associateId
 // If we have never seen the combination of userId and associateId before, return nil
 // If we have, backgroundSessionId will not be nil, but sessionTask might be nil if the task has completed
-- (BOXBackgroundSessionIdAndTask *)existingBackgroundSessionTaskGivenUserId:(NSString *)userId associateId:(NSString *)associateId
+- (BOXBackgroundSessionIdAndTask *)existingBackgroundSessionTaskGivenUserId:(NSString *)userId
+                                                                associateId:(NSString *)associateId
 {
     NSError *error = nil;
     BOXBackgroundSessionIdAndTask *returned = nil;
@@ -575,6 +616,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         NSURLSessionTask *task = [self existingBackgroundSessionTaskForSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
         returned = [[BOXBackgroundSessionIdAndTask alloc] initWithBackgroundSessionId:backgroundSessionId sessionTask:task];
     }
+    
     return returned;
 }
 
@@ -597,6 +639,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (outError != nil) {
             *outError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes userInfo:nil];
         }
+        
         return nil;
     }
 
@@ -639,7 +682,12 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 
     if (sessionTask != nil) {
-        BOOL success = [self persistBackgroundSessionTaskWithSessionId:backgroundSessionId sessionTask:sessionTask taskDelegate:taskDelegate userId:userId associateId:associateId error:&error];
+        BOOL success = [self persistBackgroundSessionTaskWithSessionId:backgroundSessionId
+                                                           sessionTask:sessionTask
+                                                          taskDelegate:taskDelegate
+                                                                userId:userId
+                                                           associateId:associateId
+                                                                 error:&error];
         if (success == NO || error != nil) {
             //if we fail to persist data needed to support background session tasks, cancel the one we created and do not return it
             [sessionTask cancel];
@@ -653,27 +701,34 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTask.taskIdentifier destinationFilePath:downloadTaskDelegate.destinationFilePath error:&error];
         }
     }
+    
     if (outError != nil) {
         *outError = error;
     }
+    
     return sessionTask;
 }
 
 - (BOOL)persistBackgroundSessionTaskWithSessionId:(NSString *)backgroundSessionId
                                       sessionTask:(NSURLSessionTask *)task
-                                     taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
+                                     taskDelegate:(id <BOXURLSessionTaskDelegate>)taskDelegate
                                            userId:(NSString *)userId
                                       associateId:(NSString *)associateId
                                             error:(NSError **)error
 {
     if (task == nil || taskDelegate == nil || userId == nil || associateId == nil) {
         if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId userInfo:nil];
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId
+                                            userInfo:nil];
         }
+        
         return NO;
     }
 
-    [self associateSessionId:backgroundSessionId sessionTask:task withTaskDelegate:taskDelegate];
+    [self associateSessionId:backgroundSessionId
+                 sessionTask:task
+            withTaskDelegate:taskDelegate];
 
     //cache background task if have not
     return [self.cacheClient cacheUserId:userId
@@ -686,6 +741,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (id<BOXURLSessionTaskDelegate>)taskDelegateForSessionId:(NSString *)sessionId sessionTaskId:(NSUInteger)sessionTaskId
 {
     id<BOXURLSessionTaskDelegate> taskDelegate = nil;
+    
     if (sessionId == nil) {
         @synchronized (self.progressSessionTaskIdToTaskDelegate) {
             taskDelegate = [self.progressSessionTaskIdToTaskDelegate objectForKey:@(sessionTaskId)];
@@ -695,6 +751,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             taskDelegate = [[self.backgroundSessionIdToSessionTask[sessionId] objectForKey:@(sessionTaskId)] delegate];
         }
     }
+    
     return taskDelegate;
 }
 
@@ -730,6 +787,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     if (error != nil) {
         *error = err;
     }
+    
     return success;
 }
 
@@ -748,6 +806,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId resumeData:resumeData error:&error];
     }
+    
     return success;
 }
 
@@ -919,6 +978,7 @@ didCompleteWithError:(nullable NSError *)error
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier];
         [taskDelegate sessionTask:task didFinishWithResponse:task.response responseData:nil error:error];
     }
+    
     [self deassociateSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier];
 }
 

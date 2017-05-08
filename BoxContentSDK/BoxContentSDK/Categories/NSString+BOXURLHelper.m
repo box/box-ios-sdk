@@ -14,11 +14,8 @@
 {
     if (encoded)
     {
-        string = (__bridge_transfer NSString *) CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                        (__bridge CFStringRef) string,
-                                                                                        NULL,
-                                                                                        (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                        kCFStringEncodingUTF8);
+        NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]"] invertedSet];
+        string = [string stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
     }
 
     return [NSString stringWithString:string];

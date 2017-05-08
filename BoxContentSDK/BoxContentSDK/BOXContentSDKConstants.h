@@ -219,9 +219,13 @@ extern NSString *const BOXAPIParameterKeyMaxHeight;
 extern NSString *const BOXAPIParameterKeyAvatarType;
 
 // Recent Items Parameter Keys
-extern NSString *const BOXAPIParameterKeyMarker;
 extern NSString *const BOXAPIParameterKeyNextMarker;
 extern NSString *const BOXAPIParameterKeyListType;
+
+/*!
+ * @deprecated Use BOXAPIParameterKeyNextMarker instead for Recents API.
+ */
+extern NSString *const BOXAPIParameterKeyMarker;
 
 // Metadata Parameter Key
 extern NSString *const BOXAPIParameterKeyTemplate;

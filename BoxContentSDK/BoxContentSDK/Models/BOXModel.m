@@ -8,7 +8,7 @@
 
 #import "BOXModel.h"
 
-#import "BoxISO8601DateFormatter.h"
+#import "BOXISO8601DateFormatter.h"
 
 @implementation BOXModel
 
