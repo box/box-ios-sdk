@@ -37,10 +37,10 @@
     BOXUserMini *user = [[BOXUserMini alloc] initWithJSON:dictionary[BOXAPIObjectKeyAccessibleBy]];
     [self assertModel:user isEquivalentTo:collaboration.accessibleBy];
 
-    BOXFolderMini *folder = [[BOXFolderMini alloc] initWithJSON:dictionary[BOXAPIObjectKeyItem]];
+    BOXItemMini *item = [[BOXItemMini alloc] initWithJSON:dictionary[BOXAPIObjectKeyItem]];
     
-    [self assertModel:folder isEquivalentTo:collaboration.folder];
-    XCTAssertEqualObjects(@"11446500", collaboration.folder.modelID);
+    [self assertModel:item isEquivalentTo:collaboration.item];
+    XCTAssertEqualObjects(@"11446500", collaboration.item.modelID);
 }
 
 

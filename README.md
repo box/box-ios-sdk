@@ -9,23 +9,26 @@ This SDK makes it easy to use Box's [Content API](https://developers.box.com/doc
 Developer Setup
 ---------------
 * Ensure you have the latest version of [Xcode](https://developer.apple.com/xcode/) installed.
-* We encourage you to use [CocoaPods](http://cocoapods.org/) to import the SDK into your project. CocoaPods is a simple, but powerful dependency management tool. If you do not already use CocoaPods, it's very easy to [get started](http://guides.cocoapods.org/using/getting-started.html).
+* We encourage you to use [Carthage] (https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
 
 Quickstart
 ----------
-Step 1: Add to your Podfile
+Step 1: Install Carthage
+
+[First, install Carthage] (https://github.com/Carthage/Carthage#installing-carthage)
+
+After Carthage is installed, run the following command
+ 
 ```
-pod 'box-ios-sdk'
+carthage update --platform iOS
+
 ```
-Step 2: Install
-```
-pod install
-```
-Step 3: Import
+Step 2: Import the built framework from Carthage/Build/iOS to your project. For more detailed instructions please see the official documentation for [Carthage] (https://github.com/Carthage/Carthage#getting-started)
+
 ```objectivec
-#import <BoxContentSDK/BOXContentSDK.h>
+@import BoxContentSDK;
 ```
-Step 4: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md). 
+Step 3: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md). 
 ```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -33,7 +36,7 @@ Step 4: Set the Box Client ID and Client Secret that you obtain from [creating y
   [BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
 }
 ```
-Step 5: Authenticate a User
+Step 4: Authenticate a User
 ```objectivec
 // This will present the necessary UI for a user to authenticate into Box
 [[BOXContentClient defaultClient] authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {

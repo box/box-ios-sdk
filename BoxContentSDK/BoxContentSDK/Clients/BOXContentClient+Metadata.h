@@ -27,8 +27,8 @@
  *
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  *
- * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
@@ -37,13 +37,15 @@
 /**
  * Generate a request to retrieve metadata information about a file.
  *
- * @param fileID File ID.
- * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param scope        Scope to see which templates are available.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName;
+- (BOXMetadataRequest *)metadataInfoRequestWithFileID:(NSString *)fileID
+                                                scope:(NSString *)scope
+                                             template:(NSString *)templateName;
 
 /**
  * Generate a request to retrieve all metadata information about a file.
@@ -59,23 +61,26 @@
  *
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  *
- * @param fileID File ID.
- * @param template Template information that should be deleted.
+ * @param fileID       File ID.
+ * @param templateName Template information that should be deleted.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID template:(NSString *)templateName;
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID
+                                                     template:(NSString *)templateName;
 
 /**
  * Generate a request to delete metadata information about a file.
  *
- * @param fileID File ID.
- * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param scope        Scope to see which templates are available.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID scope:(NSString *)scope template:(NSString *)templateName;
+- (BOXMetadataDeleteRequest *)metadataDeleteRequestWithFileID:(NSString *) fileID
+                                                        scope:(NSString *)scope
+                                                     template:(NSString *)templateName;
 
 /**
  * Generate a request to create metadata information for a file.
@@ -83,25 +88,30 @@
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  * **NOTE** All objects in tasks must be of type @see BOXMetadataKeyValue.
  *
- * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName tasks:(NSArray *)tasks;
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID
+                                                     template:(NSString *)templateName
+                                                        tasks:(NSArray *)tasks;
 
 /**
  * Generate a request to create metadata information for a file.
  *
  * **NOTE** All objects in tasks must be of type @see BOXMetadataKeyValue.
  *
- * @param fileID File ID.
- * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param scope        Scope to see which templates are available.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName tasks:(NSArray *)tasks;
+- (BOXMetadataCreateRequest *)metadataCreateRequestWithFileID:(NSString *)fileID
+                                                        scope:(NSString *)scope
+                                                     template:(NSString *)templateName
+                                                        tasks:(NSArray *)tasks;
 
 /**
  * Generate a request to update metadata information about a file.
@@ -109,35 +119,41 @@
  * **NOTE** Defaults the scope property to @see BOXAPIScopeEnterprise.
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
- * @param fileID File ID.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID
+                                                     template:(NSString *)templateName
+                                                  updateTasks:(NSArray *)updateTasks;
 
 /**
  * Generate a request to update metadata information about a file.
  *
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
- * @param fileID File ID.
- * @param scope Scope to see which templates are available.
- * @param template Template for metadata in file.
+ * @param fileID       File ID.
+ * @param scope        Scope to see which templates are available.
+ * @param templateName Template for metadata in file.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
+- (BOXMetadataUpdateRequest *)metadataUpdateRequestWithFileID:(NSString *)fileID
+                                                        scope:(NSString *)scope
+                                                     template:(NSString *)templateName
+                                                  updateTasks:(NSArray *)updateTasks;
 
 /**
  * Generate a request to retrieve a metadata template schema within a scope.
  *
- * @param scope Scope to see which templates are available.
- * @param template Template whose schema will be returned.
+ * @param scope        Scope to see which templates are available.
+ * @param templateName Template whose schema will be returned.
  *
  * @return A request that can be customized and then executed.
  */
-- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope template:(NSString *)templateName;
+- (BOXMetadataTemplateRequest *)metadataTemplateInfoRequestWithScope:(NSString *)scope
+                                                            template:(NSString *)templateName;
 
 /**
  * Generate a request to retrieve all metadata template schemas within a scope.

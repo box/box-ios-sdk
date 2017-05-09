@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, BOXAPIBoolean) {
 /**
  *  Initialize with a dictionary from Box API response JSON.
  *
- *  @param Dictionary from Box API response JSON.
+ *  @param JSONData Box API response JSON.
  *
  *  @return The model object.
  */

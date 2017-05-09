@@ -36,9 +36,17 @@
 @synthesize receivedDataBuffer = _receivedDataBuffer;
 @synthesize bytesReceived = _bytesReceived;
 
-- (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
+- (id)initWithURL:(NSURL *)URL
+       HTTPMethod:(NSString *)HTTPMethod
+             body:(NSDictionary *)body
+      queryParams:(NSDictionary *)queryParams
+          session:(BOXAbstractSession *)session
 {
-    self = [super initWithURL:URL HTTPMethod:HTTPMethod body:body queryParams:queryParams session:session];
+    self = [super initWithURL:URL
+                   HTTPMethod:HTTPMethod
+                         body:body
+                  queryParams:queryParams
+                      session:session];
     
     if (self != nil)
     {

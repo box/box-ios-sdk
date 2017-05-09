@@ -21,7 +21,8 @@
 - (void)test_that_request_with_user_id_has_expected_URLRequest
 {
     NSString *folderID = @"123";
-    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithFolderID:folderID];
+    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithItemType:BOXAPIItemTypeFolder
+                                                                                              itemID:folderID];
     NSString *userID = @"36534645";
     request.userID = userID;
     NSString *role = BOXCollaborationRoleEditor;
@@ -42,7 +43,8 @@
 - (void)test_that_request_with_user_login_has_expected_URLRequest
 {
     NSString *folderID = @"123";
-    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithFolderID:folderID];
+    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithItemType:BOXAPIItemTypeFolder
+                                                                                              itemID:folderID];
     NSString *email = @"test@box.com";
     request.login = email;
     NSString *role = BOXCollaborationRoleEditor;
@@ -63,7 +65,8 @@
 - (void)test_that_request_with_group_id_has_expected_URLRequest
 {
     NSString *folderID = @"123";
-    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithFolderID:folderID];
+    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithItemType:BOXAPIItemTypeFolder
+                                                                                              itemID:folderID];
     NSString *groupID = @"545634";
     request.groupID = groupID;
     NSString *role = BOXCollaborationRoleEditor;
@@ -92,7 +95,8 @@
     BOXCollaboration *expectedCollaboration = [[BOXCollaboration alloc] initWithJSON:jsonDictionary];
     
     // Set up BOXCollaborationRequest and attach canned response to it.
-    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithFolderID:expectedCollaboration.folder.modelID];
+    BOXCollaborationCreateRequest *request = [[BOXCollaborationCreateRequest alloc] initWithItemType:BOXAPIItemTypeFolder
+                                                                                              itemID:expectedCollaboration.item.modelID];
     [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
     
     // Peform request and assert that we received the expectedFile as a response.

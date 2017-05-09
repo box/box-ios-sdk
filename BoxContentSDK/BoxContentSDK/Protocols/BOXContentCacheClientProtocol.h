@@ -17,6 +17,7 @@
 
 @class BOXFileRequest;
 @class BOXFileCopyRequest;
+@class BOXFileCollaborationsRequest;
 @class BOXFileDeleteRequest;
 @class BOXFileDownloadRequest;
 @class BOXFileShareRequest;
@@ -183,6 +184,14 @@
 
 - (void)retrieveCacheForFolderCollaborationsRequest:(BOXFolderCollaborationsRequest *)request
                                          completion:(BOXCollaborationArrayCompletionBlock)completionBlock;
+
+- (void)cacheFileCollaborationsRequest:(BOXFileCollaborationsRequest *)request
+                    withCollaborations:(NSArray *)collaborations
+                            nextMarker:(NSString *)nextMarker
+                                 error:(NSError *)error;
+
+- (void)retrieveCacheForFileCollaborationsRequest:(BOXFileCollaborationsRequest *)request
+                                       completion:(BOXFileCollaborationArrayCompletionBlock)completionBlock;
 
 - (void)cacheFolderPaginatedItemsRequest:(BOXFolderPaginatedItemsRequest *)request
                                withItems:(NSArray *)items

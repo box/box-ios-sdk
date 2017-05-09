@@ -28,19 +28,31 @@
 #import "BOXContentClient+Folder.h"
 #import "BOXContentClient+Bookmark.h"
 #import "BOXContentClient+Metadata.h"
+#import "BOXContentClient+RecentItems.h"
 
 // Session
 #import "BOXAuthorizationViewController.h"
 #import "BOXAbstractSession.h"
+#import "BOXAbstractSession_Private.h"
 #import "BOXOAuth2Session.h"
 #import "BOXParallelOAuth2Session.h"
 #import "BOXAppUserSession.h"
 #import "BOXURLSessionManager.h"
 
+// Protocols
+#import "BOXSharedLinkStorageProtocol.h"
+#import "BOXSharedLinkItemSource.h"
+
 // AppToApp
+#import "BOXAppToAppAnnotationBuilder.h"
+#import "BOXAppToAppAnnotationKeys.h"
+#import "BOXAppToAppApplication.h"
+#import "BOXAppToAppFileMetadata.h"
+#import "BOXAppToAppMessage.h"
 
 // Requests
 #import "BOXRequest.h"
+#import "BOXRequest+Metadata.h"
 #import "BOXUserRequest.h"
 #import "BOXUserAvatarRequest.h"
 #import "BOXSharedItemRequest.h"
@@ -55,6 +67,7 @@
 #import "BOXBookmarkCommentsRequest.h"
 #import "BOXFolderRequest.h"
 #import "BOXFileCommentsRequest.h"
+#import "BOXFileCollaborationsRequest.h"
 #import "BOXFileCopyRequest.h"
 #import "BOXFileDeleteRequest.h"
 #import "BOXFileDownloadRequest.h"
@@ -76,6 +89,7 @@
 #import "BOXPreflightCheckRequest.h"
 #import "BOXFolderItemsRequest.h"
 #import "BOXFolderPaginatedItemsRequest.h"
+#import "BOXFolderPaginatedItemsRequest_Private.h"
 #import "BOXCommentRequest.h"
 #import "BOXCommentAddRequest.h"
 #import "BOXCommentDeleteRequest.h"
@@ -102,6 +116,8 @@
 #import "BOXMetadataUpdateRequest.h"
 #import "BOXMetadataTemplateRequest.h"
 #import "BOXStreamOperation.h"
+#import "BOXRecentItemsRequest.h"
+#import "BOXRecentItemsRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
 
 // API Operation queues
@@ -112,6 +128,7 @@
 
 // API Operations
 #import "BOXAPIOperation.h"
+#import "BOXAPIOperation_Private.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
 #import "BOXAPIAuthenticatedOperation.h"
 #import "BOXAPIJSONOperation.h"
@@ -127,8 +144,11 @@
 #import "BOXFileLock.h"
 #import "BOXSharedLink.h"
 #import "BOXUser.h"
+#import "BOXUser_Private.h"
 #import "BOXBookmark.h"
 #import "BOXComment.h"
+#import "BOXRecentItem.h"
+
 #import "BOXCollection.h"
 #import "BOXEvent.h"
 #import "BOXCollaboration.h"
@@ -141,4 +161,21 @@
 #import "BOXMetadataTemplateField.h"
 #import "BOXRepresentation.h"
 
+// Catagories
+#import "NSString+BOXContentSDKAdditions.h"
+#import "NSError+BOXContentSDKAdditions.h"
+#import "UIApplication+ExtensionSafeAdditions.h"
+#import "UIDevice+BOXContentSDKAdditions.h"
+#import "NSString+BOXContentSDKAdditions.h"
+#import "NSURL+BOXURLHelper.h"
+#import "NSString+BOXURLHelper.h"
+#import "NSJSONSerialization+BOXContentSDKAdditions.h"
+#import "NSDate+BOXContentSDKAdditions.h"
 
+// External
+#import "BOXHashHelper.h"
+#import "BOXKeychainItemWrapper.h"
+#import "BOXISO8601DateFormatter.h"
+
+// Others
+#import "BOXSharedLinkHeadersDefaultManager.h"

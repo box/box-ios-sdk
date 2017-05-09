@@ -9,7 +9,7 @@
 #import "BOXContentSDKConstants.h"
 
 @class BOXUserMini;
-@class BOXFolderMini;
+@class BOXItemMini;
 
 /**
  *  Represents a Collaboration.
@@ -52,9 +52,9 @@
 @property (nonatomic, readwrite, strong) NSDate *acknowledgedDate;
 
 /**
- *  The folder that this collaboration applies to.
+ *  The file or folder that this collaboration applies to.
  */
-@property (nonatomic, readwrite, strong) BOXFolderMini *folder;
+@property (nonatomic, readwrite, strong) BOXItemMini *item;
 
 /**
  *  The user or group who the collaboration applies to. Will be either a BOXUserMini or BOXGroup object.

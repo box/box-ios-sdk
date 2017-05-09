@@ -9,12 +9,8 @@
 /* Begin PBXBuildFile section */
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
-		5A322B8B1D9F33718A20259E /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */; };
-		68830E82C1F95E57C70BBB50 /* libPods-shareExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */; };
-		6A6F11F71EC0F42100C2F6C4 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */; };
-		6A6F11FA1EC0F42100C2F6C4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */; };
-		6A6F11FE1EC0F42100C2F6C4 /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6A6F12021EC0F79E00C2F6C4 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
+		591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */; };
+		599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 599B1A911E4BF44200709C27 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
@@ -64,26 +60,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6A00390D1E849BB000CB2B13 /* Embed App Extensions */ = {
+		599B1A951E4BF4DD00709C27 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolderSpec = 10;
 			files = (
-				6A6F11FE1EC0F42100C2F6C4 /* shareExtension.appex in Embed App Extensions */,
+				599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		599B1AA41E4C090A00709C27 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F7521BA19D70999B5C7E0FD /* Pods-shareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-shareExtension/Pods-shareExtension.release.xcconfig"; sourceTree = "<group>"; };
-		36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
-		56BAD24DC21135ED0519AFF7 /* Pods-shareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shareExtension/Pods-shareExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
+		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
 		6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -95,7 +100,6 @@
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
-		91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-shareExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C52D0A931A5C1C7A00CD4B56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,8 +139,6 @@
 		C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxSDKSampleAppTests.m; sourceTree = "<group>"; };
 		E11BED351ADBE5CA00A9216F /* icon-folder-external.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external.png"; sourceTree = "<group>"; };
 		E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external@2x.png"; sourceTree = "<group>"; };
-		ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
-		FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68830E82C1F95E57C70BBB50 /* libPods-shareExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +158,6 @@
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
-				5A322B8B1D9F33718A20259E /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,17 +171,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D013461979FCB58E6009842 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */,
-				36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */,
-				56BAD24DC21135ED0519AFF7 /* Pods-shareExtension.debug.xcconfig */,
-				2F7521BA19D70999B5C7E0FD /* Pods-shareExtension.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		6A6F11F41EC0F42100C2F6C4 /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,13 +186,12 @@
 		C52D0A8D1A5C18ED00CD4B56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				599B1A911E4BF44200709C27 /* BoxContentSDK.framework */,
 				3DD751901AD2FEDE00BA719A /* Photos.framework */,
 				C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */,
 				C540BEB41A5B00BA0060E41B /* Security.framework */,
 				C540BEB21A5B00B40060E41B /* QuartzCore.framework */,
 				C52D0A871A5C18D100CD4B56 /* Foundation.framework */,
-				FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */,
-				91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,7 +229,6 @@
 				6A6F11F41EC0F42100C2F6C4 /* shareExtension */,
 				C5745C251A5AF6CC00824FFA /* Products */,
 				C52D0A8D1A5C18ED00CD4B56 /* Frameworks */,
-				1D013461979FCB58E6009842 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -323,11 +310,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */;
 			buildPhases = (
-				2DBBAE3F695D3F1D5A821860 /* [CP] Check Pods Manifest.lock */,
 				6A6F11EF1EC0F42100C2F6C4 /* Sources */,
 				6A6F11F01EC0F42100C2F6C4 /* Frameworks */,
 				6A6F11F11EC0F42100C2F6C4 /* Resources */,
-				183187FFCD3E85761B45FAC5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,14 +327,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */;
 			buildPhases = (
-				1AC630AA0F479BA941CDFAC9 /* [CP] Check Pods Manifest.lock */,
 				C5745C201A5AF6CC00824FFA /* Sources */,
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
-				A77481B959EA9596086ACBA3 /* [CP] Embed Pods Frameworks */,
-				882FACF6EC21A89613A9E814 /* [CP] Copy Pods Resources */,
-				6A00390D1E849BB000CB2B13 /* Embed App Extensions */,
-				073D9FB3D4EA9D1075D2A3CD /* Embed Pods Frameworks */,
+				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
+				599B1AA41E4C090A00709C27 /* CopyFiles */,
+				591805DF1E4D30C0004E1B28 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -442,7 +425,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A6F11FA1EC0F42100C2F6C4 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,95 +457,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		073D9FB3D4EA9D1075D2A3CD /* Embed Pods Frameworks */ = {
+		591805DF1E4D30C0004E1B28 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/BoxContentSDK.framework",
 			);
-			name = "Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		183187FFCD3E85761B45FAC5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shareExtension/Pods-shareExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1AC630AA0F479BA941CDFAC9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		2DBBAE3F695D3F1D5A821860 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		882FACF6EC21A89613A9E814 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A77481B959EA9596086ACBA3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -572,8 +478,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A6F12021EC0F79E00C2F6C4 /* BOXSampleAppSessionManager.m in Sources */,
-				6A6F11F71EC0F42100C2F6C4 /* ShareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,67 +552,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6A6F12001EC0F42100C2F6C4 /* Debug */ = {
+		591E13CB1EC28C55008AFA5C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56BAD24DC21135ED0519AFF7 /* Pods-shareExtension.debug.xcconfig */;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"BOX_ENABLE_DEBUG_LOGGING=1",
-				);
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public/box-ios-sdk\"",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-				);
-				INFOPLIST_FILE = shareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6A6F12011EC0F42100C2F6C4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F7521BA19D70999B5C7E0FD /* Pods-shareExtension.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_NO_COMMON_BLOCKS = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public/box-ios-sdk\"",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-				);
-				INFOPLIST_FILE = shareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				PRODUCT_NAME = shareExtension;
 			};
 			name = Release;
 		};
-		C5745C451A5AF6CC00824FFA /* Debug */ = {
+		591E13CC1EC28C55008AFA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				PRODUCT_NAME = shareExtension;
+			};
+			name = Debug;
+		};
+		599B1A8E1E4BED8700709C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -726,16 +591,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -743,10 +602,46 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		599B1A8F1E4BED8700709C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
+				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/system",
+					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = BoxContentSDKSampleApp;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+			};
+			name = Debug;
+		};
+		599B1A901E4BED8700709C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = BoxContentSDKSampleAppTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxContentSDKSampleApp.app/BoxContentSDKSampleApp";
 			};
 			name = Debug;
 		};
@@ -786,32 +681,8 @@
 			};
 			name = Release;
 		};
-		C5745C481A5AF6CC00824FFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
-				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/lib/system",
-					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = BoxContentSDKSampleApp;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-			};
-			name = Debug;
-		};
 		C5745C491A5AF6CC00824FFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36BE90D96CBCB2591D350D52 /* Pods-BoxContentSDKSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
@@ -831,25 +702,6 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 			};
 			name = Release;
-		};
-		C5745C4B1A5AF6CC00824FFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = BoxContentSDKSampleAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxContentSDKSampleApp.app/BoxContentSDKSampleApp";
-			};
-			name = Debug;
 		};
 		C5745C4C1A5AF6CC00824FFA /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -872,8 +724,8 @@
 		6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6A6F12001EC0F42100C2F6C4 /* Debug */,
-				6A6F12011EC0F42100C2F6C4 /* Release */,
+				591E13CB1EC28C55008AFA5C /* Release */,
+				591E13CC1EC28C55008AFA5C /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -881,8 +733,8 @@
 		C5745C1F1A5AF6CC00824FFA /* Build configuration list for PBXProject "BoxContentSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C451A5AF6CC00824FFA /* Debug */,
 				C5745C461A5AF6CC00824FFA /* Release */,
+				599B1A8E1E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -890,8 +742,8 @@
 		C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C481A5AF6CC00824FFA /* Debug */,
 				C5745C491A5AF6CC00824FFA /* Release */,
+				599B1A8F1E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -899,8 +751,8 @@
 		C5745C4A1A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5745C4B1A5AF6CC00824FFA /* Debug */,
 				C5745C4C1A5AF6CC00824FFA /* Release */,
+				599B1A901E4BED8700709C27 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

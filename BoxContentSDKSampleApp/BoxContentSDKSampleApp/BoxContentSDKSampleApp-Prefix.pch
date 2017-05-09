@@ -9,7 +9,7 @@
 #ifndef BoxContentSDKSampleApp_BoxSDKSampleApp_Prefix_pch
 #define BoxContentSDKSampleApp_BoxSDKSampleApp_Prefix_pch
 
-#import <BoxContentSDK/BOXContentSDK.h>
+@import BoxContentSDK;
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

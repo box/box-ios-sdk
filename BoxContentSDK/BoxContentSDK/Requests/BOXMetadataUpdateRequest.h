@@ -53,13 +53,15 @@
  * **NOTE** Scope is defaulted to @see BOXAPIScopeEnterprise in this initializer.
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
- * @param fileID The ID of the desired file.
- * @param template The templateKey of the desired metadata information for the given file.
- * @param updateTasks The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
+ * @param fileID       The ID of the desired file.
+ * @param templateName The templateKey of the desired metadata information for the given file.
+ * @param updateTasks  The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
+- (instancetype)initWithFileID:(NSString *)fileID
+                      template:(NSString *)templateName
+                   updateTasks:(NSArray *)updateTasks;
 
 /**
  * Designated initializer. Returns a BOXMetadataUpdateRequest instance that allows users
@@ -67,14 +69,17 @@
  *
  * **NOTE** Must only contain instances of @see BOXMetadataUpdateTask.
  *
- * @param fileID The ID of the desired file.
- * @param scope The scope of the templates desired for creating a metadata template instance.
- * @param template The templateKey of the desired metadata information for the given file.
- * @param updateTasks The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
+ * @param fileID       The ID of the desired file.
+ * @param scope        The scope of the templates desired for creating a metadata template instance.
+ * @param templateName The templateKey of the desired metadata information for the given file.
+ * @param updateTasks  The collection of updates to be applied to the file's metadata with BOXMetadataUpdateTask objects.
  *
  * @return A BOXMetadataUpdateRequest that allows users to update metadata information on a given file.
  */
-- (instancetype)initWithFileID:(NSString *)fileID scope:(NSString *)scope template:(NSString *)templateName updateTasks:(NSArray *)updateTasks;
+- (instancetype)initWithFileID:(NSString *)fileID
+                         scope:(NSString *)scope
+                      template:(NSString *)templateName
+                   updateTasks:(NSArray *)updateTasks;
 
 /**
  * Performs the PUT request to update metadata information.

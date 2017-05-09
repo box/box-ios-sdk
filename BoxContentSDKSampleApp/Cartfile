@@ -1,0 +1,3 @@
+# Box SDKs
+git "git@github.com:box/box-ios-sdk.git" "carthageConversion"
+

@@ -28,7 +28,9 @@
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 
-    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] completion:^(NSError *error) {
+    [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self
+                                                               rootCacheDir:[BOXSampleAppSessionManager rootCacheDir]
+                                                                 completion:^(NSError *error) {
         BOXAssert(error == nil, @"Failed to set up to support background tasks with error %@", error);
     }];
     return YES;

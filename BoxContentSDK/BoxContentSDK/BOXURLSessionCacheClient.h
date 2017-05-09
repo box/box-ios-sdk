@@ -170,7 +170,7 @@
  *
  * @param userId            Id of user started the session task. Cannot be nil
  * @param associateId       Id to associate with the session task. Cannot be nil
- * @param error             error if fail to get
+ * @param outError          error if fail to get
  *
  * @return BOXURLSessionTaskCache   all cached data of the session task
  */
@@ -216,29 +216,35 @@
  *
  * @return BOXURLBackgroundSessionIdAndSessionTaskId associate with userId and associateId
  */
-- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
+- (BOXURLBackgroundSessionIdAndSessionTaskId *)backgroundSessionIdAndSessionTaskIdForUserId:(NSString *)userId
+                                                                                associateId:(NSString *)associateId
+                                                                                      error:(NSError **)error;
 
 /**
  * Call to complete a session task by moving its cached info from on-going session tasks' subdir into users' completed subdir
  *
  * @param backgroundSessionId   Id of the background session
  * @param sessionTaskId         Id of the session task
- * @param error                 error if fail to complete
+ * @param outError              error if fail to complete
  *
  * @return YES if succeeded, NO if failed
  */
-- (BOOL)completeSessionTaskForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)outError;
+- (BOOL)completeSessionTaskForBackgroundSessionId:(NSString *)backgroundSessionId
+                                    sessionTaskId:(NSUInteger)sessionTaskId
+                                            error:(NSError **)outError;
 
 /**
  * Call to complete all on-going session tasks of a background session unless in the excludingSessionTaskIds list
  *
  * @param backgroundSessionId       Id of the background session
  * @param excludingSessionTaskIds   Ids of session tasks to keep
- * @param error                     error if fail to complete any session tasks
+ * @param outError                  error if fail to complete any session tasks
  *
  * @return YES if succeeded, NO if failed to complete any session tasks
  */
-- (BOOL)completeOnGoingSessionTasksForBackgroundSessionId:(NSString *)backgroundSessionId excludingSessionTaskIds:(NSSet *)excludingSessionTaskIds error:(NSError **)outError;
+- (BOOL)completeOnGoingSessionTasksForBackgroundSessionId:(NSString *)backgroundSessionId
+                                  excludingSessionTaskIds:(NSSet *)excludingSessionTaskIds
+                                                    error:(NSError **)outError;
 
 /**
  * Check if session task associated with this userId and associateId has completed
@@ -297,7 +303,7 @@
  * Cache backgroundSessionId from extension into extensionSessions/$backgroundSessionId file
  *
  * @param backgroundSessionId   Id to cache
- * @param error                 error if failed to cache
+ * @param outError                 error if failed to cache
  *
  * @return YES if succeeded, NO if failed
  */

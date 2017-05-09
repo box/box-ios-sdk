@@ -24,3 +24,7 @@ buildArtifacts
 # Pods directories
 BoxContentSDK/Pods
 BoxContentSDKSampleApp/Pods
+
+#Carthage Checkout
+Carthage/
+BOXContentSDKSampleApp/Carthage/
