@@ -20,8 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-#warning Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
-
+#error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
     [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
     
     BOXAuthenticationPickerViewController *authenticationController = [[BOXAuthenticationPickerViewController alloc]init];

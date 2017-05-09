@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */; };
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
+		5A322B8B1D9F33718A20259E /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */; };
+		68830E82C1F95E57C70BBB50 /* libPods-shareExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */; };
 		6A6F11F71EC0F42100C2F6C4 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */; };
 		6A6F11FA1EC0F42100C2F6C4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */; };
 		6A6F11FE1EC0F42100C2F6C4 /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -43,7 +44,6 @@
 		C5745C441A5AF6CC00824FFA /* BoxSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5745C431A5AF6CC00824FFA /* BoxSDKSampleAppTests.m */; };
 		E11BED371ADBE5CA00A9216F /* icon-folder-external.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED351ADBE5CA00A9216F /* icon-folder-external.png */; };
 		E11BED381ADBE5CA00A9216F /* icon-folder-external@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */; };
-		FAC0580298B20A226ACE6304 /* libPods-shareExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C9036C181A113B951DF5B1 /* libPods-shareExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +95,7 @@
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
-		99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9C9036C181A113B951DF5B1 /* libPods-shareExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-shareExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-shareExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C52D0A931A5C1C7A00CD4B56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		E11BED351ADBE5CA00A9216F /* icon-folder-external.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external.png"; sourceTree = "<group>"; };
 		E11BED361ADBE5CA00A9216F /* icon-folder-external@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-folder-external@2x.png"; sourceTree = "<group>"; };
 		ED083FD5B04A84FA084CF4C5 /* Pods-BoxContentSDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxContentSDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoxContentSDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAC0580298B20A226ACE6304 /* libPods-shareExtension.a in Frameworks */,
+				68830E82C1F95E57C70BBB50 /* libPods-shareExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,7 @@
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
-				0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
+				5A322B8B1D9F33718A20259E /* libPods-BoxContentSDKSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +202,8 @@
 				C540BEB41A5B00BA0060E41B /* Security.framework */,
 				C540BEB21A5B00B40060E41B /* QuartzCore.framework */,
 				C52D0A871A5C18D100CD4B56 /* Foundation.framework */,
-				99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */,
-				B9C9036C181A113B951DF5B1 /* libPods-shareExtension.a */,
+				FB3DA3ED51BF0947CD1D9B1C /* libPods-BoxContentSDKSampleApp.a */,
+				91B1CAEE70F657A6D72FE6F4 /* libPods-shareExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -323,12 +323,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */;
 			buildPhases = (
-				2DBBAE3F695D3F1D5A821860 /* Check Pods Manifest.lock */,
+				2DBBAE3F695D3F1D5A821860 /* [CP] Check Pods Manifest.lock */,
 				6A6F11EF1EC0F42100C2F6C4 /* Sources */,
 				6A6F11F01EC0F42100C2F6C4 /* Frameworks */,
 				6A6F11F11EC0F42100C2F6C4 /* Resources */,
-				224CD0D2B6F03C78065C0166 /* Embed Pods Frameworks */,
-				183187FFCD3E85761B45FAC5 /* Copy Pods Resources */,
+				183187FFCD3E85761B45FAC5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -491,14 +490,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BoxContentSDKSampleApp/Pods-BoxContentSDKSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		183187FFCD3E85761B45FAC5 /* Copy Pods Resources */ = {
+		183187FFCD3E85761B45FAC5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,37 +517,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		224CD0D2B6F03C78065C0166 /* Embed Pods Frameworks */ = {
+		2DBBAE3F695D3F1D5A821860 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shareExtension/Pods-shareExtension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2DBBAE3F695D3F1D5A821860 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		882FACF6EC21A89613A9E814 /* [CP] Copy Pods Resources */ = {
@@ -678,6 +662,10 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"BOX_ENABLE_DEBUG_LOGGING=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public/box-ios-sdk\"",
 					"$(inherited)",

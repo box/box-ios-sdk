@@ -6,6 +6,7 @@
 //  Copyright © 2017 Box. All rights reserved.
 //
 
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "ShareViewController.h"
 #import <BoxContentSDK/BOXContentSDK.h>
 #import "BOXSampleAppSessionManager.h"
@@ -20,11 +21,10 @@
 
 - (void)setUp
 {
-#warning Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
-
+#error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
     [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
 
-    [BOXContentClient oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] sharedContainerIdentifier:@"group.com.box.ios.dev" completion:^(NSError *error) {
+    [BOXContentClient oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] sharedContainerIdentifier:@"group.BoxContentSDKSampleApp" completion:^(NSError *error) {
         BOXAssert(error == nil, @"Failed to set up to support background tasks in ext with error %@", error);
     }];
     NSArray *users = [BOXContentClient users];
@@ -46,18 +46,18 @@
     NSString *tempPath = [path stringByAppendingString:@".temp"];
     NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
-    BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:@"6598717269" fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+    BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:BOXAPIFolderIDRoot fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
     uploadRequest.enableCheckForCorruptionInTransit = YES;
 
     [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
-        NSLog(@"----->>>>%lld, %lld", totalBytesTransferred, totalBytesExpectedToTransfer);
+        BOXLog(@"totalBytesTransferred, totalBytesExpectedToTransfer: %lld, %lld", totalBytesTransferred, totalBytesExpectedToTransfer);
     } completion:^(BOXFile *file, NSError *error) {
-        NSLog(@"----->>>>file %@, error %@", file, error);
+        BOXLog(@"upload request finished with file %@, error %@", file, error);
     }];
 }
 
 - (void)didSelectPost {
-    NSString *typeIdentifier = @"public.image";
+    NSString *typeIdentifier = (NSString *)kUTTypeImage;
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
 
