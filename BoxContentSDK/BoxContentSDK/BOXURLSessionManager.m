@@ -167,6 +167,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         //arbitrary maxConcurrentOperationCount given that the number should not go above
         //the max number of concurrent Box api operations
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
         if (self.protocolClasses != nil) {
             sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
         }
@@ -180,9 +181,10 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return _progressSession;
 }
 
-- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
+- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier sharedContainerIdentifier:(NSString *)sharedContainerIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
+    sessionConfig.sharedContainerIdentifier = sharedContainerIdentifier;
     
     if (self.protocolClasses != nil) {
         sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
@@ -218,7 +220,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     //used by main app to create and reuse one background NSURLSession
     //completionBlock will be called once the app's background session is ready
     //to provide background session tasks
-    [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionIdentifierForMainApp delegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
+    [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionIdentifierForMainApp
+                                                             delegate:delegate
+                                                         rootCacheDir:rootCacheDir
+                                            sharedContainerIdentifier:nil
+                                                           completion:completionBlock];
 
     //setting up previously reconnected background sessions
     NSError *error = nil;
@@ -244,23 +250,30 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return [NSString stringWithFormat:@"%@_%@", backgroundSessionIdentifierForMainApp, randomString];
 }
 
-- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)(NSError * _Nullable error))completionBlock
+- (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+                                                       rootCacheDir:(NSString *)rootCacheDir
+                                          sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+                                                         completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
     //this method is expected to call once by an extension to create its own background session
     //if extension restarts, it will get a different backgroundSessionId given that its previous background session
     //will now be handled by the main app (app got woken up about background sessions from a terminated extension)
     NSString *backgroundSessionId = [BOXURLSessionManager randomExtensionBackgroundSessionId];
-    [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
+    [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir sharedContainerIdentifier:sharedContainerIdentifier completion:completionBlock];
 }
 
-- (void)oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId delegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)(NSError * _Nullable error))completionBlock
+- (void)oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId
+                                                           delegate:(id<BOXURLSessionManagerDelegate>)delegate
+                                                       rootCacheDir:(NSString *)rootCacheDir
+                                          sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+                                                         completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
     BOOL firstSetUp = NO;
     @synchronized (self) {
         //create one _backgroundSession which can provide new session tasks for this app
         //or this extension if called from extension
         if (_backgroundSession == nil) {
-            _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:40];
+            _backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId sharedContainerIdentifier:sharedContainerIdentifier maxConcurrentOperationCount:40];
             firstSetUp = YES;
         }
     }
@@ -287,7 +300,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     } else if ([self backgroundSessionForId:backgroundSessionId] == nil) {
         // Have not reconnected to this background session previously, create it and populate its tasks' information
         NSError *error = nil;
-        NSURLSession *backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId maxConcurrentOperationCount:-1];
+        NSURLSession *backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId sharedContainerIdentifier:nil maxConcurrentOperationCount:-1];
         if ([self.cacheClient cacheBackgroundSessionIdFromExtension:backgroundSessionId error:&error] == YES) {
             [self populatePendingSessionTasksForBackgroundSession:backgroundSession completion:completionBlock];
         } else if (completionBlock != nil) {

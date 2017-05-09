@@ -197,6 +197,7 @@
  */
 + (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
                                                        rootCacheDir:(NSString *)rootCacheDir
+                                          sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
                                                          completion:(void (^)(NSError *error))completionBlock;
 
 /**

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C7C38728164375427E7A5F1 /* libPods-BoxContentSDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D73816E259B1D323458F2A /* libPods-BoxContentSDKSampleApp.a */; };
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
 		591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */; };
@@ -44,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6A6F11FC1EC0F42100C2F6C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6F11F21EC0F42100C2F6C4;
+			remoteInfo = shareExtension;
+		};
 		C5745C3E1A5AF6CC00824FFA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
@@ -83,6 +89,13 @@
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
 		591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
 		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		6A6F11F91EC0F42100C2F6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		6A6F11FB1EC0F42100C2F6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A6F12031EC10D1100C2F6C4 /* BoxContentSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoxContentSDKSampleApp.entitlements; sourceTree = "<group>"; };
+		6A6F12041EC10D2400C2F6C4 /* shareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shareExtension.entitlements; sourceTree = "<group>"; };
 		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
@@ -129,6 +142,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6A6F11F01EC0F42100C2F6C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5745C211A5AF6CC00824FFA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +171,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A6F11F41EC0F42100C2F6C4 /* shareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				6A6F12041EC10D2400C2F6C4 /* shareExtension.entitlements */,
+				6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */,
+				6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */,
+				6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */,
+				6A6F11FB1EC0F42100C2F6C4 /* Info.plist */,
+			);
+			path = shareExtension;
+			sourceTree = "<group>";
+		};
 		C52D0A8D1A5C18ED00CD4B56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +226,7 @@
 			children = (
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
+				6A6F11F41EC0F42100C2F6C4 /* shareExtension */,
 				C5745C251A5AF6CC00824FFA /* Products */,
 				C52D0A8D1A5C18ED00CD4B56 /* Frameworks */,
 			);
@@ -204,6 +237,7 @@
 			children = (
 				C5745C241A5AF6CC00824FFA /* BoxContentSDKSampleApp.app */,
 				C5745C3D1A5AF6CC00824FFA /* BoxContentSDKSampleAppTests.xctest */,
+				6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,6 +245,7 @@
 		C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				6A6F12031EC10D1100C2F6C4 /* BoxContentSDKSampleApp.entitlements */,
 				C52D0ACB1A5D4D9600CD4B56 /* Helpers */,
 				C5745C2B1A5AF6CC00824FFA /* BOXSampleAppDelegate.h */,
 				C5745C2C1A5AF6CC00824FFA /* BOXSampleAppDelegate.m */,
@@ -271,6 +306,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6A6F11F21EC0F42100C2F6C4 /* shareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */;
+			buildPhases = (
+				6A6F11EF1EC0F42100C2F6C4 /* Sources */,
+				6A6F11F01EC0F42100C2F6C4 /* Frameworks */,
+				6A6F11F11EC0F42100C2F6C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shareExtension;
+			productName = shareExtension;
+			productReference = 6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5745C471A5AF6CC00824FFA /* Build configuration list for PBXNativeTarget "BoxContentSDKSampleApp" */;
@@ -285,6 +337,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6A6F11FD1EC0F42100C2F6C4 /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKSampleApp;
 			productName = BoxSDKSampleApp;
@@ -318,8 +371,28 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Box;
 				TargetAttributes = {
+					6A6F11F21EC0F42100C2F6C4 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
 					C5745C231A5AF6CC00824FFA = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					C5745C3C1A5AF6CC00824FFA = {
 						CreatedOnToolsVersion = 6.1;
@@ -342,11 +415,19 @@
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C3C1A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
+				6A6F11F21EC0F42100C2F6C4 /* shareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6A6F11F11EC0F42100C2F6C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5745C221A5AF6CC00824FFA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +474,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A6F11EF1EC0F42100C2F6C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5745C201A5AF6CC00824FFA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,6 +512,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6A6F11FD1EC0F42100C2F6C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6F11F21EC0F42100C2F6C4 /* shareExtension */;
+			targetProxy = 6A6F11FC1EC0F42100C2F6C4 /* PBXContainerItemProxy */;
+		};
 		C5745C3F1A5AF6CC00824FFA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */;
@@ -432,6 +525,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A6F11F91EC0F42100C2F6C4 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -451,6 +552,27 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		591E13CB1EC28C55008AFA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				PRODUCT_NAME = shareExtension;
+			};
+			name = Release;
+		};
+		591E13CC1EC28C55008AFA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
+				PRODUCT_NAME = shareExtension;
+			};
+			name = Debug;
+		};
 		599B1A8E1E4BED8700709C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -563,7 +685,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -597,6 +721,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				591E13CB1EC28C55008AFA5C /* Release */,
+				591E13CC1EC28C55008AFA5C /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C5745C1F1A5AF6CC00824FFA /* Build configuration list for PBXProject "BoxContentSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

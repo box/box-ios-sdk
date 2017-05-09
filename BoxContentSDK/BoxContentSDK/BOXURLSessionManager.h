@@ -111,10 +111,14 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @param rootCacheDir      root directory for caching background session tasks' data. Should be the same
  *                          as rootCacheDir for main app to allow main app takes over background session
  *                          tasks created from extensions
- * @param completionBlock       block to execute upon completion of setup, indicating background tasks can be provided
+ * @param sharedContainerIdentifier an identifier for a container shared between the app extension
+ *                                  and its containing app. This is used to configure a background URL session
+ *                                  to be used by an app extension.
+ * @param completionBlock           block to execute upon completion of setup, indicating background tasks can be provided
  */
 - (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
                                                        rootCacheDir:(NSString *)rootCacheDir
+                                          sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
                                                          completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
