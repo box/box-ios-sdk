@@ -43,7 +43,7 @@
 {
     [self setUp];
     NSString *path = url.path;
-    NSString *tempPath = [path stringByAppendingString:@".temp"];
+    NSString *tempPath = [path stringByAppendingPathExtension:@"temp"];
     NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
     BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:BOXAPIFolderIDRoot fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
@@ -57,7 +57,7 @@
 }
 
 - (void)didSelectPost {
-    NSString *typeIdentifier = (NSString *)kUTTypeImage;
+    NSString *typeIdentifier = (__bridge_transfer NSString *)kUTTypeImage;
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
 
