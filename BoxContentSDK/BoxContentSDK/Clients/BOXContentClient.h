@@ -193,7 +193,7 @@
  *                          tasks created from extensions
  * @param completeion       block to execute upon completion of setup, indicating background tasks can be provided
  */
-+ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
++ (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir sharedContainerIdentifier:(NSString *)sharedContainerIdentifier completion:(void (^)(NSError *error))completionBlock;
 
 /**
  * This method needs to be called in the main app to allow it reconnecting to background session tasks created by
