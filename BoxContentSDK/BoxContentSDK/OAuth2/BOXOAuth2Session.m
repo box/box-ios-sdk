@@ -11,7 +11,6 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
-#import "NSString+BOXURLHelper.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXKeychainItemWrapper.h"
 #import "BOXUserRequest.h"
@@ -19,6 +18,7 @@
 #import "NSDate+BOXContentSDKAdditions.h"
 #import "BOXAbstractSession_Private.h"
 #import "BOXContentClient.h"
+#import "BOXURLRequestSerialization.h"
 
 #define keychainRefreshTokenKey @"refresh_token"
 
@@ -178,7 +178,7 @@
 
 - (NSURL *)authorizeURL
 {
-    NSString *encodedRedirectURI = [NSString box_stringWithString:self.redirectURIString URLEncoded:YES];
+    NSString *encodedRedirectURI = BOXPercentEscapedStringFromString(self.redirectURIString);
     NSString *authorizeURLString = [NSString stringWithFormat:
                                     @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
                                     [BOXContentClient APIAuthBaseURL], self.clientID, self.nonce, encodedRedirectURI];
