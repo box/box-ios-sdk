@@ -169,6 +169,22 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
+- (void)test_that_account_deactivated_400_error_triggers_logout_notification
+{
+    BOXRequest *request = [[BOXRequest alloc] init];
+    
+    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"account_deactivated"];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:400 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    [request performRequest];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+
 - (void)test_that_unauthorized_401_error_triggers_logout_notification
 {
     BOXRequest *request = [[BOXRequest alloc] init];

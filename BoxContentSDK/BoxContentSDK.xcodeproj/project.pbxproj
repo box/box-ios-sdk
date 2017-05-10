@@ -35,6 +35,7 @@
 		1522C9061A3FCD3B0075DC7D /* BOXBookmarkDeleteRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C9051A3FCD3B0075DC7D /* BOXBookmarkDeleteRequestTests.m */; };
 		15280E901A392198008D4F5D /* BOXFolderCreateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E8F1A392198008D4F5D /* BOXFolderCreateRequestTests.m */; };
 		15280E9B1A39442E008D4F5D /* BOXFolderUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15280E9A1A39442E008D4F5D /* BOXFolderUpdateRequestTests.m */; };
+		153227041EB11BA100DBD82E /* account_deactivated.json in Resources */ = {isa = PBXBuildFile; fileRef = 153227031EB11BA100DBD82E /* account_deactivated.json */; };
 		153FE6B61B15060A008A1E49 /* user_all_fields_null_enterprise.json in Resources */ = {isa = PBXBuildFile; fileRef = 153FE6B51B15060A008A1E49 /* user_all_fields_null_enterprise.json */; };
 		155170BF1A548D43004C00AF /* file_version.json in Resources */ = {isa = PBXBuildFile; fileRef = 155170BE1A548D43004C00AF /* file_version.json */; };
 		155170C21A548DA3004C00AF /* BOXFileVersionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 155170C11A548DA3004C00AF /* BOXFileVersionTests.m */; };
@@ -570,6 +571,7 @@
 		15280E6B1A37E731008D4F5D /* BOXEnterprise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXEnterprise.m; sourceTree = "<group>"; };
 		15280E8F1A392198008D4F5D /* BOXFolderCreateRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderCreateRequestTests.m; sourceTree = "<group>"; };
 		15280E9A1A39442E008D4F5D /* BOXFolderUpdateRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFolderUpdateRequestTests.m; sourceTree = "<group>"; };
+		153227031EB11BA100DBD82E /* account_deactivated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = account_deactivated.json; sourceTree = "<group>"; };
 		153FE6B51B15060A008A1E49 /* user_all_fields_null_enterprise.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user_all_fields_null_enterprise.json; sourceTree = "<group>"; };
 		155170B81A54872D004C00AF /* BOXFileVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXFileVersion.h; sourceTree = "<group>"; };
 		155170B91A54872D004C00AF /* BOXFileVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileVersion.m; sourceTree = "<group>"; };
@@ -1345,6 +1347,7 @@
 				C55386361C98DF41009E3B90 /* exceeded_device_limits.json */,
 				C55386371C98DF41009E3B90 /* missing_device_id.json */,
 				C55386381C98DF41009E3B90 /* unsupported_device_pinning_runtime.json */,
+				153227031EB11BA100DBD82E /* account_deactivated.json */,
 				C5D91C9F1A41D25B00AC8B8F /* events.json */,
 				C5972A9C1A40978E00225CBA /* event_all_fields.json */,
 				0E5E145E1A40DF7900B205F6 /* collaboration.json */,
@@ -2042,6 +2045,7 @@
 				15F9C4BE1A3B9BAA006EC2EE /* shared_link.json in Resources */,
 				C55386351C98DBF0009E3B90 /* unauthorized_device.json in Resources */,
 				E15596181A3670F00070ED1E /* folder_mini_fields.json in Resources */,
+				153227041EB11BA100DBD82E /* account_deactivated.json in Resources */,
 				E15596171A3670F00070ED1E /* bookmark_mini_fields.json in Resources */,
 				E155961C1A367A6D0070ED1E /* folder_all_fields.json in Resources */,
 				704DBA211AD1F7D8001E28BB /* get_items_3_5_duped.json in Resources */,
