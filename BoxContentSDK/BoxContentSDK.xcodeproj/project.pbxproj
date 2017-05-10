@@ -928,8 +928,6 @@
 		E4CA6F5D173F1C750089680F /* BOXParallelOAuth2Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXParallelOAuth2Session.m; sourceTree = "<group>"; };
 		E4CF273516DC4A5100F5979E /* BOXContentSDKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXContentSDKConstants.h; sourceTree = "<group>"; };
 		E4F4693517264439000CAD86 /* BOXContentSDKErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXContentSDKErrors.h; sourceTree = "<group>"; };
-		E4FAD97C172CE2C50052AD11 /* NSString+BOXURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BOXURLHelper.h"; sourceTree = "<group>"; };
-		E4FAD97D172CE2C50052AD11 /* NSString+BOXURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BOXURLHelper.m"; sourceTree = "<group>"; };
 		E4FAD97E172CE2C50052AD11 /* NSURL+BOXURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+BOXURLHelper.h"; sourceTree = "<group>"; };
 		E4FAD97F172CE2C50052AD11 /* NSURL+BOXURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+BOXURLHelper.m"; sourceTree = "<group>"; };
 		E4FAD982172CE2C50052AD11 /* BOXISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXISO8601DateFormatter.h; sourceTree = "<group>"; };
@@ -1588,8 +1586,6 @@
 				C59605561CC5917E0096DD59 /* NSJSONSerialization+BOXContentSDKAdditions.m */,
 				C59605571CC5917E0096DD59 /* NSString+BOXContentSDKAdditions.h */,
 				C59605581CC5917E0096DD59 /* NSString+BOXContentSDKAdditions.m */,
-				E4FAD97C172CE2C50052AD11 /* NSString+BOXURLHelper.h */,
-				E4FAD97D172CE2C50052AD11 /* NSString+BOXURLHelper.m */,
 				E4FAD97E172CE2C50052AD11 /* NSURL+BOXURLHelper.h */,
 				E4FAD97F172CE2C50052AD11 /* NSURL+BOXURLHelper.m */,
 			);

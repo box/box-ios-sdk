@@ -11,7 +11,7 @@
 #import "BOXOAuth2Session.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
-#import "NSString+BOXURLHelper.h"
+#import "BOXURLRequestSerialization.h"
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -166,8 +166,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (NSURL *)requestURLWithURL:(NSURL *)baseURL queryStringParameters:(NSDictionary *)queryDictionary
 {
-    if ([queryDictionary count] == 0)
-    {
+    if ([queryDictionary count] == 0) {
         return baseURL;
     }
 
@@ -175,8 +174,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     for (id key in queryDictionary)
     {
         id value = [queryDictionary objectForKey:key];
-        NSString *keyString = [NSString box_stringWithString:[key description] URLEncoded:YES];
-        NSString *valueString = [NSString box_stringWithString:[value description] URLEncoded:YES];
+        NSString *keyString = BOXPercentEscapedStringFromString([key description]);
+        NSString *valueString = BOXPercentEscapedStringFromString([value description]);
 
         [queryParts addObject:[NSString stringWithFormat:@"%@=%@", keyString, valueString]];
     }

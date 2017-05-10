@@ -10,11 +10,9 @@
 
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
-#import "NSString+BOXURLHelper.h"
+#import "BOXURLRequestSerialization.h"
 
 #define BOX_OAUTH2_AUTHORIZATION_CODE_GRANT_PARAMETER_COUNT  (5)
-
-
 
 @implementation BOXAPIOAuth2ToJSONOperation
 
@@ -28,8 +26,8 @@
     for (id key in bodyDictionary)
     {
         id value = [bodyDictionary objectForKey:key];
-        NSString *keyString = [NSString box_stringWithString:[key description] URLEncoded:YES];
-        NSString *valueString = [NSString box_stringWithString:[value description] URLEncoded:YES];
+        NSString *keyString = BOXPercentEscapedStringFromString([key description]);
+        NSString *valueString = BOXPercentEscapedStringFromString([value description]);
 
         [multipartParamsParts addObject:[NSString stringWithFormat:@"%@=%@", keyString, valueString]];
     }

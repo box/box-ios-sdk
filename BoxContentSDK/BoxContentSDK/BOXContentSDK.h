@@ -168,7 +168,6 @@
 #import "UIDevice+BOXContentSDKAdditions.h"
 #import "NSString+BOXContentSDKAdditions.h"
 #import "NSURL+BOXURLHelper.h"
-#import "NSString+BOXURLHelper.h"
 #import "NSJSONSerialization+BOXContentSDKAdditions.h"
 #import "NSDate+BOXContentSDKAdditions.h"
 
