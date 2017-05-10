@@ -10,6 +10,10 @@
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
 		6A6208F51EC3C4DF009E167A /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */; };
+		6A6209221EC3C91B009E167A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6209211EC3C91B009E167A /* ShareViewController.m */; };
+		6A6209251EC3C91B009E167A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6209231EC3C91B009E167A /* MainInterface.storyboard */; };
+		6A6209291EC3C91B009E167A /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A62091E1EC3C91B009E167A /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6A62092E1EC3C9A7009E167A /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
@@ -42,11 +46,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A6F11FC1EC0F42100C2F6C4 /* PBXContainerItemProxy */ = {
+		6A6209271EC3C91B009E167A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A6F11F21EC0F42100C2F6C4;
+			remoteGlobalIDString = 6A62091D1EC3C91B009E167A;
 			remoteInfo = shareExtension;
 		};
 		C5745C3E1A5AF6CC00824FFA /* PBXContainerItemProxy */ = {
@@ -69,6 +73,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A62092D1EC3C91B009E167A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6A6209291EC3C91B009E167A /* shareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -77,13 +92,13 @@
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
 		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
 		6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BoxContentSDKSampleApp-bzuvlhmytnstqrhbktltgyrtawhl/Build/Products/Debug-iphonesimulator/BoxContentSDK.framework"; sourceTree = "<group>"; };
-		6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		6A6F11F91EC0F42100C2F6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		6A6F11FB1EC0F42100C2F6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A62091E1EC3C91B009E167A /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6209201EC3C91B009E167A /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		6A6209211EC3C91B009E167A /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		6A6209241EC3C91B009E167A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		6A6209261EC3C91B009E167A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A62092F1EC3C9F7009E167A /* shareExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = shareExtension.entitlements; sourceTree = "<group>"; };
 		6A6F12031EC10D1100C2F6C4 /* BoxContentSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoxContentSDKSampleApp.entitlements; sourceTree = "<group>"; };
-		6A6F12041EC10D2400C2F6C4 /* shareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shareExtension.entitlements; sourceTree = "<group>"; };
 		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
@@ -130,7 +145,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6A6F11F01EC0F42100C2F6C4 /* Frameworks */ = {
+		6A62091B1EC3C91B009E167A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -160,14 +175,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6A6F11F41EC0F42100C2F6C4 /* shareExtension */ = {
+		6A62091F1EC3C91B009E167A /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				6A6F12041EC10D2400C2F6C4 /* shareExtension.entitlements */,
-				6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */,
-				6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */,
-				6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */,
-				6A6F11FB1EC0F42100C2F6C4 /* Info.plist */,
+				6A62092F1EC3C9F7009E167A /* shareExtension.entitlements */,
+				6A6209201EC3C91B009E167A /* ShareViewController.h */,
+				6A6209211EC3C91B009E167A /* ShareViewController.m */,
+				6A6209231EC3C91B009E167A /* MainInterface.storyboard */,
+				6A6209261EC3C91B009E167A /* Info.plist */,
 			);
 			path = shareExtension;
 			sourceTree = "<group>";
@@ -216,7 +231,7 @@
 			children = (
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
-				6A6F11F41EC0F42100C2F6C4 /* shareExtension */,
+				6A62091F1EC3C91B009E167A /* shareExtension */,
 				C5745C251A5AF6CC00824FFA /* Products */,
 				C52D0A8D1A5C18ED00CD4B56 /* Frameworks */,
 			);
@@ -227,7 +242,7 @@
 			children = (
 				C5745C241A5AF6CC00824FFA /* BoxContentSDKSampleApp.app */,
 				C5745C3D1A5AF6CC00824FFA /* BoxContentSDKSampleAppTests.xctest */,
-				6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */,
+				6A62091E1EC3C91B009E167A /* shareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,13 +311,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6A6F11F21EC0F42100C2F6C4 /* shareExtension */ = {
+		6A62091D1EC3C91B009E167A /* shareExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */;
+			buildConfigurationList = 6A62092A1EC3C91B009E167A /* Build configuration list for PBXNativeTarget "shareExtension" */;
 			buildPhases = (
-				6A6F11EF1EC0F42100C2F6C4 /* Sources */,
-				6A6F11F01EC0F42100C2F6C4 /* Frameworks */,
-				6A6F11F11EC0F42100C2F6C4 /* Resources */,
+				6A62091A1EC3C91B009E167A /* Sources */,
+				6A62091B1EC3C91B009E167A /* Frameworks */,
+				6A62091C1EC3C91B009E167A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -310,7 +325,7 @@
 			);
 			name = shareExtension;
 			productName = shareExtension;
-			productReference = 6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */;
+			productReference = 6A62091E1EC3C91B009E167A /* shareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */ = {
@@ -321,11 +336,12 @@
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
+				6A62092D1EC3C91B009E167A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6A6F11FD1EC0F42100C2F6C4 /* PBXTargetDependency */,
+				6A6209281EC3C91B009E167A /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKSampleApp;
 			productName = BoxSDKSampleApp;
@@ -359,7 +375,7 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Box;
 				TargetAttributes = {
-					6A6F11F21EC0F42100C2F6C4 = {
+					6A62091D1EC3C91B009E167A = {
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -403,16 +419,17 @@
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C3C1A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
-				6A6F11F21EC0F42100C2F6C4 /* shareExtension */,
+				6A62091D1EC3C91B009E167A /* shareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6A6F11F11EC0F42100C2F6C4 /* Resources */ = {
+		6A62091C1EC3C91B009E167A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6209251EC3C91B009E167A /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,10 +462,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6A6F11EF1EC0F42100C2F6C4 /* Sources */ = {
+		6A62091A1EC3C91B009E167A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A62092E1EC3C9A7009E167A /* BOXSampleAppSessionManager.m in Sources */,
+				6A6209221EC3C91B009E167A /* ShareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,10 +502,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A6F11FD1EC0F42100C2F6C4 /* PBXTargetDependency */ = {
+		6A6209281EC3C91B009E167A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6A6F11F21EC0F42100C2F6C4 /* shareExtension */;
-			targetProxy = 6A6F11FC1EC0F42100C2F6C4 /* PBXContainerItemProxy */;
+			target = 6A62091D1EC3C91B009E167A /* shareExtension */;
+			targetProxy = 6A6209271EC3C91B009E167A /* PBXContainerItemProxy */;
 		};
 		C5745C3F1A5AF6CC00824FFA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -496,10 +515,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6A6F11F81EC0F42100C2F6C4 /* MainInterface.storyboard */ = {
+		6A6209231EC3C91B009E167A /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6A6F11F91EC0F42100C2F6C4 /* Base */,
+				6A6209241EC3C91B009E167A /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -523,27 +542,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		591E13CB1EC28C55008AFA5C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
-				PRODUCT_NAME = shareExtension;
-			};
-			name = Release;
-		};
-		591E13CC1EC28C55008AFA5C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = BoxContentSDKSampleAppTests/Info.plist;
-				PRODUCT_NAME = shareExtension;
-			};
-			name = Debug;
-		};
 		599B1A8E1E4BED8700709C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -584,7 +582,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
@@ -613,6 +613,58 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = BoxContentSDKSampleAppTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxContentSDKSampleApp.app/BoxContentSDKSampleApp";
+			};
+			name = Debug;
+		};
+		6A62092B1EC3C91B009E167A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6A62092C1EC3C91B009E167A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"BOX_ENABLE_DEBUG_LOGGING=1",
+				);
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -692,11 +744,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6A6F11FF1EC0F42100C2F6C4 /* Build configuration list for PBXNativeTarget "shareExtension" */ = {
+		6A62092A1EC3C91B009E167A /* Build configuration list for PBXNativeTarget "shareExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				591E13CB1EC28C55008AFA5C /* Release */,
-				591E13CC1EC28C55008AFA5C /* Debug */,
+				6A62092B1EC3C91B009E167A /* Release */,
+				6A62092C1EC3C91B009E167A /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
