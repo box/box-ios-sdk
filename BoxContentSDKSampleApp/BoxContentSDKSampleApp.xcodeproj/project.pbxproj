@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
-		591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */; };
-		599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 599B1A911E4BF44200709C27 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6A6208F51EC3C4DF009E167A /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
@@ -66,19 +65,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				599B1A941E4BF4DD00709C27 /* BoxContentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		599B1AA41E4C090A00709C27 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				591805DE1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM in CopyFiles */,
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -87,8 +75,8 @@
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
-		591805DD1E4D3005004E1B28 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
 		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BoxContentSDKSampleApp-bzuvlhmytnstqrhbktltgyrtawhl/Build/Products/Debug-iphonesimulator/BoxContentSDK.framework"; sourceTree = "<group>"; };
 		6A6F11F31EC0F42100C2F6C4 /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6F11F51EC0F42100C2F6C4 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		6A6F11F61EC0F42100C2F6C4 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -153,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6208F51EC3C4DF009E167A /* BoxContentSDK.framework in Frameworks */,
 				3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */,
 				C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */,
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
@@ -186,6 +175,7 @@
 		C52D0A8D1A5C18ED00CD4B56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */,
 				599B1A911E4BF44200709C27 /* BoxContentSDK.framework */,
 				3DD751901AD2FEDE00BA719A /* Photos.framework */,
 				C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */,
@@ -331,8 +321,6 @@
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
-				599B1AA41E4C090A00709C27 /* CopyFiles */,
-				591805DF1E4D30C0004E1B28 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -455,23 +443,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		591805DF1E4D30C0004E1B28 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/BoxContentSDK.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6A6F11EF1EC0F42100C2F6C4 /* Sources */ = {
@@ -614,7 +585,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
