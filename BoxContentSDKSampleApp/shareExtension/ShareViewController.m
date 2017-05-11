@@ -24,7 +24,11 @@
 #error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
     [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
 
-    [BOXContentClient oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:self rootCacheDir:[BOXSampleAppSessionManager rootCacheDir] sharedContainerIdentifier:@"group.BoxContentSDKSampleApp" completion:^(NSError *error) {
+    NSString *sharedContainerIdentifier = @"group.BoxContentSDKSampleApp";
+    [BOXContentClient oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:self
+                                                                     rootCacheDir:[BOXSampleAppSessionManager rootCacheDirGivenSharedContainerId:sharedContainerIdentifier]
+                                                        sharedContainerIdentifier:sharedContainerIdentifier
+                                                                       completion:^(NSError *error) {
         BOXAssert(error == nil, @"Failed to set up to support background tasks in ext with error %@", error);
     }];
     NSArray *users = [BOXContentClient users];
@@ -57,7 +61,7 @@
 }
 
 - (void)didSelectPost {
-    NSString *typeIdentifier = (__bridge_transfer NSString *)kUTTypeImage;
+    NSString *typeIdentifier = (__bridge_transfer NSString *)kUTTypeItem;
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
 

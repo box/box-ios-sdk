@@ -181,7 +181,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return _progressSession;
 }
 
-- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier sharedContainerIdentifier:(NSString *)sharedContainerIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
+- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
     sessionConfig.sharedContainerIdentifier = sharedContainerIdentifier;
@@ -265,7 +265,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (void)oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:(NSString *)backgroundSessionId
                                                            delegate:(id<BOXURLSessionManagerDelegate>)delegate
                                                        rootCacheDir:(NSString *)rootCacheDir
-                                          sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+                                          sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier
                                                          completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
     BOOL firstSetUp = NO;
