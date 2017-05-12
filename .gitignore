@@ -14,6 +14,7 @@ app/build/*
 *.pbxuser
 xcuserdata
 *.xccheckout
+DerivedData/
 
 # Box build artifacts
 buildArtifacts
