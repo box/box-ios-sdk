@@ -132,6 +132,11 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                            completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
 /**
+ * Id of the current background session
+ */
+- (NSString *)backgroundSessionId;
+
+/**
  Create a NSURLSessionDataTask which does not need to be run in background,
  and its completionHandler will be called upon completion of the task
  */

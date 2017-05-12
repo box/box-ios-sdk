@@ -28,6 +28,8 @@
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 
+    [[BOXSampleAppSessionManager defaultManager] setUpForApp];
+
     [BOXContentClient oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:self
                                                                rootCacheDir:[BOXSampleAppSessionManager rootCacheDirGivenSharedContainerId:@"group.BoxContentSDKSampleApp"]
                                                                  completion:^(NSError *error) {

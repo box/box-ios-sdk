@@ -313,6 +313,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
+- (NSString *)backgroundSessionId
+{
+    return self.backgroundSession.configuration.identifier;
+}
+
 - (void)populatePendingSessionTasksForBackgroundSession:(NSURLSession *)backgroundSession completion:(void (^)(NSError *error))completionBlock
 {
     if (backgroundSession == nil) {

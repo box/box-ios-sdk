@@ -24,6 +24,7 @@
 #error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
     [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
 
+    [[BOXSampleAppSessionManager defaultManager] setUpForExtension];
     NSString *sharedContainerIdentifier = @"group.BoxContentSDKSampleApp";
     [BOXContentClient oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:self
                                                                      rootCacheDir:[BOXSampleAppSessionManager rootCacheDirGivenSharedContainerId:sharedContainerIdentifier]
@@ -46,19 +47,31 @@
 - (void)upload:(NSURL *)url
 {
     [self setUp];
-    NSString *path = url.path;
 
+    NSString *backgroundSessionId = [self.client backgroundSessionId];
+    NSString *userId = self.client.user.modelID;
+
+    NSString *path = url.path;
     NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
     NSString *tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];
     NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
-    BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:BOXAPIFolderIDRoot fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
+    BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
+    BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
+    info.folderID = BOXAPIFolderIDRoot;
+    info.uploadFromLocalFilePath = path;
+    info.uploadMultipartCopyFilePath = tempPath;
+
+    [appSessionManager saveBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId withInfo:info];
+
+    BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:info.folderID fromLocalFilePath:info.uploadFromLocalFilePath uploadMultipartCopyFilePath:info.uploadMultipartCopyFilePath associateId:associateId];
     uploadRequest.enableCheckForCorruptionInTransit = YES;
 
     [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
         BOXLog(@"totalBytesTransferred, totalBytesExpectedToTransfer: %lld, %lld", totalBytesTransferred, totalBytesExpectedToTransfer);
     } completion:^(BOXFile *file, NSError *error) {
         BOXLog(@"upload request finished with file %@, error %@", file, error);
+        [appSessionManager removeBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId];
     }];
 }
 

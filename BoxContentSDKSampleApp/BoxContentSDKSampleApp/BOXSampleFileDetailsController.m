@@ -271,7 +271,9 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
     info.fileID = self.itemID;
     info.destinationPath = finalPath;
-    [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
+
+    NSString *backgroundSessionId= [self.client backgroundSessionId];
+    [appSessionManager saveBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId withInfo:info];
 
     // Setup some UI to track our download progress
     BOXFileDownloadRequest *request = [self.client fileDownloadRequestWithID:self.itemID
@@ -291,7 +293,9 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
         float progress = (float)totalBytesTransferred / (float)totalBytesExpectedToTransfer;
         [progressHeaderView.progressView setProgress:progress animated:YES];
     } completion:^(NSError *error) {
-        [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+        NSString *backgroundSessionId= [self.client backgroundSessionId];
+
+        [[BOXSampleAppSessionManager defaultManager] removeBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId];
         self.tableView.tableHeaderView = nil;
         NSString *message = [NSString stringWithFormat:@"Your file %@ in the documents directory.", error == nil ? @"was downloaded" : @"failed to download"];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil

@@ -388,6 +388,11 @@ static BOXContentClient *defaultInstance = nil;
     [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId completion:completionBlock];
 }
 
+- (NSString *)backgroundSessionId
+{
+    return [self.urlSessionManager backgroundSessionId];
+}
+
 #pragma mark - helper methods
 
 - (void)prepareRequest:(BOXRequest *)request

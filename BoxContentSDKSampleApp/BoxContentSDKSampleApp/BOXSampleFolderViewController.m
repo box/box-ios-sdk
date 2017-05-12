@@ -12,6 +12,7 @@
 #import "BOXSampleProgressView.h"
 #import "BOXSampleLibraryAssetViewController.h"
 #import "BOXSampleAppSessionManager.h"
+#import "BOXSampleAppBackgroundTasksRecovery.h"
 #import <Photos/Photos.h>
 
 @interface BOXSampleFolderViewController () <UIAlertViewDelegate>
@@ -43,10 +44,11 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(retrieveItems) forControlEvents:UIControlEventValueChanged];
 
+    UIBarButtonItem *reconnectButton = [[UIBarButtonItem alloc] initWithTitle:@"ReconnectBg" style:UIBarButtonItemStylePlain target:self action:@selector(reconnectBackgroundAction:)];
     UIBarButtonItem *uploadBgButton = [[UIBarButtonItem alloc] initWithTitle:@"UploadBg" style:UIBarButtonItemStylePlain target:self action:@selector(uploadBackgroundAction:)];
     UIBarButtonItem *uploadButton = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStylePlain target:self action:@selector(uploadAction:)];
     UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(importAction:)];
-    self.navigationItem.rightBarButtonItems = @[uploadBgButton, uploadButton, importButton];
+    self.navigationItem.rightBarButtonItems = @[reconnectButton, uploadBgButton, uploadButton, importButton];
     
     // Get the current folder's informations
     BOXFolderRequest *folderRequest = [self.client folderInfoRequestWithID:self.folderID];
@@ -236,6 +238,11 @@
     [self upload:YES];
 }
 
+- (void)reconnectBackgroundAction:(id)sender
+{
+    [BOXSampleAppBackgroundTasksRecovery reconnectBackgroundTasks:self.client];
+}
+
 - (void)upload:(BOOL)background
 {
     // See the progress
@@ -307,6 +314,8 @@
     NSString *tempPath = nil;
     NSString *associateId = nil;
     NSString *userId = self.client.user.modelID;
+    NSString *backgroundSessionId = [self.client backgroundSessionId];
+
     if (background == YES) {
         NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
         tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];
@@ -319,7 +328,7 @@
         info.folderID = self.folderID;
         info.uploadFromLocalFilePath = path;
         info.uploadMultipartCopyFilePath = tempPath;
-        [appSessionManager saveUserId:userId associateId:associateId withInfo:info];
+        [appSessionManager saveBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId withInfo:info];
     }
     if (indexOfFile == NSNotFound) {
         BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:self.folderID fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];
@@ -331,7 +340,7 @@
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
             if (background == YES) {
-                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+                [[BOXSampleAppSessionManager defaultManager] removeBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId];
             }
             completionBlock(file, error);
         }];
@@ -347,7 +356,7 @@
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
             if (background == YES) {
-                [[BOXSampleAppSessionManager defaultManager] removeUserId:userId associateId:associateId];
+                [[BOXSampleAppSessionManager defaultManager] removeBackgroundSessionId:backgroundSessionId userId:userId associateId:associateId];
             }
             completionBlock(file, error);
         }];
