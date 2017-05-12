@@ -222,9 +222,7 @@ extern NSString *const BOXAPIParameterKeyAvatarType;
 extern NSString *const BOXAPIParameterKeyNextMarker;
 extern NSString *const BOXAPIParameterKeyListType;
 
-/*!
- * @deprecated Use BOXAPIParameterKeyNextMarker instead for Recents API.
- */
+__attribute__((deprecated("BOXAPIParameterKeyMarker is deprecated - please use BOXAPIParameterKeyNextMarker instead")))
 extern NSString *const BOXAPIParameterKeyMarker;
 
 // Metadata Parameter Key
