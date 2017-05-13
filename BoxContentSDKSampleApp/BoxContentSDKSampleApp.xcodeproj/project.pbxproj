@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
-		6A6208F51EC3C4DF009E167A /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */; };
 		6A6209221EC3C91B009E167A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6209211EC3C91B009E167A /* ShareViewController.m */; };
 		6A6209251EC3C91B009E167A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6209231EC3C91B009E167A /* MainInterface.storyboard */; };
 		6A6209291EC3C91B009E167A /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A62091E1EC3C91B009E167A /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6A62092E1EC3C9A7009E167A /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
+		6A8A19351EC52CC300FF43CE /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */; };
+		6A8A19361EC52D2A00FF43CE /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
@@ -69,6 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6A8A19361EC52D2A00FF43CE /* BoxContentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,8 +92,6 @@
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
-		599B1A911E4BF44200709C27 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
-		6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BoxContentSDKSampleApp-bzuvlhmytnstqrhbktltgyrtawhl/Build/Products/Debug-iphonesimulator/BoxContentSDK.framework"; sourceTree = "<group>"; };
 		6A62091E1EC3C91B009E167A /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6209201EC3C91B009E167A /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		6A6209211EC3C91B009E167A /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -101,6 +101,7 @@
 		6A6F12031EC10D1100C2F6C4 /* BoxContentSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoxContentSDKSampleApp.entitlements; sourceTree = "<group>"; };
 		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
+		6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BoxContentSDKSampleApp-bzuvlhmytnstqrhbktltgyrtawhl/Build/Products/Debug-iphoneos/BoxContentSDK.framework"; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -149,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A8A19351EC52CC300FF43CE /* BoxContentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +158,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A6208F51EC3C4DF009E167A /* BoxContentSDK.framework in Frameworks */,
 				3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */,
 				C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */,
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
@@ -190,8 +191,7 @@
 		C52D0A8D1A5C18ED00CD4B56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6A6208F41EC3C4DF009E167A /* BoxContentSDK.framework */,
-				599B1A911E4BF44200709C27 /* BoxContentSDK.framework */,
+				6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */,
 				3DD751901AD2FEDE00BA719A /* Photos.framework */,
 				C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */,
 				C540BEB41A5B00BA0060E41B /* Security.framework */,
@@ -592,10 +592,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
-					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
 					"$(inherited)",
+					"$(SRCROOT)/../BoxContentSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp;
 				PRODUCT_NAME = BoxContentSDKSampleApp;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 			};
@@ -631,7 +632,7 @@
 				INFOPLIST_FILE = shareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -662,7 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.box.BoxContentSDKSampleApp.shareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -685,7 +686,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -717,10 +717,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/system",
-					"$(SRCROOT)/BoxContentSDK/build/Debug-iphoneos",
 					"$(inherited)",
+					"$(SRCROOT)/../BoxContentSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp;
 				PRODUCT_NAME = BoxContentSDKSampleApp;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 			};
@@ -730,6 +731,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

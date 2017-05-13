@@ -54,10 +54,10 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
     return defaultManager;
 }
 
-+ (NSString *)rootCacheDir
++ (NSString *)rootCacheDirGivenSharedContainerId:(NSString *)sharedContainerId
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [paths objectAtIndex:0];
+    NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:sharedContainerId];
+    return containerURL.path;
 }
 
 + (NSString *)generateRandomStringWithLength:(NSInteger)length

@@ -21,7 +21,7 @@
 @interface BOXSampleAppSessionManager : NSObject
 
 + (id)defaultManager;
-+ (NSString *)rootCacheDir;
++ (NSString *)rootCacheDirGivenSharedContainerId:(NSString *)sharedContainerId;
 + (NSString *)generateRandomStringWithLength:(NSInteger)length;
 
 - (BOXSampleAppSessionInfo *)getSessionTaskInfoForUserId:(NSString *)userId associateId:(NSString *)associateId;
