@@ -76,7 +76,9 @@
                 //instead of the previous simulator path which no longer exists after app restarts
                 NSString *dummyImageName = @"Logo_Box_Blue_Whitebg_480x480.jpg";
                 NSString *path = [[NSBundle mainBundle] pathForResource:dummyImageName ofType:nil];
-                NSString *tempPath = [path stringByAppendingString:@".temp"];
+
+                NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+                NSString *tempPath = [[BOXSampleAppSessionManager tempCacheDir] stringByAppendingPathComponent:tempFileName];
 
                 if (info.fileID != nil) {
 

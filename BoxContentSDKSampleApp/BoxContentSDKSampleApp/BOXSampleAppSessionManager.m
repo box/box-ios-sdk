@@ -7,6 +7,7 @@
 //
 
 #import "BOXSampleAppSessionManager.h"
+@import BoxContentSDK;
 
 @implementation BOXSampleAppSessionInfo
 
@@ -58,6 +59,23 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
 {
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:sharedContainerId];
     return containerURL.path;
+}
+
++ (NSString *)tempCacheDir
+{
+    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    cachesPath = [cachesPath stringByAppendingPathComponent:@"temp"];
+    BOOL isDir = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:cachesPath isDirectory:&isDir] == NO || isDir == NO) {
+        NSError *error = nil;
+        BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:cachesPath
+                                                 withIntermediateDirectories:YES
+                                                                  attributes:nil
+                                                                       error:&error];
+        BOXAssert(success, @"Failed to create cacheDir %@ with error %@", cachesPath, error);
+    }
+
+    return cachesPath;
 }
 
 + (NSString *)generateRandomStringWithLength:(NSInteger)length

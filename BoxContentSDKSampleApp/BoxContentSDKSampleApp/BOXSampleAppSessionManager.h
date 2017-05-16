@@ -23,6 +23,7 @@
 + (id)defaultManager;
 + (NSString *)rootCacheDirGivenSharedContainerId:(NSString *)sharedContainerId;
 + (NSString *)generateRandomStringWithLength:(NSInteger)length;
++ (NSString *)tempCacheDir;
 
 - (BOXSampleAppSessionInfo *)getSessionTaskInfoForUserId:(NSString *)userId associateId:(NSString *)associateId;
 
