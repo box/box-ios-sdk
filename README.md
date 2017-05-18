@@ -13,24 +13,24 @@ Developer Setup
 
 Quickstart
 ----------
-Step 1: Add to your Cartfile 
+**Step 1**: Add to your Cartfile 
 ```
 git "git@github.com:box/box-ios-sdk.git"
 ```
 
-Step 2: Update
+**Step 2:** Update
 ```
 carthage update --platform iOS
 ```
 
-Step 3: Import the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the official documentation for [Carthage] (https://github.com/Carthage/Carthage#getting-started). 
+**Step 3:** Drag the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the official documentation for [Carthage] (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). 
 
-Step 4: Import
+**Step 4: Import**
 ```objectivec
 @import BoxContentSDK;
 ```
 
-Step 5: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md). 
+**Step 5: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md).**
 ```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,7 +39,7 @@ Step 5: Set the Box Client ID and Client Secret that you obtain from [creating y
 }
 
 ```
-Step 4: Authenticate a User
+**Step 4: Authenticate a User**
 ```objectivec
 // This will present the necessary UI for a user to authenticate into Box
 [[BOXContentClient defaultClient] authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
