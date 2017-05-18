@@ -78,7 +78,7 @@
                 NSString *path = [[NSBundle mainBundle] pathForResource:dummyImageName ofType:nil];
 
                 NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
-                NSString *tempPath = [[BOXSampleAppSessionManager tempCacheDir] stringByAppendingPathComponent:tempFileName];
+                NSString *tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];
 
                 if (info.fileID != nil) {
 

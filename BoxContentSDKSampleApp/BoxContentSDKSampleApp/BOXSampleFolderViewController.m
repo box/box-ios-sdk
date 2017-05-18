@@ -309,7 +309,7 @@
     NSString *userId = self.client.user.modelID;
     if (background == YES) {
         NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
-        tempPath = [[BOXSampleAppSessionManager tempCacheDir] stringByAppendingPathComponent:tempFileName];
+        tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];
         associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
         //save information about this background upload to allow reconnection to it upon app restarts
