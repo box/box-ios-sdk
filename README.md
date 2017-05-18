@@ -23,7 +23,7 @@ git "git@github.com:box/box-ios-sdk.git"
 carthage update --platform iOS
 ```
 
-**Step 3:** Drag the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the official documentation for [Carthage] (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). 
+**Step 3:** Drag the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the official documentation for Carthage (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). 
 
 **Step 4: Import**
 ```objectivec
