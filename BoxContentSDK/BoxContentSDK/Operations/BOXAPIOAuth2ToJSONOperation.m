@@ -11,6 +11,7 @@
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXURLRequestSerialization.h"
+#import "BOXAPIOperation_Private.h"
 
 #define BOX_OAUTH2_AUTHORIZATION_CODE_GRANT_PARAMETER_COUNT  (5)
 
@@ -95,5 +96,20 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:BOXAuthOperationDidCompleteNotification object:self];
 }
 
+- (BOOL)shouldErrorTriggerLogout:(NSError *)error
+{
+    BOOL shouldLogout = [super shouldErrorTriggerLogout:error];
+    
+    // We let the parent class handle most error scenarios, but for token requests specifically, a 403 should trigger a logout.
+    if (!shouldLogout) {
+        if ([error.domain isEqualToString:BOXContentSDKErrorDomain]) {
+            if (error.code == BOXContentSDKAPIErrorForbidden) {
+                shouldLogout = YES;
+            }
+        }
+    }
+    
+    return shouldLogout;
+}
 
 @end
