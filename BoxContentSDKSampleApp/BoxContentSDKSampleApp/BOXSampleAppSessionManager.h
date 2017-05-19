@@ -24,6 +24,8 @@
 + (NSString *)rootCacheDirGivenSharedContainerId:(NSString *)sharedContainerId;
 + (NSString *)generateRandomStringWithLength:(NSInteger)length;
 
+- (NSString *)boxURLRequestCacheDir;
+
 - (BOXSampleAppSessionInfo *)getSessionTaskInfoForUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 - (void)saveUserId:(NSString *)userId associateId:(NSString *)associateId withInfo:(BOXSampleAppSessionInfo *)info;

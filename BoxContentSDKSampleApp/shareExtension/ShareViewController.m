@@ -47,7 +47,9 @@
 {
     [self setUp];
     NSString *path = url.path;
-    NSString *tempPath = [path stringByAppendingPathExtension:@"temp"];
+
+    NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
+    NSString *tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];
     NSString *associateId = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
 
     BOXFileUploadRequest *uploadRequest = [self.client fileUploadRequestInBackgroundToFolderWithID:BOXAPIFolderIDRoot fromLocalFilePath:path uploadMultipartCopyFilePath:tempPath associateId:associateId];

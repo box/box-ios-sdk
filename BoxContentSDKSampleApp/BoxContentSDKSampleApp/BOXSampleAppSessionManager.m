@@ -7,6 +7,7 @@
 //
 
 #import "BOXSampleAppSessionManager.h"
+@import BoxContentSDK;
 
 @implementation BOXSampleAppSessionInfo
 
@@ -37,6 +38,8 @@
 @interface BOXSampleAppSessionManager()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, BOXSampleAppSessionInfo *> *> *userIdToAssociateIdAndSessionTaskInfo;
+
+@property (nonatomic, strong, readwrite) NSString *boxURLRequestCacheDir;
 
 @end
 
@@ -78,9 +81,24 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
     self = [super init];
     if (self != nil) {
         _userIdToAssociateIdAndSessionTaskInfo = [NSMutableDictionary new];
+        _boxURLRequestCacheDir = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"urlRequestCache"];
+        [self setUpCache];
         [self populateSessionTaskIdMap];
     }
     return self;
+}
+
+- (void)setUpCache
+{
+    BOOL isDir = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.boxURLRequestCacheDir isDirectory:&isDir] == NO) {
+        NSError *error = nil;
+        BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:self.boxURLRequestCacheDir
+                                                 withIntermediateDirectories:YES
+                                                                  attributes:nil
+                                                                       error:&error];
+        BOXAssert(success, @"Failed to create cacheDir %@ with error %@", self.boxURLRequestCacheDir, error);
+    }
 }
 
 - (void)saveUserId:(NSString *)userId associateId:(NSString *)associateId withInfo:(BOXSampleAppSessionInfo *)info
