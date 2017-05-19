@@ -39,7 +39,7 @@ carthage update --platform iOS
 }
 
 ```
-**Step 4: Authenticate a User**
+**Step 6: Authenticate a User**
 ```objectivec
 // This will present the necessary UI for a user to authenticate into Box
 [[BOXContentClient defaultClient] authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
