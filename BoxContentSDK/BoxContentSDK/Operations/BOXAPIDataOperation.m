@@ -317,38 +317,41 @@
 - (void)writeDataToOutputStream
 {
     @synchronized (self.receivedDataBuffer) {
-        while ([self.outputStream hasSpaceAvailable])
+
+        if (self.receivedDataBuffer.length == 0)
         {
-            if (self.receivedDataBuffer.length == 0)
-            {
-                self.outputStreamHasSpaceAvailable = YES;
-                return; // bail out because we have nothing to write
+            self.outputStreamHasSpaceAvailable = YES;
+            return; // bail out because we have nothing to write
+        }
+
+        NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes]
+                                                              maxLength:self.receivedDataBuffer.length];
+
+        if (bytesWrittenToOutputStream == -1)
+        {
+            // Failed to write from to output stream. The download cannot be completed
+            BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
+            NSError *streamWriteError = [self.outputStream streamError];
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+            if (streamWriteError) {
+                [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
             }
+            NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                                code:BOXContentSDKStreamErrorWriteFailed
+                                                            userInfo:userInfo];
+            [self abortWithError:downloadError];
 
-            NSInteger bytesWrittenToOutputStream = [self.outputStream write:[self.receivedDataBuffer bytes] maxLength:self.receivedDataBuffer.length];
+            return; // Bail out due to error
+        }
+        else
+        {
+            self.bytesReceived += bytesWrittenToOutputStream;
+            [self performProgressCallback];
 
-            if (bytesWrittenToOutputStream == -1)
-            {
-                // Failed to write from to output stream. The download cannot be completed
-                BOXLog(@"BOXAPIDataOperation failed to write to the output stream. Aborting download.");
-                NSError *streamWriteError = [self.outputStream streamError];
-                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-                if (streamWriteError) {
-                    [userInfo setObject:streamWriteError forKey:NSUnderlyingErrorKey];
-                }
-                NSError *downloadError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKStreamErrorWriteFailed userInfo:userInfo];
-                [self abortWithError:downloadError];
-
-                return; // Bail out due to error
-            }
-            else
-            {
-                self.bytesReceived += bytesWrittenToOutputStream;
-                [self performProgressCallback];
-
-                // truncate buffer by removing the consumed bytes from the front
-                [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream) withBytes:NULL length:0];
-            }
+            // truncate buffer by removing the consumed bytes from the front
+            [self.receivedDataBuffer replaceBytesInRange:NSMakeRange(0, bytesWrittenToOutputStream)
+                                               withBytes:NULL
+                                                  length:0];
         }
     }
 }
