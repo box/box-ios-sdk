@@ -188,8 +188,8 @@
 
 - (void)finish
 {
-    [super finish];
     [self close];
+    [super finish];
 }
 
 - (void)dealloc
