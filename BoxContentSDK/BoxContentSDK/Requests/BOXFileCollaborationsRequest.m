@@ -57,9 +57,9 @@
 {
     if (completionBlock) {
         BOOL isMainThread = [NSThread isMainThread];
-        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+        BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
         
-        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
             NSArray *collaborationDictionaries = [JSONDictionary objectForKey:BOXAPICollectionKeyEntries];
             NSString *nextMarker = JSONDictionary[BOXAPIParameterKeyNextMarker];
             NSMutableArray *collaborations = [NSMutableArray arrayWithCapacity:collaborationDictionaries.count];
@@ -68,7 +68,7 @@
                 [collaborations addObject:[[BOXCollaboration alloc] initWithJSON:collaborationDictionary]];
             }
             
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCollaborationsRequest:withCollaborations:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCollaborationsRequest:withCollaborations:nextMarker:error:)]) {
                 [self.cacheClient cacheFileCollaborationsRequest:self
                                               withCollaborations:collaborations
                                                       nextMarker:nextMarker
@@ -79,9 +79,9 @@
                 completionBlock(collaborations, nextMarker, nil);
             } onMainThread:isMainThread];
         };
-        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
             
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderCollaborationsRequest:withCollaborations:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileCollaborationsRequest:withCollaborations:nextMarker:error:)]) {
                 [self.cacheClient cacheFileCollaborationsRequest:self
                                               withCollaborations:nil
                                                       nextMarker:nil
