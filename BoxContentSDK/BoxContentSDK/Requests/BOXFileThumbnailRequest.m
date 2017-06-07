@@ -10,7 +10,8 @@
 
 @interface BOXFileThumbnailRequest ()
 
-@property (nonatomic, readonly, strong) NSOutputStream *outputStream;
+@property (nonatomic, readwrite, strong) NSString *destinationPath;
+@property (nonatomic, readwrite, strong) NSOutputStream *outputStream;
 
 @end
 
@@ -20,8 +21,17 @@
 {
     if (self = [super init]) {
         _fileID = fileID;
-        _outputStream = [[NSOutputStream alloc] initToMemory];
     }
+
+    return self;
+}
+
+- (instancetype)initWithFileID:(NSString *)fileID localDestination:(NSString *)destinationPath
+{
+    if (self = [self initWithFileID:fileID]) {
+        _destinationPath = destinationPath;
+    }
+
     return self;
 }
 
@@ -31,6 +41,17 @@
         _maxWidth = [NSNumber numberWithInteger:size];
         _maxHeight = [NSNumber numberWithInteger:size];
     }
+
+    return self;
+}
+
+- (instancetype)initWithFileID:(NSString *)fileID size:(BOXThumbnailSize)size localDestination:(NSString *)destinationPath
+{
+    if (self = [self initWithFileID:fileID localDestination:destinationPath]) {
+        _maxWidth = [NSNumber numberWithInteger:size];
+        _maxHeight = [NSNumber numberWithInteger:size];
+    }
+
     return self;
 }
 
@@ -57,6 +78,12 @@
 
     if (self.maxHeight) {
         queryParameters[BOXAPIParameterKeyMaxHeight] = [NSString stringWithFormat:@"%lld", [self.maxHeight longLongValue]];
+    }
+
+    if ([self.destinationPath length] > 0) {
+        self.outputStream = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:self.destinationPath] append:NO];
+    } else {
+        self.outputStream = [[NSOutputStream alloc] initToMemory];
     }
 
     BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
@@ -89,9 +116,15 @@
         }
 
         NSOutputStream *outputStream = self.outputStream;
+        NSString *localPath = self.destinationPath;
         dataOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
-            NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
-            UIImage *image = [UIImage imageWithData:data scale:[[UIScreen mainScreen] scale]];
+            UIImage *image = nil;
+            if ([localPath length] > 0) {
+                image = [UIImage imageWithContentsOfFile:localPath];
+            } else {
+                NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+                image = [UIImage imageWithData:data scale:[[UIScreen mainScreen] scale]];
+            }
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(image, nil);
             } onMainThread:isMainThread];

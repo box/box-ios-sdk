@@ -114,6 +114,16 @@
     return request;
 }
 
+- (BOXFileThumbnailRequest *)fileThumbnailRequestWithID:(NSString *)fileID
+                                                   size:(BOXThumbnailSize)size
+                                        toLocalFilePath:(NSString *)localFilePath
+{
+    BOXFileThumbnailRequest *request = [[BOXFileThumbnailRequest alloc] initWithFileID:fileID size:size localDestination:localFilePath];
+    [self prepareRequest:request];
+
+    return request;
+}
+
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                         fromLocalFilePath:(NSString *)localFilePath
 {
