@@ -209,6 +209,19 @@
                                                    size:(BOXThumbnailSize)size;
 
 /**
+ *  Generate a request to retrieve the thumbnail of a file.
+ *
+ *  @param fileID           File ID.
+ *  @param size             Thumbnail size.
+ *  @param localFilePath    Thumbnail download destination path.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileThumbnailRequest *)fileThumbnailRequestWithID:(NSString *)fileID
+                                                   size:(BOXThumbnailSize)size
+                                        toLocalFilePath:(NSString *)localFilePath;
+
+/**
  *  Generate a request to retrieve information of a file in the trash.
  *
  *  @param fileID File ID.
