@@ -324,6 +324,9 @@
                        BOXAPIObjectKeyLock,
                        BOXAPIObjectKeyExtension,
                        BOXAPIObjectKeyIsPackage,
+                       BOXAPIObjectKeyHasCollaborations,
+                       BOXAPIObjectKeyIsExternallyOwned,
+                       BOXAPIObjectKeyAllowedInviteeRoles,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections];
     return array;

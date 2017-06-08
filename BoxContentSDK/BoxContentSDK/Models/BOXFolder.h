@@ -47,22 +47,6 @@
 @property (nonatomic, readwrite, strong) NSString *syncState;
 
 /**
- *  Whether this folder has at least on collaboration.
- *  Can be synced, not_synced, or partially_synced.
- *  Warning: By default, the Box API does not return this value, and it will be nil.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, assign) BOXAPIBoolean hasCollaborations;
-
-/**
- *  Whether this folder is owned by an external company.
- *  Can be synced, not_synced, or partially_synced.
- *  Warning: By default, the Box API does not return this value, and it will be nil.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, assign) BOXAPIBoolean isExternallyOwned;
-
-/**
  *  Indicates permission for the current user to download items in the folder.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
@@ -82,13 +66,6 @@
  *  You must request it by setting the "fields" of the request.
  */
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canNonOwnersInvite;
-
-/**
- *  The possible roles that can be given to collaborators who are added into this folder.
- *  Warning: By default, the Box API does not return this value, and it will be nil.
- *  You must request it by setting the "fields" of the request.
- */
-@property (nonatomic, readwrite, strong) NSArray *allowedInviteeRoles;
 
 /**
  *  Whether or not the folder is the "root" folder of the user.
