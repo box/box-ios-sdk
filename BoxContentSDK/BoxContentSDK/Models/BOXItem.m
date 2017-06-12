@@ -201,6 +201,30 @@
                                                                          hasExpectedType:[NSArray class]
                                                                              nullAllowed:NO];
         
+        // Parse HasCollaborations
+        NSNumber *hasCollaborations = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyHasCollaborations
+                                                                     inDictionary:JSONResponse
+                                                                  hasExpectedType:[NSNumber class]
+                                                                      nullAllowed:NO];
+        if (hasCollaborations) {
+            self.hasCollaborations = hasCollaborations.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
+        }
+        
+        // Parse IsExternallyOwned
+        NSNumber *isExternallyOwned = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyIsExternallyOwned
+                                                                     inDictionary:JSONResponse
+                                                                  hasExpectedType:[NSNumber class]
+                                                                      nullAllowed:NO];
+        if (isExternallyOwned) {
+            self.isExternallyOwned = isExternallyOwned.boolValue ? BOXAPIBooleanYES : BOXAPIBooleanNO;
+        }
+        
+        // Parse AllowedInviteeRoles
+        self.allowedInviteeRoles = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAllowedInviteeRoles
+                                                                  inDictionary:JSONResponse
+                                                               hasExpectedType:[NSArray class]
+                                                                   nullAllowed:NO];
+        
         // Parse Item Size.
         self.size = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySize
                                                    inDictionary:JSONResponse

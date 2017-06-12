@@ -191,6 +191,29 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean canInviteCollaborator;
 
 /**
+ *  Whether this item has at least on collaboration.
+ *  Can be synced, not_synced, or partially_synced.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean hasCollaborations;
+
+/**
+ *  Whether this folder is owned by an external company.
+ *  Can be synced, not_synced, or partially_synced.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, assign) BOXAPIBoolean isExternallyOwned;
+
+/**
+ *  The possible roles that can be given to collaborators who are added into this folder.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, strong) NSArray *allowedInviteeRoles;
+
+/**
  *  Convenience method to check if the item is a File.
  */
 @property (nonatomic, readonly, assign) BOOL isFile;

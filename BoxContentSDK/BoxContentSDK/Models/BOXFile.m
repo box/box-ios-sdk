@@ -29,9 +29,9 @@
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
 {
     BOXAssert([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeFile], @"Invalid type for object.");
-    
-    if (self = [super initWithJSON:JSONResponse]) {
 
+    if (self = [super initWithJSON:JSONResponse]) {
+        
         // Parse SHA1 Value of File.
         self.SHA1 = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySHA1
                                                    inDictionary:JSONResponse
@@ -94,9 +94,11 @@
                 BOXRepresentation *representation = [[BOXRepresentation alloc] initWithJSON:representationJSON];
                 [tempRepresentations addObject:representation];
             }
+            
             self.representations = [NSArray arrayWithArray:tempRepresentations];
         }
     }
+    
     return self;
 }
 

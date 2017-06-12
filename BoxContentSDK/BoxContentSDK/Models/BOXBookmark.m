@@ -103,4 +103,9 @@
     return BOXAPIBooleanNO;
 }
 
+- (BOXAPIBoolean)hasCollaborations
+{
+    return BOXAPIBooleanNO;
+}
+
 @end
