@@ -15,7 +15,7 @@ Quickstart
 ----------
 **Step 1**: Add to your Cartfile 
 ```
-git "git@github.com:box/box-ios-sdk.git"
+github "box/box-ios-sdk"
 ```
 
 **Step 2:** Update
