@@ -56,7 +56,7 @@
 
 - (void)test_that_full_fields_string_for_files_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,sha1,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,version_number,comment_count,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,sha1,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,version_number,comment_count,permissions,lock,extension,is_package,has_collaborations,is_externally_owned,allowed_invitee_roles,allowed_shared_link_access_levels,collections";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullFileFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }
