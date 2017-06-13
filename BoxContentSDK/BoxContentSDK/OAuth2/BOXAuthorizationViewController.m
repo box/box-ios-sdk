@@ -389,6 +389,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                 }
             });
         }];
+        return NO;
     } else if (![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]]) {
         // If it is an iFrame, there's not much we can do. We have to just let the UIWebView do the load.
         // If we tried to use NSURLSession to make this request, we would not know how to properly populate the
