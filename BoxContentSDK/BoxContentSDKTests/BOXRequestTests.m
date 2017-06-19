@@ -14,13 +14,13 @@
 
 @interface BOXRequest (Testing)
 
-- (void)performRequestWithCompletion:(void (^)())completion;
+- (void)performRequestWithCompletion:(void (^)(void))completion;
 
 @end
 
 @implementation BOXRequest (Testing)
 
-- (void)performRequestWithCompletion:(void (^)())completionBlock {
+- (void)performRequestWithCompletion:(void (^)(void))completionBlock {
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIJSONOperation *operation = (BOXAPIJSONOperation *)self.operation;
     
