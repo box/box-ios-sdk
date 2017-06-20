@@ -80,7 +80,10 @@
     NSString *actualURL = [URLRequest.URL absoluteString];
     XCTAssertEqualObjects(expectedURL, actualURL);
 
-    NSDictionary *expectedHeaders = @{BOXAPIHTTPHeaderIfNoneMatch: [notMatchingEtagsToUse componentsJoinedByString:@","]};
+    NSMutableDictionary *expectedHeaders = [NSMutableDictionary dictionaryWithDictionary:@{BOXAPIHTTPHeaderIfNoneMatch: [notMatchingEtagsToUse componentsJoinedByString:@","]}];
+    
+    [expectedHeaders addEntriesFromDictionary:[self cannedRepresentationHintHeader]];
+    
     XCTAssertEqualObjects(expectedHeaders, [URLRequest allHTTPHeaderFields]);
 }
 

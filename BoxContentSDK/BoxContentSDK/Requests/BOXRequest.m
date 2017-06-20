@@ -34,6 +34,8 @@
 {
     if (_operation == nil) {
         _operation = [self createOperation];
+        [_operation.APIRequest addValue:[BOXRequest representationRequestFields]
+                     forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
     }
 
     return _operation;
@@ -328,6 +330,7 @@
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyAllowedInviteeRoles,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
+                       BOXAPIObjectKeyRepresentations,
                        BOXAPIObjectKeyCollections];
     return array;
 }
@@ -543,6 +546,13 @@
         }
     
     return NO;
+}
+
++ (NSString *)representationRequestFields
+{
+    NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? @"[hls]" : @"[mp4]";
+    
+    return [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false]%@", videoFormat];
 }
 
 @end

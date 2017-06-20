@@ -147,14 +147,14 @@ BOXRepresentationType *const BOXRepresentationType3D = @"3d";
 BOXRepresentationType *const BOXRepresentationTypeFilmstrip = @"filmstrip";
 BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
 BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
-BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
 BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
 
 // Representations URL Template
 NSString *const BOXRepresentationTemplateKeyAccessPath = @"{+asset_path}";
 
 // Representation Template Value
-NSString *const BOXRepresentationTemplateValueHLSManifiest = @"master.m3u8";
+NSString *const BOXRepresentationTemplateValueHLSManifest = @"master.m3u8";
+NSString *const BOXRepresentationTemplateValueMP4 = @"";
 
 // Representation Status
 BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";

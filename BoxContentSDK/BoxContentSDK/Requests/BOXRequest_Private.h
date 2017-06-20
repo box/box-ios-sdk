@@ -88,4 +88,6 @@
 
 + (NSArray *)itemsWithJSON:(NSDictionary *)JSONDictionary;
 
++ (NSString *)representationRequestFields;
+
 @end

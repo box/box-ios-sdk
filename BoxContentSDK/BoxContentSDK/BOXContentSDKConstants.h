@@ -166,7 +166,8 @@ extern BOXRepresentationType *const BOXRepresentationTypeDICOM;
 extern NSString *const BOXRepresentationTemplateKeyAccessPath;
 
 // Representation Template Value
-extern NSString *const BOXRepresentationTemplateValueHLSManifiest;
+extern NSString *const BOXRepresentationTemplateValueHLSManifest;
+extern NSString *const BOXRepresentationTemplateValueMP4;
 
 // Representation Status
 typedef NSString BOXRepresentationStatus;
