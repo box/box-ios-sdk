@@ -125,7 +125,7 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
 - (NSString *)box_stringByAddingURLPercentEscapes
 {
-    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]"] invertedSet];
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]{}"] invertedSet];
     return [self stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
 }
 
