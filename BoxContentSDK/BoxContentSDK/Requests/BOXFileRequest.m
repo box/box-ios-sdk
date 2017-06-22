@@ -51,12 +51,6 @@
 
     if (self.requestAllFileFields) {
         NSString *fieldString = [self fullFileFieldsParameterString];
-        
-        // Include the representations field in the request for high definition video content
-        if (self.requestHighDefinitionVideo == YES) {
-            fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
-        }
-
         queryParameters = @{BOXAPIParameterKeyFields:fieldString};
     }
     
@@ -72,12 +66,6 @@
             [JSONOperation.APIRequest addValue:notMatchingEtag
                             forHTTPHeaderField:BOXAPIHTTPHeaderIfNoneMatch];
         }
-    }
-    
-    // Add the header to specify HLS video streaming contentUrl
-    if (self.requestHighDefinitionVideo == YES) {
-        [JSONOperation.APIRequest addValue:[NSString stringWithFormat:@"[%@]", BOXRepresentationTypeHLS]
-                        forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
     }
     
     [self addSharedLinkHeaderToRequest:JSONOperation.APIRequest];

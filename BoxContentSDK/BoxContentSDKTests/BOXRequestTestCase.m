@@ -172,4 +172,10 @@
     return [expectedItems copy];
 }
 
+- (NSDictionary *)cannedRepresentationHintHeader
+{
+    return [NSDictionary dictionaryWithObject:[BOXRequest representationRequestFields]
+                                       forKey:BOXAPIHTTPHeaderXRepHints];
+}
+
 @end

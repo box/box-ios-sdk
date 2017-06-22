@@ -56,10 +56,15 @@
                                                                  hasExpectedType:[NSString class]
                                                                      nullAllowed:NO];
         if (contentURLString.length > 0) {
+            NSString *replacementString = @"";
+            
             if ([self.type isEqualToString:BOXRepresentationTypeHLS]) {
-                contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:BOXRepresentationTemplateValueHLSManifiest];
+                replacementString = BOXRepresentationTemplateValueHLSManifest;
+            } else if ([self.type isEqualToString:BOXRepresentationTypeMP4]) {
+                replacementString = BOXRepresentationTemplateValueMP4;
             }
-            self.contentURL = [NSURL URLWithString:contentURLString];
+            
+            self.contentURL = [NSURL URLWithString:[contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:replacementString]];
         }
         
         NSDictionary *infoJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInfo

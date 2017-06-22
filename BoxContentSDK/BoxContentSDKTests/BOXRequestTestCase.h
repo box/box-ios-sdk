@@ -35,4 +35,6 @@
 
 - (NSArray *)itemsFromResponseData:(NSData *)data;
 
+- (NSDictionary *)cannedRepresentationHintHeader;
+
 @end
