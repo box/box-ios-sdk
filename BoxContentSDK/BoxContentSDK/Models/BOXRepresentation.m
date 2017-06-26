@@ -56,10 +56,13 @@
                                                                  hasExpectedType:[NSString class]
                                                                      nullAllowed:NO];
         if (contentURLString.length > 0) {
+            NSString *replacementString = @"";
+
             if ([self.type isEqualToString:BOXRepresentationTypeHLS]) {
-                contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:BOXRepresentationTemplateValueHLSManifiest];
+                replacementString = BOXRepresentationTemplateValueHLSManifest;
             }
-            self.contentURL = [NSURL URLWithString:contentURLString];
+            
+            self.contentURL = [NSURL URLWithString:[contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:replacementString]];
         }
         
         NSDictionary *infoJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInfo

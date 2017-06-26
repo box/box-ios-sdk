@@ -9,6 +9,7 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXFile.h"
 #import "BOXSharedLinkHeadersHelper.h"
+#import "UIDevice+BoxContentSDKAdditions.h"
 
 @interface BOXFileRequest ()
 
@@ -76,7 +77,8 @@
     
     // Add the header to specify HLS video streaming contentUrl
     if (self.requestHighDefinitionVideo == YES) {
-        [JSONOperation.APIRequest addValue:[NSString stringWithFormat:@"[%@]", BOXRepresentationTypeHLS]
+        NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? BOXRepresentationTypeHLS : BOXRepresentationTypeMP4;
+        [JSONOperation.APIRequest addValue:[NSString stringWithFormat:@"[%@]", videoFormat]
                         forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
     }
     

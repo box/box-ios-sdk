@@ -154,7 +154,7 @@ BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
 NSString *const BOXRepresentationTemplateKeyAccessPath = @"{+asset_path}";
 
 // Representation Template Value
-NSString *const BOXRepresentationTemplateValueHLSManifiest = @"master.m3u8";
+NSString *const BOXRepresentationTemplateValueHLSManifest = @"master.m3u8";
 
 // Representation Status
 BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";
