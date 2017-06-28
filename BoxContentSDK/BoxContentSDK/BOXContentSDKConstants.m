@@ -170,6 +170,11 @@ BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048 = @"2048
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen = @"open";
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelCollaborators = @"collaborators";
 
+// Item Status
+BOXItemStatus *const BOXItemStatusActive = @"active";
+BOXItemStatus *const BOXItemStatusTrashed = @"trashed";
+BOXItemStatus *const BOXItemStatusDeleted =@"deleted";
+
 // Collection keys
 NSString *const BOXAPICollectionKeyEntries = @"entries";
 NSString *const BOXAPICollectionKeyTotalCount = @"total_count";
