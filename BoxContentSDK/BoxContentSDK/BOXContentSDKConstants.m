@@ -163,6 +163,8 @@ BOXRepresentationStatus *const BOXRepresentationStatusNone = @"none";
 BOXRepresentationStatus *const BOXRepresentationStatusError = @"error";
 
 // Representation Dimensions
+BOXRepresentationDimensions *const BOXRepresentationDimensionsThumbnail = @"320x320";
+BOXRepresentationDimensions *const BOXRepresentationDimensionsLargeThumbnail = @"1024x1024";
 BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024 = @"1024x1024";
 BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048 = @"2048x2048";
 
