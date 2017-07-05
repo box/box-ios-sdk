@@ -177,6 +177,8 @@ extern BOXRepresentationStatus *const BOXRepresentationStatusError;
 
 // Representation dimensions
 typedef NSString BOXRepresentationDimensions;
+extern BOXRepresentationDimensions *const BOXRepresentationDimensionsThumbnail;
+extern BOXRepresentationDimensions *const BOXRepresentationDimensionsLargeThumbnail;
 extern BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024;
 extern BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048;
 

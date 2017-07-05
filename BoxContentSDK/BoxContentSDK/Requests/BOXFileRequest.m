@@ -49,15 +49,19 @@
                                  subID:nil];
 
     NSDictionary *queryParameters = nil;
+    
+    NSString *fieldString = @"";
 
     if (self.requestAllFileFields) {
-        NSString *fieldString = [self fullFileFieldsParameterString];
-        
-        // Include the representations field in the request for high definition video content
-        if (self.requestHighDefinitionVideo == YES) {
-            fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
-        }
-
+        fieldString = [self fullFileFieldsParameterString];
+    }
+    
+    // Include the representations field in the request for high definition video content
+    if (self.requestHighDefinitionVideo || self. requestThumbnailRepresentation || self.requestLargeThumbnailRepresentation) {
+        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
+    }
+    
+    if (fieldString.length > 0) {
         queryParameters = @{BOXAPIParameterKeyFields:fieldString};
     }
     
@@ -76,11 +80,26 @@
     }
     
     // Add the header to specify HLS video streaming contentUrl
+    NSString *representationFields = @"";
+    
     if (self.requestHighDefinitionVideo == YES) {
         NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? BOXRepresentationTypeHLS : BOXRepresentationTypeMP4;
-        [JSONOperation.APIRequest addValue:[NSString stringWithFormat:@"[%@]", videoFormat]
+        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[%@]", videoFormat]];
+    }
+    
+    if (self.requestThumbnailRepresentation) {
+        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[jpg?dimensions=%@&paged=false]", BOXRepresentationDimensionsThumbnail]];
+    }
+    
+    if (self.requestLargeThumbnailRepresentation) {
+        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[jpg?dimensions=%@&paged=false]", BOXRepresentationDimensionsLargeThumbnail]];
+    }
+    
+    if (representationFields.length > 0) {
+        [JSONOperation.APIRequest addValue:representationFields
                         forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
     }
+    
     
     [self addSharedLinkHeaderToRequest:JSONOperation.APIRequest];
 

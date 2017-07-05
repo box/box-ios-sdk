@@ -14,6 +14,10 @@
  */
 @property (nonatomic, readwrite, assign) BOOL requestHighDefinitionVideo;
 
+@property (nonatomic, readwrite, assign) BOOL requestThumbnailRepresentation;
+
+@property (nonatomic, readwrite, assign) BOOL requestLargeThumbnailRepresentation;
+
 @property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;//If-None-Match: Array of strings representing etag values
 
 @property (nonatomic, readonly, strong) NSString *fileID;
