@@ -205,6 +205,29 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     BOXAbstract();
 }
 
+- (void)prepareOperation
+{
+    if (![self isCancelled]) {
+        if (self.sessionTask == nil) {
+            @synchronized(self.session)
+            {
+                //Note: if sessionTask exists, we cannot change its API request
+                //make sure you recreate sessionTask with the new API request if needed
+                [self prepareAPIRequest];
+                self.accessToken = self.session.accessToken;
+            }
+            NSError *error = nil;
+            self.sessionTask = [self createSessionTaskWithError:&error];
+            if (error != nil) {
+                BOXLog(@"BOXAPIOperation %@ failed to create session task to prepare to execute API request", self);
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+                self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateSessionTask userInfo:userInfo];
+            }
+        }
+    }
+}
+
 #pragma mark - Process API call results
 - (void)processResponseData:(NSData *)data
 {
@@ -335,18 +358,18 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
-    if (![self isCancelled])
-    {
-        @synchronized(self.session)
-        {
-            //Note: if sessionTask exists, we cannot change its API request
-            //make sure you recreate sessionTask with the new API request if needed
-            [self prepareAPIRequest];
-            self.accessToken = self.session.accessToken;
+    if (![self isCancelled]) {
+        if (self.sessionTask == nil) {
+            @synchronized(self.session)
+            {
+                //Note: if sessionTask exists, we cannot change its API request
+                //make sure you recreate sessionTask with the new API request if needed
+                [self prepareAPIRequest];
+                self.accessToken = self.session.accessToken;
+            }
         }
 
-        if (self.error == nil && ![self isCancelled])
-        {
+        if (self.error == nil && ![self isCancelled]) {
             NSError *error = nil;
             if (self.sessionTask == nil) {
                 self.sessionTask = [self createSessionTaskWithError:&error];
@@ -360,9 +383,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateSessionTask userInfo:userInfo];
                 [self finish];
             }
-        }
-        else
-        {
+        } else {
             // if an error has already occured, do not attempt to start the API call.
             // short circuit instead.
             if ([self isCancelled] && self.error == nil) {
@@ -370,9 +391,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             }
             [self finish];
         }
-    }
-    else
-    {
+    } else {
         BOXLog(@"BOXAPIOperation %@ was cancelled -- short circuiting and not making API call", self);
         self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
         [self finish];

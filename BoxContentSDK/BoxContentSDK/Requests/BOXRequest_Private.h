@@ -73,6 +73,16 @@
 
 - (BOXAPIOperation *)createOperation;
 
+//NOTE: Only meant to be used in cases where access to the operation and its URL Session Task
+// is needed before actually performing the operation. In that case, the preparation of the URL
+// request and session task which is usually done right before making the network request
+// (including population the API auth headers, etc) is done earlier, so it is expected that
+// the operation will be enqueued immediately after and not held onto for a long time.
+// Specifically it is the authentication token, which has a one hour lifespan, that gets
+// associated with the operation. Thus, if a long delay is expected between setup and
+// execution, it is not recommended to use this method.
+- (void)prepareOperation;
+
 - (NSString *)fullFileFieldsParameterString;
 - (NSString *)fullFolderFieldsParameterString;
 - (NSString *)fullBookmarkFieldsParameterString;
