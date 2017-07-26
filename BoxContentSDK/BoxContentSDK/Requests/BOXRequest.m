@@ -78,6 +78,13 @@
     return nil;
 }
 
+
+- (void)prepareOperation
+{
+    [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
+    [self.operation prepareOperation];
+}
+
 #pragma mark - Convenience Methods
 
 - (NSURL *)URLWithResource:(NSString *)resource
