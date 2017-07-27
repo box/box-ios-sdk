@@ -12,6 +12,7 @@
 #import "BOXHashHelper.h"
 #import "BOXAPIQueueManager.h"
 #import "BOXAbstractSession.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileUploadRequest ()
 

@@ -7,6 +7,7 @@
 #import "BOXFileDownloadRequest.h"
 #import "BOXLog.h"
 #import "BOXAPIDataOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileDownloadRequest ()
 

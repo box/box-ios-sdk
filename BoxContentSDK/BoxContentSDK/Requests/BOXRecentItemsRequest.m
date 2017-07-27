@@ -6,9 +6,11 @@
 //
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXRecentItemsRequest.h"
 #import "BOXRecentItem.h"
 #import "BOXAPIOperation.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXRecentItemsRequest
 

@@ -10,6 +10,7 @@
 #import "BOXContentClient.h"
 #import "BOXEventsAdminLogsRequest.h"
 #import "NSURL+BOXURLHelper.h"
+#import "BOXContentSDKConstants.h"
 
 @interface BOXEventAdminLogsRequestTests : BOXRequestTestCase
 

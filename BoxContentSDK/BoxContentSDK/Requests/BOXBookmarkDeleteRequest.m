@@ -6,6 +6,7 @@
 #import "BOXRequest_Private.h"
 #import "BOXBookmarkDeleteRequest.h"
 #import "BOXAPIJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXBookmarkDeleteRequest ()
 

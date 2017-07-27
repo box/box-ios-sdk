@@ -10,6 +10,7 @@
 #import "BOXFolder.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXSharedLinkHeadersHelper.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFolderRequest ()
 

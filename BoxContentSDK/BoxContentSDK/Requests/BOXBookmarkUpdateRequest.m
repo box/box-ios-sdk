@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXBookmark.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXBookmarkUpdateRequest ()
 @property (nonatomic, readwrite, strong) NSString *bookmarkID;

@@ -3,6 +3,7 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXEventsAdminLogsRequest.h"
 
 @implementation BOXEventsAdminLogsRequest

@@ -1,5 +1,5 @@
 //
-//  BOXClient.m
+//  BOXContentClient.m
 //  BoxContentSDK
 //
 //  Created by Scott Liu on 11/4/14.
@@ -19,6 +19,7 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXSharedLinkHeadersDefaultManager.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXRequest_Private.h"
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
 #import "BOXURLSessionManager.h"
@@ -392,6 +393,7 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)prepareRequest:(BOXRequest *)request
 {
+    //Note: Queue Manager and Cache Client are from the BOXRequest_private header
     request.queueManager = self.queueManager;
     request.cacheClient = self.cacheClient;
     request.userAgentPrefix = self.userAgentPrefix;

@@ -3,7 +3,9 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXPreflightCheckRequest.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXPreflightCheckRequest
 

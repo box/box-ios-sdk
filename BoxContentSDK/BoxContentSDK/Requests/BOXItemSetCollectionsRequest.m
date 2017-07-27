@@ -3,12 +3,14 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXItemSetCollectionsRequest.h"
 
 #import "BOXCollection.h"
 #import "BOXFile.h"
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXItemSetCollectionsRequest()
 

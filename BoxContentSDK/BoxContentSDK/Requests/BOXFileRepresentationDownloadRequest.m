@@ -6,11 +6,12 @@
 //  Copyright © 2017 Box. All rights reserved.
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXFileRepresentationDownloadRequest.h"
 #import "BOXRepresentation.h"
 #import "BOXAPIDataOperation.h"
 #import "BOXLog.h"
-#import "BOXRequest_Private.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileRepresentationDownloadRequest ()
 

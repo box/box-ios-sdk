@@ -260,6 +260,28 @@
     return operation;
 }
 
+- (BOXAPIOAuth2ToJSONOperation *)authOperationWithURL:(NSURL *)URL
+                                           HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                       bodyDictionary:(NSDictionary *)bodyDictionary
+                                     JSONSuccessBlock:(BOXAPIJSONSuccessBlock)successBlock
+                                         failureBlock:(BOXAPIJSONFailureBlock)failureBlock
+{
+    BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:URL
+                                                                                   HTTPMethod:HTTPMethod
+                                                                                         body:bodyDictionary
+                                                                                  queryParams:nil
+                                                                                      session:self.queueManager.session];
+
+    if (successBlock != nil) {
+        operation.success = successBlock;
+    }
+    if (failureBlock != nil) {
+        operation.failure = failureBlock;
+    }
+
+    return operation;
+}
+
 - (NSArray *)fullFolderFieldsArray
 {
     NSArray *array = @[BOXAPIObjectKeyType,

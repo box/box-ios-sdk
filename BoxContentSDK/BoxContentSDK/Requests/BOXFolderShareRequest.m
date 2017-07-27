@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXFolder.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFolderShareRequest ()
 

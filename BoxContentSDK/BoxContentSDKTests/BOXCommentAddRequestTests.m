@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXContentClient.h"
+#import "BOXRequest_Private.h"
 #import "BOXCommentAddRequest.h"
 #import "BOXFile.h"
 #import "BOXComment.h"

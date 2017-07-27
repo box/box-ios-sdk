@@ -7,6 +7,7 @@
 #import "BOXBookmarkCopyRequest.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXBookmark.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXBookmarkCopyRequest
 

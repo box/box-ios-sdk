@@ -7,6 +7,7 @@
 #import "BOXUserAvatarRequest.h"
 
 #import "BOXAPIDataOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXUserAvatarRequest ()
 

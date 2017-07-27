@@ -3,8 +3,8 @@
 //  BoxContentSDK
 //
 
-#import "BOXFolderItemsRequest.h"
 #import "BOXRequest_Private.h"
+#import "BOXFolderItemsRequest.h"
 #import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXBookmark.h"
 #import "BOXFile.h"
@@ -13,6 +13,7 @@
 #import "BOXSharedLinkHeadersHelper.h"
 #import "BOXFolderPaginatedItemsRequest_Private.h"
 #import "BOXContentSDKErrors.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFolderItemsRequest ()
 

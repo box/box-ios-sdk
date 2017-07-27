@@ -9,6 +9,7 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXFile.h"
 #import "BOXSharedLinkHeadersHelper.h"
+#import "BOXDispatchHelper.h"
 #import "UIDevice+BoxContentSDKAdditions.h"
 
 @interface BOXFileRequest ()

@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXFile.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileUpdateRequest ()
 @property (nonatomic, readwrite, strong) NSString *fileID;

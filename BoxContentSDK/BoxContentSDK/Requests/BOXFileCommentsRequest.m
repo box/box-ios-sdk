@@ -3,11 +3,12 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXFileCommentsRequest.h"
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXComment.h"
-#import "BOXRequest_Private.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileCommentsRequest ()
 

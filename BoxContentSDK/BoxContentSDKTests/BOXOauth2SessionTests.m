@@ -95,14 +95,14 @@
     for (NSUInteger i = 0; i < numCredentials; i++)
     {
         BOXOAuth2Session *session = [[BOXOAuth2Session alloc] init];
-        session.refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", i];
-        session.accessToken = [NSString stringWithFormat:@"access_token_%lu", i];
+        session.refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", (unsigned long)i];
+        session.accessToken = [NSString stringWithFormat:@"access_token_%lu", (unsigned long)i];
         session.accessTokenExpiration = [self dateWithoutMillisecondsFromDate:[NSDate date]];
         
         BOXUserMini *user = [[BOXUserMini alloc] init];
-        user.modelID = [NSString stringWithFormat:@"user_id_%lu", i];
-        user.login = [NSString stringWithFormat:@"user_login_%lu", i];
-        user.name = [NSString stringWithFormat:@"user_name_%lu", i];
+        user.modelID = [NSString stringWithFormat:@"user_id_%lu", (unsigned long)i];
+        user.login = [NSString stringWithFormat:@"user_login_%lu", (unsigned long)i];
+        user.name = [NSString stringWithFormat:@"user_name_%lu", (unsigned long)i];
         
         id sessionMock = [OCMockObject partialMockForObject:session];
         [[[sessionMock stub] andReturn:user] user];
@@ -159,12 +159,12 @@
     for (NSUInteger i = 0; i < numCredentials; i++)
     {
         BOXUserMini *user = [[BOXUserMini alloc] init];
-        user.modelID = [NSString stringWithFormat:@"user_id_%lu", i];
-        user.login = [NSString stringWithFormat:@"user_login_%lu", i];
-        user.name = [NSString stringWithFormat:@"user_name_%lu", i];
+        user.modelID = [NSString stringWithFormat:@"user_id_%lu", (unsigned long)i];
+        user.login = [NSString stringWithFormat:@"user_login_%lu", (unsigned long)i];
+        user.name = [NSString stringWithFormat:@"user_name_%lu", (unsigned long)i];
         
-        NSString *refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", i];
-        NSString *accessToken = [NSString stringWithFormat:@"access_token_%lu", i];
+        NSString *refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", (unsigned long)i];
+        NSString *accessToken = [NSString stringWithFormat:@"access_token_%lu", (unsigned long)i];
         NSDate *accessTokenExpiration = [self dateWithoutMillisecondsFromDate:[NSDate date]];
         
         NSDictionary *dictionary = @{@"access_token" : accessToken,
@@ -262,14 +262,14 @@
     for (NSUInteger i = 0; i < numCredentials; i++)
     {
         BOXOAuth2Session *session = [[BOXOAuth2Session alloc] init];
-        session.refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", i];
-        session.accessToken = [NSString stringWithFormat:@"access_token_%lu", i];
+        session.refreshToken = [NSString stringWithFormat:@"refresh_token_%lu", (unsigned long)i];
+        session.accessToken = [NSString stringWithFormat:@"access_token_%lu", (unsigned long)i];
         session.accessTokenExpiration = [NSDate date];
         
         BOXUserMini *user = [[BOXUserMini alloc] init];
-        user.modelID = [NSString stringWithFormat:@"user_id_%lu", i];
-        user.login = [NSString stringWithFormat:@"user_login_%lu", i];
-        user.name = [NSString stringWithFormat:@"user_name_%lu", i];
+        user.modelID = [NSString stringWithFormat:@"user_id_%lu", (unsigned long)i];
+        user.login = [NSString stringWithFormat:@"user_login_%lu", (unsigned long)i];
+        user.name = [NSString stringWithFormat:@"user_name_%lu", (unsigned long)i];
         
         id sessionMock = [OCMockObject partialMockForObject:session];
         [[[sessionMock stub] andReturn:user] user];
