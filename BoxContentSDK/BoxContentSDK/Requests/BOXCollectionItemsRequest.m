@@ -6,6 +6,7 @@
 #import "BOXRequest_Private.h"
 #import "BOXCollectionItemsRequest.h"
 #import "BOXAPIJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXCollectionItemsRequest ()
 

@@ -3,9 +3,11 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXFileCollaborationsRequest.h"
 
 #import "BOXCollaboration.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileCollaborationsRequest ()
 

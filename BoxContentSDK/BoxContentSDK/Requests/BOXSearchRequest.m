@@ -8,6 +8,7 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXMetadataKeyValue.h"
 #import "BOXLog.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXSearchRequest ()
 

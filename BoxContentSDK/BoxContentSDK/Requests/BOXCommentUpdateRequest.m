@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXComment.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXCommentUpdateRequest ()
 

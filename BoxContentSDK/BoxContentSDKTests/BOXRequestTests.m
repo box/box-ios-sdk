@@ -11,6 +11,7 @@
 #import "BOXAPIOperation_Private.h"
 #import "BOXAPIQueueManager.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXRequest (Testing)
 

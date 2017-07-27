@@ -5,7 +5,9 @@
 
 #import "BOXRequest_Private.h"
 #import "BOXFileDeleteRequest.h"
+
 #import "BOXAPIJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileDeleteRequest ()
 

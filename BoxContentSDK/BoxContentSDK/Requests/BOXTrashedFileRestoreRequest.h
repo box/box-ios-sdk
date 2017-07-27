@@ -3,7 +3,7 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest_Private.h"
+#import "BOXRequest.h"
 
 @interface BOXTrashedFileRestoreRequest : BOXRequest
 

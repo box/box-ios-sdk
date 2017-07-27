@@ -6,7 +6,7 @@
 //
 //
 
-#import <BoxContentSDK/BOXContentSDK.h>
+#import "BOXRequest.h"
 
 @interface BOXRecentItemsRequest : BOXRequest
 

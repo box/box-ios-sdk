@@ -7,6 +7,7 @@
 #import "BOXCollaborationUpdateRequest.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXCollaboration.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXCollaborationUpdateRequest ()
 

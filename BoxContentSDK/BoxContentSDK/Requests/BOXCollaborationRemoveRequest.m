@@ -7,6 +7,7 @@
 #import "BOXCollaborationRemoveRequest.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXCollaborationRemoveRequest
 

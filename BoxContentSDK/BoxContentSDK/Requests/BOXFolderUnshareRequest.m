@@ -8,6 +8,7 @@
 
 #import "BOXFolder.h"
 #import "BOXSharedLinkHeadersHelper.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFolderUnshareRequest ()
 

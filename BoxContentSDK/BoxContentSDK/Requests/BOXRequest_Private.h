@@ -6,12 +6,13 @@
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
-#import "BOXDispatchHelper.h"
+#import "BOXStreamOperation.h"
+#import "BOXAPIHeadOperation.h"
+#import "BOXAPIOAuth2ToJSONOperation.h"
+
 #import "BOXRequest.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXContentCacheClientProtocol.h"
-#import "BOXStreamOperation.h"
-#import "BOXAPIHeadOperation.h"
 
 @class BOXAPIQueueManager;
 
@@ -70,6 +71,12 @@
                                bodyDictionary:(NSDictionary *)bodyDictionary
                                  successBlock:(BOXAPIHeaderSuccessBlock)successBlock
                                  failureBlock:(BOXAPIHeaderFailureBlock)failureBlock;
+
+- (BOXAPIOAuth2ToJSONOperation *)authOperationWithURL:(NSURL *)URL
+                                           HTTPMethod:(BOXAPIHTTPMethod *)HTTPMethod
+                                       bodyDictionary:(NSDictionary *)bodyDictionary
+                                     JSONSuccessBlock:(BOXAPIJSONSuccessBlock)successBlock
+                                         failureBlock:(BOXAPIJSONFailureBlock)failureBlock;
 
 - (BOXAPIOperation *)createOperation;
 

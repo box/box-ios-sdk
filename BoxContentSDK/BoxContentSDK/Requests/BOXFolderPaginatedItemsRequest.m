@@ -12,6 +12,7 @@
 #import "BOXFolder.h"
 #import "BOXItem.h"
 #import "BOXSharedLinkHeadersHelper.h"
+#import "BOXDispatchHelper.h"
 #import "BOXFolderPaginatedItemsRequest_Private.h"
 
 @implementation BOXFolderPaginatedItemsRequest

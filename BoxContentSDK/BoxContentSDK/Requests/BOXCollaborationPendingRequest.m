@@ -7,6 +7,7 @@
 #import "BOXCollaborationPendingRequest.h"
 #import "BOXAPIJSONOperation.h"
 #import "BOXCollaboration.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXCollaborationPendingRequest
 

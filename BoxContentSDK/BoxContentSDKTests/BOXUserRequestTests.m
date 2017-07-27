@@ -8,6 +8,7 @@
 
 #import "BOXRequestTestCase.h"
 #import "BOXContentClient.h"
+#import "BOXRequest_Private.h"
 #import "BOXUserRequest.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXUser.h"

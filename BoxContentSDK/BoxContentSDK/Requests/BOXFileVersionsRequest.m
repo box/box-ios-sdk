@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXFileVersion.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileVersionsRequest ()
 

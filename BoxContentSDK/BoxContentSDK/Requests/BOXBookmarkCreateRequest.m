@@ -5,6 +5,7 @@
 
 #import "BOXBookmarkCreateRequest.h"
 #import "BOXBookmark.h"
+#import "BOXDispatchHelper.h"
 
 @implementation BOXBookmarkCreateRequest
 

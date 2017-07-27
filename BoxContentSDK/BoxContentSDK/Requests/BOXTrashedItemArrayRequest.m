@@ -7,6 +7,7 @@
 #import "BOXTrashedItemArrayRequest.h"
 
 #import "BOXAPIJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXTrashedItemArrayRequest ()
 

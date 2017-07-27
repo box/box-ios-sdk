@@ -3,9 +3,11 @@
 //  BoxContentSDK
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXFileVersionPromoteRequest.h"
 
 #import "BOXFileVersion.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileVersionPromoteRequest ()
 

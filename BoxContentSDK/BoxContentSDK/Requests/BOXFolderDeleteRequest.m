@@ -6,6 +6,7 @@
 #import "BOXRequest_Private.h"
 #import "BOXFolderDeleteRequest.h"
 #import "BOXAPIJSONOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFolderDeleteRequest ()
 @property (nonatomic, readwrite, assign) BOOL isTrashed;

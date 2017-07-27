@@ -8,6 +8,7 @@
 
 #import "BOXAPIJSONOperation.h"
 #import "BOXBookmark.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXBookmarkShareRequest ()
 

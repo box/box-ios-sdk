@@ -7,6 +7,7 @@
 #import "BOXFileThumbnailRequest.h"
 
 #import "BOXAPIDataOperation.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXFileThumbnailRequest ()
 

@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
+#import "BOXRequest_Private.h"
 #import "BOXMetadataCreateRequest.h"
 #import "BOXRequest+Metadata.h"
 #import "BOXContentSDKConstants.h"
@@ -13,8 +14,8 @@
 #import "BOXAPIOperation.h"
 #import "BOXMetadataKeyValue.h"
 #import "BOXAPIJSONOperation.h"
-#import "BOXRequest_Private.h"
 #import "BOXMetadata.h"
+#import "BOXDispatchHelper.h"
 
 @interface BOXMetadataCreateRequest ()
 
