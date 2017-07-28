@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import BoxContentSDK;
 
 @interface BOXSampleAppSessionInfo : NSObject <NSCoding>
 
@@ -20,20 +21,31 @@
 
 @interface BOXSampleAppSessionManager : NSObject
 
+@property (nonatomic, strong, readwrite) NSString *backgroundSessionId;
+
 + (id)defaultManager;
 + (NSString *)rootCacheDirGivenSharedContainerId:(NSString *)sharedContainerId;
 + (NSString *)generateRandomStringWithLength:(NSInteger)length;
++ (NSArray *)allExtensionIdsGivenSharedContainerId:(NSString *)sharedContainerId;
 
 - (NSString *)boxURLRequestCacheDir;
 
-- (BOXSampleAppSessionInfo *)getSessionTaskInfoForUserId:(NSString *)userId associateId:(NSString *)associateId;
+- (void)setUpForApp;
 
-- (void)saveUserId:(NSString *)userId associateId:(NSString *)associateId withInfo:(BOXSampleAppSessionInfo *)info;
+- (void)setUpForExtension;
 
-- (void)removeUserId:(NSString *)userId associateId:(NSString *)associateId;
+- (void)removeInfoForExtensionId:(NSString *)extensionId;
 
-- (NSDictionary *)associateIdToSessionTaskInfoForUserId:(NSString *)userId;
+- (void)populateInfoForExtensionId:(NSString *)extensionId;
+
+- (void)saveBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId associateId:(NSString *)associateId withInfo:(BOXSampleAppSessionInfo *)info;
+
+- (void)removeBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId associateId:(NSString *)associateId;
+
+- (NSDictionary *)associateIdToSessionTaskInfoForBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId;
 
 - (void)cleanUpForUserId:(NSString *)userId;
+
+- (NSDictionary *)backgroundSessionIdToAssociateIdAndSessionTaskInfoForUserId:(NSString *)userId;
 
 @end

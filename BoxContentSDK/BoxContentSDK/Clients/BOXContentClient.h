@@ -211,6 +211,11 @@
                                            completion:(void (^)(NSError *error))completionBlock;
 
 /**
+ * Id of the current background session
+ */
+- (NSString *)backgroundSessionId;
+
+/**
  *  API base URLs.
  **/
 + (NSString *)APIBaseURL;
