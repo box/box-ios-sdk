@@ -18,11 +18,23 @@
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs;
 
+- (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
+                                             collectionIDs:(NSArray *)collectionIDs
+                                               associateId:(NSString *)associateId;
+
 - (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
                                                  collectionIDs:(NSArray *)collectionIDs;
 
+- (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
+                                                 collectionIDs:(NSArray *)collectionIDs
+                                                   associateId:(NSString *)associateId;
+
 - (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
                                                      collectionIDs:(NSArray *)collectionIDs;
+
+- (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
+                                                     collectionIDs:(NSArray *)collectionIDs
+                                                       associateId:(NSString *)associateId;
 
 - (void)performRequestWithCompletion:(BOXItemBlock)completionBlock;
 

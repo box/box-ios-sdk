@@ -81,10 +81,28 @@
     self.outputStream.delegate = self;
 }
 
-// BOXAPIDataOperation should only ever be GET requests so there should not be a body
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary
 {
-    return nil;
+    // encode the body dictionary as JSON
+    if (bodyDictionary == nil)
+    {
+        return nil;
+    }
+    
+    NSError *JSONEncodeError = nil;
+    NSData *JSONEncodedBody = [NSJSONSerialization dataWithJSONObject:bodyDictionary options:0 error:&JSONEncodeError];
+    if (self.error == nil && JSONEncodeError != nil)
+    {
+        NSDictionary *userInfo = @{
+                                   NSUnderlyingErrorKey : JSONEncodeError,
+                                   };
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorEncodeFailed userInfo:userInfo];
+        
+        // return dummy JSON body
+        return [NSData data];
+    }
+    
+    return JSONEncodedBody;
 }
 
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError

@@ -37,7 +37,8 @@
  *
  *  @return A request that can be customized and then executed.
  */
-- (BOXCollectionItemsRequest *)collectionItemsRequestWithID:(NSString *)collectionID inRange:(NSRange)range;
+- (BOXCollectionItemsRequest *)collectionItemsRequestWithID:(NSString *)collectionID
+                                                    inRange:(NSRange)range;
 
 /**
  *  Generate a request to set the collections that a file belongs to.
@@ -47,7 +48,21 @@
  *
  *  @return A request that can be customized and then executed.
  */
-- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFileWithID:(NSString *)fileID collectionIDs:(NSArray *)collectionIDs;
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFileWithID:(NSString *)fileID
+                                                       collectionIDs:(NSArray *)collectionIDs;
+
+
+/**
+ *  Generate a background request to set the collections that a file belongs to.
+ *
+ *  @param fileID File ID.
+ *  @param collectionIDs Array of Collection IDs.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *  @return A request that can be customized and then executed
+ */
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFileWithID:(NSString *)fileID
+                                                       collectionIDs:(NSArray *)collectionIDs
+                                                         associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to set the collections that a folder belongs to.
@@ -57,7 +72,20 @@
  *
  *  @return A request that can be customized and then executed.
  */
-- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFolderWithID:(NSString *)folderID collectionIDs:(NSArray *)collectionIDs;
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFolderWithID:(NSString *)folderID
+                                                         collectionIDs:(NSArray *)collectionIDs;
+
+/**
+ *  Generate a background request to set the collections that a folder belongs to.
+ *
+ *  @param folderID Folder ID.
+ *  @param collectionIDs Array of Collection IDs.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *  @return A request that can be customized and then executed
+ */
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFolderWithID:(NSString *)folderID
+                                                       collectionIDs:(NSArray *)collectionIDs
+                                                         associateId:(NSString *)associateId;
 
 /**
  *  Generate a request to set the collections that a bookmark belongs to.
@@ -67,6 +95,19 @@
  *
  *  @return A request that can be customized and then executed.
  */
-- (BOXItemSetCollectionsRequest *)collectionsSetRequestForBookmarkWithID:(NSString *)bookmarkID collectionIDs:(NSArray *)collectionIDs;
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForBookmarkWithID:(NSString *)bookmarkID
+                                                           collectionIDs:(NSArray *)collectionIDs;
+
+/**
+ *  Generate a background request to set the collections that a bookmark belongs to.
+ *
+ *  @param bookmarkID Bookmark ID.
+ *  @param collectionIDs Array of Collection IDs.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *  @return A request that can be customized and then executed
+ */
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForBookmarkWithID:(NSString *)bookmarkID
+                                                           collectionIDs:(NSArray *)collectionIDs
+                                                             associateId:(NSString *)associateId;
 
 @end

@@ -9,15 +9,18 @@
 /* Begin PBXBuildFile section */
 		3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD751901AD2FEDE00BA719A /* Photos.framework */; };
 		3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */; };
-		6A4B3B901ECE75CF00EA46A2 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F56A61ECE34FD0032208F /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A6209221EC3C91B009E167A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6209211EC3C91B009E167A /* ShareViewController.m */; };
 		6A6209251EC3C91B009E167A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6209231EC3C91B009E167A /* MainInterface.storyboard */; };
 		6A6209291EC3C91B009E167A /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A62091E1EC3C91B009E167A /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6A62092E1EC3C9A7009E167A /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
-		6A8A19351EC52CC300FF43CE /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
+		A5A7C3471F2F040F00E84E44 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A7C3461F2F040E00E84E44 /* BoxContentSDK.framework.dSYM */; };
+		A5FCBE501F2EB3AC00B750BF /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */; };
+		A5FCBE511F2EB3AD00B750BF /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FCBE521F2EB98E00B750BF /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
+		A5FCBE551F2EC58700B750BF /* BOXItemCollectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCBE541F2EC58700B750BF /* BOXItemCollectionService.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
 		C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */; };
 		C52D0A941A5C1C7A00CD4B56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52D0A921A5C1C7A00CD4B56 /* Main.storyboard */; };
@@ -33,7 +36,6 @@
 		C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB21A5B00B40060E41B /* QuartzCore.framework */; };
 		C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C540BEB41A5B00BA0060E41B /* Security.framework */; };
 		C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C548519A1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m */; };
-		C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
 		C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE31F1A5ED76400032032 /* BOXSampleProgressView.m */; };
 		C55FE3221A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55FE3211A5EDA9F00032032 /* Logo_Box_Blue_Whitebg_480x480.jpg */; };
 		C5745C2A1A5AF6CC00824FFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5745C291A5AF6CC00824FFA /* main.m */; };
@@ -47,27 +49,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A3F56A31ECE34FD0032208F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15605D851A20132200C5EE5A;
-			remoteInfo = BoxContentSDKTests;
-		};
-		6A3F56A51ECE34FD0032208F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 599B195A1E4BE65700709C27;
-			remoteInfo = BoxContentSDK;
-		};
-		6A3F56A71ECE351C0032208F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 599B19591E4BE65700709C27;
-			remoteInfo = BoxContentSDK;
-		};
 		6A6209271EC3C91B009E167A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
@@ -91,7 +72,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6A4B3B901ECE75CF00EA46A2 /* BoxContentSDK.framework in Embed Frameworks */,
+				A5FCBE511F2EB3AD00B750BF /* BoxContentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,13 +88,22 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5A7C3451F2F03EB00E84E44 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				A5A7C3471F2F040F00E84E44 /* BoxContentSDK.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
-		6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoxContentSDK.xcodeproj; path = ../BoxContentSDK/BoxContentSDK.xcodeproj; sourceTree = "<group>"; };
 		6A62091E1EC3C91B009E167A /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6209201EC3C91B009E167A /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		6A6209211EC3C91B009E167A /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -123,9 +113,13 @@
 		6A6F12031EC10D1100C2F6C4 /* BoxContentSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BoxContentSDKSampleApp.entitlements; sourceTree = "<group>"; };
 		6A86C5DC1E298015008F6243 /* BOXSampleAppSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleAppSessionManager.h; sourceTree = "<group>"; };
 		6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleAppSessionManager.m; sourceTree = "<group>"; };
-		6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BoxContentSDKSampleApp-bzuvlhmytnstqrhbktltgyrtawhl/Build/Products/Debug-iphoneos/BoxContentSDK.framework"; sourceTree = "<group>"; };
 		86BA52D21B2A0950005DC854 /* BOXAuthenticationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXAuthenticationPickerViewController.h; sourceTree = "<group>"; };
 		86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAuthenticationPickerViewController.m; sourceTree = "<group>"; };
+		A5A7C3461F2F040E00E84E44 /* BoxContentSDK.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BoxContentSDK.framework.dSYM; path = Carthage/Build/iOS/BoxContentSDK.framework.dSYM; sourceTree = "<group>"; };
+		A5FCBC511F2EAFF200B750BF /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		A5FCBE531F2EC58700B750BF /* BOXItemCollectionService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXItemCollectionService.h; sourceTree = "<group>"; };
+		A5FCBE541F2EC58700B750BF /* BOXItemCollectionService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXItemCollectionService.m; sourceTree = "<group>"; };
 		C52D0A871A5C18D100CD4B56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C52D0A931A5C1C7A00CD4B56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -172,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A8A19351EC52CC300FF43CE /* BoxContentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +176,7 @@
 				3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */,
 				C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */,
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
+				A5FCBE501F2EB3AC00B750BF /* BoxContentSDK.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
 			);
@@ -198,15 +192,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6A3F569F1ECE34FD0032208F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6A3F56A41ECE34FD0032208F /* BoxContentSDKTests.xctest */,
-				6A3F56A61ECE34FD0032208F /* BoxContentSDK.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6A62091F1EC3C91B009E167A /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +207,7 @@
 		C52D0A8D1A5C18ED00CD4B56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6A8A19341EC52CC300FF43CE /* BoxContentSDK.framework */,
+				A5FCBC511F2EAFF200B750BF /* BoxContentSDK.framework */,
 				3DD751901AD2FEDE00BA719A /* Photos.framework */,
 				C52D0A8E1A5C18FB00CD4B56 /* CoreFoundation.framework */,
 				C540BEB41A5B00BA0060E41B /* Security.framework */,
@@ -260,7 +245,8 @@
 		C5745C1B1A5AF6CC00824FFA = {
 			isa = PBXGroup;
 			children = (
-				6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */,
+				A5A7C3461F2F040E00E84E44 /* BoxContentSDK.framework.dSYM */,
+				A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				6A62091F1EC3C91B009E167A /* shareExtension */,
@@ -309,6 +295,8 @@
 				C5745C361A5AF6CC00824FFA /* LaunchScreen.xib */,
 				C52D0AA21A5C2AB300CD4B56 /* Ressources */,
 				C5745C271A5AF6CC00824FFA /* Supporting Files */,
+				A5FCBE531F2EC58700B750BF /* BOXItemCollectionService.h */,
+				A5FCBE541F2EC58700B750BF /* BOXItemCollectionService.m */,
 			);
 			path = BoxContentSDKSampleApp;
 			sourceTree = "<group>";
@@ -369,11 +357,11 @@
 				C5745C221A5AF6CC00824FFA /* Resources */,
 				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
 				6A62092D1EC3C91B009E167A /* Embed App Extensions */,
+				A5A7C3451F2F03EB00E84E44 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6A3F56A81ECE351C0032208F /* PBXTargetDependency */,
 				6A6209281EC3C91B009E167A /* PBXTargetDependency */,
 			);
 			name = BoxContentSDKSampleApp;
@@ -410,7 +398,7 @@
 				TargetAttributes = {
 					6A62091D1EC3C91B009E167A = {
 						CreatedOnToolsVersion = 8.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -448,12 +436,6 @@
 			mainGroup = C5745C1B1A5AF6CC00824FFA;
 			productRefGroup = C5745C251A5AF6CC00824FFA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6A3F569F1ECE34FD0032208F /* Products */;
-					ProjectRef = 6A3F569E1ECE34FD0032208F /* BoxContentSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
@@ -462,23 +444,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6A3F56A41ECE34FD0032208F /* BoxContentSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BoxContentSDKTests.xctest;
-			remoteRef = 6A3F56A31ECE34FD0032208F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A3F56A61ECE34FD0032208F /* BoxContentSDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BoxContentSDK.framework;
-			remoteRef = 6A3F56A51ECE34FD0032208F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6A62091C1EC3C91B009E167A /* Resources */ = {
@@ -531,18 +496,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5FCBE521F2EB98E00B750BF /* BOXSampleFileDetailsController.m in Sources */,
 				C5745C301A5AF6CC00824FFA /* BOXSampleAccountsViewController.m in Sources */,
 				C55FE3201A5ED76400032032 /* BOXSampleProgressView.m in Sources */,
 				C52D0A9F1A5C27A700CD4B56 /* BOXSampleFolderViewController.m in Sources */,
 				C52D0ACA1A5D4D8F00CD4B56 /* BOXSampleItemCell.m in Sources */,
 				86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */,
-				C55FE2FE1A5D96EE00032032 /* BOXSampleFileDetailsController.m in Sources */,
 				3DD751971AD3044500BA719A /* BOXSampleLibraryAssetViewController.m in Sources */,
 				C52D0ABF1A5D4B4100CD4B56 /* BOXSampleThumbnailsHelper.m in Sources */,
 				C5745C2D1A5AF6CC00824FFA /* BOXSampleAppDelegate.m in Sources */,
 				6A86C5DE1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */,
 				C5745C2A1A5AF6CC00824FFA /* main.m in Sources */,
 				C548519B1E68DB26005D973B /* BOXFileRepresentionListViewControllerTableViewController.m in Sources */,
+				A5FCBE551F2EC58700B750BF /* BOXItemCollectionService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,11 +524,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A3F56A81ECE351C0032208F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BoxContentSDK;
-			targetProxy = 6A3F56A71ECE351C0032208F /* PBXContainerItemProxy */;
-		};
 		6A6209281EC3C91B009E167A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A62091D1EC3C91B009E167A /* shareExtension */;
@@ -643,10 +604,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
 				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -686,15 +649,21 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = shareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -707,10 +676,15 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -726,6 +700,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -769,9 +744,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
 				CODE_SIGN_ENTITLEMENTS = BoxContentSDKSampleApp/BoxContentSDKSampleApp.entitlements;
+				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "BoxContentSDKSampleApp/BoxContentSDKSampleApp-Prefix.pch";
 				INFOPLIST_FILE = BoxContentSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
