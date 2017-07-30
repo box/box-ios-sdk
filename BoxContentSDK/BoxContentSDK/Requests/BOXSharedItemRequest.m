@@ -40,6 +40,8 @@
 
     if (self.requestAllItemFields) {
         queryParameters = @{BOXAPIParameterKeyFields :[self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude]};
+    } else if (self.fieldsToInclude.count > 0) {
+        queryParameters = @{BOXAPIParameterKeyFields :[self.fieldsToInclude componentsJoinedByString:@","]};
     }
     
     BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL

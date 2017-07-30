@@ -17,6 +17,12 @@
  */
 @property (nonatomic, readwrite, strong) NSArray *fieldsToExclude;
 
+/**
+ * The list of fields to include in the response, besides default fields from API
+ * @note If requestAllItemFields is YES, fieldsToInclude is ignored
+ */
+@property (nonatomic, readwrite, strong) NSArray *fieldsToInclude;
+
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
 - (void)performRequestWithCached:(BOXItemArrayCompletionBlock)cacheBlock refreshed:(BOXItemArrayCompletionBlock)refreshBlock;
 

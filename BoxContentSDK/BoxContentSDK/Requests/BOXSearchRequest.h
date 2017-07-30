@@ -37,6 +37,12 @@
  */
 @property (nonatomic, readwrite, strong) NSArray *fieldsToExclude;
 
+/**
+ * The list of fields to include in the response, besides default fields from API
+ * @note If requestAllItemFields is YES, fieldsToInclude is ignored
+ */
+@property (nonatomic, readwrite, strong) NSArray *fieldsToInclude;
+
 - (instancetype)initWithSearchQuery:(NSString *)query inRange:(NSRange)range;
 
 - (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range;

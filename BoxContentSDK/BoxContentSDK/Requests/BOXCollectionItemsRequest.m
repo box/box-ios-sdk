@@ -39,6 +39,8 @@
     
     if (self.requestAllItemFields) {
         parameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
+    } else if (self.fieldsToInclude.count > 0) {
+        parameters[BOXAPIParameterKeyFields] = [self.fieldsToInclude componentsJoinedByString:@","];
     }
         
     if (self.range.length > 0) {

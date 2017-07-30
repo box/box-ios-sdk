@@ -183,6 +183,7 @@
     paginatedRequest.sharedLinkHeadersHelper = self.sharedLinkHeadersHelper;
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
     paginatedRequest.fieldsToExclude = self.fieldsToExclude;
+    paginatedRequest.fieldsToInclude = self.fieldsToInclude;
     paginatedRequest.userAgentPrefix = self.userAgentPrefix;
     self.paginatedRequest = paginatedRequest;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
