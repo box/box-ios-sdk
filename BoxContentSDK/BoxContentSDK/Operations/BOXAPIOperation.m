@@ -119,8 +119,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
 
-        NSData *encodedBody = [self encodeBody:_body];
-        APIRequest.HTTPBody = encodedBody;
+        if (_body != nil) {
+            NSData *encodedBody = [self encodeBody:_body];
+            APIRequest.HTTPBody = encodedBody;
+        } else {
+            APIRequest.HTTPBody = nil;
+        }
 
         _APIRequest = APIRequest;
 

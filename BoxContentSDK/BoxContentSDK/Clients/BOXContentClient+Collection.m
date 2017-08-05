@@ -46,9 +46,33 @@
     return request;
 }
 
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFileWithID:(NSString *)fileID
+                                                       collectionIDs:(NSArray *)collectionIDs
+                                                         associateId:(NSString *)associateId
+{
+    BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:fileID
+                                                                                                               collectionIDs:collectionIDs
+                                                                                                                 associateId:associateId];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXItemSetCollectionsRequest *)collectionsSetRequestForFolderWithID:(NSString *)folderID collectionIDs:(NSArray *)collectionIDs
 {
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFolderSetCollectionsRequestForFolderWithID:folderID collectionIDs:collectionIDs];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForFolderWithID:(NSString *)folderID
+                                                         collectionIDs:collectionIDs
+                                                           associateId:(NSString *)associateId
+{
+    BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFolderSetCollectionsRequestForFolderWithID:folderID
+                                                                                                                   collectionIDs:collectionIDs
+                                                                                                                     associateId:associateId];
     [self prepareRequest:request];
     
     return request;
@@ -62,6 +86,16 @@
     return request;
 }
 
-
+- (BOXItemSetCollectionsRequest *)collectionsSetRequestForBookmarkWithID:(NSString *)bookmarkID
+                                                           collectionIDs:collectionIDs
+                                                             associateId:(NSString *)associateId
+{
+    BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initBookmarkSetCollectionsRequestForBookmarkWithID:bookmarkID
+                                                                                                                       collectionIDs:collectionIDs
+                                                                                                                         associateId:associateId];
+    [self prepareRequest:request];
+    
+    return request;
+}
 
 @end

@@ -10,6 +10,7 @@
 #import "BOXSampleProgressView.h"
 #import "BOXSampleAppSessionManager.h"
 #import "BOXFileRepresentionListViewControllerTableViewController.h"
+#import "BOXItemCollectionService.h"
 
 NS_ENUM(NSInteger, FileDetailsControllerSection) {
     FileDetailsControllerSectionFileInfo = 0,
@@ -18,14 +19,18 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     FileDetailsControllerSectionCount
 };
 
+static NSString *const favoritesCollectionId = @"2921865";
+
 @interface BOXSampleFileDetailsController ()
 
 @property (nonatomic, readwrite, strong) NSString *itemID;
 @property (nonatomic, readwrite, strong) BOXItem *item;
-@property (nonatomic ,readwrite, strong) BOXAPIItemType *itemType;
+@property (nonatomic, readwrite, strong) BOXAPIItemType *itemType;
 @property (nonatomic, readwrite, strong) BOXContentClient *client;
 @property (nonatomic, readwrite, strong) BOXFileDownloadRequest *lastDownloadWithResumeRequest;
 @property (nonatomic, readwrite, copy) NSString *lastDownloadWithResumeAssociateId;
+@property (nonatomic, readwrite, strong) BOXItemCollectionService *itemCollectionService;
+@property (nonatomic, readwrite, strong) BOXRequest *request;
 
 @end
 
@@ -45,6 +50,8 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    
+    _itemCollectionService = [BOXItemCollectionService new];
     
     if ([self.itemType isEqualToString:BOXAPIItemTypeFile]) {
         
@@ -101,7 +108,7 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
             rows = 2;
             break;
         case FileDetailsControllerSectionDownload:
-            rows = 3;
+            rows = 4;
             break;
         default:
             break;
@@ -182,8 +189,10 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
                 } else {
                     cell.textLabel.textColor = [UIColor lightGrayColor];
                 }
-            } else {
+            } else if (indexPath.row == 2) {
                 cell.textLabel.text = @"See Representations";
+            } else if (indexPath.row == 3) {
+                cell.textLabel.text = @"Favorite Item";
             }
             break;
         default:
@@ -234,9 +243,29 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
             }];
             cell.textLabel.text = @"Cancel Download";
         }
-    } else {
+    } else if (indexPath.row == 2) {
         if (self.item.isFile) {
             [self displayRepresentations];
+        }
+    } else  if (indexPath.row == 3) {
+        // Click "Favorite Item" add item to favorites
+        // Click "Unfavorite Item" remove item from favorites
+        
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString *label = cell.textLabel.text;
+        
+        if ([label isEqualToString:@"Favorite Item"] == YES) {
+            cell.textLabel.text = @"Unfavorite Item";
+            
+            self.request = [self.itemCollectionService addItem:self.item
+                                            toCollectionWithID:favoritesCollectionId
+                                               completionBlock:nil];
+        } else {
+            cell.textLabel.text = @"Favorite Item";
+            
+            self.request = [self.itemCollectionService removeItem:self.item
+                                             fromCollectionWithID:favoritesCollectionId
+                                                  completionBlock:nil];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -249,7 +278,6 @@ NS_ENUM(NSInteger, FileDetailsControllerSection) {
     BOXFileRepresentionListViewControllerTableViewController *controller = [[BOXFileRepresentionListViewControllerTableViewController alloc] initWithFile:(BOXFile *)self.item contentClient:self.client];
     [self.navigationController pushViewController:controller animated:YES];
 }
-
 
 #pragma mark - Private Helpers
 - (void)downloadCurrentItem
