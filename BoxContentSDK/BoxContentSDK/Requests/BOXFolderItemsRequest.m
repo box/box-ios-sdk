@@ -179,6 +179,7 @@
                                   inRange:(NSRange)range
 {
     BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    paginatedRequest.cacheClient = self.cacheClient;
     paginatedRequest.queueManager = self.queueManager;
     paginatedRequest.sharedLinkHeadersHelper = self.sharedLinkHeadersHelper;
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
