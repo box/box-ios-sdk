@@ -42,6 +42,19 @@
                                          parentFolderID:(NSString *)parentFolderID;
 
 /**
+ *  Generate a background request to create a new folder.
+ *
+ *  @param folderName     Name of folder to be created.
+ *  @param parentFolderID The ID of the folder in which the new folder will be created.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderCreateRequest *)folderCreateRequestWithName:(NSString *)folderName
+                                         parentFolderID:(NSString *)parentFolderID
+                                            associateId:(nullable NSString *)associateId;
+
+/**
  *  Generate a request to rename a folder.
  *
  *  @param folderID Folder ID.

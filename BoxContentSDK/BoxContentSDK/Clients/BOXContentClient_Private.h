@@ -20,6 +20,7 @@
 @property (nonatomic, readwrite, strong) BOXAppUserSession *appSession;
 @property (nonatomic, readwrite, strong) BOXAbstractSession *session;
 @property (nonatomic, readonly, strong) BOXURLSessionManager *urlSessionManager;
+@property (nonatomic, readwrite, copy) NSString *tempCacheDir;
 
 + (NSMutableDictionary *)SDKClients;
 - (void)prepareRequest:(BOXRequest *)request;
