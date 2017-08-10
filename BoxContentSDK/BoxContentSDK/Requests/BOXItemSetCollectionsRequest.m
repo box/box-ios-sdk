@@ -3,6 +3,7 @@
 //  BoxContentSDK
 //
 
+#import "BOXContentClient_Private.h"
 #import "BOXRequest_Private.h"
 #import "BOXItemSetCollectionsRequest.h"
 
@@ -135,7 +136,8 @@
                                                            failureBlock:nil
                                                             associateId:self.associateId];
         
-        NSString *destinationPath = [NSTemporaryDirectory() stringByAppendingPathComponent:self.associateId];
+        NSString *requestDirectory = [BOXContentClient defaultClient].tempCacheDir;
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
         dataOperation.destinationPath = destinationPath;
 
         return dataOperation;
@@ -172,11 +174,11 @@
                                                      withUpdatedItem:item
                                                                error:nil];
                 }
-                
-                if ([[NSFileManager defaultManager] fileExistsAtPath: weakFileOperation.destinationPath]) {
-                    NSError *error = nil;
-                    [[NSFileManager defaultManager] removeItemAtPath:weakFileOperation.destinationPath error:&error];
-                }
+            }
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath: weakFileOperation.destinationPath]) {
+                NSError *error = nil;
+                [[NSFileManager defaultManager] removeItemAtPath:weakFileOperation.destinationPath error:&error];
             }
             
             if (completionBlock) {

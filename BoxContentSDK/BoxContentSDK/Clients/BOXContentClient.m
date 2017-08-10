@@ -29,12 +29,15 @@ NSString *const BOXDefaultAPIBaseURL = @"https://api.box.com/2.0";
 NSString *const BOXDefaultOAuth2BaseURL = @"https://api.box.com/oauth2";
 NSString *const BOXDefaultAPIAuthBaseURL = @"https://account.box.com/api";
 NSString *const BOXDefaultAPIUploadBaseURL = @"https://upload.box.com/api/2.1";
+NSString *const BOXContentClientBackgroundTempFolder = @"TempBackgroundContentClient";
+NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient";
 
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
 + (void)resetInstancesForTesting;
+
 @end
 
 @implementation BOXContentClient
@@ -346,6 +349,48 @@ static BOXContentClient *defaultInstance = nil;
     self.queueManager.session = self.session;
 }
 
+- (void)setUpTemporaryCacheDirectory:(NSString *)folderPath
+{
+    BOOL success = YES;
+    
+    NSString *tempPath = [folderPath stringByAppendingPathComponent:BOXContentClientBackgroundTempFolder];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:tempPath]) {
+        NSError * error = nil;
+        
+        success = [[NSFileManager defaultManager] createDirectoryAtPath:tempPath
+                                                 withIntermediateDirectories:YES
+                                                                  attributes:nil
+                                                                       error:&error];
+    }
+    if (success == YES) {
+        _tempCacheDir = tempPath;
+    } else {
+        _tempCacheDir = nil;
+    }
+}
+
+- (NSString*)tempCacheDir
+{
+    BOOL success = YES;
+    
+    if (_tempCacheDir == nil) {
+        _tempCacheDir = [NSTemporaryDirectory() stringByAppendingPathComponent:BOXContentClientBackgroundTempFolder];
+        if(![[NSFileManager defaultManager] fileExistsAtPath:_tempCacheDir]) {
+            NSError * error = nil;
+            
+            success = [[NSFileManager defaultManager] createDirectoryAtPath:_tempCacheDir
+                                                withIntermediateDirectories:YES
+                                                                 attributes:nil
+                                                                      error:&error];
+        }
+        if (success == NO) {
+            _tempCacheDir = NSTemporaryDirectory();
+        }
+    }
+    
+    return _tempCacheDir;
+}
+
 #pragma mark - access token delegate
 - (id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
 {
@@ -373,11 +418,16 @@ static BOXContentClient *defaultInstance = nil;
 
 + (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 {
+    [[BOXContentClient defaultClient] setUpTemporaryCacheDirectory:rootCacheDir];
+    rootCacheDir = [rootCacheDir stringByAppendingPathComponent:BOXSessionManagerCacheClientFolder];
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
 }
 
 + (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir sharedContainerIdentifier:(NSString *)sharedContainerIdentifier completion:(void (^)(NSError *error))completionBlock;
 {
+    
+    [[BOXContentClient defaultClient] setUpTemporaryCacheDirectory:rootCacheDir];
+    rootCacheDir = [rootCacheDir stringByAppendingPathComponent:BOXSessionManagerCacheClientFolder];
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate
                                                                                           rootCacheDir:rootCacheDir
                                                                              sharedContainerIdentifier:sharedContainerIdentifier

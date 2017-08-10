@@ -33,7 +33,18 @@
 - (BOXFolderCreateRequest *)folderCreateRequestWithName:(NSString *)folderName
                                          parentFolderID:(NSString *)parentFolderID
 {
-    BOXFolderCreateRequest *request = [[BOXFolderCreateRequest alloc] initWithFolderName:folderName parentFolderID:parentFolderID];
+    return [self folderCreateRequestWithName:folderName
+                              parentFolderID:parentFolderID
+                                 associateId:nil];
+}
+
+- (BOXFolderCreateRequest *)folderCreateRequestWithName:(NSString *)folderName
+                                         parentFolderID:(NSString *)parentFolderID
+                                            associateId:(nullable NSString *)associateId
+{
+    BOXFolderCreateRequest *request = [[BOXFolderCreateRequest alloc] initWithFolderName:folderName
+                                                                          parentFolderID:parentFolderID
+                                                                             associateId:associateId];
     [self prepareRequest:request];
     
     return request;
