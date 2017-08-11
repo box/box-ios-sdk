@@ -187,6 +187,12 @@ typedef NSString BOXFolderUploadEmailAccessLevel;
 extern BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen;
 extern BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelCollaborators;
 
+// Item status
+typedef NSString BOXItemStatus;
+extern BOXItemStatus *const BOXItemStatusActive;
+extern BOXItemStatus *const BOXItemStatusTrashed;
+extern BOXItemStatus *const BOXItemStatusDeleted;
+
 // Collection keys
 extern NSString *const BOXAPICollectionKeyEntries;
 extern NSString *const BOXAPICollectionKeyTotalCount;

@@ -145,7 +145,8 @@
 @property (nonatomic, readwrite, strong) BOXFolderMini *parentFolder;
 
 /**
- *  Whether this item is deleted or not. Will be "active" or "deleted".
+ *  Whether this item is deleted or not.
+ *  Values include "active", "trashed" if the file has been moved to the trash, and "deleted" if the file has been permanently deleted
  */
 @property (nonatomic, readwrite, strong) NSString *status;
 
