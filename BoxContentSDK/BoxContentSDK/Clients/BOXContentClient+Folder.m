@@ -30,6 +30,18 @@
     return request;
 }
 
+- (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
+                                  associateId:(NSString *)associateId
+{
+    BOXFolderRequest *request = nil;
+    request = [[BOXFolderRequest alloc] initWithFolderID:folderID associateId:associateId];
+    request.requestDirectoryPath = self.tempCacheDir;
+    
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFolderCreateRequest *)folderCreateRequestWithName:(NSString *)folderName
                                          parentFolderID:(NSString *)parentFolderID
 {
@@ -45,6 +57,8 @@
     BOXFolderCreateRequest *request = [[BOXFolderCreateRequest alloc] initWithFolderName:folderName
                                                                           parentFolderID:parentFolderID
                                                                              associateId:associateId];
+    request.requestDirectoryPath = self.tempCacheDir;
+    
     [self prepareRequest:request];
     
     return request;

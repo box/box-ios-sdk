@@ -16,7 +16,14 @@
 @property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;//If-None-Match: Array of strings representing etag values
 @property (nonatomic, readonly, strong) NSString *folderID;
 
+/**
+ Caller provided directory path for the result payload of the background operation to be written to.
+ */
+@property (nonatomic, readwrite, copy) NSString *requestDirectoryPath;
+
 - (instancetype)initWithFolderID:(NSString *)folderID;
+- (instancetype)initWithFolderID:(NSString *)folderID
+                     associateId:(NSString *)associateId;
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed;
 
 //Perform API request and any cache update only if refreshBlock is not nil

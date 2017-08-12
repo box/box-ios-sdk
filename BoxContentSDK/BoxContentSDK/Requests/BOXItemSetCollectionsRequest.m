@@ -3,7 +3,6 @@
 //  BoxContentSDK
 //
 
-#import "BOXContentClient_Private.h"
 #import "BOXRequest_Private.h"
 #import "BOXItemSetCollectionsRequest.h"
 
@@ -20,6 +19,14 @@
 @property (nonatomic, readwrite, strong) NSString *resource;
 
 /// Properties related to Background tasks
+
+/**
+ Check if the request can executre on background. Requires valid associateId and requestDirectoryPath
+ 
+ @return BOOL Yes for can preform on background
+ */
+- (BOOL)shouldPerformBackgroundOperation;
+
 /**
  Caller provided unique ID to execute the request as a NSURLSession background task
  */
@@ -126,7 +133,7 @@
     }
     NSDictionary *bodyDictionary = @{BOXAPIObjectKeyCollections : bodyContent};
     
-    if (self.associateId != nil) {
+    if ([self shouldPerformBackgroundOperation] == YES) {
         
         BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:url
                                                              HTTPMethod:BOXAPIHTTPMethodPUT
@@ -136,7 +143,7 @@
                                                            failureBlock:nil
                                                             associateId:self.associateId];
         
-        NSString *requestDirectory = [BOXContentClient defaultClient].tempCacheDir;
+        NSString *requestDirectory = self.requestDirectoryPath;
         NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
         dataOperation.destinationPath = destinationPath;
 
@@ -155,7 +162,7 @@
 
 - (void)performRequestWithCompletion:(BOXItemBlock)completionBlock
 {
-    if (self.associateId != nil) {
+    if ([self shouldPerformBackgroundOperation] == YES) {
         BOOL isMainThread = [NSThread isMainThread];
         
         BOXAPIDataOperation *fileOperation = (BOXAPIDataOperation *)self.operation;
@@ -238,6 +245,13 @@
         };
         [self performRequest];
     }
+}
+
+#pragma mark - Private Helper methods
+
+- (BOOL)shouldPerformBackgroundOperation
+{
+    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

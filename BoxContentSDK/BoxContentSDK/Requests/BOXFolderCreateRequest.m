@@ -3,7 +3,6 @@
 //  BoxContentSDK
 //
 
-#import "BOXContentClient_Private.h"
 #import "BOXRequest_Private.h"
 #import "BOXFolderCreateRequest.h"
 
@@ -14,6 +13,14 @@
 @interface BOXFolderCreateRequest()
 
 /// Properties related to Background tasks
+
+/**
+ Check if the request can executre on background. Requires valid associateId and requestDirectoryPath
+
+ @return BOOL Yes for can preform on background
+*/
+- (BOOL)shouldPerformBackgroundOperation;
+
 /**
  Caller provided unique ID to execute the request as a NSURLSession background task
  */
@@ -60,7 +67,7 @@
     NSDictionary *bodyDictionary = @{BOXAPIObjectKeyParent : @{BOXAPIObjectKeyID : self.parentFolderID},
                                      BOXAPIObjectKeyName : self.folderName};
 
-    if (self.associateId != nil) {
+    if ([self shouldPerformBackgroundOperation] == YES) {
         BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
                                                              HTTPMethod:BOXAPIHTTPMethodPOST
                                                   queryStringParameters:queryParameters
@@ -69,7 +76,7 @@
                                                            failureBlock:nil
                                                             associateId:self.associateId];
         
-        NSString *requestDirectory = [BOXContentClient defaultClient].tempCacheDir;
+        NSString *requestDirectory = self.requestDirectoryPath;
         NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
         dataOperation.destinationPath = destinationPath;
         
@@ -89,7 +96,7 @@
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
-    if (self.associateId != nil) {
+    if ([self shouldPerformBackgroundOperation] == YES) {
         BOOL isMainThread = [NSThread isMainThread];
         
         BOXAPIDataOperation *folderOperation = (BOXAPIDataOperation *)self.operation;
@@ -182,6 +189,13 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeFolder;
+}
+
+#pragma mark - Private Helper methods
+
+- (BOOL)shouldPerformBackgroundOperation
+{
+	return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end
