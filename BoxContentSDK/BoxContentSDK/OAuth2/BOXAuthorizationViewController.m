@@ -16,6 +16,7 @@
 #import "BOXContentClient+Authentication.h"
 #import "BOXOAuth2Session.h"
 #import "BOXAppUserSession.h"
+#import "BOXDispatchHelper.h"
 
 
 typedef void (^BOXAuthCompletionBlock)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error);
@@ -547,19 +548,24 @@ didReceiveResponse:(nonnull NSURLResponse *)response
             } else {
                 [[challenge sender] cancelAuthenticationChallenge:challenge];
             }
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                                     message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
 
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction *action) {
-                                                                 [alertController dismissViewControllerAnimated:YES completion:nil];
-                                                             }];
-            [alertController addAction:okAction];
-            [self presentViewController:alertController animated:YES completion:nil];
+            [BOXDispatchHelper callCompletionBlock:^{
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                                         message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                                 }];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            } onMainThread:YES];
         }
-        [self.activityIndicator stopAnimating];
+        [BOXDispatchHelper callCompletionBlock:^{
+            [self.activityIndicator stopAnimating];
+        } onMainThread:YES];
     } else {
         BOXLog(@"Authentication challenge of type %@", [[challenge protectionSpace] authenticationMethod]);
 
@@ -706,12 +712,13 @@ didReceiveResponse:(nonnull NSURLResponse *)response
         BOXLog(@"URLSessionTask %@ did finish loading. Requesting that the webview load the data (%lu bytes) with reponse %@", task, (unsigned long)[self.connectionData length], self.connectionResponse);
         [self setWebViewCanBeUsedDirectly:YES forHost:task.currentRequest.URL.host];
         [self setWebViewCanBeUsedDirectly:YES forHost:[self.connectionResponse URL].host];
-        [(UIWebView *)self.view loadData:self.connectionData
-                                MIMEType:[self.connectionResponse MIMEType]
-                        textEncodingName:[self.connectionResponse textEncodingName]
-                                 baseURL:[self.connectionResponse URL]];
-
-        self.connectionResponse = nil;
+        [BOXDispatchHelper callCompletionBlock:^{
+            [(UIWebView *)self.view loadData:self.connectionData
+                                    MIMEType:[self.connectionResponse MIMEType]
+                            textEncodingName:[self.connectionResponse textEncodingName]
+                                     baseURL:[self.connectionResponse URL]];
+            self.connectionResponse = nil;
+        } onMainThread:YES];
     } else {
         // Failure
         BOXLog(@"URLSessionTask %@ did fail with error %@", task, error);
