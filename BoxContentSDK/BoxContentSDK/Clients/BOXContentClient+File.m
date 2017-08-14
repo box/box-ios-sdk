@@ -1,5 +1,5 @@
 //
-//  BOXClient+File.m
+//  BOXContentClient+File.m
 //  BoxContentSDK
 //
 //  Created by Rico Yao on 1/16/15.
@@ -26,6 +26,17 @@
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
 {
     BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
+                              associateID:(NSString *)associateID
+{
+    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID];
+    request.associateID = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
     return request;
@@ -202,6 +213,17 @@
 - (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID
 {
     BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID isTrashed:YES];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID
+                                     associateID:(NSString *)associateID
+{
+    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID isTrashed:YES];
+    request.associateID = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
     return request;
