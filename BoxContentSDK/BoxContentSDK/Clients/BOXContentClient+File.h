@@ -35,6 +35,17 @@
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID;
 
 /**
+ *  Generate a background request to retrieve information about a file.
+ *
+ *  @param fileID File ID.
+ *  @param associateID Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
+                              associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to rename a file.
  *
  *  @param fileID  File ID.
@@ -222,13 +233,24 @@
                                         toLocalFilePath:(NSString *)localFilePath;
 
 /**
- *  Generate a request to retrieve information of a file in the trash.
+ *  Generate a request to retrieve information about a file in the trash.
  *
  *  @param fileID File ID.
  *
  *  @return A request that can be customized and then executed.
  */
 - (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID;
+
+/**
+ *  Generate a background request to retrieve information about a file in the trash.
+ *
+ *  @param fileID File ID.
+ *  @param associateID Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID
+                                     associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to permanently delete a file in the trash.
