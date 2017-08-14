@@ -30,6 +30,18 @@
  */
 - (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID;
 
+
+/**
+ *  Generate a background request to retrieve information about a folder.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
+                                  associateId:(NSString *)associateId;
+
 /**
  *  Generate a request to create a new folder.
  *

@@ -78,7 +78,7 @@
                                                            failureBlock:nil
                                                             associateId:self.associateID];
         NSString *requestDirectory = self.requestDirectoryPath;
-        dataOperation.destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        dataOperation.destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
 
         fileOperation = dataOperation;
     } else {

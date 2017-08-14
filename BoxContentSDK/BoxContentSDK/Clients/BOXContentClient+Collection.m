@@ -53,6 +53,8 @@
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:fileID
                                                                                                                collectionIDs:collectionIDs
                                                                                                                  associateId:associateId];
+    request.requestDirectoryPath = self.tempCacheDir;
+    
     [self prepareRequest:request];
     
     return request;
@@ -73,6 +75,8 @@
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFolderSetCollectionsRequestForFolderWithID:folderID
                                                                                                                    collectionIDs:collectionIDs
                                                                                                                      associateId:associateId];
+    request.requestDirectoryPath = self.tempCacheDir;
+    
     [self prepareRequest:request];
     
     return request;
@@ -93,6 +97,8 @@
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initBookmarkSetCollectionsRequestForBookmarkWithID:bookmarkID
                                                                                                                        collectionIDs:collectionIDs
                                                                                                                          associateId:associateId];
+    request.requestDirectoryPath = self.tempCacheDir;
+    
     [self prepareRequest:request];
     
     return request;

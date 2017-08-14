@@ -15,6 +15,11 @@
 @property (nonatomic, readonly, strong) NSArray *collectionIDs;
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
+/**
+ Caller provided directory path for the result payload of the background operation to be written to.
+ */
+@property (nonatomic, readwrite, copy) NSString *requestDirectoryPath;
+
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs;
 
