@@ -148,7 +148,7 @@
  *  Whether this item is deleted or not.
  *  Values include "active", "trashed" if the file has been moved to the trash, and "deleted" if the file has been permanently deleted
  */
-@property (nonatomic, readwrite, strong) NSString *status;
+@property (nonatomic, readwrite, copy, nullable) NSString *status;
 
 /**
  *  The collections that this item belongs to. An array of BoxCollection objects.
