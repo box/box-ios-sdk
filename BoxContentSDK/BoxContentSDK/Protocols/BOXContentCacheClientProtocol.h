@@ -213,6 +213,8 @@
                               withFolder:(BOXFolder *)folder
                                    error:(NSError *)error;
 
+- (void)hasFinishedFolderItemsRequest:(BOXFolderItemsRequest *)request;
+
 #pragma mark - Comments
 
 - (void)cacheBookmarkCommentsRequest:(BOXBookmarkCommentsRequest *)request
