@@ -104,11 +104,14 @@
 
     if (refreshBlock) {
         BOOL isMainThread = [NSThread isMainThread];
-
         NSMutableArray *results = [[NSMutableArray alloc] init];
 
         BOXItemsBlock localRefreshBlock = ^(NSArray *items, NSError *error){
             self.paginatedRequest = nil;
+
+            if (error == nil && [self.cacheClient respondsToSelector:@selector(hasFinishedFolderItemsRequest:)]) {
+                [self.cacheClient hasFinishedFolderItemsRequest:self];
+            }
 
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(items, error);
@@ -185,6 +188,7 @@
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
     paginatedRequest.fieldsToExclude = self.fieldsToExclude;
     paginatedRequest.userAgentPrefix = self.userAgentPrefix;
+    paginatedRequest.sharedPaginatedRequestData = self.sharedPaginatedRequestData;
     self.paginatedRequest = paginatedRequest;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }
