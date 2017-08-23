@@ -100,54 +100,118 @@
         queryParameters = @{BOXAPIParameterKeyFields: [self fullFileFieldsParameterString]};
     }
     
-    BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
-                                                         HTTPMethod:BOXAPIHTTPMethodPUT
-                                              queryStringParameters:queryParameters
-                                                     bodyDictionary:bodyDictionary
-                                                   JSONSuccessBlock:nil
-                                                       failureBlock:nil];
-    
-    if ([self.matchingEtag length] > 0) {
-        [JSONoperation.APIRequest setValue:self.matchingEtag forHTTPHeaderField:BOXAPIHTTPHeaderIfMatch];
+    BOXAPIOperation *fileUpdateOperation = nil;
+
+    if ([self shouldPerformBackgroundOperation]) {
+        BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPUT
+                                                  queryStringParameters:queryParameters
+                                                         bodyDictionary:bodyDictionary
+                                                           successBlock:nil
+                                                           failureBlock:nil
+                                                            associateId:self.associateID];
+        NSString *requestDirectory = self.requestDirectoryPath;
+        dataOperation.destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
+        
+        fileUpdateOperation = dataOperation;
+    } else {
+        BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPUT
+                                                  queryStringParameters:queryParameters
+                                                         bodyDictionary:bodyDictionary
+                                                       JSONSuccessBlock:nil
+                                                           failureBlock:nil];
+        fileUpdateOperation = JSONoperation;
     }
     
-    [self addSharedLinkHeaderToRequest:JSONoperation.APIRequest];
+    if ([self.matchingEtag length] > 0) {
+        [fileUpdateOperation.APIRequest setValue:self.matchingEtag
+                              forHTTPHeaderField:BOXAPIHTTPHeaderIfMatch];
+    }
     
-    return JSONoperation;
+    [self addSharedLinkHeaderToRequest:fileUpdateOperation.APIRequest];
+    
+    return fileUpdateOperation;
 }
 
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock
 {
     BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
+    
+    if ([self shouldPerformBackgroundOperation]) {
+        BOXAPIDataOperation *fileOperation = (BOXAPIDataOperation *)self.operation;
+        __weak BOXAPIDataOperation *weakFileOperation = fileOperation;
+        fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
+            NSData *data = [NSData dataWithContentsOfFile:weakFileOperation.destinationPath];
+            BOXFile *file = nil;
+            if (data != nil) {
+                NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                file = (BOXFile *)[[self class] itemWithJSON:jsonDictionary];
+                
+                if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
+                    [self.cacheClient cacheFileUpdateRequest:self
+                                                    withFile:file
+                                                       error:nil];
+                }
+            }
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:weakFileOperation.destinationPath]) {
+                NSError *error = nil;
+                [[NSFileManager defaultManager] removeItemAtPath:weakFileOperation.destinationPath error:&error];
+            }
+            
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(file, nil);
+                } onMainThread:isMainThread];
+            }
+        };
+        
+        fileOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
+                [self.cacheClient cacheFileUpdateRequest:self
+                                                withFile:nil
+                                                   error:error];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+    } else {
+        BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
+        
+        fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
+                [self.cacheClient cacheFileUpdateRequest:self
+                                                withFile:file
+                                                   error:nil];
+            }
+           
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(file, nil);
+                } onMainThread:isMainThread];
+            }
+        };
+        fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
+                [self.cacheClient cacheFileUpdateRequest:self
+                                                withFile:nil
+                                                   error:error];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+    }
 
-    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
-
-        if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
-            [self.cacheClient cacheFileUpdateRequest:self
-                                            withFile:file
-                                               error:nil];
-        }
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(file, nil);
-            } onMainThread:isMainThread];
-        }
-    };
-    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-
-        if ([self.cacheClient respondsToSelector:@selector(cacheFileUpdateRequest:withFile:error:)]) {
-            [self.cacheClient cacheFileUpdateRequest:self
-                                            withFile:nil
-                                               error:error];
-        }
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        }
-    };
     [self performRequest];
 }
 
@@ -161,6 +225,13 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeFile;
+}
+
+#pragma mark - Private Helper methods
+
+- (BOOL)shouldPerformBackgroundOperation
+{
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

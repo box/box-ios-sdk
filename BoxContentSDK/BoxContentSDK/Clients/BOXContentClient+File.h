@@ -67,6 +67,18 @@
 - (BOXFileUpdateRequest *)fileUpdateRequestWithID:(NSString *)fileID;
 
 /**
+ *  Generate a request to update properties of a file. Set properties on the BOXFileUpdateRequest
+ *  before executing it.
+ *
+ *  @param fileID File ID.
+ *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUpdateRequest *)fileUpdateRequestWithID:(NSString *)fileID
+                                      associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to move a file to a folder.
  *
  *  @param fileID              File ID.
