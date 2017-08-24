@@ -83,7 +83,7 @@
 }
 
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
-                                         asssociateID:(NSString *)associateID
+                                          associateID:(NSString *)associateID
 {
     BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID];
     request.associateId = associateID;
