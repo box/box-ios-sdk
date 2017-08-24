@@ -88,6 +88,18 @@
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID;
 
 /**
+ *  Generate a request to update properties of a folder. Configure proprties of the BOXFolderUpdateRequest
+ *  before executing it.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
+                                         asssociateID:(NSString *)associateID;
+
+/**
  *  Generate a request to move a folder into another folder.
  *
  *  @param folderID            Folder ID of the folder to be moved.

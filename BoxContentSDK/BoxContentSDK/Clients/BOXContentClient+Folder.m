@@ -82,6 +82,17 @@
     return request;
 }
 
+- (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
+                                         asssociateID:(NSString *)associateID
+{
+    BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID];
+    request.associateId = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFolderUpdateRequest *)folderMoveRequestWithID:(NSString *)folderID
                                 destinationFolderID:(NSString *)destinationFolderID
 {
