@@ -107,56 +107,115 @@
         queryParameters = @{BOXAPIParameterKeyFields : [self fullBookmarkFieldsParameterString]};
     }
     
-    BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
-                                                         HTTPMethod:BOXAPIHTTPMethodPUT
-                                              queryStringParameters:queryParameters
-                                                     bodyDictionary:bodyDictionary
-                                                   JSONSuccessBlock:nil
-                                                       failureBlock:nil];
-    
-    if ([self.matchingEtag length] > 0) {
-        [JSONOperation.APIRequest setValue:self.matchingEtag forHTTPHeaderField:BOXAPIHTTPHeaderIfMatch];
+    BOXAPIOperation *bookmarkOperation = nil;
+
+    if ([self shouldPerformBackgroundOperation]) {
+        BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPUT
+                                                  queryStringParameters:queryParameters
+                                                         bodyDictionary:bodyDictionary
+                                                           successBlock:nil
+                                                           failureBlock:nil
+                                                            associateId:self.associateID];
+        NSString *requestDirectory = self.requestDirectoryPath;
+        dataOperation.destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
+        
+        bookmarkOperation = dataOperation;
+    } else {
+        BOXAPIJSONOperation *JSONOperation = [self JSONOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPUT
+                                                  queryStringParameters:queryParameters
+                                                         bodyDictionary:bodyDictionary
+                                                       JSONSuccessBlock:nil
+                                                           failureBlock:nil];
+        
+        bookmarkOperation = JSONOperation;
     }
     
-    [self addSharedLinkHeaderToRequest:JSONOperation.APIRequest];
+    if ([self.matchingEtag length] > 0) {
+        [bookmarkOperation.APIRequest setValue:self.matchingEtag forHTTPHeaderField:BOXAPIHTTPHeaderIfMatch];
+    }
+    
+    [self addSharedLinkHeaderToRequest:bookmarkOperation.APIRequest];
 
-    return JSONOperation;
+    return bookmarkOperation;
 }
 
 - (void)performRequestWithCompletion:(BOXBookmarkBlock)completionBlock
 {
     BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
-
-    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
-
-        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
-            [self.cacheClient cacheBookmarkUpdateRequest:self
-                                            withBookmark:bookmark
-                                                   error:nil];
-        }
-
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(bookmark, nil);
-            } onMainThread:isMainThread];
-        }
-    };
-    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-
-        if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
-            [self.cacheClient cacheBookmarkUpdateRequest:self
-                                            withBookmark:nil
-                                                   error:error];
-        }
-
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        }
-    };
+    
+    if ([self shouldPerformBackgroundOperation]) {
+        BOXAPIDataOperation *bookmarkOperation = (BOXAPIDataOperation *)self.operation;
+        __weak BOXAPIDataOperation *weakBookmarkOperation = bookmarkOperation;
+        bookmarkOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
+            NSData *data = [NSData dataWithContentsOfFile:weakBookmarkOperation.destinationPath];
+            BOXBookmark *bookmark = nil;
+            if (data != nil) {
+                NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                bookmark = (BOXBookmark *)[[self class] itemWithJSON:jsonDictionary];
+                
+                if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                    [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                    withBookmark:bookmark
+                                                           error:nil];
+                }
+            }
+            
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(bookmark, nil);
+                } onMainThread:isMainThread];
+            }
+        };
+        
+        bookmarkOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                withBookmark:nil
+                                                       error:error];
+            }
+            
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+    } else {
+        BOXAPIJSONOperation *bookmarkOperation = (BOXAPIJSONOperation *)self.operation;
+        
+        bookmarkOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            BOXBookmark *bookmark = [[BOXBookmark alloc] initWithJSON:JSONDictionary];
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                withBookmark:bookmark
+                                                       error:nil];
+            }
+            
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(bookmark, nil);
+                } onMainThread:isMainThread];
+            }
+        };
+        bookmarkOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheBookmarkUpdateRequest:withBookmark:error:)]) {
+                [self.cacheClient cacheBookmarkUpdateRequest:self
+                                                withBookmark:nil
+                                                       error:error];
+            }
+            
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+    }
     
     [self performRequest];
 }
@@ -171,6 +230,11 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeWebLink;
+}
+
+- (BOOL)shouldPerformBackgroundOperation
+{
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

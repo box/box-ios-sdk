@@ -49,6 +49,18 @@
 - (BOXBookmarkUpdateRequest *)bookmarkUpdateRequestWithID:(NSString *)bookmarkID;
 
 /**
+ *  Generate a request to update properties of a bookmark. Update properties of the BOXBookmarkUpdateRequest
+ *  before executing it.
+ *
+ *  @param bookmarkID Bookmark ID.
+ *  @param associateID   an Id to associate with this background upload task to reconnect to if needed
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXBookmarkUpdateRequest *)bookmarkUpdateRequestWithID:(NSString *)bookmarkID
+                                              associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to move a bookmark into a folder.
  *
  *  @param bookmarkID          Bookmark ID.
