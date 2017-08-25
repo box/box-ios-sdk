@@ -265,6 +265,7 @@ extern NSString *const BOXAPIObjectKeyCanSetShareAccess;
 extern NSString *const BOXAPIObjectKeyCanInviteCollaborator;
 
 extern NSString *const BOXAPIObjectKeyID;
+extern NSString *const BOXAPIObjectKeyRank;
 extern NSString *const BOXAPIObjectKeyKey;
 extern NSString *const BOXAPIObjectKeyDisplayName;
 extern NSString *const BOXAPIObjectKeyOptions;
