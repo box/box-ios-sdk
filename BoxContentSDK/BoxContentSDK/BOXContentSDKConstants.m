@@ -244,6 +244,7 @@ NSString *const BOXAPIObjectKeyCanSetShareAccess = @"can_set_share_access";
 NSString *const BOXAPIObjectKeyCanInviteCollaborator = @"can_invite_collaborator";
 
 NSString *const BOXAPIObjectKeyID = @"id";
+NSString *const BOXAPIObjectKeyRank = @"rank";
 NSString *const BOXAPIObjectKeyKey = @"key";
 NSString *const BOXAPIObjectKeyDisplayName = @"displayName";
 NSString *const BOXAPIObjectKeyOptions = @"options";
