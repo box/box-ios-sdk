@@ -84,8 +84,8 @@
             if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:items
-                                                             limit:self.limit
-                                                            offset:self.offset
+                                                             limit:limit
+                                                            offset:offset
                                                              error:nil];
             }
 
