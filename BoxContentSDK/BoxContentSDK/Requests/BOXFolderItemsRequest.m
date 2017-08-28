@@ -24,10 +24,13 @@
 
 @implementation BOXFolderItemsRequest
 
+@synthesize rangeStep = _rangeStep;
+
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     if (self = [super init]) {
         _folderID = folderID;
+        _rangeStep = 0;
     }
 
     return self;
@@ -43,16 +46,24 @@
     }
 }
 
+- (void)setRangeStep:(NSUInteger)rangeStep
+{
+    _rangeStep = rangeStep;
+}
+
 - (NSUInteger)rangeStep
 {
-    NSUInteger rangeStep = 1000;
-    
-    // Root folder has better performance with a smaller page size
-    if ([self.folderID isEqualToString:BOXAPIFolderIDRoot]) {
-        rangeStep = 100;
+    if (_rangeStep == 0) {
+        NSUInteger rangeStep = 1000;
+
+        // Root folder has better performance with a smaller page size
+        if ([self.folderID isEqualToString:BOXAPIFolderIDRoot]) {
+            rangeStep = 100;
+        }
+        return rangeStep;
     }
     
-    return rangeStep;
+    return _rangeStep;
 }
 
 + (NSString *)uniqueHashForItem:(BOXItem *)item
