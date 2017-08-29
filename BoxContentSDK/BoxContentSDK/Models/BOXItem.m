@@ -260,4 +260,15 @@
     return NO;
 }
 
+- (NSNumber *)availableCollectionRank
+{
+    for (BOXCollection *collection in self.collections) {
+        if (collection.collectionRank != nil) {
+            return collection.collectionRank;
+        }
+    }
+    
+    return nil;
+}
+
 @end

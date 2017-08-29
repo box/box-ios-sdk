@@ -23,4 +23,11 @@
  */
 @property (nonatomic, readwrite, strong) NSString *collectionType;
 
+/**
+ *  The rank of the collection. An 64 bit number that determines rank of item in a given collection.
+ *  Initially only “favorites rank” will be supported.
+ */
+@property (nonatomic, readwrite, strong) NSNumber *collectionRank;
+
+
 @end
