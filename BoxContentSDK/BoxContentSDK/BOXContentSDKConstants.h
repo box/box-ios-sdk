@@ -340,6 +340,7 @@ extern NSString *const BOXAPIObjectKeyEnterprise;
 extern NSString *const BOXAPIObjectKeyIsDownloadPrevented;
 extern NSString *const BOXAPIObjectKeySharedLinkPassword;
 extern NSString *const BOXAPIObjectKeyCollectionType;
+extern NSString *const BOXAPIObjectKeyCollectionRank;
 extern NSString *const BOXAPIObjectKeyEventID;
 extern NSString *const BOXAPIObjectKeyEventType;
 extern NSString *const BOXAPIObjectKeyInteractionSharedLink;

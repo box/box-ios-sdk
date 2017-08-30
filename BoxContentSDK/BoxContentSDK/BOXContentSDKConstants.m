@@ -319,6 +319,7 @@ NSString *const BOXAPIObjectKeyEnterprise = @"enterprise";
 NSString *const BOXAPIObjectKeyIsDownloadPrevented = @"is_download_prevented";
 NSString *const BOXAPIObjectKeySharedLinkPassword = @"shared_link_password";
 NSString *const BOXAPIObjectKeyCollectionType = @"collection_type";
+NSString *const BOXAPIObjectKeyCollectionRank = @"rank";
 NSString *const BOXAPIObjectKeyEventID = @"event_id";
 NSString *const BOXAPIObjectKeyEventType = @"event_type";
 NSString *const BOXAPIObjectKeyInteractionSharedLink = @"interaction_shared_link";

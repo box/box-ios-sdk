@@ -25,6 +25,11 @@
                                                              inDictionary:JSONResponse
                                                           hasExpectedType:[NSString class]
                                                               nullAllowed:NO];
+        
+        self.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
+                                                             inDictionary:JSONResponse
+                                                          hasExpectedType:[NSNumber class]
+                                                              nullAllowed:NO];
     }
     
     return self;

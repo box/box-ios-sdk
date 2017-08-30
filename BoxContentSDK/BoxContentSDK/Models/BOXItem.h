@@ -229,4 +229,9 @@
  */
 @property (nonatomic, readonly, assign) BOOL isBookmark;
 
+/**
+ * Convenience method to retrieve the first available rank in collection
+ */
+@property (nullable, nonatomic, readonly, assign) NSNumber *availableCollectionRank;
+
 @end
