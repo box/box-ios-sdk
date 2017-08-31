@@ -260,15 +260,23 @@
     return NO;
 }
 
+// TODO: remove once we can use the file provider unranked constant
+#define boxUnranked 5
+
 - (NSNumber *)availableCollectionRank
 {
+    NSNumber *rank = nil;
     for (BOXCollection *collection in self.collections) {
         if (collection.collectionRank != nil) {
             return collection.collectionRank;
+        } else {
+            // TODO: We are using the default of 5 because the file provider unranked constant of 1
+            // crashes the enumerator. Once the issue is resolved, we can update this code.
+            rank = [[NSNumber alloc] initWithUnsignedLongLong:boxUnranked];
         }
     }
     
-    return nil;
+    return rank;
 }
 
 @end
