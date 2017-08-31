@@ -249,19 +249,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self setWebViewCanBeUsedDirectly:NO forHost:task.currentRequest.URL.host];
 
     // We can only handle the connection error if we're in the view hierarchy. It would be difficult to display UIAlertControllers when not sure we're in the view hierarchy. We will try again after viewDidAppear
-    if (self.view.window) {
-        [self handleConnectionErrorWithError:error message:message];
-    } else {
-        self.connectionError = error;
-        self.connectionErrorMessage = message;
-        // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
-        [self prepareForDismissal];
-        if (self.completionBlock) {
-            self.completionBlock(self, nil, self.connectionError);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch on main thread UI-related activities
+        if (self.view.window) {
+            [self handleConnectionErrorWithError:error message:message];
+        } else {
+            self.connectionError = error;
+            self.connectionErrorMessage = message;
+            // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
+            [self prepareForDismissal];
+            if (self.completionBlock) {
+                self.completionBlock(self, nil, self.connectionError);
+            }
         }
-    }
-
-    [self.activityIndicator stopAnimating];
+        [self.activityIndicator stopAnimating];
+     });
 }
 
 - (void)handleConnectionErrorWithError:(NSError *)error message:(NSString *)message
