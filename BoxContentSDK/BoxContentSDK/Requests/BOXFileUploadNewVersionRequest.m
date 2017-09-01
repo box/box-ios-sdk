@@ -120,7 +120,9 @@
         //if the app crashes before we could cache the response data
         BOXFile *file = JSONDictionary == nil ? nil : [[BOXFile alloc] initWithJSON:JSONDictionary];
         
-        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:tmpFilePath:error:)]) {
+           [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:file tmpFilePath:self.localFilePath error:nil];
+        } else if ([self.cacheClient respondsToSelector:@selector(cacheFileUploadNewVersionRequest:withFile:error:)]) {
             [self.cacheClient cacheFileUploadNewVersionRequest:self withFile:file error:nil];
         }
         
