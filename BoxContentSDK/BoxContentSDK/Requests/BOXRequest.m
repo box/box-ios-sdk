@@ -310,6 +310,7 @@
                        BOXAPIObjectKeyIsPackage,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections,
+                       BOXAPIObjectKeyCollectionMemberships,
                        BOXAPIObjectKeyFolderUploadEmail,
                        BOXAPIObjectKeySyncState,
                        BOXAPIObjectKeyHasCollaborations,
@@ -357,7 +358,8 @@
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyAllowedInviteeRoles,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
-                       BOXAPIObjectKeyCollections];
+                       BOXAPIObjectKeyCollections,
+                       BOXAPIObjectKeyCollectionMemberships];
     return array;
 }
 

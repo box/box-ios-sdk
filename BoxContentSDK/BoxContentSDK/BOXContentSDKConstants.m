@@ -308,6 +308,7 @@ NSString *const BOXAPIObjectKeyExtension = @"extension";
 NSString *const BOXAPIObjectKeyIsPackage = @"is_package";
 NSString *const BOXAPIObjectKeyAllowedSharedLinkAccessLevels = @"allowed_shared_link_access_levels";
 NSString *const BOXAPIObjectKeyCollections = @"collections";
+NSString *const BOXAPIObjectKeyCollectionMemberships = @"collection_memberships";
 NSString *const BOXAPIObjectKeyHasCollaborations = @"has_collaborations";
 NSString *const BOXAPIObjectKeyIsExternallyOwned = @"is_externally_owned";
 NSString *const BOXAPIObjectKeyCanNonOwnersInvite = @"can_non_owners_invite";

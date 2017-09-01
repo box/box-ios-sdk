@@ -329,6 +329,7 @@ extern NSString *const BOXAPIObjectKeyExtension;
 extern NSString *const BOXAPIObjectKeyIsPackage;
 extern NSString *const BOXAPIObjectKeyAllowedSharedLinkAccessLevels;
 extern NSString *const BOXAPIObjectKeyCollections;
+extern NSString *const BOXAPIObjectKeyCollectionMemberships;
 extern NSString *const BOXAPIObjectKeyHasCollaborations;
 extern NSString *const BOXAPIObjectKeyIsExternallyOwned;
 extern NSString *const BOXAPIObjectKeyCanNonOwnersInvite;
