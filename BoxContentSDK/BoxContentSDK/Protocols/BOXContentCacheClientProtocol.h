@@ -154,6 +154,11 @@
                                 withFile:(BOXFile *)file
                                    error:(NSError *)error;
 
+- (void)cacheFileUploadNewVersionRequest:(BOXFileUploadNewVersionRequest *)request
+                                withFile:(BOXFile *)file
+                             tmpFilePath:(NSString *)tmpFilePath
+                                   error:(NSError *)error;
+
 #pragma mark - Folders
 
 - (void)cacheFolderRequest:(BOXFolderRequest *)request
