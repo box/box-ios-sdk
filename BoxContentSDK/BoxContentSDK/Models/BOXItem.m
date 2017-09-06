@@ -242,19 +242,20 @@
         }
         
         // Parse membership collections into a BOXCollection
-        NSArray *collectionMembershipsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionMemberships
-                                                                                 inDictionary:JSONResponse
-                                                                              hasExpectedType:[NSArray class]
-                                                                                  nullAllowed:YES];
-        
-        for (NSDictionary *membershipDictionary in collectionMembershipsJSONArray) {
-            // Parse the collection object with in the collection membership
-            NSArray *collectionJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections
-                                                                          inDictionary:membershipDictionary
-                                                                       hasExpectedType:[NSArray class]
-                                                                           nullAllowed:YES];
-
-            for (NSDictionary *collectionDictionary in collectionJSONArray) {
+        // TODO: Remove the collection count check once the service collection_membership implements object removal.
+        if ([collections count] > 0 ) {
+            NSArray *collectionMembershipsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionMemberships
+                                                                                     inDictionary:JSONResponse
+                                                                                  hasExpectedType:[NSArray class]
+                                                                                      nullAllowed:YES];
+            
+            for (NSDictionary *membershipDictionary in collectionMembershipsJSONArray) {
+                // Parse the collection object with in the collection membership
+                NSDictionary *collectionDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollection
+                                                                                    inDictionary:membershipDictionary
+                                                                                 hasExpectedType:[NSDictionary class]
+                                                                                     nullAllowed:YES];
+                
                 BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
                 // Collection rank in the collection_memberships object requires BOXCollection info,
                 // Don't set the rank without the dependant collection object.
@@ -289,19 +290,12 @@
     return NO;
 }
 
-// TODO: remove once we can use the file provider unranked constant
-#define boxUnranked 5
-
 - (NSNumber *)availableCollectionRank
 {
     NSNumber *rank = nil;
     for (BOXCollection *collection in self.collections) {
         if (collection.collectionRank != nil) {
             return collection.collectionRank;
-        } else {
-            // TODO: We are using the default of 5 because the file provider unranked constant of 1
-            // crashes the enumerator. Once the issue is resolved, we can update this code.
-            rank = [[NSNumber alloc] initWithUnsignedLongLong:boxUnranked];
         }
     }
     
