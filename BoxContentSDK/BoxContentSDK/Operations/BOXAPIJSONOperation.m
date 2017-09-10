@@ -98,7 +98,7 @@
     
     NSError *JSONError = nil;
     id decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
-    
+
     if (JSONError != nil)
     {
         if (self.error == nil) {

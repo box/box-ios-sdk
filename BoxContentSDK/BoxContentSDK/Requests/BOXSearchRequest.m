@@ -145,7 +145,7 @@
             NSUInteger capacity = [itemDictionaries count];
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
-            for (NSDictionary *itemDictionary in itemDictionaries) {
+            for (NSDictionary *itemDictionary in itemDictionaries) @autoreleasepool {
                 [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
 

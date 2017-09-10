@@ -66,7 +66,7 @@
             NSString *nextMarker = JSONDictionary[BOXAPIParameterKeyNextMarker];
             NSMutableArray *collaborations = [NSMutableArray arrayWithCapacity:collaborationDictionaries.count];
             
-            for (NSDictionary *collaborationDictionary in collaborationDictionaries) {
+            for (NSDictionary *collaborationDictionary in collaborationDictionaries) @autoreleasepool {
                 [collaborations addObject:[[BOXCollaboration alloc] initWithJSON:collaborationDictionary]];
             }
             
