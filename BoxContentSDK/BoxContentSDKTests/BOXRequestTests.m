@@ -57,14 +57,14 @@
 
 - (void)test_that_full_fields_string_for_files_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,sha1,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,version_number,comment_count,permissions,lock,extension,is_package,has_collaborations,is_externally_owned,allowed_invitee_roles,allowed_shared_link_access_levels,collections";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,sha1,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,version_number,comment_count,permissions,lock,extension,is_package,has_collaborations,is_externally_owned,allowed_invitee_roles,allowed_shared_link_access_levels,collections,collection_memberships";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullFileFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }
 
 - (void)test_that_full_fields_string_for_folders_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections,folder_upload_email,sync_state,has_collaborations,is_externally_owned,can_non_owners_invite,allowed_invitee_roles";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections,collection_memberships,folder_upload_email,sync_state,has_collaborations,is_externally_owned,can_non_owners_invite,allowed_invitee_roles";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullFolderFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }
@@ -78,7 +78,7 @@
 
 - (void)test_that_full_fields_string_for_items_is_correct
 {
-    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections,folder_upload_email,sync_state,has_collaborations,is_externally_owned,can_non_owners_invite,allowed_invitee_roles,sha1,version_number,comment_count,url";
+    NSString *expectedFieldsString = @"type,id,sequence_id,etag,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections,collection_memberships,folder_upload_email,sync_state,has_collaborations,is_externally_owned,can_non_owners_invite,allowed_invitee_roles,sha1,version_number,comment_count,url";
     NSString *actualFieldsString = [[[BOXRequest alloc] init] fullItemFieldsParameterString];
     XCTAssertEqualObjects(expectedFieldsString, actualFieldsString);
 }
