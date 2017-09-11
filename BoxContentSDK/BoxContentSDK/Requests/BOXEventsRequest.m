@@ -61,7 +61,7 @@
                 NSArray *eventsJSON = JSONDictionary[BOXAPICollectionKeyEntries];
                 NSMutableArray *events = [NSMutableArray arrayWithCapacity:eventsJSON.count];
                 
-                for (NSDictionary *dict in eventsJSON) {
+                for (NSDictionary *dict in eventsJSON) @autoreleasepool {
                     [events addObject:[[BOXEvent alloc] initWithJSON:dict]];
                 }
                 NSString *nextStreamPosition = [NSString stringWithFormat:@"%@", JSONDictionary[BOXAPICollectionKeyNextStreamPosition]];

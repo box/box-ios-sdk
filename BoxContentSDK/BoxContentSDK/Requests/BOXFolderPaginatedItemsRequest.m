@@ -73,7 +73,7 @@
             NSUInteger capacity = itemDictionaries.count;
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
-            for (NSDictionary *itemDictionary in itemDictionaries) {
+            for (NSDictionary *itemDictionary in itemDictionaries) @autoreleasepool {
                 BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
