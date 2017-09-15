@@ -110,15 +110,10 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
 
 - (NSString *)box_fileNameExtensionAccountingForEmptyName
 {
-    // Get the path extension from the file name.
-    NSString *string = [[self lastPathComponent] pathExtension];
-    
     // pathExtension returns an empty string if there are no characters before the pathExtension (e.g ".jpg" or ".m4a")
     // Just simulating a correct name to correctly find the extension, since they are still valid files that can be previewed.
-    if (string.length == 0) {
-        NSString *tmp = [NSString stringWithFormat:@"tmp%@", self.lastPathComponent];
-        string = [tmp box_pathExtensionAccountingForZippedPackages];
-    }
+    NSString *tmp = [NSString stringWithFormat:@"tmp%@", self.lastPathComponent];
+    NSString *string = [tmp box_pathExtensionAccountingForZippedPackages];
     
     return string;
 }
