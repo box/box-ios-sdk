@@ -492,7 +492,6 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
 typedef NS_ENUM(NSUInteger, BOXAvatarType) {
     BOXAvatarTypeUnspecified = 0,
     BOXAvatarTypeSmall,
-    BOXAvatarTypeLarge,
-    BOXAvatarTypeProfile
+    BOXAvatarTypeLarge
 };
 
