@@ -49,6 +49,7 @@
 @class BOXSharedItemRequest;
 
 @class BOXUserRequest;
+@class BOXUserAvatarRequest;
 
 @class BOXCollaborationRequest;
 @class BOXCollaborationCreateRequest;
@@ -77,6 +78,13 @@
 
 - (void)retrieveCacheForUserRequest:(BOXUserRequest *)request
                          completion:(BOXUserBlock)completionRequest;
+
+- (void)cacheUserAvatarRequest:(BOXUserAvatarRequest *)request
+                    withAvatar:(UIImage *)avatar
+                         error:(NSError *)error;
+
+- (void)retrieveCacheForUserAvatarRequest:(BOXUserAvatarRequest *)request
+                               completion:(BOXImageBlock)completionBlock;
 
 #pragma mark - Shared Item
 
