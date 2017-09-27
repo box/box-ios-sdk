@@ -102,7 +102,7 @@
 		599B196D1E4BE67600709C27 /* NSError+BOXContentSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C59605541CC5917E0096DD59 /* NSError+BOXContentSDKAdditions.m */; };
 		599B196E1E4BE67600709C27 /* NSJSONSerialization+BOXContentSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C59605561CC5917E0096DD59 /* NSJSONSerialization+BOXContentSDKAdditions.m */; };
 		599B196F1E4BE67600709C27 /* NSString+BOXContentSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C59605581CC5917E0096DD59 /* NSString+BOXContentSDKAdditions.m */; };
-		599B19701E4BE67600709C27 /* NSString+BOXURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD97D172CE2C50052AD11 /* NSString+BOXURLHelper.m */; };
+		599B19701E4BE67600709C27 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		599B19711E4BE67600709C27 /* NSURL+BOXURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FAD97F172CE2C50052AD11 /* NSURL+BOXURLHelper.m */; };
 		599B19721E4BE67600709C27 /* BOXContentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 15958DEB1A1432AB00AEBCEE /* BOXContentClient.m */; };
 		599B19731E4BE67600709C27 /* BOXContentClient+Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15958E581A1445A300AEBCEE /* BOXContentClient+Authentication.m */; };
@@ -247,7 +247,6 @@
 		599B1A001E4BE6DC00709C27 /* NSError+BOXContentSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C59605531CC5917E0096DD59 /* NSError+BOXContentSDKAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A011E4BE6DC00709C27 /* NSJSONSerialization+BOXContentSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C59605551CC5917E0096DD59 /* NSJSONSerialization+BOXContentSDKAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A021E4BE6DC00709C27 /* NSString+BOXContentSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C59605571CC5917E0096DD59 /* NSString+BOXContentSDKAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		599B1A031E4BE6DC00709C27 /* NSString+BOXURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E4FAD97C172CE2C50052AD11 /* NSString+BOXURLHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A041E4BE6DC00709C27 /* NSURL+BOXURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E4FAD97E172CE2C50052AD11 /* NSURL+BOXURLHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A051E4BE6DC00709C27 /* BOXContentClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 15958DEA1A1432AB00AEBCEE /* BOXContentClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A061E4BE6DC00709C27 /* BOXContentClient+Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 15958E571A1445A300AEBCEE /* BOXContentClient+Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -592,6 +591,8 @@
 		15605D9D1A2013B800C5EE5A /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		15605D9E1A2013B800C5EE5A /* OCMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMRecorder.h; sourceTree = "<group>"; };
 		15605D9F1A2013B800C5EE5A /* OCMStubRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMStubRecorder.h; sourceTree = "<group>"; };
+		156087001F7C6AE7008DCD2C /* BOXUserAvatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BOXUserAvatarImageView.h; path = BoxContentSDK/Views/BOXUserAvatarImageView.h; sourceTree = SOURCE_ROOT; };
+		156087011F7C6AE7008DCD2C /* BOXUserAvatarImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BOXUserAvatarImageView.m; path = BoxContentSDK/Views/BOXUserAvatarImageView.m; sourceTree = SOURCE_ROOT; };
 		156B01A01A535FEA00F01FF1 /* BOXCannedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCannedResponse.h; sourceTree = "<group>"; };
 		156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCannedResponse.m; sourceTree = "<group>"; };
 		157512481A575429006628C6 /* BOXPreflightCheckRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXPreflightCheckRequestTests.m; sourceTree = "<group>"; };
@@ -1043,6 +1044,16 @@
 				15605D9F1A2013B800C5EE5A /* OCMStubRecorder.h */,
 			);
 			path = OCMock;
+			sourceTree = "<group>";
+		};
+		156086FF1F7C6AD3008DCD2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				156087001F7C6AE7008DCD2C /* BOXUserAvatarImageView.h */,
+				156087011F7C6AE7008DCD2C /* BOXUserAvatarImageView.m */,
+			);
+			name = Views;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		15958DE71A1432AB00AEBCEE /* Clients */ = {
@@ -1540,6 +1551,7 @@
 		E470434016D41DC500FED29A /* BoxContentSDK */ = {
 			isa = PBXGroup;
 			children = (
+				156086FF1F7C6AD3008DCD2C /* Views */,
 				86E6C40A1B23C84C00EA0E43 /* Sessions */,
 				C562DB411A4829EA0002E510 /* Protocols */,
 				5930AB501A23DD57003970C6 /* Helper */,
@@ -1755,7 +1767,6 @@
 				599B1A001E4BE6DC00709C27 /* NSError+BOXContentSDKAdditions.h in Headers */,
 				599B1A011E4BE6DC00709C27 /* NSJSONSerialization+BOXContentSDKAdditions.h in Headers */,
 				599B1A021E4BE6DC00709C27 /* NSString+BOXContentSDKAdditions.h in Headers */,
-				599B1A031E4BE6DC00709C27 /* NSString+BOXURLHelper.h in Headers */,
 				599B1A041E4BE6DC00709C27 /* NSURL+BOXURLHelper.h in Headers */,
 				599B1A051E4BE6DC00709C27 /* BOXContentClient.h in Headers */,
 				599B1A061E4BE6DC00709C27 /* BOXContentClient+Authentication.h in Headers */,
@@ -2191,7 +2202,7 @@
 				599B196D1E4BE67600709C27 /* NSError+BOXContentSDKAdditions.m in Sources */,
 				599B196E1E4BE67600709C27 /* NSJSONSerialization+BOXContentSDKAdditions.m in Sources */,
 				599B196F1E4BE67600709C27 /* NSString+BOXContentSDKAdditions.m in Sources */,
-				599B19701E4BE67600709C27 /* NSString+BOXURLHelper.m in Sources */,
+				599B19701E4BE67600709C27 /* (null) in Sources */,
 				599B19711E4BE67600709C27 /* NSURL+BOXURLHelper.m in Sources */,
 				599B19721E4BE67600709C27 /* BOXContentClient.m in Sources */,
 				599B19731E4BE67600709C27 /* BOXContentClient+Authentication.m in Sources */,

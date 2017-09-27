@@ -179,3 +179,4 @@
 // Others
 #import "BOXSharedLinkHeadersDefaultManager.h"
 #import "BOXDispatchHelper.h"
+#import "BOXUserAvatarImageView.h"
