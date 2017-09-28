@@ -12,6 +12,8 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXURLRequestSerialization.h"
 #import "BOXAPIOperation_Private.h"
+#import "BOXOAuth2Session.h"
+#import "BOXAbstractSession_Private.h"
 
 #define BOX_OAUTH2_AUTHORIZATION_CODE_GRANT_PARAMETER_COUNT  (5)
 
@@ -100,11 +102,39 @@
 {
     BOOL shouldLogout = [super shouldErrorTriggerLogout:error];
     
+    BOOL isRefreshTokenInvalid = NO;
+    BOOL isErrorForbidden = NO;
+
+    NSDictionary *errorInfo = [error.userInfo objectForKey:BOXJSONErrorResponseKey];
+    NSString *errorType = [errorInfo objectForKey:BOXAuthURLParameterErrorCodeKey];
+    
+    if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidGrant]) {
+        isRefreshTokenInvalid = YES;
+    }
+    
+    if ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIErrorForbidden) {
+        isErrorForbidden = YES;
+    }
+    
     // We let the parent class handle most error scenarios, but for token requests specifically, a 403 should trigger a logout.
-    if (!shouldLogout) {
-        if ([error.domain isEqualToString:BOXContentSDKErrorDomain]) {
-            if (error.code == BOXContentSDKAPIErrorForbidden) {
-                shouldLogout = YES;
+    if (isRefreshTokenInvalid || isErrorForbidden) {
+        
+        shouldLogout = YES;
+        
+        BOXOAuth2Session *session = (BOXOAuth2Session *)self.session;
+        
+        if ([session isKindOfClass:[BOXOAuth2Session class]]) {
+            NSString *jsonString = [[BOXOAuth2Session keychainItemWrapperForUserWithID:session.user.modelID] objectForKey:(__bridge id)kSecValueData];
+            NSError *error = nil;
+            NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                       options:0
+                                                                         error:&error];
+            NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
+            
+            // If our keychain token and token in memory are out of sync, we hold off on the logout.
+            if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
+                [session restoreSessionWithKeyChainDictionary:dictionary];
+                shouldLogout = NO;
             }
         }
     }
