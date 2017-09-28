@@ -118,22 +118,41 @@
         BOXOAuth2Session *session = (BOXOAuth2Session *)self.session;
         
         if ([session isKindOfClass:[BOXOAuth2Session class]]) {
-            NSString *jsonString = [[BOXOAuth2Session keychainItemWrapperForUserWithID:session.user.modelID] objectForKey:(__bridge id)kSecValueData];
-            NSError *error = nil;
-            NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
-                                                                       options:0
-                                                                         error:&error];
-            NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
-            
-            // If our keychain token and token in memory are out of sync, we hold off on the logout.
-            if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
-                [session restoreSessionWithKeyChainDictionary:dictionary];
+            // We're probably here because we're trying to refresh our access token right around the time it is being
+            // refreshed in another process, and we lost the race. Check the keychain, and only report refresh failure
+            // if it wasn't updated.
+            if ([self updateTokensFromKeychainIntoSession:session]) {
                 shouldLogout = NO;
+            } else {
+                // Pause briefly to allow time for the keychain to be updated (in case we have really unlucky timing).
+                // This only happens when racing to refresh our token, which is infrequent enough that this delay should
+                // be unnoticable to a user.
+                usleep(0.2 * USEC_PER_SEC);
+                if ([self updateTokensFromKeychainIntoSession:session]) {
+                    shouldLogout = NO;
+                }
             }
         }
     }
     
     return shouldLogout;
+}
+
+// Returns whether the session was actually updated by reading the keychain.
+- (BOOL)updateTokensFromKeychainIntoSession:(BOXOAuth2Session *)session
+{
+    NSString *jsonString = [[BOXOAuth2Session keychainItemWrapperForUserWithID:session.user.modelID] objectForKey:(__bridge id)kSecValueData];
+    NSError *error = nil;
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                               options:0
+                                                                 error:&error];
+    NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
+
+    if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
+        [session restoreSessionWithKeyChainDictionary:dictionary];
+        return YES;
+    }
+    return NO;
 }
 
 @end
