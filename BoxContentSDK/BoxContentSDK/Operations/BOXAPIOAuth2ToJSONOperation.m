@@ -102,19 +102,13 @@
 {
     BOOL shouldLogout = [super shouldErrorTriggerLogout:error];
     
-    BOOL isRefreshTokenInvalid = NO;
-    BOOL isErrorForbidden = NO;
 
     NSDictionary *errorInfo = [error.userInfo objectForKey:BOXJSONErrorResponseKey];
     NSString *errorType = [errorInfo objectForKey:BOXAuthURLParameterErrorCodeKey];
     
-    if ([errorType isEqualToString:BOXAuthTokenRequestErrorInvalidGrant]) {
-        isRefreshTokenInvalid = YES;
-    }
+    BOOL isRefreshTokenInvalid = [errorType isEqualToString:BOXAuthTokenRequestErrorInvalidGrant];
     
-    if ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIErrorForbidden) {
-        isErrorForbidden = YES;
-    }
+    BOOL isErrorForbidden = ([error.domain isEqualToString:BOXContentSDKErrorDomain] && error.code == BOXContentSDKAPIErrorForbidden);
     
     // We let the parent class handle most error scenarios, but for token requests specifically, a 403 should trigger a logout.
     if (isRefreshTokenInvalid || isErrorForbidden) {
