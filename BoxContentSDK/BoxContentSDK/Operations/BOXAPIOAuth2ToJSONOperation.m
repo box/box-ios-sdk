@@ -141,7 +141,12 @@
 // Returns whether the session was actually updated by reading the keychain.
 - (BOOL)updateTokensFromKeychainIntoSession:(BOXOAuth2Session *)session
 {
-    NSString *jsonString = [[BOXOAuth2Session keychainItemWrapperForUserWithID:session.user.modelID] objectForKey:(__bridge id)kSecValueData];
+    NSString *userID = session.user.modelID;
+    if (!userID) {
+        return NO;
+    }
+
+    NSString *jsonString = [[BOXOAuth2Session keychainItemWrapperForUserWithID:userID] objectForKey:(__bridge id)kSecValueData];
     NSError *error = nil;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:0
