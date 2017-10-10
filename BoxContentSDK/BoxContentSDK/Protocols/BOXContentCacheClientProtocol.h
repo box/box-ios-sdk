@@ -203,6 +203,7 @@
 
 - (void)cacheFolderPaginatedItemsRequest:(BOXFolderPaginatedItemsRequest *)request
                                withItems:(NSArray *)items
+                              totalCount:(NSUInteger)totalCount
                                    limit:(NSUInteger)limit
                                   offset:(NSUInteger)offset
                                    error:(NSError *)error;
