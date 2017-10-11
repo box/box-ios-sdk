@@ -43,6 +43,8 @@
 		155170C71A54927B004C00AF /* BOXFileVersionsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 155170C61A54927B004C00AF /* BOXFileVersionsRequestTests.m */; };
 		155EFD5A1A252EF900F34254 /* file_all_fields.json in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD591A252EF900F34254 /* file_all_fields.json */; };
 		15605DA01A2013B800C5EE5A /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15605D951A2013B800C5EE5A /* libOCMock.a */; };
+		1560870A1F7C7F7B008DCD2C /* BOXUserAvatarImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 156087071F7C78B4008DCD2C /* BOXUserAvatarImageView.m */; };
+		1560870C1F7C7FCF008DCD2C /* BOXUserAvatarImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 156087061F7C78B4008DCD2C /* BOXUserAvatarImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		156B01A21A535FEA00F01FF1 /* BOXCannedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */; };
 		157512491A575429006628C6 /* BOXPreflightCheckRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 157512481A575429006628C6 /* BOXPreflightCheckRequestTests.m */; };
 		1575124D1A575ACE006628C6 /* preflight_check_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 1575124C1A575ACE006628C6 /* preflight_check_success.json */; };
@@ -590,6 +592,8 @@
 		15605D9D1A2013B800C5EE5A /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		15605D9E1A2013B800C5EE5A /* OCMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMRecorder.h; sourceTree = "<group>"; };
 		15605D9F1A2013B800C5EE5A /* OCMStubRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMStubRecorder.h; sourceTree = "<group>"; };
+		156087061F7C78B4008DCD2C /* BOXUserAvatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXUserAvatarImageView.h; sourceTree = "<group>"; };
+		156087071F7C78B4008DCD2C /* BOXUserAvatarImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXUserAvatarImageView.m; sourceTree = "<group>"; };
 		156B01A01A535FEA00F01FF1 /* BOXCannedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCannedResponse.h; sourceTree = "<group>"; };
 		156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCannedResponse.m; sourceTree = "<group>"; };
 		157512481A575429006628C6 /* BOXPreflightCheckRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXPreflightCheckRequestTests.m; sourceTree = "<group>"; };
@@ -1041,6 +1045,15 @@
 				15605D9F1A2013B800C5EE5A /* OCMStubRecorder.h */,
 			);
 			path = OCMock;
+			sourceTree = "<group>";
+		};
+		156087051F7C7893008DCD2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				156087061F7C78B4008DCD2C /* BOXUserAvatarImageView.h */,
+				156087071F7C78B4008DCD2C /* BOXUserAvatarImageView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		15958DE71A1432AB00AEBCEE /* Clients */ = {
@@ -1538,6 +1551,7 @@
 		E470434016D41DC500FED29A /* BoxContentSDK */ = {
 			isa = PBXGroup;
 			children = (
+				156087051F7C7893008DCD2C /* Views */,
 				86E6C40A1B23C84C00EA0E43 /* Sessions */,
 				C562DB411A4829EA0002E510 /* Protocols */,
 				5930AB501A23DD57003970C6 /* Helper */,
@@ -1895,6 +1909,7 @@
 				596598EC1E9D7F3000431413 /* BOXURLSessionCacheClient.h in Headers */,
 				596598ED1E9D7F3000431413 /* BOXURLRequestSerialization.h in Headers */,
 				596598EE1E9D7F3000431413 /* BOXFileRepresentationDownloadRequest.h in Headers */,
+				1560870C1F7C7FCF008DCD2C /* BOXUserAvatarImageView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2174,6 +2189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1560870A1F7C7F7B008DCD2C /* BOXUserAvatarImageView.m in Sources */,
 				599B19621E4BE67600709C27 /* BOXAuthorizationViewController.m in Sources */,
 				599B19631E4BE67600709C27 /* BOXOAuth2Session.m in Sources */,
 				599B19641E4BE67600709C27 /* BOXParallelOAuth2Session.m in Sources */,
