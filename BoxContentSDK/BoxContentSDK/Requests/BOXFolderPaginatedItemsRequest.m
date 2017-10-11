@@ -81,9 +81,10 @@
                                                                                       ancestors:item.pathFolders];
             }
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:totalCount:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:items
+                                                        totalCount:totalCount
                                                              limit:limit
                                                             offset:offset
                                                              error:nil];
@@ -95,9 +96,10 @@
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:totalCount:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:nil
+                                                        totalCount:0
                                                              limit:0
                                                             offset:0
                                                              error:error];
