@@ -79,6 +79,8 @@
 // Initializes and resets the default generic keychain item data.
 - (void)resetKeychainItem;
 
-+ (id)keychainServiceIdentifier;
+// Retrieve all keychain entries that have been made by instances of BOXKeychainItemWrapper.
+// @return An array of BOXKeychainItemWrapper objects.
++ (NSArray *)allKeychainItemWrappersWithAccessGroup:(NSString *)accessGroup;
 
 @end

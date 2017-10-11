@@ -207,56 +207,38 @@ static NSString *staticKeychainAccessGroup;
 {
     NSMutableArray *users = [NSMutableArray array];
     
-    // Query the keychain for entries with an identifier that has our keychainIdentifierPrefix.
-    NSMutableDictionary *keychainQuery = [NSMutableDictionary dictionaryWithDictionary:@{(__bridge id)kSecReturnAttributes : (__bridge id)kCFBooleanTrue,
-                                                                                         (__bridge id)kSecMatchLimit : (__bridge id)kSecMatchLimitAll,
-                                                                                         (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
-                                                                                         (__bridge id)kSecAttrService : [BOXKeychainItemWrapper keychainServiceIdentifier]}];
-    
-#if ! TARGET_IPHONE_SIMULATOR
-    // Ignore the access group if running on the iPhone simulator.
-    // Apps that are built for the simulator aren't signed, so there's no keychain access group
-    // for the simulator to check.
-    if ([self keychainAccessGroup].length > 0) {
-        [keychainQuery setObject:[self keychainAccessGroup] forKey:(__bridge id)kSecAttrAccessGroup];
-    }
-#endif
-    
-    CFArrayRef keychainQueryResult = NULL;
-    OSStatus queryStatus =  SecItemCopyMatching((__bridge CFDictionaryRef)keychainQuery, (CFTypeRef *)&keychainQueryResult);
-    if (queryStatus == 0 && keychainQueryResult != NULL)
-    {
-        NSArray* keychainEntries = (__bridge_transfer NSArray*)keychainQueryResult;
-        for (NSDictionary *dict in keychainEntries)
-        {
-            NSObject *object = [dict objectForKey:((__bridge id)kSecAttrGeneric)];
-            if (![object isKindOfClass:[NSString class]]) {
-                continue;
-            }
+    // Go through all keychain items added by BOXKeychainItemWrapper
+    NSArray *keychainItemWrappers = [BOXKeychainItemWrapper allKeychainItemWrappersWithAccessGroup:[self keychainAccessGroup]];
+    for (BOXKeychainItemWrapper *keychainItemWrapper in keychainItemWrappers) {
+        NSObject *generic = [keychainItemWrapper objectForKey:((__bridge id)kSecAttrGeneric)];
+        if ([generic isKindOfClass:[NSString class]]) {
+            NSString *keychainIdentifier = (NSString *)generic;
             
-            NSString *keychainIdentifier = (NSString *) object;
-            if ([keychainIdentifier hasPrefix:[self keychainIdentifierPrefix]])
-            {
+            // Only look at those that have our prefix
+            if ([keychainIdentifier hasPrefix:[self keychainIdentifierPrefix]]) {
+                
+                // Extract user-id from prefix, and credentials from keychain value data
                 NSString *userID = [self userIDFromKeychainIdentifier:keychainIdentifier];
-                if (userID.length > 0)
-                {
-                    NSString *jsonString = [[self keychainItemWrapperForUserWithID:userID] objectForKey:(__bridge id)kSecValueData];
+                if (userID.length > 0) {
+                    NSString *jsonString = [keychainItemWrapper objectForKey:(__bridge id)kSecValueData];
                     NSError *error = nil;
                     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-                    NSString *userIDFromKeychain = [dictionary objectForKey:keychainUserIDKey];
-                    NSString *userNameFromKeychain = [dictionary objectForKey:keychainUserNameKey];
-                    NSString *userLoginFromKeychain = [dictionary objectForKey:keychainUserLoginKey];
-                    if ([userID isEqualToString:userIDFromKeychain]) {
-                        BOXUserMini *miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
-                                                                               name:userNameFromKeychain
-                                                                              login:userLoginFromKeychain];
-                        [users addObject:miniUser];
+                    if (error == nil) {
+                        NSString *userIDFromKeychain = [dictionary objectForKey:keychainUserIDKey];
+                        NSString *userNameFromKeychain = [dictionary objectForKey:keychainUserNameKey];
+                        NSString *userLoginFromKeychain = [dictionary objectForKey:keychainUserLoginKey];
+                        if ([userID isEqualToString:userIDFromKeychain]) {
+                            BOXUserMini *miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
+                                                                                   name:userNameFromKeychain
+                                                                                  login:userLoginFromKeychain];
+                            [users addObject:miniUser];
+                        }
                     }
                 }
             }
         }
     }
-    
+
     NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         BOXUserMini *userA = (BOXUserMini *) a;
         BOXUserMini *userB = (BOXUserMini *) b;
