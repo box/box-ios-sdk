@@ -98,6 +98,17 @@
     return request;
 }
 
+- (BOXFileDeleteRequest *)fileDeleteRequestWithID:(NSString *)fileID
+                                      associateID:(NSString *)associateID
+{
+    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID];
+    request.associateId = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFileDownloadRequest *)fileDownloadRequestWithID:(NSString *)fileID
                                       toLocalFilePath:(NSString *)localFilePath
 {
@@ -242,6 +253,18 @@
 - (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID
 {
     BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID isTrashed:YES];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+
+- (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID
+                                                      associateID:(NSString *)associateID
+{
+    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID isTrashed:YES];
+    request.associateId = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
     return request;

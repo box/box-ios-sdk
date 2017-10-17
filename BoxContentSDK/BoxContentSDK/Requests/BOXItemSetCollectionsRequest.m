@@ -204,7 +204,6 @@
         };
         
         fileOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            
             if ([self.cacheClient respondsToSelector:@selector(cacheItemSetCollectionsRequest:withUpdatedItem:error:)]) {
                 [self.cacheClient cacheItemSetCollectionsRequest:self
                                                  withUpdatedItem:nil
