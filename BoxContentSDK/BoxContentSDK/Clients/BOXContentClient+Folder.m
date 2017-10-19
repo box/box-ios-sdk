@@ -121,6 +121,18 @@
     return request;
 }
 
+- (BOXFolderDeleteRequest *)folderDeleteRequestWithID:(NSString *)folderID
+                                          associateId:(NSString *)associateId;
+{
+    BOXFolderDeleteRequest *request = nil;
+    request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID];
+    request.requestDirectoryPath = self.tempCacheDir;
+    request.associateId = associateId;
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFolderItemsRequest *)folderItemsRequestWithID:(NSString *)folderID
 {
     BOXFolderItemsRequest *request = nil;
@@ -152,6 +164,18 @@
 {
     BOXFolderDeleteRequest *request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID
                                                                              isTrashed:YES];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXFolderDeleteRequest *)trashedFolderDeleteFromTrashRequestWithID:(NSString *)folderID
+                                                          associateId:(NSString *)associateId;
+{
+    BOXFolderDeleteRequest *request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID
+                                                                             isTrashed:YES];
+    request.associateId = associateId;
+    request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
     return request;
