@@ -175,6 +175,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID;
 
 /**
+ *  Generate a background request to restore a folder from the trash.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID
+                                                          associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to retrieve all items in the folder
  *
  *  @param folderID Folder ID.
@@ -211,6 +223,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID;
+
+/**
+ *  Generate a background request to retrieve information about a folder in the trash.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID
+                                         associateID:(NSString *)associateID;
+
 
 @end
 

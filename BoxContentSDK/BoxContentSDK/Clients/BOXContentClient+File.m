@@ -278,6 +278,17 @@
     return request;
 }
 
+- (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID
+                                                      associateID:(NSString *)associateID
+{
+    BOXTrashedFileRestoreRequest *request = [[BOXTrashedFileRestoreRequest alloc] initWithFileID:fileID];
+    request.associateId = associateID;
+    request.requestDirectoryPath = self.tempCacheDir;
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
                                                                   toLocalFilePath:(NSString *)localFilePath
                                                                    representation:(BOXRepresentation *)representation
