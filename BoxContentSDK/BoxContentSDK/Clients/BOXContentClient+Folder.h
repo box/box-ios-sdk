@@ -19,6 +19,8 @@
 @class BOXTrashedFolderRestoreRequest;
 @class BOXTrashedItemArrayRequest;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BOXContentClient (Folder)
 
 /**
@@ -40,7 +42,7 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
-                                  associateId:(NSString *)associateId;
+                                  associateId:(nullable NSString *)associateId;
 
 /**
  *  Generate a request to create a new folder.
@@ -97,7 +99,7 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
-                                          associateID:(NSString *)associateID;
+                                          associateID:(nullable NSString *)associateID;
 
 /**
  *  Generate a request to move a folder into another folder.
@@ -140,7 +142,7 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderDeleteRequest *)folderDeleteRequestWithID:(NSString *)folderID
-                                          associateId:(NSString *)associateId;
+                                          associateId:(nullable NSString *)associateId;
 
 /**
  *  Generate a request to permanently delete a folder in the trash.
@@ -161,7 +163,7 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderDeleteRequest *)trashedFolderDeleteFromTrashRequestWithID:(NSString *)folderID
-                                                          associateId:(NSString *)associateId;
+                                                          associateId:(nullable NSString *)associateId;
 
 /**
  *  Generate a request to restore a folder from the trash.
@@ -211,3 +213,5 @@
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID;
 
 @end
+
+NS_ASSUME_NONNULL_END

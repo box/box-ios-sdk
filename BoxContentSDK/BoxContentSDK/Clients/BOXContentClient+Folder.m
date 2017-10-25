@@ -19,6 +19,8 @@
 #import "BOXTrashedItemArrayRequest.h"
 #import "BOXTrashedFolderRestoreRequest.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation BOXContentClient (Folder)
 
 - (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
@@ -31,7 +33,7 @@
 }
 
 - (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
-                                  associateId:(NSString *)associateId
+                                  associateId:(nullable NSString *)associateId
 {
     BOXFolderRequest *request = nil;
     request = [[BOXFolderRequest alloc] initWithFolderID:folderID associateId:associateId];
@@ -83,7 +85,7 @@
 }
 
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
-                                          associateID:(NSString *)associateID
+                                          associateID:(nullable NSString *)associateID
 {
     BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID];
     request.associateId = associateID;
@@ -122,7 +124,7 @@
 }
 
 - (BOXFolderDeleteRequest *)folderDeleteRequestWithID:(NSString *)folderID
-                                          associateId:(NSString *)associateId;
+                                          associateId:(nullable NSString *)associateId;
 {
     BOXFolderDeleteRequest *request = nil;
     request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID];
@@ -170,7 +172,7 @@
 }
 
 - (BOXFolderDeleteRequest *)trashedFolderDeleteFromTrashRequestWithID:(NSString *)folderID
-                                                          associateId:(NSString *)associateId;
+                                                          associateId:(nullable NSString *)associateId;
 {
     BOXFolderDeleteRequest *request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID
                                                                              isTrashed:YES];
@@ -197,5 +199,6 @@
     return request;
 }
 
-
 @end
+
+NS_ASSUME_NONNULL_END
