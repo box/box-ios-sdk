@@ -286,7 +286,7 @@
 - (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID;
 
 /**
- *  Generate a background to permanently delete a file in the trash.
+ *  Generate a background request to permanently delete a file in the trash.
  *
  *  @param fileID File ID.
  *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
@@ -305,6 +305,19 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID;
+
+
+/**
+ *  Generate a background request to restore a file in the trash.
+ *
+ *  @param fileID File ID.
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID
+                                                      associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to do a "preflight" check to determine whether an upload is possible. You can use this

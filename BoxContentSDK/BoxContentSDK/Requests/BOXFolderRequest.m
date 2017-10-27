@@ -26,11 +26,6 @@
  */
 - (BOOL)shouldPerformBackgroundOperation;
 
-/**
- Caller provided unique ID to execute the request as a NSURLSession background task
- */
-@property (nonatomic, readwrite, copy) NSString *associateId;
-
 @end
 
 @implementation BOXFolderRequest
