@@ -441,9 +441,6 @@ forHTTPHeaderField:(NSString *)field
     __block NSError *error = nil;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-
         [inputStream open];
         [outputStream open];
 
@@ -1215,7 +1212,6 @@ typedef enum {
             _phase = BOXHeaderPhase;
             break;
         case BOXHeaderPhase:
-            [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
             [self.inputStream open];
             _phase = BOXBodyPhase;
             break;
