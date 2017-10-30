@@ -441,9 +441,6 @@ forHTTPHeaderField:(NSString *)field
     __block NSError *error = nil;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-
         [inputStream open];
         [outputStream open];
 
@@ -471,9 +468,7 @@ forHTTPHeaderField:(NSString *)field
         [inputStream close];
 
         if (handler) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                handler(error);
-            });
+            handler(error);
         }
     });
 
@@ -1210,13 +1205,6 @@ typedef enum {
 }
 
 - (BOOL)transitionToNextPhase {
-    if (![[NSThread currentThread] isMainThread]) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self transitionToNextPhase];
-        });
-        return YES;
-    }
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
     switch (_phase) {
@@ -1224,7 +1212,6 @@ typedef enum {
             _phase = BOXHeaderPhase;
             break;
         case BOXHeaderPhase:
-            [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
             [self.inputStream open];
             _phase = BOXBodyPhase;
             break;
