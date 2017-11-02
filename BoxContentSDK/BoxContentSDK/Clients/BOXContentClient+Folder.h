@@ -184,7 +184,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return A request that can be customized and then executed.
  */
 - (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID
-                                                          associateID:(NSString *)associateID;
+                                                          associateID:(nullable NSString *)associateID;
 
 /**
  *  Generate a request to retrieve all items in the folder
@@ -234,7 +234,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID
-                                         associateID:(NSString *)associateID;
+                                         associateID:(nullable NSString *)associateID;
 
 
 @end
