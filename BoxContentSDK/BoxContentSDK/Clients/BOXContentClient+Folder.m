@@ -163,7 +163,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID
-                                         associateID:(NSString *)associateID
+                                         associateID:(nullable NSString *)associateID
 {
     BOXFolderRequest *request = [[BOXFolderRequest alloc] initWithFolderID:folderID isTrashed:YES];
     request.associateId = associateID;
@@ -212,7 +212,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID
-                                                          associateID:(NSString *)associateID
+                                                          associateID:(nullable NSString *)associateID
 {
     BOXTrashedFolderRestoreRequest *request = [[BOXTrashedFolderRestoreRequest alloc] initWithFolderID:folderID];
     request.associateId = associateID;
