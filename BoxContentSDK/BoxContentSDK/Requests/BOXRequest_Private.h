@@ -22,6 +22,12 @@
 @property (nonatomic, readwrite, strong) BOXAPIQueueManager *queueManager;
 @property (nonatomic, readwrite, strong) BOXAPIOperation *operation;
 
+- (NSURL *) URLWithResource:(NSString *)resource
+                         ID:(NSString *)ID
+                subresource:(NSString *)subresource
+                      subID:(NSString *)subID
+                    baseURL:(NSString *)baseURL;
+
 - (NSURL *)URLWithResource:(NSString *)resource
                         ID:(NSString *)ID
                subresource:(NSString *)subresource
