@@ -94,7 +94,6 @@
                    baseURL:(NSString *)baseURL
 {
     NSString *URLString = baseURL;
-
     if (resource != nil) {
         URLString = [URLString stringByAppendingFormat:@"/%@", resource];
         if (ID != nil) {
@@ -107,7 +106,7 @@
             }
         }
     }
-
+    
     return [[NSURL alloc] initWithString:URLString];
 }
 
@@ -121,6 +120,7 @@
                            subID:subID
                          baseURL:self.baseURL];
 }
+
 
 - (NSURL *)uploadURLWithResource:(NSString *)resource
                               ID:(NSString *)ID

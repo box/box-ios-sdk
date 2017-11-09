@@ -25,6 +25,16 @@
 #import "BOXURLSessionManager.h"
 
 // Default API URLs
+/*
+ NOTE:  Currently when unversioned URLs are derived from the base URL,
+        it removes the last component of the URL path if and only if
+        the component begins with a number.
+        (e.g. "https://api.box.com/2.0" shortens to "https://api.box.com")
+        If we change the base URL to not end with the API version,
+        or change the API version to begin with a non-numerical character,
+        the "baseURLWithoutVersion" implementation will need to be updated
+        as well.
+*/
 NSString *const BOXDefaultAPIBaseURL = @"https://api.box.com/2.0";
 NSString *const BOXDefaultOAuth2BaseURL = @"https://api.box.com/oauth2";
 NSString *const BOXDefaultAPIAuthBaseURL = @"https://account.box.com/api";
@@ -47,6 +57,7 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 @synthesize queueManager = _queueManager;
 
 static NSString *staticAPIBaseURL;
+static NSString *staticAPIBaseURLWithoutVersion;
 static NSString *staticOAuth2BaseURL;
 static NSString *staticAPIAuthBaseURL;
 static NSString *staticAPIUploadBaseURL;
@@ -486,6 +497,24 @@ static BOXContentClient *defaultInstance = nil;
     return staticAPIBaseURL;
 }
 
+//NOTE: Right now we assume that version-portion of the URL string is specified by the last component in the URL path and it also starts with a number
++ (NSString *)APIBaseURLWithoutVersion
+{
+    if (staticAPIBaseURLWithoutVersion.length == 0) {
+        NSString *versionedURL = [BOXContentClient APIBaseURL];
+        NSString *unversionedURL = nil;
+        NSString *lastComponent = [versionedURL lastPathComponent];
+        if (lastComponent.length > 0 && isnumber([lastComponent characterAtIndex:0])) {
+            unversionedURL = [versionedURL stringByDeletingLastPathComponent];
+        }
+        else {
+            unversionedURL = versionedURL;
+        }
+        staticAPIBaseURLWithoutVersion = unversionedURL;
+    }
+    return staticAPIBaseURLWithoutVersion;
+}
+
 + (NSString *)OAuth2BaseURL
 {
     if (staticOAuth2BaseURL.length == 0) {
@@ -513,6 +542,7 @@ static BOXContentClient *defaultInstance = nil;
 + (void)setAPIBaseURL:(NSString *)APIBaseURL
 {
     staticAPIBaseURL = APIBaseURL;
+    staticAPIBaseURLWithoutVersion = nil;
 }
 
 + (void)setOAuth2BaseURL:(NSString *)OAuth2BaseURL

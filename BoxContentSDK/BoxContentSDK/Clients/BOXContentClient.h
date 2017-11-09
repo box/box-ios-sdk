@@ -216,6 +216,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *  API base URLs.
  **/
 + (NSString *)APIBaseURL;
++ (NSString *)APIBaseURLWithoutVersion;
 + (NSString *)OAuth2BaseURL;
 + (NSString *)APIAuthBaseURL;
 + (NSString *)APIUploadBaseURL;
