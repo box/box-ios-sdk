@@ -107,8 +107,14 @@
         __weak BOXAPIDataOperation *weakFileOperation = fileOperation;
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
-            if ([self.cacheClient respondsToSelector:@selector(cacheFileDeleteRequest:error:)]) {
-                [self.cacheClient cacheFileDeleteRequest:self error:nil];
+            if (self.isTrashed) {
+                if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFileDeleteRequest:error:)]) {
+                    [self.cacheClient cacheTrashedFileDeleteRequest:self error:nil];
+                }
+            } else {
+                if ([self.cacheClient respondsToSelector:@selector(cacheFileDeleteRequest:error:)]) {
+                    [self.cacheClient cacheFileDeleteRequest:self error:nil];
+                }
             }
             
             if ([[NSFileManager defaultManager] fileExistsAtPath: weakFileOperation.destinationPath]) {

@@ -150,6 +150,9 @@
                            withVersion:(BOXFileVersion *)fileVersion
                                  error:(NSError *)error;
 
+- (void)cacheTrashedFileDeleteRequest:(BOXFileDeleteRequest *)request
+                                error:(NSError *)error;
+
 - (void)cacheTrashedFileRestoreRequest:(BOXTrashedFileRestoreRequest *)request
                               withFile:(BOXFile *)file
                                  error:(NSError *)error;
@@ -221,6 +224,9 @@
 - (void)cacheTrashedFolderRestoreRequest:(BOXTrashedFolderRestoreRequest *)request
                               withFolder:(BOXFolder *)folder
                                    error:(NSError *)error;
+
+- (void)cacheTrashedFolderDeleteRequest:(BOXFolderDeleteRequest *)request
+                                error:(NSError *)error;
 
 - (void)hasFinishedFolderItemsRequest:(BOXFolderItemsRequest *)request;
 
