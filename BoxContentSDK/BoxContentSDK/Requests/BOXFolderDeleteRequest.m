@@ -111,10 +111,17 @@
         __weak BOXAPIDataOperation *weakFolderOperation = folderOperation;
         
         folderOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderDeleteRequest:error:)]) {
-                [self.cacheClient cacheFolderDeleteRequest:self error:nil];
-            }
             
+            if (self.isTrashed) {
+                if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderDeleteRequest:error:)]) {
+                    [self.cacheClient cacheTrashedFolderDeleteRequest:self error:nil];
+                }
+            } else {
+                if ([self.cacheClient respondsToSelector:@selector(cacheFolderDeleteRequest:error:)]) {
+                    [self.cacheClient cacheFolderDeleteRequest:self error:nil];
+                }
+            }
+
             if ([[NSFileManager defaultManager] fileExistsAtPath: weakFolderOperation.destinationPath]) {
                 NSError *error = nil;
                 [[NSFileManager defaultManager] removeItemAtPath:weakFolderOperation.destinationPath error:&error];
