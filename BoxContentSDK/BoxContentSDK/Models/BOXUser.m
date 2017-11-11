@@ -53,14 +53,16 @@
     if (self = [super initWithJSON:JSONResponse])
     {
         self.createdDate = [NSDate box_dateWithISO8601String:[NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCreatedAt
-                                                                                       inDictionary:JSONResponse
-                                                                                    hasExpectedType:[NSString class]
-                                                                                        nullAllowed:NO]];
+                                                                                            inDictionary:JSONResponse
+                                                                                         hasExpectedType:[NSString class]
+                                                                                             nullAllowed:YES
+                                                                                       suppressNullAsNil:YES]];
         
         self.modifiedDate = [NSDate box_dateWithISO8601String:[NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyModifiedAt
-                                                                                       inDictionary:JSONResponse
-                                                                                    hasExpectedType:[NSString class]
-                                                                                        nullAllowed:NO]];
+                                                                                             inDictionary:JSONResponse
+                                                                                          hasExpectedType:[NSString class]
+                                                                                              nullAllowed:YES
+                                                                                        suppressNullAsNil:YES]];
         
         self.language = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyLanguage
                                                        inDictionary:JSONResponse
