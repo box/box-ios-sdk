@@ -505,7 +505,9 @@ static BOXContentClient *defaultInstance = nil;
         NSString *unversionedURL = nil;
         NSString *lastComponent = [versionedURL lastPathComponent];
         if (lastComponent.length > 0 && isnumber([lastComponent characterAtIndex:0])) {
-            unversionedURL = [versionedURL stringByDeletingLastPathComponent];
+            //NOTE: NSString's stringByDeletingLastPathComponent also deletes a slash in "https://" so was not suitable here
+            NSRange range = [versionedURL rangeOfString: lastComponent options:NSBackwardsSearch];
+            unversionedURL = [versionedURL substringToIndex:range.location];
         }
         else {
             unversionedURL = versionedURL;
