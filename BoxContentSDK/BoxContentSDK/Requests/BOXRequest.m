@@ -93,21 +93,21 @@
                      subID:(NSString *)subID
                    baseURL:(NSString *)baseURL
 {
-    NSString *URLString = baseURL;
+    NSURL * url = [[NSURL alloc] initWithString:baseURL];
     if (resource != nil) {
-        URLString = [URLString stringByAppendingFormat:@"/%@", resource];
+        url = [url URLByAppendingPathComponent:resource];
         if (ID != nil) {
-            URLString = [URLString stringByAppendingFormat:@"/%@", ID];
+            url = [url URLByAppendingPathComponent:ID];
         }
         if (subresource != nil) {
-            URLString = [URLString stringByAppendingFormat:@"/%@", subresource];
+            url = [url URLByAppendingPathComponent:subresource];
             if (subID != nil) {
-                URLString = [URLString stringByAppendingFormat:@"/%@", subID];
+                url = [url URLByAppendingPathComponent:subID];
             }
         }
     }
     
-    return [[NSURL alloc] initWithString:URLString];
+    return url;
 }
 
 - (NSURL *)URLWithResource:(NSString *)resource
