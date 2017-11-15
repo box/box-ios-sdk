@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, BOXiOSVersion) {
     BOXiOSVersion8,
     BOXiOSVersion9,
     BOXiOSVersion10,
+    BOXiOSVersion11,
     BOXiOSVersionLatest
 };
 
