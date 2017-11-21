@@ -486,7 +486,9 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
     BOXThumbnailSize32 = 32,
     BOXThumbnailSize64 = 64,
     BOXThumbnailSize128 = 128,
-    BOXThumbnailSize256 = 256
+    BOXThumbnailSize256 = 256,
+    BOXThumbnailSize1024 = 1024,
+    BOXThumbnailSize2048 = 2048,
 };
 
 typedef NS_ENUM(NSUInteger, BOXAvatarType) {
