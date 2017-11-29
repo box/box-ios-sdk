@@ -23,3 +23,7 @@ NSString *const BOXAuthErrorAccountDeactivated = @"account_deactivated";
 
 // User denied access to their Box account
 NSString *const BOXAuthErrorAccessDenied = @"access_denied";
+
+// Error for deleted/trashed resources
+NSString *const BOXContentErrorNotFound = @"not_found";
+NSString *const BOXContentErrorTrashed = @"trashed";

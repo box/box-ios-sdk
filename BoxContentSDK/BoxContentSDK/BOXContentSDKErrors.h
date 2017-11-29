@@ -104,3 +104,6 @@ extern NSString *const BOXAuthErrorUnsupportedDevicePinningRuntime;
 extern NSString *const BOXAuthErrorAccountDeactivated;
 
 extern NSString *const BOXAuthErrorAccessDenied; // User denied access to their Box account
+
+extern NSString *const BOXContentErrorNotFound;
+extern NSString *const BOXContentErrorTrashed;
