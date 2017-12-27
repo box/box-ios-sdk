@@ -706,18 +706,13 @@ backgroundSessionId:(NSString *)backgroundSessionId
         //persist data to onGoingSessionTasks/$backgroundSessionId/$sessionTaskId/$fileType
         NSString *path = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:type];
         
-        BOOL isDir = NO;
-        
         success = [self cacheAndAttemptToEncryptData:data atPath:path error:&error];
         
         if (!success) {
             // For some reason we the directory that's supposed to be here is sometimes not, so we make sure to create it and try again.
-            if (![[NSFileManager defaultManager] fileExistsAtPath:[path stringByDeletingLastPathComponent] isDirectory:&isDir] || isDir == NO) {
-                [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent]
-                                          withIntermediateDirectories:YES
-                                                           attributes:nil
-                                                                error:nil];
-                
+            success = [self createDirForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId error:&error];
+            
+            if (success == YES && error == nil) {
                 success = [self cacheAndAttemptToEncryptData:data atPath:path error:&error];
             }
         }
