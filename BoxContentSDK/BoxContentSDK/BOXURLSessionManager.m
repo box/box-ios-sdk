@@ -926,7 +926,10 @@ didReceiveResponse:(NSURLResponse *)response
         //for background tasks, cache response data
         NSError *error = nil;
         BOOL success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier responseData:data error:&error];
-        BOXAssert(success, @"failed to cache response for background session task", error);
+        
+        if (!success) {
+            BOXLog(@"failed to cache response for background session task due to %@", error);
+        }
     } else {
         //for foreground tasks, call its taskDelegate to handle
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier];
