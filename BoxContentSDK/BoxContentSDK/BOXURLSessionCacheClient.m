@@ -701,11 +701,21 @@ backgroundSessionId:(NSString *)backgroundSessionId
 
     //persist onGoingSessionTasks/$backgroundSessionId/$sessionTaskId
     BOOL success = [self createDirForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId error:&error];
-
+    
     if (success == YES && error == nil) {
         //persist data to onGoingSessionTasks/$backgroundSessionId/$sessionTaskId/$fileType
         NSString *path = [self filePathForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId type:type];
+        
         success = [self cacheAndAttemptToEncryptData:data atPath:path error:&error];
+        
+        if (!success) {
+            // For some reason we the directory that's supposed to be here is sometimes not, so we make sure to create it and try again.
+            success = [self createDirForBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId error:&error];
+            
+            if (success == YES && error == nil) {
+                success = [self cacheAndAttemptToEncryptData:data atPath:path error:&error];
+            }
+        }
     }
 
     if (outError != nil) {
