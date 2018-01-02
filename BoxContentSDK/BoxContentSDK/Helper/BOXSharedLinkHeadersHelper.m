@@ -55,16 +55,18 @@
 
 - (void)storeHeadersFromAncestorsIfNecessaryForItemWithID:(NSString *)itemID itemType:(NSString *)itemType ancestors:(NSArray *)ancestors
 {
-    // Go from the direct parent to the most remote ancestor.
-    for (NSInteger i = ancestors.count - 1; i >= 0; i --) {
-        BOXFolderMini *folder = ancestors[i];
+    if ([self.delegate sharedLinkForItemWithID:itemID itemType:itemType userID:self.userID] == nil) {
+        // Go from the direct parent to the most remote ancestor.
+        for (NSInteger i = ancestors.count - 1; i >= 0; i --) {
+            BOXFolderMini *folder = ancestors[i];
             
-        NSString *link = [self.delegate sharedLinkForItemWithID:folder.modelID itemType:folder.type userID:self.userID];
-        // We found a link in one of the ancestors of the file, we need to store this file that now would need the headers of its ancestors in any API request
-        if (link) {
-            NSString *password = [self.delegate passwordForSharedItemWithID:folder.modelID itemType:folder.type userID:self.userID];
-            [self.delegate storeSharedLink:link forItemWithIDKey:itemID itemTypeKey:itemType password:password userIDKey:self.userID];
-            break;
+            NSString *link = [self.delegate sharedLinkForItemWithID:folder.modelID itemType:folder.type userID:self.userID];
+            // We found a link in one of the ancestors of the file, we need to store this file that now would need the headers of its ancestors in any API request
+            if (link) {
+                NSString *password = [self.delegate passwordForSharedItemWithID:folder.modelID itemType:folder.type userID:self.userID];
+                [self.delegate storeSharedLink:link forItemWithIDKey:itemID itemTypeKey:itemType password:password userIDKey:self.userID];
+                break;
+            }
         }
     }
 }
