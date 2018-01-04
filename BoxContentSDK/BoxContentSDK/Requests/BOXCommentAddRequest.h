@@ -3,11 +3,11 @@
 //  BoxContentSDK
 //
 
-#import "BOXRequest.h"
+#import "BOXRequestWithSharedLinkHeader.h"
 
 @class BOXItem;
 
-@interface BOXCommentAddRequest : BOXRequest
+@interface BOXCommentAddRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readwrite, strong) NSString *taggedMessage;
 
