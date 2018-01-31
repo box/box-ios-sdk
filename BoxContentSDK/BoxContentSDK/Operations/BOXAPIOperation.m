@@ -411,12 +411,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)cancelSessionTask
 {
-    NSDictionary *errorInfo = nil;
-    if (self.baseRequestURL)
-    {
-        errorInfo = [NSDictionary dictionaryWithObject:self.baseRequestURL forKey:NSURLErrorFailingURLErrorKey];
-    }
-    self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
+    self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
+    [[NSError alloc] initWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
 
     if (self.sessionTask != nil) {
         if ([self shouldAllowResume] == YES && [self.sessionTask isKindOfClass:[NSURLSessionDownloadTask class]] == YES) {
