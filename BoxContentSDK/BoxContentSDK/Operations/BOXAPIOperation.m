@@ -412,8 +412,6 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 - (void)cancelSessionTask
 {
     self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
-    [[NSError alloc] initWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
-
     if (self.sessionTask != nil) {
         if ([self shouldAllowResume] == YES && [self.sessionTask isKindOfClass:[NSURLSessionDownloadTask class]] == YES) {
             //if session task is a background download and it was cancelled with intention to resume,
