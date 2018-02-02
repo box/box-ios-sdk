@@ -15,7 +15,6 @@
 @implementation BOXURLSessionTaskCachedInfo
 @end
 
-
 @implementation BOXURLBackgroundSessionIdAndSessionTaskId
 
 - (id)initWithBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId
@@ -29,7 +28,6 @@
 }
 
 @end
-
 
 @interface BOXUserIdAndAssociateId : NSObject
 @property (nonatomic, copy, readwrite) NSString *userId;
@@ -139,6 +137,14 @@ backgroundSessionId:(NSString *)backgroundSessionId
     }
 
     return success;
+}
+
+- (NSFileCoordinator *)createFileCoordinator {
+    NSFileCoordinator *coordinator = [[NSFileCoordinator alloc] init];
+   
+    coordinator.purposeIdentifier = @"com.box.BOXURLSessionCacheClient.urlSessionCache";
+    
+    return coordinator;
 }
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId
@@ -448,9 +454,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSString *filePath = [self filePathForBackgroundSessionId:backgroundSessionId
                                                 sessionTaskId:sessionTaskId
                                                          type:BOXURLSessionTaskCacheFileTypeResponseData];
-
     //decrypt data found at filePath
-    
     return [self unencryptedDataAtFilePath:filePath];
 }
 
@@ -488,13 +492,23 @@ backgroundSessionId:(NSString *)backgroundSessionId
 
 - (NSData *)unencryptedDataAtFilePath:(NSString *)filePath
 {
-    BOOL isDir = NO;
+    __block NSData *data = nil;
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] == NO || isDir == YES) {
-        return nil;
-    }
+    NSFileCoordinator *coordinator = [self createFileCoordinator];
     
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    [coordinator coordinateReadingItemAtURL:[NSURL fileURLWithPath:filePath]
+                                    options:NSFileCoordinatorReadingWithoutChanges
+                                      error:nil
+                                 byAccessor:^(NSURL * _Nonnull newURL) {
+                                     BOOL isDir = NO;
+                                     BOOL isValidFilePath = YES;
+                                     isValidFilePath = [[NSFileManager defaultManager] fileExistsAtPath:newURL.path isDirectory:&isDir] == YES &&
+                                                        isDir == NO;
+                                     
+                                     if (isValidFilePath) {
+                                         data = [NSData dataWithContentsOfFile:newURL.path];
+                                     }
+                                 }];
     
     if ([self.delegate respondsToSelector:@selector(decryptData:)]) {
         data = [self.delegate decryptData:data];
@@ -754,7 +768,17 @@ backgroundSessionId:(NSString *)backgroundSessionId
         finalData = [self.delegate encryptData:data];
     }
     
-    return [finalData writeToFile:path options:NSDataWritingAtomic error:outError];
+    __block BOOL success = NO;
+    
+    NSFileCoordinator *coordinator = [self createFileCoordinator];
+    [coordinator coordinateWritingItemAtURL:[NSURL fileURLWithPath:path]
+                                    options:NSFileCoordinatorWritingForReplacing
+                                      error:outError
+                                 byAccessor:^(NSURL * _Nonnull newURL) {
+                                     success = [finalData writeToURL:newURL options:NSDataWritingAtomic error:outError];
+                                 }];
+    
+    return success;
 }
 
 // Delete file extensionSessions/$backgroundSessionId if backgroundSessionId is from extension
