@@ -31,6 +31,7 @@
         _destinationPath = destinationPath;
         _fileID = fileID;
         _representation = representation;
+        _ignoreLocalURLRequestCache = NO;
     }
     return self;
 }
@@ -45,6 +46,14 @@
         _representation = representation;
     }
     return self;
+}
+
+- (void) setIgnoreLocalURLRequestCache:(BOOL)ignoreLocalURLRequestCache {
+    if(ignoreLocalURLRequestCache) {
+        [self.operation.APIRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    } else {
+        [self.operation.APIRequest setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    }
 }
 
 - (NSURL *)representationURL

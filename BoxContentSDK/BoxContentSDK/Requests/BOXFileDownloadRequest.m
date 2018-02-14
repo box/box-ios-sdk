@@ -25,6 +25,7 @@
     if (self = [super init]) {
         _destinationPath = destinationPath;
         _fileID = fileID;
+        _ignoreLocalURLRequestCache = NO;
     }
     return self;
 }
@@ -45,8 +46,18 @@
     if (self = [super init]) {
         _outputStream = outputStream;
         _fileID = fileID;
+        _ignoreLocalURLRequestCache = NO;
     }
     return self;
+}
+
+- (void) setIgnoreLocalURLRequestCache:(BOOL)ignoreLocalURLRequestCache {
+    if(ignoreLocalURLRequestCache) {
+        [self.operation.APIRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    } else {
+        [self.operation.APIRequest setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+        
+    }
 }
 
 - (BOXAPIOperation *)createOperation
