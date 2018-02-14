@@ -12,6 +12,9 @@
 // it is the ID of the version representation gotten from /files/<fileID>/versions
 @property (nonatomic, readwrite, strong) NSString *versionID;
 
+// Enable NSURLSession cachepolicy for this request
+@property (nonatomic, readwrite, assign) BOOL ignoreLocalURLRequestCache;
+
 /**
  * request will download file into destinationPath, and the file download can continue
  * running in the background even if app is not running

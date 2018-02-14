@@ -13,6 +13,7 @@
 @interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readwrite, strong) NSString *versionID;
+@property (nonatomic, readwrite, assign) BOOL ignoreLocalURLRequestCache;
 
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
