@@ -371,6 +371,8 @@ extern NSString *const BOXAPIMetadataObjectKeyParent;
 extern NSString *const BOXAPIMetadataObjectKeyOperation;
 extern NSString *const BOXAPIMetadataObjectKeyPath;
 extern NSString *const BOXAPIMetadataObjectKeyValue;
+extern NSString *const BOXAPIMetadataObjectKeyVersion;
+extern NSString *const BOXAPIMetadataObjectKeyTypeVersion;
 
 // API Folder IDs
 extern NSString *const BOXAPIFolderIDRoot;
