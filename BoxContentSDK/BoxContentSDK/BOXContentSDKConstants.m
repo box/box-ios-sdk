@@ -350,6 +350,8 @@ NSString *const BOXAPIMetadataObjectKeyParent = @"$parent";
 NSString *const BOXAPIMetadataObjectKeyOperation = @"op";
 NSString *const BOXAPIMetadataObjectKeyPath = @"path";
 NSString *const BOXAPIMetadataObjectKeyValue = @"value";
+NSString *const BOXAPIMetadataObjectKeyVersion = @"$version";
+NSString *const BOXAPIMetadataObjectKeyTypeVersion = @"$typeVersion";
 
 // API Folder IDs
 NSString *const BOXAPIFolderIDRoot = @"0";

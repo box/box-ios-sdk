@@ -42,13 +42,22 @@
                                                   hasExpectedType:[NSString class]
                                                       nullAllowed:NO];
         
+        self.version = [NSJSONSerialization box_ensureObjectForKey:BOXAPIMetadataObjectKeyVersion
+                                                      inDictionary:JSONData
+                                                   hasExpectedType:[NSNumber class]
+                                                       nullAllowed:NO];
+        
+        self.typeVersion = [NSJSONSerialization box_ensureObjectForKey:BOXAPIMetadataObjectKeyTypeVersion
+                                                          inDictionary:JSONData
+                                                       hasExpectedType:[NSNumber class]
+                                                           nullAllowed:NO];
+        
         // Retrieving all custom metadata information (key/value pairs).
         NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
         for (NSString *key in JSONData) {
             // Only default metadata keys have '$' at the beginning, so the ones that don't are custom metadata keys.
             if ([key characterAtIndex:0] != '$') {
-                NSString *value = [JSONData objectForKey:key];
-                [info setObject:value forKey:key];
+                [info setObject:[JSONData objectForKey:key] forKey:key];
             }
         }
         self.info = info;
