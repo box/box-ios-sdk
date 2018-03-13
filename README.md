@@ -9,11 +9,11 @@ This SDK makes it easy to use Box's [Content API](https://developers.box.com/doc
 Developer Setup
 ---------------
 * Ensure you have the latest version of [Xcode](https://developer.apple.com/xcode/) installed.
-* We encourage you to use [Carthage] (https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
+* We encourage you to use [Carthage](https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
 
 Quickstart
 ----------
-**Step 1**: Add to your Cartfile 
+**Step 1**: Add to your Cartfile
 ```
 github "box/box-ios-sdk"
 ```
@@ -23,7 +23,7 @@ github "box/box-ios-sdk"
 carthage update --platform iOS
 ```
 
-**Step 3:** Drag the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the official documentation for Carthage (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). 
+**Step 3:** Drag the built framework from Carthage/Build/iOS into your project. For more detailed instructions please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). 
 
 **Step 4: Import**
 ```objectivec
@@ -89,7 +89,7 @@ Copyright and License
 ---------------------
 Copyright 2015 Box, Inc. All rights reserved.
 
- 
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
