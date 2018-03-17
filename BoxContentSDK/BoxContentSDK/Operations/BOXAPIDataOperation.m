@@ -278,7 +278,7 @@
         if (currentQueue == nil) {
             currentQueue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0);
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
             [self reenqueOperationDueTo202Response];
         });
     } else {
