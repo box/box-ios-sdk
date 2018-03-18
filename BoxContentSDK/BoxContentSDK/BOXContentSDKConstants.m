@@ -136,6 +136,8 @@ BOXCollaborationRole *const BOXCollaborationRoleViewer = @"viewer";
 BOXCollaborationRole *const BOXCollaborationRolePreviewer = @"previewer";
 BOXCollaborationRole *const BOXCollaborationRoleUploader = @"uploader";
 
+// File Representation documentation: https://developer.box.com/v2.0/reference#representations
+
 // Representation Type
 BOXRepresentationType *const BOXRepresentationTypeOriginal = @"original";
 BOXRepresentationType *const BOXRepresentationTypePDF = @"pdf";
@@ -149,6 +151,7 @@ BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
 BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
 BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
 BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
+BOXRepresentationType *const BOXRepresentationTypeExtractedText = @"extracted_text";
 
 // Representations URL Template
 NSString *const BOXRepresentationTemplateKeyAccessPath = @"{+asset_path}";
@@ -162,11 +165,13 @@ BOXRepresentationStatus *const BOXRepresentationStatusPending = @"pending";
 BOXRepresentationStatus *const BOXRepresentationStatusNone = @"none";
 BOXRepresentationStatus *const BOXRepresentationStatusError = @"error";
 
-// Representation Dimensions
-BOXRepresentationDimensions *const BOXRepresentationDimensionsThumbnail = @"320x320";
-BOXRepresentationDimensions *const BOXRepresentationDimensionsLargeThumbnail = @"1024x1024";
-BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024 = @"1024x1024";
-BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048 = @"2048x2048";
+// Representation Supported Image Formats
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG32 = @"32x32";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG94 = @"94x94";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG160 = @"160x160";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG320 = @"320x320";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions1024 = @"1024x1024";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions2048 = @"2048x2048";
 
 // Folder Upload Email Access Levels
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen = @"open";
@@ -278,6 +283,7 @@ NSString *const BOXAPIObjectKeySyncState = @"sync_state";
 NSString *const BOXAPIObjectKeyURL = @"url";
 NSString *const BOXAPIObjectKeyURLTemplate = @"url_template";
 NSString *const BOXAPIObjectKeyDownloadURL = @"download_url";
+NSString *const BOXAPIObjectKeyAuthenticatedDownloadURL = @"authenticated_download_url";
 NSString *const BOXAPIObjectKeyVanityURL = @"vanity_url";
 NSString *const BOXAPIObjectKeyIsPasswordEnabled = @"is_password_enabled";
 NSString *const BOXAPIObjectKeyLogin = @"login";

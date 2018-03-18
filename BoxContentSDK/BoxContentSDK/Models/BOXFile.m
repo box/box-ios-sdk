@@ -97,6 +97,11 @@
             
             self.representations = [NSArray arrayWithArray:tempRepresentations];
         }
+        
+        self.downloadUrl = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDownloadURL
+                                                          inDictionary:JSONResponse
+                                                       hasExpectedType:[NSString class]
+                                                           nullAllowed:NO];
     }
     
     return self;
