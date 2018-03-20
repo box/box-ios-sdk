@@ -150,7 +150,7 @@ BOXRepresentationType *const BOXRepresentationTypeFilmstrip = @"filmstrip";
 BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
 BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
 BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
-BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
+BOXRepresentationType *const BOXRepresentationTypeDICOM = @"box_dicom";
 BOXRepresentationType *const BOXRepresentationTypeExtractedText = @"extracted_text";
 
 // Representations URL Template

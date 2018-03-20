@@ -127,22 +127,22 @@
     NSString *actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     XCTAssertEqualObjects(nil, actualXRepsHint);
     
-    // Check x-reps-hint header default no options file request
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestNoOptions, BOXRepresentationRequestJPGRepresentation, BOXRepresentationRequestMP3Representation, BOXRepresentationRequestMP4Representation, BOXRepresentationRequestMP4Representation, nil];
+    // Check x-reps-hint header with multi-options file request
+    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestJPGRepresentation, BOXRepresentationRequestMP3Representation, BOXRepresentationRequestMP4Representation, nil];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     NSString *expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false],[mp3],[mp4]"];
-    XCTAssertEqualObjects(nil, actualXRepsHint);
+    XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header original file request with other option
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestOriginal, nil];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     XCTAssertEqualObjects(nil, actualXRepsHint);
     
-    // Check x-reps-hint header default no options file request with other option
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestNoOptions, BOXRepresentationRequestThumbnailRepresentation, nil];
+    // Check x-reps-hint header default original file request with other option
+    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestOriginal, BOXRepresentationRequestThumbnailRepresentation, nil];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=320x320&paged=false]"];
-    XCTAssertEqualObjects(nil, actualXRepsHint);
+    XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header thumbnail request
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestThumbnailRepresentation, nil];
@@ -161,6 +161,11 @@
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[mp3]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
+    
+    // Check x-reps-hint header is no option due to persmissions set '0', representation is ignored.
+    [fileRequest setRepresentationRequestOptions:0, nil];
+    actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
+    XCTAssertEqualObjects(nil, actualXRepsHint);
     
     // Match representations option request
     fileRequest.matchSupportedRepresentation = YES;

@@ -65,10 +65,11 @@
         fieldString = [self fullFileFieldsParameterString];
     }
     
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
+        [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
+    }
     if ([self.representationsRequested count] > 0) {
-        if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
-            fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
-        }
+        // Include information for the original content URL in any request for file representations
         fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
     }
     
@@ -172,7 +173,6 @@
 
             fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
                 BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
-
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:file.modelID
                                                                                        itemType:file.type
                                                                                       ancestors:file.pathFolders];
@@ -248,7 +248,9 @@
         [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
         va_start(argumentList, representationOptions);
         while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
-            [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
+            if ([NSNumber numberWithUnsignedInteger:eachObject] > 0) {
+                [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
+            }
         }
         va_end(argumentList);
     }
@@ -259,9 +261,6 @@
 - (NSString *)formatRepresentationRequestHeader
 {
     // Only process valid API options.
-    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestNoOptions)]) {
-        [self.representationsRequested removeObject:@(BOXRepresentationRequestNoOptions)];
-    }
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
     }
