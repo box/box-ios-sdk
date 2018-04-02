@@ -4,6 +4,6 @@ before_install:
   - gem install cocoapods -v '0.38.2'
 podfile: BoxContentSDK/Podfile
 osx_image: xcode8.2.1
-#run on iPhone 6s Plus (9.3) [989606C6-1BE4-425F-9497-43D9D37F0BCC] (Simulator)
+#run on iPhone 7 (10.0) [060AAE67-12D1-4C9B-AD75-71A217E26F0E] (Simulator)
 script: 
-  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -destination 'platform=iOS Simulator,id=D83D9FC9-4AFB-41AC-A04B-755635DABF7D' -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -destination 'platform=iOS Simulator,id=060AAE67-12D1-4C9B-AD75-71A217E26F0E' -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
