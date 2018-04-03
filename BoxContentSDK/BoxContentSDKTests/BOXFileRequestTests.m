@@ -53,6 +53,7 @@
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
     NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullFileFieldsParameterString];
+    expectedFieldsString = [expectedFieldsString stringByAppendingString:@",download_url"];
     XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 }
 

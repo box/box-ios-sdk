@@ -63,6 +63,7 @@
 
     if (self.requestAllFileFields) {
         fieldString = [self fullFileFieldsParameterString];
+        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
     }
     
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
