@@ -9,6 +9,7 @@
 #import "BOXUser.h"
 #import "BOXSharedLink.h"
 #import "BOXCollection.h"
+#import "BOXMetadata.h"
 
 @implementation BOXItemMini
 
@@ -270,7 +271,20 @@
         
         // Set all collections and collection memberships found in json response.
         self.collections = collections;
-        
+
+        // Parse metadata
+        NSMutableArray *metadataArray = [NSMutableArray array];
+        for (NSDictionary *metadataScopeDictionary in JSONResponse[BOXAPISubresourceMetadata]) {
+            // Scope
+            for (NSDictionary *metadataTemplateDictionaries in [metadataScopeDictionary allValues]) {
+                // Template
+                for (NSDictionary *itemMetaDataDictionary in [metadataTemplateDictionaries allValues]) {
+                    BOXMetadata *metadata = [[BOXMetadata alloc] initWithJSON:itemMetaDataDictionary];
+                    [metadataArray addObject:metadata];
+                }
+            }
+        }
+        self.metadata = metadataArray;
     }
     return self;
 }
