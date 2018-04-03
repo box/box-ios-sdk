@@ -91,4 +91,11 @@
 
 @property (nonatomic, readwrite, strong) NSArray *representations;
 
+
+/**
+ *  Url available to download original content.
+ *  Warning: file exists only if canDownload is true
+ */
+@property (nonatomic, readwrite, strong) NSURL *downloadUrl;
+
 @end

@@ -17,6 +17,12 @@
 @property (nonatomic, readwrite, strong) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL isTrashed;
 
+/**
+ Setting a representation or list option will include availability of file with request representation information
+ */
+@property (nonatomic, readwrite, strong) NSMutableOrderedSet *representationsRequested;
+
+
 - (BOOL)shouldPerformBackgroundOperation;
 
 @end
@@ -59,8 +65,11 @@
         fieldString = [self fullFileFieldsParameterString];
     }
     
-    // Include the representations field in the request for high definition video content
-    if (self.requestHighDefinitionVideo || self. requestThumbnailRepresentation || self.requestLargeThumbnailRepresentation) {
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
+        [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
+    }
+    if ([self.representationsRequested count] > 0) {
+        // Include information for the original content URL in any request for file representations
         fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
     }
     
@@ -100,18 +109,8 @@
         }
     }
 
-    // Add the header to specify HLS video streaming contentUrl
-    NSString *representationFields = @"";
-    if (self.requestHighDefinitionVideo == YES) {
-        NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? BOXRepresentationTypeHLS : BOXRepresentationTypeMP4;
-        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[%@]", videoFormat]];
-    }
-    if (self.requestThumbnailRepresentation) {
-        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[jpg?dimensions=%@&paged=false]", BOXRepresentationDimensionsThumbnail]];
-    }
-    if (self.requestLargeThumbnailRepresentation) {
-        representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"[jpg?dimensions=%@&paged=false]", BOXRepresentationDimensionsLargeThumbnail]];
-    }
+    NSString *representationFields = [self formatRepresentationRequestHeader];
+    
     if (representationFields.length > 0) {
         [fileOperation.APIRequest addValue:representationFields
                         forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
@@ -174,7 +173,6 @@
 
             fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
                 BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
-
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:file.modelID
                                                                                        itemType:file.type
                                                                                       ancestors:file.pathFolders];
@@ -239,6 +237,83 @@
 - (BOOL)shouldPerformBackgroundOperation
 {
     return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
+}
+
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... NS_REQUIRES_NIL_TERMINATION
+{
+    NSMutableArray *arguments=[[NSMutableArray alloc]init];
+    BOXRepresentationRequestOptions eachObject;
+    va_list argumentList;
+    if (representationOptions) {
+        [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
+        va_start(argumentList, representationOptions);
+        while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
+            if ([NSNumber numberWithUnsignedInteger:eachObject] > 0) {
+                [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
+            }
+        }
+        va_end(argumentList);
+    }
+    
+    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
+}
+
+- (NSString *)formatRepresentationRequestHeader
+{
+    // Only process valid API options.
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
+        [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
+    }
+    if ([self.representationsRequested count] == 0) {
+        return nil;
+    }
+    
+    __block NSString *representationFields = @"[";
+    
+    __block NSString *delimiter = @"],[";
+    if (self.matchSupportedRepresentation == YES) {
+        delimiter = @",";
+    }
+    
+    [self.representationsRequested enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx == [self.representationsRequested count]) {
+            representationFields = [representationFields stringByReplacingCharactersInRange:NSMakeRange([representationFields length]-1, 1) withString:@"]"];
+            
+            *stop = YES;
+        } else {
+            if (idx == [self.representationsRequested  count] - 1) {
+                delimiter = @"]";
+            }
+            BOXRepresentationRequestOptions representationOption = (BOXRepresentationRequestOptions) [obj integerValue];
+            if (representationOption & BOXRepresentationRequestHighDefinitionVideo) {
+                NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? BOXRepresentationTypeHLS : BOXRepresentationTypeMP4;
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", videoFormat, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestMP3Representation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeMP3, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestMP4Representation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeMP4, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestThumbnailRepresentation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensionsJPG320, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestLargeThumbnailRepresentation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensions1024, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestPDFRepresentation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypePDF, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequestJPGRepresentation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensions1024, delimiter]];
+            }
+            if (representationOption & BOXRepresentationRequesteExtractedTextRepresentation) {
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeExtractedText, delimiter]];
+            }
+        }
+    }];
+    
+    return representationFields;
 }
 
 @end

@@ -21,7 +21,7 @@
 
 @property (nonatomic, readwrite, strong) NSDictionary *details;
 
-@property (nonatomic, readwrite, strong) BOXRepresentationDimensions *dimensions;
+@property (nonatomic, readwrite, strong) BOXRepresentationImageDimensions *dimensions;
 
 /**
  *  JSON response data.

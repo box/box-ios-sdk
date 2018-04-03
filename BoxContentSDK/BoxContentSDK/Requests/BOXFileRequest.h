@@ -5,20 +5,45 @@
 
 #import "BOXRequestWithSharedLinkHeader.h"
 
+
+/**
+ Representations are digital assets created for files stored in Box. To request representations information for
+ a file, set the options for each type.
+
+ - BOXRepresentationRequestOriginal:                        Request original content url with file information request
+ - BOXRepresentationRequestHighDefinitionVideo:             Request video representions if available for the given file
+ - BOXRepresentationRequestThumbnailRepresentation:         Request thumbnail representions if available for the given file
+ - BOXRepresentationRequestLargeThumbnailRepresentation:    Request large thumbnail representions are available for the given file
+ - BOXRepresentationRequestPDFRepresentation:               Request PDF representions if available for the given file
+ - BOXRepresentationRequestJPGRepresentation:               Request JPG representions if available for the given file
+ - BOXRepresentationRequestMP3Representation:               Request PNG representions if available for the given file
+ - BOXRepresentationRequestMP4Representation:               Request MP4 representions if available for the given file
+ - BOXRepresentationRequestDicomRepresentation:             Request DICOM representions available for DICOM file
+ - BOXRepresentationRequesteExtractedTextRepresentation:    Request extracted text if unformatted text is contained in a document (non-image)
+ */
+typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
+    BOXRepresentationRequestOriginal                           = 1 << 0,
+    BOXRepresentationRequestHighDefinitionVideo                = 1 << 1,
+    BOXRepresentationRequestThumbnailRepresentation            = 1 << 2,
+    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 3,
+    BOXRepresentationRequestPDFRepresentation                  = 1 << 4,
+    BOXRepresentationRequestJPGRepresentation                  = 1 << 5,
+    BOXRepresentationRequestMP3Representation                  = 1 << 6,
+    BOXRepresentationRequestMP4Representation                  = 1 << 7,
+    BOXRepresentationRequestDICOMRepresentation                = 1 << 8,
+    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 9
+} NS_ENUM_AVAILABLE_IOS(10_0);
+
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 
 /**
- Setting this value to YES for a video file request will include high definition video content where supported
+ Ordered list of representation types, returns first representation type supported by the specified file type
  */
-@property (nonatomic, readwrite, assign) BOOL requestHighDefinitionVideo;
+@property (nonatomic, readwrite, assign) BOOL matchSupportedRepresentation;
 
-@property (nonatomic, readwrite, assign) BOOL requestThumbnailRepresentation;
-
-@property (nonatomic, readwrite, assign) BOOL requestLargeThumbnailRepresentation;
-
-@property (nonatomic, readwrite, strong) NSArray *notMatchingEtags;//If-None-Match: Array of strings representing etag values
+@property (nonatomic, readwrite, strong) NSArray *notMatchingEtags; //If-None-Match: Array of strings representing etag values
 
 @property (nonatomic, readonly, strong) NSString *fileID;
 
@@ -47,5 +72,12 @@
 //Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXFileBlock)cacheBlock
                        refreshed:(BOXFileBlock)refreshBlock;
+
+/**
+ Setting a representation or list option will include availability of file with request representation information
+ */
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... NS_REQUIRES_NIL_TERMINATION;
+
+- (NSString *)formatRepresentationRequestHeader;
 
 @end

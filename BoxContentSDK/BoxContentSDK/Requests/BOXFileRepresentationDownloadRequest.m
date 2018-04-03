@@ -81,7 +81,7 @@
 
 - (BOXAPIOperation *)createOperation
 {
-    NSURL *URL = [self representationURL];
+    NSURL *URL = self.representation.contentURL;
     
     BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET

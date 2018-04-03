@@ -70,10 +70,13 @@
                                                              hasExpectedType:[NSDictionary class]
                                                                  nullAllowed:NO];
         
-        self.infoURL = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
+        NSString *infoURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
                                                       inDictionary:infoJSON
                                                    hasExpectedType:[NSString class]
                                                        nullAllowed:NO];
+        if (infoURLString.length > 0) {
+            self.infoURL = [NSURL URLWithString:infoURLString];
+        }
     }
     
     return self;
