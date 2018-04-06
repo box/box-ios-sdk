@@ -272,11 +272,15 @@
         // Set all collections and collection memberships found in json response.
         self.collections = collections;
 
-        // Parse metadata
+        // Parse metadata - may come down in unifiedMetadata
         NSMutableArray *metadataArray = [NSMutableArray array];
-        for (NSDictionary *metadataScopeDictionary in JSONResponse[BOXAPISubresourceMetadata]) {
+        id metadataJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPISubresourceMetadata
+                                                                          inDictionary:JSONResponse
+                                                                       hasExpectedType:[NSDictionary class]
+                                                                           nullAllowed:YES];
+        if (metadataJSON != nil && ![metadataJSON isKindOfClass:[NSNull class]]) {
             // Scope
-            for (NSDictionary *metadataTemplateDictionaries in [metadataScopeDictionary allValues]) {
+            for (NSDictionary *metadataTemplateDictionaries in [metadataJSON allValues]) {
                 // Template
                 for (NSDictionary *itemMetaDataDictionary in [metadataTemplateDictionaries allValues]) {
                     BOXMetadata *metadata = [[BOXMetadata alloc] initWithJSON:itemMetaDataDictionary];
