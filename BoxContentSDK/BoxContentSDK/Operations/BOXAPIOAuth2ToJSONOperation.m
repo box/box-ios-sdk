@@ -151,11 +151,19 @@
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:0
                                                                  error:&error];
-    NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
+    if (dictionary != nil) {
+        NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
+        NSDate *now = [NSDate date];
+        NSDate *keychainAccessTokenExpiration = [NSDate box_dateWithISO8601String:dictionary[keychainAccessTokenExpirationKey]];
 
-    if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
-        [session restoreSessionWithKeyChainDictionary:dictionary];
-        return YES;
+        // if keychain's access token expiration is later than now, we have a new access token in the keychain
+        // update session's tokens with the ones from keychain if needed
+        if (keychainAccessToken.length > 0 && [now compare:keychainAccessTokenExpiration] == NSOrderedAscending) {
+            if (![keychainAccessToken isEqualToString:session.accessToken]) {
+                [session restoreSessionWithKeyChainDictionary:dictionary];
+            }
+            return YES;
+        }
     }
     return NO;
 }
