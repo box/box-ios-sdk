@@ -12,6 +12,7 @@
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXFile.h"
+#import "UIDevice+BOXContentSDKAdditions.h"
 
 @interface BOXFileRequestTests : BOXRequestTestCase
 @end
@@ -180,7 +181,11 @@
     // Check x-reps-hint header verify single rep in match option
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestHighDefinitionVideo, nil];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
-    expectedHeaderXRepsHint = [NSString stringWithFormat:@"[hls]"];
+    if ([UIDevice isRunningiOS10xOrLater]) {
+        expectedHeaderXRepsHint = [NSString stringWithFormat:@"[hls]"];
+    } else {
+        expectedHeaderXRepsHint = [NSString stringWithFormat:@"[mp4]"];
+    }
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestLargeThumbnailRepresentation, nil];
