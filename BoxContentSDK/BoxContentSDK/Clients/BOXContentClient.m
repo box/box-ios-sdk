@@ -76,7 +76,8 @@ static BOXContentClient *defaultInstance = nil;
             NSArray *storedUsers = [self users];
             if (storedUsers.count > 1)
             {
-                BOXAssertFail(@"You cannot use 'defaultClient' if multiple users have established a session. Specify a user through clientForUser:");
+                [NSException raise:@"You cannot use 'defaultClient' if multiple users have established a session."
+                            format:@"Specify a user through clientForUser:"];
             }
             else if (storedUsers.count == 1)
             {
