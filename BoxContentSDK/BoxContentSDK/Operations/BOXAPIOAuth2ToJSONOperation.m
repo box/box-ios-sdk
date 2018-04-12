@@ -134,7 +134,6 @@
             }
         }
     }
-    
     return shouldLogout;
 }
 
@@ -161,10 +160,27 @@
         if (keychainAccessToken.length > 0 && [now compare:keychainAccessTokenExpiration] == NSOrderedAscending) {
             if (![keychainAccessToken isEqualToString:session.accessToken]) {
                 [session restoreSessionWithKeyChainDictionary:dictionary];
+
+                //log found a newer access token from keychain, refresh current session's accessToken with keychain's
+                NSDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                           @"message" : @"failed_and_refresh_from_keychain",
+                                           };
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
+            } else {
+                //log found a newer access token from keychain, and current session's accessToken is already same as keychain's
+                NSDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                           @"message" : @"failed_but_session_has_new_access_token",
+                                           };
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
             }
             return YES;
         }
     }
+    //log failing to update session's access token
+    NSDictionary *userInfo = @{@"completion_status" : @"failed",
+                               @"message" : @"failed_and_no_new_access_token_from_keychain",
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
     return NO;
 }
 
