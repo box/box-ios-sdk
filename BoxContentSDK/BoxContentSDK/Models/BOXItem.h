@@ -215,6 +215,13 @@
 @property (nonatomic, readwrite, strong) NSArray *allowedInviteeRoles;
 
 /**
+ *  Metadata values for an item
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, strong) NSArray *metadata;
+
+/**
  *  Convenience method to check if the item is a File.
  */
 @property (nonatomic, readonly, assign) BOOL isFile;
