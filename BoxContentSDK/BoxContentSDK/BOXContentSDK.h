@@ -119,6 +119,7 @@
 #import "BOXRecentItemsRequest.h"
 #import "BOXRecentItemsRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
+#import "BOXRepresentationInfoRequest.h"
 
 // API Operation queues
 #import "BOXAPIQueueManager.h"

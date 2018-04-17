@@ -19,6 +19,7 @@
 @class BOXEvent;
 @class BOXRecentItem;
 @class BOXMetadataTemplate;
+@class BOXRepresentation;
 
 typedef void (^BOXErrorBlock)(NSError *error);
 
@@ -66,6 +67,8 @@ typedef void (^BOXMetadataBlock)(BOXMetadata *metadata, NSError *error);
 typedef void (^BOXMetadatasBlock)(NSArray <BOXMetadata *> *metadatas, NSError *error);
 
 typedef void (^BOXMetadataTemplatesBlock) (NSArray <BOXMetadataTemplate *>*metadataTemplates, NSError *error);
+
+typedef void (^BOXRepresentationInfoBlock)(BOXRepresentation *representation, NSError *error);
 
 @interface BOXRequest : NSObject
 
