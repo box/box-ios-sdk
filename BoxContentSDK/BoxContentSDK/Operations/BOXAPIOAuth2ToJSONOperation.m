@@ -152,12 +152,10 @@
                                                                  error:&error];
     if (dictionary != nil) {
         NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
-        NSDate *now = [NSDate date];
-        NSDate *keychainAccessTokenExpiration = [NSDate box_dateWithISO8601String:dictionary[keychainAccessTokenExpirationKey]];
 
-        // if keychain's access token expiration is later than now, we have a new access token in the keychain
-        // update session's tokens with the ones from keychain if needed
-        if (keychainAccessToken.length > 0 && [now compare:keychainAccessTokenExpiration] == NSOrderedAscending) {
+        // if keychain's access token is different than the one associated with refreshToken in the token request,
+        // we have a newer access token, update session's tokens with the ones from keychain if needed
+        if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
             if (![keychainAccessToken isEqualToString:session.accessToken]) {
                 [session restoreSessionWithKeyChainDictionary:dictionary];
 

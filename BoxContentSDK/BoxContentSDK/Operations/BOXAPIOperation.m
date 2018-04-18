@@ -12,6 +12,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "BOXURLRequestSerialization.h"
+#import "BOXAPIOAuth2ToJSONOperation.h"
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -218,7 +219,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 //Note: if sessionTask exists, we cannot change its API request
                 //make sure you recreate sessionTask with the new API request if needed
                 [self prepareAPIRequest];
-                self.accessToken = self.session.accessToken;
+                if (![self isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]]) {
+                    self.accessToken = self.session.accessToken;
+                }
             }
             NSError *error = nil;
             self.sessionTask = [self createSessionTaskWithError:&error];
@@ -369,7 +372,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 //Note: if sessionTask exists, we cannot change its API request
                 //make sure you recreate sessionTask with the new API request if needed
                 [self prepareAPIRequest];
-                self.accessToken = self.session.accessToken;
+                if (![self isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]]) {
+                    self.accessToken = self.session.accessToken;
+                }
             }
         }
 
