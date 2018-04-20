@@ -50,6 +50,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 @property (nonatomic, readwrite, strong) UIActivityIndicatorView *activityIndicator;
 
+@property (nonatomic, readwrite) UIBackgroundTaskIdentifier backgroundTaskID;
+
 #define kMaxNTLMAuthFailuresPriorToExit 3
 #define kMaxAuthChallengeCycles 100
 
@@ -114,6 +116,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         _preexistingCookies = [[cookieStorage cookies] copy];
         _preexistingCookiePolicy = [cookieStorage cookieAcceptPolicy];
+
+        _backgroundTaskID = UIBackgroundTaskInvalid;
     }
 
     return self;
@@ -162,6 +166,40 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     if (self.connectionError != nil) {
         [self handleConnectionErrorWithError:self.connectionError
                                      message:self.connectionErrorMessage];
+    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        self.backgroundTaskID = UIBackgroundTaskInvalid;
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+
+    [super viewWillDisappear:animated];
+}
+
+// Fixes a bug starting iOS 11.3, where backgrounding the app to respond to
+// 2FA could cause the login to fail.
+- (void)applicationWillResignActive:(NSNotification *)note
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:self.backgroundTaskID];
+        self.backgroundTaskID = UIBackgroundTaskInvalid;
+    }];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)note
+{
+    if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        self.backgroundTaskID = UIBackgroundTaskInvalid;
     }
 }
 
