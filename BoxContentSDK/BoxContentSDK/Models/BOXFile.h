@@ -96,6 +96,6 @@
  *  Url available to download original content.
  *  Warning: file exists only if canDownload is true
  */
-@property (nonatomic, readwrite, strong) NSURL *downloadUrl;
+@property (nonatomic, readwrite, strong) NSURL *authenticatedDownloadUrl;
 
 @end

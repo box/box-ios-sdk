@@ -81,6 +81,14 @@
             self.lock = [[BOXFileLock alloc] initWithJSON:lock];
         }
         
+        NSString *downloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAuthenticatedDownloadURL
+                                                                     inDictionary:JSONResponse
+                                                                  hasExpectedType:[NSString class]
+                                                                      nullAllowed:NO];
+        if (downloadURLString.length > 0) {
+            self.authenticatedDownloadUrl = [NSURL URLWithString:downloadURLString];
+        }
+        
         // Parse Representations.
         NSDictionary *representationsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyRepresentations
                                                                           inDictionary:JSONResponse
@@ -95,16 +103,19 @@
                 [tempRepresentations addObject:representation];
             }
             
+            // Add the original content url to self.representations as BOXRepresentationRequestOriginal for convenience
+            if (self.authenticatedDownloadUrl.absoluteString.length > 0) {
+                BOXRepresentation *representation = [[BOXRepresentation alloc] init];
+                representation.type = BOXRepresentationTypeOriginal;
+                representation.contentURL = self.authenticatedDownloadUrl;
+                representation.status = BOXRepresentationStatusSuccess;
+                [tempRepresentations addObject:representation];
+            }
+            
             self.representations = [NSArray arrayWithArray:tempRepresentations];
         }
         
-        NSString *downloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDownloadURL
-                                                           inDictionary:JSONResponse
-                                                        hasExpectedType:[NSString class]
-                                                            nullAllowed:NO];
-        if (downloadURLString.length > 0) {
-            self.downloadUrl = [NSURL URLWithString:downloadURLString];
-        }
+
     }
     
     return self;

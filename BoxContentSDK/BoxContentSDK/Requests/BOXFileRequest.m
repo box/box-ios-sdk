@@ -63,11 +63,14 @@
 
     if (self.requestAllFileFields) {
         fieldString = [self fullFileFieldsParameterString];
-        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
     }
     
+    // The original content url is retrieved from the authenticated_download_url. Include BOXRepresentationRequestOriginal
+    // The download url is added to the BoxFile representations array, retrieved by type value BOXRepresentationRequestOriginal.
+    // You can download the file has onwer, co-owner, editor, viewer uploader, viewer permissions.
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
+        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyAuthenticatedDownloadURL];
     }
     if ([self.representationsRequested count] > 0) {
         // Include information for the original content URL in any request for file representations
@@ -101,7 +104,7 @@
 
         fileOperation = JSONOperation;
     }
-
+    
     if ([self.notMatchingEtags count] > 0) {
         // Set up the If-None-Match header
         for (NSString *notMatchingEtag in self.notMatchingEtags) {
@@ -109,7 +112,7 @@
                             forHTTPHeaderField:BOXAPIHTTPHeaderIfNoneMatch];
         }
     }
-
+    
     NSString *representationFields = [self formatRepresentationRequestHeader];
     
     if (representationFields.length > 0) {
@@ -267,6 +270,13 @@
     }
     if ([self.representationsRequested count] == 0) {
         return nil;
+    }
+    
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAllRepresentations)]) {
+        // For now on iOS 11 request mp4 as priorty preview over hls playback,
+        return [UIDevice isRunningiOS10xOrLater]
+        ? @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,mp4,hls,mp3,jpg]"
+        : @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
     }
     
     __block NSString *representationFields = @"[";
