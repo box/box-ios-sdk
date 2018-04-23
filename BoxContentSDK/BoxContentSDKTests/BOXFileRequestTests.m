@@ -54,7 +54,6 @@
     XCTAssertEqualObjects(expectedURLWithoutQueryString, actualURLWithoutQueryString);
     
     NSString *expectedFieldsString = [[[BOXRequest alloc] init] fullFileFieldsParameterString];
-    expectedFieldsString = [expectedFieldsString stringByAppendingString:@",download_url"];
     XCTAssertEqualObjects(expectedFieldsString, [[[URLRequest.URL box_queryDictionary] objectForKey:@"fields"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 }
 
@@ -109,7 +108,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
 - (void)test_that_representation_options_are_set_correctly_when_request_is_performed

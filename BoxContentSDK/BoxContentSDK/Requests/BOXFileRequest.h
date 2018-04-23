@@ -11,6 +11,9 @@
  a file, set the options for each type.
 
  - BOXRepresentationRequestOriginal:                        Request original content url with file information request
+                                                            Reference the reponse field 'authenticated_download_url' to download original content
+                                                            when file permissions are onwer, co-owner, editor, viewer uploader, viewer
+ - BOXRepresentationRequestAllRepresentations:              If permissions allow retrieve representations for thumbnails, preview representations for the given file
  - BOXRepresentationRequestHighDefinitionVideo:             Request video representions if available for the given file
  - BOXRepresentationRequestThumbnailRepresentation:         Request thumbnail representions if available for the given file
  - BOXRepresentationRequestLargeThumbnailRepresentation:    Request large thumbnail representions are available for the given file
@@ -23,15 +26,16 @@
  */
 typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
     BOXRepresentationRequestOriginal                           = 1 << 0,
-    BOXRepresentationRequestHighDefinitionVideo                = 1 << 1,
-    BOXRepresentationRequestThumbnailRepresentation            = 1 << 2,
-    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 3,
-    BOXRepresentationRequestPDFRepresentation                  = 1 << 4,
-    BOXRepresentationRequestJPGRepresentation                  = 1 << 5,
-    BOXRepresentationRequestMP3Representation                  = 1 << 6,
-    BOXRepresentationRequestMP4Representation                  = 1 << 7,
-    BOXRepresentationRequestDICOMRepresentation                = 1 << 8,
-    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 9
+    BOXRepresentationRequestAllRepresentations                 = 1 << 1,
+    BOXRepresentationRequestHighDefinitionVideo                = 1 << 2,
+    BOXRepresentationRequestThumbnailRepresentation            = 1 << 3,
+    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 4,
+    BOXRepresentationRequestPDFRepresentation                  = 1 << 5,
+    BOXRepresentationRequestJPGRepresentation                  = 1 << 6,
+    BOXRepresentationRequestMP3Representation                  = 1 << 7,
+    BOXRepresentationRequestMP4Representation                  = 1 << 8,
+    BOXRepresentationRequestDICOMRepresentation                = 1 << 9,
+    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 10
 } NS_ENUM_AVAILABLE_IOS(10_0);
 
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
