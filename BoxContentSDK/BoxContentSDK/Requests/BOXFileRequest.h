@@ -11,8 +11,8 @@
  a file, set the options for each type.
 
  - BOXRepresentationRequestOriginal:                        Request original content url with file information request
-                                                            Reference the reponse field 'authenticated_download_url' to download original content
-                                                            when file permissions are onwer, co-owner, editor, viewer uploader, viewer
+                                                            Reference the reponse field 'download_url' to download original content when file
+                                                            has download permissions are owner, co-owner, editor, viewer uploader, viewer
  - BOXRepresentationRequestAllRepresentations:              If permissions allow retrieve representations for thumbnails, preview representations for the given file
  - BOXRepresentationRequestHighDefinitionVideo:             Request video representions if available for the given file
  - BOXRepresentationRequestThumbnailRepresentation:         Request thumbnail representions if available for the given file
