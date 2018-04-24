@@ -65,12 +65,12 @@
         fieldString = [self fullFileFieldsParameterString];
     }
     
-    // The original content url is retrieved from the authenticated_download_url. Include BOXRepresentationRequestOriginal
+    // The original content url is retrieved from the download_url. Include BOXRepresentationRequestOriginal
     // The download url is added to the BoxFile representations array, retrieved by type value BOXRepresentationRequestOriginal.
-    // You can download the file has onwer, co-owner, editor, viewer uploader, viewer permissions.
+    // You can download the file has owner, co-owner, editor, viewer uploader, viewer permissions.
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
-        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyAuthenticatedDownloadURL];
+        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
     }
     if ([self.representationsRequested count] > 0) {
         // Include information for the original content URL in any request for file representations

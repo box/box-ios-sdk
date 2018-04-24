@@ -81,12 +81,12 @@
             self.lock = [[BOXFileLock alloc] initWithJSON:lock];
         }
         
-        NSString *downloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAuthenticatedDownloadURL
+        NSString *downloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDownloadURL
                                                                      inDictionary:JSONResponse
                                                                   hasExpectedType:[NSString class]
                                                                       nullAllowed:NO];
         if (downloadURLString.length > 0) {
-            self.authenticatedDownloadUrl = [NSURL URLWithString:downloadURLString];
+            self.downloadUrl = [NSURL URLWithString:downloadURLString];
         }
         
         // Parse Representations.
@@ -104,10 +104,10 @@
             }
             
             // Add the original content url to self.representations as BOXRepresentationRequestOriginal for convenience
-            if (self.authenticatedDownloadUrl.absoluteString.length > 0) {
+            if (self.downloadUrl.absoluteString.length > 0) {
                 BOXRepresentation *representation = [[BOXRepresentation alloc] init];
                 representation.type = BOXRepresentationTypeOriginal;
-                representation.contentURL = self.authenticatedDownloadUrl;
+                representation.contentURL = self.downloadUrl;
                 representation.status = BOXRepresentationStatusSuccess;
                 [tempRepresentations addObject:representation];
             }
