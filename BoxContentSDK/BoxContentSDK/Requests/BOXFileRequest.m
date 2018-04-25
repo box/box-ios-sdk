@@ -274,7 +274,7 @@
     
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAllRepresentations)]) {
         // For now on iOS 11 request mp4 as priorty preview over hls playback,
-        return [UIDevice isRunningiOS10xOrLater]
+        return ([UIDevice iOSVersion] > BOXiOSVersion10)
         ? @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,mp4,hls,mp3,jpg]"
         : @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
     }
@@ -297,7 +297,7 @@
             }
             BOXRepresentationRequestOptions representationOption = (BOXRepresentationRequestOptions) [obj integerValue];
             if (representationOption & BOXRepresentationRequestHighDefinitionVideo) {
-                NSString *videoFormat = [UIDevice isRunningiOS10xOrLater] ? BOXRepresentationTypeHLS : BOXRepresentationTypeMP4;
+                NSString *videoFormat = ([UIDevice iOSVersion] > BOXiOSVersion10) ? BOXRepresentationTypeMP4 : BOXRepresentationTypeHLS;
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", videoFormat, delimiter]];
             }
             if (representationOption & BOXRepresentationRequestMP3Representation) {
