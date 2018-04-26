@@ -134,7 +134,6 @@
             }
         }
     }
-    
     return shouldLogout;
 }
 
@@ -151,12 +150,35 @@
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:0
                                                                  error:&error];
-    NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
+    if (dictionary != nil) {
+        NSString *keychainAccessToken = dictionary[keychainAccessTokenKey];
 
-    if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
-        [session restoreSessionWithKeyChainDictionary:dictionary];
-        return YES;
+        // if keychain's access token is different than the one associated with refreshToken in the token request,
+        // we have a newer access token, update session's tokens with the ones from keychain if needed
+        if (keychainAccessToken.length > 0 && ![keychainAccessToken isEqualToString:self.accessToken]) {
+            if (![keychainAccessToken isEqualToString:session.accessToken]) {
+                [session restoreSessionWithKeyChainDictionary:dictionary];
+
+                //log found a newer access token from keychain, refresh current session's accessToken with keychain's
+                NSDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                           @"message" : @"failed_and_refresh_from_keychain",
+                                           };
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
+            } else {
+                //log found a newer access token from keychain, and current session's accessToken is already same as keychain's
+                NSDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                           @"message" : @"failed_but_session_has_new_access_token",
+                                           };
+                [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
+            }
+            return YES;
+        }
     }
+    //log failing to update session's access token
+    NSDictionary *userInfo = @{@"completion_status" : @"failed",
+                               @"message" : @"failed_and_no_new_access_token_from_keychain",
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXAccessTokenRefreshDiagnosisNotification object:nil userInfo:userInfo];
     return NO;
 }
 
