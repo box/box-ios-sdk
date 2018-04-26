@@ -189,9 +189,10 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)applicationWillResignActive:(NSNotification *)note
 {
     UIApplication *app = [UIApplication sharedApplication];
-    [app beginBackgroundTaskWithExpirationHandler:^{
-        [app endBackgroundTask:self.backgroundTaskID];
-        self.backgroundTaskID = UIBackgroundTaskInvalid;
+    __weak BOXAuthorizationViewController *weakSelf = self;
+    self.backgroundTaskID = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:weakSelf.backgroundTaskID];
+        weakSelf.backgroundTaskID = UIBackgroundTaskInvalid;
     }];
 }
 
