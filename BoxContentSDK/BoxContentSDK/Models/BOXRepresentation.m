@@ -40,6 +40,11 @@
                                                   hasExpectedType:[NSString class]
                                                       nullAllowed:NO];
         
+        self.statusCode = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCode
+                                                         inDictionary:statusObject
+                                                      hasExpectedType:[NSString class]
+                                                          nullAllowed:NO];
+        
         NSDictionary *detailsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDetails
                                                                    inDictionary:JSONResponse
                                                                 hasExpectedType:[NSDictionary class]

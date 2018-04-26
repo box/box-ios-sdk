@@ -298,6 +298,7 @@ NSString *const BOXAPIObjectKeyCanSeeManagedUsers = @"can_see_managed_users";
 NSString *const BOXAPIObjectKeyIsSyncEnabled = @"is_sync_enabled";
 NSString *const BOXAPIObjectKeyStatus = @"status";
 NSString *const BOXAPIObjectKeyState = @"state";
+NSString *const BOXAPIObjectKeyCode = @"code";
 NSString *const BOXAPIObjectKeyJobTitle = @"job_title";
 NSString *const BOXAPIObjectKeyPhone = @"phone";
 NSString *const BOXAPIObjectKeyAddress = @"address";

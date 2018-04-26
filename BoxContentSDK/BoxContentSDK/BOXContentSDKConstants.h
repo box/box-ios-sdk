@@ -324,6 +324,7 @@ extern NSString *const BOXAPIObjectKeyCanSeeManagedUsers;
 extern NSString *const BOXAPIObjectKeyIsSyncEnabled;
 extern NSString *const BOXAPIObjectKeyStatus;
 extern NSString *const BOXAPIObjectKeyState;
+extern NSString *const BOXAPIObjectKeyCode;
 extern NSString *const BOXAPIObjectKeyJobTitle;
 extern NSString *const BOXAPIObjectKeyPhone;
 extern NSString *const BOXAPIObjectKeyAddress;

@@ -15,6 +15,8 @@
 
 @property (nonatomic, readwrite, strong) BOXRepresentationStatus *status;
 
+@property (nonatomic, readwrite, strong) NSString *statusCode;
+
 @property (nonatomic, readwrite, strong) NSURL *infoURL;
 
 @property (nonatomic, readwrite, strong) NSURL *contentURL;
