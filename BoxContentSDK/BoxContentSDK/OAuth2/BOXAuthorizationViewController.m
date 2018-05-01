@@ -168,35 +168,44 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
                                      message:self.connectionErrorMessage];
     }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveBackgroundNotification:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveForegroundNotification:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
-        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
-        self.backgroundTaskID = UIBackgroundTaskInvalid;
-    }
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [self endBackgroundTask];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 
     [super viewWillDisappear:animated];
 }
 
 // Fixes a bug starting iOS 11.3, where backgrounding the app to respond to
 // 2FA could cause the login to fail.
-- (void)applicationWillResignActive:(NSNotification *)note
+- (void)didReceiveBackgroundNotification:(NSNotification *)notification
 {
-    UIApplication *app = [UIApplication sharedApplication];
+    [self endBackgroundTask];
     __weak BOXAuthorizationViewController *weakSelf = self;
-    self.backgroundTaskID = [app beginBackgroundTaskWithExpirationHandler:^{
-        [app endBackgroundTask:weakSelf.backgroundTaskID];
-        weakSelf.backgroundTaskID = UIBackgroundTaskInvalid;
+    self.backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [weakSelf endBackgroundTask];
     }];
 }
 
-- (void)applicationDidBecomeActive:(NSNotification *)note
+- (void)didReceiveForegroundNotification:(NSNotification *)notification
+{
+    [self endBackgroundTask];
+}
+
+- (void)endBackgroundTask
 {
     if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
