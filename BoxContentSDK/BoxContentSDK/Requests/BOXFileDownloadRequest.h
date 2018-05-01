@@ -24,10 +24,8 @@
 
 /**
  * Similar to the above init method, request will download file into destinationPath,
- * and the file download can continue running in the background even if app is not running
- * If downloadTask is provided, it will be used to execute/reconnect with the existing download task
- * downloadTaskReplacedBlock is to notify when the downloadTask used by the request has been changed,
- * useful to reconnecting to ongoing download task upon app restart
+ * If associateId is provided, the file download can continue running in the background even if the
+ * app is not running. It will be used to execute/reconnect with the existing download task.
  */
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID

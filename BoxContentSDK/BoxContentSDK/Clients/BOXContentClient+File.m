@@ -301,6 +301,19 @@
 }
 
 - (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation
+                                                                      associateID:(NSString *)associateID
+{
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:localFilePath
+                                                                                                                    fileID:fileID
+                                                                                                            representation:representation
+                                                                                                               associateId:associateID];
+    [self prepareRequest:request];
+    return request;
+}
+
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
                                                                    toOutputStream:(NSOutputStream *)outputStream
                                                                    representation:(BOXRepresentation *)representation
 {

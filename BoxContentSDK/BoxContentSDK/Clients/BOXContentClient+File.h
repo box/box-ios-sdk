@@ -363,6 +363,21 @@
                                                                    representation:(BOXRepresentation *)representation;
 
 /**
+ *  Generate a request to download a given representation of a file to a local filepath.
+ *
+ *  @param fileID          File ID.
+ *  @param localFilePath   Local filepath.
+ *  @param representation  BOXRepresentation to be downloaded
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation
+                                                                      associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to download a given representation file to an outputstream.
  *
  *  @param fileID          File ID.
