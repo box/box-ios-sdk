@@ -619,7 +619,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return success;
 }
 
-- (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
+- (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
 {
     if (userId == nil) {
         return nil;
@@ -784,7 +784,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
 // Delete file extensionSessions/$backgroundSessionId if backgroundSessionId is from extension
 - (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString *)backgroundSessionId error:(NSError **)outError
 {
-    NSString *filePath = [self filePathOfExtensionBackgrounSessionId:backgroundSessionId];
+    NSString *filePath = [self filePathOfExtensionBackgroundSessionId:backgroundSessionId];
     BOOL success = YES;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == YES) {
@@ -796,12 +796,12 @@ backgroundSessionId:(NSString *)backgroundSessionId
 
 - (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError
 {
-    NSString *filePath = [self filePathOfExtensionBackgrounSessionId:backgroundSessionId];
+    NSString *filePath = [self filePathOfExtensionBackgroundSessionId:backgroundSessionId];
     
     return [self createFile:filePath error:outError];
 }
 
-- (NSString *)filePathOfExtensionBackgrounSessionId:(NSString *)backgroundSessionId
+- (NSString *)filePathOfExtensionBackgroundSessionId:(NSString *)backgroundSessionId
 {
     NSString *dirPath = [self dirPathOfExtensionSessions];
     
@@ -819,6 +819,32 @@ backgroundSessionId:(NSString *)backgroundSessionId
     }
     
     return ids;
+}
+
+- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
+{
+    NSError *outError = nil;
+    NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *associateIdToBackgroundSessionIdAndSessionTaskIdDict = [self associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:&outError];
+
+    if (outError != nil) {
+        //getting an error retrieving associateIds, return
+        if (error != nil) {
+            *error = outError;
+        }
+        return nil;
+    }
+
+    //filter out associateIds for the given backgroundSessionId
+    NSMutableArray *associateIds = [NSMutableArray new];
+    for (NSString *associateId in associateIdToBackgroundSessionIdAndSessionTaskIdDict) {
+        BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = associateIdToBackgroundSessionIdAndSessionTaskIdDict[associateId];
+
+        if ([backgroundSessionIdAndSessionTaskId.backgroundSessionId isEqualToString:backgroundSessionId]) {
+            [associateIds addObject:associateId];
+        }
+    }
+
+    return [associateIds copy];
 }
 
 // Create dir if not exists, users/$userId/$associateId/$backgroundSessionId-$sessionTaskId
