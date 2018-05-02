@@ -39,4 +39,9 @@
  */
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse;
 
+/**
+ *  Returns an array of BOXRepresentations for all thumbnail types
+ */
++ (NSArray *)thumbnailRepresentations;
+
 @end

@@ -87,4 +87,16 @@
     return self;
 }
 
+#pragma mark — Helper Methods
+
++ (NSArray *)thumbnailRepresentations {
+    BOXRepresentation *smallThumbnail = [[BOXRepresentation alloc] init];
+    smallThumbnail.type = BOXRepresentationTypeJPG;
+    smallThumbnail.dimensions = BOXRepresentationImageDimensionsJPG320;
+    BOXRepresentation *largeThumbnail = [[BOXRepresentation alloc] init];
+    largeThumbnail.type = BOXRepresentationTypeJPG;
+    largeThumbnail.dimensions = BOXRepresentationImageDimensions1024;
+    return @[smallThumbnail, largeThumbnail];
+}
+
 @end
