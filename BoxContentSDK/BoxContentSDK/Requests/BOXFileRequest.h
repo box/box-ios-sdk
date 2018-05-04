@@ -80,7 +80,9 @@ typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
 /**
  Setting a representation or list option will include availability of file with request representation information
  */
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... NS_REQUIRES_NIL_TERMINATION;
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ...;
+
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions args:(va_list)args;
 
 - (NSString *)formatRepresentationRequestHeader;
 
