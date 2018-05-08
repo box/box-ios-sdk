@@ -23,6 +23,7 @@
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
 #import "BOXURLSessionManager.h"
+#import "BOXURLSessionCacheClient.h"
 
 // Default API URLs
 /*
@@ -448,6 +449,16 @@ static BOXContentClient *defaultInstance = nil;
 + (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
 {
     [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId completion:completionBlock];
+}
+
++ (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
+{
+    return [[BOXURLSessionManager sharedInstance] associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
+}
+
++ (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error
+{
+    return [[BOXURLSessionManager sharedInstance] associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:error];
 }
 
 #pragma mark - helper methods

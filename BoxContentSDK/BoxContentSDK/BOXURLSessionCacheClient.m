@@ -657,7 +657,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
 }
 
 // Return associateIds under users/$userId dir
-- (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error
+- (NSArray <NSString *> *)associateIdsForUserId:(NSString *)userId error:(NSError **)error
 {
     NSString *dirPath = [self dirPathOfUserId:userId];
     NSArray *associateIds = nil;

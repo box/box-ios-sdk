@@ -11,6 +11,7 @@
 @class BOXAPIQueueManager;
 @class BOXRequest;
 @class BOXSharedLinkHeadersHelper;
+@class BOXURLBackgroundSessionIdAndSessionTaskId;
 @protocol BOXAPIAccessTokenDelegate;
 @protocol BOXSharedLinkStorageProtocol;
 @protocol BOXContentCacheClientProtocol;
@@ -211,6 +212,27 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 + (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId
                                            completion:(void (^)(NSError *error))completionBlock;
+
+/**
+ * Get associateIds for a given backgroundSessionId and userId
+ *
+ * @param backgroundSessionId   Id of the background session to look up associateIds for
+ * @param userId                Id of user started the background session tasks
+ * @param error                 error if failed to retrieve
+ *
+ * @return NSArray of associateIds, nil if error
+ */
++ (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Get all associateIds with backgroundSessionId and sessionTaskId pairs created by userId
+ *
+ * @param userId    Id of user started the session tasks. Cannot be nil
+ * @param error     error if failed to retrieve
+ *
+ * @return NSDictionary of associateId to backgroundSessionId and sessionTaskId
+ */
++ (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
 
 /**
  *  API base URLs.

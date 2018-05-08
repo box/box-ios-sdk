@@ -280,6 +280,17 @@
 - (BOOL)cleanUpForUserIdIfEmpty:(NSString *)userId error:(NSError **)error;
 
 /**
+ * Get associateIds for a given backgroundSessionId and userId
+ *
+ * @param backgroundSessionId   Id of the background session to look up associateIds for
+ * @param userId                Id of user started the background session tasks
+ * @param error                 error if failed to retrieve
+ *
+ * @return NSArray of associateIds, nil if error
+ */
+- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
+
+/**
  * Get all associateIds with backgroundSessionId and sessionTaskId pairs created by userId
  *
  * @param userId    Id of user started the session tasks. Cannot be nil
@@ -287,7 +298,7 @@
  *
  * @return NSDictionary of associateId to backgroundSessionId and sessionTaskId
  */
-- (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
+- (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
 
 /**
  * Get all associateIds used to create session tasks with userId
@@ -297,7 +308,7 @@
  *
  * @return array of associateIds used to create session tasks with userId
  */
-- (NSArray *)associateIdsForUserId:(NSString *)userId error:(NSError **)error;
+- (NSArray <NSString *> *)associateIdsForUserId:(NSString *)userId error:(NSError **)error;
 
 /**
  * Cache backgroundSessionId from extension into extensionSessions/$backgroundSessionId file
@@ -335,16 +346,5 @@
  * @return YES if succeeded, NO if failed
  */
 - (BOOL)resumeCompletedDownloadSessionTaskForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
-
-/**
- * Get associateIds for a given backgroundSessionId and userId
- *
- * @param backgroundSessionId   Id of the background session to look up associateIds for
- * @param userId                Id of user started the background session tasks
- * @param error                 error if failed to retrieve
- *
- * @return NSArray of associateIds, nil if error
- */
-- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
 
 @end

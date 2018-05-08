@@ -600,6 +600,16 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
+- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
+{
+    return [self.cacheClient associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
+}
+
+- (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error
+{
+    return [self.cacheClient associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:error];
+}
+
 #pragma mark - Private Helpers
 
 - (BOOL)cleanUpBackgroundSessionId:(NSString *)backgroundSessionId
