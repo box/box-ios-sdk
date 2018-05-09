@@ -458,7 +458,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     if ([self shouldAllowResume] == NO) {
         //clean up cached info for session task if any
         BOOL success = [self.session.urlSessionManager cleanUpBackgroundSessionTaskIfExistForUserId:userId associateId:self.associateId error:&error];
-        BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+        if (success == NO) {
+            BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+        }
     }
     self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;

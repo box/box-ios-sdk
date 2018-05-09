@@ -204,6 +204,11 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
                                                          completion:(void (^)(NSError *error))completionBlock;
 
 /**
+ * @return root directory for caching background session tasks' data specified at one time setup time
+ */
++ (NSString *)rootCacheDir;
+
+/**
  * This method needs to be called in the main app to allow it reconnecting to background session tasks created by
  * background session started from extension
  *
@@ -233,6 +238,12 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * @return NSDictionary of associateId to backgroundSessionId and sessionTaskId
  */
 + (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Return all background session ids known to the app from extensions
+ * which were cached previously using cacheBackgroundSessionIdFromExtension:error
+ */
++ (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
 
 /**
  *  API base URLs.

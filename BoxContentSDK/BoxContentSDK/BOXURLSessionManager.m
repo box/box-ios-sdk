@@ -99,6 +99,9 @@ NS_ASSUME_NONNULL_BEGIN
 //Currently used by test cases to control the expected responses/data for API requests without reaching the server
 @property (nonatomic, readwrite, copy) NSArray<Class> *protocolClasses;
 
+//Root directory for caching background session tasks' data
+@property (nonatomic, strong, readonly) NSString *rootCacheDir;
+
 @end
 
 static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSessionManager.backgroundSessionIdentifier";
@@ -107,6 +110,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
 @synthesize progressSessionTaskIdToTaskDelegate = _progressSessionTaskIdToTaskDelegate;
 @synthesize backgroundSessionIdToSessionTask = _backgroundSessionIdToSessionTask;
+@synthesize rootCacheDir = _rootCacheDir;
 
 + (BOXURLSessionManager *)sharedInstance
 {
@@ -284,6 +288,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     if (firstSetUp == YES) {
         self.defaultDelegate = delegate;
+        _rootCacheDir = rootCacheDir;
         [self createCacheClient:rootCacheDir];
         self.cacheClient.delegate = delegate;
         [self populatePendingSessionTasksForBackgroundSession:_backgroundSession completion:completionBlock];
@@ -292,6 +297,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         // Have set up this background session previously
         completionBlock(nil);
     }
+}
+
+- (NSString *)rootCacheDir
+{
+    return _rootCacheDir;
 }
 
 - (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(nullable void (^)(NSError * _Nullable error))completionBlock
@@ -608,6 +618,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error
 {
     return [self.cacheClient associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:error];
+}
+
+- (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error
+{
+    return [self.cacheClient backgroundSessionIdsFromExtensionsWithError:error];
 }
 
 #pragma mark - Private Helpers
