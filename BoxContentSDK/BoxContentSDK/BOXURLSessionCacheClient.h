@@ -324,7 +324,7 @@
  * Return all background session ids known to the app from extensions
  * which were cached previously using cacheBackgroundSessionIdFromExtension:error
  */
-- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
+- (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
 
 /**
  * Return resumeData of a completed session task associated with the userId and associateId

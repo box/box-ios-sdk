@@ -769,7 +769,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     }
     
     __block BOOL success = NO;
-    
+    //FIXME: if file exists, don't override?
     NSFileCoordinator *coordinator = [self createFileCoordinator];
     [coordinator coordinateWritingItemAtURL:[NSURL fileURLWithPath:path]
                                     options:NSFileCoordinatorWritingForReplacing
@@ -808,11 +808,11 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return [dirPath stringByAppendingPathComponent:backgroundSessionId];
 }
 
-- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error
+- (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error
 {
     NSString *dirPath = [self dirPathOfExtensionSessions];
     BOOL isDir = NO;
-    NSArray *ids = [NSArray new];
+    NSArray <NSString *> *ids = [NSArray new];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] == YES && isDir == YES) {
         ids = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self dirPathOfExtensionSessions] error:error];

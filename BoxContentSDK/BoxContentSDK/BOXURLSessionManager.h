@@ -121,6 +121,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                           sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
                                                          completion:(nullable void (^)(NSError * _Nullable error))completionBlock;
 
+// @return root directory for caching background session tasks' data specified at one time setup time
+- (NSString *)rootCacheDir;
+
 /**
  * This method results in this BOXURLSessionManager becomes the delegate for session with backgroundSessionId identifier
  * should share the same rootCacheDir as the main app to work properly
@@ -258,6 +261,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * @return NSDictionary of associateId to backgroundSessionId and sessionTaskId
  */
 - (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Return all background session ids known to the app from extensions
+ * which were cached previously using cacheBackgroundSessionIdFromExtension:error
+ */
+- (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
 
 @end
 

@@ -446,6 +446,11 @@ static BOXContentClient *defaultInstance = nil;
                                                                                             completion:completionBlock];
 }
 
++ (NSString *)rootCacheDir
+{
+    return [[BOXURLSessionManager sharedInstance] rootCacheDir];
+}
+
 + (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(void (^)(NSError *error))completionBlock;
 {
     [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId completion:completionBlock];
@@ -459,6 +464,11 @@ static BOXContentClient *defaultInstance = nil;
 + (NSDictionary <NSString *, BOXURLBackgroundSessionIdAndSessionTaskId *> *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error
 {
     return [[BOXURLSessionManager sharedInstance] associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:error];
+}
+
++ (NSArray <NSString *> *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error
+{
+    return [[BOXURLSessionManager sharedInstance] backgroundSessionIdsFromExtensionsWithError:error];
 }
 
 #pragma mark - helper methods
