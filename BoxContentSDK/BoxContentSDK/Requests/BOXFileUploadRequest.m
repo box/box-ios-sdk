@@ -130,11 +130,7 @@
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
-
-    if (self.enableCheckForCorruptionInTransit) {
-        // Set up the Content-MD5 header
-        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
-    }
+    [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
 
     return operation;
 }

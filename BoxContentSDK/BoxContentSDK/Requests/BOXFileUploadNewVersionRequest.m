@@ -11,6 +11,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXAbstractSession.h"
 #import "BOXDispatchHelper.h"
+#import "BOXHashHelper.h"
 
 @interface BOXFileUploadNewVersionRequest ()
 
@@ -90,7 +91,8 @@
     if ([self.matchingEtag length] > 0) {
         [operation.APIRequest setValue:self.matchingEtag forHTTPHeaderField:BOXAPIHTTPHeaderIfMatch];
     }
-    
+    [operation.APIRequest setValue:@"[self fileSHA1]" forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
+
     return operation;
 }
 
@@ -154,6 +156,23 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeFile;
+}
+
+#pragma mark - Helper Methods
+
+- (NSString *)fileSHA1
+{
+    NSString *hash = nil;
+
+    if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
+        hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
+    } else if (self.fileData != nil) {
+        hash = [BOXHashHelper sha1HashOfData:self.fileData];
+    } else {
+        BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
+    }
+
+    return hash;
 }
 
 @end
