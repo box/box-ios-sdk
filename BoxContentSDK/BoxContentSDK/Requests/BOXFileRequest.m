@@ -243,7 +243,7 @@
     return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... NS_REQUIRES_NIL_TERMINATION
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... 
 {
     NSMutableArray *arguments=[[NSMutableArray alloc]init];
     BOXRepresentationRequestOptions eachObject;
@@ -252,11 +252,28 @@
         [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
         va_start(argumentList, representationOptions);
         while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
-            if ([NSNumber numberWithUnsignedInteger:eachObject] > 0) {
+            if (eachObject > 0) {
                 [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
             }
         }
         va_end(argumentList);
+    }
+    
+    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
+}
+
+// Swift compatable va_list version of the method
+- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions args:(va_list)argumentList
+{
+    NSMutableArray *arguments=[[NSMutableArray alloc]init];
+    BOXRepresentationRequestOptions eachObject;
+    if (representationOptions) {
+        [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
+        while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
+            if (eachObject > 0) {
+                [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
+            }
+        }
     }
     
     self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
