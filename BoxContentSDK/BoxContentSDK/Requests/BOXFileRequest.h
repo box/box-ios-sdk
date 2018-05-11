@@ -21,7 +21,6 @@
  - BOXRepresentationRequestJPGRepresentation:               Request JPG representions if available for the given file
  - BOXRepresentationRequestMP3Representation:               Request PNG representions if available for the given file
  - BOXRepresentationRequestMP4Representation:               Request MP4 representions if available for the given file
- - BOXRepresentationRequestDicomRepresentation:             Request DICOM representions available for DICOM file
  - BOXRepresentationRequesteExtractedTextRepresentation:    Request extracted text if unformatted text is contained in a document (non-image)
  */
 typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
@@ -34,8 +33,7 @@ typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
     BOXRepresentationRequestJPGRepresentation                  = 1 << 6,
     BOXRepresentationRequestMP3Representation                  = 1 << 7,
     BOXRepresentationRequestMP4Representation                  = 1 << 8,
-    BOXRepresentationRequestDICOMRepresentation                = 1 << 9,
-    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 10
+    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 9
 } NS_ENUM_AVAILABLE_IOS(10_0);
 
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
