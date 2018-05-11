@@ -104,7 +104,6 @@
     request.fileName = fileNameOnServer;
     request.contentCreatedAt = contentCreatedAtDateOnServer;
     request.contentModifiedAt = contentModifiedAtDateOnServer;
-    request.enableCheckForCorruptionInTransit = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL
@@ -192,7 +191,6 @@
     request.fileName = fileNameOnServer;
     request.contentCreatedAt = contentCreatedAtDateOnServer;
     request.contentModifiedAt = contentModifiedAtDateOnServer;
-    request.enableCheckForCorruptionInTransit = YES;
     NSURLRequest *URLRequest = request.urlRequest;
     
     // URL

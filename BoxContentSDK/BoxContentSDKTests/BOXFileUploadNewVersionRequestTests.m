@@ -198,6 +198,8 @@
     XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
 
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
+    XCTAssertEqualObjects([BOXHashHelper sha1HashOfData:[uploadData dataUsingEncoding:NSUTF8StringEncoding]], URLRequest.allHTTPHeaderFields[@"Content-MD5"]);
+
 }
 
 #pragma mark - Completion and Progress Blocks

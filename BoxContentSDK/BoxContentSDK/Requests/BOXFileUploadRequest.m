@@ -127,13 +127,9 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:fileName
                                        MIMEType:nil];
+        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
-    }
-
-    if (self.enableCheckForCorruptionInTransit) {
-        // Set up the Content-MD5 header
-        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
     }
 
     return operation;
@@ -209,9 +205,7 @@
 {
     NSString *hash = nil;
 
-    if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
-        hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
-    } else if (self.fileData != nil) {
+    if (self.fileData != nil) {
         hash = [BOXHashHelper sha1HashOfData:self.fileData];
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
