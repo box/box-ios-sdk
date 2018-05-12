@@ -13,6 +13,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXFile.h"
 #import "BOXContentSDKConstants.h"
+#import "BOXHashHelper.h"
 
 @interface BOXAPIMultipartToJSONOperation ()
 // An array of BOXAPIMultipartPiece. In our tests, we want to inspect these.
@@ -198,6 +199,8 @@
     XCTAssertTrue([expectedContentType isEqualToString:URLRequest.allHTTPHeaderFields[@"Content-Type"]]);
 
     XCTAssertEqualObjects(matchingEtag, URLRequest.allHTTPHeaderFields[@"If-Match"]);
+    XCTAssertEqualObjects([BOXHashHelper sha1HashOfData:[uploadData dataUsingEncoding:NSUTF8StringEncoding]], URLRequest.allHTTPHeaderFields[@"Content-MD5"]);
+
 }
 
 #pragma mark - Completion and Progress Blocks

@@ -12,10 +12,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol BOXStreamingDataProcessor;
 @interface BOXMultipartBodyStream : NSInputStream <NSStreamDelegate>
 
 @property (readonly, nonatomic, assign) unsigned long long contentLength;
-
+@property (nonatomic, readwrite, weak) id<BOXStreamingDataProcessor> contentProcessor;
 @end
 
 /**
@@ -271,7 +272,7 @@ forHTTPHeaderField:(NSString *)field;
  */
 - (NSMutableURLRequest *)requestWithMultipartFormRequest:(NSURLRequest *)request
                              writingStreamContentsToFile:(NSURL *)fileURL
-                                       completionHandler:(nullable void (^)(NSError * _Nullable error))handler;
+                                       completionHandler:(nullable void (^)(NSString * _Nullable digest, NSError * _Nullable error))handler;
 
 @end
 

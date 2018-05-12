@@ -411,7 +411,10 @@
 		8676E0EA1B2FA89200AC2677 /* metadata_template.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E91B2FA89200AC2677 /* metadata_template.json */; };
 		8676E0EC1B2FB09C00AC2677 /* enterprise_metadatas.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0EB1B2FB09C00AC2677 /* enterprise_metadatas.json */; };
 		86DADC281B29657C004D9624 /* BOXAppUserSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */; };
+		942BDE6D20B38E320074F0C5 /* BOXStreamingHashHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 942BDE6B20B38E320074F0C5 /* BOXStreamingHashHelper.h */; };
+		942BDE6E20B38E320074F0C5 /* BOXStreamingHashHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BDE6C20B38E320074F0C5 /* BOXStreamingHashHelper.m */; };
 		946F4B7720833476009D628D /* representations_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 946F4B7620833476009D628D /* representations_info.json */; };
+		94AE27C320B4B0F40043AB0E /* BOXStreamingHashHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AE27C220B4B0F40043AB0E /* BOXStreamingHashHelperTests.m */; };
 		94D51FC2207D9347008341A7 /* BOXRepresentationInfoRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 94D51FC0207D9347008341A7 /* BOXRepresentationInfoRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		94D51FC3207D9347008341A7 /* BOXRepresentationInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */; };
 		94D51FC4207EB9B1008341A7 /* BOXRepresentationInfoRequest.m in Headers */ = {isa = PBXBuildFile; fileRef = 94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -780,7 +783,10 @@
 		86C514A51B2BC1600078565C /* BOXContentClient+Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXContentClient+Metadata.h"; sourceTree = "<group>"; };
 		86C514A61B2BC1600078565C /* BOXContentClient+Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXContentClient+Metadata.m"; sourceTree = "<group>"; };
 		86DADC271B29657C004D9624 /* BOXAppUserSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXAppUserSessionTests.m; sourceTree = "<group>"; };
+		942BDE6B20B38E320074F0C5 /* BOXStreamingHashHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXStreamingHashHelper.h; sourceTree = "<group>"; };
+		942BDE6C20B38E320074F0C5 /* BOXStreamingHashHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXStreamingHashHelper.m; sourceTree = "<group>"; };
 		946F4B7620833476009D628D /* representations_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = representations_info.json; sourceTree = "<group>"; };
+		94AE27C220B4B0F40043AB0E /* BOXStreamingHashHelperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXStreamingHashHelperTests.m; sourceTree = "<group>"; };
 		94D51FC0207D9347008341A7 /* BOXRepresentationInfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXRepresentationInfoRequest.h; sourceTree = "<group>"; };
 		94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXRepresentationInfoRequest.m; sourceTree = "<group>"; };
 		94F5E2CA2083B6E300334AEC /* BOXRepresentationInfoRequestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXRepresentationInfoRequestTests.m; sourceTree = "<group>"; };
@@ -1075,6 +1081,7 @@
 				15F5EE4A1A20157100FBBE1D /* Requests */,
 				15605D941A2013B800C5EE5A /* Libraries */,
 				15605D871A20132200C5EE5A /* Supporting Files */,
+				942BDE6F20B4B0470074F0C5 /* External */,
 			);
 			path = BoxContentSDKTests;
 			sourceTree = "<group>";
@@ -1516,6 +1523,14 @@
 			name = Sessions;
 			sourceTree = "<group>";
 		};
+		942BDE6F20B4B0470074F0C5 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				94AE27C220B4B0F40043AB0E /* BOXStreamingHashHelperTests.m */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
 		C562DB411A4829EA0002E510 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1548,6 +1563,8 @@
 			children = (
 				E11035F41A200E6B00B46F6D /* BOXHashHelper.h */,
 				E11035F51A200E6B00B46F6D /* BOXHashHelper.m */,
+				942BDE6B20B38E320074F0C5 /* BOXStreamingHashHelper.h */,
+				942BDE6C20B38E320074F0C5 /* BOXStreamingHashHelper.m */,
 			);
 			path = HashHelper;
 			sourceTree = "<group>";
@@ -1854,6 +1871,7 @@
 				599B1A111E4BE6DC00709C27 /* BOXContentClient+Folder.h in Headers */,
 				599B1A121E4BE6DC00709C27 /* BOXContentClient+Bookmark.h in Headers */,
 				599B1A131E4BE6DC00709C27 /* BOXContentClient+Metadata.h in Headers */,
+				942BDE6D20B38E320074F0C5 /* BOXStreamingHashHelper.h in Headers */,
 				599B1A141E4BE6DC00709C27 /* BOXContentClient+RecentItems.h in Headers */,
 				599B1A151E4BE6DC00709C27 /* BOXHashHelper.h in Headers */,
 				599B1A161E4BE6DC00709C27 /* BOXKeychainItemWrapper.h in Headers */,
@@ -2300,6 +2318,7 @@
 				C562DB691A487E970002E510 /* BOXBookmarkCommentsRequestTests.m in Sources */,
 				E1F9AE0D1A3B830800D44858 /* BOXBookmarkUnshareRequestTests.m in Sources */,
 				0E16F1481A44E6D300BDDA21 /* BOXSearchRequestTests.m in Sources */,
+				94AE27C320B4B0F40043AB0E /* BOXStreamingHashHelperTests.m in Sources */,
 				155170C71A54927B004C00AF /* BOXFileVersionsRequestTests.m in Sources */,
 				1522C8E41A3FAA100075DC7D /* BOXFolderCopyRequestTests.m in Sources */,
 				E15596121A3670840070ED1E /* BOXFolderTests.m in Sources */,
@@ -2461,6 +2480,7 @@
 				599B19EB1E4BE67600709C27 /* BOXAppToAppMessage.m in Sources */,
 				599B19EC1E4BE67600709C27 /* BOXContentSDKErrors.m in Sources */,
 				599B19ED1E4BE67600709C27 /* BOXContentSDKConstants.m in Sources */,
+				942BDE6E20B38E320074F0C5 /* BOXStreamingHashHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
