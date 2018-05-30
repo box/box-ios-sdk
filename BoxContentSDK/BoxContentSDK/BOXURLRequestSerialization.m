@@ -667,7 +667,7 @@ NSTimeInterval const kBOXUploadStream3GSuggestedDelay = 0.2;
 #pragma mark -
 
 @interface BOXStreamingMultipartFormData ()
-@property (readwrite, nonatomic, copy) NSMutableURLRequest *request;
+@property (readwrite, nonatomic, strong) NSMutableURLRequest *request;
 @property (readwrite, nonatomic, assign) NSStringEncoding stringEncoding;
 @property (readwrite, nonatomic, copy) NSString *boundary;
 @property (readwrite, nonatomic, strong) BOXMultipartBodyStream *bodyStream;

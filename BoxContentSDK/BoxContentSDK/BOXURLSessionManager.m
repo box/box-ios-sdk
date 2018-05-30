@@ -717,7 +717,10 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             //for a new background download task, we need to cache destinationFilePath to be used later
 
             id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = (id<BOXURLSessionDownloadTaskDelegate>)taskDelegate;
-            success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTask.taskIdentifier destinationFilePath:downloadTaskDelegate.destinationFilePath error:&error];
+            [self.cacheClient cacheBackgroundSessionId:backgroundSessionId
+                                         sessionTaskId:sessionTask.taskIdentifier
+                                   destinationFilePath:downloadTaskDelegate.destinationFilePath
+                                                 error:&error];
         }
     }
     
