@@ -290,10 +290,7 @@
     }
     
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAllRepresentations)]) {
-        // For now on iOS 11 request mp4 as priorty preview over hls playback,
-        return ([UIDevice iOSVersion] > BOXiOSVersion10)
-        ? @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,mp4,hls,mp3,jpg]"
-        : @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
+        return @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
     }
     
     __block NSString *representationFields = @"[";
