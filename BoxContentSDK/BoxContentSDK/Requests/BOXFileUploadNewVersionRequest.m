@@ -11,6 +11,7 @@
 #import "BOXAPIQueueManager.h"
 #import "BOXAbstractSession.h"
 #import "BOXDispatchHelper.h"
+#import "BOXHashHelper.h"
 
 @interface BOXFileUploadNewVersionRequest ()
 
@@ -72,6 +73,10 @@
                                                                                       session:self.queueManager.session];
     
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
+        if([self.uploadMultipartCopyFilePath length] <= 0) { // Foreground operations deprecated, for backward compatibility
+            [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
+        }
+
         operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
         operation.associateId = self.associateId;
         [operation appendMultipartPieceWithFilePath:self.localFilePath
@@ -83,6 +88,7 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:@"" // Box API ignores the filename when uploading a new version.
                                        MIMEType:nil];
+        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
     }  else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
     }
@@ -154,6 +160,23 @@
 - (BOXAPIItemType *)itemTypeForSharedLink
 {
     return BOXAPIItemTypeFile;
+}
+
+#pragma mark - Helper Methods
+
+- (NSString *)fileSHA1
+{
+    NSString *hash = nil;
+    
+    if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
+        hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
+    } else if (self.fileData != nil) {
+        hash = [BOXHashHelper sha1HashOfData:self.fileData];
+    } else {
+        BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
+    }
+    
+    return hash;
 }
 
 @end

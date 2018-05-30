@@ -166,9 +166,13 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
         self.APIRequest = [[BOXHTTPRequestSerializer serializer] requestWithMultipartFormRequest:self.APIRequest
                                                                      writingStreamContentsToFile:tempUploadFileURL
-                                                                               completionHandler:^(NSError * error) {
+                                                                               completionHandler:^(NSString *digest, NSError * error) {
                                                                                    if (error != nil) {
                                                                                        [weakSelf abortWithError:error];
+                                                                                   }
+                                                                                   else if ([digest length] > 0){
+                                                                                       [self.APIRequest setValue:digest
+                                                                                              forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
                                                                                    }
                                                                                    dispatch_semaphore_signal(sema);
                                                                                }];

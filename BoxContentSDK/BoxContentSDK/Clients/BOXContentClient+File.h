@@ -131,6 +131,7 @@
  */
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                         fromLocalFilePath:(NSString *)localFilePath;
+__attribute__((deprecated("Foreground fileuploads will be removed. Please use fileUploadRequestInBackgroundToFolderWithID")));
 
 /**
  *  Generate a request to upload a local file to Box in background unless uploadMultipartCopyFilePath is not provided
@@ -170,6 +171,7 @@
  */
 - (BOXFileUploadNewVersionRequest *)fileUploadNewVersionRequestWithID:(NSString *)fileID
                                                     fromLocalFilePath:(NSString *)localFilePath;
+__attribute__((deprecated("Foreground fileuploads will be removed. Please use fileUploadNewVersionRequestInBackgroundWithFileID")));
 
 /**
  *  Generate a request to upload a new version of a file from a local file in the background
