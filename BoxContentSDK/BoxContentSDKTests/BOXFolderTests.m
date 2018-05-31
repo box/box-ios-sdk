@@ -9,6 +9,7 @@
 #import "BOXUser.h"
 #import "BOXBookmark.h"
 #import "BOXCollection.h"
+#import "BOXMetadata.h"
 
 @interface BOXFolderTests : BOXModelTestCase
 @end
@@ -95,6 +96,8 @@
     XCTAssertFalse(folder.isFile);
     XCTAssertTrue(folder.isFolder);
     XCTAssertFalse(folder.isBookmark);
+
+    XCTAssertEqual(folder.metadata.count, 0);
 }
 
 - (void)test_that_folder_with_all_fields_is_parsed_correctly_from_json
@@ -177,6 +180,10 @@
     XCTAssertFalse(folder.isFile);
     XCTAssertTrue(folder.isFolder);
     XCTAssertFalse(folder.isBookmark);
+
+    XCTAssertEqual(folder.metadata.count, 1);
+    BOXMetadata *metadata = folder.metadata[0];
+    XCTAssertEqualObjects(@"yes", metadata.info[@"contentApproved"]);
 }
 
 @end

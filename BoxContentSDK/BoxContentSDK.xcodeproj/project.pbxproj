@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00D123E02077BCA10026AF5A /* file_all_fields_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */; };
 		00D0E5252077EE230026BABA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E5242077EE230026BABA /* main.m */; };
 		00D0E5282077EE230026BABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E5272077EE230026BABA /* AppDelegate.m */; };
 		00D0E52B2077EE230026BABA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E52A2077EE230026BABA /* ViewController.m */; };
@@ -496,6 +497,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file_all_fields_enterprise_metadata.json; sourceTree = "<group>"; };
 		00D0E5212077EE230026BABA /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00D0E5242077EE230026BABA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		00D0E5262077EE230026BABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1453,6 +1455,7 @@
 				E1F9AE121A3B843300D44858 /* file_default_fields_not_shared.json */,
 				E1F9AE131A3B843300D44858 /* file_default_fields_shared.json */,
 				155EFD591A252EF900F34254 /* file_all_fields.json */,
+				00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */,
 				A59A40B21EA1771000BF4113 /* file_all_fields_representations.json */,
 				E15595A21A2D4B8E0070ED1E /* bookmark_default_fields.json */,
 				E1F9AE161A3B845A00D44858 /* bookmark_default_fields_not_shared.json */,
@@ -2177,6 +2180,7 @@
 				E155961A1A367A570070ED1E /* bookmark_all_fields.json in Resources */,
 				70CC16A11ACCA8DD00C3CC80 /* get_items_3_5.json in Resources */,
 				A59A40B31EA1771000BF4113 /* file_all_fields_representations.json in Resources */,
+				00D123E02077BCA10026AF5A /* file_all_fields_enterprise_metadata.json in Resources */,
 				11E465461D86006900E267B1 /* representations.json in Resources */,
 				155EFD5A1A252EF900F34254 /* file_all_fields.json in Resources */,
 				155170C41A5491CC004C00AF /* file_versions.json in Resources */,
