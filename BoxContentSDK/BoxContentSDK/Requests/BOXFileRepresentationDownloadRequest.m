@@ -12,6 +12,8 @@
 #import "BOXAPIDataOperation.h"
 #import "BOXLog.h"
 #import "BOXDispatchHelper.h"
+#import "BOXHashHelper.h"
+#import "BOXContentSDKErrors.h"
 
 @interface BOXFileRepresentationDownloadRequest ()
 
@@ -34,6 +36,7 @@
         _fileID = fileID;
         _representation = representation;
         _ignoreLocalURLRequestCache = NO;
+        _sha1Hash = nil;
     }
     return self;
 }
@@ -113,8 +116,15 @@
         }
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
+            NSError *dataIntegrityErrorIfAny = nil;
+            if([self.sha1Hash length] && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
+                dataIntegrityErrorIfAny = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKDataIntegrityError userInfo:nil];
+                if(dataIntegrityErrorIfAny) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self];
+                }
+            }
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil);
+                completionBlock(dataIntegrityErrorIfAny);
             } onMainThread:isMainThread];
         };
         fileOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -144,6 +154,5 @@
     dataOperation.allowResume = YES;
     [self cancel];
 }
-
 @end
 
