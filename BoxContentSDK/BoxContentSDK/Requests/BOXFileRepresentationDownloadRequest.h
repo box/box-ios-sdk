@@ -19,6 +19,9 @@
 // Enable NSURLSession cachepolicy for this request
 @property (nonatomic, readwrite, assign) BOOL ignoreLocalURLRequestCache;
 
+// Set digest to verify data integrity of downloaded content
+@property (nonatomic, readwrite, strong) NSString *sha1Hash;
+
 /**
  Request will download file into destinationPath, and the file download can continue
  running in the background even if app is not running.

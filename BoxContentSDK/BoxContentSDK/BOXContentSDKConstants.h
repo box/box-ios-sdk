@@ -91,6 +91,7 @@ extern NSString *const BOXOAuth2AuthDelegationNewClientKey;
 // Notifications
 extern NSString *const BOXUserWasLoggedOutDueToErrorNotification;
 extern NSString *const BOXAuthOperationDidCompleteNotification;
+extern NSString *const BOXFileDownloadCorruptedNotification;
 
 // Private Notifications. No guarantee for future support.
 extern NSString *const BOXAccessTokenRefreshDiagnosisNotification;
