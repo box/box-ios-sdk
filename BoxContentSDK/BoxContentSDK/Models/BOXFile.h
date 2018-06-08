@@ -89,13 +89,21 @@
  */
 @property (nonatomic, readwrite, strong) BOXFileLock *lock;
 
+/**
+ *  Array of available file conversion formats for original content
+ */
 @property (nonatomic, readwrite, strong) NSArray *representations;
-
 
 /**
  *  Url available to download original content.
  *  Warning: file exists only if canDownload is true
  */
 @property (nonatomic, readwrite, strong) NSURL *downloadUrl;
+
+/**
+ *  Url available to download or preview original content.
+ *  Warning: file url exists if canDownload or canPreview is true
+ */
+@property (nonatomic, readwrite, strong) NSURL *authenticatedDownloadUrl;
 
 @end

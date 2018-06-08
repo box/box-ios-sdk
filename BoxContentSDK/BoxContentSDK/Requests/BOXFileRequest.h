@@ -9,10 +9,13 @@
 /**
  Representations are digital assets created for files stored in Box. To request representations information for
  a file, set the options for each type.
-
+ 
  - BOXRepresentationRequestOriginal:                        Request original content url with file information request
                                                             Reference the reponse field 'download_url' to download original content when file
                                                             has download permissions are owner, co-owner, editor, viewer uploader, viewer
+ - BOXRepresentationRequestAuthenticatedOriginal:           Request original content url for
+                                                            Reference the reponse field 'authenticated_download_url' to access original content when file
+                                                            has download permissions are owner, co-owner, editor, viewer uploader, viewer, preview and preview uploader permission
  - BOXRepresentationRequestAllRepresentations:              If permissions allow retrieve representations for thumbnails, preview representations for the given file
  - BOXRepresentationRequestHighDefinitionVideo:             Request video representions if available for the given file
  - BOXRepresentationRequestThumbnailRepresentation:         Request thumbnail representions if available for the given file
@@ -25,15 +28,16 @@
  */
 typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
     BOXRepresentationRequestOriginal                           = 1 << 0,
-    BOXRepresentationRequestAllRepresentations                 = 1 << 1,
-    BOXRepresentationRequestHighDefinitionVideo                = 1 << 2,
-    BOXRepresentationRequestThumbnailRepresentation            = 1 << 3,
-    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 4,
-    BOXRepresentationRequestPDFRepresentation                  = 1 << 5,
-    BOXRepresentationRequestJPGRepresentation                  = 1 << 6,
-    BOXRepresentationRequestMP3Representation                  = 1 << 7,
-    BOXRepresentationRequestMP4Representation                  = 1 << 8,
-    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 9
+    BOXRepresentationRequestAuthenticatedOriginal              = 1 << 1,
+    BOXRepresentationRequestAllRepresentations                 = 1 << 2,
+    BOXRepresentationRequestHighDefinitionVideo                = 1 << 3,
+    BOXRepresentationRequestThumbnailRepresentation            = 1 << 4,
+    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 5,
+    BOXRepresentationRequestPDFRepresentation                  = 1 << 6,
+    BOXRepresentationRequestJPGRepresentation                  = 1 << 7,
+    BOXRepresentationRequestMP3Representation                  = 1 << 8,
+    BOXRepresentationRequestMP4Representation                  = 1 << 9,
+    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 10
 } NS_ENUM_AVAILABLE_IOS(10_0);
 
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
