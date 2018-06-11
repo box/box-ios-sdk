@@ -72,6 +72,9 @@
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
         fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
     }
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAuthenticatedOriginal)]) {
+        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyAuthenticatedDownloadURL];
+    }
     if ([self.representationsRequested count] > 0) {
         // Include information for the original content URL in any request for file representations
         fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyRepresentations];
@@ -285,15 +288,24 @@
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
     }
+    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAuthenticatedOriginal)]) {
+        [self.representationsRequested removeObject:@(BOXRepresentationRequestAuthenticatedOriginal)];
+    }
     if ([self.representationsRequested count] == 0) {
         return nil;
     }
     
+    __block NSString *representationFields = nil;
+    
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAllRepresentations)]) {
-        return @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
+        representationFields = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
+        [self.representationsRequested removeObject:@(BOXRepresentationRequestAllRepresentations)];
+    }
+    if ([self.representationsRequested count] == 0) {
+        return representationFields;
     }
     
-    __block NSString *representationFields = @"[";
+    representationFields = [representationFields stringByAppendingString:@"["];
     
     __block NSString *delimiter = @"],[";
     if (self.matchSupportedRepresentation == YES) {
@@ -311,8 +323,7 @@
             }
             BOXRepresentationRequestOptions representationOption = (BOXRepresentationRequestOptions) [obj integerValue];
             if (representationOption & BOXRepresentationRequestHighDefinitionVideo) {
-                NSString *videoFormat = ([UIDevice iOSVersion] > BOXiOSVersion10) ? BOXRepresentationTypeMP4 : BOXRepresentationTypeHLS;
-                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", videoFormat, delimiter]];
+                representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeHLS, delimiter]];
             }
             if (representationOption & BOXRepresentationRequestMP3Representation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeMP3, delimiter]];
