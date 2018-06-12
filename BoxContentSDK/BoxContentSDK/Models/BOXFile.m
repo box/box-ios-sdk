@@ -89,6 +89,14 @@
             self.downloadUrl = [NSURL URLWithString:downloadURLString];
         }
         
+        NSString *authenticatedDownloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAuthenticatedDownloadURL
+                                                                     inDictionary:JSONResponse
+                                                                  hasExpectedType:[NSString class]
+                                                                      nullAllowed:NO];
+        if (authenticatedDownloadURLString.length > 0) {
+            self.authenticatedDownloadUrl = [NSURL URLWithString:authenticatedDownloadURLString];
+        }
+        
         // Parse Representations.
         NSDictionary *representationsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyRepresentations
                                                                           inDictionary:JSONResponse
@@ -111,11 +119,16 @@
                 representation.status = BOXRepresentationStatusSuccess;
                 [tempRepresentations addObject:representation];
             }
+            if (self.authenticatedDownloadUrl.absoluteString.length > 0) {
+                BOXRepresentation *representation = [[BOXRepresentation alloc] init];
+                representation.type = BOXRepresentationTypeSecondaryOriginal;
+                representation.contentURL = self.authenticatedDownloadUrl;
+                representation.status = BOXRepresentationStatusSuccess;
+                [tempRepresentations addObject:representation];
+            }
             
             self.representations = [NSArray arrayWithArray:tempRepresentations];
         }
-        
-
     }
     
     return self;

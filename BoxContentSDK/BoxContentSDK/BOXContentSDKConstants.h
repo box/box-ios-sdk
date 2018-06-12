@@ -153,6 +153,7 @@ extern BOXCollaborationRole *const BOXCollaborationRoleUploader;
 // Representation Type
 typedef NSString BOXRepresentationType;
 extern BOXRepresentationType *const BOXRepresentationTypeOriginal;
+extern BOXRepresentationType *const BOXRepresentationTypeSecondaryOriginal;
 extern BOXRepresentationType *const BOXRepresentationTypePDF;
 extern BOXRepresentationType *const BOXRepresentationTypeMP4;
 extern BOXRepresentationType *const BOXRepresentationTypeMP3;
