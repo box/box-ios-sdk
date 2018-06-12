@@ -141,6 +141,7 @@ BOXCollaborationRole *const BOXCollaborationRoleUploader = @"uploader";
 
 // Representation Type
 BOXRepresentationType *const BOXRepresentationTypeOriginal = @"original";
+BOXRepresentationType *const BOXRepresentationTypeSecondaryOriginal = @"secondary original";
 BOXRepresentationType *const BOXRepresentationTypePDF = @"pdf";
 BOXRepresentationType *const BOXRepresentationTypeMP4 = @"mp4";
 BOXRepresentationType *const BOXRepresentationTypeMP3 = @"mp3";
