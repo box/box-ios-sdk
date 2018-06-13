@@ -180,11 +180,7 @@
     // Check x-reps-hint header verify single rep in match option
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestHighDefinitionVideo, nil];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
-    if ([UIDevice iOSVersion] > BOXiOSVersion10) {
-        expectedHeaderXRepsHint = [NSString stringWithFormat:@"[mp4]"];
-    } else {
-        expectedHeaderXRepsHint = [NSString stringWithFormat:@"[hls]"];
-    }
+    expectedHeaderXRepsHint = [NSString stringWithFormat:@"[hls]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestLargeThumbnailRepresentation, nil];

@@ -164,6 +164,7 @@ NSString *const BOXRepresentationTemplateValueHLSManifest = @"master.m3u8";
 
 // Representation Status
 BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";
+BOXRepresentationStatus *const BOXRepresentationStatusViewable = @"viewable";
 BOXRepresentationStatus *const BOXRepresentationStatusPending = @"pending";
 BOXRepresentationStatus *const BOXRepresentationStatusNone = @"none";
 BOXRepresentationStatus *const BOXRepresentationStatusError = @"error";

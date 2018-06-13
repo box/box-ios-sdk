@@ -177,6 +177,7 @@ extern NSString *const BOXRepresentationTemplateValueHLSManifest;
 // Representation Status
 typedef NSString BOXRepresentationStatus;
 extern BOXRepresentationStatus *const BOXRepresentationStatusSuccess;
+extern BOXRepresentationStatus *const BOXRepresentationStatusViewable;
 extern BOXRepresentationStatus *const BOXRepresentationStatusPending;
 extern BOXRepresentationStatus *const BOXRepresentationStatusNone;
 extern BOXRepresentationStatus *const BOXRepresentationStatusError;
