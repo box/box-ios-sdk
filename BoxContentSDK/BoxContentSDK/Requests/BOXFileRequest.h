@@ -84,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
  */
 - (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ...;
 
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions args:(va_list)args;
+- (void)setRepresentationRequestOptionsWithSet:(NSSet *)representationOptionsSet;
 
 - (NSString *)formatRepresentationRequestHeader;
 
