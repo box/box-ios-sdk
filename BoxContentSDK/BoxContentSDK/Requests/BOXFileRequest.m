@@ -283,7 +283,7 @@
         return nil;
     }
     
-    __block NSString *representationFields = nil;
+    __block NSString *representationFields = @"";
     
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAllRepresentations)]) {
         representationFields = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][pdf,hls,mp4,mp3,jpg]";
