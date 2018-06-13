@@ -265,21 +265,9 @@
     self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
 }
 
-// Swift compatable va_list version of the method
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions args:(va_list)argumentList
+- (void)setRepresentationRequestOptionsWithSet:(NSSet *)representationOptionsSet
 {
-    NSMutableArray *arguments=[[NSMutableArray alloc]init];
-    BOXRepresentationRequestOptions eachObject;
-    if (representationOptions) {
-        [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
-        while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
-            if (eachObject > 0) {
-                [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
-            }
-        }
-    }
-    
-    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
+    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithSet:representationOptionsSet];
 }
 
 - (NSString *)formatRepresentationRequestHeader
