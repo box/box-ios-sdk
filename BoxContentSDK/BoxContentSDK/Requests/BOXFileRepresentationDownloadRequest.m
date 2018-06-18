@@ -116,16 +116,22 @@
         }
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
-            NSError *dataIntegrityErrorIfAny = nil;
-            if([self.sha1Hash length] && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
-                dataIntegrityErrorIfAny = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKDataIntegrityError userInfo:nil];
-                if(dataIntegrityErrorIfAny) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self];
+            [BOXDispatchHelper callCompletionBlock:^{
+                completionBlock(nil);
+            } onMainThread:isMainThread];
+
+            
+            if([self.sha1Hash length]) {
+                NSString *calculatedSha1 = [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath];
+                if(![calculatedSha1 isEqualToString:self.sha1Hash]) {
+                    NSDictionary *userInfo = @{@"local_sha1" : self.sha1Hash,
+                                               @"download_sha1" : calculatedSha1,
+                                               @"file_id" : self.fileID};
+                    // Data integrity check fails - Notify the cache and/or application that cache needs to be invalidated
+                    // This is asynchronous notification because of performance implications when dealing with large files or large download sets
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self userInfo:userInfo];
                 }
             }
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(dataIntegrityErrorIfAny);
-            } onMainThread:isMainThread];
         };
         fileOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             [BOXDispatchHelper callCompletionBlock:^{
