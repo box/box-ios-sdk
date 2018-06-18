@@ -106,7 +106,7 @@
 
 #pragma mark - Error Handling
 
-- (void)test_that_download_data_integrity_check_triggers_error
+- (void)test_that_download_data_integrity_check_triggers_notification
 {
     NSString *fileID = @"123";
     NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
@@ -124,9 +124,10 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
     request.sha1Hash = @"Some Incorrect Sha1";
     [request performRequestWithProgress:nil completion:^(NSError *error) {
-        XCTAssertNotNil(error);
+        XCTAssertNil(error);
         [expectation fulfill];
     }];
+    [self expectationForNotification:BOXFileDownloadCorruptedNotification object:nil handler:nil];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
