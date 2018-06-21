@@ -124,47 +124,47 @@
     BOXFileRequest *fileRequest = [[BOXFileRequest alloc] initWithFileID:expectedFile.modelID];
     
     // Check x-reps-hint header original file request
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestOriginal, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestOriginal)]];
     NSString *actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     XCTAssertEqualObjects(nil, actualXRepsHint);
     
     // Check x-reps-hint header with multi-options file request
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestJPGRepresentation, BOXRepresentationRequestMP3Representation, BOXRepresentationRequestMP4Representation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation), @(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     NSString *expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false],[mp3],[mp4]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header original file request with other option
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestOriginal, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestOriginal)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     XCTAssertEqualObjects(nil, actualXRepsHint);
     
     // Check x-reps-hint header default original file request with other option
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestOriginal, BOXRepresentationRequestThumbnailRepresentation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestOriginal), @(BOXRepresentationRequestThumbnailRepresentation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=320x320&paged=false]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header thumbnail request
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestThumbnailRepresentation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestThumbnailRepresentation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=320x320&paged=false]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header group reps request for all options
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestJPGRepresentation, BOXRepresentationRequestMP3Representation, BOXRepresentationRequestMP4Representation, BOXRepresentationRequestMP4Representation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation), @(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation), @(BOXRepresentationRequestMP4Representation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false],[mp3],[mp4]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header mp3 request
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestMP3Representation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestMP3Representation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[mp3]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header is no option due to persmissions set '0', representation is ignored.
-    [fileRequest setRepresentationRequestOptions:0, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(0)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     XCTAssertEqualObjects(nil, actualXRepsHint);
     
@@ -172,18 +172,18 @@
     fileRequest.matchSupportedRepresentation = YES;
     
     // Check x-reps-hint header first reps matched request for all options
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestJPGRepresentation, BOXRepresentationRequestMP3Representation, BOXRepresentationRequestMP4Representation, BOXRepresentationRequestMP4Representation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation),@(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation), @(BOXRepresentationRequestMP4Representation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false,mp3,mp4]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header verify single rep in match option
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestHighDefinitionVideo, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestHighDefinitionVideo)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[hls]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
-    [fileRequest setRepresentationRequestOptions:BOXRepresentationRequestLargeThumbnailRepresentation, nil];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestLargeThumbnailRepresentation)]];
     actualXRepsHint = [fileRequest formatRepresentationRequestHeader];
     expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);

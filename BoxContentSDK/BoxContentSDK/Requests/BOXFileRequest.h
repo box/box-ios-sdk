@@ -26,18 +26,18 @@
  - BOXRepresentationRequestMP4Representation:               Request MP4 representions if available for the given file
  - BOXRepresentationRequesteExtractedTextRepresentation:    Request extracted text if unformatted text is contained in a document (non-image)
  */
-typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
-    BOXRepresentationRequestOriginal                           = 1 << 0,
-    BOXRepresentationRequestAuthenticatedOriginal              = 1 << 1,
-    BOXRepresentationRequestAllRepresentations                 = 1 << 2,
-    BOXRepresentationRequestHighDefinitionVideo                = 1 << 3,
-    BOXRepresentationRequestThumbnailRepresentation            = 1 << 4,
-    BOXRepresentationRequestLargeThumbnailRepresentation       = 1 << 5,
-    BOXRepresentationRequestPDFRepresentation                  = 1 << 6,
-    BOXRepresentationRequestJPGRepresentation                  = 1 << 7,
-    BOXRepresentationRequestMP3Representation                  = 1 << 8,
-    BOXRepresentationRequestMP4Representation                  = 1 << 9,
-    BOXRepresentationRequesteExtractedTextRepresentation       = 1 << 10
+typedef NS_ENUM(NSUInteger, BOXRepresentationRequestOptions) {
+    BOXRepresentationRequestOriginal,
+    BOXRepresentationRequestAuthenticatedOriginal,
+    BOXRepresentationRequestAllRepresentations,
+    BOXRepresentationRequestHighDefinitionVideo,
+    BOXRepresentationRequestThumbnailRepresentation,
+    BOXRepresentationRequestLargeThumbnailRepresentation,
+    BOXRepresentationRequestPDFRepresentation,
+    BOXRepresentationRequestJPGRepresentation,
+    BOXRepresentationRequestMP3Representation,
+    BOXRepresentationRequestMP4Representation,
+    BOXRepresentationRequesteExtractedTextRepresentation
 } NS_ENUM_AVAILABLE_IOS(10_0);
 
 @interface BOXFileRequest : BOXRequestWithSharedLinkHeader
@@ -80,11 +80,9 @@ typedef NS_OPTIONS(NSUInteger, BOXRepresentationRequestOptions) {
                        refreshed:(BOXFileBlock)refreshBlock;
 
 /**
- Setting a representation or list option will include availability of file with request representation information
+ Setting a representation or Array of options will include availability for that file when request representation information
  */
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ...;
-
-- (void)setRepresentationRequestOptionsWithSet:(NSSet *)representationOptionsSet;
+- (void)setRepresentationRequestOptions:(NSArray *)representationOptions;
 
 - (NSString *)formatRepresentationRequestHeader;
 
