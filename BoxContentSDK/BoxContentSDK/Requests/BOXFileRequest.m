@@ -246,28 +246,9 @@
     return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
-- (void)setRepresentationRequestOptions:(BOXRepresentationRequestOptions)representationOptions, ... 
+- (void)setRepresentationRequestOptions:(NSArray *)representationOptions
 {
-    NSMutableArray *arguments=[[NSMutableArray alloc]init];
-    BOXRepresentationRequestOptions eachObject;
-    va_list argumentList;
-    if (representationOptions) {
-        [arguments addObject: [NSNumber numberWithUnsignedInteger:representationOptions]];
-        va_start(argumentList, representationOptions);
-        while ((eachObject = va_arg(argumentList, BOXRepresentationRequestOptions))) {
-            if (eachObject > 0) {
-                [arguments addObject: [NSNumber numberWithUnsignedInteger:eachObject]];
-            }
-        }
-        va_end(argumentList);
-    }
-    
-    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:arguments];
-}
-
-- (void)setRepresentationRequestOptionsWithSet:(NSSet *)representationOptionsSet
-{
-    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithSet:representationOptionsSet];
+    self.representationsRequested = [[NSMutableOrderedSet alloc] initWithArray:representationOptions];
 }
 
 - (NSString *)formatRepresentationRequestHeader
@@ -310,28 +291,28 @@
                 delimiter = @"]";
             }
             BOXRepresentationRequestOptions representationOption = (BOXRepresentationRequestOptions) [obj integerValue];
-            if (representationOption & BOXRepresentationRequestHighDefinitionVideo) {
+            if (representationOption == BOXRepresentationRequestHighDefinitionVideo) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeHLS, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestMP3Representation) {
+            if (representationOption == BOXRepresentationRequestMP3Representation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeMP3, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestMP4Representation) {
+            if (representationOption == BOXRepresentationRequestMP4Representation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeMP4, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestThumbnailRepresentation) {
+            if (representationOption == BOXRepresentationRequestThumbnailRepresentation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensionsJPG320, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestLargeThumbnailRepresentation) {
+            if (representationOption == BOXRepresentationRequestLargeThumbnailRepresentation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensions1024, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestPDFRepresentation) {
+            if (representationOption == BOXRepresentationRequestPDFRepresentation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypePDF, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequestJPGRepresentation) {
+            if (representationOption == BOXRepresentationRequestJPGRepresentation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@?dimensions=%@&paged=false%@", BOXRepresentationTypeJPG, BOXRepresentationImageDimensions1024, delimiter]];
             }
-            if (representationOption & BOXRepresentationRequesteExtractedTextRepresentation) {
+            if (representationOption == BOXRepresentationRequesteExtractedTextRepresentation) {
                 representationFields = [representationFields stringByAppendingString:[NSString stringWithFormat:@"%@%@", BOXRepresentationTypeExtractedText, delimiter]];
             }
         }
