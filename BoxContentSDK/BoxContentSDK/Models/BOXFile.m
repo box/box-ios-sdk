@@ -80,15 +80,7 @@
         if (lock && ![lock isKindOfClass:[NSNull class]]) {
             self.lock = [[BOXFileLock alloc] initWithJSON:lock];
         }
-        
-        NSString *downloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDownloadURL
-                                                                     inDictionary:JSONResponse
-                                                                  hasExpectedType:[NSString class]
-                                                                      nullAllowed:NO];
-        if (downloadURLString.length > 0) {
-            self.downloadUrl = [NSURL URLWithString:downloadURLString];
-        }
-        
+
         NSString *authenticatedDownloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAuthenticatedDownloadURL
                                                                      inDictionary:JSONResponse
                                                                   hasExpectedType:[NSString class]
@@ -112,16 +104,9 @@
             }
             
             // Add the original content url to self.representations as BOXRepresentationRequestOriginal for convenience
-            if (self.downloadUrl.absoluteString.length > 0) {
-                BOXRepresentation *representation = [[BOXRepresentation alloc] init];
-                representation.type = BOXRepresentationTypeOriginal;
-                representation.contentURL = self.downloadUrl;
-                representation.status = BOXRepresentationStatusSuccess;
-                [tempRepresentations addObject:representation];
-            }
             if (self.authenticatedDownloadUrl.absoluteString.length > 0) {
                 BOXRepresentation *representation = [[BOXRepresentation alloc] init];
-                representation.type = BOXRepresentationTypeSecondaryOriginal;
+                representation.type = BOXRepresentationTypeOriginal;
                 representation.contentURL = self.authenticatedDownloadUrl;
                 representation.status = BOXRepresentationStatusSuccess;
                 [tempRepresentations addObject:representation];
