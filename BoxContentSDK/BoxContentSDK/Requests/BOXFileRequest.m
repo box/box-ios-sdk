@@ -70,9 +70,6 @@
     // You can download the file has owner, co-owner, editor, viewer uploader, viewer permissions.
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
-        fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyDownloadURL];
-    }
-    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAuthenticatedOriginal)]) {
         fieldString = [fieldString stringByAppendingFormat:@",%@", BOXAPIObjectKeyAuthenticatedDownloadURL];
     }
     if ([self.representationsRequested count] > 0) {
@@ -257,9 +254,7 @@
     if ([self.representationsRequested containsObject:@(BOXRepresentationRequestOriginal)]) {
         [self.representationsRequested removeObject:@(BOXRepresentationRequestOriginal)];
     }
-    if ([self.representationsRequested containsObject:@(BOXRepresentationRequestAuthenticatedOriginal)]) {
-        [self.representationsRequested removeObject:@(BOXRepresentationRequestAuthenticatedOriginal)];
-    }
+    
     if ([self.representationsRequested count] == 0) {
         return nil;
     }
