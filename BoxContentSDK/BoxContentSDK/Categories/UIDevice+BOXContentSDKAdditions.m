@@ -102,7 +102,11 @@
             __iOSVersion = BOXiOSVersion9;
         } else if (majorVersion == 10) {
             __iOSVersion = BOXiOSVersion10;
-        } else if (majorVersion > 10) {
+        } else if (majorVersion == 11) {
+            __iOSVersion = BOXiOSVersion11;
+        } else {
+            //NOTE: The assumption that 'else' will result in latest will remain true as long as we
+            // check < X and then == X+1, and +2, etc. with no spaces in between.
             __iOSVersion = BOXiOSVersionLatest;
         }
     }
@@ -200,6 +204,18 @@
         return @"iPhone 7";
     } else if ([modelID isEqualToString:@"iPhone9,4"]) {
         return @"iPhone 7 Plus";
+    } else if ([modelID isEqualToString:@"iPhone10,1"]) {
+        return @"iPhone 8 (CDMA)";
+    } else if ([modelID isEqualToString:@"iPhone10,2"]) {
+        return @"iPhone 8 Plus (CDMA)";
+    } else if ([modelID isEqualToString:@"iPhone10,3"]) {
+        return @"iPhone X (CDMA)";
+    } else if ([modelID isEqualToString:@"iPhone10,4"]) {
+        return @"iPhone 8";
+    } else if ([modelID isEqualToString:@"iPhone10,5"]) {
+        return @"iPhone 8 Plus";
+    } else if ([modelID isEqualToString:@"iPhone10,6"]) {
+        return @"iPhone X";
     } else if ([modelID isEqualToString:@"iPod1,1"]) {
         return @"iPod touch 1st Generation";
     } else if ([modelID isEqualToString:@"iPod2,1"]) {
@@ -275,7 +291,19 @@
         return @"iPad Pro 12.9-inch (WiFi)";
     } else if ([modelID isEqualToString:@"iPad6,8"]) {
         return @"iPad Pro 12.9-inch (4G LTE)";
-    } else if ([modelID isEqualToString:@"i386"] || [modelID isEqualToString:@"x86_64"] || [modelID isEqualToString:@"x86_32"]) {
+    } else if ([modelID isEqualToString:@"iPad6,11"]) {
+        return @"iPad 5th Gen (WiFi)";
+    } else if ([modelID isEqualToString:@"iPad6,12"]) {
+        return @"iPad 5th Gen (Cellular)";
+    } else if ([modelID isEqualToString:@"iPad7,1"]) {
+        return @"iPad Pro 12.9-inch 2nd Gen (WiFi)";
+    } else if ([modelID isEqualToString:@"iPad7,2"]) {
+        return @"iPad Pro 12.9-inch 2nd Gen (Cellular)";
+    } else if ([modelID isEqualToString:@"iPad7,3"]) {
+        return @"iPad Pro 10.5-inch (WiFi)";
+    } else if ([modelID isEqualToString:@"iPad7,4"]) {
+        return @"iPad Pro 10.5-inch (Cellular)";
+    }else if ([modelID isEqualToString:@"i386"] || [modelID isEqualToString:@"x86_64"] || [modelID isEqualToString:@"x86_32"]) {
         return @"Simulator";
     }
     

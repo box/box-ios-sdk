@@ -10,6 +10,7 @@
 #import "BOXFileRepresentationDownloadRequest.h"
 #import "BOXRepresentation.h"
 #import "BOXRequest_Private.h"
+#import "BOXHashHelper.h"
 
 @interface BOXFileRepresentationDownloadRequestTests : BOXRequestTestCase
 
@@ -62,6 +63,35 @@
     [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
 
+- (void)test_that_download_to_path_request_returns_expected_download_data_and_verifies_hash
+{
+    NSString *fileID = @"123";
+    NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *localFileURL = [temporaryDirectoryURL URLByAppendingPathComponent:@"dummyDownloadFile"];
+    NSString *localFilePath = [localFileURL path];
+    [[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];
+    
+    BOXRepresentation *rep = [self testRepresentation];
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID representation:rep];
+    
+    NSData *cannedResponseData = [self randomDataWithLength:4096];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:200 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+    request.sha1Hash = [BOXHashHelper sha1HashOfData:cannedResponseData];
+    [request performRequestWithProgress:nil completion:^(NSError *error) {
+        XCTAssertNil(error);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    
+    NSData *data = [NSData dataWithContentsOfFile:localFilePath];
+    XCTAssertEqualObjects(cannedResponseData, data);
+    
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
+}
+
 - (void)test_that_operation_is_not_marked_as_small_download
 {
     NSString *fileID = @"123";
@@ -74,23 +104,33 @@
     XCTAssert(dataOperation.isSmallDownloadOperation == NO);
 }
 
-- (void)test_that_correct_version_is_downloaded
+#pragma mark - Error Handling
+
+- (void)test_that_download_data_integrity_check_triggers_error
 {
     NSString *fileID = @"123";
-    NSString *version = @"98765432";
+    NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *localFileURL = [temporaryDirectoryURL URLByAppendingPathComponent:@"dummyDownloadFile"];
+    NSString *localFilePath = [localFileURL path];
+    [[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];
+    
     BOXRepresentation *rep = [self testRepresentation];
-    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
-    request.versionID = version;
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID representation:rep];
     
-    BOOL result = [request.urlRequest.URL.absoluteString containsString:[NSString stringWithFormat:@"versions/%@", version]];
-    XCTAssertTrue(result);
+    NSData *cannedResponseData = [self randomDataWithLength:4096];
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:200 responseData:cannedResponseData];
+    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
     
-    request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
-    result = [request.urlRequest.URL.absoluteString containsString:@"versions/current"];
-    XCTAssertTrue(result);
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+    request.sha1Hash = @"Some Incorrect Sha1";
+    [request performRequestWithProgress:nil completion:^(NSError *error) {
+        XCTAssertNotNil(error);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    
+    [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
-
-#pragma mark - Error Handling
 
 - (void)test_that_invalid_grant_400_error_triggers_logout_notification
 {

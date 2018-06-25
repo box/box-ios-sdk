@@ -9,6 +9,7 @@
 #import "BOXItem.h"
 #import "BOXComment.h"
 #import "BOXDispatchHelper.h"
+#import "BOXSharedLinkHeadersHelper.h"
 
 @interface BOXCommentAddRequest ()
 
@@ -78,6 +79,8 @@
                                 bodyDictionary:bodyDictionary
                               JSONSuccessBlock:nil
                                   failureBlock:nil];
+
+        [self addSharedLinkHeaderToRequest:operation.APIRequest];
     }
     
     return operation;
@@ -90,6 +93,11 @@
 
     commentAddOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
         BOXComment *comment = [[BOXComment alloc] initWithJSON:JSONDictionary];
+
+        // Noop. Passing nil for ancestors since we don't have the information right now.
+        [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:comment.item.modelID
+                                                                               itemType:comment.item.type
+                                                                              ancestors:nil];
 
         if ([self.cacheClient respondsToSelector:@selector(cacheAddCommentRequest:withComment:error:)]) {
             [self.cacheClient cacheAddCommentRequest:self
@@ -116,6 +124,17 @@
         }
     };
     [self performRequest];
+}
+
+#pragma mark - BOXRequestWithSharedLinkHeader methods
+- (NSString *)itemIDForSharedLink
+{
+    return self.modelID;
+}
+
+- (BOXAPIItemType *)itemTypeForSharedLink
+{
+    return self.modelType;
 }
 
 @end

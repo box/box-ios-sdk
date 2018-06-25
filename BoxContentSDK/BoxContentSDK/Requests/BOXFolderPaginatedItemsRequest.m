@@ -75,7 +75,7 @@
             NSUInteger capacity = itemDictionaries.count;
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
-            for (NSDictionary *itemDictionary in itemDictionaries) {
+            for (NSDictionary *itemDictionary in itemDictionaries) @autoreleasepool {
                 BOXItem *item = [BOXRequest itemWithJSON:itemDictionary];
                 [items addObject:item];
                 [self.sharedLinkHeadersHelper storeHeadersFromAncestorsIfNecessaryForItemWithID:item.modelID
@@ -83,11 +83,12 @@
                                                                                       ancestors:item.pathFolders];
             }
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:totalCount:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:items
-                                                             limit:self.limit
-                                                            offset:self.offset
+                                                        totalCount:totalCount
+                                                             limit:limit
+                                                            offset:offset
                                                              error:nil];
             }
 
@@ -97,9 +98,10 @@
         };
         folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
 
-            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:limit:offset:error:)]) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheFolderPaginatedItemsRequest:withItems:totalCount:limit:offset:error:)]) {
                 [self.cacheClient cacheFolderPaginatedItemsRequest:self
                                                          withItems:nil
+                                                        totalCount:0
                                                              limit:0
                                                             offset:0
                                                              error:error];

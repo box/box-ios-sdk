@@ -35,6 +35,17 @@
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID;
 
 /**
+ *  Generate a background request to retrieve information about a file.
+ *
+ *  @param fileID File ID.
+ *  @param associateID Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
+                              associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to rename a file.
  *
  *  @param fileID  File ID.
@@ -54,6 +65,18 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFileUpdateRequest *)fileUpdateRequestWithID:(NSString *)fileID;
+
+/**
+ *  Generate a request to update properties of a file. Set properties on the BOXFileUpdateRequest
+ *  before executing it.
+ *
+ *  @param fileID File ID.
+ *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileUpdateRequest *)fileUpdateRequestWithID:(NSString *)fileID
+                                      associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to move a file to a folder.
@@ -87,6 +110,18 @@
 - (BOXFileDeleteRequest *)fileDeleteRequestWithID:(NSString *)fileID;
 
 /**
+ *  Generate a background request to delete a file.
+ *
+ *  @param fileID File ID.
+ *  @param associateID   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileDeleteRequest *)fileDeleteRequestWithID:(NSString *)fileID
+                                      associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to upload a local file to Box.
  *
  *  @param folderID      Folder ID of the folder to upload the file into.
@@ -96,7 +131,6 @@
  */
 - (BOXFileUploadRequest *)fileUploadRequestToFolderWithID:(NSString *)folderID
                                         fromLocalFilePath:(NSString *)localFilePath;
-
 /**
  *  Generate a request to upload a local file to Box in background unless uploadMultipartCopyFilePath is not provided
  *
@@ -222,13 +256,24 @@
                                         toLocalFilePath:(NSString *)localFilePath;
 
 /**
- *  Generate a request to retrieve information of a file in the trash.
+ *  Generate a request to retrieve information about a file in the trash.
  *
  *  @param fileID File ID.
  *
  *  @return A request that can be customized and then executed.
  */
 - (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID;
+
+/**
+ *  Generate a background request to retrieve information about a file in the trash.
+ *
+ *  @param fileID File ID.
+ *  @param associateID Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID
+                                     associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to permanently delete a file in the trash.
@@ -240,6 +285,18 @@
 - (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID;
 
 /**
+ *  Generate a background request to permanently delete a file in the trash.
+ *
+ *  @param fileID File ID.
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID
+                                                      associateID:(NSString *)associateID;
+
+/**
  *  Generate a request to restore a file in the trash.
  *
  *  @param fileID File ID.
@@ -247,6 +304,19 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID;
+
+
+/**
+ *  Generate a background request to restore a file in the trash.
+ *
+ *  @param fileID File ID.
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID
+                                                      associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to do a "preflight" check to determine whether an upload is possible. You can use this
@@ -290,6 +360,21 @@
 - (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
                                                                   toLocalFilePath:(NSString *)localFilePath
                                                                    representation:(BOXRepresentation *)representation;
+
+/**
+ *  Generate a request to download a given representation of a file to a local filepath.
+ *
+ *  @param fileID          File ID.
+ *  @param localFilePath   Local filepath.
+ *  @param representation  BOXRepresentation to be downloaded
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
+                                                                  toLocalFilePath:(NSString *)localFilePath
+                                                                   representation:(BOXRepresentation *)representation
+                                                                      associateID:(NSString *)associateID;
 
 /**
  *  Generate a request to download a given representation file to an outputstream.

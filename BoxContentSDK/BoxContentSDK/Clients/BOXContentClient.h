@@ -16,6 +16,8 @@
 @protocol BOXContentCacheClientProtocol;
 @protocol BOXURLSessionManagerDelegate;
 
+extern NSString *const BOXContentClientBackgroundTempFolder;
+
 @interface BOXContentClient : NSObject
 
 /**
@@ -214,6 +216,7 @@
  *  API base URLs.
  **/
 + (NSString *)APIBaseURL;
++ (NSString *)APIBaseURLWithoutVersion;
 + (NSString *)OAuth2BaseURL;
 + (NSString *)APIAuthBaseURL;
 + (NSString *)APIUploadBaseURL;
@@ -221,4 +224,5 @@
 + (void)setOAuth2BaseURL:(NSString *)OAuth2BaseURL;
 + (void)setAPIAuthBaseURL:(NSString *)APIAuthBaseURL;
 + (void)setAPIUploadBaseURL:(NSString *)APIUploadBaseURL;
+
 @end

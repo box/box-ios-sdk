@@ -12,6 +12,16 @@
 @property (nonatomic, readwrite, strong) NSString *folderDescription;
 @property (nonatomic, readwrite, strong) NSString *parentID;
 
+/**
+ Caller provided unique ID to execute the request as a NSURLSession background task
+ */
+@property (nonatomic, readwrite, copy) NSString *associateId;
+
+/**
+ Caller provided directory path for the result payload of the background operation to be written to.
+ */
+@property (nonatomic, readwrite, copy) NSString *requestDirectoryPath;
+
 @property (nonatomic, readwrite, strong) BOXSharedLinkAccessLevel *sharedLinkAccessLevel;
 @property (nonatomic, readwrite, strong) NSDate *sharedLinkExpirationDate;
 @property (nonatomic, readwrite, assign) BOOL sharedLinkPermissionCanDownload;

@@ -9,6 +9,7 @@
 #import "BOXUser.h"
 #import "BOXSharedLink.h"
 #import "BOXCollection.h"
+#import "BOXMetadata.h"
 
 @implementation BOXItemMini
 
@@ -231,6 +232,7 @@
                                                 hasExpectedType:[NSNumber class]
                                                     nullAllowed:NO];
         
+        // Parse common collections into a BOXCollection
         NSArray *collectionsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections 
                                                                        inDictionary:JSONResponse
                                                                     hasExpectedType:[NSArray class]
@@ -239,8 +241,54 @@
         for (NSDictionary *dict in collectionsJSONArray) {
             [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
         }
-        self.collections = collections;
         
+        // Parse membership collections into a BOXCollection
+        // TODO: Remove the collection count check once the service collection_membership implements object removal.
+        if ([collections count] > 0 ) {
+            NSArray *collectionMembershipsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionMemberships
+                                                                                     inDictionary:JSONResponse
+                                                                                  hasExpectedType:[NSArray class]
+                                                                                      nullAllowed:YES];
+            
+            for (NSDictionary *membershipDictionary in collectionMembershipsJSONArray) {
+                // Parse the collection object with in the collection membership
+                NSDictionary *collectionDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollection
+                                                                                    inDictionary:membershipDictionary
+                                                                                 hasExpectedType:[NSDictionary class]
+                                                                                     nullAllowed:YES];
+                
+                BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
+                // Collection rank in the collection_memberships object requires BOXCollection info,
+                // Don't set the rank without the dependant collection object.
+                collection.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
+                                                                           inDictionary:membershipDictionary
+                                                                        hasExpectedType:[NSNumber class]
+                                                                            nullAllowed:YES];
+                
+                [collections addObject:collection];
+            }
+        }
+        
+        // Set all collections and collection memberships found in json response.
+        self.collections = collections;
+
+        // Parse metadata - may come down in unifiedMetadata
+        NSMutableArray *metadataArray = [NSMutableArray array];
+        id metadataJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPISubresourceMetadata
+                                                                          inDictionary:JSONResponse
+                                                                       hasExpectedType:[NSDictionary class]
+                                                                           nullAllowed:YES];
+        if (metadataJSON != nil && ![metadataJSON isKindOfClass:[NSNull class]]) {
+            // Scope
+            for (NSDictionary *metadataTemplateDictionaries in [metadataJSON allValues]) {
+                // Template
+                for (NSDictionary *itemMetaDataDictionary in [metadataTemplateDictionaries allValues]) {
+                    BOXMetadata *metadata = [[BOXMetadata alloc] initWithJSON:itemMetaDataDictionary];
+                    [metadataArray addObject:metadata];
+                }
+            }
+        }
+        self.metadata = metadataArray;
     }
     return self;
 }
@@ -258,6 +306,19 @@
 - (BOOL)isBookmark
 {
     return NO;
+}
+
+- (NSNumber *)availableCollectionRank
+{
+    NSNumber *rank = nil;
+    for (BOXCollection *collection in self.collections) {
+        if ((collection.collectionRank != nil) &&
+            (collection.collectionRank != [NSNull null])) {
+            return collection.collectionRank;
+        }
+    }
+    
+    return rank;
 }
 
 @end

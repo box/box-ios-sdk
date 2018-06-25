@@ -81,10 +81,28 @@
     self.outputStream.delegate = self;
 }
 
-// BOXAPIDataOperation should only ever be GET requests so there should not be a body
 - (NSData *)encodeBody:(NSDictionary *)bodyDictionary
 {
-    return nil;
+    // encode the body dictionary as JSON
+    if (bodyDictionary == nil)
+    {
+        return nil;
+    }
+    
+    NSError *JSONEncodeError = nil;
+    NSData *JSONEncodedBody = [NSJSONSerialization dataWithJSONObject:bodyDictionary options:0 error:&JSONEncodeError];
+    if (self.error == nil && JSONEncodeError != nil)
+    {
+        NSDictionary *userInfo = @{
+                                   NSUnderlyingErrorKey : JSONEncodeError,
+                                   };
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorEncodeFailed userInfo:userInfo];
+        
+        // return dummy JSON body
+        return [NSData data];
+    }
+    
+    return JSONEncodedBody;
 }
 
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
@@ -122,7 +140,7 @@
     
     NSError *JSONError = nil;
     id decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
-    
+
     if (JSONError != nil)
     {
         NSDictionary *userInfo = @{
@@ -260,7 +278,7 @@
         if (currentQueue == nil) {
             currentQueue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0);
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
             [self reenqueOperationDueTo202Response];
         });
     } else {

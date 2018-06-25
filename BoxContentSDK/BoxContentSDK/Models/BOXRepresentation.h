@@ -15,13 +15,15 @@
 
 @property (nonatomic, readwrite, strong) BOXRepresentationStatus *status;
 
+@property (nonatomic, readwrite, strong) NSString *statusCode;
+
 @property (nonatomic, readwrite, strong) NSURL *infoURL;
 
 @property (nonatomic, readwrite, strong) NSURL *contentURL;
 
 @property (nonatomic, readwrite, strong) NSDictionary *details;
 
-@property (nonatomic, readwrite, strong) BOXRepresentationDimensions *dimensions;
+@property (nonatomic, readwrite, strong) BOXRepresentationImageDimensions *dimensions;
 
 /**
  *  JSON response data.

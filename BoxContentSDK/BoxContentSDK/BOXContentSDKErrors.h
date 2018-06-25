@@ -93,6 +93,10 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
     BOXContentSDKURLSessionInvalidBackgroundSession = 50012
 };
 
+typedef NS_ENUM(NSUInteger, BOXContentSDKDataContentError) {
+    BOXContentSDKDataIntegrityError = 60000
+};
+
 extern NSString *const BOXAuthTokenRequestErrorInvalidGrant; // Invalid refresh token
 extern NSString *const BOXAuthTokenRequestErrorInvalidToken; // Invalid access token
 extern NSString *const BOXAuthTokenRequestErrorInvalidRequest; // Possibly a missing access token

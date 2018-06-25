@@ -28,4 +28,12 @@
     return request;
 }
 
+- (BOXSearchRequest *)searchMetadataRequestWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range unifiedMetadataKeys:(NSArray *)unifiedMetadataKeys
+{
+    BOXSearchRequest *request = [[BOXSearchRequest alloc] initWithTemplateKey:templateKey scope:scope filters:filters inRange:range unifiedMetadataKeys:unifiedMetadataKeys];
+    [self prepareRequest:request];
+
+    return request;
+}
+
 @end

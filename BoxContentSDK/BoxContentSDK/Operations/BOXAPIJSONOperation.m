@@ -97,35 +97,37 @@
     }
     
     NSError *JSONError = nil;
-    id decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
-    
-    if (JSONError != nil)
-    {
-        if (self.error == nil) {
-            NSDictionary *userInfo = @{
-            NSUnderlyingErrorKey : JSONError,
-            };
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];
+    @autoreleasepool {
+        id decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
+
+        if (JSONError != nil)
+        {
+            if (self.error == nil) {
+                NSDictionary *userInfo = @{
+                NSUnderlyingErrorKey : JSONError,
+                };
+                self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorDecodeFailed userInfo:userInfo];
+            }
         }
-    }
-    else if ([decodedJSON isKindOfClass:[NSDictionary class]] == NO)
-    {
-        NSDictionary *userInfo = @{
-        BOXJSONErrorResponseKey : decodedJSON,
-        };
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorUnexpectedType userInfo:userInfo];
-    }
-    else if (self.error != nil)
-    {
-        // if this operation has already encountered an error, include the decoded JSON in the error info
-        NSDictionary *userInfo = @{
-        BOXJSONErrorResponseKey : decodedJSON,
-        };
-        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:self.error.code userInfo:userInfo];
-    }
-    else
-    {
-        self.responseJSON = (NSDictionary *)decodedJSON;
+        else if ([decodedJSON isKindOfClass:[NSDictionary class]] == NO)
+        {
+            NSDictionary *userInfo = @{
+            BOXJSONErrorResponseKey : decodedJSON,
+            };
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKJSONErrorUnexpectedType userInfo:userInfo];
+        }
+        else if (self.error != nil)
+        {
+            // if this operation has already encountered an error, include the decoded JSON in the error info
+            NSDictionary *userInfo = @{
+            BOXJSONErrorResponseKey : decodedJSON,
+            };
+            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:self.error.code userInfo:userInfo];
+        }
+        else
+        {
+            self.responseJSON = (NSDictionary *)decodedJSON;
+        }
     }
 }
 

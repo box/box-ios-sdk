@@ -22,7 +22,7 @@
 
             BOXCollection *favoritesCollection = nil;
 
-            for (NSDictionary *dict in collectionsJSON) {
+            for (NSDictionary *dict in collectionsJSON) @autoreleasepool {
                 if ([dict[BOXAPIObjectKeyCollectionType] isEqual:[NSNull null]] == NO &&
                     [dict[BOXAPIObjectKeyCollectionType] isEqualToString:BOXAPIFavoritesCollectionType]) {
                     favoritesCollection = [[BOXCollection alloc] initWithJSON:dict];

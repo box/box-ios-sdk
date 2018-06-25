@@ -80,6 +80,14 @@
         if (lock && ![lock isKindOfClass:[NSNull class]]) {
             self.lock = [[BOXFileLock alloc] initWithJSON:lock];
         }
+
+        NSString *authenticatedDownloadURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyAuthenticatedDownloadURL
+                                                                     inDictionary:JSONResponse
+                                                                  hasExpectedType:[NSString class]
+                                                                      nullAllowed:NO];
+        if (authenticatedDownloadURLString.length > 0) {
+            self.authenticatedDownloadUrl = [NSURL URLWithString:authenticatedDownloadURLString];
+        }
         
         // Parse Representations.
         NSDictionary *representationsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyRepresentations
@@ -92,6 +100,15 @@
             
             for (NSDictionary *representationJSON in representations) {
                 BOXRepresentation *representation = [[BOXRepresentation alloc] initWithJSON:representationJSON];
+                [tempRepresentations addObject:representation];
+            }
+            
+            // Add the original content url to self.representations as BOXRepresentationRequestOriginal for convenience
+            if (self.authenticatedDownloadUrl.absoluteString.length > 0) {
+                BOXRepresentation *representation = [[BOXRepresentation alloc] init];
+                representation.type = BOXRepresentationTypeOriginal;
+                representation.contentURL = self.authenticatedDownloadUrl;
+                representation.status = BOXRepresentationStatusSuccess;
                 [tempRepresentations addObject:representation];
             }
             

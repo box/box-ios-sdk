@@ -20,6 +20,7 @@
 @property (nonatomic, readwrite, strong) NSString *templateKey;
 @property (nonatomic, readwrite, strong) NSString *scope;
 @property (nonatomic, readwrite, strong) NSArray *filters;
+@property (nonatomic, readwrite, strong) NSArray *unifiedMetadataKeys;
 
 @end
 
@@ -50,6 +51,13 @@
     
     return self;
 }
+- (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range unifiedMetadataKeys:(NSArray *)unifiedMetadataKeys
+{
+    if (self = [self initWithTemplateKey:templateKey scope:scope filters:filters inRange:range]) {
+        self.unifiedMetadataKeys = unifiedMetadataKeys ? unifiedMetadataKeys : @[];
+    }
+    return self;
+}
 
 - (BOXAPIOperation *)createOperation
 {
@@ -73,6 +81,15 @@
         queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     } else if (self.fieldsToInclude.count > 0) {
         queryParameters[BOXAPIParameterKeyFields] = [self.fieldsToInclude componentsJoinedByString:@","];
+    }
+
+    // api returns metadata information on boxItem
+    if (self.unifiedMetadataKeys.count > 0) {
+        NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:[queryParameters[BOXAPIParameterKeyFields] componentsSeparatedByString:@","]];
+        for (NSString *unifiedMetadataKey in self.unifiedMetadataKeys) {
+            [set addObject:unifiedMetadataKey];
+        }
+        queryParameters[BOXAPIParameterKeyFields] = [[set array] componentsJoinedByString:@","];
     }
     
     if (self.fileExtensions) {
@@ -147,7 +164,7 @@
             NSUInteger capacity = [itemDictionaries count];
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:capacity];
 
-            for (NSDictionary *itemDictionary in itemDictionaries) {
+            for (NSDictionary *itemDictionary in itemDictionaries) @autoreleasepool {
                 [items addObject:[BOXRequest itemWithJSON:itemDictionary]];
             }
 

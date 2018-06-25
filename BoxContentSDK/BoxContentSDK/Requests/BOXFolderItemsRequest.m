@@ -24,10 +24,13 @@
 
 @implementation BOXFolderItemsRequest
 
+@synthesize rangeStep = _rangeStep;
+
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     if (self = [super init]) {
         _folderID = folderID;
+        _rangeStep = 0;
     }
 
     return self;
@@ -43,16 +46,24 @@
     }
 }
 
+- (void)setRangeStep:(NSUInteger)rangeStep
+{
+    _rangeStep = rangeStep;
+}
+
 - (NSUInteger)rangeStep
 {
-    NSUInteger rangeStep = 1000;
-    
-    // Root folder has better performance with a smaller page size
-    if ([self.folderID isEqualToString:BOXAPIFolderIDRoot]) {
-        rangeStep = 100;
+    if (_rangeStep == 0) {
+        NSUInteger rangeStep = 1000;
+
+        // Root folder has better performance with a smaller page size
+        if ([self.folderID isEqualToString:BOXAPIFolderIDRoot]) {
+            rangeStep = 100;
+        }
+        return rangeStep;
     }
     
-    return rangeStep;
+    return _rangeStep;
 }
 
 + (NSString *)uniqueHashForItem:(BOXItem *)item
@@ -104,11 +115,14 @@
 
     if (refreshBlock) {
         BOOL isMainThread = [NSThread isMainThread];
-
         NSMutableArray *results = [[NSMutableArray alloc] init];
 
         BOXItemsBlock localRefreshBlock = ^(NSArray *items, NSError *error){
             self.paginatedRequest = nil;
+
+            if (error == nil && [self.cacheClient respondsToSelector:@selector(hasFinishedFolderItemsRequest:)]) {
+                [self.cacheClient hasFinishedFolderItemsRequest:self];
+            }
 
             [BOXDispatchHelper callCompletionBlock:^{
                 refreshBlock(items, error);
@@ -179,12 +193,14 @@
                                   inRange:(NSRange)range
 {
     BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    paginatedRequest.cacheClient = self.cacheClient;
     paginatedRequest.queueManager = self.queueManager;
     paginatedRequest.sharedLinkHeadersHelper = self.sharedLinkHeadersHelper;
     paginatedRequest.requestAllItemFields = self.requestAllItemFields;
     paginatedRequest.fieldsToExclude = self.fieldsToExclude;
     paginatedRequest.fieldsToInclude = self.fieldsToInclude;
     paginatedRequest.userAgentPrefix = self.userAgentPrefix;
+    paginatedRequest.sharedPaginatedRequestData = self.sharedPaginatedRequestData;
     self.paginatedRequest = paginatedRequest;
     [paginatedRequest performRequestWithCached:cacheBlock refreshed:refreshBlock];
 }

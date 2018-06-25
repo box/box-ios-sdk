@@ -86,6 +86,8 @@ NSString *const BOXOAuth2AuthDelegationNewClientKey = @"BOXOAuth2AuthDelegationN
 // Notifications
 NSString *const BOXUserWasLoggedOutDueToErrorNotification = @"BOXUserWasLoggedOutDueToErrorNotification";
 NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
+NSString *const BOXAccessTokenRefreshDiagnosisNotification = @"BOXAccessTokenRefreshDiagnosisNotification";
+NSString *const BOXFileDownloadCorruptedNotification = @"BOXFileDownloadCorruptedNotification";
 
 // Item Types
 BOXAPIItemType *const BOXAPIItemTypeFile = @"file";
@@ -136,6 +138,8 @@ BOXCollaborationRole *const BOXCollaborationRoleViewer = @"viewer";
 BOXCollaborationRole *const BOXCollaborationRolePreviewer = @"previewer";
 BOXCollaborationRole *const BOXCollaborationRoleUploader = @"uploader";
 
+// File Representation documentation: https://developer.box.com/v2.0/reference#representations
+
 // Representation Type
 BOXRepresentationType *const BOXRepresentationTypeOriginal = @"original";
 BOXRepresentationType *const BOXRepresentationTypePDF = @"pdf";
@@ -148,7 +152,8 @@ BOXRepresentationType *const BOXRepresentationTypeFilmstrip = @"filmstrip";
 BOXRepresentationType *const BOXRepresentationTypeDASH = @"dash";
 BOXRepresentationType *const BOXRepresentationTypeHLS = @"hls";
 BOXRepresentationType *const BOXRepresentationTypeCrocodoc = @"crocodoc";
-BOXRepresentationType *const BOXRepresentationTypeDICOM = @"dicom";
+BOXRepresentationType *const BOXRepresentationTypeDICOM = @"box_dicom";
+BOXRepresentationType *const BOXRepresentationTypeExtractedText = @"extracted_text";
 
 // Representations URL Template
 NSString *const BOXRepresentationTemplateKeyAccessPath = @"{+asset_path}";
@@ -158,19 +163,27 @@ NSString *const BOXRepresentationTemplateValueHLSManifest = @"master.m3u8";
 
 // Representation Status
 BOXRepresentationStatus *const BOXRepresentationStatusSuccess = @"success";
+BOXRepresentationStatus *const BOXRepresentationStatusViewable = @"viewable";
 BOXRepresentationStatus *const BOXRepresentationStatusPending = @"pending";
 BOXRepresentationStatus *const BOXRepresentationStatusNone = @"none";
 BOXRepresentationStatus *const BOXRepresentationStatusError = @"error";
 
-// Representation Dimensions
-BOXRepresentationDimensions *const BOXRepresentationDimensionsThumbnail = @"320x320";
-BOXRepresentationDimensions *const BOXRepresentationDimensionsLargeThumbnail = @"1024x1024";
-BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024 = @"1024x1024";
-BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048 = @"2048x2048";
+// Representation Supported Image Formats
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG32 = @"32x32";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG94 = @"94x94";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG160 = @"160x160";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG320 = @"320x320";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions1024 = @"1024x1024";
+BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions2048 = @"2048x2048";
 
 // Folder Upload Email Access Levels
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen = @"open";
 BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelCollaborators = @"collaborators";
+
+// Item Status
+BOXItemStatus *const BOXItemStatusActive = @"active";
+BOXItemStatus *const BOXItemStatusTrashed = @"trashed";
+BOXItemStatus *const BOXItemStatusDeleted =@"deleted";
 
 // Collection keys
 NSString *const BOXAPICollectionKeyEntries = @"entries";
@@ -239,6 +252,7 @@ NSString *const BOXAPIObjectKeyCanSetShareAccess = @"can_set_share_access";
 NSString *const BOXAPIObjectKeyCanInviteCollaborator = @"can_invite_collaborator";
 
 NSString *const BOXAPIObjectKeyID = @"id";
+NSString *const BOXAPIObjectKeyRank = @"rank";
 NSString *const BOXAPIObjectKeyKey = @"key";
 NSString *const BOXAPIObjectKeyDisplayName = @"displayName";
 NSString *const BOXAPIObjectKeyOptions = @"options";
@@ -272,6 +286,7 @@ NSString *const BOXAPIObjectKeySyncState = @"sync_state";
 NSString *const BOXAPIObjectKeyURL = @"url";
 NSString *const BOXAPIObjectKeyURLTemplate = @"url_template";
 NSString *const BOXAPIObjectKeyDownloadURL = @"download_url";
+NSString *const BOXAPIObjectKeyAuthenticatedDownloadURL = @"authenticated_download_url";
 NSString *const BOXAPIObjectKeyVanityURL = @"vanity_url";
 NSString *const BOXAPIObjectKeyIsPasswordEnabled = @"is_password_enabled";
 NSString *const BOXAPIObjectKeyLogin = @"login";
@@ -285,6 +300,7 @@ NSString *const BOXAPIObjectKeyCanSeeManagedUsers = @"can_see_managed_users";
 NSString *const BOXAPIObjectKeyIsSyncEnabled = @"is_sync_enabled";
 NSString *const BOXAPIObjectKeyStatus = @"status";
 NSString *const BOXAPIObjectKeyState = @"state";
+NSString *const BOXAPIObjectKeyCode = @"code";
 NSString *const BOXAPIObjectKeyJobTitle = @"job_title";
 NSString *const BOXAPIObjectKeyPhone = @"phone";
 NSString *const BOXAPIObjectKeyAddress = @"address";
@@ -302,6 +318,8 @@ NSString *const BOXAPIObjectKeyExtension = @"extension";
 NSString *const BOXAPIObjectKeyIsPackage = @"is_package";
 NSString *const BOXAPIObjectKeyAllowedSharedLinkAccessLevels = @"allowed_shared_link_access_levels";
 NSString *const BOXAPIObjectKeyCollections = @"collections";
+NSString *const BOXAPIObjectKeyCollection = @"collection";
+NSString *const BOXAPIObjectKeyCollectionMemberships = @"collection_memberships";
 NSString *const BOXAPIObjectKeyHasCollaborations = @"has_collaborations";
 NSString *const BOXAPIObjectKeyIsExternallyOwned = @"is_externally_owned";
 NSString *const BOXAPIObjectKeyCanNonOwnersInvite = @"can_non_owners_invite";
@@ -313,6 +331,7 @@ NSString *const BOXAPIObjectKeyEnterprise = @"enterprise";
 NSString *const BOXAPIObjectKeyIsDownloadPrevented = @"is_download_prevented";
 NSString *const BOXAPIObjectKeySharedLinkPassword = @"shared_link_password";
 NSString *const BOXAPIObjectKeyCollectionType = @"collection_type";
+NSString *const BOXAPIObjectKeyCollectionRank = @"rank";
 NSString *const BOXAPIObjectKeyEventID = @"event_id";
 NSString *const BOXAPIObjectKeyEventType = @"event_type";
 NSString *const BOXAPIObjectKeyInteractionSharedLink = @"interaction_shared_link";
@@ -341,6 +360,8 @@ NSString *const BOXAPIMetadataObjectKeyParent = @"$parent";
 NSString *const BOXAPIMetadataObjectKeyOperation = @"op";
 NSString *const BOXAPIMetadataObjectKeyPath = @"path";
 NSString *const BOXAPIMetadataObjectKeyValue = @"value";
+NSString *const BOXAPIMetadataObjectKeyVersion = @"$version";
+NSString *const BOXAPIMetadataObjectKeyTypeVersion = @"$typeVersion";
 
 // API Folder IDs
 NSString *const BOXAPIFolderIDRoot = @"0";

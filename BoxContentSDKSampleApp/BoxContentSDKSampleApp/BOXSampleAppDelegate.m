@@ -10,14 +10,13 @@
 #import "BOXAuthenticationPickerViewController.h"
 #import "BOXSampleAppSessionManager.h"
 
-#import <BoxContentSDK/BOXContentSDK.h>
+@import BoxContentSDK;
 
 @interface BOXSampleAppDelegate () <BOXURLSessionManagerDelegate>
 
 @end
 
 @implementation BOXSampleAppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #error Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com

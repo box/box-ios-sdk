@@ -91,6 +91,10 @@ extern NSString *const BOXOAuth2AuthDelegationNewClientKey;
 // Notifications
 extern NSString *const BOXUserWasLoggedOutDueToErrorNotification;
 extern NSString *const BOXAuthOperationDidCompleteNotification;
+extern NSString *const BOXFileDownloadCorruptedNotification;
+
+// Private Notifications. No guarantee for future support.
+extern NSString *const BOXAccessTokenRefreshDiagnosisNotification;
 
 // Item Types
 typedef NSString BOXAPIItemType;
@@ -161,6 +165,7 @@ extern BOXRepresentationType *const BOXRepresentationTypeDASH;
 extern BOXRepresentationType *const BOXRepresentationTypeHLS;
 extern BOXRepresentationType *const BOXRepresentationTypeCrocodoc;
 extern BOXRepresentationType *const BOXRepresentationTypeDICOM;
+extern BOXRepresentationType *const BOXRepresentationTypeExtractedText;
 
 // Representations URL Template
 extern NSString *const BOXRepresentationTemplateKeyAccessPath;
@@ -171,21 +176,35 @@ extern NSString *const BOXRepresentationTemplateValueHLSManifest;
 // Representation Status
 typedef NSString BOXRepresentationStatus;
 extern BOXRepresentationStatus *const BOXRepresentationStatusSuccess;
+extern BOXRepresentationStatus *const BOXRepresentationStatusViewable;
 extern BOXRepresentationStatus *const BOXRepresentationStatusPending;
 extern BOXRepresentationStatus *const BOXRepresentationStatusNone;
 extern BOXRepresentationStatus *const BOXRepresentationStatusError;
 
-// Representation dimensions
-typedef NSString BOXRepresentationDimensions;
-extern BOXRepresentationDimensions *const BOXRepresentationDimensionsThumbnail;
-extern BOXRepresentationDimensions *const BOXRepresentationDimensionsLargeThumbnail;
-extern BOXRepresentationDimensions *const BOXRepresentationDimensions1024x1024;
-extern BOXRepresentationDimensions *const BOXRepresentationDimensions2048x2048;
+// Representation Supported Image Formats
+// Formats greater than 1024 are rendered on demand, all others are rendered once the file is uploaded to Box.
+// JPG 2048, PNG 1024 and PNG 2048 representations not available for video file types
+// If the original file is not a square, images requested above 160x160 will retain the file's original aspect ratio.
+// JPG avaiable in all sizes, PNG available only in 1024 and 2048
+
+typedef NSString BOXRepresentationImageDimensions;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG32;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG94;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG160;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensionsJPG320;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions1024;
+extern BOXRepresentationImageDimensions *const BOXRepresentationImageDimensions2048;
 
 // Folder upload email access level
 typedef NSString BOXFolderUploadEmailAccessLevel;
 extern BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelOpen;
 extern BOXFolderUploadEmailAccessLevel *const BOXFolderUploadEmailAccessLevelCollaborators;
+
+// Item status
+typedef NSString BOXItemStatus;
+extern BOXItemStatus *const BOXItemStatusActive;
+extern BOXItemStatus *const BOXItemStatusTrashed;
+extern BOXItemStatus *const BOXItemStatusDeleted;
 
 // Collection keys
 extern NSString *const BOXAPICollectionKeyEntries;
@@ -259,6 +278,7 @@ extern NSString *const BOXAPIObjectKeyCanSetShareAccess;
 extern NSString *const BOXAPIObjectKeyCanInviteCollaborator;
 
 extern NSString *const BOXAPIObjectKeyID;
+extern NSString *const BOXAPIObjectKeyRank;
 extern NSString *const BOXAPIObjectKeyKey;
 extern NSString *const BOXAPIObjectKeyDisplayName;
 extern NSString *const BOXAPIObjectKeyOptions;
@@ -292,6 +312,7 @@ extern NSString *const BOXAPIObjectKeySyncState;
 extern NSString *const BOXAPIObjectKeyURL;
 extern NSString *const BOXAPIObjectKeyURLTemplate;
 extern NSString *const BOXAPIObjectKeyDownloadURL;
+extern NSString *const BOXAPIObjectKeyAuthenticatedDownloadURL;
 extern NSString *const BOXAPIObjectKeyVanityURL;
 extern NSString *const BOXAPIObjectKeyIsPasswordEnabled;
 extern NSString *const BOXAPIObjectKeyLogin;
@@ -305,6 +326,7 @@ extern NSString *const BOXAPIObjectKeyCanSeeManagedUsers;
 extern NSString *const BOXAPIObjectKeyIsSyncEnabled;
 extern NSString *const BOXAPIObjectKeyStatus;
 extern NSString *const BOXAPIObjectKeyState;
+extern NSString *const BOXAPIObjectKeyCode;
 extern NSString *const BOXAPIObjectKeyJobTitle;
 extern NSString *const BOXAPIObjectKeyPhone;
 extern NSString *const BOXAPIObjectKeyAddress;
@@ -322,6 +344,8 @@ extern NSString *const BOXAPIObjectKeyExtension;
 extern NSString *const BOXAPIObjectKeyIsPackage;
 extern NSString *const BOXAPIObjectKeyAllowedSharedLinkAccessLevels;
 extern NSString *const BOXAPIObjectKeyCollections;
+extern NSString *const BOXAPIObjectKeyCollection;
+extern NSString *const BOXAPIObjectKeyCollectionMemberships;
 extern NSString *const BOXAPIObjectKeyHasCollaborations;
 extern NSString *const BOXAPIObjectKeyIsExternallyOwned;
 extern NSString *const BOXAPIObjectKeyCanNonOwnersInvite;
@@ -333,6 +357,7 @@ extern NSString *const BOXAPIObjectKeyEnterprise;
 extern NSString *const BOXAPIObjectKeyIsDownloadPrevented;
 extern NSString *const BOXAPIObjectKeySharedLinkPassword;
 extern NSString *const BOXAPIObjectKeyCollectionType;
+extern NSString *const BOXAPIObjectKeyCollectionRank;
 extern NSString *const BOXAPIObjectKeyEventID;
 extern NSString *const BOXAPIObjectKeyEventType;
 extern NSString *const BOXAPIObjectKeyInteractionSharedLink;
@@ -361,6 +386,8 @@ extern NSString *const BOXAPIMetadataObjectKeyParent;
 extern NSString *const BOXAPIMetadataObjectKeyOperation;
 extern NSString *const BOXAPIMetadataObjectKeyPath;
 extern NSString *const BOXAPIMetadataObjectKeyValue;
+extern NSString *const BOXAPIMetadataObjectKeyVersion;
+extern NSString *const BOXAPIMetadataObjectKeyTypeVersion;
 
 // API Folder IDs
 extern NSString *const BOXAPIFolderIDRoot;
@@ -476,13 +503,14 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
     BOXThumbnailSize32 = 32,
     BOXThumbnailSize64 = 64,
     BOXThumbnailSize128 = 128,
-    BOXThumbnailSize256 = 256
+    BOXThumbnailSize256 = 256,
+    BOXThumbnailSize1024 = 1024,
+    BOXThumbnailSize2048 = 2048,
 };
 
 typedef NS_ENUM(NSUInteger, BOXAvatarType) {
     BOXAvatarTypeUnspecified = 0,
     BOXAvatarTypeSmall,
-    BOXAvatarTypeLarge,
-    BOXAvatarTypeProfile
+    BOXAvatarTypeLarge
 };
 

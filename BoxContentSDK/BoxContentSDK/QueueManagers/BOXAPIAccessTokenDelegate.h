@@ -13,7 +13,7 @@
  * comments, tasks, and the many other features offered by the Box platform.
  *
  * For more information the documentation is linked below.
- * https://developers.box.com/developer-edition/#app_users
+ * https://developer.box.com/docs/app-users and https://developer.box.com/docs/service-account
  *
  * BOXAPIAccessTokenDelegate allows developers to make network calls to their own servers to retrieve an access token
  * outside of the normal means of authentication (OAuth2).

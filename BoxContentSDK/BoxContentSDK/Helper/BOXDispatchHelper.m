@@ -18,7 +18,9 @@
     });
 
     dispatch_async(__serialQueue, ^{
-        block();
+        @autoreleasepool {
+            block();
+        }
     });
 }
 

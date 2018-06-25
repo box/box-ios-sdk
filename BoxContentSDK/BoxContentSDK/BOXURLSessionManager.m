@@ -181,7 +181,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return _progressSession;
 }
 
-- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
+- (NSURLSession *)createBackgroundSessionWithId:(NSString *)backgroundSessionIdentifier
+                      sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier
+                    maxConcurrentOperationCount:(NSInteger)maxConcurrentOperationCount
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionIdentifier];
     sessionConfig.sharedContainerIdentifier = sharedContainerIdentifier;
@@ -215,7 +217,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
 #pragma mark - public methods
 
-- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(NSString *)rootCacheDir completion:(nullable void (^)(NSError * _Nullable error))completionBlock
+- (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate
+                                                 rootCacheDir:(NSString *)rootCacheDir
+                                                   completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
     //used by main app to create and reuse one background NSURLSession
     //completionBlock will be called once the app's background session is ready
@@ -650,7 +654,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         //trying to get a background session task before setting up background session completes
         //will fail this method
         if (outError != nil) {
-            *outError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes userInfo:nil];
+            *outError = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                   code:BOXContentSDKURLSessionFailToCreateBackgroundSessionTaskBeforeBackgroundSessionSetUpCompletes
+                                               userInfo:nil];
         }
         
         return nil;
@@ -711,7 +717,10 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             //for a new background download task, we need to cache destinationFilePath to be used later
 
             id<BOXURLSessionDownloadTaskDelegate> downloadTaskDelegate = (id<BOXURLSessionDownloadTaskDelegate>)taskDelegate;
-            success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTask.taskIdentifier destinationFilePath:downloadTaskDelegate.destinationFilePath error:&error];
+            [self.cacheClient cacheBackgroundSessionId:backgroundSessionId
+                                         sessionTaskId:sessionTask.taskIdentifier
+                                   destinationFilePath:downloadTaskDelegate.destinationFilePath
+                                                 error:&error];
         }
     }
     
@@ -901,7 +910,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
  *
  * This method will not be called for background upload tasks (which cannot be converted to download tasks).
  */
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+- (void)URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
@@ -919,14 +929,21 @@ didReceiveResponse:(NSURLResponse *)response
  * the data may be discontiguous, you should use
  * [NSData enumerateByteRangesUsingBlock:] to access it.
  */
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+- (void)URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
     if (session.configuration.identifier != nil) {
         //for background tasks, cache response data
         NSError *error = nil;
-        BOOL success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier responseData:data error:&error];
-        BOXAssert(success, @"failed to cache response for background session task", error);
+        BOOL success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier
+                                                    sessionTaskId:dataTask.taskIdentifier
+                                                     responseData:data
+                                                            error:&error];
+        
+        if (!success) {
+            BOXLog(@"failed to cache response for background session task due to %@", error);
+        }
     } else {
         //for foreground tasks, call its taskDelegate to handle
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier];
@@ -960,8 +977,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 /* Sent as the last message related to a specific task.  Error may be
  * nil, which implies that no error occurred and this task is complete.
  */
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-didCompleteWithError:(nullable NSError *)error
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
 {
     if (session.configuration.identifier != nil) {
         //background session task finishes, cache its response and error
@@ -969,21 +985,34 @@ didCompleteWithError:(nullable NSError *)error
         NSError *err = nil;
         NSString *backgroundSessionId = session.configuration.identifier;
 
-        BOOL success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier response:task.response error:&err];
+        BOOL success = [self.cacheClient cacheBackgroundSessionId:backgroundSessionId
+                                                    sessionTaskId:task.taskIdentifier
+                                                         response:task.response
+                                                            error:&err];
         BOXAssert(success, @"failed to cache response for background session task with error %@", err);
 
-        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier sessionTaskId:task.taskIdentifier taskError:error error:&err];
+        success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier
+                                               sessionTaskId:task.taskIdentifier
+                                                   taskError:error
+                                                       error:&err];
         BOXAssert(success, @"failed to cache error for background session task with error %@", err);
 
         //notify its taskDelegate about the completion with response, responseData, and error
-        NSData *responseData = [self.cacheClient responseDataForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
-
+        NSData *responseData = [self.cacheClient responseDataForBackgroundSessionId:backgroundSessionId
+                                                                      sessionTaskId:task.taskIdentifier];
+        
         //the task finished/cancelled, update its cache info accordingly
-        success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier error:&err];
+        success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId
+                                                                sessionTaskId:task.taskIdentifier
+                                                                        error:&err];
         BOXAssert(success, @"failed to complete session task for background session task with error %@", err);
 
-        id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId sessionTaskId:task.taskIdentifier];
-        [taskDelegate sessionTask:task didFinishWithResponse:task.response responseData:responseData error:error];
+        id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId
+                                                                      sessionTaskId:task.taskIdentifier];
+        [taskDelegate sessionTask:task
+            didFinishWithResponse:task.response
+                     responseData:responseData
+                            error:error];
 
     } else {
         //foreground session task finishes, notify its taskDelegate accordingly

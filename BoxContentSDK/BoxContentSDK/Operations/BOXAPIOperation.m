@@ -12,6 +12,7 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXLog.h"
 #import "BOXURLRequestSerialization.h"
+#import "BOXAPIOAuth2ToJSONOperation.h"
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -119,8 +120,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         NSMutableURLRequest *APIRequest = [NSMutableURLRequest requestWithURL:[self requestURLWithURL:_baseRequestURL queryStringParameters:_queryStringParameters]];
         APIRequest.HTTPMethod = HTTPMethod;
 
-        NSData *encodedBody = [self encodeBody:_body];
-        APIRequest.HTTPBody = encodedBody;
+        if (_body != nil) {
+            NSData *encodedBody = [self encodeBody:_body];
+            APIRequest.HTTPBody = encodedBody;
+        } else {
+            APIRequest.HTTPBody = nil;
+        }
 
         _APIRequest = APIRequest;
 
@@ -214,7 +219,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 //Note: if sessionTask exists, we cannot change its API request
                 //make sure you recreate sessionTask with the new API request if needed
                 [self prepareAPIRequest];
-                self.accessToken = self.session.accessToken;
+                if (![self isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]]) {
+                    self.accessToken = self.session.accessToken;
+                }
             }
             NSError *error = nil;
             self.sessionTask = [self createSessionTaskWithError:&error];
@@ -365,7 +372,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 //Note: if sessionTask exists, we cannot change its API request
                 //make sure you recreate sessionTask with the new API request if needed
                 [self prepareAPIRequest];
-                self.accessToken = self.session.accessToken;
+                if (![self isKindOfClass:[BOXAPIOAuth2ToJSONOperation class]]) {
+                    self.accessToken = self.session.accessToken;
+                }
             }
         }
 
@@ -407,13 +416,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)cancelSessionTask
 {
-    NSDictionary *errorInfo = nil;
-    if (self.baseRequestURL)
-    {
-        errorInfo = [NSDictionary dictionaryWithObject:self.baseRequestURL forKey:NSURLErrorFailingURLErrorKey];
-    }
-    self.error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:errorInfo];
-
+    self.error = [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAPIUserCancelledError userInfo:nil];
     if (self.sessionTask != nil) {
         if ([self shouldAllowResume] == YES && [self.sessionTask isKindOfClass:[NSURLSessionDownloadTask class]] == YES) {
             //if session task is a background download and it was cancelled with intention to resume,

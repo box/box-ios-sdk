@@ -50,6 +50,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 @property (nonatomic, readwrite, strong) UIActivityIndicatorView *activityIndicator;
 
+@property (nonatomic, readwrite) UIBackgroundTaskIdentifier backgroundTaskID;
+
 #define kMaxNTLMAuthFailuresPriorToExit 3
 #define kMaxAuthChallengeCycles 100
 
@@ -114,6 +116,8 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         _preexistingCookies = [[cookieStorage cookies] copy];
         _preexistingCookiePolicy = [cookieStorage cookieAcceptPolicy];
+
+        _backgroundTaskID = UIBackgroundTaskInvalid;
     }
 
     return self;
@@ -162,6 +166,50 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     if (self.connectionError != nil) {
         [self handleConnectionErrorWithError:self.connectionError
                                      message:self.connectionErrorMessage];
+    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveBackgroundNotification:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveForegroundNotification:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self endBackgroundTask];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+
+    [super viewWillDisappear:animated];
+}
+
+// Fixes a bug starting iOS 11.3, where backgrounding the app to respond to
+// 2FA could cause the login to fail.
+- (void)didReceiveBackgroundNotification:(NSNotification *)notification
+{
+    [self endBackgroundTask];
+    __weak BOXAuthorizationViewController *weakSelf = self;
+    self.backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [weakSelf endBackgroundTask];
+    }];
+}
+
+- (void)didReceiveForegroundNotification:(NSNotification *)notification
+{
+    [self endBackgroundTask];
+}
+
+- (void)endBackgroundTask
+{
+    if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        self.backgroundTaskID = UIBackgroundTaskInvalid;
     }
 }
 
@@ -249,19 +297,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self setWebViewCanBeUsedDirectly:NO forHost:task.currentRequest.URL.host];
 
     // We can only handle the connection error if we're in the view hierarchy. It would be difficult to display UIAlertControllers when not sure we're in the view hierarchy. We will try again after viewDidAppear
-    if (self.view.window) {
-        [self handleConnectionErrorWithError:error message:message];
-    } else {
-        self.connectionError = error;
-        self.connectionErrorMessage = message;
-        // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
-        [self prepareForDismissal];
-        if (self.completionBlock) {
-            self.completionBlock(self, nil, self.connectionError);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch on main thread UI-related activities
+        if (self.view.window) {
+            [self handleConnectionErrorWithError:error message:message];
+        } else {
+            self.connectionError = error;
+            self.connectionErrorMessage = message;
+            // We still want to report the completion block so that the necessary cleanup is done up in the call tree.
+            [self prepareForDismissal];
+            if (self.completionBlock) {
+                self.completionBlock(self, nil, self.connectionError);
+            }
         }
-    }
-
-    [self.activityIndicator stopAnimating];
+        [self.activityIndicator stopAnimating];
+     });
 }
 
 - (void)handleConnectionErrorWithError:(NSError *)error message:(NSString *)message
@@ -547,19 +597,24 @@ didReceiveResponse:(nonnull NSURLResponse *)response
             } else {
                 [[challenge sender] cancelAuthenticationChallenge:challenge];
             }
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
-                                                                                     message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
 
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction *action) {
-                                                                 [alertController dismissViewControllerAnimated:YES completion:nil];
-                                                             }];
-            [alertController addAction:okAction];
-            [self presentViewController:alertController animated:YES completion:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Log In", @"Alert view title: Title for failed SSO login due to authentication issue")
+                                                                                         message:NSLocalizedString(@"Could not complete login because the SSO server is untrusted. Please contact your administrator for more information.", @"Alert view message: message for failed SSO login due to untrusted (for example: self signed) certificate")
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Label: Allow the user to accept the current condition, often used on buttons to dismiss alerts")
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                                 }];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            });
         }
-        [self.activityIndicator stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityIndicator stopAnimating];
+        });
     } else {
         BOXLog(@"Authentication challenge of type %@", [[challenge protectionSpace] authenticationMethod]);
 
@@ -639,59 +694,61 @@ didReceiveResponse:(nonnull NSURLResponse *)response
                         BOXLog(@"Presenting modal username and password window");
                         self.authenticationChallenge = challenge;
 
-                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please Log In", @"Alert view title: title for SSO authentication challenge")
-                                                                                                 message:nil
-                                                                                          preferredStyle:UIAlertControllerStyleAlert];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please Log In", @"Alert view title: title for SSO authentication challenge")
+                                                                                                     message:nil
+                                                                                              preferredStyle:UIAlertControllerStyleAlert];
 
-                        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
-                                                                               style:UIAlertActionStyleCancel
-                                                                             handler:^(UIAlertAction *action) {
-                                                                                 BOXLog(@"Cancel");
-                                                                                 if (completionHandler) {
-                                                                                     completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
-                                                                                 } else {
-                                                                                     [[self.authenticationChallenge sender] cancelAuthenticationChallenge:self.authenticationChallenge];
-                                                                                 }
-                                                                                 [alertController dismissViewControllerAnimated:YES completion:nil];
-                                                                             }];
-                        UIAlertAction *submitAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Submit", @"Alert view button: submit button for authentication challenge")
-                                                                               style:UIAlertActionStyleDefault
-                                                                             handler:^(UIAlertAction *action) {
-                                                                                 [alertController dismissViewControllerAnimated:YES completion:nil];
+                            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label: Cancel action. Usually used on buttons.")
+                                                                                   style:UIAlertActionStyleCancel
+                                                                                 handler:^(UIAlertAction *action) {
+                                                                                     BOXLog(@"Cancel");
+                                                                                     if (completionHandler) {
+                                                                                         completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
+                                                                                     } else {
+                                                                                         [[self.authenticationChallenge sender] cancelAuthenticationChallenge:self.authenticationChallenge];
+                                                                                     }
+                                                                                     [alertController dismissViewControllerAnimated:YES completion:nil];
+                                                                                 }];
+                            UIAlertAction *submitAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Submit", @"Alert view button: submit button for authentication challenge")
+                                                                                   style:UIAlertActionStyleDefault
+                                                                                 handler:^(UIAlertAction *action) {
+                                                                                     [alertController dismissViewControllerAnimated:YES completion:nil];
 
-                                                                                 BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
-                                                                                 [self setWebViewCanBeUsedDirectly:YES forHost:task.currentRequest.URL.host];
-                                                                                 UITextField *login = alertController.textFields.firstObject;
-                                                                                 UITextField *password = alertController.textFields.lastObject;
+                                                                                     BOXLog(@"Submitting credential for authentication challenge %@", self.authenticationChallenge);
+                                                                                     [self setWebViewCanBeUsedDirectly:YES forHost:task.currentRequest.URL.host];
+                                                                                     UITextField *login = alertController.textFields.firstObject;
+                                                                                     UITextField *password = alertController.textFields.lastObject;
 
-                                                                                 self.authenticationChallengeCredential = [NSURLCredential credentialWithUser:[login text]
-                                                                                                                                                     password:[password text]
-                                                                                                                                                  persistence:NSURLCredentialPersistenceNone];
-                                                                                 if (completionHandler) {
-                                                                                     completionHandler(NSURLSessionAuthChallengeUseCredential, self.authenticationChallengeCredential);
-                                                                                 } else {
-                                                                                     [[self.authenticationChallenge sender] useCredential:self.authenticationChallengeCredential
-                                                                                            forAuthenticationChallenge:self.authenticationChallenge];
-                                                                                 }
-                                                                                 
-                                                                                 // Clear out the authentication challenge in memory
-                                                                                 self.authenticationChallenge = nil;
-                                                                             }];
+                                                                                     self.authenticationChallengeCredential = [NSURLCredential credentialWithUser:[login text]
+                                                                                                                                                         password:[password text]
+                                                                                                                                                      persistence:NSURLCredentialPersistenceNone];
+                                                                                     if (completionHandler) {
+                                                                                         completionHandler(NSURLSessionAuthChallengeUseCredential, self.authenticationChallengeCredential);
+                                                                                     } else {
+                                                                                         [[self.authenticationChallenge sender] useCredential:self.authenticationChallengeCredential
+                                                                                                                   forAuthenticationChallenge:self.authenticationChallenge];
+                                                                                     }
 
-                        [alertController addAction:cancelAction];
-                        [alertController addAction:submitAction];
+                                                                                     // Clear out the authentication challenge in memory
+                                                                                     self.authenticationChallenge = nil;
+                                                                                 }];
 
-                        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
-                         {
-                             textField.placeholder = NSLocalizedString(@"Username", @"Alert view text placeholder: Placeholder for where to enter user name for SSO authentication challenge");
-                         }];
+                            [alertController addAction:cancelAction];
+                            [alertController addAction:submitAction];
 
-                        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                            textField.placeholder = NSLocalizedString(@"Password", @"Alert view text placeholder: Placeholder for where to enter password for SSO authentication challenge");
-                            textField.secureTextEntry = YES;
-                        }];
+                            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+                             {
+                                 textField.placeholder = NSLocalizedString(@"Username", @"Alert view text placeholder: Placeholder for where to enter user name for SSO authentication challenge");
+                             }];
 
-                        [self presentViewController:alertController animated:YES completion:nil];
+                            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                                textField.placeholder = NSLocalizedString(@"Password", @"Alert view text placeholder: Placeholder for where to enter password for SSO authentication challenge");
+                                textField.secureTextEntry = YES;
+                            }];
+
+                            [self presentViewController:alertController animated:YES completion:nil];
+                        });
                     }
                 }
             }
@@ -706,12 +763,13 @@ didReceiveResponse:(nonnull NSURLResponse *)response
         BOXLog(@"URLSessionTask %@ did finish loading. Requesting that the webview load the data (%lu bytes) with reponse %@", task, (unsigned long)[self.connectionData length], self.connectionResponse);
         [self setWebViewCanBeUsedDirectly:YES forHost:task.currentRequest.URL.host];
         [self setWebViewCanBeUsedDirectly:YES forHost:[self.connectionResponse URL].host];
-        [(UIWebView *)self.view loadData:self.connectionData
-                                MIMEType:[self.connectionResponse MIMEType]
-                        textEncodingName:[self.connectionResponse textEncodingName]
-                                 baseURL:[self.connectionResponse URL]];
-
-        self.connectionResponse = nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [(UIWebView *)self.view loadData:self.connectionData
+                                    MIMEType:[self.connectionResponse MIMEType]
+                            textEncodingName:[self.connectionResponse textEncodingName]
+                                     baseURL:[self.connectionResponse URL]];
+            self.connectionResponse = nil;
+        });
     } else {
         // Failure
         BOXLog(@"URLSessionTask %@ did fail with error %@", task, error);

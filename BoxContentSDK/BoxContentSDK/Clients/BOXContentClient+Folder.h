@@ -19,6 +19,8 @@
 @class BOXTrashedFolderRestoreRequest;
 @class BOXTrashedItemArrayRequest;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BOXContentClient (Folder)
 
 /**
@@ -29,6 +31,18 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID;
+
+
+/**
+ *  Generate a background request to retrieve information about a folder.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderRequest *)folderInfoRequestWithID:(NSString *)folderID
+                                  associateId:(nullable NSString *)associateId;
 
 /**
  *  Generate a request to create a new folder.
@@ -42,6 +56,19 @@
                                          parentFolderID:(NSString *)parentFolderID;
 
 /**
+ *  Generate a background request to create a new folder.
+ *
+ *  @param folderName     Name of folder to be created.
+ *  @param parentFolderID The ID of the folder in which the new folder will be created.
+ *  @param associateId Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderCreateRequest *)folderCreateRequestWithName:(NSString *)folderName
+                                         parentFolderID:(NSString *)parentFolderID
+                                            associateId:(nullable NSString *)associateId;
+
+/**
  *  Generate a request to rename a folder.
  *
  *  @param folderID Folder ID.
@@ -53,7 +80,7 @@
                                               newName:(NSString *)newName;
 
 /**
- *  Generate a request to update properties of a folder. Configure proprties of the BOXFolderUpdateRequest
+ *  Generate a request to update properties of a folder. Configure properties of the BOXFolderUpdateRequest
  *  before executing it.
  *
  *  @param folderID Folder ID.
@@ -61,6 +88,18 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID;
+
+/**
+ *  Generate a request to update properties of a folder. Configure properties of the BOXFolderUpdateRequest
+ *  before executing it.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateID Unique ID to associate with the operation to manage when in the background queue.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
+                                          associateID:(nullable NSString *)associateID;
 
 /**
  *  Generate a request to move a folder into another folder.
@@ -94,6 +133,18 @@
 - (BOXFolderDeleteRequest *)folderDeleteRequestWithID:(NSString *)folderID;
 
 /**
+ *  Generate a request to delete a folder.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderDeleteRequest *)folderDeleteRequestWithID:(NSString *)folderID
+                                          associateId:(nullable NSString *)associateId;
+
+/**
  *  Generate a request to permanently delete a folder in the trash.
  *
  *  @param folderID Folder ID.
@@ -103,6 +154,18 @@
 - (BOXFolderDeleteRequest *)trashedFolderDeleteFromTrashRequestWithID:(NSString *)folderID;
 
 /**
+ *  Generate a request to permanently delete a folder in the trash.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderDeleteRequest *)trashedFolderDeleteFromTrashRequestWithID:(NSString *)folderID
+                                                          associateId:(nullable NSString *)associateId;
+
+/**
  *  Generate a request to restore a folder from the trash.
  *
  *  @param folderID Folder ID.
@@ -110,6 +173,18 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID;
+
+/**
+ *  Generate a background request to restore a folder from the trash.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateID A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID
+                                                          associateID:(nullable NSString *)associateID;
 
 /**
  *  Generate a request to retrieve all items in the folder
@@ -131,7 +206,6 @@
 - (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
                                                               inRange:(NSRange)range;
 
-
 /**
  *  Generate a request to retrieve the items in a folder in the trash.
  *
@@ -150,4 +224,19 @@
  */
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID;
 
+/**
+ *  Generate a background request to retrieve information about a folder in the trash.
+ *
+ *  @param folderID Folder ID.
+ *  @param associateId   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  task will cause the request to reconnect to that task, rather than making a new one.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID
+                                         associateID:(nullable NSString *)associateID;
+
+
 @end
+
+NS_ASSUME_NONNULL_END

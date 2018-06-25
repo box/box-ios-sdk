@@ -1,0 +1,2 @@
+# Box SDKs
+github "box/box-ios-sdk" ~> 1.0

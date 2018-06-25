@@ -106,7 +106,7 @@
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       BOXAuthTokenRequestRedirectURIKey : self.redirectURIString,
                                                                                       }];
-    
+
     BOXAPIOAuth2ToJSONOperation *operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[self grantTokensURL]
                                                                                    HTTPMethod:BOXAPIHTTPMethodPOST
                                                                                          body:POSTParams
@@ -216,7 +216,19 @@
         
         return;
     }
-    
+
+    //If session has a newer access token than the expiredAccessToken, do not need to refresh
+    //This can happen in a race condition where multiple requests fail with the same expired access token
+    //and they try to refresh at the same time, the first successful one will update the shared session
+    //with new accessToken and refreshToken that subsequent requests can use.
+    NSString *accessToken = self.accessToken;
+    if (accessToken.length > 0 && ![accessToken isEqualToString:expiredAccessToken]) {
+        if (block) {
+            block(self, nil);
+        }
+        return;
+    }
+
     NSMutableDictionary *POSTParams = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                                       BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
                                                                                       BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,
@@ -236,6 +248,9 @@
                                                                                          body:POSTParams
                                                                                   queryParams:nil
                                                                                       session:self];
+    //Note: record the expired access token that initiated this refresh operation
+    //to detect if this refresh operation fails because we have acquired a newer access token
+    operation.accessToken = expiredAccessToken;
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {

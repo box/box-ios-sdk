@@ -145,9 +145,10 @@
 @property (nonatomic, readwrite, strong) BOXFolderMini *parentFolder;
 
 /**
- *  Whether this item is deleted or not. Will be "active" or "deleted".
+ *  Whether this item is deleted or not.
+ *  Values include "active", "trashed" if the file has been moved to the trash, and "deleted" if the file has been permanently deleted
  */
-@property (nonatomic, readwrite, strong) NSString *status;
+@property (nonatomic, readwrite, copy, nullable) NSString *status;
 
 /**
  *  The collections that this item belongs to. An array of BoxCollection objects.
@@ -214,6 +215,13 @@
 @property (nonatomic, readwrite, strong) NSArray *allowedInviteeRoles;
 
 /**
+ *  Metadata values for an item
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, strong) NSArray *metadata;
+
+/**
  *  Convenience method to check if the item is a File.
  */
 @property (nonatomic, readonly, assign) BOOL isFile;
@@ -227,5 +235,10 @@
  *  Convenience method to check if the item is a Bookmark.
  */
 @property (nonatomic, readonly, assign) BOOL isBookmark;
+
+/**
+ * Convenience method to retrieve the first available rank in collection
+ */
+@property (nullable, nonatomic, readonly, assign) NSNumber *availableCollectionRank;
 
 @end

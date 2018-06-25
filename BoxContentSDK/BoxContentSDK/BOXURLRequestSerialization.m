@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 #import "BOXURLRequestSerialization.h"
+#include "BOXStreamingHashHelper.h"
 
 #if TARGET_OS_IOS || TARGET_OS_WATCH || TARGET_OS_TV
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -431,7 +432,7 @@ forHTTPHeaderField:(NSString *)field
 
 - (NSMutableURLRequest *)requestWithMultipartFormRequest:(NSURLRequest *)request
                              writingStreamContentsToFile:(NSURL *)fileURL
-                                       completionHandler:(void (^)(NSError *error))handler
+                                       completionHandler:(void (^)(NSString *digest, NSError *error))handler
 {
     NSParameterAssert(request.HTTPBodyStream);
     NSParameterAssert([fileURL isFileURL]);
@@ -439,18 +440,19 @@ forHTTPHeaderField:(NSString *)field
     NSInputStream *inputStream = request.HTTPBodyStream;
     NSOutputStream *outputStream = [[NSOutputStream alloc] initWithURL:fileURL append:NO];
     __block NSError *error = nil;
-
+    BOXStreamingHashHelper* streamingHashHelper = [BOXStreamingHashHelper new];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-
         [inputStream open];
         [outputStream open];
-
+        BOXMultipartBodyStream *bodyStream = (BOXMultipartBodyStream*) inputStream;
+        bodyStream.contentProcessor = streamingHashHelper;
+        [streamingHashHelper open];
+        const NSUInteger chunkSize = 1024 * 8;
         while ([inputStream hasBytesAvailable] && [outputStream hasSpaceAvailable]) {
-            uint8_t buffer[1024];
+            uint8_t buffer[chunkSize];
 
-            NSInteger bytesRead = [inputStream read:buffer maxLength:1024];
+            NSInteger bytesRead = [inputStream read:buffer maxLength:chunkSize];
             if (inputStream.streamError || bytesRead < 0) {
                 error = inputStream.streamError;
                 break;
@@ -469,11 +471,10 @@ forHTTPHeaderField:(NSString *)field
 
         [outputStream close];
         [inputStream close];
+        NSString *sha1Hash = error ? nil : [streamingHashHelper close];
 
         if (handler) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                handler(error);
-            });
+            handler(sha1Hash, error);
         }
     });
 
@@ -648,6 +649,8 @@ NSTimeInterval const kBOXUploadStream3GSuggestedDelay = 0.2;
 
 - (NSInteger)read:(uint8_t *)buffer
         maxLength:(NSUInteger)length;
+
+@property (nonatomic, readwrite, weak) id<BOXStreamingDataProcessor> contentProcessor;
 @end
 
 @interface BOXMultipartBodyStream()
@@ -664,7 +667,7 @@ NSTimeInterval const kBOXUploadStream3GSuggestedDelay = 0.2;
 #pragma mark -
 
 @interface BOXStreamingMultipartFormData ()
-@property (readwrite, nonatomic, copy) NSMutableURLRequest *request;
+@property (readwrite, nonatomic, strong) NSMutableURLRequest *request;
 @property (readwrite, nonatomic, assign) NSStringEncoding stringEncoding;
 @property (readwrite, nonatomic, copy) NSString *boundary;
 @property (readwrite, nonatomic, strong) BOXMultipartBodyStream *bodyStream;
@@ -920,6 +923,12 @@ NSTimeInterval const kBOXUploadStream3GSuggestedDelay = 0.2;
     return [self.HTTPBodyParts count] == 0;
 }
 
+- (void) setContentProcessor:(id<BOXStreamingDataProcessor>)contentProcessor {
+    _contentProcessor = contentProcessor;
+    BOXHTTPBodyPart *contentBodyPart = (BOXHTTPBodyPart*)[self.HTTPBodyParts lastObject];
+    contentBodyPart.contentProcessor = contentProcessor;
+}
+
 #pragma mark - NSInputStream
 
 - (NSInteger)read:(uint8_t *)buffer
@@ -1152,8 +1161,7 @@ typedef enum {
 #pragma clang diagnostic pop
 }
 
-- (NSInteger)read:(uint8_t *)buffer
-        maxLength:(NSUInteger)length
+- (NSInteger) read:(uint8_t *)buffer maxLength:(NSUInteger)length
 {
     NSInteger totalNumberOfBytesRead = 0;
 
@@ -1171,6 +1179,11 @@ typedef enum {
         NSInteger numberOfBytesRead = 0;
 
         numberOfBytesRead = [self.inputStream read:&buffer[totalNumberOfBytesRead] maxLength:(length - (NSUInteger)totalNumberOfBytesRead)];
+        id<BOXStreamingDataProcessor> contentProcessor = self.contentProcessor;
+        if(contentProcessor) {
+            NSData *bodyData = [NSData dataWithBytes:(const void *)(buffer + totalNumberOfBytesRead) length:numberOfBytesRead];
+            [contentProcessor processData:bodyData];
+        }
         if (numberOfBytesRead == -1) {
             return -1;
         } else {
@@ -1210,13 +1223,6 @@ typedef enum {
 }
 
 - (BOOL)transitionToNextPhase {
-    if (![[NSThread currentThread] isMainThread]) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self transitionToNextPhase];
-        });
-        return YES;
-    }
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
     switch (_phase) {
@@ -1224,7 +1230,6 @@ typedef enum {
             _phase = BOXHeaderPhase;
             break;
         case BOXHeaderPhase:
-            [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
             [self.inputStream open];
             _phase = BOXBodyPhase;
             break;

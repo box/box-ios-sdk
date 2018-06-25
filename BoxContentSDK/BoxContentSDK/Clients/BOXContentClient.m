@@ -25,16 +25,29 @@
 #import "BOXURLSessionManager.h"
 
 // Default API URLs
+/*
+ NOTE:  Currently when unversioned URLs are derived from the base URL,
+        it removes the last component of the URL path if and only if
+        the component begins with a number.
+        (e.g. "https://api.box.com/2.0" shortens to "https://api.box.com")
+        If we change the base URL to not end with the API version,
+        or change the API version to begin with a non-numerical character,
+        the "baseURLWithoutVersion" implementation will need to be updated
+        as well.
+*/
 NSString *const BOXDefaultAPIBaseURL = @"https://api.box.com/2.0";
 NSString *const BOXDefaultOAuth2BaseURL = @"https://api.box.com/oauth2";
 NSString *const BOXDefaultAPIAuthBaseURL = @"https://account.box.com/api";
 NSString *const BOXDefaultAPIUploadBaseURL = @"https://upload.box.com/api/2.1";
+NSString *const BOXContentClientBackgroundTempFolder = @"TempBackgroundContentClient";
+NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient";
 
 @interface BOXContentClient ()
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
 + (void)resetInstancesForTesting;
+
 @end
 
 @implementation BOXContentClient
@@ -44,6 +57,7 @@ NSString *const BOXDefaultAPIUploadBaseURL = @"https://upload.box.com/api/2.1";
 @synthesize queueManager = _queueManager;
 
 static NSString *staticAPIBaseURL;
+static NSString *staticAPIBaseURLWithoutVersion;
 static NSString *staticOAuth2BaseURL;
 static NSString *staticAPIAuthBaseURL;
 static NSString *staticAPIUploadBaseURL;
@@ -346,6 +360,48 @@ static BOXContentClient *defaultInstance = nil;
     self.queueManager.session = self.session;
 }
 
+- (void)setUpTemporaryCacheDirectory:(NSString *)folderPath
+{
+    BOOL success = YES;
+    
+    NSString *tempPath = [folderPath stringByAppendingPathComponent:BOXContentClientBackgroundTempFolder];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:tempPath]) {
+        NSError * error = nil;
+        
+        success = [[NSFileManager defaultManager] createDirectoryAtPath:tempPath
+                                                 withIntermediateDirectories:YES
+                                                                  attributes:nil
+                                                                       error:&error];
+    }
+    if (success == YES) {
+        _tempCacheDir = tempPath;
+    } else {
+        _tempCacheDir = nil;
+    }
+}
+
+- (NSString*)tempCacheDir
+{
+    BOOL success = YES;
+    
+    if (_tempCacheDir == nil) {
+        _tempCacheDir = [NSTemporaryDirectory() stringByAppendingPathComponent:BOXContentClientBackgroundTempFolder];
+        if(![[NSFileManager defaultManager] fileExistsAtPath:_tempCacheDir]) {
+            NSError * error = nil;
+            
+            success = [[NSFileManager defaultManager] createDirectoryAtPath:_tempCacheDir
+                                                withIntermediateDirectories:YES
+                                                                 attributes:nil
+                                                                      error:&error];
+        }
+        if (success == NO) {
+            _tempCacheDir = NSTemporaryDirectory();
+        }
+    }
+    
+    return _tempCacheDir;
+}
+
 #pragma mark - access token delegate
 - (id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
 {
@@ -373,11 +429,16 @@ static BOXContentClient *defaultInstance = nil;
 
 + (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
 {
+    [[BOXContentClient defaultClient] setUpTemporaryCacheDirectory:rootCacheDir];
+    rootCacheDir = [rootCacheDir stringByAppendingPathComponent:BOXSessionManagerCacheClientFolder];
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:delegate rootCacheDir:rootCacheDir completion:completionBlock];
 }
 
 + (void)oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir sharedContainerIdentifier:(NSString *)sharedContainerIdentifier completion:(void (^)(NSError *error))completionBlock;
 {
+    
+    [[BOXContentClient defaultClient] setUpTemporaryCacheDirectory:rootCacheDir];
+    rootCacheDir = [rootCacheDir stringByAppendingPathComponent:BOXSessionManagerCacheClientFolder];
     [[BOXURLSessionManager sharedInstance] oneTimeSetUpInExtensionToSupportBackgroundTasksWithDelegate:delegate
                                                                                           rootCacheDir:rootCacheDir
                                                                              sharedContainerIdentifier:sharedContainerIdentifier
@@ -436,6 +497,26 @@ static BOXContentClient *defaultInstance = nil;
     return staticAPIBaseURL;
 }
 
+//NOTE: Right now we assume that version-portion of the URL string is specified by the last component in the URL path and it also starts with a number
++ (NSString *)APIBaseURLWithoutVersion
+{
+    if (staticAPIBaseURLWithoutVersion.length == 0) {
+        NSString *versionedURL = [BOXContentClient APIBaseURL];
+        NSString *unversionedURL = nil;
+        NSString *lastComponent = [versionedURL lastPathComponent];
+        if (lastComponent.length > 0 && isnumber([lastComponent characterAtIndex:0])) {
+            //NOTE: NSString's stringByDeletingLastPathComponent also deletes a slash in "https://" so was not suitable here
+            NSRange range = [versionedURL rangeOfString: lastComponent options:NSBackwardsSearch];
+            unversionedURL = [versionedURL substringToIndex:range.location];
+        }
+        else {
+            unversionedURL = versionedURL;
+        }
+        staticAPIBaseURLWithoutVersion = unversionedURL;
+    }
+    return staticAPIBaseURLWithoutVersion;
+}
+
 + (NSString *)OAuth2BaseURL
 {
     if (staticOAuth2BaseURL.length == 0) {
@@ -463,6 +544,7 @@ static BOXContentClient *defaultInstance = nil;
 + (void)setAPIBaseURL:(NSString *)APIBaseURL
 {
     staticAPIBaseURL = APIBaseURL;
+    staticAPIBaseURLWithoutVersion = nil;
 }
 
 + (void)setOAuth2BaseURL:(NSString *)OAuth2BaseURL

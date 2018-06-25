@@ -116,6 +116,9 @@
                                               session:self.queueManager.session];
 
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
+        if([self.uploadMultipartCopyFilePath length] <= 0) { // Foreground operations deprecated, for backward compatibility
+            [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
+        }
         operation.uploadMultipartCopyFilePath = self.uploadMultipartCopyFilePath;
         operation.associateId = self.associateId;
         [operation appendMultipartPieceWithFilePath:self.localFilePath
@@ -127,13 +130,9 @@
                                       fieldName:BOXAPIMultipartParameterFieldKeyFile
                                        filename:fileName
                                        MIMEType:nil];
+        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path to upload from or data to upload.");
-    }
-
-    if (self.enableCheckForCorruptionInTransit) {
-        // Set up the Content-MD5 header
-        [operation.APIRequest setValue:[self fileSHA1] forHTTPHeaderField:BOXAPIHTTPHeaderContentMD5];
     }
 
     return operation;
@@ -208,7 +207,7 @@
 - (NSString *)fileSHA1
 {
     NSString *hash = nil;
-
+    
     if ([self.localFilePath length] > 0 && [[NSFileManager defaultManager] fileExistsAtPath:self.localFilePath]) {
         hash = [BOXHashHelper sha1HashOfFileAtPath:self.localFilePath];
     } else if (self.fileData != nil) {
@@ -216,7 +215,7 @@
     } else {
         BOXAssertFail(@"The File Upload Request was not given an existing file path or data to calculate the hash from.");
     }
-
+    
     return hash;
 }
 

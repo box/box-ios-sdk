@@ -127,21 +127,21 @@ typedef struct _FileHashComputationContext {
 
 + (NSData *)sha1HashDataOfData:(NSData *)data
 {
-    unsigned char digest[SHA_DIGEST_LENGTH];
+    unsigned char digest[CC_SHA1_DIGEST_LENGTH];
 
     CC_SHA1([data bytes], (CC_LONG)[data length], digest);
 
-    return [NSData dataWithBytes:&digest length:SHA_DIGEST_LENGTH];
+    return [NSData dataWithBytes:&digest length:CC_SHA1_DIGEST_LENGTH];
 }
 
 + (NSString *)sha1HashOfData:(NSData *)data
 {
-    unsigned char digest[SHA_DIGEST_LENGTH];
-    char finaldigest[2*SHA_DIGEST_LENGTH];
+    unsigned char digest[CC_SHA1_DIGEST_LENGTH];
+    char finaldigest[2*CC_SHA1_DIGEST_LENGTH];
     int i = 0;
 
     CC_SHA1([data bytes], (CC_LONG)[data length], digest);
-    for (i=0; i<SHA_DIGEST_LENGTH; i++) {
+    for (i=0; i<CC_SHA1_DIGEST_LENGTH; i++) {
         sprintf(finaldigest+i*2, "%02x", digest[i]);
     }
 

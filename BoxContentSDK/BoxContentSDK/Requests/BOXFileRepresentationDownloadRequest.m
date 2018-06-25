@@ -12,6 +12,8 @@
 #import "BOXAPIDataOperation.h"
 #import "BOXLog.h"
 #import "BOXDispatchHelper.h"
+#import "BOXHashHelper.h"
+#import "BOXContentSDKErrors.h"
 
 @interface BOXFileRepresentationDownloadRequest ()
 
@@ -19,6 +21,8 @@
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
 @property (nonatomic, readwrite, strong) BOXRepresentation *representation;
+@property (nonatomic, readwrite, copy) NSString *associateId;
+
 @end
 
 @implementation BOXFileRepresentationDownloadRequest
@@ -31,7 +35,19 @@
         _destinationPath = destinationPath;
         _fileID = fileID;
         _representation = representation;
+        _ignoreLocalURLRequestCache = NO;
+        _sha1Hash = nil;
     }
+    return self;
+}
+
+- (instancetype)initWithLocalDestination:(NSString *)destinationPath
+                                  fileID:(NSString *)fileID
+                          representation:(BOXRepresentation *)representation
+                             associateId:(NSString *)associateId
+{
+    self = [self initWithLocalDestination:destinationPath fileID:fileID representation:representation];
+    self.associateId = associateId;
     return self;
 }
 
@@ -47,45 +63,34 @@
     return self;
 }
 
-- (NSURL *)representationURL
+- (void) setIgnoreLocalURLRequestCache:(BOOL)ignoreLocalURLRequestCache
 {
-    NSURL *url = self.representation.contentURL;
-    
-    NSString *urlString = url.absoluteString;
-    NSRange versionStartRange = [urlString rangeOfString:@"versions/"];
-    NSRange versionEndRange = [urlString rangeOfString:@"/representations"];
-    
-    NSInteger startIndex = versionStartRange.location + versionStartRange.length;
-    
-    NSString *versionString = [urlString substringWithRange:NSMakeRange(startIndex, versionEndRange.location - startIndex)];
-    NSString *newVersionString = nil;
-    
-    if (self.versionID.length > 0) {
-        newVersionString = self.versionID;
+    if(ignoreLocalURLRequestCache) {
+        [self.operation.APIRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     } else {
-        newVersionString = @"current";
+        [self.operation.APIRequest setCachePolicy:NSURLRequestUseProtocolCachePolicy];
     }
-    urlString = [urlString stringByReplacingOccurrencesOfString:versionString withString:newVersionString];
-    
-    return url = [NSURL URLWithString:urlString];
 }
 
 - (BOXAPIOperation *)createOperation
 {
-    NSURL *URL = [self representationURL];
+    NSURL *URL = self.representation.contentURL;
     
     BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
                                                          HTTPMethod:BOXAPIHTTPMethodGET
                                               queryStringParameters:nil
                                                      bodyDictionary:nil
                                                        successBlock:nil
-                                                       failureBlock:nil];
+                                                       failureBlock:nil
+                                                        associateId:self.associateId];
     
     BOXAssert(self.representation != nil, @"A representation must be specified.");
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
     
-    if (self.outputStream != nil) {
+    if (self.destinationPath != nil && self.associateId != nil) {
+        dataOperation.destinationPath = self.destinationPath;
+    } else if (self.outputStream != nil) {
         dataOperation.outputStream = self.outputStream;
     } else {
         dataOperation.outputStream = [[NSOutputStream alloc] initToFileAtPath:self.destinationPath append:NO];
@@ -111,8 +116,15 @@
         }
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
+            NSError *dataIntegrityErrorIfAny = nil;
+            if([self.sha1Hash length] && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
+                dataIntegrityErrorIfAny = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKDataIntegrityError userInfo:nil];
+                if(dataIntegrityErrorIfAny) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self];
+                }
+            }
             [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil);
+                completionBlock(dataIntegrityErrorIfAny);
             } onMainThread:isMainThread];
         };
         fileOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -136,5 +148,11 @@
     return BOXAPIItemTypeFile;
 }
 
+- (void)cancelWithIntentionToResume
+{
+    BOXAPIDataOperation *dataOperation = (BOXAPIDataOperation *)self.operation;
+    dataOperation.allowResume = YES;
+    [self cancel];
+}
 @end
 

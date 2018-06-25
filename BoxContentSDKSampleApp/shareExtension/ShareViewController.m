@@ -8,7 +8,7 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ShareViewController.h"
-#import <BoxContentSDK/BOXContentSDK.h>
+@import BoxContentSDK;
 #import "BOXSampleAppSessionManager.h"
 
 @interface ShareViewController () <BOXURLSessionManagerDelegate>

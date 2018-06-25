@@ -29,6 +29,18 @@
 @property (nonatomic, readwrite, strong) NSString *scope;
 
 /**
+ * The current version of the metadata.
+ */
+@property (nonatomic, readwrite, strong) NSNumber *version;
+
+
+/**
+ * The current type version of the metadata.
+ */
+@property (nonatomic, readwrite, strong) NSNumber *typeVersion;
+
+
+/**
  * Custom defined information stored as key/value pairs.
  */
 @property (nonatomic, readwrite, strong) NSDictionary *info;

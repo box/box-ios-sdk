@@ -40,6 +40,11 @@
                                                   hasExpectedType:[NSString class]
                                                       nullAllowed:NO];
         
+        self.statusCode = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCode
+                                                         inDictionary:statusObject
+                                                      hasExpectedType:[NSString class]
+                                                          nullAllowed:NO];
+        
         NSDictionary *detailsJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDetails
                                                                    inDictionary:JSONResponse
                                                                 hasExpectedType:[NSDictionary class]
@@ -70,10 +75,13 @@
                                                              hasExpectedType:[NSDictionary class]
                                                                  nullAllowed:NO];
         
-        self.infoURL = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
+        NSString *infoURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURL
                                                       inDictionary:infoJSON
                                                    hasExpectedType:[NSString class]
                                                        nullAllowed:NO];
+        if (infoURLString.length > 0) {
+            self.infoURL = [NSURL URLWithString:infoURLString];
+        }
     }
     
     return self;

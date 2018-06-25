@@ -20,6 +20,17 @@
     return self;
 }
 
+- (instancetype)initWithFolderID:(NSString *)folderID
+                     associateId:(NSString *)associateId
+{
+    if (self = [super init]) {
+        _folderID = folderID;
+        _associateId = associateId;
+    }
+    
+    return self;
+}
+
 - (BOXAPIOperation *)createOperation
 {
     NSURL *URL = [self URLWithResource:BOXAPIResourceFolders
@@ -35,49 +46,120 @@
         bodyDictionary[BOXAPIObjectKeyParent] = @{BOXAPIObjectKeyID : self.parentFolderID};
     }
     
-    BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
-                                                         HTTPMethod:BOXAPIHTTPMethodPOST
-                                              queryStringParameters:nil
-                                                     bodyDictionary:bodyDictionary
-                                                   JSONSuccessBlock:nil
-                                                       failureBlock:nil];
-    
-    return JSONoperation;
+    if ([self shouldPerformBackgroundOperation] == YES) {
+        BOXAPIDataOperation *dataOperation = [self dataOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPOST
+                                                  queryStringParameters:nil
+                                                         bodyDictionary:bodyDictionary
+                                                           successBlock:nil
+                                                           failureBlock:nil
+                                                            associateId:self.associateId];
+        
+        NSString *requestDirectory = self.requestDirectoryPath;
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        dataOperation.destinationPath = destinationPath;
+        
+        return dataOperation;
+    } else {
+        BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
+                                                             HTTPMethod:BOXAPIHTTPMethodPOST
+                                                  queryStringParameters:nil
+                                                         bodyDictionary:bodyDictionary
+                                                       JSONSuccessBlock:nil
+                                                           failureBlock:nil];
+        
+        return JSONoperation;
+    }
 }
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock
 {
-    BOOL isMainThread = [NSThread isMainThread];
-    BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
-    
-    fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
-        BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+    if ([self shouldPerformBackgroundOperation] == YES) {
+        BOOL isMainThread = [NSThread isMainThread];
+        
+        BOXAPIDataOperation *folderOperation = (BOXAPIDataOperation *)self.operation;
+        __weak BOXAPIDataOperation *weakFolderOperation = folderOperation;
+        
+        folderOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
+            NSData *data = [NSData dataWithContentsOfFile:weakFolderOperation.destinationPath];
+            BOXFolder *folder = nil;
+            if (data != nil) {
+                NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                folder = (BOXFolder *)[[self class] itemWithJSON:jsonDictionary];
+                
+                if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                    [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                            withFolder:folder
+                                                                 error:nil];
+                }
+                
+                if ([[NSFileManager defaultManager] fileExistsAtPath: weakFolderOperation.destinationPath]) {
+                    NSError *error = nil;
+                    [[NSFileManager defaultManager] removeItemAtPath:weakFolderOperation.destinationPath error:&error];
+                }
+                
+                if (completionBlock) {
+                    [BOXDispatchHelper callCompletionBlock:^{
+                        completionBlock(folder, nil);
+                    } onMainThread:isMainThread];
+                }
+            }
+        };
+        
+        folderOperation.failureBlock = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                        withFolder:nil
+                                                             error:error];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+        
+        [self performRequest];
+    } else {
+        BOOL isMainThread = [NSThread isMainThread];
+        BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
+        
+        folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+            BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                        withFolder:folder
+                                                             error:nil];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(folder, nil);
+                } onMainThread:isMainThread];
+            }
+        };
+        folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+            
+            if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
+                [self.cacheClient cacheTrashedFolderRestoreRequest:self
+                                                        withFolder:nil
+                                                             error:error];
+            }
+            if (completionBlock) {
+                [BOXDispatchHelper callCompletionBlock:^{
+                    completionBlock(nil, error);
+                } onMainThread:isMainThread];
+            }
+        };
+        [self performRequest];
+    }
+}
 
-        if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
-            [self.cacheClient cacheTrashedFolderRestoreRequest:self
-                                                    withFolder:folder
-                                                         error:nil];
-        }
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(folder, nil);
-            } onMainThread:isMainThread];
-        }
-    };
-    fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+#pragma mark - Private Helper methods
 
-        if ([self.cacheClient respondsToSelector:@selector(cacheTrashedFolderRestoreRequest:withFolder:error:)]) {
-            [self.cacheClient cacheTrashedFolderRestoreRequest:self
-                                                    withFolder:nil
-                                                         error:error];
-        }
-        if (completionBlock) {
-            [BOXDispatchHelper callCompletionBlock:^{
-                completionBlock(nil, error);
-            } onMainThread:isMainThread];
-        }
-    };
-    [self performRequest];
+- (BOOL)shouldPerformBackgroundOperation
+{
+    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

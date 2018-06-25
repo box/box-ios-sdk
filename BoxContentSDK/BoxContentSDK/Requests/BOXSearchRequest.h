@@ -47,6 +47,8 @@
 
 - (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range;
 
+- (instancetype)initWithTemplateKey:(NSString *)templateKey scope:(NSString *)scope filters:(NSArray *)filters inRange:(NSRange)range unifiedMetadataKeys:(NSArray *)unifiedMetadataKeys;
+
 //Perform API request only if completionBlock is not nil
 - (void)performRequestWithCompletion:(BOXItemArrayCompletionBlock)completionBlock;
 
