@@ -326,7 +326,6 @@
         if (background == NO) {
             self.nonBackgroundUploadRequest = uploadRequest;
         }
-        uploadRequest.enableCheckForCorruptionInTransit = YES;
         [uploadRequest performRequestWithProgress:^(long long totalBytesTransferred, long long totalBytesExpectedToTransfer) {
             progressBlock(totalBytesTransferred, totalBytesExpectedToTransfer);
         } completion:^(BOXFile *file, NSError *error) {
@@ -374,7 +373,6 @@
                 BOXFileUploadRequest *uploadRequest = [weakSelf.client fileUploadRequestToFolderWithID:weakSelf.folderID
                                                                                               fromData:imageData
                                                                                               fileName:filename];
-                uploadRequest.enableCheckForCorruptionInTransit = YES;
                 [uploadRequest performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
                 
                     if (error == nil) {
