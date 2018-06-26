@@ -10,6 +10,9 @@
 @class BOXSharedLink;
 @class BOXCollection;
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A compact representation of a Box Item with only a few properties.
  *  Some API requests will return these representations to reduce bandiwdth, especially when many
@@ -142,7 +145,7 @@
 /**
  *  The folder that contains this item.
  */
-@property (nonatomic, readwrite, strong) BOXFolderMini *parentFolder;
+@property (nonatomic, readwrite, strong, nullable) BOXFolderMini *parentFolder;
 
 /**
  *  Whether this item is deleted or not.
@@ -242,3 +245,5 @@
 @property (nullable, nonatomic, readonly, assign) NSNumber *availableCollectionRank;
 
 @end
+
+NS_ASSUME_NONNULL_END

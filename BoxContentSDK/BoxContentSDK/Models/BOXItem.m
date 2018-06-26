@@ -313,7 +313,7 @@
     NSNumber *rank = nil;
     for (BOXCollection *collection in self.collections) {
         if ((collection.collectionRank != nil) &&
-            (collection.collectionRank != [NSNull null])) {
+            ((id)collection.collectionRank != [NSNull null])) {
             return collection.collectionRank;
         }
     }
