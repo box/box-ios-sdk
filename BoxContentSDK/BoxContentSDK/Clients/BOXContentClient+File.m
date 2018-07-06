@@ -20,6 +20,7 @@
 #import "BOXPreflightCheckRequest.h"
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
+#import "BOXRepresentationInfoRequest.h"
 
 @implementation BOXContentClient (File)
 
@@ -320,6 +321,15 @@
     BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithOutputStream:outputStream
                                                                                                                 fileID:fileID
                                                                                                         representation:representation];
+    [self prepareRequest:request];
+    return request;
+}
+
+- (BOXRepresentationInfoRequest *)fileRepresentationInfoRequestWithFileID:(NSString *)fileID
+                                                           representation:(BOXRepresentation *)representation
+{
+    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithFileID:fileID
+                                                                                  representation:representation];
     [self prepareRequest:request];
     return request;
 }
