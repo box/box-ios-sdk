@@ -22,6 +22,7 @@
 @class BOXPreflightCheckRequest;
 @class BOXFileRepresentationDownloadRequest;
 @class BOXRepresentation;
+@class BOXRepresentationInfoRequest;
 
 @interface BOXContentClient (File)
 
@@ -388,6 +389,15 @@
 - (BOXFileRepresentationDownloadRequest *)fileRepresentationDownloadRequestWithID:(NSString *)fileID
                                                                    toOutputStream:(NSOutputStream *)outputStream
                                                                    representation:(BOXRepresentation *)representation;
-
+/**
+ *  Generate a request to get representation information for a file
+ *
+ *  @param fileID          File ID.
+ *  @param representation  BOXRepresentation to get information on
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXRepresentationInfoRequest *)fileRepresentationInfoRequestWithFileID:(NSString *)fileID
+                                                           representation:(BOXRepresentation *)representation;
 
 @end

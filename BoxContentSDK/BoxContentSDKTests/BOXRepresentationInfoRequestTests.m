@@ -15,6 +15,7 @@
 
 @implementation BOXRepresentationInfoRequestTests
 NSString *const testInfoUrl = @"https://dl.boxcloud.com/api/2.0/internal_files/12345/versions/12345/representations/jpg_2048x2048/content/";
+NSString *const testFileID = @"12345";
 
 - (BOXRepresentation *)testRepresentation
 {
@@ -25,7 +26,7 @@ NSString *const testInfoUrl = @"https://dl.boxcloud.com/api/2.0/internal_files/1
 
 #pragma mark - URLRequest
 - (void)test_that_basic_request_has_expected_URLRequest {
-    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithRepresentation:[self testRepresentation]];
+    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithFileID:testFileID representation:[self testRepresentation]];
     NSURLRequest *URLRequest = request.urlRequest;
     
     XCTAssertEqualObjects(testInfoUrl, URLRequest.URL.absoluteString);
@@ -36,7 +37,7 @@ NSString *const testInfoUrl = @"https://dl.boxcloud.com/api/2.0/internal_files/1
 
 - (void)test_that_expected_items_are_returned_for_representationInfo_request
 {
-    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithRepresentation:[self testRepresentation]];
+    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithFileID:testFileID representation:[self testRepresentation]];
     NSData *cannedData = [self cannedResponseDataWithName:@"representations_info"];
     NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:200 responseData:cannedData];
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:request];
