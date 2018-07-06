@@ -38,7 +38,6 @@ NSString *const testInfoUrl = @"https://dl.boxcloud.com/api/2.0/internal_files/1
 {
     BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithRepresentation:[self testRepresentation]];
     NSData *cannedData = [self cannedResponseDataWithName:@"representations_info"];
-    NSArray *expectedItems = [self itemsFromResponseData:cannedData];
     NSHTTPURLResponse *response = [self cannedURLResponseWithStatusCode:200 responseData:cannedData];
     [self setCannedURLResponse:response cannedResponseData:cannedData forRequest:request];
     

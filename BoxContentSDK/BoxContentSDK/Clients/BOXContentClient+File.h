@@ -71,7 +71,7 @@
  *  before executing it.
  *
  *  @param fileID File ID.
- *  @param associateId   an Id to associate with this background upload task to reconnect to if needed
+ *  @param associateID   an Id to associate with this background upload task to reconnect to if needed
  *
  *  @return A request that can be customized and then executed.
  */

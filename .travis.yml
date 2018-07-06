@@ -3,7 +3,7 @@ before_install:
   - gem install xcpretty
   - gem install cocoapods -v '0.38.2'
 podfile: BoxContentSDK/Podfile
-osx_image: xcode8.2.1
-#run on iPhone 6s Plus (9.3) [989606C6-1BE4-425F-9497-43D9D37F0BCC] (Simulator)
+osx_image: xcode9.4
+#run on iPhone 8 (11.0) [76513A6D-E646-4CD9-B37A-E51C606999CA] (Simulator)
 script: 
-  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -destination 'platform=iOS Simulator,id=D83D9FC9-4AFB-41AC-A04B-755635DABF7D' -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -destination 'platform=iOS Simulator,id=76513A6D-E646-4CD9-B37A-E51C606999CA' -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}
