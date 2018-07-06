@@ -21,7 +21,8 @@
 @implementation BOXRepresentationInfoRequest
 
 - (instancetype)initWithFileID:(NSString *)fileID
-                representation:(BOXRepresentation *)representation {
+                representation:(BOXRepresentation *)representation
+{
     self = [super init];
     if (self != nil) {
         _fileID = fileID;
