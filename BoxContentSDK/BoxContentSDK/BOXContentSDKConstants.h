@@ -374,6 +374,7 @@ extern NSString *const BOXAPIObjectKeyLinks;
 extern NSString *const BOXAPIObjectKeyContent;
 extern NSString *const BOXAPIObjectKeyInfo;
 extern NSString *const BOXAPIObjectKeyDimensions;
+extern NSString *const BOXAPIObjectKeyClassification; 
 
 // API Metadata Object keys
 extern NSString *const BOXAPIMetadataObjectKeyID;

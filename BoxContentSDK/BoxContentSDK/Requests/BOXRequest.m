@@ -359,7 +359,8 @@
                        BOXAPIObjectKeyAllowedInviteeRoles,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections,
-                       BOXAPIObjectKeyCollectionMemberships];
+                       BOXAPIObjectKeyCollectionMemberships,
+                       BOXAPIObjectKeyClassification];
     return array;
 }
 

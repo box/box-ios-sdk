@@ -348,6 +348,7 @@ NSString *const BOXAPIObjectKeyLinks = @"links";
 NSString *const BOXAPIObjectKeyContent = @"content";
 NSString *const BOXAPIObjectKeyInfo = @"info";
 NSString *const BOXAPIObjectKeyDimensions = @"dimensions";
+NSString *const BOXAPIObjectKeyClassification = @"metadata.enterprise.securityClassification-6VMVochwUWo";
 
 // API metadata object keys
 NSString *const BOXAPIMetadataObjectKeyID = @"$id";
