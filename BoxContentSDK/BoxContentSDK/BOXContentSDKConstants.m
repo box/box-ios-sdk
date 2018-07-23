@@ -23,8 +23,8 @@ NSString *const BOXAPIResourceMetadataTemplates = @"metadata_templates";
 NSString *const BOXAPIResourceRecentItems = @"recent_items";
 
 // API Metadata Template Scope
-NSString *const BOXAPITemplateScopeEnterprise = @"enterprise";
-NSString *const BOXAPITemplateScopeGlobal = @"global";
+BOXMetadataScope const BOXAPITemplateScopeGlobal = @"global";
+BOXMetadataScope const BOXAPITemplateScopeEnterprise = @"enterprise";
 
 // API Subresources
 NSString *const BOXAPISubresourceItems = @"items";

@@ -7,6 +7,7 @@
 //
 
 #import "BOXContentClient.h"
+#import "BOXContentSDKConstants.h"
 
 @class BOXFolderRequest;
 @class BOXFolderCopyRequest;
@@ -199,11 +200,39 @@ NS_ASSUME_NONNULL_BEGIN
  *  Generate a request to retrieve the items in a folder.
  *
  *  @param folderID Folder ID.
+ *  @param metadataTemplateKey  The template key for specific metadata template
+ *  @param metadataScope    The scope of the metadata
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderItemsRequest *)folderItemsRequestWithID:(NSString *)folderID
+                                metadataTemplateKey:(NSString *)metadataTemplateKey
+                                      metadataScope:(BOXMetadataScope)metadataScope;
+
+/**
+ *  Generate a request to retrieve the items in a folder.
+ *
+ *  @param folderID Folder ID.
  *  @param range    An offset (NSRange location) and limit (NSRange limit). The maximum limit allowed is 1000.
  *
  *  @return A request that can be customized and then executed.
  */
 - (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
+                                                              inRange:(NSRange)range;
+
+/**
+ *  Generate a request to retrieve the items in a folder.
+ *
+ *  @param folderID Folder ID.
+ *  @param metadataTemplateKey  The template key for specific metadata template
+ *  @param metadataScope    The scope of the metadata
+ *  @param range    An offset (NSRange location) and limit (NSRange limit). The maximum limit allowed is 1000.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
+                                                  metadataTemplateKey:(NSString *)metadataTemplateKey
+                                                        metadataScope:(BOXMetadataScope)metadataScope
                                                               inRange:(NSRange)range;
 
 /**

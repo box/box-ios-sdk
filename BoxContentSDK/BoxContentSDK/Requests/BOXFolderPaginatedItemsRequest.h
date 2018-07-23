@@ -15,6 +15,11 @@
 //can be used as a way to link related paginated requests together
 @property (nonatomic, readwrite, strong) NSData *sharedPaginatedRequestData;
 
+//Metadata information parameters
+@property (nonatomic, readwrite, copy) NSString *metadataTemplateKey;
+@property (nonatomic, readwrite, copy) BOXMetadataScope metadataScope;
+
 - (instancetype)initWithFolderID:(NSString *)folderID inRange:(NSRange)range;
+- (instancetype)initWithFolderID:(NSString *)folderID metadataTemplateKey:(NSString *)metadataTemplateKey metadataScope:(BOXMetadataScope)metadataScope inRange:(NSRange)range;
 
 @end

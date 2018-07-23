@@ -18,6 +18,7 @@
 #import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXTrashedItemArrayRequest.h"
 #import "BOXTrashedFolderRestoreRequest.h"
+#import "BOXFolderItemsRequest+Metadata.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -144,11 +145,33 @@ NS_ASSUME_NONNULL_BEGIN
     return request;
 }
 
+- (BOXFolderItemsRequest *)folderItemsRequestWithID:(NSString *)folderID
+                                metadataTemplateKey:(NSString *)metadataTemplateKey
+                                      metadataScope:(BOXMetadataScope)metadataScope
+{
+    BOXFolderItemsRequest *request = nil;
+    request = [[BOXFolderItemsRequest alloc] initWithFolderID:folderID metadataTemplateKey:metadataTemplateKey metadataScope:metadataScope];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
                                                               inRange:(NSRange)range
 {
     BOXFolderPaginatedItemsRequest *request = nil;
     request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:folderID inRange:range];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
+                                                  metadataTemplateKey:(NSString *)metadataTemplateKey
+                                                        metadataScope:(BOXMetadataScope)metadataScope
+                                                              inRange:(NSRange)range
+{
+    BOXFolderPaginatedItemsRequest *request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:folderID metadataTemplateKey:metadataTemplateKey metadataScope:metadataScope inRange:range];
     [self prepareRequest:request];
     
     return request;

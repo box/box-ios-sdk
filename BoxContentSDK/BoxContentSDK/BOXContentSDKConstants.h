@@ -26,8 +26,9 @@ extern NSString *const BOXAPIResourceMetadataTemplates;
 extern NSString *const BOXAPIResourceRecentItems;
 
 // API Metadata Template Scope
-extern NSString *const BOXAPITemplateScopeEnterprise;
-extern NSString *const BOXAPITemplateScopeGlobal;
+typedef NSString *BOXMetadataScope NS_EXTENSIBLE_STRING_ENUM;
+extern BOXMetadataScope const BOXAPITemplateScopeGlobal;
+extern BOXMetadataScope const BOXAPITemplateScopeEnterprise;
 
 // API Subresources
 extern NSString *const BOXAPISubresourceItems;
