@@ -14,6 +14,7 @@
 #import "BOXFolderPaginatedItemsRequest_Private.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXDispatchHelper.h"
+#import "BOXFolderItemsRequest+Metadata.h"
 
 @interface BOXFolderItemsRequest ()
 
@@ -192,7 +193,14 @@
                                 refreshed:(BOXItemArrayCompletionBlock)refreshBlock
                                   inRange:(NSRange)range
 {
-    BOXFolderPaginatedItemsRequest *paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    BOXFolderPaginatedItemsRequest *paginatedRequest = nil;
+    
+    if (self.metadataTemplateKey != nil && self.metadataScope != nil) {
+        paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID metadataTemplateKey:self.metadataTemplateKey metadataScope:self.metadataScope inRange:range];
+    } else {
+        paginatedRequest = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:self.folderID inRange:range];
+    }
+    
     paginatedRequest.cacheClient = self.cacheClient;
     paginatedRequest.queueManager = self.queueManager;
     paginatedRequest.sharedLinkHeadersHelper = self.sharedLinkHeadersHelper;

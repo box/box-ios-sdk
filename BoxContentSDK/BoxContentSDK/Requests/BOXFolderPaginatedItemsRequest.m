@@ -28,6 +28,18 @@
     return self;
 }
 
+- (instancetype)initWithFolderID:(NSString *)folderID metadataTemplateKey:(NSString *)metadataTemplateKey metadataScope:(BOXMetadataScope)metadataScope inRange:(NSRange)range
+ {
+    if (self = [super init]){
+        _folderID = folderID;
+        _metadataTemplateKey = metadataTemplateKey;
+        _metadataScope = metadataScope;
+        _limit = range.length;
+        _offset = range.location;
+    }
+    return self;
+}
+
 - (BOXAPIOperation *)createOperation
 {
     NSURL *URL = [self URLWithResource:BOXAPIResourceFolders
@@ -36,10 +48,18 @@
                                  subID:nil];
 
     NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
-
+    NSString *fieldString = nil;
+    
     if (self.requestAllItemFields) {
-        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
+        fieldString = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     }
+    
+    if (self.metadataTemplateKey && self.metadataScope) {
+        NSString *metadata = [NSString stringWithFormat:@"%@.%@.%@",BOXAPISubresourceMetadata,self.metadataScope,self.metadataTemplateKey];
+        fieldString = [fieldString stringByAppendingFormat:@",%@",metadata];
+    }
+    
+    queryParameters[BOXAPIParameterKeyFields] = fieldString;
 
     if (self.limit != 0) {
         queryParameters[BOXAPIParameterKeyLimit] = [NSString stringWithFormat:@"%lu", (unsigned long)self.limit];

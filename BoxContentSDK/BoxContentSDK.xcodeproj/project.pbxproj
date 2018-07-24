@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00D123E02077BCA10026AF5A /* file_all_fields_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */; };
 		00D0E5252077EE230026BABA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E5242077EE230026BABA /* main.m */; };
 		00D0E5282077EE230026BABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E5272077EE230026BABA /* AppDelegate.m */; };
 		00D0E52B2077EE230026BABA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D0E52A2077EE230026BABA /* ViewController.m */; };
 		00D0E52E2077EE230026BABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D0E52C2077EE230026BABA /* Main.storyboard */; };
 		00D0E5302077EE230026BABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00D0E52F2077EE230026BABA /* Assets.xcassets */; };
 		00D0E5332077EE230026BABA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D0E5312077EE230026BABA /* LaunchScreen.storyboard */; };
+		00D123E02077BCA10026AF5A /* file_all_fields_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */; };
 		0E16F10D1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F10C1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m */; };
 		0E16F1161A426F8800BDDA21 /* BOXCollaborationCreateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F1151A426F8800BDDA21 /* BOXCollaborationCreateRequestTests.m */; };
 		0E16F1191A43600600BDDA21 /* BOXCollaborationRemoveRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F1181A43600600BDDA21 /* BOXCollaborationRemoveRequestTests.m */; };
@@ -80,6 +80,8 @@
 		15F9C4C11A3B9C2F006EC2EE /* BOXSharedLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9C4C01A3B9C2F006EC2EE /* BOXSharedLinkTests.m */; };
 		15F9C4CE1A3BACF3006EC2EE /* BOXFileUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9C4CD1A3BACF3006EC2EE /* BOXFileUpdateRequestTests.m */; };
 		3DE35CB11A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */; };
+		4C100EE82102788300CB1135 /* BOXFolderItemsRequest+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C100EE62102788200CB1135 /* BOXFolderItemsRequest+Metadata.m */; };
+		4C100EE92102788300CB1135 /* BOXFolderItemsRequest+Metadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C100EE72102788200CB1135 /* BOXFolderItemsRequest+Metadata.h */; };
 		590A1F7E1BE843B4008CB28D /* BOXContentCacheTestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */; };
 		591E13CA1EC28AF5008AFA5C /* BOXOAuth2Session.h in Headers */ = {isa = PBXBuildFile; fileRef = E4FAD998172CE2C50052AD11 /* BOXOAuth2Session.h */; };
 		59258FFD1A3A5BC00038B9EE /* get_items.json in Resources */ = {isa = PBXBuildFile; fileRef = 59258FFC1A3A5BC00038B9EE /* get_items.json */; };
@@ -497,7 +499,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file_all_fields_enterprise_metadata.json; sourceTree = "<group>"; };
 		00D0E5212077EE230026BABA /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00D0E5242077EE230026BABA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		00D0E5262077EE230026BABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -509,6 +510,7 @@
 		00D0E5322077EE230026BABA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00D0E5342077EE230026BABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D0E5382077EE2C0026BABA /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
+		00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file_all_fields_enterprise_metadata.json; sourceTree = "<group>"; };
 		0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKErrors.m; sourceTree = "<group>"; };
 		0E16F0E91A411ED400BDDA21 /* BOXCollaborationUpdateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCollaborationUpdateRequest.h; sourceTree = "<group>"; };
 		0E16F0EA1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCollaborationUpdateRequest.m; sourceTree = "<group>"; };
@@ -710,6 +712,8 @@
 		3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXFileVersionPromoteRequestTests.m; sourceTree = "<group>"; };
 		3DE3A1D71AB112A5002E3FDA /* BOXKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXKeychainItemWrapper.h; sourceTree = "<group>"; };
 		3DE3A1D81AB112A5002E3FDA /* BOXKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXKeychainItemWrapper.m; sourceTree = "<group>"; };
+		4C100EE62102788200CB1135 /* BOXFolderItemsRequest+Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXFolderItemsRequest+Metadata.m"; sourceTree = "<group>"; };
+		4C100EE72102788200CB1135 /* BOXFolderItemsRequest+Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXFolderItemsRequest+Metadata.h"; sourceTree = "<group>"; };
 		590A1F7C1BE843B4008CB28D /* BOXContentCacheTestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXContentCacheTestClient.h; sourceTree = "<group>"; };
 		590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentCacheTestClient.m; sourceTree = "<group>"; };
 		59258FFC1A3A5BC00038B9EE /* get_items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_items.json; sourceTree = "<group>"; };
@@ -1171,6 +1175,8 @@
 		15958DF21A14338900AEBCEE /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				4C100EE72102788200CB1135 /* BOXFolderItemsRequest+Metadata.h */,
+				4C100EE62102788200CB1135 /* BOXFolderItemsRequest+Metadata.m */,
 				15958E0F1A14338A00AEBCEE /* BOXRequest.h */,
 				E1CAD4D41A16C85C006ECAFD /* BOXRequest_Private.h */,
 				15958E101A14338A00AEBCEE /* BOXRequest.m */,
@@ -1957,6 +1963,7 @@
 				599B1A611E4BE6DD00709C27 /* BOXBookmarkCreateRequest.h in Headers */,
 				599B1A621E4BE6DD00709C27 /* BOXBookmarkDeleteRequest.h in Headers */,
 				599B1A631E4BE6DD00709C27 /* BOXBookmarkShareRequest.h in Headers */,
+				4C100EE92102788300CB1135 /* BOXFolderItemsRequest+Metadata.h in Headers */,
 				599B1A641E4BE6DD00709C27 /* BOXBookmarkUnshareRequest.h in Headers */,
 				599B1A651E4BE6DD00709C27 /* BOXBookmarkUpdateRequest.h in Headers */,
 				599B1A661E4BE6DD00709C27 /* BOXUserRequest.h in Headers */,
@@ -2484,6 +2491,7 @@
 				599B19EB1E4BE67600709C27 /* BOXAppToAppMessage.m in Sources */,
 				599B19EC1E4BE67600709C27 /* BOXContentSDKErrors.m in Sources */,
 				599B19ED1E4BE67600709C27 /* BOXContentSDKConstants.m in Sources */,
+				4C100EE82102788300CB1135 /* BOXFolderItemsRequest+Metadata.m in Sources */,
 				942BDE6E20B38E320074F0C5 /* BOXStreamingHashHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
