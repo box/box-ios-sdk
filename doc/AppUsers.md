@@ -1,7 +1,7 @@
 Developer's Edition (App Users)
 ==============
 
-Authetication + Single User Mode
+Authentication + Single User Mode
 --------------------
 When using the Developer's Edition (App Users), developers should conform to BOXAPIAccessTokenDelegate protocol in order to
 retrieve an account's access token. Additionally, BOXContentClient instances using the Developer's Edition (App Users)
