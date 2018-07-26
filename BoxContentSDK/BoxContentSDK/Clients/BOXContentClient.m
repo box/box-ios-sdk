@@ -147,7 +147,7 @@ static BOXContentClient *defaultInstance = nil;
 + (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret
 {
     if (clientID.length == 0) {
-        [NSException raise:@"Invalid client ID bitch." format:@"%@ is not a valid client ID", clientID];
+        [NSException raise:@"Invalid client ID." format:@"%@ is not a valid client ID", clientID];
         return;
     }
     if (clientSecret.length == 0) {
