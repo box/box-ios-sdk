@@ -425,6 +425,14 @@ static BOXContentClient *defaultInstance = nil;
     self.queueManager.delegate = accessTokenDelegate;
 }
 
+- (void)setAccessToken:(NSString *)accessToken
+{
+    BOXAssert([self.session isKindOfClass:[BOXAppUserSession class]], @"BOXContentClient must be App User based when calling setAccessToken:");
+    BOXAssert(self.accessTokenDelegate != nil, @"setAccessTokenDelegate must be non-nil when calling setAccessToken:");
+    
+    self.session.accessToken = accessToken;
+}
+
 # pragma mark - background tasks support
 
 + (void)oneTimeSetUpInAppToSupportBackgroundTasksWithDelegate:(id<BOXURLSessionManagerDelegate>)delegate rootCacheDir:(nonnull NSString *)rootCacheDir completion:(void (^)(NSError *error))completionBlock;
