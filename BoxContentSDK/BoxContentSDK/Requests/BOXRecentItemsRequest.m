@@ -34,10 +34,19 @@
 
     NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
 
+    NSString *fieldString = nil;
+    
     if (self.requestAllItemFields) {
-        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
+        fieldString = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     }
-
+    
+    if (self.metadataTemplateKey && self.metadataScope) {
+        NSString *metadata = [NSString stringWithFormat:@",%@.%@.%@",BOXAPISubresourceMetadata,self.metadataScope,self.metadataTemplateKey];
+        fieldString = [fieldString stringByAppendingString:metadata];
+    }
+    
+    queryParameters[BOXAPIParameterKeyFields] = fieldString;
+    
     if (self.limit >= 0) {
         queryParameters[BOXAPIParameterKeyLimit] = @(self.limit);
     }

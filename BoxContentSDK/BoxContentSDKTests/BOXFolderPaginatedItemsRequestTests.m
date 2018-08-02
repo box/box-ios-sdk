@@ -11,6 +11,7 @@
 #import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
+#import "BOXContentSDKTestsConstants.h"
 
 @interface BOXFolderPaginatedItemsRequestTests : BOXRequestTestCase
 
@@ -18,21 +19,18 @@
 
 @implementation BOXFolderPaginatedItemsRequestTests
 
-NSString *const expectedFieldString = @"type,id,sequence_id,etag,name,description,size,path_collection,created_at,modified_at,trashed_at,purged_at,content_created_at,content_modified_at,created_by,modified_by,owned_by,shared_link,parent,item_status,permissions,lock,extension,is_package,allowed_shared_link_access_levels,collections,collection_memberships,folder_upload_email,sync_state,has_collaborations,is_externally_owned,can_non_owners_invite,allowed_invitee_roles,sha1,version_number,comment_count,url";
-
 #pragma mark - URLRequest
 
 - (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
 {
     BOXFolderPaginatedItemsRequest *request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:@"123" metadataTemplateKey:@"test" metadataScope:@"scope" inRange:NSMakeRange(0,5)];
     request.requestAllItemFields = YES;
-    
-    NSString *expectedFieldStringWithMetadata = [expectedFieldString stringByAppendingString:@",metadata.scope.test"];
+
     BOXAPIOperation *op = [request createOperation];
     NSDictionary *queryDict = op.queryStringParameters;
     NSString *fieldString = [queryDict objectForKey:BOXAPIParameterKeyFields];
     
-    XCTAssertTrue([fieldString isEqualToString:expectedFieldStringWithMetadata]);
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithMetadata]);
     
 }
 
@@ -44,7 +42,7 @@ NSString *const expectedFieldString = @"type,id,sequence_id,etag,name,descriptio
     NSDictionary *queryDict = op.queryStringParameters;
     NSString *fieldString = [queryDict objectForKey:BOXAPIParameterKeyFields];
     
-    XCTAssertTrue([fieldString isEqualToString:expectedFieldString]);
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithoutMetadata]);
     
 }
 

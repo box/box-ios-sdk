@@ -7,6 +7,7 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 #import "BOXSearchRequest.h"
 #import "NSURL+BOXURLHelper.h"
 #import "BOXContentSDKConstants.h"
@@ -14,6 +15,7 @@
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
 #import "BOXContentClient.h"
+#import "BOXContentSDKTestsConstants.h"
 
 @interface BOXRequest ()
 
@@ -130,6 +132,20 @@
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
+{
+    BOXSearchRequest *request = [[BOXSearchRequest alloc] initWithSearchQuery:@"some_query" inRange:NSMakeRange(0, 0)];
+    request.requestAllItemFields = YES;
+    request.metadataTemplateKey = @"test";
+    request.metadataScope = @"scope";
+    
+    BOXAPIOperation *op = [request createOperation];
+    NSDictionary *queryDict = op.queryStringParameters;
+    NSString *fieldString = queryDict[BOXAPIParameterKeyFields];
+    
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithMetadata]);
 }
 
 @end
