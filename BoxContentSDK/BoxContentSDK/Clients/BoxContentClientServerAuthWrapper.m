@@ -13,6 +13,9 @@
                     forUserId:(NSString *)userId
           withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock
 {
+    BOXAssert(userId != nil, @"forUserId must be non-nil");
+    BOXAssert(fetchTokenBlock != nil, @"withFetchTokenBlock must be non-nil");
+    
     if (self = [super init]) {
         _userId = userId;
         _fetchTokenBlock = fetchTokenBlock;
