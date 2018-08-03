@@ -15,6 +15,7 @@
 #import "BOXFolder.h"
 #import "BOXBookmark.h"
 #import "BOXContentCacheTestClient.h"
+#import "BOXContentSDKTestsConstants.h"
 
 @interface BOXCollectionItemsRequestTests : BOXRequestTestCase
 
@@ -22,6 +23,19 @@
 
 @implementation BOXCollectionItemsRequestTests
 
+#pragma mark - URLRequest
+
+- (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
+{
+    BOXCollectionItemsRequest *request = [[BOXCollectionItemsRequest alloc] initWithCollectionID:@"some_collection_id" inRange:NSMakeRange(0, 0) metadataTemplateKey:@"test" metadataScope:@"scope"];
+    request.requestAllItemFields = YES;
+
+    BOXAPIOperation *op = [request createOperation];
+    NSDictionary *queryDict = op.queryStringParameters;
+    NSString *fieldString = queryDict[BOXAPIParameterKeyFields];
+
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithMetadata]);
+}
 
 - (void)test_request_url_is_correct_without_range
 {

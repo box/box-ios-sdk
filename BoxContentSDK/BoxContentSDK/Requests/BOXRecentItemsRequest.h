@@ -17,6 +17,12 @@
 @property (nonatomic, readwrite, assign) BOOL requestAllItemFields;
 
 /**
+ BOXRecentItemsRequest will fetch the specified metadata for a BOXItem. 
+ */
+@property (nonatomic,readwrite, copy) NSString *metadataTemplateKey;
+@property (nonatomic,readwrite, copy) NSString *metadataScope;
+
+/**
  The list of fields to exclude from the requested BOXItem. This works in conjunction with
  requestAllItemFields to exclude fields from the list of all item fields.
  

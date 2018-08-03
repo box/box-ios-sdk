@@ -7,11 +7,13 @@
 //
 
 #import "BOXRequestTestCase.h"
+#import "BOXRequest_Private.h"
 #import "BOXContentClient.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXRecentItem.h"
 #import "BOXRecentItemsRequest.h"
 #import "NSURL+BOXURLHelper.h"
+#import "BOXContentSDKTestsConstants.h"
 
 @interface BOXRecentItemsRequestTests : BOXRequestTestCase
 
@@ -93,6 +95,21 @@
     }];
 
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
+- (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
+{
+    BOXRecentItemsRequest *request = [[BOXRecentItemsRequest alloc] init];
+    request.requestAllItemFields = YES;
+    request.metadataTemplateKey = @"test";
+    request.metadataScope = @"scope";
+    
+    BOXAPIOperation *op = [request createOperation];
+    NSDictionary *queryDict = op.queryStringParameters;
+    NSString *fieldString = queryDict[BOXAPIParameterKeyFields];
+    
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithMetadata]);
+    
 }
 
 @end

@@ -19,4 +19,14 @@
     return request;
 }
 
+- (BOXRecentItemsRequest *)recentItemsRequestForCurrentUserWithMetadata:(NSString *)metadataTemplateKey metadataScope:(NSString *)metadataScope
+{
+    BOXRecentItemsRequest *request = [[BOXRecentItemsRequest alloc] init];
+    request.metadataScope = metadataScope;
+    request.metadataTemplateKey = metadataTemplateKey;
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 @end

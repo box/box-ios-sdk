@@ -38,6 +38,14 @@
     return request;
 }
 
+- (BOXCollectionItemsRequest *)collectionItemsRequestWithID:(NSString *)collectionID inRange:(NSRange)range metadataTemplateKey:(NSString *)metadataTemplateKey metdataScope:(NSString *)metadataScope 
+{
+    BOXCollectionItemsRequest *request = [[BOXCollectionItemsRequest alloc] initWithCollectionID:collectionID inRange:range metadataTemplateKey:metadataTemplateKey metadataScope:metadataScope];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXItemSetCollectionsRequest *)collectionsSetRequestForFileWithID:(NSString *)fileID collectionIDs:(NSArray *)collectionIDs
 {
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:fileID collectionIDs:collectionIDs];

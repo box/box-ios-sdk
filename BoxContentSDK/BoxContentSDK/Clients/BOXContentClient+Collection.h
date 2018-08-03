@@ -39,6 +39,20 @@
  */
 - (BOXCollectionItemsRequest *)collectionItemsRequestWithID:(NSString *)collectionID
                                                     inRange:(NSRange)range;
+/**
+ *  Generate a request to retrieve a page of items in a collection with the specified metadata information for the items in the collection.
+ *
+ *  @param collectionID Collection ID.
+ *  @param range        An offset (NSRange location) and limit (NSRange limit). The maximum limit allowed is 1000.
+ *  @param metadataTemplateKey  The template key for specific metadata template
+ *  @param metadataScope    The scope of the metadata
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXCollectionItemsRequest *)collectionItemsRequestWithID:(NSString *)collectionID
+                                                    inRange:(NSRange)range
+                                        metadataTemplateKey:(NSString *)metadataTemplateKey
+                                               metdataScope:(NSString *)metadataScope;
 
 /**
  *  Generate a request to set the collections that a file belongs to.

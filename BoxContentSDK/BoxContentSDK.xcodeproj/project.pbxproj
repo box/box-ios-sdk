@@ -714,6 +714,7 @@
 		3DE3A1D81AB112A5002E3FDA /* BOXKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXKeychainItemWrapper.m; sourceTree = "<group>"; };
 		4C100EE62102788200CB1135 /* BOXFolderItemsRequest+Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BOXFolderItemsRequest+Metadata.m"; sourceTree = "<group>"; };
 		4C100EE72102788200CB1135 /* BOXFolderItemsRequest+Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BOXFolderItemsRequest+Metadata.h"; sourceTree = "<group>"; };
+		4CB60FC82113E02900B35186 /* BOXContentSDKTestsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXContentSDKTestsConstants.h; sourceTree = "<group>"; };
 		590A1F7C1BE843B4008CB28D /* BOXContentCacheTestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXContentCacheTestClient.h; sourceTree = "<group>"; };
 		590A1F7D1BE843B4008CB28D /* BOXContentCacheTestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentCacheTestClient.m; sourceTree = "<group>"; };
 		59258FFC1A3A5BC00038B9EE /* get_items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_items.json; sourceTree = "<group>"; };
@@ -1074,6 +1075,7 @@
 			isa = PBXGroup;
 			children = (
 				156B01A01A535FEA00F01FF1 /* BOXCannedResponse.h */,
+				4CB60FC82113E02900B35186 /* BOXContentSDKTestsConstants.h */,
 				156B01A11A535FEA00F01FF1 /* BOXCannedResponse.m */,
 				15F5EE781A23FFC400FBBE1D /* BOXCannedURLProtocol.h */,
 				15F5EE791A23FFC400FBBE1D /* BOXCannedURLProtocol.m */,
