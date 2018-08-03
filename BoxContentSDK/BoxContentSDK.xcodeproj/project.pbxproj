@@ -408,6 +408,7 @@
 		70CC169F1ACCA8AD00C3CC80 /* get_items_0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 70CC169E1ACCA8AD00C3CC80 /* get_items_0_2.json */; };
 		70CC16A11ACCA8DD00C3CC80 /* get_items_3_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 70CC16A01ACCA8DD00C3CC80 /* get_items_3_5.json */; };
 		7A661D03211502C700813E75 /* BoxContentClientServerAuthWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A661D02211502C700813E75 /* BoxContentClientServerAuthWrapper.m */; };
+		7A88CB9C21150EFF0013D2C1 /* BoxContentClientServerAuthWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A661D012115025000813E75 /* BoxContentClientServerAuthWrapper.h */; };
 		864963C81B3099580084822D /* BOXMetadataRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 864963C71B3099580084822D /* BOXMetadataRequestTests.m */; };
 		8676E0E41B2FA78800AC2677 /* enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E31B2FA78800AC2677 /* enterprise_metadata.json */; };
 		8676E0E61B2FA7BE00AC2677 /* updated_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 8676E0E51B2FA7BE00AC2677 /* updated_enterprise_metadata.json */; };
@@ -1957,6 +1958,7 @@
 				599B1A551E4BE6DD00709C27 /* BOXFolderCollaborationsRequest.h in Headers */,
 				599B1A561E4BE6DD00709C27 /* BOXItemArrayRequest.h in Headers */,
 				599B1A571E4BE6DD00709C27 /* BOXSharedItemRequest.h in Headers */,
+				7A88CB9C21150EFF0013D2C1 /* BoxContentClientServerAuthWrapper.h in Headers */,
 				599B1A581E4BE6DD00709C27 /* BOXFolderPaginatedItemsRequest.h in Headers */,
 				599B1A591E4BE6DD00709C27 /* BOXFolderPaginatedItemsRequest_Private.h in Headers */,
 				94D51FC2207D9347008341A7 /* BOXRepresentationInfoRequest.h in Headers */,
