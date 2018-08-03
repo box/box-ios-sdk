@@ -74,8 +74,6 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
-- (void)setAccessToken:(NSString *)accessToken;
-
 /**
  *  The list of Box users that have established a session through the SDK.
  *
