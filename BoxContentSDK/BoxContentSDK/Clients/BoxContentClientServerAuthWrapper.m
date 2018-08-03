@@ -9,9 +9,9 @@
 
 @implementation BoxContentClientServerAuthWrapper
 
-- (instancetype)initWithInitialToken:(NSString *)token
-                           forUserId:(NSString *)userId
-                 withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock
+- (instancetype)initWithToken:(NSString *)token
+                    forUserId:(NSString *)userId
+          withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock
 {
     if (self = [super init]) {
         _userId = userId;

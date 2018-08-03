@@ -7,8 +7,8 @@
 @property (nonatomic, readonly, strong) NSString *userId;
 
 
-- (instancetype)initWithInitialToken:(NSString*)token
-                           forUserId:(NSString*)userId
-                 withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock;
+- (instancetype)initWithToken:(NSString*)token
+                    forUserId:(NSString*)userId
+          withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock;
 
 @end
