@@ -5,10 +5,12 @@
 
 @property (nonatomic, readonly, strong) BOXContentClient *boxClient;
 @property (nonatomic, readonly, strong) NSString *userId;
+@property (nonatomic, readonly, strong) NSDictionary *userInfo;
 
 
 - (instancetype)initWithToken:(NSString*)token
-                    forUserId:(NSString*)userId
-          withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock;
+                       userId:(NSString*)userId
+                     userInfo:(nullable NSDictionary *)userInfo
+              fetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId, NSDictionary *userInfo))fetchTokenBlock;
 
 @end
