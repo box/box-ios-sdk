@@ -1,6 +1,8 @@
 #import "BOXContentClient.h"
 #import "BOXAPIAccessTokenDelegate.h"
 
+typedef void (^ServerAuthFetchTokenBlock)(NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *));
+
 @interface BoxContentClientServerAuthWrapper : NSObject <BOXAPIAccessTokenDelegate>
 
 @property (nonatomic, readonly, strong) BOXContentClient *boxClient;
@@ -11,6 +13,6 @@
 - (instancetype)initWithToken:(NSString*)token
                        userId:(NSString*)userId
                      userInfo:(nullable NSDictionary *)userInfo
-              fetchTokenBlock:(void (^) (NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *)))fetchTokenBlock;
+              fetchTokenBlock:(ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 @end
