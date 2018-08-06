@@ -11,6 +11,6 @@
 - (instancetype)initWithToken:(NSString*)token
                        userId:(NSString*)userId
                      userInfo:(nullable NSDictionary *)userInfo
-              fetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId, NSDictionary *userInfo))fetchTokenBlock;
+              fetchTokenBlock:(void (^) (NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *)))fetchTokenBlock;
 
 @end
