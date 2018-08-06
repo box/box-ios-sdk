@@ -3,7 +3,7 @@
 
 @interface BoxContentClientServerAuthWrapper ()
 
-@property (nonatomic, readonly, strong) void (^fetchTokenBlock) (NSString *userId, NSDictionary *userInfo, void (^completion)(NSString *, NSDate *, NSError *));
+@property (nonatomic, readonly, strong) ServerAuthFetchTokenBlock fetchTokenBlock;
 
 @end
 
@@ -12,7 +12,7 @@
 - (instancetype)initWithToken:(NSString *)token
                        userId:(NSString *)userId
                      userInfo:(nullable NSDictionary *)userInfo
-              fetchTokenBlock:(void (^) (NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *)))fetchTokenBlock
+              fetchTokenBlock:(ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXAssert(userId != nil, @"userId must be non-nil");
     BOXAssert(fetchTokenBlock != nil, @"fetchTokenBlock must be non-nil");
