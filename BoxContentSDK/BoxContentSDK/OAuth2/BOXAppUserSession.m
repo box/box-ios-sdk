@@ -24,25 +24,9 @@
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;
         
-        BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        [weakSelf prepareRequest:userRequest];
-        
-        [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
-            if (user && !error) {
-                weakSelf.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];
-                [weakSelf storeCredentialsToKeychain];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
-                
-                if (block) {
-                    block(weakSelf, nil);
-                }
-            } else {
-                if (block) {
-                    block(self, error);
-                }
-            }
-        }];
+        if (block) {
+            block(weakSelf, nil);
+        }
     };
     
     operation.failure = ^(NSError *error) {
