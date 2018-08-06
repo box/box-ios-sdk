@@ -3,21 +3,23 @@
 
 @interface BoxContentClientServerAuthWrapper ()
 
-@property (nonatomic, readonly, strong) void (^fetchTokenBlock) (void (^completion)(NSString *, NSDate *, NSError *), NSString *userId);
+@property (nonatomic, readonly, strong) void (^fetchTokenBlock) (void (^completion)(NSString *, NSDate *, NSError *), NSString *userId, NSDictionary *userInfo);
 
 @end
 
 @implementation BoxContentClientServerAuthWrapper
 
 - (instancetype)initWithToken:(NSString *)token
-                    forUserId:(NSString *)userId
-          withFetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId))fetchTokenBlock
+                       userId:(NSString *)userId
+                     userInfo:(nullable NSDictionary *)userInfo
+              fetchTokenBlock:(void (^) (void (^)(NSString *, NSDate *, NSError *), NSString *userId, NSDictionary *userInfo))fetchTokenBlock
 {
     BOXAssert(userId != nil, @"forUserId must be non-nil");
     BOXAssert(fetchTokenBlock != nil, @"withFetchTokenBlock must be non-nil");
     
     if (self = [super init]) {
         _userId = userId;
+        _userInfo = userInfo;
         _fetchTokenBlock = fetchTokenBlock;
         
         _boxClient = [BOXContentClient clientForNewSession];
@@ -32,7 +34,7 @@
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-    _fetchTokenBlock(completion, _userId);
+    _fetchTokenBlock(completion, _userId, _userInfo);
 }
 
 @end
