@@ -14,8 +14,6 @@
                      userInfo:(nullable NSDictionary *)userInfo
               fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
-    BOXAssert(fetchTokenBlock != nil, @"fetchTokenBlock must be non-nil");
-    
     if (self = [super init]) {
         _userId = userId;
         _userInfo = userInfo;
