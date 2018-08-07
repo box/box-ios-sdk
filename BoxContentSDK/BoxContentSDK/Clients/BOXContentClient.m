@@ -46,6 +46,8 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
+@property (nonnull, nonatomic, readwrite, strong) ServerAuthFetchTokenBlock fetchTokenBlock;
+
 + (void)resetInstancesForTesting;
 
 @end
@@ -142,6 +144,20 @@ static BOXContentClient *defaultInstance = nil;
 + (BOXContentClient *)clientForNewSession
 {
     return [[self alloc] init];
+}
+
++ (BOXContentClient *)clientWithToken:(nullable NSString *)token
+                               userId:(nullable NSString*)userId
+                             userInfo:(nullable NSDictionary *)userInfo
+                      fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
+{
+    BOXContentClient* client = [BOXContentClient clientForNewSession];
+    client.userId = userId;
+    client.userInfo = userInfo;
+    client.fetchTokenBlock = fetchTokenBlock;
+    [client setAccessTokenDelegate:client];
+    [client session].accessToken = token;
+    return client;
 }
 
 + (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret
@@ -293,6 +309,11 @@ static BOXContentClient *defaultInstance = nil;
     {
         [[[self class] SDKClients] removeObjectForKey:userIDRevoked];
     }
+}
+
+- (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
+{
+    _fetchTokenBlock(_userId, _userInfo, completion);
 }
 
 - (void)dealloc
