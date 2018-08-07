@@ -3,7 +3,7 @@
 
 @interface BoxContentClientServerAuthWrapper ()
 
-@property (nonatomic, readonly, strong) ServerAuthFetchTokenBlock fetchTokenBlock;
+@property (nonnull, nonatomic, readonly, strong) ServerAuthFetchTokenBlock fetchTokenBlock;
 
 @end
 
@@ -24,8 +24,7 @@
         _boxClient = [BOXContentClient clientForNewSession];
         [_boxClient setAccessTokenDelegate:self];
         
-        BOXAbstractSession *session = [_boxClient session];
-        session.accessToken = token;
+        [_boxClient session].accessToken = token;
     }
     
     return self;
