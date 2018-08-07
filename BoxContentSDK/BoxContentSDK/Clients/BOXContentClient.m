@@ -313,7 +313,9 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-    _fetchTokenBlock(_userId, _userInfo, completion);
+    if(_fetchTokenBlock){
+        _fetchTokenBlock(_userId, _userInfo, completion);
+    }
 }
 
 - (void)dealloc
