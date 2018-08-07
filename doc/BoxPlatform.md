@@ -5,11 +5,11 @@ Setup
 --------------------
 When creating an app that uses App Users and/or downscoped tokens, you do not use the OAuth2 capabilities of the SDK, and all token creation must occur on a remote server that has access to the private keys for your Box application.  You should never include the private key in your iOS app distribution.
 
-In order to support this application architecture, there is a wrapper class included in the SDK to handle the mechanics of retrieving tokens for a user from the remote server. It includes the ability to specify an initial token that you may have already retrieved, and allows you to specify a code block that will be called by the SDK when it detects an expired token.  This code block is where you call your secure server with whatever information you need in order to retrieve a new token for the user.
+In order to support this application architecture, there is class method on BOXContentClient for creating a client with the capability of retrieving tokens from a remote server. It includes the ability to specify an initial token that you may have already retrieved, and allows you to specify a code block that will be called by the SDK when it detects an expired token.  This code block is where you call your secure server with whatever information you need in order to retrieve a new token for the user.
 
 <b>PLEASE NOTE:</b> It is up to you as the app developer to ensure that the process of retrieving tokens is secured.  Typically this is done by passing a JSON Web Token in the Authorization header of the request to your remote server that is signed by your authentication system.  That way you can verify that the incoming request is indeed originating from an authorized app and device.
 
-Below is an example of configuring the <b>BoxContentClientServerAuthWrapper</b> instance to work with a specific App User Id, including example code of how to retrieve a new token when the SDK detects a token expiration. Note that you are not require to specify an initial token as the SDK will simply invoke your fetchTokenBlock. However, in some cases you may already have a token (for example, a downscoped token) that you wish to initialize the wrapper with.  The userInfo parameter is a dictionary for specifying arbitrary information you may need in your fetchTokenBlock code.
+Below is an example of using a BOXContentClient instance to work with a specific App User Id, including example code of how to retrieve a new token when the SDK detects a token expiration. Note that you are not require to specify an initial token as the SDK will simply invoke your fetchTokenBlock. However, in some cases you may already have a token (for example, a downscoped token) that you wish to initialize the wrapper with.  The userInfo parameter is a dictionary for specifying arbitrary information you may need in your fetchTokenBlock code.
 
 ```objectivec
 #import "AppDelegate.h"
@@ -18,23 +18,21 @@ Below is an example of configuring the <b>BoxContentClientServerAuthWrapper</b> 
 
 @interface AppDelegate ()
 
-@property (nonatomic, readonly, strong) BoxContentClientServerAuthWrapper *boxClientWrapper;
+@property (nonatomic, readonly, strong) BOXContentClient *boxClient;
 
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    _boxClientWrapper = [[BoxContentClientServerAuthWrapper alloc] initWithToken:@"INITIAL_TOKEN_FROM_SERVER"
-                                                                          userId:@"APP_USER_ID"
-                                                                        userInfo:nil
-                                                                 fetchTokenBlock:myFetchTokenBlock];
-    
-    //Example of making an API call; Note that the actual BOXContentClient is a property of the wrapper
-    BOXContentClient *client = _boxClientWrapper.boxClient;
 
-    BOXUserRequest *request = [client currentUserRequest];
+    _boxClient = [BOXContentClient clientWithToken:@"INITIAL_TOKEN_FROM_SERVER"
+                                            userId:@"APP_USER_ID"
+                                          userInfo:nil
+                                   fetchTokenBlock:fetchTokenBlock];                                                            
+    
+    //Example of making an API call
+    BOXUserRequest *request = [_boxClient currentUserRequest];
     [request performRequestWithCompletion:^(BOXUser *user, NSError *error) {
         if (error){
             NSLog(@"Error getting user info");

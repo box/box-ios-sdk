@@ -29,7 +29,6 @@
 #import "BOXContentClient+Bookmark.h"
 #import "BOXContentClient+Metadata.h"
 #import "BOXContentClient+RecentItems.h"
-#import "BoxContentClientServerAuthWrapper.h"
 
 // Session
 #import "BOXAuthorizationViewController.h"
