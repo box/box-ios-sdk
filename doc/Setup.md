@@ -9,7 +9,7 @@ For apps that expect a user to already have a Box account, select 'Partner Integ
 
 Configure Your Partner Integration App
 --------------------------
-Follow the instructions for creating a [Partner Integration](https://developer.box.com/docs/partner-integrations).
+Read the documentation for working with [Partner Integrations](https://developer.box.com/docs/partner-integrations).
 
 Then, in your App configuration page, find your 'client_id' and 'client_secret' under 'OAuth2 Parameters'. These values are needed for initializing the SDK in your app.
 
@@ -18,6 +18,6 @@ Make sure you replace the 'YOUR_CLIENT_ID_HERE' string with your client ID value
 
 Configure Your Custom App (Box Platform)
 --------------------------
-Follow the instructions for creating a [Custom Application](https://developer.box.com/docs/custom-applications).
+Read the documentation for working with [Custom Applications](https://developer.box.com/docs/custom-applications).
 
 Then, see the documentation for configuring your iOS app to work with [Box Platform](https://github.com/box/box-ios-sdk/tree/master/doc).
