@@ -4,6 +4,7 @@
 //
 //  Copyright (c) 2014 Box. All rights reserved.
 //
+#import "BOXAPIAccessTokenDelegate.h"
 
 @class BOXAbstractSession;
 @class BOXUser;
@@ -16,9 +17,11 @@
 @protocol BOXContentCacheClientProtocol;
 @protocol BOXURLSessionManagerDelegate;
 
+typedef void (^ServerAuthFetchTokenBlock)(NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *));
+
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
-@interface BOXContentClient : NSObject
+@interface BOXContentClient : NSObject <BOXAPIAccessTokenDelegate>
 
 /**
  *  Allows the SDK to associate shared links with Box Items.
@@ -74,6 +77,10 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
+@property (nonatomic, nullable, readwrite, strong) NSString *userId;
+
+@property (nonatomic, nullable, readwrite, strong) NSDictionary *userInfo;
+
 /**
  *  The list of Box users that have established a session through the SDK.
  *
@@ -117,6 +124,11 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *  @return An unauthenticated BOXContentClient
  */
 + (BOXContentClient *)clientForNewSession;
+
++ (BOXContentClient *)clientWithToken:(nullable NSString *)token
+                               userId:(nullable NSString*)userId
+                             userInfo:(nullable NSDictionary *)userInfo
+                      fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 /**
  * Client ID:
