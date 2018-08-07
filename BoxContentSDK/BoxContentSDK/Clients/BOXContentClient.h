@@ -77,8 +77,16 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
+/**
+ * When using a server-based auth client (App Users or downscoped tokens) this property store the box user id of the associated user.
+ * Passed into your fetchTokenBlock delegate method when a new token is required.
+ */
 @property (nonatomic, nullable, readwrite, strong) NSString *userId;
 
+/**
+ * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
+ * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
+ */
 @property (nonatomic, nullable, readwrite, strong) NSDictionary *userInfo;
 
 /**
@@ -125,6 +133,16 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 + (BOXContentClient *)clientForNewSession;
 
+/**
+ * Get a BOXContentClient that supports server-based auth (App Users or downscoped tokens).
+ *
+ * @param token An optional token that you have already retrieved from your remote server; if nil your fetchTokenBlock will be invoked to retrieve a new token
+ * @param userId An optional Box App User Id
+ * @param userInfo An optional dictionary of relevant information you may need when your fetchTokenBlock is invoked
+ * @param fetchTokenBlock A required code block that will be invoked whenever an expired token is detected.  This is where you will call your secure remote server to generate a new token
+ *
+ * @return BOXContentClient that is configured for server-based auth
+ */
 + (BOXContentClient *)clientWithToken:(nullable NSString *)token
                                userId:(nullable NSString*)userId
                              userInfo:(nullable NSDictionary *)userInfo
