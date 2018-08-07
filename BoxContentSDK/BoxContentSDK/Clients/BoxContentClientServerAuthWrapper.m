@@ -9,12 +9,11 @@
 
 @implementation BoxContentClientServerAuthWrapper
 
-- (instancetype)initWithToken:(NSString *)token
-                       userId:(NSString *)userId
+- (instancetype)initWithToken:(nullable NSString *)token
+                       userId:(nullable NSString *)userId
                      userInfo:(nullable NSDictionary *)userInfo
-              fetchTokenBlock:(ServerAuthFetchTokenBlock)fetchTokenBlock
+              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
-    BOXAssert(userId != nil, @"userId must be non-nil");
     BOXAssert(fetchTokenBlock != nil, @"fetchTokenBlock must be non-nil");
     
     if (self = [super init]) {

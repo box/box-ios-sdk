@@ -5,14 +5,14 @@ typedef void (^ServerAuthFetchTokenBlock)(NSString *userId, NSDictionary *userIn
 
 @interface BoxContentClientServerAuthWrapper : NSObject <BOXAPIAccessTokenDelegate>
 
-@property (nonatomic, readonly, strong) BOXContentClient *boxClient;
-@property (nonatomic, readonly, strong) NSString *userId;
-@property (nonatomic, readonly, strong) NSDictionary *userInfo;
+@property (nonatomic, nonnull, readonly, strong) BOXContentClient *boxClient;
+@property (nonatomic, nullable, readonly, strong) NSString *userId;
+@property (nonatomic, nullable, readwrite, strong) NSDictionary *userInfo;
 
 
-- (instancetype)initWithToken:(NSString*)token
-                       userId:(NSString*)userId
+- (instancetype)initWithToken:(nullable NSString*)token
+                       userId:(nullable NSString*)userId
                      userInfo:(nullable NSDictionary *)userInfo
-              fetchTokenBlock:(ServerAuthFetchTokenBlock)fetchTokenBlock;
+              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 @end
