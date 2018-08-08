@@ -46,7 +46,9 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
-@property (nonnull, nonatomic, readwrite, strong) ServerAuthFetchTokenBlock fetchTokenBlock;
+@property (nonnull, nonatomic, readwrite, copy) ServerAuthFetchTokenBlock fetchTokenBlock;
+
+@property (nullable, nonatomic, readwrite, copy) NSString *userId;
 
 + (void)resetInstancesForTesting;
 

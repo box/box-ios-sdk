@@ -78,12 +78,6 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
 /**
- * When using a server-based auth client (App Users or downscoped tokens) this property store the box user id of the associated user.
- * Passed into your fetchTokenBlock delegate method when a new token is required.
- */
-@property (nonatomic, nullable, readwrite, strong) NSString *userId;
-
-/**
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
  * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
  */
