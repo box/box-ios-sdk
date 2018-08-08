@@ -315,8 +315,13 @@ static BOXContentClient *defaultInstance = nil;
 
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
-    if(_fetchTokenBlock){
+    if(_fetchTokenBlock)
+    {
         _fetchTokenBlock(_userId, _userInfo, completion);
+    }
+    else
+    {
+        [NSException raise:@"No fetchTokenBlock specified." format:@"You must specify a fetchTokenBlock when using a BOXContentClient configured for server-based auth"];
     }
 }
 
