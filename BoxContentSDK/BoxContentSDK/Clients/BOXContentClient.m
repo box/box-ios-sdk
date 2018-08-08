@@ -153,7 +153,7 @@ static BOXContentClient *defaultInstance = nil;
                              userInfo:(nullable NSDictionary *)userInfo
                       fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
-    BOXContentClient* client = [BOXContentClient clientForNewSession];
+    BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:client];
     [client session].accessToken = token;
     client.userId = userId;
