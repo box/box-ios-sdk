@@ -17,7 +17,7 @@
 @protocol BOXContentCacheClientProtocol;
 @protocol BOXURLSessionManagerDelegate;
 
-typedef void (^ServerAuthFetchTokenBlock)(NSString *userId, NSDictionary *userInfo, void (^)(NSString *, NSDate *, NSError *));
+typedef void (^ServerAuthFetchTokenBlock)(NSString *, NSDictionary *, void (^)(NSString *, NSDate *, NSError *));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
@@ -81,7 +81,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
  * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
  */
-@property (nonatomic, nullable, readwrite, strong) NSDictionary *userInfo;
+@property (nonatomic, nullable, readwrite, strong) NSDictionary *fetchTokenBlockInfo;
 
 /**
  *  The list of Box users that have established a session through the SDK.
@@ -139,7 +139,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 + (BOXContentClient *)clientWithToken:(nullable NSString *)token
                                userId:(nullable NSString*)userId
-                             userInfo:(nullable NSDictionary *)userInfo
+                             fetchTokenBlockInfo:(nullable NSDictionary *)userInfo
                       fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 /**
