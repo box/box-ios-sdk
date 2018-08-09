@@ -150,14 +150,14 @@ static BOXContentClient *defaultInstance = nil;
 
 + (BOXContentClient *)clientWithToken:(nullable NSString *)token
                                userId:(nullable NSString*)userId
-                             userInfo:(nullable NSDictionary *)userInfo
+                  fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                       fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:client];
     [client session].accessToken = token;
     client.userId = userId;
-    client.userInfo = userInfo;
+    client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
     return client;
 }
@@ -317,7 +317,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     if(_fetchTokenBlock)
     {
-        _fetchTokenBlock(_userId, _userInfo, completion);
+        _fetchTokenBlock(_userId, _fetchTokenBlockInfo, completion);
     }
     else
     {
