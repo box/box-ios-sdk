@@ -149,7 +149,7 @@ static BOXContentClient *defaultInstance = nil;
     return [[self alloc] init];
 }
 
-+ (BOXContentClient *)clientForServerAuthUniqueId:(nullable NSString*)uniqueId
++ (BOXContentClient *)clientForServerAuthUniqueId:(nonnull NSString*)uniqueId
                                      initialToken:(nullable NSString *)token
                               fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                                   fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
