@@ -24,6 +24,8 @@
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
+        
         if (block) {
             block(weakSelf, nil);
         }
