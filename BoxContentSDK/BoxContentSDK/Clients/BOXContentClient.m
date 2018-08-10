@@ -14,6 +14,7 @@
 #import "BOXAppUserSession.h"
 #import "BOXParallelAPIQueueManager.h"
 #import "BOXUser.h"
+#import "BOXUser_Private.h"
 #import "BOXRequestWithSharedLinkHeader.h"
 #import "BOXSharedItemRequest.h"
 #import "BOXSharedLinkHeadersHelper.h"
@@ -48,7 +49,7 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 
 @property (nonnull, nonatomic, readwrite, copy) ServerAuthFetchTokenBlock fetchTokenBlock;
 
-@property (nullable, nonatomic, readwrite, copy) NSString *userId;
+@property (nullable, nonatomic, readwrite, copy) NSString *serverAuthUniqueIdentifier;
 
 + (void)resetInstancesForTesting;
 
@@ -148,15 +149,15 @@ static BOXContentClient *defaultInstance = nil;
     return [[self alloc] init];
 }
 
-+ (BOXContentClient *)clientWithToken:(nullable NSString *)token
-                               userId:(nullable NSString*)userId
-                  fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
-                      fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
++ (BOXContentClient *)clientForServerAuthUniqueId:(nullable NSString*)uniqueId
+                                     initialToken:(nullable NSString *)token
+                              fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
+                                  fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:client];
     [client session].accessToken = token;
-    client.userId = userId;
+    client.serverAuthUniqueIdentifier = uniqueId;
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
     return client;
@@ -317,7 +318,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     if(_fetchTokenBlock)
     {
-        _fetchTokenBlock(_userId, _fetchTokenBlockInfo, completion);
+        _fetchTokenBlock(_serverAuthUniqueIdentifier, _fetchTokenBlockInfo, completion);
     }
     else
     {
@@ -337,7 +338,13 @@ static BOXContentClient *defaultInstance = nil;
 
 - (BOXUserMini *)user
 {
-    return self.session.user;
+    if(self.session.user){
+        return self.session.user;
+    }else if(_serverAuthUniqueIdentifier){
+        return [[BOXUserMini alloc] initWithUserID:_serverAuthUniqueIdentifier name:nil login:nil];
+    }else{
+        return nil;
+    }
 }
 
 - (BOOL)appToAppBoxAuthenticationEnabled
