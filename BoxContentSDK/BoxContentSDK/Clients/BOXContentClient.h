@@ -130,7 +130,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 /**
  * Get a BOXContentClient that supports server-based auth (App Users or downscoped tokens).
  *
- * @param uniqueId An optional Box App User Id
+ * @param uniqueId A required unique Id that will be passed to the fetchTokenBlock when a new token is required from the remote server
  * @param token An optional token that you have already retrieved from your remote server; if nil your fetchTokenBlock will be invoked to retrieve a new token
  * @param fetchTokenBlockInfo An optional dictionary of relevant information you may need when your fetchTokenBlock is invoked
  * @param fetchTokenBlock A required code block that will be invoked whenever an expired token is detected.  This is where you will call your secure remote server to generate a new token
