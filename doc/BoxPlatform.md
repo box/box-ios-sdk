@@ -5,11 +5,11 @@ Setup
 --------------------
 When creating an app that uses App Users and/or downscoped tokens, you do not use the OAuth2 capabilities of the SDK, and all token creation must occur on a remote server that has access to the private keys for your Box application.  You should never include the private key in your iOS app distribution.
 
-In order to support this application architecture, there is class method on BOXContentClient for creating a client with the capability of retrieving tokens from a remote server. It includes the ability to specify an initial token that you may have already retrieved, and requires you to specify a code block that will be called by the SDK when it detects an expired token.  This code block is where you call your secure server with whatever information you need in order to retrieve a new token for the user.
+In order to support this application architecture, there is class method on BOXContentClient for creating a client with the capability of retrieving tokens from a remote server. It requires you to specify a uniqueId for the user, and includes the ability to specify an optional initial token that you may have already retrieved and an optional Dictionary of information you may need in your fetchTokenBlock code. The code block that will be called by the SDK when it detects an expired token is required.  This code block is where you call your secure server with the information needed in order to retrieve a new token for the user. The required uniqueId and optional fetchTokenBlockInfo are passed into your code block. The uniqueId value can be, for example, a Box App User Id, or it can be any unique identifier that enables your backend code to properly retrieve a new token for the user. The strategy you use will depend on your overall application design.
 
 <b>PLEASE NOTE:</b> It is up to you as the app developer to ensure that the process of retrieving tokens is secured.  Typically this is done by passing a JSON Web Token in the Authorization header of the request to your remote server that is signed by your authentication system.  That way you can verify that the incoming request is indeed originating from an authorized app and device.
 
-Below is an example of using a BOXContentClient instance to work with a specific App User Id, including example code of how to retrieve a new token when the SDK detects a token expiration. Note that you are not require to specify an initial token as the SDK will simply invoke your fetchTokenBlock. However, in some cases you may already have a token (for example, a downscoped token) that you wish to initialize the wrapper with.  The userInfo parameter is a dictionary for specifying arbitrary information you may need in your fetchTokenBlock code.
+Below is an example of using a BOXContentClient instance to work with a specific uniqueId, including example code of how to retrieve a new token when the SDK detects a token expiration. Note that you are not required to specify an initial token as the SDK will simply invoke your fetchTokenBlock.
 
 ```objectivec
 #import "AppDelegate.h"
@@ -26,10 +26,10 @@ Below is an example of using a BOXContentClient instance to work with a specific
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    _boxClient = [BOXContentClient clientWithToken:@"INITIAL_TOKEN_FROM_SERVER"
-                                            userId:@"APP_USER_ID"
-                                          userInfo:nil
-                                   fetchTokenBlock:fetchTokenBlock];                                                            
+    _boxClient = [BOXContentClient clientForServerAuthUniqueId:@"A_UNIQUE_ID"
+                                                  initialToken:nil
+                                           fetchTokenBlockInfo:nil
+                                               fetchTokenBlock:fetchTokenBlock];                                                          
     
     //Example of making an API call
     BOXUserRequest *request = [_boxClient currentUserRequest];
@@ -45,12 +45,12 @@ Below is an example of using a BOXContentClient instance to work with a specific
     return YES;
 }
 
-ServerAuthFetchTokenBlock myFetchTokenBlock = ^(NSString *userId, NSDictionary *userInfo, void (^completion)(NSString *, NSDate *, NSError *))
+ServerAuthFetchTokenBlock myFetchTokenBlock = ^(NSString *uniqueId, NSDictionary *fetchTokenBlockInfo, void (^completion)(NSString *, NSDate *, NSError *))
 {
     //this code is specific to your app; it is responsible for retrieving new tokens from a secure server
-    NSLog(@"Attempting to retrieve new access token from server for user Id: %@", userId);
+    NSLog(@"Attempting to retrieve new access token from server for uniqueId: %@", unique);
     
-    NSString *fullUrl = [NSString stringWithFormat:@"https://your.secure.server/token?id=%@", userId];
+    NSString *fullUrl = [NSString stringWithFormat:@"https://your.secure.server/token?id=%@", uniqueId];
     NSURL *url = [NSURL URLWithString:fullUrl];
     
     __block NSString *token;
