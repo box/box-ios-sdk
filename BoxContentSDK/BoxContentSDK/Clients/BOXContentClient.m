@@ -338,10 +338,15 @@ static BOXContentClient *defaultInstance = nil;
 
 - (BOXUserMini *)user
 {
+    return self.session.user;
+}
+
+- (NSString *)uniqueIdentifier
+{
     if(self.session.user){
-        return self.session.user;
+        return self.session.user.modelID;
     }else if(_serverAuthUniqueIdentifier){
-        return [[BOXUserMini alloc] initWithUserID:_serverAuthUniqueIdentifier name:nil login:nil];
+        return _serverAuthUniqueIdentifier;
     }else{
         return nil;
     }
