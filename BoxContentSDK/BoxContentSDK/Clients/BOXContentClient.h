@@ -68,6 +68,8 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  */
 @property (nonatomic, readonly, strong) BOXUserMini *user;
 
+@property (nonatomic, readonly, copy) NSString *uniqueIdentifier;
+
 /**
  * The delegate for the BOXContentClient instance. Internally setting the BOXContentClient's delegate
  * will automatically set the BOXAPIQueueManager's delegate and getting the delegate will return the
