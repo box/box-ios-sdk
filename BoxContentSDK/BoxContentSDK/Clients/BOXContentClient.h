@@ -64,10 +64,16 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 @property (nonatomic, readwrite, copy) void (^authenticationCompletionBlock)(BOXUser *user, NSError *error);
 
 /**
- *  The Box user associated with this SDK client. This will be nil if no user has been authenticated yet.
+ * The Box user associated with this SDK client. This will be nil if no user has been authenticated yet.
  */
 @property (nonatomic, readonly, strong) BOXUserMini *user;
 
+/**
+ * This property will return the appropriate value that uniquely identifies this client.  For an OAuth2 client it will return
+ * self.session.user.modelId, and for a server-auth based client (app users and downscoped tokens) it will return the value
+ * specified when creating the client using the clientForServerAuthUniqueId:initialToken:fetchTokenBlockInfo:fetchTokenBlock method.
+ * This value is primarily utilized by the Box Preview SDK for managing on-disk caching.
+ */
 @property (nonatomic, readonly, copy) NSString *uniqueIdentifier;
 
 /**
