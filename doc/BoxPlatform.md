@@ -57,7 +57,6 @@ ServerAuthFetchTokenBlock myFetchTokenBlock = ^(NSString *uniqueId, NSDictionary
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url
                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
                                          if(error){
-                                             NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorUnknown userInfo:nil];
                                              NSLog(@"Failed to retrieve new access token from server");
                                              completion(nil, nil, error);
                                          }
