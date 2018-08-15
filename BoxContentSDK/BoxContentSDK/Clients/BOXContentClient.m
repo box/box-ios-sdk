@@ -273,7 +273,7 @@ static BOXContentClient *defaultInstance = nil;
     // Separate assignment to avoid an unused variable warning in release builds
     session = (BOXAbstractSession *)notification.object;
     if ([self.session isEqual: session]) {
-        BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
+        BOXAssert(!self.user.uniqueId || !session.user.uniqueId || [self.user.uniqueId isEqualToString:session.user.uniqueId], @"ClientUser: %@, does not match Session User: %@", self.user.uniqueId, session.user.uniqueId);
     }
 }
 
@@ -282,7 +282,7 @@ static BOXContentClient *defaultInstance = nil;
     if ([notification.object isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = (NSDictionary *)notification.object;
         NSString *userID = [userInfo objectForKey:BOXUserIDKey];
-        if ([userID isEqualToString:self.user.modelID]) {
+        if ([userID isEqualToString:self.user.uniqueId]) {
             [self logOut];
         }
     }
@@ -295,7 +295,7 @@ static BOXContentClient *defaultInstance = nil;
     // user should update to the most recently authenticated one.
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
     
-    if ([session.user.modelID isEqualToString:self.session.user.modelID] && session != self.session) {
+    if ([session.user.uniqueId isEqualToString:self.session.user.uniqueId] && session != self.session) {
         // In case there are any pending operations in the old session's queue, give them the latest tokens so they have
         // a good chance of succeeding.
         [self.session reassignTokensFromSession:session];
@@ -336,20 +336,9 @@ static BOXContentClient *defaultInstance = nil;
     return [BOXAbstractSession usersInKeychain];
 }
 
-- (BOXUserMini *)user
+- (id<UniqueSDKUser>)user
 {
     return self.session.user;
-}
-
-- (NSString *)uniqueIdentifier
-{
-    if(self.session.user){
-        return self.session.user.modelID;
-    }else if(_serverAuthUniqueIdentifier){
-        return _serverAuthUniqueIdentifier;
-    }else{
-        return nil;
-    }
 }
 
 - (BOOL)appToAppBoxAuthenticationEnabled

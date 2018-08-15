@@ -150,7 +150,7 @@ static NSString *staticKeychainAccessGroup;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
-        BOXKeychainItemWrapper *keychainItemWrapper = [[self class]keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainItemWrapper = [[self class]keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainItemWrapper resetKeychainItem];
         [keychainItemWrapper setObject:jsonString forKey:(__bridge id)kSecValueData];
     }
@@ -170,10 +170,10 @@ static NSString *staticKeychainAccessGroup;
 
 - (void)revokeCredentials
 {
-    NSString *userID = self.user.modelID;
+    NSString *userID = self.user.uniqueId;
     if (userID.length > 0)
     {
-        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainWrapper resetKeychainItem];
         
         [self clearCurrentSessionWithUserID:userID];
@@ -270,7 +270,7 @@ static NSString *staticKeychainAccessGroup;
 
 - (NSDictionary *)keychainDictionary
 {
-    NSDictionary *dictionary = @{keychainUserIDKey : self.user.modelID,
+    NSDictionary *dictionary = @{keychainUserIDKey : self.user.uniqueId,
                                  keychainUserNameKey : self.user.name,
                                  keychainAccessTokenKey : self.accessToken,
                                  keychainUserLoginKey : self.user.login,

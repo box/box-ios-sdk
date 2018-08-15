@@ -7,12 +7,20 @@
 #import "BOXModel.h"
 #import "BOXEnterprise.h"
 
+@protocol UniqueSDKUser
+
+@property (nonnull,  nonatomic, readonly, strong) NSString *uniqueId;
+@property (nullable, nonatomic, readonly, strong) NSString *name;
+@property (nullable, nonatomic, readonly, strong) NSString *login;
+
+@end
+
 /**
  *  A compact representation of a User with only a few properties.
  *  Some API requests will return these representations to reduce bandiwdth, especially when many
  *  instances are being returned.
  */
-@interface BOXUserMini : BOXModel
+@interface BOXUserMini : BOXModel <UniqueSDKUser>
 
 /**
  *  Name of the user. May be nil if the user has not set the name in Box.

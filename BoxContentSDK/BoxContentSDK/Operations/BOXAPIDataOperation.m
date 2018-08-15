@@ -108,7 +108,7 @@
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
 
     NSError *error = nil;
     if (self.destinationPath != nil && self.associateId != nil) {

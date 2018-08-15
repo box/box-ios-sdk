@@ -39,7 +39,7 @@
 
 - (NSString *)userID
 {
-    return self.client.user.modelID;
+    return self.client.user.uniqueId;
 }
 
 #pragma mark - Public Methods

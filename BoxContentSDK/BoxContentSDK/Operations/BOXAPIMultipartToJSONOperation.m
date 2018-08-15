@@ -111,7 +111,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
 
     NSError *error = nil;
     if (self.shouldRunInBackground == YES) {
