@@ -147,7 +147,7 @@
 
 - (void)logOut
 {
-    NSString *userId = self.user.modelID;
+    NSString *userId = self.user.uniqueId;
     [self.sharedLinksHeaderHelper removeStoredInformationForUserWithID:userId];
     [self.session revokeCredentials];
     [self.queueManager cancelAllOperations];

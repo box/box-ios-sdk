@@ -44,6 +44,10 @@
     return self;
 }
 
+- (NSString *)uniqueId{
+    return self.modelID;
+}
+
 @end
 
 @implementation BOXUser

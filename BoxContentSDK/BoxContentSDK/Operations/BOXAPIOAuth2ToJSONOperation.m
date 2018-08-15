@@ -140,7 +140,7 @@
 // Returns whether the session was actually updated by reading the keychain.
 - (BOOL)updateTokensFromKeychainIntoSession:(BOXOAuth2Session *)session
 {
-    NSString *userID = session.user.modelID;
+    NSString *userID = session.user.uniqueId;
     if (!userID) {
         return NO;
     }
