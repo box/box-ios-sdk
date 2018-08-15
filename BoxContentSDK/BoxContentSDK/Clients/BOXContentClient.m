@@ -49,8 +49,6 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 
 @property (nonnull, nonatomic, readwrite, copy) ServerAuthFetchTokenBlock fetchTokenBlock;
 
-@property (nullable, nonatomic, readwrite, copy) NSString *serverAuthUniqueIdentifier;
-
 + (void)resetInstancesForTesting;
 
 @end
@@ -157,7 +155,7 @@ static BOXContentClient *defaultInstance = nil;
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:client];
     [client session].accessToken = token;
-    client.serverAuthUniqueIdentifier = uniqueId;
+    //client.serverAuthUniqueIdentifier = uniqueId; //need to implement app user session version of UniqueSDKUser protocol
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
     return client;
@@ -318,7 +316,7 @@ static BOXContentClient *defaultInstance = nil;
 {
     if(_fetchTokenBlock)
     {
-        _fetchTokenBlock(_serverAuthUniqueIdentifier, _fetchTokenBlockInfo, completion);
+        _fetchTokenBlock(self.session.user.uniqueId, _fetchTokenBlockInfo, completion);
     }
     else
     {
