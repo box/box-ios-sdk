@@ -247,7 +247,7 @@ static NSString *staticKeychainAccessGroup;
                     NSString *userNameFromKeychain = [dictionary objectForKey:keychainUserNameKey];
                     NSString *userLoginFromKeychain = [dictionary objectForKey:keychainUserLoginKey];
                     if ([userID isEqualToString:userIDFromKeychain]) {
-                        BOXUserMini *miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
+                        id<UniqueSDKUser> miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
                                                                                name:userNameFromKeychain
                                                                               login:userLoginFromKeychain];
                         [users addObject:miniUser];

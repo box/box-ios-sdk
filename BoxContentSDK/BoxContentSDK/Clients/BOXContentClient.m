@@ -84,11 +84,11 @@ static BOXContentClient *defaultInstance = nil;
             }
             else if (storedUsers.count == 1)
             {
-                BOXUserMini *storedUser = [storedUsers firstObject];
-                defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.modelID];
+                id<UniqueSDKUser> storedUser = [storedUsers firstObject];
+                defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.uniqueId];
                 if (defaultInstance == nil) {
-                    defaultInstance = [[self alloc] initWithBOXUser:storedUser];
-                    [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.modelID];
+                    defaultInstance = [[self alloc] initWithUniqueSDKUser:storedUser];
+                    [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.uniqueId];
                 }
             }
             else
@@ -119,7 +119,7 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
-+ (BOXContentClient *)clientForUser:(BOXUserMini *)user
++ (BOXContentClient *)clientForUser:(id<UniqueSDKUser>)user
 {
     if (user == nil)
     {
@@ -129,13 +129,13 @@ static BOXContentClient *defaultInstance = nil;
     static NSString *synchronizer = @"synchronizer";
     @synchronized(synchronizer)
     {
-        BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.modelID];
+        BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.uniqueId];
         
         // NOTE: Developers should not allow the user to login through both App Users and OAuth2 at the same time.
         
         if (client == nil) {
-            client = [[self alloc] initWithBOXUser:user];
-            [[[self class] SDKClients] setObject:client forKey:user.modelID];
+            client = [[self alloc] initWithUniqueSDKUser:user];
+            [[[self class] SDKClients] setObject:client forKey:user.uniqueId];
         }
         
         return client;
@@ -155,6 +155,7 @@ static BOXContentClient *defaultInstance = nil;
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     [client setAccessTokenDelegate:client];
     [client session].accessToken = token;
+    [client session].credentialsPersistenceEnabled = NO;
     //client.serverAuthUniqueIdentifier = uniqueId; //need to implement app user session version of UniqueSDKUser protocol
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
@@ -251,15 +252,15 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
-- (instancetype)initWithBOXUser:(BOXUserMini *)user
+- (instancetype)initWithUniqueSDKUser:(id<UniqueSDKUser>)user
 {
     if (self = [self init])
     {
-        [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
+        [self.session restoreCredentialsFromKeychainForUserWithID:user.uniqueId];
         
         if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
             self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager urlSessionManager:self.urlSessionManager];
-            [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
+            [self.session restoreCredentialsFromKeychainForUserWithID:user.uniqueId];
         }
     }
     return self;
