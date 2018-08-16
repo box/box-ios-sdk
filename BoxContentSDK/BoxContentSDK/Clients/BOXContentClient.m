@@ -14,7 +14,6 @@
 #import "BOXAppUserSession.h"
 #import "BOXParallelAPIQueueManager.h"
 #import "BOXUser.h"
-#import "BOXUser_Private.h"
 #import "BOXRequestWithSharedLinkHeader.h"
 #import "BOXSharedItemRequest.h"
 #import "BOXSharedLinkHeadersHelper.h"
