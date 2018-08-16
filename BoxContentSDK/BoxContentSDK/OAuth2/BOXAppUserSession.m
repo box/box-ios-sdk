@@ -10,11 +10,25 @@
 #import "BOXAppUserSession.h"
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXUserRequest.h"
+#import "BOXUser.h"
 #import "BOXUser_Private.h"
 #import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXAPIOperation_Private.h"
 
+
 @implementation BOXAppUserSession
+
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager
+                   urlSessionManager:(BOXURLSessionManager *)urlSessionManager
+                      serverAuthUser:(ServerAuthUser *)serverAuthUser
+{
+    self = [super initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
+    if (self) {
+        self.user = serverAuthUser;
+    }
+    
+    return self;
+}
 
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
