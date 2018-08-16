@@ -189,16 +189,16 @@ static NSString *staticKeychainAccessGroup;
 + (void)revokeAllCredentials
 {
     NSArray *users = [self usersInKeychain];
-    for (BOXUserMini *user in users)
+    for (id<UniqueSDKUser> user in users)
     {
-        if (user.modelID.length > 0)
+        if (user.uniqueId.length > 0)
         {
-            BOXKeychainItemWrapper *keychainWrapper = [self keychainItemWrapperForUserWithID:user.modelID];
+            BOXKeychainItemWrapper *keychainWrapper = [self keychainItemWrapperForUserWithID:user.uniqueId];
             [keychainWrapper resetKeychainItem];
             
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BOXSessionWasRevokedNotification
                                                                                                  object:nil
-                                                                                               userInfo:@{BOXUserIDKey : user.modelID}]];
+                                                                                               userInfo:@{BOXUserIDKey : user.uniqueId}]];
         }
     }
 }
@@ -258,8 +258,8 @@ static NSString *staticKeychainAccessGroup;
     }
     
     NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        BOXUserMini *userA = (BOXUserMini *) a;
-        BOXUserMini *userB = (BOXUserMini *) b;
+        id<UniqueSDKUser> userA = (id<UniqueSDKUser>) a;
+        id<UniqueSDKUser> userB = (id<UniqueSDKUser>) b;
         return [userA.login compare:userB.login options:NSCaseInsensitiveSearch];
     }];
     
