@@ -98,7 +98,7 @@ extern NSString *const BOXUserIDKey;
 /**
  * Box user associated with the credentials.
  */
-@property (nonatomic, readonly , strong) id<UniqueSDKUser> user;
+@property (nonatomic, readonly, strong) id<UniqueSDKUser> user;
 
 #pragma mark Initializers
 /** @name Initialization */
