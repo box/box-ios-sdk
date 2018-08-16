@@ -146,13 +146,13 @@ static BOXContentClient *defaultInstance = nil;
     return [[self alloc] init];
 }
 
-+ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)user
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)serverAuthUser
                                  initialToken:(nullable NSString *)token
                           fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                               fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:client serverAuthUser:user];
+    [client setAccessTokenDelegate:client serverAuthUser:serverAuthUser];
     [client session].accessToken = token;
     [client session].credentialsPersistenceEnabled = NO;
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
