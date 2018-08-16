@@ -138,7 +138,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * @return BOXContentClient that is configured for server-based auth
  */
-+ (BOXContentClient *)clientForServerAuthUniqueId:(nonnull NSString*)uniqueId
++ (BOXContentClient *)clientForServerAuthUser:(nonnull NSString*)uniqueId
                                      initialToken:(nullable NSString *)token
                               fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                                   fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;

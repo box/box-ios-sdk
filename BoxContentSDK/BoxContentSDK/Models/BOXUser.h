@@ -15,6 +15,29 @@
 
 @end
 
+@interface ServerAuthUser : BOXModel <UniqueSDKUser>
+
+/**
+ *  Unique id for the user.  Commonly this could be the App User Id, or it can be any unique identifier that your server code can utilize to retrieve the appropriate Box API tokens.
+ */
+@property (nonatomic, readwrite, strong) NSString *uniqueId;
+
+/**
+ *  Option Name of the user.
+ */
+@property (nonatomic, readwrite, strong) NSString *name;
+
+/**
+ *  Optional Login of the user.
+ */
+@property (nonatomic, readwrite, strong) NSString *login;
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID;
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(NSString *)name login:(NSString *)login;
+
+@end
+
 /**
  *  A compact representation of a User with only a few properties.
  *  Some API requests will return these representations to reduce bandiwdth, especially when many

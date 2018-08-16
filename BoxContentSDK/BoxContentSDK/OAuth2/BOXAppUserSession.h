@@ -19,6 +19,10 @@
  */
 @interface BOXAppUserSession : BOXAbstractSession
 
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager
+                   urlSessionManager:(BOXURLSessionManager *)urlSessionManager
+                      serverAuthUser:(ServerAuthUser *)serverAuthUser;
+
 /**
  * A convenience method used to authorize an access token.
  *

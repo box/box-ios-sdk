@@ -146,16 +146,15 @@ static BOXContentClient *defaultInstance = nil;
     return [[self alloc] init];
 }
 
-+ (BOXContentClient *)clientForServerAuthUniqueId:(nonnull NSString*)uniqueId
-                                     initialToken:(nullable NSString *)token
-                              fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
-                                  fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)user
+                                 initialToken:(nullable NSString *)token
+                          fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
+                              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:client];
+    [client setAccessTokenDelegate:client serverAuthUser:user];
     [client session].accessToken = token;
     [client session].credentialsPersistenceEnabled = NO;
-    //client.serverAuthUniqueIdentifier = uniqueId; //need to implement app user session version of UniqueSDKUser protocol
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
     return client;
@@ -438,6 +437,7 @@ static BOXContentClient *defaultInstance = nil;
 }
 
 - (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+                serverAuthUser:(ServerAuthUser*)serverAuthUser
 {
     BOXAssert(self.OAuth2Session.refreshToken == nil, @"BOXContentClients that use OAuth2 cannot have a delegate set.");
     BOXAssert(accessTokenDelegate != nil, @"delegate must be non-nil when calling setAccessTokenDelegate:");
@@ -446,7 +446,10 @@ static BOXContentClient *defaultInstance = nil;
     // Since BOXContentClient instances are defaulted to OAuth2 instead of App Users, a BOXAppUserSession must be initialized.
     // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
     if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
-        self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager urlSessionManager:self.urlSessionManager];
+        self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager
+                                                     urlSessionManager:self.urlSessionManager
+                                                        serverAuthUser:serverAuthUser];
+        
         self.session.userAgentPrefix = self.userAgentPrefix;
     }
     
