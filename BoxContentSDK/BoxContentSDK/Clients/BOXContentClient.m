@@ -109,8 +109,8 @@ static BOXContentClient *defaultInstance = nil;
     }
     else if (usersFromKeychain.count == 1)
     {
-        BOXUserMini *storedUser = [usersFromKeychain firstObject];
-        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.modelID];
+        id<UniqueSDKUser> storedUser = [usersFromKeychain firstObject];
+        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.uniqueId];
     }
     else {
         [NSException raise:@"You cannot use 'defaultClient' if multiple users have established a session."
