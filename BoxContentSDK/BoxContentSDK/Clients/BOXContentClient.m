@@ -86,7 +86,7 @@ static BOXContentClient *defaultInstance = nil;
                 id<UniqueSDKUser> storedUser = [storedUsers firstObject];
                 defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.uniqueId];
                 if (defaultInstance == nil) {
-                    defaultInstance = [[self alloc] initWithUniqueSDKUser:storedUser];
+                    defaultInstance = [[self alloc] initWithUser:storedUser];
                     [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.uniqueId];
                 }
             }
@@ -118,7 +118,12 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
-+ (BOXContentClient *)clientForUser:(id<UniqueSDKUser>)user
++ (BOXContentClient *)clientForNewSession
+{
+    return [[self alloc] init];
+}
+
++ (BOXContentClient *)clientForBOXUserMini:(BOXUserMini *)user
 {
     if (user == nil)
     {
@@ -130,20 +135,13 @@ static BOXContentClient *defaultInstance = nil;
     {
         BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.uniqueId];
         
-        // NOTE: Developers should not allow the user to login through both App Users and OAuth2 at the same time.
-        
         if (client == nil) {
-            client = [[self alloc] initWithUniqueSDKUser:user];
+            client = [[self alloc] initWithUser:user];
             [[[self class] SDKClients] setObject:client forKey:user.uniqueId];
         }
         
         return client;
     }
-}
-
-+ (BOXContentClient *)clientForNewSession
-{
-    return [[self alloc] init];
 }
 
 + (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)serverAuthUser
@@ -253,16 +251,12 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
-- (instancetype)initWithUniqueSDKUser:(id<UniqueSDKUser>)user
+- (instancetype)initWithUser:(id<UniqueSDKUser>)user
 {
+    //this will only be called internally when we're dealing with a BOXUserMini instance of user, not with a ServerAuthUser
     if (self = [self init])
     {
         [self.session restoreCredentialsFromKeychainForUserWithID:user.uniqueId];
-        
-        if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
-            self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager urlSessionManager:self.urlSessionManager];
-            [self.session restoreCredentialsFromKeychainForUserWithID:user.uniqueId];
-        }
     }
     return self;
 }

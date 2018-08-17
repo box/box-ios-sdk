@@ -160,7 +160,7 @@
 {
     NSArray *users = [BOXContentClient users];
     for (BOXUser *user in users) {
-        BOXContentClient *client = [BOXContentClient clientForUser:user];
+        BOXContentClient *client = [BOXContentClient clientForBOXUserMini:user];
         [client logOut];
     }
     [BOXAbstractSession revokeAllCredentials];
