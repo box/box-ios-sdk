@@ -118,7 +118,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  *  @return BOXContentClient for the specified user
  */
-+ (BOXContentClient *)clientForUser:(id<UniqueSDKUser>)user;
++ (BOXContentClient *)clientForBOXUserMini:(BOXUserMini *)user;
 
 /**
  *  Get an unauthenticated BOXContentClient.
