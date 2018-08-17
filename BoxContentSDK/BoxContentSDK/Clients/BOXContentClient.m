@@ -152,11 +152,14 @@ static BOXContentClient *defaultInstance = nil;
                               fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
+    
     [client setAccessTokenDelegate:client serverAuthUser:serverAuthUser];
-    [client session].accessToken = token;
     [client session].credentialsPersistenceEnabled = NO;
+    [client session].accessToken = token;
+    
     client.fetchTokenBlockInfo = fetchTokenBlockInfo;
     client.fetchTokenBlock = fetchTokenBlock;
+    
     return client;
 }
 
