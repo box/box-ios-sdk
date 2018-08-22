@@ -12,6 +12,7 @@
 @property (nonnull,  nonatomic, readonly, strong) NSString *uniqueId;
 @property (nullable, nonatomic, readonly, strong) NSString *name;
 @property (nullable, nonatomic, readonly, strong) NSString *login;
+@property (nonatomic, readwrite, strong) NSString *modelID;
 
 @end
 
@@ -21,6 +22,9 @@
  *  Unique id for the user.  Commonly this could be the App User Id, or it can be any unique identifier that your server code can utilize to retrieve the appropriate Box API tokens.
  */
 @property (nonatomic, readwrite, strong) NSString *uniqueId;
+
+//temp for Boxworks so I can use the pre-built Preview SDK 2.0.0
+@property (nonatomic, readwrite, strong) NSString *modelID;
 
 /**
  *  Option Name of the user.

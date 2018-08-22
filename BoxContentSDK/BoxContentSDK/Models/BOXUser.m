@@ -22,6 +22,7 @@
     if (self = [super init])
     {
         self.uniqueId = uniqueID;
+        self.modelID = uniqueID;
         self.login = login;
         self.name = name;
     }
