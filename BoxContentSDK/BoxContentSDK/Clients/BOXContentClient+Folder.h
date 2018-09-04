@@ -257,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Generate a background request to retrieve information about a folder in the trash.
  *
  *  @param folderID Folder ID.
- *  @param associateId   A unique ID used to recover background tasks. Providing an ID associated with a running background
+ *  @param associateID   A unique ID used to recover background tasks. Providing an ID associated with a running background
  *  task will cause the request to reconnect to that task, rather than making a new one.
  *
  *  @return A request that can be customized and then executed.
