@@ -121,6 +121,8 @@
 
 #pragma mark - Files
 
+- (void)cacheBoxFile:(BOXFile *)file;
+
 - (void)cacheFileRequest:(BOXFileRequest *)request
                 withFile:(BOXFile *)file
                    error:(NSError *)error;
