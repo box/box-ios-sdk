@@ -86,7 +86,7 @@ static BOXContentClient *defaultInstance = nil;
                 id<UniqueSDKUser> storedUser = [storedUsers firstObject];
                 defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.uniqueId];
                 if (defaultInstance == nil) {
-                    defaultInstance = [[self alloc] initWithUser:storedUser];
+                    defaultInstance = [[self alloc] initWithBOXUser:storedUser];
                     [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.uniqueId];
                 }
             }
@@ -123,7 +123,7 @@ static BOXContentClient *defaultInstance = nil;
     return [[self alloc] init];
 }
 
-+ (BOXContentClient *)clientForBOXUserMini:(BOXUserMini *)user
++ (BOXContentClient *)clientForUser:(BOXUserMini *)user
 {
     if (user == nil)
     {
@@ -136,7 +136,7 @@ static BOXContentClient *defaultInstance = nil;
         BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.uniqueId];
         
         if (client == nil) {
-            client = [[self alloc] initWithUser:user];
+            client = [[self alloc] initWithBOXUser:user];
             [[[self class] SDKClients] setObject:client forKey:user.uniqueId];
         }
         
@@ -251,7 +251,7 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
-- (instancetype)initWithUser:(id<UniqueSDKUser>)user
+- (instancetype)initWithBOXUser:(id<UniqueSDKUser>)user
 {
     //this will only be called internally when we're dealing with a BOXUserMini instance of user, not with a ServerAuthUser
     if (self = [self init])
