@@ -134,7 +134,7 @@
     [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation), @(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation)]];
     fileRequestOperation = [fileRequest createOperation];
     actualXRepsHint = [[fileRequestOperation.APIRequest allHTTPHeaderFields] valueForKey:BOXAPIHTTPHeaderXRepHints];
-    NSString *expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false],[mp3],[mp4]"];
+    NSString *expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false][mp3][mp4]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header original file request with other option
@@ -158,10 +158,10 @@
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header group reps request for all options
-    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation), @(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation), @(BOXRepresentationRequestMP4Representation)]];
+    [fileRequest setRepresentationRequestOptions:@[@(BOXRepresentationRequestJPGRepresentation), @(BOXRepresentationRequestMP3Representation), @(BOXRepresentationRequestMP4Representation)]];
     fileRequestOperation = [fileRequest createOperation];
     actualXRepsHint = [[fileRequestOperation.APIRequest allHTTPHeaderFields] valueForKey:BOXAPIHTTPHeaderXRepHints];
-    expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false],[mp3],[mp4]"];
+    expectedHeaderXRepsHint = [NSString stringWithFormat:@"[jpg?dimensions=1024x1024&paged=false][mp3][mp4]"];
     XCTAssertEqualObjects(expectedHeaderXRepsHint, actualXRepsHint);
     
     // Check x-reps-hint header mp3 request
