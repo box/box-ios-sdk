@@ -14,16 +14,15 @@
 - (instancetype)initWithOperation:(BOXMetadataUpdateOperation)operation path:(NSString *)path value:(NSString *)value
 {
     if (self = [self init]) {
-        NSString *formatString = nil;
         if (path) {
-            formatString = @"/%@";
+            NSString *formatString = @"/%@";
             if ([path characterAtIndex:0] == '/') {
                 formatString = @"%@";
             }
+            self.path = [NSString stringWithFormat:formatString, path];
         }
         
         self.value = value;
-        self.path = [NSString stringWithFormat:formatString, path];
         self.operation = operation;
         
         [self validate];
