@@ -16,7 +16,6 @@
 
 @property (nonatomic, readwrite, strong) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL isTrashed;
-@property (nonatomic, readonly, strong) BOXRepresentationsHelper* repsHelper;
 
 - (BOOL)shouldPerformBackgroundOperation;
 
@@ -34,7 +33,6 @@
     if (self = [super init]) {
         _fileID = fileID;
         _isTrashed = isTrashed;
-        _repsHelper = [BOXRepresentationsHelper new];
     }
 
     return self;
@@ -60,10 +58,9 @@
     if (self.requestAllFileFields) {
         fieldString = [self fullFileFieldsParameterString];
     }
-    
-    NSString *repsFieldString = [self.repsHelper getRepresentationsFieldString];
-    if(repsFieldString.length > 0) {
-        fieldString = [fieldString stringByAppendingFormat:@",%@", repsFieldString];
+
+    if(self.representationHints.length > 0) {
+        fieldString = [fieldString stringByAppendingFormat:@",%@,%@", BOXAPIObjectKeyRepresentations, BOXAPIObjectKeyAuthenticatedDownloadURL];
     }
     
     if (fieldString.length > 0) {
@@ -101,11 +98,9 @@
                             forHTTPHeaderField:BOXAPIHTTPHeaderIfNoneMatch];
         }
     }
-    
-    NSString *representationFields = [self.repsHelper formatRepresentationRequestHeader];
-    
-    if (representationFields.length > 0) {
-        [fileOperation.APIRequest addValue:representationFields
+
+    if (self.representationHints.length > 0) {
+        [fileOperation.APIRequest addValue:self.representationHints
                         forHTTPHeaderField:BOXAPIHTTPHeaderXRepHints];
     }
 
@@ -213,10 +208,6 @@
     [self performRequestWithCompletion:refreshBlock];
 }
 
-- (void)setRepresentationRequestOptions:(NSArray *)representationOptions {
-    [self.repsHelper setRepresentationRequestOptions:representationOptions];
-}
-
 #pragma mark - Superclass overidden methods
 
 - (NSString *)itemIDForSharedLink
@@ -235,7 +226,5 @@
 {
     return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
-
-
 
 @end

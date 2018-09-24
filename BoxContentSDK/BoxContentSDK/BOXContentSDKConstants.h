@@ -515,33 +515,19 @@ typedef NS_ENUM(NSUInteger, BOXAvatarType) {
     BOXAvatarTypeLarge
 };
 
-/**
- Representations are digital assets created for files stored in Box. To request representations information for
- a file, set the options for each type.
- 
- - BOXRepresentationRequestOriginal:                        Request original content url with file information request
- Reference the reponse field 'authenticated_download_url' to download original content when file
- has download permissions are owner, co-owner, editor, viewer uploader, viewer
- - BOXRepresentationRequestAllRepresentations:              If permissions allow retrieve representations for thumbnails, preview representations for the given file
- - BOXRepresentationRequestHighDefinitionVideo:             Request video representions if available for the given file
- - BOXRepresentationRequestThumbnailRepresentation:         Request thumbnail representions if available for the given file
- - BOXRepresentationRequestLargeThumbnailRepresentation:    Request large thumbnail representions are available for the given file
- - BOXRepresentationRequestPDFRepresentation:               Request PDF representions if available for the given file
- - BOXRepresentationRequestJPGRepresentation:               Request JPG representions if available for the given file
- - BOXRepresentationRequestMP3Representation:               Request PNG representions if available for the given file
- - BOXRepresentationRequestMP4Representation:               Request MP4 representions if available for the given file
- - BOXRepresentationRequesteExtractedTextRepresentation:    Request extracted text if unformatted text is contained in a document (non-image)
- */
-typedef NS_ENUM(NSUInteger, BOXRepresentationRequestOptions) {
-    BOXRepresentationRequestOriginal,
-    BOXRepresentationRequestAllRepresentations,
-    BOXRepresentationRequestHighDefinitionVideo,
-    BOXRepresentationRequestThumbnailRepresentation,
-    BOXRepresentationRequestLargeThumbnailRepresentation,
-    BOXRepresentationRequestPDFRepresentation,
-    BOXRepresentationRequestJPGRepresentation,
-    BOXRepresentationRequestMP3Representation,
-    BOXRepresentationRequestMP4Representation,
-    BOXRepresentationRequesteExtractedTextRepresentation
-};
-
+/// Some reasonable default values for the X-Rep-Hints header when requesting
+/// the representations field of a file or files.
+///
+/// The exact definition of these values may change between SDK versions, but
+/// the semantics will remain.
+///
+/// For further information, refer to https://developer.box.com/v2.0/reference
+typedef NSString *BOXRepresentationHints;
+/// Large and small thumbnails (currently JPG thumbnails up to 1024px and 320px
+/// on a side, if available)
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnails;
+/// A good preview for most file types. Maybe more than one preview representation
+/// (currently at least the first available of PDF, HLS, MP4, MP3 or JPG)
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultPreview;
+/// Both thumbnails and the preview defined above
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnailsandPreview;

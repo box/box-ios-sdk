@@ -467,3 +467,9 @@ NSString *const BOXURLSessionTaskCacheResponse = @"response";
 NSString *const BOXURLSessionTaskCacheResponseData = @"responseData";
 NSString *const BOXURLSessionTaskCacheError = @"error";
 NSString *const BOXURLSessionTaskCacheUserIdAndAssociateId = @"userIdAndAssociateId";
+
+const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnails = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false]";
+// We separate HLS here because HLS is only suitable for streaming, and there will be cases
+// we want to fall back on MP4
+const BOXRepresentationHints BOXRepresentationHintsDefaultPreview = @"[hls][pdf,mp4,mp3,jpg?dimensions=1024x1024&paged=false]";
+const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnailsandPreview = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][hls][pdf,mp4,mp3]";
