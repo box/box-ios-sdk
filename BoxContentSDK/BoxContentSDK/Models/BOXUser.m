@@ -68,7 +68,7 @@
     return self;
 }
 
-- (NSString *)uniqueId{
+- (NSString *)uniqueId {
     return self.modelID;
 }
 

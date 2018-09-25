@@ -257,10 +257,8 @@ static NSString *staticKeychainAccessGroup;
         }
     }
     
-    NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        id<UniqueSDKUser> userA = (id<UniqueSDKUser>) a;
-        id<UniqueSDKUser> userB = (id<UniqueSDKUser>) b;
-        return [userA.login compare:userB.login options:NSCaseInsensitiveSearch];
+    NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id<UniqueSDKUser> a, id<UniqueSDKUser> b) {
+        return [a.login compare:b.login options:NSCaseInsensitiveSearch];
     }];
     
     return sortedUsers;

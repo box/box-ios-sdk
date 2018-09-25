@@ -144,7 +144,7 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
-+ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)serverAuthUser
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser *)serverAuthUser
                                  initialToken:(nullable NSString *)token
                           fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                               fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
@@ -434,7 +434,7 @@ static BOXContentClient *defaultInstance = nil;
 }
 
 - (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
-                serverAuthUser:(ServerAuthUser*)serverAuthUser
+                serverAuthUser:(ServerAuthUser *)serverAuthUser
 {
     BOXAssert(self.OAuth2Session.refreshToken == nil, @"BOXContentClients that use OAuth2 cannot have a delegate set.");
     BOXAssert(accessTokenDelegate != nil, @"delegate must be non-nil when calling setAccessTokenDelegate:");

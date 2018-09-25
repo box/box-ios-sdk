@@ -9,28 +9,31 @@
 
 @protocol UniqueSDKUser
 
-@property (nonnull,  nonatomic, readonly, strong) NSString *uniqueId;
-@property (nullable, nonatomic, readonly, strong) NSString *name;
-@property (nullable, nonatomic, readonly, strong) NSString *login;
-
-@end
-
-@interface ServerAuthUser : BOXModel <UniqueSDKUser>
+/**
+ *  Unique id for the user.
+ */
+@property (nonnull,  nonatomic, readonly, copy) NSString *uniqueId;
 
 /**
- *  Unique id for the user.  Commonly this could be the App User Id, or it can be any unique identifier that your server code can utilize to retrieve the appropriate Box API tokens.
+ *  Optional Name of the user.
  */
-@property (nonatomic, readwrite, strong) NSString *uniqueId;
-
-/**
- *  Option Name of the user.
- */
-@property (nonatomic, readwrite, strong) NSString *name;
+@property (nullable, nonatomic, readonly, copy) NSString *name;
 
 /**
  *  Optional Login of the user.
  */
-@property (nonatomic, readwrite, strong) NSString *login;
+@property (nullable, nonatomic, readonly, copy) NSString *login;
+
+@end
+
+/**
+ *  An implementation of the UniqueSDKUser protocol that is used in scenarios involving server-based auth (App Users, downscoped tokens, service accounts).
+ */
+@interface ServerAuthUser : BOXModel <UniqueSDKUser>
+
+@property (nonatomic, readwrite, copy) NSString *uniqueId;
+@property (nonatomic, readwrite, copy) NSString *name;
+@property (nonatomic, readwrite, copy) NSString *login;
 
 - (instancetype)initWithUniqueID:(NSString *)uniqueID;
 
@@ -48,12 +51,12 @@
 /**
  *  Name of the user. May be nil if the user has not set the name in Box.
  */
-@property (nonatomic, readwrite, strong) NSString *name;
+@property (nonatomic, readwrite, copy) NSString *name;
 
 /**
  *  Login of the user, usually an email address but not always.
  */
-@property (nonatomic, readwrite, strong) NSString *login;
+@property (nonatomic, readwrite, copy) NSString *login;
 
 @end
 

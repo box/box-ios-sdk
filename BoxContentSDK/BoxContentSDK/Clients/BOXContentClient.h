@@ -83,7 +83,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
  * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
  */
-@property (nonatomic, nullable, readwrite, strong) NSDictionary *fetchTokenBlockInfo;
+@property (nonatomic, nullable, readwrite, copy) NSDictionary *fetchTokenBlockInfo;
 
 /**
  *  The list of Box users that have established a session through the SDK.
@@ -139,7 +139,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * @return BOXContentClient that is configured for server-based auth
  */
-+ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser*)serverAuthUser
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser *)serverAuthUser
                                  initialToken:(nullable NSString *)token
                           fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
                               fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
