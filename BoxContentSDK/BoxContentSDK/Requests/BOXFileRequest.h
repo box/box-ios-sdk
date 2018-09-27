@@ -4,9 +4,8 @@
 //
 
 #import "BOXRequestWithSharedLinkHeader.h"
-#import "BOXRepresentationsHelper.h"
 
-@interface BOXFileRequest : BOXRequestWithSharedLinkHeader <RepresentationsRequesting>
+@interface BOXFileRequest : BOXRequestWithSharedLinkHeader
 
 @property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 
@@ -27,6 +26,12 @@
  */
 @property (nonatomic, readwrite, strong) NSString *requestDirectoryPath;
 
+/**
+ The X-Rep-Hints header, defining what representations will get returned
+ when requesting the representations field. Setting this field also adds
+ the representations field to the request.
+ */
+@property (nonatomic, readwrite, copy) BOXRepresentationHints representationHints;
 
 - (instancetype)initWithFileID:(NSString *)fileID;
 
@@ -39,12 +44,5 @@
 //Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCached:(BOXFileBlock)cacheBlock
                        refreshed:(BOXFileBlock)refreshBlock;
-
-/**
- Returns an array of representations requested if existing
- Setting a representation or Array of options will include availability for that file when request representation information
- Use BOXRepresentationRequestAllRepresentations to return small and large thumbnail and best preview
- */
-- (void)setRepresentationRequestOptions:(NSArray *)representationOptions;
 
 @end

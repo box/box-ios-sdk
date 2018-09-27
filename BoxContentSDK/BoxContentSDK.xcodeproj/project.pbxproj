@@ -422,8 +422,6 @@
 		94D51FC3207D9347008341A7 /* BOXRepresentationInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */; };
 		94D51FC4207EB9B1008341A7 /* BOXRepresentationInfoRequest.m in Headers */ = {isa = PBXBuildFile; fileRef = 94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */; settings = {ATTRIBUTES = (Public, ); }; };
 		94F5E2CB2083B6E300334AEC /* BOXRepresentationInfoRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F5E2CA2083B6E300334AEC /* BOXRepresentationInfoRequestTests.m */; };
-		94F971222130B4DF00F50F8C /* BOXRepresentationsHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 94F971202130B4DF00F50F8C /* BOXRepresentationsHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		94F971232130B4DF00F50F8C /* BOXRepresentationsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F971212130B4DF00F50F8C /* BOXRepresentationsHelper.m */; };
 		A59A40B31EA1771000BF4113 /* file_all_fields_representations.json in Resources */ = {isa = PBXBuildFile; fileRef = A59A40B21EA1771000BF4113 /* file_all_fields_representations.json */; };
 		C53EC2631A388E9F0007C8A7 /* BOXCommentAddRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2621A388E9F0007C8A7 /* BOXCommentAddRequestTests.m */; };
 		C53EC2991A389F2C0007C8A7 /* BOXCommentDeleteRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EC2981A389F2C0007C8A7 /* BOXCommentDeleteRequestTests.m */; };
@@ -799,8 +797,6 @@
 		94D51FC0207D9347008341A7 /* BOXRepresentationInfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXRepresentationInfoRequest.h; sourceTree = "<group>"; };
 		94D51FC1207D9347008341A7 /* BOXRepresentationInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXRepresentationInfoRequest.m; sourceTree = "<group>"; };
 		94F5E2CA2083B6E300334AEC /* BOXRepresentationInfoRequestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BOXRepresentationInfoRequestTests.m; sourceTree = "<group>"; };
-		94F971202130B4DF00F50F8C /* BOXRepresentationsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BOXRepresentationsHelper.h; path = Helper/BOXRepresentationsHelper.h; sourceTree = "<group>"; };
-		94F971212130B4DF00F50F8C /* BOXRepresentationsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BOXRepresentationsHelper.m; path = Helper/BOXRepresentationsHelper.m; sourceTree = "<group>"; };
 		A59A40B21EA1771000BF4113 /* file_all_fields_representations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file_all_fields_representations.json; sourceTree = "<group>"; };
 		AA73ECFF1E36C1EE0010F6D8 /* BOXRecentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXRecentItem.m; sourceTree = "<group>"; };
 		AA73ED001E36C1EE0010F6D8 /* BOXRecentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXRecentItem.h; sourceTree = "<group>"; };
@@ -1516,8 +1512,6 @@
 				C562DB491A4831270002E510 /* BOXSharedLinkHeadersDefaultManager.m */,
 				6AA4256F1E39743800EF2677 /* BOXURLRequestSerialization.h */,
 				6AA425701E39743800EF2677 /* BOXURLRequestSerialization.m */,
-				94F971202130B4DF00F50F8C /* BOXRepresentationsHelper.h */,
-				94F971212130B4DF00F50F8C /* BOXRepresentationsHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1918,7 +1912,6 @@
 				599B1A2D1E4BE6DC00709C27 /* BOXRepresentation.h in Headers */,
 				599B1A2E1E4BE6DC00709C27 /* BOXRecentItem.h in Headers */,
 				599B1A2F1E4BE6DC00709C27 /* BOXStreamOperation.h in Headers */,
-				94F971222130B4DF00F50F8C /* BOXRepresentationsHelper.h in Headers */,
 				599B1A301E4BE6DC00709C27 /* BOXAPIAuthenticatedOperation.h in Headers */,
 				599B1A311E4BE6DC00709C27 /* BOXAPIDataOperation.h in Headers */,
 				599B1A321E4BE6DC00709C27 /* BOXAPIJSONOperation.h in Headers */,
@@ -2359,7 +2352,6 @@
 				599B19631E4BE67600709C27 /* BOXOAuth2Session.m in Sources */,
 				599B19641E4BE67600709C27 /* BOXParallelOAuth2Session.m in Sources */,
 				94D51FC3207D9347008341A7 /* BOXRepresentationInfoRequest.m in Sources */,
-				94F971232130B4DF00F50F8C /* BOXRepresentationsHelper.m in Sources */,
 				599B19651E4BE67600709C27 /* BOXAbstractSession.m in Sources */,
 				599B19661E4BE67600709C27 /* BOXAppUserSession.m in Sources */,
 				599B19671E4BE67600709C27 /* BOXDispatchHelper.m in Sources */,
