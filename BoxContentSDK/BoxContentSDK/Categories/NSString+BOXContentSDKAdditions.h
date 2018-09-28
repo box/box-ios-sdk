@@ -29,9 +29,11 @@
 - (BOOL)box_isEmptyOrWhitespacesOnly;
 
 /**
- *  @return Returns the extension of a file with multiple extensions (some iWork files have .xxx.zip file extensions).
+ *  @return Returns the extension of a file with multiple extensions (some iWork files have .xxx.zip file extensions),
+ *  also accounting for empty name (".jpg"), where Apple's pathExtension method is inaccurate and returns an empty
+ *  string as of Xcode 10 and iOS 12.
  */
-- (NSString *)box_pathExtensionAccountingForZippedPackages;
+- (NSString *)box_pathExtensionAccountingForMultipleExtensionsAndEmptyName;
 
 /**
  *  @return The string where all trailing spaces will have been removed 
@@ -42,11 +44,6 @@
  *  @return The string whose path extension has been removed, even if it had multiple path extensions.
  */
 - (NSString *)box_stringByDeletingMultiplePathExtensionsIfNecessary;
-
-/**
- *  @return The path extension accounting for empty name, where Apple's pathExtension method is inaccurate.
- */
-- (NSString *)box_fileNameExtensionAccountingForEmptyName;
 
 /**
  *  @return a properly escaped string.

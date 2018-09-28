@@ -50,6 +50,16 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     return isEmptyOrWhitespaces;
 }
 
+- (NSString *)box_pathExtensionAccountingForMultipleExtensionsAndEmptyName
+{
+    // pathExtension returns an empty string if there are no characters before the pathExtension (e.g ".jpg" or ".m4a")
+    // Just simulating a correct name to correctly find the extension, since they are still valid files that can be previewed.
+    NSString *tmp = [NSString stringWithFormat:@"tmp%@", self.lastPathComponent];
+    NSString *string = [tmp box_pathExtensionAccountingForZippedPackages];
+    
+    return string;
+}
+
 - (NSString *)box_pathExtensionAccountingForZippedPackages
 {
     NSString *extension = nil;
@@ -106,16 +116,6 @@ long long const BOX_TERABYTE = BOX_GIGABYTE * 1024;
     }
     
     return tmp;
-}
-
-- (NSString *)box_fileNameExtensionAccountingForEmptyName
-{
-    // pathExtension returns an empty string if there are no characters before the pathExtension (e.g ".jpg" or ".m4a")
-    // Just simulating a correct name to correctly find the extension, since they are still valid files that can be previewed.
-    NSString *tmp = [NSString stringWithFormat:@"tmp%@", self.lastPathComponent];
-    NSString *string = [tmp box_pathExtensionAccountingForZippedPackages];
-    
-    return string;
 }
 
 - (NSString *)box_stringByAddingURLPercentEscapes
