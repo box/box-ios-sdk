@@ -22,6 +22,9 @@
 // Set digest to verify data integrity of downloaded content
 @property (nonatomic, readwrite, strong) NSString *sha1Hash;
 
+// Set max size of downloaded content until which data integrity is verified
+@property (nonatomic, readwrite, assign) NSUInteger requireSha1ChecksUpToMaxFileSize;
+
 /**
  Request will download file into destinationPath, and the file download can continue
  running in the background even if app is not running.

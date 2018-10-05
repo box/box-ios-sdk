@@ -37,6 +37,7 @@
         _representation = representation;
         _ignoreLocalURLRequestCache = NO;
         _sha1Hash = nil;
+        _requireSha1ChecksUpToMaxFileSize = NSUIntegerMax;
     }
     return self;
 }
@@ -117,7 +118,8 @@
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
             NSError *dataIntegrityErrorIfAny = nil;
-            if([self.sha1Hash length] && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
+            if([self.sha1Hash length] && (self.requireSha1ChecksUpToMaxFileSize > expectedTotalBytes)
+                                      && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
                 dataIntegrityErrorIfAny = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKDataIntegrityError userInfo:nil];
                 if(dataIntegrityErrorIfAny) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self];
