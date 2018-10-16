@@ -60,6 +60,7 @@
         _outputStream = outputStream;
         _fileID = fileID;
         _representation = representation;
+        _requireSha1ChecksUpToMaxFileSize = NSUIntegerMax;
     }
     return self;
 }
