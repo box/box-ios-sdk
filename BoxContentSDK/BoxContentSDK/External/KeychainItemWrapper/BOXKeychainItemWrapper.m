@@ -50,6 +50,7 @@
 #import "BOXKeychainItemWrapper.h"
 #import <Security/Security.h>
 #import "BOXLog.h"
+#import "BOXContentSDKConstants.h"
 
 /*
  
@@ -342,6 +343,11 @@
         
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
         BOXAssert( result == noErr, @"Couldn't update the Keychain Item with error %d.", (int)result);
+        NSDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
+                                   @"message" : @(result)};
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                            object:nil
+                                                          userInfo:userInfo];
     }
     else
     {
@@ -355,6 +361,11 @@
         }
         result = SecItemAdd((CFDictionaryRef)query, NULL);
         BOXAssert( result == noErr, @"Couldn't add the Keychain Item with error %d.", (int)result);
+        NSDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
+                                   @"return_code" : @(result)};
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                            object:nil
+                                                          userInfo:userInfo];
     }
     
     // if keychain operations failed, attempt to delete and retry it again.

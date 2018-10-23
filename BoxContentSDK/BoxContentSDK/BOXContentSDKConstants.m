@@ -88,6 +88,7 @@ NSString *const BOXUserWasLoggedOutDueToErrorNotification = @"BOXUserWasLoggedOu
 NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
 NSString *const BOXAccessTokenRefreshDiagnosisNotification = @"BOXAccessTokenRefreshDiagnosisNotification";
 NSString *const BOXFileDownloadCorruptedNotification = @"BOXFileDownloadCorruptedNotification";
+NSString *const BOXRefreshTokenSaveToKeychainNotification = @"BOXRefreshTokenSaveToKeychainNotification";
 
 // Item Types
 BOXAPIItemType *const BOXAPIItemTypeFile = @"file";
