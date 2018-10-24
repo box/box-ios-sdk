@@ -344,7 +344,7 @@
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
         BOXAssert( result == noErr, @"Couldn't update the Keychain Item with error %d.", (int)result);
         NSDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
-                                   @"message" : @(result)};
+                                   @"error_code" : @(result)};
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
                                                             object:nil
                                                           userInfo:userInfo];
@@ -362,7 +362,7 @@
         result = SecItemAdd((CFDictionaryRef)query, NULL);
         BOXAssert( result == noErr, @"Couldn't add the Keychain Item with error %d.", (int)result);
         NSDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
-                                   @"return_code" : @(result)};
+                                   @"error_code" : @(result)};
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
                                                             object:nil
                                                           userInfo:userInfo];
