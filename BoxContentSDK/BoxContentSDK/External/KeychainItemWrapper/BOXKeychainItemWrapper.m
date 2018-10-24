@@ -299,6 +299,14 @@
     if (result != noErr) {
         BOXLog(@"Keychain overwrite failed. Failed to add keychain item with error %d", (int)result);
     }
+    NSMutableDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
+                                      @"message" : @"Overwriting all items in keychain"}.mutableCopy;
+    if (result != noErr) {
+        userInfo[@"error_code"] = @(result);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
 }
 
 
@@ -306,7 +314,7 @@
 {
     NSDictionary *attributes = NULL;
     NSMutableDictionary *updateItem = NULL;
-    
+    NSString *keychainActionAnalyticsMessage = nil;
     OSStatus result = SecItemCopyMatching((CFDictionaryRef)self.genericPasswordQuery, (CFTypeRef *)&attributes);
     if (result == noErr)
     {
@@ -340,16 +348,9 @@
 #endif
         
         // An implicit assumption is that you can only update a single item at a time.
-        
+        keychainActionAnalyticsMessage = @"Modifying existing items in keychain";
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
         BOXAssert( result == noErr, @"Couldn't update the Keychain Item with error %d.", (int)result);
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed"}];
-        if (result != noErr) {
-            userInfo[@"error_code"] = @(result);
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
-                                                            object:nil
-                                                          userInfo:userInfo];
     }
     else
     {
@@ -361,17 +362,18 @@
         } else {
             [query setObject:(id)kSecAttrAccessibleAfterFirstUnlock forKey:(id)kSecAttrAccessible];
         }
+        keychainActionAnalyticsMessage = @"Adding items to keychain";
         result = SecItemAdd((CFDictionaryRef)query, NULL);
         BOXAssert( result == noErr, @"Couldn't add the Keychain Item with error %d.", (int)result);
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed"}];
-        if (result != noErr) {
-            userInfo[@"error_code"] = @(result);
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
-                                                            object:nil
-                                                          userInfo:userInfo];
     }
-    
+    NSMutableDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
+                                       @"message" : keychainActionAnalyticsMessage}.mutableCopy;
+    if (result != noErr) {
+        userInfo[@"error_code"] = @(result);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
     // if keychain operations failed, attempt to delete and retry it again.
     if (result != noErr)
     {
