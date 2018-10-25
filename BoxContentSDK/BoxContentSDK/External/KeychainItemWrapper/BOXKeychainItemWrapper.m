@@ -283,6 +283,9 @@
     NSMutableDictionary *tempDictionary = [self dictionaryToSecItemFormat:itemDataForDeletingFromKeychain];
     result = SecItemDelete((CFDictionaryRef)tempDictionary);
     
+    // tracking keychain overwrite-delete action in analytics
+    [self logKeychainActionResult:result withMessage:@"Overwriting items in keychain by first deleting"];
+    
     if ((result != noErr) && (result != errSecItemNotFound)) {
         BOXLog(@"Keychain overwrite failed. Failed to delete keychain item with error %d", (int)result);
     }
@@ -299,22 +302,16 @@
     if (result != noErr) {
         BOXLog(@"Keychain overwrite failed. Failed to add keychain item with error %d", (int)result);
     }
-    NSMutableDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
-                                      @"message" : @"Overwriting all items in keychain"}.mutableCopy;
-    if (result != noErr) {
-        userInfo[@"error_code"] = @(result);
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
-                                                        object:nil
-                                                      userInfo:userInfo];
+    
+    // tracking keychain overwrite-add action in analytic
+    [self logKeychainActionResult:result withMessage:@"Overwriting all items in keychain"];
 }
-
 
 - (void)writeToKeychain
 {
     NSDictionary *attributes = NULL;
     NSMutableDictionary *updateItem = NULL;
-    NSString *keychainActionAnalyticsMessage = nil;
+    NSString *keychainActionAnalyticsMessage = nil; // set by the result value check below
     OSStatus result = SecItemCopyMatching((CFDictionaryRef)self.genericPasswordQuery, (CFTypeRef *)&attributes);
     if (result == noErr)
     {
@@ -348,9 +345,9 @@
 #endif
         
         // An implicit assumption is that you can only update a single item at a time.
-        keychainActionAnalyticsMessage = @"Modifying existing items in keychain";
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
         BOXAssert( result == noErr, @"Couldn't update the Keychain Item with error %d.", (int)result);
+        keychainActionAnalyticsMessage = @"Modifying existing items in keychain";
     }
     else
     {
@@ -362,18 +359,14 @@
         } else {
             [query setObject:(id)kSecAttrAccessibleAfterFirstUnlock forKey:(id)kSecAttrAccessible];
         }
-        keychainActionAnalyticsMessage = @"Adding items to keychain";
         result = SecItemAdd((CFDictionaryRef)query, NULL);
         BOXAssert( result == noErr, @"Couldn't add the Keychain Item with error %d.", (int)result);
+        keychainActionAnalyticsMessage = @"Adding items to keychain";
     }
-    NSMutableDictionary *userInfo = @{@"completion_status" : (result == noErr) ? @"succeeded" : @"failed",
-                                       @"message" : keychainActionAnalyticsMessage}.mutableCopy;
-    if (result != noErr) {
-        userInfo[@"error_code"] = @(result);
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
-                                                        object:nil
-                                                      userInfo:userInfo];
+    
+    // tracking write-to-keychain action in analytics
+    [self logKeychainActionResult:result withMessage:keychainActionAnalyticsMessage];
+
     // if keychain operations failed, attempt to delete and retry it again.
     if (result != noErr)
     {
@@ -417,4 +410,17 @@
     return defaultDictionary;
 }
 
+/// Logging to analytics on add/update/delete attempts on keychain
+- (void)logKeychainActionResult:(OSStatus)result withMessage:(NSString *)message
+{
+    NSMutableDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                      @"message" : message}.mutableCopy;
+    if (result != noErr) {
+        userInfo[@"completion_status"] = @"failed";
+        userInfo[@"error_code"] = @(result);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
+}
 @end
