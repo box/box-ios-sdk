@@ -2231,13 +2231,15 @@
 			files = (
 			);
 			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).framework",
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).framework.dSYM",
 			);
 			name = "Copy products to Carthage/Build/iOS";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "CARTHAGE_BUILD_DIR=\"$SRCROOT/../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$CARTHAGE_BUILD_DIR\" ]; then exit 0; fi\n\nrsync --delete -av \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$CARTHAGE_BUILD_DIR/iOS\"\n";
+			shellScript = "COPY_PRODUCTS=\"$SRCROOT/build-phases/copy-products.sh\"\nif [ -x \"$COPY_PRODUCTS\" ]; then\n    \"$COPY_PRODUCTS\" \"$SRCROOT/../Carthage/Build\"\nelse\n    echo \"warning: Not executable: $COPY_PRODUCTS\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
