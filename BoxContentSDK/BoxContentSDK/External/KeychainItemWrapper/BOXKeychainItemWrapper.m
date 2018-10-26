@@ -212,7 +212,8 @@
         {
             NSMutableDictionary *tempDictionary = [self dictionaryToSecItemFormat:self.keychainItemData];
             junk = SecItemDelete((CFDictionaryRef)tempDictionary);
-            
+            // tracking keychain reset action in analytics
+            [self logKeychainActionResult:junk withMessage:@"Reset keychain items by deleting"];
             NSAssert( junk == noErr || junk == errSecItemNotFound, @"Problem deleting current dictionary." );
             // Default data for keychain item.
             self.keychainItemData = [self defaultKeychainItemDataDictionaryWithIdentifier:self.identifier
