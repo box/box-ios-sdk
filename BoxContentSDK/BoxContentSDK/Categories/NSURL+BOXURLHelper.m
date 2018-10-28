@@ -25,9 +25,11 @@
     for (NSString *keyValuePair in keyValuePairs)
     {
         keyValuePairComponents = [keyValuePair componentsSeparatedByString:@"="];
-        BOXAssert(keyValuePairComponents.count == 2, @"Inconsistent information in keyValuePair=%@", keyValuePair);
-        [params setValue:[[keyValuePairComponents objectAtIndex:1] stringByRemovingPercentEncoding]
-                  forKey:[keyValuePairComponents objectAtIndex:0]];
+        if (keyValuePairComponents.count == 2) {
+            params[keyValuePairComponents[0]] = [keyValuePairComponents[1] stringByRemovingPercentEncoding];
+        } else {
+            BOXAssertFail(@"Inconsistent information in keyValuePair=%@", keyValuePair);
+        }
     }
 
     return [NSDictionary dictionaryWithDictionary:params];
