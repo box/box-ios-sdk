@@ -87,4 +87,36 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        _type = [coder decodeObjectOfClass:[BOXRepresentationType class] forKey:NSStringFromSelector(@selector(type))];
+        _status = [coder decodeObjectOfClass:[BOXRepresentationStatus class] forKey:NSStringFromSelector(@selector(status))];
+        _statusCode = [coder decodeObjectOfClass:[NSString class] forKey:NSStringFromSelector(@selector((statusCode)))];
+        _infoURL = [coder decodeObjectOfClass:[NSURL class] forKey:NSStringFromSelector(@selector(infoURL))];
+        _contentURL = [coder decodeObjectOfClass:[NSURL class] forKey:NSStringFromSelector(@selector(contentURL))];
+        _details = [coder decodeObjectOfClass:[NSDictionary class] forKey:NSStringFromSelector(@selector(details))];
+        _dimensions = [coder decodeObjectOfClass:[BOXRepresentationImageDimensions class] forKey:NSStringFromSelector(@selector(dimensions))];
+        _JSONData = [coder decodeObjectOfClass:[NSDictionary class] forKey:NSStringFromSelector(@selector(JSONData))];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.type forKey:NSStringFromSelector(@selector(type))];
+    [coder encodeObject:self.status forKey:NSStringFromSelector(@selector(status))];
+    [coder encodeObject:self.statusCode forKey:NSStringFromSelector(@selector((statusCode)))];
+    [coder encodeObject:self.infoURL forKey:NSStringFromSelector(@selector(infoURL))];
+    [coder encodeObject:self.contentURL forKey:NSStringFromSelector(@selector(contentURL))];
+    [coder encodeObject:self.details forKey:NSStringFromSelector(@selector(details))];
+    [coder encodeObject:self.dimensions forKey:NSStringFromSelector(@selector(dimensions))];
+    [coder encodeObject:self.JSONData forKey:NSStringFromSelector(@selector(JSONData))];
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
 @end

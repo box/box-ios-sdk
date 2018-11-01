@@ -96,7 +96,7 @@
                                                                            nullAllowed:NO];
         NSArray *representations = representationsJSON[BOXAPIObjectKeyEntries];
         if (representations) {
-            NSMutableArray *tempRepresentations = [NSMutableArray array];
+            NSMutableArray<BOXRepresentation *> *tempRepresentations = [NSMutableArray array];
             
             for (NSDictionary *representationJSON in representations) {
                 BOXRepresentation *representation = [[BOXRepresentation alloc] initWithJSON:representationJSON];

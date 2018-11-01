@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BOXContentSDKConstants.h"
 
-@interface BOXRepresentation : NSObject
+@interface BOXRepresentation : NSObject <NSSecureCoding>
 
 @property (nonatomic, readwrite, strong) BOXRepresentationType *type;
 
