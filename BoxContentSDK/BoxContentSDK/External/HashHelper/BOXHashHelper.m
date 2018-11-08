@@ -29,6 +29,10 @@
 #include <stdio.h>
 #include <AssetsLibrary/AssetsLibrary.h>
 
+#ifndef SHA_DIGEST_LENGTH
+#define SHA_DIGEST_LENGTH CC_SHA1_DIGEST_LENGTH
+#endif
+
 // Constants
 static const size_t FileHashDefaultChunkSizeForReadingData = 4096;
 
