@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BOXContentSDKConstants.h"
 
-@interface BOXRepresentation : NSObject <NSSecureCoding>
+@interface BOXRepresentation : NSObject
 
 @property (nonatomic, readwrite, strong) BOXRepresentationType *type;
 
@@ -44,6 +44,6 @@
  *
  *  @return NSDictionary the reconstructed JSONData of this BOXRepresentation
  */
-- (NSDictionary *)composeJSONData;
+- (NSDictionary *)JSONDictionary;
 
 @end

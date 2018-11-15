@@ -87,7 +87,7 @@
     return self;
 }
 
-- (NSDictionary *)composeJSONData
+- (NSDictionary *)JSONDictionary
 {
     NSMutableDictionary *JSONData = [NSMutableDictionary new];
     if (self.type) {
