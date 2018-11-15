@@ -39,4 +39,11 @@
  */
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse;
 
+/**
+ *  Reconstruct JSONData from BOXRepresentation's properties
+ *
+ *  @return NSDictionary the reconstructed JSONData of this BOXRepresentation
+ */
+- (NSDictionary *)composeJSONData;
+
 @end

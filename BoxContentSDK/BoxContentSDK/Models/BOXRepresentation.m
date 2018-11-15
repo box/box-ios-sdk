@@ -87,36 +87,41 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (NSDictionary *)composeJSONData
 {
-    self = [super init];
-    if (self) {
-        _type = [coder decodeObjectOfClass:[BOXRepresentationType class] forKey:NSStringFromSelector(@selector(type))];
-        _status = [coder decodeObjectOfClass:[BOXRepresentationStatus class] forKey:NSStringFromSelector(@selector(status))];
-        _statusCode = [coder decodeObjectOfClass:[NSString class] forKey:NSStringFromSelector(@selector((statusCode)))];
-        _infoURL = [coder decodeObjectOfClass:[NSURL class] forKey:NSStringFromSelector(@selector(infoURL))];
-        _contentURL = [coder decodeObjectOfClass:[NSURL class] forKey:NSStringFromSelector(@selector(contentURL))];
-        _details = [coder decodeObjectOfClass:[NSDictionary class] forKey:NSStringFromSelector(@selector(details))];
-        _dimensions = [coder decodeObjectOfClass:[BOXRepresentationImageDimensions class] forKey:NSStringFromSelector(@selector(dimensions))];
-        _JSONData = [coder decodeObjectOfClass:[NSDictionary class] forKey:NSStringFromSelector(@selector(JSONData))];
+    NSMutableDictionary *JSONData = [NSMutableDictionary new];
+    if (self.type) {
+        JSONData[BOXAPIObjectKeyRepresentation] = self.type;
     }
-    return self;
-}
+    if (self.dimensions) {
+        JSONData[BOXAPIObjectKeyProperties] = @{BOXAPIObjectKeyDimensions: self.dimensions};
+    }
+    if (self.status || self.statusCode) {
 
-- (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:self.type forKey:NSStringFromSelector(@selector(type))];
-    [coder encodeObject:self.status forKey:NSStringFromSelector(@selector(status))];
-    [coder encodeObject:self.statusCode forKey:NSStringFromSelector(@selector((statusCode)))];
-    [coder encodeObject:self.infoURL forKey:NSStringFromSelector(@selector(infoURL))];
-    [coder encodeObject:self.contentURL forKey:NSStringFromSelector(@selector(contentURL))];
-    [coder encodeObject:self.details forKey:NSStringFromSelector(@selector(details))];
-    [coder encodeObject:self.dimensions forKey:NSStringFromSelector(@selector(dimensions))];
-    [coder encodeObject:self.JSONData forKey:NSStringFromSelector(@selector(JSONData))];
-}
+        NSMutableDictionary *statusDict = [NSMutableDictionary new];
+        if (self.status) {
+            statusDict[BOXAPIObjectKeyState] = self.status;
+        }
+        if (self.statusCode) {
+            statusDict[BOXAPIObjectKeyCode] = self.statusCode;
+        }
+        JSONData[BOXAPIObjectKeyStatus] = statusDict;
+    }
+    if (self.details) {
+        JSONData[BOXAPIObjectKeyDetails] = self.details;
+    }
 
-+ (BOOL)supportsSecureCoding
-{
-    return YES;
+    NSString *contentURLString = self.contentURL.path;
+    if (contentURLString && [self.type isEqualToString:BOXRepresentationTypeHLS]) {
+        contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateValueHLSManifest withString:BOXRepresentationTemplateKeyAccessPath];
+    }
+    if (contentURLString) {
+        JSONData[BOXAPIObjectKeyContent] = @{BOXAPIObjectKeyURLTemplate: contentURLString};
+    }
+    if (self.infoURL.path) {
+        JSONData[BOXAPIObjectKeyInfo] = @{BOXAPIObjectKeyURL: self.infoURL.path};
+    }
+    return JSONData;
 }
 
 @end
