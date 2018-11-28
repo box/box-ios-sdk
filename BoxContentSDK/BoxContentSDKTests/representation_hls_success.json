@@ -1,0 +1,14 @@
+{
+    "representation": "hls",
+    "properties": {
+    },
+    "info": {
+        "url": "https://api.box.com/2.0/internal_files/125041766103/versions/133811379927/representations/hls"
+    },
+    "content": {
+        "url_template": "https://dl.boxcloud.com/api/2.0/internal_files/125041766103/versions/133811379927/representations/hls/content/{+asset_path}"
+    },
+    "status": {
+        "state": "success"
+    }
+}

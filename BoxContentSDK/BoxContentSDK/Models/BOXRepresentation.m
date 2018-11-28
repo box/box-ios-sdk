@@ -90,28 +90,23 @@
 - (NSDictionary *)JSONDictionary
 {
     NSMutableDictionary *JSONData = [NSMutableDictionary new];
-    if (self.type) {
-        JSONData[BOXAPIObjectKeyRepresentation] = self.type;
-    }
+    JSONData[BOXAPIObjectKeyRepresentation] = self.type;
+
     if (self.dimensions) {
         JSONData[BOXAPIObjectKeyProperties] = @{BOXAPIObjectKeyDimensions: self.dimensions};
     }
+
+    NSMutableDictionary *statusDict = nil;
     if (self.status || self.statusCode) {
-
-        NSMutableDictionary *statusDict = [NSMutableDictionary new];
-        if (self.status) {
-            statusDict[BOXAPIObjectKeyState] = self.status;
-        }
-        if (self.statusCode) {
-            statusDict[BOXAPIObjectKeyCode] = self.statusCode;
-        }
-        JSONData[BOXAPIObjectKeyStatus] = statusDict;
+        statusDict = [NSMutableDictionary new];
+        statusDict[BOXAPIObjectKeyState] = self.status;
+        statusDict[BOXAPIObjectKeyCode] = self.statusCode;
     }
-    if (self.details) {
-        JSONData[BOXAPIObjectKeyDetails] = self.details;
-    }
+    JSONData[BOXAPIObjectKeyStatus] = statusDict;
 
-    NSString *contentURLString = self.contentURL.path;
+    JSONData[BOXAPIObjectKeyDetails] = self.details;
+
+    NSString *contentURLString = self.contentURL.absoluteString;
     if (contentURLString && [self.type isEqualToString:BOXRepresentationTypeHLS]) {
         contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateValueHLSManifest withString:BOXRepresentationTemplateKeyAccessPath];
     }
@@ -119,7 +114,7 @@
         JSONData[BOXAPIObjectKeyContent] = @{BOXAPIObjectKeyURLTemplate: contentURLString};
     }
     if (self.infoURL.path) {
-        JSONData[BOXAPIObjectKeyInfo] = @{BOXAPIObjectKeyURL: self.infoURL.path};
+        JSONData[BOXAPIObjectKeyInfo] = @{BOXAPIObjectKeyURL: self.infoURL.absoluteString};
     }
     return JSONData;
 }

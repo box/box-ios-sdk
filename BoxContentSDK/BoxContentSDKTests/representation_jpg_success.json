@@ -1,0 +1,17 @@
+{
+    "representation": "jpg",
+    "properties": {
+        "dimensions": "32x32",
+        "paged": "false",
+        "thumb": "true"
+    },
+    "info": {
+        "url": "https://api.box.com/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32"
+    },
+    "status": {
+        "state": "success"
+    },
+    "content": {
+        "url_template": "https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/{+asset_path}"
+    }
+}
