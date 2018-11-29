@@ -93,7 +93,7 @@
 /**
  *  Array of available file conversion formats for original content
  */
-@property (nonatomic, readwrite, strong) NSArray<BOXRepresentation *> *representations;
+@property (nonatomic, readwrite, copy) NSArray<BOXRepresentation *> *representations;
 
 /**
  *  Url available to download or preview original content.

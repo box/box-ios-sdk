@@ -56,18 +56,18 @@
                                                                 hasExpectedType:[NSDictionary class]
                                                                     nullAllowed:NO];
         
-        NSString *contentURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURLTemplate
+        self.templateURLString = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyURLTemplate
                                                                     inDictionary:contentJSON
                                                                  hasExpectedType:[NSString class]
                                                                      nullAllowed:NO];
-        if (contentURLString.length > 0) {
+        if (self.templateURLString.length > 0) {
             NSString *replacementString = @"";
 
             if ([self.type isEqualToString:BOXRepresentationTypeHLS]) {
                 replacementString = BOXRepresentationTemplateValueHLSManifest;
             }
             
-            self.contentURL = [NSURL URLWithString:[contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:replacementString]];
+            self.contentURL = [NSURL URLWithString:[self.templateURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateKeyAccessPath withString:replacementString]];
         }
         
         NSDictionary *infoJSON = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyInfo
@@ -106,14 +106,10 @@
 
     JSONData[BOXAPIObjectKeyDetails] = self.details;
 
-    NSString *contentURLString = self.contentURL.absoluteString;
-    if (contentURLString && [self.type isEqualToString:BOXRepresentationTypeHLS]) {
-        contentURLString = [contentURLString stringByReplacingOccurrencesOfString:BOXRepresentationTemplateValueHLSManifest withString:BOXRepresentationTemplateKeyAccessPath];
+    if (self.templateURLString) {
+        JSONData[BOXAPIObjectKeyContent] = @{BOXAPIObjectKeyURLTemplate: self.templateURLString};
     }
-    if (contentURLString) {
-        JSONData[BOXAPIObjectKeyContent] = @{BOXAPIObjectKeyURLTemplate: contentURLString};
-    }
-    if (self.infoURL.path) {
+    if (self.infoURL.absoluteString) {
         JSONData[BOXAPIObjectKeyInfo] = @{BOXAPIObjectKeyURL: self.infoURL.absoluteString};
     }
     return JSONData;

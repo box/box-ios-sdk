@@ -24,6 +24,7 @@
     XCTAssertEqualObjects(BOXRepresentationStatusSuccess, representation.status);
     XCTAssertNil(representation.statusCode);
     XCTAssertEqualObjects(@"https://api.box.com/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32", representation.infoURL.absoluteString);
+    XCTAssertEqualObjects(@"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/{+asset_path}", representation.templateURLString);
     XCTAssertEqualObjects(@"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/", representation.contentURL.absoluteString);
     XCTAssertNil(representation.details);
     XCTAssertEqualObjects(BOXRepresentationImageDimensionsJPG32, representation.dimensions);
@@ -36,7 +37,7 @@
     representation.status = BOXRepresentationStatusSuccess;
     representation.statusCode = nil;
     representation.infoURL = [NSURL URLWithString:@"https://api.box.com/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32"];
-    representation.contentURL = [NSURL URLWithString:@"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/"];
+    representation.templateURLString = @"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/{+asset_path}";
     representation.details = nil;
     representation.dimensions = BOXRepresentationImageDimensionsJPG32;
 
@@ -53,7 +54,7 @@
             @"state": @"success"
         },
         @"content": @{
-            @"url_template": @"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/"
+            @"url_template": @"https://dl3.boxcloud.com/api/2.0/internal_files/269521907606/versions/283776110047/representations/jpg_thumb_32x32/content/{+asset_path}"
         }
     };
 
@@ -70,6 +71,7 @@
     XCTAssertEqualObjects(BOXRepresentationStatusSuccess, representation.status);
     XCTAssertNil(representation.statusCode);
     XCTAssertEqualObjects(@"https://api.box.com/2.0/internal_files/125041766103/versions/133811379927/representations/hls", representation.infoURL.absoluteString);
+    XCTAssertEqualObjects(@"https://dl.boxcloud.com/api/2.0/internal_files/125041766103/versions/133811379927/representations/hls/content/{+asset_path}", representation.templateURLString);
     XCTAssertEqualObjects(@"https://dl.boxcloud.com/api/2.0/internal_files/125041766103/versions/133811379927/representations/hls/content/master.m3u8", representation.contentURL.absoluteString);
     XCTAssertNil(representation.details);
     XCTAssertNil(representation.dimensions);
@@ -82,7 +84,7 @@
     representation.status = BOXRepresentationStatusSuccess;
     representation.statusCode = nil;
     representation.infoURL = [NSURL URLWithString:@"https://api.box.com/2.0/internal_files/125041766103/versions/133811379927/representations/hls"];
-    representation.contentURL = [NSURL URLWithString: @"https://dl.boxcloud.com/api/2.0/internal_files/125041766103/versions/133811379927/representations/hls/content/master.m3u8"];
+    representation.templateURLString = @"https://dl.boxcloud.com/api/2.0/internal_files/125041766103/versions/133811379927/representations/hls/content/{+asset_path}";
     representation.details = nil;
     representation.dimensions = nil;
 
@@ -112,6 +114,7 @@
     XCTAssertEqualObjects(BOXRepresentationStatusError, representation.status);
     XCTAssertEqualObjects(@"error_conversion_failed", representation.statusCode);
     XCTAssertEqualObjects(@"https://api.box.com/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320", representation.infoURL.absoluteString);
+    XCTAssertEqualObjects(@"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/{+asset_path}", representation.templateURLString);
     XCTAssertEqualObjects(@"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/", representation.contentURL.absoluteString);
     XCTAssertNil(representation.details);
     XCTAssertEqualObjects(BOXRepresentationImageDimensionsJPG320, representation.dimensions);
@@ -124,14 +127,14 @@
     representation.status = BOXRepresentationStatusError;
     representation.statusCode = @"error_conversion_failed";
     representation.infoURL = [NSURL URLWithString:@"https://api.box.com/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320"];
-    representation.contentURL = [NSURL URLWithString: @"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/"];
+    representation.templateURLString = @"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/{+asset_path}";
     representation.details = nil;
     representation.dimensions = BOXRepresentationImageDimensionsJPG320;
 
     NSDictionary *representationJSONDict = [representation JSONDictionary];
     NSDictionary *dictionary = @{
                                      @"content": @{
-                                         @"url_template": @"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/"
+                                         @"url_template": @"https://dl3.boxcloud.com/api/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320/content/{+asset_path}"
                                      },
                                      @"info": @{
                                          @"url": @"https://api.box.com/2.0/internal_files/339301799730/versions/358254064530/representations/jpg_320x320"

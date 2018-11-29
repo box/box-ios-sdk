@@ -19,6 +19,8 @@
 
 @property (nonatomic, readwrite, strong) NSURL *infoURL;
 
+@property (nonatomic, readwrite, copy) NSString *templateURLString;
+
 @property (nonatomic, readwrite, strong) NSURL *contentURL;
 
 @property (nonatomic, readwrite, strong) NSDictionary *details;
