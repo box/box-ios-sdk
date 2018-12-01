@@ -46,6 +46,8 @@ NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient
 
 @property (nonatomic, readwrite, strong) BOXSharedLinkHeadersHelper *sharedLinksHeaderHelper;
 
+@property (nonnull, nonatomic, readwrite, copy) ServerAuthFetchTokenBlock fetchTokenBlock;
+
 + (void)resetInstancesForTesting;
 
 @end
@@ -81,11 +83,11 @@ static BOXContentClient *defaultInstance = nil;
             }
             else if (storedUsers.count == 1)
             {
-                BOXUserMini *storedUser = [storedUsers firstObject];
-                defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.modelID];
+                id<UniqueSDKUser> storedUser = [storedUsers firstObject];
+                defaultInstance = [[[self class] SDKClients] objectForKey:storedUser.uniqueId];
                 if (defaultInstance == nil) {
                     defaultInstance = [[self alloc] initWithBOXUser:storedUser];
-                    [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.modelID];
+                    [[[self class] SDKClients] setObject:defaultInstance forKey:storedUser.uniqueId];
                 }
             }
             else
@@ -107,13 +109,18 @@ static BOXContentClient *defaultInstance = nil;
     }
     else if (usersFromKeychain.count == 1)
     {
-        BOXUserMini *storedUser = [usersFromKeychain firstObject];
-        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.modelID];
+        id<UniqueSDKUser> storedUser = [usersFromKeychain firstObject];
+        [defaultInstance.session restoreCredentialsFromKeychainForUserWithID:storedUser.uniqueId];
     }
     else {
         [NSException raise:@"You cannot use 'defaultClient' if multiple users have established a session."
                     format:@"Specify a user through clientForUser:"];
     }
+}
+
++ (BOXContentClient *)clientForNewSession
+{
+    return [[self alloc] init];
 }
 
 + (BOXContentClient *)clientForUser:(BOXUserMini *)user
@@ -126,22 +133,32 @@ static BOXContentClient *defaultInstance = nil;
     static NSString *synchronizer = @"synchronizer";
     @synchronized(synchronizer)
     {
-        BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.modelID];
-        
-        // NOTE: Developers should not allow the user to login through both App Users and OAuth2 at the same time.
+        BOXContentClient *client = [[[self class] SDKClients] objectForKey:user.uniqueId];
         
         if (client == nil) {
             client = [[self alloc] initWithBOXUser:user];
-            [[[self class] SDKClients] setObject:client forKey:user.modelID];
+            [[[self class] SDKClients] setObject:client forKey:user.uniqueId];
         }
         
         return client;
     }
 }
 
-+ (BOXContentClient *)clientForNewSession
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser *)serverAuthUser
+                                 initialToken:(nullable NSString *)token
+                          fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
+                              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock
 {
-    return [[self alloc] init];
+    BOXContentClient *client = [BOXContentClient clientForNewSession];
+    
+    [client setAccessTokenDelegate:client serverAuthUser:serverAuthUser];
+    [client session].credentialsPersistenceEnabled = NO;
+    [client session].accessToken = token;
+    
+    client.fetchTokenBlockInfo = fetchTokenBlockInfo;
+    client.fetchTokenBlock = fetchTokenBlock;
+    
+    return client;
 }
 
 + (void)setClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret
@@ -234,16 +251,12 @@ static BOXContentClient *defaultInstance = nil;
     return self;
 }
 
-- (instancetype)initWithBOXUser:(BOXUserMini *)user
+- (instancetype)initWithBOXUser:(id<UniqueSDKUser>)user
 {
+    //this will only be called internally when we're dealing with a BOXUserMini instance of user, not with a ServerAuthUser
     if (self = [self init])
     {
-        [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
-        
-        if (((BOXOAuth2Session *)self.session).refreshToken == nil) {
-            self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager urlSessionManager:self.urlSessionManager];
-            [self.session restoreCredentialsFromKeychainForUserWithID:user.modelID];
-        }
+        [self.session restoreCredentialsFromKeychainForUserWithID:user.uniqueId];
     }
     return self;
 }
@@ -254,7 +267,7 @@ static BOXContentClient *defaultInstance = nil;
     // Separate assignment to avoid an unused variable warning in release builds
     session = (BOXAbstractSession *)notification.object;
     if ([self.session isEqual: session]) {
-        BOXAssert(!self.user.modelID || !session.user.modelID || [self.user.modelID isEqualToString:session.user.modelID], @"ClientUser: %@, does not match Session User: %@", self.user.modelID, session.user.modelID);
+        BOXAssert(!self.user.uniqueId || !session.user.uniqueId || [self.user.uniqueId isEqualToString:session.user.uniqueId], @"ClientUser: %@, does not match Session User: %@", self.user.uniqueId, session.user.uniqueId);
     }
 }
 
@@ -263,7 +276,7 @@ static BOXContentClient *defaultInstance = nil;
     if ([notification.object isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = (NSDictionary *)notification.object;
         NSString *userID = [userInfo objectForKey:BOXUserIDKey];
-        if ([userID isEqualToString:self.user.modelID]) {
+        if ([userID isEqualToString:self.user.uniqueId]) {
             [self logOut];
         }
     }
@@ -276,7 +289,7 @@ static BOXContentClient *defaultInstance = nil;
     // user should update to the most recently authenticated one.
     BOXAbstractSession *session = (BOXAbstractSession *)notification.object;
     
-    if ([session.user.modelID isEqualToString:self.session.user.modelID] && session != self.session) {
+    if ([session.user.uniqueId isEqualToString:self.session.user.uniqueId] && session != self.session) {
         // In case there are any pending operations in the old session's queue, give them the latest tokens so they have
         // a good chance of succeeding.
         [self.session reassignTokensFromSession:session];
@@ -295,6 +308,18 @@ static BOXContentClient *defaultInstance = nil;
     }
 }
 
+- (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
+{
+    if(_fetchTokenBlock)
+    {
+        _fetchTokenBlock(self.session.user.uniqueId, _fetchTokenBlockInfo, completion);
+    }
+    else
+    {
+        [NSException raise:@"No fetchTokenBlock specified." format:@"You must specify a fetchTokenBlock when using a BOXContentClient configured for server-based auth"];
+    }
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -305,7 +330,7 @@ static BOXContentClient *defaultInstance = nil;
     return [BOXAbstractSession usersInKeychain];
 }
 
-- (BOXUserMini *)user
+- (id<UniqueSDKUser>)user
 {
     return self.session.user;
 }
@@ -409,6 +434,7 @@ static BOXContentClient *defaultInstance = nil;
 }
 
 - (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+                serverAuthUser:(ServerAuthUser *)serverAuthUser
 {
     BOXAssert(self.OAuth2Session.refreshToken == nil, @"BOXContentClients that use OAuth2 cannot have a delegate set.");
     BOXAssert(accessTokenDelegate != nil, @"delegate must be non-nil when calling setAccessTokenDelegate:");
@@ -417,7 +443,10 @@ static BOXContentClient *defaultInstance = nil;
     // Since BOXContentClient instances are defaulted to OAuth2 instead of App Users, a BOXAppUserSession must be initialized.
     // The OAuth2Session must be nil-ed out because "session" returns the first non-nil session instance (chosen between AppSession and OAuth2Session).
     if ([self.session isKindOfClass:[BOXOAuth2Session class]]) {
-        self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager urlSessionManager:self.urlSessionManager];
+        self.session = [[BOXAppUserSession alloc] initWithQueueManager:self.queueManager
+                                                     urlSessionManager:self.urlSessionManager
+                                                        serverAuthUser:serverAuthUser];
+        
         self.session.userAgentPrefix = self.userAgentPrefix;
     }
     

@@ -339,12 +339,12 @@
 - (void)didReceiveRevokeSessionNotification:(NSNotification *)notification
 {
     NSString *userIDRevoked = [notification.userInfo objectForKey:BOXUserIDKey];
-    if ([userIDRevoked isEqualToString:self.user.modelID])
+    if ([userIDRevoked isEqualToString:self.user.uniqueId])
     {
-        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainWrapper resetKeychainItem];
         
-        [self clearCurrentSessionWithUserID:self.user.modelID];
+        [self clearCurrentSessionWithUserID:self.user.uniqueId];
     }
 }
 

@@ -4,10 +4,12 @@
 //
 //  Copyright (c) 2014 Box. All rights reserved.
 //
+#import "BOXAPIAccessTokenDelegate.h"
 
 @class BOXAbstractSession;
 @class BOXUser;
 @class BOXUserMini;
+@class ServerAuthUser;
 @class BOXAPIQueueManager;
 @class BOXRequest;
 @class BOXSharedLinkHeadersHelper;
@@ -15,10 +17,13 @@
 @protocol BOXSharedLinkStorageProtocol;
 @protocol BOXContentCacheClientProtocol;
 @protocol BOXURLSessionManagerDelegate;
+@protocol UniqueSDKUser;
+
+typedef void (^ServerAuthFetchTokenBlock)(NSString *, NSDictionary *, void (^)(NSString *, NSDate *, NSError *));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
-@interface BOXContentClient : NSObject
+@interface BOXContentClient : NSObject <BOXAPIAccessTokenDelegate>
 
 /**
  *  Allows the SDK to associate shared links with Box Items.
@@ -61,9 +66,9 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 @property (nonatomic, readwrite, copy) void (^authenticationCompletionBlock)(BOXUser *user, NSError *error);
 
 /**
- *  The Box user associated with this SDK client. This will be nil if no user has been authenticated yet.
+ * The Box user associated with this SDK client. This will be nil if no user has been authenticated yet.
  */
-@property (nonatomic, readonly, strong) BOXUserMini *user;
+@property (nonatomic, readonly, strong) id<UniqueSDKUser> user;
 
 /**
  * The delegate for the BOXContentClient instance. Internally setting the BOXContentClient's delegate
@@ -73,6 +78,12 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * Allows users to retrieve access tokens in a way that bypasses OAuth2 and uses App Users instead.
  */
 @property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
+
+/**
+ * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
+ * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
+ */
+@property (nonatomic, nullable, readwrite, copy) NSDictionary *fetchTokenBlockInfo;
 
 /**
  *  The list of Box users that have established a session through the SDK.
@@ -117,6 +128,21 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *  @return An unauthenticated BOXContentClient
  */
 + (BOXContentClient *)clientForNewSession;
+
+/**
+ * Get a BOXContentClient that supports server-based auth (App Users or downscoped tokens).
+ *
+ * @param serverAuthUser A required instance of ServerAuthUser that will be passed to the fetchTokenBlock when a new token is required from the remote server
+ * @param token An optional token that you have already retrieved from your remote server; if nil your fetchTokenBlock will be invoked to retrieve a new token
+ * @param fetchTokenBlockInfo An optional dictionary of relevant information you may need when your fetchTokenBlock is invoked
+ * @param fetchTokenBlock A required code block that will be invoked whenever an expired token is detected.  This is where you will call your secure remote server to generate a new token
+ *
+ * @return BOXContentClient that is configured for server-based auth
+ */
++ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser *)serverAuthUser
+                                 initialToken:(nullable NSString *)token
+                          fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
+                              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 /**
  * Client ID:

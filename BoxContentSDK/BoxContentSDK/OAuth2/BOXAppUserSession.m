@@ -10,11 +10,25 @@
 #import "BOXAppUserSession.h"
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXUserRequest.h"
+#import "BOXUser.h"
 #import "BOXUser_Private.h"
 #import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXAPIOperation_Private.h"
 
+
 @implementation BOXAppUserSession
+
+- (instancetype)initWithQueueManager:(BOXAPIQueueManager *)queueManager
+                   urlSessionManager:(BOXURLSessionManager *)urlSessionManager
+                      serverAuthUser:(ServerAuthUser *)serverAuthUser
+{
+    self = [super initWithQueueManager:queueManager urlSessionManager:urlSessionManager];
+    if (self) {
+        self.user = serverAuthUser;
+    }
+    
+    return self;
+}
 
 - (void)performAuthorizationCodeGrantWithReceivedURL:(NSURL *)URL withCompletionBlock:(void (^)(BOXAppUserSession *, NSError *))block
 {
@@ -24,25 +38,11 @@
         weakSelf.accessToken = accessToken;
         weakSelf.accessTokenExpiration = accessTokenExpiration;
         
-        BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
-        [weakSelf prepareRequest:userRequest];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
         
-        [userRequest performRequestWithCompletion:^(BOXUser *user, NSError *error) {
-            if (user && !error) {
-                weakSelf.user = [[BOXUserMini alloc] initWithUserID:user.modelID name:user.name login:user.login];
-                [weakSelf storeCredentialsToKeychain];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidRefreshTokensNotification object:weakSelf];
-                
-                if (block) {
-                    block(weakSelf, nil);
-                }
-            } else {
-                if (block) {
-                    block(self, error);
-                }
-            }
-        }];
+        if (block) {
+            block(weakSelf, nil);
+        }
     };
     
     operation.failure = ^(NSError *error) {

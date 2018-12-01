@@ -8,6 +8,30 @@
 
 #import "BOXUser_Private.h"
 
+@implementation ServerAuthUser
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID
+{
+    self = [self initWithUniqueID:uniqueID name:nil login:nil];
+    
+    return self;
+}
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(NSString *)name login:(NSString *)login
+{
+    if (self = [super init])
+    {
+        self.uniqueId = uniqueID;
+        self.login = login;
+        self.name = name;
+    }
+    
+    return self;
+}
+
+@end
+
+
 @implementation BOXUserMini
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
@@ -42,6 +66,10 @@
     }
     
     return self;
+}
+
+- (NSString *)uniqueId {
+    return self.modelID;
 }
 
 @end

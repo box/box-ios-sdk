@@ -19,7 +19,7 @@
 
 @interface BOXAbstractSession ()
 
-@property (nonatomic, readwrite, strong) BOXUserMini *user;
+@property (nonatomic, readwrite, strong) id<UniqueSDKUser> user;
 
 + (NSString *)keychainIdentifierPrefix;
 + (NSString *)keychainAccessGroup;

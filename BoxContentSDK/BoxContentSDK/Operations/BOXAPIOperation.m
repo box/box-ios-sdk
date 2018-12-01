@@ -339,7 +339,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         //no session task to execute with, this happens for a background download/upload operation
         //retrieve cached info to finish
 
-        NSString *userId = self.session.user.modelID;
+        NSString *userId = self.session.user.uniqueId;
         NSError *error = nil;
         BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
 
@@ -422,7 +422,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             //if session task is a background download and it was cancelled with intention to resume,
             //acquire resumeData to later resume the download from where it was left off
             NSURLSessionDownloadTask *downloadTask = (NSURLSessionDownloadTask *)self.sessionTask;
-            NSString *userId = self.session.user.modelID;
+            NSString *userId = self.session.user.uniqueId;
             __weak BOXAPIOperation *weakSelf = self;
             [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
                 /**
@@ -452,7 +452,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     [self performCompletionCallback];
 
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
     NSError *error = nil;
 
     if ([self shouldAllowResume] == NO) {
@@ -516,8 +516,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:self.error
                                                           forKey:BOXAuthenticationErrorKey];
     NSDictionary *objectInfo = nil;
-    if (self.session.user.modelID) {
-        objectInfo = [NSDictionary dictionaryWithObject:self.session.user.modelID forKey:BOXUserIDKey];
+    if (self.session.user.uniqueId) {
+        objectInfo = [NSDictionary dictionaryWithObject:self.session.user.uniqueId forKey:BOXUserIDKey];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification
                                                         object:objectInfo
