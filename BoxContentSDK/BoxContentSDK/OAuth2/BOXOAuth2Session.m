@@ -180,7 +180,7 @@
 {
     NSString *encodedRedirectURI = BOXPercentEscapedStringFromString(self.redirectURIString);
     NSString *authorizeURLString = [NSString stringWithFormat:
-                                    @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@",
+                                    @"%@/oauth2/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@&mode=webapp",
                                     [BOXContentClient APIAuthBaseURL], self.clientID, self.nonce, encodedRedirectURI];
     return [NSURL URLWithString:authorizeURLString];
 }
