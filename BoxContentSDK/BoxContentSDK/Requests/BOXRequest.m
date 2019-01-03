@@ -332,6 +332,7 @@
                        BOXAPIObjectKeySequenceID,
                        BOXAPIObjectKeyETag,
                        BOXAPIObjectKeySHA1,
+                       BOXAPIObjectKeyWatermarkInfo,
                        BOXAPIObjectKeyName,
                        BOXAPIObjectKeyDescription,
                        BOXAPIObjectKeySize,

@@ -288,6 +288,7 @@ extern NSString *const BOXAPIObjectKeyType;
 extern NSString *const BOXAPIObjectKeySequenceID;
 extern NSString *const BOXAPIObjectKeyETag;
 extern NSString *const BOXAPIObjectKeySHA1;
+extern NSString* const BOXAPIObjectKeyWatermarkInfo;
 extern NSString *const BOXAPIObjectKeyName;
 extern NSString *const BOXAPIObjectKeyCreatedAt;
 extern NSString *const BOXAPIObjectKeyModifiedAt;
