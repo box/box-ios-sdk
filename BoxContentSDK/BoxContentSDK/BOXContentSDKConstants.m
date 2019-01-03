@@ -261,6 +261,7 @@ NSString *const BOXAPIObjectKeyType = @"type";
 NSString *const BOXAPIObjectKeySequenceID = @"sequence_id";
 NSString *const BOXAPIObjectKeyETag = @"etag";
 NSString *const BOXAPIObjectKeySHA1 = @"sha1";
+NSString *const BOXAPIObjectKeyWatermarkInfo = @"watermark_info";
 NSString *const BOXAPIObjectKeyName = @"name";
 NSString *const BOXAPIObjectKeyCreatedAt = @"created_at";
 NSString *const BOXAPIObjectKeyModifiedAt = @"modified_at";
