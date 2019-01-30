@@ -38,14 +38,13 @@ ServerAuthFetchTokenBlock fetchTokens = ^(NSString *uniqueId, NSDictionary *fetc
     NSString *fullUrl = [NSString stringWithFormat:@"https://YOUR_SECURE_SERVER.example.com/token?id=%@", uniqueId];
     NSURL *url = [NSURL URLWithString:fullUrl];
 
-    __block NSString *token;
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url
             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
                     NSLog(@"Failed to retrieve new access token from server");
                     completion(nil, nil, error);
                 } else {
-                    token = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    NSString *token = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     NSLog(@"Succeeded in retrieving new access token: %@", token);
 
                     // Pass token and expiration time back to the client
@@ -57,8 +56,8 @@ ServerAuthFetchTokenBlock fetchTokens = ^(NSString *uniqueId, NSDictionary *fetc
 
 // Create a client for the authenticated user; the client is keyed to that user's unique ID for caching purposes
 // The unique ID can be any identifier for the user, or a dummy value
-ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"UNIQUE_ID"];
-BOXContentClient *boxClient = [BOXContentClient clientForServerAuthUser:user
+ServerAuthUser *authUser = [[ServerAuthUser alloc] initWithUniqueID:@"UNIQUE_ID"];
+BOXContentClient *boxClient = [BOXContentClient clientForServerAuthUser:authUser
                                                 initialToken:nil
                                                 fetchTokenBlockInfo:nil
                                                 fetchTokenBlock:fetchTokens];
@@ -89,7 +88,7 @@ let fetchToken: ServerAuthFetchTokenBlock = { (
     let url = URL(string: "https://YOUR_SECURE_SERVER.example.com/token?id=\(uniqueID ?? "")")!
     let task = URLSession.shared.dataTask(with: url) { data, response, error in
         
-        if error != nil {
+        guard error == nil else {
             NSLog("Failed to retrieve new access token from server")
             completion(nil, nil, error)
             return
@@ -112,13 +111,13 @@ let fetchToken: ServerAuthFetchTokenBlock = { (
 
 // Create a client for the authenticated user; the client is keyed to that user's unique ID for caching purposes
 // The unique ID can be any identifier for the user, or a dummy value
-let user = ServerAuthUser(uniqueID: "UNIQUE_ID")!
-let client = BOXContentClient.init(for: user, initialToken: nil, fetchTokenBlockInfo: nil, fetchTokenBlock: fetchToken)!
+let authUser = ServerAuthUser(uniqueID: "UNIQUE_ID")!
+let client = BOXContentClient(for: authUser, initialToken: nil, fetchTokenBlockInfo: nil, fetchTokenBlock: fetchToken)!
 
 // Example of making an API call
 client.currentUserRequest().perform { (user: BOXUser?, error: Error?) in
     
-    if error != nil {
+    guard error == nil else {
         NSLog("Error getting user info");
         return
     }
