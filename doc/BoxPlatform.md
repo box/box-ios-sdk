@@ -76,16 +76,16 @@ BOXUserRequest *request = [boxClient currentUserRequest];
 __Swift:__
 ```swift
 let fetchToken: ServerAuthFetchTokenBlock = { (
-        uniqueID: String?,
+        uniqueID: String,
         fetchTokenBlockInfo: [AnyHashable: Any]?,
-        completion: ((String?, Date?, Error?) -> Void)!
+        completion: ((String?, Date?, Error?) -> Void)
     ) -> Void in
     
     // NOTE: This code is specific to your app; it is responsible for retrieving new tokens from a secure server
     NSLog("Attempting to retrieve new access token from server for unique ID: \(uniqueID)");
     
     // Make a request to the secure sever for a token
-    let url = URL(string: "https://YOUR_SECURE_SERVER.example.com/token?id=\(uniqueID ?? "")")!
+    let url = URL(string: "https://YOUR_SECURE_SERVER.example.com/token?id=\(uniqueID)")!
     let task = URLSession.shared.dataTask(with: url) { data, response, error in
         
         guard error == nil else {

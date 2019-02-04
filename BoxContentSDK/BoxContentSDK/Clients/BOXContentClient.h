@@ -19,7 +19,7 @@
 @protocol BOXURLSessionManagerDelegate;
 @protocol UniqueSDKUser;
 
-typedef void (^ServerAuthFetchTokenBlock)(NSString *, NSDictionary *, void (^)(NSString *, NSDate *, NSError *));
+typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull, NSDictionary * _Nullable, void (^ _Nonnull)(NSString * _Nullable, NSDate * _Nullable, NSError * _Nullable));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
@@ -77,7 +77,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * Allows users to retrieve access tokens in a way that bypasses OAuth2 and uses App Users instead.
  */
-@property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
+@property (nonatomic, readonly, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
 /**
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
