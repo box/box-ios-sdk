@@ -19,7 +19,7 @@
 @protocol BOXURLSessionManagerDelegate;
 @protocol UniqueSDKUser;
 
-typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull, NSDictionary * _Nullable, void (^ _Nonnull)(NSString * _Nullable, NSDate * _Nullable, NSError * _Nullable));
+typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull uniqueID, NSDictionary * _Nullable fetchTokenInfo, void (^ _Nonnull completion)(NSString * _Nullable token, NSDate * _Nullable expiresAt, NSError * _Nullable error));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
