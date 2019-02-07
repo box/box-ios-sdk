@@ -14,6 +14,8 @@
 @class BOXBookmarkDeleteRequest;
 @class BOXBookmarkCopyRequest;
 @class BOXBookmarkUpdateRequest;
+@class BOXBookmarkShareRequest;
+@class BOXBookmarkUnshareRequest;
 
 @class BOXFileRequest;
 @class BOXFileCopyRequest;
@@ -38,6 +40,8 @@
 @class BOXFolderPaginatedItemsRequest;
 @class BOXFolderItemsRequest;
 @class BOXTrashedFolderRestoreRequest;
+@class BOXFolderShareRequest;
+@class BOXFolderUnshareRequest;
 
 @class BOXBookmarkCommentsRequest;
 @class BOXCommentRequest;
@@ -94,6 +98,30 @@
 
 - (void)retrieveCacheForSharedItemRequest:(BOXSharedItemRequest *)request
                                completion:(BOXItemBlock)completionBlock;
+
+- (void)cacheFileShareRequest:(BOXFileShareRequest *)request
+                     withFile:(BOXFile *)file
+                        error:(NSError *)error;
+
+- (void)cacheFileUnshareRequest:(BOXFileUnshareRequest *)request
+                       withFile:(BOXFile *)file
+                          error:(NSError *)error;
+
+- (void)cacheFolderShareRequest:(BOXFolderShareRequest *)request
+                     withFolder:(BOXFolder *)folder
+                          error:(NSError *)error;
+
+- (void)cacheFolderUnshareRequest:(BOXFolderUnshareRequest *)request
+                       withFolder:(BOXFolder *)folder
+                            error:(NSError *)error;
+
+- (void)cacheBookmarkShareRequest:(BOXBookmarkShareRequest *)request
+                     withBookmark:(BOXBookmark *)bookmark
+                            error:(NSError *)error;
+
+- (void)cacheBookmarkUnshareRequest:(BOXBookmarkUnshareRequest *)request
+                       withBookmark:(BOXBookmark *)bookmark
+                              error:(NSError *)error;
 
 #pragma mark - Bookmarks
 
