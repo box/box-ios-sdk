@@ -200,6 +200,15 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
 
 /**
+ * Sets the access token delegate for an App Auth client.
+ *
+ * @param accessTokenDelegate  The delegate responsible for fetching new tokens when necessary.
+ * @param serverAuthUser       The user for which this client should be authenticated.
+ */
+- (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+                serverAuthUser:(ServerAuthUser *)serverAuthUser;
+
+/**
  * This method needs to be called once in main app to be ready to
  * support background upload/download tasks.
  * If this method has not been called, all background task creations will fail

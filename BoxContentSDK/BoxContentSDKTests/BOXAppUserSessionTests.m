@@ -50,7 +50,8 @@
 - (void)test_content_client_delegate_sets_queue_manager_delegate
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:self];
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    [client setAccessTokenDelegate:self serverAuthUser:user];
     
     XCTAssertEqual(self, client.queueManager.delegate);
 }
