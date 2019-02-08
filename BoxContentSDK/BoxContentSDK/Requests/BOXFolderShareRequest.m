@@ -12,7 +12,7 @@
 
 @interface BOXFolderShareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *folderID;
+@property (nonatomic, readwrite, copy) NSString *folderID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanPreview;
 
@@ -108,14 +108,24 @@
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
     folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderShareRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderShareRequest:self
+                                           withFolder:folder
+                                                error:nil];
+        }
         if (completionBlock) {
-            BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(folder, nil);
             } onMainThread:isMainThread];
         }
     };
     folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderShareRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderShareRequest:self
+                                           withFolder:nil
+                                                error:error];
+        }
         if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);
