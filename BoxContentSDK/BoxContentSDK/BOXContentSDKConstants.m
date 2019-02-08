@@ -107,6 +107,8 @@ BOXAPIItemType *const BOXAPIItemTypeRecentItem = @"recent_item";
 BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelOpen = @"open";
 BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelCompany = @"company";
 BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelCollaborators = @"collaborators";
+BOXSharedLinkAccessLevel *const BOXSharedLinkExpireLinkFileAccess = @"expireLinkFiles";
+BOXSharedLinkAccessLevel *const BOXSharedLinkExpireLinkFolderAvailable = @"expireLinkFolders";
 
 // Collaboration collaborator types
 BOXCollaborationCollaboratorType *const BOXCollaborationCollaboratorTypeUser = @"user";

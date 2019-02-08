@@ -14,6 +14,10 @@
  */
 @property (nonatomic, readwrite, assign) BOOL requestAllUserFields;
 
+@property (nonatomic, readonly, strong) NSString *userID;
+
+- (instancetype)initWithUserID:(NSString *)userID;
+
 //Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXUserBlock)completionBlock;
 
