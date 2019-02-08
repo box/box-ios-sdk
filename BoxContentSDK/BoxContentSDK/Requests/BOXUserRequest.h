@@ -16,6 +16,8 @@
 
 @property (nonatomic, readonly, strong) NSString *userID;
 
+// Setting the userID proprty reports the information for specified user is requested
+// Not setting this property, the default case will report the current user
 - (instancetype)initWithUserID:(NSString *)userID;
 
 //Perform API request and any cache update only if refreshBlock is not nil
