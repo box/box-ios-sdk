@@ -203,7 +203,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * Sets the access token delegate for an App Auth client.
  *
  * @param accessTokenDelegate  The delegate responsible for fetching new tokens when necessary.
- * @param serverAuthUser       The user for which this client should be authenticated.
+ * @param serverAuthUser       The user for which this client is authenticated.
  */
 - (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
                 serverAuthUser:(ServerAuthUser *)serverAuthUser;
