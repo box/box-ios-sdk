@@ -140,7 +140,7 @@
                 NSDictionary *expectedDictionary = @{@"access_token" : session.accessToken,
                                                      @"access_token_expiration" : [session.accessTokenExpiration box_ISO8601String],
                                                      @"refresh_token" : session.refreshToken,
-                                                     @"user_id" : session.user.modelID,
+                                                     @"user_id" : session.user.uniqueId,
                                                      @"user_login" : session.user.login,
                                                      @"user_name" : session.user.name};
                 XCTAssertEqualObjects(expectedDictionary, dictionary);
@@ -192,7 +192,7 @@
         XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"refresh_token"], session.refreshToken);
         XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"access_token"], session.accessToken);
         XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"access_token_expiration"], [session.accessTokenExpiration box_ISO8601String]);
-        XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"user_id"], session.user.modelID);
+        XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"user_id"], session.user.uniqueId);
         XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"user_login"], session.user.login);
         XCTAssertEqualObjects(keychainEntriesByUserID[userID][@"user_name"], session.user.name);
     }
