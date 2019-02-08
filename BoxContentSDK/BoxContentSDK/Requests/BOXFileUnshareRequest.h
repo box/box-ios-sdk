@@ -7,6 +7,8 @@
 
 @interface BOXFileUnshareRequest : BOXRequestWithSharedLinkHeader
 
+@property (nonatomic, readonly, strong) NSString *fileID;
+
 // Optional, if nil the file will get unshared if it exists and removing the shared link is permissable.
 // If an etag value is supplied, the file will only be unshared if the provided etag matches the current value.
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
