@@ -117,8 +117,6 @@ typedef NSString BOXSharedLinkAccessLevel;
 extern BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelOpen;
 extern BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelCompany;
 extern BOXSharedLinkAccessLevel *const BOXSharedLinkAccessLevelCollaborators;
-extern BOXSharedLinkAccessLevel *const BOXSharedLinkExpireLinkFileAvailable;
-extern BOXSharedLinkAccessLevel *const BOXSharedLinkExpireLinkFolderAvailable;
 
 // Collaboration collaborator types
 typedef NSString BOXCollaborationCollaboratorType;
