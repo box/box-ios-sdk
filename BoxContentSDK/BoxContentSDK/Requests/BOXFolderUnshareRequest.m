@@ -12,7 +12,7 @@
 
 @interface BOXFolderUnshareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *folderID;
+@property (nonatomic, readwrite, copy) NSString *folderID;
 
 @end
 

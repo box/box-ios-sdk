@@ -12,7 +12,7 @@
 
 @interface BOXBookmarkUnshareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *bookmarkID;
+@property (nonatomic, readwrite, copy) NSString *bookmarkID;
 
 @end
 

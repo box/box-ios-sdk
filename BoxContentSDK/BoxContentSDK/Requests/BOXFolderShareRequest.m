@@ -12,7 +12,7 @@
 
 @interface BOXFolderShareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *folderID;
+@property (nonatomic, readwrite, copy) NSString *folderID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanPreview;
 

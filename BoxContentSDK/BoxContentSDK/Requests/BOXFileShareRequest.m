@@ -12,7 +12,7 @@
 
 @interface BOXFileShareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *fileID;
+@property (nonatomic, readwrite, copy) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseCanPreview;
 

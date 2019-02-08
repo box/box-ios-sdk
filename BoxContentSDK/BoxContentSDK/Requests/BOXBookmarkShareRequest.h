@@ -7,7 +7,7 @@
 
 @interface BOXBookmarkShareRequest : BOXItemShareRequest
 
-@property (nonatomic, readonly, strong) NSString *bookmarkID;
+@property (nonatomic, readonly, copy) NSString *bookmarkID;
 
 - (instancetype)initWithBookmarkID:(NSString *)bookmarkID;
 - (void)performRequestWithCompletion:(BOXBookmarkBlock)completionBlock;

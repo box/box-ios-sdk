@@ -7,7 +7,7 @@
 
 @interface BOXFolderShareRequest : BOXItemShareRequest
 
-@property (nonatomic, readonly, strong) NSString *folderID;
+@property (nonatomic, readonly, copy) NSString *folderID;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
