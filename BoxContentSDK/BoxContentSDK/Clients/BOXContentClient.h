@@ -19,7 +19,7 @@
 @protocol BOXURLSessionManagerDelegate;
 @protocol UniqueSDKUser;
 
-typedef void (^ServerAuthFetchTokenBlock)(NSString *, NSDictionary *, void (^)(NSString *, NSDate *, NSError *));
+typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull uniqueID, NSDictionary * _Nullable fetchTokenInfo, void (^ _Nonnull completion)(NSString * _Nullable token, NSDate * _Nullable expiresAt, NSError * _Nullable error));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
@@ -77,7 +77,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * Allows users to retrieve access tokens in a way that bypasses OAuth2 and uses App Users instead.
  */
-@property (nonatomic, readwrite, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
+@property (nonatomic, readonly, weak) id<BOXAPIAccessTokenDelegate> accessTokenDelegate;
 
 /**
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
@@ -198,6 +198,15 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *  @param delegate The object that will receive the BOXSharedLinkStorageProtocol delegate callbacks.
  **/ 
 - (void)setSharedLinkStorageDelegate:(id <BOXSharedLinkStorageProtocol>)delegate;
+
+/**
+ * Sets the access token delegate for an App Auth client.
+ *
+ * @param accessTokenDelegate  The delegate responsible for fetching new tokens when necessary.
+ * @param serverAuthUser       The user for which this client is authenticated.
+ */
+- (void)setAccessTokenDelegate:(id<BOXAPIAccessTokenDelegate>)accessTokenDelegate
+                serverAuthUser:(ServerAuthUser *)serverAuthUser;
 
 /**
  * This method needs to be called once in main app to be ready to
