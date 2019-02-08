@@ -31,6 +31,17 @@
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }
 
+- (void)test_that_basic_request_for_user_by_id_has_expected_URLRequest
+{
+    BOXUserRequest *userRequest = [[BOXUserRequest alloc] initWithUserID:@"12345678"];
+    NSURLRequest *URLRequest = userRequest.urlRequest;
+    
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/12345678", [BOXContentClient APIBaseURL]]];
+    
+    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
+    XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
+}
+
 - (void)test_that_request_with_all_fields_has_expected_URLRequest_query_params
 {
     BOXUserRequest *userRequest = [[BOXUserRequest alloc] init];
