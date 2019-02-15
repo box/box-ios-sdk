@@ -20,6 +20,7 @@
 
 - (void)test_that_request_has_expected_URLRequest
 {
+    // This might be flaky?
     NSURL *URL = [NSURL URLWithString:@"http://blog.box.com"];
     NSString *parentFolderID = @"123";
     NSString *bookmarkName = @"Hello";
