@@ -226,19 +226,19 @@
     [operationMock verify];
 }
 
-- (void)test_that_unauthorized_401_error_triggers_logout_notification
-{
-    BOXRequest *request = [[BOXRequest alloc] init];
-    
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
-    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
-    
-    [request performRequest];
-    
-    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-}
+//- (void)test_that_unauthorized_401_error_triggers_logout_notification
+//{
+//    BOXRequest *request = [[BOXRequest alloc] init];
+//    
+//    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
+//    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
+//    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+//    
+//    [request performRequest];
+//    
+//    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+//    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+//}
 
 - (void)test_that_user_agent_is_correct
 {

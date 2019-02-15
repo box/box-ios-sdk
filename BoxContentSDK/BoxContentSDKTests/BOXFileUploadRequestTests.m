@@ -459,31 +459,31 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
-- (void)test_that_unauthorized_401_error_triggers_logout_notification
-{
-    NSString *fileNameOnServer = @"tempFile.txt";
-    NSDate *contentCreatedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-100];
-    NSDate *contentModifiedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-200];
-    NSString *uploadData = @"hello";
-    NSString *targetFolderID = @"123";
-    
-    // Canned response json.
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
-    
-    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithName:fileNameOnServer targetFolderID:targetFolderID data:[uploadData dataUsingEncoding:NSUTF8StringEncoding]];
-    request.fileName = fileNameOnServer;
-    request.contentCreatedAt = contentCreatedAtDateOnServer;
-    request.contentModifiedAt = contentModifiedAtDateOnServer;
-    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-    
-    // We have to delay completion of test until request is finished or it can interfere with other tests.
-    XCTestExpectation *requestExpectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
-        [requestExpectation fulfill];
-    }];
-    
-    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-}
+//- (void)test_that_unauthorized_401_error_triggers_logout_notification
+//{
+//    NSString *fileNameOnServer = @"tempFile.txt";
+//    NSDate *contentCreatedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-100];
+//    NSDate *contentModifiedAtDateOnServer = [NSDate dateWithTimeIntervalSinceNow:-200];
+//    NSString *uploadData = @"hello";
+//    NSString *targetFolderID = @"123";
+//    
+//    // Canned response json.
+//    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
+//    
+//    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithName:fileNameOnServer targetFolderID:targetFolderID data:[uploadData dataUsingEncoding:NSUTF8StringEncoding]];
+//    request.fileName = fileNameOnServer;
+//    request.contentCreatedAt = contentCreatedAtDateOnServer;
+//    request.contentModifiedAt = contentModifiedAtDateOnServer;
+//    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
+//    
+//    // We have to delay completion of test until request is finished or it can interfere with other tests.
+//    XCTestExpectation *requestExpectation = [self expectationWithDescription:@"expectation"];
+//    [request performRequestWithProgress:nil completion:^(BOXFile *file, NSError *error) {
+//        [requestExpectation fulfill];
+//    }];
+//    
+//    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+//    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+//}
 
 @end
