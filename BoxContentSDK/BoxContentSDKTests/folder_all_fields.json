@@ -84,6 +84,7 @@
                              "editor",
                              "viewer"
                              ],
+    "default_invitee_role":"viewer",
     "item_collection":{
         "total_count":6,
         "entries":[

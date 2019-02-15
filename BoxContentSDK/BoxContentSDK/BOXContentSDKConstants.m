@@ -326,6 +326,7 @@ NSString *const BOXAPIObjectKeyHasCollaborations = @"has_collaborations";
 NSString *const BOXAPIObjectKeyIsExternallyOwned = @"is_externally_owned";
 NSString *const BOXAPIObjectKeyCanNonOwnersInvite = @"can_non_owners_invite";
 NSString *const BOXAPIObjectKeyAllowedInviteeRoles = @"allowed_invitee_roles";
+NSString *const BOXAPIObjectKeyDefaultInviteeRole = @"default_invitee_role";
 NSString *const BOXAPIObjectKeyVersionNumber = @"version_number";
 NSString *const BOXAPIObjectKeyTimezone = @"timezone";
 NSString *const BOXAPIObjectKeyIsExternalCollabRestricted = @"is_external_collab_restricted";

@@ -316,7 +316,8 @@
                        BOXAPIObjectKeyHasCollaborations,
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyCanNonOwnersInvite,
-                       BOXAPIObjectKeyAllowedInviteeRoles];
+                       BOXAPIObjectKeyAllowedInviteeRoles,
+                       BOXAPIObjectKeyDefaultInviteeRole];
     return array;
 }
 
@@ -358,6 +359,7 @@
                        BOXAPIObjectKeyHasCollaborations,
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyAllowedInviteeRoles,
+                       BOXAPIObjectKeyDefaultInviteeRole,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections,
                        BOXAPIObjectKeyCollectionMemberships];

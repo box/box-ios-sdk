@@ -208,11 +208,18 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean isExternallyOwned;
 
 /**
- *  The possible roles that can be given to collaborators who are added into this folder.
+ *  The possible roles that can be given to collaborators who are added into this item.
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
  */
 @property (nonatomic, readwrite, strong) NSArray *allowedInviteeRoles;
+
+/**
+ *  The default roles to select when this item is being collaborated.
+ *  Warning: By default, the Box API does not return this value, and it will be nil.
+ *  You must request it by setting the "fields" of the request.
+ */
+@property (nonatomic, readwrite, strong, nullable) NSString *defaultInviteeRole;
 
 /**
  *  Metadata values for an item
