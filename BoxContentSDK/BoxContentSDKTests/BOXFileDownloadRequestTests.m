@@ -183,7 +183,7 @@
     }];
 
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:12.0 handler:nil];
 }
 
 # pragma mark - private helpers
