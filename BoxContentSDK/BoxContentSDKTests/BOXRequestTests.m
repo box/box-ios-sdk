@@ -187,44 +187,44 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
-- (void)test_that_forbidden_403_error_triggers_logout_notification_for_token_requests
-{
-    BOXRequest *request = [[BOXRequest alloc] init];
-    
-    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"empty"]; // we don't care what the JSON response is, but we need valid json
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:403 responseData:cannedResponseData];
-    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
-    
-    // Specifically testing BOXAPIOAuth2ToJSONOperation because 403 in other operations should NOT trigger a logout.
-    // (see test_that_forbidden_403_error_does_not_trigger_logout_notification_for_non_token_requests)
-    request.operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodPOST body:nil queryParams:nil session:request.queueManager.session];
-    
-    [request performRequest];
-    
-    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-}
+//- (void)test_that_forbidden_403_error_triggers_logout_notification_for_token_requests
+//{
+//    BOXRequest *request = [[BOXRequest alloc] init];
+//
+//    NSData *cannedResponseData =  [self cannedResponseDataWithName:@"empty"]; // we don't care what the JSON response is, but we need valid json
+//    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:403 responseData:cannedResponseData];
+//    [self setCannedURLResponse:URLResponse cannedResponseData:cannedResponseData forRequest:request];
+//
+//    // Specifically testing BOXAPIOAuth2ToJSONOperation because 403 in other operations should NOT trigger a logout.
+//    // (see test_that_forbidden_403_error_does_not_trigger_logout_notification_for_non_token_requests)
+//    request.operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodPOST body:nil queryParams:nil session:request.queueManager.session];
+//
+//    [request performRequest];
+//
+//    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+//    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+//}
 
-- (void)test_that_forbidden_403_error_does_not_trigger_logout_notification_for_non_token_requests
-{
-    BOXRequest *request = [[BOXRequest alloc] init];
-    
-    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:403 responseData:nil];
-    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
-
-    id operationMock = [OCMockObject partialMockForObject:request.operation];
-    [[operationMock reject] sendLogoutNotification];
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
-    [request performRequestWithCompletion:^{
-        XCTAssertEqual(403, request.operation.HTTPResponse.statusCode);
-        [expectation fulfill];
-    }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-
-    [operationMock verify];
-}
+//- (void)test_that_forbidden_403_error_does_not_trigger_logout_notification_for_non_token_requests
+//{
+//    BOXRequest *request = [[BOXRequest alloc] init];
+//
+//    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:403 responseData:nil];
+//    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
+//    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+//
+//    id operationMock = [OCMockObject partialMockForObject:request.operation];
+//    [[operationMock reject] sendLogoutNotification];
+//
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"expectation"];
+//    [request performRequestWithCompletion:^{
+//        XCTAssertEqual(403, request.operation.HTTPResponse.statusCode);
+//        [expectation fulfill];
+//    }];
+//    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+//
+//    [operationMock verify];
+//}
 
 //- (void)test_that_unauthorized_401_error_triggers_logout_notification
 //{
