@@ -149,21 +149,21 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
 }
 
-//- (void)test_that_unauthorized_401_error_triggers_logout_notification
-//{
-//    NSString *fileID = @"123";
-//    BOXRepresentation *rep = [self testRepresentation];
-//    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
-//    
-//    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
-//    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-//    
-//    [request performRequestWithProgress:nil completion:^(NSError *error) {
-//    }];
-//    
-//    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-//    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-//}
+- (void)test_that_unauthorized_401_error_triggers_logout_notification
+{
+    NSString *fileID = @"123";
+    BOXRepresentation *rep = [self testRepresentation];
+    BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:@"/dummy/path" fileID:fileID representation:rep];
+    
+    NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:401 responseData:nil];
+    [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
+    
+    [request performRequestWithProgress:nil completion:^(NSError *error) {
+    }];
+    
+    [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
 
 
 # pragma mark - private helpers

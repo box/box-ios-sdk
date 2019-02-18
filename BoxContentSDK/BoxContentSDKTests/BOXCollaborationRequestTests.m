@@ -44,7 +44,6 @@
 
 - (void)test_that_expected_collaboration_is_returned_when_request_is_performed
 {
-    // flaky?
     // Canned response json.
     NSData *cannedResponseData = [self cannedResponseDataWithName:@"collaboration"];
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:200 responseData:cannedResponseData];
