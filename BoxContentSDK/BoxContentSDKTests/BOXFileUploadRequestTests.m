@@ -278,7 +278,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     // Intermediate progress should be called at least once, and final should be called exactly once.
     XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
@@ -327,7 +327,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     // Intermediate progress should be called at least once, and final should be called exactly once.
     XCTAssertGreaterThan(intermediateProgressBlockCalls,  0);
@@ -379,7 +379,7 @@
         [requestExpectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 
     [[NSFileManager defaultManager] removeItemAtURL:localFileURL error:nil];
 }
@@ -426,7 +426,7 @@
         [requestExpectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 #pragma mark - Error Handling
@@ -456,7 +456,7 @@
     }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_unauthorized_401_error_triggers_logout_notification
@@ -483,7 +483,7 @@
     }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:12.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 @end

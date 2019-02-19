@@ -75,7 +75,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT handler:nil];
     
     NSData *data = [NSData dataWithContentsOfFile:localFilePath];
     XCTAssertEqualObjects(cannedResponseData, data);
@@ -98,7 +98,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
     XCTAssertEqualObjects(cannedResponseData, data);
@@ -133,7 +133,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     NSData *data = [outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
     XCTAssertEqualObjects(cannedResponseData, data);
@@ -167,7 +167,7 @@
     }];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_unauthorized_401_error_triggers_logout_notification
@@ -183,7 +183,7 @@
     }];
 
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:12.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 # pragma mark - private helpers

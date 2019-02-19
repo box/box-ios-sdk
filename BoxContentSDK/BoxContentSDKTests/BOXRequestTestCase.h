@@ -9,6 +9,8 @@
 #import "BOXContentSDKTestCase.h"
 #import "BOXCannedResponse.h"
 
+#define REQUEST_TEST_WAIT_TIME 5.0
+
 @class BOXRequest;
 
 @interface BOXRequestTestCase : BOXContentSDKTestCase

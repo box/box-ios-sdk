@@ -109,7 +109,7 @@
     [request performRequest];
 
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_unauthorized_device_400_error_triggers_logout_notification
@@ -124,7 +124,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_exceeded_device_limit_400_error_triggers_logout_notification
@@ -139,7 +139,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_missing_device_id_400_error_triggers_logout_notification
@@ -154,7 +154,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_unsupported_device_pinning_runtime_400_error_triggers_logout_notification
@@ -169,7 +169,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_account_deactivated_400_error_triggers_logout_notification
@@ -184,7 +184,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_forbidden_403_error_triggers_logout_notification_for_token_requests
@@ -200,9 +200,9 @@
     request.operation = [[BOXAPIOAuth2ToJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodPOST body:nil queryParams:nil session:request.queueManager.session];
 
     [request performRequest];
-
+    
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:12.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_forbidden_403_error_does_not_trigger_logout_notification_for_non_token_requests
@@ -221,7 +221,7 @@
         XCTAssertEqual(403, request.operation.HTTPResponse.statusCode);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:12.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 
     [operationMock verify];
 }
@@ -237,7 +237,7 @@
     [request performRequest];
     
     [self expectationForNotification:BOXUserWasLoggedOutDueToErrorNotification object:nil handler:nil];
-    [self waitForExpectationsWithTimeout:12.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_user_agent_is_correct
