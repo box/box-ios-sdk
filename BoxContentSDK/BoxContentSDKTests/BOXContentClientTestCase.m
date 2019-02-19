@@ -122,7 +122,7 @@
         [clientExpectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:5.97 handler:nil];
 }
 
 @end
