@@ -75,7 +75,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     NSData *data = [NSData dataWithContentsOfFile:localFilePath];
     XCTAssertEqualObjects(cannedResponseData, data);
