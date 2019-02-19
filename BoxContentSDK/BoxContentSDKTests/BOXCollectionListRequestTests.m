@@ -64,7 +64,7 @@
         [expectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 
     [cacheClientMock verify];
 }
@@ -94,7 +94,7 @@
         [expectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     [cacheClientMock verify];
 }

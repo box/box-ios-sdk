@@ -64,7 +64,7 @@
         XCTAssertEqual(cannedResponseImage.size.height, image.size.height);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_operation_is_marked_as_small_download

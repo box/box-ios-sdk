@@ -85,7 +85,7 @@
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_failed_preflight_check_request_fires_completion_block_with_expected_error
@@ -111,7 +111,7 @@
         XCTAssertEqualObjects(@"item_name_in_use", error.userInfo[BOXJSONErrorResponseKey][@"code"]);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 @end

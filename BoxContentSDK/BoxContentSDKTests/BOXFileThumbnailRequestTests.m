@@ -60,7 +60,7 @@
         XCTAssertEqual(cannedResponseImage.size.height, image.size.height);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_thumbnail_request_returns_expected_thumbnail_after_intermediate_202_responses
@@ -93,7 +93,7 @@
         XCTAssertEqual(cannedResponseImage.size.height, image.size.height);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
     
     // Expect 1 enqueueing for the initial request, and then 1 more for each of the intermediate 202 responses.
     XCTAssertEqual(1 + numberOfIntermediate202Responses, numberOfOperationsEnqueued);

@@ -84,7 +84,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.00 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_metadata_is_created_when_request_is_performed
@@ -109,7 +109,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_metadata_is_deleted_when_request_is_performed
@@ -125,7 +125,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_metadata_is_updated_when_request_is_performed
@@ -151,7 +151,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_metadata_update_task_value_cannot_be_nil_with_add_operation_when_using_validation

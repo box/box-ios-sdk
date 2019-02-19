@@ -131,7 +131,7 @@
         
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+    [self waitForExpectationsWithTimeout:REQUEST_TEST_WAIT_TIME handler:nil];
 }
 
 - (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
