@@ -74,5 +74,10 @@
                     "collection_type": "favorites"
                     }
                     ],
+    "allowed_invitee_roles":[
+        "editor",
+        "viewer"
+    ],
+    "default_invitee_role":"editor",
     "metadata": null
 }

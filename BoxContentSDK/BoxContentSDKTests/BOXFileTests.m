@@ -102,6 +102,18 @@
     XCTAssertFalse(file.isBookmark);
 }
 
+- (void)test_that_file_with_missing_default_invitee_role_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"file_all_fields"];
+    
+    // manually strip the 'default_invitee_role' entry
+    NSMutableDictionary *mutable = [dictionary mutableCopy];
+    [mutable removeObjectForKey:@"default_invitee_role"];
+    
+    BOXFile *file = [[BOXFile alloc] initWithJSON:mutable];
+    XCTAssertEqual(file.defaultInviteeRole, nil);
+}
+
 - (void)test_that_file_with_all_fields_is_parsed_correctly_from_json
 {
     // TODO: We need to revisit file_all_fields to make sure it reflects the latest server API doc.
@@ -182,6 +194,10 @@
     XCTAssertFalse(file.isFolder);
     XCTAssertFalse(file.isBookmark);
     XCTAssertEqual(file.metadata.count, 0);
+    
+    NSArray *allowedInviteeRoles = @[@"editor", @"viewer"];
+    XCTAssertEqualObjects(allowedInviteeRoles, file.allowedInviteeRoles);
+    XCTAssertEqualObjects(file.defaultInviteeRole, @"editor");
 }
 
 - (void)test_that_file_with_all_fields_with_representations_is_parsed_correctly_from_json

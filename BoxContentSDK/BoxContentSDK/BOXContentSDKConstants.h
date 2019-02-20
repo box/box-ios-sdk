@@ -353,6 +353,7 @@ extern NSString *const BOXAPIObjectKeyHasCollaborations;
 extern NSString *const BOXAPIObjectKeyIsExternallyOwned;
 extern NSString *const BOXAPIObjectKeyCanNonOwnersInvite;
 extern NSString *const BOXAPIObjectKeyAllowedInviteeRoles;
+extern NSString *const BOXAPIObjectKeyDefaultInviteeRole;
 extern NSString *const BOXAPIObjectKeyVersionNumber;
 extern NSString *const BOXAPIObjectKeyTimezone;
 extern NSString *const BOXAPIObjectKeyIsExternalCollabRestricted;

@@ -225,7 +225,15 @@
                                                                   inDictionary:JSONResponse
                                                                hasExpectedType:[NSArray class]
                                                                    nullAllowed:NO];
-        
+
+        // Parse DefaultInviteeRole
+        // Be forgiving here if the `default_invitee_role` field is not present. Doing this because as of Feb. test_that_upload_from_local_file_has_expected_URLRequest2019 the backend API
+        // is a bit in flux, there's no public ability to set the default role. Thus making the production iOS code more defensive.
+        self.defaultInviteeRole = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDefaultInviteeRole
+                                                                  inDictionary:JSONResponse
+                                                               hasExpectedType:[NSString class]
+                                                                   nullAllowed:YES];
+
         // Parse Item Size.
         self.size = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySize
                                                    inDictionary:JSONResponse
