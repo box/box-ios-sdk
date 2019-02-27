@@ -125,6 +125,15 @@ typedef enum {
     }];
 }
 
+- (void)refresh
+{
+    if (self.user.modelID.length > 0) {
+        [self.request cancel];
+        self.request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypeLarge];
+        [self renderRealUserAvatarFromRemote];
+    }
+}
+
 - (void)renderImage:(UIImage *)image
 {
     dispatch_async(dispatch_get_main_queue(), ^{
