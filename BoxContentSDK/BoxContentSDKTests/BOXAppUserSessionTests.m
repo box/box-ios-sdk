@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BOXContentSDKTestCase.h"
+
+@import BoxContentSDKTestFramework;
+
 #import "BOXAppUserSession.h"
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXContentClient_Private.h"

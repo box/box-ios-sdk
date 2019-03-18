@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentSDKTestCase.h"
+@import BoxContentSDKTestFramework;
+
 #import "BOXOAuth2Session.h"
 #import "BOXKeychainItemWrapper.h"
 
