@@ -17,8 +17,6 @@
 		6A86C5DF1E298015008F6243 /* BOXSampleAppSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A86C5DD1E298015008F6243 /* BOXSampleAppSessionManager.m */; };
 		86BA52D41B2A0950005DC854 /* BOXAuthenticationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BA52D31B2A0950005DC854 /* BOXAuthenticationPickerViewController.m */; };
 		A5A7C3471F2F040F00E84E44 /* BoxContentSDK.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A7C3461F2F040E00E84E44 /* BoxContentSDK.framework.dSYM */; };
-		A5FCBE501F2EB3AC00B750BF /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */; };
-		A5FCBE511F2EB3AD00B750BF /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5FCBE521F2EB98E00B750BF /* BOXSampleFileDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55FE2FD1A5D96EE00032032 /* BOXSampleFileDetailsController.m */; };
 		A5FCBE551F2EC58700B750BF /* BOXItemCollectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCBE541F2EC58700B750BF /* BOXItemCollectionService.m */; };
 		C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52D0A871A5C18D100CD4B56 /* Foundation.framework */; };
@@ -66,17 +64,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		599B1A951E4BF4DD00709C27 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A5FCBE511F2EB3AD00B750BF /* BoxContentSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A62092D1EC3C91B009E167A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,7 +163,6 @@
 				3DD751911AD2FEDE00BA719A /* Photos.framework in Frameworks */,
 				C540BEB31A5B00B40060E41B /* QuartzCore.framework in Frameworks */,
 				C540BEB51A5B00BA0060E41B /* Security.framework in Frameworks */,
-				A5FCBE501F2EB3AC00B750BF /* BoxContentSDK.framework in Frameworks */,
 				C52D0A881A5C18D100CD4B56 /* Foundation.framework in Frameworks */,
 				C52D0A8F1A5C18FB00CD4B56 /* CoreFoundation.framework in Frameworks */,
 			);
@@ -355,7 +341,6 @@
 				C5745C201A5AF6CC00824FFA /* Sources */,
 				C5745C211A5AF6CC00824FFA /* Frameworks */,
 				C5745C221A5AF6CC00824FFA /* Resources */,
-				599B1A951E4BF4DD00709C27 /* Embed Frameworks */,
 				6A62092D1EC3C91B009E167A /* Embed App Extensions */,
 				A5A7C3451F2F03EB00E84E44 /* CopyFiles */,
 			);
