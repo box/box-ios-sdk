@@ -49,6 +49,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		229030792241278400C6E7FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 15605D851A20132200C5EE5A;
+			remoteInfo = BoxContentSDKTests;
+		};
+		2290307B2241278400C6E7FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 599B195A1E4BE65700709C27;
+			remoteInfo = BoxContentSDK;
+		};
+		2290307D2241278400C6E7FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00D0E5212077EE230026BABA;
+			remoteInfo = TestApp;
+		};
 		6A6209271EC3C91B009E167A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5745C1C1A5AF6CC00824FFA /* Project object */;
@@ -101,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoxContentSDK.xcodeproj; path = "Carthage/Checkouts/box-ios-sdk/BoxContentSDK/BoxContentSDK.xcodeproj"; sourceTree = "<group>"; };
 		3DD751901AD2FEDE00BA719A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3DD751951AD3044500BA719A /* BOXSampleLibraryAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXSampleLibraryAssetViewController.h; sourceTree = "<group>"; };
 		3DD751961AD3044500BA719A /* BOXSampleLibraryAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXSampleLibraryAssetViewController.m; sourceTree = "<group>"; };
@@ -192,6 +214,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		229030742241278400C6E7FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2290307A2241278400C6E7FA /* BoxContentSDKTests.xctest */,
+				2290307C2241278400C6E7FA /* BoxContentSDK.framework */,
+				2290307E2241278400C6E7FA /* TestApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6A62091F1EC3C91B009E167A /* shareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +279,7 @@
 			children = (
 				A5A7C3461F2F040E00E84E44 /* BoxContentSDK.framework.dSYM */,
 				A5FCBE4F1F2EB3AC00B750BF /* BoxContentSDK.framework */,
+				229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */,
 				C5745C261A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
 				C5745C401A5AF6CC00824FFA /* BoxContentSDKSampleAppTests */,
 				6A62091F1EC3C91B009E167A /* shareExtension */,
@@ -436,6 +469,12 @@
 			mainGroup = C5745C1B1A5AF6CC00824FFA;
 			productRefGroup = C5745C251A5AF6CC00824FFA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 229030742241278400C6E7FA /* Products */;
+					ProjectRef = 229030732241278400C6E7FA /* BoxContentSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C5745C231A5AF6CC00824FFA /* BoxContentSDKSampleApp */,
@@ -444,6 +483,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2290307A2241278400C6E7FA /* BoxContentSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BoxContentSDKTests.xctest;
+			remoteRef = 229030792241278400C6E7FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2290307C2241278400C6E7FA /* BoxContentSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BoxContentSDK.framework;
+			remoteRef = 2290307B2241278400C6E7FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2290307E2241278400C6E7FA /* TestApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestApp.app;
+			remoteRef = 2290307D2241278400C6E7FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6A62091C1EC3C91B009E167A /* Resources */ = {
