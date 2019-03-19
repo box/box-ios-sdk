@@ -294,7 +294,7 @@ static NSString *const favoritesCollectionId = @"2921865";
     NSString *finalPath = [documentRootPath stringByAppendingPathComponent:((BOXFile *)self.item).name];
 
     //save information about this background download to allow reconnection to it upon app restarts
-    NSString *userId = self.client.user.modelID;
+    NSString *userId = self.client.user.uniqueId;
     BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
     BOXSampleAppSessionInfo *info = [BOXSampleAppSessionInfo new];
     info.fileID = self.itemID;
@@ -311,7 +311,7 @@ static NSString *const favoritesCollectionId = @"2921865";
 
 - (void)performRequest:(BOXFileDownloadRequest *)request associateId:(NSString *)associateId completion:(BOXErrorBlock)completionBlock
 {
-    NSString *userId = self.client.user.modelID;
+    NSString *userId = self.client.user.uniqueId;
     BOXSampleProgressView *progressHeaderView = [[BOXSampleProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 50.0f)];
     self.tableView.tableHeaderView = progressHeaderView;
 

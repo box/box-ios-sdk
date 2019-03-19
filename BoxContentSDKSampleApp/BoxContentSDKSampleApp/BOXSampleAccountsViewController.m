@@ -55,7 +55,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        NSString *userId = client.user.modelID;
+        NSString *userId = client.user.uniqueId;
         BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
         NSDictionary *associateIdToSessionTaskInfo = [appSessionManager associateIdToSessionTaskInfoForUserId:userId];
 
@@ -139,7 +139,7 @@
         } else {
             BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];
             
-            if ([tmpClient.user.modelID isEqualToString:client.user.modelID] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
+            if ([tmpClient.user.uniqueId isEqualToString:client.user.uniqueId] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
                 [tmpClient logOut];
                 [self barButtonPressed:nil];
             } else {
