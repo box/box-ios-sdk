@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Box. All rights reserved.
 //
 
-#import "BOXContentSDKTestCase.h"
+@import BoxContentSDKTestFramework;
 
 @interface BOXModelTestCase : BOXContentSDKTestCase
 
