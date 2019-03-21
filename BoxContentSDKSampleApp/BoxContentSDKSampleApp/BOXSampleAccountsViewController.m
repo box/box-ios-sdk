@@ -114,7 +114,7 @@
     [self reconnectWithBackgroundTasks:client];
 
     if (self.isAppUsers) {
-        [client setAccessTokenDelegate:self];
+//        [client setAccessTokenDelegate:self];
     }
     
     [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
@@ -242,7 +242,7 @@
     BOXContentClient *client = [BOXContentClient clientForUser:user];
     
     if (self.isAppUsers) {
-        [client setAccessTokenDelegate:self];
+//        [client setAccessTokenDelegate:self];
     }
     
     BOXSampleFolderViewController *folderListingController = [[BOXSampleFolderViewController alloc] initWithClient:client folderID:BOXAPIFolderIDRoot];
