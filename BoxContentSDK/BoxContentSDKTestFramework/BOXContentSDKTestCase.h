@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
+#import "OCMock.h"
 
 @class BOXModel;
 @class BOXSharedLink;
