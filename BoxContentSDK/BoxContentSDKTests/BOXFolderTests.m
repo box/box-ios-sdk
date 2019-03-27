@@ -112,6 +112,14 @@
     XCTAssertEqual(folder.defaultInviteeRole, nil);
 }
 
+- (void)test_that_folder_with_nsnull_default_invitee_role_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"folder_with_null_default_collab_invitee"];
+        
+    BOXFolder *folder = [[BOXFolder alloc] initWithJSON:dictionary];
+    XCTAssertEqual(folder.defaultInviteeRole, nil);
+}
+
 - (void)test_that_folder_with_all_fields_is_parsed_correctly_from_json
 {
     // TODO: We need to revisit folder_all_fields to make sure it reflects the latest server API doc.
