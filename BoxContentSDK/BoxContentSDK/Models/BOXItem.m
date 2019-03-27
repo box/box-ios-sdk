@@ -232,7 +232,8 @@
         self.defaultInviteeRole = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyDefaultInviteeRole
                                                                   inDictionary:JSONResponse
                                                                hasExpectedType:[NSString class]
-                                                                   nullAllowed:YES];
+                                                                   nullAllowed:YES
+                                                             suppressNullAsNil:YES];
 
         // Parse Item Size.
         self.size = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySize
