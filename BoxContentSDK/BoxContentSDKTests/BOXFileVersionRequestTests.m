@@ -39,7 +39,7 @@
     BOXFileVersionRequest *request = [[BOXFileVersionRequest alloc] initWithFileID:fileID versionID:versionID];
     
     XCTAssertEqualObjects([request itemIDForSharedLink], fileID);
-    XCTAssertEqualObjects([request itemTypeForSharedLink], BOXAPIItemTypeFile);    
+    XCTAssertEqualObjects([request itemTypeForSharedLink], BOXAPIItemTypeFileVersion);    
 }
 
 #pragma mark - Perform the request
