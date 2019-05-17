@@ -12,11 +12,6 @@
 @interface BOXFileVersionMini : BOXModel
 
 /**
- *  The name of the file at this version.
- */
-@property (nonatomic, readwrite, strong) NSString *name;
-
-/**
  *  The SHA1 hash of the file at this version.
  */
 @property (nonatomic, readwrite, strong) NSString *sha1;

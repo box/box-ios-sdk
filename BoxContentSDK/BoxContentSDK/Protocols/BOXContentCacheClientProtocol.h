@@ -26,6 +26,7 @@
 @class BOXFileUnshareRequest;
 @class BOXFileUpdateRequest;
 @class BOXFileVersionsRequest;
+@class BOXFileVersionRequest;
 @class BOXFileVersionPromoteRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXFileUploadRequest;
@@ -175,6 +176,13 @@
 
 - (void)retrieveCacheForFileVersionsRequest:(BOXFileVersionsRequest *)request
                                  completion:(BOXObjectsArrayCompletionBlock)completionBlock;
+
+- (void)cacheFileVersionRequest:(BOXFileVersionRequest *)request
+                    withVersion:(BOXFileVersion *)version
+                           error:(NSError *)error;
+
+- (void)retrieveCacheForFileVersionRequest:(BOXFileVersionRequest *)request
+                                 completion:(BOXFileVersionBlock)completionBlock;
 
 - (void)cacheFileVersionPromoteRequest:(BOXFileVersionPromoteRequest *)request
                            withVersion:(BOXFileVersion *)fileVersion
