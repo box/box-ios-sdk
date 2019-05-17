@@ -23,6 +23,11 @@
 @property (nonatomic, readwrite, strong) NSString *sequenceID;
 
 /**
+ *  ID of the item.
+ */
+@property (nonatomic, readwrite, strong) NSString *id;
+
+/**
  *  Name of the item.
  */
 @property (nonatomic, readwrite, strong) NSString *name;
@@ -249,3 +254,4 @@
 @property (nullable, nonatomic, readonly, assign) NSNumber *availableCollectionRank;
 
 @end
+

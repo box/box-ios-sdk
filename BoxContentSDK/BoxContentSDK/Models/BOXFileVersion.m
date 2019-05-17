@@ -8,6 +8,12 @@
 
 #import "BOXFileVersion.h"
 
+@implementation BOXFileVersionMini
+
+@end
+
+
+
 @implementation BOXFileVersion
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse
