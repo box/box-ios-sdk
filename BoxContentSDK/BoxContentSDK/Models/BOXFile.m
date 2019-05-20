@@ -52,13 +52,13 @@
         self.fileVersion = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyVersionNumber
                                                             inDictionary:JSONResponse
                                                          hasExpectedType:[BOXFileVersionMini class]
-                                                             nullAllowed:NO];
+                                                             nullAllowed:YES];
 
         // Parse Version Number.
         self.versionNumber = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyVersionNumber
                                                             inDictionary:JSONResponse
                                                          hasExpectedType:[NSString class]
-                                                             nullAllowed:YES];
+                                                             nullAllowed:NO];
 
         // Parse Comment Count.
         self.commentCount = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCommentCount
