@@ -58,7 +58,7 @@
         self.versionNumber = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyVersionNumber
                                                             inDictionary:JSONResponse
                                                          hasExpectedType:[NSString class]
-                                                             nullAllowed:NO];
+                                                             nullAllowed:YES];
 
         // Parse Comment Count.
         self.commentCount = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCommentCount
