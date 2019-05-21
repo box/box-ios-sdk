@@ -74,7 +74,7 @@
 		15F9C4BE1A3B9BAA006EC2EE /* shared_link.json in Resources */ = {isa = PBXBuildFile; fileRef = 15F9C4BD1A3B9BAA006EC2EE /* shared_link.json */; };
 		15F9C4C11A3B9C2F006EC2EE /* BOXSharedLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9C4C01A3B9C2F006EC2EE /* BOXSharedLinkTests.m */; };
 		15F9C4CE1A3BACF3006EC2EE /* BOXFileUpdateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9C4CD1A3BACF3006EC2EE /* BOXFileUpdateRequestTests.m */; };
-		225432F4228EB82100A670EA /* BOXFileVersionRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 225432F2228EB82000A670EA /* BOXFileVersionRequest.h */; };
+		225432F4228EB82100A670EA /* BOXFileVersionRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 225432F2228EB82000A670EA /* BOXFileVersionRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		225432F5228EB82100A670EA /* BOXFileVersionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 225432F3228EB82100A670EA /* BOXFileVersionRequest.m */; };
 		225432F7228EE05D00A670EA /* BOXFileVersionRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225432F6228EE05D00A670EA /* BOXFileVersionRequestTests.m */; };
 		3DE35CB11A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE35CB01A5B61C000694F6D /* BOXFileVersionPromoteRequestTests.m */; };
