@@ -49,7 +49,7 @@
             self.fileVersion = [[BOXFileVersionMini alloc] initWithJSON:fileVersionDictionary];
         }
         
-        self.fileVersion = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyVersionNumber
+        self.fileVersion = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyFileVersion
                                                             inDictionary:JSONResponse
                                                          hasExpectedType:[BOXFileVersionMini class]
                                                              nullAllowed:YES];
