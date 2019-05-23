@@ -38,22 +38,18 @@
                                                 hasExpectedType:[NSString class]
                                                     nullAllowed:NO];
         
+        // Parse File Version.
         NSDictionary *fileVersionDictionary = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyFileVersion
                                                                             inDictionary:JSONResponse
                                                                          hasExpectedType:[NSDictionary class]
                                                                              nullAllowed:YES
                                                                        suppressNullAsNil:YES];
-        // Parse File Version.
+        
         if (fileVersionDictionary)
         {
             self.fileVersion = [[BOXFileVersionMini alloc] initWithJSON:fileVersionDictionary];
         }
         
-        self.fileVersion = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyFileVersion
-                                                            inDictionary:JSONResponse
-                                                         hasExpectedType:[BOXFileVersionMini class]
-                                                             nullAllowed:YES];
-
         // Parse Version Number.
         self.versionNumber = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyVersionNumber
                                                             inDictionary:JSONResponse
