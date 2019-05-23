@@ -27,8 +27,6 @@
         keyValuePairComponents = [keyValuePair componentsSeparatedByString:@"="];
         if (keyValuePairComponents.count == 2) {
             params[keyValuePairComponents[0]] = [keyValuePairComponents[1] stringByRemovingPercentEncoding];
-        } else {
-            BOXAssertFail(@"Inconsistent information in keyValuePair=%@", keyValuePair);
         }
     }
 
