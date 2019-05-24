@@ -76,6 +76,7 @@
 #import "BOXFileShareRequest.h"
 #import "BOXFileUnshareRequest.h"
 #import "BOXFileVersionsRequest.h"
+#import "BOXFileVersionRequest.h"
 #import "BOXFileVersionPromoteRequest.h"
 #import "BOXFolderCreateRequest.h"
 #import "BOXFolderCopyRequest.h"

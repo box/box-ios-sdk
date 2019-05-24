@@ -51,5 +51,10 @@
         "etag": null,
         "name": "All Files"
     },
-    "item_status": "active"
+    "item_status": "active",
+    "file_version": {
+        "type": "file_version",
+        "id": "26261748416",
+        "sha1": "134b65991ed521fcfe4724b7d814ab8ded5185dc "
+    }
 }

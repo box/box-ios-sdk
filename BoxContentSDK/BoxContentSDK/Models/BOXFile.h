@@ -5,6 +5,7 @@
 //
 
 #import "BOXItem.h"
+#import "BOXFileVersion.h"
 
 @class BOXFileLock;
 
@@ -25,6 +26,12 @@
  *  The SHA1 hash of the file.
  */
 @property (nonatomic, readwrite, strong) NSString *SHA1;
+
+// TODO: please create better comment for this property
+/**
+ *  The version of the file.
+ */
+@property (nonatomic, readwrite, strong) BOXFileVersionMini *fileVersion;
 
 /**
  *  The version of the file.

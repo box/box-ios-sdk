@@ -394,7 +394,8 @@
                        BOXAPIObjectKeyCommentCount,
                        BOXAPIObjectKeyPermissions,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
-                       BOXAPIObjectKeyCollections];
+                       BOXAPIObjectKeyCollections,
+                       BOXAPIObjectKeyFileVersion];
     return array;
 }
 
