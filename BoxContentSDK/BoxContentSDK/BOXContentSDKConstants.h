@@ -516,7 +516,8 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
 typedef NS_ENUM(NSUInteger, BOXAvatarType) {
     BOXAvatarTypeUnspecified = 0,
     BOXAvatarTypeSmall,
-    BOXAvatarTypeLarge
+    BOXAvatarTypeLarge,
+    BOXAvatarTypePreview
 };
 
 /// Some reasonable default values for the X-Rep-Hints header when requesting
