@@ -46,6 +46,9 @@
         case BOXAvatarTypeLarge:
             avatarTypeString = @"large";
             break;
+        case BOXAvatarTypePreview:
+            avatarTypeString = @"preview";
+            break;
         case BOXAvatarTypeUnspecified:
         default:
             break;
