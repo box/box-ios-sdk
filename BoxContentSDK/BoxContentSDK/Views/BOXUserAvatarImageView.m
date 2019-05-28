@@ -87,7 +87,8 @@ typedef enum {
 {
     if (self.user.modelID.length > 0) {
         [self.request cancel];
-        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypeLarge];
+        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID
+                                                                        type:BOXAvatarTypePreview];
         id<BOXContentCacheClientProtocol> cacheClient = [self.client cacheClient];
         __weak BOXUserAvatarImageView *me = self;
         if ([cacheClient respondsToSelector:@selector(retrieveCacheForUserAvatarRequest:completion:)]) {
@@ -130,7 +131,7 @@ typedef enum {
 {
     if (self.user.modelID.length > 0) {
         [self.request cancel];
-        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypeLarge];
+        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypePreview];
         [self renderRealUserAvatarFromRemote:request];
     }
 }

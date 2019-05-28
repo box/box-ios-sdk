@@ -31,7 +31,20 @@
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
 }
 
-- (void)test_that_avatar_request_has_expected_URLRequest_with_specified_type
+- (void)test_that_avatar_request_has_expected_URLRequest_with_specified_type_small
+{
+    NSString *userID = @"123";
+    BOXUserAvatarRequest *request = [[BOXUserAvatarRequest alloc] initWithUserID:userID];
+    request.avatarType = BOXAvatarTypeSmall;
+    NSURLRequest *URLRequest = request.urlRequest;
+    
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/avatar?pic_type=small", [BOXContentClient APIBaseURL], userID]];
+    
+    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
+    XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
+}
+
+- (void)test_that_avatar_request_has_expected_URLRequest_with_specified_type_large
 {
     NSString *userID = @"123";
     BOXUserAvatarRequest *request = [[BOXUserAvatarRequest alloc] initWithUserID:userID];
@@ -39,6 +52,19 @@
     NSURLRequest *URLRequest = request.urlRequest;
     
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/avatar?pic_type=large", [BOXContentClient APIBaseURL], userID]];
+    
+    XCTAssertEqualObjects(expectedURL, URLRequest.URL);
+    XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
+}
+
+- (void)test_that_avatar_request_has_expected_URLRequest_with_specified_preview
+{
+    NSString *userID = @"123";
+    BOXUserAvatarRequest *request = [[BOXUserAvatarRequest alloc] initWithUserID:userID];
+    request.avatarType = BOXAvatarTypePreview;
+    NSURLRequest *URLRequest = request.urlRequest;
+    
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/avatar?pic_type=preview", [BOXContentClient APIBaseURL], userID]];
     
     XCTAssertEqualObjects(expectedURL, URLRequest.URL);
     XCTAssertEqualObjects(@"GET", URLRequest.HTTPMethod);
