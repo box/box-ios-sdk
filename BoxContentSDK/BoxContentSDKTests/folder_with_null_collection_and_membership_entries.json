@@ -9,5 +9,9 @@
         "editor",
         "viewer"
     ],
-    "default_invitee_role":null,
+    "collections":[null],
+    "collection_memberships": {
+        "collection": null
+    }
 }
+

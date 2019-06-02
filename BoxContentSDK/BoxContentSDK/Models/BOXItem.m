@@ -248,7 +248,9 @@
                                                                         nullAllowed:YES];
         NSMutableArray *collections = [NSMutableArray arrayWithCapacity:collectionsJSONArray.count];
         for (NSDictionary *dict in collectionsJSONArray) {
-            [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
+            if (![dict isEqual:[NSNull null]]) {
+                [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
+            }
         }
         
         // Parse membership collections into a BOXCollection
@@ -265,16 +267,17 @@
                                                                                     inDictionary:membershipDictionary
                                                                                  hasExpectedType:[NSDictionary class]
                                                                                      nullAllowed:YES];
-                
-                BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
-                // Collection rank in the collection_memberships object requires BOXCollection info,
-                // Don't set the rank without the dependant collection object.
-                collection.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
-                                                                           inDictionary:membershipDictionary
-                                                                        hasExpectedType:[NSNumber class]
-                                                                            nullAllowed:YES];
-                
-                [collections addObject:collection];
+                if (![collectionDictionary isEqual:[NSNull null]]) {
+                    BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
+                    // Collection rank in the collection_memberships object requires BOXCollection info,
+                    // Don't set the rank without the dependant collection object.
+                    collection.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
+                                                                               inDictionary:membershipDictionary
+                                                                            hasExpectedType:[NSNumber class]
+                                                                                nullAllowed:YES];
+
+                    [collections addObject:collection];
+                }
             }
         }
         
