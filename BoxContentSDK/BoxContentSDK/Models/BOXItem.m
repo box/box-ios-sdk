@@ -242,10 +242,11 @@
                                                     nullAllowed:NO];
         
         // Parse common collections into a BOXCollection
-        NSArray *collectionsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections 
-                                                                       inDictionary:JSONResponse
-                                                                    hasExpectedType:[NSArray class]
-                                                                        nullAllowed:YES];
+        NSArray *collectionsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections
+                                                                        inDictionary:JSONResponse
+                                                                     hasExpectedType:[NSArray class]
+                                                                         nullAllowed:YES
+                                                                   suppressNullAsNil:YES];
         NSMutableArray *collections = [NSMutableArray arrayWithCapacity:collectionsJSONArray.count];
         for (NSDictionary *dict in collectionsJSONArray) {
             if (![dict isEqual:[NSNull null]]) {
@@ -259,7 +260,8 @@
             NSArray *collectionMembershipsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionMemberships
                                                                                      inDictionary:JSONResponse
                                                                                   hasExpectedType:[NSArray class]
-                                                                                      nullAllowed:YES];
+                                                                                      nullAllowed:YES
+                                                                                suppressNullAsNil:YES];
             
             for (NSDictionary *membershipDictionary in collectionMembershipsJSONArray) {
                 // Parse the collection object with in the collection membership
