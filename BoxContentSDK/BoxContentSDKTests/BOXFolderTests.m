@@ -210,5 +210,13 @@
     XCTAssertEqualObjects(folder.defaultInviteeRole, @"viewer");
 }
 
+- (void)test_that_folder_with_nsnull_collections_entry_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"folder_with_null_collection_and_membership_entries"];
+    
+    BOXFolder *folder = [[BOXFolder alloc] initWithJSON:dictionary];
+    XCTAssertEqual([folder.collections count], 0);
+}
+
 @end
 

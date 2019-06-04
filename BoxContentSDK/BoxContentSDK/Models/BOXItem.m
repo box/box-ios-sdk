@@ -242,13 +242,16 @@
                                                     nullAllowed:NO];
         
         // Parse common collections into a BOXCollection
-        NSArray *collectionsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections 
-                                                                       inDictionary:JSONResponse
-                                                                    hasExpectedType:[NSArray class]
-                                                                        nullAllowed:YES];
+        NSArray *collectionsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollections
+                                                                        inDictionary:JSONResponse
+                                                                     hasExpectedType:[NSArray class]
+                                                                         nullAllowed:YES
+                                                                   suppressNullAsNil:YES];
         NSMutableArray *collections = [NSMutableArray arrayWithCapacity:collectionsJSONArray.count];
         for (NSDictionary *dict in collectionsJSONArray) {
-            [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
+            if (![dict isEqual:[NSNull null]]) {
+                [collections addObject:[[BOXCollection alloc] initWithJSON:dict]];
+            }
         }
         
         // Parse membership collections into a BOXCollection
@@ -257,7 +260,8 @@
             NSArray *collectionMembershipsJSONArray = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionMemberships
                                                                                      inDictionary:JSONResponse
                                                                                   hasExpectedType:[NSArray class]
-                                                                                      nullAllowed:YES];
+                                                                                      nullAllowed:YES
+                                                                                suppressNullAsNil:YES];
             
             for (NSDictionary *membershipDictionary in collectionMembershipsJSONArray) {
                 // Parse the collection object with in the collection membership
@@ -265,16 +269,17 @@
                                                                                     inDictionary:membershipDictionary
                                                                                  hasExpectedType:[NSDictionary class]
                                                                                      nullAllowed:YES];
-                
-                BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
-                // Collection rank in the collection_memberships object requires BOXCollection info,
-                // Don't set the rank without the dependant collection object.
-                collection.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
-                                                                           inDictionary:membershipDictionary
-                                                                        hasExpectedType:[NSNumber class]
-                                                                            nullAllowed:YES];
-                
-                [collections addObject:collection];
+                if (![collectionDictionary isEqual:[NSNull null]]) {
+                    BOXCollection *collection = [[BOXCollection alloc] initWithJSON:collectionDictionary];
+                    // Collection rank in the collection_memberships object requires BOXCollection info,
+                    // Don't set the rank without the dependant collection object.
+                    collection.collectionRank = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeyCollectionRank
+                                                                               inDictionary:membershipDictionary
+                                                                            hasExpectedType:[NSNumber class]
+                                                                                nullAllowed:YES];
+
+                    [collections addObject:collection];
+                }
             }
         }
         
