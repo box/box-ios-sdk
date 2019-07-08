@@ -238,6 +238,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  */
 - (BOOL)cacheResumeData:(NSData *)resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
 
+- (void)debug:(NSString *)rootCacheDir;
+
 @end
 
 NS_ASSUME_NONNULL_END

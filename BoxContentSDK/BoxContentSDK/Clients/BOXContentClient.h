@@ -247,6 +247,9 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 + (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId
                                            completion:(void (^)(NSError *error))completionBlock;
 
+
++ (NSString *)sessionManagerRootCacheDir:(NSString *)rootCacheDir;
+
 /**
  *  API base URLs.
  **/

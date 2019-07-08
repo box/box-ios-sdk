@@ -922,7 +922,51 @@ backgroundSessionId:(NSString *)backgroundSessionId
 // Return dir path onGoingSessionTasks/$backgroundSessionId
 - (NSString *)dirPathOfSessionTaskWithBackgroundSessionId:(NSString *)backgroundSessionId
 {
-    return [[self.cacheDir stringByAppendingPathComponent:BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName] stringByAppendingPathComponent:backgroundSessionId];
+    return [[self dirPathOfOnGoingSessionTasks] stringByAppendingPathComponent:backgroundSessionId];
+}
+
+- (NSString *)dirPathOfOnGoingSessionTasks
+{
+    return [self.cacheDir stringByAppendingPathComponent:BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName];
+}
+
+- (NSArray *)onGoingBackgroundSessionIdsWithError:(NSError **)error
+{
+    NSString *dir = [self dirPathOfOnGoingSessionTasks];
+    BOOL isDir = NO;
+    NSArray *backgroundSessionIds = [NSArray new];
+    NSError *err = nil;
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDir] == YES && isDir == YES) {
+        backgroundSessionIds = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:&err];
+    }
+
+    if (error != nil) {
+        *error = err;
+    }
+
+    return backgroundSessionIds;
+}
+
+- (NSDictionary<NSString *, NSArray<NSNumber *> *> *)onGoingBackgroundSessionIdToSessionTaskIdsWithError:(NSError **)error
+{
+    NSError *err = nil;
+    NSArray *backgroundSessionIds = [self onGoingBackgroundSessionIdsWithError:&err];
+    NSMutableDictionary<NSString *, NSArray<NSNumber *> *>*results = [NSMutableDictionary new];
+
+    for (int i=0; i<backgroundSessionIds.count; i++) {
+        NSString *backgroundSessionId = backgroundSessionIds[i];
+        NSArray<NSNumber *> *sessionTaskIds = [self onGoingSessionTasksForBackgroundSessionId:backgroundSessionId error:&err];
+        if (err == nil && sessionTaskIds != nil) {
+            results[backgroundSessionId] = sessionTaskIds;
+        } else {
+            break;
+        }
+    }
+    if (error != nil) {
+        *error = err;
+    }
+    return results;
 }
 
 // Return dir path extensionSessions/
@@ -962,6 +1006,12 @@ backgroundSessionId:(NSString *)backgroundSessionId
 - (NSString *)dirPathOfUserId:(NSString *)userId
 {
     return [[self dirPathOfUsers] stringByAppendingPathComponent:userId];
+}
+
+- (NSArray<NSString *> *)userIdsWithError:(NSError **)error
+{
+    NSString *usersDir = [self dirPathOfUsers];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usersDir error:error];
 }
 
 - (NSString *)fileNameGivenBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId

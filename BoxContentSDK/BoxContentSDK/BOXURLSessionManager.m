@@ -9,6 +9,7 @@
 #import "BOXURLSessionManager.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -140,6 +141,29 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return self;
 }
 
+//collect info on:
+// - userId->associateId->backgroundSessionId+sessionTaskId
+// - ongoing: backgroundSessionId -> sessionTaskIds
+// - extensionSessionIds
+- (void)debug:(NSString *)rootCacheDir
+{
+    NSError *error = nil;
+
+    [self createCacheClient:rootCacheDir];
+
+    NSArray *userIds = [self.cacheClient userIdsWithError:&error];
+    for (NSString *userId in userIds) {
+        NSDictionary *associateIdToBgSessionIdAndSessionTaskId = [self.cacheClient associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:&error];
+        os_log(OS_LOG_DEFAULT, "******SM: debug userId %{public}@, associateId map %{public}@", userId, associateIdToBgSessionIdAndSessionTaskId);
+    }
+
+    NSDictionary *sessionIdToSessionTaskIds = [self.cacheClient onGoingBackgroundSessionIdToSessionTaskIdsWithError:&error];
+    os_log(OS_LOG_DEFAULT, "******SM: debug ongoing sessions %{public}@", sessionIdToSessionTaskIds);
+
+    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIdsFromExtensionsWithError:&error];
+    os_log(OS_LOG_DEFAULT, "******SM: extensionSessionIds %{public}@", extensionSessionIds);
+}
+
 - (NSURLSession *)createDefaultSession
 {
     if (_defaultSession == nil) {
@@ -221,6 +245,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                  rootCacheDir:(NSString *)rootCacheDir
                                                    completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
+    os_log(OS_LOG_DEFAULT, "******SM: set up in app to support bg tasks with sessionId %{public}@", backgroundSessionIdentifierForMainApp);
     //used by main app to create and reuse one background NSURLSession
     //completionBlock will be called once the app's background session is ready
     //to provide background session tasks
@@ -236,6 +261,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     BOXAssert(error == nil, @"Failed to retrieve backgroundSessionIds from extensions with error %@", error);
 
     for (NSString *extensionSessionId in extensionSessionIds) {
+        os_log(OS_LOG_DEFAULT, "******SM: set up in app, reconnect to sessionId %{public}@", extensionSessionId);
         [self reconnectWithBackgroundSessionIdFromExtension:extensionSessionId completion:nil];
     }
 }
@@ -263,6 +289,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     //if extension restarts, it will get a different backgroundSessionId given that its previous background session
     //will now be handled by the main app (app got woken up about background sessions from a terminated extension)
     NSString *backgroundSessionId = [BOXURLSessionManager randomExtensionBackgroundSessionId];
+    os_log(OS_LOG_DEFAULT, "******SM: set up in ext to support bg tasks with sessionId %{public}@", backgroundSessionId);
+
     [self oneTimeSetUpToSupportBackgroundTasksWithBackgroundSessionId:backgroundSessionId delegate:delegate rootCacheDir:rootCacheDir sharedContainerIdentifier:sharedContainerIdentifier completion:completionBlock];
 }
 
@@ -283,6 +311,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 
     if (firstSetUp == YES) {
+        os_log(OS_LOG_DEFAULT, "******SM: first set up for sessionId %{public}@", backgroundSessionId);
         self.defaultDelegate = delegate;
         [self createCacheClient:rootCacheDir];
         self.cacheClient.delegate = delegate;
@@ -290,6 +319,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     } else if (completionBlock != nil) {
         // Have set up this background session previously
+        os_log(OS_LOG_DEFAULT, "******SM: set up sessionId %{public}@ previously", backgroundSessionId);
         completionBlock(nil);
     }
 }
@@ -297,6 +327,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 - (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(nullable void (^)(NSError * _Nullable error))completionBlock
 {
     if (self.supportBackgroundSessionTasks == NO) {
+
+        os_log(OS_LOG_DEFAULT, "******SM: reconnect to sessionId %{public}@, failed without bg support", backgroundSessionId);
         if (completionBlock != nil) {
             NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionFailToReconnectBecauseBackgroundSessionIsNotSupported userInfo:nil];
             completionBlock(error);
@@ -305,14 +337,20 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         // Have not reconnected to this background session previously, create it and populate its tasks' information
         NSError *error = nil;
         NSURLSession *backgroundSession = [self createBackgroundSessionWithId:backgroundSessionId sharedContainerIdentifier:nil maxConcurrentOperationCount:-1];
+
+        os_log(OS_LOG_DEFAULT, "******SM: reconnect creating sessionId %{public}@", backgroundSession.configuration.identifier);
+
         if ([self.cacheClient cacheBackgroundSessionIdFromExtension:backgroundSessionId error:&error] == YES) {
+            os_log(OS_LOG_DEFAULT, "******SM: reconnect cached sessionId %{public}@", backgroundSessionId);
             [self populatePendingSessionTasksForBackgroundSession:backgroundSession completion:completionBlock];
         } else if (completionBlock != nil) {
+            os_log(OS_LOG_DEFAULT, "******SM: reconnect failed to cache sessionId %{public}@, error %{public}@", backgroundSessionId, error.localizedDescription);
             completionBlock(error);
         }
 
     } else if (completionBlock != nil) {
         // Have reconnected to this background session previously
+        os_log(OS_LOG_DEFAULT, "******SM: reconnected to sessionId %{public}@ previously", backgroundSessionId);
         completionBlock(nil);
     }
 }
@@ -321,6 +359,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     if (backgroundSession == nil) {
         NSError *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKURLSessionInvalidBackgroundSession userInfo:nil];
+
+        os_log(OS_LOG_DEFAULT, "******SM: populate pending tasks failed with nil session");
         if (completionBlock != nil) {
             completionBlock(error);
         }
@@ -342,7 +382,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             [pendingSessionTaskIds addObject:@(downloadTask.taskIdentifier)];
         }
         NSError *error = nil;
+
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ populate found in-progress tasks: %{public}@", backgroundSessionId, pendingSessionTaskIds);
         BOOL success = [self.cacheClient completeOnGoingSessionTasksForBackgroundSessionId:backgroundSessionId excludingSessionTaskIds:pendingSessionTaskIds error:&error];
+
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ populate move completed tasks status %{public}d, error %{public}@",
+               backgroundSessionId, success, error==nil ? @"nil" : error.localizedDescription);
+
         BOXAssert(success, @"Failed to complete tasks which are no longer in pending with error %@", error);
         self.didFinishSettingUpBackgroundSession = YES;
         
@@ -849,6 +895,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 didFinishDownloadingToURL:(NSURL *)location
 {
     // This method is only called by background download tasks
+
+    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ finished download task %{public}@, response %{public}@", session.configuration.identifier, downloadTask.taskIdentifier, downloadTask.response);
+
     if ([downloadTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)downloadTask.response;
 
@@ -915,6 +964,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
+    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, receive response %{public}@", session.configuration.identifier, dataTask.taskIdentifier, response);
     //this method is only called by foreground session tasks, call its taskDelegate to handle
     id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier];
 
@@ -940,7 +990,8 @@ didReceiveResponse:(NSURLResponse *)response
                                                     sessionTaskId:dataTask.taskIdentifier
                                                      responseData:data
                                                             error:&error];
-        
+
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, cached response data status %{public}@", session.configuration.identifier, dataTask.taskIdentifier, success?@"YES":@"NO");
         if (!success) {
             BOXLog(@"failed to cache response for background session task due to %@", error);
         }
@@ -989,12 +1040,14 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                                     sessionTaskId:task.taskIdentifier
                                                          response:task.response
                                                             error:&err];
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed with response %{public}@, cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, task.response, success?@"YES":@"NO", err.localizedDescription);
         BOXAssert(success, @"failed to cache response for background session task with error %@", err);
 
         success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier
                                                sessionTaskId:task.taskIdentifier
                                                    taskError:error
                                                        error:&err];
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed with error %{public}@, cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, error.localizedDescription, success?@"YES":@"NO", err.localizedDescription);
         BOXAssert(success, @"failed to cache error for background session task with error %@", err);
 
         //notify its taskDelegate about the completion with response, responseData, and error
@@ -1005,6 +1058,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId
                                                                 sessionTaskId:task.taskIdentifier
                                                                         error:&err];
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, success?@"YES":@"NO", err.localizedDescription);
         BOXAssert(success, @"failed to complete session task for background session task with error %@", err);
 
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId
@@ -1035,7 +1089,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
     if (task.originalRequest.HTTPBodyStream && [task.originalRequest.HTTPBodyStream conformsToProtocol:@protocol(NSCopying)]) {
         inputStream = [task.originalRequest.HTTPBodyStream copy];
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, got new stream", session.configuration.identifier, task.taskIdentifier);
     } else {
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, failed to get new stream", session.configuration.identifier, task.taskIdentifier);
         BOXLog(@"needNewBodyStream failed to get an new input stream from %@", task.originalRequest.HTTPBodyStream);
     }
 

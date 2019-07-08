@@ -336,4 +336,9 @@
  */
 - (BOOL)resumeCompletedDownloadSessionTaskForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
+
+- (NSDictionary<NSString *, NSArray<NSNumber *> *> *)onGoingBackgroundSessionIdToSessionTaskIdsWithError:(NSError **)error;
+
+- (NSArray<NSString *> *)userIdsWithError:(NSError **)error;
+
 @end
