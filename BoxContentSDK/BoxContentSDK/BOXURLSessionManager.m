@@ -991,7 +991,7 @@ didReceiveResponse:(NSURLResponse *)response
                                                      responseData:data
                                                             error:&error];
 
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, cached response data status %{public}@", session.configuration.identifier, dataTask.taskIdentifier, success?@"YES":@"NO");
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, cached response data status %{public}d", session.configuration.identifier, dataTask.taskIdentifier, success);
         if (!success) {
             BOXLog(@"failed to cache response for background session task due to %@", error);
         }

@@ -10,7 +10,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
-
+#import <os/log.h>
 
 @implementation BOXURLSessionTaskCachedInfo
 @end
@@ -127,6 +127,13 @@ backgroundSessionId:(NSString *)backgroundSessionId
                                sessionTaskId:sessionTaskId
                                        error:error];
 
+    if (success == NO) {
+        if (error && *error) {
+            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}@, error %{public}@", associateId, backgroundSessionId, sessionTaskId, (*error).localizedDescription);
+        } else {
+            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}@", associateId, backgroundSessionId, sessionTaskId);
+        }
+    }
     if (success == YES) {
         //persist onGoingSessionTasks/$backgroundSessionId/$sessionTaskId/userIdAndAssociateId
         success = [self cacheBackgroundSessionId:backgroundSessionId
@@ -135,7 +142,6 @@ backgroundSessionId:(NSString *)backgroundSessionId
                                      associateId:associateId
                                            error:error];
     }
-
     return success;
 }
 
@@ -1061,7 +1067,8 @@ backgroundSessionId:(NSString *)backgroundSessionId
             backgroundSessionIdAndSessionTaskId = [self parseBackgroundSessionIdAndSessionTaskIdFileName:fileName];
         } else {
             //if the error is different than "No such file or directory"
-            BOXAssertFail(@"Failed to list content of dir %@", dir);
+            //BOXAssertFail(@"Failed to list content of dir %@", dir);
+            os_log(OS_LOG_DEFAULT, "*****CC: Failed to list content of dir for userId %{public}@, associatedId %{public}@", userId, associateId);
         }
         
         if (error != nil) {
