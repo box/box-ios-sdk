@@ -341,4 +341,6 @@
 
 - (NSArray<NSString *> *)userIdsWithError:(NSError **)error;
 
+- (NSDictionary *)readAssociateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)error;
+
 @end

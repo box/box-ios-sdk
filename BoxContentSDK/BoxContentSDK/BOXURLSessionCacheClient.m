@@ -625,6 +625,45 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return success;
 }
 
+
+- (NSDictionary *)readAssociateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
+{
+    if (userId == nil) {
+        return nil;
+    }
+
+    NSError *finalError = nil;
+    NSArray *associateIds = [self associateIdsForUserId:userId error:&finalError];
+    NSMutableDictionary *associateIdToBackgroundSessionIdAndSessionTaskIds = [NSMutableDictionary new];
+
+    //iterate through users/$userId/$associateId subdirs to get its backgroundSessionId and sessionTaskId
+    for (NSString *associateId in associateIds) {
+        NSError *error = nil;
+        BOXURLBackgroundSessionIdAndSessionTaskId *backgroundSessionIdAndSessionTaskId = [self backgroundSessionIdAndSessionTaskIdForUserId:userId
+                                                                                                                                associateId:associateId
+                                                                                                                                      error:&error];
+
+        if (backgroundSessionIdAndSessionTaskId != nil) {
+            associateIdToBackgroundSessionIdAndSessionTaskIds[associateId] = backgroundSessionIdAndSessionTaskId;
+        } else if (error == nil) {
+            //we do not have valid backgroundSessionId and sessionTaskId for a previously seen userId and associateId,
+            //something must have failed, clean up the cache dir for future usage
+            //[self deleteCachedInfoForUserId:userId associateId:associateId error:&error];
+            os_log(OS_LOG_DEFAULT, "******CC: no sessionId/taskId for userId %{public}@, associateId %{public}@", userId, associateId);
+        }
+
+        if (error != nil && finalError == nil) {
+            finalError = error;
+        }
+    }
+
+    if (outError != nil) {
+        *outError = finalError;
+    }
+
+    return [associateIdToBackgroundSessionIdAndSessionTaskIds copy];
+}
+
 - (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
 {
     if (userId == nil) {
