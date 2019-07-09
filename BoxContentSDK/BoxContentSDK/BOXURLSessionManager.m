@@ -970,7 +970,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, receive response %{public}@", session.configuration.identifier, dataTask.taskIdentifier, response);
+    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, receive response %{public}@", session.configuration.identifier, dataTask.taskIdentifier, response);
     //this method is only called by foreground session tasks, call its taskDelegate to handle
     id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:session.configuration.identifier sessionTaskId:dataTask.taskIdentifier];
 
