@@ -154,7 +154,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     NSArray *userIds = [self.cacheClient userIdsWithError:&error];
     for (NSString *userId in userIds) {
         NSDictionary *associateIdToBgSessionIdAndSessionTaskId = [self.cacheClient readAssociateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:&error];
-        os_log(OS_LOG_DEFAULT, "******SM: debug userId %{public}@, associateId map %{public}@", userId, associateIdToBgSessionIdAndSessionTaskId);
+        NSMutableString *str = [[NSMutableString alloc] init];
+
+        for (NSString *associateId in [associateIdToBgSessionIdAndSessionTaskId allKeys]) {
+            BOXURLBackgroundSessionIdAndSessionTaskId *obj = associateIdToBgSessionIdAndSessionTaskId[associateId];
+            [str appendFormat:@"%@ : %@, %lu\n", associateId, obj.backgroundSessionId, (unsigned long)obj.sessionTaskId];
+        }
+        os_log(OS_LOG_DEFAULT, "******SM: debug userId %{public}@, associateId map %{public}@", userId, str);
     }
 
     NSDictionary *sessionIdToSessionTaskIds = [self.cacheClient onGoingBackgroundSessionIdToSessionTaskIdsWithError:&error];
