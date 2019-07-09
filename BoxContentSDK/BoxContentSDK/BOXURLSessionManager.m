@@ -902,7 +902,7 @@ didFinishDownloadingToURL:(NSURL *)location
 {
     // This method is only called by background download tasks
 
-    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ finished download task %{public}@, response %{public}@", session.configuration.identifier, downloadTask.taskIdentifier, downloadTask.response);
+    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ finished download task %{public}d, response %{public}@", session.configuration.identifier, downloadTask.taskIdentifier, downloadTask.response);
 
     if ([downloadTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)downloadTask.response;
@@ -997,7 +997,7 @@ didReceiveResponse:(NSURLResponse *)response
                                                      responseData:data
                                                             error:&error];
 
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, cached response data status %{public}d", session.configuration.identifier, dataTask.taskIdentifier, success);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, cached response data status %{public}d", session.configuration.identifier, dataTask.taskIdentifier, success);
         if (!success) {
             BOXLog(@"failed to cache response for background session task due to %@", error);
         }
@@ -1046,14 +1046,14 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                                     sessionTaskId:task.taskIdentifier
                                                          response:task.response
                                                             error:&err];
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed with response %{public}@, cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, task.response, success?@"YES":@"NO", err.localizedDescription);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, completed with response %{public}@, cache success %{public}d, error %{public}@", backgroundSessionId, task.taskIdentifier, task.response, success, err.localizedDescription);
         BOXAssert(success, @"failed to cache response for background session task with error %@", err);
 
         success = [self.cacheClient cacheBackgroundSessionId:session.configuration.identifier
                                                sessionTaskId:task.taskIdentifier
                                                    taskError:error
                                                        error:&err];
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed with error %{public}@, cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, error.localizedDescription, success?@"YES":@"NO", err.localizedDescription);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, completed with error %{public}@, cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, error.localizedDescription, success?@"YES":@"NO", err.localizedDescription);
         BOXAssert(success, @"failed to cache error for background session task with error %@", err);
 
         //notify its taskDelegate about the completion with response, responseData, and error
@@ -1064,7 +1064,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         success = [self.cacheClient completeSessionTaskForBackgroundSessionId:backgroundSessionId
                                                                 sessionTaskId:task.taskIdentifier
                                                                         error:&err];
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, completed cache success %{public}@, error %{public}@", backgroundSessionId, task.taskIdentifier, success?@"YES":@"NO", err.localizedDescription);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, completed cache success %{public}d, error %{public}@", backgroundSessionId, task.taskIdentifier, success, err.localizedDescription);
         BOXAssert(success, @"failed to complete session task for background session task with error %@", err);
 
         id<BOXURLSessionTaskDelegate> taskDelegate = [self taskDelegateForSessionId:backgroundSessionId
@@ -1095,9 +1095,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
     if (task.originalRequest.HTTPBodyStream && [task.originalRequest.HTTPBodyStream conformsToProtocol:@protocol(NSCopying)]) {
         inputStream = [task.originalRequest.HTTPBodyStream copy];
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, got new stream", session.configuration.identifier, task.taskIdentifier);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, got new stream", session.configuration.identifier, task.taskIdentifier);
     } else {
-        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}@, failed to get new stream", session.configuration.identifier, task.taskIdentifier);
+        os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ data task %{public}d, failed to get new stream", session.configuration.identifier, task.taskIdentifier);
         BOXLog(@"needNewBodyStream failed to get an new input stream from %@", task.originalRequest.HTTPBodyStream);
     }
 
