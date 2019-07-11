@@ -361,9 +361,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             [self finish];
         }
     } else {
-        os_log(OS_LOG_DEFAULT, "AO: session task %{public}d going to resume", self.sessionTask.taskIdentifier);
+        os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d going to resume", self.sessionTask.taskIdentifier);
         [self.sessionTask resume];
-        os_log(OS_LOG_DEFAULT, "AO: session task %{public}d resumed", self.sessionTask.taskIdentifier);
+        os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d resumed", self.sessionTask.taskIdentifier);
     }
 }
 
