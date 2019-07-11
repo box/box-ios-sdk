@@ -13,6 +13,8 @@
 #import "BOXDispatchHelper.h"
 #import "BOXHashHelper.h"
 
+#import <os/log.h>
+
 @interface BOXFileUploadNewVersionRequest ()
 
 @property (nonatomic, readwrite, strong) NSString *localFilePath;
@@ -102,6 +104,7 @@
 
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock completion:(BOXFileBlock)completionBlock
 {
+    os_log(OS_LOG_DEFAULT, "******UR: call perform request, associateId %{public}@", self.operation.associateId);
     BOOL isMainThread = [NSThread isMainThread];
     BOXAPIMultipartToJSONOperation *uploadOperation = (BOXAPIMultipartToJSONOperation *)self.operation;
     
@@ -147,8 +150,29 @@
             } onMainThread:isMainThread];
         }
     };
+
+    os_log(OS_LOG_DEFAULT, "******UR: going to perform request, associateId %{public}@", self.operation.associateId);
     [self performRequest];
+
+//    [self readFileIntoMem:self.localFilePath];
 }
+
+//- (void)readFileIntoMem:(NSString *)filePath
+//{
+//    os_log(OS_LOG_DEFAULT, "******going to read file to mem!!!", filePath);
+//    NSError *error = nil;
+//    NSString* fileContents =
+//    [NSString stringWithContentsOfFile:filePath
+//                              encoding:NSUTF8StringEncoding error:&error];
+//
+//    // first, separate by new line
+//    NSArray* allLinedStrings =
+//    [fileContents componentsSeparatedByCharactersInSet:
+//     [NSCharacterSet newlineCharacterSet]];
+//
+//    NSLog(@"file content!!!! %@, error %@", allLinedStrings, error);
+//    os_log(OS_LOG_DEFAULT, "******read file to mem!!!", filePath);
+//}
 
 #pragma mark - Superclass overidden methods
 

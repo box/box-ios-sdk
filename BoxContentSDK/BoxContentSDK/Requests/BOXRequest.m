@@ -15,6 +15,7 @@
 #import "NSString+BOXContentSDKAdditions.h"
 #import "UIDevice+BOXContentSDKAdditions.h"
 #import "BOXContentClient.h"
+#import <os/log.h>
 
 #define BOX_API_MULTIPART_FILENAME_DEFAULT (@"upload")
 
@@ -65,7 +66,10 @@
 - (void)performRequest
 {
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
+
+    os_log(OS_LOG_DEFAULT, "******AO: enqueuing operation, associateId %{public}@", self.operation.associateId);
     [self.queueManager enqueueOperation:self.operation];
+    os_log(OS_LOG_DEFAULT, "******AO: enqueued operation, associateId %{public}@", self.operation.associateId);
 }
 
 - (void)cancel

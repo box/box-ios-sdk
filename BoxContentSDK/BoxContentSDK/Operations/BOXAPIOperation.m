@@ -13,6 +13,7 @@
 #import "BOXLog.h"
 #import "BOXURLRequestSerialization.h"
 #import "BOXAPIOAuth2ToJSONOperation.h"
+#import <os/log.h>
 
 static NSString * BoxOperationKeyPathForState(BOXAPIOperationState state) {
     switch (state) {
@@ -224,7 +225,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
                 }
             }
             NSError *error = nil;
+            os_log(OS_LOG_DEFAULT, "******AO: prepare operation, associateId %{public}@, request %{public}@, creating task", self.associateId, self.APIRequest.URL);
             self.sessionTask = [self createSessionTaskWithError:&error];
+            os_log(OS_LOG_DEFAULT, "******AO: prepare operation, associateId %{public}@, request %{public}@, created taskID %{public}d, error %{public}@", self.associateId, self.APIRequest.URL, self.sessionTask.taskIdentifier, error.localizedDescription);
             if (error != nil) {
                 BOXLog(@"BOXAPIOperation %@ failed to create session task to prepare to execute API request", self);
                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
@@ -358,13 +361,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             [self finish];
         }
     } else {
+        os_log(OS_LOG_DEFAULT, "AO: session task %{public}d going to resume", self.sessionTask.taskIdentifier);
         [self.sessionTask resume];
+        os_log(OS_LOG_DEFAULT, "AO: session task %{public}d resumed", self.sessionTask.taskIdentifier);
     }
 }
 
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
+    os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, isCancelled %{public}d, error %{public}@", self.associateId, [self isCancelled], self.error.localizedDescription);
     if (![self isCancelled]) {
         if (self.sessionTask == nil) {
             @synchronized(self.session)
@@ -381,7 +387,9 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         if (self.error == nil && ![self isCancelled]) {
             NSError *error = nil;
             if (self.sessionTask == nil) {
+                os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, creating task", self.associateId);
                 self.sessionTask = [self createSessionTaskWithError:&error];
+                os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, created taskID %{public}d", self.associateId, self.sessionTask.taskIdentifier);
             }
             if (error == nil) {
                 [self executeSessionTask];
