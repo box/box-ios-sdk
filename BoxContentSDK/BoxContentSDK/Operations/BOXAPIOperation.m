@@ -361,16 +361,22 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             [self finish];
         }
     } else {
-        os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d going to resume", self.sessionTask.taskIdentifier);
+        if (self.associateId) {
+            os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d going to resume", self.sessionTask.taskIdentifier);
+        }
         [self.sessionTask resume];
-        os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d resumed", self.sessionTask.taskIdentifier);
+        if (self.associateId) {
+            os_log(OS_LOG_DEFAULT, "******AO: session task %{public}d resumed", self.sessionTask.taskIdentifier);
+        }
     }
 }
 
 - (void)executeOperation
 {
     BOXLog(@"BOXAPIOperation %@ was started", self);
-    os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, isCancelled %{public}d, error %{public}@", self.associateId, [self isCancelled], self.error.localizedDescription);
+    if (self.associateId) {
+        os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, isCancelled %{public}d, error %{public}@", self.associateId, [self isCancelled], self.error.localizedDescription);
+    }
     if (![self isCancelled]) {
         if (self.sessionTask == nil) {
             @synchronized(self.session)
@@ -387,9 +393,13 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         if (self.error == nil && ![self isCancelled]) {
             NSError *error = nil;
             if (self.sessionTask == nil) {
-                os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, creating task", self.associateId);
+                if (self.associateId) {
+                    os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, creating task", self.associateId);
+                }
                 self.sessionTask = [self createSessionTaskWithError:&error];
-                os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, created taskID %{public}d", self.associateId, self.sessionTask.taskIdentifier);
+                if (self.associateId) {
+                    os_log(OS_LOG_DEFAULT, "******AO: execute operation, associateId %{public}@, created taskID %{public}d", self.associateId, self.sessionTask.taskIdentifier);
+                }
             }
             if (error == nil) {
                 [self executeSessionTask];

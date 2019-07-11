@@ -67,9 +67,14 @@
 {
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
 
-    os_log(OS_LOG_DEFAULT, "******AO: enqueuing operation, associateId %{public}@", self.operation.associateId);
+
+    if (self.operation.associateId) {
+        os_log(OS_LOG_DEFAULT, "******AO: enqueuing operation, associateId %{public}@", self.operation.associateId);
+    }
     [self.queueManager enqueueOperation:self.operation];
-    os_log(OS_LOG_DEFAULT, "******AO: enqueued operation, associateId %{public}@", self.operation.associateId);
+    if (self.operation.associateId) {
+        os_log(OS_LOG_DEFAULT, "******AO: enqueued operation, associateId %{public}@", self.operation.associateId);
+    }
 }
 
 - (void)cancel

@@ -361,6 +361,37 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
+- (void)debugSessionTasks:(NSString *)sessionId completion:(void (^)(void))completionBlock
+{
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:sessionId];
+
+    if (self.protocolClasses != nil) {
+        sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
+    }
+
+    NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+
+    os_log(OS_LOG_DEFAULT, "******SM: debugging session %{public}@", sessionId);
+
+    [backgroundSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+        for (NSURLSessionUploadTask *uploadTask in uploadTasks) {
+            os_log(OS_LOG_DEFAULT, "******SM: debug session %{public}@, upload task %{public}d, state %{public}d", sessionId, uploadTask.taskIdentifier, uploadTask.state);
+        }
+
+        for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
+            os_log(OS_LOG_DEFAULT, "******SM: debug session %{public}@, download task %{public}d, state %{public}d", sessionId, downloadTask.taskIdentifier, downloadTask.state);
+        }
+
+        for (NSURLSessionUploadTask *task in dataTasks) {
+            os_log(OS_LOG_DEFAULT, "******SM: debug session %{public}@, data task %{public}d, state %{public}d", sessionId, task.taskIdentifier, task.state);
+        }
+
+        if (completionBlock != nil) {
+            completionBlock();
+        }
+    }];
+}
+
 - (void)populatePendingSessionTasksForBackgroundSession:(NSURLSession *)backgroundSession completion:(void (^)(NSError *error))completionBlock
 {
     if (backgroundSession == nil) {

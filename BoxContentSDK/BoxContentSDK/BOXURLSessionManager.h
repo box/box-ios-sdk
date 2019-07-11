@@ -240,6 +240,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 
 - (void)debug:(NSString *)rootCacheDir;
 
+- (void)debugSessionTasks:(NSString *)sessionId completion:(void (^)(void))completionBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END
