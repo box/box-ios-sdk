@@ -170,6 +170,66 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     os_log(OS_LOG_DEFAULT, "******SM: extensionSessionIds %{public}@", extensionSessionIds);
 }
 
+//will try to recreate background session to populate this info
+- (void)associateIdsStillRunningForUserId:(NSString *)userId
+                               completion:(void (^)(NSSet * _Nullable associateIds, NSError  * _Nullable error))completionBlock
+{
+    NSError *error = nil;
+    NSMutableSet *associateIds = [NSMutableSet new];
+    NSDictionary *associateIdToBgSessionIdAndSessionTaskId = [self.cacheClient readAssociateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:&error];
+    if (error || associateIdToBgSessionIdAndSessionTaskId.count == 0) {
+        completionBlock([associateIds copy], error);
+        return;
+    }
+
+    NSMutableDictionary *backgroundSessionIdToTaskIdAndAssociateId = [NSMutableDictionary new];
+    for (NSString *associateId in associateIdToBgSessionIdAndSessionTaskId) {
+        if ([self.cacheClient isSessionTaskCompletedForUserId:userId associateId:associateId] == YES) {
+            [associateIds addObject:associateId];
+        } else {
+            BOXURLBackgroundSessionIdAndSessionTaskId *obj = associateIdToBgSessionIdAndSessionTaskId[associateId];
+            NSString *backgroundSessionId = obj.backgroundSessionId;
+            NSUInteger sessionTaskID = obj.sessionTaskId;
+            if (backgroundSessionIdToTaskIdAndAssociateId[backgroundSessionId] == nil) {
+                backgroundSessionIdToTaskIdAndAssociateId[backgroundSessionId] = [NSMutableDictionary new];
+            }
+            backgroundSessionIdToTaskIdAndAssociateId[backgroundSessionId][@(sessionTaskID)] = associateId;
+        }
+    }
+
+    if (associateIds.count == associateIdToBgSessionIdAndSessionTaskId.count) {
+        completionBlock([associateIds copy], nil);
+        return;
+    }
+
+    for (NSString *backgroundSessionId in backgroundSessionIdToTaskIdAndAssociateId) {
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
+
+        if (self.protocolClasses != nil) {
+            sessionConfig.protocolClasses = [self.protocolClasses arrayByAddingObjectsFromArray:sessionConfig.protocolClasses];
+        }
+
+        NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+
+        os_log(OS_LOG_DEFAULT, "******SM: to check running tasks, debugging session %{public}@", backgroundSessionId);
+        [self populatePendingSessionTasksForBackgroundSessionHelper:backgroundSession completion:^(NSDictionary * _Nullable sessionTaskIdToState) {
+            os_log(OS_LOG_DEFAULT, "******SM: found sessionTaskIdToState %{public}@", sessionTaskIdToState);
+            for (NSNumber *sessionTaskId in sessionTaskIdToState) {
+                NSString *associateId = backgroundSessionIdToTaskIdAndAssociateId[backgroundSessionId][sessionTaskId];
+                [associateIds addObject:associateId];
+                os_log(OS_LOG_DEFAULT, "******SM: found running tasks, session %{public}@, taskId %{public}@, associateId %{public}@", backgroundSessionId, sessionTaskId, associateId);
+            }
+            completionBlock([associateIds copy], nil);
+        }];
+    }
+    return;
+}
+
+- (NSDictionary *)associateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:(NSString *)userId error:(NSError **)outError
+{
+    return [self.cacheClient readAssociateIdToBackgroundSessionIdAndSessionTaskIdsForUserId:userId error:outError];
+}
+
 - (NSURLSession *)createDefaultSession
 {
     if (_defaultSession == nil) {
@@ -392,6 +452,37 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }];
 }
 
+- (void)populatePendingSessionTasksForBackgroundSessionHelper:(NSURLSession *)backgroundSession completion:(void (^)(NSDictionary * _Nullable sessionTaskIdToState))completionBlock
+{
+    if (backgroundSession == nil) {
+        os_log(OS_LOG_DEFAULT, "******SM: populate pending tasks failed with nil session");
+        if (completionBlock != nil) {
+            completionBlock(nil);
+        }
+        return;
+    }
+    //populate pending background session tasks
+    [backgroundSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+        NSMutableDictionary *pendingSessionTaskIds = [NSMutableDictionary new];
+
+        for (NSURLSessionUploadTask *task in dataTasks) {
+            pendingSessionTaskIds[@(task.taskIdentifier)] = @(task.state);
+        }
+
+        for (NSURLSessionUploadTask *uploadTask in uploadTasks) {
+            pendingSessionTaskIds[@(uploadTask.taskIdentifier)] = @(uploadTask.state);
+        }
+
+        for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
+            pendingSessionTaskIds[@(downloadTask.taskIdentifier)] = @(downloadTask.state);
+        }
+
+        if (completionBlock != nil) {
+            completionBlock(pendingSessionTaskIds);
+        }
+    }];
+}
+
 - (void)populatePendingSessionTasksForBackgroundSession:(NSURLSession *)backgroundSession completion:(void (^)(NSError *error))completionBlock
 {
     if (backgroundSession == nil) {
@@ -401,7 +492,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         if (completionBlock != nil) {
             completionBlock(error);
         }
-        
+
         return;
     }
     NSString *backgroundSessionId = backgroundSession.configuration.identifier;
@@ -413,7 +504,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             [self associateSessionId:backgroundSessionId sessionTask:uploadTask withTaskDelegate:nil];
             [pendingSessionTaskIds addObject:@(uploadTask.taskIdentifier)];
         }
-        
+
         for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
             [self associateSessionId:backgroundSessionId sessionTask:downloadTask withTaskDelegate:nil];
             [pendingSessionTaskIds addObject:@(downloadTask.taskIdentifier)];
@@ -428,7 +519,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
         BOXAssert(success, @"Failed to complete tasks which are no longer in pending with error %@", error);
         self.didFinishSettingUpBackgroundSession = YES;
-        
+
         if (completionBlock != nil) {
             completionBlock(error);
         }
@@ -446,19 +537,6 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     @synchronized (self.backgroundSessionIdToSession) {
         return self.backgroundSessionIdToSession[backgroundSessionId];
-    }
-}
-
-- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nullable uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nullable downloadTasks))completionBlock
-{
-    if (completionBlock != nil) {
-        if (self.supportBackgroundSessionTasks == NO) {
-            completionBlock(nil, nil);
-        } else {
-            [self.backgroundSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
-                completionBlock(uploadTasks, downloadTasks);
-            }];
-        }
     }
 }
 
@@ -933,7 +1011,7 @@ didFinishDownloadingToURL:(NSURL *)location
 {
     // This method is only called by background download tasks
 
-    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ finished download task %{public}d, response %{public}@", session.configuration.identifier, downloadTask.taskIdentifier, downloadTask.response);
+//    os_log(OS_LOG_DEFAULT, "******SM: sessionId %{public}@ finished download task %{public}d, response %{public}@", session.configuration.identifier, downloadTask.taskIdentifier, downloadTask.response);
 
     if ([downloadTask.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)downloadTask.response;

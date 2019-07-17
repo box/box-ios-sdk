@@ -129,9 +129,9 @@ backgroundSessionId:(NSString *)backgroundSessionId
 
     if (success == NO) {
         if (error && *error) {
-            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}@, error %{public}@", associateId, backgroundSessionId, sessionTaskId, (*error).localizedDescription);
+            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}d, error %{public}@", associateId, backgroundSessionId, sessionTaskId, (*error).localizedDescription);
         } else {
-            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}@", associateId, backgroundSessionId, sessionTaskId);
+            os_log(OS_LOG_DEFAULT, "*******CC: failed to cache session info for associateId %{public}@, sessionId %{public}@, taskId %{public}d", associateId, backgroundSessionId, sessionTaskId);
         }
     }
     if (success == YES) {

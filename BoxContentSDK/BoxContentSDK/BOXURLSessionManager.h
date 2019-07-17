@@ -224,11 +224,6 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (BOOL)cleanUpBackgroundSessionTaskIfExistForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
- * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
- */
-- (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
-
-/**
  * Cancel and clean up all background session tasks associated with this user
  */
 - (void)cancelAndCleanUpBackgroundSessionTasksForUserId:(NSString *)userId error:(NSError **)outError;
@@ -241,6 +236,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (void)debug:(NSString *)rootCacheDir;
 
 - (void)debugSessionTasks:(NSString *)sessionId completion:(void (^)(void))completionBlock;
+
+//will try to recreate background session to populate this info
+- (void)associateIdsStillRunningForUserId:(NSString *)userId
+                               completion:(void (^)(NSSet * _Nullable associateIds, NSError  * _Nullable error))completionBlock;
 
 @end
 

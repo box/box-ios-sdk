@@ -155,24 +155,27 @@
     [self performRequest];
 
 //    [self readFileIntoMem:self.localFilePath];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        exit(1);
+//    });
 }
 
-//- (void)readFileIntoMem:(NSString *)filePath
-//{
-//    os_log(OS_LOG_DEFAULT, "******going to read file to mem!!!", filePath);
-//    NSError *error = nil;
-//    NSString* fileContents =
-//    [NSString stringWithContentsOfFile:filePath
-//                              encoding:NSUTF8StringEncoding error:&error];
-//
-//    // first, separate by new line
-//    NSArray* allLinedStrings =
-//    [fileContents componentsSeparatedByCharactersInSet:
-//     [NSCharacterSet newlineCharacterSet]];
-//
-//    NSLog(@"file content!!!! %@, error %@", allLinedStrings, error);
-//    os_log(OS_LOG_DEFAULT, "******read file to mem!!!", filePath);
-//}
+- (void)readFileIntoMem:(NSString *)filePath
+{
+    os_log(OS_LOG_DEFAULT, "******going to read file to mem!!!", filePath);
+    NSError *error = nil;
+    NSString* fileContents =
+    [NSString stringWithContentsOfFile:filePath
+                              encoding:NSUTF8StringEncoding error:&error];
+
+    // first, separate by new line
+    NSArray* allLinedStrings =
+    [fileContents componentsSeparatedByCharactersInSet:
+     [NSCharacterSet newlineCharacterSet]];
+
+    NSLog(@"file content!!!! %@, error %@", allLinedStrings, error);
+    os_log(OS_LOG_DEFAULT, "******read file to mem!!!", filePath);
+}
 
 #pragma mark - Superclass overidden methods
 
