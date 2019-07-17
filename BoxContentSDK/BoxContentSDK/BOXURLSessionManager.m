@@ -184,9 +184,12 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     NSMutableDictionary *backgroundSessionIdToTaskIdAndAssociateId = [NSMutableDictionary new];
     for (NSString *associateId in associateIdToBgSessionIdAndSessionTaskId) {
+        //if session task for this assoicateId has completed, add it to the returned list
         if ([self.cacheClient isSessionTaskCompletedForUserId:userId associateId:associateId] == YES) {
             [associateIds addObject:associateId];
         } else {
+            //session task for this assoicateId has not completed, collect its background session ids
+            // to query for a list of tasks for these sessions to check if they are running
             BOXURLBackgroundSessionIdAndSessionTaskId *obj = associateIdToBgSessionIdAndSessionTaskId[associateId];
             NSString *backgroundSessionId = obj.backgroundSessionId;
             NSUInteger sessionTaskID = obj.sessionTaskId;
@@ -197,11 +200,14 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         }
     }
 
+    //if all tasks completed, return
     if (associateIds.count == associateIdToBgSessionIdAndSessionTaskId.count) {
         completionBlock([associateIds copy], nil);
         return;
     }
 
+    //iterate over background sessions, if session tasks are returned by the sessions, we know those tasks are running
+    //add their associateIds to the returned list
     for (NSString *backgroundSessionId in backgroundSessionIdToTaskIdAndAssociateId) {
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
 
@@ -217,7 +223,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             for (NSNumber *sessionTaskId in sessionTaskIdToState) {
                 NSString *associateId = backgroundSessionIdToTaskIdAndAssociateId[backgroundSessionId][sessionTaskId];
                 [associateIds addObject:associateId];
-                os_log(OS_LOG_DEFAULT, "******SM: found running tasks, session %{public}@, taskId %{public}@, associateId %{public}@", backgroundSessionId, sessionTaskId, associateId);
+                os_log(OS_LOG_DEFAULT, "******SM: found running tasks, session %{public}@, taskId %{public}d, associateId %{public}@", backgroundSessionId, sessionTaskId, associateId);
             }
             completionBlock([associateIds copy], nil);
         }];
