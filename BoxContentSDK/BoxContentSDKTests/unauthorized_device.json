@@ -1,4 +1,0 @@
-{
-    "error": "unauthorized_device",
-    "error_description": "Device not authorized to request an access token"
-}
