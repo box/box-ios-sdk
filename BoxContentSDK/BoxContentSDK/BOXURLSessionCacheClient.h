@@ -106,6 +106,30 @@
 - (BOOL)cacheUserId:(NSString *)userId associateId:(NSString *)associateId backgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)error;
 
 /**
+ * Cache that a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ * @param error                 error if fail to cache
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cacheSessionTaskStartedGivenUserId:(NSString *)userId
+                               associateId:(NSString *)associateId
+                                     error:(NSError **)error;
+
+/**
+ *  Check whether a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
+                           associateId:(NSString *)associateId;
+
+/**
  * Cache destinationFilePath of a background download session task
  *
  * @param backgroundSessionId   Id of the background session. Cannot be nil

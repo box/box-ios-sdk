@@ -335,12 +335,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)executeSessionTask
 {
+    NSString *userId = self.session.user.uniqueId;
+    NSError *error = nil;
+
     if (self.sessionTask == nil) {
         //no session task to execute with, this happens for a background download/upload operation
         //retrieve cached info to finish
-
-        NSString *userId = self.session.user.uniqueId;
-        NSError *error = nil;
         BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
 
         if (cachedInfo.response != nil && error == nil) {
@@ -359,6 +359,10 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         }
     } else {
         [self.sessionTask resume];
+        [self.session.urlSessionManager cacheSessionTaskStartedGivenUserId:userId
+                                                                                  associateId:self.associateId
+                                                                                        error:&error];
+        BOXAssert(!error, @"Failed to cache started info for background session task", error);
     }
 }
 
