@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BoxSDK Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BoxSDK" class="dashAnchor"></a>
+    <a title="BoxSDK Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BoxSDK Docs</a> (97% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BoxSDK Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxCollection.html">BoxCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest/BodyType.html">– BodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration.html">Collaboration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationItem.html">CollaborationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaborator.html">Collaborator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Comment.html">Comment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentItem.html">CommentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentsModule.html">CommentsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Constants.html">Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DelegatedAuthSession.html">DelegatedAuthSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailAlias.html">EmailAlias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainerInnerModel.html">EntryContainerInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Representation.html">– Representation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem/FolderItemType.html">– FolderItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/InvitabilityLevel.html">– InvitabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/MemberViewabilityLevel.html">– MemberViewabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Invite.html">Invite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataModule.html">MetadataModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataObject.html">MetadataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItem.html">SharedItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLinkPermissions.html">SharedLinkPermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TaskAssignment.html">TaskAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User/TrackingCode.html">– TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UsersModule.html">UsersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink.html">WebLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink/Permissions.html">– Permissions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AccessibleBy.html">AccessibleBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:6BoxSDK0A0O">Box</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxDecodingError.html">BoxDecodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxError.html">BoxError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationRole.html">CollaborationRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationStatus.html">CollaborationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileMetadataOperation.html">FileMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderMetadataOperation.html">FolderMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderUploadEmailAccess.html">FolderUploadEmailAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataTemplateOperation.html">MetadataTemplateOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OptionalParameter.html">OptionalParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderBy.html">OrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchContentType.html">SearchContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchItemType.html">SearchItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchScope.html">SearchScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SyncState.html">SyncState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ThumbnailExtension.html">ThumbnailExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TokenScope.html">TokenScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserRole.html">UserRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxEnum.html">BoxEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LogDestination.html">LogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenStore.html">TokenStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoxAPIError.html">BoxAPIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetadataField.html">MetadataField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultipartForm.html">MultipartForm</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateFileInfoData.html">UpdateFileInfoData</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16AccessTokenTuplea">AccessTokenTuple</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BoxSDK</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxSDK</span></code></pre>
+
+                </div>
+              </div>
+            <p>Provides methods for creating BoxSDKClient</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC13configurationAA0A16SDKConfigurationVvp"></a>
+                    <a name="//apple_ref/swift/Property/configuration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC13configurationAA0A16SDKConfigurationVvp">configuration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SDK configuration</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC20defaultConfigurationAA0A16SDKConfigurationVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultConfiguration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC20defaultConfigurationAA0A16SDKConfigurationVvpZ">defaultConfiguration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default configuration</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultConfiguration</span><span class="p">:</span> <span class="kt"><a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC4authAA10AuthModuleCvp"></a>
+                    <a name="//apple_ref/swift/Property/auth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC4authAA10AuthModuleCvp">auth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Auth module providing authorization and token related requests.
+Is set upon BoxSDK initialisation</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">auth</span><span class="p">:</span> <span class="kt"><a href="../Classes/AuthModule.html">AuthModule</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC8clientId0C6SecretABSS_SStcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(clientId:clientSecret:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC8clientId0C6SecretABSS_SStcfc">init(clientId:clientSecret:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">clientId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">clientSecret</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>clientId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The client ID of the application requesting authentication. To get the client ID for your application,
+log in to your Box developer console click the Edit Application link for the application you&rsquo;re working with.
+In the OAuth 2 Parameters section of the configuration page, find the item labeled <q>client_id</q>. The text of that item
+is your application&rsquo;s client ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>clientSecret</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The client secret of the application requesting authentication. To get the client secret for your application,
+log in to your Box developer console and click the Edit Application link for the application you&rsquo;re working with.
+In the OAuth 2 Parameters section of the configuration page, find the item labeled <q>client_secret</q>.
+The text of that item is your application&rsquo;s client secret.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC9getClient5tokenAA0aD0CSS_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/getClient(token:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC9getClient5tokenAA0aD0CSS_tFZ">getClient(token:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient object based on developer token</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getClient</span><span class="p">(</span><span class="nv">token</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>token</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Developer token</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>New BoxClient object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC9getClient5tokenAA0aD0CSS_tF"></a>
+                    <a name="//apple_ref/swift/Method/getClient(token:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC9getClient5tokenAA0aD0CSS_tF">getClient(token:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient with developer token</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClient</span><span class="p">(</span><span class="nv">token</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>token</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Developer token</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>New BoxClient object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC22getDelegatedAuthClient9tokenInfo0G5Store11authClosure8uniqueID10completionyAA05TokenH0CSg_AA0oI0_pSgySS_ys6ResultOySS06accessO0_Sd9expiresInts5Error_pGctcSSyAOyAA0aF0CAA0aT0OGctF"></a>
+                    <a name="//apple_ref/swift/Method/getDelegatedAuthClient(tokenInfo:tokenStore:authClosure:uniqueID:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC22getDelegatedAuthClient9tokenInfo0G5Store11authClosure8uniqueID10completionyAA05TokenH0CSg_AA0oI0_pSgySS_ys6ResultOySS06accessO0_Sd9expiresInts5Error_pGctcSSyAOyAA0aF0CAA0aT0OGctF">getDelegatedAuthClient(tokenInfo:tokenStore:authClosure:uniqueID:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient using JWT token.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getDelegatedAuthClient</span><span class="p">(</span>
+    <span class="nv">tokenInfo</span><span class="p">:</span> <span class="kt"><a href="../Classes/TokenInfo.html">TokenInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tokenStore</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TokenStore.html">TokenStore</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">authClosure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a></span><span class="p">,</span>
+    <span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Information about token</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenStore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom token store. To use custom store, implement TokenStore protocol.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>authClosure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Requests new JWT token value when needed. Provide the token value from your token provider.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uniqueID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier provided for jwt token.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns standard BoxClient object or error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC15getOAuth2Client9tokenInfo0F5Store10completionyAA05TokenG0CSg_AA0jH0_pSgys6ResultOyAA0aE0CAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/getOAuth2Client(tokenInfo:tokenStore:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC15getOAuth2Client9tokenInfo0F5Store10completionyAA05TokenG0CSg_AA0jH0_pSgys6ResultOyAA0aE0CAA0A5ErrorOGctF">getOAuth2Client(tokenInfo:tokenStore:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient in a completion with OAuth 2.0 type of authentication</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getOAuth2Client</span><span class="p">(</span>
+    <span class="nv">tokenInfo</span><span class="p">:</span> <span class="kt"><a href="../Classes/TokenInfo.html">TokenInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tokenStore</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TokenStore.html">TokenStore</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Information about token</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenStore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom token store. To use custom store, implement TokenStore protocol.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns created standard BoxClient object or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Configuration"></a>
+                <a name="//apple_ref/swift/Section/Configuration" class="dashAnchor"></a>
+                <a href="#/Configuration">
+                  <h3 class="section-name">Configuration</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold14logDestination19clientAnalyticsInfoy10Foundation0G0VSg_AMSiSgSdSgAA03LogQ0_pSgAA06ClientsT0VSgtF"></a>
+                    <a name="//apple_ref/swift/Method/updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:logDestination:clientAnalyticsInfo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold14logDestination19clientAnalyticsInfoy10Foundation0G0VSg_AMSiSgSdSgAA03LogQ0_pSgAA06ClientsT0VSgtF">updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:logDestination:clientAnalyticsInfo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates current SDK configuration</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateConfiguration</span><span class="p">(</span>
+    <span class="nv">apiBaseURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">uploadApiBaseURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">maxRetryAttempts</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tokenRefreshThreshold</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">logDestination</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LogDestination.html">LogDestination</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">clientAnalyticsInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>apiBaseURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Base URL for majority of the requests.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uploadApiBaseURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Base URL for upload requests. If not specified, default URL is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>maxRetryAttempts</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximum number of request retries in case of error result. If not specified, default value 5 is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenRefreshThreshold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies how many seconds before token expires it shuld be refreshed.
+If not specified, default value 60 seconds is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>logDestination</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom destination of console log.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>clientAnalyticsInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom analytics info that will be set to request header.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-07-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
