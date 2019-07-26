@@ -58,9 +58,10 @@ Sample Apps
 
 ### OAuth2 Sample App
 
-A sample app using OAuth2 Authentication can be found in the
-[OAuth2SampleApp](../../tree/next/SampleApps/Swift/OAuth2SampleApp) folder.  This app demonstrates how to use the
-SDK to make calls, and can be run directly by entering your own credentials to log in.
+A [sample app using OAuth2 Authentication][oauth2-sample-app] can be downloaded as a zip file.  This app demonstrates
+how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
+
+[oauth2-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/OAuth2SampleApp.zip?raw=true
 
 To execute the sample app:
 __Step 1__: Run carthage
@@ -77,7 +78,7 @@ $ open OAuth2SampleApp.xcworkspace
 __Step 3__: Insert your client ID and client secret
 
 First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
-values to the sample app in [Constants.swift](../../tree/next/SampleApps/OAuth2SampleApp/OAuth2SampleApp/Constants.swift):
+values to the sample app in the `Constants.swift` file in the sample app:
 ```swift
 static let clientId = "YOUR CLIENT ID GOES HERE"
 static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
@@ -85,15 +86,14 @@ static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
 
 __Step 4__: Set redirect URL
 
-Using the same client ID from the previous step, set the redirect URL for your application in the [Box Developer Console][dev-console] to
-`boxsdk-<<YOUR CLIENT ID>>://boxsdkoauth2redirect`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
-ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
-`boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
+Using the same client ID from the previous step, set the redirect URL for your application in the
+[Box Developer Console][dev-console] to `boxsdk-<<YOUR CLIENT ID>>://boxsdkoauth2redirect`, where `<<YOUR CLIENT ID>>`
+is replaced with your client ID.  For example, if your client ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect
+URL should be `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
 
 __Step 5__: Insert your client ID to receive the redirect in the app
 
-Open the [Info.plist](../../tree/limited-beta-release/SampleApps/OAuth2SampleApp/OAuth2SampleApp/Resources/Info.plist) file and find the key here:
-URL Types --> Item 0 --> URL Schemes --> Item 0
+Open the `Info.plist` file in the sample app and find the key under `URL Types --> Item 0 --> URL Schemes --> Item 0`.
 Using the same client ID from the previous step, set the value for Item 0 to
 `boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
 ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
@@ -105,9 +105,11 @@ __Step 6__: Run the sample app
 
 ### JWT Auth Sample App
 
-A sample app using JWT Authentication can be found in the [JWTSampleApp](../../tree/next/SampleApps/Swift/JWTSampleApp)
-folder.  This app demonstrates how to set up JWT authentication, and will not run until you provide the code to
-retrieve tokens.
+A [sample app using JWT Authentication][jwt-sample-app] can be downloaded as a zip file.  This app demonstrates how to
+set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
+tokens.
+
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/JWTSampleApp.zip?raw=true
 
 To execute the sample app:
 __Step 1__: Run carthage
@@ -124,7 +126,7 @@ $ open JWTSampleApp.xcworkspace
 __Step 3__: Insert your client ID and client secret
 
 First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
-values to the sample app in [Constants.swift](../../tree/next/SampleApps/JWTSampleApp/JWTSampleApp/Constants.swift):
+values to the sample app in the `Constants.swift` file in the sample app:
 ```swift
 static let clientId = "YOUR CLIENT ID GOES HERE"
 static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
@@ -132,7 +134,7 @@ static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
 
 __Step 4__: Add code for retrieving access tokens
 
-In [ViewController.Swift](../../tree/next/SampleApps/Swift/JWTSampleApp/JWTSampleApp/ViewController.swift), edit the
+In the `ViewController.swift` file in the sample app, edit the
 `obtainJWTTokenFromExternalSources()` method:
 ```swift
 func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
