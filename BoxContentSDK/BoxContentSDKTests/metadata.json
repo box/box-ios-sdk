@@ -1,0 +1,13 @@
+{
+    "$id":"c79896a0-a33f-11e3-a5e2-0800200c9a66",
+    "$type": "properties",
+    "$parent": "file_552345101",
+    "client_number": "820183",
+    "client_name": "Biomedical Corp",
+    "case_reference": "A83JAA",
+    "case_type": "Employment Litigation",
+    "assigned_attorney": "Francis Burke",
+    "case_status": "in-progress"
+    "$version": 1,
+    "$typeVersion": 2
+}

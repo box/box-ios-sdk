@@ -1,0 +1,13 @@
+{
+    "audience": ["internal", "internalEng"],
+    "vertical": "healthcare",
+    "documentType": "datasheet",
+    "status": "active",
+    "$type": "marketingCollateral-1199c73f-11aa-439a-a7d0-e981fc6cc22f",
+    "$parent": "file_6122548033",
+    "$id": "fab04c3b-bf72-4726-80d1-d87f8cb87592",
+    "$template": "marketingCollateral",
+    "$scope": "enterprise_42500",
+    "$version": 1,
+    "$typeVersion": 2
+}

@@ -1,0 +1,12 @@
+{
+    "representation": "jpg",
+    "info": {
+        "url": "https://www.box.com/s/aaa"
+    },
+    "status": {
+        "state": "success"
+    },
+    "content": {
+        "url_template": "https://www.box.com/s/bbb"
+    }
+}

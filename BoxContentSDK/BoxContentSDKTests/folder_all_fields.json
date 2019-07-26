@@ -1,0 +1,566 @@
+{
+    "type":"folder",
+    "id":"2759406491",
+    "etag":"0",
+    "sequence_id":"0",
+    "name":"bookmarks yo",
+    "description":"",
+    "size":16096676,
+    "path_collection":{
+        "total_count":1,
+        "entries":[
+                   {
+                   "type":"folder",
+                   "id":"0",
+                   "sequence_id":null,
+                   "etag":null,
+                   "name":"All Files"
+                   }
+                   ]
+    },
+    "created_at":"2014-12-01T15:18:33-08:00",
+    "modified_at":"2014-12-01T17:37:43-08:00",
+    "trashed_at":null,
+    "purged_at":null,
+    "content_created_at":"2014-12-01T15:18:33-08:00",
+    "content_modified_at":"2014-12-01T17:37:43-08:00",
+    "created_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "modified_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "owned_by":{
+        "type":"user",
+        "id":"15220407",
+        "name":"Thisisaverylongfirstname Middlename Andlastname",
+        "login":"boxinternalqa+ttest33@gmail.com"
+    },
+    "shared_link":null,
+    "parent":{
+        "type":"folder",
+        "id":"0",
+        "sequence_id":null,
+        "etag":null,
+        "name":"All Files"
+    },
+    "item_status":"active",
+    "permissions":{
+        "can_download":true,
+        "can_upload":true,
+        "can_rename":true,
+        "can_delete":true,
+        "can_share":true,
+        "can_invite_collaborator":true,
+        "can_set_share_access":true
+    },
+    "allowed_shared_link_access_levels":[
+                                         "collaborators",
+                                         "open"
+                                         ],
+    "collections": [
+                    {
+                    "type": "collection",
+                    "id": "10047",
+                    "name": "Favorites",
+                    "collection_type": "favorites"
+                    }
+                    ],
+    "folder_upload_email": {
+        "access": "collaborators",
+        "email": "bilbo.baggins@gmail.com"
+    },
+    "sync_state":"not_synced",
+    "has_collaborations":false,
+    "is_externally_owned":false,
+    "can_non_owners_invite":true,
+    "allowed_invitee_roles":[
+                             "editor",
+                             "viewer"
+                             ],
+    "default_invitee_role":"viewer",
+    "item_collection":{
+        "total_count":6,
+        "entries":[
+                   {
+                   "type":"file",
+                   "id":"23491027943",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"test.txt",
+                   "description":"",
+                   "size":28,
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T17:37:42-08:00",
+                   "modified_at":"2014-12-01T17:37:42-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "content_created_at":"2014-12-01T17:37:42-08:00",
+                   "content_modified_at":"2014-12-01T17:37:42-08:00",
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":{
+                   "can_download":true,
+                   "can_preview":true,
+                   "can_upload":true,
+                   "can_comment":true,
+                   "can_rename":true,
+                   "can_delete":true,
+                   "can_share":true,
+                   "can_set_share_access":true
+                   },
+                   "lock":null,
+                   "extension":"txt",
+                   "is_package":false,
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   },
+                   {
+                   "type":"file",
+                   "id":"23491028289",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"TestPDF.pdf",
+                   "description":"",
+                   "size":6749103,
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T17:37:43-08:00",
+                   "modified_at":"2014-12-01T17:37:43-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "content_created_at":"2014-12-01T17:37:43-08:00",
+                   "content_modified_at":"2014-12-01T17:37:43-08:00",
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":{
+                   "can_download":true,
+                   "can_preview":true,
+                   "can_upload":true,
+                   "can_comment":true,
+                   "can_rename":true,
+                   "can_delete":true,
+                   "can_share":true,
+                   "can_set_share_access":true
+                   },
+                   "lock":null,
+                   "extension":"pdf",
+                   "is_package":false,
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   },
+                   {
+                   "type":"file",
+                   "id":"23491028385",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"TestPPT.pptx",
+                   "description":"",
+                   "size":9347545,
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T17:37:43-08:00",
+                   "modified_at":"2014-12-01T17:37:43-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "content_created_at":"2014-12-01T17:37:43-08:00",
+                   "content_modified_at":"2014-12-01T17:37:43-08:00",
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":{
+                   "can_download":true,
+                   "can_preview":true,
+                   "can_upload":true,
+                   "can_comment":true,
+                   "can_rename":true,
+                   "can_delete":true,
+                   "can_share":true,
+                   "can_set_share_access":true
+                   },
+                   "lock":null,
+                   "extension":"pptx",
+                   "is_package":false,
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   },
+                   {
+                   "type":"web_link",
+                   "id":"6006481",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"Box Dev",
+                   "description":"",
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T15:19:36-08:00",
+                   "modified_at":"2014-12-01T15:19:36-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":[
+                   
+                   ],
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   },
+                   {
+                   "type":"web_link",
+                   "id":"6006477",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"Google",
+                   "description":"Some description",
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T15:18:52-08:00",
+                   "modified_at":"2014-12-01T15:18:52-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":[
+                   
+                   ],
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   },
+                   {
+                   "type":"web_link",
+                   "id":"6006479",
+                   "etag":"0",
+                   "sequence_id":"0",
+                   "name":"news.google.com",
+                   "description":"This one has no name.",
+                   "path_collection":{
+                   "total_count":2,
+                   "entries":[
+                              {
+                              "type":"folder",
+                              "id":"0",
+                              "sequence_id":null,
+                              "etag":null,
+                              "name":"All Files"
+                              },
+                              {
+                              "type":"folder",
+                              "id":"2759406491",
+                              "sequence_id":"0",
+                              "etag":"0",
+                              "name":"bookmarks yo"
+                              }
+                              ]
+                   },
+                   "created_at":"2014-12-01T15:19:08-08:00",
+                   "modified_at":"2014-12-01T15:19:08-08:00",
+                   "trashed_at":null,
+                   "purged_at":null,
+                   "created_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "modified_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "owned_by":{
+                   "type":"user",
+                   "id":"15220407",
+                   "name":"Thisisaverylongfirstname Middlename Andlastname",
+                   "login":"boxinternalqa+ttest33@gmail.com"
+                   },
+                   "shared_link":null,
+                   "parent":{
+                   "type":"folder",
+                   "id":"2759406491",
+                   "sequence_id":"0",
+                   "etag":"0",
+                   "name":"bookmarks yo"
+                   },
+                   "item_status":"active",
+                   "permissions":[
+                   
+                   ],
+                   "allowed_shared_link_access_levels":[
+                                                        "collaborators",
+                                                        "open"
+                                                        ],
+                   "collections":[
+                   
+                   ]
+                   }
+                   ],
+        "offset":0,
+        "limit":100,
+        "order":[
+                 {
+                 "by":"type",
+                 "direction":"ASC"
+                 },
+                 {
+                 "by":"name",
+                 "direction":"ASC"
+                 }
+                 ]
+    },
+    "metadata": {
+        "enterprise": {
+            "marketingCollateral": {
+                "$type": "marketingCollateral-1199c73f-11aa-439a-a7d0-e981fc6cc22f",
+                "$parent": "file_10559150999",
+                "$id": "2f76a16d-44af-44a8-b630-fc62e0f1d80c",
+                "$template": "marketingCollateral",
+                "$scope": "enterprise_42500",
+                "contentApproved": "yes",
+                "audience": "external"
+            }
+        }
+    }
+    
+}

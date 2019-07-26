@@ -1,0 +1,12 @@
+language: objective-c
+before_install:
+  - gem install xcpretty
+  - gem install cocoapods -v '0.38.2'
+podfile: BoxContentSDK/Podfile
+osx_image: xcode9.4
+branches:
+    only:
+        - master # Only run "push" tests on master so PRs don't get duplicate test runs
+#run on iPhone 8 (11.0.1) (Simulator)
+script: 
+  - xcodebuild test -scheme BoxContentSDKTests -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=11.0.1,name=iPhone 8' -project BoxContentSDK/BoxContentSDK.xcodeproj -configuration Debug  | xcpretty -c && exit ${PIPESTATUS[0]}

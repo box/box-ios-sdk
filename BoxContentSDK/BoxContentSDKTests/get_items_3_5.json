@@ -1,0 +1,31 @@
+{
+    "total_count": 5,
+    "entries": [
+                {
+                "type": "web_link",
+                "id": "6006481",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Box Developer Site",
+                },
+                {
+                "type": "folder",
+                "id": "123",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "My first sub-folder",
+                }
+                ],
+    "offset": 3,
+    "limit": 2,
+    "order": [
+              {
+              "by": "type",
+              "direction": "ASC"
+              },
+              {
+              "by": "name",
+              "direction": "ASC"
+              }
+              ]
+}

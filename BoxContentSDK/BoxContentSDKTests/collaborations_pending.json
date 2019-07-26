@@ -1,0 +1,51 @@
+{
+    "total_count": 2,
+    "entries": [
+                {
+                "type": "collaboration",
+                "id": "27513888",
+                "created_by": {
+                "type": "user",
+                "id": "11993747",
+                "name": "sean",
+                "login": "sean@box.com"
+                },
+                "created_at": "2012-10-17T23:14:42-07:00",
+                "modified_at": "2012-10-17T23:14:42-07:00",
+                "expires_at": null,
+                "status": "pending",
+                "accessible_by": {
+                "type": "user",
+                "id": "181216415",
+                "name": "sean rose",
+                "login": "sean+awesome@box.com"
+                },
+                "role": "Editor",
+                "acknowledged_at": null,
+                "item": null
+                },
+                {
+                "type": "collaboration",
+                "id": "65434624",
+                "created_by": {
+                "type": "user",
+                "id": "4657345",
+                "name": "john",
+                "login": "john@box.com"
+                },
+                "created_at": "2012-10-17T23:14:42-07:00",
+                "modified_at": "2012-10-17T23:14:42-07:00",
+                "expires_at": null,
+                "status": "pending",
+                "accessible_by": {
+                "type": "user",
+                "id": "181216415",
+                "name": "john smith",
+                "login": "john+fsdf@box.com"
+                },
+                "role": "Editor",
+                "acknowledged_at": null,
+                "item": null
+                }
+                ]
+}
