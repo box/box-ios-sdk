@@ -496,11 +496,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return nil;
 }
 
-- (BOOL)cacheSessionTaskStartedGivenUserId:(NSString *)userId
-                               associateId:(NSString *)associateId
-                                     error:(NSError **)error
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error
 {
-    return [self.cacheClient cacheSessionTaskStartedGivenUserId:userId associateId:associateId error:error];
+    return [self.cacheClient cacheSessionTaskStartedForUserId:userId associateId:associateId error:error];
 }
 
 - (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId

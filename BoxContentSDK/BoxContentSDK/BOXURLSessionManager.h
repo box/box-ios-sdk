@@ -207,9 +207,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  *
  * @return YES if succeeded, NO if failed
  */
-- (BOOL)cacheSessionTaskStartedGivenUserId:(NSString *)userId
-                               associateId:(NSString *)associateId
-                                     error:(NSError **)error;
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error;
 
 /**
  *  Check whether a session task for a given user and associateId has started

@@ -139,12 +139,13 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return success;
 }
 
-- (BOOL)cacheSessionTaskStartedGivenUserId:(NSString *)userId
-                               associateId:(NSString *)associateId
-                                     error:(NSError **)error
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error
 {
     if (userId == nil || associateId == nil) {
         if (error != nil) {
+            //Note: consider converting this into a compile time error
             *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                 code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId
                                             userInfo:nil];
@@ -161,7 +162,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
 - (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
                            associateId:(NSString *)associateId
 {
-    NSString *filePath = [self filePathOfUserSessionTaskStartedGivenUserId:userId associateId:associateId];
+    NSString *filePath = [self filePathOfUserSessionTaskStartedForUserId:userId associateId:associateId];
     BOOL isDir = NO;
 
     return [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] == YES && isDir == NO;
@@ -868,7 +869,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
                                   associateId:(NSString *)associateId
                                         error:(NSError **)error
 {
-    NSString *path = [self filePathOfUserSessionTaskStartedGivenUserId:userId
+    NSString *path = [self filePathOfUserSessionTaskStartedForUserId:userId
                                                            associateId:associateId];
 
     return [self createFile:path error:error];
@@ -992,8 +993,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return [path stringByAppendingPathComponent:fileName];
 }
 
-// Return dir path users/$userId/$associateId/started
-- (NSString *)filePathOfUserSessionTaskStartedGivenUserId:(NSString *)userId
+- (NSString *)filePathOfUserSessionTaskStartedForUserId:(NSString *)userId
                                               associateId:(NSString *)associateId
 {
     return [[self dirPathOfSessionTaskGivenUserId:userId associateId:associateId] stringByAppendingPathComponent:@"started"];
