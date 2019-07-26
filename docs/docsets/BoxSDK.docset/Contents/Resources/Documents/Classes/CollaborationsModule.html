@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CollaborationsModule Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/CollaborationsModule" class="dashAnchor"></a>
+    <a title="CollaborationsModule Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BoxSDK Docs</a> (97% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CollaborationsModule Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxCollection.html">BoxCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest/BodyType.html">– BodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration.html">Collaboration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationItem.html">CollaborationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaborator.html">Collaborator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Comment.html">Comment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentItem.html">CommentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentsModule.html">CommentsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Constants.html">Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DelegatedAuthSession.html">DelegatedAuthSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailAlias.html">EmailAlias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainerInnerModel.html">EntryContainerInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Representation.html">– Representation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem/FolderItemType.html">– FolderItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/InvitabilityLevel.html">– InvitabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/MemberViewabilityLevel.html">– MemberViewabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Invite.html">Invite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataModule.html">MetadataModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataObject.html">MetadataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItem.html">SharedItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLinkPermissions.html">SharedLinkPermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TaskAssignment.html">TaskAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User/TrackingCode.html">– TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UsersModule.html">UsersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink.html">WebLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink/Permissions.html">– Permissions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AccessibleBy.html">AccessibleBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:6BoxSDK0A0O">Box</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxDecodingError.html">BoxDecodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxError.html">BoxError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationRole.html">CollaborationRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationStatus.html">CollaborationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileMetadataOperation.html">FileMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderMetadataOperation.html">FolderMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderUploadEmailAccess.html">FolderUploadEmailAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataTemplateOperation.html">MetadataTemplateOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OptionalParameter.html">OptionalParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderBy.html">OrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchContentType.html">SearchContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchItemType.html">SearchItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchScope.html">SearchScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SyncState.html">SyncState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ThumbnailExtension.html">ThumbnailExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TokenScope.html">TokenScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserRole.html">UserRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxEnum.html">BoxEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LogDestination.html">LogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenStore.html">TokenStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoxAPIError.html">BoxAPIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetadataField.html">MetadataField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultipartForm.html">MultipartForm</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateFileInfoData.html">UpdateFileInfoData</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16AccessTokenTuplea">AccessTokenTuple</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CollaborationsModule</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollaborationsModule</span></code></pre>
+
+                </div>
+              </div>
+            <p>Provides <a href="../Structs/Collaborations.html">Collaborations</a> management.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC9boxClientAcA0aF0C_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(boxClient:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC9boxClientAcA0aF0C_tcfc">init(boxClient:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">boxClient</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>boxClient</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Required for communicating with Box APIs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC16getCollaboration15collaborationId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/getCollaboration(collaborationId:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC16getCollaboration15collaborationId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF">getCollaboration(collaborationId:fields:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get information about a collaboration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollaboration</span><span class="p">(</span>
+    <span class="nv">collaborationId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collaborationId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration to get details</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC19createCollaboration8itemType0G2Id4role12accessibleBy0klH011canViewPath6fields6notify10completionySS_SSAA0F4RoleOSSAA010AccessibleL0OSbSgSaySSGSgARys6ResultOyAA0F0CAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/createCollaboration(itemType:itemId:role:accessibleBy:accessibleByType:canViewPath:fields:notify:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC19createCollaboration8itemType0G2Id4role12accessibleBy0klH011canViewPath6fields6notify10completionySS_SSAA0F4RoleOSSAA010AccessibleL0OSbSgSaySSGSgARys6ResultOyAA0F0CAA0A5ErrorOGctF">createCollaboration(itemType:itemId:role:accessibleBy:accessibleByType:canViewPath:fields:notify:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new collaboration that grants a group access to a file or folder in a specific role.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollaboration</span><span class="p">(</span>
+    <span class="nv">itemType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">itemId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">role</span><span class="p">:</span> <span class="kt"><a href="../Enums/CollaborationRole.html">CollaborationRole</a></span><span class="p">,</span>
+    <span class="nv">accessibleBy</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">accessibleByType</span><span class="p">:</span> <span class="kt"><a href="../Enums/AccessibleBy.html">AccessibleBy</a></span><span class="p">,</span>
+    <span class="nv">canViewPath</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">notify</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object type. Can be file or folder</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the file or the folder</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>role</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The level of access granted. Can be editor, viewer, previewer, uploader, previewer uploader, viewer uploader, or co-owner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessibleBy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the group that is granted access</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessibleByType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Can be user or group</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>canViewPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether view path collaboration feature is enabled or not. View path collaborations allow the invitee to see the entire ancestral path to the associated folder.
+this parameter is only available for folder collaborations
+The user will not gain privileges in any ancestral folder (e.g. see content the user is not collaborated on).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attribute(s) to include in the response</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notify</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines if the user, (or all the users in the group) should receive email notification of the collaboration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC30createCollaborationByUserEmail8itemType0J2Id4role5login11canViewPath6fields6notify10completionySS_SSAA0F4RoleOSSSbSgSaySSGSgAOys6ResultOyAA0F0CAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/createCollaborationByUserEmail(itemType:itemId:role:login:canViewPath:fields:notify:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC30createCollaborationByUserEmail8itemType0J2Id4role5login11canViewPath6fields6notify10completionySS_SSAA0F4RoleOSSSbSgSaySSGSgAOys6ResultOyAA0F0CAA0A5ErrorOGctF">createCollaborationByUserEmail(itemType:itemId:role:login:canViewPath:fields:notify:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new collaboration that grants a user to a file or folder in a specific role.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollaborationByUserEmail</span><span class="p">(</span>
+    <span class="nv">itemType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">itemId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">role</span><span class="p">:</span> <span class="kt"><a href="../Enums/CollaborationRole.html">CollaborationRole</a></span><span class="p">,</span>
+    <span class="nv">login</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">canViewPath</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">notify</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object type. Can be file or folder</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the file or the folder</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>role</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The level of access granted. Can be editor, viewer, previewer, uploader, previewer uploader, viewer uploader, or co-owner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>login</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the user or group that is granted access</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>canViewPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether view path collaboration feature is enabled or not. View path collaborations allow the invitee to see the entire ancestral path to the associated folder.
+this parameter is only available for folder collaborations
+The user will not gain privileges in any ancestral folder (e.g. see content the user is not collaborated on).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attribute(s) to include in the response</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notify</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines if the user, (or all the users in the group) should receive email notification of the collaboration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC19updateCollaboration15collaborationId4role6status11canViewPath6fields10completionySS_AA0F4RoleOAA0F6StatusOSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/updateCollaboration(collaborationId:role:status:canViewPath:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC19updateCollaboration15collaborationId4role6status11canViewPath6fields10completionySS_AA0F4RoleOAA0F6StatusOSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF">updateCollaboration(collaborationId:role:status:canViewPath:fields:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update a collaboration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCollaboration</span><span class="p">(</span>
+    <span class="nv">collaborationId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">role</span><span class="p">:</span> <span class="kt"><a href="../Enums/CollaborationRole.html">CollaborationRole</a></span><span class="p">,</span>
+    <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/CollaborationStatus.html">CollaborationStatus</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">canViewPath</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collaborationId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration to get details</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>role</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The level of access granted. Can be editor, viewer, previewer, uploader, previewer uploader, viewer uploader, co-owner, or owner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>status</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The status of the collaboration invitation. Can be accepted or  rejected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>canViewPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether view path collaboration feature is enabled or not. View path collaborations allow the invitee to see the entire ancestral path to the associated folder.
+The user will not gain privileges in any ancestral folder (e.g. see content the user is not collaborated on).
+This parameter is only available for folder collaborations</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attribute(s) to include in the response</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC19deleteCollaboration15collaborationId10completionySS_ys6ResultOyytAA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCollaboration(collaborationId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC19deleteCollaboration15collaborationId10completionySS_ys6ResultOyytAA0A5ErrorOGctF">deleteCollaboration(collaborationId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a collaboration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollaboration</span><span class="p">(</span>
+    <span class="nv">collaborationId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collaborationId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration to delete</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An empty response will be returned upon successful deletion or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK20CollaborationsModuleC010getPendingC06offset5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSiSg_AMSaySSGSgtF"></a>
+                    <a name="//apple_ref/swift/Method/getPendingCollaborations(offset:limit:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK20CollaborationsModuleC010getPendingC06offset5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSiSg_AMSaySSGSgtF">getPendingCollaborations(offset:limit:fields:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get information about a collaboration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPendingCollaborations</span><span class="p">(</span>
+    <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collaborationId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration to get details</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-07-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
