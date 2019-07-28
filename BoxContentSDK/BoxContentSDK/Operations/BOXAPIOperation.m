@@ -359,10 +359,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         }
     } else {
         [self.sessionTask resume];
-        [self.session.urlSessionManager cacheSessionTaskStartedForUserId:userId
-                                                             associateId:self.associateId
-                                                                   error:&error];
-        BOXAssert(!error, @"Failed to cache started info for background session task", error);
+        if (self.associateId) {
+            [self.session.urlSessionManager cacheSessionTaskStartedForUserId:userId
+                                                                 associateId:self.associateId
+                                                                       error:&error];
+            BOXAssert(!error, @"Failed to cache started info for background session task", error);
+        }
     }
 }
 
