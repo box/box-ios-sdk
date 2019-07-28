@@ -145,6 +145,35 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return success;
 }
 
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error
+{
+    if (userId == nil || associateId == nil) {
+        if (error != nil) {
+            //Note: consider converting this into a compile time error
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                code:BOXContentSDKURLSessionCacheErrorInvalidUserIdOrAssociateId
+                                            userInfo:nil];
+        }
+        return NO;
+    }
+
+    return [self createSessionTaskStartedFileForUserId:userId
+                                           associateId:associateId
+                                                 error:error];
+
+}
+
+- (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
+                           associateId:(NSString *)associateId
+{
+    NSString *filePath = [self filePathOfUserSessionTaskStartedForUserId:userId associateId:associateId];
+    BOOL isDir = NO;
+
+    return [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] == YES && isDir == NO;
+}
+
 - (NSFileCoordinator *)createFileCoordinator {
     NSFileCoordinator *coordinator = [[NSFileCoordinator alloc] init];
    
@@ -881,6 +910,16 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return [self createFile:path error:error];
 }
 
+- (BOOL)createSessionTaskStartedFileForUserId:(NSString *)userId
+                                  associateId:(NSString *)associateId
+                                        error:(NSError **)error
+{
+    NSString *path = [self filePathOfUserSessionTaskStartedForUserId:userId
+                                                           associateId:associateId];
+
+    return [self createFile:path error:error];
+}
+
 // Create dir if not exists, onGoingSessionTasks/$backgroundSessionId/$sessionTaskId
 - (BOOL)createDirForBackgroundSessionId:(NSString *)backgroundSessionId sessionTaskId:(NSUInteger)sessionTaskId error:(NSError **)error
 {
@@ -1041,6 +1080,12 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSString *fileName = [self fileNameGivenBackgroundSessionId:backgroundSessionId sessionTaskId:sessionTaskId];
     
     return [path stringByAppendingPathComponent:fileName];
+}
+
+- (NSString *)filePathOfUserSessionTaskStartedForUserId:(NSString *)userId
+                                              associateId:(NSString *)associateId
+{
+    return [[self dirPathOfSessionTaskGivenUserId:userId associateId:associateId] stringByAppendingPathComponent:@"started"];
 }
 
 - (NSString *)dirPathOfUsers

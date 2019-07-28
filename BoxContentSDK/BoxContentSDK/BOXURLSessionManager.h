@@ -199,6 +199,30 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                                       error:(NSError **)error;
 
 /**
+ * Cache that a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ * @param error                 error if fail to cache
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error;
+
+/**
+ *  Check whether a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
+                           associateId:(NSString *)associateId;
+
+/**
  Retrieve completed session task's cached info associated with userId and associateId
 
  @param userId          userId that this task belongs to
