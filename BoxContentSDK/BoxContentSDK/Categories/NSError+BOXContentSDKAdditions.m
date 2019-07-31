@@ -10,7 +10,7 @@
 
 @interface NSError (BOXContentSDKAdditionsPrivate)
 
-- (NSString *)customBoxErrorCodeFromError;
+- (NSString *)customBoxErrorCode;
 
 @end
 
