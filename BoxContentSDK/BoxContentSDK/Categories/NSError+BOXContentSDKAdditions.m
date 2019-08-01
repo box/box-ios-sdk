@@ -37,7 +37,7 @@
                 break;
                 
             case BOXContentSDKAPIErrorForbidden:
-                if ([[self customBoxErrorCode] isEqualToString:@"access_blocked_by_shield_access_policy"]) {
+                if ([[self customBoxErrorCode] isEqualToString:@"forbidden_by_policy"]) {
                     result = NSLocalizedString(@"The attempted action has been disabled due to the classification applied.", @"Narrative: Alert message explaining that an action was blocked (by Shield).");
                 } else {
                     result = NSLocalizedString(@"You do not have permission to perform this action.", @"Narrative: Message explaining that a failure happened because the user does not have sufficient permissions or access required to perform the action");
