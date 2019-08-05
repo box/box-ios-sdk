@@ -107,12 +107,6 @@ typedef struct _FileHashComputationContext {
     return result;
 }
 
-+ (NSString *)md5HashOfFileAtPath:(NSString *)filePath {
-    FileHashComputationContext context;
-    FileHashComputationContextInitialize(context, MD5);
-    return [self hashOfFileAtPath:filePath withComputationContext:&context];
-}
-
 + (NSString *)sha1HashOfFileAtPath:(NSString *)filePath {
     FileHashComputationContext context;
     FileHashComputationContextInitialize(context, SHA1);
