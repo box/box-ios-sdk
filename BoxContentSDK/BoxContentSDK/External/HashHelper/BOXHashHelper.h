@@ -22,7 +22,7 @@
 
 @interface BOXHashHelper : NSObject
 
-+ (NSString *)md5HashOfFileAtPath:(NSString *)filePath;
++ (NSString *)md5HashOfFileAtPath:(NSString *)filePath __attribute__((deprecated("All MD5 based methods will be removed")));
 + (NSString *)sha1HashOfFileAtPath:(NSString *)filePath;
 + (NSString *)sha512HashOfFileAtPath:(NSString *)filePath;
 
