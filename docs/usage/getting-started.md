@@ -17,9 +17,8 @@ Installing the SDK
 ------------------
 
 __Step 1__: Add to your `Cartfile`
-<!-- TODO: Confirm URL for release asset -->
 ```ogdl
-binary "https://github.com/box/box-ios-sdk/releases/download/v3.0.0-alpha.1/boxSDK.json"
+binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.1
 ```
 
 __Step 2__: Update dependencies
