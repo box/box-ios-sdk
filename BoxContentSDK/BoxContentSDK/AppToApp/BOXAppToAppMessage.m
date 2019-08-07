@@ -317,7 +317,7 @@
     return description;
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSSecureCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -340,6 +340,10 @@
     }
 
     return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

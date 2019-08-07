@@ -9,7 +9,7 @@
 
 // Represents any app that supports Box app-to-app communication. This includes
 // the Box app itself, as well as all partner apps.
-@interface BOXAppToAppApplication : NSObject <NSCoding>
+@interface BOXAppToAppApplication : NSObject <NSSecureCoding>
 
 @property (nonatomic, readonly, strong) NSString *name;
 @property (nonatomic, readonly, strong) NSString *bundleID;

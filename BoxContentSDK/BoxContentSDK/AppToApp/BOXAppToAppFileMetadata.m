@@ -177,7 +177,7 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
     return [self.allMetadata description];
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSSecureCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -187,6 +187,10 @@ void nilSafePut(NSMutableDictionary *dict, NSString *key, id value)
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     return [self initWithInfo:[aDecoder decodeObjectForKey:@"allMetadata"]];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

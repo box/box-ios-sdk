@@ -95,7 +95,7 @@ authRedirectURIString:(NSString *)authRedirectURIString;
     return [NSString stringWithFormat:@"BOXAppToAppApplication %@ with bundleID %@", self.name, self.bundleID];
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSSecureCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -117,6 +117,10 @@ authRedirectURIString:(NSString *)authRedirectURIString;
         self.authRedirectURIString = [aDecoder decodeObjectForKey:@"authRedirectURIString"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

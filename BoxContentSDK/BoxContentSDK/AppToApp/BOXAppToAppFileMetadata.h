@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BOXAppToAppFileMetadata : NSObject <NSCoding>
+@interface BOXAppToAppFileMetadata : NSObject <NSSecureCoding>
 
 @property (nonatomic, readonly, strong) NSString *fileName;               // e.g. "Cute kitty.jpg"
 @property (nonatomic, readonly, strong) NSString *folderName;             // e.g. "Kitten pictures"
