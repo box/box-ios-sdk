@@ -110,11 +110,11 @@ authRedirectURIString:(NSString *)authRedirectURIString;
 {
     if (self = [self init])
     {
-        self.name = [aDecoder decodeObjectForKey:@"name"];
-        self.bundleID = [aDecoder decodeObjectForKey:@"bundleID"];
-        self.clientID = [aDecoder decodeObjectForKey:@"clientID"];
-        self.urlScheme = [aDecoder decodeObjectForKey:@"urlScheme"];
-        self.authRedirectURIString = [aDecoder decodeObjectForKey:@"authRedirectURIString"];
+        self.name = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"name"];
+        self.bundleID = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"bundleID"];
+        self.clientID = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"clientID"];
+        self.urlScheme = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"urlScheme"];
+        self.authRedirectURIString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"authRedirectURIString"];
     }
     return self;
 }
