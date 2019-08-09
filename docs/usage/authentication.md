@@ -4,12 +4,14 @@ Authentication
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Ways to Authenticate](#ways-to-authenticate)
   - [Developer Token](#developer-token)
   - [Server Auth with JWT](#server-auth-with-jwt)
   - [Traditional 3-Legged OAuth2](#traditional-3-legged-oauth2)
 - [Token Store](#token-store)
 - [As-User](#as-user)
+- [Token Exchange](#token-exchange)
 - [Revoking Tokens](#revoking-tokens)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -160,7 +162,6 @@ asUserClient.users.getCurrentUser() { result in
 }
 ```
 
-<!-- TODO: Add when token exchange is exposed publicly
 Token Exchange
 --------------
 
@@ -168,11 +169,10 @@ You can exchange a client's access token for one with a lower scope, in order to
 client or to pass to a less secure location (e.g. a browser-based app).
 
 To exchange the token held by a client for a new token with only `item_preview`
-scope, restricted to a single file, suitable for the
-[Content Preview UI Kit](https://developer.box.com/docs/box-content-preview):
+scope, restricted to a single file:
 
 ```swift
-client.exchangeToken(scopes: ["item_preview"], resource: "https://api.box.com/2.0/files/123456789") { result in
+client.exchangeToken(scope: ["item_preview"], resource: "https://api.box.com/2.0/files/123456789") { result in
     guard case let .success(tokenInfo) = result else {
         print("Error exchanging tokens")
         return
@@ -181,7 +181,6 @@ client.exchangeToken(scopes: ["item_preview"], resource: "https://api.box.com/2.
     print("Got new access token: \(tokenInfo.accessToken)")
 }
 ```
--->
 
 Revoking Tokens
 ---------------
