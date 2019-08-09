@@ -29,4 +29,6 @@
 + (NSData *)sha1HashDataOfData:(NSData *)data;
 + (NSString *)sha1HashOfData:(NSData *)data;
 
++ (NSString *)sha512HashFromString:(NSString *)string;
+
 @end

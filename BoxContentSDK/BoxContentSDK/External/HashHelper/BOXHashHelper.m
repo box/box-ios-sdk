@@ -148,4 +148,17 @@ typedef struct _FileHashComputationContext {
     return [NSString stringWithCString:finaldigest encoding:NSASCIIStringEncoding];
 }
 
++ (NSString *)sha512HashFromString:(NSString *)string {
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    unsigned char digest[CC_SHA512_DIGEST_LENGTH];
+    CC_SHA512([data bytes], (CC_LONG)[data length], digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    return output;
+}
+
 @end
