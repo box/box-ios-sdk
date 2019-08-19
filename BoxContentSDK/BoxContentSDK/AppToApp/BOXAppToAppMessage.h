@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, BOXAppToAppStatus)
  * For example, a command might be "edit the file with ID 1234", or "create a new file
  * of type .docx in folder 5678".
  */
- @interface BOXAppToAppMessage : NSObject <NSCoding>
+ @interface BOXAppToAppMessage : NSObject <NSSecureCoding>
 
 /**
  * Indicates whether was an incoming message from another app, or an outgoing message
