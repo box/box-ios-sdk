@@ -212,6 +212,7 @@
 
 - (void)dealloc
 {
+    self.receivedDataBuffer = nil;
     if (self.outputStream) {
         self.outputStream.delegate = nil;
         [self.outputStream close];
