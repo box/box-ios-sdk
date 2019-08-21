@@ -21,11 +21,6 @@
 // output stream from this NSData when space becomes availble
 @property (nonatomic, readwrite, strong) NSMutableData *receivedDataBuffer;
 
-// The output stream may trigger the has space available callback when no data
-// is buffered. Use this BOOL to keep track of this state and manually invoke
-// the callback if necessary
-@property (nonatomic, readwrite, assign) BOOL outputStreamHasSpaceAvailable;
-
 @property (nonatomic, readwrite, assign) unsigned long long bytesReceived;
 
 - (void)writeDataToOutputStream;
@@ -51,7 +46,6 @@
 
 @synthesize outputStream = _outputStream;
 @synthesize receivedDataBuffer = _receivedDataBuffer;
-@synthesize outputStreamHasSpaceAvailable = _outputStreamHasSpaceAvailable;
 @synthesize bytesReceived = _bytesReceived;
 
 - (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
@@ -62,7 +56,6 @@
     {
         _outputStream = [NSOutputStream outputStreamToMemory];
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
-        _outputStreamHasSpaceAvailable = YES; // attempt to write to the output stream as soon as we receive data
         _bytesReceived = 0;
         self.allowResume = NO;
 
@@ -212,6 +205,7 @@
 
 - (void)dealloc
 {
+    self.receivedDataBuffer = nil;
     if (self.outputStream) {
         self.outputStream.delegate = nil;
         [self.outputStream close];
@@ -303,15 +297,7 @@
             [self.receivedDataBuffer appendData:data];
         }
 
-        // If the output stream does have space available, trigger the writeDataToOutputStream
-        // handler so the data is consumed by the output stream. This state would occur if
-        // an NSStreamEventHasSpaceAvailable event was received but receivedDataBuffer was
-        // empty.
-        if (self.outputStreamHasSpaceAvailable)
-        {
-            self.outputStreamHasSpaceAvailable = NO;
-            [self writeDataToOutputStream];
-        }
+        [self writeDataToOutputStream];
     }
 }
 
@@ -339,7 +325,6 @@
         {
             if (self.receivedDataBuffer.length == 0)
             {
-                self.outputStreamHasSpaceAvailable = YES;
                 return; // bail out because we have nothing to write
             }
 
