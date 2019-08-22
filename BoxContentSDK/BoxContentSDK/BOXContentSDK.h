@@ -121,6 +121,7 @@
 #import "BOXRecentItemsRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
 #import "BOXRepresentationInfoRequest.h"
+#import "BOXBlockExecutionRequest.h"
 
 // API Operation queues
 #import "BOXAPIQueueManager.h"
@@ -138,6 +139,7 @@
 #import "BOXAPIDataOperation.h"
 #import "BOXAPIJSONPatchOperation.h"
 #import "BOXAPIAppUsersAuthOperation.h"
+#import "BOXBlockExecutionOperation.h"
 
 // API models
 #import "BOXItem.h"

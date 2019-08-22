@@ -80,6 +80,11 @@ typedef void (^BOXRepresentationInfoBlock)(BOXRepresentation *representation, NS
 
 @property (nonatomic, readwrite, strong) NSString *SDKIdentifier;
 @property (nonatomic, readwrite, strong) NSString *SDKVersion;
+/**
+ * Whether performRequest would enqueue its operation onto a queue to be executed later,
+ * or bypass the queue and execute operation immediately
+ */
+@property (nonatomic, readwrite, assign) BOOL shouldPerformRequestImmediately;
 
 - (void)performRequest;
 - (void)cancel;

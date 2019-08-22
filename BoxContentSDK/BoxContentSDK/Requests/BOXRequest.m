@@ -65,7 +65,11 @@
 - (void)performRequest
 {
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
-    [self.queueManager enqueueOperation:self.operation];
+    if (self.shouldPerformRequestImmediately == YES) {
+        [self.operation start];
+    } else {
+        [self.queueManager enqueueOperation:self.operation];
+    }
 }
 
 - (void)cancel

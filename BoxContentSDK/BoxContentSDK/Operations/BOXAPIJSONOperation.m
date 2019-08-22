@@ -9,6 +9,8 @@
 #import "BOXAPIJSONOperation.h"
 #import "BOXContentSDKErrors.h"
 
+#import "BOXAPIOperation_Private.h"
+
 #define BOX_API_CONTENT_TYPE_JSON  (@"application/json")
 
 @implementation BOXAPIJSONOperation
