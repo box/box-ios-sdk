@@ -1,0 +1,14 @@
+{
+    "type":"folder",
+    "id":"2759406491",
+    "etag":"0",
+    "sequence_id":"0",
+    "name":"bookmarks yo",
+    "description":"",
+    "allowed_invitee_roles":[
+        "editor",
+        "viewer"
+    ],
+    "default_invitee_role":null,
+}
+

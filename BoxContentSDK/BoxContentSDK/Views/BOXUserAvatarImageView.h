@@ -23,4 +23,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
                        client:(BOXContentClient *)client;
 
+- (void)refresh;
+
 @end

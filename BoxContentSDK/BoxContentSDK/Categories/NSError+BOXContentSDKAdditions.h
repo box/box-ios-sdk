@@ -11,5 +11,6 @@
 
 - (NSString *)box_localizedFailureReasonString;
 - (NSString *)box_localizedShortFailureReasonString;
+- (BOOL)isBlockedByShield;
 
 @end

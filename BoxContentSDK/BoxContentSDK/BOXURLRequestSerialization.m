@@ -449,7 +449,7 @@ forHTTPHeaderField:(NSString *)field
         bodyStream.contentProcessor = streamingHashHelper;
         [streamingHashHelper open];
         const NSUInteger chunkSize = 1024 * 8;
-        while ([inputStream hasBytesAvailable] && [outputStream hasSpaceAvailable]) {
+        while ([inputStream hasBytesAvailable] && [outputStream hasSpaceAvailable]) { @autoreleasepool {
             uint8_t buffer[chunkSize];
 
             NSInteger bytesRead = [inputStream read:buffer maxLength:chunkSize];
@@ -467,7 +467,7 @@ forHTTPHeaderField:(NSString *)field
             if (bytesRead == 0 && bytesWritten == 0) {
                 break;
             }
-        }
+        } }
 
         [outputStream close];
         [inputStream close];
