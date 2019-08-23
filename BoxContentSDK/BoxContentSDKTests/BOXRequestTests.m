@@ -50,6 +50,34 @@
 
 @end
 
+// For use by tests that need to track when [BOXAPIOperation finish] has
+// completed. There are subtle (and really not-well-understood) situations
+// where a test completes (the test method 'returns') and after that
+// the 'finish' method is still executing. Most tests are naturally keyed
+// of the call `[self performCompletionCallback];` in BOXAPIOperation,
+// but there a bunch more logic in finish after the callback. The test
+// subclass here overrides finish, calls super, and then fulfills an
+// optional XCTestExpectation, making it possible for a test to wait on
+// that expectation.
+@interface BOXAPIJSONOperationSpy : BOXAPIJSONOperation
+
+@property (nonatomic, readwrite, strong) XCTestExpectation *expectation;
+
+- (void)finish;
+
+@end
+
+@implementation BOXAPIJSONOperationSpy
+
+- (void)finish {
+    [super finish];
+    if (_expectation != nil) {
+        [_expectation fulfill];
+    }
+}
+
+@end
+
 @interface BOXRequestTests : BOXRequestTestCase
 @end
 
@@ -211,8 +239,20 @@
     
     NSHTTPURLResponse *URLResponse = [self cannedURLResponseWithStatusCode:403 responseData:nil];
     [self setCannedURLResponse:URLResponse cannedResponseData:nil forRequest:request];
-    request.operation = [[BOXAPIJSONOperation alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    
+    // For a subtle (and not well understood reason) the OCMock `reject` call below, triggers flaky
+    // crashes in BOXAPIOperation's finish method. The test method exits right after the
+    // `[self performCompletionCallback];` call in finish. And for some reason related to `reject`
+    // one can hit an assortment of crashes in the remaining codepaths in that finish method.
+    // If the `reject' call is commented out... then crashes do not occur. The solution to this
+    // is using BOXAPIJSONOperationSpy and waiting on an Expectation that is fulfill'd
+    // *AFTER* finish has completed. This technique also avoids the random crashers. Of course
+    // figuring out why OCMock `reject` and the BoxAPIOperation are problematic would be preferred,
+    // but until then BOXAPIJSONOperationSpy serves as a workaround.
+    BOXAPIJSONOperationSpy *op = [[BOXAPIJSONOperationSpy alloc] initWithURL:[request URLWithResource:nil ID:nil subresource:nil subID:nil] HTTPMethod:BOXAPIHTTPMethodGET body:nil queryParams:nil session:request.queueManager.session];
+    op.expectation = [self expectationWithDescription:@"finish expectation"];
 
+    request.operation = op;
     id operationMock = [OCMockObject partialMockForObject:request.operation];
     [[operationMock reject] sendLogoutNotification];
     
@@ -222,8 +262,6 @@
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
-
-    [operationMock verify];
 }
 
 - (void)test_that_unauthorized_401_error_triggers_logout_notification
