@@ -15,13 +15,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/SharedLink.swift",
-      "line": 33,
-      "symbol": "SharedLink.effectivePermission",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
       "line": 9,
       "symbol": "WebLink.Permissions.canRename",
