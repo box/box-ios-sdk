@@ -241,7 +241,7 @@
 
 - (BOOL)canBeReenqueued
 {
-    return YES;
+    return self.shouldStartImmediately == NO;
 }
 
 @end

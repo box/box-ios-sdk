@@ -23,6 +23,7 @@
 #import "BOXUserRequest.h"
 #import "BOXContentClient+User.h"
 #import "BOXURLSessionManager.h"
+#import "BOXRequest.h"
 
 // Default API URLs
 /*
@@ -219,6 +220,7 @@ static BOXContentClient *defaultInstance = nil;
                                                                queueManager:_queueManager
                                                           urlSessionManager:_urlSessionManager];
         _queueManager.session = self.session;
+        _shouldBackgroundRequestsPerformImmediately = NO;
         
         if (staticRedirectURIString.length > 0) {
             _OAuth2Session.redirectURIString = staticRedirectURIString;
@@ -495,10 +497,22 @@ static BOXContentClient *defaultInstance = nil;
         BOXSharedItemRequest *shareItemRequest = (BOXSharedItemRequest *)request;
         shareItemRequest.sharedLinkHeadersHelper = self.sharedLinksHeaderHelper;
     }
-    
+
+    // If the request is currently not set to perform immediately,
+    // Check if we should set it to perform immediately or not
+    if (request.shouldPerformRequestImmediately == NO) {
+       request.shouldPerformRequestImmediately = self.shouldBackgroundRequestsPerformImmediately
+        && [self isBackgroundRequest:request];
+    }
     if (self.OAuth2Session.refreshToken && (self.OAuth2Session.clientID.length == 0 || self.OAuth2Session.clientSecret.length == 0)) {
         [NSException raise:@"Set client ID and client secret first." format:@"You must set a client ID and client secret first."];
     }
+}
+
+- (BOOL)isBackgroundRequest:(BOXRequest *)request
+{
+    return [request conformsToProtocol:@protocol(BOXBackgroundRequestProtocol)]
+        && [(id<BOXBackgroundRequestProtocol>)request associateID] != nil;
 }
 
 + (NSMutableDictionary *)SDKClients
