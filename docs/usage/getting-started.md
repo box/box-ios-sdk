@@ -146,3 +146,9 @@ func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
 ```
 
 __Step 5__: Run the sample app
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__
