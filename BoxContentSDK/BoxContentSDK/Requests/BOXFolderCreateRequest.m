@@ -24,7 +24,7 @@
 /**
  Caller provided unique ID to execute the request as a NSURLSession background task
  */
-@property (nonatomic, readwrite, copy) NSString *associateId;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 @end
 
@@ -34,18 +34,18 @@
 {
     return [self initWithFolderName:folderName
                        parentFolderID:parentFolderID
-                    associateId:nil];
+                    associateID:nil];
 }
 
 - (instancetype)initWithFolderName:(NSString *)folderName
                     parentFolderID:(NSString *)parentFolderID
-                       associateId:(nullable NSString *)associateId
+                       associateID:(nullable NSString *)associateID
 
 {
     if (self = [super init]) {
         _folderName = folderName;
         _parentFolderID = parentFolderID;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     
     return self;
@@ -74,10 +74,10 @@
                                                          bodyDictionary:bodyDictionary
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         
         return dataOperation;
@@ -195,7 +195,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-	return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+	return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

@@ -14,6 +14,7 @@
 @property (nonatomic, readwrite, strong) NSString *bookmarkID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanPreview;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 @end
 
@@ -25,6 +26,13 @@
         _bookmarkID = bookmarkID;
     }
     
+    return self;
+}
+
+- (instancetype)initWithBookmarkID:(NSString *)bookmarkID associateID:(NSString *)associateID
+{
+    self = [self initWithBookmarkID:bookmarkID];
+    self.associateID = associateID;
     return self;
 }
 

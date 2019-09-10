@@ -30,7 +30,7 @@
 /**
  Caller provided unique ID to execute the request as a NSURLSession background task
  */
-@property (nonatomic, readwrite, copy) NSString *associateId;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 @end
 
@@ -43,19 +43,19 @@
     return [self initWithItemID:itemID
                        resource:BOXAPIResourceFiles
                   collectionIDs:collectionIDs
-                    associateId:nil];
+                    associateID:nil];
 }
 
 - (instancetype)initWithItemID:(NSString *)itemID
                       resource:(NSString *)resource
                  collectionIDs:(NSArray *)collectionIDs
-                   associateId:(NSString *)associateId
+                   associateID:(NSString *)associateID
 {
     if (self = [super init]) {
         _itemID = itemID;
         _resource = resource;
         _collectionIDs = collectionIDs;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     return self;
 }
@@ -65,17 +65,17 @@
 {
     return [self initFileSetCollectionsRequestForFileWithID:fileID
                                               collectionIDs:collectionIDs
-                                                associateId:nil];
+                                                associateID:nil];
 }
 
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs
-                                               associateId:(NSString *)associateId
+                                               associateID:(NSString *)associateID
 {
     return [self initWithItemID:fileID
                        resource:BOXAPIResourceFiles
                   collectionIDs:collectionIDs
-                    associateId:associateId];
+                    associateID:associateID];
 }
 
 - (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
@@ -83,17 +83,17 @@
 {
     return [self initFolderSetCollectionsRequestForFolderWithID:folderID
                                               collectionIDs:collectionIDs
-                                                associateId:nil];
+                                                associateID:nil];
 }
 
 - (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
                                                  collectionIDs:(NSArray *)collectionIDs
-                                                   associateId:(NSString *)associateId
+                                                   associateID:(NSString *)associateID
 {
     return [self initWithItemID:folderID
                        resource:BOXAPIResourceFolders
                   collectionIDs:collectionIDs
-                    associateId:associateId];
+                    associateID:associateID];
 }
 
 - (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
@@ -101,17 +101,17 @@
 {
     return [self initBookmarkSetCollectionsRequestForBookmarkWithID:bookmarkID
                                                   collectionIDs:collectionIDs
-                                                    associateId:nil];
+                                                    associateID:nil];
 }
 
 - (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
                                                      collectionIDs:(NSArray *)collectionIDs
-                                                       associateId:(NSString *)associateId
+                                                       associateID:(NSString *)associateID
 {
     return [self initWithItemID:bookmarkID
                        resource:BOXAPIResourceBookmarks
                   collectionIDs:collectionIDs
-                    associateId:associateId];
+                    associateID:associateID];
 }
 
 - (BOXAPIOperation *)createOperation
@@ -149,10 +149,10 @@
                                                          bodyDictionary:bodyDictionary
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
 
         return dataOperation;
@@ -258,7 +258,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

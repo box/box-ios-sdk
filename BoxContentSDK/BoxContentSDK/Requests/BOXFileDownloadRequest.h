@@ -6,7 +6,7 @@
 #import "BOXRequestWithSharedLinkHeader.h"
 #import "BOXAPIOperation.h"
 
-@interface BOXFileDownloadRequest : BOXRequestWithSharedLinkHeader
+@interface BOXFileDownloadRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 // This is not the etag of a particular version of the file, nor the sequential version number,
 // it is the ID of the version representation gotten from /files/<fileID>/versions
@@ -29,7 +29,7 @@
  */
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
-                             associateId:(NSString *)associateId;
+                             associateID:(NSString *)associateID;
 
 /**
  * request will download file into outputStream, and the file download cannot continue

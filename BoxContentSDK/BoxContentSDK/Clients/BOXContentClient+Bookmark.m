@@ -69,8 +69,7 @@
 - (BOXBookmarkUpdateRequest *)bookmarkUpdateRequestWithID:(NSString *)bookmarkID
                                               associateID:(NSString *)associateID
 {
-    BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID];
-    request.associateID = associateID;
+    BOXBookmarkUpdateRequest *request = [[BOXBookmarkUpdateRequest alloc] initWithBookmarkID:bookmarkID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     

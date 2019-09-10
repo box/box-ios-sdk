@@ -10,7 +10,7 @@
 
 @class BOXRepresentation;
 
-@interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader
+@interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 // This is not the etag of a particular version of the file, nor the sequential version number,
 // it is the ID of the version representation gotten from /files/<fileID>/versions
@@ -54,7 +54,7 @@
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
                           representation:(BOXRepresentation *)representation
-                             associateId:(NSString *)associateId;
+                             associateID:(NSString *)associateID;
 
 /**
  * request will download file into outputStream, and the file download cannot continue
