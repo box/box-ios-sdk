@@ -5,7 +5,7 @@
 
 #import "BOXRequestWithSharedLinkHeader.h"
 
-@interface BOXFileRequest : BOXRequestWithSharedLinkHeader
+@interface BOXFileRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 @property (nonatomic, readwrite, assign) BOOL requestAllFileFields;
 
@@ -14,11 +14,6 @@
 @property (nonatomic, readonly, strong) NSString *fileID;
 
 // NOTE: Both the associateID and requestDirectoryPath values are required for performing the request in the background.
-/**
- Caller provided unique ID to execute the request as a NSURLSession background task.
- This is a required value for performing the request in the background.
- */
-@property (nonatomic, readwrite, strong) NSString *associateID;
 
 /**
  Caller provided directory path for the result payload of the background operation to be written to.
@@ -36,7 +31,14 @@
 - (instancetype)initWithFileID:(NSString *)fileID;
 
 - (instancetype)initWithFileID:(NSString *)fileID
+                   associateID:(NSString *)associateID;
+
+- (instancetype)initWithFileID:(NSString *)fileID
                      isTrashed:(BOOL)isTrashed;
+
+- (instancetype)initWithFileID:(NSString *)fileID
+                     isTrashed:(BOOL)isTrashed
+                   associateID:(NSString *)associateID;
 
 //Perform API request and any cache update only if refreshBlock is not nil
 - (void)performRequestWithCompletion:(BOXFileBlock)completionBlock;

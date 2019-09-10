@@ -15,6 +15,8 @@
 
 @property (nonatomic, readwrite, strong) NSString *fileID;
 
+@property (nonatomic, readwrite, copy) NSString *associateID;
+
 /// Properties related to Background tasks
 
 /**
@@ -33,6 +35,14 @@
     return [self initWithFileID:fileID isTrashed:NO];
 }
 
+- (instancetype)initWithFileID:(NSString *)fileID
+                   associateID:(NSString *)associateID
+{
+    self = [self initWithFileID:fileID];
+    self.associateID = associateID;
+    return self;
+}
+
 - (instancetype)initWithFileID:(NSString *)fileID isTrashed:(BOOL)isTrashed
 {
     if (self = [super init]) {
@@ -45,12 +55,12 @@
 
 - (instancetype)initWithFileID:(NSString *)fileID
                      isTrashed:(BOOL)isTrashed
-                   associateId:(NSString *)associateId
+                   associateID:(NSString *)associateID
 {
     if (self = [super init]) {
         _fileID = fileID;
         _isTrashed = isTrashed;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     return self;
 }
@@ -75,10 +85,10 @@
                                                          bodyDictionary:nil
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         
         return dataOperation;
@@ -188,7 +198,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end
