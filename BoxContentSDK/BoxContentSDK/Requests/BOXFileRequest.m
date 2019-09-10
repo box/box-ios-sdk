@@ -16,6 +16,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL isTrashed;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 - (BOOL)shouldPerformBackgroundOperation;
 
@@ -28,6 +29,13 @@
     return [self initWithFileID:fileID isTrashed:NO];
 }
 
+- (instancetype)initWithFileID:(NSString *)fileID associateID:(NSString *)associateID
+{
+    self = [self initWithFileID:fileID];
+    self.associateID = associateID;
+    return self;
+}
+
 - (instancetype)initWithFileID:(NSString *)fileID isTrashed:(BOOL)isTrashed
 {    
     if (self = [super init]) {
@@ -35,6 +43,13 @@
         _isTrashed = isTrashed;
     }
 
+    return self;
+}
+
+- (instancetype)initWithFileID:(NSString *)fileID isTrashed:(BOOL)isTrashed associateID:(NSString *)associateID
+{
+    self = [self initWithFileID:fileID isTrashed:isTrashed];
+    self.associateID = associateID;
     return self;
 }
 
