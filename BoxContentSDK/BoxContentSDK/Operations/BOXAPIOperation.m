@@ -113,6 +113,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
+        _shouldStartImmediately = NO;
         // delay setting up the session task as long as possible so the authentication credentials remain fresh
 
         _APIRequest = nil;
@@ -297,23 +298,34 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)start
 {
-    [[BOXAPIOperation APIOperationGlobalLock] lock];
+    if (self.shouldStartImmediately) {
+        if ([self isReady]) {
+            self.state = BOXAPIOperationStateExecuting;
+            @autoreleasepool {
+                [self executeOperation];
+            }
+        } else {
+            BOXAssertFail(@"Operation was not ready but start was called");
+        }
+    } else {
+        [[BOXAPIOperation APIOperationGlobalLock] lock];
 
-    if ([self isReady])
-    {
-        // Set state = executing once we have the lock
-        // BOXAPIQueueManagers check to ensure that operations are not executing when
-        // they grab the lock and are adding dependencies.
-        self.state = BOXAPIOperationStateExecuting;
+        if ([self isReady])
+        {
+            // Set state = executing once we have the lock
+            // BOXAPIQueueManagers check to ensure that operations are not executing when
+            // they grab the lock and are adding dependencies.
+            self.state = BOXAPIOperationStateExecuting;
 
-        [self performSelector:@selector(executeOperation) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+            [self performSelector:@selector(executeOperation) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+        }
+        else
+        {
+            BOXAssertFail(@"Operation was not ready but start was called");
+        }
+
+        [[BOXAPIOperation APIOperationGlobalLock] unlock];
     }
-    else
-    {
-        BOXAssertFail(@"Operation was not ready but start was called");
-    }
-
-    [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
@@ -415,7 +427,13 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)cancel
 {
-    [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    if (self.shouldStartImmediately) {
+        @autoreleasepool {
+            [self cancelSessionTask];
+        }
+    } else {
+        [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    }
     [super cancel];
     BOXLog(@"BOXAPIOperation %@ was cancelled", self);
 }

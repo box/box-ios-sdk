@@ -86,6 +86,12 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 @property (nonatomic, nullable, readwrite, copy) NSDictionary *fetchTokenBlockInfo;
 
 /**
+ *  Used to set background requests' shouldPerformRequestImmediately provided those requests prepared
+ *  using BOXContentClient. E.g.: BOXFileRequest returned by fileInfoRequestWithID:associateID:
+ */
+@property (nonatomic, readwrite, assign) BOOL shouldBackgroundRequestsPerformImmediately;
+
+/**
  *  The list of Box users that have established a session through the SDK.
  *
  *  @return array of BOXUserMini model objects
