@@ -92,6 +92,12 @@ Please refer to specific requests for additional required properties to perform 
 @property (nonatomic, readwrite, strong) NSString *SDKIdentifier;
 @property (nonatomic, readwrite, strong) NSString *SDKVersion;
 
+/**
+ * If true, when performRequest is called, its API request will be started immediately instead of being put onto a network queue.
+ * This also means no automatic retry.
+ */
+@property (nonatomic, readwrite, assign) BOOL shouldPerformRequestImmediately;
+
 - (void)performRequest;
 - (void)cancel;
 
