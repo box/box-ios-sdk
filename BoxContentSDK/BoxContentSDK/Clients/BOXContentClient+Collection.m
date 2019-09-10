@@ -60,7 +60,7 @@
 {
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFileSetCollectionsRequestForFileWithID:fileID
                                                                                                                collectionIDs:collectionIDs
-                                                                                                                 associateId:associateId];
+                                                                                                                 associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     
     [self prepareRequest:request];
@@ -82,7 +82,7 @@
 {
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initFolderSetCollectionsRequestForFolderWithID:folderID
                                                                                                                    collectionIDs:collectionIDs
-                                                                                                                     associateId:associateId];
+                                                                                                                     associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     
     [self prepareRequest:request];
@@ -104,7 +104,7 @@
 {
     BOXItemSetCollectionsRequest *request = [[BOXItemSetCollectionsRequest alloc] initBookmarkSetCollectionsRequestForBookmarkWithID:bookmarkID
                                                                                                                        collectionIDs:collectionIDs
-                                                                                                                         associateId:associateId];
+                                                                                                                         associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     
     [self prepareRequest:request];

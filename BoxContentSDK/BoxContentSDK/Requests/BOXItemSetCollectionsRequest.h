@@ -9,7 +9,7 @@
  * This request associates a BOXItem to a list of collections. The return value is the updated BOXItem.
  */
 
-@interface BOXItemSetCollectionsRequest : BOXRequest
+@interface BOXItemSetCollectionsRequest : BOXRequest <BOXBackgroundRequestProtocol>
 
 @property (nonatomic, readonly, strong) NSString *itemID;
 @property (nonatomic, readonly, strong) NSArray *collectionIDs;
@@ -25,21 +25,21 @@
 
 - (instancetype)initFileSetCollectionsRequestForFileWithID:(NSString *)fileID
                                              collectionIDs:(NSArray *)collectionIDs
-                                               associateId:(NSString *)associateId;
+                                               associateID:(NSString *)associateID;
 
 - (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
                                                  collectionIDs:(NSArray *)collectionIDs;
 
 - (instancetype)initFolderSetCollectionsRequestForFolderWithID:(NSString *)folderID
                                                  collectionIDs:(NSArray *)collectionIDs
-                                                   associateId:(NSString *)associateId;
+                                                   associateID:(NSString *)associateID;
 
 - (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
                                                      collectionIDs:(NSArray *)collectionIDs;
 
 - (instancetype)initBookmarkSetCollectionsRequestForBookmarkWithID:(NSString *)bookmarkID
                                                      collectionIDs:(NSArray *)collectionIDs
-                                                       associateId:(NSString *)associateId;
+                                                       associateID:(NSString *)associateID;
 
 - (void)performRequestWithCompletion:(BOXItemBlock)completionBlock;
 

@@ -9,6 +9,10 @@
 #import "BOXFolder.h"
 #import "BOXDispatchHelper.h"
 
+@interface BOXTrashedFolderRestoreRequest()
+@property (nonatomic, readwrite, copy) NSString *associateID;
+@end
+
 @implementation BOXTrashedFolderRestoreRequest
 
 - (instancetype)initWithFolderID:(NSString *)folderID
@@ -21,11 +25,11 @@
 }
 
 - (instancetype)initWithFolderID:(NSString *)folderID
-                     associateId:(NSString *)associateId
+                     associateID:(NSString *)associateID
 {
     if (self = [super init]) {
         _folderID = folderID;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     
     return self;
@@ -53,10 +57,10 @@
                                                          bodyDictionary:bodyDictionary
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         
         return dataOperation;
@@ -159,7 +163,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

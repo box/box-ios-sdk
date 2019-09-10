@@ -19,6 +19,8 @@
 
 /// Properties related to Background tasks
 
+@property (nonatomic, readwrite, copy) NSString *associateID;
+
 /**
  Check if the request can executre on background. Requires valid associateId and requestDirectoryPath
  
@@ -32,28 +34,28 @@
 
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
-    return [self initWithFolderID:folderID associateId:nil];
+    return [self initWithFolderID:folderID associateID:nil];
 }
 
 - (instancetype)initWithFolderID:(NSString *)folderID
-                     associateId:(NSString *)associateId
+                     associateID:(NSString *)associateID
 {
-    return [self initWithFolderID:folderID isTrashed:NO associateId: associateId];
+    return [self initWithFolderID:folderID isTrashed:NO associateID:associateID];
 }
 
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed
 {
-    return [self initWithFolderID:folderID isTrashed:isTrashed associateId: nil];
+    return [self initWithFolderID:folderID isTrashed:isTrashed associateID:nil];
 }
 
 - (instancetype)initWithFolderID:(NSString *)folderID
                        isTrashed:(BOOL)isTrashed
-                     associateId:(NSString *)associateId
+                     associateID:(NSString *)associateID
 {
     if (self = [super init]) {
         _folderID = folderID;
         _isTrashed = isTrashed;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     
     return self;
@@ -89,10 +91,10 @@
                                                          bodyDictionary:nil
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         
         if ([self.notMatchingEtags count] > 0) {
@@ -248,7 +250,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

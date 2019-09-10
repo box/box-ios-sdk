@@ -14,7 +14,7 @@
 @property (nonatomic, readonly, strong) NSString *destinationPath;
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
-@property (nonatomic, readwrite, copy) NSString *associateId;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 @end
 
 @implementation BOXFileDownloadRequest
@@ -33,10 +33,10 @@
 
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
-                             associateId:(NSString *)associateId
+                             associateID:(NSString *)associateID
 {
     self = [self initWithLocalDestination:destinationPath fileID:fileID];
-    self.associateId = associateId;
+    self.associateID = associateID;
     return self;
 }
 
@@ -79,14 +79,14 @@
                                                      bodyDictionary:nil
                                                        successBlock:nil
                                                        failureBlock:nil
-                                                        associateId:self.associateId];
+                                                        associateId:self.associateID];
 
     dataOperation.modelID = self.fileID;
     
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
 
-    if (self.destinationPath != nil && self.associateId != nil) {
+    if (self.destinationPath != nil && self.associateID != nil) {
         dataOperation.destinationPath = self.destinationPath;
     } else if (self.outputStream != nil) {
         dataOperation.outputStream = self.outputStream;
