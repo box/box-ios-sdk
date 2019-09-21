@@ -265,6 +265,23 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 + (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
 
 /**
+ * Background session ID of background session
+*/
++ (nullable NSString *)backgroundSessionIdentifier;
+
+/**
+ * Return currrently active background session IDs
+*/
++ (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
+
+/**
+ * Return all background session IDs created by the extensions
+ * and reconnected to the app
+ */
++ (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error;
+
+
+/**
  *  API base URLs.
  **/
 + (NSString *)APIBaseURL;

@@ -486,6 +486,21 @@ static BOXContentClient *defaultInstance = nil;
     return [[BOXURLSessionManager sharedInstance] associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
 }
 
++ (NSString *)backgroundSessionIdentifier
+{
+    return [[BOXURLSessionManager sharedInstance] backgroundSessionIdentifier];
+}
+
++ (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error
+{
+    return [[BOXURLSessionManager sharedInstance] onGoingBackgroundSessionIDsWithError:error];
+}
+
++ (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error
+{
+    return [[BOXURLSessionManager sharedInstance] backgroundSessionIDsReconnectedToAppWithError:error];
+}
+
 #pragma mark - helper methods
 
 - (void)prepareRequest:(BOXRequest *)request

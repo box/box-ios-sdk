@@ -334,10 +334,15 @@
 - (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
 
 /**
- * Return all background session ids known to the app from extensions
- * which were cached previously using cacheBackgroundSessionIdFromExtension:error
+ * Return currrently active background session IDs
+*/
+- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
+
+/**
+ * Return all background session IDs created by the extensions
+ * and reconnected to the app
  */
-- (NSArray *)backgroundSessionIdsFromExtensionsWithError:(NSError **)error;
+- (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error;
 
 /**
  * Return resumeData of a completed session task associated with the userId and associateId
