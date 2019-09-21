@@ -279,7 +279,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSString *)backgroundSessionIdentifier;
 
 /**
- * Return ongoing background session IDs
+ * Return currrently active background session IDs
 */
 - (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
 

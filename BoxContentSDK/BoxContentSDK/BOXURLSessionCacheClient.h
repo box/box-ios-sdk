@@ -334,7 +334,7 @@
 - (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
 
 /**
- * Return ongoing background session IDs
+ * Return currrently active background session IDs
 */
 - (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
 
