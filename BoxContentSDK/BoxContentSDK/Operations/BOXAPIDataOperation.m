@@ -362,7 +362,6 @@
 {
     BOXAPIDataOperation *operationCopy = [self copy];
     operationCopy.timesReenqueued++;
-    self.outputStream = nil;
     [self.session.queueManager enqueueOperation:operationCopy];
     [self finish];
 }
@@ -385,8 +384,9 @@
                                                                                           body:bodyCopy
                                                                                    queryParams:queryStringParametersCopy
                                                                                  session:self.session];
+    self.outputStream.delegate = nil;
     operationCopy.outputStream = self.outputStream;
-    operationCopy.outputStream.delegate = nil;
+    self.outputStream = nil;
     operationCopy.timesReenqueued = self.timesReenqueued;
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];

@@ -13,11 +13,7 @@
 /**
  * BOXAPIAuthenticatedOperation is an abstract base class for all API operations that
  * require authentication with Box. Because this class is abstract, you should not instantiate
- * it directly. Instead, use one of its subclasses:
- *
- * - BOXAPIJSONOperation
- * - BOXAPIMultipartToJSONOperation
- * - BOXAPIDataOperation
+ * it directly. Instead, use one of its subclasses.
  *
  * This class encapsulates logic for handling expired access tokens. If an access token is found
  * to be expired, instances will request an attempt to refresh access tokens and will attempt
@@ -27,9 +23,7 @@
  * ================
  * ...
  *
- * @warning Only members of the class BOXAPIJSONOperation may be reenqueued. Neither
- * BOXAPIMultipartToJSONOperation nor BOXAPIDataOperation instances may be reenqueued because they
- * contain properties that cannot be copied (subclasses of NSStream).
+ * @warning Concrete subclasses that are reenqueueable (see `canBeReenqueued:` below) also need to  conform to NSCopying.
  */
 @interface BOXAPIAuthenticatedOperation : BOXAPIOperation
 
@@ -76,7 +70,8 @@
 /**
   * Whether or not the operation request can be re-enqueued automatically.
   * In certain cases, the Operations layer can try to re-execute (once) upon failure (e.g. token needed refreshing).
-  * Sub-classes should override to indicate whether they are re-enqueueable or not.
+  * Sub-classes should override to indicate whether they are re-enqueueable or not. If they are re-enqueueable
+  * the class also needs to support creating a copy of the Operation.
   */
 - (BOOL)canBeReenqueued;
 

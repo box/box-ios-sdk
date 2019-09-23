@@ -14,12 +14,10 @@
 typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalBytes);
 
 /**
- * BOXAPIDataOperation is a concrete subclass of BOXAPIAuthenticatedOperation.
- * This operation receives binary data from the Box API which may be in the form
- * of downloads or thumbnails.
+ * BOXStreamOperation is a concrete subclass of BOXAPIAuthenticatedOperation.
  *
  * API calls to Box may fail with a 202 Accepted with an
- * empty body on Downloads of files and thumbnails.
+ * empty body on Downloads.
  * This indicates that a file has successfully been uploaded but
  * is not yet available for download or has not yet been converted
  * to the requested thumbnail representation. In these cases, retry
@@ -35,13 +33,8 @@ typedef void (^BOXAPIStreamProgressBlock)(NSData *data, long long expectedTotalB
  *
  * **Note**: expectedTotalBytes may be `NSURLResponseUnknownLength` if the operation is unable to
  * determine the Content-Length of the download.
- *
- * @warning Because BOXAPIDataOperation holds references to `NSStream`s, it cannot be copied. Because it
- * cannot be copied, BOXAPIDataOperation instances cannot be automatically retried by the SDK in the event
- * of an expired access token. In this case, the operation will fail with error code
- * `BoxContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued`.
  */
-@interface BOXStreamOperation : BOXAPIAuthenticatedOperation
+@interface BOXStreamOperation : BOXAPIAuthenticatedOperation <NSCopying>
 
 
 /** @name Callbacks */
