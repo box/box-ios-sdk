@@ -8,7 +8,6 @@
 
 #import "BOXAPIAuthenticatedOperation.h"
 
-#import "BOXAPIJSONOperation.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXAbstractSession.h"
@@ -78,7 +77,7 @@
         {
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
 
-            BOXAPIJSONOperation *operationCopy = [self copy];
+            BOXAPIAuthenticatedOperation *operationCopy = [self copy];
             operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
             [self.session.queueManager enqueueOperation:operationCopy];
         }
