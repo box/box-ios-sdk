@@ -565,46 +565,20 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         switch (self.HTTPResponse.statusCode)
         {
             case BOXContentSDKAPIErrorAccepted:
-                errorCode = BOXContentSDKAPIErrorAccepted;
-                break;
             case BOXContentSDKAPIErrorBadRequest:
-                errorCode = BOXContentSDKAPIErrorBadRequest;
-                break;
             case BOXContentSDKAPIErrorUnauthorized:
-                errorCode = BOXContentSDKAPIErrorUnauthorized;
-                break;
             case BOXContentSDKAPIErrorForbidden:
-                errorCode = BOXContentSDKAPIErrorForbidden;
-                break;
             case BOXContentSDKAPIErrorNotFound:
-                errorCode = BOXContentSDKAPIErrorNotFound;
-                break;
             case BOXContentSDKAPIErrorMethodNotAllowed:
-                errorCode = BOXContentSDKAPIErrorMethodNotAllowed;
-                break;
             case BOXContentSDKAPIErrorConflict:
-                errorCode = BOXContentSDKAPIErrorConflict;
-                break;
             case BOXContentSDKAPIErrorPreconditionFailed:
-                errorCode = BOXContentSDKAPIErrorPreconditionFailed;
-                break;
             case BOXContentSDKAPIErrorRequestEntityTooLarge:
-                errorCode = BOXContentSDKAPIErrorRequestEntityTooLarge;
-                break;
             case BOXContentSDKAPIErrorPreconditionRequired:
-                errorCode = BOXContentSDKAPIErrorPreconditionRequired;
-                break;
             case BOXContentSDKAPIErrorTooManyRequests:
-                errorCode = BOXContentSDKAPIErrorTooManyRequests;
-                break;
             case BOXContentSDKAPIErrorInternalServerError:
-                errorCode = BOXContentSDKAPIErrorInternalServerError;
-                break;
             case BOXContentSDKAPIErrorInsufficientStorage:
-                errorCode = BOXContentSDKAPIErrorInsufficientStorage;
+                errorCode = self.HTTPResponse.statusCode;
                 break;
-            default:
-                errorCode = BOXContentSDKAPIErrorUnknownStatusCode;
         }
 
         self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
