@@ -206,7 +206,7 @@
 
 - (BOOL)canBeReenqueuedDueTo202NotReady
 {
-    return YES;
+    return self.shouldStartImmediately == NO;
 }
 
 @end
