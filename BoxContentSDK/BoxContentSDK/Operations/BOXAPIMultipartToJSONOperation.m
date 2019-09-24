@@ -211,7 +211,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     [self.sessionTask cancel];
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
 {
     return NO;
 }

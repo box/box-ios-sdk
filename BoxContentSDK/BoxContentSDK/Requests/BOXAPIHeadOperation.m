@@ -10,9 +10,6 @@
 #import "BOXContentSDKErrors.h"
 #import "BOXAbstractSession.h"
 
-#define MAX_REENQUE_DELAY 15
-#define REENQUE_BASE_DELAY 0.2
-
 @implementation BOXAPIHeadOperation
 
 @synthesize successBlock = _successBlock;
@@ -68,39 +65,6 @@
     return JSONEncodedBody;
 }
 
-- (void)processResponse:(NSURLResponse *)response
-{
-    [super processResponse:response];
-
-    if (self.error.code == BOXContentSDKAPIErrorAccepted) {
-        // If we get a 202, it means the content is not yet ready on Box's servers.
-        // Re-enqueue after a certain amount of time.
-        double delay = [self reenqueDelay];
-        dispatch_queue_t currentQueue = [[NSOperationQueue currentQueue] underlyingQueue];
-        if (currentQueue == nil) {
-            currentQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
-            [self reenqueOperationDueTo202Response];
-        });
-    }
-}
-
-- (double)reenqueDelay
-{
-    // Delay grows each time the request is re-enqueued.
-    double delay = MIN(pow((1 + REENQUE_BASE_DELAY), self.timesReenqueued) - 1, MAX_REENQUE_DELAY);
-    return delay;
-}
-
-- (void)reenqueOperationDueTo202Response
-{
-    BOXAPIHeadOperation *operationCopy = [self copy];
-    operationCopy.timesReenqueued++;
-    [self.session.queueManager enqueueOperation:operationCopy];
-    [self finish];
-}
-
 - (void)performCompletionCallback
 {
     BOOL shouldClearCompletionBlocks = NO;
@@ -129,9 +93,14 @@
     }
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
 {
     return self.shouldStartImmediately == NO;
+}
+
+- (BOOL)canBeReenqueuedDueTo202NotReady
+{
+    return YES;
 }
 
 @end
