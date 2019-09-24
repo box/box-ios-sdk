@@ -72,6 +72,13 @@
         {
             [self.expiredOAuth2Tokens addObject:expiredAccessToken];
         }
+        else
+        {
+            if (block) {
+                block(self, [NSError errorWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorNotPossible userInfo:nil]);
+            }
+            return;
+        }
         
         [super performRefreshTokenGrant:expiredAccessToken
              newAccessTokenExpirationAt:accessTokenExpirationTimestamp
