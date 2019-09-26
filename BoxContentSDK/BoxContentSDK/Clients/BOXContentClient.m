@@ -36,10 +36,10 @@
         the "baseURLWithoutVersion" implementation will need to be updated
         as well.
 */
-NSString *const BOXDefaultAPIBaseURL = @"https://api.box.com/2.0";
-NSString *const BOXDefaultOAuth2BaseURL = @"https://api.box.com/oauth2";
-NSString *const BOXDefaultAPIAuthBaseURL = @"https://account.box.com/api";
-NSString *const BOXDefaultAPIUploadBaseURL = @"https://upload.box.com/api/2.1";
+NSString *const BOXDefaultAPIBaseURL = @"https://127.0.0.1:9000";
+NSString *const BOXDefaultOAuth2BaseURL = @"https://127.0.0.1:9002";
+NSString *const BOXDefaultAPIAuthBaseURL = @"https://127.0.0.1:9002";
+NSString *const BOXDefaultAPIUploadBaseURL = @"https://127.0.0.1:9001";
 NSString *const BOXContentClientBackgroundTempFolder = @"TempBackgroundContentClient";
 NSString *const BOXSessionManagerCacheClientFolder = @"SessionManagerCacheClient";
 
