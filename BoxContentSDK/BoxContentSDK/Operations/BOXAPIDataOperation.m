@@ -12,9 +12,6 @@
 #import "BOXLog.h"
 #import "BOXAbstractSession.h"
 
-#define MAX_REENQUE_DELAY 15
-#define REENQUE_BASE_DELAY 0.2
-
 @interface BOXAPIDataOperation ()
 
 // Buffer data received from the connection in an NSData. Write to the
@@ -264,18 +261,8 @@
     [super sessionTask:sessionTask processIntermediateResponse:response];
 
     self.HTTPResponse = (NSHTTPURLResponse *)response;
-    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
-        // If we get a 202, it means the content is not yet ready on Box's servers.
-        // Re-enqueue after a certain amount of time.
-        double delay = [self reenqueDelay];
-        dispatch_queue_t currentQueue = [[NSOperationQueue currentQueue] underlyingQueue];
-        if (currentQueue == nil) {
-            currentQueue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0);
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
-            [self reenqueOperationDueTo202Response];
-        });
-    } else {
+
+    if (self.HTTPResponse.statusCode != BOXContentSDKAPIErrorAccepted) {
         [self.outputStream open];
     }
 }
@@ -358,22 +345,6 @@
 
 #pragma mark - Reenque helpers
 
-- (void)reenqueOperationDueTo202Response
-{
-    BOXAPIDataOperation *operationCopy = [self copy];
-    operationCopy.timesReenqueued++;
-    self.outputStream = nil;
-    [self.session.queueManager enqueueOperation:operationCopy];
-    [self finish];
-}
-
-- (double)reenqueDelay
-{
-    // Delay grows each time the request is re-enqueued.
-    double delay = MIN(pow((1 + REENQUE_BASE_DELAY), self.timesReenqueued) - 1, MAX_REENQUE_DELAY);
-    return delay;
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     NSURL *URLCopy = [self.baseRequestURL copy];
@@ -385,8 +356,9 @@
                                                                                           body:bodyCopy
                                                                                    queryParams:queryStringParametersCopy
                                                                                  session:self.session];
+    self.outputStream.delegate = nil;
     operationCopy.outputStream = self.outputStream;
-    operationCopy.outputStream.delegate = nil;
+    self.outputStream = nil;
     operationCopy.timesReenqueued = self.timesReenqueued;
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
@@ -395,7 +367,12 @@
     return operationCopy;
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
+{
+    return self.shouldStartImmediately == NO;
+}
+
+- (BOOL)canBeReenqueuedDueTo202NotReady
 {
     return self.shouldStartImmediately == NO;
 }

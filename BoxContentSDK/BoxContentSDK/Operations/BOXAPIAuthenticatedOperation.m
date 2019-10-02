@@ -8,10 +8,12 @@
 
 #import "BOXAPIAuthenticatedOperation.h"
 
-#import "BOXAPIJSONOperation.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXAbstractSession.h"
+
+#define MAX_REENQUE_DELAY 15
+#define REENQUE_BASE_DELAY 0.2
 
 #define WWW_AUTHENTICATE_HEADER           (@"WWW-Authenticate")
 
@@ -58,7 +60,12 @@
     [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
+{
+    return NO;
+}
+
+- (BOOL)canBeReenqueuedDueTo202NotReady
 {
     return NO;
 }
@@ -66,27 +73,61 @@
 - (void)processResponse:(NSURLResponse *)response
 {
     [super processResponse:response];
+    
+    [self handlePossible202NotReady];
+    [self handlePossibleTokenExpired];
+}
 
-    BOOL isOAuth2TokenExpired = [self isAccessTokenExpired];
-
-    if (isOAuth2TokenExpired)
+- (void)handlePossibleTokenExpired
+{
+    if ([self isAccessTokenExpired])
     {
+        BOXContentSDKAuthError errorCode;
+        
         [self handleExpiredAccessToken];
-
-        // re-enqueue operation in the same queue referred to by the OAuth2 session if possible.
-        if ([self canBeReenqueued] && self.timesReenqueued == 0)
+        
+        if ([self canBeReenqueuedDueToTokenExpired] && self.timesReenqueued == 0)
         {
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
-
-            BOXAPIJSONOperation *operationCopy = [self copy];
-            operationCopy.timesReenqueued = operationCopy.timesReenqueued + 1;
-            [self.session.queueManager enqueueOperation:operationCopy];
+            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued;
+            [self reenqueCopyOfOperation];
         }
         else
         {
-            self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
+            errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued;
         }
+        self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
     }
+}
+
+- (void)handlePossible202NotReady
+{
+    if (self.error.code == BOXContentSDKAPIErrorAccepted && [self canBeReenqueuedDueTo202NotReady]) {
+        // If we get a 202, it means the content is not yet ready on Box's servers.
+        // Re-enqueue after a certain amount of time.
+        double delay = [self reenqueDelay];
+        dispatch_queue_t currentQueue = [[NSOperationQueue currentQueue] underlyingQueue];
+        if (currentQueue == nil) {
+            currentQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
+            [self reenqueCopyOfOperation];
+            [self finish];
+        });
+    }
+}
+
+- (double)reenqueDelay
+{
+    // Delay grows each time the request is re-enqueued.
+    double delay = MIN(pow((1 + REENQUE_BASE_DELAY), self.timesReenqueued) - 1, MAX_REENQUE_DELAY);
+    return delay;
+}
+
+- (void)reenqueCopyOfOperation
+{
+    BOXAPIAuthenticatedOperation *operationCopy = [self copy];
+    operationCopy.timesReenqueued++;
+    [self.session.queueManager enqueueOperation:operationCopy];
 }
 
 @end
