@@ -65,7 +65,8 @@ extern NSString *const BOXUserIDKey;
 
 /**
  * This token identifies a user on Box. This token is included in every request in the
- * Authorization header as a Bearer token. Access tokens expire 60 minutes from when they are issued.
+ * Authorization header as a Bearer token. Access tokens automatically expire after some
+ * duration of time controlled by the service, typically in the range of some few hours.
  *
  * accessToken is never stored by the SDK. If you choose to persist the access token, do so in
  * secure storage such as the Keychain.
@@ -76,7 +77,7 @@ extern NSString *const BOXUserIDKey;
  *
  * @see addAuthorizationParametersToRequest:
  */
-@property (nonatomic, readwrite, strong) NSString *accessToken;
+@property (atomic, readwrite, strong) NSString *accessToken;
 
 /**
  * When an access token is expected to expire. There is no guarantee the access token will be valid

@@ -235,6 +235,8 @@
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
+
+    // The following 2 POSTParams are undocumented features of the /token endpoint.
     if (accessTokenExpirationTimestamp) {
         [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
     }
