@@ -105,4 +105,37 @@
     return isInvalidGrantError;
 }
 
+#pragma mark - Access/Refresh token consistency
+
+// Overrides below are to make atomic updating and storing access/refresh token pair.
+//
+// This is a fragile pattern, but doing better would require refactoring. Currently the BOXAbstractSession
+// owns the accessToken and BOXOAuth2Session owns the refreshToken. It's unclear why the OAuth class doesn't
+// also own the accessToekn, since the accessToken concept implies some for of authentication, while no
+// authentication is implied by the base BOXAbstractSession.
+
+- (void)storeCredentialsToKeychain
+{
+    @synchronized(self)
+    {
+        [super storeCredentialsToKeychain];
+    }
+}
+
+- (void)reassignTokensFromSession:(BOXOAuth2Session *)session
+{
+    @synchronized(self)
+    {
+        [super reassignTokensFromSession:session];
+    }
+}
+
+- (void)restoreCredentialsFromKeychainForUserWithID:(NSString *)userID
+{
+    @synchronized(self)
+    {
+        [super restoreCredentialsFromKeychainForUserWithID:userID];
+    }
+}
+
 @end
