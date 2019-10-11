@@ -13,10 +13,24 @@
 
 @implementation BOXUserRequest
 
+- (instancetype)initWithUserID:(NSString *)userID
+{
+    if (self = [super init]) {
+        _userID = userID;
+    }
+    
+    return self;
+}
+
 - (BOXAPIOperation *)createOperation
 {
+    NSString *currentUserID = @"me";
+    
+    if ([self.userID length] > 0) {
+        currentUserID = self.userID;
+    }
     NSURL *URL = [self URLWithResource:BOXAPIResourceUsers
-                                    ID:@"me"
+                                    ID:currentUserID
                            subresource:nil
                                  subID:nil];
 

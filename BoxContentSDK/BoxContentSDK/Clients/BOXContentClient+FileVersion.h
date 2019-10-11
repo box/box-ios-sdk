@@ -9,6 +9,7 @@
 #import "BOXContentClient.h"
 
 @class BOXFileVersionsRequest;
+@class BOXFileVersionRequest;
 @class BOXFileVersionPromoteRequest;
 
 @interface BOXContentClient (FileVersion)
@@ -21,6 +22,16 @@
  *  @return A request that can be customized and then executed.
  */
 - (BOXFileVersionsRequest *)fileVersionsRequestForFileWithID:(NSString *)fileID;
+
+/**
+ *  Generate a request to retrieve the particular version of a file.
+ *
+ *  @param fileID File ID.
+ *  @param versionID Version ID
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXFileVersionRequest *)fileVersionRequestForFileWithID:(NSString *)fileID versionID:(NSString *)versionID;
 
 /**
  *  Generate a request to promote a version of a file to be the current version.

@@ -46,7 +46,7 @@ carthage update --platform iOS
   if (error == nil) {
     NSLog(@"Logged in user: %@", user.login);
   }
-} cancelBlock:nil];
+}];
 ```
 
 Sample App
@@ -87,7 +87,7 @@ See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.
 
 Copyright and License
 ---------------------
-Copyright 2015 Box, Inc. All rights reserved.
+Copyright 2019 Box, Inc. All rights reserved.
 
  
 Licensed under the Apache License, Version 2.0 (the "License");

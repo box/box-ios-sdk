@@ -9,7 +9,9 @@
 #import <BoxContentSDK/BoxContentSDK.h>
 @class BOXRepresentation;
 
-@interface BOXRepresentationInfoRequest : BOXRequest
-- (instancetype)initWithRepresentation:(BOXRepresentation *) representation;
+@interface BOXRepresentationInfoRequest : BOXRequestWithSharedLinkHeader
+
+- (instancetype)initWithFileID:(NSString *)fileID
+                representation:(BOXRepresentation *)representation;
 - (void)performRequestWithCompletion:(BOXRepresentationInfoBlock)completionBlock;
 @end

@@ -53,7 +53,7 @@
     if (_uploadBaseURL == nil) {
         _uploadBaseURL = [BOXContentClient APIUploadBaseURL];
     }
-    
+
     return _uploadBaseURL;
 }
 
@@ -65,7 +65,12 @@
 - (void)performRequest
 {
     [self.operation.APIRequest setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
-    [self.queueManager enqueueOperation:self.operation];
+    if (self.shouldPerformRequestImmediately == YES) {
+        self.operation.shouldStartImmediately = YES;
+        [self.operation start];
+    } else {
+        [self.queueManager enqueueOperation:self.operation];
+    }
 }
 
 - (void)cancel
@@ -106,7 +111,7 @@
             }
         }
     }
-    
+
     return url;
 }
 
@@ -170,7 +175,7 @@
                                                                         patchOperations:bodyArray
                                                                             queryParams:queryParameters
                                                                           session:self.queueManager.session];
-    
+
     // calling a nil block results in a crash, so only set the operation's success block if it is non-nil
     // BOXAPIJSONOperation initializes blocks to empty blocks
     if (successBlock != nil) {
@@ -179,7 +184,7 @@
     if (failureBlock != nil) {
         operation.failure = failureBlock;
     }
-    
+
     return operation;
 }
 
@@ -236,7 +241,7 @@
     if (failureBlock != nil) {
         operation.failureBlock = failureBlock;
     }
-    
+
     return operation;
 }
 
@@ -316,7 +321,8 @@
                        BOXAPIObjectKeyHasCollaborations,
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyCanNonOwnersInvite,
-                       BOXAPIObjectKeyAllowedInviteeRoles];
+                       BOXAPIObjectKeyAllowedInviteeRoles,
+                       BOXAPIObjectKeyDefaultInviteeRole];
     return array;
 }
 
@@ -332,6 +338,7 @@
                        BOXAPIObjectKeySequenceID,
                        BOXAPIObjectKeyETag,
                        BOXAPIObjectKeySHA1,
+                       BOXAPIObjectKeyWatermarkInfo,
                        BOXAPIObjectKeyName,
                        BOXAPIObjectKeyDescription,
                        BOXAPIObjectKeySize,
@@ -357,9 +364,11 @@
                        BOXAPIObjectKeyHasCollaborations,
                        BOXAPIObjectKeyIsExternallyOwned,
                        BOXAPIObjectKeyAllowedInviteeRoles,
+                       BOXAPIObjectKeyDefaultInviteeRole,
                        BOXAPIObjectKeyAllowedSharedLinkAccessLevels,
                        BOXAPIObjectKeyCollections,
-                       BOXAPIObjectKeyCollectionMemberships];
+                       BOXAPIObjectKeyCollectionMemberships,
+                       BOXAPIObjectKeyFileVersion];
     return array;
 }
 
@@ -516,7 +525,7 @@
     } else {
         userAgent = defaultUserAgent;
     }
-    
+
     return userAgent;
 }
 
@@ -538,7 +547,7 @@
     BOXItem *item = nil;
 
     NSString *itemType = [JSONDictionary objectForKey:BOXAPIObjectKeyType];
-    
+
     if ([itemType isEqualToString:BOXAPIItemTypeFile]) {
         item = [[BOXFile alloc] initWithJSON:JSONDictionary];
     } else if ([itemType isEqualToString:BOXAPIItemTypeFolder]) {
@@ -556,11 +565,11 @@
 {
     NSArray *itemsDicts = [JSONDictionary objectForKey:@"entries"];
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:itemsDicts.count];
-    
+
     for (NSDictionary *dict in itemsDicts) {
         [items addObject:[self itemWithJSON:dict]];
     }
-    
+
     return items;
 }
 
@@ -572,7 +581,7 @@
          error.code == BOXContentSDKAPIErrorNotFound)) {
             return YES;
         }
-    
+
     return NO;
 }
 

@@ -12,15 +12,15 @@
 
 @interface BOXSearchRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *query;
+@property (nonatomic, readwrite, copy) NSString *query;
 @property (nonatomic, readwrite, assign) NSUInteger limit;
 @property (nonatomic, readwrite, assign) NSUInteger offset;
 
 // Advanced Metadata Search parameters
-@property (nonatomic, readwrite, strong) NSString *templateKey;
-@property (nonatomic, readwrite, strong) NSString *scope;
-@property (nonatomic, readwrite, strong) NSArray *filters;
-@property (nonatomic, readwrite, strong) NSArray *unifiedMetadataKeys;
+@property (nonatomic, readwrite, copy) NSString *templateKey;
+@property (nonatomic, readwrite, copy) NSString *scope;
+@property (nonatomic, readwrite, copy) NSArray *filters;
+@property (nonatomic, readwrite, copy) NSArray *unifiedMetadataKeys;
 
 @end
 
@@ -77,11 +77,20 @@
     }
     queryParameters[queryKey] = self.query;
 
+    NSString *fieldString = nil;
+    
     if (self.requestAllItemFields) {
-        queryParameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
+        fieldString = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     } else if (self.fieldsToInclude.count > 0) {
-        queryParameters[BOXAPIParameterKeyFields] = [self.fieldsToInclude componentsJoinedByString:@","];
+        fieldString = [self.fieldsToInclude componentsJoinedByString:@","];
     }
+    
+    if (self.metadataScope && self.metadataTemplateKey) {
+        NSString *metadata = [NSString stringWithFormat:@",%@.%@.%@",BOXAPISubresourceMetadata, self.metadataScope, self.metadataTemplateKey];
+        fieldString = [fieldString stringByAppendingString:metadata];
+    }
+    
+    queryParameters[BOXAPIParameterKeyFields] = fieldString;
 
     // api returns metadata information on boxItem
     if (self.unifiedMetadataKeys.count > 0) {

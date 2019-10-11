@@ -21,6 +21,14 @@
     return request;
 }
 
+- (BOXUserRequest *)userInfoRequestWithID:(NSString *)userID
+{
+    BOXUserRequest *request = [[BOXUserRequest alloc] initWithUserID:userID];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXUserAvatarRequest *)userAvatarRequestWithID:(NSString *)userID
                                              type:(BOXAvatarType)type
 {

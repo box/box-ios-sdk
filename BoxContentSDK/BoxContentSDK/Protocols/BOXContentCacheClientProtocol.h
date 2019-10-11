@@ -14,6 +14,8 @@
 @class BOXBookmarkDeleteRequest;
 @class BOXBookmarkCopyRequest;
 @class BOXBookmarkUpdateRequest;
+@class BOXBookmarkShareRequest;
+@class BOXBookmarkUnshareRequest;
 
 @class BOXFileRequest;
 @class BOXFileCopyRequest;
@@ -24,6 +26,7 @@
 @class BOXFileUnshareRequest;
 @class BOXFileUpdateRequest;
 @class BOXFileVersionsRequest;
+@class BOXFileVersionRequest;
 @class BOXFileVersionPromoteRequest;
 @class BOXTrashedFileRestoreRequest;
 @class BOXFileUploadRequest;
@@ -38,6 +41,8 @@
 @class BOXFolderPaginatedItemsRequest;
 @class BOXFolderItemsRequest;
 @class BOXTrashedFolderRestoreRequest;
+@class BOXFolderShareRequest;
+@class BOXFolderUnshareRequest;
 
 @class BOXBookmarkCommentsRequest;
 @class BOXCommentRequest;
@@ -95,6 +100,30 @@
 - (void)retrieveCacheForSharedItemRequest:(BOXSharedItemRequest *)request
                                completion:(BOXItemBlock)completionBlock;
 
+- (void)cacheFileShareRequest:(BOXFileShareRequest *)request
+                     withFile:(BOXFile *)file
+                        error:(NSError *)error;
+
+- (void)cacheFileUnshareRequest:(BOXFileUnshareRequest *)request
+                       withFile:(BOXFile *)file
+                          error:(NSError *)error;
+
+- (void)cacheFolderShareRequest:(BOXFolderShareRequest *)request
+                     withFolder:(BOXFolder *)folder
+                          error:(NSError *)error;
+
+- (void)cacheFolderUnshareRequest:(BOXFolderUnshareRequest *)request
+                       withFolder:(BOXFolder *)folder
+                            error:(NSError *)error;
+
+- (void)cacheBookmarkShareRequest:(BOXBookmarkShareRequest *)request
+                     withBookmark:(BOXBookmark *)bookmark
+                            error:(NSError *)error;
+
+- (void)cacheBookmarkUnshareRequest:(BOXBookmarkUnshareRequest *)request
+                       withBookmark:(BOXBookmark *)bookmark
+                              error:(NSError *)error;
+
 #pragma mark - Bookmarks
 
 - (void)cacheBookmarkRequest:(BOXBookmarkRequest *)request
@@ -121,6 +150,8 @@
 
 #pragma mark - Files
 
+- (void)cacheBoxFile:(BOXFile *)file;
+
 - (void)cacheFileRequest:(BOXFileRequest *)request
                 withFile:(BOXFile *)file
                    error:(NSError *)error;
@@ -145,6 +176,13 @@
 
 - (void)retrieveCacheForFileVersionsRequest:(BOXFileVersionsRequest *)request
                                  completion:(BOXObjectsArrayCompletionBlock)completionBlock;
+
+- (void)cacheFileVersionRequest:(BOXFileVersionRequest *)request
+                    withVersion:(BOXFileVersion *)version
+                           error:(NSError *)error;
+
+- (void)retrieveCacheForFileVersionRequest:(BOXFileVersionRequest *)request
+                                 completion:(BOXFileVersionBlock)completionBlock;
 
 - (void)cacheFileVersionPromoteRequest:(BOXFileVersionPromoteRequest *)request
                            withVersion:(BOXFileVersion *)fileVersion

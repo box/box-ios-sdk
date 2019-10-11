@@ -8,6 +8,27 @@
 
 #import "BOXFileVersion.h"
 
+@implementation BOXFileVersionMini
+
+- (instancetype)initWithJSON:(NSDictionary *)JSONResponse
+{
+    BOXAssert([JSONResponse[BOXAPIObjectKeyType] isEqualToString:BOXAPIItemTypeFileVersion], @"Invalid type for object.");
+    
+    if (self = [super initWithJSON:JSONResponse]) {
+        
+        self.sha1 = [NSJSONSerialization box_ensureObjectForKey:BOXAPIObjectKeySHA1
+                                                   inDictionary:JSONResponse
+                                                hasExpectedType:[NSString class]
+                                                    nullAllowed:NO];
+    }
+    
+    return self;
+}
+
+@end
+
+
+
 @implementation BOXFileVersion
 
 - (instancetype)initWithJSON:(NSDictionary *)JSONResponse

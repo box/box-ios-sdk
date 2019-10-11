@@ -50,6 +50,7 @@
 #import "BOXKeychainItemWrapper.h"
 #import <Security/Security.h>
 #import "BOXLog.h"
+#import "BOXContentSDKConstants.h"
 
 /*
  
@@ -211,7 +212,8 @@
         {
             NSMutableDictionary *tempDictionary = [self dictionaryToSecItemFormat:self.keychainItemData];
             junk = SecItemDelete((CFDictionaryRef)tempDictionary);
-            
+            // tracking keychain reset action in analytics
+            [self logKeychainActionResult:junk withMessage:@"Reset keychain items by deleting"];
             NSAssert( junk == noErr || junk == errSecItemNotFound, @"Problem deleting current dictionary." );
             // Default data for keychain item.
             self.keychainItemData = [self defaultKeychainItemDataDictionaryWithIdentifier:self.identifier
@@ -282,6 +284,9 @@
     NSMutableDictionary *tempDictionary = [self dictionaryToSecItemFormat:itemDataForDeletingFromKeychain];
     result = SecItemDelete((CFDictionaryRef)tempDictionary);
     
+    // tracking keychain overwrite-delete action in analytics
+    [self logKeychainActionResult:result withMessage:@"Overwriting items in keychain by first deleting"];
+    
     if ((result != noErr) && (result != errSecItemNotFound)) {
         BOXLog(@"Keychain overwrite failed. Failed to delete keychain item with error %d", (int)result);
     }
@@ -298,14 +303,16 @@
     if (result != noErr) {
         BOXLog(@"Keychain overwrite failed. Failed to add keychain item with error %d", (int)result);
     }
+    
+    // tracking keychain overwrite-add action in analytic
+    [self logKeychainActionResult:result withMessage:@"Overwriting all items in keychain"];
 }
-
 
 - (void)writeToKeychain
 {
     NSDictionary *attributes = NULL;
     NSMutableDictionary *updateItem = NULL;
-    
+    NSString *keychainActionAnalyticsMessage = nil; // set by the result value check below
     OSStatus result = SecItemCopyMatching((CFDictionaryRef)self.genericPasswordQuery, (CFTypeRef *)&attributes);
     if (result == noErr)
     {
@@ -339,9 +346,9 @@
 #endif
         
         // An implicit assumption is that you can only update a single item at a time.
-        
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
         BOXAssert( result == noErr, @"Couldn't update the Keychain Item with error %d.", (int)result);
+        keychainActionAnalyticsMessage = @"Modifying existing items in keychain";
     }
     else
     {
@@ -355,8 +362,12 @@
         }
         result = SecItemAdd((CFDictionaryRef)query, NULL);
         BOXAssert( result == noErr, @"Couldn't add the Keychain Item with error %d.", (int)result);
+        keychainActionAnalyticsMessage = @"Adding items to keychain";
     }
     
+    // tracking write-to-keychain action in analytics
+    [self logKeychainActionResult:result withMessage:keychainActionAnalyticsMessage];
+
     // if keychain operations failed, attempt to delete and retry it again.
     if (result != noErr)
     {
@@ -400,4 +411,17 @@
     return defaultDictionary;
 }
 
+/// Logging to analytics on add/update/delete attempts on keychain
+- (void)logKeychainActionResult:(OSStatus)result withMessage:(NSString *)message
+{
+    NSMutableDictionary *userInfo = @{@"completion_status" : @"succeeded",
+                                      @"message" : message}.mutableCopy;
+    if (result != noErr) {
+        userInfo[@"completion_status"] = @"failed";
+        userInfo[@"error_code"] = @(result);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOXRefreshTokenSaveToKeychainNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
+}
 @end

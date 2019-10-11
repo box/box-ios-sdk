@@ -12,19 +12,11 @@
 #import "BOXLog.h"
 #import "BOXAbstractSession.h"
 
-#define MAX_REENQUE_DELAY 15
-#define REENQUE_BASE_DELAY 0.2
-
 @interface BOXAPIDataOperation ()
 
 // Buffer data received from the connection in an NSData. Write to the
 // output stream from this NSData when space becomes availble
 @property (nonatomic, readwrite, strong) NSMutableData *receivedDataBuffer;
-
-// The output stream may trigger the has space available callback when no data
-// is buffered. Use this BOOL to keep track of this state and manually invoke
-// the callback if necessary
-@property (nonatomic, readwrite, assign) BOOL outputStreamHasSpaceAvailable;
 
 @property (nonatomic, readwrite, assign) unsigned long long bytesReceived;
 
@@ -51,7 +43,6 @@
 
 @synthesize outputStream = _outputStream;
 @synthesize receivedDataBuffer = _receivedDataBuffer;
-@synthesize outputStreamHasSpaceAvailable = _outputStreamHasSpaceAvailable;
 @synthesize bytesReceived = _bytesReceived;
 
 - (id)initWithURL:(NSURL *)URL HTTPMethod:(NSString *)HTTPMethod body:(NSDictionary *)body queryParams:(NSDictionary *)queryParams session:(BOXAbstractSession *)session
@@ -62,7 +53,6 @@
     {
         _outputStream = [NSOutputStream outputStreamToMemory];
         _receivedDataBuffer = [NSMutableData dataWithCapacity:0];
-        _outputStreamHasSpaceAvailable = YES; // attempt to write to the output stream as soon as we receive data
         _bytesReceived = 0;
         self.allowResume = NO;
 
@@ -108,7 +98,7 @@
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
 
     NSError *error = nil;
     if (self.destinationPath != nil && self.associateId != nil) {
@@ -212,6 +202,7 @@
 
 - (void)dealloc
 {
+    self.receivedDataBuffer = nil;
     if (self.outputStream) {
         self.outputStream.delegate = nil;
         [self.outputStream close];
@@ -270,18 +261,8 @@
     [super sessionTask:sessionTask processIntermediateResponse:response];
 
     self.HTTPResponse = (NSHTTPURLResponse *)response;
-    if (self.HTTPResponse.statusCode == BOXContentSDKAPIErrorAccepted) {
-        // If we get a 202, it means the content is not yet ready on Box's servers.
-        // Re-enqueue after a certain amount of time.
-        double delay = [self reenqueDelay];
-        dispatch_queue_t currentQueue = [[NSOperationQueue currentQueue] underlyingQueue];
-        if (currentQueue == nil) {
-            currentQueue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0);
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), currentQueue, ^{
-            [self reenqueOperationDueTo202Response];
-        });
-    } else {
+
+    if (self.HTTPResponse.statusCode != BOXContentSDKAPIErrorAccepted) {
         [self.outputStream open];
     }
 }
@@ -303,15 +284,7 @@
             [self.receivedDataBuffer appendData:data];
         }
 
-        // If the output stream does have space available, trigger the writeDataToOutputStream
-        // handler so the data is consumed by the output stream. This state would occur if
-        // an NSStreamEventHasSpaceAvailable event was received but receivedDataBuffer was
-        // empty.
-        if (self.outputStreamHasSpaceAvailable)
-        {
-            self.outputStreamHasSpaceAvailable = NO;
-            [self writeDataToOutputStream];
-        }
+        [self writeDataToOutputStream];
     }
 }
 
@@ -339,7 +312,6 @@
         {
             if (self.receivedDataBuffer.length == 0)
             {
-                self.outputStreamHasSpaceAvailable = YES;
                 return; // bail out because we have nothing to write
             }
 
@@ -373,22 +345,6 @@
 
 #pragma mark - Reenque helpers
 
-- (void)reenqueOperationDueTo202Response
-{
-    BOXAPIDataOperation *operationCopy = [self copy];
-    operationCopy.timesReenqueued++;
-    self.outputStream = nil;
-    [self.session.queueManager enqueueOperation:operationCopy];
-    [self finish];
-}
-
-- (double)reenqueDelay
-{
-    // Delay grows each time the request is re-enqueued.
-    double delay = MIN(pow((1 + REENQUE_BASE_DELAY), self.timesReenqueued) - 1, MAX_REENQUE_DELAY);
-    return delay;
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     NSURL *URLCopy = [self.baseRequestURL copy];
@@ -400,8 +356,9 @@
                                                                                           body:bodyCopy
                                                                                    queryParams:queryStringParametersCopy
                                                                                  session:self.session];
+    self.outputStream.delegate = nil;
     operationCopy.outputStream = self.outputStream;
-    operationCopy.outputStream.delegate = nil;
+    self.outputStream = nil;
     operationCopy.timesReenqueued = self.timesReenqueued;
     operationCopy.successBlock = [self.successBlock copy];
     operationCopy.failureBlock = [self.failureBlock copy];
@@ -410,9 +367,14 @@
     return operationCopy;
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
 {
-    return YES;
+    return self.shouldStartImmediately == NO;
+}
+
+- (BOOL)canBeReenqueuedDueTo202NotReady
+{
+    return self.shouldStartImmediately == NO;
 }
 
 @end

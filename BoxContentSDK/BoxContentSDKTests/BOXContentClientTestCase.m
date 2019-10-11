@@ -35,8 +35,13 @@
 
 - (void)test_content_client_with_app_user
 {
-    BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:self];
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    BOXContentClient *client = [BOXContentClient clientForServerAuthUser:user
+                                                 initialToken:nil
+                                                 fetchTokenBlockInfo:nil
+                                                 fetchTokenBlock:^(NSString * _Nonnull uniqueID, NSDictionary * _Nullable fetchTokenInfo, void (^ _Nonnull completion)(NSString * _Nullable, NSDate * _Nullable, NSError * _Nullable)) {
+                                                     completion(@"token", nil, nil);
+                                                 }];
     
     XCTAssert([client.session isKindOfClass:[BOXAppUserSession class]]);
 }
@@ -55,7 +60,8 @@
     client.session.accessTokenExpiration = [NSDate dateWithTimeIntervalSince1970:1];
     ((BOXOAuth2Session *)client.session).refreshToken = @"ghi";
     
-    XCTAssertThrows([client setAccessTokenDelegate:self]);
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    XCTAssertThrows([client setAccessTokenDelegate:self serverAuthUser:user]);
 }
 
 - (void)test_app_users_should_require_delegate_set
@@ -73,7 +79,8 @@
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
     
-    XCTAssertThrows([client setAccessTokenDelegate:nil]);
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    XCTAssertThrows([client setAccessTokenDelegate:nil serverAuthUser:user]);
 }
 
 // Access token is fed in from the delegate method "fetchAccessTokenWithCompletion:" above.
@@ -81,7 +88,8 @@
 {
     self.accessToken = @"access_token";
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:self];
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    [client setAccessTokenDelegate:self serverAuthUser:user];
     [client.queueManager.delegate fetchAccessTokenWithCompletion:^(NSString *accessToken, NSDate *accessTokenExpiration, NSError *error) {
         client.session.accessToken = accessToken;
         client.session.accessTokenExpiration = accessTokenExpiration;
@@ -101,7 +109,8 @@
     self.accessToken = nil;
     
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:self];
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    [client setAccessTokenDelegate:self serverAuthUser:user];
     
     XCTestExpectation *clientExpectation = [self expectationWithDescription:@"expectation"];
     [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {

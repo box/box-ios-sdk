@@ -14,6 +14,7 @@
 @property (nonatomic, readwrite, strong) NSString *fileID;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanPreview;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 @end
 
 @implementation BOXFileUpdateRequest
@@ -24,6 +25,13 @@
         _fileID = fileID;
     }
 
+    return self;
+}
+
+- (instancetype)initWithFileID:(NSString *)fileID associateID:(NSString *)associateID
+{
+    self = [self initWithFileID:fileID];
+    self.associateID = associateID;
     return self;
 }
 

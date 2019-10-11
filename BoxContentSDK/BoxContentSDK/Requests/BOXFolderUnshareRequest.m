@@ -12,7 +12,7 @@
 
 @interface BOXFolderUnshareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *folderID;
+@property (nonatomic, readwrite, copy) NSString *folderID;
 
 @end
 
@@ -62,8 +62,13 @@
     BOXAPIJSONOperation *folderOperation = (BOXAPIJSONOperation *)self.operation;
 
     folderOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderUnshareRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderUnshareRequest:self
+                                             withFolder:folder
+                                                  error:nil];
+        }
         if (completionBlock) {
-            BOXFolder *folder = [[BOXFolder alloc] initWithJSON:JSONDictionary];
             [self.sharedLinkHeadersHelper removeStoredInformationForItemWithID:folder.modelID itemType:folder.type];
             
             [BOXDispatchHelper callCompletionBlock:^{
@@ -72,6 +77,11 @@
         }
     };
     folderOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFolderUnshareRequest:withFolder:error:)]) {
+            [self.cacheClient cacheFolderUnshareRequest:self
+                                             withFolder:nil
+                                                  error:error];
+        }
         if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);

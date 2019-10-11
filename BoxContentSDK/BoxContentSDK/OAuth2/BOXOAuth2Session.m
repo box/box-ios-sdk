@@ -235,6 +235,8 @@
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
+
+    // The following 2 POSTParams are undocumented features of the /token endpoint.
     if (accessTokenExpirationTimestamp) {
         [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
     }
@@ -339,12 +341,12 @@
 - (void)didReceiveRevokeSessionNotification:(NSNotification *)notification
 {
     NSString *userIDRevoked = [notification.userInfo objectForKey:BOXUserIDKey];
-    if ([userIDRevoked isEqualToString:self.user.modelID])
+    if ([userIDRevoked isEqualToString:self.user.uniqueId])
     {
-        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainWrapper resetKeychainItem];
         
-        [self clearCurrentSessionWithUserID:self.user.modelID];
+        [self clearCurrentSessionWithUserID:self.user.uniqueId];
     }
 }
 

@@ -100,6 +100,26 @@
     XCTAssertEqual(folder.metadata.count, 0);
 }
 
+- (void)test_that_folder_with_missing_default_invitee_role_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"folder_all_fields"];
+
+    // manually strip the 'default_invitee_role' entry
+    NSMutableDictionary *mutable = [dictionary mutableCopy];
+    [mutable removeObjectForKey:@"default_invitee_role"];
+
+    BOXFolder *folder = [[BOXFolder alloc] initWithJSON:mutable];
+    XCTAssertEqual(folder.defaultInviteeRole, nil);
+}
+
+- (void)test_that_folder_with_nsnull_default_invitee_role_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"folder_with_null_default_collab_invitee"];
+        
+    BOXFolder *folder = [[BOXFolder alloc] initWithJSON:dictionary];
+    XCTAssertEqual(folder.defaultInviteeRole, nil);
+}
+
 - (void)test_that_folder_with_all_fields_is_parsed_correctly_from_json
 {
     // TODO: We need to revisit folder_all_fields to make sure it reflects the latest server API doc.
@@ -184,6 +204,18 @@
     XCTAssertEqual(folder.metadata.count, 1);
     BOXMetadata *metadata = folder.metadata[0];
     XCTAssertEqualObjects(@"yes", metadata.info[@"contentApproved"]);
+    
+    NSArray *allowedInviteeRoles = @[@"editor", @"viewer"];
+    XCTAssertEqualObjects(allowedInviteeRoles, folder.allowedInviteeRoles);
+    XCTAssertEqualObjects(folder.defaultInviteeRole, @"viewer");
+}
+
+- (void)test_that_folder_with_nsnull_collections_entry_is_parsed_correctly_from_json
+{
+    NSDictionary *dictionary = [self dictionaryFromCannedJSON:@"folder_with_null_collection_and_membership_entries"];
+    
+    BOXFolder *folder = [[BOXFolder alloc] initWithJSON:dictionary];
+    XCTAssertEqual([folder.collections count], 0);
 }
 
 @end

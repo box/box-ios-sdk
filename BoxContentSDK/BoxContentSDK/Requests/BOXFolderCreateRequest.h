@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFolderName:(NSString *)folderName
                     parentFolderID:(NSString *)parentFolderID
-                       associateId:(nullable NSString *)associateId;
+                       associateID:(nullable NSString *)associateID;
 
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
 

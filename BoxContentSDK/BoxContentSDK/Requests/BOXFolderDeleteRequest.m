@@ -10,6 +10,7 @@
 
 @interface BOXFolderDeleteRequest ()
 @property (nonatomic, readwrite, assign) BOOL isTrashed;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 /// Properties related to Background tasks
 
@@ -29,21 +30,29 @@
     return [self initWithFolderID:folderID isTrashed:NO];
 }
 
+- (instancetype)initWithFolderID:(NSString *)folderID
+                     associateID:(NSString *)associateID
+{
+    self = [self initWithFolderID:folderID];
+    self.associateID = associateID;
+    return self;
+}
+
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed
 {
-    return [self initWithFolderID:folderID isTrashed:isTrashed associateId:nil];
+    return [self initWithFolderID:folderID isTrashed:isTrashed associateID:nil];
 }
 
 - (instancetype)initWithFolderID:(NSString *)folderID
                        isTrashed:(BOOL)isTrashed
-                     associateId:(NSString *)associateId
+                     associateID:(NSString *)associateID
 {
     self = [super init];
     if (self != nil) {
         _folderID = folderID;
         _recursive = YES;
         _isTrashed = isTrashed;
-        _associateId = associateId;
+        _associateID = associateID;
     }
     
     return self;
@@ -75,10 +84,10 @@
                                                          bodyDictionary:nil
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         
         if ([self.matchingEtag length] > 0) {
@@ -192,7 +201,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

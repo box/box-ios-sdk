@@ -26,8 +26,9 @@ extern NSString *const BOXAPIResourceMetadataTemplates;
 extern NSString *const BOXAPIResourceRecentItems;
 
 // API Metadata Template Scope
-extern NSString *const BOXAPITemplateScopeEnterprise;
-extern NSString *const BOXAPITemplateScopeGlobal;
+typedef NSString *BOXMetadataScope NS_EXTENSIBLE_STRING_ENUM;
+extern BOXMetadataScope const BOXAPITemplateScopeGlobal;
+extern BOXMetadataScope const BOXAPITemplateScopeEnterprise;
 
 // API Subresources
 extern NSString *const BOXAPISubresourceItems;
@@ -92,6 +93,7 @@ extern NSString *const BOXOAuth2AuthDelegationNewClientKey;
 extern NSString *const BOXUserWasLoggedOutDueToErrorNotification;
 extern NSString *const BOXAuthOperationDidCompleteNotification;
 extern NSString *const BOXFileDownloadCorruptedNotification;
+extern NSString *const BOXRefreshTokenSaveToKeychainNotification;
 
 // Private Notifications. No guarantee for future support.
 extern NSString *const BOXAccessTokenRefreshDiagnosisNotification;
@@ -286,6 +288,7 @@ extern NSString *const BOXAPIObjectKeyType;
 extern NSString *const BOXAPIObjectKeySequenceID;
 extern NSString *const BOXAPIObjectKeyETag;
 extern NSString *const BOXAPIObjectKeySHA1;
+extern NSString* const BOXAPIObjectKeyWatermarkInfo;
 extern NSString *const BOXAPIObjectKeyName;
 extern NSString *const BOXAPIObjectKeyCreatedAt;
 extern NSString *const BOXAPIObjectKeyModifiedAt;
@@ -350,6 +353,8 @@ extern NSString *const BOXAPIObjectKeyHasCollaborations;
 extern NSString *const BOXAPIObjectKeyIsExternallyOwned;
 extern NSString *const BOXAPIObjectKeyCanNonOwnersInvite;
 extern NSString *const BOXAPIObjectKeyAllowedInviteeRoles;
+extern NSString *const BOXAPIObjectKeyDefaultInviteeRole;
+extern NSString *const BOXAPIObjectKeyFileVersion;
 extern NSString *const BOXAPIObjectKeyVersionNumber;
 extern NSString *const BOXAPIObjectKeyTimezone;
 extern NSString *const BOXAPIObjectKeyIsExternalCollabRestricted;
@@ -511,6 +516,23 @@ typedef NS_ENUM(NSUInteger, BOXThumbnailSize) {
 typedef NS_ENUM(NSUInteger, BOXAvatarType) {
     BOXAvatarTypeUnspecified = 0,
     BOXAvatarTypeSmall,
-    BOXAvatarTypeLarge
+    BOXAvatarTypeLarge,
+    BOXAvatarTypePreview
 };
 
+/// Some reasonable default values for the X-Rep-Hints header when requesting
+/// the representations field of a file or files.
+///
+/// The exact definition of these values may change between SDK versions, but
+/// the semantics will remain.
+///
+/// For further information, refer to https://developer.box.com/v2.0/reference
+typedef NSString *BOXRepresentationHints;
+/// Large and small thumbnails (currently JPG thumbnails up to 1024px and 320px
+/// on a side, if available)
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnails;
+/// A good preview for most file types. Maybe more than one preview representation
+/// (currently at least the first available of PDF, HLS, MP4, MP3 or JPG)
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultPreview;
+/// Both thumbnails and the preview defined above
+extern const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnailsandPreview;

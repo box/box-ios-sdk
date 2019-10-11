@@ -87,22 +87,23 @@ typedef enum {
 {
     if (self.user.modelID.length > 0) {
         [self.request cancel];
-        self.request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypeLarge];
+        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID
+                                                                        type:BOXAvatarTypePreview];
         id<BOXContentCacheClientProtocol> cacheClient = [self.client cacheClient];
         __weak BOXUserAvatarImageView *me = self;
         if ([cacheClient respondsToSelector:@selector(retrieveCacheForUserAvatarRequest:completion:)]) {
-            [cacheClient retrieveCacheForUserAvatarRequest:self.request
+            [cacheClient retrieveCacheForUserAvatarRequest:request
                                                 completion:^(UIImage *image, NSError *error) {
                                                     if (image && !error) {
                                                         [me renderImage:image];
                                                     } else {
                                                         [me renderNameBasedAvatar];
-                                                        [me renderRealUserAvatarFromRemote];
+                                                        [me renderRealUserAvatarFromRemote:request];
                                                     }
                                                 }];
         } else {
             [self renderNameBasedAvatar];
-            [self renderRealUserAvatarFromRemote];
+            [self renderRealUserAvatarFromRemote:request];
         }
     }
 }
@@ -113,9 +114,10 @@ typedef enum {
     [self renderImage:image];
 }
 
-- (void)renderRealUserAvatarFromRemote
+- (void)renderRealUserAvatarFromRemote:(BOXUserAvatarRequest *)request
 {
     __weak BOXUserAvatarImageView *me = self;
+    self.request = request;
     [self.request performRequestWithProgress:nil completion:^(UIImage *image, NSError *error) {
         if (image && !error) {
             [me renderImage:image];
@@ -123,6 +125,21 @@ typedef enum {
             [me renderNameBasedAvatar];
         }
     }];
+}
+
+- (void)refresh
+{
+    if (self.user.modelID.length > 0) {
+        [self.request cancel];
+        BOXUserAvatarRequest *request = [self.client userAvatarRequestWithID:self.user.modelID type:BOXAvatarTypePreview];
+        [self renderRealUserAvatarFromRemote:request];
+    }
+}
+
+- (void)dealloc
+{
+    [self.request cancel];
+    self.request = nil;
 }
 
 - (void)renderImage:(UIImage *)image

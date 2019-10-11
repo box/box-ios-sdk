@@ -5,14 +5,9 @@
 
 #import "BOXRequestWithSharedLinkHeader.h"
 
-@interface BOXFolderDeleteRequest : BOXRequestWithSharedLinkHeader
+@interface BOXFolderDeleteRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 // NOTE: Both the associateID and requestDirectoryPath values are required for performing the request in the background.
-/**
- Caller provided unique ID to execute the request as a NSURLSession background task.
- This is a required value for performing the request in the background.
- */
-@property (nonatomic, readwrite, strong) NSString *associateId;
 
 /**
  Caller provided directory path for the result payload of the background operation to be written to.
@@ -27,11 +22,14 @@
 @property (nonatomic, readwrite, strong) NSString *matchingEtag;
 
 - (instancetype)initWithFolderID:(NSString *)folderID;
+- (instancetype)initWithFolderID:(NSString *)folderID
+                     associateID:(NSString *)associateID;
+
 - (instancetype)initWithFolderID:(NSString *)folderID isTrashed:(BOOL)isTrashed;
 
 - (instancetype)initWithFolderID:(NSString *)folderID
-                     isTrashed:(BOOL)isTrashed
-                   associateId:(NSString *)associateId;
+                       isTrashed:(BOOL)isTrashed
+                     associateID:(NSString *)associateID;
 
 - (void)performRequestWithCompletion:(BOXErrorBlock)completionBlock;
 

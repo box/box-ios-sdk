@@ -18,5 +18,6 @@
  @return A request that can be customized and then executed.
  */
 - (BOXRecentItemsRequest *)recentItemsRequestForCurrentUser;
+- (BOXRecentItemsRequest *)recentItemsRequestForCurrentUserWithMetadata:(NSString *)metadataTemplateKey metadataScope:(NSString *)metadataScope;
 
 @end

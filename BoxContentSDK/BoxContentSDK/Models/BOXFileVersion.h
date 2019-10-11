@@ -9,6 +9,16 @@
 #import "BOXModel.h"
 #import "BOXUser.h"
 
+@interface BOXFileVersionMini : BOXModel
+
+/**
+ *  The SHA1 hash of the file at this version.
+ */
+@property (nonatomic, readwrite, strong) NSString *sha1;
+    
+@end
+
+
 /**
  *  Represents a version of a file.
  */

@@ -82,7 +82,7 @@
 
 /**
  * This token may be exchanged for a new access token and refresh token. Refresh tokens expire
- * 14 days from when they are issued.
+ * some number days after they are issued, the timing of which is controlled by the service.
  *
  * refreshToken is never stored by the SDK. If you choose to persis the access token, do so in
  * secure storage such as the Keychain.
@@ -92,7 +92,7 @@
  *
  * @see performRefreshTokenGrant:
  */
-@property (nonatomic, readwrite, strong) NSString *refreshToken;
+@property (atomic, readwrite, strong) NSString *refreshToken;
 
 #pragma mark - Initialization
 /** @name Initialization */

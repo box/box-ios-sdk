@@ -70,6 +70,17 @@ typedef void (^BOXMetadataTemplatesBlock) (NSArray <BOXMetadataTemplate *>*metad
 
 typedef void (^BOXRepresentationInfoBlock)(BOXRepresentation *representation, NSError *error);
 
+@protocol BOXBackgroundRequestProtocol
+
+/**
+Caller provided unique ID to execute the request as a NSURLSession background task.
+This is a required value for performing the request in the background.
+Please refer to specific requests for additional required properties to perform as background task.
+*/
+- (NSString *)associateID;
+
+@end
+
 @interface BOXRequest : NSObject
 
 @property (nonatomic, readwrite, strong) NSString *baseURL;
@@ -80,6 +91,12 @@ typedef void (^BOXRepresentationInfoBlock)(BOXRepresentation *representation, NS
 
 @property (nonatomic, readwrite, strong) NSString *SDKIdentifier;
 @property (nonatomic, readwrite, strong) NSString *SDKVersion;
+
+/**
+ * If true, when performRequest is called, its API request will be started immediately instead of being put onto a network queue.
+ * This also means no automatic retry.
+ */
+@property (nonatomic, readwrite, assign) BOOL shouldPerformRequestImmediately;
 
 - (void)performRequest;
 - (void)cancel;

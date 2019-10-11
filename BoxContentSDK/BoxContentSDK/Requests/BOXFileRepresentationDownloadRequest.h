@@ -10,7 +10,7 @@
 
 @class BOXRepresentation;
 
-@interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader
+@interface BOXFileRepresentationDownloadRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 // This is not the etag of a particular version of the file, nor the sequential version number,
 // it is the ID of the version representation gotten from /files/<fileID>/versions
@@ -21,6 +21,9 @@
 
 // Set digest to verify data integrity of downloaded content
 @property (nonatomic, readwrite, strong) NSString *sha1Hash;
+
+// Set max size of downloaded content until which data integrity is verified
+@property (nonatomic, readwrite, assign) NSUInteger requireSha1ChecksUpToMaxFileSize;
 
 /**
  Request will download file into destinationPath, and the file download can continue
@@ -51,7 +54,7 @@
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
                           representation:(BOXRepresentation *)representation
-                             associateId:(NSString *)associateId;
+                             associateID:(NSString *)associateID;
 
 /**
  * request will download file into outputStream, and the file download cannot continue

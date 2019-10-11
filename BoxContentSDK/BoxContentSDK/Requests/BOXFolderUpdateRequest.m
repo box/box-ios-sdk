@@ -14,6 +14,7 @@
 
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanDownload;
 @property (nonatomic, readwrite, assign) BOOL shouldUseSharedLinkCanPreview;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 @end
 
@@ -24,6 +25,14 @@
     if (self = [super init]) {
         _folderID = folderID;
     }
+    return self;
+}
+
+
+- (instancetype)initWithFolderID:(NSString *)folderID associateID:(NSString *)associateID
+{
+    self = [self initWithFolderID:folderID];
+    self.associateID = associateID;
     return self;
 }
 
@@ -131,10 +140,10 @@
                                                          bodyDictionary:bodyDictionary
                                                            successBlock:nil
                                                            failureBlock:nil
-                                                            associateId:self.associateId];
+                                                            associateId:self.associateID];
         
         NSString *requestDirectory = self.requestDirectoryPath;
-        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateId];
+        NSString *destinationPath = [requestDirectory stringByAppendingPathComponent:self.associateID];
         dataOperation.destinationPath = destinationPath;
         folderUpdateOperation = dataOperation;
     } else {
@@ -263,7 +272,7 @@
 
 - (BOOL)shouldPerformBackgroundOperation
 {
-    return (self.associateId.length > 0 && self.requestDirectoryPath.length > 0);
+    return (self.associateID.length > 0 && self.requestDirectoryPath.length > 0);
 }
 
 @end

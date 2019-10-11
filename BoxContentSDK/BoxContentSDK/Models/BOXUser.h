@@ -7,22 +7,56 @@
 #import "BOXModel.h"
 #import "BOXEnterprise.h"
 
+@protocol UniqueSDKUser
+
+/**
+ *  Unique id for the user.
+ */
+@property (nonnull,  nonatomic, readonly, copy) NSString *uniqueId;
+
+/**
+ *  Optional Name of the user.
+ */
+@property (nullable, nonatomic, readonly, copy) NSString *name;
+
+/**
+ *  Optional Login of the user.
+ */
+@property (nullable, nonatomic, readonly, copy) NSString *login;
+
+@end
+
+/**
+ *  An implementation of the UniqueSDKUser protocol that is used in scenarios involving server-based auth (App Users, downscoped tokens, service accounts).
+ */
+@interface ServerAuthUser : BOXModel <UniqueSDKUser>
+
+@property (nonatomic, readwrite, copy) NSString *uniqueId;
+@property (nonatomic, readwrite, copy) NSString *name;
+@property (nonatomic, readwrite, copy) NSString *login;
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID;
+
+- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(NSString *)name login:(NSString *)login;
+
+@end
+
 /**
  *  A compact representation of a User with only a few properties.
  *  Some API requests will return these representations to reduce bandiwdth, especially when many
  *  instances are being returned.
  */
-@interface BOXUserMini : BOXModel
+@interface BOXUserMini : BOXModel <UniqueSDKUser>
 
 /**
  *  Name of the user. May be nil if the user has not set the name in Box.
  */
-@property (nonatomic, readwrite, strong) NSString *name;
+@property (nonatomic, readwrite, copy) NSString *name;
 
 /**
  *  Login of the user, usually an email address but not always.
  */
-@property (nonatomic, readwrite, strong) NSString *login;
+@property (nonatomic, readwrite, copy) NSString *login;
 
 @end
 

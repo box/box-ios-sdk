@@ -21,7 +21,7 @@
 @property (nonatomic, readonly, strong) NSOutputStream *outputStream;
 @property (nonatomic, readonly, strong) NSString *fileID;
 @property (nonatomic, readwrite, strong) BOXRepresentation *representation;
-@property (nonatomic, readwrite, copy) NSString *associateId;
+@property (nonatomic, readwrite, copy) NSString *associateID;
 
 @end
 
@@ -37,6 +37,7 @@
         _representation = representation;
         _ignoreLocalURLRequestCache = NO;
         _sha1Hash = nil;
+        _requireSha1ChecksUpToMaxFileSize = NSUIntegerMax;
     }
     return self;
 }
@@ -44,10 +45,10 @@
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID
                           representation:(BOXRepresentation *)representation
-                             associateId:(NSString *)associateId
+                             associateID:(NSString *)associateID
 {
     self = [self initWithLocalDestination:destinationPath fileID:fileID representation:representation];
-    self.associateId = associateId;
+    self.associateID = associateID;
     return self;
 }
 
@@ -82,13 +83,13 @@
                                                      bodyDictionary:nil
                                                        successBlock:nil
                                                        failureBlock:nil
-                                                        associateId:self.associateId];
+                                                        associateId:self.associateID];
     
     BOXAssert(self.representation != nil, @"A representation must be specified.");
     BOXAssert(self.outputStream != nil || self.destinationPath != nil, @"An output stream or destination file path must be specified.");
     BOXAssert(!(self.outputStream != nil && self.destinationPath != nil), @"You cannot specify both an outputStream and a destination file path.");
     
-    if (self.destinationPath != nil && self.associateId != nil) {
+    if (self.destinationPath != nil && self.associateID != nil) {
         dataOperation.destinationPath = self.destinationPath;
     } else if (self.outputStream != nil) {
         dataOperation.outputStream = self.outputStream;
@@ -117,7 +118,8 @@
         
         fileOperation.successBlock = ^(NSString *modelID, long long expectedTotalBytes) {
             NSError *dataIntegrityErrorIfAny = nil;
-            if([self.sha1Hash length] && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
+            if([self.sha1Hash length] && (self.requireSha1ChecksUpToMaxFileSize > expectedTotalBytes)
+                                      && ![self.sha1Hash isEqualToString: [BOXHashHelper sha1HashOfFileAtPath:self.destinationPath]]) {
                 dataIntegrityErrorIfAny = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKDataIntegrityError userInfo:nil];
                 if(dataIntegrityErrorIfAny) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BOXFileDownloadCorruptedNotification object:self];

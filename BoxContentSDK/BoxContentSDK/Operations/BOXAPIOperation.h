@@ -169,6 +169,14 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
 @property (nonatomic, readwrite, copy) NSString *associateId;
 
 /**
+ * If true, operation's start will execute immediately on the current thread and not be put on a network thread. This also removes
+ *  the automatic re-enqueuing of a failed operation, thus, provides the caller further control in handling of failed operations.
+ * If false, operation's start will be put on a network thread.
+ * Default to false.
+ */
+@property (nonatomic, readwrite, assign) BOOL shouldStartImmediately;
+
+/**
  * Do not call this. It is used internally.
  */
 - (void)finish;

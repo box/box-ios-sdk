@@ -111,7 +111,7 @@ static NSString * BOXAPIMultipartContentTypeHeader(void)
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
 {
     NSURLSessionTask *sessionTask;
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
 
     NSError *error = nil;
     if (self.shouldRunInBackground == YES) {
@@ -211,7 +211,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     [self.sessionTask cancel];
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
 {
     return NO;
 }

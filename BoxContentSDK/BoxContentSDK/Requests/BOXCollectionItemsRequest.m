@@ -10,7 +10,7 @@
 
 @interface BOXCollectionItemsRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *collectionID;
+@property (nonatomic, readwrite, copy) NSString *collectionID;
 @property (nonatomic, readwrite, assign) NSRange range;
 
 @end
@@ -21,6 +21,17 @@
 {
     if (self = [super init]) {
         _collectionID = collectionID;
+        _range = range;
+    }
+    return self;
+}
+
+- (instancetype)initWithCollectionID:(NSString *)collectionID inRange:(NSRange)range metadataTemplateKey:(NSString *)metadataTemplateKey metadataScope:(NSString *)metadataScope
+{
+    if (self = [super init]) {
+        _collectionID = collectionID;
+        _metadataTemplateKey = metadataTemplateKey;
+        _metadataScope = metadataScope;
         _range = range;
     }
     return self;
@@ -37,11 +48,20 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
+    NSString *fieldString = nil;
+    
     if (self.requestAllItemFields) {
-        parameters[BOXAPIParameterKeyFields] = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
+        fieldString = [self fullItemFieldsParameterStringExcludingFields:self.fieldsToExclude];
     } else if (self.fieldsToInclude.count > 0) {
-        parameters[BOXAPIParameterKeyFields] = [self.fieldsToInclude componentsJoinedByString:@","];
+        fieldString = [self.fieldsToInclude componentsJoinedByString:@","];
     }
+    
+    if (self.metadataTemplateKey && self.metadataScope) {
+        NSString *metadata = [NSString stringWithFormat:@",%@.%@.%@",BOXAPISubresourceMetadata, self.metadataScope, self.metadataTemplateKey];
+        fieldString = [fieldString stringByAppendingString:metadata];
+    }
+    
+    parameters[BOXAPIParameterKeyFields] = fieldString;
         
     if (self.range.length > 0) {
         parameters[BOXAPIParameterKeyLimit] = @(self.range.length);

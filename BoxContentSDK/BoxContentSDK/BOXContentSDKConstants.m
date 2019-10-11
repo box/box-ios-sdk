@@ -23,8 +23,8 @@ NSString *const BOXAPIResourceMetadataTemplates = @"metadata_templates";
 NSString *const BOXAPIResourceRecentItems = @"recent_items";
 
 // API Metadata Template Scope
-NSString *const BOXAPITemplateScopeEnterprise = @"enterprise";
-NSString *const BOXAPITemplateScopeGlobal = @"global";
+BOXMetadataScope const BOXAPITemplateScopeGlobal = @"global";
+BOXMetadataScope const BOXAPITemplateScopeEnterprise = @"enterprise";
 
 // API Subresources
 NSString *const BOXAPISubresourceItems = @"items";
@@ -88,6 +88,7 @@ NSString *const BOXUserWasLoggedOutDueToErrorNotification = @"BOXUserWasLoggedOu
 NSString *const BOXAuthOperationDidCompleteNotification = @"BOXOAuth2OperationDidComplete";
 NSString *const BOXAccessTokenRefreshDiagnosisNotification = @"BOXAccessTokenRefreshDiagnosisNotification";
 NSString *const BOXFileDownloadCorruptedNotification = @"BOXFileDownloadCorruptedNotification";
+NSString *const BOXRefreshTokenSaveToKeychainNotification = @"BOXRefreshTokenSaveToKeychainNotification";
 
 // Item Types
 BOXAPIItemType *const BOXAPIItemTypeFile = @"file";
@@ -260,6 +261,7 @@ NSString *const BOXAPIObjectKeyType = @"type";
 NSString *const BOXAPIObjectKeySequenceID = @"sequence_id";
 NSString *const BOXAPIObjectKeyETag = @"etag";
 NSString *const BOXAPIObjectKeySHA1 = @"sha1";
+NSString *const BOXAPIObjectKeyWatermarkInfo = @"watermark_info";
 NSString *const BOXAPIObjectKeyName = @"name";
 NSString *const BOXAPIObjectKeyCreatedAt = @"created_at";
 NSString *const BOXAPIObjectKeyModifiedAt = @"modified_at";
@@ -324,6 +326,8 @@ NSString *const BOXAPIObjectKeyHasCollaborations = @"has_collaborations";
 NSString *const BOXAPIObjectKeyIsExternallyOwned = @"is_externally_owned";
 NSString *const BOXAPIObjectKeyCanNonOwnersInvite = @"can_non_owners_invite";
 NSString *const BOXAPIObjectKeyAllowedInviteeRoles = @"allowed_invitee_roles";
+NSString *const BOXAPIObjectKeyDefaultInviteeRole = @"default_invitee_role";
+NSString *const BOXAPIObjectKeyFileVersion = @"file_version";
 NSString *const BOXAPIObjectKeyVersionNumber = @"version_number";
 NSString *const BOXAPIObjectKeyTimezone = @"timezone";
 NSString *const BOXAPIObjectKeyIsExternalCollabRestricted = @"is_external_collab_restricted";
@@ -467,3 +471,9 @@ NSString *const BOXURLSessionTaskCacheResponse = @"response";
 NSString *const BOXURLSessionTaskCacheResponseData = @"responseData";
 NSString *const BOXURLSessionTaskCacheError = @"error";
 NSString *const BOXURLSessionTaskCacheUserIdAndAssociateId = @"userIdAndAssociateId";
+
+const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnails = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false]";
+// We separate HLS here because HLS is only suitable for streaming, and there will be cases
+// we want to fall back on MP4
+const BOXRepresentationHints BOXRepresentationHintsDefaultPreview = @"[hls][pdf,mp4,mp3,jpg?dimensions=1024x1024&paged=false]";
+const BOXRepresentationHints BOXRepresentationHintsDefaultThumbnailsandPreview = @"[jpg?dimensions=320x320&paged=false][jpg?dimensions=1024x1024&paged=false][hls][pdf,mp4,mp3]";

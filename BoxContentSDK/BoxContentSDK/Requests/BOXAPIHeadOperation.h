@@ -10,7 +10,7 @@
 
 typedef void (^BOXAPIHeaderSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response);
 typedef void (^BOXAPIHeaderFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error);
-@interface BOXAPIHeadOperation : BOXAPIAuthenticatedOperation
+@interface BOXAPIHeadOperation : BOXAPIAuthenticatedOperation <NSCopying>
 
 @property (nonatomic, readwrite, strong) BOXAPIHeaderSuccessBlock successBlock;
 @property (nonatomic, readwrite, strong) BOXAPIHeaderFailureBlock failureBlock;

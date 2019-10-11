@@ -317,7 +317,7 @@
     return description;
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSSecureCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -333,13 +333,17 @@
     if (self = [self init])
     {
         _messageType = [aDecoder decodeInt32ForKey:@"messageType"];
-        _senderApplication = [aDecoder decodeObjectForKey:@"senderApplication"];
-        _receiverApplication = [aDecoder decodeObjectForKey:@"receiverApplication"];
-        _action = [aDecoder decodeObjectForKey:@"action"];
-        _fileMetadata = [aDecoder decodeObjectForKey:@"metadata"];
+        _senderApplication = [aDecoder decodeObjectOfClass:[BOXAppToAppApplication class] forKey:@"senderApplication"];
+        _receiverApplication = [aDecoder decodeObjectOfClass:[BOXAppToAppApplication class] forKey:@"receiverApplication"];
+        _action = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"action"];
+        _fileMetadata = [aDecoder decodeObjectOfClass:[BOXAppToAppFileMetadata class] forKey:@"metadata"];
     }
 
     return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

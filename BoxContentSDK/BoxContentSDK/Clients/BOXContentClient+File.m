@@ -20,6 +20,7 @@
 #import "BOXPreflightCheckRequest.h"
 #import "BOXFileUploadNewVersionRequest.h"
 #import "BOXFileRepresentationDownloadRequest.h"
+#import "BOXRepresentationInfoRequest.h"
 
 @implementation BOXContentClient (File)
 
@@ -34,8 +35,7 @@
 - (BOXFileRequest *)fileInfoRequestWithID:(NSString *)fileID
                               associateID:(NSString *)associateID
 {
-    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID];
-    request.associateID = associateID;
+    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -62,8 +62,7 @@
 
 - (BOXFileUpdateRequest *)fileUpdateRequestWithID:(NSString *)fileID
                                       associateID:(NSString *)associateID {
-    BOXFileUpdateRequest *request = [[BOXFileUpdateRequest alloc] initWithFileID:fileID];
-    request.associateID = associateID;
+    BOXFileUpdateRequest *request = [[BOXFileUpdateRequest alloc] initWithFileID:fileID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -101,8 +100,7 @@
 - (BOXFileDeleteRequest *)fileDeleteRequestWithID:(NSString *)fileID
                                       associateID:(NSString *)associateID
 {
-    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID];
-    request.associateId = associateID;
+    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -122,7 +120,7 @@
                                       toLocalFilePath:(NSString *)localFilePath
                                           associateId:(NSString *)associateId
 {
-    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID associateId:associateId];
+    BOXFileDownloadRequest *request = [[BOXFileDownloadRequest alloc] initWithLocalDestination:localFilePath fileID:fileID associateID:associateId];
     [self prepareRequest:request];
 
     return request;
@@ -167,7 +165,7 @@
                                           uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
                                                           associateId:(NSString *)associateId
 {
-    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithPath:localFilePath targetFolderID:folderID uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateId:associateId];
+    BOXFileUploadRequest *request = [[BOXFileUploadRequest alloc] initWithPath:localFilePath targetFolderID:folderID uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateID:associateId];
     [self prepareRequest:request];
 
     return request;
@@ -194,7 +192,7 @@
                                                       uploadMultipartCopyFilePath:(NSString *)uploadMultipartCopyFilePath
                                                                       associateId:(NSString *)associateId
 {
-    BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateId:associateId];
+    BOXFileUploadNewVersionRequest *request = [[BOXFileUploadNewVersionRequest alloc] initWithFileID:fileID localPath:localFilePath uploadMultipartCopyFilePath:uploadMultipartCopyFilePath associateID:associateId];
     [self prepareRequest:request];
 
     return request;
@@ -242,8 +240,7 @@
 - (BOXFileRequest *)trashedFileInfoRequestWithID:(NSString *)fileID
                                      associateID:(NSString *)associateID
 {
-    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID isTrashed:YES];
-    request.associateID = associateID;
+    BOXFileRequest *request = [[BOXFileRequest alloc] initWithFileID:fileID isTrashed:YES associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -262,8 +259,7 @@
 - (BOXFileDeleteRequest *)trashedFileDeleteFromTrashRequestWithID:(NSString *)fileID
                                                       associateID:(NSString *)associateID
 {
-    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID isTrashed:YES];
-    request.associateId = associateID;
+    BOXFileDeleteRequest *request = [[BOXFileDeleteRequest alloc] initWithFileID:fileID isTrashed:YES associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -281,8 +277,7 @@
 - (BOXTrashedFileRestoreRequest *)trashedFileRestoreRequestWithID:(NSString *)fileID
                                                       associateID:(NSString *)associateID
 {
-    BOXTrashedFileRestoreRequest *request = [[BOXTrashedFileRestoreRequest alloc] initWithFileID:fileID];
-    request.associateId = associateID;
+    BOXTrashedFileRestoreRequest *request = [[BOXTrashedFileRestoreRequest alloc] initWithFileID:fileID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -308,7 +303,7 @@
     BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithLocalDestination:localFilePath
                                                                                                                     fileID:fileID
                                                                                                             representation:representation
-                                                                                                               associateId:associateID];
+                                                                                                               associateID:associateID];
     [self prepareRequest:request];
     return request;
 }
@@ -320,6 +315,15 @@
     BOXFileRepresentationDownloadRequest *request = [[BOXFileRepresentationDownloadRequest alloc] initWithOutputStream:outputStream
                                                                                                                 fileID:fileID
                                                                                                         representation:representation];
+    [self prepareRequest:request];
+    return request;
+}
+
+- (BOXRepresentationInfoRequest *)fileRepresentationInfoRequestWithFileID:(NSString *)fileID
+                                                           representation:(BOXRepresentation *)representation
+{
+    BOXRepresentationInfoRequest *request = [[BOXRepresentationInfoRequest alloc] initWithFileID:fileID
+                                                                                  representation:representation];
     [self prepareRequest:request];
     return request;
 }

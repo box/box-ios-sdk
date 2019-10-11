@@ -113,6 +113,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         _body = [POSTParams copy];
         _queryStringParameters = queryParams;
         _session = session;
+        _shouldStartImmediately = NO;
         // delay setting up the session task as long as possible so the authentication credentials remain fresh
 
         _APIRequest = nil;
@@ -297,23 +298,34 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)start
 {
-    [[BOXAPIOperation APIOperationGlobalLock] lock];
+    if (self.shouldStartImmediately) {
+        if ([self isReady]) {
+            self.state = BOXAPIOperationStateExecuting;
+            @autoreleasepool {
+                [self executeOperation];
+            }
+        } else {
+            BOXAssertFail(@"Operation was not ready but start was called");
+        }
+    } else {
+        [[BOXAPIOperation APIOperationGlobalLock] lock];
 
-    if ([self isReady])
-    {
-        // Set state = executing once we have the lock
-        // BOXAPIQueueManagers check to ensure that operations are not executing when
-        // they grab the lock and are adding dependencies.
-        self.state = BOXAPIOperationStateExecuting;
+        if ([self isReady])
+        {
+            // Set state = executing once we have the lock
+            // BOXAPIQueueManagers check to ensure that operations are not executing when
+            // they grab the lock and are adding dependencies.
+            self.state = BOXAPIOperationStateExecuting;
 
-        [self performSelector:@selector(executeOperation) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+            [self performSelector:@selector(executeOperation) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+        }
+        else
+        {
+            BOXAssertFail(@"Operation was not ready but start was called");
+        }
+
+        [[BOXAPIOperation APIOperationGlobalLock] unlock];
     }
-    else
-    {
-        BOXAssertFail(@"Operation was not ready but start was called");
-    }
-
-    [[BOXAPIOperation APIOperationGlobalLock] unlock];
 }
 
 - (NSURLSessionTask *)createSessionTaskWithError:(NSError **)outError
@@ -335,12 +347,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)executeSessionTask
 {
+    NSString *userId = self.session.user.uniqueId;
+    NSError *error = nil;
+
     if (self.sessionTask == nil) {
         //no session task to execute with, this happens for a background download/upload operation
         //retrieve cached info to finish
-
-        NSString *userId = self.session.user.modelID;
-        NSError *error = nil;
         BOXURLSessionTaskCachedInfo *cachedInfo = [self.session.urlSessionManager sessionTaskCompletedCachedInfoGivenUserId:userId associateId:self.associateId error:&error];
 
         if (cachedInfo.response != nil && error == nil) {
@@ -359,6 +371,12 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         }
     } else {
         [self.sessionTask resume];
+        if (self.associateId) {
+            [self.session.urlSessionManager cacheSessionTaskStartedForUserId:userId
+                                                                 associateId:self.associateId
+                                                                       error:&error];
+            BOXAssert(!error, @"Failed to cache started info for background session task", error);
+        }
     }
 }
 
@@ -409,7 +427,13 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
 
 - (void)cancel
 {
-    [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    if (self.shouldStartImmediately) {
+        @autoreleasepool {
+            [self cancelSessionTask];
+        }
+    } else {
+        [self performSelector:@selector(cancelSessionTask) onThread:[[self class] globalAPIOperationNetworkThread] withObject:nil waitUntilDone:NO];
+    }
     [super cancel];
     BOXLog(@"BOXAPIOperation %@ was cancelled", self);
 }
@@ -422,7 +446,7 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
             //if session task is a background download and it was cancelled with intention to resume,
             //acquire resumeData to later resume the download from where it was left off
             NSURLSessionDownloadTask *downloadTask = (NSURLSessionDownloadTask *)self.sessionTask;
-            NSString *userId = self.session.user.modelID;
+            NSString *userId = self.session.user.uniqueId;
             __weak BOXAPIOperation *weakSelf = self;
             [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
                 /**
@@ -452,13 +476,16 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     }
     [self performCompletionCallback];
 
-    NSString *userId = self.session.user.modelID;
+    NSString *userId = self.session.user.uniqueId;
     NSError *error = nil;
 
     if ([self shouldAllowResume] == NO) {
         //clean up cached info for session task if any
-        BOOL success = [self.session.urlSessionManager cleanUpBackgroundSessionTaskIfExistForUserId:userId associateId:self.associateId error:&error];
-        BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+        BOXURLSessionManager *sessionMgr = self.session.urlSessionManager;
+        if (sessionMgr != nil) {
+            BOOL success = [sessionMgr cleanUpBackgroundSessionTaskIfExistForUserId:userId associateId:self.associateId error:&error];
+            BOXAssert(success, @"Failed to clean up cached info for background session task", error);
+        }
     }
     self.sessionTask = nil;
     self.state = BOXAPIOperationStateFinished;
@@ -516,8 +543,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
     NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:self.error
                                                           forKey:BOXAuthenticationErrorKey];
     NSDictionary *objectInfo = nil;
-    if (self.session.user.modelID) {
-        objectInfo = [NSDictionary dictionaryWithObject:self.session.user.modelID forKey:BOXUserIDKey];
+    if (self.session.user.uniqueId) {
+        objectInfo = [NSDictionary dictionaryWithObject:self.session.user.uniqueId forKey:BOXUserIDKey];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:BOXUserWasLoggedOutDueToErrorNotification
                                                         object:objectInfo
@@ -538,46 +565,20 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         switch (self.HTTPResponse.statusCode)
         {
             case BOXContentSDKAPIErrorAccepted:
-                errorCode = BOXContentSDKAPIErrorAccepted;
-                break;
             case BOXContentSDKAPIErrorBadRequest:
-                errorCode = BOXContentSDKAPIErrorBadRequest;
-                break;
             case BOXContentSDKAPIErrorUnauthorized:
-                errorCode = BOXContentSDKAPIErrorUnauthorized;
-                break;
             case BOXContentSDKAPIErrorForbidden:
-                errorCode = BOXContentSDKAPIErrorForbidden;
-                break;
             case BOXContentSDKAPIErrorNotFound:
-                errorCode = BOXContentSDKAPIErrorNotFound;
-                break;
             case BOXContentSDKAPIErrorMethodNotAllowed:
-                errorCode = BOXContentSDKAPIErrorMethodNotAllowed;
-                break;
             case BOXContentSDKAPIErrorConflict:
-                errorCode = BOXContentSDKAPIErrorConflict;
-                break;
             case BOXContentSDKAPIErrorPreconditionFailed:
-                errorCode = BOXContentSDKAPIErrorPreconditionFailed;
-                break;
             case BOXContentSDKAPIErrorRequestEntityTooLarge:
-                errorCode = BOXContentSDKAPIErrorRequestEntityTooLarge;
-                break;
             case BOXContentSDKAPIErrorPreconditionRequired:
-                errorCode = BOXContentSDKAPIErrorPreconditionRequired;
-                break;
             case BOXContentSDKAPIErrorTooManyRequests:
-                errorCode = BOXContentSDKAPIErrorTooManyRequests;
-                break;
             case BOXContentSDKAPIErrorInternalServerError:
-                errorCode = BOXContentSDKAPIErrorInternalServerError;
-                break;
             case BOXContentSDKAPIErrorInsufficientStorage:
-                errorCode = BOXContentSDKAPIErrorInsufficientStorage;
+                errorCode = self.HTTPResponse.statusCode;
                 break;
-            default:
-                errorCode = BOXContentSDKAPIErrorUnknownStatusCode;
         }
 
         self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];

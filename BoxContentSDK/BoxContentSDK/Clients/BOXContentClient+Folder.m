@@ -18,6 +18,7 @@
 #import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXTrashedItemArrayRequest.h"
 #import "BOXTrashedFolderRestoreRequest.h"
+#import "BOXFolderItemsRequest+Metadata.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
                                   associateId:(nullable NSString *)associateId
 {
     BOXFolderRequest *request = nil;
-    request = [[BOXFolderRequest alloc] initWithFolderID:folderID associateId:associateId];
+    request = [[BOXFolderRequest alloc] initWithFolderID:folderID associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     
     [self prepareRequest:request];
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     BOXFolderCreateRequest *request = [[BOXFolderCreateRequest alloc] initWithFolderName:folderName
                                                                           parentFolderID:parentFolderID
-                                                                             associateId:associateId];
+                                                                             associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     
     [self prepareRequest:request];
@@ -87,8 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOXFolderUpdateRequest *)folderUpdateRequestWithID:(NSString *)folderID
                                           associateID:(nullable NSString *)associateID
 {
-    BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID];
-    request.associateId = associateID;
+    BOXFolderUpdateRequest *request = [[BOXFolderUpdateRequest alloc] initWithFolderID:folderID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -127,9 +127,8 @@ NS_ASSUME_NONNULL_BEGIN
                                           associateId:(nullable NSString *)associateId;
 {
     BOXFolderDeleteRequest *request = nil;
-    request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID];
+    request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
-    request.associateId = associateId;
     [self prepareRequest:request];
     
     return request;
@@ -144,11 +143,33 @@ NS_ASSUME_NONNULL_BEGIN
     return request;
 }
 
+- (BOXFolderItemsRequest *)folderItemsRequestWithID:(NSString *)folderID
+                                metadataTemplateKey:(NSString *)metadataTemplateKey
+                                      metadataScope:(BOXMetadataScope)metadataScope
+{
+    BOXFolderItemsRequest *request = nil;
+    request = [[BOXFolderItemsRequest alloc] initWithFolderID:folderID metadataTemplateKey:metadataTemplateKey metadataScope:metadataScope];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
 - (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
                                                               inRange:(NSRange)range
 {
     BOXFolderPaginatedItemsRequest *request = nil;
     request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:folderID inRange:range];
+    [self prepareRequest:request];
+    
+    return request;
+}
+
+- (BOXFolderPaginatedItemsRequest *)folderPaginatedItemsRequestWithID:(NSString *)folderID
+                                                  metadataTemplateKey:(NSString *)metadataTemplateKey
+                                                        metadataScope:(BOXMetadataScope)metadataScope
+                                                              inRange:(NSRange)range
+{
+    BOXFolderPaginatedItemsRequest *request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:folderID metadataTemplateKey:metadataTemplateKey metadataScope:metadataScope inRange:range];
     [self prepareRequest:request];
     
     return request;
@@ -165,8 +186,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOXFolderRequest *)trashedFolderInfoRequestWithID:(NSString *)folderID
                                          associateID:(nullable NSString *)associateID
 {
-    BOXFolderRequest *request = [[BOXFolderRequest alloc] initWithFolderID:folderID isTrashed:YES];
-    request.associateId = associateID;
+    BOXFolderRequest *request = [[BOXFolderRequest alloc] initWithFolderID:folderID isTrashed:YES associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -187,8 +207,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                           associateId:(nullable NSString *)associateId;
 {
     BOXFolderDeleteRequest *request = [[BOXFolderDeleteRequest alloc] initWithFolderID:folderID
-                                                                             isTrashed:YES];
-    request.associateId = associateId;
+                                                                             isTrashed:YES
+                                                                           associateID:associateId];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     
@@ -214,8 +234,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOXTrashedFolderRestoreRequest *)trashedFolderRestoreRequestWithID:(NSString *)folderID
                                                           associateID:(nullable NSString *)associateID
 {
-    BOXTrashedFolderRestoreRequest *request = [[BOXTrashedFolderRestoreRequest alloc] initWithFolderID:folderID];
-    request.associateId = associateID;
+    BOXTrashedFolderRestoreRequest *request = [[BOXTrashedFolderRestoreRequest alloc] initWithFolderID:folderID associateID:associateID];
     request.requestDirectoryPath = self.tempCacheDir;
     [self prepareRequest:request];
     

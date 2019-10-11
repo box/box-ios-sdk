@@ -199,6 +199,30 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                                       error:(NSError **)error;
 
 /**
+ * Cache that a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ * @param error                 error if fail to cache
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error;
+
+/**
+ *  Check whether a session task for a given user and associateId has started
+ *
+ * @param userId                Id of user started the session task. Cannot be nil
+ * @param associateId           Id to associate with the session task. Cannot be nil
+ *
+ * @return YES if succeeded, NO if failed
+ */
+- (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
+                           associateId:(NSString *)associateId;
+
+/**
  Retrieve completed session task's cached info associated with userId and associateId
 
  @param userId          userId that this task belongs to
@@ -237,6 +261,33 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * Cache resumeData for background download session task of this userId and associateId
  */
 - (BOOL)cacheResumeData:(NSData *)resumeData forUserId:(NSString *)userId associateId:(NSString *)associateId;
+
+/**
+ * Get associateIds for a given backgroundSessionId and userId
+ *
+ * @param backgroundSessionId   Id of the background session to look up associateIds for
+ * @param userId                Id of user started the background session tasks
+ * @param error                 error if failed to retrieve
+ *
+ * @return NSArray of associateIds, nil if error
+ */
+- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
+
+/**
+ * Background session ID of background session
+*/
+- (NSString *)backgroundSessionIdentifier;
+
+/**
+ * Return currrently active background session IDs
+*/
+- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
+
+/**
+ * Return all background session IDs created by the extensions
+ * and reconnected to the app
+ */
+- (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error;
 
 @end
 

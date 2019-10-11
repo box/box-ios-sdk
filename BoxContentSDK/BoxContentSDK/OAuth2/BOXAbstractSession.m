@@ -150,7 +150,7 @@ static NSString *staticKeychainAccessGroup;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
-        BOXKeychainItemWrapper *keychainItemWrapper = [[self class]keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainItemWrapper = [[self class]keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainItemWrapper resetKeychainItem];
         [keychainItemWrapper setObject:jsonString forKey:(__bridge id)kSecValueData];
     }
@@ -170,10 +170,10 @@ static NSString *staticKeychainAccessGroup;
 
 - (void)revokeCredentials
 {
-    NSString *userID = self.user.modelID;
+    NSString *userID = self.user.uniqueId;
     if (userID.length > 0)
     {
-        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.modelID];
+        BOXKeychainItemWrapper *keychainWrapper = [[self class] keychainItemWrapperForUserWithID:self.user.uniqueId];
         [keychainWrapper resetKeychainItem];
         
         [self clearCurrentSessionWithUserID:userID];
@@ -189,16 +189,16 @@ static NSString *staticKeychainAccessGroup;
 + (void)revokeAllCredentials
 {
     NSArray *users = [self usersInKeychain];
-    for (BOXUserMini *user in users)
+    for (id<UniqueSDKUser> user in users)
     {
-        if (user.modelID.length > 0)
+        if (user.uniqueId.length > 0)
         {
-            BOXKeychainItemWrapper *keychainWrapper = [self keychainItemWrapperForUserWithID:user.modelID];
+            BOXKeychainItemWrapper *keychainWrapper = [self keychainItemWrapperForUserWithID:user.uniqueId];
             [keychainWrapper resetKeychainItem];
             
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BOXSessionWasRevokedNotification
                                                                                                  object:nil
-                                                                                               userInfo:@{BOXUserIDKey : user.modelID}]];
+                                                                                               userInfo:@{BOXUserIDKey : user.uniqueId}]];
         }
     }
 }
@@ -247,7 +247,7 @@ static NSString *staticKeychainAccessGroup;
                     NSString *userNameFromKeychain = [dictionary objectForKey:keychainUserNameKey];
                     NSString *userLoginFromKeychain = [dictionary objectForKey:keychainUserLoginKey];
                     if ([userID isEqualToString:userIDFromKeychain]) {
-                        BOXUserMini *miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
+                        id<UniqueSDKUser> miniUser = [[BOXUserMini alloc] initWithUserID:userIDFromKeychain
                                                                                name:userNameFromKeychain
                                                                               login:userLoginFromKeychain];
                         [users addObject:miniUser];
@@ -257,10 +257,8 @@ static NSString *staticKeychainAccessGroup;
         }
     }
     
-    NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        BOXUserMini *userA = (BOXUserMini *) a;
-        BOXUserMini *userB = (BOXUserMini *) b;
-        return [userA.login compare:userB.login options:NSCaseInsensitiveSearch];
+    NSArray *sortedUsers = [users sortedArrayUsingComparator:^NSComparisonResult(id<UniqueSDKUser> a, id<UniqueSDKUser> b) {
+        return [a.login compare:b.login options:NSCaseInsensitiveSearch];
     }];
     
     return sortedUsers;
@@ -270,7 +268,7 @@ static NSString *staticKeychainAccessGroup;
 
 - (NSDictionary *)keychainDictionary
 {
-    NSDictionary *dictionary = @{keychainUserIDKey : self.user.modelID,
+    NSDictionary *dictionary = @{keychainUserIDKey : self.user.uniqueId,
                                  keychainUserNameKey : self.user.name,
                                  keychainAccessTokenKey : self.accessToken,
                                  keychainUserLoginKey : self.user.login,

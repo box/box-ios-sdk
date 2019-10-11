@@ -22,6 +22,15 @@
 - (BOXUserRequest *)currentUserRequest;
 
 /**
+ *  Generate a request to retrieve the user by user ID.
+ *
+ *  @param userID   The ID of the user whose avatar is being fetched.
+ *
+ *  @return A request that can be customized and then executed.
+ */
+- (BOXUserRequest *)userInfoRequestWithID:(NSString *)userID;
+
+/**
  *  Generate a request to retrieve the avatar of a user.
  *
  *  @param userID   The ID of the user whose avatar is being fetched.

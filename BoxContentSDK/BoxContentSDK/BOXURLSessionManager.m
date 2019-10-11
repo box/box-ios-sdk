@@ -232,7 +232,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     //setting up previously reconnected background sessions
     NSError *error = nil;
-    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIdsFromExtensionsWithError:&error];
+    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIDsReconnectedToAppWithError:&error];
     BOXAssert(error == nil, @"Failed to retrieve backgroundSessionIds from extensions with error %@", error);
 
     for (NSString *extensionSessionId in extensionSessionIds) {
@@ -292,6 +292,16 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         // Have set up this background session previously
         completionBlock(nil);
     }
+}
+
+- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error
+{
+    return [self.cacheClient onGoingBackgroundSessionIDsWithError:error];
+}
+
+- (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error
+{
+    return [self.cacheClient backgroundSessionIDsReconnectedToAppWithError:error];
 }
 
 - (void)reconnectWithBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId completion:(nullable void (^)(NSError * _Nullable error))completionBlock
@@ -496,6 +506,19 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return nil;
 }
 
+- (BOOL)cacheSessionTaskStartedForUserId:(NSString *)userId
+                             associateId:(NSString *)associateId
+                                   error:(NSError **)error
+{
+    return [self.cacheClient cacheSessionTaskStartedForUserId:userId associateId:associateId error:error];
+}
+
+- (BOOL)hasSessionTaskStartedForUserId:(NSString *)userId
+                           associateId:(NSString *)associateId
+{
+    return [self.cacheClient hasSessionTaskStartedForUserId:userId associateId:associateId];
+}
+
 - (BOXURLSessionTaskCachedInfo *)sessionTaskCompletedCachedInfoGivenUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error
 {
     return self.supportBackgroundSessionTasks == NO ? nil : [self.cacheClient completedCachedInfoForUserId:userId associateId:associateId error:error];
@@ -598,6 +621,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             [sessionTask cancel];
         }
     }
+}
+
+- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
+{
+    return [self.cacheClient associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
 }
 
 #pragma mark - Private Helpers

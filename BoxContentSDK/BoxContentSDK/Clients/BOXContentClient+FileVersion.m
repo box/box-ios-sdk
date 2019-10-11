@@ -9,6 +9,7 @@
 #import "BOXContentClient+FileVersion.h"
 #import "BOXContentClient_Private.h"
 #import "BOXFileVersionsRequest.h"
+#import "BOXFileVersionRequest.h"
 #import "BOXFileVersionPromoteRequest.h"
 
 @implementation BOXContentClient (FileVersion)
@@ -16,6 +17,12 @@
 - (BOXFileVersionsRequest *)fileVersionsRequestForFileWithID:(NSString *)fileID
 {
     BOXFileVersionsRequest *request = [[BOXFileVersionsRequest alloc] initWithFileID:fileID];
+    [self prepareRequest:request];
+    return request;
+}
+
+- (BOXFileVersionRequest *)fileVersionRequestForFileWithID:(NSString *)fileID versionID:(NSString *)versionID {
+    BOXFileVersionRequest *request = [[BOXFileVersionRequest alloc] initWithFileID:fileID versionID:versionID];
     [self prepareRequest:request];
     return request;
 }

@@ -4,7 +4,8 @@
 //  Copyright (c) 2015 Box. All rights reserved.
 //
 
-#import "BOXContentSDKTestCase.h"
+@import BoxContentSDKTestFramework;
+
 #import "NSString+BOXContentSDKAdditions.h"
 
 @interface NSStringBoxContentSDKAdditionsTests : BOXContentSDKTestCase

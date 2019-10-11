@@ -7,21 +7,23 @@
 
 @interface BOXSearchRequest : BOXRequest
 
-@property (nonatomic, readonly, strong) NSString *query;
+@property (nonatomic, readonly, copy) NSString *query;
 @property (nonatomic, readonly, assign) NSUInteger limit;
 @property (nonatomic, readonly, assign) NSUInteger offset;
 
-@property (nonatomic, readwrite, strong) NSArray *fileExtensions;
+@property (nonatomic, readwrite, copy) NSArray<NSString *> *fileExtensions;
 @property (nonatomic, readwrite, strong) NSDate *createdAtFromDate;
 @property (nonatomic, readwrite, strong) NSDate *createdAtToDate;
 @property (nonatomic, readwrite, strong) NSDate *updatedAtFromDate;
 @property (nonatomic, readwrite, strong) NSDate *updatedAtToDate;
 @property (nonatomic, readwrite, assign) NSUInteger sizeLowerBound;
 @property (nonatomic, readwrite, assign) NSUInteger sizeUpperBound;
-@property (nonatomic, readwrite, strong) NSArray *ownerUserIDs;
-@property (nonatomic, readwrite, strong) NSArray *ancestorFolderIDs;
-@property (nonatomic, readwrite, strong) NSArray *contentTypes;
-@property (nonatomic, readwrite, strong) NSString *type;
+@property (nonatomic, readwrite, copy) NSArray<NSString *> *ownerUserIDs;
+@property (nonatomic, readwrite, copy) NSArray<NSString *> *ancestorFolderIDs;
+@property (nonatomic, readwrite, copy) NSArray<NSString *> *contentTypes;
+@property (nonatomic, readwrite, copy) NSString *type;
+@property (nonatomic, readwrite, copy) NSString *metadataTemplateKey;
+@property (nonatomic, readwrite, copy) NSString *metadataScope;
 
 /*
  By default BOXSearchRequest will only fetch a predefined set of fields. Use |requestAllItemFields| to

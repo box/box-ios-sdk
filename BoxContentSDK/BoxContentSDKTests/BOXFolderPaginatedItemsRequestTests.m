@@ -11,6 +11,7 @@
 #import "BOXFolderPaginatedItemsRequest.h"
 #import "BOXRequest_Private.h"
 #import "NSURL+BOXURLHelper.h"
+#import "BOXContentSDKTestsConstants.h"
 
 @interface BOXFolderPaginatedItemsRequestTests : BOXRequestTestCase
 
@@ -19,6 +20,31 @@
 @implementation BOXFolderPaginatedItemsRequestTests
 
 #pragma mark - URLRequest
+
+- (void)test_that_request_with_metadata_templateKey_and_scope_creates_query_parameters_with_metadata_info
+{
+    BOXFolderPaginatedItemsRequest *request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:@"123" metadataTemplateKey:@"test" metadataScope:@"scope" inRange:NSMakeRange(0,5)];
+    request.requestAllItemFields = YES;
+
+    BOXAPIOperation *op = [request createOperation];
+    NSDictionary *queryDict = op.queryStringParameters;
+    NSString *fieldString = [queryDict objectForKey:BOXAPIParameterKeyFields];
+    
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithMetadata]);
+    
+}
+
+- (void)test_that_request_without_metadata_templateKey_and_scope_creates_correct_query_parameters
+{
+    BOXFolderPaginatedItemsRequest *request = [[BOXFolderPaginatedItemsRequest alloc] initWithFolderID:@"123" inRange:NSMakeRange(0,5)];
+    request.requestAllItemFields = YES;
+    BOXAPIOperation *op = [request createOperation];
+    NSDictionary *queryDict = op.queryStringParameters;
+    NSString *fieldString = [queryDict objectForKey:BOXAPIParameterKeyFields];
+    
+    XCTAssertTrue([fieldString isEqualToString:expectedItemRequestFieldsStringWithoutMetadata]);
+    
+}
 
 - (void)test_that_basic_request_has_expected_URLRequest
 {

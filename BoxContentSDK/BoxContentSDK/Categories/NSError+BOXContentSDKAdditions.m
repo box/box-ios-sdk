@@ -8,6 +8,12 @@
 #import "NSError+BOXContentSDKAdditions.h"
 #import "BOXContentSDKErrors.h"
 
+@interface NSError (BOXContentSDKAdditionsPrivate)
+
+- (NSString *)customBoxErrorCode;
+
+@end
+
 @implementation NSError (BOXContentSDKAdditions)
 
 - (NSString *)box_localizedFailureReasonString
@@ -27,8 +33,15 @@
         
         switch (self.code) {
             case BOXContentSDKAPIErrorUnauthorized:
-            case BOXContentSDKAPIErrorForbidden:
                 result = NSLocalizedString(@"You do not have permission to perform this action.", @"Narrative: Message explaining that a failure happened because the user does not have sufficient permissions or access required to perform the action");
+                break;
+                
+            case BOXContentSDKAPIErrorForbidden:
+                if ([self isBlockedByShield]) {
+                    result = NSLocalizedString(@"The attempted action has been disabled due to the classification applied.", @"Narrative: Alert message explaining that an action was blocked (by Shield).");
+                } else {
+                    result = NSLocalizedString(@"You do not have permission to perform this action.", @"Narrative: Message explaining that a failure happened because the user does not have sufficient permissions or access required to perform the action");
+                }
                 break;
                 
             case BOXContentSDKAPIErrorNotFound:
@@ -67,8 +80,15 @@
     } else if ([self.domain isEqualToString:BOXContentSDKErrorDomain]) {
         switch (self.code) {
             case BOXContentSDKAPIErrorUnauthorized:
-            case BOXContentSDKAPIErrorForbidden:
                 result = NSLocalizedString(@"Insufficient Permissions", @"Label: Short title explaining that a failure happened because the user does not have sufficient permissions or access required to perform the action");
+                break;
+
+            case BOXContentSDKAPIErrorForbidden:
+                if ([self isBlockedByShield]) {
+                    result = NSLocalizedString(@"Action Blocked", @"Label: Short title explaining that an action was blocked (by Shield).");
+                } else {
+                    result = NSLocalizedString(@"Insufficient Permissions", @"Label: Short title explaining that a failure happened because the user does not have sufficient permissions or access required to perform the action");
+                }
                 break;
 
             case BOXContentSDKAPIErrorConflict:
@@ -97,6 +117,16 @@
     }
 
     return result;
+}
+
+- (NSString *)customBoxErrorCode
+{
+    return [[self.userInfo objectForKey:BOXJSONErrorResponseKey] objectForKey:@"code"];
+}
+
+- (BOOL)isBlockedByShield
+{
+    return [[self customBoxErrorCode] isEqualToString:@"forbidden_by_policy"];
 }
 
 @end

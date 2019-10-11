@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BOXContentSDKTestCase.h"
+
+@import BoxContentSDKTestFramework;
+
 #import "BOXAppUserSession.h"
 #import "BOXAPIAccessTokenDelegate.h"
 #import "BOXContentClient_Private.h"
@@ -50,7 +52,8 @@
 - (void)test_content_client_delegate_sets_queue_manager_delegate
 {
     BOXContentClient *client = [BOXContentClient clientForNewSession];
-    [client setAccessTokenDelegate:self];
+    ServerAuthUser *user = [[ServerAuthUser alloc] initWithUniqueID:@"user_id"];
+    [client setAccessTokenDelegate:self serverAuthUser:user];
     
     XCTAssertEqual(self, client.queueManager.delegate);
 }

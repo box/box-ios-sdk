@@ -12,7 +12,7 @@
 
 @interface BOXFileUnshareRequest ()
 
-@property (nonatomic, readwrite, strong) NSString *fileID;
+@property (nonatomic, readwrite, copy) NSString *fileID;
 
 @end
 
@@ -61,14 +61,24 @@
     BOXAPIJSONOperation *fileOperation = (BOXAPIJSONOperation *)self.operation;
 
     fileOperation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary) {
+        BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUnshareRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUnshareRequest:self
+                                             withFile:file
+                                                error:nil];
+        }
         if (completionBlock) {
-            BOXFile *file = [[BOXFile alloc] initWithJSON:JSONDictionary];
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(file, nil);
             } onMainThread:isMainThread];
         }
     };
     fileOperation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
+        if ([self.cacheClient respondsToSelector:@selector(cacheFileUnshareRequest:withFile:error:)]) {
+            [self.cacheClient cacheFileUnshareRequest:self
+                                             withFile:nil
+                                                error:error];
+        }
         if (completionBlock) {
             [BOXDispatchHelper callCompletionBlock:^{
                 completionBlock(nil, error);

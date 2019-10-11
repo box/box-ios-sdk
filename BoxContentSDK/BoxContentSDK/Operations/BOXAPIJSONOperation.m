@@ -159,9 +159,9 @@
     self.failure = nil;
 }
 
-- (BOOL)canBeReenqueued
+- (BOOL)canBeReenqueuedDueToTokenExpired
 {
-    return YES;
+    return self.shouldStartImmediately == NO;
 }
 
 @end
