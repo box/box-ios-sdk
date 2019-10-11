@@ -19,7 +19,7 @@
 @protocol BOXURLSessionManagerDelegate;
 @protocol UniqueSDKUser;
 
-typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull uniqueID, NSDictionary * _Nullable fetchTokenInfo, void (^ _Nonnull completion)(NSString * _Nullable token, NSDate * _Nullable expiresAt, NSError * _Nullable error));
+typedef void (^ServerAuthFetchTokenBlock)(NSString *uniqueID, NSDictionary *fetchTokenInfo, void (^completion)(NSString *token, NSDate *expiresAt, NSError *error));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
 
@@ -83,7 +83,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * This property is for storing any relevant information needed when your fetchTokenBlock delegate method is invoked
  * to retrieve a new token.  Passed into your fetchTokenBlock delegate method when a new token is required.
  */
-@property (nonatomic, nullable, readwrite, copy) NSDictionary *fetchTokenBlockInfo;
+@property (nonatomic, readwrite, copy) NSDictionary *fetchTokenBlockInfo;
 
 /**
  *  Used to set background requests' shouldPerformRequestImmediately provided those requests prepared
@@ -145,10 +145,10 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * @return BOXContentClient that is configured for server-based auth
  */
-+ (BOXContentClient *)clientForServerAuthUser:(nonnull ServerAuthUser *)serverAuthUser
-                                 initialToken:(nullable NSString *)token
-                          fetchTokenBlockInfo:(nullable NSDictionary *)fetchTokenBlockInfo
-                              fetchTokenBlock:(nonnull ServerAuthFetchTokenBlock)fetchTokenBlock;
++ (BOXContentClient *)clientForServerAuthUser:(ServerAuthUser *)serverAuthUser
+                                 initialToken:(NSString *)token
+                          fetchTokenBlockInfo:(NSDictionary *)fetchTokenBlockInfo
+                              fetchTokenBlock:(ServerAuthFetchTokenBlock)fetchTokenBlock;
 
 /**
  * Client ID:
@@ -267,7 +267,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 /**
  * Background session ID of background session
 */
-+ (nullable NSString *)backgroundSessionIdentifier;
++ (NSString *)backgroundSessionIdentifier;
 
 /**
  * Return currrently active background session IDs

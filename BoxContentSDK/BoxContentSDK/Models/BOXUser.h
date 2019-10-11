@@ -12,17 +12,17 @@
 /**
  *  Unique id for the user.
  */
-@property (nonnull,  nonatomic, readonly, copy) NSString *uniqueId;
+@property (nonatomic, readonly, copy) NSString *uniqueId;
 
 /**
  *  Optional Name of the user.
  */
-@property (nullable, nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /**
  *  Optional Login of the user.
  */
-@property (nullable, nonatomic, readonly, copy) NSString *login;
+@property (nonatomic, readonly, copy) NSString *login;
 
 @end
 
