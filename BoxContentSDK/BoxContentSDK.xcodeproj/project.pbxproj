@@ -411,7 +411,7 @@
 		599B1A831E4BE6DD00709C27 /* BOXAppToAppApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED411ADC050000A9216F /* BOXAppToAppApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A841E4BE6DD00709C27 /* BOXAppToAppFileMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED431ADC050000A9216F /* BOXAppToAppFileMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A851E4BE6DD00709C27 /* BOXAppToAppMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E11BED471ADC050000A9216F /* BOXAppToAppMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		599B1A861E4BE6DD00709C27 /* BOXContentSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = E470434316D41DC500FED29A /* BOXContentSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		599B1A861E4BE6DD00709C27 /* BoxContentSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = E470434316D41DC500FED29A /* BoxContentSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A871E4BE6DD00709C27 /* BOXContentSDKErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F4693517264439000CAD86 /* BOXContentSDKErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A881E4BE6DD00709C27 /* BOXContentSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E4CF273516DC4A5100F5979E /* BOXContentSDKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599B1A891E4BE6DD00709C27 /* BOXLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C3289716D6F447002DC905 /* BOXLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1023,7 +1023,7 @@
 		E44A95B016E21C5100356ADA /* BOXContentSDKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKConstants.m; sourceTree = "<group>"; };
 		E470433E16D41DC500FED29A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E470434216D41DC500FED29A /* BoxContentSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BoxContentSDK-Prefix.pch"; sourceTree = "<group>"; };
-		E470434316D41DC500FED29A /* BOXContentSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXContentSDK.h; sourceTree = "<group>"; };
+		E470434316D41DC500FED29A /* BoxContentSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxContentSDK.h; sourceTree = "<group>"; };
 		E4C3289716D6F447002DC905 /* BOXLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BOXLog.h; sourceTree = "<group>"; };
 		E4CA6F54173F13C10089680F /* BOXParallelAPIQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXParallelAPIQueueManager.h; sourceTree = "<group>"; };
 		E4CA6F55173F13C10089680F /* BOXParallelAPIQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXParallelAPIQueueManager.m; sourceTree = "<group>"; };
@@ -1736,7 +1736,7 @@
 				15958DF21A14338900AEBCEE /* Requests */,
 				E11BED3D1ADC050000A9216F /* AppToApp */,
 				E470434116D41DC500FED29A /* Supporting Files */,
-				E470434316D41DC500FED29A /* BOXContentSDK.h */,
+				E470434316D41DC500FED29A /* BoxContentSDK.h */,
 				E4F4693517264439000CAD86 /* BOXContentSDKErrors.h */,
 				0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */,
 				E4CF273516DC4A5100F5979E /* BOXContentSDKConstants.h */,
@@ -2095,7 +2095,7 @@
 				599B1A831E4BE6DD00709C27 /* BOXAppToAppApplication.h in Headers */,
 				599B1A841E4BE6DD00709C27 /* BOXAppToAppFileMetadata.h in Headers */,
 				599B1A851E4BE6DD00709C27 /* BOXAppToAppMessage.h in Headers */,
-				599B1A861E4BE6DD00709C27 /* BOXContentSDK.h in Headers */,
+				599B1A861E4BE6DD00709C27 /* BoxContentSDK.h in Headers */,
 				599B1A871E4BE6DD00709C27 /* BOXContentSDKErrors.h in Headers */,
 				599B1A881E4BE6DD00709C27 /* BOXContentSDKConstants.h in Headers */,
 				599B1A891E4BE6DD00709C27 /* BOXLog.h in Headers */,
@@ -2188,7 +2188,6 @@
 				599B19561E4BE65700709C27 /* Frameworks */,
 				599B19571E4BE65700709C27 /* Headers */,
 				599B19581E4BE65700709C27 /* Resources */,
-				0DA24CE41EA53B5F003E8EF0 /* Copy products to Carthage/Build/iOS */,
 			);
 			buildRules = (
 			);
@@ -2206,7 +2205,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Box;
 				TargetAttributes = {
 					00D0E5202077EE230026BABA = {
@@ -2234,10 +2233,9 @@
 			};
 			buildConfigurationList = E470433616D41DC500FED29A /* Build configuration list for PBXProject "BoxContentSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -2350,25 +2348,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0DA24CE41EA53B5F003E8EF0 /* Copy products to Carthage/Build/iOS */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).framework",
-				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).framework.dSYM",
-			);
-			name = "Copy products to Carthage/Build/iOS";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "COPY_PRODUCTS=\"$SRCROOT/build-phases/copy-products.sh\"\nif [ -x \"$COPY_PRODUCTS\" ]; then\n    \"$COPY_PRODUCTS\" \"$SRCROOT/../Carthage/Build\"\nelse\n    echo \"warning: Not executable: $COPY_PRODUCTS\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		00D0E51D2077EE230026BABA /* Sources */ = {
@@ -2856,7 +2835,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2905,7 +2884,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -2976,6 +2955,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3017,6 +2997,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3026,6 +3007,7 @@
 		E470435E16D41DC500FED29A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3075,6 +3057,7 @@
 		E470435F16D41DC500FED29A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;

@@ -48,7 +48,7 @@
  @param fileID              BOXFile modelID
  @param representation      BOXRepresentation of available content to download. See BOXFileRequestInfo to
                             retrieve available representation.
- @param associateId         UniqueID (UUID) to provide session task for background management.
+ @param associateID         UniqueID (UUID) to provide session task for background management.
  @return instance of BOXFileRepresentationDownloadRequest
  */
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath

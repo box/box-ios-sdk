@@ -799,13 +799,17 @@ backgroundSessionId:(NSString *)backgroundSessionId
     
     __block BOOL success = NO;
     
+    __block NSError *writingError = nil;
     NSFileCoordinator *coordinator = [self createFileCoordinator];
     [coordinator coordinateWritingItemAtURL:[NSURL fileURLWithPath:path]
                                     options:NSFileCoordinatorWritingForReplacing
                                       error:outError
                                  byAccessor:^(NSURL * _Nonnull newURL) {
-                                     success = [finalData writeToURL:newURL options:NSDataWritingAtomic error:outError];
+                                     success = [finalData writeToURL:newURL options:NSDataWritingAtomic error:&writingError];
                                  }];
+    if (outError) {
+        *outError = writingError;
+    }
     
     return success;
 }
