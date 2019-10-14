@@ -218,6 +218,9 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * This method needs to be called once in main app to be ready to
  * support background upload/download tasks.
  * If this method has not been called, all background task creations will fail
+ * Note: This method does not reconnect to previously reconnected background sessions. To do that,
+ *  you can call backgroundSessionIDsReconnectedToAppWithError: to get the list of previously
+ *  reconnected background sessions, then call reconnectWithBackgroundSessionIdFromExtension:completion:
  *
  * @param delegate          used for encrypting/decrypting metadata cached for background session tasks
  * @param rootCacheDir      root directory for caching background session tasks' data
