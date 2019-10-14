@@ -229,15 +229,6 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                          rootCacheDir:rootCacheDir
                                             sharedContainerIdentifier:nil
                                                            completion:completionBlock];
-
-    //setting up previously reconnected background sessions
-    NSError *error = nil;
-    NSArray *extensionSessionIds = [self.cacheClient backgroundSessionIDsReconnectedToAppWithError:&error];
-    BOXAssert(error == nil, @"Failed to retrieve backgroundSessionIds from extensions with error %@", error);
-
-    for (NSString *extensionSessionId in extensionSessionIds) {
-        [self reconnectWithBackgroundSessionIdFromExtension:extensionSessionId completion:nil];
-    }
 }
 
 // Return string in the format $backgroundSessionIdentifierForMainApp_$randomString
