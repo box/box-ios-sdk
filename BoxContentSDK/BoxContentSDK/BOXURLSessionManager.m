@@ -538,27 +538,35 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         success = [self.cacheClient deleteCachedInfoForUserId:userId associateId:associateId error:&error];
 
         if (success == YES) {
-            NSString *backgroundSessionId = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
-            if (backgroundSessionId != nil && [backgroundSessionId isEqualToString:[self backgroundSessionIdentifier]] == NO) {
-                //this background session is not self.backgroundSession so we must be running inside the main app
-                //and this background session is from extension, clean it up if it has no more pending tasks
-                BOOL shouldCleanUp = NO;
-                @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionId]) {
-                    NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionId];
-                    shouldCleanUp = sessionTask.count == 0;
-                }
-                if (shouldCleanUp == YES) {
-                    success = [self cleanUpBackgroundSessionId:backgroundSessionId error:&error];
-                    NSURLSession *backgroundSession = [self backgroundSessionForId:backgroundSessionId];
-                    [backgroundSession invalidateAndCancel];
-                }
-            }
+            success = [self cleanUpBackgroundSessionIfPossibleGivenID:backgroundSessionIdAndSessionTaskId.backgroundSessionId
+                                                                error:&error];
         }
     }
     if (outError != nil) {
         *outError = error;
     }
     
+    return success;
+}
+
+- (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
+                                            error:(NSError **)error
+{
+    BOOL success = NO;
+    if (backgroundSessionID != nil && [backgroundSessionID isEqualToString:[self backgroundSessionIdentifier]] == NO) {
+        //this background session is not self.backgroundSession, most likely so we are running inside the main app
+        //and this background session is from extension, clean it up if it has no more pending tasks
+        BOOL shouldCleanUp = NO;
+        @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionID]) {
+            NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionID];
+            shouldCleanUp = sessionTask.count == 0;
+        }
+        if (shouldCleanUp == YES) {
+            success = [self cleanUpBackgroundSessionId:backgroundSessionID error:error];
+            NSURLSession *backgroundSession = [self backgroundSessionForId:backgroundSessionID];
+            [backgroundSession invalidateAndCancel];
+        }
+    }
     return success;
 }
 

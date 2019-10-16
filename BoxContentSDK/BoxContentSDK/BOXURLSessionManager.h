@@ -251,6 +251,19 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (BOOL)cleanUpBackgroundSessionTaskIfExistForUserId:(NSString *)userId associateId:(NSString *)associateId error:(NSError **)error;
 
 /**
+ * Clean up background session from cache and invalidate it if possible,
+ * i.e. if the background session to be cleaned up is not the current
+ * background session and has no pending tasks
+ *
+ * @param backgroundSessionID   background session ID to clean up
+ * @param error error cleaning up this background session
+ *
+ * @return YES if successfully clean up, NO otherwise
+*/
+- (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
+                                            error:(NSError **)error;
+
+/**
  * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
  */
 - (void)pendingBackgroundDownloadUploadSessionTasks:(void (^)(NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks))completion;
