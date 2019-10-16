@@ -803,7 +803,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSFileCoordinator *coordinator = [self createFileCoordinator];
     [coordinator coordinateWritingItemAtURL:[NSURL fileURLWithPath:path]
                                     options:NSFileCoordinatorWritingForReplacing
-                                      error:outError
+                                      error:&writingError
                                  byAccessor:^(NSURL * _Nonnull newURL) {
                                      success = [finalData writeToURL:newURL options:NSDataWritingAtomic error:&writingError];
                                  }];
