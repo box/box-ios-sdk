@@ -554,8 +554,8 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 {
     BOOL success = NO;
     if (backgroundSessionID != nil && [backgroundSessionID isEqualToString:[self backgroundSessionIdentifier]] == NO) {
-        //this background session is not self.backgroundSession, most likely so we are running inside the main app
-        //and this background session is from extension, clean it up if it has no more pending tasks
+        //this background session is not self.backgroundSession, most likely we are running inside the main app
+        //and this background session is from an extension, clean it up if it has no more pending tasks
         BOOL shouldCleanUp = NO;
         @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionID]) {
             NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionID];
