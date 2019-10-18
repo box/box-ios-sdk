@@ -538,8 +538,13 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         success = [self.cacheClient deleteCachedInfoForUserId:userId associateId:associateId error:&error];
 
         if (success == YES) {
-            success = [self cleanUpBackgroundSessionIfPossibleGivenID:backgroundSessionIdAndSessionTaskId.backgroundSessionId
-                                                                error:&error];
+            [self cleanUpBackgroundSessionIfPossibleGivenID:backgroundSessionIdAndSessionTaskId.backgroundSessionId
+                                                      error:&error];
+            // Note: don't use return value of cleanUpBackgroundSessionIfPossibleGivenID:error:
+            // since the background session might not be possible to clean up yet,
+            // return value will be NO, error will be nil
+            // We care about the error if clean up fails.
+            success = !error;
         }
     }
     if (outError != nil) {
