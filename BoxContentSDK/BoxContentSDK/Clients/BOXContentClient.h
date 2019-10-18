@@ -65,7 +65,7 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  * This property is used to temporarily hold the authentication completion block in the case of
  * App-to-App authentication through the Box app.
  */
-@property (nonatomic, readwrite, copy) void (^authenticationCompletionBlock)(BOXUser *user, NSError *error);
+@property (nullable, nonatomic, readwrite, copy) void (^authenticationCompletionBlock)(BOXUser *user, NSError *error);
 
 /**
  * The Box user associated with this SDK client. This will be nil if no user has been authenticated yet.
