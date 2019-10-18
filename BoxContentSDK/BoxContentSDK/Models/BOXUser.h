@@ -7,12 +7,14 @@
 #import "BOXModel.h"
 #import "BOXEnterprise.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol UniqueSDKUser
 
 /**
  *  Unique id for the user.
  */
-@property (nonnull,  nonatomic, readonly, copy) NSString *uniqueId;
+@property (nonatomic, readonly, copy) NSString *uniqueId;
 
 /**
  *  Optional Name of the user.
@@ -32,12 +34,12 @@
 @interface ServerAuthUser : BOXModel <UniqueSDKUser>
 
 @property (nonatomic, readwrite, copy) NSString *uniqueId;
-@property (nonatomic, readwrite, copy) NSString *name;
-@property (nonatomic, readwrite, copy) NSString *login;
+@property (nullable, nonatomic, readwrite, copy) NSString *name;
+@property (nullable, nonatomic, readwrite, copy) NSString *login;
 
 - (instancetype)initWithUniqueID:(NSString *)uniqueID;
 
-- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(NSString *)name login:(NSString *)login;
+- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(nullable NSString *)name login:(nullable NSString *)login;
 
 @end
 
@@ -51,12 +53,12 @@
 /**
  *  Name of the user. May be nil if the user has not set the name in Box.
  */
-@property (nonatomic, readwrite, copy) NSString *name;
+@property (nullable, nonatomic, readwrite, copy) NSString *name;
 
 /**
  *  Login of the user, usually an email address but not always.
  */
-@property (nonatomic, readwrite, copy) NSString *login;
+@property (nullable, nonatomic, readwrite, copy) NSString *login;
 
 @end
 
@@ -123,7 +125,7 @@
 /**
  *  URL of the user's avatar image.
  */
-@property (nonatomic, readwrite, strong) NSURL *avatarURL;
+@property (nullable, nonatomic, readwrite, strong) NSURL *avatarURL;
 
 /**
  *  Whether this user has a custom avatar set.
@@ -184,7 +186,7 @@
  *  Warning: By default, the Box API does not return this value, and it will be nil.
  *  You must request it by setting the "fields" of the request.
  */
-@property (nonatomic, readwrite, strong) BOXEnterpriseMini *enterprise;
+@property (nullable, nonatomic, readwrite, strong) BOXEnterpriseMini *enterprise;
 
 /**
  *  Whether or not this user can create BoxNotes.
@@ -194,3 +196,5 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean isBoxNotesCreationEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -321,7 +321,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInt32:self.messageType forKey:@"messageType"];
+    [aCoder encodeInt32:(int32_t)self.messageType forKey:@"messageType"];
     [aCoder encodeObject:self.senderApplication forKey:@"senderApplication"];
     [aCoder encodeObject:self.receiverApplication forKey:@"receiverApplication"];
     [aCoder encodeObject:self.action forKey:@"action"];

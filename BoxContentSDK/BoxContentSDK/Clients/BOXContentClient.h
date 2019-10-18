@@ -19,6 +19,8 @@
 @protocol BOXURLSessionManagerDelegate;
 @protocol UniqueSDKUser;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^ServerAuthFetchTokenBlock)(NSString * _Nonnull uniqueID, NSDictionary * _Nullable fetchTokenInfo, void (^ _Nonnull completion)(NSString * _Nullable token, NSDate * _Nullable expiresAt, NSError * _Nullable error));
 
 extern NSString *const BOXContentClientBackgroundTempFolder;
@@ -295,3 +297,5 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
 + (void)setAPIUploadBaseURL:(NSString *)APIUploadBaseURL;
 
 @end
+
+NS_ASSUME_NONNULL_END
