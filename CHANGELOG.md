@@ -1,6 +1,50 @@
 Changelog
 =========
 
+## v3.0.0-rc.1 [2019-10-18]
+
+__Breaking Changes:__
+
+- Changed TaskAssignment.resolutionState from String to new AssignmentState enum type
+- Changed Group.groupType from String to new GroupType enum type
+- Changed Folder.allowedSharedLinkAccessLevels from [String] to new [SharedLinkAccess] enum type
+- Changed File.allowedInviteeRoles from [String] to new [CollaborationRole] enum type
+- Network responses with 4xx or 5xx status codes are now transformed into an API Error
+- CollaborationItem changed from class to enum
+- CommentItem changed from class to enum
+- FolderItem changed from class to enum
+- WebhookItem changed from class to enum
+- TaskItem changed from class to enum
+- JSON decoding errors now emit expected type
+- Public method names changed to a new convention in many of the "module" classes
+- Redesigned error classes and error hierarchy
+
+
+__New Features and Enhancements:__
+
+- Added Xcode 11 support (SDK builds still target iOS 11.0)
+- Removed AlamoFire dependency
+- Added support for Device Pins
+- Added SDK Configuration URL validation
+- Added SDK-level constants rootFolder and currentUser for convenience
+- Added support for Collaboration Whitelist endpoints
+- Added support for Retention Policy endpoints
+- Added support for Tasks endpoints
+- Added support for Webhooks endpoints
+- Added support for Groups and Group Membership endpoints
+- Added support for Legal Holds endpoints
+- Added support for Terms of Service endpoints
+- Added support for Terms of Service User Status endpoints
+- Added support for Watermarking endpoints
+- Added support for Storage Policy endpoints
+- Added support for Metadata Cascade Policy endpoints
+- Added support for User endpoints
+- Added support for Events endpoints
+
+- Added Error Views in Sample Apps
+- Improved structure and usability of Sample Apps
+
+
 ## v3.0.0-alpha.3 [2019-08-29]
 
 __Breaking Changes:__
