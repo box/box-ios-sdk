@@ -18,7 +18,7 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.3
+binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-rc.1
 ```
 
 __Step 2__: Update dependencies
@@ -65,7 +65,7 @@ how to use the SDK to make calls, and can be run directly by entering your own c
 To execute the sample app:
 __Step 1__: Run carthage
 ```shell
-$ cd SampleApps/Swift/OAuth2SampleApp
+$ cd SampleApps/OAuth2SampleApp
 $ carthage update --platform iOS
 ```
 
@@ -113,7 +113,7 @@ tokens.
 To execute the sample app:
 __Step 1__: Run carthage
 ```shell
-$ cd SampleApps/Swift/JWTSampleApp
+$ cd SampleApps/JWTSampleApp
 $ carthage update --platform iOS
 ```
 
@@ -137,10 +137,12 @@ In the `ViewController.swift` file in the sample app, edit the
 `obtainJWTTokenFromExternalSources()` method:
 ```swift
 func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
-    return { _, completion in
-        // Retrieve access token from external source, for example a dedicated authentication service
-        // Then, pass the access token and expiration time to the completion:
-        //completion(.success((accessToken: accessToken, expiresIn: tokenTTLinSeconds)))
+    return { uniqueID, completion in
+        #error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")
+        // The code below is an example implementation of the delegate function
+        // Please provide your own implementation
+        
+        // ...
     }
 }
 ```

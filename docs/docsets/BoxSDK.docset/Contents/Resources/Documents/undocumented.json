@@ -1,152 +1,362 @@
 {
   "warnings": [
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Requests/QueryParameters/FieldsQueryParam.swift",
-      "line": 21,
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Requests/BodyData/LockData.swift",
+      "line": 11,
+      "symbol": "LockData",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Requests/BodyData/LockData.swift",
+      "line": 22,
+      "symbol": "LockData.init(expiresAt:isDownloadPrevented:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Requests/QueryParameters/FieldsQueryParam.swift",
+      "line": null,
       "symbol": "FieldsQueryParam",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/File.swift",
-      "line": 76,
-      "symbol": "File.Representation.Properties.thumb",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Requests/QueryParameters/MetadataFilterQueryParam.swift",
+      "line": null,
+      "symbol": "MetadataFilterQueryParam",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 11,
+      "symbol": "FileRepresentationHint",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 94,
+      "symbol": "FileRepresentation.Status",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 95,
+      "symbol": "FileRepresentation.Status.state",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 107,
+      "symbol": "FileRepresentation.StatusEnum.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 108,
+      "symbol": "FileRepresentation.StatusEnum.pending",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 109,
+      "symbol": "FileRepresentation.StatusEnum.viewable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 110,
+      "symbol": "FileRepresentation.StatusEnum.success",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 111,
+      "symbol": "FileRepresentation.StatusEnum.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/FileRepresentation.swift",
+      "line": 112,
+      "symbol": "FileRepresentation.StatusEnum.customValue(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 11,
+      "symbol": "RecentItem",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 68,
+      "symbol": "RecentItem.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 70,
+      "symbol": "RecentItem.interactionType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 72,
+      "symbol": "RecentItem.interactedAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 74,
+      "symbol": "RecentItem.item",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/RecentItem.swift",
+      "line": 76,
+      "symbol": "RecentItem.interactionSharedLink",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadPart.swift",
+      "line": 13,
+      "symbol": "UploadPartDescription.partId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadPart.swift",
+      "line": 14,
+      "symbol": "UploadPartDescription.offset",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadPart.swift",
+      "line": 15,
+      "symbol": "UploadPartDescription.size",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadPart.swift",
+      "line": 16,
+      "symbol": "UploadPartDescription.sha1",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadPart.swift",
+      "line": 31,
+      "symbol": "UploadPartDescription.jsonRepresentation()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 16,
+      "symbol": "UploadSession.UploadSessionEndpoints.listParts",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 17,
+      "symbol": "UploadSession.UploadSessionEndpoints.commit",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 18,
+      "symbol": "UploadSession.UploadSessionEndpoints.logEvent",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 19,
+      "symbol": "UploadSession.UploadSessionEndpoints.uploadPart",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 20,
+      "symbol": "UploadSession.UploadSessionEndpoints.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/UploadSession.swift",
+      "line": 21,
+      "symbol": "UploadSession.UploadSessionEndpoints.abort",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 9,
       "symbol": "WebLink.Permissions.canRename",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 10,
       "symbol": "WebLink.Permissions.canDelete",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 11,
       "symbol": "WebLink.Permissions.canComment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 12,
       "symbol": "WebLink.Permissions.canShare",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 13,
       "symbol": "WebLink.Permissions.canSetShareAccess",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 27,
       "symbol": "WebLink.sequenceId",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 28,
       "symbol": "WebLink.etag",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 33,
       "symbol": "WebLink.createdBy",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 34,
       "symbol": "WebLink.createdAt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 35,
       "symbol": "WebLink.modifiedAt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 40,
       "symbol": "WebLink.itemStatus",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 41,
       "symbol": "WebLink.trashedAt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 42,
       "symbol": "WebLink.purgedAt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 43,
       "symbol": "WebLink.sharedLink",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 44,
       "symbol": "WebLink.pathCollection",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 45,
       "symbol": "WebLink.modifiedBy",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 46,
       "symbol": "WebLink.ownedBy",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/Responses/WebLink.swift",
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/Responses/WebLink.swift",
       "line": 47,
       "symbol": "WebLink.permissions",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK/Sources/TokenStore/KeychainRelated/KeychainStoreQueryable.swift",
-      "line": 25,
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/TokenStore/KeychainRelated/KeychainStoreQueryable.swift",
+      "line": null,
       "symbol": "GenericPasswordQueryable",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/TokenStore/KeychainTokenStore.swift",
+      "line": 14,
+      "symbol": "KeychainTokenStore",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk-testing/Sources/TokenStore/KeychainTokenStore.swift",
+      "line": 17,
+      "symbol": "KeychainTokenStore.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/martinastremenova/Documents/Projects/STRV/Box/ContentSDK"
+  "source_directory": "/box/sdk/box-swift-sdk-testing"
 }

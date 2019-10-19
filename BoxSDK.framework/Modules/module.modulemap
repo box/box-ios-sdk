@@ -1,0 +1,11 @@
+framework module BoxSDK {
+  umbrella header "BoxSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BoxSDK.Swift {
+    header "BoxSDK-Swift.h"
+    requires objc
+}

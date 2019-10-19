@@ -15,11 +15,11 @@ Get Recent Items
 ----------------
 
 To get recently accessed items, call
-[`client.recentItems.getRecentItems(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object you can use to retrieve successive pages of
+[`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object you can use to retrieve successive pages of
 results, where each page contains some of the recent items.
 
 ```swift
-let recentItems = client.folders.getRecentItems()
+let recentItems = client.folders.list()
 
 // Get the first page of items
 recentItems.getNextItems() { (result: Result<[FolderItem], BoxError>) in
@@ -35,3 +35,5 @@ recentItems.getNextItems() { (result: Result<[FolderItem], BoxError>) in
     }
 }
 ```
+
+[get-recent-items]: https://opensource.box.com/box-swift-sdk/Classes/RecentItemsModule.html#/s:6BoxSDK17RecentItemsModuleC03getcD06marker5limit6fieldsAA18PaginationIteratorCyAA0C4ItemCGSSSg_SiSgSaySSGSgtF
