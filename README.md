@@ -20,7 +20,7 @@ Between now and the next couple of months, the Box Swift SDK for iOS releases wi
 - [Long Term Support](#long-term-support)
 
 ### Release Candidate (RC)
-The initial releases of the SDK starting Oct 17th will be Release Candidate (RC). This means (1) the core functionality is present and tested, (2) additional functionality from this point on will be considered improvements or enhancements based on customer feedback. RC releases are usually more frequent (every few weeks), followed shortly by a current release. If you plan to use an RC release, we recommend:
+The initial releases of the SDK starting Oct 19th will be Release Candidate (RC). This means (1) the core functionality is present and tested, (2) additional functionality from this point on will be considered improvements or enhancements based on customer feedback. RC releases are usually more frequent (every few weeks), followed shortly by a current release. If you plan to use an RC release, we recommend:
 - that you don't use it for production workloads (If that is unavoidable, we recommend upgrading to the Current Release version once it's ready.)
 - that you create a plan to keep your application on the latest RC release version at all times (since older RC releases are considered "out of support" as soon as a new RC release is released)
 
