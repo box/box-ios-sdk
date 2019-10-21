@@ -10,7 +10,7 @@ Please refer to [docs/usage/getting-started.md](https://github.com/box/box-ios-s
 
 
 ## Release Definitions
-Starting Oct 20th, 2019 the Box Swift SDK for iOS will be available for general use. This implies all Box developers will be able to use the SDK to build native iOS applications on Box. Between now and the next couple of months, we will be making frequent updates to the SDK based on feedback from our customers, and this document aims to set expectations with respect to:
+Starting Oct 19th, 2019 the Box Swift SDK for iOS will be available for general use. This implies all Box developers will be able to use the SDK to build native iOS applications on Box. Between now and the next couple of months, we will be making frequent updates to the SDK based on feedback from our customers, and this document aims to set expectations with respect to:
 1. the various release types you will see over the next few months, what they mean and how to identify them
 1. support policy for each of the release types
 
