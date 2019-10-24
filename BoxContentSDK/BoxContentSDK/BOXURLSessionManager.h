@@ -255,13 +255,15 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  * i.e. if the background session to be cleaned up is not the current
  * background session and has no pending tasks
  *
+ * @param userID    userID that this session belongs to
  * @param backgroundSessionID   background session ID to clean up
  * @param error error cleaning up this background session
  *
  * @return YES if successfully clean up, NO otherwise
 */
-- (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
-                                            error:(NSError **)error;
+- (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString * _Nonnull)userID
+                                  backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+                                                error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Asynchronously calls a completion callback with all background upload, and download tasks in a session.
@@ -287,7 +289,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
  *
  * @return NSArray of associateIds, nil if error
  */
-- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
+- (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Background session ID of background session

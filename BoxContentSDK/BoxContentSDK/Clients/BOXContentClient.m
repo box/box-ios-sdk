@@ -481,9 +481,13 @@ static BOXContentClient *defaultInstance = nil;
     [[BOXURLSessionManager sharedInstance] reconnectWithBackgroundSessionIdFromExtension:backgroundSessionId completion:completionBlock];
 }
 
-+ (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
++ (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error
 {
-    return [[BOXURLSessionManager sharedInstance] associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
+    return [[BOXURLSessionManager sharedInstance] associateIdsOfBackgroundSessionId:backgroundSessionId
+                                                                             userId:userId
+                                                                              error:error];
 }
 
 + (NSString *)backgroundSessionIdentifier
@@ -501,11 +505,13 @@ static BOXContentClient *defaultInstance = nil;
     return [[BOXURLSessionManager sharedInstance] backgroundSessionIDsReconnectedToAppWithError:error];
 }
 
-+ (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
-                                            error:(NSError **)error
++ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString *)userID
+                                  backgroundSessionID:(NSString *)backgroundSessionID
+                                                error:(NSError **)error
 {
-    return [[BOXURLSessionManager sharedInstance] cleanUpBackgroundSessionIfPossibleGivenID:backgroundSessionID
-                                                                                      error:error];
+    return [[BOXURLSessionManager sharedInstance] cleanUpBackgroundSessionIfPossibleGivenUserID:userID
+                                                                            backgroundSessionID:backgroundSessionID
+                                                                                          error:error];
 }
 
 #pragma mark - helper methods
