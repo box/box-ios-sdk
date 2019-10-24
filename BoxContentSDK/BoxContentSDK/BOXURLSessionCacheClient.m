@@ -10,6 +10,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 
 @implementation BOXURLSessionTaskCachedInfo
@@ -142,6 +143,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
                                                         associateID:associateId
                                                               error:error];
     }
+    os_log(OS_LOG_DEFAULT, "*****SC: cache bg task info bgID %{public}@, associateID %{public}@, error %{public}@", backgroundSessionId, associateId, *error);
     return success;
 }
 
@@ -645,6 +647,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSString *filePath = [self filePathOfBackgroundSessionIndexGivenUserID:userID
                                                        backgroundSessionID:backgroundSessionID
                                                                associateID:associateID];
+    os_log(OS_LOG_DEFAULT, "******SC: clean up associateIDIndex userID %{public}@, bgSessionID %{public}@, associateID %{public}@", userID, backgroundSessionID, associateID);
     return [self deleteFile:filePath error:error];
 }
 
@@ -654,6 +657,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
 {
     NSString *dirPath = [self dirPathOfBackgroundSessionIndexGivenUserID:userID
                                                      backgroundSessionID:backgroundSessionID];
+    os_log(OS_LOG_DEFAULT, "******SC: clean up bgSessionIndex userID %{public}@, bgSessionID %{public}@", userID, backgroundSessionID);
     return [self deleteDirectory:dirPath error:error];
 }
 
@@ -896,6 +900,10 @@ backgroundSessionId:(NSString *)backgroundSessionId
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDir] == YES && isDir == YES) {
         associateIDs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:error];
+        os_log(OS_LOG_DEFAULT, "*****SC: associateIds %{public}@\n for bg %{public}@, userId %{public}@, error %{public}@", associateIDs, backgroundSessionId, userId, *error);
+    } else {
+        os_log(OS_LOG_DEFAULT, "*****SC: !!!!!!no dir for associateIds bgID %{public}@, userId %{public}@", backgroundSessionId, userId);
+        [self backgroundSessionIDsOfUserID:userId error:error];
     }
     return associateIDs;
 }
@@ -923,6 +931,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSString *path = [self filePathOfBackgroundSessionIndexGivenUserID:userID
                                                    backgroundSessionID:backgroundSessionID
                                                            associateID:associateID];
+    os_log(OS_LOG_DEFAULT, "******SC: create bg Index userID %{public}@, bgSessionID %{public}@, associateID %{public}@", userID, backgroundSessionID, associateID);
     return [self createFile:path error:error];
 }
 

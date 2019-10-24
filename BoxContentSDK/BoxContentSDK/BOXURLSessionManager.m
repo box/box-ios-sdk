@@ -9,6 +9,7 @@
 #import "BOXURLSessionManager.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -552,6 +553,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                  && (error.code == BOXContentSDKURLSessionCannotCleanUpCurrentBackgroundSession
                                      || error.code == BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithActiveTasks
                                      || error.code == BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithTasks));
+            os_log(OS_LOG_DEFAULT, "*****SM: cleaned up bg session success %{public}@, error: %{public}@", success?@"YES":@"NO", error);
             if (success == YES) {
                 error = nil;
             }
@@ -704,7 +706,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     @synchronized (self.backgroundSessionIdToSession) {
         [self.backgroundSessionIdToSession removeObjectForKey:backgroundSessionId];
     }
-    
+
+    os_log(OS_LOG_DEFAULT, "*****SM: clean up ongoing bgID %{public}@, error %{public}@", backgroundSessionId, *error);
+
     return [self.cacheClient cleanUpOnGoingCachedInfoOfBackgroundSessionId:backgroundSessionId error:error];
 }
 
