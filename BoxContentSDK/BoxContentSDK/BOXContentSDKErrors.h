@@ -90,7 +90,10 @@ typedef NS_ENUM(NSUInteger, BOXContentSDKURLSessionError) {
     BOXContentSDKURLSessionFailToReconnectBecauseBackgroundSessionIsNotSupported = 50009,
     BOXContentSDKURLSessionFailToCreateSessionTask = 50010,
     BOXContentSDKURLSessionInvalidSessionTask = 50011,
-    BOXContentSDKURLSessionInvalidBackgroundSession = 50012
+    BOXContentSDKURLSessionInvalidBackgroundSession = 50012,
+    BOXContentSDKURLSessionCannotCleanUpCurrentBackgroundSession = 50013,
+    BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithActiveTasks = 50014,
+    BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithTasks = 50015
 };
 
 typedef NS_ENUM(NSUInteger, BOXContentSDKDataContentError) {
