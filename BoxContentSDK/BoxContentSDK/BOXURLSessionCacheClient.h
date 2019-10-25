@@ -67,6 +67,9 @@
  * 2. To keep track of whose user and its associateId the session task belongs to, we save backgroundSessionId and sessionTaskId
  * as a file name under sub-directory users/$userId/$associateId/info with format $backgroundSessionId-$sessionTaskId
  *
+ * We also record a map of background session ID to its associateIDs at backgroundSessionsIndex/$userID/$backgroundSessionID/$associateID
+ * which provides a quick look up of associateIDs given a background session ID.
+ *
  * 3. Once session tasks complete, their cached info under onGoingSessionTasks/$backgroundSessionId/$sessionTaskId dir
  * will be moved into users/$userId/$associateId/completed dir
  *
@@ -281,6 +284,17 @@
 - (BOOL)isSessionTaskCompletedForUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 /**
+ * Check if a background session is valid, i.e. exists for a userId
+ *
+ * @param userID            Id of user
+ * @param backgroundSessionID       Id of background session
+ *
+ * @return YES if valid, NO if not
+ */
+- (BOOL)isBackgroundSessionValidGivenUserID:(NSString * _Nonnull)userID
+                        backgroundSessionID:(NSString * _Nonnull)backgroundSessionID;
+
+/**
  * Clean up on-going session tasks' cached info of backgroundSessionId.
  * This does not clean up info relating to user and completed cached info, which
  * can be done using deleteCachedInfoForUserId:associateId:error
@@ -291,6 +305,19 @@
  * @return YES if succeeded, NO if failed
  */
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error;
+
+/**
+ * Clean up background session index of a given background session
+ *
+ * @param userID    Id of user
+ * @param backgroundSessionID   Id of the background session
+ * @param error                 error if fail to complete
+ *
+ * @return YES if succeeded, NO if failed
+*/
+- (BOOL)cleanUpBackgroundSessionIndexGivenUserID:(NSString * _Nonnull)userID
+                             backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+                                           error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Clean up users/$userId directory if empty. Expected to be used at logout
@@ -374,6 +401,8 @@
  *
  * @return NSArray of associateIds, nil if error
  */
-- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
+- (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error;
 
 @end
