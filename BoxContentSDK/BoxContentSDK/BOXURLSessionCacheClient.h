@@ -327,8 +327,8 @@
  *
  * @return YES if successfully cleaned up, NO if failed
  */
-- (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString * _Nonnull)backgroundSessionId
-                                             error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)cleanUpExtensionBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                      error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Clean up users/$userId directory if empty. Expected to be used at logout
