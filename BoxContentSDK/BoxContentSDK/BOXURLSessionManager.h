@@ -299,10 +299,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (NSString *)backgroundSessionIdentifier;
 
 /**
- * Return currrently active background session IDs
-*/
-- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
-
+ * Return existing background session IDs
+ */
+- (NSArray <NSString *> * _Nullable)backgroundSessionIDsOfUserID:(NSString * _Nonnull)userID
+                                                           error:(NSError * _Nullable * _Nullable)error;
 /**
  * Return all background session IDs created by the extensions
  * and reconnected to the app
