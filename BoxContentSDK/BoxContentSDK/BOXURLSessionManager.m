@@ -552,6 +552,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                  && (error.code == BOXContentSDKURLSessionCannotCleanUpCurrentBackgroundSession
                                      || error.code == BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithActiveTasks
                                      || error.code == BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithTasks));
+            if (success == YES) {
+                error = nil;
+            }
         }
     }
     if (outError != nil) {
