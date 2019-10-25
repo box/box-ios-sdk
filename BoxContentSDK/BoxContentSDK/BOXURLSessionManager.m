@@ -537,9 +537,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         }
         success = [self.cacheClient deleteCachedInfoForUserId:userId associateId:associateId error:&error];
 
-        if (success == YES) {
-            [self cleanUpBackgroundSessionIfPossibleGivenID:backgroundSessionIdAndSessionTaskId.backgroundSessionId
-                                                      error:&error];
+        NSString *backgroundSessionID = backgroundSessionIdAndSessionTaskId.backgroundSessionId;
+        if (success == YES && backgroundSessionID != nil) {
+            [self cleanUpBackgroundSessionIfPossibleGivenUserID:userId
+                                            backgroundSessionID:backgroundSessionID
+                                                          error:&error];
             // Note: don't use return value of cleanUpBackgroundSessionIfPossibleGivenID:error:
             // since the background session might not be possible to clean up yet,
             // return value will be NO, error will be nil
@@ -554,9 +556,20 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     return success;
 }
 
-- (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
-                                            error:(NSError **)error
+- (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString * _Nonnull)userID
+                                  backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+                                                error:(NSError * _Nullable * _Nullable)error
 {
+    if ([self.cacheClient isBackgroundSessionValidGivenUserID:userID
+                                          backgroundSessionID:backgroundSessionID] == NO) {
+        if (error != nil) {
+            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
+                                                code:BOXContentSDKURLSessionInvalidBackgroundSession
+                                            userInfo:nil];
+        }
+        return NO;
+    }
+
     BOOL success = NO;
     if (backgroundSessionID != nil && [backgroundSessionID isEqualToString:[self backgroundSessionIdentifier]] == NO) {
         //this background session is not self.backgroundSession, most likely we are running inside the main app
@@ -567,7 +580,9 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
             shouldCleanUp = sessionTask.count == 0;
         }
         if (shouldCleanUp == YES) {
-            success = [self cleanUpBackgroundSessionId:backgroundSessionID error:error];
+            success = [self cleanUpBackgroundSessionGivenUserId:userID
+                                            backgroundSessionId:backgroundSessionID
+                                                          error:error];
             NSURLSession *backgroundSession = [self backgroundSessionForId:backgroundSessionID];
             [backgroundSession invalidateAndCancel];
         }
@@ -627,15 +642,20 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
-- (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error
+- (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error
 {
-    return [self.cacheClient associateIdsOfBackgroundSessionId:backgroundSessionId userId:userId error:error];
+    return [self.cacheClient associateIdsOfBackgroundSessionId:backgroundSessionId
+                                                        userId:userId
+                                                         error:error];
 }
 
 #pragma mark - Private Helpers
 
-- (BOOL)cleanUpBackgroundSessionId:(NSString *)backgroundSessionId
-                             error:(NSError **)error
+- (BOOL)cleanUpBackgroundSessionGivenUserId:(NSString *)userId
+                        backgroundSessionId:(NSString *)backgroundSessionId
+                                      error:(NSError **)error
 {
     @synchronized (self.backgroundSessionIdToSessionTask) {
         [self.backgroundSessionIdToSessionTask removeObjectForKey:backgroundSessionId];
@@ -645,7 +665,15 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         [self.backgroundSessionIdToSession removeObjectForKey:backgroundSessionId];
     }
     
-    return [self.cacheClient cleanUpOnGoingCachedInfoOfBackgroundSessionId:backgroundSessionId error:error];
+    BOOL success = [self.cacheClient cleanUpOnGoingCachedInfoOfBackgroundSessionId:backgroundSessionId error:error];
+
+    if (success == YES) {
+        success = [self.cacheClient cleanUpBackgroundSessionIndexGivenUserID:userId
+                                                         backgroundSessionID:backgroundSessionId
+                                                                       error:error];
+    }
+
+    return success;
 }
 
 // Return background session Id and sessionTask for this userId and associateId

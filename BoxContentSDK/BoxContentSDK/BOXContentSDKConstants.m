@@ -464,6 +464,7 @@ NSString *const BOXAPIEnterpriseEventTypeItemUnsync = @"ITEM_UNSYNC";
 NSString *const BOXURLSessionTaskCacheDirectoryName = @"BOXURLSessionCache";
 NSString *const BOXURLSessionTaskCacheOnGoingSessionTasksDirectoryName = @"onGoingSessionTasks";
 NSString *const BOXURLSessionTaskCacheUsersDirectoryName = @"users";
+NSString *const BOXURLSessionTaskCacheBackgroundSessionsIndexDirectoryName = @"backgroundSessionsIndex";
 NSString *const BOXURLSessionTaskCacheExtensionSessionsDirectoryName = @"extensionSessions";
 NSString *const BOXURLSessionTaskCacheDestinationFilePath = @"destinationFilePath";
 NSString *const BOXURLSessionTaskCacheResumeData = @"resumeData";
