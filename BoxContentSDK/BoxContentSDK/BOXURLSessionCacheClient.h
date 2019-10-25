@@ -361,10 +361,21 @@
 - (BOOL)cacheBackgroundSessionIdFromExtension:(NSString *)backgroundSessionId error:(NSError **)outError;
 
 /**
- * Return currrently active background session IDs
-*/
-- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error;
+ * Check if backgroundSessionID is associated with userID
+ *
+ * @param backgroundSessionID   Id to check
+ * @param userID    Id of user
+ *
+ * @return YES if associated, NO otherwise
+ */
+- (BOOL)isBackgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+         associatedWithUserID:(NSString * _Nonnull)userID;
 
+/**
+ * Return existing background session IDs
+ */
+- (NSArray <NSString *> * _Nullable)backgroundSessionIDsOfUserID:(NSString * _Nonnull)userID
+                                                           error:(NSError * _Nullable * _Nullable)error;
 /**
  * Return all background session IDs created by the extensions
  * and reconnected to the app
