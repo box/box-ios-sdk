@@ -320,6 +320,17 @@
                                            error:(NSError * _Nullable * _Nullable)error;
 
 /**
+ * Clean up background session ID from IDs reconnected from extension
+ *
+ * @param backgroundSessionId   Id to clean
+ * @param error error if fail to complete
+ *
+ * @return YES if successfully cleaned up, NO if failed
+ */
+- (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString * _Nonnull)backgroundSessionId
+                                             error:(NSError * _Nullable * _Nullable)error;
+
+/**
  * Clean up users/$userId directory if empty. Expected to be used at logout
  * after cleaning up on user's session tasks
  *
