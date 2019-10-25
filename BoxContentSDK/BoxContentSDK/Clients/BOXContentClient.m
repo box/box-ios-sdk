@@ -507,9 +507,9 @@ static BOXContentClient *defaultInstance = nil;
     return [[BOXURLSessionManager sharedInstance] backgroundSessionIDsReconnectedToAppWithError:error];
 }
 
-+ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString *)userID
-                                  backgroundSessionID:(NSString *)backgroundSessionID
-                                                error:(NSError **)error
++ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString * _Nonnull)userID
+                                  backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+                                                error:(NSError * _Nullable * _Nullable)error
 {
     return [[BOXURLSessionManager sharedInstance] cleanUpBackgroundSessionIfPossibleGivenUserID:userID
                                                                             backgroundSessionID:backgroundSessionID

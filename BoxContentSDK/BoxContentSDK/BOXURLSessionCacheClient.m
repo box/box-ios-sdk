@@ -844,8 +844,8 @@ backgroundSessionId:(NSString *)backgroundSessionId
 }
 
 // Delete file extensionSessions/$backgroundSessionId if backgroundSessionId is from extension
-- (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString * _Nonnull)backgroundSessionId
-                                             error:(NSError * _Nullable * _Nullable)outError
+- (BOOL)cleanUpExtensionBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                      error:(NSError * _Nullable * _Nullable)outError
 {
     NSString *filePath = [self filePathOfExtensionBackgroundSessionId:backgroundSessionId];
     BOOL success = YES;
