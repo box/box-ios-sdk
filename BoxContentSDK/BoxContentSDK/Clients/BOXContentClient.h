@@ -280,9 +280,9 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * @return YES if successfully clean up, NO otherwise
 */
-+ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString *)userID
-                                  backgroundSessionID:(NSString *)backgroundSessionID
-                                                error:(NSError **)error;
++ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString * _Nonnull)userID
+                                  backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+                                                error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Background session ID of background session
