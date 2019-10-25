@@ -744,13 +744,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
 - (BOOL)cleanUpOnGoingCachedInfoOfBackgroundSessionId:(NSString *)backgroundSessionId error:(NSError **)error
 {
     NSString *dirPath = [self dirPathOfSessionTaskWithBackgroundSessionId:backgroundSessionId];
-    BOOL success = [self deleteDirectory:dirPath error:error];
-    
-    if (success == YES) {
-        success = [self cleanUpExtensionBackgrounSessionIdIfExists:backgroundSessionId error:error];
-    }
-    
-    return success;
+    return [self deleteDirectory:dirPath error:error];
 }
 
 - (BOOL)cacheBackgroundSessionId:(NSString *)backgroundSessionId
@@ -850,7 +844,8 @@ backgroundSessionId:(NSString *)backgroundSessionId
 }
 
 // Delete file extensionSessions/$backgroundSessionId if backgroundSessionId is from extension
-- (BOOL)cleanUpExtensionBackgrounSessionIdIfExists:(NSString *)backgroundSessionId error:(NSError **)outError
+- (BOOL)cleanUpExtensionBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                      error:(NSError * _Nullable * _Nullable)outError
 {
     NSString *filePath = [self filePathOfExtensionBackgroundSessionId:backgroundSessionId];
     BOOL success = YES;
