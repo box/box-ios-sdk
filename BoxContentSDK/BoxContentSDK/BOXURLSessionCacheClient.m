@@ -142,7 +142,6 @@ backgroundSessionId:(NSString *)backgroundSessionId
                                                         associateID:associateId
                                                               error:error];
     }
-
     return success;
 }
 
@@ -732,7 +731,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSArray *associateIds = nil;
 
     BOOL isDir = NO;
-    
+
     if ([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] == YES && isDir == YES) {
         associateIds = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirPath error:error];
     }
@@ -891,26 +890,19 @@ backgroundSessionId:(NSString *)backgroundSessionId
 }
 
 - (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
-                                                                 userId:(NSString * _Nonnull)userId
-                                                                  error:(NSError * _Nullable * _Nullable)error
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error
 {
     NSString *dir = [self dirPathOfBackgroundSessionIndexGivenUserID:userId
                                                  backgroundSessionID:backgroundSessionId];
 
     BOOL isDir = NO;
-    NSMutableArray *associateIDs = nil;
+    NSArray *associateIDs = [NSArray new];
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDir] == YES && isDir == YES) {
-        NSArray *filePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:error];
-        if (filePaths.count > 0) {
-            associateIDs = [NSMutableArray new];
-            for (NSString *associateID in filePaths) {
-                [associateIDs addObject:associateID];
-            }
-        }
+        associateIDs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:error];
     }
-
-    return [associateIDs copy];
+    return associateIDs;
 }
 
 // Create dir if not exists, users/$userId/$associateId/$backgroundSessionId-$sessionTaskId
@@ -936,7 +928,6 @@ backgroundSessionId:(NSString *)backgroundSessionId
     NSString *path = [self filePathOfBackgroundSessionIndexGivenUserID:userID
                                                    backgroundSessionID:backgroundSessionID
                                                            associateID:associateID];
-
     return [self createFile:path error:error];
 }
 
@@ -1133,20 +1124,40 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return [dirPath stringByAppendingPathComponent:associateID];
 }
 
+
+- (NSString *)dirPathOfBackgroundSessionIndexGivenUserID:(NSString * _Nonnull)userID
+{
+    return [[self dirPathOfBackgroundSessionsIndex] stringByAppendingPathComponent:userID];
+}
+
 - (NSString *)dirPathOfBackgroundSessionIndexGivenUserID:(NSString * _Nonnull)userID
                                      backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
 {
-    NSString *dirPath = [[self dirPathOfBackgroundSessionsIndex] stringByAppendingPathComponent:userID];
+    NSString *dirPath = [self dirPathOfBackgroundSessionIndexGivenUserID:userID];
     return [dirPath stringByAppendingPathComponent:backgroundSessionID];
 }
 
-- (BOOL)isBackgroundSessionValidGivenUserID:(NSString * _Nonnull)userID
-                        backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
+- (BOOL)isBackgroundSessionID:(NSString *)backgroundSessionID
+         associatedWithUserID:(NSString *)userID
 {
     BOOL isDir = NO;
     NSString *dir = [self dirPathOfBackgroundSessionIndexGivenUserID:userID
                                                  backgroundSessionID:backgroundSessionID];
     return [[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDir] && isDir == YES;
+}
+
+- (NSArray <NSString *> * _Nullable)backgroundSessionIDsOfUserID:(NSString * _Nonnull)userID
+                                                           error:(NSError * _Nullable * _Nullable)error
+{
+    BOOL isDir = NO;
+    NSString *dir = [self dirPathOfBackgroundSessionIndexGivenUserID:userID];
+    NSArray *backgroundSessionIDs = [NSArray new];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDir] == YES && isDir == YES) {
+        backgroundSessionIDs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:error];
+    }
+
+    return backgroundSessionIDs;
 }
 
 - (NSString *)filePathOfUserSessionTaskStartedForUserId:(NSString *)userId

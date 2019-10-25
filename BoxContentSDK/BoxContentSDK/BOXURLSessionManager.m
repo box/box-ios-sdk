@@ -285,9 +285,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 }
 
-- (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error
+- (NSArray <NSString *> * _Nullable)backgroundSessionIDsOfUserID:(NSString * _Nonnull)userID
+                                                           error:(NSError * _Nullable * _Nullable)error
 {
-    return [self.cacheClient onGoingBackgroundSessionIDsWithError:error];
+    return [self.cacheClient backgroundSessionIDsOfUserID:userID
+                                                    error:error];
 }
 
 - (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error
@@ -560,16 +562,6 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                   backgroundSessionID:(NSString * _Nonnull)backgroundSessionID
                                                 error:(NSError * _Nullable * _Nullable)error
 {
-    if ([self.cacheClient isBackgroundSessionValidGivenUserID:userID
-                                          backgroundSessionID:backgroundSessionID] == NO) {
-        if (error != nil) {
-            *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
-                                                code:BOXContentSDKURLSessionInvalidBackgroundSession
-                                            userInfo:nil];
-        }
-        return NO;
-    }
-
     BOOL success = NO;
     if (backgroundSessionID != nil && [backgroundSessionID isEqualToString:[self backgroundSessionIdentifier]] == NO) {
         //this background session is not self.backgroundSession, most likely we are running inside the main app
@@ -577,7 +569,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
         BOOL shouldCleanUp = NO;
         @synchronized (self.backgroundSessionIdToSessionTask[backgroundSessionID]) {
             NSMutableDictionary *sessionTask = self.backgroundSessionIdToSessionTask[backgroundSessionID];
-            shouldCleanUp = sessionTask.count == 0;
+            shouldCleanUp = sessionTask.count == 0 && [self.cacheClient isBackgroundSessionID:backgroundSessionID associatedWithUserID:userID];
         }
         if (shouldCleanUp == YES) {
             success = [self cleanUpBackgroundSessionGivenUserId:userID

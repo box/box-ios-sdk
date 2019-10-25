@@ -495,9 +495,11 @@ static BOXContentClient *defaultInstance = nil;
     return [[BOXURLSessionManager sharedInstance] backgroundSessionIdentifier];
 }
 
-+ (NSArray <NSString *> *)onGoingBackgroundSessionIDsWithError:(NSError **)error
++ (NSArray <NSString *> * _Nullable)backgroundSessionIDsOfUserID:(NSString * _Nonnull)userID
+                                                           error:(NSError * _Nullable * _Nullable)error
 {
-    return [[BOXURLSessionManager sharedInstance] onGoingBackgroundSessionIDsWithError:error];
+    return [[BOXURLSessionManager sharedInstance] backgroundSessionIDsOfUserID:userID
+                                                                         error:error];
 }
 
 + (NSArray <NSString *> *)backgroundSessionIDsReconnectedToAppWithError:(NSError **)error
