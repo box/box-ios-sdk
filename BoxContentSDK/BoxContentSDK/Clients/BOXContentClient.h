@@ -265,20 +265,24 @@ extern NSString *const BOXContentClientBackgroundTempFolder;
  *
  * @return NSArray of associateIds, nil if error
  */
-+ (NSArray <NSString *> *)associateIdsOfBackgroundSessionId:(NSString *)backgroundSessionId userId:(NSString *)userId error:(NSError **)error;
++ (NSArray <NSString *> * _Nullable)associateIdsOfBackgroundSessionId:(NSString * _Nonnull)backgroundSessionId
+                                                               userId:(NSString * _Nonnull)userId
+                                                                error:(NSError * _Nullable * _Nullable)error;
 
 /**
  * Clean up background session from cache and invalidate it if possible,
  * i.e. if the background session to be cleaned up is not the current
  * background session and has no pending tasks
  *
+ * @param userID    userID that this session belongs to
  * @param backgroundSessionID   background session ID to clean up
  * @param error error cleaning up this background session
  *
  * @return YES if successfully clean up, NO otherwise
 */
-+ (BOOL)cleanUpBackgroundSessionIfPossibleGivenID:(NSString *)backgroundSessionID
-                                            error:(NSError **)error;
++ (BOOL)cleanUpBackgroundSessionIfPossibleGivenUserID:(NSString *)userID
+                                  backgroundSessionID:(NSString *)backgroundSessionID
+                                                error:(NSError **)error;
 
 /**
  * Background session ID of background session
