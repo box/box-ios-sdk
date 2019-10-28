@@ -284,17 +284,6 @@
 - (BOOL)isSessionTaskCompletedForUserId:(NSString *)userId associateId:(NSString *)associateId;
 
 /**
- * Check if a background session is valid, i.e. exists for a userId
- *
- * @param userID            Id of user
- * @param backgroundSessionID       Id of background session
- *
- * @return YES if valid, NO if not
- */
-- (BOOL)isBackgroundSessionValidGivenUserID:(NSString * _Nonnull)userID
-                        backgroundSessionID:(NSString * _Nonnull)backgroundSessionID;
-
-/**
  * Clean up on-going session tasks' cached info of backgroundSessionId.
  * This does not clean up info relating to user and completed cached info, which
  * can be done using deleteCachedInfoForUserId:associateId:error
