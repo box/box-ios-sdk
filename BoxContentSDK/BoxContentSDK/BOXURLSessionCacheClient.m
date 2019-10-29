@@ -10,6 +10,7 @@
 #import "BOXContentSDKConstants.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 
 @implementation BOXURLSessionTaskCachedInfo
@@ -91,9 +92,23 @@
                 BOXAssert(success, @"Failed to create cacheDir %@ with error %@", cacheDir, error);
             }
             self.cacheDir = cacheDir;
+            os_log(OS_LOG_DEFAULT, "******SC: root cacheDir %{public}@", cacheDir);
+            [self debugPrintDir:cacheRootDir];
         }
     }
     return self;
+}
+
+- (void)debugPrintDir:(NSString *)dir
+{
+    NSError *error = nil;
+    NSString *paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:&error];
+    os_log(OS_LOG_DEFAULT, "******SC: debugPrintDir dir %{public}@: %{public}@", dir.lastPathComponent, paths);
+
+    for (NSString *path in paths) {
+        NSString *newPath = [dir stringByAppendingPathComponent:path];
+        [self debugPrintDir:newPath];
+    }
 }
 
 - (BOOL)cacheUserId:(NSString *)userId
