@@ -578,7 +578,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
 
     // Check if the background session to clean up is the current background session
     if ([backgroundSessionID isEqualToString:[self backgroundSessionIdentifier]]) {
-        if (!error) {
+        if (error != nil) {
             *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                 code:BOXContentSDKURLSessionCannotCleanUpCurrentBackgroundSession
                                             userInfo:nil];
@@ -589,7 +589,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     // Check if there are more active tasks
     @synchronized (self.backgroundSessionIdToSessionTask) {
         if (self.backgroundSessionIdToSessionTask[backgroundSessionID].count > 0) {
-            if (!error) {
+            if (error != nil) {
                 *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                     code:BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithActiveTasks
                                                 userInfo:nil];
@@ -612,7 +612,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                                  userId:userID
                                                                   error:error];
         if (associateIDs.count > 0) {
-            if (!error) {
+            if (error != nil) {
                 *error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain
                                                     code:BOXContentSDKURLSessionCannotCleanUpBackgroundSessionWithTasks
                                                 userInfo:nil];
