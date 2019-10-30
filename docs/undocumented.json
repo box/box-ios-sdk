@@ -1,170 +1,23 @@
 {
   "warnings": [
     {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIAuthError.swift",
-      "line": 9,
-      "symbol": "BoxAPIAuthErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIAuthError.swift",
-      "line": 11,
-      "symbol": "BoxAPIAuthErrorEnum.customValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIAuthError.swift",
-      "line": 28,
-      "symbol": "BoxAPIAuthErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIAuthError.swift",
-      "line": 36,
-      "symbol": "BoxAPIAuthError.apiAuthMessage",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIAuthError.swift",
-      "line": 44,
-      "symbol": "BoxAPIAuthError.getDictionary()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 11,
-      "symbol": "BoxAPIErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
       "line": 13,
-      "symbol": "BoxAPIErrorEnum.customValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 30,
-      "symbol": "BoxAPIErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 38,
-      "symbol": "BoxAPIError.apiMessage",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 39,
       "symbol": "BoxAPIError.request",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 40,
+      "line": 14,
       "symbol": "BoxAPIError.response",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxAPIError.swift",
-      "line": 101,
+      "line": 74,
       "symbol": "BoxAPIError.getDictionary()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 10,
-      "symbol": "BoxCodingErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 12,
-      "symbol": "BoxCodingErrorEnum.customValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 29,
-      "symbol": "BoxCodingErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 37,
-      "symbol": "BoxCodingError.codingMessage",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 38,
-      "symbol": "BoxCodingError.key",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxCodingError.swift",
-      "line": 47,
-      "symbol": "BoxCodingError.getDictionary()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 11,
-      "symbol": "BoxNetworkErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 13,
-      "symbol": "BoxNetworkErrorEnum.test",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 14,
-      "symbol": "BoxNetworkErrorEnum.customValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 36,
-      "symbol": "BoxNetworkErrorEnum",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 45,
-      "symbol": "BoxNetworkError.networkMessage",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxNetworkError.swift",
-      "line": 53,
-      "symbol": "BoxNetworkError.getDictionary()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -178,48 +31,195 @@
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
       "line": 13,
-      "symbol": "BoxSDKErrorEnum.customValue(_:)",
+      "symbol": "BoxSDKErrorEnum.clientDestroyed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 14,
+      "symbol": "BoxSDKErrorEnum.invalidURL(urlString:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 15,
+      "symbol": "BoxSDKErrorEnum.notFound(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 16,
+      "symbol": "BoxSDKErrorEnum.instanceDeallocated(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 17,
+      "symbol": "BoxSDKErrorEnum.keychainDataConversionError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 18,
+      "symbol": "BoxSDKErrorEnum.keychainNoValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 19,
+      "symbol": "BoxSDKErrorEnum.keychainUnhandledError(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 20,
+      "symbol": "BoxSDKErrorEnum.rateLimitMaxRetries",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 21,
+      "symbol": "BoxSDKErrorEnum.typeMismatch(key:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 22,
+      "symbol": "BoxSDKErrorEnum.valueMismatch(key:value:acceptedValues:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 23,
+      "symbol": "BoxSDKErrorEnum.invalidValueFormat(key:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 24,
+      "symbol": "BoxSDKErrorEnum.notPresent(key:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 25,
+      "symbol": "BoxSDKErrorEnum.representationCreationFailed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 26,
+      "symbol": "BoxSDKErrorEnum.tokenStoreFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 27,
+      "symbol": "BoxSDKErrorEnum.tokenRetrieval",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 28,
+      "symbol": "BoxSDKErrorEnum.invalidOAuthRedirectConfiguration",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 29,
+      "symbol": "BoxSDKErrorEnum.invalidOAuthState",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
       "line": 30,
+      "symbol": "BoxSDKErrorEnum.unauthorizedAccess",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 31,
+      "symbol": "BoxSDKErrorEnum.refreshTokenNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 32,
+      "symbol": "BoxSDKErrorEnum.expiredToken",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 33,
+      "symbol": "BoxSDKErrorEnum.jwtAuthError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 34,
+      "symbol": "BoxSDKErrorEnum.customValue(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
+      "line": 121,
       "symbol": "BoxSDKErrorEnum",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
-      "line": 38,
+      "line": 129,
       "symbol": "BoxSDKError.errorType",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
-      "line": 39,
+      "line": 130,
       "symbol": "BoxSDKError.message",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
-      "line": 40,
+      "line": 131,
       "symbol": "BoxSDKError.stackTrace",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
-      "line": 41,
+      "line": 132,
       "symbol": "BoxSDKError.error",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/box/sdk/box-swift-sdk/Sources/Core/Errors/BoxSDKError.swift",
-      "line": 50,
+      "line": 141,
       "symbol": "BoxSDKError.getDictionary()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

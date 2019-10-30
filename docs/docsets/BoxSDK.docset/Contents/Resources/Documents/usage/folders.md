@@ -107,7 +107,7 @@ Delete Folder
 -------------
 
 To delete a folder, call
-[`client.folders.delete(folderId:recursive:completion:)`][delete-folder]
+[`client.folders.delet(folderId:recursive:completion:)`][delete-folder]
 with the ID of the folder to delete.  By default, the folder will only be deleted if it is empty and has no
 items in it; if you wish to delete all the items in the folder as well, pass `recursive: true`.
 
