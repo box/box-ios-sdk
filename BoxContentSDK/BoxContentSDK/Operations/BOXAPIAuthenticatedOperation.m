@@ -12,6 +12,7 @@
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
 #import "BOXAbstractSession.h"
+#import <os/log.h>
 
 #define WWW_AUTHENTICATE_HEADER           (@"WWW-Authenticate")
 
@@ -54,6 +55,7 @@
 
 - (void)handleExpiredAccessToken
 {
+    os_log(OS_LOG_DEFAULT, "*****Op: handleExpiredAccessToken %{public}@", self.APIRequest.URL);
     // We rely on NSNotifications sent by performRefreshTokenGrant in this case so we're not setting a completion-block.
     [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
 }

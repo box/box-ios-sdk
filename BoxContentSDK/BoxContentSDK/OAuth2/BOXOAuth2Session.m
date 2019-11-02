@@ -19,6 +19,7 @@
 #import "BOXAbstractSession_Private.h"
 #import "BOXContentClient.h"
 #import "BOXURLRequestSerialization.h"
+#import <os/log.h>
 
 #define keychainRefreshTokenKey @"refresh_token"
 
@@ -221,7 +222,10 @@
     //This can happen in a race condition where multiple requests fail with the same expired access token
     //and they try to refresh at the same time, the first successful one will update the shared session
     //with new accessToken and refreshToken that subsequent requests can use.
-    NSString *accessToken = self.accessToken;
+    NSString *accessToken = self.accessToken;//synchronize this
+    NSString *refreshToken = self.refreshToken;
+
+    os_log(OS_LOG_DEFAULT, "*****OAuthSess: start refresh with expiredAccessToken %{pulic}@, current access %{public}@, refresh %{public}@", expiredAccessToken, self.accessToken, self.refreshToken);
     if (accessToken.length > 0 && ![accessToken isEqualToString:expiredAccessToken]) {
         if (block) {
             block(self, nil);
@@ -231,10 +235,11 @@
 
     NSMutableDictionary *POSTParams = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                                       BOXAuthTokenRequestGrantTypeKey : BOXAuthTokenRequestGrantTypeRefreshToken,
-                                                                                      BOXAuthTokenRequestRefreshTokenKey : self.refreshToken,
+                                                                                      BOXAuthTokenRequestRefreshTokenKey : refreshToken,
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
+    accessTokenExpirationTimestamp = [NSNumber numberWithInt:([[NSDate date] timeIntervalSince1970] + 5)];
     if (accessTokenExpirationTimestamp) {
         [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
     }
@@ -258,6 +263,7 @@
         self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
         NSTimeInterval accessTokenExpiresIn = [[JSONDictionary valueForKey:BOXAuthTokenJSONExpiresInKey] integerValue];
+        os_log(OS_LOG_DEFAULT, "*****OAuthSess: success, accessTokenExpiresIn %{public}@, access %{public}@, refresh %{public}@", [NSString stringWithFormat:@"%f", accessTokenExpiresIn], self.accessToken, self.refreshToken);
         if (accessTokenExpiresIn < 0) {
             // When requesting an access token that expires immediately, this value can sometimes be -1, which isn't ideal but is technically correct.
             BOXLog(@"Warning: accessTokenExpiresIn value is negative");
@@ -276,6 +282,7 @@
     
     operation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary)
     {
+        os_log(OS_LOG_DEFAULT, "*****OAuthSess: failed, error %{public}@", error);
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:BOXSessionDidReceiveRefreshErrorNotification
