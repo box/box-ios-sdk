@@ -12,6 +12,7 @@
 #import "BOXAbstractSession.h"
 #import "BOXDispatchHelper.h"
 #import "BOXHashHelper.h"
+#import <os/log.h>
 
 @interface BOXFileUploadNewVersionRequest ()
 
@@ -108,10 +109,17 @@
     // Unlike other operation types, BOXAPIMultipartToJSONOperation cannot be gracefully re-enqueued if the access token is expired (and can be refreshed).
     // In order to minimize the risk of a failed request due to an expired access token, more aggressively check if it is expired, and refresh it manually
     // beforehand if necessary.
+
+    NSString *accessToken = self.operation.session.accessToken;
+    int expiredIn = [self.operation.session.accessTokenExpiration timeIntervalSinceNow];
     if ([self.operation.session.accessTokenExpiration timeIntervalSinceNow] < 300) {
         // We rely on our operations layer to block the upload request until this is done, because
         // BOXParallelOAuth2Session cannot reliably call the completion block. (See TODO in [BOXParallelOAuth2Session:performRefreshTokenGrant:withCompletionBlock]
-        [self.operation.session performRefreshTokenGrant:self.operation.session.accessToken withCompletionBlock:nil];
+        NSString *accessToken = self.operation.session.accessToken;
+        os_log(OS_LOG_DEFAULT, "*****Op: !!!!perform token refresh for upload new version access token %{public}@, expiredIn %{public}@", accessToken, @(expiredIn));
+        [self.operation.session performRefreshTokenGrant:accessToken withCompletionBlock:nil];
+    } else {
+        os_log(OS_LOG_DEFAULT, "*****Op: don't refresh token for upload new version access token %{public}@, expiredIn %{public}@", accessToken, @(expiredIn));
     }
     
     if (progressBlock) {
