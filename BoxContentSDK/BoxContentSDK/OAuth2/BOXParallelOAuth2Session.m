@@ -82,7 +82,7 @@
                     withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
 
             BOOL notInvalid = ![self isInvalidGrantError:error];
-            os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!completed refresh expiredAccessToken %{public}@, notInvalidGrant %{public}@, error %{public}@", expiredAccessToken, notInvalid?@"YES":@"NO", error);
+            os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!completed refresh expiredAccessToken %{public}@, notInvalidGrant %{public}@, error %{public}@", expiredAccessToken, notInvalid?@"YES":@"NO", error ? error : @"nil");
             if (expiredAccessToken.length > 0 && error != nil && notInvalid) {
                 // If there was an error, remove from 'expiredOAuth2Tokens' so that we can try again. For example, if there was a network
                 // error, then we would not want to block ourselves from trying to refresh the tokens again later.

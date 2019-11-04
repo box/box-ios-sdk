@@ -112,7 +112,7 @@
 
     NSString *accessToken = self.operation.session.accessToken;
     int expiredIn = [self.operation.session.accessTokenExpiration timeIntervalSinceNow];
-    if ([self.operation.session.accessTokenExpiration timeIntervalSinceNow] < 300) {
+    if (expiredIn <= 0) {//} 300) {
         // We rely on our operations layer to block the upload request until this is done, because
         // BOXParallelOAuth2Session cannot reliably call the completion block. (See TODO in [BOXParallelOAuth2Session:performRefreshTokenGrant:withCompletionBlock]
         NSString *accessToken = self.operation.session.accessToken;

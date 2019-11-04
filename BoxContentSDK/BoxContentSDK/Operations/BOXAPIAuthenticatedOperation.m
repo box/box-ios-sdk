@@ -95,6 +95,7 @@
         }
         else
         {
+            os_log(OS_LOG_DEFAULT, "*****AuthOp: can't reenqueue, request failed op %{public}@ after expired token", self);
             errorCode = BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued;
         }
         self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:errorCode userInfo:nil];
