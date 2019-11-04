@@ -78,6 +78,7 @@
         // re-enqueue operation in the same queue referred to by the OAuth2 session if possible.
         if ([self canBeReenqueued] && self.timesReenqueued == 0)
         {
+            os_log(OS_LOG_DEFAULT, "*****AuthOp: reenqueue op %{public}@ after expired token", self);
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationWillBeClonedAndReenqueued userInfo:nil];
 
             BOXAPIJSONOperation *operationCopy = [self copy];
@@ -86,6 +87,7 @@
         }
         else
         {
+            os_log(OS_LOG_DEFAULT, "*****AuthOp: can't reenqueue, request failed op %{public}@ after expired token", self);
             self.error = [[NSError alloc] initWithDomain:BOXContentSDKErrorDomain code:BOXContentSDKAuthErrorAccessTokenExpiredOperationCannotBeReenqueued userInfo:nil];
         }
     }

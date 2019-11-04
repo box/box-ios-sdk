@@ -260,7 +260,7 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
-        [NSThread sleepForTimeInterval:8.0f];
+//        [NSThread sleepForTimeInterval:8.0f];
         self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
         self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
@@ -284,7 +284,7 @@
     
     operation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary)
     {
-        [NSThread sleepForTimeInterval:8.0f];
+//        [NSThread sleepForTimeInterval:8.0f];
         os_log(OS_LOG_DEFAULT, "*****OAuthSess: failed, error %{public}@", error);
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
