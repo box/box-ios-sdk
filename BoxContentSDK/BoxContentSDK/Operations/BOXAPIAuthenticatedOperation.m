@@ -57,7 +57,7 @@
 
 - (void)handleExpiredAccessToken
 {
-    os_log(OS_LOG_DEFAULT, "*****Op: handleExpiredAccessToken %{public}@", self.APIRequest.URL);
+    os_log(OS_LOG_DEFAULT, "*****Op: handleExpiredAccessToken %{public}@, baseRequestURL %{public}@", [self class], self.baseRequestURL.lastPathComponent);
     // We rely on NSNotifications sent by performRefreshTokenGrant in this case so we're not setting a completion-block.
     [self.session performRefreshTokenGrant:self.accessToken withCompletionBlock:nil];
 }

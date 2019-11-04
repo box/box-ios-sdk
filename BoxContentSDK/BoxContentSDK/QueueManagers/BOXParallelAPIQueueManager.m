@@ -13,7 +13,7 @@
 #import "BOXAPIMultipartToJSONOperation.h"
 #import "BOXLog.h"
 #import "BOXAPIAppUsersAuthOperation.h"
-
+#import <os/log.h>
 @interface BOXParallelAPIQueueManager ()
 
 @property (atomic, readwrite, assign) BOOL currentAccessTokenHasExpired;
@@ -74,6 +74,7 @@
             // hold a refernce to the pending authentication operation so it can be added
             // as a dependency to all APIOperations enqueued before it finishes
             [self.enqueuedAuthOperations addObject:operation];
+            os_log(OS_LOG_DEFAULT, "*****QueueManager: enqueue op %{public}@,\n #enqueuedAuthOperations %{public}@", operation, @([self.enqueuedAuthOperations count]));
 
             for (NSOperation *enqueuedOperation in self.globalQueue.operations)
             {

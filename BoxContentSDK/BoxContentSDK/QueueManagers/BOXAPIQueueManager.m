@@ -13,7 +13,7 @@
 #import "BOXAPIAppUsersAuthOperation.h"
 #import "BOXLog.h"
 #import "BOXAppUserSession.h"
-
+#import <os/log.h>
 /**
  * This internal extension provides a notification callback for completed
  * [BOXAPIOAuth2ToJSONOperations](BOXAPIOAuth2ToJSONOperation) and [BOXAPIAppAuthOperation](BOXAPIAppAuthOperation).
@@ -79,6 +79,7 @@
     {
         BOXAPIOperation *operation = (BOXAPIOperation *)notification.object;
         BOXLog(@"%@ completed. Removing from set of Auth dependencies", operation);
+        os_log(OS_LOG_DEFAULT, "*****QueueManager: AuthOperationDidComplete removing op %{public}@, from enqueuedAuthOperations %{public}@", operation, self.enqueuedAuthOperations);
         [self.enqueuedAuthOperations removeObject:operation];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:BOXAuthOperationDidCompleteNotification object:operation];
     }
