@@ -11,6 +11,7 @@
 #import "BOXLog.h"
 #import "BOXContentSDKConstants.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 @interface BOXParallelOAuth2Session ()
 
@@ -56,6 +57,7 @@
     {
         if ([self.expiredOAuth2Tokens containsObject:expiredAccessToken])
         {
+            os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!do not create op, return error alreadyInProgress expiredAccessToken %{public}@ in self.expiredOAuth2Tokens %{public}@ \n current access %{public}@, refresh %{public}@", expiredAccessToken, self.expiredOAuth2Tokens, self.accessToken, self.refreshToken);
             // Only attempt to refresh the token if this is the first time this access
             // token has expired
             
@@ -70,6 +72,7 @@
         
         if (expiredAccessToken.length > 0)
         {
+            os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!record expiredAccessToken %{public}@\n self.expiredOAuth2Tokens %{public}@", expiredAccessToken, self.expiredOAuth2Tokens);
             [self.expiredOAuth2Tokens addObject:expiredAccessToken];
         }
         
@@ -77,11 +80,16 @@
              newAccessTokenExpirationAt:accessTokenExpirationTimestamp
             newRefreshTokenExpirationAt:refreshTokenExpirationTimestamp
                     withCompletionBlock:^(BOXOAuth2Session *session, NSError *error) {
-            if (expiredAccessToken.length > 0 && error != nil && ![self isInvalidGrantError:error]) {
+
+            BOOL notInvalid = ![self isInvalidGrantError:error];
+            os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!completed refresh expiredAccessToken %{public}@, notInvalidGrant %{public}@, error %{public}@", expiredAccessToken, notInvalid?@"YES":@"NO", error);
+            if (expiredAccessToken.length > 0 && error != nil && notInvalid) {
                 // If there was an error, remove from 'expiredOAuth2Tokens' so that we can try again. For example, if there was a network
                 // error, then we would not want to block ourselves from trying to refresh the tokens again later.
                 // The exception to this is if we get 'invalid_grant' in which case the token is not just expired, but is just dead. In that
                 // case, we don't want to ever try refreshing that again.
+
+                os_log(OS_LOG_DEFAULT, "*****ParOAuthSess: !!!removed expiredAccessToken %{public}@, current access %{public}@, refresh %{public}@\n self.expiredOAuth2Tokens %{public}@", expiredAccessToken, self.accessToken, self.refreshToken, self.expiredOAuth2Tokens);
                 [self.expiredOAuth2Tokens removeObject:expiredAccessToken];
             }
                         

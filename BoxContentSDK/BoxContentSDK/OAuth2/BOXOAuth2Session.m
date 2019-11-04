@@ -225,8 +225,9 @@
     NSString *accessToken = self.accessToken;//synchronize this
     NSString *refreshToken = self.refreshToken;
 
-    os_log(OS_LOG_DEFAULT, "*****OAuthSess: start refresh with expiredAccessToken %{pulic}@, current access %{public}@, refresh %{public}@", expiredAccessToken, self.accessToken, self.refreshToken);
+    os_log(OS_LOG_DEFAULT, "*****OAuthSess: before creating op, check if expiredAccessToken %{pulic}@ has changed current access %{public}@, refresh %{public}@", expiredAccessToken, self.accessToken, self.refreshToken);
     if (accessToken.length > 0 && ![accessToken isEqualToString:expiredAccessToken]) {
+        os_log(OS_LOG_DEFAULT, "*****OAuthSess: !!!no op needed to refresh expiredAccessToken  %{pulic}@ != current access %{public}@, refresh %{public}@", expiredAccessToken, self.accessToken, self.refreshToken);
         if (block) {
             block(self, nil);
         }
@@ -259,6 +260,7 @@
     
     operation.success = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *JSONDictionary)
     {
+        [NSThread sleepForTimeInterval:8.0f];
         self.accessToken = [JSONDictionary valueForKey:BOXAuthTokenJSONAccessTokenKey];
         self.refreshToken = [JSONDictionary valueForKey:BOXAuthTokenJSONRefreshTokenKey];
         
@@ -282,6 +284,7 @@
     
     operation.failure = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary)
     {
+        [NSThread sleepForTimeInterval:8.0f];
         os_log(OS_LOG_DEFAULT, "*****OAuthSess: failed, error %{public}@", error);
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error
                                                               forKey:BOXAuthenticationErrorKey];
