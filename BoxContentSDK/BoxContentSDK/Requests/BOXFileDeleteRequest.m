@@ -30,6 +30,8 @@
 
 @implementation BOXFileDeleteRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFileID:(NSString *)fileID
 {
     return [self initWithFileID:fileID isTrashed:NO];

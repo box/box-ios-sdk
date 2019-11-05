@@ -20,6 +20,8 @@
 
 @implementation BOXBookmarkUpdateRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithBookmarkID:(NSString *)bookmarkID
 {
     if (self = [super init]) {

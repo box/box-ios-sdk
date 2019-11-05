@@ -168,6 +168,8 @@ typedef void (^BOXAPIDataFailureBlock)(NSURLRequest *request, NSHTTPURLResponse 
  */
 @property (nonatomic, readwrite, copy) NSString *associateId;
 
+@property (nonatomic, readwrite, assign) NSDate * _Nullable earliestBeginDate;
+
 /**
  * If true, operation's start will execute immediately on the current thread and not be put on a network thread. This also removes
  *  the automatic re-enqueuing of a failed operation, thus, provides the caller further control in handling of failed operations.

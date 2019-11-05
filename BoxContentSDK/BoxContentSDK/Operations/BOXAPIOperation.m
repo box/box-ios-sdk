@@ -134,6 +134,8 @@ static BOOL BoxOperationStateTransitionIsValid(BOXAPIOperationState fromState, B
         // (see BOXAPIDataOperation as an example). Some subclasses will not use this object and for
         // correct processing it needs to remain nil rather than an empty mutable data object.
         _responseData = nil;
+        _associateId = nil;
+        _earliestBeginDate = nil;
 
         self.state = BOXAPIOperationStateReady;
     }

@@ -25,6 +25,8 @@
 
 @implementation BOXFolderDeleteRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     return [self initWithFolderID:folderID isTrashed:NO];

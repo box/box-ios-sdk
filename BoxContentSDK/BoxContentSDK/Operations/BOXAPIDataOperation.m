@@ -105,7 +105,12 @@
 
     NSError *error = nil;
     if (self.destinationPath != nil && self.associateId != nil) {
-        sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self userId:userId associateId:self.associateId error:&error];
+        sessionTask = [self.session.urlSessionManager backgroundDownloadTaskWithRequest:self.APIRequest
+                                                                           taskDelegate:self
+                                                                                 userId:userId
+                                                                            associateId:self.associateId
+                                                                      earliestBeginDate:self.earliestBeginDate
+                                                                                  error:&error];
     } else {
         sessionTask = [self.session.urlSessionManager foregroundDownloadTaskWithRequest:self.APIRequest taskDelegate:self];
         if (sessionTask == nil) {

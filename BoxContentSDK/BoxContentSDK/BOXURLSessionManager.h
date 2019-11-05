@@ -174,6 +174,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                                    taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
                                                          userId:(NSString *)userId
                                                     associateId:(NSString *)associateId
+                                              earliestBeginDate:(NSDate *)earliestBeginDate
                                                           error:(NSError **)error;
 
 /**
@@ -199,6 +200,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
                                                taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
                                                      userId:(NSString *)userId
                                                 associateId:(NSString *)associateId
+                                          earliestBeginDate:(NSDate *)earliestBeginDate
                                                       error:(NSError **)error;
 
 /**

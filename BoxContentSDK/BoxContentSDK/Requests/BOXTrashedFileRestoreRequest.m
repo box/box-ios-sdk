@@ -18,6 +18,8 @@
 
 @implementation BOXTrashedFileRestoreRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFileID:(NSString *)fileID
 {
     if (self = [super init]) {

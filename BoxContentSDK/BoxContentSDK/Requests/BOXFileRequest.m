@@ -24,6 +24,8 @@
 
 @implementation BOXFileRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFileID:(NSString *)fileID
 {
     return [self initWithFileID:fileID isTrashed:NO];

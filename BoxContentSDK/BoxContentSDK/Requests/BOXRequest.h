@@ -78,6 +78,7 @@ This is a required value for performing the request in the background.
 Please refer to specific requests for additional required properties to perform as background task.
 */
 - (NSString *)associateID;
+@property (nonatomic, readwrite, strong) NSDate * _Nullable earliestBeginDate;
 
 @end
 

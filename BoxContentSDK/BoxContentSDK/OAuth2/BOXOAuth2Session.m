@@ -240,7 +240,7 @@
                                                                                       BOXAuthTokenRequestClientIDKey : self.clientID,
                                                                                       BOXAuthTokenRequestClientSecretKey : self.clientSecret,
                                                                                       }];
-    accessTokenExpirationTimestamp = [NSNumber numberWithInt:([[NSDate date] timeIntervalSince1970] + 5)];
+//    accessTokenExpirationTimestamp = [NSNumber numberWithInt:([[NSDate date] timeIntervalSince1970] + 25)];
     if (accessTokenExpirationTimestamp) {
         [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
     }

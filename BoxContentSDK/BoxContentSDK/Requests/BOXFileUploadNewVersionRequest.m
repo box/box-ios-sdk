@@ -25,6 +25,8 @@
 
 @implementation BOXFileUploadNewVersionRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFileID:(NSString *)fileID localPath:(NSString *)localPath
 {
     if (self = [super init]) {
