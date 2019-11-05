@@ -32,6 +32,8 @@
 
 @implementation BOXFolderRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     return [self initWithFolderID:folderID associateID:nil];

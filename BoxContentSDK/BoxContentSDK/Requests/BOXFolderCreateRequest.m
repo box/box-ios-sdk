@@ -30,6 +30,8 @@
 
 @implementation BOXFolderCreateRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFolderName:(NSString *)folderName parentFolderID:(NSString *)parentFolderID
 {
     return [self initWithFolderName:folderName

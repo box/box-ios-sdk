@@ -242,7 +242,7 @@
                                                                                       }];
 
     // The following 2 POSTParams are undocumented features of the /token endpoint.
-    accessTokenExpirationTimestamp = [NSNumber numberWithInt:([[NSDate date] timeIntervalSince1970] + 5)];
+//    accessTokenExpirationTimestamp = [NSNumber numberWithInt:([[NSDate date] timeIntervalSince1970] + 5)];
     if (accessTokenExpirationTimestamp) {
         [POSTParams setObject:accessTokenExpirationTimestamp forKey:BOXAuthTokenRequestAccessTokenExpiresAtKey];
     }

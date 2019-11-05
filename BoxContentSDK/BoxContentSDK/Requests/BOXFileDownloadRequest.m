@@ -19,6 +19,8 @@
 
 @implementation BOXFileDownloadRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithLocalDestination:(NSString *)destinationPath
                                   fileID:(NSString *)fileID;
 {

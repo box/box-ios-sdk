@@ -36,6 +36,8 @@
 
 @implementation BOXItemSetCollectionsRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithItemID:(NSString *)itemID
                  collectionIDs:(NSArray *)collectionIDs
                       resource:(NSString *)resource

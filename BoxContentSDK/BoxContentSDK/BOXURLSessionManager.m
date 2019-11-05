@@ -9,6 +9,7 @@
 #import "BOXURLSessionManager.h"
 #import "BOXLog.h"
 #import "BOXContentSDKErrors.h"
+#import <os/log.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -456,6 +457,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                    taskDelegate:(id <BOXURLSessionDownloadTaskDelegate>)taskDelegate
                                                          userId:(NSString *)userId
                                                     associateId:(NSString *)associateId
+                                              earliestBeginDate:(NSDate *)earliestBeginDate
                                                           error:(NSError **)error
 {
     if (request == nil || taskDelegate == nil || userId == nil || associateId == nil) {
@@ -467,6 +469,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                 taskDelegate:taskDelegate
                                                       userId:userId
                                                  associateId:associateId
+                                           earliestBeginDate:earliestBeginDate
                                                        error:error];
     if ([task isKindOfClass:[NSURLSessionDownloadTask class]]) {
         return (NSURLSessionDownloadTask *) task;
@@ -480,6 +483,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                taskDelegate:(id <BOXURLSessionUploadTaskDelegate>)taskDelegate
                                                      userId:(NSString *)userId
                                                 associateId:(NSString *)associateId
+                                          earliestBeginDate:(NSDate *)earliestBeginDate
                                                       error:(NSError **)error
 {
     if (request == nil || fileURL == nil || taskDelegate == nil || userId == nil || associateId == nil) {
@@ -491,6 +495,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                                 taskDelegate:taskDelegate
                                                       userId:userId
                                                  associateId:associateId
+                                           earliestBeginDate:earliestBeginDate
                                                        error:error];
     if ([task isKindOfClass:[NSURLSessionUploadTask class]]) {
         return (NSURLSessionUploadTask *) task;
@@ -740,6 +745,7 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
                                    taskDelegate:(id <BOXURLSessionTaskDelegate>)taskDelegate
                                          userId:(NSString *)userId
                                     associateId:(NSString *)associateId
+                              earliestBeginDate:(NSDate *)earliestBeginDate
                                           error:(NSError **)outError
 {
     if (self.didFinishSettingUpBackgroundSession == NO) {
@@ -793,6 +799,11 @@ static NSString *backgroundSessionIdentifierForMainApp = @"com.box.BOXURLSession
     }
 
     if (sessionTask != nil) {
+        if (@available(iOS 11.0, *)) {
+            if (earliestBeginDate != nil) {
+                sessionTask.earliestBeginDate = earliestBeginDate;
+            }
+        }
         BOOL success = [self persistBackgroundSessionTaskWithSessionId:backgroundSessionId
                                                            sessionTask:sessionTask
                                                           taskDelegate:taskDelegate
@@ -1046,6 +1057,16 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 #pragma mark - NSURLSessionTaskDelegate
+
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+                        willBeginDelayedRequest:(NSURLRequest *)request
+                              completionHandler:(void (^)(NSURLSessionDelayedRequestDisposition disposition, NSURLRequest * _Nullable newRequest))completionHandler
+API_AVAILABLE(ios(11.0))
+{
+    os_log(OS_LOG_DEFAULT, "*****SM: will begin delay req task %{public}@ %{public}@", task, request);
+    completionHandler(NSURLSessionDelayedRequestContinueLoading, nil);
+}
 
 /* Sent periodically to notify the delegate of upload progress.  This
  * information is also available as properties of the task.

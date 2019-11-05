@@ -19,6 +19,8 @@
 
 @implementation BOXFileUpdateRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFileID:(NSString *)fileID
 {
     if (self = [super init]) {

@@ -26,6 +26,8 @@
 
 @implementation BOXFileUploadRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithName:(NSString *)fileName
               targetFolderID:(NSString *)folderID
 {

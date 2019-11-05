@@ -15,6 +15,8 @@
 
 @implementation BOXTrashedFolderRestoreRequest
 
+@synthesize earliestBeginDate;
+
 - (instancetype)initWithFolderID:(NSString *)folderID
 {
     if (self = [super init]) {
