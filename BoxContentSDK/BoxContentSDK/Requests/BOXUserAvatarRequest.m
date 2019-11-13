@@ -71,25 +71,6 @@
 }
 
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
-                            cached:(BOXImageBlock)cacheBlock
-                         refreshed:(BOXImageBlock)refreshBlock
-{
-    if (cacheBlock) {
-        if ([self.cacheClient respondsToSelector:@selector(retrieveCacheForUserAvatarRequest:completion:)]) {
-            [self.cacheClient retrieveCacheForUserAvatarRequest:self
-                                                     completion:cacheBlock];
-        } else {
-            cacheBlock(nil, nil);
-        }
-    }
-    
-    [self performRequestWithProgress:progressBlock
-                          completion:refreshBlock];
-    
-
-}
-
-- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
                         completion:(BOXImageBlock)completionBlock
 {
     if (completionBlock) {

@@ -14,10 +14,6 @@
 - (instancetype)initWithUserID:(NSString *)userID;
 
 - (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
-                            cached:(BOXImageBlock)cacheBlock
-                         refreshed:(BOXImageBlock)completionBlock;
-
-- (void)performRequestWithProgress:(BOXProgressBlock)progressBlock
                         completion:(BOXImageBlock)completionBlock;
 
 @end
