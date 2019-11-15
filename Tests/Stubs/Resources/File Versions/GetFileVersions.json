@@ -1,0 +1,41 @@
+{
+    "total_count": 2,
+    "entries": [
+        {
+            "type": "file_version",
+            "id": "11111",
+            "sha1": "fcd25519f7190f6d0a06d6ce03e933d3d8270851",
+            "name": "Test.pdf",
+            "size": 26179512,
+            "created_at": "2018-11-16T14:57:00-08:00",
+            "modified_at": "2018-11-16T14:57:04-08:00",
+            "modified_by": {
+                "type": "user",
+                "id": "12345",
+                "name": "Test User",
+                "login": "test@user.com"
+            },
+            "trashed_at": null,
+            "purged_at": null
+        },
+        {
+            "type": "file_version",
+            "id": "22222",
+            "sha1": "fcd26219f7190f6d0a06d6ce03e933d3d8270851",
+            "name": "Test2.pdf",
+            "size": 26179512,
+            "created_at": "2018-11-16T14:53:44-08:00",
+            "modified_at": "2018-11-16T14:53:45-08:00",
+            "modified_by": {
+                "type": "user",
+                "id": "12345",
+                "name": "Test User",
+                "login": "test@user.com"
+            },
+            "trashed_at": null,
+            "purged_at": null
+        }
+    ],
+    "limit": 1000,
+    "offset": 0
+}

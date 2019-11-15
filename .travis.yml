@@ -1,0 +1,93 @@
+language: objective-c
+osx_image: xcode11
+branches:
+  only:
+    - master
+cache:
+  directories:
+    - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
+    - Carthage
+    - vendor/bundle
+
+before_install:
+  - gem update --system
+  - gem install bundler
+  - bundle install --path vendor/bundle
+  - gem install xcpretty
+  - brew outdated carthage || brew upgrade carthage
+  - brew outdated swiftlint || brew upgrade swiftlint
+  - gem install xcode-install
+  - echo "" | xcversion simulators --install="iOS $IOS_VERSION"
+
+install:
+  - gem install jazzy
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+    - WORKSPACE=BoxSDK.xcworkspace
+    - IOS_FRAMEWORK_SCHEME="BoxSDK-iOS"
+    - OSX_FRAMEWORK_SCHEME="BoxSDK-macOS"
+    - TVOS_FRAMEWORK_SCHEME="BoxSDK-tvOS"
+    - WATCHOS_FRAMEWORK_SCHEME="BoxSDK-watchOS"
+    - TEST_APP_SCHEME="TestApp"
+  matrix:
+    - IOS_VERSION="12.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone XS"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+    - IOS_VERSION="11.4" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone X"                   SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+
+before_script:
+  - sh scripts/bootstrap
+
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - jazzy
+
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES -enableCodeCoverage YES test | xcpretty -c;
+  - swiftlint
+
+
+jobs:
+  include:
+# deploy:
+    # provider:     pages
+    # skip-cleanup: true
+    # github-token: "GitHub Personal Access Token"
+    # keep-history: true
+    # local-dir:    docs
+    # on:
+      # branch:     master
+
+    # - stage: Danger
+    #   script: bundle exec danger
+    # - stage: Pod lib lint
+    #   script: bundle exec pod lib lint --verbose --allow-warnings
+    # - stage: Deploy Github
+    #   script: skip
+    #   before_deploy:
+    #     - carthage build --no-skip-current --cache-builds
+    #     - carthage archive BoxSDK
+    #   deploy:
+    #     - provider: releases
+    #       api_key:
+    #         secure: # https://docs.travis-ci.com/user/deployment/releases/
+    #       file:
+    #         - BoxSDK.framework.zip
+    #       skip_cleanup: true
+    #       overwrite: true
+    #       on:
+    #         repo: box/box-swift-sdk
+    #         tags: true
+    # - stage: Deploy Cocoapods
+    #   script: skip
+    #   deploy:
+    #     - provider: script # https://fuller.li/posts/automated-cocoapods-releases-with-ci/
+    #       script: bundle exec pod trunk push
+    #       skip_cleanup: true
+    #       on:
+    #         tags: true
+
+after_script:
+  - bundle exec slather

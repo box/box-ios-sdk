@@ -100,6 +100,9 @@
                 <a href="../Classes/Collaborator.html">Collaborator</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/Collaborator/CollaboratorType.html">– CollaboratorType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
               </li>
               <li class="nav-group-task">
@@ -220,13 +223,13 @@
                 <a href="../Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignmentItem/AssignmentItemType.html">– AssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/LegalHoldsModule.html">LegalHoldsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Lock.html">Lock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
@@ -247,13 +250,10 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+                <a href="../Classes/PagingIterator.html">PagingIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathCollection.html">PathCollection</a>
@@ -298,6 +298,9 @@
                 <a href="../Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/SharedItem/SharedItemType.html">– SharedItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
               </li>
               <li class="nav-group-task">
@@ -317,9 +320,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Task.html">Task</a>
@@ -481,6 +481,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PagingParameter.html">PagingParameter</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -720,9 +723,312 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC4list4name4type15createdByUserId6marker5limitAA18PaginationIteratorCyAA0C11PolicyEntryCGSSSg_AA0cQ4TypeOSgA2OSiSgtF"></a>
-                    <a name="//apple_ref/swift/Method/list(name:type:createdByUserId:marker:limit:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC4list4name4type15createdByUserId6marker5limitAA18PaginationIteratorCyAA0C11PolicyEntryCGSSSg_AA0cQ4TypeOSgA2OSiSgtF">list(name:type:createdByUserId:marker:limit:)</a>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC3get8policyId10completionySS_ys6ResultOyAA0C6PolicyCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/get(policyId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC3get8policyId10completionySS_ys6ResultOyAA0C6PolicyCAA0A8SDKErrorCGctF">get(policyId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves information about a retention policy</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span>
+    <span class="n">policyId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicy.html">RetentionPolicy</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Policy id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns either standard RetentionPolicy object or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients10completionySS_AA0C10PolicyTypeOSiSgAA011DispositionK0OSbSgARSayAA4UserCGSgys6ResultOyAA0cV0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/create(name:type:length:dispositionAction:canOwnerExtendRetention:areOwnersNotified:customNotificationRecipients:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients10completionySS_AA0C10PolicyTypeOSiSgAA011DispositionK0OSbSgARSayAA4UserCGSgys6ResultOyAA0cV0CAA0A8SDKErrorCGctF">create(name:type:length:dispositionAction:canOwnerExtendRetention:areOwnersNotified:customNotificationRecipients:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new retention policy.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a></span><span class="p">,</span>
+    <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">dispositionAction</span><span class="p">:</span> <span class="kt"><a href="../Enums/DispositionAction.html">DispositionAction</a></span><span class="p">,</span>
+    <span class="nv">canOwnerExtendRetention</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">areOwnersNotified</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">customNotificationRecipients</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/User.html">User</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicy.html">RetentionPolicy</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of retention policy to be created.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of retention policy.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>length</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The retention_length is the amount of time, in days, to apply the retention policy to the selected content in days.
+Do not specify for <code>indefinite</code> policies. Required for <code>finite</code> policies.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dispositionAction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If creating a finite policy, the disposition action can be <code>permanently_delete</code> or <code>remove_retention</code>.
+For <code>indefinite</code> policies, disposition action must be <code>remove_retention</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>canOwnerExtendRetention</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Owner of a file will be allowed to extend the retention.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>areOwnersNotified</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Owner or Co-owner will get notified when a file is nearing expiration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customNotificationRecipients</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Notified users.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns either standard RetentionPolicy object or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgys6ResultOyAA0cO0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/update(policyId:name:dispositionAction:status:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgys6ResultOyAA0cO0CAA0A8SDKErrorCGctF">update(policyId:name:dispositionAction:status:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates existing retention policy.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span>
+    <span class="n">policyId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">dispositionAction</span><span class="p">:</span> <span class="kt"><a href="../Enums/DispositionAction.html">DispositionAction</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyStatus.html">RetentionPolicyStatus</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicy.html">RetentionPolicy</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Retention policy id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Updated name of retention policy.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dispositionAction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If updating a <code>finite</code> policy, the disposition action can be <code>permanently_delete</code> or <code>remove_retention</code>.
+For indefinite policies, disposition action must be remove_retention.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>status</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Used to <code>retire</code> a retention policy if status is set to <code>retired</code>. If not retiring a policy, do not include or set to null.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns either updated retention policy object or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC4list4name4type15createdByUserId6marker5limit10completionySSSg_AA0C10PolicyTypeOSgA2KSiSgys6ResultOyAA14PagingIteratorCyAA0cP5EntryCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/list(name:type:createdByUserId:marker:limit:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC4list4name4type15createdByUserId6marker5limit10completionySSSg_AA0C10PolicyTypeOSgA2KSiSgys6ResultOyAA14PagingIteratorCyAA0cP5EntryCGAA0A8SDKErrorCGctF">list(name:type:createdByUserId:marker:limit:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -742,8 +1048,9 @@
     <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">createdByUserId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicyEntry.html">RetentionPolicyEntry</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicyEntry.html">RetentionPolicyEntry</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -822,12 +1129,265 @@ If query parameters are given, only the retention policies that match the query 
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC13getAssignment12assignmentId10completionySS_ys6ResultOyAA0c6PolicyG0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/getAssignment(assignmentId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC13getAssignment12assignmentId10completionySS_ys6ResultOyAA0c6PolicyG0CAA0A8SDKErrorCGctF">getAssignment(assignmentId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves information about a retention policy assignment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAssignment</span><span class="p">(</span>
+    <span class="n">assignmentId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicyAssignment.html">RetentionPolicyAssignment</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Retention policy assignment ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Either the specified retention policy assignment will be returned upon success or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6assign8policyId015assignedContentH00fJ4Type12filterFields10completionySS_SSAA0c20PolicyAssignmentItemK0OSayAA19MetadataFieldFilterVGSgys6ResultOyAA0coP0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/assign(policyId:assignedContentId:assignContentType:filterFields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6assign8policyId015assignedContentH00fJ4Type12filterFields10completionySS_SSAA0c20PolicyAssignmentItemK0OSayAA19MetadataFieldFilterVGSgys6ResultOyAA0coP0CAA0A8SDKErrorCGctF">assign(policyId:assignedContentId:assignContentType:filterFields:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates new retention policy assignment to a content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">assign</span><span class="p">(</span>
+    <span class="n">policyId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">assignedContentId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">assignContentType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a></span><span class="p">,</span>
+    <span class="nv">filterFields</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/MetadataFieldFilter.html">MetadataFieldFilter</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicyAssignment.html">RetentionPolicyAssignment</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the retention policy to assign this content to.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assignedContentId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the content to assign the retention policy to. If assigning to an enterprise, no id should be provided.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assignContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of item policy is assigned to. The type can only be one of three attributes: enterprise, folder, or metadata_template.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filterFields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The array of metadata field filters</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns either new assignment upon success or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limit10completionySS_AA0C10PolicyTypeOSgSSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cN10AssignmentCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listAssignments(policyId:type:marker:limit:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limit10completionySS_AA0C10PolicyTypeOSgSSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cN10AssignmentCGAA0A8SDKErrorCGctF">listAssignments(policyId:type:marker:limit:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a list of all retention policy assignments associated with a specified retention policy.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listAssignments</span><span class="p">(</span>
+    <span class="n">policyId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicyAssignment.html">RetentionPolicyAssignment</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Retention policy id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the retention policy assignment to retrieve.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return. The default is 100.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns either a list of the retention policy assignments associated with the specified retention policy or an error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-30)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

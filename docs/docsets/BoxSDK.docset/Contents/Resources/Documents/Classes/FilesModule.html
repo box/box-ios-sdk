@@ -100,6 +100,9 @@
                 <a href="../Classes/Collaborator.html">Collaborator</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/Collaborator/CollaboratorType.html">– CollaboratorType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
               </li>
               <li class="nav-group-task">
@@ -220,13 +223,13 @@
                 <a href="../Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignmentItem/AssignmentItemType.html">– AssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/LegalHoldsModule.html">LegalHoldsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Lock.html">Lock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
@@ -247,13 +250,10 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+                <a href="../Classes/PagingIterator.html">PagingIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathCollection.html">PathCollection</a>
@@ -298,6 +298,9 @@
                 <a href="../Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/SharedItem/SharedItemType.html">– SharedItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
               </li>
               <li class="nav-group-task">
@@ -317,9 +320,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Task.html">Task</a>
@@ -481,6 +481,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PagingParameter.html">PagingParameter</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -1894,9 +1897,9 @@ attributes back; otherwise, the mini format is returned for each item by default
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSS_SSSgSiSgSaySSGSgtF"></a>
-                    <a name="//apple_ref/swift/Method/listCollaborations(forFile:marker:limit:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSS_SSSgSiSgSaySSGSgtF">listCollaborations(forFile:marker:limit:fields:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listCollaborations(forFile:marker:limit:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF">listCollaborations(forFile:marker:limit:fields:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1915,8 +1918,9 @@ attributes back; otherwise, the mini format is returned for each item by default
     <span class="n">forFile</span> <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Collaboration.html">Collaboration</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1986,9 +1990,9 @@ attributes back; otherwise, the mini format is returned for each item by default
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fieldsAA18PaginationIteratorCyAA7CommentCGSS_SiSgANSaySSGSgtF"></a>
-                    <a name="//apple_ref/swift/Method/listComments(forFile:offset:limit:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fieldsAA18PaginationIteratorCyAA7CommentCGSS_SiSgANSaySSGSgtF">listComments(forFile:offset:limit:fields:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listComments(forFile:offset:limit:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF">listComments(forFile:offset:limit:fields:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2007,8 +2011,9 @@ attributes back; otherwise, the mini format is returned for each item by default
     <span class="n">forFile</span> <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Comment.html">Comment</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Comment.html">Comment</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2082,9 +2087,9 @@ attributes back; otherwise, the mini format is returned for each item by default
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC9listTasks7forFile6fieldsAA18PaginationIteratorCyAA4TaskCGSS_SaySSGSgtF"></a>
-                    <a name="//apple_ref/swift/Method/listTasks(forFile:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fieldsAA18PaginationIteratorCyAA4TaskCGSS_SaySSGSgtF">listTasks(forFile:fields:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listTasks(forFile:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF">listTasks(forFile:fields:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2101,8 +2106,9 @@ attributes back; otherwise, the mini format is returned for each item by default
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listTasks</span><span class="p">(</span>
     <span class="n">forFile</span> <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2591,9 +2597,9 @@ Depending on the enterprise settings for this user, the item will either be actu
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fieldsAA18PaginationIteratorCyAA11FileVersionCGSS_SiSgANSaySSGSgtF"></a>
-                    <a name="//apple_ref/swift/Method/listVersions(fileId:offset:limit:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fieldsAA18PaginationIteratorCyAA11FileVersionCGSS_SiSgANSaySSGSgtF">listVersions(fileId:offset:limit:fields:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA11FileVersionCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listVersions(fileId:offset:limit:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA11FileVersionCGAA0A8SDKErrorCGctF">listVersions(fileId:offset:limit:fields:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2612,8 +2618,9 @@ Depending on the enterprise settings for this user, the item will either be actu
     <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/FileVersion.html">FileVersion</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/FileVersion.html">FileVersion</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -3639,9 +3646,9 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limitAA24OffsetPaginationIteratorCyAA0F15PartDescriptionVGSS_SiSgAMtF"></a>
-                    <a name="//apple_ref/swift/Method/listUploadSessionParts(sessionId:offset:limit:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limitAA24OffsetPaginationIteratorCyAA0F15PartDescriptionVGSS_SiSgAMtF">listUploadSessionParts(sessionId:offset:limit:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limit10completionySS_SiSgAIys6ResultOyAA14PagingIteratorCyAA0F15PartDescriptionVGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listUploadSessionParts(sessionId:offset:limit:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limit10completionySS_SiSgAIys6ResultOyAA14PagingIteratorCyAA0F15PartDescriptionVGAA0A8SDKErrorCGctF">listUploadSessionParts(sessionId:offset:limit:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3659,8 +3666,9 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listUploadSessionParts</span><span class="p">(</span>
     <span class="nv">sessionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/UploadPartDescription.html">UploadPartDescription</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/UploadPartDescription.html">UploadPartDescription</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -4353,9 +4361,9 @@ See <a href="https://developer.box.com/reference#representations">representation
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6markerAA18PaginationIteratorCyAA04FileF9RetentionCGSSSg_A2rA011DispositionL0OSg10Foundation4DateVSgAYSiSgARtF"></a>
-                    <a name="//apple_ref/swift/Method/listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6markerAA18PaginationIteratorCyAA04FileF9RetentionCGSSSg_A2rA011DispositionL0OSg10Foundation4DateVSgAYSiSgARtF">listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6marker10completionySSSg_A2nA011DispositionL0OSg10Foundation4DateVSgAUSiSgANys6ResultOyAA14PagingIteratorCyAA04FileF9RetentionCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6marker10completionySSSg_A2nA011DispositionL0OSg10Foundation4DateVSgAUSiSgANys6ResultOyAA14PagingIteratorCyAA04FileF9RetentionCGAA0A8SDKErrorCGctF">listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4378,8 +4386,9 @@ See <a href="https://developer.box.com/reference#representations">representation
     <span class="nv">dispositionBefore</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">dispositionAfter</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PaginationIterator.html">PaginationIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/FileVersionRetention.html">FileVersionRetention</a></span><span class="o">&gt;</span></code></pre>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/FileVersionRetention.html">FileVersionRetention</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -4499,7 +4508,7 @@ If optional parameters are given, only the file version retentions that match th
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-30)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

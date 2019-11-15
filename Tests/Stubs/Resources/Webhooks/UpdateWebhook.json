@@ -1,0 +1,19 @@
+{
+    "id": "4133",
+    "type": "webhook",
+    "target": {
+        "id": "1000605797",
+        "type": "folder"
+    },
+    "created_by": {
+        "type": "user",
+        "id": "2030392653",
+        "name": "John Q. Developer",
+        "login": "john2@example.net"
+    },
+    "created_at": "2016-05-04T18:51:17-07:00",
+    "address": "https://notification.example.net",
+    "triggers": [
+        "FILE.PREVIEWED", "FILE.DOWNLOADED"
+    ]
+}

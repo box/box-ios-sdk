@@ -1,0 +1,9 @@
+coverage_service: coveralls
+xcodeproj: ./BoxSDK.xcodeproj
+workspace: ./BoxSDK.xcworkspace
+scheme: BoxSDK-iOS
+configuration: Release
+ignore:
+  - Tests/*
+ci_service: travis_pro
+coverage_access_token: BanK4QAI5t80o95dlQLxEcAvs5ZUnQ6Zy

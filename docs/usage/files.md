@@ -70,8 +70,6 @@ client.files.update(fileId: "11111", name: "New file name.docx") { (result: Resu
 }
 ```
 
-<!-- TODO: Add link when jazzy docs are updated -->
-
 
 Upload File
 -----------
@@ -167,7 +165,6 @@ client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Vo
 
 [download-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctF
 
-<!-- TODO: Document delete file once it's implemented -->
 
 Copy File
 ---------

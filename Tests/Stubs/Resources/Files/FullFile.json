@@ -1,0 +1,273 @@
+{
+    "type": "file",
+    "id": "11111",
+    "etag": "2",
+    "sequence_id": "2",
+    "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+    "name": "script.js",
+    "extension": "js",
+    "description": "My test script",
+    "size": 33510,
+    "path_collection": {
+        "total_count": 2,
+        "entries": [
+            {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+            },
+            {
+                "type": "folder",
+                "id": "22222",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Test Folder"
+            }
+        ]
+    },
+    "comment_count": 0,
+    "created_at": "2018-02-27T10:57:08-08:00",
+    "modified_at": "2018-02-27T10:57:14-08:00",
+    "trashed_at": null,
+    "purged_at": null,
+    "content_created_at": "2017-10-09T15:09:01-07:00",
+    "content_modified_at": "2017-10-09T15:09:01-07:00",
+    "is_package": false,
+    "created_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "modified_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "owned_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "shared_link": {
+        "url": "https://app.box.com/s/vc35nxi6vid83lf8lh5xabtrwmiqiy7a",
+        "download_url": "https://app.box.com/shared/static/vc35nxi6vid83lf8lh5xabtrwmiqiy7a.js",
+        "vanity_url": null,
+        "effective_access": "company",
+        "effective_permission": "can_download",
+        "is_password_enabled": false,
+        "unshared_at": null,
+        "download_count": 0,
+        "preview_count": 0,
+        "access": "company",
+        "permissions": {
+            "can_preview": true,
+            "can_download": true
+        }
+    },
+    "parent": {
+        "type": "folder",
+        "id": "22222",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "Test Folder"
+    },
+    "item_status": "active",
+    "file_version": {
+        "type": "file_version",
+        "id": "44444",
+        "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe"
+    },
+    "version_number": "1",
+    "expires_at": null,
+    "permissions": {
+        "can_download": true,
+        "can_preview": true,
+        "can_upload": true,
+        "can_comment": true,
+        "can_rename": true,
+        "can_delete": true,
+        "can_share": true,
+        "can_set_share_access": true,
+        "can_invite_collaborator": true,
+        "can_annotate": false,
+        "can_view_annotations_all": true,
+        "can_view_annotations_self": true
+    },
+    "is_hide_collaborators_enabled": false,
+    "lock": {
+        "type": "lock",
+        "id": "55555",
+        "created_by": {
+            "type": "user",
+            "id": "33333",
+            "name": "Example User",
+            "login": "user@example.com"
+        },
+        "created_at": "2019-06-11T14:45:08-07:00",
+        "expires_at": "2019-06-12T14:45:08-07:00",
+        "is_download_prevented": true
+    },
+    "tags": [
+        "script"
+    ],
+    "allowed_shared_link_access_levels": [
+        "collaborators",
+        "open",
+        "company"
+    ],
+    "allowed_shared_link_permissions": [
+        "can_edit",
+        "can_download",
+        "can_preview"
+    ],
+    "shared_link_options": {
+        "default_link_expiration_in": 0,
+        "default_access_level": "company"
+    },
+    "collections": [
+        {
+            "type": "collection",
+            "id": "66666",
+            "name": "Favorites",
+            "collection_type": "favorites"
+        }
+    ],
+    "download_url": "https://dl.boxcloud.com/d/1/b1!CIUlLy92Az9HXGDgTXKu0pCqNhUgT7AuEwKVHa_-wliFDk2W-LLKrN-acMjpKBjig0pdUnQwgetiskBPkCtSugjsiNmJnFVmLU9CQPPWzR2A39b_zIKlwN3tx-R6NKpW9jheZG00SiSGol8tvGNIptSD_vZRlllvWpZZBeZ7eA3HekG1LhcPuUwwfuzMdroq-jqFYGCCdy7xO-ON43g1QVTGaK2hBZdN486k1Y92Vd5aWMO_Tvp-pkb1w_CD7d6QJ4E54jZmbnFN4BvoiL5bb9zsJ_oJ8T2T5ljmFudwPDXiHQxA9xoEgQwqJQoiGb6kLVk0Q9gsVfArVNzlEVw8JbBE7Fqhxk8kmWu3CMjnP_iw_OlI8tyJB2aGivQ788lYhtHXD0V2hGDxX51r2bappwmREdTWedJO0IsNjuHDzIyol9tiDnyj00UwvFd10msQxPwCOPKGtkfp1eMmGxXBTYycVJWpC5lr4Ghkag1VivTBBdwIfifFxPXBZxFaNroICK_Qpo_EZBUMzTnWsUx22ShrxcLpcmLbszJuGymCcNAY0rMKGE2T_tICsTDTXC-1XTEiAl3f8wa2WJ6hc0hZ-Iryik9hqUs0giBxKW87LQmQtKKEa4If7AIDn5QByhSiVpk7a9_NMkW_c02q2Y9us0mGuvClvx7EhWdxc0o-fxWhUT5jGd2BYCCcfLbhmdTBHgLAiCErOPa5ZVLzV-fq4Cx8Nzv-b2RJicdR-yLScrkG0GH8ZikmOZi1E9DBkkxppNBMknBvEGrQHutSDj10fLLJ5uUff6NPizzrMr9nE6gRXW8VP7Iknfud8AeVFJoVphFGfeUo3T_9SckrO4d3G8IsbWBcJQ_LzBs-nOVLWpOtIcYkT5DyB0zZQnvWAO8ckuf-H2tfziL_Xq5f9iQpLXVGGfo-uYQy11T4ECqpUZMeQjzORH0vAl3D6zV4ed7BC15ruF9CnXyYzxA9vxeLXjlmv4flKmm0h0t1gCyVQE1z-sh1lxp2JXklfXJFj7JDzew5Ma9Fs8tm5Ppnr0eliJ4GncIx7wPUzk1veouf9bJJLrm7MuyQ0OplsWKGFahfN_ti1dKATf2MH_wsJ7albm0JH7ZbhUrexDFSmxHdw-weQGc-6yuv-NtLQb2Z76rSy-dyv2LGtwwqCLwRH8es089aIwPINeNsCgj6BKtjqNtpJS-oOfXzt1qILfgWFW7Xyr5_0runBd63Yb61-51II3yPvDBn05wplsBKJcH7Cs49a83BAqh5aF-zKiSWZulM89IjsYhTVAVGpenIq9TS2eKqubkcl4ApVc_GZLRVv9wEslkWH8YqxV6TWOhTfx0irWLD7MaeUAgdsgfNc4w./download",
+    "authenticated_download_url": "https://dl.boxcloud.com/api/2.0/files/11111/content",
+    "expiring_embed_link": {
+        "url": "https://cloud.app.box.com/preview/expiring_embed/gvoct6FE!709ZEVbR4x5ugsUc9NOAfd9S9-g0YhPQ1hyoXrK4mwxMUS-qBIdaJmo9T3oHcA5McRG8jpHBDpWVy1fdq0S2Um3vbFve2MuU4F1c1Y8Mcwmb3nB1DMJt-3dp2kr-qBGAwGfQbZ2p_YVes0wsSXsr349Oaa3h8Vm2mda3Jgkj43FNV1MXWAvP0zJGRGn9eyYDsHUHdpnsWBsSseP7vG_Heq1cW5mqKNgxHg9QHI_rHrFPCyN8_jUv9FwPPoYc6PQIUshzSBCxuFd03wp-sRl5QbSvhG8Jb_iiv-8k8Uph02oOGi6bC_3mxeb9I2gH8A2j8RidCO9uOfmvCJBwS6YKbBRnZuyKWlTwmKMq9mZKe-15qm0xJpnir89hb520IsTVyMsM0JaamQxOYwmAwfel-t_4E4yL2S-NuaRtl91Jf6r6p_WhH-uxHTCCeb0IBtZUKiDW0AnxD3E5lkS_mrEhi8g_UDAueWEwVkMCWklGgsKqi0GtaDXMHjgbGSb-xj-svn6EtG8FYLjr8OHp9GAvUHeAQT9lTQAPPbFX7dzPt3tr2wzVU6ChT1NhyJo9uZeprwOHlWL8CvJxh-LYiXDx2KctFFnk84o8tK9Z1byloY9orhuwmrqt4cX-zB-gkpSdfQVeKsFsnbMMqIeQaAFk35hlskr4fo2Ds4s5Oe9zbqaOEku3O1WC5p2CWXX2cAvB3Ng4ER-m-QNQv4gfntHNIFfC-Bb9TlD96BwScJnTiL_SFZ60__dje0fW-AelG_qeZR9eE13TgAWmdEOb2N_-MjD0TZ6GR1WQFdOX6M767fs_j7GC27LZjEpjXhc6WBcu2byjq_GuZa2y_aR0lOr9LHYiYwDpdbh-zSLovgc5dJXLyUv_S4X8y5vuGIpCgwfiU3Ja_83AHv7Ew1z3tfkEXI6cithfGRe-ZRrGJ0--pFa0zJi-8NQr-0ZyxNSHdMcoY1uyCp7p3sLVBimfaqN9C-3qwZ6-1XHN8T_n70sDBXB34kZWPFlPF0oguMK079J4ZFZnY4xStW1qVzO2wkiaieVnFeP-hJ6_eC9StZ2iBjSGSlggZd5DyTY1wqPyFRJ7kvA0dMv_ftHY_FMuuqkbSFF-6lyBbwLZ5_xRida_OqZ1YT5LKg-IT7G6bWencUXZt8NoR-Ay5U8_ZEPNZsjizgsIRmtWVMq1LbOreBs8lfnWYeoavPCMmirlEQHBSMQumf5iKq..",
+        "token": {
+            "access_token": "1!D_MS3ZK4uj6TjLoFmW-BJp7igMpdUYvbwGd6W1jY5u6aIOxXXPvfMRKpKlIllBWCjbNaE8fFu4yQrfExZzjxDZRvj9UX7DVTG9HG0kXwYos3U-IJF6V61v1ZSp19akKRW0LJlK2QPfLF70ZBEHLlwjROmNZF7UKtM7opu7j8RMe5der7MiKtI-75Tm86dyUqKINa_Oc-mRuF7d4Qx3lwXPGveN28oiyqLquH8faV1M9mnRhCItKIlWi1owsx-L1vIHwl6J-fljjkqiBJfbaWYEJ87pvhUNodSD__KpsrnidZUzBQF8CUidpBGO6lu0493Cpc3DXSzL5VnGJgh242TVKZMOhtiFAYyER10ByXuAlPH1G74yY6Mzf638y7GNLepe7muKJKkBvcNpQzl42HIqvMDPUNEeBtEzGvh8VBIdHUJdrsJkcol_zVD6wSOkTEITa4WltDbrkIyZgEJ9m5TGxqmVD4s9pntzaI2RfUyWJ2z7QGrrzIbQ7WHr5tW9lsONdqkAwJt54rA3vphWNS0IcxnGTd6uzFGrzOyF3zuIHTm8owluuxoWCYBj1Lsl1qymvtKMB6mPdqxhGGpCT68Vyb9g35lepH-Qj2PzJLqAJ9vzzX2ec6MkO4WSSpoI4x5VhJbZR4idvHf3ePKr5aqDvsiNj2m5-0CCfVr9xENiznjFW4D9RBCMj5ZlHFWgzY0--n--DQm6sy7Vj2XZ7znbtneTUd19NJ6Sjb-oMQjIULL1gf0ByJ",
+            "expires_in": 3709,
+            "token_type": "bearer",
+            "restricted_to": [
+                {
+                    "scope": "base_preview",
+                    "object": {
+                        "type": "file",
+                        "id": "11111",
+                        "file_version": {
+                            "type": "file_version",
+                            "id": "44444",
+                            "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe"
+                        },
+                        "sequence_id": "2",
+                        "etag": "2",
+                        "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+                        "name": "script.js"
+                    }
+                },
+                {
+                    "scope": "item_download",
+                    "object": {
+                        "type": "file",
+                        "id": "11111",
+                        "file_version": {
+                            "type": "file_version",
+                            "id": "44444",
+                            "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe"
+                        },
+                        "sequence_id": "2",
+                        "etag": "2",
+                        "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+                        "name": "script.js"
+                    }
+                },
+                {
+                    "scope": "annotation_view_all",
+                    "object": {
+                        "type": "file",
+                        "id": "11111",
+                        "file_version": {
+                            "type": "file_version",
+                            "id": "44444",
+                            "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe"
+                        },
+                        "sequence_id": "2",
+                        "etag": "2",
+                        "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+                        "name": "script.js"
+                    }
+                },
+                {
+                    "scope": "annotation_view_self",
+                    "object": {
+                        "type": "file",
+                        "id": "11111",
+                        "file_version": {
+                            "type": "file_version",
+                            "id": "44444",
+                            "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe"
+                        },
+                        "sequence_id": "2",
+                        "etag": "2",
+                        "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+                        "name": "script.js"
+                    }
+                }
+            ]
+        }
+    },
+    "representations": {
+        "entries": [
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "1024x1024",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/11111/versions/44444/representations/png_paged_1024x1024"
+                }
+            },
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "2048x2048",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/11111/versions/44444/representations/png_paged_2048x2048"
+                }
+            },
+            {
+                "representation": "pdf",
+                "properties": {},
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/11111/versions/44444/representations/pdf"
+                }
+            },
+            {
+                "representation": "extracted_text",
+                "properties": {},
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/11111/versions/44444/representations/extracted_text"
+                }
+            },
+            {
+                "representation": "text",
+                "properties": {},
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/11111/versions/44444/representations/text"
+                }
+            }
+        ]
+    },
+    "watermark_info": {
+        "is_watermarked": false
+    },
+    "has_collaborations": false,
+    "is_externally_owned": false,
+    "allowed_invitee_roles": [
+        "editor",
+        "viewer"
+    ],
+    "default_invitee_role": "editor"
+}

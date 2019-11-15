@@ -1,0 +1,16 @@
+{
+    "type": "group",
+    "id": "11111",
+    "name": "Team A",
+    "group_type": "managed_group",
+    "created_at": "2016-11-16T21:47:04-08:00",
+    "modified_at": "2019-06-18T13:28:44-07:00",
+    "is_read_only": true,
+    "provenance": "IDP",
+    "email_alias": null,
+    "description": "Team A from IDP",
+    "external_sync_identifier": "idp-team-a",
+    "has_sync_early_access": false,
+    "invitability_level": "all_managed_users",
+    "member_viewability_level": "all_managed_users"
+}

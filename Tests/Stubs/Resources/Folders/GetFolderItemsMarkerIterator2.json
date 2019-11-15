@@ -1,0 +1,27 @@
+{
+    "entries": [{
+        "type": "folder",
+        "id": "11111",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "Test Folder"
+    }, {
+        "type": "file",
+        "id": "22222",
+        "file_version": {
+            "type": "file_version",
+            "id": "472444342408",
+            "sha1": "5478aadc5202bc47aab00de0d49c9cc42837d12b"
+        },
+        "sequence_id": "0",
+        "etag": "0",
+        "sha1": "5478aadc5202bc47aab00de0d49c9cc42837d12b",
+        "name": "test.jpeg"
+    }],
+    "limit": 2,
+    "next_marker": "eyJ0eXBlIjoiZmlsZSIsImRpciI6Im5leHQiLCJ0YWlsIjoiZXlKMWMyVnlYMmxrSWpvM05UQXlOVFEzT0RneUxDSm1iMnhrWlhKZmFXUWlPakFzSW1SbGJHVjBaV1FpT2pBc0ltWnBiR1ZmYm1GdFpTSTZJa0poYzNNd01TNXFjR1ZuSWl3aVptbHNaVjlwWkNJNk5EUTJOVGczTlRjME1EQTRmUSJ9",
+    "order": [{
+        "by": "name",
+        "direction": "ASC"
+    }]
+}
