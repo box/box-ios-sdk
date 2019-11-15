@@ -99,6 +99,9 @@
                 <a href="Classes/Collaborator.html">Collaborator</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/Collaborator/CollaboratorType.html">– CollaboratorType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/CollectionsModule.html">CollectionsModule</a>
               </li>
               <li class="nav-group-task">
@@ -219,13 +222,13 @@
                 <a href="Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/LegalHoldPolicyAssignmentItem/AssignmentItemType.html">– AssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/LegalHoldsModule.html">LegalHoldsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/Lock.html">Lock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
@@ -246,13 +249,10 @@
                 <a href="Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaginationIterator.html">PaginationIterator</a>
+                <a href="Classes/PagingIterator.html">PagingIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/PathCollection.html">PathCollection</a>
@@ -297,6 +297,9 @@
                 <a href="Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/SharedItem/SharedItemType.html">– SharedItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/SharedItemsModule.html">SharedItemsModule</a>
               </li>
               <li class="nav-group-task">
@@ -316,9 +319,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/Task.html">Task</a>
@@ -480,6 +480,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PagingParameter.html">PagingParameter</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -714,159 +717,137 @@
 <p>Box Swift SDK</p>
 
 <ul>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-<h2 id='requirements' class='heading'>Requirements</h2>
+<li><a href="#installing-the-sdk">Installing the SDK</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#sample-apps">Sample Apps</a>
 
 <ul>
-<li>iOS 8.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+</li>
-<li>Xcode 10.0+</li>
+<li><a href="#oauth2-sample-app">OAuth2 Sample App</a></li>
+<li><a href="#jwt-auth-sample-app">JWT Auth Sample App</a></li>
+</ul></li>
 </ul>
-<h2 id='installation' class='heading'>Installation</h2>
-<h3 id='dependency-managers' class='heading'>Dependency Managers</h3>
 
-<details>
-  <summary><strong>CocoaPods</strong></summary>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h2 id='installing-the-sdk' class='heading'>Installing the SDK</h2>
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+<p><strong>Step 1</strong>: Add to your <code>Cartfile</code></p>
+<pre class="highlight plaintext"><code>git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
+</code></pre>
 
-&ldquo;`bash
-$ gem install cocoapods
-&rdquo;`
+<p><strong>Step 2</strong>: Update dependencies</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+</code></pre>
 
-To integrate BoxSDK into your Xcode project using CocoaPods, specify it in your `Podfile`:
+<p><strong>Step 3</strong>: Drag the built framework from Carthage/Build/iOS into your project.</p>
 
-&ldquo;`ruby
-source &lsquo;https://github.com/CocoaPods/Specs.git&rsquo;
-platform :ios, &lsquo;8.0&rsquo;
-use_frameworks!
+<p>For more detailed instructions, please see the <a href="https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos">official documentation for Carthage</a>.</p>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
 
-pod &lsquo;BoxSDK&rsquo;, &lsquo;~> 0.0.1&rsquo;
-&rdquo;`
+<p>To get started with the SDK, get a Developer Token from the Configuration page of your app in the
+<a href="https://app.box.com/developers/console">Box Developer Console</a>.  You can use this token to make test calls for your own Box account.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">BoxSDK</span>
 
-Then, run the following command:
+<span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">BoxSDK</span><span class="o">.</span><span class="nf">getClient</span><span class="p">(</span><span class="nv">token</span><span class="p">:</span> <span class="s">"YOUR_DEVELOPER_TOKEN"</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="nf">getCurrentUser</span><span class="p">()</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s"> (</span><span class="se">\(</span><span class="n">user</span><span class="o">.</span><span class="n">login</span><span class="se">)</span><span class="s">) is logged in"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='sample-apps' class='heading'>Sample Apps</h2>
+<h3 id='oauth2-sample-app' class='heading'>OAuth2 Sample App</h3>
 
-&ldquo;`bash
-$ pod install
-&rdquo;`
+<p>A <a href="https://github.com/box/box-ios-sdk/blob/limited-beta-release/OAuth2SampleApp.zip?raw=true">sample app using OAuth2 Authentication</a> can be downloaded as a zip file.  This app demonstrates
+how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.</p>
 
-</details>
+<p>To execute the sample app:
+<strong>Step 1</strong>: Run carthage</p>
+<pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>SampleApps/OAuth2SampleApp
+<span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+</code></pre>
 
-<details>
-  <summary><strong>Carthage</strong></summary>
+<p><strong>Step 2</strong>: Open Workspace</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>open OAuth2SampleApp.xcworkspace
+</code></pre>
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+<p><strong>Step 3</strong>: Insert your client ID and client secret</p>
 
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+<p>First, find your OAuth2 app&rsquo;s client ID and secret from the <a href="https://app.box.com/developers/console">Box Developer Console</a>.  Then, add these
+values to the sample app in the <code>Constants.swift</code> file in the sample app:</p>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">clientId</span> <span class="o">=</span> <span class="s">"YOUR CLIENT ID GOES HERE"</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">clientSecret</span> <span class="o">=</span> <span class="s">"YOUR CLIENT SECRET GOES HERE"</span>
+</code></pre>
 
-&ldquo;`bash
-$ brew update
-$ brew install carthage
-&rdquo;`
+<p><strong>Step 4</strong>: Set redirect URL</p>
 
-To integrate BoxSDK into your Xcode project using Carthage, specify it in your `Cartfile`:
+<p>Using the same client ID from the previous step, set the redirect URL for your application in the
+<a href="https://app.box.com/developers/console">Box Developer Console</a> to <code>boxsdk-&lt;&lt;YOUR CLIENT ID&gt;&gt;://boxsdkoauth2redirect</code>, where <code>&lt;&lt;YOUR CLIENT ID&gt;&gt;</code>
+is replaced with your client ID.  For example, if your client ID were <code>vvxff7v61xi7gqveejo8jh9d2z9xhox5</code> the redirect
+URL should be <code>boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect</code></p>
 
-&ldquo;`ogdl
-github &quot;box/box-swift-sdk&rdquo; ~> 0.0.1
-&ldquo;`
+<p><strong>Step 5</strong>: Insert your client ID to receive the redirect in the app</p>
 
-</details>
+<p>Open the <code>Info.plist</code> file in the sample app and find the key under <code>URL Types --&gt; Item 0 --&gt; URL Schemes --&gt; Item 0</code>.
+Using the same client ID from the previous step, set the value for Item 0 to
+<code>boxsdk-&lt;&lt;YOUR CLIENT ID&gt;&gt;</code>, where <code>&lt;&lt;YOUR CLIENT ID&gt;&gt;</code> is replaced with your client ID.  For example, if your client
+ID were <code>vvxff7v61xi7gqveejo8jh9d2z9xhox5</code> the redirect URL should be
+<code>boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5</code></p>
 
-<details>
-  <summary><strong>Swift Package Manager</strong></summary>
+<p><img src="./redirect-url-scheme.png" alt="location to add redirect URL scheme in Xcode"></p>
 
-To use BoxSDK as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
+<p><strong>Step 6</strong>: Run the sample app</p>
+<h3 id='jwt-auth-sample-app' class='heading'>JWT Auth Sample App</h3>
 
-&rdquo;` swift
-// swift-tools-version:4.2
+<p>A <a href="https://github.com/box/box-ios-sdk/blob/limited-beta-release/JWTSampleApp.zip?raw=true">sample app using JWT Authentication</a> can be downloaded as a zip file.  This app demonstrates how to
+set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
+tokens.</p>
 
-import PackageDescription
+<p>To execute the sample app:
+<strong>Step 1</strong>: Run carthage</p>
+<pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>SampleApps/JWTSampleApp
+<span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+</code></pre>
 
-let package = Package(
-    name: &ldquo;HelloBoxSDK&rdquo;,
-    dependencies: [
-        .package(url: &ldquo;https://github.com/box/box-swift-sdk.git&rdquo;, .upToNextMajor(from: &ldquo;0.0.1&rdquo;))
-    ],
-    targets: [
-        .target(name: &ldquo;HelloBoxSDK&rdquo;, dependencies: [&ldquo;BoxSDK&rdquo;])
-    ]
-)
-&ldquo;`
-</details>
-<h3 id='manually' class='heading'>Manually</h3>
+<p><strong>Step 2</strong>: Open Workspace</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>open JWTSampleApp.xcworkspace
+</code></pre>
 
-<p>If you prefer not to use either of the aforementioned dependency managers, you can integrate BoxSDK into your project manually.</p>
+<p><strong>Step 3</strong>: Insert your client ID and client secret</p>
 
-<details>
-  <summary><strong>Git Submodules</strong></summary><p>
+<p>First, find your OAuth2 app&rsquo;s client ID and secret from the <a href="https://app.box.com/developers/console">Box Developer Console</a>.  Then, add these
+values to the sample app in the <code>Constants.swift</code> file in the sample app:</p>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">clientId</span> <span class="o">=</span> <span class="s">"YOUR CLIENT ID GOES HERE"</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">clientSecret</span> <span class="o">=</span> <span class="s">"YOUR CLIENT SECRET GOES HERE"</span>
+</code></pre>
 
-- Open up Terminal, `cd` into your top-level project directory, and run the following command &quot;if&rdquo; your project is not initialized as a git repository:
+<p><strong>Step 4</strong>: Add code for retrieving access tokens</p>
 
-&ldquo;`bash
-$ git init
-&rdquo;`
+<p>In the <code>ViewController.swift</code> file in the sample app, edit the
+<code>obtainJWTTokenFromExternalSources()</code> method:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">obtainJWTTokenFromExternalSources</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">DelegatedAuthClosure</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="n">uniqueID</span><span class="p">,</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="cp">#error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")</span>
+        <span class="c1">// The code below is an example implementation of the delegate function</span>
+        <span class="c1">// Please provide your own implementation</span>
 
-- Add BoxSDK as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
 
-&ldquo;`bash
-$ git submodule add https://github.com/box/box-swift-sdk.git
-$ git submodule update &ndash;init &ndash;recursive
-&rdquo;`
-
-- Open the new `BoxSDK` folder, and drag the `BoxSDK.xcodeproj` into the Project Navigator of your application&rsquo;s Xcode project.
-
-    > It should appear nested underneath your application&rsquo;s blue project icon. Whether it is above or below all the other Xcode groups does not matter.
-
-- Select the `BoxSDK.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the &ldquo;Targets&rdquo; heading in the sidebar.
-- In the tab bar at the top of that window, open the &ldquo;General&rdquo; panel.
-- Click on the `+` button under the &ldquo;Embedded Binaries&rdquo; section.
-- You will see two different `BoxSDK.xcodeproj` folders each with two different versions of the `BoxSDK.framework` nested inside a `Products` folder.
-
-    > It does not matter which `Products` folder you choose from.
-
-- Select the `BoxSDK.framework`.
-
-- And that&rsquo;s it!
-
-> The `BoxSDK.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
-
-</p></details>
-
-<details>
-  <summary><strong>Embedded Binaries</strong></summary><p>
-
-- Download the latest release from https://github.com/box/box-swift-sdk/releases
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the &ldquo;Targets&rdquo; heading in the sidebar.
-- In the tab bar at the top of that window, open the &ldquo;General&rdquo; panel.
-- Click on the `+` button under the &ldquo;Embedded Binaries&rdquo; section.
-- Add the downloaded `BoxSDK.framework`.
-- And that&rsquo;s it!
-
-</p></details>
-<h2 id='usage' class='heading'>Usage</h2>
-
-<p>Please see the <a href="https://box.github.io/box-swift-sdk/index.html">SDK documentation</a> for more information.</p>
-<h2 id='contributing' class='heading'>Contributing</h2>
-
-<p>Issues and pull requests are welcome!  Please review the <a href="https://github.com/box/box-swift-sdk/blob/master/CONTRIBUTING.md">Contributing Guidelines</a>.</p>
-<h2 id='author' class='heading'>Author</h2>
-
-<p><a href="https://twitter.com/box">@box</a></p>
+<p><strong>Step 5</strong>: Run the sample app</p>
 <h2 id='license' class='heading'>License</h2>
 
-<p>BoxSDK is released under the Apache 2.0 license. See <a href="https://github.com/box/box-swift-sdk/blob/master/LICENSE">LICENSE</a> for details.</p>
-
-<p>The SDK uses some third-party libraries; please see <a href="./LICENSES-THIRD-PARTY.txt">LICENSES-THIRD-PARTY.txt</a>
-for the licenses of all included libraries.</p>
+<p>Any use of this software is governed by the attached <a href="../../BETA-AGREEMENT.md">Box SDK Beta Agreement</a>.
+<strong>If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.</strong></p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-30)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

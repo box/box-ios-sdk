@@ -100,6 +100,9 @@
                 <a href="../Classes/Collaborator.html">Collaborator</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/Collaborator/CollaboratorType.html">– CollaboratorType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
               </li>
               <li class="nav-group-task">
@@ -220,13 +223,13 @@
                 <a href="../Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignmentItem/AssignmentItemType.html">– AssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/LegalHoldsModule.html">LegalHoldsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Lock.html">Lock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
@@ -247,13 +250,10 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+                <a href="../Classes/PagingIterator.html">PagingIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathCollection.html">PathCollection</a>
@@ -298,6 +298,9 @@
                 <a href="../Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/SharedItem/SharedItemType.html">– SharedItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
               </li>
               <li class="nav-group-task">
@@ -317,9 +320,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Task.html">Task</a>
@@ -481,6 +481,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PagingParameter.html">PagingParameter</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -730,7 +733,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>SDK-wide constant values</p>
+                        <p>Box-specific constants</p>
 
                         <a href="../Classes/BoxSDK/Constants.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1268,9 +1271,9 @@ The text of that item is your application&rsquo;s client secret.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold14logDestination19clientAnalyticsInfoy10Foundation0G0VSg_AMSiSgSdSgAA03LogQ0_pSgAA06ClientsT0VSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:logDestination:clientAnalyticsInfo:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold14logDestination19clientAnalyticsInfoy10Foundation0G0VSg_AMSiSgSdSgAA03LogQ0_pSgAA06ClientsT0VSgtKF">updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:logDestination:clientAnalyticsInfo:)</a>
+                    <a name="/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold21consoleLogDestination04fileqR019clientAnalyticsInfoy10Foundation0G0VSg_ANSiSgSdSgAA07ConsoleqR0CSgAA04FileqR0CSgAA06ClientuV0VSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:consoleLogDestination:fileLogDestination:clientAnalyticsInfo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG016maxRetryAttempts21tokenRefreshThreshold21consoleLogDestination04fileqR019clientAnalyticsInfoy10Foundation0G0VSg_ANSiSgSdSgAA07ConsoleqR0CSgAA04FileqR0CSgAA06ClientuV0VSgtKF">updateConfiguration(apiBaseURL:uploadApiBaseURL:maxRetryAttempts:tokenRefreshThreshold:consoleLogDestination:fileLogDestination:clientAnalyticsInfo:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1290,7 +1293,8 @@ The text of that item is your application&rsquo;s client secret.</p>
     <span class="nv">uploadApiBaseURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">maxRetryAttempts</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">tokenRefreshThreshold</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">logDestination</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LogDestination.html">LogDestination</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consoleLogDestination</span><span class="p">:</span> <span class="kt"><a href="../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileLogDestination</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileLogDestination.html">FileLogDestination</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">clientAnalyticsInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span> <span class="k">throws</span></code></pre>
 
@@ -1352,12 +1356,24 @@ If not specified, default value 60 seconds is used.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>logDestination</em>
+                                <em>consoleLogDestination</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
                                   <p>Custom destination of console log.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileLogDestination</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom destination of file log.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1460,7 +1476,7 @@ This parameter is provided for your use in protecting against hijacked sessions 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-30)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

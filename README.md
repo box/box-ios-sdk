@@ -1,12 +1,155 @@
-# Box iOS SDK
+# BoxSDK
 
-Box iOS SDK
+[![Platforms](https://img.shields.io/cocoapods/p/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK)
+[![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-swift-sdk/master/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+ [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+ [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-swift-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
 
+Box Swift SDK
+- [Installing the SDK](#installing-the-sdk)
 - [Getting Started](#getting-started)
+- [Sample Apps](#sample-apps)
+  - [OAuth2 Sample App](#oauth2-sample-app)
+  - [JWT Auth Sample App](#jwt-auth-sample-app)
 - [Release Definitions](#release-definitions)
 
-## Getting Started
-Please refer to [docs/usage/getting-started.md](https://github.com/box/box-ios-sdk/blob/limited-beta-release/docs/usage/getting-started.md)
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Installing the SDK
+------------------
+
+__Step 1__: Add to your `Cartfile`
+```ogdl
+git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
+```
+
+__Step 2__: Update dependencies
+```shell
+$ carthage update --platform iOS
+```
+
+__Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
+
+For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+
+Getting Started
+---------------
+
+To get started with the SDK, get a Developer Token from the Configuration page of your app in the
+[Box Developer Console][dev-console].  You can use this token to make test calls for your own Box account.
+
+```swift
+import BoxSDK
+
+let client = BoxSDK.getClient(token: "YOUR_DEVELOPER_TOKEN")
+client.users.getCurrentUser() { result in
+    switch result {
+    case let .error(error):
+        print("Error: \(error)")
+    case let .success(user):
+        print("\(user.name) (\(user.login)) is logged in")
+    }
+}
+```
+
+[dev-console]: https://app.box.com/developers/console
+
+Sample Apps
+-----------
+
+### OAuth2 Sample App
+
+A [sample app using OAuth2 Authentication][oauth2-sample-app] can be downloaded as a zip file.  This app demonstrates
+how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
+
+[oauth2-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/OAuth2SampleApp.zip?raw=true
+
+To execute the sample app:
+__Step 1__: Run carthage
+```shell
+$ cd SampleApps/OAuth2SampleApp
+$ carthage update --platform iOS
+```
+
+__Step 2__: Open Workspace
+```shell
+$ open OAuth2SampleApp.xcworkspace
+```
+
+__Step 3__: Insert your client ID and client secret
+
+First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
+values to the sample app in the `Constants.swift` file in the sample app:
+```swift
+static let clientId = "YOUR CLIENT ID GOES HERE"
+static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
+```
+
+__Step 4__: Set redirect URL
+
+Using the same client ID from the previous step, set the redirect URL for your application in the
+[Box Developer Console][dev-console] to `boxsdk-<<YOUR CLIENT ID>>://boxsdkoauth2redirect`, where `<<YOUR CLIENT ID>>`
+is replaced with your client ID.  For example, if your client ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect
+URL should be `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
+
+__Step 5__: Insert your client ID to receive the redirect in the app
+
+Open the `Info.plist` file in the sample app and find the key under `URL Types --> Item 0 --> URL Schemes --> Item 0`.
+Using the same client ID from the previous step, set the value for Item 0 to
+`boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
+ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
+`boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
+
+![location to add redirect URL scheme in Xcode](./redirect-url-scheme.png)
+
+__Step 6__: Run the sample app
+
+### JWT Auth Sample App
+
+A [sample app using JWT Authentication][jwt-sample-app] can be downloaded as a zip file.  This app demonstrates how to
+set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
+tokens.
+
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/JWTSampleApp.zip?raw=true
+
+To execute the sample app:
+__Step 1__: Run carthage
+```shell
+$ cd SampleApps/JWTSampleApp
+$ carthage update --platform iOS
+```
+
+__Step 2__: Open Workspace
+```shell
+$ open JWTSampleApp.xcworkspace
+```
+
+__Step 3__: Insert your client ID and client secret
+
+First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
+values to the sample app in the `Constants.swift` file in the sample app:
+```swift
+static let clientId = "YOUR CLIENT ID GOES HERE"
+static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
+```
+
+__Step 4__: Add code for retrieving access tokens
+
+In the `ViewController.swift` file in the sample app, edit the
+`obtainJWTTokenFromExternalSources()` method:
+```swift
+func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
+    return { uniqueID, completion in
+        #error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")
+        // The code below is an example implementation of the delegate function
+        // Please provide your own implementation
+        
+        // ...
+    }
+}
+```
+
+__Step 5__: Run the sample app
 
 
 ## Release Definitions
@@ -72,3 +215,10 @@ After a time, the release is no longer under active development, but customers m
 
 #### End-of-life
 After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
+
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

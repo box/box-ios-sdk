@@ -101,7 +101,6 @@ client.folders.create(name: "New Folder", parentId: "22222") { (result: Result<F
 
 [create-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC12createFolder4name8parentId6fields10completionySS_SSSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
 
-<!-- TODO: Add Update Folder when interface is updated -->
 
 Delete Folder
 -------------

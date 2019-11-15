@@ -1,0 +1,29 @@
+{
+    "entries": [
+        {
+            "currentDocumentStage": "prioritization",
+            "needsApprovalFrom": "planning team",
+            "$type": "documentFlow-452b4c9d-c3ad-4ac7-b1ad-9d5192f2fc5f",
+            "$parent": "folder_998951261",
+            "$id": "e57f90ff-0044-48c2-807d-06b908765baf",
+            "$version": 1,
+            "$typeVersion": 2,
+            "maximumDaysAllowedInCurrentStage": 5,
+            "$template": "documentFlow",
+            "$scope": "enterprise_12345"
+        },
+        {
+            "skuNumber": 45234522115075,
+            "description": "Hat",
+            "department": "Accessories",
+            "$type": "productInfo-9d7b6993-b09e-4e52-b197-e42f0ea995b9",
+            "$parent": "folder_998951261",
+            "$id": "0dd54220-8340-4ea1-bd3f-59a23c68ccdd",
+            "$version": 0,
+            "$typeVersion": 1,
+            "$template": "productInfo",
+            "$scope": "enterprise_12345"
+        }
+    ],
+    "limit": 100
+}

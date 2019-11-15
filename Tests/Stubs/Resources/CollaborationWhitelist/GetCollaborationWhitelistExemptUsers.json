@@ -1,0 +1,16 @@
+{
+   "entries":[
+      {
+         "type":"collaboration_whitelist_exempt_target",
+         "id":"1234567890",
+         "user":{
+            "type":"user",
+            "id":"12345",
+            "name":"John Doe",
+            "login":"john@doe.com"
+         }
+      }
+   ],
+   "next_marker":"marker",
+   "limit":100
+}

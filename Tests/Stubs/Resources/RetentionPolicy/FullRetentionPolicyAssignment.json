@@ -1,0 +1,26 @@
+{
+    "type": "retention_policy_assignment",
+    "id": "12345678",
+    "retention_policy": {
+        "type": "retention_policy",
+        "id": "123",
+        "policy_name": "Some Policy Name"
+    },
+    "assigned_to": {
+        "type": "metadata_template",
+        "id": "dbab3bd1-93ab-43d9-a31c-9540b0a72ff"
+    },
+    "filter_fields": [
+        {
+            "field": "c0753131-b592-4340-9c2d-ba67145fb784",
+            "value": "fe6b46fd-a7e9-127f-b3d0-a0be0921372e"
+        }
+    ],
+    "assigned_by": {
+        "type": "user",
+        "id": "1234",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    },
+    "assigned_at": "2018-01-05T11:45:19-08:00"
+}

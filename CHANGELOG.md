@@ -1,6 +1,26 @@
 Changelog
 =========
 
+## v3.0.0-rc.3 [2019-11-14]
+
+__Breaking Changes:__
+
+- For Module methods that returned a collection of objects, changed from returning a PaginationIterator to returning a PagingIterator in a completion.
+- Modules are now automatically instantiated with the BoxClient object and no longer allow the client app to instantiate them 
+- Related RetentionPolicy classes no longer allow rawData to be set by the client app
+- UploadPartDescription made private
+- Fixed bug with exponential backoff and changed SDK configuration item "retryAfterTime" to "retryBaseInterval"
+
+
+__New Features and Enhancements:__
+
+- RetentionPolicyModule methods made public 
+- Added additional supporting types 
+- Improved support for logging to file, allow for custom file path, and fixed some related bugs
+- Improved console logging formatting
+- Updated Sample Apps to use new PagingIterator responses 
+
+
 ## v3.0.0-rc.2 [2019-10-30]
 
 __Breaking Changes:__

@@ -1,0 +1,12 @@
+{
+  "entries": [
+    {
+     "type": "collaboration_whitelist_entry",
+     "id": "123456",
+     "domain" : "somedomain.com",
+     "direction" : "inbound"
+    }
+  ],
+  "next_marker": "eyJ0eXBlIjoiZmlsZSIsImRpciI6Im5leHQiLCJ0YWlsIjoiZXlKMWMyVnlYMmxrSWpvM05UQXlOVFEzT0RneUxDSm1iMnhrWlhKZmFXUWlPakFzSW1SbGJHVjBaV1FpT2pBc0ltWnBiR1ZmYm1GdFpTSTZJa0poYzNNd01TNXFjR1ZuSWl3aVptbHNaVjlwWkNJNk5EUTJOVGczTlRjME1EQTRmUSJ9",
+  "limit": 10
+}

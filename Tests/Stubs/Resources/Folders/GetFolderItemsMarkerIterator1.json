@@ -1,0 +1,21 @@
+{
+    "entries": [{
+        "type": "folder",
+        "id": "69102302893",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "TestFolder"
+    }, {
+        "type": "folder",
+        "id": "69102904855",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "My Box Notes"
+    }],
+    "limit": 2,
+    "next_marker": "eyJ0eXBlIjoiZm9sZGVyIiwiZGlyIjoibmV4dCIsInRhaWwiOiJleUoxYzJWeVgybGtJam8zTlRBeU5UUTNPRGd5TENKd1lYSmxiblJmWm05c1pHVnlYMmxrSWpvd0xDSmtaV3hsZEdWa0lqb3dMQ0ptYjJ4a1pYSmZibUZ0WlNJNklrMTVJRUp2ZUNCT2IzUmxjeUlzSW1admJHUmxjbDlwWkNJNk5qa3hNREk1TURRNE5UVjkifQ",
+    "order": [{
+        "by": "name",
+        "direction": "ASC"
+    }]
+}

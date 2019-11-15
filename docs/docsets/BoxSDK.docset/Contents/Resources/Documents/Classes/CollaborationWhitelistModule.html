@@ -100,6 +100,9 @@
                 <a href="../Classes/Collaborator.html">Collaborator</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/Collaborator/CollaboratorType.html">– CollaboratorType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
               </li>
               <li class="nav-group-task">
@@ -220,13 +223,13 @@
                 <a href="../Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignmentItem/AssignmentItemType.html">– AssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/LegalHoldsModule.html">LegalHoldsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Lock.html">Lock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
@@ -247,13 +250,10 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+                <a href="../Classes/PagingIterator.html">PagingIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathCollection.html">PathCollection</a>
@@ -298,6 +298,9 @@
                 <a href="../Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/SharedItem/SharedItemType.html">– SharedItemType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
               </li>
               <li class="nav-group-task">
@@ -317,9 +320,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Task.html">Task</a>
@@ -481,6 +481,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PagingParameter.html">PagingParameter</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -720,9 +723,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC9boxClientAcA0aG0C_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(boxClient:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC9boxClientAcA0aG0C_tcfc">init(boxClient:)</a>
+                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limit10completionySaySSGSg_SSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cD5EntryCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listEntries(fields:marker:limit:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limit10completionySaySSGSg_SSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cD5EntryCGAA0A8SDKErrorCGctF">listEntries(fields:marker:limit:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -730,14 +733,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initializer</p>
+                        <p>Returns the list of Whitelist entries for the current Enterprise. Each entry lists type, id,
+domain, and direction. You can specify more by using the fields parameter.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">boxClient</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listEntries</span><span class="p">(</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -748,12 +757,38 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>boxClient</em>
+                                <em>fields</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Required for communicating with Box APIs.</p>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return. The default is 100 and the maximum is
+1,000.</p>
                                 </div>
                               </td>
                             </tr>
@@ -993,6 +1028,85 @@ thrown if the collaboration whitelist cannot be deleted.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0cdG6TargetCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listExemptTargets(marker:limit:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0cdG6TargetCGAA0A8SDKErrorCGctF">listExemptTargets(marker:limit:fields:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an interator for listing of Exempt User entries for the current Enterprise.
+By default, each will return type, id, and user, but you can specify more by using the
+fields parameter.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listExemptTargets</span><span class="p">(</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a></span><span class="o">&gt;&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return. The default is 100 and the maximum is
+1,000.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK28CollaborationWhitelistModuleC15getExemptTarget2id6fields10completionySS_SaySSGSgys6ResultOyAA0cdgH0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getExemptTarget(id:fields:completion:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC15getExemptTarget2id6fields10completionySS_SaySSGSgys6ResultOyAA0cdgH0CAA0A8SDKErrorCGctF">getExemptTarget(id:fields:completion:)</a>
@@ -1207,7 +1321,7 @@ thrown if the exempt target cannot be deleted.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-30)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

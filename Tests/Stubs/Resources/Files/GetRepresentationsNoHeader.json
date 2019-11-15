@@ -1,0 +1,104 @@
+{
+    "type": "file",
+    "id": "12345",
+    "etag": "0",
+    "representations": {
+        "entries": [
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "32x32",
+                    "paged": "false",
+                    "thumb": "true"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/11111/representations/jpg_thumb_32x32"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "94x94",
+                    "paged": "false",
+                    "thumb": "true"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/22222/representations/jpg_thumb_94x94"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "160x160",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/33333/representations/jpg_160x160"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "320x320",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/44444/representations/jpg_320x320"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "1024x1024",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/55555/representations/jpg_1024x1024"
+                }
+            },
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "1024x1024",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/66666/representations/png_paged_1024x1024"
+                }
+            },
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "2048x2048",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/77777/representations/png_paged_2048x2048"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "2048x2048",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/88888/representations/jpg_paged_2048x2048"
+                }
+            },
+            {
+                "representation": "3d",
+                "properties": {},
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/11112/representations/3d"
+                }
+            }
+        ]
+    }
+}
