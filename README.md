@@ -59,10 +59,11 @@ Sample Apps
 
 ### OAuth2 Sample App
 
-A [sample app using OAuth2 Authentication][oauth2-sample-app] can be downloaded as a zip file.  This app demonstrates
+A sample app using OAuth2 Authentication can be found in the repository [here][oauth2-sample-app].  This app demonstrates
 how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
 
-[oauth2-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/OAuth2SampleApp.zip?raw=true
+[oauth2-sample-app]:
+https://github.com/box/box-ios-sdk/tree/limited-beta-release/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
@@ -71,9 +72,9 @@ $ cd SampleApps/OAuth2SampleApp
 $ carthage update --platform iOS
 ```
 
-__Step 2__: Open Workspace
+__Step 2__: Open Xcode Project File
 ```shell
-$ open OAuth2SampleApp.xcworkspace
+$ open OAuth2SampleApp.xcodeproj
 ```
 
 __Step 3__: Insert your client ID and client secret
@@ -106,11 +107,11 @@ __Step 6__: Run the sample app
 
 ### JWT Auth Sample App
 
-A [sample app using JWT Authentication][jwt-sample-app] can be downloaded as a zip file.  This app demonstrates how to
+A sample app using JWT Authentication can be found in the repository [here][jwt-sample-app].  This app demonstrates how to
 set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
 tokens.
 
-[jwt-sample-app]: https://github.com/box/box-ios-sdk/blob/limited-beta-release/JWTSampleApp.zip?raw=true
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/limited-beta-release/SampleApps/JWTSampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
@@ -119,9 +120,9 @@ $ cd SampleApps/JWTSampleApp
 $ carthage update --platform iOS
 ```
 
-__Step 2__: Open Workspace
+__Step 2__: Open Xcode Project File
 ```shell
-$ open JWTSampleApp.xcworkspace
+$ open JWTSampleApp.xcodeproj
 ```
 
 __Step 3__: Insert your client ID and client secret
