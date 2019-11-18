@@ -1,6 +1,12 @@
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
 [![Build Status](https://api.travis-ci.org/box/box-ios-content-sdk.svg)](https://travis-ci.org/box/box-ios-content-sdk)
 
+NOTE:
+===================
+
+The iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to this objective-c-maintenance branch.
+Going forward, the master branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
+
 Box iOS SDK
 ===================
 
