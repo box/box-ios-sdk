@@ -1,2 +1,2 @@
 # Box SDKs
-github "box/box-ios-sdk" ~> 2.0
+github "box/box-ios-sdk" "objective-c-maintenance"
