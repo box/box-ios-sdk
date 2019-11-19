@@ -1,8 +1,0 @@
-author: 
-author_url: https://twitter.com/box
-github_url: https://github.com/box/box-swift-sdk
-root_url: https://box.github.io/BoxSDK/
-module: BoxSDK
-output: docs
-theme: fullwidth
-xcodebuild_arguments: [-workspace, 'BoxSDK.xcworkspace', -scheme, 'BoxSDK-iOS']
