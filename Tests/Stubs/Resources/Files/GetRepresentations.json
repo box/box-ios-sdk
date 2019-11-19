@@ -1,0 +1,25 @@
+{
+    "type": "file",
+    "id": "12345",
+    "etag": "1",
+    "representations": {
+        "entries": [
+            {
+                "content": {
+                    "url_template": "https://dl.boxcloud.com/api/2.0/internal_files/12345/versions/11111/representations/extracted_text/content/{+asset_path}"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/12345/versions/11111/representations/extracted_text"
+                },
+                "properties": {
+                    "paged": "false",
+                    "thumb": "true"
+                },
+                "representation": "text",
+                "status": {
+                    "state": "success"
+                }
+            }
+        ]
+    }
+}

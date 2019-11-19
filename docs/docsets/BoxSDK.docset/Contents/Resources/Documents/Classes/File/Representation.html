@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Representation Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Representation" class="dashAnchor"></a>
+    <a title="Representation Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">BoxSDK Docs</a> (97% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        Representation Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxCollection.html">BoxCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxRequest/BodyType.html">– BodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Collaboration.html">Collaboration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CollaborationItem.html">CollaborationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CollaborationsModule.html">CollaborationsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Collaborator.html">Collaborator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CollectionsModule.html">CollectionsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Comment.html">Comment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CommentItem.html">CommentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CommentsModule.html">CommentsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Constants.html">Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DelegatedAuthSession.html">DelegatedAuthSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/EmailAlias.html">EmailAlias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/EntryContainerInnerModel.html">EntryContainerInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/File/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/File/Representation.html">– Representation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FolderItem/FolderItemType.html">– FolderItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Group/InvitabilityLevel.html">– InvitabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Group/MemberViewabilityLevel.html">– MemberViewabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Invite.html">Invite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/MetadataModule.html">MetadataModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/MetadataObject.html">MetadataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/MetadataTemplate.html">MetadataTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/PaginationIterator.html">PaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SharedItem.html">SharedItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SharedItemsModule.html">SharedItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/SharedLinkPermissions.html">SharedLinkPermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/TaskAssignment.html">TaskAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/User/TrackingCode.html">– TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/UsersModule.html">UsersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/WebLink.html">WebLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/WebLink/Permissions.html">– Permissions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Enums/AccessibleBy.html">AccessibleBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums.html#/s:6BoxSDK0A0O">Box</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/BoxDecodingError.html">BoxDecodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/BoxError.html">BoxError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/CollaborationRole.html">CollaborationRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/CollaborationStatus.html">CollaborationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/FileMetadataOperation.html">FileMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/FolderMetadataOperation.html">FolderMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/FolderUploadEmailAccess.html">FolderUploadEmailAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/MetadataTemplateOperation.html">MetadataTemplateOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/OptionalParameter.html">OptionalParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/OrderBy.html">OrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/SearchContentType.html">SearchContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/SearchItemType.html">SearchItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/SearchScope.html">SearchScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/SyncState.html">SyncState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ThumbnailExtension.html">ThumbnailExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/TokenScope.html">TokenScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/UserRole.html">UserRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/BoxEnum.html">BoxEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/LogDestination.html">LogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/TokenStore.html">TokenStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/BoxAPIError.html">BoxAPIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MetadataField.html">MetadataField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MultipartForm.html">MultipartForm</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/UpdateFileInfoData.html">UpdateFileInfoData</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK16AccessTokenTuplea">AccessTokenTuple</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Representation</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Representation</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Digital assets created for files stored in Box.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV7contentAE7ContentVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/content" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV7contentAE7ContentVSgvp">content</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An opaque URL template to the content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../../Classes/File/Representation/Content.html">Content</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV4infoAE4InfoVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/info" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV4infoAE4InfoVSgvp">info</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An opaque URL which will return status information about the file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">info</span><span class="p">:</span> <span class="kt"><a href="../../Classes/File/Representation/Info.html">Info</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV10propertiesAE10PropertiesVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/properties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV10propertiesAE10PropertiesVSgvp">properties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set of static properties to distinguish between subtypes of a given representation,
+for example, different sizes of jpg&rsquo;s. Each representation has its own set of properties.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../../Classes/File/Representation/Properties.html">Properties</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV6statusAE6StatusVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV6statusAE6StatusVSgvp">status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Status string</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../../Classes/File/Representation/Status.html">Status</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV14representationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/representation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV14representationSSSgvp">representation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Usually the extension of the format, but occasionally a name of a standard (potentially de facto)
+format or a proprietary format that Box supports.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">representation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV7ContentV"></a>
+                    <a name="//apple_ref/swift/Struct/Content" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV7ContentV">Content</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains an opaque URL template to the content, which follows RFC 6570.
+There is an asset_path variable that should be replaced with a valid path.
+Valid paths are different for each representation subtype.
+It may change over time and should not be hard-coded or cached.</p>
+
+                        <a href="../../Classes/File/Representation/Content.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Content</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV4InfoV"></a>
+                    <a name="//apple_ref/swift/Struct/Info" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV4InfoV">Info</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains an opaque URL which will return status information about the file.
+It may change over time and should not be hard-coded or cached.
+The response is the entries object from the array with all fields available.</p>
+
+                        <a href="../../Classes/File/Representation/Info.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Info</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV10PropertiesV"></a>
+                    <a name="//apple_ref/swift/Struct/Properties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV10PropertiesV">Properties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set of static properties to distinguish between subtypes of a given representation,
+for example, different sizes of jpgs. Each representation has its own set of properties.</p>
+
+                        <a href="../../Classes/File/Representation/Properties.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Properties</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4FileC14RepresentationV6StatusV"></a>
+                    <a name="//apple_ref/swift/Struct/Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4FileC14RepresentationV6StatusV">Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A string with one of the following values: &lsquo;none&rsquo;, &lsquo;pending&rsquo;, &lsquo;viewable&rsquo;, &lsquo;error&rsquo; and &lsquo;success&rsquo;.
+none - generating the representation needs to be manually triggered (see info.url note).
+pending - content is being generated but is not ready yet.
+viewable - like pending, though indicates that enough content is available to be useful.
+error - an error happened and this content is not available.
+success - all of the content is available and complete.</p>
+
+                        <a href="../../Classes/File/Representation/Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Status</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-07-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

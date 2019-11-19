@@ -1,0 +1,25 @@
+{
+  "entries": [
+    {
+      "part_id": "CFEB4BA9",
+      "offset": 0,
+      "size": 8388608,
+      "sha1": null
+    },
+    {
+      "part_id": "4DBB872D",
+      "offset": 8388608,
+      "size": 8388608,
+      "sha1": null
+    },
+    {
+      "part_id": "6F2D3486",
+      "offset": 16777216,
+      "size": 3222784,
+      "sha1": null
+    }
+  ],
+  "offset": 0,
+  "total_count": 3,
+  "limit": 1000
+}

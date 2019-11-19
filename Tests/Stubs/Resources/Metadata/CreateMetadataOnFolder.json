@@ -1,0 +1,12 @@
+{
+    "currentDocumentStage": "initial vetting",
+    "needsApprovalFrom": "vetting team",
+    "nextDocumentStage": "prioritization",
+    "$type": "documentFlow-452b4c9d-c3ad-4ac7-b1ad-9d5192f2fc5f",
+    "$parent": "folder_998951261",
+    "$id": "e57f90ff-0044-48c2-807d-06b908765baf",
+    "$version": 0,
+    "$typeVersion": 0,
+    "$template": "documentFlow",
+    "$scope": "enterprise_12345"
+}

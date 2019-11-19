@@ -1,0 +1,21 @@
+{
+    "total_count": 24,
+    "entries": [
+        {
+            "type": "folder",
+            "id": "192429928",
+            "sequence_id": "1",
+            "etag": "1",
+            "name": "Test Folder"
+        },
+        {
+            "type": "file",
+            "id": "818853862",
+            "sequence_id": "0",
+            "etag": "0",
+            "name": "test.jpg"
+        }
+    ],
+    "offset": 0,
+    "limit": 2
+}

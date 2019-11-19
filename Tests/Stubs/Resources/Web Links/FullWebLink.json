@@ -1,0 +1,105 @@
+{
+    "type": "web_link",
+    "id": "11111",
+    "etag": "0",
+    "sequence_id": "0",
+    "name": "Example Web Link",
+    "url": "http://example.com",
+    "created_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "created_at": "2019-01-22T16:19:34-08:00",
+    "modified_at": "2019-01-22T16:19:34-08:00",
+    "parent": {
+        "type": "folder",
+        "id": "33333",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "Test Folder"
+    },
+    "description": "A web link for testing",
+    "item_status": "active",
+    "expires_at": "2020-01-22T16:19:34-08:00",
+    "permissions": {
+        "can_rename": true,
+        "can_delete": true,
+        "can_comment": true,
+        "can_share": true,
+        "can_set_share_access": true
+    },
+    "allowed_shared_link_access_levels": [
+        "collaborators",
+        "open",
+        "company"
+    ],
+    "allowed_shared_link_permissions": [
+        "can_edit",
+        "can_download",
+        "can_preview"
+    ],
+    "shared_link_options": {
+        "default_link_expiration_in": 0,
+        "default_access_level": "company"
+    },
+    "trashed_at": null,
+    "purged_at": null,
+    "shared_link": {
+        "url": "https://app.box.com/s/ioh1ue6n5htav8h3c0m3f1gj40pbxpnz",
+        "download_url": null,
+        "vanity_url": null,
+        "effective_access": "company",
+        "effective_permission": "can_download",
+        "is_password_enabled": false,
+        "unshared_at": null,
+        "download_count": 0,
+        "preview_count": 0,
+        "access": "company",
+        "permissions": {
+            "can_preview": true,
+            "can_download": true
+        }
+    },
+    "path_collection": {
+        "total_count": 2,
+        "entries": [
+            {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+            },
+            {
+                "type": "folder",
+                "id": "33333",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Test Folder"
+            }
+        ]
+    },
+    "modified_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "owned_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "collections": [
+        {
+            "type": "collection",
+            "id": "55555",
+            "name": "Favorites",
+            "collection_type": "favorites"
+        }
+    ],
+    "comment_count": 0
+}

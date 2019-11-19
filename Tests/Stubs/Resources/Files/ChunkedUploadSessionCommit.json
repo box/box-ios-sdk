@@ -1,0 +1,65 @@
+{
+  "total_count": 1,
+  "entries": [
+    {
+      "type": "file",
+      "id": "243696906120",
+      "file_version": {
+        "type": "file_version",
+        "id": "257047849608",
+        "sha1": "59cc614a395ce5b3051bb78b51d6720c28318c96"
+      },
+      "sequence_id": "0",
+      "etag": "0",
+      "sha1": "59cc614a395ce5b3051bb78b51d6720c28318c96",
+      "name": "chunked-uploads-api-test Thu Nov  2 14:59:24 PDT 2017",
+      "description": "",
+      "size": 20000000,
+      "path_collection": {
+        "total_count": 1,
+        "entries": [
+          {
+            "type": "folder",
+            "id": "0",
+            "sequence_id": null,
+            "etag": null,
+            "name": "All Files"
+          }
+        ]
+      },
+      "created_at": "2017-11-02T15:04:38-07:00",
+      "modified_at": "2017-11-02T15:04:38-07:00",
+      "trashed_at": null,
+      "purged_at": null,
+      "content_created_at": "2017-11-02T15:04:38-07:00",
+      "content_modified_at": "2017-11-02T15:04:38-07:00",
+      "created_by": {
+        "type": "user",
+        "id": "226901453",
+        "name": "John Doe",
+        "login": "john@doe.com"
+      },
+      "modified_by": {
+        "type": "user",
+        "id": "226901453",
+        "name": "John Doe",
+        "login": "john@doe.com"
+      },
+      "owned_by": {
+        "type": "user",
+        "id": "226901453",
+        "name": "John Doe",
+        "login": "john@doe.com"
+      },
+      "shared_link": null,
+      "parent": {
+        "type": "folder",
+        "id": "0",
+        "sequence_id": null,
+        "etag": null,
+        "name": "All Files"
+      },
+      "item_status": "active"
+    }
+  ]
+}
