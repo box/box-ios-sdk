@@ -1,0 +1,35 @@
+{
+    "total_count": 1,
+    "entries": [
+        {
+            "type": "collaboration",
+            "id": "12345",
+            "created_by": {
+                "type": "user",
+                "id": "11111",
+                "name": "Test User",
+                "login": "testuser@example.com"
+            },
+            "created_at": "2013-11-14T16:16:20-08:00",
+            "modified_at": "2013-11-14T16:16:20-08:00",
+            "expires_at": null,
+            "status": "accepted",
+            "accessible_by": {
+                "type": "group",
+                "id": "22222",
+                "name": "Test Group"
+            },
+            "role": "viewer",
+            "acknowledged_at": "2013-11-14T16:16:20-08:00",
+            "item": {
+                "type": "folder",
+                "id": "33333",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Test Folder"
+            }
+        }
+    ],
+    "offset": 0,
+    "limit": 100
+}

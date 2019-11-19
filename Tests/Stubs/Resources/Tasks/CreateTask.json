@@ -1,0 +1,32 @@
+{
+    "type": "task",
+    "id": "11111",
+    "item": {
+        "type": "file",
+        "id": "22222",
+        "file_version": {
+            "type": "file_version",
+            "id": "33333",
+            "sha1": "0bbd79a105c504f99573e3799756debba4c760cd"
+        },
+        "sequence_id": "0",
+        "etag": "0",
+        "sha1": "0bbd79a105c504f99573e3799756debba4c760cd",
+        "name": "box-logo.png"
+    },
+    "due_at": "2014-04-03T11:09:43-07:00",
+    "action": "review",
+    "message": "Please review.",
+    "task_assignment_collection": {
+        "total_count": 0,
+        "entries": []
+    },
+    "is_completed": false,
+    "created_by": {
+        "type": "user",
+        "id": "44444",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    },
+    "created_at": "2013-04-03T11:12:54-07:00"
+}

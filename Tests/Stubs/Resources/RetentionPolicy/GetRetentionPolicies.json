@@ -1,0 +1,11 @@
+{
+    "entries": [
+        {
+            "type": "retention_policy",
+            "id": "123456789",
+            "name": "Tax Documents"
+        }
+    ],
+    "limit": 100,
+    "next_marker": "someMarkerString"
+}

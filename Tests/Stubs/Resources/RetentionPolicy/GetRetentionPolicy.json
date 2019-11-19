@@ -1,0 +1,33 @@
+{
+    "type": "retention_policy",
+    "id": "103",
+    "policy_name": "somePolicy",
+    "policy_type": "finite",
+    "retention_length": 10,
+    "disposition_action": "permanently_delete",
+    "status": "active",
+    "can_owner_extend_retention": true,
+    "are_owners_notified": true,
+    "custom_notification_recipients":
+    [
+        {
+            "type": "user",
+            "id": "960",
+            "name": "Unit Test User File Owner 2",
+            "login": "boxautomatedqa+fileowner2@gmail.com"
+        },
+        {
+            "type": "user",
+            "id": "962",
+            "name": "Unit Test User File Owner 3",
+            "login": "boxautomatedqa+fileowner3@gmail.com"
+        }
+    ],
+    "created_by":
+    {
+        "type": "user",
+        "id": "958",
+        "name": "Unit Test User File Owner 1",
+        "login": "boxautomatedqa+fileowner1@gmail.com"
+    }
+}

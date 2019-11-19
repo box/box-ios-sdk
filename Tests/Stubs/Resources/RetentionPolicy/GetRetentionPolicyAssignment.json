@@ -1,0 +1,19 @@
+{
+    "id": "11446498",
+    "type": "retention_policy_assignment",
+    "retention_policy": {
+        "id": "11446498",
+        "type": "retention_policy",
+        "policy_name": "Some Policy Name"
+    },
+    "assigned_to": {
+        "id": "11446498"
+    },
+    "assigned_by": {
+        "id": "11111",
+        "type": "user",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    },
+    "assigned_at": "2012-12-12T10:53:43-08:00"
+}

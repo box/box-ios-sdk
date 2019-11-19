@@ -1,0 +1,56 @@
+{
+    "templateKey": "customer",
+    "scope": "enterprise_490685",
+    "displayName": "Client",
+    "fields": [
+        {
+            "type": "string",
+            "key": "customerTeam",
+            "displayName": "Customer team",
+            "hidden": false
+        },
+        {
+            "type": "multiSelect",
+            "key": "fy",
+            "displayName": "FY",
+            "options": [
+                {
+                    "key": "FY11"
+                },
+                {
+                    "key": "FY12"
+                },
+                {
+                    "key": "FY13"
+                },
+                {
+                    "key": "FY14"
+                },
+                {
+                    "key": "FY15"
+                }
+            ],
+            "hidden": false
+        },
+        {
+            "type": "enum",
+            "key": "qtr",
+            "displayName": "Qtr",
+            "options": [
+                {
+                    "key": "First"
+                },
+                {
+                    "key": "Second"
+                },
+                {
+                    "key": "Third"
+                },
+                {
+                    "key": "Fourth"
+                }
+            ],
+            "hidden": false
+        }
+    ]
+}

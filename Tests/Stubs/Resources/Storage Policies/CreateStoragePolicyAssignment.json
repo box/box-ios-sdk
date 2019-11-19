@@ -1,0 +1,12 @@
+{
+    "type": "storage_policy_assignment",
+    "id": "user_309387087",
+    "storage_policy": {
+        "type": "storage_policy",
+        "id": "12"
+    },
+    "assigned_to": {
+        "type": "user",
+        "id": "3093450887"
+    }
+}

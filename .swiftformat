@@ -1,0 +1,21 @@
+#
+# SwiftFormat configuration file
+# https://github.com/nicklockwood/SwiftFormat
+#
+# Feel free to send pull request or suggest improvements!
+#
+# To run this only go to terminal swiftformat .
+#
+
+# format options
+--allman false
+--commas inline
+
+# file options
+--exclude Pods,**/*generated.swift,**/fastlane,SampleApps
+
+# rules
+--disable blankLinesAroundMark
+--disable blankLinesAtStartOfScope
+--wraparguments before-first
+--elseposition next-line

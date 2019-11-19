@@ -1,0 +1,31 @@
+{
+    "total_count": 57,
+    "entries": [{
+        "type": "folder",
+        "id": "11111",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "Test Folder"
+    }, {
+        "type": "file",
+        "id": "22222",
+        "file_version": {
+            "type": "file_version",
+            "id": "472444342408",
+            "sha1": "5478aadc5202bc47aab00de0d49c9cc42837d12b"
+        },
+        "sequence_id": "0",
+        "etag": "0",
+        "sha1": "5478aadc5202bc47aab00de0d49c9cc42837d12b",
+        "name": "test.jpeg"
+    }],
+    "offset": 2,
+    "limit": 2,
+    "order": [{
+        "by": "type",
+        "direction": "ASC"
+    }, {
+        "by": "name",
+        "direction": "ASC"
+    }]
+}

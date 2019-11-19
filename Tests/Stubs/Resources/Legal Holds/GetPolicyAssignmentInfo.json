@@ -1,0 +1,21 @@
+{
+    "type": "legal_hold_policy_assignment",
+    "id": "1234",
+    "legal_hold_policy": {
+        "type": "legal_hold_policy",
+        "id": "166757",
+        "policy_name": "Bug Bash 5-12 Policy 3 updated"
+    },
+    "assigned_to": {
+        "type": "user",
+        "id": "12445325"
+    },
+    "assigned_by": {
+        "type": "user",
+        "id": "11111",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    },
+    "assigned_at": "2016-05-18T10:32:19-07:00",
+    "deleted_at": null
+}

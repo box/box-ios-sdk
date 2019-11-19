@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BoxError Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/BoxError" class="dashAnchor"></a>
+    <a title="BoxError Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BoxSDK Docs</a> (95% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BoxError Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxCollection.html">BoxCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest/BodyType.html">– BodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html#/s:6BoxSDKAAC9ConstantsO">– Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration.html">Collaboration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationItem.html">CollaborationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaborator.html">Collaborator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Comment.html">Comment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentItem.html">CommentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentsModule.html">CommentsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DelegatedAuthSession.html">DelegatedAuthSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailAlias.html">EmailAlias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainerInnerModel.html">EntryContainerInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderItem/FolderItemType.html">– FolderItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/InvitabilityLevel.html">– InvitabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/MemberViewabilityLevel.html">– MemberViewabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Invite.html">Invite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KeychainTokenStore.html">KeychainTokenStore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataModule.html">MetadataModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataObject.html">MetadataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataSearchFilter.html">MetadataSearchFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItem.html">RecentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItem/InteractionType.html">– InteractionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItemsModule.html">RecentItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItem.html">SharedItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLinkPermissions.html">SharedLinkPermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TaskAssignment.html">TaskAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrashModule.html">TrashModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadPart.html">UploadPart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadSession.html">UploadSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadSession/UploadSessionEndpoints.html">– UploadSessionEndpoints</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User/TrackingCode.html">– TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UsersModule.html">UsersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink.html">WebLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLinksModule.html">WebLinksModule</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AccessibleBy.html">AccessibleBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxDecodingError.html">BoxDecodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxError.html">BoxError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationRole.html">CollaborationRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationStatus.html">CollaborationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileMetadataOperation.html">FileMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileRepresentationHint.html">FileRepresentationHint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderItemsOrderBy.html">FolderItemsOrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderMetadataOperation.html">FolderMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderUploadEmailAccess.html">FolderUploadEmailAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataFilterBound.html">MetadataFilterBound</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataScope.html">MetadataScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataTemplateOperation.html">MetadataTemplateOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NullableParameter.html">NullableParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchContentType.html">SearchContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchItemType.html">SearchItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchScope.html">SearchScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SyncState.html">SyncState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ThumbnailExtension.html">ThumbnailExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TokenScope.html">TokenScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserRole.html">UserRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxEnum.html">BoxEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LogDestination.html">LogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenStore.html">TokenStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoxAPIError.html">BoxAPIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation.html">FileRepresentation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Info.html">– Info</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/StatusEnum.html">– StatusEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockData.html">LockData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetadataField.html">MetadataField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultipartForm.html">MultipartForm</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16AccessTokenTuplea">AccessTokenTuple</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BoxError</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">BoxError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                </div>
+              </div>
+            <p>Defines error values for the whole SDK</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/API"></a>
+                <a name="//apple_ref/swift/Section/API" class="dashAnchor"></a>
+                <a href="#/API">
+                  <h3 class="section-name">API</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO03apiC0yAcA0A8APIErrorV_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/apiError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO03apiC0yAcA0A8APIErrorV_tcACmF">apiError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Result of an API request. Contains specific BoxAPIError.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">apiError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Structs/BoxAPIError.html">BoxAPIError</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>BoxApiError specifying the issue.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Requests"></a>
+                <a name="//apple_ref/swift/Section/Requests" class="dashAnchor"></a>
+                <a href="#/Requests">
+                  <h3 class="section-name">Requests</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO8encodingyACs0C0_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/encoding(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO8encodingyACs0C0_p_tcACmF">encoding(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Could not encode an object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">encoding</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO8decodingyACs0C0_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/decoding(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO8decodingyACs0C0_p_tcACmF">decoding(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Could not decode an object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">decoding</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Thrown error - either BoxDecodingError or standard swift decoding Error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO19rateLimitMaxRetriesyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/rateLimitMaxRetries" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO19rateLimitMaxRetriesyA2CmF">rateLimitMaxRetries</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Request had its maximum number of retries.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">rateLimitMaxRetries</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO15invalidResponseyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO15invalidResponseyA2CmF">invalidResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Response body was a different type than expected. Usually did not find expected JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO7networkyACSS_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/network(message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO7networkyACSS_tcACmF">network(message:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Network failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">network</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO12expiredTokenyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/expiredToken" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO12expiredTokenyA2CmF">expiredToken</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Access token has expired.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">expiredToken</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO15clientDestroyedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/clientDestroyed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO15clientDestroyedyA2CmF">clientDestroyed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tried to use a BoxClient instance that was already destroyed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">clientDestroyed</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO8notFoundyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/notFound" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO8notFoundyA2CmF">notFound</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Expected result is not found in a valid request response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notFound</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Authentication"></a>
+                <a name="//apple_ref/swift/Section/Authentication" class="dashAnchor"></a>
+                <a href="#/Authentication">
+                  <h3 class="section-name">Authentication</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO14tokenRetrievalyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/tokenRetrieval" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO14tokenRetrievalyA2CmF">tokenRetrieval</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsuccessful token retrieval. Token was not found.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tokenRetrieval</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO20refreshTokenNotFoundyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/refreshTokenNotFound" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO20refreshTokenNotFoundyA2CmF">refreshTokenNotFound</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsuccessful refresh token retrieval. Token was not found in the retrieved TokenInfo object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">refreshTokenNotFound</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO18unauthorizedAccessyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/unauthorizedAccess" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO18unauthorizedAccessyA2CmF">unauthorizedAccess</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unauthorized request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unauthorizedAccess</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO33invalidOAuthRedirectConfigurationyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidOAuthRedirectConfiguration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO33invalidOAuthRedirectConfigurationyA2CmF">invalidOAuthRedirectConfiguration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Failed OAuth web session authorization.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidOAuthRedirectConfiguration</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO17invalidOAuthStateyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidOAuthState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO17invalidOAuthStateyA2CmF">invalidOAuthState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Couldn&rsquo;t obtain authorization code from OAuth web session success result.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidOAuthState</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO07jwtAuthC0yACs0C0_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/jwtAuthError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO07jwtAuthC0yACs0C0_p_tcACmF">jwtAuthError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Authorization with JWT token failed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">jwtAuthError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Thrown error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Common"></a>
+                <a name="//apple_ref/swift/Section/Common" class="dashAnchor"></a>
+                <a href="#/Common">
+                  <h3 class="section-name">Common</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO19instanceDeallocatedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/instanceDeallocated" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO19instanceDeallocatedyA2CmF">instanceDeallocated</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object needed in closure was already deallocated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">instanceDeallocated</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO12invalidValueyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO12invalidValueyA2CmF">invalidValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The provided value is not valid in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidValue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/TokenStore"></a>
+                <a name="//apple_ref/swift/Section/TokenStore" class="dashAnchor"></a>
+                <a href="#/TokenStore">
+                  <h3 class="section-name">TokenStore</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO17tokenStoreFailureyACs0C0_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/tokenStoreFailure(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO17tokenStoreFailureyACs0C0_p_tcACmF">tokenStoreFailure(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Could not finish and operation (write, read or clear) on TokenStore object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">tokenStoreFailure</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Thrown error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Keychain"></a>
+                <a name="//apple_ref/swift/Section/Keychain" class="dashAnchor"></a>
+                <a href="#/Keychain">
+                  <h3 class="section-name">Keychain</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO022keychainDataConversionC0yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/keychainDataConversionError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO022keychainDataConversionC0yA2CmF">keychainDataConversionError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Could not decode or encode data for or from keychain.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">keychainDataConversionError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO017keychainUnhandledC0yACSS_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/keychainUnhandledError(message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO017keychainUnhandledC0yACSS_tcACmF">keychainUnhandledError(message:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unhandled keychain error</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">keychainUnhandledError</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO016keychainUhandledC0yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/keychainUhandledError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO016keychainUhandledC0yA2CmF">keychainUhandledError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unspecified unhandled keychain error</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">keychainUhandledError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO15keychainNoValueyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/keychainNoValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO15keychainNoValueyA2CmF">keychainNoValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Value not found in Keychain.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">keychainNoValue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/File%20representations"></a>
+                <a name="//apple_ref/swift/Section/File representations" class="dashAnchor"></a>
+                <a href="#/File%20representations">
+                  <h3 class="section-name">File representations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A5ErrorO28representationCreationFailedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/representationCreationFailed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A5ErrorO28representationCreationFailedyA2CmF">representationCreationFailed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The file representation could not be made.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">representationCreationFailed</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-08-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,23 @@
+{
+    "entries": [
+        {
+            "type": "legal_hold",
+            "id": "24101"
+        },
+        {
+            "type": "legal_hold",
+            "id": "24105"
+        },
+        {
+            "type": "legal_hold",
+            "id": "24109"
+        }
+    ],
+    "limit": 100,
+    "order": [
+        {
+            "by": "retention_policy_set_id, file_version_id",
+            "direction": "ASC"
+        }
+    ]
+}
