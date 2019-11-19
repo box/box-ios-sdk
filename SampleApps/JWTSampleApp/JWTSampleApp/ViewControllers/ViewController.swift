@@ -83,6 +83,36 @@ extension ViewController {
             cell.textLabel?.text = file.name
             cell.detailTextLabel?.text = String(format: "Date Modified %@", dateFormatter.string(from: file.modifiedAt ?? Date()))
             cell.accessoryType = .none
+            var icon: String
+            switch file.extension {
+            case "boxnote":
+                icon = "boxnote"
+            case "jpg",
+                 "jpeg",
+                 "png",
+                 "tiff",
+                 "tif",
+                 "gif",
+                 "bmp",
+                 "BMPf",
+                 "ico",
+                 "cur",
+                 "xbm":
+                icon = "image"
+            case "pdf":
+                icon = "pdf"
+            case "docx":
+                icon = "word"
+            case "pptx":
+                icon = "powerpoint"
+            case "xlsx":
+                icon = "excel"
+            case "zip":
+                icon = "zip"
+            default:
+                icon = "generic"
+            }
+            cell.imageView?.image = UIImage(named: icon)
         case let .folder(folder):
             cell.textLabel?.text = folder.name
             cell.detailTextLabel?.text = ""
@@ -103,7 +133,7 @@ private extension ViewController {
         client.folders.listItems(
             folderId: BoxSDK.Constants.rootFolder,
             usemarker: true,
-            fields: ["modified_at", "name"]
+            fields: ["modified_at", "name", "extension"]
         ){ [weak self] result in
             guard let self = self else {return}
 
@@ -176,7 +206,7 @@ private extension ViewController {
 //                    completion(.success((accessToken: token, expiresIn: 999)))
 //                }
 //                else {
-//                    completion(.failure(BoxError.tokenRetrieval))
+//                    completion(.failure(customError))
 //                }
 //            }
 //            task.resume()
