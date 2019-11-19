@@ -1,0 +1,25 @@
+{
+    "total_count": 57,
+    "entries": [{
+        "type": "folder",
+        "id": "11111",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "TestFolder"
+    }, {
+        "type": "folder",
+        "id": "22222",
+        "sequence_id": "0",
+        "etag": "0",
+        "name": "My Box Notes"
+    }],
+    "offset": 0,
+    "limit": 2,
+    "order": [{
+        "by": "type",
+        "direction": "ASC"
+    }, {
+        "by": "name",
+        "direction": "ASC"
+    }]
+}

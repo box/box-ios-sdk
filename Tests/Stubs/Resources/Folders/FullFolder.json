@@ -1,0 +1,130 @@
+{
+    "type": "folder",
+    "id": "11111",
+    "etag": "0",
+    "sequence_id": "0",
+    "name": "Test Folder",
+    "created_at": "2013-06-01T15:52:00-07:00",
+    "modified_at": "2019-05-28T12:12:46-07:00",
+    "content_created_at": "2013-06-01T15:52:00-07:00",
+    "content_modified_at": "2019-05-28T12:12:46-07:00",
+    "description": "A folder for testing",
+    "size": 814688861,
+    "path_collection": {
+        "total_count": 1,
+        "entries": [
+            {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+            }
+        ]
+    },
+    "can_non_owners_invite": true,
+    "created_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "modified_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "trashed_at": null,
+    "purged_at": null,
+    "owned_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "shared_link": {
+        "url": "https://app.box.com/s/ago2k14xz23vwcgnhk1u",
+        "download_url": null,
+        "vanity_url": null,
+        "effective_access": "open",
+        "effective_permission": "can_download",
+        "is_password_enabled": false,
+        "unshared_at": null,
+        "download_count": 0,
+        "preview_count": 0,
+        "access": "open",
+        "permissions": {
+            "can_preview": true,
+            "can_download": true
+        }
+    },
+    "folder_upload_email": {
+        "access": "collaborators",
+        "email": "Test_Fo.sidu576dbfn@u.box.com"
+    },
+    "parent": {
+        "type": "folder",
+        "id": "0",
+        "sequence_id": null,
+        "etag": null,
+        "name": "All Files"
+    },
+    "sync_state": "not_synced",
+    "item_status": "active",
+    "has_collaborations": false,
+    "expires_at": null,
+    "permissions": {
+        "can_download": true,
+        "can_upload": true,
+        "can_rename": true,
+        "can_delete": true,
+        "can_share": true,
+        "can_invite_collaborator": true,
+        "can_set_share_access": true
+    },
+    "is_hide_collaborators_enabled": false,
+    "tags": [
+        "test"
+    ],
+    "allowed_shared_link_access_levels": [
+        "collaborators",
+        "open",
+        "company"
+    ],
+    "allowed_shared_link_permissions": [
+        "can_edit",
+        "can_download",
+        "can_preview"
+    ],
+    "shared_link_options": {
+        "default_link_expiration_in": 0,
+        "default_access_level": "company"
+    },
+    "allowed_invitee_roles": [
+        "viewer",
+        "editor",
+        "previewer",
+        "uploader",
+        "previewer uploader",
+        "co-owner",
+        "viewer uploader"
+    ],
+    "default_invitee_role": "editor",
+    "collections": [
+        {
+            "type": "collection",
+            "id": "33333",
+            "name": "Favorites",
+            "collection_type": "favorites"
+        }
+    ],
+    "is_externally_owned": false,
+    "can_widget_email_upload_overwrite_files": false,
+    "watermark_info": {
+        "is_watermarked": false
+    },
+    "file_count": 1238,
+    "is_collaboration_restricted_to_enterprise": true,
+    "can_non_owners_view_collaborators": true
+}

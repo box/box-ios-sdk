@@ -1,0 +1,21 @@
+{
+    "type": "file_version_retention",
+    "id": "12345",
+    "applied_at": "2015-08-06T12:02:24-07:00",
+    "disposition_at": "2016-08-06T11:45:28-07:00",
+    "winning_retention_policy": {
+        "type": "retention_policy",
+        "id": "123",
+        "policy_name": "Tax Documents"
+    },
+    "file_version": {
+        "type": "file_version",
+        "id": "123456",
+        "sha1": "4262d326250e6f440dca43a2337bd4621bad9136"
+    },
+    "file": {
+        "type": "file",
+        "id": "98765",
+        "etag": "2"
+    }
+}

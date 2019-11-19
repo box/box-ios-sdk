@@ -1,0 +1,134 @@
+{
+    "type": "file_version",
+    "id": "11111",
+    "sha1": "66b034c4281cc624495835a3b5cd80edbaaae688",
+    "name": "Screen Shot 2015-08-24 at 11.34.42 AM (1).png",
+    "extension": "png",
+    "size": 105459,
+    "created_at": "2018-05-29T11:40:53-07:00",
+    "modified_at": "2018-05-29T11:40:53-07:00",
+    "modified_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "restored_at": "2018-05-29T11:40:53-07:00",
+    "restored_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "trashed_at": null,
+    "trashed_by": {
+        "type": "user",
+        "id": "22222",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "purged_at": null,
+    "is_package": false,
+    "representations": {
+        "entries": [
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "32x32",
+                    "paged": "false",
+                    "thumb": "true"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/jpg_thumb_32x32"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "94x94",
+                    "paged": "false",
+                    "thumb": "true"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/jpg_thumb_94x94"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "160x160",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/jpg_160x160"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "320x320",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/jpg_320x320"
+                }
+            },
+            {
+                "representation": "jpg",
+                "properties": {
+                    "dimensions": "1024x1024",
+                    "paged": "false",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/jpg_1024x1024"
+                }
+            },
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "1024x1024",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/png_paged_1024x1024"
+                }
+            },
+            {
+                "representation": "png",
+                "properties": {
+                    "dimensions": "2048x2048",
+                    "paged": "true",
+                    "thumb": "false"
+                },
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/png_paged_2048x2048"
+                }
+            },
+            {
+                "representation": "3d",
+                "properties": {},
+                "info": {
+                    "url": "https://api.box.com/2.0/internal_files/99999/versions/11111/representations/3d"
+                }
+            }
+        ]
+    },
+    "watermark_info": {
+        "is_watermarked": false
+    },
+    "authenticated_download_url": "https://dl.boxcloud.com/api/2.0/files/99999/content?version=11111",
+    "permissions": {
+        "can_download": true,
+        "can_preview": true,
+        "can_delete": true,
+        "can_annotate": false,
+        "can_view_annotations_all": true,
+        "can_view_annotations_self": true
+    },
+    "version_number": "2",
+    "is_download_available": true
+}

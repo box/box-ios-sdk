@@ -1,0 +1,54 @@
+{
+    "type": "user",
+    "id": "22222",
+    "name": "Example User",
+    "login": "user@example.com",
+    "created_at": "2012-06-07T11:14:50-07:00",
+    "modified_at": "2019-06-17T15:30:56-07:00",
+    "role": "user",
+    "language": "en",
+    "timezone": "America/Los_Angeles",
+    "space_amount": 1000000000000000,
+    "space_used": 18236190421,
+    "max_upload_size": 34359738368,
+    "tracking_codes": [
+        {
+            "type": "tracking_code",
+            "name": "foo",
+            "value": "bar"
+        }
+    ],
+    "can_see_managed_users": true,
+    "is_sync_enabled": true,
+    "can_manage_relay": null,
+    "status": "active",
+    "job_title": "Software Engineer",
+    "phone": "5555555555",
+    "address": "900 Jefferson Ave",
+    "website": null,
+    "avatar_url": "https://cloud.app.box.com/api/avatar/large/22222",
+    "is_exempt_from_device_limits": false,
+    "is_exempt_from_login_verification": false,
+    "enterprise": {
+        "type": "enterprise",
+        "id": "12345",
+        "name": "Box Enterprise"
+    },
+    "reseller_representative_info": null,
+    "is_password_reset_required": false,
+    "is_deactivated": false,
+    "deactivated_reason": "",
+    "has_custom_avatar": true,
+    "is_boxnotes_creation_enabled": true,
+    "is_default_notes_shared_link_editable": true,
+    "my_tags": [
+        "foo"
+    ],
+    "hostname": "https://cloud.app.box.com/",
+    "is_external_collab_restricted": false,
+    "is_platform_access_only": false,
+    "external_app_user_id": null,
+    "is_subscribed_to_relay": false,
+    "last_login_at": "2019-06-17T15:30:56-07:00",
+    "notification_email": null
+}

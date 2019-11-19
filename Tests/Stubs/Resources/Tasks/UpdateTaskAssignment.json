@@ -1,0 +1,34 @@
+{
+    "type": "task_assignment",
+    "id": "11111",
+    "item": {
+        "type": "file",
+        "id": "22222",
+        "file_version": {
+            "type": "file_version",
+            "id": "33333",
+            "sha1": "7840095ee096ee8297676a138d4e316eabb3ec96"
+        },
+        "sequence_id": "0",
+        "etag": "0",
+        "sha1": "7840095ee096ee8297676a138d4e316eabb3ec96",
+        "name": "testfile.pdf"
+    },
+    "assigned_to": {
+        "type": "user",
+        "id": "12345",
+        "name": "testuser@example.com",
+        "login": "testuser@example.com"
+    },
+    "message": "Test Message",
+    "completed_at": null,
+    "assigned_at": "2013-05-10T11:43:41-07:00",
+    "reminded_at": null,
+    "resolution_state": "incomplete",
+    "assigned_by": {
+        "type": "user",
+        "id": "55555",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "total_parts": 3,
+  "part_size": 8388608,
+  "session_endpoints": {
+    "list_parts": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658/parts",
+    "commit": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658/commit",
+    "log_event": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658/log",
+    "upload_part": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658",
+    "status": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658",
+    "abort": "https://upload.box.com/api/2.0/files/upload_sessions/D5E3F7ADA11A38F0A66AD0B64AACA658"
+  },
+  "session_expires_at": "2017-11-09T21:59:16Z",
+  "id": "D5E3F7ADA11A38F0A66AD0B64AACA658",
+  "type": "upload_session",
+  "num_parts_processed": 0
+}

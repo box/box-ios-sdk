@@ -1,0 +1,22 @@
+{
+    "type": "group_membership",
+    "id": "12345",
+    "user": {
+        "type": "user",
+        "id": "54321",
+        "name": "Test User",
+        "login": "testuser@example.com"
+    },
+    "group": {
+        "type": "group",
+        "id": "11111",
+        "name": "Test"
+    },
+    "role": "admin",
+    "configurable_permissions": {
+        "can_run_reports": true,
+        "can_instant_login": true,
+        "can_create_accounts": false,
+        "can_edit_accounts": true
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "total_count": 2,
+    "entries": [
+        {
+            "type": "group_membership",
+            "id": "12345",
+            "user": {
+                "type": "user",
+                "id": "11111",
+                "name": "Test User",
+                "login": "testuser@example.com"
+            },
+            "group": {
+                "type": "group",
+                "id": "22222",
+                "name": "Test Group"
+            },
+            "role": "member"
+        },
+        {
+            "type": "group_membership",
+            "id": "54321",
+            "user": {
+                "type": "user",
+                "id": "33333",
+                "name": "Test User 2",
+                "login": "testuser2@example.com"
+            },
+            "group": {
+                "type": "group",
+                "id": "55555",
+                "name": "Test Group 2"
+            },
+            "role": "member"
+        }
+    ],
+    "offset": 0,
+    "limit": 100
+}
