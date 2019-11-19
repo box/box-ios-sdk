@@ -1,5 +1,14 @@
 Changelog
 =========
+## v3.0.0 [2019-11-18]
+
+__Breaking Changes:__
+
+
+__New Features and Enhancements:__
+
+- Added file specific icons for the Sample Apps.
+
 
 ## v3.0.0-rc.3 [2019-11-14]
 
