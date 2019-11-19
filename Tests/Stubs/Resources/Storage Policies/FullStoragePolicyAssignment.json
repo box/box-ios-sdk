@@ -1,0 +1,12 @@
+{
+    "type": "storage_policy_assignment",
+    "id": "enterprise_36907420",
+    "storage_policy": {
+        "type": "storage_policy",
+        "id": "123"
+    },
+    "assigned_to": {
+        "type": "enterprise",
+        "id": "12345"
+    }
+}

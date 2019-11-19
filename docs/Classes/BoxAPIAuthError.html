@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BoxAPIAuthError Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BoxAPIAuthError" class="dashAnchor"></a>
+    <a title="BoxAPIAuthError Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BoxSDK Docs</a> (91% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BoxAPIAuthError Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxAPIAuthError.html">BoxAPIAuthError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxAPIError.html">BoxAPIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxCodingError.html">BoxCodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxCollection.html">BoxCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkError.html">BoxNetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxRequest/BodyType.html">– BodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK/Constants.html">– Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDKError.html">BoxSDKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration.html">Collaboration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration/AcceptanceRequirementsStatus.html">– AcceptanceRequirementsStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration/TermsOfServiceRequirement.html">– TermsOfServiceRequirement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration/StrongPasswordRequirement.html">– StrongPasswordRequirement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaboration/TwoFactorAuthenticationRequirement.html">– TwoFactorAuthenticationRequirement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationWhitelistModule.html">CollaborationWhitelistModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Collaborator.html">Collaborator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionsModule.html">CollectionsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Comment.html">Comment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CommentsModule.html">CommentsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConsoleLogDestination.html">ConsoleLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DelegatedAuthSession.html">DelegatedAuthSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DevicePin.html">DevicePin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DevicePinsModule.html">DevicePinsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailAlias.html">EmailAlias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EntryContainerInnerModel.html">EntryContainerInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Event.html">Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventContainer.html">EventContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventItem.html">EventItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventItem/EventItemType.html">– EventItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventsModule.html">EventsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/File/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersionLegalHold.html">FileVersionLegalHold</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileVersionRetention.html">FileVersionRetention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/GroupType.html">– GroupType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupMembership.html">GroupMembership</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupMembership/ConfigurablePermissions.html">– ConfigurablePermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupsModule.html">GroupsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Invite.html">Invite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KeychainTokenStore.html">KeychainTokenStore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicy.html">LegalHoldPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicy/AssignmentCounts.html">– AssignmentCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicy/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignment.html">LegalHoldPolicyAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldPolicyAssignmentItem.html">LegalHoldPolicyAssignmentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LegalHoldsModule.html">LegalHoldsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MarkerPaginationIterator.html">MarkerPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataCascadePolicy.html">MetadataCascadePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataCascadePolicyModule.html">MetadataCascadePolicyModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataModule.html">MetadataModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataObject.html">MetadataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataSearchFilter.html">MetadataSearchFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OffsetPaginationIterator.html">OffsetPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaginationIterator.html">PaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PollingResult.html">PollingResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PollingURLInfo.html">PollingURLInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItem.html">RecentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItem/InteractionType.html">– InteractionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RecentItemsModule.html">RecentItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RetentionPoliciesModule.html">RetentionPoliciesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RetentionPolicy.html">RetentionPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RetentionPolicyAssignment.html">RetentionPolicyAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RetentionPolicyAssignmentItem.html">RetentionPolicyAssignmentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RetentionPolicyEntry.html">RetentionPolicyEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItem.html">SharedItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedItemsModule.html">SharedItemsModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StoragePolicy.html">StoragePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StoragePolicyAssignment.html">StoragePolicyAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StoragePolicyAssignment/AssignedTo.html">– AssignedTo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StreamPaginationIterator.html">StreamPaginationIterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TaskAssignment.html">TaskAssignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TasksModule.html">TasksModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TermsOfService.html">TermsOfService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TermsOfServiceUserStatus.html">TermsOfServiceUserStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TermsOfServicesModule.html">TermsOfServicesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrashModule.html">TrashModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadPart.html">UploadPart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadSession.html">UploadSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadSession/UploadSessionEndpoints.html">– UploadSessionEndpoints</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User/TrackingCode.html">– TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UsersModule.html">UsersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Watermark.html">Watermark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink.html">WebLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebLinksModule.html">WebLinksModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Webhook.html">Webhook</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Webhook/EventTriggers.html">– EventTriggers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AccessibleBy.html">AccessibleBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxAPIAuthErrorEnum.html">BoxAPIAuthErrorEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxAPIErrorEnum.html">BoxAPIErrorEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxCodingErrorEnum.html">BoxCodingErrorEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxNetworkErrorEnum.html">BoxNetworkErrorEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationDirection.html">CollaborationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationItem.html">CollaborationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationRole.html">CollaborationRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CollaborationStatus.html">CollaborationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CommentItem.html">CommentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ConflictResolution.html">ConflictResolution</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/DispositionAction.html">DispositionAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EventObserverResponse.html">EventObserverResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EventType.html">EventType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileMetadataOperation.html">FileMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileRepresentationHint.html">FileRepresentationHint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderItemsOrderBy.html">FolderItemsOrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderMetadataOperation.html">FolderMetadataOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderUploadEmailAccess.html">FolderUploadEmailAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GroupInvitabilityLevel.html">GroupInvitabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GroupMemberViewabilityLevel.html">GroupMemberViewabilityLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GroupRole.html">GroupRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataFilterBound.html">MetadataFilterBound</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataScope.html">MetadataScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetadataTemplateOperation.html">MetadataTemplateOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NullableParameter.html">NullableParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RetentionPolicyStatus.html">RetentionPolicyStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchContentType.html">SearchContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchItemType.html">SearchItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SearchScope.html">SearchScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StreamPosition.html">StreamPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StreamType.html">StreamType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SyncState.html">SyncState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TaskAction.html">TaskAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TaskCompletionRule.html">TaskCompletionRule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TaskItem.html">TaskItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TermsOfServiceStatus.html">TermsOfServiceStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TermsOfServiceType.html">TermsOfServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ThumbnailExtension.html">ThumbnailExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TokenScope.html">TokenScope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserRole.html">UserRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/WebhookItem.html">WebhookItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxEnum.html">BoxEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LogDestination.html">LogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenStore.html">TokenStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoxRequestDescription.html">BoxRequestDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxResponseDescription.html">BoxResponseDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxSDKConfiguration.html">BoxSDKConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxURLComponents.html">BoxURLComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClientAnalyticsInfo.html">ClientAnalyticsInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConfigurablePermissionData.html">ConfigurablePermissionData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation.html">FileRepresentation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Info.html">– Info</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileRepresentation/StatusEnum.html">– StatusEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockData.html">LockData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetadataField.html">MetadataField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetadataFieldFilter.html">MetadataFieldFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultipartForm.html">MultipartForm</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16AccessTokenTuplea">AccessTokenTuple</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK20DelegatedAuthClosurea">DelegatedAuthClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BoxAPIAuthError</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxAPIAuthError</span> <span class="p">:</span> <span class="kt"><a href="../Classes/BoxAPIError.html">BoxAPIError</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Describes authentication errors.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A12APIAuthErrorC14apiAuthMessageAA0acD4EnumOvp"></a>
+                    <a name="//apple_ref/swift/Property/apiAuthMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A12APIAuthErrorC14apiAuthMessageAA0acD4EnumOvp">apiAuthMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">apiAuthMessage</span><span class="p">:</span> <span class="kt"><a href="../Enums/BoxAPIAuthErrorEnum.html">BoxAPIAuthErrorEnum</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A12APIAuthErrorC13getDictionarySDySSypGyF"></a>
+                    <a name="//apple_ref/swift/Method/getDictionary()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A12APIAuthErrorC13getDictionarySDySSypGyF">getDictionary()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">getDictionary</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

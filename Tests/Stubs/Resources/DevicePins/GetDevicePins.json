@@ -1,0 +1,34 @@
+{
+    "entries": [
+        {
+            "type": "device_pinner",
+            "id": "12345",
+            "owned_by": {
+                "type": "user",
+                "id": "54321",
+                "name": "Test User",
+                "login": "testuser@example.com"
+            },
+            "product_name": "Test"
+        },
+        
+        {
+            "type": "device_pinner",
+            "id": "88888",
+            "owned_by": {
+                "type": "user",
+                "id": "11111",
+                "name": "Test User 2",
+                "login": "testuser2@example.com"
+            },
+            "product_name": "Test 2"
+        }
+    ],
+    "limit": 100,
+    "order": [
+        {
+            "by": "id",
+            "direction": "ASC"
+        }
+    ]
+}

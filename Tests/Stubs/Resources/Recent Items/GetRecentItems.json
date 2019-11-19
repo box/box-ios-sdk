@@ -1,0 +1,48 @@
+{
+    "next_marker": "",
+    "limit": 100,
+    "order": {
+        "by": "interacted_at",
+        "direction": "DESC"
+    },
+    "entries": [
+        {
+            "type": "recent_item",
+            "interaction_type": "item_preview",
+            "interacted_at": "2017-06-06T15:46:28-07:00",
+            "item": {
+                "type": "file",
+                "id": "181937331928",
+                "file_version": {
+                    "type": "file_version",
+                    "id": "192865288152",
+                    "sha1": "d0a8c75ba72bf923bfb0c855bbcf1e8f7cc817dd"
+                },
+                "sequence_id": "0",
+                "etag": "0",
+                "sha1": "d0a8c75ba72bf923bfb0c855bbcf1e8f7cc817dd",
+                "name": "File2.txt"
+            },
+            "interaction_shared_link": null
+        },
+        {
+            "type": "recent_item",
+            "interaction_type": "item_preview",
+            "interacted_at": "2017-06-06T15:46:27-07:00",
+            "item": {
+                "type": "file",
+                "id": "181937443182",
+                "file_version": {
+                    "type": "file_version",
+                    "id": "192865400174",
+                    "sha1": "12a715416bc96ba3ea860480c815657d5e0809da"
+                },
+                "sequence_id": "0",
+                "etag": "0",
+                "sha1": "12a715416bc96ba3ea860480c815657d5e0809da",
+                "name": "Image1.png"
+            },
+            "interaction_shared_link": null
+        }
+    ]
+}

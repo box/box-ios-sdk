@@ -1,0 +1,19 @@
+{
+    "type": "file",
+    "id": "5000948880",
+    "shared_link": {
+        "url": "https://www.box.com/s/rh935iit6ewrmw0unyul",
+        "download_url": "https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg",
+        "vanity_url": null,
+        "is_password_enabled": true,
+        "unshared_at": null,
+        "download_count": 0,
+        "preview_count": 0,
+        "access": "open",
+        "permissions": {
+            "can_download": true,
+            "can_preview": true
+        }
+    }
+}
+

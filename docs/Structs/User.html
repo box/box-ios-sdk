@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>User Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/User" class="dashAnchor"></a>
+    <a title="User Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BoxSDK Docs</a> (12% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BoxSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        User Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthModule.html">AuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxClient.html">BoxClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxSDK.html">BoxSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FieldsQueryParams.html">FieldsQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FilesModule.html">FilesModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FoldersModule.html">FoldersModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ObjectDeserializer.html">ObjectDeserializer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SingleTokenSession.html">SingleTokenSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TokenInfo.html">TokenInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UsersModule.html">UsersModule</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK9emptyBodyAA0a5EmptyD0Vvp">emptyBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK16emptyHTTPHeadersSDyS2SGvp">emptyHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK16emptyQueryParamsAA0a5EmptydE0Vvp">emptyQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK13emptyResponseAA0a5EmptyD0Vvp">emptyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK18prettyPrintEncoder10Foundation11JSONEncoderCvp">prettyPrintEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK21queryParameterDecoder10Foundation11JSONDecoderCvp">queryParameterDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK21queryParameterEncoder10Foundation11JSONEncoderCvp">queryParameterEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK18requestBodyEncoder10Foundation11JSONEncoderCvp">requestBodyEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:6BoxSDK19responseBodyDecoder10Foundation11JSONDecoderCvp">responseBodyDecoder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Box.html">Box</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxError.html">BoxError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BoxHTTPHeaderKey.html">BoxHTTPHeaderKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Constants.html">Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FolderItem.html">FolderItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HTTPMethod.html">HTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemStatus.html">ItemStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ItemType.html">ItemType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogCategory.html">LogCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogSubsystem.html">LogSubsystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderBy.html">OrderBy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OrderDirection.html">OrderDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/QueryParameter.html">QueryParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/QueryParameterEncoder.html">QueryParameterEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxClientProtocol.html">BoxClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SessionProtocol.html">SessionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TokenRefreshing.html">TokenRefreshing</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A9EmptyBodyV">BoxEmptyBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A16EmptyQueryParamsV">BoxEmptyQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:6BoxSDK0A13EmptyResponseV">BoxEmptyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxRequest.html">BoxRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoxResponse.html">BoxResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CopyFileData.html">CopyFileData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateFolderData.html">CreateFolderData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteFolderQueryParams.html">DeleteFolderQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enterprise.html">Enterprise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntryContainer.html">EntryContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExpiringEmbedLink.html">ExpiringEmbedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileVersion.html">FileVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetFolderItemsQueryParams.html">GetFolderItemsQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Order.html">Order</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PathCollection.html">PathCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Scope.html">Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLink.html">SharedLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SharedLinkPermissions.html">SharedLinkPermissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Token.html">Token</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrackingCode.html">TrackingCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateFileInfoData.html">UpdateFileInfoData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UploadFileData.html">UploadFileData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/VersionQueryParams.html">VersionQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WebLink.html">WebLink</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK18AccessTokenClosurea">AccessTokenClosure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6BoxSDK16TokenInfoClosurea">TokenInfoClosure</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>User</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">User</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV4typeAA8ItemTypeOvp"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV4typeAA8ItemTypeOvp">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ItemType.html">ItemType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV2idSSvp"></a>
+                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV2idSSvp">id</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV4nameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV4nameSSSgvp">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV5loginSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/login" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV5loginSSSgvp">login</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">login</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV9createdAt10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/createdAt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV9createdAt10Foundation4DateVSgvp">createdAt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">createdAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV10modifiedAt10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modifiedAt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV10modifiedAt10Foundation4DateVSgvp">modifiedAt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">modifiedAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV8languageSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/language" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV8languageSSSgvp">language</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV8timezoneSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/timezone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV8timezoneSSSgvp">timezone</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">timezone</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV11spaceAmountSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/spaceAmount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV11spaceAmountSiSgvp">spaceAmount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">spaceAmount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV9spaceUsedSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/spaceUsed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV9spaceUsedSiSgvp">spaceUsed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">spaceUsed</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV13maxUploadSizeSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/maxUploadSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV13maxUploadSizeSiSgvp">maxUploadSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">maxUploadSize</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV6statusSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV6statusSSSgvp">status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV8jobTitleSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/jobTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV8jobTitleSSSgvp">jobTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">jobTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV5phoneSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/phone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV5phoneSSSgvp">phone</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">phone</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV7addressSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/address" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV7addressSSSgvp">address</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">address</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV9avatarUrl10Foundation3URLVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/avatarUrl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV9avatarUrl10Foundation3URLVSgvp">avatarUrl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">avatarUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV4roleSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/role" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV4roleSSSgvp">role</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">role</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV13trackingCodesSayAA12TrackingCodeVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/trackingCodes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV13trackingCodesSayAA12TrackingCodeVGSgvp">trackingCodes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">trackingCodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TrackingCode.html">TrackingCode</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV18canSeeManagedUsersSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/canSeeManagedUsers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV18canSeeManagedUsersSbSgvp">canSeeManagedUsers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">canSeeManagedUsers</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV13isSyncEnabledSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isSyncEnabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV13isSyncEnabledSbSgvp">isSyncEnabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isSyncEnabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV26isExternalCollabRestrictedSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isExternalCollabRestricted" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV26isExternalCollabRestrictedSbSgvp">isExternalCollabRestricted</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isExternalCollabRestricted</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV25isExemptFromDeviceLimitesSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isExemptFromDeviceLimites" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV25isExemptFromDeviceLimitesSbSgvp">isExemptFromDeviceLimites</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isExemptFromDeviceLimites</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV30isExemptFromLoginVerificiationSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isExemptFromLoginVerificiation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV30isExemptFromLoginVerificiationSbSgvp">isExemptFromLoginVerificiation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isExemptFromLoginVerificiation</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV10enterpriseAA10EnterpriseVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/enterprise" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV10enterpriseAA10EnterpriseVSgvp">enterprise</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">enterprise</span><span class="p">:</span> <span class="kt"><a href="../Structs/Enterprise.html">Enterprise</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV6myTagsSaySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/myTags" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV6myTagsSaySSGSgvp">myTags</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">myTags</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV8hostnameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/hostname" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV8hostnameSSSgvp">hostname</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">hostname</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV20isPlatformAccessOnlySbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isPlatformAccessOnly" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV20isPlatformAccessOnlySbSgvp">isPlatformAccessOnly</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isPlatformAccessOnly</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV6clientAA0A6ClientCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/client" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV6clientAA0A6ClientCSgvp">client</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">client</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/User%20API%20Requests"></a>
+                <a name="//apple_ref/swift/Section/User API Requests" class="dashAnchor"></a>
+                <a href="#/User%20API%20Requests">
+                  <h3 class="section-name">User API Requests</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK4UserV7getInfo6fields10completionySaySSGSg_ys6ResultOyAcA0A5ErrorOGctF"></a>
+                    <a name="//apple_ref/swift/Method/getInfo(fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK4UserV7getInfo6fields10completionySaySSGSg_ys6ResultOyAcA0A5ErrorOGctF">getInfo(fields:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getInfo</span><span class="p">(</span><span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt"><a href="../Enums/BoxError.html">BoxError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-04-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

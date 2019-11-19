@@ -1,0 +1,21 @@
+{
+    "entries": [
+        {
+            "type": "legal_hold_policy",
+            "id": "16687",
+            "policy_name": "Policy 1"
+        },
+        {
+            "type": "legal_hold_policy",
+            "id": "16681",
+            "policy_name": "Policy 2"
+        }
+    ],
+    "limit": 3,
+    "order": [
+        {
+            "by": "policy_name",
+            "direction": "ASC"
+        }
+    ]
+}

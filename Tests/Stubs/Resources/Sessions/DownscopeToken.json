@@ -1,0 +1,40 @@
+{
+    "access_token": "qwertyuiop",
+    "expires_in": 3964,
+    "token_type": "bearer",
+    "restricted_to": [
+        {
+            "scope": "item_preview",
+            "object": {
+                "type": "file",
+                "id": "5391641209",
+                "file_version": {
+                    "type": "file_version",
+                    "id": "619573369",
+                    "sha1": "c85ef6489c090ff71cda537bfbac47f1df721bba"
+                },
+                "sequence_id": "0",
+                "etag": "0",
+                "sha1": "c85ef6489c090ff71cda537bfbac47f1df721bba",
+                "name": "finland.JPG"
+            }
+        },
+        {
+            "scope": "item_upload",
+            "object": {
+                "type": "file",
+                "id": "5391641209",
+                "file_version": {
+                    "type": "file_version",
+                    "id": "619573369",
+                    "sha1": "c85ef6489c090ff71cda537bfbac47f1df721bba"
+                },
+                "sequence_id": "0",
+                "etag": "0",
+                "sha1": "c85ef6489c090ff71cda537bfbac47f1df721bba",
+                "name": "finland.JPG"
+            }
+        }
+    ],
+    "issued_token_type": "urn:ietf:params:oauth:token-type:access_token"
+}

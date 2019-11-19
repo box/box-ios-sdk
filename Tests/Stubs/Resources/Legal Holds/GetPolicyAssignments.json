@@ -1,0 +1,10 @@
+{
+    "entries": [
+        {
+            "type": "legal_hold_policy_assignment",
+            "id": "25573"
+        }
+    ],
+    "limit": 100,
+    "next_marker": "someMarkerString"
+}

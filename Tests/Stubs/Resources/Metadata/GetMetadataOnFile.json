@@ -1,0 +1,15 @@
+{
+    "audience1": "internal",
+    "documentType": "Q1 plans",
+    "competitiveDocument": "no",
+    "status": "active",
+    "author": "Jones",
+    "currentState": "proposal",
+    "$type": "marketingCollateral-d086c908-2498-4d3e-8a1f-01e82bfc2abe",
+    "$parent": "file_5010739061",
+    "$id": "2094c584-68e1-475c-a581-534a4609594e",
+    "$version": 0,
+    "$typeVersion": 0,
+    "$template": "marketingCollateral",
+    "$scope": "enterprise_12345"
+}

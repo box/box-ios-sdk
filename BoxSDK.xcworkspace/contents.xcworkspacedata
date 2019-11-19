@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Readme.md">
+   </FileRef>
+   <FileRef
+      location = "group:docs/usage/getting-started.md">
+   </FileRef>
+   <FileRef
+      location = "group:BoxSDK.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Cartfile">
+   </FileRef>
+   <FileRef
+      location = "group:Cartfile.private">
+   </FileRef>
+   <FileRef
+      location = "group:Cartfile.resolved">
+   </FileRef>
+   <FileRef
+      location = "group:CODE_OF_CONDUCT.md">
+   </FileRef>
+   <FileRef
+      location = "group:CONTRIBUTING.md">
+   </FileRef>
+   <FileRef
+      location = "group:Dangerfile">
+   </FileRef>
+   <FileRef
+      location = "group:Gemfile">
+   </FileRef>
+   <FileRef
+      location = "group:Gemfile.lock">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSES-THIRD-PARTY.txt">
+   </FileRef>
+   <FileRef
+      location = "group:Package.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Package.resolved">
+   </FileRef>
+   <FileRef
+      location = "group:BoxSDK.podspec">
+   </FileRef>
+</Workspace>

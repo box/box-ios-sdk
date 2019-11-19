@@ -1,0 +1,31 @@
+{
+    "total_count": 2,
+    "entries": [
+        {
+            "type": "terms_of_service",
+            "id" : "12345",
+            "status" : "enabled",
+            "enterprise" :  {
+                "id": "11111",
+                "type": "enterprise"
+            },
+            "tos_type" : "managed",
+            "text" : "Example Text",
+            "created_at": "2019-08-18T13:55:09-07:00",
+            "modified_at": "2019-08-18T13:55:09-07:00"
+        },
+        {
+            "type": "terms_of_service",
+            "id" : "88888",
+            "status" : "disabled",
+            "enterprise" :  {
+                "id": "11111",
+                "type": "enterprise"
+            },
+            "tos_type" : "external",
+            "text" : "Example Text 2",
+            "created_at": "2019-08-18T13:55:09-07:00",
+            "modified_at": "2019-08-18T13:55:09-07:00"
+        }
+    ]
+}
