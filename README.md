@@ -6,7 +6,11 @@
  [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-swift-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
 
 Box Swift SDK
+- [Requirements](#requirements)
 - [Installing the SDK](#installing-the-sdk)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+  - [Swift Package Manager](#swift-package-manager)
 - [Getting Started](#getting-started)
 - [Sample Apps](#sample-apps)
   - [OAuth2 Sample App](#oauth2-sample-app)
@@ -15,12 +19,23 @@ Box Swift SDK
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+
+
+Requirements
+------------------
+
+- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+
+- Xcode 10.0+
+
 Installing the SDK
 ------------------
 
+### Carthage
+
 __Step 1__: Add to your `Cartfile`
-```ogdl
-git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
+
+```
+git "https://github.com/box/box-ios-sdk.git" ~> 3.0
 ```
 
 __Step 2__: Update dependencies
@@ -31,6 +46,44 @@ $ carthage update --platform iOS
 __Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+
+### CocoaPods
+
+__Step 1__: Add to your `Podfile`
+
+```
+pod 'BoxSDK', '~> 3.0'
+```
+
+__Step 2__: Install pod by running the following command in the directory with the `Podfile`
+
+```
+$ pod install
+```
+
+For more detailed instructions, please see the [official documentation for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
+
+### Swift Package Manager
+
+#### Importing BoxSDK into Project
+
+__Step 1__: Click on Xcode project file
+
+__Step 2__: Click on Swift Packages and click on the plus to add a package
+
+__Step 3__: Enter the following repository url `https://github.com/box/box-ios-sdk.git` and click next
+
+__Step 4__: Leave the default settings to get the most recent release and click next to finish importing
+
+The process should look like below:
+
+![Import Package](docs/Import_BoxSDK.gif)
+
+
+
+#### Adding BoxSDK as a Dependency
+
+For detailed instructions, please see the [official documentation for SPM](https://swift.org/package-manager/). 
 
 Getting Started
 ---------------
@@ -221,5 +274,4 @@ After a release is no longer being supported by Box, it enters End-of-life (EOL)
 License
 -------
 
-Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
-__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__
+Apache License, Version 2.0
