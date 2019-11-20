@@ -77,7 +77,7 @@ __Step 4__: Leave the default settings to get the most recent release and click 
 
 The process should look like below:
 
-![Import Package](docs/Import BoxSDK.gif)
+![Import Package](docs/Import_BoxSDK.gif)
 
 
 
