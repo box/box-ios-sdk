@@ -79,7 +79,7 @@ __Step 4__: Leave the default settings to get the most recent release and click 
 
 The process should look like below:
 
-![Import Package](/Users/sgarlanka/Documents/SDKs/box-ios-sdk/docs/usage/docs/Import BoxSDK.gif)
+![Import Package](../Import_BoxSDK.gif)
 
 
 
