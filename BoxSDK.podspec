@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   spec.watchos.deployment_target = "4.0"
   spec.tvos.deployment_target = "11.0"
   spec.source       = { :git => "https://github.com/box/box-ios-sdk.git", :tag => "v"+spec.version.to_s }
-  spec.swift_version = '5.0'
+  spec.swift_versions = ["5.0", "5.1"]
   spec.requires_arc = true
 
   spec.default_subspec = "Core"
