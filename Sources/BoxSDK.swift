@@ -176,56 +176,58 @@ public class BoxSDK {
     ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
     ///   - context: The ViewController that is presenting the OAuth request
     ///   - completion: Returns created standard BoxClient object or error
-    @available(iOS 13.0, *)
-    public func getOAuth2Client(
-        tokenInfo: TokenInfo? = nil,
-        tokenStore: TokenStore? = nil,
-        context: ASWebAuthenticationPresentationContextProviding,
-        completion: @escaping Callback<BoxClient>
-    ) {
-        var designatedTokenStore: TokenStore
+    #if os(iOS)
+        @available(iOS 13.0, *)
+        public func getOAuth2Client(
+            tokenInfo: TokenInfo? = nil,
+            tokenStore: TokenStore? = nil,
+            context: ASWebAuthenticationPresentationContextProviding,
+            completion: @escaping Callback<BoxClient>
+        ) {
+            var designatedTokenStore: TokenStore
 
-        if tokenInfo == nil, let unWrappedTokenStore = tokenStore {
-            designatedTokenStore = unWrappedTokenStore
-            designatedTokenStore.read { [weak self] result in
-                guard let self = self else {
-                    completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get OAuth 2 client - BoxSDK deallocated"))))
-                    return
-                }
+            if tokenInfo == nil, let unWrappedTokenStore = tokenStore {
+                designatedTokenStore = unWrappedTokenStore
+                designatedTokenStore.read { [weak self] result in
+                    guard let self = self else {
+                        completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get OAuth 2 client - BoxSDK deallocated"))))
+                        return
+                    }
 
-                switch result {
-                case let .success(tokenInfo):
-                    let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: designatedTokenStore, configuration: self.configuration)
-                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                    switch result {
+                    case let .success(tokenInfo):
+                        let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: designatedTokenStore, configuration: self.configuration)
+                        let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
 
-                    completion(.success(client))
-                case .failure:
-                    self.startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore, context: context)
+                        completion(.success(client))
+                    case .failure:
+                        self.startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore, context: context)
+                    }
                 }
             }
-        }
-        else if let tokenInfo = tokenInfo {
-            designatedTokenStore = tokenStore ?? MemoryTokenStore()
-            designatedTokenStore.write(tokenInfo: tokenInfo) { [weak self] result in
-                guard let self = self else {
-                    completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get OAuth 2 client - BoxSDK deallocated"))))
-                    return
-                }
-                switch result {
-                case .success:
-                    let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: designatedTokenStore, configuration: self.configuration)
-                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
-                    completion(.success(client))
-                case let .failure(error):
-                    completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure, error: error)))
+            else if let tokenInfo = tokenInfo {
+                designatedTokenStore = tokenStore ?? MemoryTokenStore()
+                designatedTokenStore.write(tokenInfo: tokenInfo) { [weak self] result in
+                    guard let self = self else {
+                        completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get OAuth 2 client - BoxSDK deallocated"))))
+                        return
+                    }
+                    switch result {
+                    case .success:
+                        let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: designatedTokenStore, configuration: self.configuration)
+                        let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                        completion(.success(client))
+                    case let .failure(error):
+                        completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure, error: error)))
+                    }
                 }
             }
+            else {
+                designatedTokenStore = MemoryTokenStore()
+                startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore)
+            }
         }
-        else {
-            designatedTokenStore = MemoryTokenStore()
-            startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore)
-        }
-    }
+    #endif
 
     /// Creates BoxClient in a completion with OAuth 2.0 type of authentication
     ///
@@ -286,38 +288,39 @@ public class BoxSDK {
     // swiftlint:enable cyclomatic_complexity
 
     // MARK: - OAuthWebAuthenticationable related
-
-    @available(iOS 13.0, *)
-    func startOAuth2WebSession(completion: @escaping Callback<BoxClient>, tokenStore: TokenStore, context: ASWebAuthenticationPresentationContextProviding) {
-        obtainAuthorizationCodeFromWebSession(context: context) { result in
-            switch result {
-            case let .failure(error):
-                completion(.failure(error))
-            case let .success(authorizationCode):
-                self.auth.getToken(withCode: authorizationCode) { [weak self] result in
-                    guard let self = self else {
-                        completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to start OAuth 2 web session - BoxSDK deallocated"))))
-                        return
-                    }
-                    switch result {
-                    case let .success(tokenInfo):
-                        tokenStore.write(tokenInfo: tokenInfo) { result in
-                            switch result {
-                            case .success:
-                                let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: tokenStore, configuration: self.configuration)
-                                let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
-                                completion(.success(client))
-                            case let .failure(error):
-                                completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure, error: error)))
-                            }
+    #if os(iOS)
+        @available(iOS 13.0, *)
+        func startOAuth2WebSession(completion: @escaping Callback<BoxClient>, tokenStore: TokenStore, context: ASWebAuthenticationPresentationContextProviding) {
+            obtainAuthorizationCodeFromWebSession(context: context) { result in
+                switch result {
+                case let .failure(error):
+                    completion(.failure(error))
+                case let .success(authorizationCode):
+                    self.auth.getToken(withCode: authorizationCode) { [weak self] result in
+                        guard let self = self else {
+                            completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to start OAuth 2 web session - BoxSDK deallocated"))))
+                            return
                         }
-                    case let .failure(error):
-                        completion(.failure(error))
+                        switch result {
+                        case let .success(tokenInfo):
+                            tokenStore.write(tokenInfo: tokenInfo) { result in
+                                switch result {
+                                case .success:
+                                    let session = OAuth2Session(authModule: self.auth, tokenInfo: tokenInfo, tokenStore: tokenStore, configuration: self.configuration)
+                                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                                    completion(.success(client))
+                                case let .failure(error):
+                                    completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure, error: error)))
+                                }
+                            }
+                        case let .failure(error):
+                            completion(.failure(error))
+                        }
                     }
                 }
             }
         }
-    }
+    #endif
 
     func startOAuth2WebSession(completion: @escaping Callback<BoxClient>, tokenStore: TokenStore) {
         obtainAuthorizationCodeFromWebSession { result in
@@ -350,10 +353,10 @@ public class BoxSDK {
         }
     }
 
-    @available(iOS 13.0, *)
-    func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
-        let authorizeURL = makeAuthorizeURL(state: nonce)
-        #if os(iOS)
+    #if os(iOS)
+        @available(iOS 13.0, *)
+        func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
+            let authorizeURL = makeAuthorizeURL(state: nonce)
             webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: defaultCallbackURL, context: context) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
@@ -376,8 +379,8 @@ public class BoxSDK {
             }
 
             webSession?.start()
-        #endif
-    }
+        }
+    #endif
 
     func obtainAuthorizationCodeFromWebSession(completion: @escaping Callback<String>) {
         let authorizeURL = makeAuthorizeURL(state: nonce)

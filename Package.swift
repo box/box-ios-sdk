@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 //
 //  BoxSDK.swift
 //  BoxSDK
@@ -11,6 +11,12 @@ import PackageDescription
 
 let package = Package(
     name: "BoxSDK",
+    platforms: [
+        .iOS(.v11),
+        .macOS(.v10_13),
+        .watchOS(.v4),
+        .tvOS(.v11)
+    ],
     products: [
         .library(
             name: "BoxSDK",
