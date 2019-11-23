@@ -27,7 +27,7 @@ with the ID of the policy.  You can control which fields are returned in the res
 `fields` parameter.
 
 ```swift
-client.legalHolds.get(policyId: "22222", fields: ["name", "created_at"]) { (result: Result<LegalHoldPolicy, BoxError>) in
+client.legalHolds.get(policyId: "22222", fields: ["name", "created_at"]) { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
         print("Error getting policy information")
         return
@@ -41,20 +41,24 @@ Get Legal Hold Policies
 
 To retrieve information about the items contained in a folder, call
 [`client.legalHolds.listForEnterprise(policyName: String, marker: String?, limit: Int?, fields: [String]?)`][get-legal-hold-policies]
-with the ID of the policy.  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the policies in the enterprise.
+with the ID of the policy.  This method will return an iterator object in the completion you can use to retrieve policies in the enterprise.
 
 ```swift
-let legalHoldPolicies = client.legalHolds.listForEnterprise(policyName: "policy1")
-// Get the first page of policies
-legalHoldPolicies.getNextItems() { (result: Result<[LegalHoldPolicy], BoxError>) in
-    guard case let .success(policies) = result else {
-        print("Error getting legal hold policies")
-        return
-    }
-    // Print out first page of policies
-    for policy in legalHoldPolicies {
-        print("Legal hold policy \(policy.name)")
+client.legalHolds.listForEnterprise(policyName: "policy1") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(policy):
+                    print("Legal hold policy \(policy.name)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -67,7 +71,7 @@ To create a new legal hold policy, call
 with a name for the legal hold policy.
 
 ```swift
-client.legalHolds.create(name: "New Folder") { (result: Result<LegalHoldPolicy, BoxError>) in
+client.legalHolds.create(name: "New Folder") { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
         print("Error creating legal hold policy")
         return
@@ -83,7 +87,7 @@ To update legal hold policy, call
 [`client.legalHolds.update(policyId: String, policyName: String?, description: String?, releaseNotes: String?, fields: [String]?, completion: @escaping Callback<LegalHoldPolicy>`][update-legal-hold-policy].
 
 ```swift
-client.legalHolds.update(policyId: "1234", policyName: "New Name") { (result: Result<LegalHoldPolicy, BoxError>) in
+client.legalHolds.update(policyId: "1234", policyName: "New Name") { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
         print("Error updating legal hold policy")
         return
@@ -100,7 +104,7 @@ To delete a legal hold policy, call
 with the ID of the legal hold policy to delete.
 
 ```swift
-client.legalHolds.delete() { result: Result<Void, BoxError>} in
+client.legalHolds.delete() { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
         print("Error deleting legal hold policy")
         return
@@ -118,7 +122,7 @@ with the ID of the policy assignment.  You can control which fields are returned
 `fields` parameter.
 
 ```swift
-client.legalHolds.getPolicyAssignment(assignmentId: "22222", fields: ["assigned_at"]) { (result: Result<LegalHoldPolicyAssignment, BoxError>) in
+client.legalHolds.getPolicyAssignment(assignmentId: "22222", fields: ["assigned_at"]) { (result: Result<LegalHoldPolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error getting policy assignment info")
         return
@@ -132,21 +136,26 @@ Get Policy Assignments
 
 To retrieve legal hold policy assignments, call
 [`client.legalHolds.listPolicyAssignments(policyId: String, assignToType: String?, assignToId: String?, marker: String?, limit: String?, fields: [String]?)`][get-policy-assignments]
-with the ID of a policy.  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the policies assignments for a policy.
+with the ID of a policy.  This method will return an iterator object in the completion that you can use to retrieve policies assignments for a policy.
 
 ```swift
-let policyAssignments = client.legalHolds.listPolicyAssignments(policyId: "1234")
-// Get the first page of policy assignments
-policyAssignments.getNextItems() { (result: Result<[LegalHoldPolicyAssignment], BoxError>) in
-    guard case let .success(assignments) = result else {
-        print("Error getting legal hold policies")
-        return
+client.legalHolds.listPolicyAssignments(policyId: "1234") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(assignment):
+                    print("Policy Assignment \(assignment.id)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
-    // Print out first page of policy assignments
-    for assignment in assignments {
-        print("Policy Assignment \(assignment.id)")
-    }
+
 }
 ```
 
@@ -158,7 +167,7 @@ To assign a legal hold policy, call
 with an ID of a policy, an ID of a file, file version, folder, or user and the type of the box item that the policy is being assigned to.
 
 ```swift
-client.legalHolds.forceApply(policyId: "1234", assignToId: "4568" ,assignToType: "file") { (result: Result<LegalHoldPolicyAssignment, BoxError>) in
+client.legalHolds.forceApply(policyId: "1234", assignToId: "4568" ,assignToType: "file") { (result: Result<LegalHoldPolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error assigning legal hold policy")
         return
@@ -175,7 +184,7 @@ To delete a legal hold policy assignment, call
 with the ID of the policy assignment to delete.
 
 ```swift
-client.legalHolds.deletePolicyAssignment(assignmentId: "1234") { result: Result<Void, BoxError>} in
+client.legalHolds.deletePolicyAssignment(assignmentId: "1234") { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
         print("Error deleting legal hold policy assignment")
         return
@@ -193,7 +202,7 @@ with the ID of legal hold.  You can control which fields are returned in the res
 `fields` parameter.
 
 ```swift
-client.legalHolds.getFileVersionPolicy(legalHoldId: "22222") { (result: Result<FileVersionLegalHold, BoxError>) in
+client.legalHolds.getFileVersionPolicy(legalHoldId: "22222") { (result: Result<FileVersionLegalHold, BoxSDKError>) in
     guard case let .success(legalHold) = result else {
         print("Error getting file version legal hold")
         return
@@ -207,20 +216,24 @@ Get File Version Legal Holds
 
 To retrieve all of the non-deleted legal holds for a single legal hold policy, call
 [`client.legalHolds.listFileVersionPolicies(policyId: String, marker: String?, limit: String?, fields: [String]?)`][get-file-version-legal-holds]
-with the ID of a policy.  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the non-deleted legal holds for a policy.
+with the ID of a policy.  This method will return an iterator object in the completion that you can use to retrieve legal holds for a policy.
 
 ```swift
-let legalHolds = client.legalHolds.listFileVersionPolicies(policyId: "1234")
-// Get the first page of legal holds
-legalHolds.getNextItems() { (result: Result<[FileVersionLegalHold], BoxError>) in
-    guard case let .success(holds) = result else {
-        print("Error getting legal holds")
-        return
-    }
-    // Print out first page of legal holds
-    for hold in legalHolds {
-        print("Legal hold \(hold.id)")
+client.legalHolds.listFileVersionPolicies(policyId: "1234") {
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(hold):
+                    print("Legal hold \(hold.id)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```

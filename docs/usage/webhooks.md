@@ -24,7 +24,7 @@ with the ID of the webhook.  You can control which fields are returned in the re
 `fields` parameter.
 
 ```swift
-client.folders.get(webhookId: "22222", fields: ["id", "created_at"]) { (result: Result<Webhook, BoxError>) in
+client.folders.get(webhookId: "22222", fields: ["id", "created_at"]) { (result: Result<Webhook, BoxSDKError>) in
     guard case let .success(webhook) = result else {
         print("Error getting webhook information")
         return
@@ -38,22 +38,24 @@ Get Webhooks
 ----------------
 
 To retrieve information about webhooks in an enterprise, call
-[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`].  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the webhooks in the enterprise.
+[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`].  This method will return an iterator object in the completion you can use to get the webhooks.
 
 ```swift
-let enterpriseWebhooks = client.webhooks.list()
-
-// Get the first page of webhooks
-enterpriseWebhooks.nextItems() { (result: Result<[Webhook], BoxError>) in
-    guard case let .success(webhooks) = result else {
-        print("Error getting folder items")
-        return
-    }
-
-    // Print out first page of webhooks in enterprise
-    for webhook in webhooks {
-       print("Webhook \(webhook.id) was created at \(webhook.createdAt)")
+client.webhooks.list() { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(webhook):
+                    print("Webhook \(webhook.id) was created at \(webhook.createdAt)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -65,7 +67,7 @@ To create a new webhook, call
 [`client.webhooks.create(targetType: String, targetId: String, triggers: [Webhook.EventTriggers], address: String, fields: [String]?, completion: @escaping Callback<Webhook>`]
 
 ```swift
-client.webhooks.create(targetType: "file", targetId: "1234", triggers: [.fileDownloaded], address: "www.testurl.com") { (result: Result<Webhook, BoxError>) in
+client.webhooks.create(targetType: "file", targetId: "1234", triggers: [.fileDownloaded], address: "www.testurl.com") { (result: Result<Webhook, BoxSDKError>) in
     guard case let .success(webhook) = result else {
         print("Error creating webhook")
         return
@@ -82,7 +84,7 @@ To update a webhook, call
 [`client.webhooks.update(webhookId: String, targetType: String?, targetId: String?, triggers: [Webhook.EventTriggers]?, address: String?, fields: [String]?, completion: @escaping Callback<Webhook>`]
 
 ```swift
-client.webhooks.update(webhookId: "1234", targetType: "file", targetId: "1234", address: "www.testurl.com") { (result: Result<Webhook, BoxError>) in
+client.webhooks.update(webhookId: "1234", targetType: "file", targetId: "1234", address: "www.testurl.com") { (result: Result<Webhook, BoxSDKError>) in
     guard case let .success(webhook) = result else {
         print("Error updating webhook")
         return
@@ -99,7 +101,7 @@ To delete a webhook, call
 [`client.webhooks.delete(webhookId: String, completion: @escaping Callback<Void>`]
 
 ```swift
-client.webhooks.delete(webhookId: "22222") { result: Result<Void, BoxError>} in
+client.webhooks.delete(webhookId: "22222") { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
         print("Error deleting webhook")
         return

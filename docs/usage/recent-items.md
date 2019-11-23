@@ -15,23 +15,24 @@ Get Recent Items
 ----------------
 
 To get recently accessed items, call
-[`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the recent items.
+[`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object in the completion you can use to retrieve recent items.
 
 ```swift
-let recentItems = client.folders.list()
-
-// Get the first page of items
-recentItems.getNextItems() { (result: Result<[FolderItem], BoxError>) in
-    guard case let .success(items) = result else {
-        print("Error getting recent items")
-        return
-    }
-
-    // Print out first page of recent items
-    for item in items {
-       print("Interaction type is \(item.interactionType)")
-       print("File ID is \(item.item.id)")
+client.recentItems.list() { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(item):
+                    print("Interaction type is \(item.interactionType)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
