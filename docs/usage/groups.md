@@ -262,7 +262,7 @@ client.groups.listMembershipsForUser(userId: "12345") {
 Get Collaborations for Group
 ----------------------------
 
-To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for. This method will return an iterator object in the completion that you can use to retrieve the collaborations.
+To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for. This method will return an iterator object in the completion, which is used to retrieve the collaborations.
 
 ```swift
 client.groups.listCollaborations(groupId: "12345") { results in
