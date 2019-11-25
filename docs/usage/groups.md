@@ -207,7 +207,7 @@ client.groups.deleteMembership(membershipId: "12345") {
 Get Memberships for Group
 -------------------------
 
-To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for. This method will return an iterator object in the completion that you can use to the retrieve memberships.
+To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
 
 ```swift
 client.groups.listMembership(groupId: "12345") {
