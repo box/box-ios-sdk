@@ -181,7 +181,7 @@ List Metadata Templates
 
 To retrieve the collection of available metadata templates in a particular scope, call
 [`client.metadata.listEnterpriseTemplates(scope:marker:limit:)`][list-templates]
-with the scope. This method will return an iterator object in the completion that you can use to retrieve metadata templates.
+with the scope. This method will return an iterator object in the completion, which is used to retrieve metadata templates.
 
 ```swift
 client.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
