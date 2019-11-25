@@ -51,7 +51,7 @@ Get Folder Items
 
 To retrieve information about the items contained in a folder, call
 [`client.folders.listItems(folderId:usemarker:marker:offset:limit:sort:direction:fields:)`][get-folder-items]
-with the ID of the folder.  This method will return an iterator in the completion you can use to retrieve folder items.
+with the ID of the folder.  This method will return an iterator in the completion, which is used to retrieve folder items.
 
 ```swift
 let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending) { results in
