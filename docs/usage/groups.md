@@ -84,7 +84,7 @@ client.groups.get(groupId: "12345") {
 Get Enterprise Groups
 ---------------------
 
-To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object in the completion that you can use to retrieve groups in the enterprise.
+To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object in the completion, which is used to retrieve groups in the enterprise.
 
 ```swift
 client.groups.listForEnterprise() { results in
