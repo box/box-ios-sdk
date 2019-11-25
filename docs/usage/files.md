@@ -273,7 +273,7 @@ Get File Collaborations
 
 To retrieve a list of collaborations on a file, call
 [`client.files.listCollaborations(forFile:marker:limit:fields:)`][get-collaborations]
-with the ID of the file.  This method returns an iterator in the completion that can be used to retrieve file collaborations.
+with the ID of the file.  This method returns an iterator in the completion, which is used to retrieve file collaborations.
 
 ```swift
 client.files.listCollaborations(forFile: "11111") { result in
