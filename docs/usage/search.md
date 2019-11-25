@@ -51,7 +51,7 @@ Metadata Search
 
 To search within metadata for specific values, use the helper methods included in the SDK to construct the metadata
 query and call [`client.search.query(query:...)`][search] with the metadata filters and optionally a
-search query.  If no additional content query string is needed, just set the `query` parameter to `nil`. This method will return an iterator object in the completion you can use to get the results. 
+search query.  If no additional content query string is needed, just set the `query` parameter to `nil`. This method will return an iterator object in the completion, which is used to get the results. 
 
 ```swift
 let metadataFilters = MetadataSearchFilter()
