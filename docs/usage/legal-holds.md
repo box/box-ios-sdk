@@ -136,7 +136,7 @@ Get Policy Assignments
 
 To retrieve legal hold policy assignments, call
 [`client.legalHolds.listPolicyAssignments(policyId: String, assignToType: String?, assignToId: String?, marker: String?, limit: String?, fields: [String]?)`][get-policy-assignments]
-with the ID of a policy.  This method will return an iterator object in the completion that you can use to retrieve policies assignments for a policy.
+with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve policy assignments for a policy.
 
 ```swift
 client.legalHolds.listPolicyAssignments(policyId: "1234") { results in
