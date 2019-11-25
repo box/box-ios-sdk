@@ -302,7 +302,7 @@ Get File Comments
 
 To retrieve a list of comments on the file, call
 [`client.files.listComments(forFile:offset:limit:fields:)`][get-comments]
-with the ID of the file.  This method returns an iterator in the completion that can be used to page through the collection
+with the ID of the file.  This method returns an iterator in the completion, which is used to page through the collection
 of file comments.
 
 ```swift
