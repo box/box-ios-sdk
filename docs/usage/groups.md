@@ -235,7 +235,7 @@ Get Memberships for User
 ------------------------
 
 To retrieve information about the group memberships for a given user, call
-[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for. This method will return an iterator object in the completion that you can use to retrieve the memberships.
+[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
 
 ```swift
 client.groups.listMembershipsForUser(userId: "12345") {
