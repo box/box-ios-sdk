@@ -150,7 +150,6 @@ client.folders.copy(
 
 [copy-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC10copyFolder8folderId011destinationF2ID4name6fields10completionySS_S2SSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
 
-NOTE: Is this an iterator or not?
 Get Folder Collaborations
 -------------------------
 
@@ -159,15 +158,21 @@ To retrieve a list of the collaborations on a folder, call
 with the ID of the folder.
 
 ```swift
-client.folders.listCollaborations(folderId: "22222") { (result: Result<[Collaboration], BoxSDKError>) in
-    guard case let .success(collaborations) = result else {
-        print("Error retrieving collaborations")
-        return
-    }
-
-    print("Folder has \(collaborations.count) collaborators:")
-    for collaboration in collaborations {
-        print("- \(collaboration.accessibleBy?.name)")
+client.folders.listCollaborations(folderId: "22222") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(collaboration):
+                    print("- \(collaboration.accessibleBy?.name)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
