@@ -35,7 +35,7 @@ client.devicePins.get(devicePinId: "11111", fields: ["product_name"]) { (result:
 Get Device Pins for Enterprise
 ------------------------------
 
-To retrieve information about the device pins active for the enterprise, call [`client.devicePins.listForEnterprise(enterpriseId: String, marker: String?, limit: Int?, direction: OrdeDirection?, fields: [String]?)`][get-device-pins] with the ID of the enterpise. This method will return an iterator object in the completion that you can use to retrieve device pins for the enterprise.
+To retrieve information about the device pins active for the enterprise, call [`client.devicePins.listForEnterprise(enterpriseId: String, marker: String?, limit: Int?, direction: OrdeDirection?, fields: [String]?)`][get-device-pins] with the ID of the enterpise. This method will return an iterator object in the completion, which is used to retrieve device pins for the enterprise.
 
 ```swift
 client.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending) { results in 
