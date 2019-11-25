@@ -126,7 +126,7 @@ Get Pending Collaborations
 
 To retrieve a list of the pending collaborations requiring the user to accept or reject them, call
 [`client.collaborations.listPendingForEnterprise(offset:limit:fields:)`][get-pending-collaborations].
-The method returns an iterator in the completion that can be used to get pending collaborations.
+The method returns an iterator in the completion, which is used to get pending collaborations.
 
 ```swift
 client.collaborations.listPendingForEnterprise() { results in
