@@ -41,7 +41,7 @@ Get Legal Hold Policies
 
 To retrieve information about the items contained in a folder, call
 [`client.legalHolds.listForEnterprise(policyName: String, marker: String?, limit: Int?, fields: [String]?)`][get-legal-hold-policies]
-with the ID of the policy.  This method will return an iterator object in the completion you can use to retrieve policies in the enterprise.
+with the ID of the policy.  This method will return an iterator object in the completion, which is used to retrieve policies in the enterprise.
 
 ```swift
 client.legalHolds.listForEnterprise(policyName: "policy1") { results in
