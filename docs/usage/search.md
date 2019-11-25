@@ -15,7 +15,7 @@ Content Search
 
 To get a list of items matching a search query, call [`client.search.query(query:...)`][search] with the
 string to query for.  There are many possible options for advanced search filtering, which can be used to narrow down
-the search results. This method will return an iterator object in the completion you can use to get the results.
+the search results. This method will return an iterator object in the completion, which is used to get the results.
 
 ```swift
 client.search.query(query: "Quarterly Business Review") { results in
