@@ -331,7 +331,7 @@ Get File Tasks
 --------------
 
 To retrieve a list of file tasks, call [`client.files.listTasks(forFile:fields:)`][get-tasks] with the ID of the
-file.  This method returns an iterator in the completion that can be used to retrieve file comments.
+file.  This method returns an iterator in the completion, which is used to retrieve file comments.
 
 ```swift
 client.files.listTasks(forFile: "11111") { results in
