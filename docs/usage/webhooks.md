@@ -38,7 +38,7 @@ Get Webhooks
 ----------------
 
 To retrieve information about webhooks in an enterprise, call
-[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`].  This method will return an iterator object in the completion you can use to get the webhooks.
+[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`].  This method will return an iterator object in the completion, which is used to get the webhooks.
 
 ```swift
 client.webhooks.list() { results in
