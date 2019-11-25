@@ -216,7 +216,7 @@ Get File Version Legal Holds
 
 To retrieve all of the non-deleted legal holds for a single legal hold policy, call
 [`client.legalHolds.listFileVersionPolicies(policyId: String, marker: String?, limit: String?, fields: [String]?)`][get-file-version-legal-holds]
-with the ID of a policy.  This method will return an iterator object in the completion that you can use to retrieve legal holds for a policy.
+with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve legal holds for a policy.
 
 ```swift
 client.legalHolds.listFileVersionPolicies(policyId: "1234") {
