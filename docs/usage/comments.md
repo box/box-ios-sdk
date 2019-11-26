@@ -22,7 +22,7 @@ To retrieve information about a comment, call
 with the ID of the comment.
 
 ```swift
-client.comments.get(commentId: "55555") { (result: Result<Comment, BoxError>) in
+client.comments.get(commentId: "55555") { (result: Result<Comment, BoxSDKError>) in
     guard case let .success(comment) = result else {
         print("Error retrieving comment")
         return
@@ -46,7 +46,7 @@ client.comments.create(
     itemId: "11111",
     itemType: "file",
     message: "Thanks!"
-) { (result: Result<Comment, BoxError>) in
+) { (result: Result<Comment, BoxSDKError>) in
     guard case let .success(comment) = result else {
         print("Error creating comment")
         return
@@ -69,7 +69,7 @@ with the ID of the comment to update and the properties to update.
 client.comments.update(
     commentId: "55555",
     message: "Updated message"
-) { (result: Result<Comment, BoxError>) in
+) { (result: Result<Comment, BoxSDKError>) in
     guard case let .success(comment) = result else {
         print("Error updating comment")
         return
@@ -88,7 +88,7 @@ To delete a comment, call [`client.comments.delete(commentId:completion:)`][dele
 with the ID of the comment to delete.
 
 ```swift
-client.comments.delete(commentId: "55555") { (result: Result<Void, BoxError>) in
+client.comments.delete(commentId: "55555") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error deleting comment")
         return
