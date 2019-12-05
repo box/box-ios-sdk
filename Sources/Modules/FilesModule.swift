@@ -746,6 +746,7 @@ public class FilesModule {
         fileId: String,
         destinationURL: URL,
         version: String? = nil,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
     ) {
 
@@ -753,6 +754,7 @@ public class FilesModule {
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             downloadDestinationURL: destinationURL,
             queryParameters: ["version": version],
+            progress: progress,
             completion: ResponseHandler.default(wrapping: completion)
         )
     }

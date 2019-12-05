@@ -840,6 +840,7 @@
 		9DE5D7DF22EF53E30081A031 /* EventItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemType.swift; sourceTree = "<group>"; };
 		9DEA474322D380A50035C959 /* GetFileSharedLink.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFileSharedLink.json; sourceTree = "<group>"; };
 		9DEA474822D391220035C959 /* GetFolderSharedLink.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderSharedLink.json; sourceTree = "<group>"; };
+		F923A6A323947BE800C1B9B6 /* SwiftSDK.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftSDK.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F928142B233DA3AB00E42EEE /* MetadataFieldFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataFieldFilter.swift; sourceTree = "<group>"; };
 		F9281430233E814400E42EEE /* FullRetentionPolicyAssignment.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FullRetentionPolicyAssignment.json; sourceTree = "<group>"; };
 		F928143F233E825900E42EEE /* FullFileVersionRetention.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FullFileVersionRetention.json; sourceTree = "<group>"; };
@@ -1534,6 +1535,7 @@
 		3549BAFB1DA387DB00C63030 = {
 			isa = PBXGroup;
 			children = (
+				F923A6A323947BE800C1B9B6 /* SwiftSDK.playground */,
 				97FA4FE9234FF47900A615B8 /* docs */,
 				3549BB161DA3890B00C63030 /* Sources */,
 				3549BB191DA3890B00C63030 /* Tests */,

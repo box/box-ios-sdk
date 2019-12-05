@@ -30,6 +30,14 @@ enum HTTPMethod: String {
     case options
 }
 
+struct Request {
+    var request: BoxRequest?
+    var retryCount: Int?
+    var completion: Callback<BoxResponse>?
+    var downloadDestination: URL?
+    var stream: InputStream?
+}
+
 // Error codes allowing for request retry
 private let transientErrorCodes = [429, 500, 501, 502, 503, 504]
 
@@ -52,11 +60,11 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
     private let configuration: BoxSDKConfiguration
     private let utilityQueue = DispatchQueue.global(qos: .utility)
     private let logger: Logger
-
-    // The variable "session" is set as lazy here because self can't be passed as a delegate
-    // until after init is finished. It will be computed after init and then used in other
-    // functions in this class.
-    private lazy var session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+    // Struct with request information for download, upload and regular requests to be used when by the delegate methods
+    private var storedRequest = Request()
+    // This is a Lazy variable because you can't pass in self in as delegate until init method is finished. So now, this variable will compute
+    // after init when it is actually used in other functions in this class
+    private lazy var session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
 
     /// Initializer.
     ///
@@ -65,12 +73,7 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         configuration: BoxSDKConfiguration = BoxSDK.defaultConfiguration
     ) {
         self.configuration = configuration
-        if let fileDestination = configuration.fileLogDestination {
-            logger = Logger(category: .networkAgent, destinations: [configuration.consoleLogDestination, fileDestination])
-        }
-        else {
-            logger = Logger(category: .networkAgent, destinations: [configuration.consoleLogDestination])
-        }
+        logger = Logger(category: .networkAgent, destinations: [configuration.consoleLogDestination])
     }
 
     /// Makes Box SDK request
@@ -98,52 +101,15 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         let updatedRequest = updateRequestWithAnalyticsHeaders(request)
         logger.logRequest(updatedRequest)
 
-        let urlRequest = createRequest(for: updatedRequest)
-        // swiftlint:disable:next force_unwrapping
-        let downloadDestination = request.downloadDestination!
+        storedRequest.request = request
+        storedRequest.retryCount = retryCount
+        storedRequest.completion = completion
 
-        let task = session.downloadTask(with: urlRequest) { [weak self] location, response, error in
-            guard let self = self else {
-                return
-            }
-
-            if let unwrappedError = error {
-                completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
-                self.logger.error("Request Error: %{public}@", unwrappedError.localizedDescription)
-                return
-            }
-
-            guard let localURL = location else {
-                completion(.failure(BoxAPIError(message: "File was not downloaded", request: request, response: BoxResponse(
-                    request: request,
-                    body: nil,
-                    urlResponse: response
-                ))))
-                return
-            }
-
-            do {
-                try? FileManager.default.removeItem(at: downloadDestination) // remove the old file, if any
-                try FileManager.default.moveItem(at: localURL, to: downloadDestination)
-            }
-            catch {
-                completion(.failure(BoxSDKError(message: "Could not move item from temporary download location to download destination")))
-            }
-
-            self.processResponse(
-                BoxResponse(
-                    request: request,
-                    body: nil,
-                    urlResponse: response
-                ),
-                retryCount: retryCount,
-                retry: { [weak self] in
-                    self?.sendDownloadRequest(request: request, retryCount: retryCount + 1, completion: completion)
-                },
-                completion: completion
-            )
+        let task = createDownloadRequest(for: updatedRequest)
+        request.progress(task.progress)
+        utilityQueue.async {
+            task.resume()
         }
-        task.resume()
     }
 
     private func send(
@@ -155,35 +121,20 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         let updatedRequest = updateRequestWithAnalyticsHeaders(request)
         logger.logRequest(updatedRequest)
 
-        let urlRequest = createRequest(for: updatedRequest)
-        let task = session.dataTask(with: urlRequest) { [weak self] data, response, error in
-            guard let self = self else {
-                return
-            }
+        storedRequest.request = request
+        storedRequest.retryCount = retryCount
+        storedRequest.completion = completion
 
-            if let unwrappedError = error {
-                completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
-                self.logger.error("Request Error: %{public}@", unwrappedError.localizedDescription)
-                return
-            }
-
-            self.processResponse(
-                BoxResponse(
-                    request: request,
-                    body: data,
-                    urlResponse: response
-                ),
-                retryCount: retryCount,
-                retry: { [weak self] in
-                    self?.send(request: request, retryCount: retryCount + 1, completion: completion)
-                },
-                completion: completion
-            )
+        let task = createRequest(for: updatedRequest)
+        let progress = Progress(totalUnitCount: task.countOfBytesClientExpectsToReceive)
+        progress.completedUnitCount = task.countOfBytesReceived
+        request.progress(progress)
+        utilityQueue.async {
+            task.resume()
         }
-        task.resume()
     }
 
-    private func createRequest(for request: BoxRequest) -> URLRequest {
+    private func createRequest(for request: BoxRequest) -> URLSessionTask {
         let method = request.httpMethod.rawValue.uppercased()
         let url = request.endpoint()
         let headers = request.httpHeaders
@@ -247,12 +198,11 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest.httpBodyStream = ArrayInputStream(inputStreams: bodyStreams)
         }
-        return urlRequest
+        return session.dataTask(with: urlRequest)
     }
 
     func createMultipartBodyStreams(_ parameters: [String: Any]?, partName: String, fileName: String, mimetype: String, bodyStream: InputStream, boundary: String) -> [InputStream] {
         // swiftlint:disable force_unwrapping
-
         var preBody = Data()
         if parameters != nil {
             for (key, value) in parameters! {
@@ -276,6 +226,25 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
 
         return bodyStreams
         // swiftlint:enable force_unwrapping
+    }
+
+    private func createDownloadRequest(for request: BoxRequest) -> URLSessionDownloadTask {
+        let method = request.httpMethod.rawValue.uppercased()
+        let url = request.endpoint()
+        let headers = request.httpHeaders
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
+        urlRequest.allHTTPHeaderFields = headers
+
+        if let unwrappedDestination = request.downloadDestination {
+            storedRequest.downloadDestination = unwrappedDestination
+        }
+        else {
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            storedRequest.downloadDestination = urls.last
+        }
+        return session.downloadTask(with: urlRequest)
     }
 
     private func updateRequestWithAnalyticsHeaders(_ request: BoxRequest) -> BoxRequest {
@@ -335,3 +304,126 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         }
     }
 }
+
+extension BoxNetworkAgent: URLSessionDownloadDelegate {
+    // swiftlint:disable all
+    public func urlSession(_: URLSession, downloadTask: URLSessionDownloadTask, didWriteData _: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let progress = Progress(totalUnitCount: totalBytesExpectedToWrite)
+        progress.completedUnitCount = totalBytesWritten
+//        storedRequest.request?.progress(progress)
+
+//        if totalBytesExpectedToWrite > 0 {
+//            let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+//            print("Progress \(downloadTask) \(progress)")
+//        }
+    }
+
+    public func urlSession(_: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+
+        let request = storedRequest.request!
+        let retryCount = storedRequest.retryCount!
+        let completion = storedRequest.completion!
+        let downloadDestination = storedRequest.downloadDestination!
+
+        do {
+            try? FileManager.default.removeItem(at: downloadDestination) // remove the old file, if any
+            try FileManager.default.moveItem(at: location, to: downloadDestination)
+        }
+        catch {
+            completion(.failure(BoxSDKError(error: error)))
+            return
+        }
+
+        processResponse(
+            BoxResponse(
+                request: request,
+                body: nil,
+                urlResponse: downloadTask.response
+            ),
+            retryCount: retryCount,
+            retry: { [weak self] in
+                self?.sendDownloadRequest(request: request, retryCount: retryCount + 1, completion: completion)
+            },
+            completion: completion
+        )
+    }
+
+    public func urlSession(_: URLSession, task _: URLSessionTask, didCompleteWithError error: Error?) {
+        let completion = storedRequest.completion!
+
+        if let unwrappedError = error {
+            completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription))))
+            logger.error("Request Error: %{public}@", unwrappedError.localizedDescription)
+            return
+        }
+    }
+}
+
+extension BoxNetworkAgent: URLSessionDataDelegate {
+    // swiftlint:disable all
+
+    // Handles all requests other than uploads
+    public func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+
+        let request = storedRequest.request!
+        let retryCount = storedRequest.retryCount!
+        let completion = storedRequest.completion!
+
+        processResponse(
+            BoxResponse(
+                request: request,
+                body: data,
+                urlResponse: dataTask.response
+            ),
+            retryCount: retryCount,
+            retry: { [weak self] in
+                self?.send(request: request, retryCount: retryCount + 1, completion: completion)
+            },
+            completion: completion
+        )
+    }
+
+//    public func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive _: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+//        // We've got the response headers from the server.
+//        print("didReceive response")
+    ////        self.response = response
+//
+    ////        let request = storedRequest.request!
+    ////        let retryCount = storedRequest.retryCount!
+    ////        let completion = storedRequest.completion!
+    ////
+    ////        processResponse(
+    ////            BoxResponse(
+    ////                request: request,
+    ////                body: nil,
+    ////                urlResponse: dataTask.response
+    ////            ),
+    ////            retryCount: retryCount,
+    ////            retry: { [weak self] in
+    ////                self?.send(request: request, retryCount: retryCount + 1, completion: completion)
+    ////            },
+    ////            completion: completion
+    ////        )
+//
+//        completionHandler(URLSession.ResponseDisposition.allow)
+//    }
+
+    // Next few functions handle upload requests
+
+    public func urlSession(_: URLSession, task _: URLSessionTask, didSendBodyData _: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        let progress = Progress(totalUnitCount: totalBytesExpectedToSend)
+        progress.completedUnitCount = totalBytesSent
+        storedRequest.request?.progress(progress)
+    }
+}
+
+// extension URLSessionDownloadTask {
+//
+//    public var test = 1234
+//
+// }
+
+// extension URLRequest{
+//    var boxRequest: Request = Request()
+//
+// }
