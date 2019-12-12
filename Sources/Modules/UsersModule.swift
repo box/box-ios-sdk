@@ -414,7 +414,6 @@ public class UsersModule {
         var queryParams: QueryParameters = [
             "filter_term": filterTerm,
             "fields": FieldsQueryParam(fields),
-            "offset": offset,
             "limit": limit
         ]
 
