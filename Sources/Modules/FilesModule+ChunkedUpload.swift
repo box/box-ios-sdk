@@ -74,6 +74,7 @@ public extension FilesModule {
         data: Data,
         offset: Int,
         totalSize: Int,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<UploadPart>
     ) {
         let digest = data.sha1Base64Encoded()
@@ -85,6 +86,7 @@ public extension FilesModule {
                 "content-range": "bytes \(offset)-\(offset + data.count - 1)/\(totalSize)"
             ],
             data: data,
+            progress: progress,
             completion: ResponseHandler.default(wrapping: completion)
         )
     }

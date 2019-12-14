@@ -143,7 +143,24 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-        task.resume()
+
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates,
+        // progressHandler is called with the Progress object passed in. progressHandler calls the request's progress closure and passes in the updated
+        // progress object.
+        var observation: NSKeyValueObservation?
+        let progressHandler: (Progress, NSKeyValueObservedChange<Double>) -> Void = {
+            progress, _ in
+            request.progress(progress)
+            if progress.fractionCompleted >= 1 {
+                observation?.invalidate()
+                observation = nil
+            }
+        }
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new], changeHandler: progressHandler)
+
+        utilityQueue.async {
+            task.resume()
+        }
     }
 
     private func send(
@@ -180,7 +197,24 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-        task.resume()
+
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates,
+        // progressHandler is called with the Progress object passed in. progressHandler calls the request's progress closure and passes in the updated
+        // progress object.
+        var observation: NSKeyValueObservation?
+        let progressHandler: (Progress, NSKeyValueObservedChange<Double>) -> Void = {
+            progress, _ in
+            request.progress(progress)
+            if progress.fractionCompleted >= 1 {
+                observation?.invalidate()
+                observation = nil
+            }
+        }
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new], changeHandler: progressHandler)
+
+        utilityQueue.async {
+            task.resume()
+        }
     }
 
     private func createRequest(for request: BoxRequest) -> URLRequest {
