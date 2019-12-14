@@ -106,7 +106,19 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         storedRequest.completion = completion
 
         let task = createDownloadRequest(for: updatedRequest)
-        request.progress(task.progress)
+
+        var observation: NSKeyValueObservation?
+        let progressHandler: (Progress, NSKeyValueObservedChange<Double>) -> Void = {
+            progress, _ in
+            request.progress(progress)
+            if progress.fractionCompleted >= 1 {
+                observation?.invalidate()
+                observation = nil
+            }
+        }
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new], changeHandler: progressHandler)
+
+//        request.progress(task.progress)
         utilityQueue.async {
             task.resume()
         }
