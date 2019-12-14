@@ -1,0 +1,23 @@
+{
+    "entries": [
+        {
+            "type": "user",
+            "id": "11111",
+            "name": "Test User",
+            "login": "testuser@example.com",
+            "created_at": "2012-05-03T21:39:11-07:00",
+            "modified_at": "2012-08-23T14:57:48-07:00",
+            "language": "en",
+            "space_amount": 5368709120,
+            "space_used": 52947,
+            "max_upload_size": 104857600,
+            "status": "active",
+            "job_title": "",
+            "phone": "5555551374",
+            "address": "Test Address",
+            "avatar_url": "https://app.box.com/api/avatar/large/181216415"
+        }
+    ],
+    "limit": 100,
+    "next_marker": "eyJ0eXBlIjoiaWQiLCJkaXIiOiJuZXh0IiwidGFpbCI6Ijk4MTc3MjQyOTMifQ"
+}

@@ -319,6 +319,39 @@ class UsersModuleSpecs: QuickSpec {
                         }
                     }
                 }
+
+                it("should return a list of users of the enterprise using marker pagination") {
+                    stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodGET() && containsQueryParams(["limit": "100", "usemarker": "true"])) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetEnterpriseUsersMarker-Pagination.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.users.listForEnterprise(usemarker: true, limit: 100) { results in
+                            switch results {
+                            case let .success(iterator):
+                                iterator.next { result in
+                                    switch result {
+                                    case let .success(user):
+                                        expect(user).to(beAKindOf(User.self))
+                                        expect(user.id).to(equal("11111"))
+                                        expect(user.name).to(equal("Test User"))
+                                        expect(user.login).to(equal("testuser@example.com"))
+
+                                    case let .failure(error):
+                                        fail("Expected call to succeed, but it got \(error)")
+                                    }
+                                    done()
+                                }
+                            case let .failure(error):
+                                fail("Expected call to succeed, but it got \(error)")
+                                done()
+                            }
+                        }
+                    }
+                }
             }
 
             describe("inviteToJoinEnterprise()") {

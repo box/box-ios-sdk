@@ -429,6 +429,7 @@
 		F99D41902319CE8C00327698 /* WebhookSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D414A2319845700327698 /* WebhookSpecs.swift */; };
 		F99DB49A233C41AA0065317F /* FullRetentionPolicy.json in Resources */ = {isa = PBXBuildFile; fileRef = F99DB498233C41A00065317F /* FullRetentionPolicy.json */; };
 		F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99DB496233C41440065317F /* RetentionPolicySpecs.swift */; };
+		F9A3F0D223A18926007C7393 /* GetEnterpriseUsersMarker-Pagination.json in Resources */ = {isa = PBXBuildFile; fileRef = F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -904,6 +905,7 @@
 		F99D414A2319845700327698 /* WebhookSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebhookSpecs.swift; sourceTree = "<group>"; };
 		F99DB496233C41440065317F /* RetentionPolicySpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicySpecs.swift; sourceTree = "<group>"; };
 		F99DB498233C41A00065317F /* FullRetentionPolicy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FullRetentionPolicy.json; sourceTree = "<group>"; };
+		F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GetEnterpriseUsersMarker-Pagination.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1359,6 +1361,7 @@
 		225639C4225389B100D951B5 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */,
 				225639C5225389B100D951B5 /* GetUserInfo.json */,
 				225639C6225389B100D951B5 /* GetCurrentUserInfo.json */,
 				0C59EA2C2289BBBA00DAE688 /* CreateUser.json */,
@@ -2095,6 +2098,7 @@
 				22C95BD3230AC54F004F5C18 /* ChunkedUploadSessionNewFile.json in Resources */,
 				227B6A99229D385F0095E3D4 /* APIErrorTemplate.json in Resources */,
 				F929D6162331AE280039E452 /* GetLegalHoldPolicyInfo.json in Resources */,
+				F9A3F0D223A18926007C7393 /* GetEnterpriseUsersMarker-Pagination.json in Resources */,
 				22C95BE3230AF910004F5C18 /* ChunkedUploadSessionListParts.json in Resources */,
 				0C506CC122A6B376007F18A4 /* PendingCollaborations.json in Resources */,
 				9DD6F54022DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json in Resources */,

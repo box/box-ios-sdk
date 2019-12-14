@@ -1,5 +1,15 @@
 Changelog
 =========
+
+## Next Release
+
+__Breaking Changes:__
+
+
+__New Features and Enhancements:__
+
+- Add marker based pagination to list users endpoint
+
 ## v3.0.0 [2019-11-18]
 
 __Breaking Changes:__

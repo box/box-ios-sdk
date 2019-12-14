@@ -389,24 +389,45 @@ public class UsersModule {
     ///   - fields: List of [user object fields](https://developer.box.com/reference#user-object) to
     ///     include in the response.  Only those fields will be populated on the resulting model object.
     ///     If not passed, a default set of fields will be returned.
+    ///   - usemarker: This specifies whether you would like to use marker-based or offset-based
+    ///     paging. You can only use one or the other. Marker-based paging is the preferred method
+    ///     and is most performant. If not specified, this endpoint defaults to using offset-based
+    ///     paging. This parameter is unique to Get Folder Items to retain backwards compatibility
+    ///     for this endpoint. This parameter is required for both the first and subsequent calls to
+    ///     use marked-based paging.
+    ///   - marker: The position marker at which to begin the response. See [marker-based paging]
+    ///     (https://developer.box.com/reference#section-marker-based-paging) for details. This
+    ///     parameter cannot be used simultaneously with the 'offset' parameter.
     ///   - offset: The offset of the item at which to begin the response. See [offset-based paging]
     ///     (https://developer.box.com/reference#section-offset-based-paging) for details.
     ///   - limit: The maximum number of items to return.
     public func listForEnterprise(
         filterTerm: String? = nil,
         fields: [String]? = nil,
+        usemarker: Bool? = nil,
+        marker: String? = nil,
         offset: Int? = nil,
         limit: Int? = nil,
         completion: @escaping Callback<PagingIterator<User>>
     ) {
+
+        var queryParams: QueryParameters = [
+            "filter_term": filterTerm,
+            "fields": FieldsQueryParam(fields),
+            "limit": limit
+        ]
+
+        if usemarker ?? false {
+            queryParams["usemarker"] = true
+            queryParams["marker"] = marker
+        }
+        else {
+            queryParams["offset"] = offset
+        }
+
         boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/users", configuration: boxClient.configuration),
-            queryParameters: [
-                "filter_term": filterTerm,
-                "fields": FieldsQueryParam(fields),
-                "offset": offset,
-                "limit": limit
-            ],
+            queryParameters: queryParams,
             completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
         )
     }
