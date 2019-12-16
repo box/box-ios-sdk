@@ -906,7 +906,6 @@
 		F99DB496233C41440065317F /* RetentionPolicySpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicySpecs.swift; sourceTree = "<group>"; };
 		F99DB498233C41A00065317F /* FullRetentionPolicy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FullRetentionPolicy.json; sourceTree = "<group>"; };
 		F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GetEnterpriseUsersMarker-Pagination.json"; sourceTree = "<group>"; };
-		F9A3F0D323A48128007C7393 /* SwiftSDK.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftSDK.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1538,7 +1537,6 @@
 		3549BAFB1DA387DB00C63030 = {
 			isa = PBXGroup;
 			children = (
-				F9A3F0D323A48128007C7393 /* SwiftSDK.playground */,
 				97FA4FE9234FF47900A615B8 /* docs */,
 				3549BB161DA3890B00C63030 /* Sources */,
 				3549BB191DA3890B00C63030 /* Tests */,
