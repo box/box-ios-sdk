@@ -21,6 +21,9 @@ before_install:
 
 install:
   - gem install jazzy
+  
+after_success:
+  - slather
 
 env:
   global:
