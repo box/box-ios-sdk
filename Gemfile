@@ -4,4 +4,3 @@ gem 'cocoapods', "~> 1.8.4"
 gem 'jazzy'
 gem 'danger'
 gem 'slather'
-gem 'coveralls', require: false
