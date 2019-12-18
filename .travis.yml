@@ -21,9 +21,6 @@ before_install:
 install:
   - gem install jazzy
   
-after_success:
-  - slather
-
 env:
   global:
     - LC_CTYPE=en_US.UTF-8
