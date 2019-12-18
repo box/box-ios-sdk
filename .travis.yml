@@ -11,7 +11,6 @@ cache:
 
 before_install:
   - gem install bundler
-  - gem update --system
   - bundle install --path vendor/bundle
   - gem install xcpretty
   - brew outdated carthage || brew upgrade carthage
