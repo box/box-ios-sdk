@@ -20,7 +20,7 @@ before_install:
 
 install:
   - gem install jazzy
-  
+
 env:
   global:
     - LC_CTYPE=en_US.UTF-8
