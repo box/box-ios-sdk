@@ -10,7 +10,6 @@ cache:
     - vendor/bundle
 
 before_install:
-  - gem update --system
   - gem install bundler
   - bundle install --path vendor/bundle
   - gem install xcpretty
@@ -21,6 +20,9 @@ before_install:
 
 install:
   - gem install jazzy
+  
+after_success:
+  - slather
 
 env:
   global:
