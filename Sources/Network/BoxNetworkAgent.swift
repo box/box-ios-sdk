@@ -46,6 +46,18 @@ public protocol NetworkAgentProtocol {
     )
 }
 
+public class TestDeallocate {
+
+    public var observation: NSKeyValueObservation?
+    public init(observation: NSKeyValueObservation? = nil) {
+        self.observation = observation
+    }
+
+    deinit {
+        print("Deallocated")
+    }
+}
+
 /// Implementation of networking layer
 public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
     private let analyticsHeaderGenerator = AnalyticsHeaderGenerator()
@@ -101,11 +113,14 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         let urlRequest = createRequest(for: updatedRequest)
         // swiftlint:disable:next force_unwrapping
         let downloadDestination = request.downloadDestination!
+        var observation: NSKeyValueObservation?
 
         let task = session.downloadTask(with: urlRequest) { [weak self] location, response, error in
             guard let self = self else {
                 return
             }
+
+            observation?.invalidate()
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -144,19 +159,10 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             )
         }
 
-        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates,
-        // progressHandler is called with the Progress object passed in. progressHandler calls the request's progress closure and passes in the updated
-        // progress object.
-        var observation: NSKeyValueObservation?
-        let progressHandler: (Progress, NSKeyValueObservedChange<Double>) -> Void = {
-            progress, _ in
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
             request.progress(progress)
-            if progress.fractionCompleted >= 1 {
-                observation?.invalidate()
-                observation = nil
-            }
         }
-        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new], changeHandler: progressHandler)
 
         utilityQueue.async {
             task.resume()
@@ -173,10 +179,14 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         logger.logRequest(updatedRequest)
 
         let urlRequest = createRequest(for: updatedRequest)
+        var observation: NSKeyValueObservation?
+        
         let task = session.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let self = self else {
                 return
             }
+            
+            observation?.invalidate()
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -198,19 +208,10 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             )
         }
 
-        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates,
-        // progressHandler is called with the Progress object passed in. progressHandler calls the request's progress closure and passes in the updated
-        // progress object.
-        var observation: NSKeyValueObservation?
-        let progressHandler: (Progress, NSKeyValueObservedChange<Double>) -> Void = {
-            progress, _ in
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
             request.progress(progress)
-            if progress.fractionCompleted >= 1 {
-                observation?.invalidate()
-                observation = nil
-            }
         }
-        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new], changeHandler: progressHandler)
 
         utilityQueue.async {
             task.resume()
