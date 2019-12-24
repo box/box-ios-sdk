@@ -46,18 +46,6 @@ public protocol NetworkAgentProtocol {
     )
 }
 
-public class TestDeallocate {
-
-    public var observation: NSKeyValueObservation?
-    public init(observation: NSKeyValueObservation? = nil) {
-        self.observation = observation
-    }
-
-    deinit {
-        print("Deallocated")
-    }
-}
-
 /// Implementation of networking layer
 public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
     private let analyticsHeaderGenerator = AnalyticsHeaderGenerator()
