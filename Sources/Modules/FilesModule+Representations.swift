@@ -65,6 +65,7 @@ public extension FilesModule {
         representationHint: FileRepresentationHint,
         assetPath: String = "",
         destinationURL: URL,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
     ) {
         listRepresentations(fileId: fileId, representationHint: representationHint) { [weak self] result in
@@ -83,7 +84,7 @@ public extension FilesModule {
                 self.processRepresentation(firstRepresentation, assetPath: assetPath) { result in
                     switch result {
                     case let .success(url):
-                        self.downloadRepresentation(sourceURL: url, destinationURL: destinationURL, completion: completion)
+                        self.downloadRepresentation(sourceURL: url, destinationURL: destinationURL, progress: progress, completion: completion)
 
                     case .failure:
                         completion(.failure(BoxAPIError(message: .representationCreationFailed)))
@@ -196,12 +197,14 @@ extension FilesModule {
     public func downloadRepresentation(
         sourceURL: URL,
         destinationURL: URL,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
     ) {
 
         boxClient.download(
             url: sourceURL,
             downloadDestinationURL: destinationURL,
+            progress: progress,
             completion: { result in
                 completion(result.map { _ in })
             }

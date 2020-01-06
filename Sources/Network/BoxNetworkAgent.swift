@@ -101,11 +101,14 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         let urlRequest = createRequest(for: updatedRequest)
         // swiftlint:disable:next force_unwrapping
         let downloadDestination = request.downloadDestination!
+        var observation: NSKeyValueObservation?
 
         let task = session.downloadTask(with: urlRequest) { [weak self] location, response, error in
             guard let self = self else {
                 return
             }
+
+            observation?.invalidate()
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -143,7 +146,15 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-        task.resume()
+
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
+            request.progress(progress)
+        }
+
+        utilityQueue.async {
+            task.resume()
+        }
     }
 
     private func send(
@@ -156,10 +167,14 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         logger.logRequest(updatedRequest)
 
         let urlRequest = createRequest(for: updatedRequest)
+        var observation: NSKeyValueObservation?
+        
         let task = session.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let self = self else {
                 return
             }
+            
+            observation?.invalidate()
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -180,7 +195,15 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-        task.resume()
+
+        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
+            request.progress(progress)
+        }
+
+        utilityQueue.async {
+            task.resume()
+        }
     }
 
     private func createRequest(for request: BoxRequest) -> URLRequest {

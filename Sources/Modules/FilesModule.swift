@@ -246,6 +246,7 @@ public class FilesModule {
         data: Data,
         name: String,
         parentId: String,
+        progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
     ) {
@@ -258,7 +259,7 @@ public class FilesModule {
                 guard let self = self else {
                     return
                 }
-                self.upload(data: data, name: name, parentId: parentId, completion: completion)
+                self.upload(data: data, name: name, parentId: parentId, progress: progress, completion: completion)
             }, completion: completion
         )
     }
@@ -268,6 +269,7 @@ public class FilesModule {
         data: Data,
         name: String,
         parentId: String,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
     ) {
 
@@ -291,6 +293,7 @@ public class FilesModule {
         boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/content", configuration: boxClient.configuration),
             multipartBody: body,
+            progress: progress,
             completion: ResponseHandler.unwrapCollection(wrapping: completion)
         )
     }
@@ -309,6 +312,7 @@ public class FilesModule {
         name: String? = nil,
         contentModifiedAt: String? = nil,
         data: Data,
+        progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
     ) {
@@ -328,6 +332,7 @@ public class FilesModule {
                     name: name,
                     contentModifiedAt: contentModifiedAt,
                     data: data,
+                    progress: progress,
                     completion: completion
                 )
             }, completion: completion
@@ -340,6 +345,7 @@ public class FilesModule {
         name: String? = nil,
         contentModifiedAt: String? = nil,
         data: Data,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
     ) {
         var attributes: [String: Any] = [:]
@@ -359,6 +365,7 @@ public class FilesModule {
         boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             multipartBody: body,
+            progress: progress,
             completion: ResponseHandler.unwrapCollection(wrapping: completion)
         )
     }
@@ -381,6 +388,7 @@ public class FilesModule {
         fileSize: Int,
         name: String,
         parentId: String,
+        progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
     ) {
@@ -398,6 +406,7 @@ public class FilesModule {
                     fileSize: fileSize,
                     name: name,
                     parentId: parentId,
+                    progress: progress,
                     completion: completion
                 )
             },
@@ -411,6 +420,7 @@ public class FilesModule {
         fileSize: Int,
         name: String,
         parentId: String,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
     ) {
 
@@ -434,6 +444,7 @@ public class FilesModule {
         boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/content", configuration: boxClient.configuration),
             multipartBody: body,
+            progress: progress,
             completion: ResponseHandler.unwrapCollection(wrapping: completion)
         )
     }
@@ -746,6 +757,7 @@ public class FilesModule {
         fileId: String,
         destinationURL: URL,
         version: String? = nil,
+        progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
     ) {
 
@@ -753,6 +765,7 @@ public class FilesModule {
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             downloadDestinationURL: destinationURL,
             queryParameters: ["version": version],
+            progress: progress,
             completion: ResponseHandler.default(wrapping: completion)
         )
     }
