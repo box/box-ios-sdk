@@ -1,4 +1,4 @@
-# BoxSDK
+# Box iOS SDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK)
 [![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-swift-sdk/master/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
@@ -8,10 +8,10 @@
 NOTE:
 ===================
 
-The iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
+The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
 Going forward, the master branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
 
-Box Swift SDK
+Box iOS SDK
 - [Requirements](#requirements)
 - [Installing the SDK](#installing-the-sdk)
   - [Carthage](#carthage)
