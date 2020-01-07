@@ -5,6 +5,12 @@
  [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
  [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-swift-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
 
+NOTE:
+===================
+
+The iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
+Going forward, the master branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
+
 Box Swift SDK
 - [Requirements](#requirements)
 - [Installing the SDK](#installing-the-sdk)
