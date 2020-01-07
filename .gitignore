@@ -15,6 +15,7 @@ app/build/*
 xcuserdata
 *.xccheckout
 DerivedData/
+*.xcscmblueprint
 
 # Box build artifacts
 buildArtifacts
