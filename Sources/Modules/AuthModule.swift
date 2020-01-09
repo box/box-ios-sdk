@@ -129,8 +129,9 @@ public class AuthModule: TokenRefreshing {
     ///   - parentToken: Fully-scoped access token. This can be an OAuth (Managed User), JWT (App User or Service Account) or an App Token (New Box View) token.
     ///   - scope: Scope or scopes that you want to apply to the resulting token.
     ///   - resource: Full url path to the file that the token should be generated for, eg: https://api.box.com/2.0/files/{file_id}
+    ///   - sharedLink: Shared link to get a token for.
     ///   - completion: Returns the token data or an error.
-    public func downscopeToken(parentToken: String, scope: Set<TokenScope>, resource: String? = nil, completion: @escaping TokenInfoClosure) {
+    public func downscopeToken(parentToken: String, scope: Set<TokenScope>, resource: String? = nil, sharedLink: String? = nil, completion: @escaping TokenInfoClosure) {
 
         let scopeList = Array(scope).map { $0.description }.joined(separator: " ")
 
@@ -143,6 +144,10 @@ public class AuthModule: TokenRefreshing {
 
         if let unwrappedResource = resource {
             params["resource"] = unwrappedResource
+        }
+
+        if let unwrappedSharedLink = sharedLink {
+            params["box_shared_link"] = unwrappedSharedLink
         }
 
         networkAgent.send(

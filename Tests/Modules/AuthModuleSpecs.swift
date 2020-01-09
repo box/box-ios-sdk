@@ -170,7 +170,8 @@ class AuthModuleSpecs: QuickSpec {
                                 "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
                                 "scope": "item_preview item_upload",
                                 "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
-                                "resource": "https://api.box.com/2.0/files/123"
+                                "resource": "https://api.box.com/2.0/files/123",
+                                "box_shared_link": "https://app.box.com/s/xyz"
                             ],
                             checkClosure: { (checkTuple: CheckClosureTuple) in
                                 if let lastPathElement = checkTuple.path.last {
@@ -196,7 +197,7 @@ class AuthModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: 10) { done in
-                    self.sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
+                    self.sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
                         switch result {
                         case let .success(tokenInfo):
                             expect(tokenInfo).to(beAKindOf(TokenInfo.self))

@@ -168,12 +168,12 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
 
         let urlRequest = createRequest(for: updatedRequest)
         var observation: NSKeyValueObservation?
-        
+
         let task = session.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let self = self else {
                 return
             }
-            
+
             observation?.invalidate()
 
             if let unwrappedError = error {
