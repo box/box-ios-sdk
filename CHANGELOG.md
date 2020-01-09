@@ -1,14 +1,16 @@
 Changelog
 =========
 
-## Next Release
+## v3.1.0 [2020-01-09]
 
 __Breaking Changes:__
 
 
 __New Features and Enhancements:__
 - Add shared link downscoping
+- Add closure parameter for progress of uploads and downloads
 - Add marker based pagination to list users endpoint
+
 
 ## v3.0.0 [2019-11-18]
 
