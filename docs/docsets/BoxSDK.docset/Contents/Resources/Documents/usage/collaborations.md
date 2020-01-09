@@ -24,7 +24,7 @@ To retrieve a Collaboration record from the API, call
 with the ID of the collaboration.
 
 ```swift
-client.collaborations.get(collaborationId: "12345") { (result: Result<Collaboration, BoxError>) in
+client.collaborations.get(collaborationId: "12345") { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
         print("Error retrieving collaboration")
         return
@@ -39,7 +39,7 @@ client.collaborations.get(collaborationId: "12345") { (result: Result<Collaborat
     }
 
     let itemName: String
-    switch collaboration.item.itemValue {
+    switch collaboration.item {
     case let .file(file):
         itemName = file.name
     case let .folder(folder):
@@ -69,7 +69,7 @@ client.collaborations.create(
     role: .editor,
     accessibleBy: "33333",
     accessibleByType: "user"
-) { (result: Result<Collaboration, BoxError>) in
+) { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
         print("Error creating collaboration")
         return
@@ -89,7 +89,7 @@ To update a collaboration record, call
 with the ID of the collaboration to update and the properties to update, including at least the `role`.
 
 ```swift
-client.collaborations.update(collaborationId: "12345", role: .viewer) { (result: Result<Collaboration, BoxError>) in
+client.collaborations.update(collaborationId: "12345", role: .viewer) { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
         print("Error updating collaboration")
         return
@@ -109,7 +109,7 @@ To delete a collaboration, removing the collaborator's access to the relevant it
 with the ID of the collaboration to delete.
 
 ```swift
-client.collaborations.delete(collaborationId: "12345") { (result: Result<Void, BoxError>) in
+client.collaborations.delete(collaborationId: "12345") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error deleting collaboration")
         return
@@ -126,17 +126,25 @@ Get Pending Collaborations
 
 To retrieve a list of the pending collaborations requiring the user to accept or reject them, call
 [`client.collaborations.listPendingForEnterprise(offset:limit:fields:)`][get-pending-collaborations].
-The method returns an iterator that can be used to page through the collection of pending collaborations.
+The method returns an iterator in the completion, which is used to get pending collaborations.
 
 ```swift
-let pendingCollabIterator = client.collaborations.listPendingForEnterprise()
-pendingCollabIterator.nextItems { (result: Result<[Collaboration], BoxError>) in
-    guard case let .success(collaborations) = result else {
-        print("Error retrieving next page of collaborations")
-        return
-    }
-
-    print("User has \(collaborations.count) pending collaborations")
+client.collaborations.listPendingForEnterprise() { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(collaboration):
+                    print("Collaboration created by \(collaboration.createdBy?.name)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
+    } 
 }
 ```
 

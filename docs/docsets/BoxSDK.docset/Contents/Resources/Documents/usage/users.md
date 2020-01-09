@@ -10,7 +10,7 @@ To retrieve information about the currently authenticated user, call
 [`client.users.getCurrent(fields:completion:)`][get-current-user].
 
 ```swift
-client.users.getCurrent(fields: ["name", "login"]) { (result: Result<User, BoxError>) in
+client.users.getCurrent(fields: ["name", "login"]) { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error getting user information")
         return
@@ -30,7 +30,7 @@ To retrieve information about a specific user, call
 with the ID of the user.
 
 ```swift
-client.users.get(userId: "33333", fields: ["name", "login"]) { (result: Result<User, BoxError>) in
+client.users.get(userId: "33333", fields: ["name", "login"]) { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error getting user information")
         return
@@ -50,7 +50,7 @@ To retrieve the avatar image for a user, call
 with the ID of the user.
 
 ```swift
-client.users.getAvatar(userId: "33333") { (result: Result<Data, BoxError>) in
+client.users.getAvatar(userId: "33333") { (result: Result<Data, BoxSDKError>) in
     guard case let .success(avatarData) = result else {
         print("Error getting user avatar")
         return
@@ -70,7 +70,7 @@ As an admin user or service account, create a new user in your enterprise by cal
 the user.
 
 ```swift
-client.users.create(login: "new.user@example.com", name: "New User") { (result: Result<User, BoxError>) in
+client.users.create(login: "new.user@example.com", name: "New User") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error creating user")
         return
@@ -89,7 +89,7 @@ To create an [app user][app-user], call [`client.users.createAppUser(name:...)`]
 a name for that user.
 
 ```swift
-client.users.createAppUser(name: "Doug") { (result: Result<User, BoxError>) in
+client.users.createAppUser(name: "Doug") { (result: Result<User, BoxSDKError>) in
     guard case let .success(appUser) = result else {
         print("Error creating app user")
         return
@@ -110,7 +110,7 @@ with the ID of the user and the properties to update.  The result is the updated
 
 ```swift
 // Restrict the user from collaborating content externally
-client.users.update(userId: "33333", isExternalCollabRestricted: true) { (result: Result<User, BoxError>) in
+client.users.update(userId: "33333", isExternalCollabRestricted: true) { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error updating user")
         return
@@ -133,7 +133,7 @@ To change a user's login email, call
 with the ID of the user and the new login email.
 
 ```swift
-client.users.changeLogin(userId: "33333", login: "updated.address@example.com") { (result: Result<User, BoxError>) in
+client.users.changeLogin(userId: "33333", login: "updated.address@example.com") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error updating user email")
         return
@@ -154,7 +154,7 @@ with the ID of the user.  By default, the user will not be deleted if they have 
 To delete the user and any content that is in their account, set the `force` parameter to `true`.
 
 ```swift
-client.users.delete(userId: "33333") { (result: Result<Void, BoxError>) in
+client.users.delete(userId: "33333") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error deleting user")
         return
@@ -171,18 +171,24 @@ Get Enterprise Users
 
 To retrieve the users in an enterprise, call
 [`client.users.listForEnterprise(filterTerm:fields:offset:limit:)`][get-enterprise-users].
-The method returns an iterator object that can be used to page through the entire collection of users.
+The method returns an iterator object in the completion, which is used to get the users.
 
 ```swift
-let usersIterator = client.users.listForEnterprise()
-usersIterator.nextItems { (result: Result<[User], BoxError>) in
-    guard case let .success(users) = result else {
-        print("Error retrieving users")
-        return
-    }
-
-    for user in users {
-        print("\(user.name) (ID: \(user.id))")
+client.users.listForEnterprise() {
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(user):
+                    print("\(user.name) (ID: \(user.id))")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -200,7 +206,7 @@ with the login email of the user and the ID of the enterprise.
 client.users.inviteToJoinEnterprise(
     login: "user@example.com",
     enterpriseId: "12345"
-) { (result: Result<Invite, BoxError>) in
+) { (result: Result<Invite, BoxSDKError>) in
     guard case let .success(invite) = result else {
         print("Error inviting user to enterprise")
         return
@@ -221,7 +227,7 @@ with the ID of the source and destination users.  The result of this method is a
 user's root folder, containing all content previously owned by the source user.
 
 ```swift
-client.users.moveItemsOwnedByUser(withID: "33333", toUserWithID: "44444") { (result: Result<Folder, BoxError>) in
+client.users.moveItemsOwnedByUser(withID: "33333", toUserWithID: "44444") { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folder) = result else {
         print("Error moving user content")
         return
@@ -241,7 +247,7 @@ To retrieve the list of email aliases associated with a user, call
 with the ID of the user.
 
 ```swift
-client.users.listEmailAliases(userId: "33333") { (result: Result<EntryContainer<User>, BoxError>) in
+client.users.listEmailAliases(userId: "33333") { (result: Result<EntryContainer<User>, BoxSDKError>) in
     guard case let .success(aliasCollection) = result else {
         print("Error retrieving email aliases")
         return
@@ -267,7 +273,7 @@ with the ID of the user and the email address to add as an alias.
 client.users.createEmailAlias(
     userId: "33333",
     email: "user+alias@example.com"
-) { (result: Result<EmailAlias, BoxError>) in
+) { (result: Result<EmailAlias, BoxSDKError>) in
     guard case let .success(alias) = result else {
         print("Error adding email alias")
         return
@@ -287,7 +293,7 @@ To remove a user's email alias, call
 with the ID of the user and the ID of the email alias to remove.
 
 ```swift
-client.users.deleteEmailAlias(userId: "33333", emailAliasId: "99999") { (result: Result<Void, BoxError>) in
+client.users.deleteEmailAlias(userId: "33333", emailAliasId: "99999") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error removing email alias")
         return
@@ -307,7 +313,7 @@ To roll a user out of an enterprise, converting them to a free user, call
 with the ID of the user.
 
 ```swift
-client.users.rollOutOfEnterprise(userId: "33333") { (result: Result<User, BoxError>) in
+client.users.rollOutOfEnterprise(userId: "33333") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
         print("Error removing user from enterprise")
         return

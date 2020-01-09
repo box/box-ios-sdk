@@ -40,7 +40,7 @@ with the ID of the file.  You can control which fields are returned on the resul
 desired field names in the optional `fields` parameter.
 
 ```swift
-client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Result<File, BoxError>) in
+client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error retrieving file information")
         return
@@ -60,7 +60,7 @@ To update a file record, call
 with the ID of the file to update and the properties to update.
 
 ```swift
-client.files.update(fileId: "11111", name: "New file name.docx") { (result: Result<File, BoxError>) in
+client.files.update(fileId: "11111", name: "New file name.docx") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error updating file information")
         return
@@ -82,7 +82,7 @@ Use ID `"0"` to upload a file into the root folder, "All Files".
 ```swift
 let data = "test content".data(using: .utf8)
 
-client.files.upload(data: data, name: "Test File.txt", parentId: "0") { (result: Result<File, BoxError>) in
+client.files.upload(data: data, name: "Test File.txt", parentId: "0") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error uploading file")
         return
@@ -104,7 +104,7 @@ client.files.streamUpload(
     fileSize: 12,
     name: "Test File.txt",
     parentId: "0"
-) { (result: Result<File, BoxError>) in
+) { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error uploading file")
         return
@@ -131,7 +131,7 @@ client.files.uploadVersion(
     name: "New file name.txt",
     contentModifiedAt: "2019-08-07T09:19:13-07:00",
     data: data
-) { (result: Result<File, BoxError>) in
+) { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error uploading file version")
         return
@@ -153,7 +153,7 @@ with the ID of the file to download and a URL to the location where the file sho
 ```swift
 let url = FileManager.default.homeDirectoryForCurrentUser
 
-client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxError>) in
+client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error downloading file")
         return
@@ -176,7 +176,7 @@ same name already exists in the destination folder, the `name` parameter can be 
 copied file.  You can copy a specific file version by passing the version ID in the `version` parameter.
 
 ```swift
-client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxError>) in
+client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxSDKError>) in
     guard case let .success(copiedFile) = result else {
         print("Error copying file")
         return
@@ -197,7 +197,7 @@ with the ID of the file.  To also prevent others from downloading the file while
 `isDownloadPrevented` parameter to `true`.
 
 ```swift
-client.files.lock(fileId: "11111") { (result: Result<File, BoxError>) in
+client.files.lock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error locking file")
         return
@@ -215,7 +215,7 @@ Unlock File
 To unlock a file, call [`client.files.unlock(fileId:fields:completion:)][unlock-file] with the ID of the file.
 
 ```swift
-client.files.unlock(fileId: "11111") { (result: Result<File, BoxError>) in
+client.files.unlock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error unlocking file")
         return
@@ -236,7 +236,7 @@ with the ID of the file and the desired image format extension.  Optionally, con
 dimensions can be specified in the `minHeight`, `minWidth`, `maxHeight`, and `maxWidth` parameters.
 
 ```swift
-client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<Data, BoxError>) in
+client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<Data, BoxSDKError>) in
     guard case let .success(thumbnailData) = result else {
         print("Error getting file thumbnail")
         return
@@ -256,7 +256,7 @@ To retrieve a URL that can be embedded in a web page `<iframe>` to display a fil
 with the ID of the file.
 
 ```swift
-client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink, BoxError>) in
+client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink, BoxSDKError>) in
     guard case let .success(embedLink) = result else {
         print("Error generating file embed link")
         return
@@ -273,20 +273,24 @@ Get File Collaborations
 
 To retrieve a list of collaborations on a file, call
 [`client.files.listCollaborations(forFile:marker:limit:fields:)`][get-collaborations]
-with the ID of the file.  This method returns an iterator that can be used to page through the collection
-of file collaborations.
+with the ID of the file.  This method returns an iterator in the completion, which is used to retrieve file collaborations.
 
 ```swift
-let collaborationsIterator = client.files.listCollaborations(forFile: "11111")
-collaborationsIterator.nextItems { (result: Result<[Collaboration], BoxError>) in
-    guard case let .success(collaborations) = result else {
-        print("Error retrieving file collaborations")
-        return
-    }
-
-    print("The following users are collaborated on the file:")
-    for collaboration in collaborations {
-        print("- \(collaboration.accessibleBy?.name)")
+client.files.listCollaborations(forFile: "11111") { result in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(collaboration):
+                    print("Collaboration created by \(collaboration.createdBy?.name)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -298,20 +302,25 @@ Get File Comments
 
 To retrieve a list of comments on the file, call
 [`client.files.listComments(forFile:offset:limit:fields:)`][get-comments]
-with the ID of the file.  This method returns an iterator that can be used to page through the collection
+with the ID of the file.  This method returns an iterator in the completion, which is used to page through the collection
 of file comments.
 
 ```swift
-let commentsIterator = client.files.listComments(forFile: "11111")
-commentsIterator.nextItems { (result: Result<[Comment], BoxError>) in
-    guard case let .success(comments) = result else {
-        print("Error retrieving file comments")
-        return
-    }
-
-    print("The following comments were posted on the file:")
-    for comment in comments {
-        print("- \(comment.message)")
+client.files.listComments(forFile: "11111"){ results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(comment):
+                    print(comment.message)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -322,19 +331,24 @@ Get File Tasks
 --------------
 
 To retrieve a list of file tasks, call [`client.files.listTasks(forFile:fields:)`][get-tasks] with the ID of the
-file.  This method returns an iterator that can be used to page through the collection of file comments.
+file.  This method returns an iterator in the completion, which is used to retrieve file comments.
 
 ```swift
-let tasksIterator = client.files.listTasks(forFile: "11111")
-tasksIterator.nextItems { (result: Result<[Task], BoxError>) in
-    guard case let .success(tasks) = result else {
-        print("Error retrieving file tasks")
-        return
-    }
-
-    print("There are \(tasks.count) tasks on the file:")
-    for task in tasks {
-        print("- \(task.message)")
+client.files.listTasks(forFile: "11111") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(item):
+                    print("Task messsage: \(task.message)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -349,7 +363,7 @@ To add a file to the user's favorites collection, call
 with the ID of the file.
 
 ```swift
-client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxError>) in
+client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error adding file to favorites")
         return
@@ -369,7 +383,7 @@ To remove a file from the user's favorites collection, call
 with the ID of the file.
 
 ```swift
-client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxError>) in
+client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error removing file from favorites")
         return
@@ -389,7 +403,7 @@ To retrieve the shared link associated with a file, call
 with the ID of the file.
 
 ```swift
-client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxError>) in
+client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
         print("Error retrieving file shared link")
         return
@@ -409,7 +423,7 @@ To add or update the shared link for a file, call
 with the ID of the file and the shared link properties to set.
 
 ```swift
-client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxError>) in
+client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
         print("Error setting file shared link")
         return
@@ -429,7 +443,7 @@ To remove a file's shared link, call
 with the ID of the file.
 
 ```swift
-client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxError>) in
+client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error removing file shared link")
         return
@@ -455,7 +469,7 @@ must be passed to select the desired representations.
 client.files.getRepresentations(
     fileId: "11111",
     xRepHints: "[pdf]"
-) { (result: Result<[FileRepresentation], BoxError>) in
+) { (result: Result<[FileRepresentation], BoxSDKError>) in
     guard case let .success(representations) = result else {
         print("Error fetching representations")
         return

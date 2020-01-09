@@ -29,7 +29,7 @@ Create Group
 To create a new group, call [`client.groups.create(name: String, provenance: String?, externalSyncIdentifier: String?, description: String?, invitabilityLevel: GroupInvitabilityLevel?, memberViewabilityLevel: GroupMemberViewabilityLevel, fields: [String]?, completion: @escaping Callback<Group>)`][create_group] with the name of the group you wish to create. You can control which fields are returned in the resulting `Group` object by passing the `fields` parameter.
 
 ```swift
- client.groups.create(name: "Team A", provenance: "Test", externalSyncIdentifier: "Test Sync", description: "Test Description", invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { (result: Result<Group, BoxError>) in
+ client.groups.create(name: "Team A", provenance: "Test", externalSyncIdentifier: "Test Sync", description: "Test Description", invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { (result: Result<Group, BoxSDKError>) in
     guard case let .success(group) = result else {
         print("Error creating new group")
         return
@@ -49,7 +49,7 @@ To update an existing group, call [`client.groups.update(groupId: String, name: 
 
 ```swift
 client.groups.update(groupId: "11111", name: "Team A", provenance: .value("Test"), externalSyncIdentifier: .value("Test Sync"), description: .value("Test Description"), invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { 
-(result: Result<Group, BoxError>) in
+(result: Result<Group, BoxSDKError>) in
     guard case let .success(group) = result else {
         print("Error updating the group")
         return
@@ -69,7 +69,7 @@ To retrieve information about a group, call [`client.groups.get(groupId: String,
 
 ```swift
 client.groups.get(groupId: "12345") {
-(result: Result<Group, BoxError>) in
+(result: Result<Group, BoxSDKError>) in
     guard case let .success(group) = result else {
         print("Error getting group information")
         return
@@ -84,19 +84,24 @@ client.groups.get(groupId: "12345") {
 Get Enterprise Groups
 ---------------------
 
-To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object you can use to retrieve successive pages of result, where each page contains some of the groups in the enterprise.
+To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object in the completion, which is used to retrieve groups in the enterprise.
 
 ```swift
-let groupsIterator = client.groups.listForEnterprise()
-
-groupsIterator.getNextItems() { (result: Result<[Groups], BoxError>) in
-    guard case let .success(groups) = result else {
-        print("Error getting enterprise groups")
-        return
-    }
-
-    for group in groups {
-        print("Group with name \(group.name) retrieved")
+client.groups.listForEnterprise() { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(group):
+                    print("Group with name \(group.name) retrieved")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -110,7 +115,7 @@ To delete a group, call [`client.groups.delete(groupId: String, completion: @esc
 
 ```swift
 client.groups.delete(groupId: "12345") { 
-(result: Result<Void, BoxError>) in
+(result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error deleting group")
         return
@@ -132,7 +137,7 @@ To retrieve information about a specified group membership, call [`client.groups
 
 ```swift
 client.groups.getMembershipInfo(membershipId: "12345") { 
-(result: Result<GroupMembership, BoxError>) in
+(result: Result<GroupMembership, BoxSDKError>) in
     guard case let .success(membership) = result else {
         print("Error retrieving group membership information")
         return
@@ -149,7 +154,7 @@ To create a new group membership, call [`client.groups.createMembership(userId: 
 
 ```swift
 client.createMembership(userId: "54321", groupId: "11111", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { 
-(result: Result<GroupMembership, BoxError>) in
+(result: Result<GroupMembership, BoxSDKError>) in
     guard case let .success(membership) = result else {
         print("Error creating group membership")
         return
@@ -168,7 +173,7 @@ To update an existing group membership, call [`client.groups.updateMembership(me
 
 ```swift
 client.groups.updateMembership(membershipId: "12345", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { 
-(result: Result<GroupMembership, BoxError>) in
+(result: Result<GroupMembership, BoxSDKError>) in
     guard case let .success(membership) = result else {
         print("Error updating group membership")
         return
@@ -187,7 +192,7 @@ To delete a group membership, call [`client.groups.deleteMembership(membershipId
 
 ```swift
 client.groups.deleteMembership(membershipId: "12345") { 
-(result: Result<Void, BoxError>) in
+(result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error deleting group membership")
         return
@@ -202,20 +207,24 @@ client.groups.deleteMembership(membershipId: "12345") {
 Get Memberships for Group
 -------------------------
 
-To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for.
+To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
 
 ```swift
-let membershipIterator = client.groups.listMembership(groupId: "12345")
-
-membershipIterator.getNextItems() {
-(result: Result<[GroupMembership], BoxError>) in
-    guard case let .success(memberships) = result else {
-        print("Error getting memberships")
-        return
-    }
-
-    for membership in memberships {
-        print("Group Membership with ID \(membership.id) was retrieved")
+client.groups.listMembership(groupId: "12345") {
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(membership):
+                    print("Group Membership with ID \(membership.id) was retrieved")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -226,20 +235,24 @@ Get Memberships for User
 ------------------------
 
 To retrieve information about the group memberships for a given user, call
-[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for.
+[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
 
 ```swift
-let membershipIterator = client.groups.listMembershipsForUser(userId: "12345")
-
-membershipIterator.getNextItems() {
-(result: Result<[GroupMembership], BoxError>) in
-    guard case let .success(memberships) = result else {
-        print("Error getting memberships")
-        return
-    }
-
-    for membership in memberships {
-        print("Group Membership with ID \(membership.id) was retrieved")
+client.groups.listMembershipsForUser(userId: "12345") {
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(membership):
+                    print("Group Membership with ID \(membership.id) was retrieved")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -249,21 +262,25 @@ membershipIterator.getNextItems() {
 Get Collaborations for Group
 ----------------------------
 
-To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for.
+To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for. This method will return an iterator object in the completion, which is used to retrieve the collaborations.
 
 ```swift
-let collabIterator = client.groups.listCollaborations(groupId: "12345")
-
-collabIterator.getNextItems() {
-(result: Result<[Collaboration], BoxError>) in
-    guard case let .success(collaborations) = result else {
-        print("Error getting collaborations")
-        return
-    }
-
-    for collaboration in collaborations {
-        print("Collaboration with ID \(collaboration.id) was retrieved")
-    }
+client.groups.listCollaborations(groupId: "12345") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { (result in
+                switch result {
+                case let .success(collaboration):
+                    print("Collaboration with ID \(collaboration.id) was retrieved")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
+    }  
 }
 ```
 
