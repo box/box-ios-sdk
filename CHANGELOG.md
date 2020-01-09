@@ -7,7 +7,7 @@ __Breaking Changes:__
 
 
 __New Features and Enhancements:__
-
+- Add shared link downscoping
 - Add marker based pagination to list users endpoint
 
 ## v3.0.0 [2019-11-18]
