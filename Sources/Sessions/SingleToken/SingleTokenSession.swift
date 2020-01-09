@@ -30,12 +30,14 @@ class SingleTokenSession: SessionProtocol {
     /// - Parameters:
     ///   - scope: Scope or scopes that you want to apply to the resulting token.
     ///   - resource: Full url path to the file that the token should be generated for, eg: https://api.box.com/2.0/files/{file_id}
+    ///   - sharedLink: Shared link to get a token for.
     ///   - completion: Returns the success or an error.
     func downscopeToken(
         scope: Set<TokenScope>,
         resource: String? = nil,
+        sharedLink: String? = nil,
         completion: @escaping TokenInfoClosure
     ) {
-        authModule.downscopeToken(parentToken: token, scope: scope, resource: resource, completion: completion)
+        authModule.downscopeToken(parentToken: token, scope: scope, resource: resource, sharedLink: sharedLink, completion: completion)
     }
 }
