@@ -22,14 +22,14 @@ password-protected.
 ```swift
 client.sharedItems.get(
     sharedLinkURL: "https://app.box.com/s/qqwertyuiopasdfghjklzxcvbnm123456"
-) { (result: Result<SharedItem, BoxError>) in
+) { (result: Result<SharedItem, BoxSDKError>) in
     guard case let .success(item) = result else {
         print("Error resolving shared item")
         return
     }
 
     print("The shared link resolves to item:")
-    switch item.itemValue {
+    switch item {
     case let .file(file):
         print("- File \(file.name) (ID: \(file.id))")
     case let .folder(folder):

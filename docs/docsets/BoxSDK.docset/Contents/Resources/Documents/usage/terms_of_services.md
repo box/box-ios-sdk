@@ -26,7 +26,7 @@ To retrieve information about a terms of service, call
 ```swift
 client.termsOfService.get(
     tosID: "12345"
-) { (result: Result<TermsOfService, BoxError>) in
+) { (result: Result<TermsOfService, BoxSDKError>) in
     guard case let .success(termsOfService) = result else {
         print("Error getting terms of service information")
         return
@@ -46,7 +46,7 @@ client.termsOfService.create(
     status: .enabled,
     tosType: .managed,
     text: "Test Terms of Service"
-) { (result: Result<TermsOfService, BoxError>) in
+) { (result: Result<TermsOfService, BoxSDKError>) in
     guard case let .success(termsOfService) = result else {
         print("Error creating terms of service")
         return
@@ -65,7 +65,7 @@ client.termsOfService.update(
     tosId: "12345",
     text: "Updated Text String",
     status: TermsOfServiceStatus.enabled
-) { (result: Result<TermsOfService, BoxError>) in
+) { (result: Result<TermsOfService, BoxSDKError>) in
     guard calse let .success(termsOfService) = result else {
         print("Error updating terms of service")
         return
@@ -96,7 +96,7 @@ client.termsOfService.createUserStatus(
     tosId: "12345",
     isAccepted: true,
     userId: "54321"
-) { (result: Result<TermsOfServiceUserStatus, BoxError>) in
+) { (result: Result<TermsOfServiceUserStatus, BoxSDKError>) in
     guard case let .success(userStatus) = result else {
         print("Error accepting Terms of Service for new user")
         return
@@ -115,7 +115,7 @@ To update a user status on a terms of service call [`client.termsOfService.updat
 client.termsOfService.updateUserStatus(
     userStatusId: "12345",
     isAccepted: true
-) { (result: Result<TermsOfServiceUserStatus, BoxError>) in
+) { (result: Result<TermsOfServiceUserStatus, BoxSDKError>) in
     guard case let .success(userStatus) = result else {
         print("Error updating Terms of Service User Status")
         return
@@ -134,7 +134,7 @@ To retrieve the user status for a user on a terms of service, call [`client.term
 client.termsOfService.getUserStatus(
     tosId: "12345",
     userId: "54321"
-) { (result: Result<TermsOfServiceUserStatus, BoxError>) in
+) { (result: Result<TermsOfServiceUserStatus, BoxSDKError>) in
     guard case let .success(userStatus) = result else {
         print("Error retrieving user status for Terms of Service")
         return

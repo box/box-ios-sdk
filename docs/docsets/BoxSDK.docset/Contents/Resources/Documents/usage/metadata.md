@@ -50,7 +50,7 @@ with the scope and key of the template.
 client.metadata.getTemplateByKey(
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<MetadataTemplate, BoxError>) in
+) { (result: Result<MetadataTemplate, BoxSDKError>) in
     guard case let .success(template) = result {
         print("Error retrieving metadata template")
         return
@@ -67,7 +67,7 @@ with the ID of the template.
 ```swift
 client.metadata.getTemplateById(
     id: "26004e29-7b94-44a1-8a63-f9aa384c7421"
-) { (result: Result<MetadataTemplate, BoxError>) in
+) { (result: Result<MetadataTemplate, BoxSDKError>) in
     guard case let .success(template) = result {
         print("Error retrieving metadata template")
         return
@@ -115,7 +115,7 @@ client.metadata.createTemplate(
     displayName: "Personnel Record",
     hidden: false,
     fields: templateFields
-) { (result: Result<MetadataTemplate, BoxError>) in
+) { (result: Result<MetadataTemplate, BoxSDKError>) in
     guard case let .success(template) = result {
         print("Error creating metadata template")
         return
@@ -141,7 +141,7 @@ client.metadata.updateTemplate(
     scope: "enterprise",
     templateKey: "personnelRecord",
     operation: .reorderEnumOptions(fieldKey: "department", enumOptionKeys: ["Marketing", "Sales", "HR"])
-) { (result: Result<MetadataTemplate, BoxError>) in
+) { (result: Result<MetadataTemplate, BoxSDKError>) in
     guard case let .success(template) = result {
         print("Error updating metadata template")
         return
@@ -164,7 +164,7 @@ with the scope and key of the template to delete.
 client.metadata.deleteTemplate(
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<Void, BoxError>) in
+) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result {
         print("Error deleting metadata template")
         return
@@ -181,19 +181,24 @@ List Metadata Templates
 
 To retrieve the collection of available metadata templates in a particular scope, call
 [`client.metadata.listEnterpriseTemplates(scope:marker:limit:)`][list-templates]
-with the scope.
+with the scope. This method will return an iterator object in the completion, which is used to retrieve metadata templates.
 
 ```swift
-let enterpriseTemplates = client.metadata.listEnterpriseTemplates(scope: "enterprise")
-enterpriseTemplates.nextItems { (result: Result<[MetadataTemplate], BoxError>) in
-    guard case let .success(templates) = result {
-        print("Error retrieving metadata templates")
-        return
-    }
-
-    print("Retrieved \(templates.count) enterprise-scope templates:")
-    for template in templates {
-        print("- \(template.displayName)")
+client.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(template):
+                    print("Template name: \(template.displayName)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -208,7 +213,7 @@ To retrieve all metadata attached to a file, call
 with the ID of the file.
 
 ```swift
-client.metadata.list(forFileId: "11111") { (result: Result<[MetadataObject], BoxError>) in
+client.metadata.list(forFileId: "11111") { (result: Result<[MetadataObject], BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error retrieving metadata")
         return
@@ -235,7 +240,7 @@ client.metadata.get(
     forFileWithId: "11111",
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error retrieving metadata")
         return
@@ -266,7 +271,7 @@ client.metadata.create(
     scope: "enterprise",
     templateKey: "personnelRecord",
     keys: metadata
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error adding metadata")
         return
@@ -295,7 +300,7 @@ client.metadata.update(
         .test(path: "/department", value: "Sales"),
         .replace(path: "/department", value: "Marketing")
     ]
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error updating metadata")
         return
@@ -319,7 +324,7 @@ client.metadata.delete(
     forFileWithId: "11111",
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<Void, BoxError>) in
+) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result {
         print("Error deleting metadata instance")
         return
@@ -339,7 +344,7 @@ To retrieve all metadata attached to a folder, call
 with the ID of the folder.
 
 ```swift
-client.metadata.list(forFolderId: "22222") { (result: Result<[MetadataObject], BoxError>) in
+client.metadata.list(forFolderId: "22222") { (result: Result<[MetadataObject], BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error retrieving metadata")
         return
@@ -366,7 +371,7 @@ client.metadata.get(
     forFolderWithId: "22222",
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error retrieving metadata")
         return
@@ -397,7 +402,7 @@ client.metadata.create(
     scope: "enterprise",
     templateKey: "personnelRecord",
     keys: metadata
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error adding metadata")
         return
@@ -426,7 +431,7 @@ client.metadata.update(
         .test(path: "/department", value: "Sales"),
         .replace(path: "/department", value: "Marketing")
     ]
-) { (result: Result<MetadataObject, BoxError>) in
+) { (result: Result<MetadataObject, BoxSDKError>) in
     guard case let .success(metadata) = result {
         print("Error updating metadata")
         return
@@ -450,7 +455,7 @@ client.metadata.deleteMetadata(
     forFolderWithId: "22222",
     scope: "enterprise",
     templateKey: "personnelRecord"
-) { (result: Result<Void, BoxError>) in
+) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result {
         print("Error deleting metadata instance")
         return

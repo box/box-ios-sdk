@@ -25,7 +25,7 @@ with the ID of the storage policy.  You can control which fields are returned in
 `fields` parameter.
 
 ```swift
-client.storagePolicies.get(storagePolicyId: "22222") { (result: Result<StoragePolicy, BoxError>) in
+client.storagePolicies.get(storagePolicyId: "22222") { (result: Result<StoragePolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
         print("Error getting storage policy")
         return
@@ -38,20 +38,24 @@ Get Storage Policies
 --------------------
 
 To retrieve the storage policies in an enterprise, call
-[`client.storagePolicies.list(marker: String?, limit: Int?, fields: [String]?)`][get-storage-policies].  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the policies in the enterprise.
+[`client.storagePolicies.list(marker: String?, limit: Int?, fields: [String]?)`][get-storage-policies].  This method will return an iterator in the completion, which is used to get the policies.
 
 ```swift
-let storagePolicies = client.storagePolicies.list()
-// Get the first page of storage policies
-storagePolicies.nextPage() { (result: Result<[StoragePolicy], BoxError>) in
-    guard case let .success(policies) = result else {
-        print("Error getting storage policies")
-        return
-    }
-    // Print out first page of storage policies in the enterprise
-    for policy in policies {
-        print("Storage policy \(policy.id)")
+client.storagePolicies.list() { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(policy):
+                    print("Storage policy \(policy.id)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -64,7 +68,7 @@ To get storage policy assignment, call
 with the id of a storage policy assignment.
 
 ```swift
-client.storagePolicy.getAssignment(storagePolicyAssignmentId: "1234") { (result: Result<StoragePolicyAssignment, BoxError>) in
+client.storagePolicy.getAssignment(storagePolicyAssignmentId: "1234") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error getting storage policy assignment")
         return
@@ -79,7 +83,7 @@ To get storage policy assignments for a user or enterprise, call
 [`client.storagePolicies.listAssignments(resolvedForType: String, resolvedForId: String, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][get-storage-policy-assignments]. This always returns a single storage policy assignment.
 
 ```swift
-client.storagePolicy.listAssignments(resolvedForType: "user", resolvedForId: "1234") { (result: Result<StoragePolicyAssignment, BoxError>) in
+client.storagePolicy.listAssignments(resolvedForType: "user", resolvedForId: "1234") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error getting storage policy assignment")
         return
@@ -95,7 +99,7 @@ To assign a storage policy, call
 [`client.storagePolicies.assign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][storage-policy-assignment].
 
 ```swift
-client.storagePolicy.assign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxError>) in
+client.storagePolicy.assign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error assigning a storage policy")
         return
@@ -111,7 +115,7 @@ To assign a storage policy, call
 [`client.storagePolicies.forceAssign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][assign-storage-policy]. The difference between this call and the createPolicyAssignment() above is that this method will guarantee an update to the assignee's policy. If an assignee already has a policy assigned to it, the createPolicyAssignment() will return a 409 Conflict error. assignPolicy() will instead make an additional updatePolicyAssignment() call to replace the existing policy with the new policy for a policy assignment.
 
 ```swift
-client.storagePolicy.forceAssign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxError>) in
+client.storagePolicy.forceAssign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error assigning a storage policy")
         return
@@ -127,7 +131,7 @@ To update storage policy assignment, call
 [`client.storagePolicies.updateAssignment(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][update-storage-policy-assignment].
 
 ```swift
-client.storagePolicy.updateAssignment(storagePolicyAssignmentId: "1234", storagePolicyId: "123") { (result: Result<StoragePolicyAssignment, BoxError>) in
+client.storagePolicy.updateAssignment(storagePolicyAssignmentId: "1234", storagePolicyId: "123") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
         print("Error updating a storage policy assignment")
         return
@@ -144,7 +148,7 @@ To delete a storage policy assignment, call
 with the ID of the storage policy to delete.
 
 ```swift
-client.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "22222") { result: Result<Void, BoxError>} in
+client.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "22222") { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
         print("Error deleting storage policy assignment")
         return

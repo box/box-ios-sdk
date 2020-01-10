@@ -34,7 +34,7 @@ with the ID of the folder.  You can control which fields are returned in the res
 client.folders.get(
     folderId: "22222",
     fields: ["name", "created_at"]
-) { (result: Result<Folder, BoxError>) in
+) { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folder) = result else {
         print("Error getting folder information")
         return
@@ -51,29 +51,31 @@ Get Folder Items
 
 To retrieve information about the items contained in a folder, call
 [`client.folders.listItems(folderId:usemarker:marker:offset:limit:sort:direction:fields:)`][get-folder-items]
-with the ID of the folder.  This method will return an iterator object you can use to retrieve successive pages of
-results, where each page contains some of the items in the folder.
+with the ID of the folder.  This method will return an iterator in the completion, which is used to retrieve folder items.
 
 ```swift
-let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending)
-
-// Get the first page of items
-folderItems.nextItems() { (result: Result<[FolderItem], BoxError>) in
-    guard case let .success(items) = result else {
-        print("Error getting folder items")
-        return
-    }
-
-    // Print out first page of items in the folder
-    for item in items {
-        switch item.itemValue {
-        case let .file(file):
-            print("File \(file.name) (ID: \(file.id)) is in the folder")
-        case let .folder(folder):
-            print("Subfolder \(folder.name) (ID: \(folder.id)) is in the folder")
-        case let .webLink(webLink):
-            print("Web link \(webLink.name) (ID: \(webLink.id)) is in the folder")
+let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending) { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(item):
+                    switch item {
+                    case let .file(file):
+                        print("File \(file.name) (ID: \(file.id)) is in the folder")
+                    case let .folder(folder):
+                        print("Subfolder \(folder.name) (ID: \(folder.id)) is in the folder")
+                    case let .webLink(webLink):
+                        print("Web link \(webLink.name) (ID: \(webLink.id)) is in the folder")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+            }
         }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -89,7 +91,7 @@ with a name for the new folder and the ID of the folder to create the new folder
 root folder ("All Files"), use ID `"0"`.
 
 ```swift
-client.folders.create(name: "New Folder", parentId: "22222") { (result: Result<Folder, BoxError>) in
+client.folders.create(name: "New Folder", parentId: "22222") { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folder) = result else {
         print("Error creating folder")
         return
@@ -111,7 +113,7 @@ with the ID of the folder to delete.  By default, the folder will only be delete
 items in it; if you wish to delete all the items in the folder as well, pass `recursive: true`.
 
 ```swift
-client.folders.delete(folderId: "22222", recursive: true) { result: Result<Void, BoxError>} in
+client.folders.delete(folderId: "22222", recursive: true) { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
         print("Error deleting folder")
         return
@@ -136,7 +138,7 @@ alternate name in case of a conflict.
 client.folders.copy(
     folderId: "22222",
     destinationFolderID: "12345"
-) { (result: Result<Folder, BoxError>) in
+) { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folderCopy) = result else {
         print("Error copying folder")
         return
@@ -156,15 +158,21 @@ To retrieve a list of the collaborations on a folder, call
 with the ID of the folder.
 
 ```swift
-client.folders.listCollaborations(folderId: "22222") { (result: Result<[Collaboration], BoxError>) in
-    guard case let .success(collaborations) = result else {
-        print("Error retrieving collaborations")
-        return
-    }
-
-    print("Folder has \(collaborations.count) collaborators:")
-    for collaboration in collaborations {
-        print("- \(collaboration.accessibleBy?.name)")
+client.folders.listCollaborations(folderId: "22222") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(collaboration):
+                    print("- \(collaboration.accessibleBy?.name)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
     }
 }
 ```
@@ -179,7 +187,7 @@ To add a folder to the user's favorites, call
 with the ID of the folder.
 
 ```swift
-client.folders.addToFavorites(folderId: "22222") { (result: Result<Void, BoxError>) in
+client.folders.addToFavorites(folderId: "22222") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error adding folder to favorites")
         return
@@ -208,7 +216,7 @@ To retrieve the shared link associated with a folder, call
 with the ID of the folder.
 
 ```swift
-client.folders.getSharedLink(forFolder: "11111") { (result: Result<SharedLink, BoxError>) in
+client.folders.getSharedLink(forFolder: "11111") { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
         print("Error retrieving folder shared link")
         return
@@ -228,7 +236,7 @@ To add or update the shared link for a folder, call
 with the ID of the folder and the shared link properties to set.
 
 ```swift
-client.folders.setSharedLink(forFolder: "11111", access: .open) { (result: Result<SharedLink, BoxError>) in
+client.folders.setSharedLink(forFolder: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
         print("Error setting folder shared link")
         return
@@ -248,7 +256,7 @@ To remove a file's shared link, call
 with the ID of the folder.
 
 ```swift
-client.folders.deleteSharedLink(forFolder: "11111") { (result: Result<Void, BoxError>) in
+client.folders.deleteSharedLink(forFolder: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error removing folder shared link")
         return

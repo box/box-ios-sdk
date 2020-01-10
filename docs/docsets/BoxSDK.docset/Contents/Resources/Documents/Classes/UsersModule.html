@@ -1760,9 +1760,9 @@ thrown if the folder is not empty and the ‘recursive’ parameter is not inclu
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields6offset5limit10completionySSSg_SaySSGSgSiSgAMys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/listForEnterprise(filterTerm:fields:offset:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields6offset5limit10completionySSSg_SaySSGSgSiSgAMys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF">listForEnterprise(filterTerm:fields:offset:limit:completion:)</a>
+                    <a name="/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/listForEnterprise(filterTerm:fields:usemarker:marker:offset:limit:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF">listForEnterprise(filterTerm:fields:usemarker:marker:offset:limit:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1780,6 +1780,8 @@ thrown if the folder is not empty and the ‘recursive’ parameter is not inclu
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listForEnterprise</span><span class="p">(</span>
     <span class="nv">filterTerm</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">usemarker</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/User.html">User</a></span><span class="o">&gt;&gt;</span>
@@ -1814,6 +1816,36 @@ thrown if the folder is not empty and the ‘recursive’ parameter is not inclu
                                   <p>List of <a href="https://developer.box.com/reference#user-object">user object fields</a> to
 include in the response.  Only those fields will be populated on the resulting model object.
 If not passed, a default set of fields will be returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>usemarker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This specifies whether you would like to use marker-based or offset-based
+paging. You can only use one or the other. Marker-based paging is the preferred method
+and is most performant. If not specified, this endpoint defaults to using offset-based
+paging. This parameter is unique to Get Folder Items to retain backwards compatibility
+for this endpoint. This parameter is required for both the first and subsequent calls to
+use marked-based paging.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details. This
+parameter cannot be used simultaneously with the &lsquo;offset&rsquo; parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2431,8 +2463,8 @@ If not passed, a default set of fields will be returned.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.box.com" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
