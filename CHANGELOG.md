@@ -7,6 +7,7 @@ __Breaking Changes:__
 
 
 __New Features and Enhancements:__
+
 - Add shared link downscoping
 - Add closure parameter for progress of uploads and downloads
 - Add marker based pagination to list users endpoint
