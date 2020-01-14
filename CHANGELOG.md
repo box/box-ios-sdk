@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+- Change `status` field for task assignments from a String to an Enum
+
+__New Features and Enhancements:__
+
+
+
 ## v3.1.0 [2020-01-09]
 
 __Breaking Changes:__
