@@ -51,7 +51,7 @@ class TaskSpecs: QuickSpec {
                         expect(task.taskAssignmentCollection?.entries[0].type).to(equal("task_assignment"))
                         expect(task.taskAssignmentCollection?.entries[0].id).to(equal("12345"))
                         expect(task.taskAssignmentCollection?.entries[0].message).to(equal(""))
-                        expect(task.taskAssignmentCollection?.entries[0].status).to(equal("incomplete"))
+                        expect(task.taskAssignmentCollection?.entries[0].status).to(equal(.incomplete))
                         expect(task.taskAssignmentCollection?.entries[0].resolutionState).to(equal(.incomplete))
 
                         guard case let .file(assignmentFile)? = task.taskAssignmentCollection?.entries[0].item else {
@@ -77,7 +77,7 @@ class TaskSpecs: QuickSpec {
                         expect(task.taskAssignmentCollection?.entries[0].type).to(equal("task_assignment"))
                         expect(task.taskAssignmentCollection?.entries[0].id).to(equal("12345"))
                         expect(task.taskAssignmentCollection?.entries[0].message).to(equal(""))
-                        expect(task.taskAssignmentCollection?.entries[0].status).to(equal("incomplete"))
+                        expect(task.taskAssignmentCollection?.entries[0].status).to(equal(.incomplete))
                         expect(task.taskAssignmentCollection?.entries[0].resolutionState).to(equal(.incomplete))
 
                         expect(task.isCompleted).to(beFalse())
