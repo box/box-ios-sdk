@@ -8,6 +8,50 @@
 
 import Foundation
 
+/// Status of assignment.
+public enum AssignmentStatus: BoxEnum {
+    /// Completed
+    case completed
+    /// Incomplete
+    case incomplete
+    /// Approved
+    case approved
+    /// Rejected
+    case rejected
+    /// Custom value not implemented in this version of SDK.
+    case customValue(String)
+
+    public init(_ value: String) {
+        switch value {
+        case "completed":
+            self = .completed
+        case "incomplete":
+            self = .incomplete
+        case "approved":
+            self = .approved
+        case "rejected":
+            self = .rejected
+        default:
+            self = .customValue(value)
+        }
+    }
+
+    public var description: String {
+        switch self {
+        case .completed:
+            return "completed"
+        case .incomplete:
+            return "incomplete"
+        case .approved:
+            return "approved"
+        case .rejected:
+            return "rejected"
+        case let .customValue(value):
+            return value
+        }
+    }
+}
+
 /// State of assignment.
 public enum AssignmentState: BoxEnum {
     /// Completed
@@ -70,7 +114,7 @@ public class TaskAssignment: BoxModel {
     /// Date of assignment.
     public let assignedAt: Date?
     /// Assignment status.
-    public let status: String?
+    public let status: AssignmentStatus?
     /// A message from the assignee about this task.
     public let message: String?
     /// The user task is assigned to.
@@ -99,7 +143,7 @@ public class TaskAssignment: BoxModel {
         id = try BoxJSONDecoder.decode(json: json, forKey: "id")
         item = try BoxJSONDecoder.optionalDecode(json: json, forKey: "item")
         assignedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "assigned_at")
-        status = try BoxJSONDecoder.optionalDecode(json: json, forKey: "status")
+        status = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "status")
         message = try BoxJSONDecoder.optionalDecode(json: json, forKey: "message")
         assignedTo = try BoxJSONDecoder.optionalDecode(json: json, forKey: "assigned_to")
         assignedBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "assigned_by")
