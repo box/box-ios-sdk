@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SingleTokenSession: SessionProtocol {
+public class SingleTokenSession: SessionProtocol {
     var token: String
     var authModule: AuthModule
 
@@ -17,11 +17,11 @@ class SingleTokenSession: SessionProtocol {
         self.authModule = authModule
     }
 
-    func getAccessToken(completion: @escaping AccessTokenClosure) {
+    public func getAccessToken(completion: @escaping AccessTokenClosure) {
         completion(.success(token))
     }
 
-    func revokeTokens(completion: @escaping Callback<Void>) {
+    public func revokeTokens(completion: @escaping Callback<Void>) {
         authModule.revokeToken(token: token, completion: completion)
     }
 
@@ -32,7 +32,7 @@ class SingleTokenSession: SessionProtocol {
     ///   - resource: Full url path to the file that the token should be generated for, eg: https://api.box.com/2.0/files/{file_id}
     ///   - sharedLink: Shared link to get a token for.
     ///   - completion: Returns the success or an error.
-    func downscopeToken(
+    public func downscopeToken(
         scope: Set<TokenScope>,
         resource: String? = nil,
         sharedLink: String? = nil,
