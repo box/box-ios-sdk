@@ -146,6 +146,45 @@ class FilesModuleSpecs: QuickSpec {
                         }
                     }
                 }
+                
+                it("should retrieve representations from a file when fields are passed") {
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/2.0/files/12345")
+                            && containsQueryParams(["fields": "representations,name,extension"])
+                            && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetRepresentations.json", type(of: self))!,
+                            statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.files.listRepresentations(fileId: "12345", representationHint: .extractedText, fields: ["name", "extension"]) { result in
+                            switch result {
+                            case let .success(representations):
+                                guard let firstRepresentation = representations.first else {
+                                    fail("Representation list should not be empty")
+                                    done()
+                                    return
+                                }
+                                expect(firstRepresentation.info?.url).to(equal("https://api.box.com/2.0/internal_files/12345/versions/11111/representations/extracted_text"))
+                                expect(firstRepresentation.status?.state?.description).to(equal("success"))
+                                expect(firstRepresentation.representation).to(equal("text"))
+
+                                let properties = firstRepresentation.properties
+
+                                expect(properties["paged"]).to(equal("false"))
+                                expect(properties["thumb"]).to(equal("true"))
+
+                            case let .failure(error):
+                                fail("Expected call to listRepresentations() to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
 
                 it("should retrieve representations from a file when no x-rep-hints are passed") {
                     stub(

@@ -18,10 +18,13 @@ public extension FilesModule {
     ///   - representationHint: The representation to retrieve for the file. It can be one of predefined
     ///     options or custom representation, see [representation
     ///     documentation](https://developer.box.com/reference#representations).
+    ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     ///   - completion: Returns an array of the specified representations.
     func listRepresentations(
         fileId: String,
         representationHint: FileRepresentationHint? = nil,
+        fields: [String]? = nil,
         completion: @escaping Callback<[FileRepresentation]>
     ) {
         var headers: [String: String] = [:]
@@ -29,11 +32,17 @@ public extension FilesModule {
         if let xRepHints = representationHint?.description {
             headers["x-rep-hints"] = xRepHints
         }
+        
+        var allFields = ["representations"]
+        
+        if let unwrappedFields = fields {
+            allFields += unwrappedFields
+        }
 
         boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: boxClient.configuration),
             httpHeaders: headers,
-            queryParameters: ["fields": FieldsQueryParam(["representations"])],
+            queryParameters: ["fields": FieldsQueryParam(allFields)],
             completion: { result in
                 let objectResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
                 switch objectResult {
