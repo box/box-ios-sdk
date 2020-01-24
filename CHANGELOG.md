@@ -9,6 +9,7 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Make authentication session classes `OAuth2Session`, `SingleTokenSession`, and `DelegatedAuthSession` public
 
 
 ## v3.1.0 [2020-01-09]
