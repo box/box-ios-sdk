@@ -30,6 +30,7 @@ To retrieve information about a folder, call
 with the ID of the folder.  You can control which fields are returned in the resulting `Folder` object by passing the
 `fields` parameter.
 
+<!-- sample get_folders_id -->
 ```swift
 client.folders.get(
     folderId: "22222",
@@ -53,6 +54,7 @@ To retrieve information about the items contained in a folder, call
 [`client.folders.listItems(folderId:usemarker:marker:offset:limit:sort:direction:fields:)`][get-folder-items]
 with the ID of the folder.  This method will return an iterator in the completion, which is used to retrieve folder items.
 
+<!-- sample get_folders_id_items -->
 ```swift
 let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending) { results in
     switch results {
@@ -90,6 +92,7 @@ To create a new folder, call
 with a name for the new folder and the ID of the folder to create the new folder in.  To create a new folder inside the
 root folder ("All Files"), use ID `"0"`.
 
+<!-- sample post_folders -->
 ```swift
 client.folders.create(name: "New Folder", parentId: "22222") { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folder) = result else {
@@ -112,6 +115,7 @@ To delete a folder, call
 with the ID of the folder to delete.  By default, the folder will only be deleted if it is empty and has no
 items in it; if you wish to delete all the items in the folder as well, pass `recursive: true`.
 
+<!-- sample delete_folders_id -->
 ```swift
 client.folders.delete(folderId: "22222", recursive: true) { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
@@ -134,6 +138,7 @@ with the ID of the folder to copy and the ID of the destination parent folder.  
 parent folder, pass an alternate name for the folder in the `name` parameter; the folder will be renamed to the
 alternate name in case of a conflict.
 
+<!-- sample post_folders_id_copy -->
 ```swift
 client.folders.copy(
     folderId: "22222",
@@ -157,6 +162,7 @@ To retrieve a list of the collaborations on a folder, call
 [`client.folders.listCollaborations(folderId:fields:)`][get-collaborations]
 with the ID of the folder.
 
+<!-- sample get_folders_id_collaborations -->
 ```swift
 client.folders.listCollaborations(folderId: "22222") { results in
     switch results {
@@ -186,6 +192,7 @@ To add a folder to the user's favorites, call
 [`client.folders.addToFavorites(folderId:completion:)`][add-to-favorites]
 with the ID of the folder.
 
+<!-- sample put_folders_id add_to_favorites -->
 ```swift
 client.folders.addToFavorites(folderId: "22222") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -215,6 +222,7 @@ To retrieve the shared link associated with a folder, call
 [`client.folders.getSharedLink(forFolder:completion:)`][get-shared-link]
 with the ID of the folder.
 
+<!-- sample get_folders_id get_shared_link -->
 ```swift
 client.folders.getSharedLink(forFolder: "11111") { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -235,6 +243,7 @@ To add or update the shared link for a folder, call
 [`client.folders.setSharedLink(forFolder:access:unsharedAt:password:canDownload:completion:)`][set-shared-link]
 with the ID of the folder and the shared link properties to set.
 
+<!-- sample get_folders_id create_shared_link -->
 ```swift
 client.folders.setSharedLink(forFolder: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -255,6 +264,7 @@ To remove a file's shared link, call
 [`client.folders.deleteSharedLink(forFolder:completion:)`][delete-shared-link]
 with the ID of the folder.
 
+<!-- sample get_folders_id delete_shared_link -->
 ```swift
 client.folders.deleteSharedLink(forFolder: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {

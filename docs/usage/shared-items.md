@@ -19,6 +19,7 @@ To get the file or folder information for a shared link, call
 with the URL of the shared link. The `sharedLinkPassword` parameter should be provided if the shared link is
 password-protected.
 
+<!-- sample get_shared_items -->   
 ```swift
 client.sharedItems.get(
     sharedLinkURL: "https://app.box.com/s/qqwertyuiopasdfghjklzxcvbnm123456"

@@ -19,6 +19,7 @@ To retrieve information about a device pin, call
 [`client.devicepins.get(devicePinId: String, fields: [String]?, completion: @escaping Callback<DevicePin>)`][get-device-pin] with the ID
 of the device pin. You can control which fields are returned on the resulting `Device Pin` object by passing the desired field names in the optional `fields` parameter.
 
+<!-- sample get_device_pinners_id -->
 ```swift
 client.devicePins.get(devicePinId: "11111", fields: ["product_name"]) { (result: Result<DevicePin, BoxSDKError>) in
     guard case let .success(devicePin) = result else {
@@ -37,6 +38,7 @@ Get Device Pins for Enterprise
 
 To retrieve information about the device pins active for the enterprise, call [`client.devicePins.listForEnterprise(enterpriseId: String, marker: String?, limit: Int?, direction: OrdeDirection?, fields: [String]?)`][get-device-pins] with the ID of the enterpise. This method will return an iterator object in the completion, which is used to retrieve device pins for the enterprise.
 
+<!-- sample get_enterprise_id_device_pinners -->
 ```swift
 client.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending) { results in 
     switch results {
@@ -65,6 +67,7 @@ Delete Device Pin
 
 To delete a device pin, call [`client.devicePins.delete(devicePinId: String, completion: @escaping: Callback<Void>)`][delete-device-pin] with the ID of the device pin to delete. 
 
+<!-- sample delete_device_pinners_id -->
 ```swift
 client.devicePins.delete(devicePinId: "12345") { result: Result<Void, BoxSDKError> in
     guard case .success = result else {

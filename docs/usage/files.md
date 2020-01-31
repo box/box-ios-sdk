@@ -39,6 +39,7 @@ To retrieve information about a file, call
 with the ID of the file.  You can control which fields are returned on the resulting `File` object by passing the
 desired field names in the optional `fields` parameter.
 
+<!-- sample get_files_id -->
 ```swift
 client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -59,6 +60,7 @@ To update a file record, call
 [`client.files.updateFileInfo(fileId:name:description:parentId:sharedLink:tags:collections:lock:ifMatch:fields:completion:)`][update-file]
 with the ID of the file to update and the properties to update.
 
+<!-- sample put_files_id -->
 ```swift
 client.files.update(fileId: "11111", name: "New file name.docx") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -79,6 +81,7 @@ To upload a file from data in memory, call
 with the data to be uploaded, the name of the file, and the ID of the folder into which the file should be uploaded.
 Use ID `"0"` to upload a file into the root folder, "All Files".
 
+<!-- sample post_files_content -->
 ```swift
 let data = "test content".data(using: .utf8)
 
@@ -124,6 +127,7 @@ To upload a new version of an existing file, call
 [`client.files.uploadVersion(forFile:name:contentModifiedAt:data:progress:completion:)`][upload-file-version]
 with the ID of the file and the file contents to be uploaded.
 
+<!-- sample post_files_id_content -->
 ```swift
 let data = "updated file content".data(using: .utf8)
 client.files.uploadVersion(
@@ -150,6 +154,7 @@ To download a file to the device, call
 [`client.files.download(fileId:version:destinationURL:progress:completion:)`][download-file]
 with the ID of the file to download and a URL to the location where the file should be downloaded to.
 
+<!-- sample get_files_id_content -->
 ```swift
 let url = FileManager.default.homeDirectoryForCurrentUser
 
@@ -175,6 +180,7 @@ with the ID of the file to copy and the ID of the folder into which the copy sho
 same name already exists in the destination folder, the `name` parameter can be used to provide a new name for the
 copied file.  You can copy a specific file version by passing the version ID in the `version` parameter.
 
+<!-- sample post_files_id_copy -->
 ```swift
 client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxSDKError>) in
     guard case let .success(copiedFile) = result else {
@@ -196,6 +202,7 @@ To lock a file and prevent others from modifying it, call
 with the ID of the file.  To also prevent others from downloading the file while it is locked, set the
 `isDownloadPrevented` parameter to `true`.
 
+<!-- sample put_files_id lock -->
 ```swift
 client.files.lock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -214,6 +221,7 @@ Unlock File
 
 To unlock a file, call [`client.files.unlock(fileId:fields:completion:)][unlock-file] with the ID of the file.
 
+<!-- sample put_files_id unlock -->
 ```swift
 client.files.unlock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -235,6 +243,7 @@ To retrieve the thumbnail image for a file, call
 with the ID of the file and the desired image format extension.  Optionally, constraints on the image
 dimensions can be specified in the `minHeight`, `minWidth`, `maxHeight`, and `maxWidth` parameters.
 
+<!-- sample get_files_id_thumbnail_id -->
 ```swift
 client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<Data, BoxSDKError>) in
     guard case let .success(thumbnailData) = result else {
@@ -255,6 +264,7 @@ To retrieve a URL that can be embedded in a web page `<iframe>` to display a fil
 [`client.files.getEmbedLink(forFile:completion:)`][get-embed-link]
 with the ID of the file.
 
+<!-- sample get_files_id embed_link -->
 ```swift
 client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink, BoxSDKError>) in
     guard case let .success(embedLink) = result else {
@@ -275,6 +285,7 @@ To retrieve a list of collaborations on a file, call
 [`client.files.listCollaborations(forFile:marker:limit:fields:)`][get-collaborations]
 with the ID of the file.  This method returns an iterator in the completion, which is used to retrieve file collaborations.
 
+<!-- sample get_files_id_collaborations -->
 ```swift
 client.files.listCollaborations(forFile: "11111") { result in
     switch results {
@@ -305,6 +316,7 @@ To retrieve a list of comments on the file, call
 with the ID of the file.  This method returns an iterator in the completion, which is used to page through the collection
 of file comments.
 
+<!-- sample get_files_id_comments -->
 ```swift
 client.files.listComments(forFile: "11111"){ results in
     switch results {
@@ -333,6 +345,7 @@ Get File Tasks
 To retrieve a list of file tasks, call [`client.files.listTasks(forFile:fields:)`][get-tasks] with the ID of the
 file.  This method returns an iterator in the completion, which is used to retrieve file comments.
 
+<!-- sample get_files_id_tasks -->
 ```swift
 client.files.listTasks(forFile: "11111") { results in
     switch results {
@@ -362,6 +375,7 @@ To add a file to the user's favorites collection, call
 [`client.files.addToFavorites(fileId:completion:)`][add-to-favorites]
 with the ID of the file.
 
+<!-- sample put_files_id add_to_collection -->
 ```swift
 client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -382,6 +396,7 @@ To remove a file from the user's favorites collection, call
 [`client.files.removeFromFavorites(fileId:completion:)`][remove-from-favorites]
 with the ID of the file.
 
+<!-- sample put_files_id remove_from_collection -->
 ```swift
 client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -402,6 +417,7 @@ To retrieve the shared link associated with a file, call
 [`client.files.getSharedLink(forFile:completion:)`][get-shared-link]
 with the ID of the file.
 
+<!-- sample get_files_id get_shared_link -->
 ```swift
 client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -422,6 +438,7 @@ To add or update the shared link for a file, call
 [`client.files.setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)][set-shared-link]
 with the ID of the file and the shared link properties to set.
 
+<!-- sample put_files_id create_shared_link -->
 ```swift
 client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -442,6 +459,7 @@ To remove a file's shared link, call
 [`client.files.deleteSharedLink(forFile:completion:)`][delete-shared-link]
 with the ID of the file.
 
+<!-- sample put_files_id remove_shared_link -->
 ```swift
 client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -464,6 +482,7 @@ with the ID of the file.  Omitting the `xRepHints` parameter will provide summar
 all available representations; in order to retrieve the representation status and URL, the `xRepHints` parameter
 must be passed to select the desired representations.
 
+<!-- sample put_files_id get_representations -->
 ```swift
 // Get full information about PDF representation
 client.files.getRepresentations(

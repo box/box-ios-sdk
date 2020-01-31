@@ -23,6 +23,7 @@ Get Terms of Service By ID
 To retrieve information about a terms of service, call
 [`client.termsOfService.get(tosId:fields:completion)`] with the ID of the terms of service. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
+<!-- sample get_terms_of_services_id -->   
 ```swift
 client.termsOfService.get(
     tosID: "12345"
@@ -41,6 +42,7 @@ Create Terms of Service
 To create a terms of service, call
 [`client.termsOfService.create(status:tosType:text:fields:completion`]. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
+<!-- sample post_terms_of_services -->   
 ```swift
 client.termsOfService.create(
     status: .enabled,
@@ -60,6 +62,7 @@ Update Terms of Service
 
 To update a terms of service, call [`client.termsOfService.update(tosId:text:status:fields:completion)`] with the ID of the terms of service to update. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
+<!-- sample put_terms_of_services_id -->   
 ```swift
 client.termsOfService.update(
     tosId: "12345",
@@ -79,6 +82,7 @@ List Terms of Services for an Enterprise
 
 To retrieve a list of terms of services for an enterprise, call [`client.termsOfService.listForEnterprise(tosType:fields:completion)`] with the type of terms of service to retrieve. If left nil, then terms of services of both types, `managed` and `external` will be retrieved. You can control which fields are returned in the resulting `Terms of Service` objects by passing the `fields` parameter.
 
+<!-- sample get_terms_of_services -->   
 ```swift
 let termsOfServiceItems = client.termsOfService.listForEnterprise()
 
@@ -91,6 +95,7 @@ Create User Status on Terms of Service
 To accept or decline a terms of service for a user who has never 
 accepted/declined this terms of service before call [`client.termsOfService.createUserStatus(tosId:isAccepted:userId:fields:completion)`]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
 
+<!-- sample post_terms_of_service_user_statuses -->   
 ```swift
 client.termsOfService.createUserStatus(
     tosId: "12345",
@@ -111,6 +116,7 @@ Update User Status of Terms of Service
 
 To update a user status on a terms of service call [`client.termsOfService.updateUserStatus(userStatusId:isAccepted:fields:completion)`]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
 
+<!-- sample put_terms_of_service_user_statuses -->
 ```swift
 client.termsOfService.updateUserStatus(
     userStatusId: "12345",
@@ -130,6 +136,7 @@ Get User Status for Terms of Service
 
 To retrieve the user status for a user on a terms of service, call [`client.termsOfService.getUserStatus(tosId:userId:fields:completion)`] with the ID of the `Terms of Service` object and the ID of the user.
 
+<!-- sample get_terms_of_service_user_statuses_id -->
 ```swift
 client.termsOfService.getUserStatus(
     tosId: "12345",

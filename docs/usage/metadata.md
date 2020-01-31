@@ -46,6 +46,7 @@ To retrieve information about a metadata template, call
 [`client.metadata.getTemplateByKey(scope:templateKey:completion:)`][get-md-template]
 with the scope and key of the template.
 
+<!-- sample get_metadata_templates_id_id_schema -->
 ```swift
 client.metadata.getTemplateByKey(
     scope: "enterprise",
@@ -64,6 +65,7 @@ Alternatively, if you know the ID of the metadata template, you can call
 [`client.metadata.getTemplateById(id:completion:)`][get-md-template-id]
 with the ID of the template.
 
+<!-- sample get_metadata_templates_id -->
 ```swift
 client.metadata.getTemplateById(
     id: "26004e29-7b94-44a1-8a63-f9aa384c7421"
@@ -87,6 +89,7 @@ To create a new metadata template, call
 [`client.metadata.createTemplate(scope:templateKey:displayName:hidden:fields:completion:)`][create-md-template]
 with the scope and name of the template, as well as the fields the template should contain.
 
+<!-- sample post_metadata_templates_schema -->
 ```swift
 var templateFields: [MetadataField] = []
 templateFields.append(MetadataField(
@@ -136,6 +139,7 @@ with the scope and key of the template to update, as well as the update operatio
 In this example, we are updating the metadata template using the ReorderEnumOptions operation.
 Other metadata template update operations include: addEnumOption, addField, editTemplate, reorderFields
 
+<!-- sample put_metadata_templates_id_id_schema -->
 ```swift
 client.metadata.updateTemplate(
     scope: "enterprise",
@@ -160,6 +164,7 @@ To delete a metadata template, call
 [`client.metadata.deleteTemplate(scope:templateKey:completion:)`][delete-md-template]
 with the scope and key of the template to delete.
 
+<!-- sample delete_metadata_templates_id_id_schema -->
 ```swift
 client.metadata.deleteTemplate(
     scope: "enterprise",
@@ -183,8 +188,32 @@ To retrieve the collection of available metadata templates in a particular scope
 [`client.metadata.listEnterpriseTemplates(scope:marker:limit:)`][list-templates]
 with the scope. This method will return an iterator object in the completion, which is used to retrieve metadata templates.
 
+<!-- sample get_metadata_templates_enterprise -->
 ```swift
 client.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
+    switch results {
+    case let .success(iterator):
+        for i in 1 ... 10 {
+            iterator.next { result in
+                switch result {
+                case let .success(template):
+                    print("Template name: \(template.displayName)")
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    case let .failure(error):
+        print(error)
+    }
+}
+```
+
+Similarly, to get all templates available in the `global` scope.
+
+<!-- sample get_metadata_templates_global -->
+```swift
+client.metadata.listEnterpriseTemplates(scope: "global") { results in
     switch results {
     case let .success(iterator):
         for i in 1 ... 10 {
@@ -212,6 +241,7 @@ To retrieve all metadata attached to a file, call
 [`client.metadata.list(forFileId:completion:)`][get-all-md-file]
 with the ID of the file.
 
+<!-- sample get_files_id_metadata -->
 ```swift
 client.metadata.list(forFileId: "11111") { (result: Result<[MetadataObject], BoxSDKError>) in
     guard case let .success(metadata) = result {
@@ -235,6 +265,7 @@ To retrieve a specific metadata instance attached to a file, call
 [`client.metadata.get(forFileWithId:scope:templateKey:completion:)`][get-md-file]
 with the file ID, as well as the scope and key of the metadata template of the instance.
 
+<!-- sample get_files_id_metadata_id_id -->
 ```swift
 client.metadata.get(
     forFileWithId: "11111",
@@ -260,6 +291,7 @@ To attach a new metadata instance to a file, call
 with the ID of the file, as well as the scope and key of the metadata template to use and the metadata keys and
 values to attach.
 
+<!-- sample post_files_id_metadata_id_id -->   
 ```swift
 let metadata = [
     "name": "John Doe",
@@ -291,6 +323,7 @@ To update the values in a metadata instance attached to a file, call
 with the ID of the file, the scope and key of the metadata template associated with the instance, and the
 operations to perform on the metadata.
 
+<!-- sample put_files_id_metadata_id_id -->   
 ```swift
 client.metadata.update(
     forFileWithId: "11111",
@@ -319,6 +352,7 @@ To remove a specific metadata instance from a file, call
 [`client.metadata.delete(forFileWithId:scope:templateKey:completion:)`][delete-md-file]
 with the ID of the file, as well as the scope and key of the metadata template associated with the instance.
 
+<!-- sample delete_files_id_metadata_id_id -->   
 ```swift
 client.metadata.delete(
     forFileWithId: "11111",
@@ -343,6 +377,7 @@ To retrieve all metadata attached to a folder, call
 [`client.metadata.list(forFolderId:completion:)`][get-all-md-folder]
 with the ID of the folder.
 
+<!-- sample get_folders_id_metadata -->   
 ```swift
 client.metadata.list(forFolderId: "22222") { (result: Result<[MetadataObject], BoxSDKError>) in
     guard case let .success(metadata) = result {
@@ -366,6 +401,7 @@ To retrieve a specific metadata instance attached to a folder, call
 [`client.metadata.get(forFolderWithId:scope:templateKey:completion:)`][get-md-folder]
 with the folder ID, as well as the scope and key of the metadata template of the instance.
 
+<!-- sample get_folders_id_metadata_id_id -->   
 ```swift
 client.metadata.get(
     forFolderWithId: "22222",
@@ -391,6 +427,7 @@ To attach a new metadata instance to a folder, call
 with the ID of the folder, as well as the scope and key of the metadata template to use and the metadata keys and
 values to attach.
 
+<!-- sample post_folders_id_metadata_id_id -->   
 ```swift
 let metadata = [
     "name": "John Doe",
@@ -422,6 +459,7 @@ To update the values in a metadata instance attached to a folder, call
 with the ID of the folder, the scope and key of the metadata template associated with the instance, and the
 operations to perform on the metadata.
 
+<!-- sample put_folders_id_metadata_id_id -->   
 ```swift
 client.metadata.update(
     forFolderWithId: "22222",
@@ -450,6 +488,7 @@ To remove a specific metadata instance from a folder, call
 [`client.metadata.delete(forFolderWithId:scope:templateKey:completion:)`][delete-md-folder]
 with the ID of the folder, as well as the scope and key of the metadata template associated with the instance.
 
+<!-- sample delete_folders_id_metadata_id_id -->   
 ```swift
 client.metadata.deleteMetadata(
     forFolderWithId: "22222",
