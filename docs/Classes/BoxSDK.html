@@ -250,6 +250,9 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
@@ -308,6 +311,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
@@ -400,6 +406,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
@@ -557,13 +566,7 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/NSNumber.html">NSNumber</a>
@@ -868,7 +871,7 @@ Is set upon BoxSDK initialisation</p>
                                 <div>
                                   <p>The client ID of the application requesting authentication. To get the client ID for your application,
 log in to your Box developer console click the Edit Application link for the application you&rsquo;re working with.
-In the OAuth 2 Parameters section of the configuration page, find the item labeled <q>client_id</q>. The text of that item
+In the OAuth 2 Parameters section of the configuration page, find the item labeled &ldquo;client_id&rdquo;. The text of that item
 is your application&rsquo;s client ID.</p>
                                 </div>
                               </td>
@@ -883,7 +886,7 @@ is your application&rsquo;s client ID.</p>
                                 <div>
                                   <p>The client secret of the application requesting authentication. To get the client secret for your application,
 log in to your Box developer console and click the Edit Application link for the application you&rsquo;re working with.
-In the OAuth 2 Parameters section of the configuration page, find the item labeled <q>client_secret</q>.
+In the OAuth 2 Parameters section of the configuration page, find the item labeled &ldquo;client_secret&rdquo;.
 The text of that item is your application&rsquo;s client secret.</p>
                                 </div>
                               </td>
@@ -1146,7 +1149,7 @@ The text of that item is your application&rsquo;s client secret.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(iOS 11.0, *)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">getOAuth2Client</span><span class="p">(</span>
     <span class="nv">tokenInfo</span><span class="p">:</span> <span class="kt"><a href="../Classes/TokenInfo.html">TokenInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">tokenStore</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TokenStore.html">TokenStore</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1207,9 +1210,11 @@ The text of that item is your application&rsquo;s client secret.</p>
               <div class="task-name-container">
                 <a name="/Configuration"></a>
                 <a name="//apple_ref/swift/Section/Configuration" class="dashAnchor"></a>
-                <a href="#/Configuration">
-                  <h3 class="section-name">Configuration</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Configuration"></a>
+                  <h3 class="section-name"><p>Configuration</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -1345,9 +1350,11 @@ If not specified, default value 60 seconds is used.</p>
               <div class="task-name-container">
                 <a name="/AuthenticationSession"></a>
                 <a name="//apple_ref/swift/Section/AuthenticationSession" class="dashAnchor"></a>
-                <a href="#/AuthenticationSession">
-                  <h3 class="section-name">AuthenticationSession</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/AuthenticationSession"></a>
+                  <h3 class="section-name"><p>AuthenticationSession</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -1420,8 +1427,8 @@ This parameter is provided for your use in protecting against hijacked sessions 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

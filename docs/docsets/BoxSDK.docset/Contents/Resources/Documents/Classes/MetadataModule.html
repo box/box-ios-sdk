@@ -250,6 +250,9 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
@@ -308,6 +311,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
@@ -400,6 +406,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
@@ -557,13 +566,7 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/NSNumber.html">NSNumber</a>
@@ -759,7 +762,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -823,7 +826,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -835,7 +838,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -912,7 +915,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -924,7 +927,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1001,7 +1004,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1013,7 +1016,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1089,7 +1092,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1101,7 +1104,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1124,10 +1127,6 @@ user doesn&rsquo;t have access to the template.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1167,7 +1166,7 @@ user doesn&rsquo;t have access to the template.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1231,7 +1230,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1243,7 +1242,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1320,7 +1319,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1332,7 +1331,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1409,7 +1408,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1421,7 +1420,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1497,7 +1496,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1509,7 +1508,7 @@ if the scope or templateKey are invalid or the user doesn&rsquo;t have access to
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -1532,10 +1531,6 @@ user doesn&rsquo;t have access to the template.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1576,7 +1571,7 @@ user doesn&rsquo;t have access to the template.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The scope of metadata template - possible values are <q>global</q> or <q>enterprise_{id}</q></p>
+                                  <p>The scope of metadata template - possible values are &ldquo;global&rdquo; or &ldquo;enterprise_{id}&rdquo;</p>
                                 </div>
                               </td>
                             </tr>
@@ -2031,8 +2026,8 @@ the user doesn&rsquo;t have access to the file.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -1,7 +1,7 @@
-author: 
+author: Box
 author_url: https://twitter.com/box
-github_url: https://github.com/box/box-swift-sdk
-root_url: https://box.github.io/BoxSDK/
+github_url: https://github.com/box/box-ios-sdk
+root_url: https://box.github.io/box-ios-sdk/
 module: BoxSDK
 output: docs
 theme: fullwidth

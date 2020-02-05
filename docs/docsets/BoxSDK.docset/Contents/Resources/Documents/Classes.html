@@ -250,6 +250,9 @@
                 <a href="Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
@@ -308,6 +311,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
@@ -400,6 +406,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
@@ -557,13 +566,7 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/NSNumber.html">NSNumber</a>
@@ -742,10 +745,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -768,16 +767,13 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxClient</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoxClient</span><span class="p">:</span> <span class="kt"><a href="Protocols/BoxClientProtocol.html">BoxClientProtocol</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -805,10 +801,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -837,10 +829,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -868,10 +856,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -899,10 +883,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -925,16 +905,14 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxSDKError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoxSDKError</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoxSDKError</span><span class="p">:</span> <span class="kt">LocalizedError</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -963,10 +941,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -995,10 +969,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1027,10 +997,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1059,10 +1025,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1091,10 +1053,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1123,10 +1081,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1140,7 +1094,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Management of collections of files and folders. The only collection available is the <q>Favorites</q>.</p>
+                        <p>Management of collections of files and folders. The only collection available is the &ldquo;Favorites&rdquo;.</p>
 
                         <a href="Classes/CollectionsModule.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1155,10 +1109,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1187,10 +1137,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1219,10 +1165,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1251,10 +1193,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1283,10 +1221,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1315,10 +1249,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1347,10 +1277,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1379,10 +1305,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1411,10 +1333,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1443,10 +1361,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1475,10 +1389,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1507,10 +1417,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1539,10 +1445,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1571,10 +1473,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1603,10 +1501,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1635,10 +1529,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1667,10 +1557,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1699,10 +1585,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1731,10 +1613,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1763,10 +1641,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1795,10 +1669,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1827,10 +1697,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1859,10 +1725,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1891,10 +1753,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1925,10 +1783,6 @@ in a similar way in which the contents of a folder are discovered.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1958,10 +1812,6 @@ A collaboration object grants a user or group access to a file or folder with pe
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1991,10 +1841,6 @@ A collaboration object grants a user or group access to a file or folder with pe
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2024,10 +1870,6 @@ that is exempt from the collaboration whitelist.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2056,10 +1898,6 @@ that is exempt from the collaboration whitelist.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2089,10 +1927,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2121,10 +1955,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2153,10 +1983,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2185,10 +2011,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2245,10 +2067,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2277,10 +2095,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2309,10 +2123,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2341,10 +2151,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2373,10 +2179,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2405,10 +2207,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2437,10 +2235,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2469,10 +2263,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2501,10 +2291,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2533,10 +2319,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2565,10 +2347,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2597,10 +2375,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2629,10 +2403,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2661,10 +2431,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2693,10 +2459,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2725,10 +2487,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2757,10 +2515,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2789,10 +2543,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2821,10 +2571,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2853,10 +2599,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2885,10 +2627,6 @@ You can create comments independently or create them as responses to other comme
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2919,10 +2657,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2951,10 +2685,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2983,10 +2713,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3015,10 +2741,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3047,10 +2769,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3079,10 +2797,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3111,10 +2825,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3143,10 +2853,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3175,10 +2881,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3207,10 +2909,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3239,10 +2937,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3271,10 +2965,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3303,10 +2993,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3335,10 +3021,6 @@ such as pre-defining sets of key:value pairs or schema enforcement on specific f
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3368,10 +3050,6 @@ You can read more about tasks in Box <a href="https://community.box.com/t5/Shari
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3400,10 +3078,6 @@ You can read more about tasks in Box <a href="https://community.box.com/t5/Shari
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3433,10 +3107,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3465,10 +3135,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3497,10 +3163,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3523,16 +3185,13 @@ Users can accept/ re-accept for custom applications.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TokenInfo</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">TokenInfo</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3561,10 +3220,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3593,10 +3248,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3625,10 +3276,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3657,10 +3304,6 @@ Users can accept/ re-accept for custom applications.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3690,10 +3333,6 @@ Watermarks can be applied to folders and files independently.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3722,10 +3361,6 @@ Watermarks can be applied to folders and files independently.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3754,10 +3389,6 @@ Watermarks can be applied to folders and files independently.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -3786,10 +3417,62 @@ Watermarks can be applied to folders and files independently.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK13OAuth2SessionC"></a>
+                    <a name="//apple_ref/swift/Class/OAuth2Session" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK13OAuth2SessionC">OAuth2Session</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Classes/OAuth2Session.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OAuth2Session</span> <span class="p">:</span> <span class="kt"><a href="Protocols/SessionProtocol.html">SessionProtocol</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK18SingleTokenSessionC"></a>
+                    <a name="//apple_ref/swift/Class/SingleTokenSession" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK18SingleTokenSessionC">SingleTokenSession</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Classes/SingleTokenSession.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SingleTokenSession</span> <span class="p">:</span> <span class="kt"><a href="Protocols/SessionProtocol.html">SessionProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -3823,8 +3506,8 @@ Watermarks can be applied to folders and files independently.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
