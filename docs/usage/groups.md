@@ -39,7 +39,7 @@ To create a new group, call [`client.groups.create(name: String, provenance: Str
  }
 ```
 
-[create-group]: 
+[create-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC6create4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityM06fields10completionySS_SSSgA2mA017GroupInvitabilityM0OSgAA0r6MemberoM0OSgSaySSGSgys6ResultOyAA0R0CAA0A8SDKErrorCGctF
 
 Update Group
 ------------
@@ -60,7 +60,7 @@ client.groups.update(groupId: "11111", name: "Team A", provenance: .value("Test"
 }
 ```
 
-[update-group]
+[update-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC6update7groupId4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityO06fields10completionySS_SSSgAA17NullableParameterOySSGSgA2rA017GroupInvitabilityO0OSgAA0v6MemberqO0OSgSaySSGSgys6ResultOyAA0V0CAA0A8SDKErrorCGctF
 
 Get Group Info
 --------------
@@ -79,7 +79,7 @@ client.groups.get(groupId: "12345") {
 }
 ```
 
-[get-group]
+[get-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC3get7groupId6fields10completionySS_SaySSGSgys6ResultOyAA5GroupCAA0A8SDKErrorCGctF
 
 Get Enterprise Groups
 ---------------------
@@ -106,7 +106,7 @@ client.groups.listForEnterprise() { results in
 }
 ```
 
-[get-enterprise-groups]
+[get-enterprise-groups]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC17listForEnterprise4name6offset5limit6fields10completionySSSg_SiSgAKSaySSGSgys6ResultOyAA14PagingIteratorCyAA5GroupCGAA0A8SDKErrorCGctF
 
 Delete Group
 ------------
@@ -125,7 +125,7 @@ client.groups.delete(groupId: "12345") {
 }
 ```
 
-[delete-group]
+[delete-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC6delete7groupId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Group Membership
 ================
@@ -147,6 +147,8 @@ client.groups.getMembershipInfo(membershipId: "12345") {
 }
 ```
 
+[get-membership-info]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC17getMembershipInfo12membershipId6fields10completionySS_SaySSGSgys6ResultOyAA05GroupF0CAA0A8SDKErrorCGctF
+
 Create Group Membership
 -----------------------
 
@@ -164,7 +166,7 @@ client.createMembership(userId: "54321", groupId: "11111", role: .admin, configu
 }
 ```
 
-[create-membership]:
+[create-membership]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC16createMembership6userId05groupH04role22configurablePermission6fields10completionySS_SSAA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableL4DataVGSgSaySSGSgys6ResultOyAA0oF0CAA0A8SDKErrorCGctF
 
 Update Group Membership
 -----------------------
@@ -183,7 +185,7 @@ client.groups.updateMembership(membershipId: "12345", role: .admin, configurable
 }
 ```
 
-[update-membership]:
+[update-membership]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC16updateMembership12membershipId4role22configurablePermission6fields10completionySS_AA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableK4DataVGSgSaySSGSgys6ResultOyAA0nF0CAA0A8SDKErrorCGctF
 
 Delete Group Membership
 -----------------------
@@ -202,7 +204,7 @@ client.groups.deleteMembership(membershipId: "12345") {
 }
 ```
 
-[delete-membership]:
+[delete-membership]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC16deleteMembership12membershipId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Get Memberships for Group
 -------------------------
@@ -229,7 +231,7 @@ client.groups.listMembership(groupId: "12345") {
 }
 ```
 
-[get-memberships-for-group]: 
+[get-memberships-for-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC15listMemberships7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF
 
 Get Memberships for User
 ------------------------
@@ -257,7 +259,7 @@ client.groups.listMembershipsForUser(userId: "12345") {
 }
 ```
 
-[get-memberships-for-user]:
+[get-memberships-for-user]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC22listMembershipsForUser6userId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF
 
 Get Collaborations for Group
 ----------------------------
@@ -284,4 +286,4 @@ client.groups.listCollaborations(groupId: "12345") { results in
 }
 ```
 
-[get-collaborations-for-group]: 
+[get-collaborations-for-group]: https://opensource.box.com/box-ios-sdk/Classes/GroupsModule.html#/s:6BoxSDK12GroupsModuleC18listCollaborations7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF

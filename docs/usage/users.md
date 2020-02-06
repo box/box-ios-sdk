@@ -3,6 +3,28 @@ Users
 
 Users represent an individual's account on Box.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Get Current User](#get-current-user)
+- [Get User](#get-user)
+- [Get User Avatar](#get-user-avatar)
+- [Create User](#list-terms-of-services-for-an-enterprise)
+- [Create App User](#create-app-user)
+- [Update User](#update-user)
+- [Change User Login](#change-user-login)
+- [Delete User](#delete-user)
+- [Get Enterprise Users](#get-enterprise-users)
+- [Invite User to Enterprise](#invite-user-to-enterprise)
+- [Move User Content](#move-user-content)
+- [Get User Email Aliases](#get-user-email-aliases)
+- [Add User Email Alias](#add-user-email-alias)
+- [Remove User Email Alias](#remove-user-email-alias)
+- [Roll User Out of Enterprise](#roll-user-out-of-enterprise)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Get Current User
 ----------------
 
@@ -20,7 +42,7 @@ client.users.getCurrent(fields: ["name", "login"]) { (result: Result<User, BoxSD
 }
 ```
 
-[get-current-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC14getCurrentUser6fields10completionySaySSGSg_ys6ResultOyAA0G0CAA0A5ErrorOGctF
+[get-current-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC10getCurrent6fields10completionySaySSGSg_ys6ResultOyAA4UserCAA0A8SDKErrorCGctF
 
 Get User
 --------
@@ -40,7 +62,7 @@ client.users.get(userId: "33333", fields: ["name", "login"]) { (result: Result<U
 }
 ```
 
-[get-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC11getUserInfo6userId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC3get6userId6fields10completionySS_SaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF
 
 Get User Avatar
 ---------------
@@ -60,7 +82,7 @@ client.users.getAvatar(userId: "33333") { (result: Result<Data, BoxSDKError>) in
 }
 ```
 
-[get-user-avatar]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC13getUserAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A5ErrorOGctF
+[get-user-avatar]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC9getAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF
 
 Create User
 -----------
@@ -80,7 +102,7 @@ client.users.create(login: "new.user@example.com", name: "New User") { (result: 
 }
 ```
 
-[create-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC10createUser5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0K24ExternalCollabRestricted0K22ExemptFromDeviceLimits0K27ExemptFromLoginVerification6status6fields10completionySS_SSAA0F4RoleOSgSSSgSbSgA3Zs5Int64VSgSayAA0F0C12TrackingCodeVGSgA_AZA_A_A_AA0F6StatusOSgSaySSGSgys6ResultOyA4_AA0A5ErrorOGctF
+[create-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC6create5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0J24ExternalCollabRestricted0J22ExemptFromDeviceLimits0J27ExemptFromLoginVerification6status6fields10completionySS_SSAA8UserRoleOSgSSSgSbSgA3Zs5Int64VSgSayAA4UserC12TrackingCodeVGSgA_AZA_A_A_AA10UserStatusOSgSaySSGSgys6ResultOyA4_AA0A8SDKErrorCGctF
 
 Create App User
 ---------------
@@ -100,7 +122,7 @@ client.users.createAppUser(name: "Doug") { (result: Result<User, BoxSDKError>) i
 ```
 
 [app-user]: https://developer.box.com/docs/user-types#section-app-user
-[create-app-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC13createAppUser4name8language8jobTitle8timezone5phone7address11spaceAmount6status26isExternalCollabRestricted013canSeeManagedC06fields10completionySS_SSSgA4Qs5Int64VSgAA0G6StatusOSgSbSgAXSaySSGSgys6ResultOyAA0G0CAA0A5ErrorOGctF
+[create-app-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC13createAppUser4name8language8jobTitle8timezone5phone7address11spaceAmount6status26isExternalCollabRestricted013canSeeManagedC06fields10completionySS_SSSgA4Qs5Int64VSgAA0G6StatusOSgSbSgAXSaySSGSgys6ResultOyAA0G0CAA0A8SDKErrorCGctF
 
 Update User
 -----------
@@ -120,7 +142,7 @@ client.users.update(userId: "33333", isExternalCollabRestricted: true) { (result
 }
 ```
 
-[update-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC10updateUser6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0M24ExternalCollabRestricted0M22ExemptFromDeviceLimits0M27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA0F4RoleOSgAXSbSgA3Xs5Int64VSgSayAA0F0C12TrackingCodeVGSgA0_AXA0_A0_A0_AA0F6StatusOSgSaySSGSgys6ResultOyA5_AA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC10updateUser6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0M24ExternalCollabRestricted0M22ExemptFromDeviceLimits0M27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA0F4RoleOSgAXSbSgA3Xs5Int64VSgSayAA0F0C12TrackingCodeVGSgA0_AXA0_A0_A0_AA0F6StatusOSgSaySSGSgys6ResultOyA5_AA0A5ErrorOGctF
+[update-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC6update6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0L24ExternalCollabRestricted0L22ExemptFromDeviceLimits0L27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA8UserRoleOSgAXSbSgA3Xs5Int64VSgSayAA4UserC12TrackingCodeVGSgA0_AXA0_A0_A0_AA10UserStatusOSgSaySSGSgys6ResultOyA5_AA0A8SDKErrorCGctF
 
 Change User Login
 -----------------
@@ -143,7 +165,7 @@ client.users.changeLogin(userId: "33333", login: "updated.address@example.com") 
 }
 ```
 
-[change-login]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC18changeLoginForUser6userId5login6fields10completionySS_SSSaySSGSgys6ResultOyAA0H0CAA0A5ErrorOGctF
+[change-login]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC11changeLogin6userId5login6fields10completionySS_SSSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF
 
 Delete User
 -----------
@@ -164,7 +186,7 @@ client.users.delete(userId: "33333") { (result: Result<Void, BoxSDKError>) in
 }
 ```
 
-[delete-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC10deleteUser6userId6notify5force10completionySS_SbSgAIys6ResultOyytAA0A5ErrorOGctF
+[delete-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC6delete6userId6notify5force10completionySS_SbSgAIys6ResultOyytAA0A8SDKErrorCGctF
 
 Get Enterprise Users
 --------------------
@@ -193,7 +215,7 @@ client.users.listForEnterprise() {
 }
 ```
 
-[get-enterprise-users]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC013getEnterpriseC010filterTerm6fields6offset5limitAA18PaginationIteratorCyAA4UserCGSSSg_SaySSGSgSiSgAQtF
+[get-enterprise-users]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF
 
 Invite User to Enterprise
 -------------------------
@@ -216,7 +238,7 @@ client.users.inviteToJoinEnterprise(
 }
 ```
 
-[invite-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC26inviteUserToJoinEnterprise5login12enterpriseId6fields10completionySS_SSSaySSGSgys6ResultOyAA6InviteCAA0A5ErrorOGctF
+[invite-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC22inviteToJoinEnterprise5login12enterpriseId6fields10completionySS_SSSaySSGSgys6ResultOyAA6InviteCAA0A8SDKErrorCGctF
 
 Move User Content
 -----------------
@@ -237,7 +259,7 @@ client.users.moveItemsOwnedByUser(withID: "33333", toUserWithID: "44444") { (res
 }
 ```
 
-[move-user-content]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC20moveItemsOwnedByUser6withID02toi4WithK06notify6fields10completionySS_SSSbSgSaySSGSgys6ResultOyAA6FolderCAA0A5ErrorOGctF
+[move-user-content]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC20moveItemsOwnedByUser6withID02toi4WithK06notify6fields10completionySS_SSSbSgSaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF
 
 Get User Email Aliases
 ----------------------
@@ -260,7 +282,7 @@ client.users.listEmailAliases(userId: "33333") { (result: Result<EntryContainer<
 }
 ```
 
-[get-email-aliases]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC22getEmailAliasesForUser6userId10completionySS_ys6ResultOyAA14EntryContainerCyAA0F5AliasCGAA0A5ErrorOGctF
+[get-email-aliases]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC16listEmailAliases6userId10completionySS_ys6ResultOyAA14EntryContainerCyAA0F5AliasCGAA0A8SDKErrorCGctF
 
 Add User Email Alias
 --------------------
@@ -283,7 +305,7 @@ client.users.createEmailAlias(
 }
 ```
 
-[add-email-alias]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC23createEmailAliasForUser6userId5email10completionySS_SSys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[add-email-alias]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC23createEmailAliasForUser6userId5email10completionySS_SSys6ResultOyAA0fG0CAA0A5ErrorOGctF
 
 Remove User Email Alias
 -----------------------
@@ -303,7 +325,7 @@ client.users.deleteEmailAlias(userId: "33333", emailAliasId: "99999") { (result:
 }
 ```
 
-[remove-email-alias]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC23deleteEmailAliasForUser6userId05emailgK010completionySS_SSys6ResultOyytAA0A5ErrorOGctF
+[remove-email-alias]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC16deleteEmailAlias6userId05emailgI010completionySS_SSys6ResultOyytAA0A8SDKErrorCGctF
 
 Roll User Out of Enterprise
 ---------------------------
@@ -323,4 +345,4 @@ client.users.rollOutOfEnterprise(userId: "33333") { (result: Result<User, BoxSDK
 }
 ```
 
-[roll-out-user]: http://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC23rollUserOutOfEnterprise6userId6notify6fields10completionySS_SbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[roll-out-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC19rollOutOfEnterprise6userId6notify6fields10completionySS_SbSgSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF

@@ -44,7 +44,7 @@ client.folders.get(
 }
 ```
 
-[get-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC13getFolderInfo8folderId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-folder]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC3get8folderId6fields10completionySS_SaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF
 
 Get Folder Items
 ----------------
@@ -80,7 +80,7 @@ let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direc
 }
 ```
 
-[get-folder-items]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC14getFolderItems8folderId9usemarker6marker6offset5limit4sort9direction6fieldsAA18PaginationIteratorCyAA0F4ItemCGSS_SbSgSSSgSiSgAtA7OrderByOSgAA0T9DirectionOSgSaySSGSgtF
+[get-folder-items]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC9listItems8folderId9usemarker6marker6offset5limit4sort9direction6fields10completionySS_SbSgSSSgSiSgApA06FolderF7OrderByOSgAA0R9DirectionOSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0Q4ItemOGAA0A8SDKErrorCGctF
 
 Create Folder
 -------------
@@ -101,7 +101,7 @@ client.folders.create(name: "New Folder", parentId: "22222") { (result: Result<F
 }
 ```
 
-[create-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC12createFolder4name8parentId6fields10completionySS_SSSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[create-folder]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC6create4name8parentId6fields10completionySS_SSSaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF
 
 
 Delete Folder
@@ -123,7 +123,7 @@ client.folders.delete(folderId: "22222", recursive: true) { result: Result<Void,
 }
 ```
 
-[delete-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC12deleteFolder8folderId9recursive10completionySS_SbSgys6ResultOyytAA0A5ErrorOGctF
+[delete-folder]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC6delete8folderId9recursive10completionySS_SbSgys6ResultOyytAA0A8SDKErrorCGctF
 
 Copy Folder
 -----------
@@ -148,7 +148,7 @@ client.folders.copy(
 }
 ```
 
-[copy-folder]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC10copyFolder8folderId011destinationF2ID4name6fields10completionySS_S2SSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[copy-folder]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC4copy8folderId19destinationFolderID4name6fields10completionySS_S2SSgSaySSGSgys6ResultOyAA0I0CAA0A8SDKErrorCGctF
 
 Get Folder Collaborations
 -------------------------
@@ -177,7 +177,7 @@ client.folders.listCollaborations(folderId: "22222") { results in
 }
 ```
 
-[get-collaborations]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC23getFolderCollaborations8folderId6fieldsAA18PaginationIteratorCyAA13CollaborationCGSS_SaySSGSgtF
+[get-collaborations]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC18listCollaborations8folderId6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF
 
 Add Folder to Favorites
 -----------------------
@@ -197,7 +197,7 @@ client.folders.addToFavorites(folderId: "22222") { (result: Result<Void, BoxSDKE
 }
 ```
 
-[add-to-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC9addFolder8folderId12toCollection10completionySS_SSys6ResultOyytAA0A5ErrorOGctF
+[add-to-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC14addToFavorites8folderId10completionySS_ys6ResultOyAA6FolderCAA0A8SDKErrorCGctF
 
 Remove Folder from Favorites
 ----------------------------
@@ -206,7 +206,7 @@ To remove a folder from the user's favorites, call
 [`client.folders.removeFromFavorites(folderId:completion:)`][remove-from-favorites]
 with the ID of the folder.
 
-[remove-from-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC25removeFolderFromFavorites8folderId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[remove-from-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC19removeFromFavorites8folderId10completionySS_ys6ResultOyAA6FolderCAA0A8SDKErrorCGctF
 
 Get Shared Link
 ---------------
@@ -226,7 +226,7 @@ client.folders.getSharedLink(forFolder: "11111") { (result: Result<SharedLink, B
 }
 ```
 
-[get-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC13getSharedLink9forFolder10completionySS_ys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[get-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC13getSharedLink9forFolder10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Set Shared Link
 ---------------
@@ -246,7 +246,7 @@ client.folders.setSharedLink(forFolder: "11111", access: .open) { (result: Resul
 }
 ```
 
-[set-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC13setSharedLink9forFolder6access10unsharedAt8password11canDownload10completionySS_AA0fG6AccessOSg10Foundation4DateVSgAA17OptionalParameterOySSGSgSbSgys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC13setSharedLink9forFolder6access10unsharedAt8password11canDownload10completionySS_AA0fG6AccessOSgAA17NullableParameterOy10Foundation4DateVGSgAOySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Remove Shared Link
 ------------------
@@ -266,4 +266,4 @@ client.folders.deleteSharedLink(forFolder: "11111") { (result: Result<Void, BoxS
 }
 ```
 
-[delete-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC16deleteSharedLink9forFolder10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FoldersModule.html#/s:6BoxSDK13FoldersModuleC16deleteSharedLink9forFolder10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF

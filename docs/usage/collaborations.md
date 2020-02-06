@@ -52,7 +52,7 @@ client.collaborations.get(collaborationId: "12345") { (result: Result<Collaborat
 }
 ```
 
-[get-collaboration]: http://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC16get5collaborationId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-collaboration]: https://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC3get15collaborationId6fields10completionySS_SaySSGSgys6ResultOyAA13CollaborationCAA0A8SDKErrorCGctF
 
 Add Collaboration
 -----------------
@@ -79,7 +79,7 @@ client.collaborations.create(
 }
 ```
 
-[create-collaboration]: http://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC19create8itemType0G2Id4role12accessibleBy0klH011canViewPath6fields6notify10completionySS_SSAA0F4RoleOSSAA010AccessibleL0OSbSgSaySSGSgARys6ResultOyAA0F0CAA0A5ErrorOGctF
+[create-collaboration]: https://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC6create8itemType0F2Id4role12accessibleBy0jkG011canViewPath6fields6notify10completionySS_SSAA17CollaborationRoleOSSAA010AccessibleK0OSbSgSaySSGSgARys6ResultOyAA0R0CAA0A8SDKErrorCGctF
 
 Update Collaboration
 --------------------
@@ -99,7 +99,7 @@ client.collaborations.update(collaborationId: "12345", role: .viewer) { (result:
 }
 ```
 
-[update-collaboration]: http://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC19update15collaborationId4role6status11canViewPath6fields10completionySS_AA0F4RoleOAA0F6StatusOSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[update-collaboration]: https://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC6update15collaborationId4role6status11canViewPath6fields10completionySS_AA17CollaborationRoleOAA0O6StatusOSgSbSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF
 
 Delete Collaboration
 --------------------
@@ -119,7 +119,7 @@ client.collaborations.delete(collaborationId: "12345") { (result: Result<Void, B
 }
 ```
 
-[delete-collaboration]: http://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC19delete15collaborationId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-collaboration]: https://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC6delete15collaborationId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Get Pending Collaborations
 --------------------------
@@ -148,4 +148,4 @@ client.collaborations.listPendingForEnterprise() { results in
 }
 ```
 
-[get-pending-collaborations]: http://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC010listPendingForEnterpriseC06offset5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSiSg_AMSaySSGSgtF
+[get-pending-collaborations]: https://opensource.box.com/box-ios-sdk/Classes/CollaborationsModule.html#/s:6BoxSDK20CollaborationsModuleC24listPendingForEnterprise6offset5limit6fields10completionySiSg_AISaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF

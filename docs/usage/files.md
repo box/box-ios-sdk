@@ -50,7 +50,7 @@ client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Res
 }
 ```
 
-[get-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC11getFileInfo6fileId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC3get6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Update File
 -----------
@@ -70,6 +70,7 @@ client.files.update(fileId: "11111", name: "New file name.docx") { (result: Resu
 }
 ```
 
+[update-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Upload File
 -----------
@@ -114,8 +115,8 @@ client.files.streamUpload(
 }
 ```
 
-[upload-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC10uploadFile4data4name8parentId8progress10completiony10Foundation4DataV_S2SySo10NSProgressCcys6ResultOyAA0F0CAA0A5ErrorOGctF
-[upload-file-stream]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16streamUploadFile0E08fileSize4name8parentId8progress10completionySo13NSInputStreamC_SiS2SySo10NSProgressCcys6ResultOyAA0G0CAA0A5ErrorOGctF
+[upload-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6upload4data4name8parentId8progress21performPreflightCheck10completiony10Foundation4DataV_S2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF
+[upload-file-stream]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12streamUpload0E08fileSize4name8parentId8progress21performPreflightCheck10completionySo13NSInputStreamC_SiS2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Upload New File Version
 -----------------------
@@ -141,7 +142,7 @@ client.files.uploadVersion(
 }
 ```
 
-[upload-file-version]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC17uploadFileVersion03forF04name17contentModifiedAt4data8progress10completionySS_S2S10Foundation4DataVySo10NSProgressCcys6ResultOyAA0F0CAA0A5ErrorOGctF
+[upload-file-version]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionySS_SSSgAL10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF
 
 Download File
 -------------
@@ -163,7 +164,7 @@ client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Vo
 }
 ```
 
-[download-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctF
+[download-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8download6fileId14destinationURL7version8progress10completionySS_10Foundation0I0VSSSgySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF
 
 
 Copy File
@@ -186,7 +187,7 @@ client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxSDK
 }
 ```
 
-[copy-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8copyFile6fileId06parentH04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8copyFile6fileId06parentH04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[copy-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC4copy6fileId06parentG04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Lock File
 ---------
@@ -207,7 +208,7 @@ client.files.lock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
 }
 ```
 
-[lock-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8lockFile6fileId9expiresAt19isDownloadPrevented6fields10completionySS_SSSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[lock-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC4lock6fileId9expiresAt19isDownloadPrevented6fields10completionySS_10Foundation4DateVSgSbSgSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Unlock File
 -----------
@@ -225,7 +226,7 @@ client.files.unlock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
 }
 ```
 
-[unlock-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC10unlockFile6fileId9expiresAt19isDownloadPrevented6fields10completionySS_SSSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[unlock-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6unlock6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Get File Thumbnail Image
 ------------------------
@@ -246,7 +247,7 @@ client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<D
 }
 ```
 
-[get-thumbnail]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A5ErrorOGctF
+[get-thumbnail]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF
 
 Get File Embed Link
 -------------------
@@ -266,7 +267,7 @@ client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink,
 }
 ```
 
-[get-embed-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A5ErrorOGctF
+[get-embed-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A8SDKErrorCGctF
 
 Get File Collaborations
 -----------------------
@@ -295,7 +296,7 @@ client.files.listCollaborations(forFile: "11111") { result in
 }
 ```
 
-[get-collaborations]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC21getFileCollaborations03forF06marker5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSS_SSSgSiSgSaySSGSgtF
+[get-collaborations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF
 
 Get File Comments
 -----------------
@@ -325,7 +326,7 @@ client.files.listComments(forFile: "11111"){ results in
 }
 ```
 
-[get-comments]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC15getFileComments03forF06offset5limit6fieldsAA18PaginationIteratorCyAA7CommentCGSS_SiSgANSaySSGSgtF
+[get-comments]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF
 
 Get File Tasks
 --------------
@@ -353,7 +354,7 @@ client.files.listTasks(forFile: "11111") { results in
 }
 ```
 
-[get-tasks]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getFileTasks03forF06fieldsAA18PaginationIteratorCyAA4TaskCGSS_SaySSGSgtF
+[get-tasks]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF
 
 Add File to Favorites
 ---------------------
@@ -373,7 +374,7 @@ client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError
 }
 ```
 
-[add-to-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18addFileToFavorites6fileId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[add-to-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC14addToFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Remove File from Favorites
 --------------------------
@@ -393,7 +394,7 @@ client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxSDK
 }
 ```
 
-[remove-from-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC23removeFileFromFavorites6fileId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[remove-from-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19removeFromFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Get Shared Link
 ---------------
@@ -413,7 +414,7 @@ client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxSD
 }
 ```
 
-[get-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[get-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Set Shared Link
 ---------------
@@ -433,7 +434,7 @@ client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<Sh
 }
 ```
 
-[set-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile13stopSharingAt6access8password11canDownload10completionySS_10Foundation4DateVSgAA0fG6AccessOSgAA17OptionalParameterOySSGSgSbSgys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Remove Shared Link
 ------------------
@@ -453,22 +454,22 @@ client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKErr
 }
 ```
 
-[delete-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
-Get Representations
+List Representations
 -------------------
 
 To retrieve information about available preview representations for a file, call
-[`client.files.getRepresentations(fileId:xRepHints:completion:)`][get-representations]
-with the ID of the file.  Omitting the `xRepHints` parameter will provide summary information about
-all available representations; in order to retrieve the representation status and URL, the `xRepHints` parameter
-must be passed to select the desired representations.
+[`client.files.listRepresentations(fileId:representationHint:completion:)`][get-representations]
+with the ID of the file.  Omitting the `representationHint` parameter will provide summary information about
+all available representations; in order to retrieve the representation status and URL, the `representationHint` parameter
+must be passed to select the desired representation.
 
 ```swift
 // Get full information about PDF representation
-client.files.getRepresentations(
+client.files.listRepresentations(
     fileId: "11111",
-    xRepHints: "[pdf]"
+    representationHint: "[pdf]"
 ) { (result: Result<[FileRepresentation], BoxSDKError>) in
     guard case let .success(representations) = result else {
         print("Error fetching representations")
@@ -479,4 +480,4 @@ client.files.getRepresentations(
 }
 ```
 
-[get-representations]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18getRepresentations6fileId9xRepHints10completionySS_SSSgys6ResultOySayAA4FileC14RepresentationVGAA0A5ErrorOGctF
+[get-representations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF

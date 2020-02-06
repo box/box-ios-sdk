@@ -34,6 +34,8 @@ client.storagePolicies.get(storagePolicyId: "22222") { (result: Result<StoragePo
 }
 ```
 
+[get-storage-policy-info]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC3get15storagePolicyId6fields10completionySS_SaySSGSgys6ResultOyAA0cH0CAA0A8SDKErrorCGctF
+
 Get Storage Policies
 --------------------
 
@@ -60,6 +62,8 @@ client.storagePolicies.list() { results in
 }
 ```
 
+[get-storage-policies]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC17listForEnterprise6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C6PolicyCGAA0A8SDKErrorCGctF
+
 Get Storage Policy Assignment Info
 ----------------------------------
 
@@ -76,6 +80,8 @@ client.storagePolicy.getAssignment(storagePolicyAssignmentId: "1234") { (result:
     print("Storage policy assignment ID \(assignment.id)")
 }
 ```
+[get-storage-policy-assignment-info]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC13getAssignment013storagePolicyG2Id6fields10completionySS_SaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
+
 Get Storage Policy Assignments
 ------------------------------
 
@@ -92,11 +98,13 @@ client.storagePolicy.listAssignments(resolvedForType: "user", resolvedForId: "12
 }
 ```
 
-Create Storage Policy Assignment
+[get-storage-policy-assignments]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC15listAssignments15resolvedForType0hI2Id6fields10completionySS_SSSaySSGSgys6ResultOyAA0C16PolicyAssignmentCAA0A8SDKErrorCGctF
+
+Assign Storage Policy
 --------------------------------
 
 To assign a storage policy, call
-[`client.storagePolicies.assign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][storage-policy-assignment].
+[`client.storagePolicies.assign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][assign-storage-policy].
 
 ```swift
 client.storagePolicy.assign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
@@ -108,11 +116,13 @@ client.storagePolicy.assign(storagePolicyId: "1234", assignedToType: "user", ass
 }
 ```
 
-Assign Storage Policy
+[assign-storage-policy]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC6assign15storagePolicyId14assignedToType0jkI06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cH10AssignmentCAA0A8SDKErrorCGctF
+
+Force Assign Storage Policy
 ---------------------
 
 To assign a storage policy, call
-[`client.storagePolicies.forceAssign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][assign-storage-policy]. The difference between this call and the createPolicyAssignment() above is that this method will guarantee an update to the assignee's policy. If an assignee already has a policy assigned to it, the createPolicyAssignment() will return a 409 Conflict error. assignPolicy() will instead make an additional updatePolicyAssignment() call to replace the existing policy with the new policy for a policy assignment.
+[`client.storagePolicies.forceAssign(storagePolicyId: String, assignedToType: String, assignedToId, fields: [String]?, completion: @escaping Callback<StoragePolicyAssignment>`][force-assign-storage-policy]. The difference between this call and the createPolicyAssignment() above is that this method will guarantee an update to the assignee's policy. If an assignee already has a policy assigned to it, the createPolicyAssignment() will return a 409 Conflict error. assignPolicy() will instead make an additional updatePolicyAssignment() call to replace the existing policy with the new policy for a policy assignment.
 
 ```swift
 client.storagePolicy.forceAssign(storagePolicyId: "1234", assignedToType: "user", assignedToId: "123") { (result: Result<StoragePolicyAssignment, BoxSDKError>) in
@@ -123,6 +133,8 @@ client.storagePolicy.forceAssign(storagePolicyId: "1234", assignedToType: "user"
     print("Created storage policy assignment ID is \(assignment.id). The ID of the user it is assigned to \(assignment.assignedTo?.id)")
 }
 ```
+
+[force-assign-storage-policy]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC11forceAssign15storagePolicyId14assignedToType0klJ06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cI10AssignmentCAA0A8SDKErrorCGctF
 
 Update Storage Policy Assignment
 --------------------------------
@@ -140,6 +152,8 @@ client.storagePolicy.updateAssignment(storagePolicyAssignmentId: "1234", storage
 }
 ```
 
+[update-storage-policy-assignment]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16updateAssignment013storagePolicyG2Id0hiJ06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
+
 Delete Storage Policy Assignment
 --------------------------------
 
@@ -156,3 +170,5 @@ client.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "22222") { re
     print("Storage policy assignment is successfully deleted.")
 }
 ```
+
+[delete-storage-policy-assignment]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16deleteAssignment013storagePolicyG2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF

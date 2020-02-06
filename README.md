@@ -114,6 +114,10 @@ client.users.getCurrentUser() { result in
 
 [dev-console]: https://app.box.com/developers/console
 
+The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/master/docs/usage).
+
+The Jazzy docs that show class, method, variable, etc definitions can be found [here](https://opensource.box.com/box-ios-sdk/).
+
 Sample Apps
 -----------
 
