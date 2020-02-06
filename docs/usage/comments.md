@@ -32,7 +32,7 @@ client.comments.get(commentId: "55555") { (result: Result<Comment, BoxSDKError>)
 }
 ```
 
-[get-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC14get9commentId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC3get9commentId6fields10completionySS_SaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Create Comment
 --------------
@@ -56,7 +56,7 @@ client.comments.create(
 }
 ```
 
-[create-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC13create6itemId0G4Type7message6fields10completionySS_S2SSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[create-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6create6itemId0F4Type7message6fields10completionySS_S2SSaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Update Comment
 --------------
@@ -79,7 +79,7 @@ client.comments.update(
 }
 ```
 
-[update-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC17update9commentId7message6fields10completionySS_SSSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[update-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6update9commentId7message6fields10completionySS_SSSaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Delete Comment
 --------------
@@ -98,4 +98,4 @@ client.comments.delete(commentId: "55555") { (result: Result<Void, BoxSDKError>)
 }
 ```
 
-[delete-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC13delete9commentId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6delete9commentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
