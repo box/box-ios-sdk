@@ -1,7 +1,7 @@
 Webhooks
 =======
 
- Webhooks enable you to attach event triggers to Box files and folders. Event triggers monitor events on Box objects and notify your application when they occur. A webhook notifies your application by sending https requests to a URL of your choosing. A webhook object contains information about a webhook like the triggers, the URL, etc.
+ Webhooks enable you to attach event triggers to Box files and folders. Event triggers monitor events on Box objects and notify your application when they occur. A webhook notifies your application by sending HTTP requests to a URL of your choosing. A webhook object contains information about a webhook like the triggers, the URL, etc.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
