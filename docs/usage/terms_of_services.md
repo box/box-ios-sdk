@@ -35,7 +35,7 @@ client.termsOfService.get(
 }
 ```
 
-[get-tos]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC3get5tosId6fields10completionySS_SaySSGSgys6ResultOyAA0cD7ServiceCAA0A8SDKErrorCGctF
+[get-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC3get5tosId6fields10completionySS_SaySSGSgys6ResultOyAA0cD7ServiceCAA0A8SDKErrorCGctF
 
 Create Terms of Service
 -----------------------
@@ -57,7 +57,7 @@ client.termsOfService.create(
 }
 ```
 
-[create-tos]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6create6status7tosType4text6fields10completionyAA0cD13ServiceStatusO_AA0cdnJ0OSSSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
+[create-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6create6status7tosType4text6fields10completionyAA0cD13ServiceStatusO_AA0cdnJ0OSSSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
 
 Update Terms of Service
 -----------------------
@@ -78,7 +78,7 @@ client.termsOfService.update(
 }
 ```
 
-[update-tos]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6update5tosId4text6status6fields10completionySS_SSAA0cD13ServiceStatusOSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
+[update-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6update5tosId4text6status6fields10completionySS_SSAA0cD13ServiceStatusOSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
 
 List Terms of Services for an Enterprise
 ----------------------------------------
@@ -91,7 +91,7 @@ let termsOfServiceItems = client.termsOfService.listForEnterprise()
 print("Terms of Service with ID \(termsOfServiceItems[0].id) and Terms of Service with ID \(termsOfServiceItems[1].id) was retrieved.")
 ```
 
-[list-tos]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC17listForEnterprise7tosType6fields10completionyAA0cd7ServiceK0OSg_SaySSGSgys6ResultOySayAA0cdN0CGAA0A8SDKErrorCGctF
+[list-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC17listForEnterprise7tosType6fields10completionyAA0cd7ServiceK0OSg_SaySSGSgys6ResultOySayAA0cdN0CGAA0A8SDKErrorCGctF
 
 Create User Status on Terms of Service
 --------------------------------------
@@ -114,7 +114,7 @@ client.termsOfService.createUserStatus(
 }
 ```
 
-[create-user-status]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16createUserStatus5tosId10isAccepted04userK06fields10completionySS_SbSSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
+[create-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16createUserStatus5tosId10isAccepted04userK06fields10completionySS_SbSSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
 
 Update User Status of Terms of Service
 --------------------------------------
@@ -135,7 +135,7 @@ client.termsOfService.updateUserStatus(
 }
 ```
 
-[update-user-status]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16updateUserStatus04userI2Id10isAccepted6fields10completionySS_SbSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
+[update-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16updateUserStatus04userI2Id10isAccepted6fields10completionySS_SbSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
 
 Get User Status for Terms of Service
 ------------------------------------
@@ -155,4 +155,4 @@ client.termsOfService.getUserStatus(
     print("User status with ID \(userStatus.id) was retrieved")
 }
 ```
-[get-user-status]: http://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC13getUserStatus5tosId04userK06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
+[get-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC13getUserStatus5tosId04userK06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF

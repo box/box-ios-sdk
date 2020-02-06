@@ -30,7 +30,7 @@ client.devicePins.get(devicePinId: "11111", fields: ["product_name"]) { (result:
 }
 ```
 
-[get-device-pin]: http://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC3get11devicePinId6fields10completionySS_SaySSGSgys6ResultOyAA0cH0CAA0A8SDKErrorCGctF
+[get-device-pin]: https://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC3get11devicePinId6fields10completionySS_SaySSGSgys6ResultOyAA0cH0CAA0A8SDKErrorCGctF
 
 Get Device Pins for Enterprise
 ------------------------------
@@ -57,7 +57,7 @@ client.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending
 }
 ```
 
-[get-device-pins]: http://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fields10completionySS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C3PinCGAA0A8SDKErrorCGctF
+[get-device-pins]: https://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fields10completionySS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C3PinCGAA0A8SDKErrorCGctF
 
 
 Delete Device Pin
@@ -76,4 +76,4 @@ client.devicePins.delete(devicePinId: "12345") { result: Result<Void, BoxSDKErro
 }
 ```
 
-[delete-device-pin]: http://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC6delete11devicePinId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
+[delete-device-pin]: https://opensource.box.com/box-ios-sdk/Classes/DevicePinsModule.html#/s:6BoxSDK16DevicePinsModuleC6delete11devicePinId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF

@@ -36,7 +36,7 @@ client.legalHolds.get(policyId: "22222", fields: ["name", "created_at"]) { (resu
 }
 ```
 
-[get-legal-hold-policy-info]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC3get8policyId6fields10completionySS_SaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
+[get-legal-hold-policy-info]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC3get8policyId6fields10completionySS_SaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
 
 Get Legal Hold Policies
 ----------------
@@ -65,7 +65,7 @@ client.legalHolds.listForEnterprise(policyName: "policy1") { results in
 }
 ```
 
-[get-legal-hold-policies]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC17listForEnterprise10policyName6marker5limit6fields10completionySSSg_AJSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C10HoldPolicyCGAA0A8SDKErrorCGctF
+[get-legal-hold-policies]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC17listForEnterprise10policyName6marker5limit6fields10completionySSSg_AJSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C10HoldPolicyCGAA0A8SDKErrorCGctF
 
 Create Legal Hold Policy
 -------------
@@ -84,7 +84,7 @@ client.legalHolds.create(name: "New Folder") { (result: Result<LegalHoldPolicy, 
 }
 ```
 
-[create-legal-hold-policy]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6create10policyName11description15filterStartedAt0j5EndedL09isOngoing6fields10completionySS_SSSg10Foundation4DateVSgAPSbSgSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
+[create-legal-hold-policy]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6create10policyName11description15filterStartedAt0j5EndedL09isOngoing6fields10completionySS_SSSg10Foundation4DateVSgAPSbSgSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
 
 Update Legal Hold Policy
 -------------
@@ -102,7 +102,7 @@ client.legalHolds.update(policyId: "1234", policyName: "New Name") { (result: Re
 }
 ```
 
-[update-legal-hold-policy]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6update8policyId0G4Name11description12releaseNotes6fields10completionySS_SSSgA2KSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
+[update-legal-hold-policy]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6update8policyId0G4Name11description12releaseNotes6fields10completionySS_SSSgA2KSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF
 
 Delete Legal Hold Policy
 -------------
@@ -121,7 +121,7 @@ client.legalHolds.delete() { result: Result<Void, BoxSDKError>} in
 }
 ```
 
-[delete-legal-hold-policy]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6delete8policyId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
+[delete-legal-hold-policy]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC6delete8policyId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Get Policy Assignment Info
 ---------------
@@ -141,7 +141,7 @@ client.legalHolds.getPolicyAssignment(assignmentId: "22222", fields: ["assigned_
 }
 ```
 
-[get-policy-assignment-info]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC19getPolicyAssignment12assignmentId6fields10completionySS_SaySSGSgys6ResultOyAA0c4HoldgH0CAA0A8SDKErrorCGctF
+[get-policy-assignment-info]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC19getPolicyAssignment12assignmentId6fields10completionySS_SaySSGSgys6ResultOyAA0c4HoldgH0CAA0A8SDKErrorCGctF
 
 Get Policy Assignments
 ----------------
@@ -171,7 +171,7 @@ client.legalHolds.listPolicyAssignments(policyId: "1234") { results in
 }
 ```
 
-[get-policy-assignments]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC21listPolicyAssignments8policyId12assignToType0klJ06marker5limit6fields10completionySS_SSSgA2LSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0c4HoldG10AssignmentCGAA0A8SDKErrorCGctF
+[get-policy-assignments]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC21listPolicyAssignments8policyId12assignToType0klJ06marker5limit6fields10completionySS_SSSgA2LSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0c4HoldG10AssignmentCGAA0A8SDKErrorCGctF
 
 Assign Policy
 -------------
@@ -190,7 +190,7 @@ client.legalHolds.forceApply(policyId: "1234", assignToId: "4568" ,assignToType:
 }
 ```
 
-[assign-policy]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC12assignPolicy8policyId0f2ToI00fJ4Type6fields10completionySS_S2SSaySSGSgys6ResultOyAA0c4HoldG10AssignmentCAA0A8SDKErrorCGctF
+[assign-policy]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC12assignPolicy8policyId0f2ToI00fJ4Type6fields10completionySS_S2SSaySSGSgys6ResultOyAA0c4HoldG10AssignmentCAA0A8SDKErrorCGctF
 
 Delete Policy Assignment
 -------------
@@ -209,7 +209,7 @@ client.legalHolds.deletePolicyAssignment(assignmentId: "1234") { result: Result<
 }
 ```
 
-[delete-policy-assignment]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC22deletePolicyAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
+[delete-policy-assignment]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC22deletePolicyAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Get File Version Legal Hold Info
 ---------------
@@ -229,7 +229,7 @@ client.legalHolds.getFileVersionPolicy(legalHoldId: "22222") { (result: Result<F
 }
 ```
 
-[get-file-version-legal-hold-info]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC20getFileVersionPolicy11legalHoldId6fields10completionySS_SaySSGSgys6ResultOyAA0ghcK0CAA0A8SDKErrorCGctF
+[get-file-version-legal-hold-info]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC20getFileVersionPolicy11legalHoldId6fields10completionySS_SaySSGSgys6ResultOyAA0ghcK0CAA0A8SDKErrorCGctF
 
 Get File Version Legal Holds
 ----------------
@@ -258,4 +258,4 @@ client.legalHolds.listFileVersionPolicies(policyId: "1234") {
 }
 ```
 
-[get-file-version-legal-holds]: http://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC23listFileVersionPolicies8policyId6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0ghC4HoldCGAA0A8SDKErrorCGctF
+[get-file-version-legal-holds]: https://opensource.box.com/box-ios-sdk/Classes/LegalHoldsModule.html#/s:6BoxSDK16LegalHoldsModuleC23listFileVersionPolicies8policyId6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0ghC4HoldCGAA0A8SDKErrorCGctF

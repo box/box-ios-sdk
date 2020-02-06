@@ -1,7 +1,7 @@
 Webhooks
 =======
 
- Webhooks enable you to attach event triggers to Box files and folders. Event triggers monitor events on Box objects and notify your application when they occur. A webhook notifies your application by sending HTTP requests to a URL of your choosing. A webhook object contains information about a webhook like the triggers, the URL, etc.
+ Webhooks enable you to attach event triggers to Box files and folders. Event triggers monitor events on Box objects and notify your application when they occur. A webhook notifies your application by sending https requests to a URL of your choosing. A webhook object contains information about a webhook like the triggers, the URL, etc.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -34,7 +34,7 @@ client.folders.get(webhookId: "22222", fields: ["id", "created_at"]) { (result: 
 }
 ```
 
-[get-webhook]: http://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC3get9webhookId6fields10completionySS_SaySSGSgys6ResultOyAA7WebhookCAA0A8SDKErrorCGctF
+[get-webhook]: https://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC3get9webhookId6fields10completionySS_SaySSGSgys6ResultOyAA7WebhookCAA0A8SDKErrorCGctF
 
 List Webhooks
 ----------------
@@ -62,7 +62,7 @@ client.webhooks.list() { results in
 }
 ```
 
-[list-webhooks]: http://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC4list6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA7WebhookCGAA0A8SDKErrorCGctF
+[list-webhooks]: https://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC4list6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA7WebhookCGAA0A8SDKErrorCGctF
 
 Create Webhook
 -------------
@@ -81,7 +81,7 @@ client.webhooks.create(targetType: "file", targetId: "1234", triggers: [.fileDow
 }
 ```
 
-[create-webhook]: http://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6create10targetType0F2Id8triggers7address6fields10completionySS_SSSayAA7WebhookC13EventTriggersOGSSSaySSGSgys6ResultOyAlA0A8SDKErrorCGctF
+[create-webhook]: https://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6create10targetType0F2Id8triggers7address6fields10completionySS_SSSayAA7WebhookC13EventTriggersOGSSSaySSGSgys6ResultOyAlA0A8SDKErrorCGctF
 
 Update Webhook
 -------------
@@ -100,7 +100,7 @@ client.webhooks.update(webhookId: "1234", targetType: "file", targetId: "1234", 
 }
 ```
 
-[update-webhook]: http://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6update9webhookId10targetType0hG08triggers7address6fields10completionySS_SSSgALSayAA7WebhookC13EventTriggersOGSgALSaySSGSgys6ResultOyAnA0A8SDKErrorCGctF
+[update-webhook]: https://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6update9webhookId10targetType0hG08triggers7address6fields10completionySS_SSSgALSayAA7WebhookC13EventTriggersOGSgALSaySSGSgys6ResultOyAnA0A8SDKErrorCGctF
 
 Delete Webhook
 -------------
@@ -119,4 +119,4 @@ client.webhooks.delete(webhookId: "22222") { result: Result<Void, BoxSDKError>} 
 }
 ```
 
-[delete-webhook]: http://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6delete9webhookId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
+[delete-webhook]: https://opensource.box.com/box-ios-sdk/Classes/WebhooksModule.html#/s:6BoxSDK14WebhooksModuleC6delete9webhookId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF

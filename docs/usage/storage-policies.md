@@ -34,7 +34,7 @@ client.storagePolicies.get(storagePolicyId: "22222") { (result: Result<StoragePo
 }
 ```
 
-[get-storage-policy-info]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC3get15storagePolicyId6fields10completionySS_SaySSGSgys6ResultOyAA0cH0CAA0A8SDKErrorCGctF
+[get-storage-policy-info]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC3get15storagePolicyId6fields10completionySS_SaySSGSgys6ResultOyAA0cH0CAA0A8SDKErrorCGctF
 
 Get Storage Policies
 --------------------
@@ -62,7 +62,7 @@ client.storagePolicies.list() { results in
 }
 ```
 
-[get-storage-policies]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC17listForEnterprise6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C6PolicyCGAA0A8SDKErrorCGctF
+[get-storage-policies]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC17listForEnterprise6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C6PolicyCGAA0A8SDKErrorCGctF
 
 Get Storage Policy Assignment Info
 ----------------------------------
@@ -80,7 +80,7 @@ client.storagePolicy.getAssignment(storagePolicyAssignmentId: "1234") { (result:
     print("Storage policy assignment ID \(assignment.id)")
 }
 ```
-[get-storage-policy-assignment-info]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC13getAssignment013storagePolicyG2Id6fields10completionySS_SaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
+[get-storage-policy-assignment-info]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC13getAssignment013storagePolicyG2Id6fields10completionySS_SaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
 
 Get Storage Policy Assignments
 ------------------------------
@@ -98,7 +98,7 @@ client.storagePolicy.listAssignments(resolvedForType: "user", resolvedForId: "12
 }
 ```
 
-[get-storage-policy-assignments]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC15listAssignments15resolvedForType0hI2Id6fields10completionySS_SSSaySSGSgys6ResultOyAA0C16PolicyAssignmentCAA0A8SDKErrorCGctF
+[get-storage-policy-assignments]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC15listAssignments15resolvedForType0hI2Id6fields10completionySS_SSSaySSGSgys6ResultOyAA0C16PolicyAssignmentCAA0A8SDKErrorCGctF
 
 Assign Storage Policy
 --------------------------------
@@ -116,7 +116,7 @@ client.storagePolicy.assign(storagePolicyId: "1234", assignedToType: "user", ass
 }
 ```
 
-[assign-storage-policy]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC6assign15storagePolicyId14assignedToType0jkI06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cH10AssignmentCAA0A8SDKErrorCGctF
+[assign-storage-policy]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC6assign15storagePolicyId14assignedToType0jkI06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cH10AssignmentCAA0A8SDKErrorCGctF
 
 Force Assign Storage Policy
 ---------------------
@@ -134,7 +134,7 @@ client.storagePolicy.forceAssign(storagePolicyId: "1234", assignedToType: "user"
 }
 ```
 
-[force-assign-storage-policy]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC11forceAssign15storagePolicyId14assignedToType0klJ06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cI10AssignmentCAA0A8SDKErrorCGctF
+[force-assign-storage-policy]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC11forceAssign15storagePolicyId14assignedToType0klJ06fields10completionySS_S2SSaySSGSgys6ResultOyAA0cI10AssignmentCAA0A8SDKErrorCGctF
 
 Update Storage Policy Assignment
 --------------------------------
@@ -152,7 +152,7 @@ client.storagePolicy.updateAssignment(storagePolicyAssignmentId: "1234", storage
 }
 ```
 
-[update-storage-policy-assignment]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16updateAssignment013storagePolicyG2Id0hiJ06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
+[update-storage-policy-assignment]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16updateAssignment013storagePolicyG2Id0hiJ06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0ciG0CAA0A8SDKErrorCGctF
 
 Delete Storage Policy Assignment
 --------------------------------
@@ -171,4 +171,4 @@ client.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "22222") { re
 }
 ```
 
-[delete-storage-policy-assignment]: http://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16deleteAssignment013storagePolicyG2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
+[delete-storage-policy-assignment]: https://opensource.box.com/box-ios-sdk/Classes/StoragePoliciesModule.html#/s:6BoxSDK21StoragePoliciesModuleC16deleteAssignment013storagePolicyG2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
