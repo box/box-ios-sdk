@@ -21,7 +21,7 @@ Get Terms of Service By ID
 --------------------------
 
 To retrieve information about a terms of service, call
-[`client.termsOfService.get(tosId:fields:completion)`] with the ID of the terms of service. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
+[`client.termsOfService.get(tosId:fields:completion)`][get-tos] with the ID of the terms of service. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
 <!-- sample get_terms_of_services_id -->   
 ```swift
@@ -36,11 +36,13 @@ client.termsOfService.get(
 }
 ```
 
+[get-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC3get5tosId6fields10completionySS_SaySSGSgys6ResultOyAA0cD7ServiceCAA0A8SDKErrorCGctF
+
 Create Terms of Service
 -----------------------
 
 To create a terms of service, call
-[`client.termsOfService.create(status:tosType:text:fields:completion`]. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
+[`client.termsOfService.create(status:tosType:text:fields:completion`][create-tos]. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
 <!-- sample post_terms_of_services -->   
 ```swift
@@ -57,10 +59,12 @@ client.termsOfService.create(
 }
 ```
 
+[create-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6create6status7tosType4text6fields10completionyAA0cD13ServiceStatusO_AA0cdnJ0OSSSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
+
 Update Terms of Service
 -----------------------
 
-To update a terms of service, call [`client.termsOfService.update(tosId:text:status:fields:completion)`] with the ID of the terms of service to update. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
+To update a terms of service, call [`client.termsOfService.update(tosId:text:status:fields:completion)`][update-tos] with the ID of the terms of service to update. You can control which fields are returned in the resulting `Terms of Service` object by passing the `fields` parameter.
 
 <!-- sample put_terms_of_services_id -->   
 ```swift
@@ -77,10 +81,12 @@ client.termsOfService.update(
 }
 ```
 
+[update-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC6update5tosId4text6status6fields10completionySS_SSAA0cD13ServiceStatusOSaySSGSgys6ResultOyAA0cdN0CAA0A8SDKErrorCGctF
+
 List Terms of Services for an Enterprise
 ----------------------------------------
 
-To retrieve a list of terms of services for an enterprise, call [`client.termsOfService.listForEnterprise(tosType:fields:completion)`] with the type of terms of service to retrieve. If left nil, then terms of services of both types, `managed` and `external` will be retrieved. You can control which fields are returned in the resulting `Terms of Service` objects by passing the `fields` parameter.
+To retrieve a list of terms of services for an enterprise, call [`client.termsOfService.listForEnterprise(tosType:fields:completion)`][list-tos] with the type of terms of service to retrieve. If left nil, then terms of services of both types, `managed` and `external` will be retrieved. You can control which fields are returned in the resulting `Terms of Service` objects by passing the `fields` parameter.
 
 <!-- sample get_terms_of_services -->   
 ```swift
@@ -89,11 +95,13 @@ let termsOfServiceItems = client.termsOfService.listForEnterprise()
 print("Terms of Service with ID \(termsOfServiceItems[0].id) and Terms of Service with ID \(termsOfServiceItems[1].id) was retrieved.")
 ```
 
+[list-tos]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC17listForEnterprise7tosType6fields10completionyAA0cd7ServiceK0OSg_SaySSGSgys6ResultOySayAA0cdN0CGAA0A8SDKErrorCGctF
+
 Create User Status on Terms of Service
 --------------------------------------
 
 To accept or decline a terms of service for a user who has never 
-accepted/declined this terms of service before call [`client.termsOfService.createUserStatus(tosId:isAccepted:userId:fields:completion)`]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
+accepted/declined this terms of service before call [`client.termsOfService.createUserStatus(tosId:isAccepted:userId:fields:completion)`][create-user-status]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
 
 <!-- sample post_terms_of_service_user_statuses -->   
 ```swift
@@ -111,10 +119,12 @@ client.termsOfService.createUserStatus(
 }
 ```
 
+[create-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16createUserStatus5tosId10isAccepted04userK06fields10completionySS_SbSSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
+
 Update User Status of Terms of Service
 --------------------------------------
 
-To update a user status on a terms of service call [`client.termsOfService.updateUserStatus(userStatusId:isAccepted:fields:completion)`]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
+To update a user status on a terms of service call [`client.termsOfService.updateUserStatus(userStatusId:isAccepted:fields:completion)`][update-user-status]. You can control which fields are returned in the resulting `Terms of Service User Status` object by passing the `fields` parameter.
 
 <!-- sample put_terms_of_service_user_statuses -->
 ```swift
@@ -131,10 +141,12 @@ client.termsOfService.updateUserStatus(
 }
 ```
 
+[update-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC16updateUserStatus04userI2Id10isAccepted6fields10completionySS_SbSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF
+
 Get User Status for Terms of Service
 ------------------------------------
 
-To retrieve the user status for a user on a terms of service, call [`client.termsOfService.getUserStatus(tosId:userId:fields:completion)`] with the ID of the `Terms of Service` object and the ID of the user.
+To retrieve the user status for a user on a terms of service, call [`client.termsOfService.getUserStatus(tosId:userId:fields:completion)`][get-user-status] with the ID of the `Terms of Service` object and the ID of the user.
 
 <!-- sample get_terms_of_service_user_statuses_id -->
 ```swift
@@ -150,3 +162,4 @@ client.termsOfService.getUserStatus(
     print("User status with ID \(userStatus.id) was retrieved")
 }
 ```
+[get-user-status]: https://opensource.box.com/box-ios-sdk/Classes/TermsOfServicesModule.html#/s:6BoxSDK21TermsOfServicesModuleC13getUserStatus5tosId04userK06fields10completionySS_SSSgSaySSGSgys6ResultOyAA0cd7ServicehI0CAA0A8SDKErrorCGctF

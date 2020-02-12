@@ -250,6 +250,9 @@
                 <a href="../Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
@@ -308,6 +311,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
@@ -400,6 +406,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
@@ -557,13 +566,7 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/NSNumber.html">NSNumber</a>
@@ -979,7 +982,7 @@ altered.</p>
                               <td>
                                 <div>
                                   <p>An optional new name for the file. Box supports file names of 255 characters or
-less. Names containing non-printable ASCII characters, <q>/</q> or <q>\</q>, names with trailing
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
 spaces, and the special names “.” and “..” are also not allowed.</p>
                                 </div>
                               </td>
@@ -1076,7 +1079,7 @@ invalid or if a file name collision occurs.</p>
                               <td>
                                 <div>
                                   <p>The name of the file. Box supports file names of 255 characters or
-less. Names containing non-printable ASCII characters, <q>/</q> or <q>\</q>, names with trailing
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
 spaces, and the special names “.” and “..” are also not allowed.</p>
                                 </div>
                               </td>
@@ -1089,7 +1092,7 @@ spaces, and the special names “.” and “..” are also not allowed.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the parent folder. Use <q>0</q> for the root folder.</p>
+                                  <p>The ID of the parent folder. Use &ldquo;0&rdquo; for the root folder.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1182,7 +1185,7 @@ name collision occurs.</p>
                               <td>
                                 <div>
                                   <p>The name of the file. Box supports file names of 255 characters or
-less. Names containing non-printable ASCII characters, <q>/</q> or <q>\</q>, names with trailing
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
 spaces, and the special names “.” and “..” are also not allowed.</p>
                                 </div>
                               </td>
@@ -1285,7 +1288,7 @@ spaces, and the special names “.” and “..” are also not allowed.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the parent folder. Use <q>0</q> for the root folder.</p>
+                                  <p>The ID of the parent folder. Use &ldquo;0&rdquo; for the root folder.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1298,7 +1301,7 @@ spaces, and the special names “.” and “..” are also not allowed.</p>
                               <td>
                                 <div>
                                   <p>The name of the file. Box supports file names of 255 characters or
-less. Names containing non-printable ASCII characters, <q>/</q> or <q>\</q>, names with trailing
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
 spaces, and the special names “.” and “..” are also not allowed.</p>
                                 </div>
                               </td>
@@ -1390,7 +1393,7 @@ folder and file name restrictions, folder and account storage quota.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the parent folder. Use <q>0</q> for the root folder.</p>
+                                  <p>The ID of the parent folder. Use &ldquo;0&rdquo; for the root folder.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1492,7 +1495,7 @@ folder and file name restrictions, folder and account storage quota.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the parent folder. Use <q>0</q> for the root folder.</p>
+                                  <p>The ID of the parent folder. Use &ldquo;0&rdquo; for the root folder.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3368,10 +3371,6 @@ include in the response.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -4025,10 +4024,6 @@ be null or have a timestamp in the past.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -4209,10 +4204,6 @@ See <a href="https://developer.box.com/reference#representations">representation
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -4300,10 +4291,6 @@ See <a href="https://developer.box.com/reference#representations">representation
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -4515,8 +4502,8 @@ If optional parameters are given, only the file version retentions that match th
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

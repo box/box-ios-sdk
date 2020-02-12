@@ -79,8 +79,8 @@ client.metadata.getTemplateById(
 }
 ```
 
-[get-md-template]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC03getC8Template5scope11templateKey10completionySS_SSys6ResultOyAA0cF0CAA0A5ErrorOGctF
-[get-md-template-id]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC03getC8Template2id10completionySS_ys6ResultOyAA0cF0CAA0A5ErrorOGctF
+[get-md-template]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC16getTemplateByKey5scope08templateH010completionySS_SSys6ResultOyAA0cF0CAA0A8SDKErrorCGctF
+[get-md-template-id]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC15getTemplateById2id10completionySS_ys6ResultOyAA0cF0CAA0A8SDKErrorCGctF
 
 Create Metadata Template
 ------------------------
@@ -128,7 +128,7 @@ client.metadata.createTemplate(
 }
 ```
 
-[create-md-template]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06createC8Template5scope11templateKey11displayName6hidden6fields10completionySS_S2SSbSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A5ErrorOGctF
+[create-md-template]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC14createTemplate5scope11templateKey11displayName6hidden6fields10completionySS_S2SSbSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A8SDKErrorCGctF
 
 Update Metadata Template
 ------------------------
@@ -155,7 +155,7 @@ client.metadata.updateTemplate(
 }
 ```
 
-[update-md-template]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06updateC8Template5scope11templateKey9operation10completionySS_SSAA0cF9OperationOys6ResultOyAA0cF0CAA0A5ErrorOGctF
+[update-md-template]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC14updateTemplate5scope11templateKey9operation10completionySS_SSAA0cF9OperationOys6ResultOyAA0cF0CAA0A8SDKErrorCGctF
 
 Delete Metadata Template
 ------------------------
@@ -179,7 +179,7 @@ client.metadata.deleteTemplate(
 }
 ```
 
-[delete-md-template]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06deleteC8Template5scope11templateKey10completionySS_SSys6ResultOyytAA0A5ErrorOGctF
+[delete-md-template]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC14deleteTemplate5scope11templateKey10completionySS_SSys6ResultOyytAA0A8SDKErrorCGctF
 
 List Metadata Templates
 -----------------------
@@ -232,7 +232,7 @@ client.metadata.listEnterpriseTemplates(scope: "global") { results in
 }
 ```
 
-[list-templates]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC22getEnterpriseTemplates5scope6marker5limitAA24MarkerPaginationIteratorCyAA0C8TemplateCGSS_SSSgSiSgtF
+[list-templates]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC23listEnterpriseTemplates5scope6marker5limit10completionySS_SSSgSiSgys6ResultOyAA14PagingIteratorCyAA0C8TemplateCGAA0A8SDKErrorCGctF
 
 Get All Metadata on File
 ------------------------
@@ -256,7 +256,7 @@ client.metadata.list(forFileId: "11111") { (result: Result<[MetadataObject], Box
 }
 ```
 
-[get-all-md-file]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06getAllC09forFileId10completionySS_ys6ResultOySayAA0C6ObjectCGAA0A5ErrorOGctF
+[get-all-md-file]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC4list9forFileId10completionySS_ys6ResultOySayAA0C6ObjectCGAA0A8SDKErrorCGctF
 
 Get Metadata Instance on File
 -----------------------------
@@ -281,7 +281,7 @@ client.metadata.get(
 }
 ```
 
-[get-md-file]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC03getC013forFileWithId5scope11templateKey10completionySS_S2Sys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[get-md-file]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC3get13forFileWithId5scope11templateKey10completionySS_S2Sys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Add Metadata Instance to File
 -----------------------------
@@ -313,7 +313,7 @@ client.metadata.create(
 }
 ```
 
-[add-md-file]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06createC013forFileWithId5scope11templateKey4keys10completionySS_S2SSDySSypGys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[add-md-file]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6create13forFileWithId5scope11templateKey4keys10completionySS_S2SSDySSypGys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Update Metadata Instance on File
 --------------------------------
@@ -343,7 +343,7 @@ client.metadata.update(
 }
 ```
 
-[update-md-file]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06updateC013forFileWithId5scope11templateKey10operations10completionySS_S2SSayAA0gC9OperationOGys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[update-md-file]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6update13forFileWithId5scope11templateKey10operations10completionySS_S2SSayAA0gC9OperationOGys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Remove Metadata Instance from File
 ----------------------------------
@@ -368,7 +368,7 @@ client.metadata.delete(
 }
 ```
 
-[delete-md-file]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06deleteC013forFileWithId5scope11templateKey10completionySS_S2Sys6ResultOyytAA0A5ErrorOGctF
+[delete-md-file]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6delete13forFileWithId5scope11templateKey10completionySS_S2Sys6ResultOyytAA0A8SDKErrorCGctF
 
 Get All Metadata on Folder
 --------------------------
@@ -392,7 +392,7 @@ client.metadata.list(forFolderId: "22222") { (result: Result<[MetadataObject], B
 }
 ```
 
-[get-all-md-folder]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06getAllC011forFolderId10completionySS_ys6ResultOySayAA0C6ObjectCGAA0A5ErrorOGctF
+[get-all-md-folder]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC4list11forFolderId10completionySS_ys6ResultOySayAA0C6ObjectCGAA0A8SDKErrorCGctF
 
 Get Metadata Instance on Folder
 -------------------------------
@@ -417,7 +417,7 @@ client.metadata.get(
 }
 ```
 
-[get-md-folder]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC03getC015forFolderWithId5scope11templateKey10completionySS_S2Sys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[get-md-folder]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC3get15forFolderWithId5scope11templateKey10completionySS_S2Sys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Add Metadata Instance to Folder
 -------------------------------
@@ -449,7 +449,7 @@ client.metadata.create(
 }
 ```
 
-[add-md-folder]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06createC015forFolderWithId5scope11templateKey4keys10completionySS_S2SSDySSypGys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[add-md-folder]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6create15forFolderWithId5scope11templateKey4keys10completionySS_S2SSDySSypGys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Update Metadata Instance on Folder
 ----------------------------------
@@ -479,7 +479,7 @@ client.metadata.update(
 }
 ```
 
-[update-md-folder]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06updateC015forFolderWithId5scope11templateKey10operations10completionySS_S2SSayAA0gC9OperationOGys6ResultOyAA0C6ObjectCAA0A5ErrorOGctF
+[update-md-folder]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6update15forFolderWithId5scope11templateKey10operations10completionySS_S2SSayAA0gC9OperationOGys6ResultOyAA0C6ObjectCAA0A8SDKErrorCGctF
 
 Remove Metadata Instance from Folder
 ------------------------------------
@@ -490,7 +490,7 @@ with the ID of the folder, as well as the scope and key of the metadata template
 
 <!-- sample delete_folders_id_metadata_id_id -->   
 ```swift
-client.metadata.deleteMetadata(
+client.metadata.delete(
     forFolderWithId: "22222",
     scope: "enterprise",
     templateKey: "personnelRecord"
@@ -504,4 +504,4 @@ client.metadata.deleteMetadata(
 }
 ```
 
-[delete-md-folder]: http://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC06deleteC015forFolderWithId5scope11templateKey10completionySS_S2Sys6ResultOyytAA0A5ErrorOGctF
+[delete-md-folder]: https://opensource.box.com/box-ios-sdk/Classes/MetadataModule.html#/s:6BoxSDK14MetadataModuleC6delete15forFolderWithId5scope11templateKey10completionySS_S2Sys6ResultOyytAA0A8SDKErrorCGctF

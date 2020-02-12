@@ -250,6 +250,9 @@
                 <a href="Classes/MetadataTemplate.html">MetadataTemplate</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/OAuth2Session.html">OAuth2Session</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/Order.html">Order</a>
               </li>
               <li class="nav-group-task">
@@ -308,6 +311,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/StoragePoliciesModule.html">StoragePoliciesModule</a>
@@ -400,6 +406,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/AssignmentState.html">AssignmentState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
@@ -557,13 +566,7 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/FieldsQueryParam.html">FieldsQueryParam</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/MetadataFilterQueryParam.html">MetadataFilterQueryParam</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/NSNumber.html">NSNumber</a>
@@ -736,16 +739,13 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">BoxSDKErrorEnum</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxEnum.html">BoxEnum</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoxSDKErrorEnum</span><span class="p">:</span> <span class="kt">ExpressibleByStringLiteral</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -802,10 +802,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -828,6 +824,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">LogLevel</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LogLevel</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
 
                         </div>
                       </div>
@@ -856,16 +853,13 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">LogCategory</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LogCategory</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -894,10 +888,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -982,10 +972,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1042,10 +1028,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1096,16 +1078,13 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FolderItemsOrderBy</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxEnum.html">BoxEnum</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FolderItemsOrderBy</span><span class="p">:</span> <span class="kt"><a href="Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1134,10 +1113,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1222,10 +1197,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1282,10 +1253,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1342,10 +1309,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1374,10 +1337,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1401,16 +1360,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NullableParameter</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">NullableParameter</span><span class="p">:</span> <span class="kt">Encodable</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Encodable</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1467,10 +1423,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1493,16 +1445,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CollaborationItem</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CollaborationItem</span><span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1531,10 +1480,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1557,16 +1502,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CommentItem</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CommentItem</span><span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1595,10 +1537,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1627,10 +1565,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1659,10 +1593,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1691,10 +1621,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1717,16 +1643,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FolderItem</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FolderItem</span><span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1783,10 +1706,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1815,10 +1734,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1875,10 +1790,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1907,10 +1818,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1995,10 +1902,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2027,10 +1930,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2053,16 +1952,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TokenScope</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxEnum.html">BoxEnum</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">TokenScope</span><span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2091,10 +1987,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2151,10 +2043,34 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK16AssignmentStatusO"></a>
+                    <a name="//apple_ref/swift/Enum/AssignmentStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK16AssignmentStatusO">AssignmentStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Status of assignment.</p>
+
+                        <a href="Enums/AssignmentStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AssignmentStatus</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxEnum.html">BoxEnum</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -2183,10 +2099,6 @@ Should be used mainly with optinal method parameters to differentiate between ig
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2209,16 +2121,13 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TaskItem</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">TaskItem</span><span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -2241,6 +2150,7 @@ Should be used mainly with optinal method parameters to differentiate between ig
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">WebhookItem</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">WebhookItem</span><span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
                         </div>
                       </div>
@@ -2252,8 +2162,8 @@ Should be used mainly with optinal method parameters to differentiate between ig
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-01-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

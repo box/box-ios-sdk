@@ -41,4 +41,4 @@ client.sharedItems.get(
 }
 ```
 
-[get-shared-item]: http://opensource.box.com/box-ios-sdk/Classes/SharedItemsModule.html#/s:6BoxSDK17SharedItemsModuleC03getC4Item13sharedLinkURL0hI8Password6fields10completionySS_SSSgSaySSGSgys6ResultOyAA0cG0CAA0A5ErrorOGctF
+[get-shared-item]: https://opensource.box.com/box-ios-sdk/Classes/SharedItemsModule.html#/s:6BoxSDK17SharedItemsModuleC3get13sharedLinkURL0gH8Password6fields10completionySS_SSSgSaySSGSgys6ResultOyAA0C4ItemCAA0A8SDKErrorCGctF
