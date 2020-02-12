@@ -21,6 +21,7 @@ To retrieve information about a comment, call
 [`client.comments.get(commentId:fields:completion:)`][get-comment]
 with the ID of the comment.
 
+<!-- sample get_comments_id -->
 ```swift
 client.comments.get(commentId: "55555") { (result: Result<Comment, BoxSDKError>) in
     guard case let .success(comment) = result else {
@@ -41,6 +42,7 @@ To create a comment, call
 [`client.comments.create(itemId:itemType:message:fields:completion:)`][create-comment]
 with the type and ID of the item to add a comment to, as well as the comment message.
 
+<!-- sample post_comments -->
 ```swift
 client.comments.create(
     itemId: "11111",
@@ -65,6 +67,7 @@ To update a comment, call
 [`client.comments.update(commentId:message:fields:completion:)`][update-comment]
 with the ID of the comment to update and the properties to update.
 
+<!-- sample put_comments_id -->
 ```swift
 client.comments.update(
     commentId: "55555",
@@ -87,6 +90,7 @@ Delete Comment
 To delete a comment, call [`client.comments.delete(commentId:completion:)`][delete-comment]
 with the ID of the comment to delete.
 
+<!-- sample delete_comments_id -->
 ```swift
 client.comments.delete(commentId: "55555") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {

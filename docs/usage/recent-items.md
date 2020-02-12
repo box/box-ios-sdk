@@ -17,6 +17,7 @@ Get Recent Items
 To get recently accessed items, call
 [`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object in the completion, which is used to retrieve recent items.
 
+<!-- sample get_items_recent -->   
 ```swift
 client.recentItems.list() { results in
     switch results {

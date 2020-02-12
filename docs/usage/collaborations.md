@@ -23,6 +23,7 @@ To retrieve a Collaboration record from the API, call
 [`client.collaborations.get(collaborationId:fields:completion:)`][get-collaboration]
 with the ID of the collaboration.
 
+<!-- sample get_collaborations_id -->
 ```swift
 client.collaborations.get(collaborationId: "12345") { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
@@ -62,6 +63,7 @@ To add a collaborator to an item, call
 with the type and ID of the item, as well as the type and ID of the collaborator — a user or a group.  A `role` for the
 collaborator must be specified, which will determine the permissions the collaborator receives on the item.
 
+<!-- sample post_collaborations -->
 ```swift
 client.collaborations.create(
     itemType: "folder",
@@ -88,6 +90,7 @@ To update a collaboration record, call
 [`client.users.update(collaborationId:role:status:canViewPath:fields:completion:)`][update-collaboration]
 with the ID of the collaboration to update and the properties to update, including at least the `role`.
 
+<!-- sample put_collaborations_id -->
 ```swift
 client.collaborations.update(collaborationId: "12345", role: .viewer) { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
@@ -108,6 +111,7 @@ To delete a collaboration, removing the collaborator's access to the relevant it
 [`client.collaborations.delete(collaborationId:completion:)`][delete-collaboration]
 with the ID of the collaboration to delete.
 
+<!-- sample delete_collaborations_id -->
 ```swift
 client.collaborations.delete(collaborationId: "12345") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -128,6 +132,7 @@ To retrieve a list of the pending collaborations requiring the user to accept or
 [`client.collaborations.listPendingForEnterprise(offset:limit:fields:)`][get-pending-collaborations].
 The method returns an iterator in the completion, which is used to get pending collaborations.
 
+<!-- sample get_collaborations -->
 ```swift
 client.collaborations.listPendingForEnterprise() { results in
     switch results {

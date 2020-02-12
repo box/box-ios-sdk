@@ -17,6 +17,7 @@ To get a list of items matching a search query, call [`client.search.query(query
 string to query for.  There are many possible options for advanced search filtering, which can be used to narrow down
 the search results. This method will return an iterator object in the completion, which is used to get the results.
 
+<!-- sample get_search -->   
 ```swift
 client.search.query(query: "Quarterly Business Review") { results in
     switch results {

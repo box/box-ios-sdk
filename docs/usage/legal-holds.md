@@ -26,6 +26,7 @@ To retrieve information about a legal hold policy, call
 with the ID of the policy.  You can control which fields are returned in the resulting `Legal Hold Policy` object by passing the
 `fields` parameter.
 
+<!-- sample get_legal_hold_policies_id -->
 ```swift
 client.legalHolds.get(policyId: "22222", fields: ["name", "created_at"]) { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
@@ -45,6 +46,7 @@ To retrieve information about the items contained in a folder, call
 [`client.legalHolds.listForEnterprise(policyName: String, marker: String?, limit: Int?, fields: [String]?)`][get-legal-hold-policies]
 with the ID of the policy.  This method will return an iterator object in the completion, which is used to retrieve policies in the enterprise.
 
+<!-- sample get_legal_hold_policies -->
 ```swift
 client.legalHolds.listForEnterprise(policyName: "policy1") { results in
     switch results {
@@ -74,6 +76,7 @@ To create a new legal hold policy, call
 [`client.legalHolds.create(policyName: String, description: String? filterStartedAt: Date?, filterEndedAt: Date?, isOngoing: Bool?, fields: [String]?, completion: @escaping Callback<LegalHoldPolicy>`][create-legal-hold-policy]
 with a name for the legal hold policy.
 
+<!-- sample post_legal_hold_policies -->
 ```swift
 client.legalHolds.create(name: "New Folder") { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
@@ -92,6 +95,7 @@ Update Legal Hold Policy
 To update legal hold policy, call
 [`client.legalHolds.update(policyId: String, policyName: String?, description: String?, releaseNotes: String?, fields: [String]?, completion: @escaping Callback<LegalHoldPolicy>`][update-legal-hold-policy].
 
+<!-- sample put_legal_hold_policies_id -->
 ```swift
 client.legalHolds.update(policyId: "1234", policyName: "New Name") { (result: Result<LegalHoldPolicy, BoxSDKError>) in
     guard case let .success(policy) = result else {
@@ -111,6 +115,7 @@ To delete a legal hold policy, call
 [`client.folders.delete(policyId: String, completion: @escaping Callback<Void>`][delete-legal-hold-policy]
 with the ID of the legal hold policy to delete.
 
+<!-- sample delete_legal_hold_policies_id -->
 ```swift
 client.legalHolds.delete() { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
@@ -131,6 +136,7 @@ To retrieve information about a legal hold policy assignment, call
 with the ID of the policy assignment.  You can control which fields are returned in the resulting `Legal Hold Policy Assignment` object by passing the
 `fields` parameter.
 
+<!-- sample get_legal_hold_policy_assignments_id -->
 ```swift
 client.legalHolds.getPolicyAssignment(assignmentId: "22222", fields: ["assigned_at"]) { (result: Result<LegalHoldPolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
@@ -150,6 +156,7 @@ To retrieve legal hold policy assignments, call
 [`client.legalHolds.listPolicyAssignments(policyId: String, assignToType: String?, assignToId: String?, marker: String?, limit: String?, fields: [String]?)`][get-policy-assignments]
 with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve policy assignments for a policy.
 
+<!-- sample get_legal_hold_policy_assignments -->
 ```swift
 client.legalHolds.listPolicyAssignments(policyId: "1234") { results in
     switch results {
@@ -180,6 +187,7 @@ To assign a legal hold policy, call
 [`client.legalHolds.forceApply(policyId: String, assignToId: String, assignToType: String, fields: [String]?, completion: @escaping Callback<LegalHoldPolicyAssignment>`][assign-policy]
 with an ID of a policy, an ID of a file, file version, folder, or user and the type of the box item that the policy is being assigned to.
 
+<!-- sample post_legal_hold_policy_assignments -->
 ```swift
 client.legalHolds.forceApply(policyId: "1234", assignToId: "4568" ,assignToType: "file") { (result: Result<LegalHoldPolicyAssignment, BoxSDKError>) in
     guard case let .success(assignment) = result else {
@@ -199,6 +207,7 @@ To delete a legal hold policy assignment, call
 [`client.legalHolds.deletePolicyAssignment(policyId: String, completion: @escaping Callback<Void>`][delete-policy-assignment]
 with the ID of the policy assignment to delete.
 
+<!-- sample delete_legal_hold_policy_assignments_id -->
 ```swift
 client.legalHolds.deletePolicyAssignment(assignmentId: "1234") { result: Result<Void, BoxSDKError>} in
     guard case .success = result else {
@@ -219,6 +228,7 @@ To retrieve information about a file version legal hold, call
 with the ID of legal hold.  You can control which fields are returned in the resulting `File Version Legal Hold` object by passing the
 `fields` parameter.
 
+<!-- sample get_file_version_legal_holds_id -->
 ```swift
 client.legalHolds.getFileVersionPolicy(legalHoldId: "22222") { (result: Result<FileVersionLegalHold, BoxSDKError>) in
     guard case let .success(legalHold) = result else {
@@ -238,6 +248,7 @@ To retrieve all of the non-deleted legal holds for a single legal hold policy, c
 [`client.legalHolds.listFileVersionPolicies(policyId: String, marker: String?, limit: String?, fields: [String]?)`][get-file-version-legal-holds]
 with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve legal holds for a policy.
 
+<!-- sample get_file_version_legal_holds -->
 ```swift
 client.legalHolds.listFileVersionPolicies(policyId: "1234") {
     switch results {

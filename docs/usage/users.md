@@ -31,6 +31,7 @@ Get Current User
 To retrieve information about the currently authenticated user, call
 [`client.users.getCurrent(fields:completion:)`][get-current-user].
 
+<!-- sample get_users_me -->
 ```swift
 client.users.getCurrent(fields: ["name", "login"]) { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
@@ -51,6 +52,7 @@ To retrieve information about a specific user, call
 [`client.users.get(userId:fields:completion:)`][get-user]
 with the ID of the user.
 
+<!-- sample get_users_id -->
 ```swift
 client.users.get(userId: "33333", fields: ["name", "login"]) { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
@@ -71,6 +73,7 @@ To retrieve the avatar image for a user, call
 [`client.users.getAvatar(userId:completion:)`][get-user-avatar]
 with the ID of the user.
 
+<!-- sample get_users_id_avatar -->
 ```swift
 client.users.getAvatar(userId: "33333") { (result: Result<Data, BoxSDKError>) in
     guard case let .success(avatarData) = result else {
@@ -91,6 +94,7 @@ As an admin user or service account, create a new user in your enterprise by cal
 [`client.users.create(login:name:...)`][create-user] with the login email address and name for
 the user.
 
+<!-- sample post_users -->
 ```swift
 client.users.create(login: "new.user@example.com", name: "New User") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
@@ -110,6 +114,7 @@ Create App User
 To create an [app user][app-user], call [`client.users.createAppUser(name:...)`][create-app-user] with the
 a name for that user.
 
+<!-- sample post_users app_user -->
 ```swift
 client.users.createAppUser(name: "Doug") { (result: Result<User, BoxSDKError>) in
     guard case let .success(appUser) = result else {
@@ -130,6 +135,7 @@ Update User
 To update the information on a user, call [`client.users.updateUser(userId:...)`][update-user]
 with the ID of the user and the properties to update.  The result is the updated user object.
 
+<!-- sample put_users_id -->
 ```swift
 // Restrict the user from collaborating content externally
 client.users.update(userId: "33333", isExternalCollabRestricted: true) { (result: Result<User, BoxSDKError>) in
@@ -154,6 +160,7 @@ To change a user's login email, call
 [`client.users.changeLogin(userId:login:fields:completion:)`][change-login]
 with the ID of the user and the new login email.
 
+<!-- sample put_users_id change_login -->
 ```swift
 client.users.changeLogin(userId: "33333", login: "updated.address@example.com") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
@@ -175,6 +182,7 @@ To delete a user, which removes their access to Box, call
 with the ID of the user.  By default, the user will not be deleted if they have any content remaining in their account.
 To delete the user and any content that is in their account, set the `force` parameter to `true`.
 
+<!-- sample delete_users_id -->
 ```swift
 client.users.delete(userId: "33333") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -195,6 +203,7 @@ To retrieve the users in an enterprise, call
 [`client.users.listForEnterprise(filterTerm:fields:offset:limit:)`][get-enterprise-users].
 The method returns an iterator object in the completion, which is used to get the users.
 
+<!-- sample get_users -->
 ```swift
 client.users.listForEnterprise() {
     switch results {
@@ -224,6 +233,7 @@ To invite a user who already has a Box account to join an enterprise, call
 [`client.users.inviteToJoinEnterprise(login:enterpriseId:fields:completion:)`][invite-user]
 with the login email of the user and the ID of the enterprise.
 
+<!-- sample post_invites -->
 ```swift
 client.users.inviteToJoinEnterprise(
     login: "user@example.com",
@@ -248,6 +258,7 @@ Before deleting a user, it is recommended to move all content they own to anothe
 with the ID of the source and destination users.  The result of this method is a new folder created in the destination
 user's root folder, containing all content previously owned by the source user.
 
+<!-- sample put_users_id_folders_id -->
 ```swift
 client.users.moveItemsOwnedByUser(withID: "33333", toUserWithID: "44444") { (result: Result<Folder, BoxSDKError>) in
     guard case let .success(folder) = result else {
@@ -268,6 +279,7 @@ To retrieve the list of email aliases associated with a user, call
 [`client.users.listEmailAliases(userId:completion:)`][get-email-aliases]
 with the ID of the user.
 
+<!-- sample get_users_id_email_aliases -->
 ```swift
 client.users.listEmailAliases(userId: "33333") { (result: Result<EntryContainer<User>, BoxSDKError>) in
     guard case let .success(aliasCollection) = result else {
@@ -291,6 +303,7 @@ To associate a new email alias with a user, call
 [`client.users.createEmailAlias(userId:email:completion:)`][add-email-alias]
 with the ID of the user and the email address to add as an alias.
 
+<!-- sample post_users_id_email_aliases -->
 ```swift
 client.users.createEmailAlias(
     userId: "33333",
@@ -314,6 +327,7 @@ To remove a user's email alias, call
 [`client.users.deleteEmailAlias(userId:emailAliasId:completion:)`][remove-email-alias]
 with the ID of the user and the ID of the email alias to remove.
 
+<!-- sample delete_users_id_email_aliases -->
 ```swift
 client.users.deleteEmailAlias(userId: "33333", emailAliasId: "99999") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -334,6 +348,7 @@ To roll a user out of an enterprise, converting them to a free user, call
 [`client.users.rollOutOfEnterprise(userId:notify:fields:completion:)`][roll-out-user]
 with the ID of the user.
 
+<!-- sample delete_users_id -->
 ```swift
 client.users.rollOutOfEnterprise(userId: "33333") { (result: Result<User, BoxSDKError>) in
     guard case let .success(user) = result else {
