@@ -39,6 +39,7 @@ To retrieve information about a file, call
 with the ID of the file.  You can control which fields are returned on the resulting `File` object by passing the
 desired field names in the optional `fields` parameter.
 
+<!-- sample get_files_id -->
 ```swift
 client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -50,7 +51,7 @@ client.files.get(fileId: "11111", fields: ["name", "created_at"]) { (result: Res
 }
 ```
 
-[get-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC11getFileInfo6fileId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC3get6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Update File
 -----------
@@ -59,6 +60,7 @@ To update a file record, call
 [`client.files.updateFileInfo(fileId:name:description:parentId:sharedLink:tags:collections:lock:ifMatch:fields:completion:)`][update-file]
 with the ID of the file to update and the properties to update.
 
+<!-- sample put_files_id -->
 ```swift
 client.files.update(fileId: "11111", name: "New file name.docx") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -70,6 +72,7 @@ client.files.update(fileId: "11111", name: "New file name.docx") { (result: Resu
 }
 ```
 
+[update-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Upload File
 -----------
@@ -79,6 +82,7 @@ To upload a file from data in memory, call
 with the data to be uploaded, the name of the file, and the ID of the folder into which the file should be uploaded.
 Use ID `"0"` to upload a file into the root folder, "All Files".
 
+<!-- sample post_files_content -->
 ```swift
 let data = "test content".data(using: .utf8)
 
@@ -114,8 +118,8 @@ client.files.streamUpload(
 }
 ```
 
-[upload-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC10uploadFile4data4name8parentId8progress10completiony10Foundation4DataV_S2SySo10NSProgressCcys6ResultOyAA0F0CAA0A5ErrorOGctF
-[upload-file-stream]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16streamUploadFile0E08fileSize4name8parentId8progress10completionySo13NSInputStreamC_SiS2SySo10NSProgressCcys6ResultOyAA0G0CAA0A5ErrorOGctF
+[upload-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6upload4data4name8parentId8progress21performPreflightCheck10completiony10Foundation4DataV_S2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF
+[upload-file-stream]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12streamUpload0E08fileSize4name8parentId8progress21performPreflightCheck10completionySo13NSInputStreamC_SiS2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Upload New File Version
 -----------------------
@@ -124,6 +128,7 @@ To upload a new version of an existing file, call
 [`client.files.uploadVersion(forFile:name:contentModifiedAt:data:progress:completion:)`][upload-file-version]
 with the ID of the file and the file contents to be uploaded.
 
+<!-- sample post_files_id_content -->
 ```swift
 let data = "updated file content".data(using: .utf8)
 client.files.uploadVersion(
@@ -141,7 +146,7 @@ client.files.uploadVersion(
 }
 ```
 
-[upload-file-version]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC17uploadFileVersion03forF04name17contentModifiedAt4data8progress10completionySS_S2S10Foundation4DataVySo10NSProgressCcys6ResultOyAA0F0CAA0A5ErrorOGctF
+[upload-file-version]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionySS_SSSgAL10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF
 
 Download File
 -------------
@@ -150,6 +155,7 @@ To download a file to the device, call
 [`client.files.download(fileId:version:destinationURL:progress:completion:)`][download-file]
 with the ID of the file to download and a URL to the location where the file should be downloaded to.
 
+<!-- sample get_files_id_content -->
 ```swift
 let url = FileManager.default.homeDirectoryForCurrentUser
 
@@ -163,7 +169,7 @@ client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Vo
 }
 ```
 
-[download-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12downloadFile6fileId7version14destinationURL8progress10completionySS_SSSg10Foundation0K0VySo10NSProgressCcys6ResultOyytAA0A5ErrorOGctF
+[download-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8download6fileId14destinationURL7version8progress10completionySS_10Foundation0I0VSSSgySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF
 
 
 Copy File
@@ -175,6 +181,7 @@ with the ID of the file to copy and the ID of the folder into which the copy sho
 same name already exists in the destination folder, the `name` parameter can be used to provide a new name for the
 copied file.  You can copy a specific file version by passing the version ID in the `version` parameter.
 
+<!-- sample post_files_id_copy -->
 ```swift
 client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxSDKError>) in
     guard case let .success(copiedFile) = result else {
@@ -186,7 +193,7 @@ client.files.copy(fileId: "11111", parentId: "0") { (result: Result<File, BoxSDK
 }
 ```
 
-[copy-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8copyFile6fileId06parentH04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctFhttp://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8copyFile6fileId06parentH04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[copy-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC4copy6fileId06parentG04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Lock File
 ---------
@@ -196,6 +203,7 @@ To lock a file and prevent others from modifying it, call
 with the ID of the file.  To also prevent others from downloading the file while it is locked, set the
 `isDownloadPrevented` parameter to `true`.
 
+<!-- sample put_files_id lock -->
 ```swift
 client.files.lock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -207,13 +215,14 @@ client.files.lock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
 }
 ```
 
-[lock-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC8lockFile6fileId9expiresAt19isDownloadPrevented6fields10completionySS_SSSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[lock-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC4lock6fileId9expiresAt19isDownloadPrevented6fields10completionySS_10Foundation4DateVSgSbSgSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Unlock File
 -----------
 
 To unlock a file, call [`client.files.unlock(fileId:fields:completion:)][unlock-file] with the ID of the file.
 
+<!-- sample put_files_id unlock -->
 ```swift
 client.files.unlock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
@@ -225,7 +234,7 @@ client.files.unlock(fileId: "11111") { (result: Result<File, BoxSDKError>) in
 }
 ```
 
-[unlock-file]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC10unlockFile6fileId9expiresAt19isDownloadPrevented6fields10completionySS_SSSgSbSgSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[unlock-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6unlock6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Get File Thumbnail Image
 ------------------------
@@ -235,6 +244,7 @@ To retrieve the thumbnail image for a file, call
 with the ID of the file and the desired image format extension.  Optionally, constraints on the image
 dimensions can be specified in the `minHeight`, `minWidth`, `maxHeight`, and `maxWidth` parameters.
 
+<!-- sample get_files_id_thumbnail_id -->
 ```swift
 client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<Data, BoxSDKError>) in
     guard case let .success(thumbnailData) = result else {
@@ -246,7 +256,7 @@ client.files.getThumbnail(forFile: "11111", extension: .png) { (result: Result<D
 }
 ```
 
-[get-thumbnail]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A5ErrorOGctF
+[get-thumbnail]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF
 
 Get File Embed Link
 -------------------
@@ -255,6 +265,7 @@ To retrieve a URL that can be embedded in a web page `<iframe>` to display a fil
 [`client.files.getEmbedLink(forFile:completion:)`][get-embed-link]
 with the ID of the file.
 
+<!-- sample get_files_id embed_link -->
 ```swift
 client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink, BoxSDKError>) in
     guard case let .success(embedLink) = result else {
@@ -266,7 +277,7 @@ client.files.getEmbedLink(forFile: "11111") { (result: Result<ExpiringEmbedLink,
 }
 ```
 
-[get-embed-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A5ErrorOGctF
+[get-embed-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A8SDKErrorCGctF
 
 Get File Collaborations
 -----------------------
@@ -275,6 +286,7 @@ To retrieve a list of collaborations on a file, call
 [`client.files.listCollaborations(forFile:marker:limit:fields:)`][get-collaborations]
 with the ID of the file.  This method returns an iterator in the completion, which is used to retrieve file collaborations.
 
+<!-- sample get_files_id_collaborations -->
 ```swift
 client.files.listCollaborations(forFile: "11111") { result in
     switch results {
@@ -295,7 +307,7 @@ client.files.listCollaborations(forFile: "11111") { result in
 }
 ```
 
-[get-collaborations]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC21getFileCollaborations03forF06marker5limit6fieldsAA18PaginationIteratorCyAA13CollaborationCGSS_SSSgSiSgSaySSGSgtF
+[get-collaborations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF
 
 Get File Comments
 -----------------
@@ -305,6 +317,7 @@ To retrieve a list of comments on the file, call
 with the ID of the file.  This method returns an iterator in the completion, which is used to page through the collection
 of file comments.
 
+<!-- sample get_files_id_comments -->
 ```swift
 client.files.listComments(forFile: "11111"){ results in
     switch results {
@@ -325,7 +338,7 @@ client.files.listComments(forFile: "11111"){ results in
 }
 ```
 
-[get-comments]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC15getFileComments03forF06offset5limit6fieldsAA18PaginationIteratorCyAA7CommentCGSS_SiSgANSaySSGSgtF
+[get-comments]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF
 
 Get File Tasks
 --------------
@@ -333,6 +346,7 @@ Get File Tasks
 To retrieve a list of file tasks, call [`client.files.listTasks(forFile:fields:)`][get-tasks] with the ID of the
 file.  This method returns an iterator in the completion, which is used to retrieve file comments.
 
+<!-- sample get_files_id_tasks -->
 ```swift
 client.files.listTasks(forFile: "11111") { results in
     switch results {
@@ -353,7 +367,7 @@ client.files.listTasks(forFile: "11111") { results in
 }
 ```
 
-[get-tasks]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC12getFileTasks03forF06fieldsAA18PaginationIteratorCyAA4TaskCGSS_SaySSGSgtF
+[get-tasks]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF
 
 Add File to Favorites
 ---------------------
@@ -362,6 +376,7 @@ To add a file to the user's favorites collection, call
 [`client.files.addToFavorites(fileId:completion:)`][add-to-favorites]
 with the ID of the file.
 
+<!-- sample put_files_id add_to_collection -->
 ```swift
 client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -373,7 +388,7 @@ client.files.addToFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError
 }
 ```
 
-[add-to-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18addFileToFavorites6fileId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[add-to-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC14addToFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Remove File from Favorites
 --------------------------
@@ -382,6 +397,7 @@ To remove a file from the user's favorites collection, call
 [`client.files.removeFromFavorites(fileId:completion:)`][remove-from-favorites]
 with the ID of the file.
 
+<!-- sample put_files_id remove_from_collection -->
 ```swift
 client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -393,7 +409,7 @@ client.files.removeFromFavorites(fileId: "11111") { (result: Result<Void, BoxSDK
 }
 ```
 
-[remove-from-favorites]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC23removeFileFromFavorites6fileId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[remove-from-favorites]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19removeFromFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Get Shared Link
 ---------------
@@ -402,6 +418,7 @@ To retrieve the shared link associated with a file, call
 [`client.files.getSharedLink(forFile:completion:)`][get-shared-link]
 with the ID of the file.
 
+<!-- sample get_files_id get_shared_link -->
 ```swift
 client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -413,7 +430,7 @@ client.files.getSharedLink(forFile: "11111") { (result: Result<SharedLink, BoxSD
 }
 ```
 
-[get-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[get-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Set Shared Link
 ---------------
@@ -422,6 +439,7 @@ To add or update the shared link for a file, call
 [`client.files.setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)][set-shared-link]
 with the ID of the file and the shared link properties to set.
 
+<!-- sample put_files_id create_shared_link -->
 ```swift
 client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -433,7 +451,7 @@ client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<Sh
 }
 ```
 
-[set-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile13stopSharingAt6access8password11canDownload10completionySS_10Foundation4DateVSgAA0fG6AccessOSgAA17OptionalParameterOySSGSgSbSgys6ResultOyAA0fG0CAA0A5ErrorOGctF
+[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Remove Shared Link
 ------------------
@@ -442,6 +460,7 @@ To remove a file's shared link, call
 [`client.files.deleteSharedLink(forFile:completion:)`][delete-shared-link]
 with the ID of the file.
 
+<!-- sample put_files_id remove_shared_link -->
 ```swift
 client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -453,22 +472,23 @@ client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKErr
 }
 ```
 
-[delete-shared-link]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
-Get Representations
+List Representations
 -------------------
 
 To retrieve information about available preview representations for a file, call
-[`client.files.getRepresentations(fileId:xRepHints:completion:)`][get-representations]
-with the ID of the file.  Omitting the `xRepHints` parameter will provide summary information about
-all available representations; in order to retrieve the representation status and URL, the `xRepHints` parameter
-must be passed to select the desired representations.
+[`client.files.listRepresentations(fileId:representationHint:completion:)`][get-representations]
+with the ID of the file.  Omitting the `representationHint` parameter will provide summary information about
+all available representations; in order to retrieve the representation status and URL, the `representationHint` parameter
+must be passed to select the desired representation.
 
+<!-- sample put_files_id get_representations -->
 ```swift
 // Get full information about PDF representation
-client.files.getRepresentations(
+client.files.listRepresentations(
     fileId: "11111",
-    xRepHints: "[pdf]"
+    representationHint: "[pdf]"
 ) { (result: Result<[FileRepresentation], BoxSDKError>) in
     guard case let .success(representations) = result else {
         print("Error fetching representations")
@@ -479,4 +499,4 @@ client.files.getRepresentations(
 }
 ```
 
-[get-representations]: http://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC18getRepresentations6fileId9xRepHints10completionySS_SSSgys6ResultOySayAA4FileC14RepresentationVGAA0A5ErrorOGctF
+[get-representations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF

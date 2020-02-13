@@ -21,6 +21,7 @@ To retrieve information about a comment, call
 [`client.comments.get(commentId:fields:completion:)`][get-comment]
 with the ID of the comment.
 
+<!-- sample get_comments_id -->
 ```swift
 client.comments.get(commentId: "55555") { (result: Result<Comment, BoxSDKError>) in
     guard case let .success(comment) = result else {
@@ -32,7 +33,7 @@ client.comments.get(commentId: "55555") { (result: Result<Comment, BoxSDKError>)
 }
 ```
 
-[get-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC14get9commentId6fields10completionySS_SaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[get-comment]: https://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC3get9commentId6fields10completionySS_SaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Create Comment
 --------------
@@ -41,6 +42,7 @@ To create a comment, call
 [`client.comments.create(itemId:itemType:message:fields:completion:)`][create-comment]
 with the type and ID of the item to add a comment to, as well as the comment message.
 
+<!-- sample post_comments -->
 ```swift
 client.comments.create(
     itemId: "11111",
@@ -56,7 +58,7 @@ client.comments.create(
 }
 ```
 
-[create-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC13create6itemId0G4Type7message6fields10completionySS_S2SSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[create-comment]: https://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6create6itemId0F4Type7message6fields10completionySS_S2SSaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Update Comment
 --------------
@@ -65,6 +67,7 @@ To update a comment, call
 [`client.comments.update(commentId:message:fields:completion:)`][update-comment]
 with the ID of the comment to update and the properties to update.
 
+<!-- sample put_comments_id -->
 ```swift
 client.comments.update(
     commentId: "55555",
@@ -79,7 +82,7 @@ client.comments.update(
 }
 ```
 
-[update-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC17update9commentId7message6fields10completionySS_SSSaySSGSgys6ResultOyAA0F0CAA0A5ErrorOGctF
+[update-comment]: https://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6update9commentId7message6fields10completionySS_SSSaySSGSgys6ResultOyAA7CommentCAA0A8SDKErrorCGctF
 
 Delete Comment
 --------------
@@ -87,6 +90,7 @@ Delete Comment
 To delete a comment, call [`client.comments.delete(commentId:completion:)`][delete-comment]
 with the ID of the comment to delete.
 
+<!-- sample delete_comments_id -->
 ```swift
 client.comments.delete(commentId: "55555") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
@@ -98,4 +102,4 @@ client.comments.delete(commentId: "55555") { (result: Result<Void, BoxSDKError>)
 }
 ```
 
-[delete-comment]: http://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC13delete9commentId10completionySS_ys6ResultOyytAA0A5ErrorOGctF
+[delete-comment]: https://opensource.box.com/box-ios-sdk/Classes/CommentsModule.html#/s:6BoxSDK14CommentsModuleC6delete9commentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
