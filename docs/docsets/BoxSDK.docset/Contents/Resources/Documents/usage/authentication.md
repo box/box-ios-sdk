@@ -92,6 +92,7 @@ their accounts.  The SDK provides a built-in flow for opening a secure web view,
 login credentials.  This requires that the application using the SDK registers itself for a custom URL scheme of the
 format `boxsdk-<<CLIENT ID>>://boxsdkoauth2redirect`.
 
+<!-- sample get_authorize -->
 ```swift
 import BoxSDK
 

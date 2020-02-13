@@ -17,6 +17,7 @@ Get Recent Items
 To get recently accessed items, call
 [`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object in the completion, which is used to retrieve recent items.
 
+<!-- sample get_items_recent -->   
 ```swift
 client.recentItems.list() { results in
     switch results {
@@ -37,4 +38,4 @@ client.recentItems.list() { results in
 }
 ```
 
-[get-recent-items]: https://opensource.box.com/box-swift-sdk/Classes/RecentItemsModule.html#/s:6BoxSDK17RecentItemsModuleC03getcD06marker5limit6fieldsAA18PaginationIteratorCyAA0C4ItemCGSSSg_SiSgSaySSGSgtF
+[get-recent-items]: https://opensource.box.com/box-ios-sdk/Classes/RecentItemsModule.html#/s:6BoxSDK17RecentItemsModuleC4list6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C4ItemCGAA0A8SDKErrorCGctF

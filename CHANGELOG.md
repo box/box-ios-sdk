@@ -1,11 +1,12 @@
 Changelog
 =========
 
-## Next Release
+## v4.0.0 [2020-02-13]
 
 __Breaking Changes:__
 
 - Change `status` field for task assignments from a String to an Enum
+- Remove macOS, tvOS, and watchOS support
 
 __New Features and Enhancements:__
 
