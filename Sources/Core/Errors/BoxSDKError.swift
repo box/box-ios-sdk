@@ -8,31 +8,56 @@
 
 import Foundation
 
+/// Box SDK Error
 public enum BoxSDKErrorEnum: BoxEnum {
     // swiftlint:disable cyclomatic_complexity
+    /// Box client is destroyed
     case clientDestroyed
+    /// URL is invalid
     case invalidURL(urlString: String)
+    /// Something is not found
     case notFound(String)
+    /// Object need in closure is deallocated
     case instanceDeallocated(String)
+    /// Can not decode or encode data for or from keychain
     case keychainDataConversionError
+    /// Value not found in Keychain
     case keychainNoValue
+    /// Unhandled keychain error
     case keychainUnhandledError(String)
+    /// Request has hit the maximum number of retries
     case rateLimitMaxRetries
+    /// Value for key is of an unexpected type
     case typeMismatch(key: String)
+    /// Value for key is not one the accepted values
     case valueMismatch(key: String, value: String, acceptedValues: [String])
+    /// Value for key is of a valid type, but was not able to convert value to expected type
     case invalidValueFormat(key: String)
+    /// Key is not present
     case notPresent(key: String)
+    /// The file representation can't be made
     case representationCreationFailed
+    /// Can not finish the operation (write, read or clear) on TokenStore object
     case tokenStoreFailure
+    /// Unsuccessful token retrieval. Token is not found
     case tokenRetrieval
+    /// OAuth web session authorization fails
     case invalidOAuthRedirectConfiguration
+    /// Can't obtain authorization code from OAuth web session success result
     case invalidOAuthState
+    /// Unauthorized request to API
     case unauthorizedAccess
+    /// Unsuccessful refresh token retrieval. Token is not found in the retrieved TokenInfo object
     case refreshTokenNotFound
+    /// Access token is expired
     case expiredToken
+    /// Authorization with JWT token fails
     case jwtAuthError
+    /// Cannot create paging iterable for non-paged response
     case nonIterableResponse
+    /// The end of the list is reached
     case endOfList
+    /// Custom error message
     case customValue(String)
 
     public init(_ value: String) {
@@ -117,7 +142,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
         case .jwtAuthError:
             return "Authorization with JWT token failed"
         case .nonIterableResponse:
-            return "Cannot create paging iterable for non-paged response"
+            return "Could not create paging iterable for non-paged response"
         case .endOfList:
             return "The end of the list has been reached"
         case let .customValue(userValue):
@@ -136,9 +161,13 @@ extension BoxSDKErrorEnum: ExpressibleByStringLiteral {
 
 /// Describes general SDK errors
 public class BoxSDKError: Error {
+    /// Type of error
     public var errorType: String
+    /// Error message
     public var message: BoxSDKErrorEnum
+    /// Stack trace
     public var stackTrace: [String]
+    /// Error
     public var error: Error?
 
     init(message: BoxSDKErrorEnum = "Internal SDK Error", error: Error? = nil) {
@@ -147,7 +176,8 @@ public class BoxSDKError: Error {
         stackTrace = Thread.callStackSymbols
         self.error = error
     }
-
+    
+    /// Get a dictionary representing BoxSDKError
     public func getDictionary() -> [String: Any] {
         var dict = [String: Any]()
         dict["errorType"] = errorType

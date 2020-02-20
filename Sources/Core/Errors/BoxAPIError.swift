@@ -10,7 +10,9 @@ import Foundation
 
 /// Describes API request related errors.
 public class BoxAPIError: BoxSDKError {
+    /// The components that make up a description of a BoxRequest
     public var request: BoxRequestDescription?
+    /// The components that make up a description of a BoxResponse
     public var response: BoxResponseDescription?
 
     init(message: BoxSDKErrorEnum? = nil, request: BoxRequest? = nil, response: BoxResponse? = nil, error: Error? = nil) {
@@ -71,6 +73,7 @@ public class BoxAPIError: BoxSDKError {
         }
     }
 
+    /// Get a dictionary representing BoxAPIError
     public override func getDictionary() -> [String: Any] {
         var dict = super.getDictionary()
         dict["request"] = request?.getDictionary()

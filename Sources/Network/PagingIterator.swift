@@ -9,9 +9,11 @@
 import Foundation
 
 public enum PagingParameter {
-
+    /// Offset
     case offset(Int)
+    /// Marker
     case marker(String?)
+    /// Stream position
     case streamPosition(String?)
 
     var asQueryParams: QueryParameters {

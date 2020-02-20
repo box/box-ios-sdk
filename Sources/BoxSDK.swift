@@ -169,14 +169,14 @@ public class BoxSDK {
         }
     }
 
-    /// Creates BoxClient in a completion with OAuth 2.0 type of authentication
-    ///
-    /// - Parameters:
-    ///   - tokenInfo: Information about token
-    ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
-    ///   - context: The ViewController that is presenting the OAuth request
-    ///   - completion: Returns created standard BoxClient object or error
     #if os(iOS)
+        /// Creates BoxClient in a completion with OAuth 2.0 type of authentication
+        ///
+        /// - Parameters:
+        ///   - tokenInfo: Information about token
+        ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
+        ///   - context: The ViewController that is presenting the OAuth request
+        ///   - completion: Returns created standard BoxClient object or error
         @available(iOS 13.0, *)
         public func getOAuth2Client(
             tokenInfo: TokenInfo? = nil,

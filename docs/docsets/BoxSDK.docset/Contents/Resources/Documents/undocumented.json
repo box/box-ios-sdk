@@ -1,13 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/BoxSDK.swift",
-      "line": 181,
-      "symbol": "BoxSDK.getOAuth2Client(tokenInfo:tokenStore:context:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/Core/Errors/BoxAPIError.swift",
       "line": 13,
       "symbol": "BoxAPIError.request",
