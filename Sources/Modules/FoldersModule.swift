@@ -233,7 +233,7 @@ public class FoldersModule {
     ///   - isCollaborationRestrictedToEnterprise: Whether to restrict future collaborations to within the enterprise. Does not affect existing collaborations.
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
-    ///   - completion: Returns The updated folder is returned if the name is valid. Errors generally occur only if there is a name collision.
+    ///   - completion: The updated folder is returned if the name is valid. Errors generally occur only if there is a name collision.
     public func update(
         folderId: String,
         name: String? = nil,

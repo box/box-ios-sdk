@@ -7,16 +7,17 @@
 //
 import Foundation
 
+/// Storage policy
 public class StoragePolicy: BoxModel {
 
     // MARK: - Properties
     public private(set) var rawData: [String: Any]
     private static var resourceType: String = "storage_policy"
-    // Box item type
+    /// Box item type
     public var type: String
-    // Id of the storage policy
+    /// Id of the storage policy
     public let id: String
-    // Name for a storage zone
+    /// Name for a storage zone
     public let name: String?
 
     /// Initializer.

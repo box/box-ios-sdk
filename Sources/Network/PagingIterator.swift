@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Stores offset, marker or stream position for the iterator
 public enum PagingParameter {
     /// Offset
     case offset(Int)
@@ -34,6 +35,7 @@ public class PagingIterator<Element: BoxModel> {
 
     private let client: BoxClient
 
+    /// Gets offset, marker or stream position for the next page
     public private(set) var nextPage: PagingParameter
     private var limit: Int
     private var isDone: Bool

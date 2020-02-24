@@ -13,11 +13,17 @@ public class UploadSession: BoxModel {
 
     /// Internal struct containing URLs for upload session manipulation
     public struct UploadSessionEndpoints: BoxInnerModel {
+        /// List parts endpoint
         public let listParts: URL?
+        /// Commit part endpoint
         public let commit: URL?
+        /// Log event endpoint
         public let logEvent: URL?
+        /// Upload part endpoint
         public let uploadPart: URL?
+        /// Upload status endpoint
         public let status: URL?
+        /// Abort upload endpoint
         public let abort: URL?
     }
 

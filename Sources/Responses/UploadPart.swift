@@ -10,9 +10,13 @@ import Foundation
 
 /// Description of uploaded part
 public struct UploadPartDescription: BoxModel {
+    /// Part Id
     public let partId: String
+    /// Part offset
     public let offset: Int
+    /// Part size
     public let size: Int
+    /// Part SHA hash
     public let sha1: String?
 }
 

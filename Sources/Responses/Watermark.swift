@@ -13,9 +13,11 @@ import Foundation
 public class Watermark: BoxModel {
 
     public private(set) var rawData: [String: Any]
+    /// Key for watermark data JSON object
     public static let resourceKey: String = "watermark"
-
+    /// Key for imprint data in JSON object
     public static let imprintKey: String = "imprint"
+    /// Default imprint text
     public static let defaultImprint: String = "default"
 
     // MARK: - Properties

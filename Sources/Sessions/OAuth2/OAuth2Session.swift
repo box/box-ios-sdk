@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Oauth 2 Session
 public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
     var authModule: AuthModule
     var configuration: BoxSDKConfiguration
@@ -24,7 +25,6 @@ public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
     }
 
     public func getAccessToken(completion: @escaping AccessTokenClosure) {
-
         // Check if the cached token info is valid, if so just return that access token
         if isValidToken() {
             completion(.success(tokenInfo.accessToken))
@@ -61,6 +61,10 @@ public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
         }
     }
 
+    /// Gets refreshed access token if necessary
+    ///
+    /// - Parameter completion: Completion for obtaining access token.
+    /// - Returns: AccessTokenClosure containing either token string or error.
     public func refreshToken(completion: @escaping AccessTokenClosure) {
         guard let refreshToken = tokenInfo.refreshToken else {
             completion(.failure(BoxAPIAuthError(message: .refreshTokenNotFound)))

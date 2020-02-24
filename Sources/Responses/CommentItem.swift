@@ -21,7 +21,9 @@ public enum CommentItem: BoxModel {
         }
     }
 
+    /// File type
     case file(File)
+    /// Comment type
     case comment(Comment)
 
     /// Initializer.

@@ -8,13 +8,13 @@
 
 import Foundation
 
+/// Retention policy entry
 public class RetentionPolicyEntry: BoxModel {
     private static var resourceType: String = "retention_policy"
 
     public private(set) var rawData: [String: Any]
     /// Box item type
     public var type: String
-
     /// Identifier
     public let id: String
     /// The name of the retention policy.

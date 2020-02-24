@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// File representation hint generated
 public enum FileRepresentationHint: BoxEnum {
 
     /// The PDF representation
@@ -91,7 +92,9 @@ public struct FileRepresentation: BoxInnerModel {
         public let url: String?
     }
 
+    /// Status of file representation
     public struct Status: BoxInnerModel {
+        /// State describing the status
         public let state: StatusEnum?
     }
 

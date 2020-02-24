@@ -12,9 +12,13 @@ public class LegalHoldPolicy: BoxModel {
 
     /// Counts of the assignments to different entities of this policy
     public struct AssignmentCounts: BoxInnerModel {
+        /// Number of assigned users
         public let user: Int
+        /// Number of assigned folders
         public let folder: Int
+        /// Number of assigned files
         public let file: Int
+        /// Number of assigned file verions
         public let fileVersion: Int
     }
 

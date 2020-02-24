@@ -9,7 +9,7 @@
 import Foundation
 
 /// The retention policy assignment provides a way for admins to apply a retention policy on a per-folder basis,
-// or place a blanket policy over the entire enterprise.
+/// or place a blanket policy over the entire enterprise.
 public class RetentionPolicyAssignment: BoxModel {
 
     private static var resourceType: String = "retention_policy_assignment"
@@ -28,7 +28,7 @@ public class RetentionPolicyAssignment: BoxModel {
     public let assignedBy: User?
     /// When the retention policy assignment object was created.
     public let assignedAt: Date?
-    // The array of metadata field filters, if present
+    /// The array of metadata field filters, if present
     public let filterFields: [MetadataFieldFilter]?
 
     public required init(json: [String: Any]) throws {

@@ -76,7 +76,7 @@ public class Folder: BoxModel {
     public let id: String
     /// A unique ID for use with the events.
     public let sequenceId: String?
-    /// The name of the folder. May be nil for some folders, such as root or trash.
+    /// The entity tag of this web link. Used with If-Match headers.
     public let etag: String?
     /// The name of the folder.
     public let name: String?

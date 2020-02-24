@@ -18,6 +18,7 @@ public class TermsOfService: BoxModel {
     public private(set) var rawData: [String: Any]
 
     // MARK: - Properties
+    /// Identifier
     public let id: String
     /// An enum indicating whether the ToS is currently active or inactive.
     public let status: TermsOfServiceStatus?

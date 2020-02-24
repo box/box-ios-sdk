@@ -176,7 +176,7 @@ public class BoxSDKError: Error {
         stackTrace = Thread.callStackSymbols
         self.error = error
     }
-    
+
     /// Get a dictionary representing BoxSDKError
     public func getDictionary() -> [String: Any] {
         var dict = [String: Any]()

@@ -14,11 +14,15 @@ public class Collaborator: BoxModel {
 
     public private(set) var rawData: [String: Any]
 
+    /// Type of collaborator
     public enum CollaboratorType {
+        /// User type
         case user(User)
+        /// Group type
         case group(Group)
     }
 
+    /// Type of collaborator
     public var collaboratorValue: CollaboratorType
 
     /// Initializer.
