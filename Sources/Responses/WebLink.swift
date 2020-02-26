@@ -40,7 +40,7 @@ public class WebLink: BoxModel {
     public let createdBy: User?
     /// When this web link was created on Box’s servers.
     public let createdAt: Date?
-    /// When this web link was last updated on the Box servers.
+    /// When this web link was last updated
     public let modifiedAt: Date?
     /// The parent object the web link belongs to.
     public let parent: Folder?
