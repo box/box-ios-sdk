@@ -38,7 +38,7 @@ public class WebLink: BoxModel {
     public let url: URL?
     /// The user who created this web link
     public let createdBy: User?
-    /// When this web link was created on Box’s servers.
+    /// When this web link was created
     public let createdAt: Date?
     /// When this web link was last updated
     public let modifiedAt: Date?
