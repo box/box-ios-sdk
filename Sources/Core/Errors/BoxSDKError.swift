@@ -33,7 +33,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case valueMismatch(key: String, value: String, acceptedValues: [String])
     /// Value for key is of a valid type, but was not able to convert value to expected type
     case invalidValueFormat(key: String)
-    /// Key is not present
+    /// Key was not present
     case notPresent(key: String)
     /// The file representation can't be made
     case representationCreationFailed
