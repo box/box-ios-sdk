@@ -92,7 +92,7 @@ public struct FileRepresentation: BoxInnerModel {
         public let url: String?
     }
 
-    /// Status of file representation
+    /// Defines the current status of the file representation generation
     public struct Status: BoxInnerModel {
         /// State describing the status
         public let state: StatusEnum?
