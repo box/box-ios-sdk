@@ -173,7 +173,7 @@ public class EventsModule {
     ///   - createdBefore: An upper bound on the timestamp of the events returned.
     ///   - streamPosition: The location in the event stream from which you want to start receiving events.
     ///   - limit: The maximum number of items to return.
-    ///   - completion: Either collection of events or an error.
+    ///   - completion: Returns an iterator of events or an error.
     public func getEnterpriseEvents(
         eventTypes: [EventType]? = nil,
         createdAfter: Date? = nil,
