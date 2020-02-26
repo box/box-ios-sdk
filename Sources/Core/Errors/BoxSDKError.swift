@@ -37,7 +37,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case notPresent(key: String)
     /// The file representation can't be made
     case representationCreationFailed
-    /// Can not finish the operation (write, read or clear) on TokenStore object
+    /// Error with TokenStore operation (write, read or clear)
     case tokenStoreFailure
     /// Unsuccessful token retrieval. Token not found
     case tokenRetrieval
