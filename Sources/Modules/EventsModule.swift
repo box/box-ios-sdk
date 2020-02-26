@@ -146,7 +146,7 @@ public class EventsModule {
     ///   - streamPosition: The location in the event stream from which you want to start receiving events. If no stream position specified
     ///     Box API will return all available events beginning with the oldest stream position.
     ///   - limit: The maximum number of items to return. If not specified, [default API limit](https://developer.box.com/reference#get-events-for-a-user) is used.
-    ///   - completion: Either collection of events or an error.
+    ///   - completion: Returns an iterator of events or an error.
     public func getUserEvents(
         streamType: StreamType? = nil,
         streamPosition: StreamPosition? = nil,
