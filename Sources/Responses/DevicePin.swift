@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Contain a device pin that allows the enterprise to control devices connecting to it.
+/// Defines a device pin which allows the enterprise to control devices connecting to it.
 public class DevicePin: BoxModel {
 
     // MARK: - BoxModel
