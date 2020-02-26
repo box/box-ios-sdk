@@ -53,7 +53,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case expiredToken
     /// Authorization with JWT token failed
     case jwtAuthError
-    /// Cannot create paging iterable for non-paged response
+    /// Couldn't create paging iterable for non-paged response
     case nonIterableResponse
     /// The end of the list is reached
     case endOfList
