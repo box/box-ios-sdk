@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Contain a device pin that allows the enterprise to control devices connecting to it.
+/// Defines a device pin which allows the enterprise to control devices connecting to it.
 public class DevicePin: BoxModel {
 
     // MARK: - BoxModel
@@ -22,13 +22,13 @@ public class DevicePin: BoxModel {
 
     /// The ID of the device pinner object.
     public let id: String
-    // The user that the device pin belongs to.
+    /// The user that the device pin belongs to.
     public let ownedBy: User?
-    // The type of device being pinned.
+    /// The type of device being pinned.
     public let productName: String?
-    // The time the device pin was created.
+    /// The time the device pin was created.
     public let createdAt: Date?
-    // The time the device pin was modified.
+    /// The time the device pin was modified.
     public let modifiedAt: Date?
 
     /// Initializer.

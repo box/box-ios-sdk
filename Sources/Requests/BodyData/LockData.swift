@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Defines a lock on a Box item
 public struct LockData: Encodable {
 
     /// Resource type
@@ -19,6 +20,11 @@ public struct LockData: Encodable {
     /// Whether or not the file can be downloaded while locked
     let isDownloadPrevented: Bool?
 
+    /// Initializer.
+    ///
+    /// - Parameters:
+    ///   - expiresAt: When the lock should expire
+    ///   - isDownloadPrevented: Whether or not the file can be downloaded while locked
     public init(expiresAt: Date?, isDownloadPrevented: Bool?) {
         self.expiresAt = expiresAt
         self.isDownloadPrevented = isDownloadPrevented

@@ -14,12 +14,17 @@ public class SharedItem: BoxModel {
 
     public private(set) var rawData: [String: Any]
 
+    /// Type of shared item
     public enum SharedItemType {
+        /// File type
         case file(File)
+        /// Folder type
         case folder(Folder)
+        /// Web link type
         case webLink(WebLink)
     }
 
+    /// Shared item value
     public var itemValue: SharedItemType
 
     /// Initializer.

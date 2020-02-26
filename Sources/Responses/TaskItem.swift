@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Item a task is assigned to
 public enum TaskItem: BoxModel {
 
     // MARK: - BoxModel
@@ -41,6 +42,7 @@ public enum TaskItem: BoxModel {
     }
 }
 
+/// Allows a task item to be printed as a String
 extension TaskItem: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {

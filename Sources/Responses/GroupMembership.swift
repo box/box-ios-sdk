@@ -44,12 +44,18 @@ public enum GroupRole: BoxEnum {
     }
 }
 
+/// Membership of a group
 public class GroupMembership: BoxModel {
 
+    /// Permissions of group membership
     public struct ConfigurablePermissions: BoxInnerModel {
+        /// Group can run reports
         public let canRunReports: Bool
+        /// Group can login instantly
         public let canInstantLogin: Bool
+        /// Group can create accounts
         public let canCreateAccounts: Bool
+        /// Group can edit accounts
         public let canEditAccounts: Bool
     }
 

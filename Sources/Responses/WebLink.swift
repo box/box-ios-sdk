@@ -5,10 +5,15 @@ public class WebLink: BoxModel {
 
     /// Web link permissions
     public struct Permissions: BoxInnerModel {
+        /// Can rename web link
         public let canRename: Bool?
+        /// Can delete web link
         public let canDelete: Bool?
+        /// Can comment on web link
         public let canComment: Bool?
+        /// Can share web link
         public let canShare: Bool?
+        /// Can set share access for web link
         public let canSetShareAccess: Bool?
     }
 
@@ -23,26 +28,39 @@ public class WebLink: BoxModel {
 
     /// Identifier
     public let id: String
+    /// A unique ID for use with the events.
     public let sequenceId: String?
+    /// The entity tag of this web link. Used with If-Match headers.
     public let etag: String?
     /// The name of this web link.
     public let name: String?
     /// The URL this web link points to.
     public let url: URL?
+    /// The user who created this web link
     public let createdBy: User?
+    /// When this web link was created
     public let createdAt: Date?
+    /// When this web link was last updated
     public let modifiedAt: Date?
     /// The parent object the web link belongs to.
     public let parent: Folder?
     /// The description accompanying the web link. This is visible within the Box web application.
     public let description: String?
+    /// Status of the web link
     public let itemStatus: ItemStatus?
+    /// When this web link was last moved to the trash
     public let trashedAt: Date?
+    /// When this web link will be permanently deleted.
     public let purgedAt: Date?
+    /// The shared link object for this web link. Is nil if no shared link has been created.
     public let sharedLink: SharedLink?
+    /// The path of folders to this link, starting at the root
     public let pathCollection: PathCollection?
+    /// The user who last modified this web link
     public let modifiedBy: User?
+    /// The user who owns this web link
     public let ownedBy: User?
+    /// Web link permissions
     public let permissions: Permissions?
 
     /// Initializer.

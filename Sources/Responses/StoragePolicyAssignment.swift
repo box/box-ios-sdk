@@ -7,24 +7,27 @@
 //
 import Foundation
 
+/// Storage policy assignment
 public class StoragePolicyAssignment: BoxModel {
 
     /// Enterprise storage policy is assigned to
     public struct AssignedTo: BoxInnerModel {
+        /// Type of item storage policy is assigned to
         public let type: String
+        /// Id of item storage policy is assigned to
         public let id: String
     }
 
     // MARK: - Properties
     public private(set) var rawData: [String: Any]
     private static var resourceType: String = "storage_policy_assignment"
-    // Box item type
+    /// Box item type
     public var type: String
-    // Id of the storage policy assignment
+    /// Id of the storage policy assignment
     public let id: String
-    // Storage policy
+    /// Storage policy
     public let storagePolicy: StoragePolicy?
-    // Enterprise the storage policy is assigned to
+    /// Enterprise the storage policy is assigned to
     public let assignedTo: AssignedTo?
 
     /// Initializer.

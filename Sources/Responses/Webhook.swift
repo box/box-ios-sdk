@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Defines a Webhook, which enables event triggers to be attached to Box files and folders
 public class Webhook: BoxModel {
     //    swiftlint:disable cyclomatic_complexity
     /// Event triggers for webhooks
@@ -252,22 +253,22 @@ public class Webhook: BoxModel {
 
     public private(set) var rawData: [String: Any]
     private static var resourceType: String = "webhook"
-    // Box item type
+    /// Box item type
     public var type: String
 
     // MARK: - Properties
 
     /// Identifier
     public let id: String
-    // Target information
+    /// Target information
     public let target: WebhookItem?
-    // User that created the webhook
+    /// User that created the webhook
     public let createdBy: User?
-    // Timestamp of when webhook was created
+    /// Timestamp of when webhook was created
     public let createdAt: Date?
-    // URL to which notifications are sent
+    /// URL to which notifications are sent
     public let address: URL?
-    // Events that activate the webhook
+    /// Events that activate the webhook
     public let triggers: [EventTriggers]?
 
     /// Initializer.

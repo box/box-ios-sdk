@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Item recently iteracted with
 public class RecentItem: BoxModel {
 
     /// Interaction type with item
@@ -64,15 +65,15 @@ public class RecentItem: BoxModel {
 
     public private(set) var rawData: [String: Any]
     private static var resourceType: String = "recent_item"
-    // Box item type
+    /// Box item type
     public var type: String
-    // Type of interation
+    /// Type of interation
     public let interactionType: InteractionType
-    // Timestamp of the interactions
+    /// Timestamp of the interactions
     public let interactedAt: Date
-    // The item
+    /// The item
     public let item: File
-    // Shared link of interaction
+    /// Shared link of interaction
     public let interactionSharedLink: String?
 
     /// Initializer.

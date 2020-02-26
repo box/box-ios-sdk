@@ -8,12 +8,13 @@
 
 import Foundation
 
-// key for storing the token info
+// Key for storing the token info
 private let tokenInfoKeychainKey = "TokenInfo"
-
+/// Token store that uses the Apple keychain
 public class KeychainTokenStore: TokenStore {
     let secureStore = KeychainService(secureStoreQueryable: GenericPasswordQueryable(service: "com.box.SwiftSDK"))
 
+    /// Initializer method
     public init() {}
 
     public func read(completion: @escaping (Result<TokenInfo, Error>) -> Void) {

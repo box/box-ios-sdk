@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Developer session that only requires a developer token. Session will only work as long as the token is valid.
 public class SingleTokenSession: SessionProtocol {
     var token: String
     var authModule: AuthModule

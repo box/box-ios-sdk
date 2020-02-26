@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Direction of the collaboration
 public enum CollaborationDirection: BoxEnum {
     /// Inbound collaboration direction
     case inbound

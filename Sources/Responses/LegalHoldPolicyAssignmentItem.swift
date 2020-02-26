@@ -7,18 +7,24 @@
 //
 import Foundation
 
-/// Item a legal hold policy was assigned to
+/// Legal hold policy assignment item
 public class LegalHoldPolicyAssignmentItem: BoxModel {
     // MARK: - BoxModel
     public private(set) var rawData: [String: Any]
 
+    /// Type of item legal hold policy was assigned to
     public enum AssignmentItemType {
+        /// FIle type
         case file(File)
+        /// File version type
         case fileVersion(FileVersion)
+        /// Folder type
         case folder(Folder)
+        /// User type
         case user(User)
     }
 
+    /// Item that the legal hold policy is assigned to
     public var itemValue: AssignmentItemType
 
     /// Initializer.

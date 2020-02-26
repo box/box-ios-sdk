@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Defines the file type for the generated file representation
 public enum FileRepresentationHint: BoxEnum {
 
     /// The PDF representation
@@ -20,7 +21,7 @@ public enum FileRepresentationHint: BoxEnum {
     case imageLarge
     /// Extracted text from original document.
     case extractedText
-    /// It is possible to use custom vale. See [representations documentation](https://developer.box.com/reference#representations).
+    /// It is possible to use a custom value. See [representations documentation](https://developer.box.com/reference#representations).
     case customValue(String)
 
     public init(_ value: String) {
@@ -91,7 +92,9 @@ public struct FileRepresentation: BoxInnerModel {
         public let url: String?
     }
 
+    /// Defines the current status of the file representation generation
     public struct Status: BoxInnerModel {
+        /// State describing the status
         public let state: StatusEnum?
     }
 

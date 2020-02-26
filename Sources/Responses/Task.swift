@@ -8,9 +8,13 @@
 
 import Foundation
 
+/// Defines the condition that will mark a task as complete
 public enum TaskCompletionRule: BoxEnum {
+    /// Task is complete when all assignees complete it
     case allAssignees
+    /// Task is complete when any assignees complete it
     case anyAssignee
+    /// Custom value
     case customValue(String)
 
     /// Creates a new value
@@ -41,9 +45,13 @@ public enum TaskCompletionRule: BoxEnum {
     }
 }
 
+/// The action the task assignee will be prompted to perform
 public enum TaskAction: BoxEnum {
+    /// Approval task that can be approved or rejected
     case review
+    /// General task which can be completed
     case complete
+    /// Custom task action
     case customValue(String)
 
     /// Creates a new value

@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Defines user or enterprise event type
+/// Defines user or enterprise event type
 public enum EventType: BoxEnum {
 
     // MARK: - User events
@@ -170,7 +170,7 @@ public enum EventType: BoxEnum {
     case userAdminRoleChanged
     /// A collaborator violated an admin-set upload policy
     case contentWorkflowUploadPolicyViolated
-    // Creation of metadata instance.
+    /// Creation of metadata instance.
     case metadataInstanceCreated
     /// Update of metadata instance.
     case matadataInstanceUpdated

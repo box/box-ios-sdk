@@ -14,7 +14,7 @@ public typealias AccessTokenClosure = (Result<String, BoxSDKError>) -> Void
 
 /// Defines methods for managing session token.
 public protocol SessionProtocol {
-    /// Gets accesss token
+    /// Gets access token
     ///
     /// - Parameter completion: Completion for obtaining access token.
     /// - Returns: AccessTokenClosure containing either token string or error.
