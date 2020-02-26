@@ -21,7 +21,7 @@ public enum FileRepresentationHint: BoxEnum {
     case imageLarge
     /// Extracted text from original document.
     case extractedText
-    /// It is possible to use custom vale. See [representations documentation](https://developer.box.com/reference#representations).
+    /// It is possible to use a custom value. See [representations documentation](https://developer.box.com/reference#representations).
     case customValue(String)
 
     public init(_ value: String) {
