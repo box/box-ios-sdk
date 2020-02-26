@@ -49,7 +49,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case unauthorizedAccess
     /// Unsuccessful refresh token retrieval. Token not found in the retrieved TokenInfo object
     case refreshTokenNotFound
-    /// Access token is expired
+    /// Access token has expired
     case expiredToken
     /// Authorization with JWT token fails
     case jwtAuthError
