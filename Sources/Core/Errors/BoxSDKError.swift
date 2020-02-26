@@ -15,7 +15,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case clientDestroyed
     /// URL is invalid
     case invalidURL(urlString: String)
-    /// Something is not found
+    /// The requested resource was not found
     case notFound(String)
     /// Object need in closure is deallocated
     case instanceDeallocated(String)
