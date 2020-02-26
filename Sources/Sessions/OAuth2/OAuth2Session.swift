@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Oauth 2 Session
+/// OAuth 2 Session
 public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
     var authModule: AuthModule
     var configuration: BoxSDKConfiguration
