@@ -51,7 +51,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case refreshTokenNotFound
     /// Access token has expired
     case expiredToken
-    /// Authorization with JWT token fails
+    /// Authorization with JWT token failed
     case jwtAuthError
     /// Cannot create paging iterable for non-paged response
     case nonIterableResponse
