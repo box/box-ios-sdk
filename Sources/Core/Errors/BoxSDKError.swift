@@ -35,7 +35,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case invalidValueFormat(key: String)
     /// Key was not present
     case notPresent(key: String)
-    /// The file representation can't be made
+    /// The file representation couldn't be made
     case representationCreationFailed
     /// Error with TokenStore operation (write, read or clear)
     case tokenStoreFailure
