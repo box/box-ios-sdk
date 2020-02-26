@@ -11,7 +11,7 @@ import Foundation
 /// Box SDK Error
 public enum BoxSDKErrorEnum: BoxEnum {
     // swiftlint:disable cyclomatic_complexity
-    /// Box client is destroyed
+    /// Box client was destroyed
     case clientDestroyed
     /// URL is invalid
     case invalidURL(urlString: String)
