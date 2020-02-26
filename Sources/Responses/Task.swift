@@ -45,7 +45,7 @@ public enum TaskCompletionRule: BoxEnum {
     }
 }
 
-/// The action the task assignee will be prompted to do
+/// The action the task assignee will be prompted to perform
 public enum TaskAction: BoxEnum {
     /// Approval task that can be approved or rejected
     case review
