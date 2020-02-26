@@ -19,7 +19,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case notFound(String)
     /// Object needed in closure was deallocated
     case instanceDeallocated(String)
-    /// Can not decode or encode data for or from keychain
+    /// Could not decode or encode keychain data
     case keychainDataConversionError
     /// Value not found in Keychain
     case keychainNoValue
