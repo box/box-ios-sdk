@@ -29,7 +29,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case rateLimitMaxRetries
     /// Value for key is of an unexpected type
     case typeMismatch(key: String)
-    /// Value for key is not one the accepted values
+    /// Value for key is not one of the accepted values
     case valueMismatch(key: String, value: String, acceptedValues: [String])
     /// Value for key is of a valid type, but was not able to convert value to expected type
     case invalidValueFormat(key: String)
