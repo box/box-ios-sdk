@@ -47,7 +47,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case invalidOAuthState
     /// Unauthorized request to API
     case unauthorizedAccess
-    /// Unsuccessful refresh token retrieval. Token is not found in the retrieved TokenInfo object
+    /// Unsuccessful refresh token retrieval. Token not found in the retrieved TokenInfo object
     case refreshTokenNotFound
     /// Access token is expired
     case expiredToken
