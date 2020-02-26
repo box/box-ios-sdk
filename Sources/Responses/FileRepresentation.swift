@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// File representation hint generated
+/// Defines the file type for the generated file representation
 public enum FileRepresentationHint: BoxEnum {
 
     /// The PDF representation
