@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Webhooks enable you to attach event triggers to Box files and folders
+/// Defines a Webhook, which enables event triggers to be attached to Box files and folders
 public class Webhook: BoxModel {
     //    swiftlint:disable cyclomatic_complexity
     /// Event triggers for webhooks
