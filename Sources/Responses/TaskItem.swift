@@ -42,7 +42,7 @@ public enum TaskItem: BoxModel {
     }
 }
 
-/// String formatting method for when a task item is printed
+/// Allows a task item to be printed as a String
 extension TaskItem: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
