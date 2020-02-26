@@ -41,7 +41,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case tokenStoreFailure
     /// Unsuccessful token retrieval. Token not found
     case tokenRetrieval
-    /// OAuth web session authorization fails
+    /// OAuth web session authorization failed due to invalid redirect configuration
     case invalidOAuthRedirectConfiguration
     /// Can't obtain authorization code from OAuth web session success result
     case invalidOAuthState
