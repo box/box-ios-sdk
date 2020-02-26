@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Rule to declare when a task is complete
+/// Defines the condition that will mark a task as complete
 public enum TaskCompletionRule: BoxEnum {
     /// Task is complete when all assignees complete it
     case allAssignees
