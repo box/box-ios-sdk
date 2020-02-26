@@ -39,7 +39,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case representationCreationFailed
     /// Can not finish the operation (write, read or clear) on TokenStore object
     case tokenStoreFailure
-    /// Unsuccessful token retrieval. Token is not found
+    /// Unsuccessful token retrieval. Token not found
     case tokenRetrieval
     /// OAuth web session authorization fails
     case invalidOAuthRedirectConfiguration
