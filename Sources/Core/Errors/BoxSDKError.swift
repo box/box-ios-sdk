@@ -43,7 +43,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case tokenRetrieval
     /// OAuth web session authorization failed due to invalid redirect configuration
     case invalidOAuthRedirectConfiguration
-    /// Can't obtain authorization code from OAuth web session success result
+    /// Couldn't obtain authorization code from OAuth web session result
     case invalidOAuthState
     /// Unauthorized request to API
     case unauthorizedAccess
