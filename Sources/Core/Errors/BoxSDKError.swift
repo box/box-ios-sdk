@@ -17,7 +17,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case invalidURL(urlString: String)
     /// The requested resource was not found
     case notFound(String)
-    /// Object need in closure is deallocated
+    /// Object needed in closure was deallocated
     case instanceDeallocated(String)
     /// Can not decode or encode data for or from keychain
     case keychainDataConversionError
