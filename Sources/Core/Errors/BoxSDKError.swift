@@ -55,7 +55,7 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case jwtAuthError
     /// Couldn't create paging iterable for non-paged response
     case nonIterableResponse
-    /// The end of the list is reached
+    /// The end of the list was reached
     case endOfList
     /// Custom error message
     case customValue(String)
