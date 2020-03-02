@@ -62,8 +62,8 @@
     if ([UIApplication box_isRunningExtension] == NO) {
         // If we are compiling from a non-extension target, use the regular sharedApplication.
         UIApplication *application = [[self class] box_sharedApplication];
-        if ([application respondsToSelector:@selector(delegate)]) {
-            id <UIApplicationDelegate> delegate = [application performSelector:@selector(delegate)];
+        if ([application respondsToSelector:@selector((delegate))]) {
+            id <UIApplicationDelegate> delegate = [application performSelector:@selector((delegate))];
             if ([delegate respondsToSelector:@selector(window)]) {
                 window = [delegate performSelector:@selector(window)];
             }

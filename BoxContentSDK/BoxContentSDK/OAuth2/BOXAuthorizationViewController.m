@@ -189,13 +189,21 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [super viewWillDisappear:animated];
 }
 
+- (UIApplication *) sharedApplication {
+    UIApplication *app = nil;
+    if ([[UIApplication class] respondsToSelector:@selector(sharedApplication)]) {
+        app = [[UIApplication class] performSelector:@selector(sharedApplication)];
+    }
+    return app;
+}
+
 // Fixes a bug starting iOS 11.3, where backgrounding the app to respond to
 // 2FA could cause the login to fail.
 - (void)didReceiveBackgroundNotification:(NSNotification *)notification
 {
     [self endBackgroundTask];
     __weak BOXAuthorizationViewController *weakSelf = self;
-    self.backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    self.backgroundTaskID = [[self sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [weakSelf endBackgroundTask];
     }];
 }
@@ -208,7 +216,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)endBackgroundTask
 {
     if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
-        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        [[self sharedApplication] endBackgroundTask:self.backgroundTaskID];
         self.backgroundTaskID = UIBackgroundTaskInvalid;
     }
 }

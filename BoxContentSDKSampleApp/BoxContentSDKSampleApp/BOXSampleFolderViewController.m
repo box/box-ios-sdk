@@ -306,7 +306,7 @@
     // We did not find a file named similarly, we can upload normally the file.
     NSString *tempPath = nil;
     NSString *associateId = nil;
-    NSString *userId = self.client.user.modelID;
+    NSString *userId = self.client.user.uniqueId;
     if (background == YES) {
         NSString *tempFileName = [BOXSampleAppSessionManager generateRandomStringWithLength:32];
         tempPath = [[[BOXSampleAppSessionManager defaultManager] boxURLRequestCacheDir] stringByAppendingPathComponent:tempFileName];

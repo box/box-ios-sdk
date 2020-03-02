@@ -13,6 +13,7 @@ app/build/*
 *.perspectivev3
 *.pbxuser
 xcuserdata
+xcshareddata/
 *.xccheckout
 DerivedData/
 *.xcscmblueprint

@@ -822,7 +822,7 @@ backgroundSessionId:(NSString *)backgroundSessionId
     return path;
 }
 
-- (BOOL)cacheAndAttemptToEncryptData:(NSData *)data atPath:(NSString *)path error:(NSError **)outError
+- (BOOL)cacheAndAttemptToEncryptData:(NSData *)data atPath:(NSString *)path error:(NSError * __autoreleasing *)outError
 {
     NSData *finalData = data;
     

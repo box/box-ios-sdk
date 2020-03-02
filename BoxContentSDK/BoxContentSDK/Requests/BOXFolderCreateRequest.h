@@ -5,6 +5,8 @@
 
 #import "BOXRequestWithSharedLinkHeader.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BOXFolderCreateRequest : BOXRequestWithSharedLinkHeader <BOXBackgroundRequestProtocol>
 
 @property (nonatomic, readwrite, strong) NSString *folderName;
@@ -26,3 +28,6 @@
 - (void)performRequestWithCompletion:(BOXFolderBlock)completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

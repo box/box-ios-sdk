@@ -10,7 +10,9 @@
 #import "BOXSampleFolderViewController.h"
 #import "BOXSampleAppSessionManager.h"
 
-@interface BOXSampleAccountsViewController ()
+#define BOXAPIAccessTokenDelegate_using 0
+
+@interface BOXSampleAccountsViewController () <BOXAPIAccessTokenDelegate>
 
 @property (nonatomic, readwrite, strong) NSArray *users;
 @property (nonatomic, readwrite, assign) BOOL isAppUsers;
@@ -55,7 +57,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        NSString *userId = client.user.modelID;
+        NSString *userId = client.user.uniqueId;
         BOXSampleAppSessionManager *appSessionManager = [BOXSampleAppSessionManager defaultManager];
         NSDictionary *associateIdToSessionTaskInfo = [appSessionManager associateIdToSessionTaskInfoForUserId:userId];
 
@@ -114,7 +116,9 @@
     [self reconnectWithBackgroundTasks:client];
 
     if (self.isAppUsers) {
+#if BOXAPIAccessTokenDelegate_using
         [client setAccessTokenDelegate:self];
+#endif
     }
     
     [client authenticateWithCompletionBlock:^(BOXUser *user, NSError *error) {
@@ -139,7 +143,7 @@
         } else {
             BOXContentClient *tmpClient = [BOXContentClient clientForUser:user];
             
-            if ([tmpClient.user.modelID isEqualToString:client.user.modelID] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
+            if ([tmpClient.user.uniqueId isEqualToString:client.user.uniqueId] && ![tmpClient.session.accessToken isEqualToString:client.session.accessToken]) {
                 [tmpClient logOut];
                 [self barButtonPressed:nil];
             } else {
@@ -150,7 +154,9 @@
     }];
 }
 
-/** 
+#pragma mark - BOXAPIAccessTokenDelegate
+
+/**
  * fetchAccessTokenWithCompletion is a delegate method from the @see BOXAPIAccessTokenDelegate protocol.
  *
  * In order to use Developer's Edition (Aka App Users) to authenticate users with Box,
@@ -166,8 +172,10 @@
  */
 - (void)fetchAccessTokenWithCompletion:(void (^)(NSString *, NSDate *, NSError *))completion
 {
+#if BOXAPIAccessTokenDelegate_using
 #warning Include logic to retrieve access token with the Developer's Edition (App Users) or use Developer Token found at https://developers.box.com/
     completion(@"your_access_token", [NSDate dateWithTimeIntervalSinceNow:1000], nil);
+#endif
 }
 
 #pragma mark - UITableViewDataSource
@@ -242,7 +250,9 @@
     BOXContentClient *client = [BOXContentClient clientForUser:user];
     
     if (self.isAppUsers) {
+#if BOXAPIAccessTokenDelegate_using
         [client setAccessTokenDelegate:self];
+#endif
     }
     
     BOXSampleFolderViewController *folderListingController = [[BOXSampleFolderViewController alloc] initWithClient:client folderID:BOXAPIFolderIDRoot];
