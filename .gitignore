@@ -13,7 +13,7 @@ app/build/*
 *.perspectivev3
 *.pbxuser
 xcuserdata
-IDEWorkspaceChecks.plist
+xcshareddata/
 *.xccheckout
 DerivedData/
 *.xcscmblueprint
