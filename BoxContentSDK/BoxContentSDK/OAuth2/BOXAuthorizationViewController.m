@@ -189,7 +189,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [super viewWillDisappear:animated];
 }
 
-- (UIApplication *) sharedApplication {
+- (UIApplication *) box_sharedApplication {
     UIApplication *app = nil;
     if ([[UIApplication class] respondsToSelector:@selector(sharedApplication)]) {
         app = [[UIApplication class] performSelector:@selector(sharedApplication)];
@@ -203,7 +203,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     [self endBackgroundTask];
     __weak BOXAuthorizationViewController *weakSelf = self;
-    self.backgroundTaskID = [[self sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    self.backgroundTaskID = [[self box_sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [weakSelf endBackgroundTask];
     }];
 }
@@ -216,7 +216,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)endBackgroundTask
 {
     if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
-        [[self sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        [[self box_sharedApplication] endBackgroundTask:self.backgroundTaskID];
         self.backgroundTaskID = UIBackgroundTaskInvalid;
     }
 }
