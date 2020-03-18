@@ -43,7 +43,7 @@
     }
     
     if (self.nextMarker != nil) {
-        queryParameters[BOXAPIParameterKeyNextMarker] = self.nextMarker;
+        queryParameters[BOXAPIParameterKeyMarker] = self.nextMarker;
     }
     
     BOXAPIJSONOperation *JSONoperation = [self JSONOperationWithURL:URL
