@@ -97,6 +97,7 @@ static NSString *userIdToAssociateIdAndSessionTaskInfoKey = @"userIdToAssociateI
                                                  withIntermediateDirectories:YES
                                                                   attributes:nil
                                                                        error:&error];
+        (void)success;
         BOXAssert(success, @"Failed to create cacheDir %@ with error %@", self.boxURLRequestCacheDir, error);
     }
 }

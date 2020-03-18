@@ -19,6 +19,7 @@
 
 - (void)prepareForReuse
 {
+    [super prepareForReuse];
     [self.request cancel];
     self.request = nil;
 }
@@ -53,7 +54,7 @@
         BOXSampleThumbnailsHelper *thumbnailsHelper = [BOXSampleThumbnailsHelper sharedInstance];
         
         // Try to retrieve the thumbnail from our in memory cache
-        UIImage *image = [thumbnailsHelper thumbnailForItemWithID:self.item.modelID userID:self.client.user.modelID];
+        UIImage *image = [thumbnailsHelper thumbnailForItemWithID:self.item.modelID userID:self.client.user.uniqueId];
         
         if (image) {
             icon = image;
@@ -68,7 +69,7 @@
             
                 [self.request performRequestWithProgress:nil completion:^(UIImage *image, NSError *error) {
                     if (error == nil) {   
-                        [thumbnailsHelper storeThumbnailForItemWithID:self.item.modelID userID:self.client.user.modelID thumbnail:image];
+                        [thumbnailsHelper storeThumbnailForItemWithID:self.item.modelID userID:self.client.user.uniqueId thumbnail:image];
                         
                         weakSelf.imageView.image = image;
                         CATransition *transition = [CATransition animation];

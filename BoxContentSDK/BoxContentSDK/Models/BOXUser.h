@@ -7,6 +7,8 @@
 #import "BOXModel.h"
 #import "BOXEnterprise.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol UniqueSDKUser
 
 /**
@@ -37,7 +39,7 @@
 
 - (instancetype)initWithUniqueID:(NSString *)uniqueID;
 
-- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(NSString *)name login:(NSString *)login;
+- (instancetype)initWithUniqueID:(NSString *)uniqueID name:(nullable NSString *)name login:(nullable NSString *)login;
 
 @end
 
@@ -194,3 +196,6 @@
 @property (nonatomic, readwrite, assign) BOXAPIBoolean isBoxNotesCreationEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

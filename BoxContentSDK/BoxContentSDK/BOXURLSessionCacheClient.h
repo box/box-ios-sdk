@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BOXURLSessionTaskCachedInfo : NSObject
 //@see comments above BOXURLSessionCacheClient for detailed explaination of those properties
 
@@ -417,3 +419,6 @@
                                                                 error:(NSError * _Nullable * _Nullable)error;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

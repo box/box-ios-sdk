@@ -195,7 +195,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 {
     [self endBackgroundTask];
     __weak BOXAuthorizationViewController *weakSelf = self;
-    self.backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    self.backgroundTaskID = [[UIApplication box_sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [weakSelf endBackgroundTask];
     }];
 }
@@ -208,7 +208,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 - (void)endBackgroundTask
 {
     if (self.backgroundTaskID != UIBackgroundTaskInvalid) {
-        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
+        [[UIApplication box_sharedApplication] endBackgroundTask:self.backgroundTaskID];
         self.backgroundTaskID = UIBackgroundTaskInvalid;
     }
 }

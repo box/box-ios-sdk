@@ -5,6 +5,8 @@
 
 #import "BOXModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class BOXFolderMini;
 @class BOXUserMini;
 @class BOXSharedLink;
@@ -147,7 +149,7 @@
 /**
  *  The folder that contains this item.
  */
-@property (nonatomic, readwrite, strong) BOXFolderMini *parentFolder;
+@property (nonatomic, readwrite, strong) BOXFolderMini * _Nullable parentFolder;
 
 /**
  *  Whether this item is deleted or not.
@@ -254,4 +256,6 @@
 @property (nullable, nonatomic, readonly, assign) NSNumber *availableCollectionRank;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
