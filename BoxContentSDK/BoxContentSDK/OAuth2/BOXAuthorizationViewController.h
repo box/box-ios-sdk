@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class BOXContentClient;
 @class BOXUser;
@@ -29,7 +30,7 @@
  * @warning This is the only part of the Box SDK that is specific to iOS. If you wish to
  *   include the Box SDK in an OS X project, remove this source file.
  */
-@interface BOXAuthorizationViewController : UIViewController <UIWebViewDelegate>
+@interface BOXAuthorizationViewController : UIViewController <WKNavigationDelegate>
 
 /** @name Initializers */
 
