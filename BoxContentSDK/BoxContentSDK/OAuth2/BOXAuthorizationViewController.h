@@ -13,7 +13,7 @@
 @class BOXUser;
 
 /**
- * BOXAuthorizationViewController is a UIViewController that displays a UIWebview
+ * BOXAuthorizationViewController is a UIViewController that displays a WKWebview
  * that loads the OAuth2 authorize URL. An app may present this view controller to
  * log a user in to Box.
  *
