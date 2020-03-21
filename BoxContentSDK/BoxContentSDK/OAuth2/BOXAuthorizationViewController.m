@@ -17,11 +17,37 @@
 #import "BOXOAuth2Session.h"
 #import "BOXAppUserSession.h"
 
+@interface NSURLRequest (Cookie)
+- (NSURLRequest *) fixCookie;
+@end
+
+@implementation NSURLRequest (Cookie)
+
+- (NSURLRequest *) fixCookie{
+    NSMutableURLRequest *fixedRequest;
+    if ([self isKindOfClass:[NSMutableURLRequest class]]) {
+        fixedRequest = (NSMutableURLRequest *)self;
+    } else {
+        fixedRequest = self.mutableCopy;
+    }
+    // prevent Cookie missing.
+    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSHTTPCookieStorage sharedHTTPCookieStorage].cookies];
+    if (dict.count) {
+        NSMutableDictionary *mDict = self.allHTTPHeaderFields.mutableCopy;
+        [mDict setValuesForKeysWithDictionary:dict];
+        fixedRequest.allHTTPHeaderFields = mDict;
+    }
+    return fixedRequest;
+}
+
+@end
+
+#pragma mark -
 
 typedef void (^BOXAuthCompletionBlock)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error);
 typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorizationViewController);
 
-@interface BOXAuthorizationViewController () <NSURLSessionDataDelegate>
+@interface BOXAuthorizationViewController () // <NSURLSessionDataDelegate>
 
 @property (nonatomic, readwrite, strong) NSURLSession *URLSession;
 @property (nonatomic, readwrite, strong) NSURLResponse *connectionResponse;
@@ -104,10 +130,12 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
         _connectionData = [[NSMutableData alloc] init];
         _hostsThatCanUseWebViewDirectly = [NSMutableSet set];
 
+#if 0
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _URLSession = [NSURLSession sessionWithConfiguration:sessionConfiguration
                                                     delegate:self //NOTE: The URL Session holds a strong reference on its delegate until it is invalidated
                                                delegateQueue:nil];
+#endif
 
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                  target:self
@@ -387,8 +415,19 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
 
 #pragma mark - WKNavigationDelegate methods
 
-- (void) webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+- (void)                      webView:(WKWebView *)webView
+    decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse
+                      decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler
 {
+    decisionHandler(WKNavigationResponsePolicyAllow);
+}
+
+- (void)                    webView:(WKWebView *)webView
+    decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+                    decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    [navigationAction.request fixCookie];
+
     NSURLRequest *request = navigationAction.request;
     BOXLog(@"Web view should start request %@ with navigation type %ld", request, (long)navigationType);
     BOXLog(@"Request Headers \n%@", [request allHTTPHeaderFields]);
@@ -457,10 +496,14 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     } else if ([self webViewCanBeUsedDirectlyForHost:request.URL.host] == NO) {
         BOXLog(@"Was not authenticated, launching URLSession and not loading the request in the web view");
         [self.activityIndicator startAnimating];
+#if 1
+        decisionHandler(WKNavigationActionPolicyAllow);
+#else
         NSURLSessionDataTask *dataTask = [self.URLSession dataTaskWithRequest:request];
         [dataTask resume];
         BOXLog(@"URLSessionDataTask is %@", dataTask);
         decisionHandler(WKNavigationActionPolicyCancel);
+#endif
         return;
     }
 
@@ -532,6 +575,7 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     [self.activityIndicator stopAnimating];
 }
 
+#if 0
 #pragma mark - NSURLSessionDataTaskDelegate methods
 
 - (void)URLSession:(NSURLSession *)session
@@ -785,5 +829,6 @@ didReceiveResponse:(nonnull NSURLResponse *)response
         }
     }
 }
+#endif
 
 @end
