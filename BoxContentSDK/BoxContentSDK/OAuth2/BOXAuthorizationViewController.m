@@ -17,31 +17,6 @@
 #import "BOXOAuth2Session.h"
 #import "BOXAppUserSession.h"
 
-@interface NSURLRequest (Cookie)
-- (NSURLRequest *) fixCookie;
-@end
-
-@implementation NSURLRequest (Cookie)
-
-- (NSURLRequest *) fixCookie{
-    NSMutableURLRequest *fixedRequest;
-    if ([self isKindOfClass:[NSMutableURLRequest class]]) {
-        fixedRequest = (NSMutableURLRequest *)self;
-    } else {
-        fixedRequest = self.mutableCopy;
-    }
-    // prevent Cookie missing.
-    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSHTTPCookieStorage sharedHTTPCookieStorage].cookies];
-    if (dict.count) {
-        NSMutableDictionary *mDict = self.allHTTPHeaderFields.mutableCopy;
-        [mDict setValuesForKeysWithDictionary:dict];
-        fixedRequest.allHTTPHeaderFields = mDict;
-    }
-    return fixedRequest;
-}
-
-@end
-
 #pragma mark -
 
 typedef void (^BOXAuthCompletionBlock)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error);
@@ -426,8 +401,6 @@ typedef void (^BOXAuthCancelBlock)(BOXAuthorizationViewController *authorization
     decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
                     decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    [navigationAction.request fixCookie];
-
     NSURLRequest *request = navigationAction.request;
     BOXLog(@"Web view should start request %@ with navigation type %ld", request, (long)navigationType);
     BOXLog(@"Request Headers \n%@", [request allHTTPHeaderFields]);
