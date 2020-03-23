@@ -142,28 +142,30 @@ private extension BoxClient {
             completion(.failure(BoxSDKError(message: .clientDestroyed)))
             return
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            // your code here
+            self.session.getAccessToken { (result: Result<String, BoxSDKError>) in
 
-        session.getAccessToken { (result: Result<String, BoxSDKError>) in
+                switch result {
+                case let .failure(error):
+                    completion(.failure(error))
+                    return
 
-            switch result {
-            case let .failure(error):
-                completion(.failure(error))
-                return
+                case let .success(token):
+                    let updatedRequest = request
+                    updatedRequest.httpHeaders["Authorization"] = "Bearer \(token)"
+                    updatedRequest.addBoxAPIRelatedHeaders(self.headers)
 
-            case let .success(token):
-                let updatedRequest = request
-                updatedRequest.httpHeaders["Authorization"] = "Bearer \(token)"
-                updatedRequest.addBoxAPIRelatedHeaders(self.headers)
-
-                self.networkAgent.send(
-                    request: updatedRequest,
-                    completion: { [weak self] (result: Result<BoxResponse, BoxSDKError>) in
-                        self?.handleAuthIssues(
-                            result: result,
-                            completion: completion
-                        )
-                    }
-                )
+                    self.networkAgent.send(
+                        request: updatedRequest,
+                        completion: { [weak self] (result: Result<BoxResponse, BoxSDKError>) in
+                            self?.handleAuthIssues(
+                                result: result,
+                                completion: completion
+                            )
+                        }
+                    )
+                }
             }
         }
     }
@@ -437,6 +439,7 @@ extension BoxClient: BoxClientProtocol {
         downloadDestinationURL: URL,
         httpHeaders: BoxHTTPHeaders = [:],
         queryParameters: QueryParameters = [:],
+        task: @escaping (URLSessionTask) -> Void = { _ in },
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<BoxResponse>
     ) {
@@ -447,6 +450,7 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 downloadDestination: downloadDestinationURL,
+                task: task,
                 progress: progress
             ),
             completion: completion
