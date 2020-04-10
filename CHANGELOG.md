@@ -7,7 +7,7 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
-- Add support for the uploader display name field
+- Add support for the uploader display name field for Files and File Versions
 
 
 ## v4.0.0 [2020-02-13]
