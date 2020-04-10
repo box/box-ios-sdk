@@ -30,15 +30,16 @@ extension BoxTask {
             if self.cancelBool {
                 sessionTask.cancel()
             }
-            else if self.pauseBool {
-                sessionTask.suspend()
-            }
+//            else if self.pauseBool {
+//                sessionTask.suspend()
+//            }
             else {
                 self.task = sessionTask
             }
         }
         return taskMethod!
     }
+
 //
 //    public func resume() {
 //        if let unwrappedTask = task {
@@ -48,15 +49,15 @@ extension BoxTask {
 //            resumeBool = true
 //        }
 //    }
-    
-    public func pause() {
-        if let unwrappedTask = task {
-            unwrappedTask.suspend()
-        }
-        else {
-            pauseBool = true
-        }
-    }
+
+//    public func pause() {
+//        if let unwrappedTask = task {
+//            unwrappedTask.suspend()
+//        }
+//        else {
+//            pauseBool = true
+//        }
+//    }
 
     public func cancel() {
         if let unwrappedTask = task {

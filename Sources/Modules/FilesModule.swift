@@ -757,7 +757,7 @@ public class FilesModule {
         fileId: String,
         destinationURL: URL,
         version: String? = nil,
-        //        task: @escaping (URLSessionTask) -> Void = { _ in },
+        task: @escaping (URLSessionTask) -> Void = { _ in },
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
     ) -> BoxTask {
@@ -767,6 +767,7 @@ public class FilesModule {
             downloadDestinationURL: destinationURL,
             queryParameters: ["version": version],
             task: task.getTask(),
+//            task: task,
             progress: progress,
             completion: ResponseHandler.default(wrapping: completion)
         )
