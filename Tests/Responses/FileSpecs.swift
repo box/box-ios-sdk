@@ -58,7 +58,6 @@ class FileSpecs: QuickSpec {
                         expect(pathCollection.entries?[1].name).to(equal("Test Folder"))
 
                         expect(file.commentCount).to(equal(0))
-                        expect(file.uploaderDisplayName).to(equal("Bob Dylan"))
                         expect(file.createdAt?.iso8601).to(equal("2018-02-27T18:57:08Z"))
                         expect(file.modifiedAt?.iso8601).to(equal("2018-02-27T18:57:14Z"))
                         expect(file.trashedAt).to(beNil())
@@ -66,6 +65,7 @@ class FileSpecs: QuickSpec {
                         expect(file.contentCreatedAt?.iso8601).to(equal("2017-10-09T22:09:01Z"))
                         expect(file.contentModifiedAt?.iso8601).to(equal("2017-10-09T22:09:01Z"))
                         expect(file.isPackage).to(beFalse())
+                        expect(file.uploaderDisplayName).to(equal("Example User"))
                         expect(file.createdBy?.type).to(equal("user"))
                         expect(file.createdBy?.id).to(equal("33333"))
                         expect(file.createdBy?.name).to(equal("Example User"))
