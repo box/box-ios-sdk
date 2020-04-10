@@ -29,6 +29,8 @@ public class FileVersion: BoxModel {
     public let size: Int64?
     /// When the file version object was created
     public let createdAt: Date?
+    /// User's name at the time of upload
+    public let uploaderDisplayName: String?
     /// When the file version object was last updated
     public let modifiedAt: Date?
     /// The user who last updated the file version
@@ -65,6 +67,7 @@ public class FileVersion: BoxModel {
         name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "name")
         size = try BoxJSONDecoder.optionalDecode(json: json, forKey: "size")
         createdAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "created_at")
+        uploaderDisplayName = try BoxJSONDecoder.optionalDecode(json: json, forKey: "uploader_display_name")
         modifiedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "modified_at")
         modifiedBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "modified_by")
         trashedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "trashed_at")
