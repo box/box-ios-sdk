@@ -75,6 +75,8 @@ public class File: BoxModel {
     public let contentModifiedAt: Date?
     /// Whether the file is a package. Used for Mac Packages used by iWorks.
     public let isPackage: Bool?
+    /// User's name at the time of upload
+    public let uploaderDisplayName: String?
     /// The user who first created this file.
     public let createdBy: User?
     /// The user who last updated this file.
@@ -146,6 +148,7 @@ public class File: BoxModel {
         contentCreatedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "content_created_at")
         contentModifiedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "content_modified_at")
         isPackage = try BoxJSONDecoder.optionalDecode(json: json, forKey: "is_package")
+        uploaderDisplayName = try BoxJSONDecoder.optionalDecode(json: json, forKey: "uploader_display_name")
         createdBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "created_by")
         modifiedBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "modified_by")
         ownedBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "owned_by")
