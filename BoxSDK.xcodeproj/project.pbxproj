@@ -399,6 +399,7 @@
 		F92CF9A52356A8430046A277 /* BoxAPIAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92CF9A42356A8430046A277 /* BoxAPIAuthError.swift */; };
 		F941067223513DD00061A3F8 /* ArrayInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F941067123513DD00061A3F8 /* ArrayInputStream.swift */; };
 		F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */; };
+		F95D6F802451F6D0008B09CF /* BoxDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D6F7F2451F6D0008B09CF /* BoxDownloadTask.swift */; };
 		F969D37C233A7146001301FC /* StoragePoliciesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D37B233A7146001301FC /* StoragePoliciesModule.swift */; };
 		F969D381233A71B4001301FC /* StoragePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D380233A71B4001301FC /* StoragePolicy.swift */; };
 		F969D386233A71EF001301FC /* StoragePolicyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D385233A71EF001301FC /* StoragePolicyAssignment.swift */; };
@@ -430,7 +431,7 @@
 		F99DB49A233C41AA0065317F /* FullRetentionPolicy.json in Resources */ = {isa = PBXBuildFile; fileRef = F99DB498233C41A00065317F /* FullRetentionPolicy.json */; };
 		F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99DB496233C41440065317F /* RetentionPolicySpecs.swift */; };
 		F9A3F0D223A18926007C7393 /* GetEnterpriseUsersMarker-Pagination.json in Resources */ = {isa = PBXBuildFile; fileRef = F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */; };
-		F9DF56B42425E2B7009E131E /* BoxTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DF56B32425E2B7009E131E /* BoxTask.swift */; };
+		F9DF56B42425E2B7009E131E /* BoxNetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DF56B32425E2B7009E131E /* BoxNetworkTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -874,6 +875,7 @@
 		F92CF9A42356A8430046A277 /* BoxAPIAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxAPIAuthError.swift; sourceTree = "<group>"; };
 		F941067123513DD00061A3F8 /* ArrayInputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStream.swift; sourceTree = "<group>"; };
 		F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingSpecs.swift; sourceTree = "<group>"; };
+		F95D6F7F2451F6D0008B09CF /* BoxDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDownloadTask.swift; sourceTree = "<group>"; };
 		F969D37B233A7146001301FC /* StoragePoliciesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePoliciesModule.swift; sourceTree = "<group>"; };
 		F969D380233A71B4001301FC /* StoragePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePolicy.swift; sourceTree = "<group>"; };
 		F969D385233A71EF001301FC /* StoragePolicyAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePolicyAssignment.swift; sourceTree = "<group>"; };
@@ -908,7 +910,7 @@
 		F99DB498233C41A00065317F /* FullRetentionPolicy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FullRetentionPolicy.json; sourceTree = "<group>"; };
 		F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GetEnterpriseUsersMarker-Pagination.json"; sourceTree = "<group>"; };
 		F9DF56B22425DEBF009E131E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F9DF56B32425E2B7009E131E /* BoxTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxTask.swift; sourceTree = "<group>"; };
+		F9DF56B32425E2B7009E131E /* BoxNetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNetworkTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1166,6 +1168,8 @@
 		2256390A2253897D00D951B5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F9DF56B32425E2B7009E131E /* BoxNetworkTask.swift */,
+				F95D6F7F2451F6D0008B09CF /* BoxDownloadTask.swift */,
 				223A7F2C22770BCD00C136E1 /* QueryParameterConvertible.swift */,
 				2256390B2253897D00D951B5 /* BoxNetworkAgent.swift */,
 				227E3F312257503000EF2BC9 /* ObjectDeserializer.swift */,
@@ -1317,7 +1321,6 @@
 			children = (
 				2256392C2253897D00D951B5 /* BoxClient.swift */,
 				2256392D2253897D00D951B5 /* BoxClientProtocol.swift */,
-				F9DF56B32425E2B7009E131E /* BoxTask.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -2374,6 +2377,7 @@
 				22C41459231FDB4B00D3992C /* MetadataCascadePolicy.swift in Sources */,
 				2228B19422C0C908001F759D /* FolderUploadEmail.swift in Sources */,
 				0C8B8DFC2285CA2C00D8A42F /* FileLogDestination.swift in Sources */,
+				F95D6F802451F6D0008B09CF /* BoxDownloadTask.swift in Sources */,
 				225639AE2253897D00D951B5 /* FoldersModule.swift in Sources */,
 				0C4A9D18226DBCB4002D069D /* BoxSDKConfiguration.swift in Sources */,
 				8053E2C622AF06FF000B42E1 /* SharedItemsModule.swift in Sources */,
@@ -2447,7 +2451,7 @@
 				0CD342252289D36100BAFF4B /* Invite.swift in Sources */,
 				2256399E2253897D00D951B5 /* TokenInfo.swift in Sources */,
 				228C361B2255F82800AC8888 /* BoxResponse.swift in Sources */,
-				F9DF56B42425E2B7009E131E /* BoxTask.swift in Sources */,
+				F9DF56B42425E2B7009E131E /* BoxNetworkTask.swift in Sources */,
 				804F3BFB22A5934E008CF915 /* CommentItem.swift in Sources */,
 				0C987133229D75FE005F19AF /* BoxJSONDecoder.swift in Sources */,
 				805E06A722E120AC00892E5C /* MetadataFilterQueryParam.swift in Sources */,

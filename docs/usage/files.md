@@ -159,13 +159,18 @@ with the ID of the file to download and a URL to the location where the file sho
 ```swift
 let url = FileManager.default.homeDirectoryForCurrentUser
 
-client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxSDKError>) in
+let task = client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error downloading file")
         return
     }
 
     print("File downloaded successfully")
+}
+
+// To cancel request
+if someConditionIsSatisfied {
+    task.cancel()
 }
 ```
 

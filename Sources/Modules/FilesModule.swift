@@ -757,21 +757,17 @@ public class FilesModule {
         fileId: String,
         destinationURL: URL,
         version: String? = nil,
-        task: @escaping (URLSessionTask) -> Void = { _ in },
+        //        task: @escaping (URLSessionTask) -> Void = { _ in },
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
-    ) -> BoxTask {
-        let task = BoxTask()
-        boxClient.download(
+    ) -> BoxDownloadTask {
+        return boxClient.download(
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             downloadDestinationURL: destinationURL,
             queryParameters: ["version": version],
-            task: task.getTask(),
-//            task: task,
             progress: progress,
             completion: ResponseHandler.default(wrapping: completion)
         )
-        return task
     }
 
     /// Discards a file to the trash. The `etag` of the file can be included as an ‘If-Match’ header to prevent race conditions.

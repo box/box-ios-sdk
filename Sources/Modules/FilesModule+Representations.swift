@@ -199,9 +199,9 @@ extension FilesModule {
         destinationURL: URL,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
-    ) {
+    ) -> BoxDownloadTask {
 
-        boxClient.download(
+        return boxClient.download(
             url: sourceURL,
             downloadDestinationURL: destinationURL,
             progress: progress,

@@ -1450,6 +1450,63 @@ class FilesModuleSpecs: QuickSpec {
                         }
                     }
                 }
+
+                it("should be cancelled immediately") {
+
+                    waitUntil(timeout: 10) { done in
+                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                        let fileURL = documentsURL.appendingPathComponent("doc.txt")
+                        var progressed: Double?
+                        let task = self.sut.files.download(
+                            fileId: "12345",
+                            destinationURL: fileURL,
+                            version: "1",
+                            progress: { progress in
+                                progressed = progress.fractionCompleted
+                            }
+                        ) { result in
+                            switch result {
+                            case .success:
+                                fail("Expected download to be cancelled, but instead suceeded")
+                            case let .failure(error):
+                                expect(progressed).to(equal(0.05))
+                                expect(error.message.description).to(equal("cancelled"))
+                            }
+                            done()
+                        }
+                        task.cancel()
+                    }
+                }
+
+                it("should be cancelled after 50% was downloaded") {
+
+                    waitUntil(timeout: 10) { done in
+                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                        let fileURL = documentsURL.appendingPathComponent("doc.txt")
+                        var progressed: Double?
+                        var task: BoxDownloadTask?
+                        task = self.sut.files.download(
+                            fileId: "12345",
+                            destinationURL: fileURL,
+                            version: "1",
+                            progress: { progress in
+                                if progress.fractionCompleted > 0.5 {
+                                    task!.cancel()
+                                    progressed = progress.fractionCompleted
+                                }
+                            }
+                        ) { result in
+                            switch result {
+                            case .success:
+                                fail("Expected download to be cancelled, but instead suceeded")
+                            case let .failure(error):
+                                expect(progressed).to(beGreaterThan(0.5))
+                                expect(error.message.description).to(equal("cancelled"))
+                            }
+                            done()
+                        }
+                    }
+                }
             }
         }
 
