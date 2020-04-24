@@ -13,12 +13,7 @@ public class BoxNetworkTask {
 
     private var taskMethod: ((URLSessionTask) -> Void)?
     private var task: URLSessionTask?
-    private var cancelBool: Bool
-    
-    /// Initializer
-    init() {
-        cancelBool = false
-    }
+    private var cancelled: Bool = false
 }
 
 extension BoxNetworkTask {
