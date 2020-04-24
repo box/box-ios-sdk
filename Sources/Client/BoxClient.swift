@@ -436,7 +436,6 @@ extension BoxClient: BoxClientProtocol {
         downloadDestinationURL: URL,
         httpHeaders: BoxHTTPHeaders = [:],
         queryParameters: QueryParameters = [:],
-        task: @escaping (URLSessionTask) -> Void = { _ in },
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<BoxResponse>
     ) -> BoxDownloadTask {
