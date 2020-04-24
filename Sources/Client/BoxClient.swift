@@ -447,7 +447,7 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 downloadDestination: downloadDestinationURL,
-                task: task.getTask(),
+                task: task.receiveTask(_:),
                 progress: progress
             ),
             completion: completion
