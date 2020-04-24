@@ -28,11 +28,7 @@ extension BoxNetworkTask {
 
     /// Method to cancel a network task
     public func cancel() {
-        if let unwrappedTask = task {
-            unwrappedTask.cancel()
-        }
-        else {
-            cancelBool = true
-        }
+        task?.cancel()
+        cancelled = true
     }
 }
