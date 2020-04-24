@@ -10,8 +10,4 @@ import Foundation
 
 /// A Box network task returned for a download
 public class BoxDownloadTask: BoxNetworkTask {
-    /// Initializer
-    override init() {
-        super.init()
-    }
 }
