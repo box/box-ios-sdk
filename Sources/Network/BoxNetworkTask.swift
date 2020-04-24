@@ -17,17 +17,13 @@ public class BoxNetworkTask {
 }
 
 extension BoxNetworkTask {
-    internal func getTask() -> ((URLSessionTask) -> Void) {
-        taskMethod = { sessionTask in
-            if self.cancelBool {
-                sessionTask.cancel()
-            }
-            else {
-                self.task = sessionTask
-            }
+    func receiveTask(_ sessionTask: URLSessionTask) {
+        if self.cancelled {
+            sessionTask.cancel()
         }
-        // swiftlint:disable:next force_unwrapping
-        return taskMethod!
+        else {
+            self.task = sessionTask
+        }
     }
 
     /// Method to cancel a network task
