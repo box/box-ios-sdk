@@ -28,7 +28,7 @@ class Logger {
 
 extension Logger {
     func debug(_ message: StaticString, _ args: CVarArg...) {
-        log(message, level: LogLevel.debug, args)
+        log(message, level: .debug, args)
     }
 
     func info(_ message: StaticString, _ args: CVarArg...) {
