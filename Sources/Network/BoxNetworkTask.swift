@@ -8,21 +8,19 @@
 
 import Foundation
 
-/// Represents Box Network Task request.
+/// A Box network task request.
 public class BoxNetworkTask {
 
-    private var taskMethod: ((URLSessionTask) -> Void)?
-    private var task: URLSessionTask?
-    private var cancelled: Bool = false
-}
+    var task: URLSessionTask?
+    /// Whether the task is cancelled or not
+    public internal(set) var cancelled: Bool = false
 
-extension BoxNetworkTask {
     func receiveTask(_ sessionTask: URLSessionTask) {
-        if self.cancelled {
+        if cancelled {
             sessionTask.cancel()
         }
         else {
-            self.task = sessionTask
+            task = sessionTask
         }
     }
 

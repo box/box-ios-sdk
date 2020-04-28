@@ -270,7 +270,8 @@ extension BoxClient: BoxClientProtocol {
         multipartBody: MultipartForm,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<BoxResponse>
-    ) {
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
         send(
             request: BoxRequest(
                 httpMethod: .post,
@@ -278,10 +279,12 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 body: .multipart(multipartBody),
+                task: task.receiveTask(_:),
                 progress: progress
             ),
             completion: completion
         )
+        return task
     }
 
     /// Performs an HTTP PUT method call on an API endpoint and returns a response.
@@ -384,17 +387,20 @@ extension BoxClient: BoxClientProtocol {
         queryParameters: QueryParameters = [:],
         json: Any? = nil,
         completion: @escaping Callback<BoxResponse>
-    ) {
+    ) -> BoxNetworkTask {
+        let task = BoxNetworkTask()
         send(
             request: BoxRequest(
                 httpMethod: .options,
                 url: url,
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
-                body: jsonToBody(json)
+                body: jsonToBody(json),
+                task: task.receiveTask(_:)
             ),
             completion: completion
         )
+        return task
     }
 
     /// Performs an HTTP DELETE method call on an API endpoint and returns a response.

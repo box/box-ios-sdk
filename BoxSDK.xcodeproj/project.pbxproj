@@ -400,6 +400,7 @@
 		F941067223513DD00061A3F8 /* ArrayInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F941067123513DD00061A3F8 /* ArrayInputStream.swift */; };
 		F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */; };
 		F95D6F802451F6D0008B09CF /* BoxDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D6F7F2451F6D0008B09CF /* BoxDownloadTask.swift */; };
+		F95D6F832453415A008B09CF /* BoxUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D6F822453415A008B09CF /* BoxUploadTask.swift */; };
 		F969D37C233A7146001301FC /* StoragePoliciesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D37B233A7146001301FC /* StoragePoliciesModule.swift */; };
 		F969D381233A71B4001301FC /* StoragePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D380233A71B4001301FC /* StoragePolicy.swift */; };
 		F969D386233A71EF001301FC /* StoragePolicyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969D385233A71EF001301FC /* StoragePolicyAssignment.swift */; };
@@ -876,6 +877,7 @@
 		F941067123513DD00061A3F8 /* ArrayInputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStream.swift; sourceTree = "<group>"; };
 		F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingSpecs.swift; sourceTree = "<group>"; };
 		F95D6F7F2451F6D0008B09CF /* BoxDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDownloadTask.swift; sourceTree = "<group>"; };
+		F95D6F822453415A008B09CF /* BoxUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxUploadTask.swift; sourceTree = "<group>"; };
 		F969D37B233A7146001301FC /* StoragePoliciesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePoliciesModule.swift; sourceTree = "<group>"; };
 		F969D380233A71B4001301FC /* StoragePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePolicy.swift; sourceTree = "<group>"; };
 		F969D385233A71EF001301FC /* StoragePolicyAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePolicyAssignment.swift; sourceTree = "<group>"; };
@@ -1174,6 +1176,7 @@
 				227E3F312257503000EF2BC9 /* ObjectDeserializer.swift */,
 				F941067123513DD00061A3F8 /* ArrayInputStream.swift */,
 				928810AC237038470076ABA0 /* PagingIterator.swift */,
+				F95D6F822453415A008B09CF /* BoxUploadTask.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2329,6 +2332,7 @@
 				0CD4842522956C2200E61C35 /* Task.swift in Sources */,
 				80BC8418232C526400010E08 /* TermsOfServicesModule.swift in Sources */,
 				22E39ED622F0913F0061E182 /* TrashModule.swift in Sources */,
+				F95D6F832453415A008B09CF /* BoxUploadTask.swift in Sources */,
 				80E567DB2315DBA000798E3A /* DevicePinsModule.swift in Sources */,
 				97BC7AAD228B69DE00DDE998 /* FieldsQueryParam.swift in Sources */,
 				0C44FF6C227C4B890018D8E9 /* LogDestination.swift in Sources */,

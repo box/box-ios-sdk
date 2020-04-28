@@ -57,7 +57,7 @@ public protocol BoxClientProtocol: AnyObject {
         multipartBody: MultipartForm,
         progress: @escaping (Progress) -> Void,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxUploadTask
 
     /// Performs an HTTP PUT method call on an API endpoint and returns a response.
     ///
@@ -125,7 +125,7 @@ public protocol BoxClientProtocol: AnyObject {
         queryParameters: QueryParameters,
         json: Any?,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxNetworkTask
 
     /// Performs an HTTP DELETE method call on an API endpoint and returns a response.
     ///

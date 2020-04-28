@@ -249,8 +249,9 @@ public class FilesModule {
         progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
-    ) {
-        uploadWithPreflightCheck(
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
+        task.receiveTask(uploadWithPreflightCheck(
             performCheck: performPreflightCheck,
             name: name,
             size: Int64(data.count),
@@ -259,9 +260,11 @@ public class FilesModule {
                 guard let self = self else {
                     return
                 }
-                self.upload(data: data, name: name, parentId: parentId, progress: progress, completion: completion)
+                task.receiveTask(self.upload(data: data, name: name, parentId: parentId, progress: progress, completion: completion))
             }, completion: completion
-        )
+        ))
+
+        return task
     }
 
     /// Uploads file without preflight check
@@ -271,7 +274,7 @@ public class FilesModule {
         parentId: String,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
-    ) {
+    ) -> BoxUploadTask {
 
         let attributes: [String: Any] = [
             "name": name,
@@ -287,10 +290,10 @@ public class FilesModule {
         }
         catch {
             completion(.failure(BoxCodingError(message: "Error with encoding multipart from", error: error)))
-            return
+            return BoxUploadTask()
         }
 
-        boxClient.post(
+        return boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/content", configuration: boxClient.configuration),
             multipartBody: body,
             progress: progress,
@@ -463,12 +466,12 @@ public class FilesModule {
         parentId: String,
         size: Int64? = nil,
         completion: @escaping Callback<Void>
-    ) {
+    ) -> BoxNetworkTask {
         var body: [String: Any] = ["parent": ["id": parentId]]
         body["name"] = name
         body["size"] = size
 
-        boxClient.options(
+        return boxClient.options(
             url: URL.boxAPIEndpoint("/2.0/files/content", configuration: boxClient.configuration),
             json: body,
             completion: ResponseHandler.default(wrapping: completion)
@@ -483,9 +486,9 @@ public class FilesModule {
         parentId: String,
         request: @escaping () -> Void,
         completion: @escaping Callback<T>
-    ) {
+    ) -> BoxNetworkTask {
         if performCheck {
-            preflightCheck(name: name, parentId: parentId, size: size) { result in
+            return preflightCheck(name: name, parentId: parentId, size: size) { result in
                 switch result {
                 case .success:
                     request()
@@ -496,6 +499,7 @@ public class FilesModule {
         }
         else {
             request()
+            return BoxNetworkTask()
         }
     }
 
