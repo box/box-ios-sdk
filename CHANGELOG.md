@@ -7,7 +7,7 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
-- Add ability to cancel downloads
+- Add ability to cancel uploads and downloads
 
 ## v4.0.0 [2020-02-13]
 
