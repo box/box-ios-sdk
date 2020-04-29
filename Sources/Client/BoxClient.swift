@@ -263,6 +263,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - queryParameters: Additional parameters to be passed in the URL that is called.
     ///   - multipartBody: The multipart body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxUploadTask
     public func post(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -279,7 +280,7 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 body: .multipart(multipartBody),
-                task: task.receiveTask(_:),
+                task: task.receiveTask,
                 progress: progress
             ),
             completion: completion
@@ -322,6 +323,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - queryParameters: Additional parameters to be passed in the URL that is called.
     ///   - multipartBody: The multipart body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxUploadTask
     public func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -329,7 +331,8 @@ extension BoxClient: BoxClientProtocol {
         multipartBody: MultipartForm,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<BoxResponse>
-    ) {
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
         send(
             request: BoxRequest(
                 httpMethod: .put,
@@ -337,10 +340,12 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 body: .multipart(multipartBody),
+                task: task.receiveTask,
                 progress: progress
             ),
             completion: completion
         )
+        return task
     }
 
     /// Performs an HTTP PUT method call on an API endpoint and returns a response - variant for chunked upload.
@@ -352,6 +357,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - data: Binary body of the request
     ///   - progress: Closure where upload progress will be reported
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxUploadTask
     public func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -359,7 +365,8 @@ extension BoxClient: BoxClientProtocol {
         data: Data,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<BoxResponse>
-    ) {
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
         send(
             request: BoxRequest(
                 httpMethod: .put,
@@ -367,10 +374,12 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 body: .data(data),
+                task: task.receiveTask,
                 progress: progress
             ),
             completion: completion
         )
+        return task
     }
 
     /// Performs an HTTP OPTIONS method call on an API endpoint and returns a response.
@@ -381,6 +390,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - queryParameters: Additional parameters to be passed in the URL that is called.
     ///   - json: The JSON body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxNetworkTask
     public func options(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -396,7 +406,7 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 body: jsonToBody(json),
-                task: task.receiveTask(_:)
+                task: task.receiveTask
             ),
             completion: completion
         )
@@ -437,6 +447,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - downloadDestinationURL: The URL on disk where the data will be saved
     ///   - progress: Completion block to track the progress of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxDownloadTask
     public func download(
         url: URL,
         downloadDestinationURL: URL,
@@ -453,7 +464,7 @@ extension BoxClient: BoxClientProtocol {
                 httpHeaders: httpHeaders,
                 queryParams: queryParameters,
                 downloadDestination: downloadDestinationURL,
-                task: task.receiveTask(_:),
+                task: task.receiveTask,
                 progress: progress
             ),
             completion: completion

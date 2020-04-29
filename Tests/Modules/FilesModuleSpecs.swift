@@ -641,6 +641,100 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
 
+                context("with preflight check") {
+                    it("should be cancelled immediately with no progress") {
+                        let data = "This is upload test file content".data(using: .utf8)!
+                        stub(
+                            condition: isHost("api.box.com") &&
+                                isPath("/2.0/files/content") &&
+                                self.compareJSONBody(["name": "tigers.jpeg", "parent": ["id": "0"], "size": data.count])
+                        ) { _ in
+                            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                        }
+                        stub(
+                            condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
+                        ) { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                statusCode: 201, headers: [:]
+                            )
+                        }
+
+                        waitUntil(timeout: 200) { done in
+                            var progressed: Double?
+                            let task = self.sut.files.upload(
+                                data: data,
+                                name: "tigers.jpeg",
+                                parentId: "0",
+                                progress: { progress in
+                                    progressed = progress.fractionCompleted
+                                },
+                                performPreflightCheck: true,
+                                completion: { result in
+                                    switch result {
+                                    case .success:
+                                        fail("Expected upload to be cancelled, but instead succeeded")
+                                    case let .failure(error):
+                                        // Should be nil because it never makes the upload call because task is cancelled during preflight check
+                                        expect(progressed).to(beNil())
+                                        expect(error.message.description).to(equal("cancelled"))
+                                    }
+                                    done()
+                                }
+                            )
+                            task.cancel()
+                        }
+                    }
+                }
+
+                context("with preflight check") {
+                    it("should be cancelled after 50% was uploaded") {
+                        let data = "This is upload test file content".data(using: .utf8)!
+                        stub(
+                            condition: isHost("api.box.com") &&
+                                isPath("/2.0/files/content") &&
+                                self.compareJSONBody(["name": "tigers.jpeg", "parent": ["id": "0"], "size": data.count])
+                        ) { _ in
+                            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                        }
+                        stub(
+                            condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
+                        ) { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                statusCode: 201, headers: [:]
+                            )
+                        }
+
+                        waitUntil(timeout: 200) { done in
+                            var progressed: Double?
+                            var task: BoxUploadTask?
+                            task = self.sut.files.upload(
+                                data: data,
+                                name: "tigers.jpeg",
+                                parentId: "0",
+                                progress: { progress in
+                                    if progress.fractionCompleted > 0.5 {
+                                        task?.cancel()
+                                        progressed = progress.fractionCompleted
+                                    }
+                                },
+                                performPreflightCheck: true,
+                                completion: { result in
+                                    switch result {
+                                    case .success:
+                                        fail("Expected upload to be cancelled, but instead succeeded")
+                                    case let .failure(error):
+                                        expect(progressed).to(beGreaterThan(0.5))
+                                        expect(error.message.description).to(equal("cancelled"))
+                                    }
+                                    done()
+                                }
+                            )
+                        }
+                    }
+                }
+
                 it("should produce an error when preflight check fails and not call upload request") {
                     let data = "This is upload test file content".data(using: .utf8)!
                     stub(
@@ -1491,7 +1585,7 @@ class FilesModuleSpecs: QuickSpec {
                             version: "1",
                             progress: { progress in
                                 if progress.fractionCompleted > 0.5 {
-                                    task!.cancel()
+                                    task?.cancel()
                                     progressed = progress.fractionCompleted
                                 }
                             }
