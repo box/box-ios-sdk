@@ -264,6 +264,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - multipartBody: The multipart body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func post(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -324,6 +325,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - multipartBody: The multipart body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -358,6 +360,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - progress: Closure where upload progress will be reported
     ///   - completion: Returns a BoxResponse object or an error if request fails
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -391,6 +394,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - json: The JSON body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
     /// - Returns: BoxNetworkTask
+    @discardableResult
     public func options(
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
@@ -448,6 +452,7 @@ extension BoxClient: BoxClientProtocol {
     ///   - progress: Completion block to track the progress of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
     /// - Returns: BoxDownloadTask
+    @discardableResult
     public func download(
         url: URL,
         downloadDestinationURL: URL,

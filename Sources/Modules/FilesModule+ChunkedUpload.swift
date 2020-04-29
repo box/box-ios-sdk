@@ -70,6 +70,7 @@ public extension FilesModule {
     ///   - totalSize: total size of uploaded data
     ///   - completion: Returns a upload part object or an error if part upload failed
     /// - Returns: BoxUploadTask
+    @discardableResult
     func uploadPart(
         sessionId: String,
         data: Data,

@@ -243,6 +243,7 @@ public class FilesModule {
     ///   - completion: Returns a standard file object or an error if the parentId is invalid or if a file
     ///     name collision occurs.
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func upload(
         data: Data,
         name: String,
@@ -316,6 +317,7 @@ public class FilesModule {
     ///   - performPreflightCheck: Checks whether new file version will be accepted before whole new version is uploaded.
     ///   - completion: Returns a standard file object or an error.
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func uploadVersion(
         forFile fileId: String,
         name: String? = nil,
@@ -354,6 +356,7 @@ public class FilesModule {
     }
 
     /// Upload request without preflight check.
+    @discardableResult
     private func uploadVersion(
         forFile fileId: String,
         name: String? = nil,
@@ -398,6 +401,7 @@ public class FilesModule {
     ///   - completion: Returns a standard file object or an error if the parentId is invalid or if a file
     ///     name collision occurs.
     /// - Returns: BoxUploadTask
+    @discardableResult
     public func streamUpload(
         stream: InputStream,
         fileSize: Int,
@@ -480,6 +484,7 @@ public class FilesModule {
     ///   - size: The size of the file in bytes
     ///   - completion: Returns a empty resppnse in case of the checks have been passed and user can proceed to make a upload call or an error.
     /// - Returns: BoxNetworkTask
+    @discardableResult
     public func preflightCheck(
         name: String,
         parentId: String,
@@ -534,6 +539,7 @@ public class FilesModule {
     ///   - size: The size of the file in bytes
     ///   - completion: Returns a empty response in case of the checks have been passed and user can proceed to make a upload call or an error.
     /// - Returns: BoxNetworkTask
+    @discardableResult
     public func preflightCheckForNewVersion(
         forFile fileId: String,
         name: String? = nil,
@@ -779,6 +785,7 @@ public class FilesModule {
     ///   - version: Optional file version ID to download (defaults to the current version)
     ///   - completion: Returns an empty response or an error
     /// - Returns: BoxDownloadTask
+    @discardableResult
     public func download(
         fileId: String,
         destinationURL: URL,
