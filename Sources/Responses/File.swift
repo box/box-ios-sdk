@@ -112,6 +112,8 @@ public class File: BoxModel {
     public let allowedInviteeRoles: [CollaborationRole]?
     /// Digital assets created for this file.
     public let representations: EntryContainerInnerModel<FileRepresentation>?
+    /// Details about the classification applied to a Box file
+    public let classification: Classification?
 
     /// Initializer.
     ///
@@ -167,5 +169,6 @@ public class File: BoxModel {
         allowedInviteeRoles = try BoxJSONDecoder.optionalDecodeEnumCollection(json: json, forKey: "allowed_invitee_roles")
         representations = try BoxJSONDecoder.optionalDecode(json: json, forKey: "representations")
         collections = json["collections"] as? [[String: String]]
+        classification = try BoxJSONDecoder.optionalDecode(json: json, forKey: "classification")
     }
 }

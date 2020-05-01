@@ -106,6 +106,9 @@ class FolderSpecs: QuickSpec {
                         expect(folder.allowedInviteeRoles?[5]).to(equal("co-owner"))
                         expect(folder.allowedInviteeRoles?[6]).to(equal("viewer uploader"))
                         expect(folder.isExternallyOwned).to(beFalse())
+                        expect(folder.classification?.color).to(equal("#FF0000"))
+                        expect(folder.classification?.definition).to(equal("Content that should not be shared outside the company."))
+                        expect(folder.classification?.name).to(equal("Top Secret"))
                     }
                     catch {
                         fail("Failed with Error: \(error)")
