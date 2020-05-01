@@ -15,6 +15,7 @@ public class BoxNetworkTask {
     /// Whether the task is cancelled or not
     public internal(set) var cancelled: Bool = false
 
+    /// Closure that is called when a task has been created for an API call
     func receiveTask(_ sessionTask: URLSessionTask) {
         if cancelled {
             sessionTask.cancel()
@@ -24,7 +25,7 @@ public class BoxNetworkTask {
         }
     }
 
-    /// Method to cancel a network task
+    /// Method to cancel a Box Network Task
     public func cancel() {
         task?.cancel()
         cancelled = true

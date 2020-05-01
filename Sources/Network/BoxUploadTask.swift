@@ -10,21 +10,29 @@ import Foundation
 
 /// A Box network task returned for a upload
 public class BoxUploadTask: BoxNetworkTask {
-    var nestedTask: BoxNetworkTask?
+    var nestedTasks: [BoxNetworkTask] = []
 
-    public func receiveTask(_ networkTask: BoxNetworkTask) {
+    /// Closure that is called when API calls are nested within each other
+    func receiveTask(_ networkTask: BoxNetworkTask) {
         if cancelled {
-            networkTask.cancel()
+            cancelNestedTasks()
         }
         else {
-            nestedTask = networkTask
+            nestedTasks.append(networkTask)
         }
     }
 
-    /// Method to cancel a network task
+    /// Method to cancel an Box Upload Task
     public override func cancel() {
         task?.cancel()
-        nestedTask?.cancel()
+        cancelNestedTasks()
         cancelled = true
+    }
+
+    /// Method to cancel all tasks created for a Box Upload Task
+    private func cancelNestedTasks() {
+        for networkTask in nestedTasks {
+            networkTask.cancel()
+        }
     }
 }
