@@ -33,6 +33,7 @@ class FileVersionSpecs: QuickSpec {
                         expect(fileVersion.name).to(equal("Screen Shot 2015-08-24 at 11.34.42 AM (1).png"))
 //                        expect(fileVersion.extension).to(equal("png"))
                         expect(fileVersion.size).to(equal(105_459))
+                        expect(fileVersion.uploaderDisplayName).to(equal("Example User"))
                         expect(fileVersion.createdAt?.iso8601).to(equal("2018-05-29T18:40:53Z"))
                         expect(fileVersion.modifiedAt?.iso8601).to(equal("2018-05-29T18:40:53Z"))
                         expect(fileVersion.modifiedBy?.type).to(equal("user"))

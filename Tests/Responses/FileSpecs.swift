@@ -65,6 +65,7 @@ class FileSpecs: QuickSpec {
                         expect(file.contentCreatedAt?.iso8601).to(equal("2017-10-09T22:09:01Z"))
                         expect(file.contentModifiedAt?.iso8601).to(equal("2017-10-09T22:09:01Z"))
                         expect(file.isPackage).to(beFalse())
+                        expect(file.uploaderDisplayName).to(equal("Example User"))
                         expect(file.createdBy?.type).to(equal("user"))
                         expect(file.createdBy?.id).to(equal("33333"))
                         expect(file.createdBy?.name).to(equal("Example User"))

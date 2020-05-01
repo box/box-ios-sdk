@@ -118,10 +118,10 @@ extension Logger {
 
         let output = StaticString("\n\n%{public}@\n◁ Headers: %{private}@\n◁ Body: %{private}@\n")
         if errorOutput {
-            debug(output, responseString, headersString, bodyString)
+            error(output, responseString, headersString, bodyString)
         }
         else {
-            error(output, responseString, headersString, bodyString)
+            debug(output, responseString, headersString, bodyString)
         }
     }
 }

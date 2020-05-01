@@ -8,6 +8,11 @@ __Breaking Changes:__
 __New Features and Enhancements:__
 
 - Add ability to cancel uploads and downloads
+- Add support for the uploader display name field for Files and File Versions
+
+__Bug Fixes:__
+
+- Fix logging of API responses
 
 ## v4.0.0 [2020-02-13]
 
