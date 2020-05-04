@@ -14,6 +14,7 @@
 		00D0E5302077EE230026BABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00D0E52F2077EE230026BABA /* Assets.xcassets */; };
 		00D0E5332077EE230026BABA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D0E5312077EE230026BABA /* LaunchScreen.storyboard */; };
 		00D123E02077BCA10026AF5A /* file_all_fields_enterprise_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */; };
+		0D33AA6E2459767D004DCF58 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33AA6D2459767D004DCF58 /* CoreServices.framework */; };
 		0E16F10D1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F10C1A4262DD00BDDA21 /* BOXCollaborationRequestTests.m */; };
 		0E16F1161A426F8800BDDA21 /* BOXCollaborationCreateRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F1151A426F8800BDDA21 /* BOXCollaborationCreateRequestTests.m */; };
 		0E16F1191A43600600BDDA21 /* BOXCollaborationRemoveRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E16F1181A43600600BDDA21 /* BOXCollaborationRemoveRequestTests.m */; };
@@ -426,7 +427,6 @@
 		63832D001E3A9A8200F7211E /* recent_item_default_fields_shared.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832CFF1E3A9A8200F7211E /* recent_item_default_fields_shared.json */; };
 		63832D021E3AA68500F7211E /* BOXRecentItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832D011E3AA68500F7211E /* BOXRecentItemsRequestTests.m */; };
 		63832D041E3AAAB000F7211E /* recent_items.json in Resources */ = {isa = PBXBuildFile; fileRef = 63832D031E3AAAB000F7211E /* recent_items.json */; };
-		6AAB688E1E8093730054153A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11035E71A1FF6EC00B46F6D /* MobileCoreServices.framework */; };
 		704DBA211AD1F7D8001E28BB /* get_items_3_5_duped.json in Resources */ = {isa = PBXBuildFile; fileRef = 704DBA201AD1F7D8001E28BB /* get_items_3_5_duped.json */; };
 		70881FA01ACF67ED0023CDF3 /* BOXFolderItemsRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC169C1ACCA06300C3CC80 /* BOXFolderItemsRequestTests.m */; };
 		70CC169F1ACCA8AD00C3CC80 /* get_items_0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 70CC169E1ACCA8AD00C3CC80 /* get_items_0_2.json */; };
@@ -560,6 +560,7 @@
 		00D0E5342077EE230026BABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D0E5382077EE2C0026BABA /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
 		00D123DF2077BCA10026AF5A /* file_all_fields_enterprise_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file_all_fields_enterprise_metadata.json; sourceTree = "<group>"; };
+		0D33AA6D2459767D004DCF58 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		0E08238F1A76CE2700222778 /* BOXContentSDKErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXContentSDKErrors.m; sourceTree = "<group>"; };
 		0E16F0E91A411ED400BDDA21 /* BOXCollaborationUpdateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOXCollaborationUpdateRequest.h; sourceTree = "<group>"; };
 		0E16F0EA1A411ED400BDDA21 /* BOXCollaborationUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOXCollaborationUpdateRequest.m; sourceTree = "<group>"; };
@@ -1074,9 +1075,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D33AA6E2459767D004DCF58 /* CoreServices.framework in Frameworks */,
 				441B60D2223C6A35003375F5 /* libOCMock.a in Frameworks */,
 				441B60D1223C6A05003375F5 /* BoxContentSDKTestFramework.framework in Frameworks */,
-				6AAB688E1E8093730054153A /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1713,6 +1714,7 @@
 		E470433D16D41DC500FED29A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D33AA6D2459767D004DCF58 /* CoreServices.framework */,
 				C5F668A41E89CE1A00A3DD36 /* XcodeKit.framework */,
 				C5F6688B1E89CA9F00A3DD36 /* XCTest.framework */,
 				F05F80E717B3FD8C001182FB /* iOS */,
@@ -2206,7 +2208,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = Box;
 				TargetAttributes = {
 					00D0E5202077EE230026BABA = {
@@ -2234,10 +2236,9 @@
 			};
 			buildConfigurationList = E470433616D41DC500FED29A /* Build configuration list for PBXProject "BoxContentSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -2856,7 +2857,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2905,7 +2906,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -3028,6 +3029,7 @@
 		E470435E16D41DC500FED29A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3077,6 +3079,7 @@
 		E470435F16D41DC500FED29A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;

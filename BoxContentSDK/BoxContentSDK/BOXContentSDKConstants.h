@@ -245,7 +245,6 @@ extern NSString *const BOXAPIParameterKeyAvatarType;
 extern NSString *const BOXAPIParameterKeyNextMarker;
 extern NSString *const BOXAPIParameterKeyListType;
 
-__attribute__((deprecated("BOXAPIParameterKeyMarker is deprecated - please use BOXAPIParameterKeyNextMarker instead")))
 extern NSString *const BOXAPIParameterKeyMarker;
 
 // Metadata Parameter Key

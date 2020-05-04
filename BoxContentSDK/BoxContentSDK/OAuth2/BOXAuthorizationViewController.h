@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Box. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class BOXContentClient;
 @class BOXUser;
 
 /**
- * BOXAuthorizationViewController is a UIViewController that displays a UIWebview
+ * BOXAuthorizationViewController is a UIViewController that displays a WKWebview
  * that loads the OAuth2 authorize URL. An app may present this view controller to
  * log a user in to Box.
  *
@@ -29,7 +29,7 @@
  * @warning This is the only part of the Box SDK that is specific to iOS. If you wish to
  *   include the Box SDK in an OS X project, remove this source file.
  */
-@interface BOXAuthorizationViewController : UIViewController <UIWebViewDelegate>
+@interface BOXAuthorizationViewController : UIViewController
 
 /** @name Initializers */
 
@@ -58,16 +58,5 @@
                           headers:(NSDictionary *)headers
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock;
-
-/**
- * Helper method to be used when the BOXAuthorizationViewController needs to be dismissed
- * externally. For example, an app presented the Authorization View Controller but needs
- * to dismiss it without user action or any normal completion of the authorization process
- * (because of an incoming event for example). Before dismissing, it must call prepare for
- * dismissal.
- * This method is already used internally in all of the expected cases such as the user
- * cancelling and authorization completion (success and failure).
- */
-- (void)prepareForDismissal;
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Box. All rights reserved.
 //
 
-#import <BoxContentSDK/BoxContentSDK.h>
+#import <BoxContentSDK/BOXContentSDK.h>
 @class BOXRepresentation;
 
 @interface BOXRepresentationInfoRequest : BOXRequestWithSharedLinkHeader
