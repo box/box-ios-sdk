@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // swiftlint:disable:next convenience_type
 class BoxJSONDecoder {
@@ -33,6 +34,7 @@ class BoxJSONDecoder {
         }
 
         guard let object = objectJSON as? T else {
+            // here
             throw BoxCodingError(message: .typeMismatch(key: key))
         }
 
@@ -149,6 +151,18 @@ class BoxJSONDecoder {
         }
 
         return url
+    }
+
+    static func optionalDecodeColor(json: [String: Any], forKey key: String) throws -> UIColor? {
+        guard let value: String = try optionalExtractJSON(json: json, key: key), !value.isEmpty else {
+            return nil
+        }
+
+        guard let color = UIColor(hex: value) else {
+            throw BoxCodingError(message: .invalidValueFormat(key: key))
+        }
+
+        return color
     }
 
     // MARK: - Decodes

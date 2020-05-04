@@ -7,15 +7,28 @@
 //
 
 import Foundation
+import UIKit
 
 /// Details about the classification applied to a Box file or folder
-public class Classification: BoxInnerModel {
+public class Classification: BoxModel {
     // MARK: - Properties
 
+    public private(set) var rawData: [String: Any]
     /// The color that is used to display the classification label in a user-interface
-    public let color: String?
+    public let color: UIColor?
     /// An explanation of the meaning of this classification
     public let definition: String?
     /// Name of the classification
     public let name: String?
+
+    /// Initializer.
+    ///
+    /// - Parameter json: JSON dictionary.
+    /// - Throws: Decoding error.
+    public required init(json: [String: Any]) throws {
+        rawData = json
+        color = try BoxJSONDecoder.optionalDecodeColor(json: json, forKey: "color")
+        definition = try BoxJSONDecoder.optionalDecode(json: json, forKey: "definition")
+        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "name")
+    }
 }

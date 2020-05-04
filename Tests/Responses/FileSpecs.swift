@@ -130,7 +130,7 @@ class FileSpecs: QuickSpec {
                         expect(file.allowedInviteeRoles?.count).to(equal(2))
                         expect(file.allowedInviteeRoles?[0]).to(equal(.editor))
                         expect(file.allowedInviteeRoles?[1]).to(equal(.viewer))
-                        expect(file.classification?.color).to(equal("#FF0000"))
+                        expect(file.classification?.color).to(equal(UIColor.red))
                         expect(file.classification?.definition).to(equal("Content that should not be shared outside the company."))
                         expect(file.classification?.name).to(equal("Top Secret"))
                     }
