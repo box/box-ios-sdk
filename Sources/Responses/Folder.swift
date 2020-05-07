@@ -132,6 +132,8 @@ public class Folder: BoxModel {
     public let isExternallyOwned: Bool?
     /// The collections the folder belongs to
     public let collections: [[String: String]]?
+    /// Details about the classification applied to a Box folder
+    public let classification: Classification?
 
     /// Initializer.
     ///
@@ -181,5 +183,6 @@ public class Folder: BoxModel {
         allowedInviteeRoles = try BoxJSONDecoder.optionalDecode(json: json, forKey: "allowed_invitee_roles")
         isExternallyOwned = try BoxJSONDecoder.optionalDecode(json: json, forKey: "is_externally_owned")
         collections = json["collections"] as? [[String: String]]
+        classification = try BoxJSONDecoder.optionalDecode(json: json, forKey: "classification")
     }
 }

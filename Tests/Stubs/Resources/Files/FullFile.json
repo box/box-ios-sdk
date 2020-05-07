@@ -270,5 +270,10 @@
         "editor",
         "viewer"
     ],
-    "default_invitee_role": "editor"
+    "default_invitee_role": "editor",
+    "classification": {
+      "color": "#FF0000",
+      "definition": "Content that should not be shared outside the company.",
+      "name": "Top Secret"
+    }
 }
