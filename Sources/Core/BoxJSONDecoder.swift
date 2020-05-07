@@ -34,7 +34,6 @@ class BoxJSONDecoder {
         }
 
         guard let object = objectJSON as? T else {
-            // here
             throw BoxCodingError(message: .typeMismatch(key: key))
         }
 
