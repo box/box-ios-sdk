@@ -19,19 +19,12 @@ extension URL {
     }
 
     private static func make(from string: String, relativeTo baseURL: URL) -> URL {
-        // This check is there to only run sanitization when string is path and not a full custom URL. Full URLs are just returned
-        if URL(string: string)?.scheme == nil {
-            let validParams = ["2.0", "thumbnail.jpg", "thumbnail.png"]
-            var sanitizedURL = string
-            validParams.forEach { param in
-                sanitizedURL = sanitizedURL.replacingOccurrences(of: param, with: "")
-            }
-            let range = NSRange(location: 0, length: sanitizedURL.utf16.count)
-            // Checks that url paths with relative paths like /../ or other invalid path parameters are not sent to the API
-            let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9!@#$%^&*()_+\\/-]*$")
-            if regex?.firstMatch(in: sanitizedURL, options: [], range: range) == nil {
-                fatalError("An invalid path parameter exists in \(string). All parameters must be alphanumeric.")
-            }
+        let range = NSRange(location: 0, length: string.utf16.count)
+        // Checks that url paths with relative paths like /../ are not sent to the API
+        // swiftlint:disable:next force_try
+        let regex = try! NSRegularExpression(pattern: "\\/\\.+\\/")
+        if regex.firstMatch(in: string, options: [], range: range) != nil {
+            fatalError("An invalid path parameter exists in \(string). Relative path parameters cannot be passed.")
         }
         guard let url = URL(string: string, relativeTo: baseURL) else {
             fatalError("Could not create URL from \(string.isEmpty ? "empty string" : string) relative to base URL: \(baseURL)")
