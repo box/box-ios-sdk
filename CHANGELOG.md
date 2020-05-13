@@ -9,6 +9,7 @@ __New Features and Enhancements:__
 
 - Add support for the uploader display name field for Files and File Versions
 - Add support for the classification field for Files and Folders
+- Add path parameter sanitization
 
 __Bug Fixes:__
 
