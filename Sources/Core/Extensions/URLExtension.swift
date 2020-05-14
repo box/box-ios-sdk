@@ -19,6 +19,7 @@ extension URL {
     }
 
     private static func make(from string: String, relativeTo baseURL: URL) -> URL {
+        // Checks that url paths with relative paths like /.. are not sent to the API
         let pattern = "\\/\\.+"
         if string.range(of: pattern, options: .regularExpression) != nil {
             fatalError("An invalid path parameter exists in \(string). Relative path parameters cannot be passed.")
