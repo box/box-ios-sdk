@@ -8,26 +8,32 @@
 
 import Foundation
 
-/// A Box network task request.
-public class BoxNetworkTask {
+protocol Cancellable {
+    func cancel()
+}
 
-    var task: URLSessionTask?
+/// A Box network task request.
+public class BoxNetworkTask: Cancellable {
+
+    var tasks: [Cancellable] = []
     /// Whether the task is cancelled or not
     public internal(set) var cancelled: Bool = false
 
-    /// Closure that is called when a task has been created for an API call
-    func receiveTask(_ sessionTask: URLSessionTask) {
+    /// Closure that is called when API calls are nested within each other
+    func receiveTask(_ task: Cancellable) {
         if cancelled {
-            sessionTask.cancel()
+            cancel()
         }
         else {
-            task = sessionTask
+            tasks.append(task)
         }
     }
 
     /// Method to cancel a Box Network Task
     public func cancel() {
-        task?.cancel()
+        for task in tasks {
+            task.cancel()
+        }
         cancelled = true
     }
 }
