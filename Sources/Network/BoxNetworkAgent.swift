@@ -146,7 +146,7 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-
+        request.task(task)
         // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
         observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
             request.progress(progress)
@@ -195,7 +195,7 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 completion: completion
             )
         }
-
+        request.task(task)
         // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
         observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
             request.progress(progress)

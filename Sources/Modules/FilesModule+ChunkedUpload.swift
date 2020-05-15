@@ -69,6 +69,8 @@ public extension FilesModule {
     ///   - offset: The first byte of uploaded part
     ///   - totalSize: total size of uploaded data
     ///   - completion: Returns a upload part object or an error if part upload failed
+    /// - Returns: BoxUploadTask
+    @discardableResult
     func uploadPart(
         sessionId: String,
         data: Data,
@@ -76,10 +78,10 @@ public extension FilesModule {
         totalSize: Int,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<UploadPart>
-    ) {
+    ) -> BoxUploadTask {
         let digest = data.sha1Base64Encoded()
 
-        boxClient.put(
+        return boxClient.put(
             url: URL.boxUploadEndpoint("/api/2.0/files/upload_sessions/\(sessionId)", configuration: boxClient.configuration),
             httpHeaders: [
                 "digest": "sha=\(digest)",

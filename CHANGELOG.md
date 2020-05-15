@@ -7,6 +7,7 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Add ability to cancel uploads and downloads
 - Add support for the uploader display name field for Files and File Versions
 - Add support for the classification field for Files and Folders
 - Add path parameter sanitization

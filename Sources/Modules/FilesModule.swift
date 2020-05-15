@@ -242,6 +242,8 @@ public class FilesModule {
     ///     can be uploaded and whether specified name is unique and won't cause conflicts.
     ///   - completion: Returns a standard file object or an error if the parentId is invalid or if a file
     ///     name collision occurs.
+    /// - Returns: BoxUploadTask
+    @discardableResult
     public func upload(
         data: Data,
         name: String,
@@ -249,19 +251,26 @@ public class FilesModule {
         progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
-    ) {
-        uploadWithPreflightCheck(
-            performCheck: performPreflightCheck,
-            name: name,
-            size: Int64(data.count),
-            parentId: parentId,
-            request: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.upload(data: data, name: name, parentId: parentId, progress: progress, completion: completion)
-            }, completion: completion
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
+        task.receiveTask(
+            uploadWithPreflightCheck(
+                performCheck: performPreflightCheck,
+                name: name,
+                size: Int64(data.count),
+                parentId: parentId,
+                request: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    task.receiveTask(
+                        self.upload(data: data, name: name, parentId: parentId, progress: progress, completion: completion)
+                    )
+                }, completion: completion
+            )
         )
+
+        return task
     }
 
     /// Uploads file without preflight check
@@ -271,7 +280,7 @@ public class FilesModule {
         parentId: String,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
-    ) {
+    ) -> BoxUploadTask {
 
         let attributes: [String: Any] = [
             "name": name,
@@ -287,10 +296,10 @@ public class FilesModule {
         }
         catch {
             completion(.failure(BoxCodingError(message: "Error with encoding multipart from", error: error)))
-            return
+            return BoxUploadTask()
         }
 
-        boxClient.post(
+        return boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/content", configuration: boxClient.configuration),
             multipartBody: body,
             progress: progress,
@@ -307,6 +316,8 @@ public class FilesModule {
     ///     spaces, and the special names “.” and “..” are also not allowed.
     ///   - performPreflightCheck: Checks whether new file version will be accepted before whole new version is uploaded.
     ///   - completion: Returns a standard file object or an error.
+    /// - Returns: BoxUploadTask
+    @discardableResult
     public func uploadVersion(
         forFile fileId: String,
         name: String? = nil,
@@ -315,31 +326,37 @@ public class FilesModule {
         progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
-    ) {
-        updateWithPreflightCheck(
-            performCheck: performPreflightCheck,
-            fileId: fileId,
-            name: name,
-            size: Int64(data.count),
-            request: { [weak self] in
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
+        task.receiveTask(
+            updateWithPreflightCheck(
+                performCheck: performPreflightCheck,
+                fileId: fileId,
+                name: name,
+                size: Int64(data.count),
+                request: { [weak self] in
 
-                guard let self = self else {
-                    return
-                }
-
-                self.uploadVersion(
-                    forFile: fileId,
-                    name: name,
-                    contentModifiedAt: contentModifiedAt,
-                    data: data,
-                    progress: progress,
-                    completion: completion
-                )
-            }, completion: completion
+                    guard let self = self else {
+                        return
+                    }
+                    task.receiveTask(
+                        self.uploadVersion(
+                            forFile: fileId,
+                            name: name,
+                            contentModifiedAt: contentModifiedAt,
+                            data: data,
+                            progress: progress,
+                            completion: completion
+                        )
+                    )
+                }, completion: completion
+            )
         )
+        return task
     }
 
     /// Upload request without preflight check.
+    @discardableResult
     private func uploadVersion(
         forFile fileId: String,
         name: String? = nil,
@@ -347,7 +364,7 @@ public class FilesModule {
         data: Data,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
-    ) {
+    ) -> BoxUploadTask {
         var attributes: [String: Any] = [:]
         attributes["name"] = name
         attributes["content_modified_at"] = contentModifiedAt
@@ -359,10 +376,10 @@ public class FilesModule {
         }
         catch {
             completion(.failure(BoxCodingError(message: "Error with encoding multipart from", error: error)))
-            return
+            return BoxUploadTask()
         }
 
-        boxClient.post(
+        return boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             multipartBody: body,
             progress: progress,
@@ -383,6 +400,8 @@ public class FilesModule {
     ///     such as size and name won't cause an upload error.
     ///   - completion: Returns a standard file object or an error if the parentId is invalid or if a file
     ///     name collision occurs.
+    /// - Returns: BoxUploadTask
+    @discardableResult
     public func streamUpload(
         stream: InputStream,
         fileSize: Int,
@@ -391,27 +410,33 @@ public class FilesModule {
         progress: @escaping (Progress) -> Void = { _ in },
         performPreflightCheck: Bool = false,
         completion: @escaping Callback<File>
-    ) {
-        uploadWithPreflightCheck(
-            performCheck: performPreflightCheck,
-            name: name,
-            size: Int64(fileSize),
-            parentId: parentId,
-            request: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.streamUpload(
-                    stream: stream,
-                    fileSize: fileSize,
-                    name: name,
-                    parentId: parentId,
-                    progress: progress,
-                    completion: completion
-                )
-            },
-            completion: completion
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
+        task.receiveTask(
+            uploadWithPreflightCheck(
+                performCheck: performPreflightCheck,
+                name: name,
+                size: Int64(fileSize),
+                parentId: parentId,
+                request: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    task.receiveTask(
+                        self.streamUpload(
+                            stream: stream,
+                            fileSize: fileSize,
+                            name: name,
+                            parentId: parentId,
+                            progress: progress,
+                            completion: completion
+                        )
+                    )
+                },
+                completion: completion
+            )
         )
+        return task
     }
 
     /// Stream upload request without preflight check.
@@ -422,7 +447,7 @@ public class FilesModule {
         parentId: String,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<File>
-    ) {
+    ) -> BoxUploadTask {
 
         let attributes: [String: Any] = [
             "name": name,
@@ -438,10 +463,10 @@ public class FilesModule {
         }
         catch {
             completion(.failure(BoxCodingError(message: "Error with encoding multipart from", error: error)))
-            return
+            return BoxUploadTask()
         }
 
-        boxClient.post(
+        return boxClient.post(
             url: URL.boxUploadEndpoint("/api/2.0/files/content", configuration: boxClient.configuration),
             multipartBody: body,
             progress: progress,
@@ -458,17 +483,19 @@ public class FilesModule {
     ///   - parantId: The ID of the parent folder. Use "0" for the root folder.
     ///   - size: The size of the file in bytes
     ///   - completion: Returns a empty resppnse in case of the checks have been passed and user can proceed to make a upload call or an error.
+    /// - Returns: BoxNetworkTask
+    @discardableResult
     public func preflightCheck(
         name: String,
         parentId: String,
         size: Int64? = nil,
         completion: @escaping Callback<Void>
-    ) {
+    ) -> BoxNetworkTask {
         var body: [String: Any] = ["parent": ["id": parentId]]
         body["name"] = name
         body["size"] = size
 
-        boxClient.options(
+        return boxClient.options(
             url: URL.boxAPIEndpoint("/2.0/files/content", configuration: boxClient.configuration),
             json: body,
             completion: ResponseHandler.default(wrapping: completion)
@@ -483,9 +510,9 @@ public class FilesModule {
         parentId: String,
         request: @escaping () -> Void,
         completion: @escaping Callback<T>
-    ) {
+    ) -> BoxNetworkTask {
         if performCheck {
-            preflightCheck(name: name, parentId: parentId, size: size) { result in
+            return preflightCheck(name: name, parentId: parentId, size: size) { result in
                 switch result {
                 case .success:
                     request()
@@ -496,6 +523,7 @@ public class FilesModule {
         }
         else {
             request()
+            return BoxNetworkTask()
         }
     }
 
@@ -510,17 +538,19 @@ public class FilesModule {
     ///   - parantId: The ID of the parent folder. Use "0" for the root folder.
     ///   - size: The size of the file in bytes
     ///   - completion: Returns a empty response in case of the checks have been passed and user can proceed to make a upload call or an error.
+    /// - Returns: BoxNetworkTask
+    @discardableResult
     public func preflightCheckForNewVersion(
         forFile fileId: String,
         name: String? = nil,
         size: Int64? = nil,
         completion: @escaping Callback<Void>
-    ) {
+    ) -> BoxNetworkTask {
         var body: [String: Any] = [:]
         body["name"] = name
         body["size"] = size
 
-        boxClient.options(
+        return boxClient.options(
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             json: body,
             completion: ResponseHandler.default(wrapping: completion)
@@ -534,9 +564,9 @@ public class FilesModule {
         size: Int64? = nil,
         request: @escaping () -> Void,
         completion: @escaping Callback<T>
-    ) {
+    ) -> BoxNetworkTask {
         if performCheck {
-            preflightCheckForNewVersion(forFile: fileId, name: name, size: size) { result in
+            return preflightCheckForNewVersion(forFile: fileId, name: name, size: size) { result in
                 switch result {
                 case .success:
                     request()
@@ -547,6 +577,7 @@ public class FilesModule {
         }
         else {
             request()
+            return BoxNetworkTask()
         }
     }
 
@@ -753,15 +784,16 @@ public class FilesModule {
     ///   - destinationURL: A URL for the location on device that we want to store the file once been donwloaded
     ///   - version: Optional file version ID to download (defaults to the current version)
     ///   - completion: Returns an empty response or an error
+    /// - Returns: BoxDownloadTask
+    @discardableResult
     public func download(
         fileId: String,
         destinationURL: URL,
         version: String? = nil,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
-    ) {
-
-        boxClient.download(
+    ) -> BoxDownloadTask {
+        return boxClient.download(
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
             downloadDestinationURL: destinationURL,
             queryParameters: ["version": version],

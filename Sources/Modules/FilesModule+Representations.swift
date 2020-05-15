@@ -194,14 +194,16 @@ extension FilesModule {
     ///   - destinationURL: A URL for the location on device that we want to store the file once been donwloaded
     ///   - version: Optional file version ID to download (defaults to the current version)
     ///   - completion: Returns an empty response or an error
+    /// - Returns: BoxDownloadTask
+    @discardableResult
     public func downloadRepresentation(
         sourceURL: URL,
         destinationURL: URL,
         progress: @escaping (Progress) -> Void = { _ in },
         completion: @escaping Callback<Void>
-    ) {
+    ) -> BoxDownloadTask {
 
-        boxClient.download(
+        return boxClient.download(
             url: sourceURL,
             downloadDestinationURL: destinationURL,
             progress: progress,

@@ -32,6 +32,7 @@ public class BoxRequest {
     var httpHeaders: BoxHTTPHeaders
     var queryParams: QueryParameters
     var body: BodyType
+    var task: (URLSessionTask) -> Void
     var progress: (Progress) -> Void
 
     // The path on the local FileSystem where a download request will write the data
@@ -44,6 +45,7 @@ public class BoxRequest {
         queryParams: QueryParameters = [:],
         body: BodyType = .empty,
         downloadDestination: URL? = nil,
+        task: @escaping (URLSessionTask) -> Void = { _ in },
         progress: @escaping (Progress) -> Void = { _ in }
     ) {
         self.httpMethod = httpMethod
@@ -52,6 +54,7 @@ public class BoxRequest {
         self.queryParams = queryParams
         self.body = body
         self.downloadDestination = downloadDestination
+        self.task = task
         self.progress = progress
     }
 }

@@ -57,7 +57,7 @@ public protocol BoxClientProtocol: AnyObject {
         multipartBody: MultipartForm,
         progress: @escaping (Progress) -> Void,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxUploadTask
 
     /// Performs an HTTP PUT method call on an API endpoint and returns a response.
     ///
@@ -84,6 +84,7 @@ public protocol BoxClientProtocol: AnyObject {
     ///   - multipartBody: The multipart form body of the request
     ///   - progress: Closure where upload progress will be reported
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxUploadTask
     func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders,
@@ -91,7 +92,7 @@ public protocol BoxClientProtocol: AnyObject {
         multipartBody: MultipartForm,
         progress: @escaping (Progress) -> Void,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxUploadTask
 
     /// Performs an HTTP PUT method call on an API endpoint and returns a response - variant for chunked upload.
     ///
@@ -102,6 +103,7 @@ public protocol BoxClientProtocol: AnyObject {
     ///   - data: Binary body of the request
     ///   - progress: Closure where upload progress will be reported
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxUploadTask
     func put(
         url: URL,
         httpHeaders: BoxHTTPHeaders,
@@ -109,7 +111,7 @@ public protocol BoxClientProtocol: AnyObject {
         data: Data,
         progress: @escaping (Progress) -> Void,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxUploadTask
 
     /// Performs an HTTP OPTIONS method call on an API endpoint and returns a response.
     ///
@@ -119,13 +121,14 @@ public protocol BoxClientProtocol: AnyObject {
     ///   - queryParameters: Additional parameters to be passed in the URL that is called.
     ///   - json: The JSON body of the request
     ///   - completion: Returns a BoxResponse object or an error if request fails
+    /// - Returns: BoxNetworkTask
     func options(
         url: URL,
         httpHeaders: BoxHTTPHeaders,
         queryParameters: QueryParameters,
         json: Any?,
         completion: @escaping Callback<BoxResponse>
-    )
+    ) -> BoxNetworkTask
 
     /// Performs an HTTP DELETE method call on an API endpoint and returns a response.
     ///
