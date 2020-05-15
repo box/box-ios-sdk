@@ -86,13 +86,18 @@ Use ID `"0"` to upload a file into the root folder, "All Files".
 ```swift
 let data = "test content".data(using: .utf8)
 
-client.files.upload(data: data, name: "Test File.txt", parentId: "0") { (result: Result<File, BoxSDKError>) in
+let task: BoxUploadTask = client.files.upload(data: data, name: "Test File.txt", parentId: "0") { (result: Result<File, BoxSDKError>) in
     guard case let .success(file) = result else {
         print("Error uploading file")
         return
     }
 
     print("File \(file.name) was uploaded at \(file.createdAt) into \"\(file.parent.name)\"")
+}
+
+// To cancel upload
+if someConditionIsSatisfied {
+    task.cancel()
 }
 ```
 
@@ -103,7 +108,7 @@ To upload a file from a stream, use
 let data = "test content".data(using: .utf8)
 let stream = InputStream(data: data)
 
-client.files.streamUpload(
+let task: BoxUploadTask = client.files.streamUpload(
     stream: stream,
     fileSize: 12,
     name: "Test File.txt",
@@ -115,6 +120,11 @@ client.files.streamUpload(
     }
 
     print("File \(file.name) was uploaded at \(file.createdAt) into \"\(file.parent.name)\"")
+}
+
+// To cancel upload
+if someConditionIsSatisfied {
+    task.cancel()
 }
 ```
 
@@ -131,7 +141,7 @@ with the ID of the file and the file contents to be uploaded.
 <!-- sample post_files_id_content -->
 ```swift
 let data = "updated file content".data(using: .utf8)
-client.files.uploadVersion(
+let task: BoxUploadTask = client.files.uploadVersion(
     forFile: "11111",
     name: "New file name.txt",
     contentModifiedAt: "2019-08-07T09:19:13-07:00",
@@ -143,6 +153,11 @@ client.files.uploadVersion(
     }
 
     print("New version of \(file.name) was uploaded")
+}
+
+// To cancel upload
+if someConditionIsSatisfied {
+    task.cancel()
 }
 ```
 
@@ -159,7 +174,7 @@ with the ID of the file to download and a URL to the location where the file sho
 ```swift
 let url = FileManager.default.homeDirectoryForCurrentUser
 
-let task = client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxSDKError>) in
+let task: BoxDownloadTask = client.files.download(fileId: "11111", destinationURL: url) { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
         print("Error downloading file")
         return
@@ -168,7 +183,7 @@ let task = client.files.download(fileId: "11111", destinationURL: url) { (result
     print("File downloaded successfully")
 }
 
-// To cancel request
+// To cancel download
 if someConditionIsSatisfied {
     task.cancel()
 }
