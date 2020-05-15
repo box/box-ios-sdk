@@ -49,10 +49,16 @@
                 <a href="Classes/BoxCollection.html">BoxCollection</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes.html#/s:6BoxSDK0A12DownloadTaskC">BoxDownloadTask</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes.html#/s:6BoxSDK0A12NetworkErrorC">BoxNetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BoxNetworkTask.html">BoxNetworkTask</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/BoxRequest.html">BoxRequest</a>
@@ -68,6 +74,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/BoxSDKError.html">BoxSDKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Classification.html">Classification</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/Collaboration.html">Collaboration</a>
@@ -1672,6 +1684,33 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK0A12DownloadTaskC"></a>
+                    <a name="//apple_ref/swift/Class/BoxDownloadTask" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A12DownloadTaskC">BoxDownloadTask</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Box network task for a download</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxDownloadTask</span> <span class="p">:</span> <span class="kt"><a href="Classes/BoxNetworkTask.html">BoxNetworkTask</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@BoxSDK@objc(cs)BoxNetworkAgent"></a>
                     <a name="//apple_ref/swift/Class/BoxNetworkAgent" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@BoxSDK@objc(cs)BoxNetworkAgent">BoxNetworkAgent</a>
@@ -1691,6 +1730,61 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxNetworkAgent</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="Protocols/NetworkAgentProtocol.html">NetworkAgentProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A11NetworkTaskC"></a>
+                    <a name="//apple_ref/swift/Class/BoxNetworkTask" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A11NetworkTaskC">BoxNetworkTask</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Box network task request.</p>
+
+                        <a href="Classes/BoxNetworkTask.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxNetworkTask</span> <span class="p">:</span> <span class="kt">Cancellable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A10UploadTaskC"></a>
+                    <a name="//apple_ref/swift/Class/BoxUploadTask" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Box network task returned for a upload</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxUploadTask</span> <span class="p">:</span> <span class="kt"><a href="Classes/BoxNetworkTask.html">BoxNetworkTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1777,6 +1871,34 @@ in a similar way in which the contents of a folder are discovered.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BoxCollection</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK14ClassificationC"></a>
+                    <a name="//apple_ref/swift/Class/Classification" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK14ClassificationC">Classification</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about the classification applied to a Box file or folder</p>
+
+                        <a href="Classes/Classification.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Classification</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1940,7 +2062,7 @@ You can create comments independently or create them as responses to other comme
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Contain a device pin that allows the enterprise to control devices connecting to it.</p>
+                        <p>Defines a device pin which allows the enterprise to control devices connecting to it.</p>
 
                         <a href="Classes/DevicePin.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3375,7 +3497,7 @@ Watermarks can be applied to folders and files independently.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Webhooks enable you to attach event triggers to Box files and folders</p>
+                        <p>Defines a Webhook, which enables event triggers to be attached to Box files and folders</p>
 
                         <a href="Classes/Webhook.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3431,7 +3553,7 @@ Watermarks can be applied to folders and files independently.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Oauth 2 Session</p>
+                        <p>OAuth 2 Session</p>
 
                         <a href="Classes/OAuth2Session.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3507,7 +3629,7 @@ Watermarks can be applied to folders and files independently.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-23)</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-05-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

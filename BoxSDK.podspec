@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "BoxSDK"
-  spec.version      = "4.0.0"
+  spec.version      = "4.1.0"
   spec.summary      = "Box Swift SDK"
   spec.description  = <<-DESC
   Official Box Swift SDK.
@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.social_media_url   = "https://twitter.com/box"
   spec.ios.deployment_target = "11.0"
   spec.source       = { :git => "https://github.com/box/box-ios-sdk.git", :tag => "v"+spec.version.to_s }
-  spec.swift_versions = ["5.0", "5.1"]
+  spec.swift_versions = ["5.0", "5.1", "5.2"]
   spec.requires_arc = true
 
   spec.default_subspec = "Core"
