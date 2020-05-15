@@ -1,33 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/Network/PagingIterator.swift",
-      "line": 11,
-      "symbol": "PagingParameter",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/Network/PagingIterator.swift",
-      "line": 37,
-      "symbol": "PagingIterator.nextPage",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/Responses/LegalHoldPolicyAssignmentItem.swift",
-      "line": 27,
-      "symbol": "LegalHoldPolicyAssignmentItem.itemValue",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk/Sources/Responses/Webhook.swift",
-      "line": 257,
-      "symbol": "Webhook.type",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    }
+
   ],
-  "source_directory": "/Users/sgarlanka/Documents/SDKs/iOS/box-ios-sdk"
+  "source_directory": "/SDKs/iOS/box-ios-sdk"
 }

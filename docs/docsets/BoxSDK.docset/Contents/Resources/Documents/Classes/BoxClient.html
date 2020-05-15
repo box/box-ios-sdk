@@ -49,10 +49,16 @@
                 <a href="../Classes/BoxCollection.html">BoxCollection</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes.html#/s:6BoxSDK0A12DownloadTaskC">BoxDownloadTask</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/BoxNetworkAgent.html">BoxNetworkAgent</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes.html#/s:6BoxSDK0A12NetworkErrorC">BoxNetworkError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BoxNetworkTask.html">BoxNetworkTask</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BoxRequest.html">BoxRequest</a>
@@ -68,6 +74,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BoxSDKError.html">BoxSDKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Classification.html">Classification</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Collaboration.html">Collaboration</a>
@@ -1998,9 +2010,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A6ClientC4post3url11httpHeaders15queryParameters13multipartBody8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
+                    <a name="/s:6BoxSDK0A6ClientC4post3url11httpHeaders15queryParameters13multipartBody8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/post(url:httpHeaders:queryParameters:multipartBody:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A6ClientC4post3url11httpHeaders15queryParameters13multipartBody8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">post(url:httpHeaders:queryParameters:multipartBody:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK0A6ClientC4post3url11httpHeaders15queryParameters13multipartBody8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">post(url:httpHeaders:queryParameters:multipartBody:progress:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2015,14 +2027,15 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">post</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">post</span><span class="p">(</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">multipartBody</span><span class="p">:</span> <span class="kt"><a href="../Structs/MultipartForm.html">MultipartForm</a></span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2092,6 +2105,10 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxUploadTask</p>
                       </div>
                     </section>
                   </div>
@@ -2199,9 +2216,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters13multipartBody8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
+                    <a name="/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters13multipartBody8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/put(url:httpHeaders:queryParameters:multipartBody:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters13multipartBody8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">put(url:httpHeaders:queryParameters:multipartBody:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters13multipartBody8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAA13MultipartFormVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">put(url:httpHeaders:queryParameters:multipartBody:progress:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2216,14 +2233,15 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">put</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">put</span><span class="p">(</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">multipartBody</span><span class="p">:</span> <span class="kt"><a href="../Structs/MultipartForm.html">MultipartForm</a></span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2294,15 +2312,19 @@
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxUploadTask</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters4data8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAK4DataVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
+                    <a name="/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters4data8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAM4DataVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/put(url:httpHeaders:queryParameters:data:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters4data8progress10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAK4DataVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">put(url:httpHeaders:queryParameters:data:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters4data8progress10completionAA0A10UploadTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGAM4DataVySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">put(url:httpHeaders:queryParameters:data:progress:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2317,14 +2339,15 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">put</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">put</span><span class="p">(</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2407,15 +2430,19 @@
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxUploadTask</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
+                    <a name="/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completionAA0A11NetworkTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/options(url:httpHeaders:queryParameters:json:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">options(url:httpHeaders:queryParameters:json:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completionAA0A11NetworkTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">options(url:httpHeaders:queryParameters:json:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2430,13 +2457,14 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">options</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">options</span><span class="p">(</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">json</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BoxNetworkTask.html">BoxNetworkTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2506,6 +2534,10 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxNetworkTask</p>
                       </div>
                     </section>
                   </div>
@@ -2600,9 +2632,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A6ClientC8download3url0D14DestinationURL11httpHeaders15queryParameters8progress10completiony10Foundation0G0V_AMSDyS2SGSDySSAA25QueryParameterConvertible_pSgGySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
+                    <a name="/s:6BoxSDK0A6ClientC8download3url0D14DestinationURL11httpHeaders15queryParameters8progress10completionAA0A12DownloadTaskC10Foundation0G0V_AOSDyS2SGSDySSAA25QueryParameterConvertible_pSgGySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/download(url:downloadDestinationURL:httpHeaders:queryParameters:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A6ClientC8download3url0D14DestinationURL11httpHeaders15queryParameters8progress10completiony10Foundation0G0V_AMSDyS2SGSDySSAA25QueryParameterConvertible_pSgGySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">download(url:downloadDestinationURL:httpHeaders:queryParameters:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK0A6ClientC8download3url0D14DestinationURL11httpHeaders15queryParameters8progress10completionAA0A12DownloadTaskC10Foundation0G0V_AOSDyS2SGSDySSAA25QueryParameterConvertible_pSgGySo10NSProgressCcys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF">download(url:downloadDestinationURL:httpHeaders:queryParameters:progress:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2617,14 +2649,15 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">download</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">download</span><span class="p">(</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">downloadDestinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span> <span class="o">=</span> <span class="p">[:],</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A12DownloadTaskC">BoxDownloadTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2707,6 +2740,10 @@
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxDownloadTask</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -2715,7 +2752,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-02-23)</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-05-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
