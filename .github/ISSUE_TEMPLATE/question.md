@@ -39,8 +39,8 @@ assignees: PJSimon, sujaygarlanka
 <!-- If applicable, add screenshots to help explain your problem. -->
 
 ### Versions Used
-iOS Preview SDK: <!-- Replace with the version of the iOS Preview SDK you're using. -->
-iOS SDK: <!-- Replace with the version of the iOS SDK you're using, if applicable. -->
+iOS SDK: <!-- Replace with the version of the iOS SDK you're using. -->
+iOS Preview SDK: <!-- Replace with the version of the iOS Preview SDK you're using, if applicable. -->
 iOS: <!-- Replace with the version of iOS your application is running on. -->
 Xcode: <!-- Replace with the version of Xcode your application is developed in. -->
 
