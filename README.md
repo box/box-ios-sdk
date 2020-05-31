@@ -127,7 +127,7 @@ A sample app using OAuth2 Authentication can be found in the repository [here][o
 how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
 
 [oauth2-sample-app]:
-https://github.com/box/box-ios-sdk/tree/limited-beta-release/SampleApps/OAuth2SampleApp
+https://github.com/box/box-ios-sdk/tree/master/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
