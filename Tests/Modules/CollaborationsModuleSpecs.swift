@@ -76,7 +76,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             condition: isHost("api.box.com") &&
                                 isPath("/2.0/collaborations") &&
                                 isMethodPOST() &&
-                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "role": "editor", "can_view_path": true])
+                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor", "can_view_path": true])
                         ) { _ in
                             OHHTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
@@ -119,7 +119,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             condition: isHost("api.box.com") &&
                                 isPath("/2.0/collaborations") &&
                                 isMethodPOST() &&
-                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "role": "editor"])
+                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
                         ) { _ in
                             OHHTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
