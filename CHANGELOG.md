@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+__Bug Fixes:__
+
+- Fix bug with creating collaboration
+
 ## v4.1.0 [2020-05-15]
 
 __Breaking Changes:__
