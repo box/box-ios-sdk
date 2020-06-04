@@ -107,11 +107,11 @@ public class CollaborationsModule {
                 "id": itemId,
                 "type": itemType
             ],
-            "role": role.description,
             "accessible_by": [
                 "id": accessibleBy,
                 "type": accessibleByType.description
-            ]
+            ],
+            "role": role.description
         ]
 
         if let canViewPath = canViewPath {
