@@ -107,15 +107,16 @@ public class CollaborationsModule {
                 "id": itemId,
                 "type": itemType
             ],
+            "accessible_by": [
+                "id": accessibleBy,
+                "type": accessibleByType.description
+            ],
             "role": role.description
         ]
 
         if let canViewPath = canViewPath {
             json["can_view_path"] = canViewPath
         }
-
-        var accessibleByJSON: [String: Any] = ["type": accessibleByType.description]
-        accessibleByJSON["id"] = accessibleBy
 
         boxClient.post(
             url: URL.boxAPIEndpoint("/2.0/collaborations", configuration: boxClient.configuration),
@@ -153,15 +154,16 @@ public class CollaborationsModule {
                 "id": itemId,
                 "type": itemType
             ],
+            "accessible_by": [
+                "login": login,
+                "type": "user"
+            ],
             "role": role.description
         ]
 
         if let canViewPath = canViewPath {
             json["can_view_path"] = canViewPath
         }
-
-        var accessibleByJSON: [String: Any] = ["type": "user"]
-        accessibleByJSON["login"] = login
 
         boxClient.post(
             url: URL.boxAPIEndpoint("/2.0/collaborations", configuration: boxClient.configuration),
