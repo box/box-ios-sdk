@@ -21,7 +21,7 @@ Quickstart
 ----------
 **Step 1**: Add to your Cartfile 
 ```
-github "box/box-ios-sdk"
+github "box/box-ios-sdk" "objective-c-maintenance"
 ```
 
 **Step 2:** Update
