@@ -168,7 +168,7 @@ public class EventsModule {
     /// and seven years via exported reports in the Box Admin Console.
     ///
     /// - Parameters:
-    ///   - evenType: Restricts returned value to listed events.
+    ///   - eventType: Restricts returned value to listed events.
     ///   - createdAfter: A lower bound on the timestamp of the events returned.
     ///   - createdBefore: An upper bound on the timestamp of the events returned.
     ///   - streamPosition: The location in the event stream from which you want to start receiving events.

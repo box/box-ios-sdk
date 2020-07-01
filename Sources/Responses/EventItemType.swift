@@ -22,6 +22,8 @@ public class EventItem: BoxModel {
         case file(File)
         /// Comment type
         case comment(Comment)
+        /// User type
+        case user(User)
         /// Unknown type
         case unknown
     }
@@ -35,20 +37,36 @@ public class EventItem: BoxModel {
     /// - Throws: Decoding error.
     public required init(json: [String: Any]) throws {
         rawData = json
+        var updatedJson: [String: Any] = json
 
-        guard let type = json["type"] as? String else {
+        if let entry = updatedJson.removeValue(forKey: "item_id") {
+            updatedJson["id"] = entry
+        }
+
+        if let entry = updatedJson.removeValue(forKey: "item_type") {
+            updatedJson["type"] = entry
+        }
+
+        if let entry = updatedJson.removeValue(forKey: "item_name") {
+            updatedJson["name"] = entry
+        }
+
+        guard let type = updatedJson["type"] as? String else {
             throw BoxCodingError(message: .typeMismatch(key: "type"))
         }
         switch type {
         case "file":
-            let file = try File(json: json)
+            let file = try File(json: updatedJson)
             itemValue = .file(file)
         case "folder":
-            let folder = try Folder(json: json)
+            let folder = try Folder(json: updatedJson)
             itemValue = .folder(folder)
         case "comment":
-            let comment = try Comment(json: json)
+            let comment = try Comment(json: updatedJson)
             itemValue = .comment(comment)
+        case "user":
+            let user = try User(json: updatedJson)
+            itemValue = .user(user)
         default:
             // Clients to use rawData directly
             itemValue = .unknown
