@@ -10,6 +10,7 @@ __New Features and Enhancements:__
 __Bug Fixes:__
 
 - Fix bug with creating collaboration
+- Fix bug with getting enterprise events
 
 ## v4.1.0 [2020-05-15]
 
