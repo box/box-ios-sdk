@@ -7,6 +7,8 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Add error information to OAuth web session failures
+
 __Bug Fixes:__
 
 - Fix bug with creating collaboration
