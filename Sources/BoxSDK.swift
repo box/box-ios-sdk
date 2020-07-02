@@ -361,7 +361,7 @@ public class BoxSDK {
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
-                        completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
+                    completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
                     return
                 }
 
@@ -389,7 +389,7 @@ public class BoxSDK {
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
-                        completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
+                    completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
                     return
                 }
 
