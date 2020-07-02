@@ -244,6 +244,7 @@ class EventsModuleSpecs: QuickSpec {
                                     expect(event.sessionId).to(beNil())
                                     switch event.source?.itemValue {
                                     case let .file(file):
+                                        expect(file.type).to(equal("file"))
                                         expect(file.id).to(equal("22222"))
                                         expect(file.name).to(equal("test.docx"))
                                     default:
@@ -252,7 +253,28 @@ class EventsModuleSpecs: QuickSpec {
                                 case let .failure(error):
                                     fail("Unable to get event details, but instead got \(error)")
                                 }
-                                done()
+                            }
+
+                            iterator.next { result in
+                                switch result {
+                                case let .success(event):
+                                    expect(event).toNot(beNil())
+                                    expect(event).to(beAKindOf(Event.self))
+                                    expect(event.id).to(equal("b9a2393a-20cf-4307-90f5-004110dec209"))
+                                    expect(event.createdBy?.id).to(equal("222853849"))
+                                    expect(event.sessionId).to(beNil())
+                                    switch event.source?.itemValue {
+                                    case let .user(user):
+                                        expect(user.type).to(equal("user"))
+                                        expect(user.id).to(equal("11111"))
+                                        expect(user.name).to(equal("Test User"))
+                                        done()
+                                    default:
+                                        fail("Unable to get event source")
+                                    }
+                                case let .failure(error):
+                                    fail("Unable to get event details, but instead got \(error)")
+                                }
                             }
                         case let .failure(error):
                             fail("Unable to get event details, but instead got \(error)")
