@@ -4,27 +4,6 @@
     "entries": [
         {
             "source": {
-                "type": "user",
-                "id": "11111",
-                "name": "Test User",
-                "login": "testuser@example.com"
-            },
-            "created_by": {
-                "type": "user",
-                "id": "222853849",
-                "name": "Test User",
-                "login": "testuser@example.com"
-            },
-            "created_at": "2015-12-02T09:41:31-08:00",
-            "event_id": "b9a2393a-20cf-4307-90f5-004110dec209",
-            "event_type": "ADD_LOGIN_ACTIVITY_DEVICE",
-            "ip_address": "Unknown IP",
-            "type": "event",
-            "session_id": null,
-            "additional_details": null
-        },
-        {
-            "source": {
                 "item_type": "file",
                 "item_id": "22222",
                 "item_name": "test.docx",
@@ -58,6 +37,27 @@
                 "ekm_id": "8afe49be-4ced-42cb-a3b0-8342a1cfe111",
                 "version_id": "77777"
             }
+        },
+        {
+            "source": {
+                "type": "user",
+                "id": "11111",
+                "name": "Test User",
+                "login": "testuser@example.com"
+            },
+            "created_by": {
+                "type": "user",
+                "id": "222853849",
+                "name": "Test User",
+                "login": "testuser@example.com"
+            },
+            "created_at": "2015-12-02T09:41:31-08:00",
+            "event_id": "b9a2393a-20cf-4307-90f5-004110dec209",
+            "event_type": "ADD_LOGIN_ACTIVITY_DEVICE",
+            "ip_address": "Unknown IP",
+            "type": "event",
+            "session_id": null,
+            "additional_details": null
         }
     ]
 }

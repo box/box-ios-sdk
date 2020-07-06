@@ -219,7 +219,7 @@ class EventsModuleSpecs: QuickSpec {
                         isMethodGET(),
                     response: { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+                            fileAtPath: OHPathForFile("GetEnterpriseEvents.json", type(of: self))!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -239,15 +239,42 @@ class EventsModuleSpecs: QuickSpec {
                                 case let .success(event):
                                     expect(event).toNot(beNil())
                                     expect(event).to(beAKindOf(Event.self))
-                                    expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
-                                    expect(event.createdBy?.id).to(equal("11111"))
-                                    expect(event.eventType).to(equal(.itemCreated))
-                                    expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
-
+                                    expect(event.id).to(equal("1a4ade15-b1ff-4cc3-89a8-955e1522557c"))
+                                    expect(event.createdBy?.id).to(equal("55555"))
+                                    expect(event.sessionId).to(beNil())
+                                    switch event.source?.itemValue {
+                                    case let .file(file):
+                                        expect(file.type).to(equal("file"))
+                                        expect(file.id).to(equal("22222"))
+                                        expect(file.name).to(equal("test.docx"))
+                                    default:
+                                        fail("Unable to get event source")
+                                    }
                                 case let .failure(error):
                                     fail("Unable to get event details, but instead got \(error)")
                                 }
-                                done()
+                            }
+
+                            iterator.next { result in
+                                switch result {
+                                case let .success(event):
+                                    expect(event).toNot(beNil())
+                                    expect(event).to(beAKindOf(Event.self))
+                                    expect(event.id).to(equal("b9a2393a-20cf-4307-90f5-004110dec209"))
+                                    expect(event.createdBy?.id).to(equal("222853849"))
+                                    expect(event.sessionId).to(beNil())
+                                    switch event.source?.itemValue {
+                                    case let .user(user):
+                                        expect(user.type).to(equal("user"))
+                                        expect(user.id).to(equal("11111"))
+                                        expect(user.name).to(equal("Test User"))
+                                        done()
+                                    default:
+                                        fail("Unable to get event source")
+                                    }
+                                case let .failure(error):
+                                    fail("Unable to get event details, but instead got \(error)")
+                                }
                             }
                         case let .failure(error):
                             fail("Unable to get event details, but instead got \(error)")
