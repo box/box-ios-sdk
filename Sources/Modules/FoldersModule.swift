@@ -159,8 +159,9 @@ public class FoldersModule {
         limit: Int? = nil,
         sort: FolderItemsOrderBy? = nil,
         direction: OrderDirection? = nil,
-        fields: [String]? = nil
-    ) -> AsyncPagesIterator<FolderItem> {
+        fields: [String]? = nil,
+        completion: @escaping Callback<PagingIterator<FolderItem>>
+    ) {
 
         var queryParams: QueryParameters = [
             "limit": limit,
@@ -176,28 +177,11 @@ public class FoldersModule {
             queryParams["offset"] = offset
         }
 
-        return .init(
-            client: boxClient,
+        boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/folders/\(folderId)/items", configuration: boxClient.configuration),
-            headers: [:],
-            queryParams: queryParams
+            queryParameters: queryParams,
+            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
         )
-    }
-
-    /// Deprecated listItems interface
-    @available(*, deprecated, message: "Use listItems(folderId:usemarker:marker:offset:limit:sort:direction:fields:) instead.")
-    public func listItems(
-        folderId: String,
-        usemarker: Bool? = nil,
-        marker: String? = nil,
-        offset: Int? = nil,
-        limit: Int? = nil,
-        sort: FolderItemsOrderBy? = nil,
-        direction: OrderDirection? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FolderItem>>
-    ) {
-        listItems(folderId: folderId, usemarker: usemarker, marker: marker, offset: offset, limit: limit, sort: sort, direction: direction, fields: fields).makePagingIterator(completion: completion)
     }
 
     /// Create a new folder.

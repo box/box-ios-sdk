@@ -29,178 +29,26 @@ public enum PagingParameter {
     }
 }
 
-/// Gets pages from a paged API
-public class AsyncPagesIterator<Element: BoxModel> {
-
-    /// The type of the page sent to callbacks registered with the `next` method
-    public typealias Page = EntryContainer<Element>
+/// Provides paged iterator access for a collection of BoxModel's
+public class PagingIterator<Element: BoxModel> {
+    // swiftlint:disable force_unwrapping
 
     private let client: BoxClient
 
-    /// Gets offset, marker or stream position for the next page after the
-    /// initial page is received
-    private var nextPage: PagingParameter?
-    fileprivate var isDone: Bool // swiftlint:disable:this strict_fileprivate
-    fileprivate var isStreamEmpty: Bool // swiftlint:disable:this strict_fileprivate
+    /// Gets offset, marker or stream position for the next page
+    public private(set) var nextPage: PagingParameter
+    private var limit: Int
+    private var isDone: Bool
+    private var isStreamEmpty: Bool
 
     private let url: URL
     private let headers: BoxHTTPHeaders
     private var queryParams: QueryParameters
 
-    let dispatchQueue: DispatchQueue
-    private var pageCallbacks: [Callback<Page>]
-
-    /// Initializer
-    ///
-    /// - Parameters:
-    ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
-    ///   - request: A BoxRequest representing the first page request.
-    init(client: BoxClient, url: URL, headers: BoxHTTPHeaders, queryParams: QueryParameters) {
-        self.client = client
-        self.url = url
-        self.headers = headers.filter { $0.key.lowercased() != "authorization" }
-        self.queryParams = queryParams
-
-        isDone = false
-        isStreamEmpty = false
-
-        dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.asyncpagesiterator", qos: .userInitiated)
-        pageCallbacks = []
-    }
-
-    /// Gets next element from the iterator
-    ///
-    /// - Parameter completion: Returns either the next page or an error.
-    ///             If the iterator has no more elements, a BoxSDKError with a
-    ///             message of BoxSDKErrorEnum.endOfList is passed to the completion.
-    public func next(completion: @escaping Callback<Page>) {
-        // Access to private variables is protected by a serial queue
-        dispatchQueue.async {
-            // Return end-failure if iterator is done (this won't happen for streams)
-            if self.isDone {
-                completion(.failure(BoxSDKError(message: .endOfList)))
-                return
-            }
-
-            // If a callback is already enqueued, that means another page of results
-            // is already on its way
-            let dataInFlight = !self.pageCallbacks.isEmpty
-            // Either way, enqueue this block
-            self.pageCallbacks.append(completion)
-
-            // Get the next page of results from the API if no data was already in flight
-            // Otherwise this will be done once the response to current request comes back
-            if !dataInFlight {
-                self.getData()
-            }
-        }
-    }
-
-    /// Update internal paging parameters to be used for the next API call.
-    /// This should only be called on dispatchQueue.
-    // swiftlint:disable:next strict_fileprivate
-    fileprivate func prepareForPageRequest(after page: EntryContainer<Element>) {
-        if let previousOffset = page.offset {
-            let limit = page.limit ?? page.entries.count
-            nextPage = .offset(previousOffset)
-
-            if let totalCount = page.totalCount {
-                isDone = previousOffset + limit >= totalCount
-            }
-            else {
-                isDone = page.entries.isEmpty
-            }
-        }
-        else if let nextStreamPosition = page.nextStreamPosition {
-            nextPage = .streamPosition(nextStreamPosition)
-            isStreamEmpty = page.entries.isEmpty
-        }
-        else if let nextMarker = page.nextMarker {
-            nextPage = .marker(nextMarker)
-        }
-        else {
-            // Default to a finished marker collection when there's no field present,
-            // since some endpoints indicate completed paging this way.
-            // This value should never be used.
-            nextPage = .marker(nil)
-            isDone = true
-        }
-
-        if !isDone {
-            // swiftlint:disable:next force_unwrapping
-            queryParams = queryParams.merging(nextPage!.asQueryParams) { _, right in right }
-        }
-    }
-
-    /// Get the next page of items from the API
-    private func getData() {
-        client.get(
-            url: url,
-            httpHeaders: headers,
-            queryParameters: queryParams
-        ) { result in
-
-            let pageResult: Result<EntryContainer<Element>, BoxSDKError> = result.flatMap {
-                ObjectDeserializer.deserialize(data: $0.body)
-            }
-
-            // Access to private variables is protected by a serial queue
-            self.dispatchQueue.async {
-                // Get the callback associated with this request
-                let callback = self.pageCallbacks.removeFirst()
-                // Return the page
-                callback(pageResult)
-
-                var error: BoxSDKError?
-
-                switch pageResult {
-                case let .success(page):
-                    // Update paging parameters for next API call
-                    self.prepareForPageRequest(after: page)
-                    // If we're at the last page it's an error for all waiting callbacks
-                    if self.isDone || self.isStreamEmpty {
-                        error = BoxSDKError(message: .endOfList)
-                    }
-
-                case let .failure(apiError):
-                    error = apiError
-                }
-
-                // An error manifests for all waiting callbacks, rather than
-                // making more page requests
-                if let error = error {
-                    for waiting in self.pageCallbacks {
-                        waiting(.failure(error))
-                    }
-                    self.pageCallbacks.removeAll()
-                }
-                // But if there's no error, and we're waiting for more pages,
-                // make a new request
-                else if !self.pageCallbacks.isEmpty {
-                    self.getData()
-                }
-            }
-        }
-    }
-}
-
-extension AsyncPagesIterator {
-    func makePagingIterator(completion: @escaping Callback<PagingIterator<Element>>) {
-        client.get(
-            url: url,
-            httpHeaders: headers,
-            queryParameters: queryParams,
-            completion: ResponseHandler.pagingIterator(client: client, wrapping: completion)
-        )
-    }
-}
-
-/// Provides paged iterator access for a collection of BoxModel's
-public class PagingIterator<Element: BoxModel> {
-    private let pages: AsyncPagesIterator<Element>
-
     private var buffer: Buffer<Element>
-    private var completionQueue: [Callback<Element>]
+    private var dispatchQueue: DispatchQueue
+    private var nextPageQueue: [Callback<EntryContainer<Element>>] = []
+    private var nextElementQueue: [Callback<Element>] = []
 
     /// The total count of the result set, if known
     public let totalCount: Int?
@@ -215,24 +63,78 @@ public class PagingIterator<Element: BoxModel> {
             throw BoxSDKError(message: .nonIterableResponse)
         }
 
+        self.client = client
+
         let result: Result<EntryContainer<Element>, BoxSDKError> = ObjectDeserializer.deserialize(data: response.body)
         switch result {
         case let .success(page):
-            pages = AsyncPagesIterator<Element>(
-                client: client,
-                url: response.request.url,
-                headers: response.request.httpHeaders,
-                queryParams: response.request.queryParams
-            )
-            pages.prepareForPageRequest(after: page)
+            if page.offset != nil {
+                nextPage = .offset(page.offset!)
+            }
+            else if page.nextStreamPosition != nil {
+                nextPage = .streamPosition(page.nextStreamPosition)
+            }
+            else if page.nextMarker != nil {
+                nextPage = .marker(page.nextMarker)
+            }
+            else {
+                // Default to a finished marker collection when there's no field present,
+                // since some endpoints indicate completed paging this way
+                nextPage = .marker(nil)
+            }
+
+            if page.limit != nil {
+                limit = page.limit!
+            }
+            else {
+                limit = page.entries.count
+            }
 
             totalCount = page.totalCount
+
+            isDone = false
+            isStreamEmpty = false
+
+            url = response.request.url
+            headers = response.request.httpHeaders.filter { $0.key.lowercased() != "authorization" }
+            queryParams = response.request.queryParams
+
             buffer = Buffer(page.entries)
-            completionQueue = []
+            dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.pagingiterator", qos: .userInitiated)
+
+            updatePaging(page: page)
 
         case let .failure(error):
             throw error
         }
+    }
+
+    /// Update internal paging parameters to be used for the next API call
+    private func updatePaging(page: EntryContainer<Element>) {
+        switch nextPage {
+        case let .offset(offset):
+            nextPage = .offset(offset + limit)
+            if page.totalCount != nil {
+                isDone = page.offset! + limit > page.totalCount!
+            }
+            else {
+                isDone = page.entries.isEmpty
+            }
+        case .marker:
+            if page.nextMarker != nil {
+                nextPage = .marker(page.nextMarker)
+            }
+            else {
+                nextPage = .marker(nil)
+                isDone = true
+            }
+        case .streamPosition:
+            if page.entries.isEmpty {
+                isStreamEmpty = true
+            }
+            nextPage = .streamPosition(page.nextStreamPosition)
+        }
+        queryParams = queryParams.merging(nextPage.asQueryParams) { _, right in right }
     }
 
     /// Gets next element from the iterator
@@ -241,59 +143,123 @@ public class PagingIterator<Element: BoxModel> {
     ///             If the iterator has no more elements, a BoxSDKError with a
     ///             message of BoxSDKErrorEnum.noSuchElement is passed to the completion.
     public func next(completion: @escaping Callback<Element>) {
-        // Protect access to private variables
-        pages.dispatchQueue.async {
-            // 1. Return buffered results, if there are any
-            guard self.buffer.isEmpty else {
-                let element = self.buffer.removeFromHead()
-                completion(.success(element))
+        // Access to the buffer and completion queue are protected by a serial dispatch queue to ensure thread safety
+        dispatchQueue.async {
+            // Consume elements that are already buffered
+            self.nextElementQueue.append(completion)
+            self.processBufferedElements()
+
+            // If we're not waiting for more results and haven't starter fetching
+            // them, kick that off
+            if !self.nextElementQueue.isEmpty && self.nextPageQueue.isEmpty {
+                self.refillBuffer()
+            }
+        }
+    }
+
+    // MUST be called within dispatchQueue
+    private func processBufferedElements() {
+        while !self.buffer.isEmpty() && !self.nextElementQueue.isEmpty {
+            let element = self.buffer.removeFromHead()
+            let completion = self.nextElementQueue.removeFirst()
+            completion(.success(element))
+        }
+    }
+
+    private func refillBuffer() {
+        self.nextEntries { pageResult in
+            switch pageResult {
+            case let .success(page):
+                self.buffer = Buffer(page.entries)
+                self.processBufferedElements()
+                // If necessary, repeat
+                if !self.nextElementQueue.isEmpty {
+                    self.refillBuffer()
+                }
+
+            case let .failure(error):
+                for queuedCompletion in self.nextElementQueue {
+                    queuedCompletion(.failure(error))
+                }
+                self.nextElementQueue = []
+            }
+        }
+    }
+
+    /// Gets the next page of elements from the iterator.
+    ///
+    /// If you use this, do not also use `next`. The result is undefined.
+    public func nextEntries(completion: @escaping Callback<EntryContainer<Element>>) {
+        dispatchQueue.async {
+            // 1. Return end-failure if iterator is done
+            if self.isDone {
+                completion(.failure(BoxSDKError(message: .endOfList)))
                 return
             }
 
             // 2. If a completion queue is already set up, that means another page of results
             // is already on its way; we can just wait for it to arrive by adding this completion
             // to the completion queue
-            guard self.completionQueue.isEmpty else {
-                self.completionQueue.append(completion)
+            guard self.nextPageQueue.isEmpty else {
+                self.nextPageQueue.append(completion)
                 return
             }
 
             // 3. There are no more results in the buffer and we need to request more from the API
             // 3a. Set up the completion queue and insert this completion as the first item,
             // so subsequent requests can queue behind this one
-            self.completionQueue = [completion]
+            self.nextPageQueue = [completion]
 
             // 3b. Get the next page of results from the API and load them into the buffer
             self.getData()
         }
     }
 
+    /// Get the next page of items from the API
     private func getData() {
-        pages.next { result in
-            switch result {
-            case let .success(page):
-                self.buffer = Buffer(page.entries)
-                while !self.completionQueue.isEmpty {
-                    if self.buffer.isEmpty {
-                        if self.pages.isDone || self.pages.isStreamEmpty {
-                            for queuedCompletion in self.completionQueue {
-                                queuedCompletion(.failure(BoxSDKError(message: .endOfList)))
-                            }
-                            self.completionQueue = []
+        self.client.get(
+            url: url,
+            httpHeaders: headers,
+            queryParameters: queryParams
+        ) { result in
+
+            // Add an item on the dispatch queue to process the new page of results; this guarantees
+            // that any previous calls to next() have already been added to the completion queue
+            self.dispatchQueue.async {
+                let pageResult: Result<EntryContainer<Element>, BoxSDKError> = result.flatMap {
+                    ObjectDeserializer.deserialize(data: $0.body)
+                }
+
+                let queuedCompletion = self.nextPageQueue.removeFirst()
+                queuedCompletion(pageResult)
+
+                switch pageResult {
+                case let .success(page):
+                    // Update paging parameters for next API call
+                    self.updatePaging(page: page)
+
+                    if self.isDone || self.isStreamEmpty {
+                        for queuedCompletion in self.nextPageQueue {
+                            queuedCompletion(.failure(BoxSDKError(message: .endOfList)))
                         }
-                        else {
-                            self.getData()
-                        }
+                        self.nextPageQueue = []
+                        return
                     }
 
-                    let queuedCompletion = self.completionQueue.removeFirst()
-                    queuedCompletion(.success(self.buffer.removeFromHead()))
+                    if !self.nextPageQueue.isEmpty {
+                        self.getData()
+                        return
+                    }
+
+                case let .failure(error):
+                    // If an API call fails completely, pass the error to all waiting completions
+                    for queuedCompletion in self.nextPageQueue {
+                        queuedCompletion(.failure(error))
+                    }
+
+                    // Clear the completion queue so future calls to next() can retry
+                    self.nextPageQueue = []
                 }
-            case let .failure(error):
-                for queuedCompletion in self.completionQueue {
-                    queuedCompletion(.failure(error))
-                }
-                self.completionQueue = []
             }
         }
     }
@@ -336,15 +302,15 @@ private class Buffer<Element> {
         bufferIndex = 0
     }
 
-    var isEmpty: Bool {
-        buffer.isEmpty || bufferIndex >= buffer.count
+    func isEmpty() -> Bool {
+        return buffer.isEmpty || bufferIndex >= buffer.count
     }
 
     func removeFromHead() -> Element {
         let element = buffer[bufferIndex]
         bufferIndex += 1
 
-        if isEmpty {
+        if isEmpty() {
             // Reset internal state because the buffer appears empty
             buffer = []
             bufferIndex = 0
