@@ -184,6 +184,17 @@ public class AsyncPagesIterator<Element: BoxModel> {
     }
 }
 
+extension AsyncPagesIterator {
+    func makePagingIterator(completion: @escaping Callback<PagingIterator<Element>>) {
+        client.get(
+            url: url,
+            httpHeaders: headers,
+            queryParameters: queryParams,
+            completion: ResponseHandler.pagingIterator(client: client, wrapping: completion)
+        )
+    }
+}
+
 /// Provides paged iterator access for a collection of BoxModel's
 public class PagingIterator<Element: BoxModel> {
     private let pages: AsyncPagesIterator<Element>
