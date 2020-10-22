@@ -36,8 +36,10 @@ public class PagingIterator<Element: BoxModel> {
     private let client: BoxClient
 
     /// Gets offset, marker or stream position for the next page
-    public private(set) var nextPage: PagingParameter
-    private var limit: Int
+    private var _nextPage: PagingParameter?
+    public var nextPage: PagingParameter {
+        _nextPage!
+    }
     private var isDone: Bool
     private var isStreamEmpty: Bool
 
@@ -51,57 +53,42 @@ public class PagingIterator<Element: BoxModel> {
     private var nextElementQueue: [Callback<Element>] = []
 
     /// The total count of the result set, if known
-    public let totalCount: Int?
+    public private(set) var totalCount: Int?
+
+    init(client: BoxClient, url: URL, headers: BoxHTTPHeaders, queryParams: QueryParameters) {
+        self.client = client
+        self.url = url
+        self.headers = headers.filter { $0.key.lowercased() != "authorization" }
+        self.queryParams = queryParams
+
+        isDone = false
+        isStreamEmpty = false
+
+        buffer = Buffer()
+        dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.pagingiterator", qos: .userInitiated)
+    }
 
     /// Initializer
     ///
     /// - Parameters:
     ///   - response: A BoxResponse from the API. The iterator is initialized from the data in the response.
     ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
-    init(response: BoxResponse, client: BoxClient) throws {
+    convenience init(response: BoxResponse, client: BoxClient) throws {
         if !PagingIterator.isIterable(response: response) {
             throw BoxSDKError(message: .nonIterableResponse)
         }
 
-        self.client = client
-
         let result: Result<EntryContainer<Element>, BoxSDKError> = ObjectDeserializer.deserialize(data: response.body)
+
         switch result {
         case let .success(page):
-            if page.offset != nil {
-                nextPage = .offset(page.offset!)
-            }
-            else if page.nextStreamPosition != nil {
-                nextPage = .streamPosition(page.nextStreamPosition)
-            }
-            else if page.nextMarker != nil {
-                nextPage = .marker(page.nextMarker)
-            }
-            else {
-                // Default to a finished marker collection when there's no field present,
-                // since some endpoints indicate completed paging this way
-                nextPage = .marker(nil)
-            }
-
-            if page.limit != nil {
-                limit = page.limit!
-            }
-            else {
-                limit = page.entries.count
-            }
-
+            self.init(
+                client: client,
+                url: response.request.url,
+                headers: response.request.httpHeaders,
+                queryParams: response.request.queryParams
+            )
             totalCount = page.totalCount
-
-            isDone = false
-            isStreamEmpty = false
-
-            url = response.request.url
-            headers = response.request.httpHeaders.filter { $0.key.lowercased() != "authorization" }
-            queryParams = response.request.queryParams
-
-            buffer = Buffer(page.entries)
-            dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.pagingiterator", qos: .userInitiated)
-
             updatePaging(page: page)
 
         case let .failure(error):
@@ -111,30 +98,33 @@ public class PagingIterator<Element: BoxModel> {
 
     /// Update internal paging parameters to be used for the next API call
     private func updatePaging(page: EntryContainer<Element>) {
-        switch nextPage {
-        case let .offset(offset):
-            nextPage = .offset(offset + limit)
+        if let previousOffset = page.offset {
+            let limit = page.limit ?? page.entries.count
+            _nextPage = .offset(previousOffset + limit)
             if page.totalCount != nil {
                 isDone = page.offset! + limit > page.totalCount!
             }
             else {
                 isDone = page.entries.isEmpty
             }
-        case .marker:
-            if page.nextMarker != nil {
-                nextPage = .marker(page.nextMarker)
-            }
-            else {
-                nextPage = .marker(nil)
-                isDone = true
-            }
-        case .streamPosition:
+        }
+        else if let nextStreamPosition = page.nextStreamPosition {
             if page.entries.isEmpty {
                 isStreamEmpty = true
             }
-            nextPage = .streamPosition(page.nextStreamPosition)
+            _nextPage = .streamPosition(nextStreamPosition)
         }
-        queryParams = queryParams.merging(nextPage.asQueryParams) { _, right in right }
+        else if let nextPageMarker = page.nextMarker {
+            _nextPage = .marker(nextPageMarker)
+        }
+        else {
+            // Default to a finished marker collection when there's no field present,
+            // since some endpoints indicate completed paging this way
+            _nextPage = .marker(nil)
+            isDone = true
+        }
+
+        queryParams = queryParams.merging(_nextPage!.asQueryParams) { _, right in right }
     }
 
     /// Gets next element from the iterator
