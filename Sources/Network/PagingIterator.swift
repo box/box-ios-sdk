@@ -31,15 +31,11 @@ public enum PagingParameter {
 
 /// Provides paged iterator access for a collection of BoxModel's
 public class PagingIterator<Element: BoxModel> {
-    // swiftlint:disable force_unwrapping
 
     private let client: BoxClient
 
     /// Gets offset, marker or stream position for the next page
     private var _nextPage: PagingParameter?
-    public var nextPage: PagingParameter {
-        _nextPage!
-    }
     private var isDone: Bool
     private var isStreamEmpty: Bool
 
@@ -47,10 +43,8 @@ public class PagingIterator<Element: BoxModel> {
     private let headers: BoxHTTPHeaders
     private var queryParams: QueryParameters
 
-    private var buffer: Buffer<Element>
     private var dispatchQueue: DispatchQueue
     private var nextPageQueue: [Callback<EntryContainer<Element>>] = []
-    private var nextElementQueue: [Callback<Element>] = []
 
     /// The total count of the result set, if known
     public private(set) var totalCount: Int?
@@ -64,7 +58,6 @@ public class PagingIterator<Element: BoxModel> {
         isDone = false
         isStreamEmpty = false
 
-        buffer = Buffer()
         dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.pagingiterator", qos: .userInitiated)
     }
 
@@ -123,59 +116,12 @@ public class PagingIterator<Element: BoxModel> {
         queryParams = queryParams.merging(_nextPage!.asQueryParams) { _, right in right }
     }
 
-    /// Gets next element from the iterator
+    /// Gets next page of elements from the iterator
     ///
-    /// - Parameter completion: Returns either the next element or an error.
+    /// - Parameter completion: Returns either the next page of elements or an error.
     ///             If the iterator has no more elements, a BoxSDKError with a
-    ///             message of BoxSDKErrorEnum.noSuchElement is passed to the completion.
-    public func next(completion: @escaping Callback<Element>) {
-        // Access to the buffer and completion queue are protected by a serial dispatch queue to ensure thread safety
-        dispatchQueue.async {
-            // Consume elements that are already buffered
-            self.nextElementQueue.append(completion)
-            self.processBufferedElements()
-
-            // If we're not waiting for more results and haven't starter fetching
-            // them, kick that off
-            if !self.nextElementQueue.isEmpty && self.nextPageQueue.isEmpty {
-                self.refillBuffer()
-            }
-        }
-    }
-
-    // MUST be called within dispatchQueue
-    private func processBufferedElements() {
-        while !self.buffer.isEmpty() && !self.nextElementQueue.isEmpty {
-            let element = self.buffer.removeFromHead()
-            let completion = self.nextElementQueue.removeFirst()
-            completion(.success(element))
-        }
-    }
-
-    private func refillBuffer() {
-        self.nextEntries { pageResult in
-            switch pageResult {
-            case let .success(page):
-                self.buffer = Buffer(page.entries)
-                self.processBufferedElements()
-                // If necessary, repeat
-                if !self.nextElementQueue.isEmpty {
-                    self.refillBuffer()
-                }
-
-            case let .failure(error):
-                for queuedCompletion in self.nextElementQueue {
-                    queuedCompletion(.failure(error))
-                }
-                self.nextElementQueue = []
-            }
-        }
-    }
-
-    /// Gets the next page of elements from the iterator.
-    ///
-    /// If you use this, do not also use `next`. The result is undefined.
-    public func nextEntries(completion: @escaping Callback<EntryContainer<Element>>) {
+    ///             message of BoxSDKErrorEnum.endOfList is passed to the completion.
+    public func next(completion: @escaping Callback<EntryContainer<Element>>) {
         dispatchQueue.async {
             // 1. Return end-failure if iterator is done
             if self.isDone {
@@ -248,40 +194,5 @@ public class PagingIterator<Element: BoxModel> {
                 }
             }
         }
-    }
-
-    // swiftlint:enable force_unwrapping
-}
-
-/// An ordered buffer of elements that provides constant-time removal of elements from the head of the buffer.
-/// Uses constant space.
-private class Buffer<Element> {
-
-    // Removing from front of array is O(n), so maintain a private index
-    // into buffer for the next element to return.
-    // Reset buffer and index when needed.
-    var buffer: [Element]
-    var bufferIndex: Int
-
-    init(_ elems: [Element] = []) {
-        buffer = elems
-        bufferIndex = 0
-    }
-
-    func isEmpty() -> Bool {
-        return buffer.isEmpty || bufferIndex >= buffer.count
-    }
-
-    func removeFromHead() -> Element {
-        let element = buffer[bufferIndex]
-        bufferIndex += 1
-
-        if isEmpty() {
-            // Reset internal state because the buffer appears empty
-            buffer = []
-            bufferIndex = 0
-        }
-
-        return element
     }
 }

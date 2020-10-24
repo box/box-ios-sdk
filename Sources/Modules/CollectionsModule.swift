@@ -58,8 +58,8 @@ public class CollectionsModule {
             case let .success(iterator):
                 iterator.next { result in
                     switch result {
-                    case let .success(collection):
-                        if collection.collectionType == "favorites" {
+                    case let .success(page):
+                        if let collection = page.entries.first(where: { $0.collectionType == "favorites" }) {
                             completion(.success(collection))
                         }
                         else {
