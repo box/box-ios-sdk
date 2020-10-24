@@ -74,10 +74,6 @@ public class PagingIterator<Element: BoxModel> {
     ///   - response: A BoxResponse from the API. The iterator is initialized from the data in the response.
     ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
     convenience init(response: BoxResponse, client: BoxClient) throws {
-        if !PagingIterator.isIterable(response: response) {
-            throw BoxSDKError(message: .nonIterableResponse)
-        }
-
         let result: Result<EntryContainer<Element>, BoxSDKError> = ObjectDeserializer.deserialize(data: response.body)
 
         switch result {
@@ -252,26 +248,6 @@ public class PagingIterator<Element: BoxModel> {
                 }
             }
         }
-    }
-
-    static func isIterable(response: BoxResponse) -> Bool {
-        guard response.request.httpMethod == .get else {
-            return false
-        }
-        guard let responseBody = response.body else {
-            return false
-        }
-
-        let responseJSON = try? JSONSerialization.jsonObject(with: responseBody, options: []) as? [String: Any]
-        guard let jsonDict = responseJSON else {
-            return false
-        }
-
-        guard (jsonDict["entries"] as? [Any]) != nil else {
-            return false
-        }
-
-        return true
     }
 
     // swiftlint:enable force_unwrapping
