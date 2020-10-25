@@ -54,13 +54,13 @@ public class PagingIterator<Element: BoxModel> {
     /// - Parameters:
     ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
     ///   - url: The endpoint from which to get pages, using HTTP GET.
-    ///   - headers: The HTTP headers to send with each request (authorization is handled by the client).
     ///   - queryParams: The query parameters for the initial page. Paging parameters are updated for subsequent pages.
-    init(client: BoxClient, url: URL, headers: BoxHTTPHeaders, queryParams: QueryParameters) {
+    ///   - headers: The HTTP headers to send with each request (authorization is handled by the client).
+    init(client: BoxClient, url: URL, queryParameters: QueryParameters, headers: BoxHTTPHeaders = [:]) {
         self.client = client
         self.url = url
         self.headers = headers.filter { $0.key.lowercased() != "authorization" }
-        self.queryParams = queryParams
+        self.queryParams = queryParameters
 
         isDone = false
         isStreamEmpty = false
