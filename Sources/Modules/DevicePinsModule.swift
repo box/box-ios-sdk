@@ -58,18 +58,17 @@ public class DevicePinsModule {
         marker: String? = nil,
         limit: Int? = nil,
         direction: OrderDirection? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<DevicePin>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<DevicePin> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/enterprises/\(enterpriseId)/device_pinners", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "direction": direction,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

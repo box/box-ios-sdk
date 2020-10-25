@@ -40,33 +40,27 @@ class TrashModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.trash.listItems { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        guard case let .file(file) = firstItem else {
-                                            fail("listItems returned invalid first item type")
-                                            done()
-                                            return
-                                        }
-
-                                        expect(file).to(beAKindOf(File.self))
-                                        expect(file.id).to(equal("2701979016"))
-                                        expect(file.name).to(equal("file Tue Jul 24 145436 2012KWPX5S.csv"))
-                                        expect(file.etag).to(equal("1"))
-                                        expect(file.sequenceId).to(equal("1"))
-                                        expect(file.type).to(equal("file"))
-                                    case let .failure(error):
-                                        fail("Expected call to listItems to suceeded, but instead got \(error)")
-                                    }
+                        let iterator = self.sut.trash.listItems()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                guard case let .file(file) = firstItem else {
+                                    fail("listItems returned invalid first item type")
                                     done()
+                                    return
                                 }
+
+                                expect(file).to(beAKindOf(File.self))
+                                expect(file.id).to(equal("2701979016"))
+                                expect(file.name).to(equal("file Tue Jul 24 145436 2012KWPX5S.csv"))
+                                expect(file.etag).to(equal("1"))
+                                expect(file.sequenceId).to(equal("1"))
+                                expect(file.type).to(equal("file"))
                             case let .failure(error):
                                 fail("Expected call to listItems to suceeded, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

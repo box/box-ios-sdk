@@ -70,25 +70,19 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.storagePolicies.listForEnterprise { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        expect(firstItem.type).to(equal("storage_policy"))
-                                        expect(firstItem.id).to(equal("12"))
-                                        expect(firstItem.name).to(equal("Montreal / Dublin"))
+                        let iterator = self.sut.storagePolicies.listForEnterprise()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                expect(firstItem.type).to(equal("storage_policy"))
+                                expect(firstItem.id).to(equal("12"))
+                                expect(firstItem.name).to(equal("Montreal / Dublin"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get storage policies instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get storage policies instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

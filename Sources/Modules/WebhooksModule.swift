@@ -29,17 +29,16 @@ public class WebhooksModule {
     public func list(
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Webhook>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Webhook> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/webhooks", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

@@ -90,26 +90,20 @@ public class DevicePinsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(devicePin):
-                                        expect(devicePin).toNot(beNil())
-                                        expect(devicePin.id).to(equal("12345"))
-                                        expect(devicePin.type).to(equal("device_pinner"))
-                                        expect(devicePin.productName).to(equal("Test"))
+                        let iterator = self.sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let devicePin = page.entries[0]
+                                expect(devicePin).toNot(beNil())
+                                expect(devicePin.id).to(equal("12345"))
+                                expect(devicePin.type).to(equal("device_pinner"))
+                                expect(devicePin.productName).to(equal("Test"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get Device Pins for an enterprise instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get Device Pins for an enterprise instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

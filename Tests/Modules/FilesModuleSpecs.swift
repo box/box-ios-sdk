@@ -1215,34 +1215,28 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.files.listCollaborations(forFile: "123456", limit: 100) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(item):
-                                        expect(item).toNot(beNil())
-                                        expect(item).to(beAKindOf(Collaboration.self))
-                                        expect(item.id).to(equal("14176246"))
-                                        expect(item.status?.description).to(equal("accepted"))
-                                        expect(item.role?.description).to(equal("editor"))
+                        let iterator = self.sut.files.listCollaborations(forFile: "123456", limit: 100)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let item = page.entries[0]
+                                expect(item).toNot(beNil())
+                                expect(item).to(beAKindOf(Collaboration.self))
+                                expect(item.id).to(equal("14176246"))
+                                expect(item.status?.description).to(equal("accepted"))
+                                expect(item.role?.description).to(equal("editor"))
 
-                                        guard let collaborator = item.accessibleBy?.collaboratorValue, case let .user(user) = collaborator else {
-                                            fail("Unable to unwrap expected user value")
-                                            done()
-                                            return
-                                        }
-                                        expect(user.id).to(equal("755492"))
-
-                                    case let .failure(error):
-                                        fail("Unable to get file collaboration instead got \(error)")
-                                    }
+                                guard let collaborator = item.accessibleBy?.collaboratorValue, case let .user(user) = collaborator else {
+                                    fail("Unable to unwrap expected user value")
                                     done()
+                                    return
                                 }
+                                expect(user.id).to(equal("755492"))
+
                             case let .failure(error):
                                 fail("Unable to get file collaboration instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -1258,28 +1252,21 @@ class FilesModuleSpecs: QuickSpec {
                     }
                     waitUntil(timeout: 10) { done in
 
-                        self.sut.files.listComments(forFile: "5000948880", offset: 0, limit: 100) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(comment):
-                                        expect(comment).toNot(beNil())
-                                        expect(comment).to(beAKindOf(Comment.self))
-                                        expect(comment.id).to(equal("191969"))
-                                        expect(comment.isReplyComment).to(equal(false))
-                                        expect(comment.message).to(equal("Test Message"))
-
-                                    case let .failure(error):
-                                        fail("Unable to get file comments instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.files.listComments(forFile: "5000948880", offset: 0, limit: 100)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let comment = page.entries[0]
+                                expect(comment).toNot(beNil())
+                                expect(comment).to(beAKindOf(Comment.self))
+                                expect(comment.id).to(equal("191969"))
+                                expect(comment.isReplyComment).to(equal(false))
+                                expect(comment.message).to(equal("Test Message"))
 
                             case let .failure(error):
                                 fail("Unable to get file comments instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -1295,24 +1282,18 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.files.listTasks(forFile: "5000948880") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(task):
-                                        expect(task).to(beAKindOf(Task.self))
-                                        expect(task.id).to(equal("1786931"))
+                        let iterator = self.sut.files.listTasks(forFile: "5000948880")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let task = page.entries[0]
+                                expect(task).to(beAKindOf(Task.self))
+                                expect(task.id).to(equal("1786931"))
 
-                                    case let .failure(error):
-                                        fail("Expected call to list tasks to succeed, but it failed \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Expected call to list tasks to succeed, but it failed \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -1522,26 +1503,20 @@ class FilesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: 10) { done in
-                    self.sut.files.listVersions(fileId: "12345") { results in
-                        switch results {
-                        case let .success(iterator):
-                            iterator.next { result in
-                                switch result {
-                                case let .success(version):
-                                    expect(version).to(beAKindOf(FileVersion.self))
-                                    expect(version.id).to(equal("11111"))
-                                    expect(version.type).to(equal("file_version"))
-                                    expect(version.name).to(equal("Test.pdf"))
+                    let iterator = self.sut.files.listVersions(fileId: "12345")
+                    iterator.next { result in
+                        switch result {
+                        case let .success(page):
+                            let version = page.entries[0]
+                            expect(version).to(beAKindOf(FileVersion.self))
+                            expect(version.id).to(equal("11111"))
+                            expect(version.type).to(equal("file_version"))
+                            expect(version.name).to(equal("Test.pdf"))
 
-                                case let .failure(error):
-                                    fail("Expected call to listVersions to succeed, but it failed \(error)")
-                                }
-                                done()
-                            }
                         case let .failure(error):
                             fail("Expected call to listVersions to succeed, but it failed \(error)")
-                            done()
                         }
+                        done()
                     }
                 }
             }
@@ -2120,27 +2095,21 @@ class FilesModuleSpecs: QuickSpec {
             it("should be able to return the list of parts uploaded so far") {
 
                 waitUntil(timeout: 10) { done in
-                    self.sut.files.listUploadSessionParts(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { results in
-                        switch results {
-                        case let .success(iterator):
-                            iterator.next { result in
-                                switch result {
-                                case let .success(firstPart):
-                                    expect(firstPart).to(beAKindOf(UploadPartDescription.self))
-                                    expect(firstPart.partId).to(equal("CFEB4BA9"))
-                                    expect(firstPart.offset).to(equal(0))
-                                    expect(firstPart.size).to(equal(8_388_608))
-                                    expect(firstPart.sha1).to(beNil())
+                    let iterator = self.sut.files.listUploadSessionParts(sessionId: "F971964745A5CD0C001BBE4E58196BFD")
+                    iterator.next { result in
+                        switch result {
+                        case let .success(page):
+                            let firstPart = page.entries[0]
+                            expect(firstPart).to(beAKindOf(UploadPartDescription.self))
+                            expect(firstPart.partId).to(equal("CFEB4BA9"))
+                            expect(firstPart.offset).to(equal(0))
+                            expect(firstPart.size).to(equal(8_388_608))
+                            expect(firstPart.sha1).to(beNil())
 
-                                case let .failure(error):
-                                    fail("Expected call to listUploadSessionParts to succeed, but instead got \(error)")
-                                }
-                                done()
-                            }
                         case let .failure(error):
-                            fail("Expected call to listUploadSessionParts to suceeded, but instead got \(error)")
-                            done()
+                            fail("Expected call to listUploadSessionParts to succeed, but instead got \(error)")
                         }
+                        done()
                     }
                 }
             }

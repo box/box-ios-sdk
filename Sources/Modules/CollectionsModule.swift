@@ -33,17 +33,16 @@ public class CollectionsModule {
     public func list(
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<BoxCollection>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<BoxCollection> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collections", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -53,22 +52,16 @@ public class CollectionsModule {
     ///   - fields: The set of fields to retrieve on the resulting collection object
     ///   - completion: Passed the favorites collection, or an error if the API call fails
     public func getFavorites(fields: [String]? = nil, completion: @escaping Callback<BoxCollection>) {
-        list(offset: 0, limit: 1000, fields: fields) { results in
-            switch results {
-            case let .success(iterator):
-                iterator.next { result in
-                    switch result {
-                    case let .success(page):
-                        if let collection = page.entries.first(where: { $0.collectionType == "favorites" }) {
-                            completion(.success(collection))
-                        }
-                        else {
-                            completion(.failure(BoxSDKError(message: .notFound("Collections does not have the favorites collection type"))))
-                            return
-                        }
-                    case let .failure(error):
-                        completion(.failure(error))
-                    }
+        let iterator = list(offset: 0, limit: 1000, fields: fields)
+        iterator.next { result in
+            switch result {
+            case let .success(page):
+                if let collection = page.entries.first(where: { $0.collectionType == "favorites" }) {
+                    completion(.success(collection))
+                }
+                else {
+                    completion(.failure(BoxSDKError(message: .notFound("Collections does not have the favorites collection type"))))
+                    return
                 }
             case let .failure(error):
                 completion(.failure(error))
@@ -96,17 +89,16 @@ public class CollectionsModule {
         collectionId: String,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FolderItem>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<FolderItem> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collections/\(collectionId)/items", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

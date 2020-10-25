@@ -35,17 +35,16 @@ public class TrashModule {
     public func listItems(
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FolderItem>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<FolderItem> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/folders/trash/items", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

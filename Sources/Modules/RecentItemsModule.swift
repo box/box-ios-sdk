@@ -34,17 +34,16 @@ public class RecentItemsModule {
     public func list(
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<RecentItem>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<RecentItem> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/recent_items", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

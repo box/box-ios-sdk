@@ -60,7 +60,7 @@ public class PagingIterator<Element: BoxModel> {
         self.client = client
         self.url = url
         self.headers = headers.filter { $0.key.lowercased() != "authorization" }
-        self.queryParams = queryParameters
+        queryParams = queryParameters
 
         isDone = false
         isStreamEmpty = false

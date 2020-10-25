@@ -150,17 +150,16 @@ public class EventsModule {
     public func getUserEvents(
         streamType: StreamType? = nil,
         streamPosition: StreamPosition? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<Event>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<Event> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/events", configuration: boxClient.configuration),
             queryParameters: [
                 "stream_type": streamType?.description,
                 "stream_position": streamPosition?.description,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -179,10 +178,10 @@ public class EventsModule {
         createdAfter: Date? = nil,
         createdBefore: Date? = nil,
         streamPosition: StreamPosition? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<Event>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<Event> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/events", configuration: boxClient.configuration),
             queryParameters: [
                 "stream_type": "admin_logs",
@@ -191,8 +190,7 @@ public class EventsModule {
                 "created_before": createdBefore?.iso8601,
                 "stream_position": streamPosition?.description,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

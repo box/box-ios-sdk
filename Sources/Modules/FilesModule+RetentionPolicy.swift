@@ -51,10 +51,10 @@ public extension FilesModule {
         dispositionBefore: Date? = nil,
         dispositionAfter: Date? = nil,
         limit: Int? = nil,
-        marker: String? = nil,
-        completion: @escaping Callback<PagingIterator<FileVersionRetention>>
-    ) {
-        boxClient.get(
+        marker: String? = nil
+    ) -> PagingIterator<FileVersionRetention> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/file_version_retentions", configuration: boxClient.configuration),
             queryParameters: [
                 "file_id": fileId,
@@ -65,8 +65,7 @@ public extension FilesModule {
                 "disposition_after": dispositionAfter?.iso8601,
                 "marker": marker,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

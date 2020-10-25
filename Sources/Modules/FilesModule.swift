@@ -811,17 +811,16 @@ public class FilesModule {
         forFile fileId: String,
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Collaboration>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Collaboration> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/collaborations", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -843,17 +842,16 @@ public class FilesModule {
         forFile fileId: String,
         offset: Int?,
         limit: Int?,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Comment>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Comment> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/comments", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -869,17 +867,16 @@ public class FilesModule {
     ///   - completion: Returns all of the tasks on the file
     public func listTasks(
         forFile fileId: String,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Task>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Task> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/tasks", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": 0,
                 "limit": 1000,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -1056,17 +1053,16 @@ public class FilesModule {
         fileId: String,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FileVersion>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<FileVersion> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/versions", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

@@ -39,32 +39,26 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.client.search.query(query: "test") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(item):
-                                        guard case let .file(file) = item else {
-                                            fail("Expected test item to be a file")
-                                            done()
-                                            return
-                                        }
-                                        expect(file).toNot(beNil())
-                                        expect(file.id).to(equal("11111"))
-                                        expect(file.name).to(equal("test file.txt"))
-                                        expect(file.description).to(equal(""))
-                                        expect(file.size).to(equal(16))
-
-                                    case let .failure(error):
-                                        fail("Expected search request to succeed, but it failed: \(error)")
-                                    }
+                        let iterator = self.client.search.query(query: "test")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let item = page.entries[0]
+                                guard case let .file(file) = item else {
+                                    fail("Expected test item to be a file")
                                     done()
+                                    return
                                 }
+                                expect(file).toNot(beNil())
+                                expect(file.id).to(equal("11111"))
+                                expect(file.name).to(equal("test file.txt"))
+                                expect(file.description).to(equal(""))
+                                expect(file.size).to(equal(16))
+
                             case let .failure(error):
                                 fail("Expected search request to succeed, but it failed: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -84,22 +78,15 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: 10) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.global, relation: MetadataFilterBound.greaterThan)
-                        self.client.search.query(query: nil, metadataFilter: searchFilter) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case .success:
-                                        break
-                                    case let .failure(error):
-                                        fail("Error with: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        iterator.next { result in
+                            switch result {
+                            case .success:
+                                break
                             case let .failure(error):
                                 fail("Error with: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -119,22 +106,15 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: 10) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.enterprise, relation: MetadataFilterBound.lessThan)
-                        self.client.search.query(query: nil, metadataFilter: searchFilter) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case .success:
-                                        break
-                                    case let .failure(error):
-                                        fail("Error with: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        iterator.next { result in
+                            switch result {
+                            case .success:
+                                break
                             case let .failure(error):
                                 fail("Error with: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -154,22 +134,15 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: 10) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.enterprise)
-                        self.client.search.query(query: nil, metadataFilter: searchFilter) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case .success:
-                                        break
-                                    case let .failure(error):
-                                        fail("Error with: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        iterator.next { result in
+                            switch result {
+                            case .success:
+                                break
                             case let .failure(error):
                                 fail("Error with: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -189,22 +162,15 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: 10) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.global)
-                        self.client.search.query(query: nil, metadataFilter: searchFilter) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case .success:
-                                        break
-                                    case let .failure(error):
-                                        fail("Error with: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        iterator.next { result in
+                            switch result {
+                            case .success:
+                                break
                             case let .failure(error):
                                 fail("Error with: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -234,7 +200,7 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.client.search.query(
+                        let iterator = self.client.search.query(
                             query: "test",
                             scope: .user,
                             fileExtensions: ["pdf", "docx"],
@@ -249,22 +215,15 @@ class SearchModuleSpecs: QuickSpec {
                             searchIn: [.name, .description, .comments, .fileContents, .tags],
                             itemType: .file,
                             searchTrash: false
-                        ) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case .success:
-                                        break
-                                    case let .failure(error):
-                                        fail("Expected request to succeed, but instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case .success:
+                                break
                             case let .failure(error):
                                 fail("Expected request to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

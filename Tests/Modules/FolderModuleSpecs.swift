@@ -106,33 +106,26 @@ class FolderModuleSpecs: QuickSpec {
 
                     waitUntil(timeout: 10) { done in
 
-                        self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        guard case let .folder(folder) = firstItem else {
-                                            fail("Unable to get folder items")
-                                            done()
-                                            return
-                                        }
-                                        expect(folder).to(beAKindOf(Folder.self))
-                                        expect(folder.id).to(equal("11111"))
-                                        expect(folder.name).to(equal("TestFolder"))
-                                        expect(folder.etag).to(equal("0"))
-                                        expect(folder.sequenceId).to(equal("0"))
-
-                                    case let .failure(error):
-                                        fail("Unable to get folder items: \(error)")
-                                    }
+                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                guard case let .folder(folder) = firstItem else {
+                                    fail("Unable to get folder items")
                                     done()
+                                    return
                                 }
+                                expect(folder).to(beAKindOf(Folder.self))
+                                expect(folder.id).to(equal("11111"))
+                                expect(folder.name).to(equal("TestFolder"))
+                                expect(folder.etag).to(equal("0"))
+                                expect(folder.sequenceId).to(equal("0"))
 
                             case let .failure(error):
                                 fail("Unable to get folder items: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -154,33 +147,27 @@ class FolderModuleSpecs: QuickSpec {
 
                     waitUntil(timeout: 10) { done in
 
-                        self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: true, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        guard case let .folder(folder) = firstItem else {
-                                            fail("Unable to get folder items")
-                                            done()
-                                            return
-                                        }
-
-                                        expect(folder).to(beAKindOf(Folder.self))
-                                        expect(folder.id).to(equal("69102302893"))
-                                        expect(folder.name).to(equal("TestFolder"))
-                                        expect(folder.etag).to(equal("0"))
-                                        expect(folder.sequenceId).to(equal("0"))
-
-                                    case let .failure(error):
-                                        fail("Unable to get folder items: \(error)")
-                                    }
+                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: true, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                guard case let .folder(folder) = firstItem else {
+                                    fail("Unable to get folder items")
                                     done()
+                                    return
                                 }
+
+                                expect(folder).to(beAKindOf(Folder.self))
+                                expect(folder.id).to(equal("69102302893"))
+                                expect(folder.name).to(equal("TestFolder"))
+                                expect(folder.etag).to(equal("0"))
+                                expect(folder.sequenceId).to(equal("0"))
+
                             case let .failure(error):
                                 fail("Unable to get folder items: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -195,21 +182,16 @@ class FolderModuleSpecs: QuickSpec {
 
                     waitUntil(timeout: 10) { done in
 
-                        self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    default:
-                                        fail("Expected call to get folder items to fail, but it suceeded")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        iterator.next { result in
+                            switch result {
                             case let .failure(error):
                                 expect(error).toNot(beNil())
                                 expect(error).to(beAKindOf(BoxSDKError.self))
-                                done()
+                            default:
+                                fail("Expected call to get folder items to fail, but it suceeded")
                             }
+                            done()
                         }
                     }
                 }
@@ -339,28 +321,21 @@ class FolderModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.folders.listCollaborations(folderId: "14176246") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(item):
-                                        expect(item).to(beAKindOf(Collaboration.self))
-                                        expect(item.id).to(equal("11111"))
-                                        expect(item.createdBy).to(beAKindOf(User.self))
-                                        expect(item.createdBy?.id).to(equal("22222"))
-                                        expect(item.createdBy?.name).to(equal("Test User"))
-
-                                    case let .failure(error):
-                                        fail("Expected listCollaborations, but it failed: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.folders.listCollaborations(folderId: "14176246")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let item = page.entries[0]
+                                expect(item).to(beAKindOf(Collaboration.self))
+                                expect(item.id).to(equal("11111"))
+                                expect(item.createdBy).to(beAKindOf(User.self))
+                                expect(item.createdBy?.id).to(equal("22222"))
+                                expect(item.createdBy?.name).to(equal("Test User"))
 
                             case let .failure(error):
                                 fail("Expected listCollaborations, but it failed: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

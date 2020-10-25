@@ -34,17 +34,16 @@ public class CollaborationWhitelistModule {
     public func listEntries(
         fields: [String]? = nil,
         marker: String? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<CollaborationWhitelistEntry>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<CollaborationWhitelistEntry> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_entries", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -123,17 +122,16 @@ public class CollaborationWhitelistModule {
     public func listExemptTargets(
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<CollaborationWhitelistExemptTarget>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<CollaborationWhitelistExemptTarget> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_exempt_targets", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

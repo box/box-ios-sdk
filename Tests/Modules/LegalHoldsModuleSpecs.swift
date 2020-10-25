@@ -164,24 +164,18 @@ class LegalHoldsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.legalHolds.listForEnterprise { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(policy):
-                                        expect(policy.type).to(equal("legal_hold_policy"))
-                                        expect(policy.id).to(equal("16687"))
-                                        expect(policy.policyName).to(equal("Policy 1"))
-                                    case let .failure(error):
-                                        fail("Unable to get legal hold policies instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.legalHolds.listForEnterprise()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let policy = page.entries[0]
+                                expect(policy.type).to(equal("legal_hold_policy"))
+                                expect(policy.id).to(equal("16687"))
+                                expect(policy.policyName).to(equal("Policy 1"))
                             case let .failure(error):
                                 fail("Unable to get legal hold policies instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -296,23 +290,17 @@ class LegalHoldsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.legalHolds.listPolicyAssignments(policyId: "255473") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(assignment):
-                                        expect(assignment.type).to(equal("legal_hold_policy_assignment"))
-                                        expect(assignment.id).to(equal("25573"))
-                                    case let .failure(error):
-                                        fail("Unable to get legal hold policy assignments instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.legalHolds.listPolicyAssignments(policyId: "255473")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let assignment = page.entries[0]
+                                expect(assignment.type).to(equal("legal_hold_policy_assignment"))
+                                expect(assignment.id).to(equal("25573"))
                             case let .failure(error):
                                 fail("Unable to get legal hold policy assignments instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -365,23 +353,17 @@ class LegalHoldsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.legalHolds.listFileVersionPolicies(policyId: "240997") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(legalHold):
-                                        expect(legalHold.type).to(equal("legal_hold"))
-                                        expect(legalHold.id).to(equal("24101"))
-                                    case let .failure(error):
-                                        fail("Unable to get file version legal holds instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.legalHolds.listFileVersionPolicies(policyId: "240997")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let legalHold = page.entries[0]
+                                expect(legalHold.type).to(equal("legal_hold"))
+                                expect(legalHold.id).to(equal("24101"))
                             case let .failure(error):
                                 fail("Unable to get file version legal holds instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

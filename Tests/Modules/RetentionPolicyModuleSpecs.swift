@@ -178,27 +178,21 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.retentionPolicy.list(
+                        let iterator = self.sut.retentionPolicy.list(
                             name: "name",
                             type: .finite,
                             createdByUserId: "1234"
-                        ) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(retentionPolicy):
-                                        expect(retentionPolicy.name).to(equal("Tax Documents"))
-                                        expect(retentionPolicy.id).to(equal("123456789"))
-                                    case let .failure(error):
-                                        fail("Expected call to list to succeed, but instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let retentionPolicy = page.entries[0]
+                                expect(retentionPolicy.name).to(equal("Tax Documents"))
+                                expect(retentionPolicy.id).to(equal("123456789"))
                             case let .failure(error):
                                 fail("Expected call to list to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -307,22 +301,16 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.retentionPolicy.listAssignments(policyId: id, type: .finite) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(retentionPolicy):
-                                        expect(retentionPolicy.id).to(equal("12345678"))
-                                    case let .failure(error):
-                                        fail("Expected call to listAssignments to succeed, but instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.retentionPolicy.listAssignments(policyId: id, type: .finite)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let retentionPolicy = page.entries[0]
+                                expect(retentionPolicy.id).to(equal("12345678"))
                             case let .failure(error):
                                 fail("Expected call to listAssignments to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -387,27 +375,21 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.files.listVersionRetentions(
+                        let iterator = self.sut.files.listVersionRetentions(
                             fileId: "1234",
                             fileVersionId: "1234",
                             policyId: "1234",
                             dispositionAction: .permanentlyDelete, dispositionBefore: dispositionBefore
-                        ) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(retentionPolicy):
-                                        expect(retentionPolicy.id).to(equal("112725"))
-                                    case let .failure(error):
-                                        fail("Expected call to getFileVersionRetentions to succeed, but instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let retentionPolicy = page.entries[0]
+                                expect(retentionPolicy.id).to(equal("112725"))
                             case let .failure(error):
                                 fail("Expected call to getFileVersionRetentions to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

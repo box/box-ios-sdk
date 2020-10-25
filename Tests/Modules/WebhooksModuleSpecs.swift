@@ -145,24 +145,18 @@ class WebhooksModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.webhooks.list { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        expect(firstItem.id).to(equal("4161"))
-                                        expect(firstItem.type).to(equal("webhook"))
+                        let iterator = self.sut.webhooks.list()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                expect(firstItem.id).to(equal("4161"))
+                                expect(firstItem.type).to(equal("webhook"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get webhooks instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get webhooks instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

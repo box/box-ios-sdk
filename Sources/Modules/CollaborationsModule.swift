@@ -236,18 +236,17 @@ public class CollaborationsModule {
     public func listPendingForEnterprise(
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Collaboration>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Collaboration> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collaborations", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "status": "pending",
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

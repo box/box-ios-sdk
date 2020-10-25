@@ -159,9 +159,8 @@ public class FoldersModule {
         limit: Int? = nil,
         sort: FolderItemsOrderBy? = nil,
         direction: OrderDirection? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FolderItem>>
-    ) {
+        fields: [String]? = nil
+    ) -> PagingIterator<FolderItem> {
 
         var queryParams: QueryParameters = [
             "limit": limit,
@@ -177,10 +176,10 @@ public class FoldersModule {
             queryParams["offset"] = offset
         }
 
-        boxClient.get(
+        return .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/folders/\(folderId)/items", configuration: boxClient.configuration),
-            queryParameters: queryParams,
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            queryParameters: queryParams
         )
     }
 
@@ -339,17 +338,16 @@ public class FoldersModule {
     ///     include in the response.
     public func listCollaborations(
         folderId: String,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Collaboration>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Collaboration> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/folders/\(folderId)/collaborations", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": 0,
                 "limit": 1000,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
