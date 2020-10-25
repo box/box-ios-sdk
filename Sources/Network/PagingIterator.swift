@@ -68,30 +68,6 @@ public class PagingIterator<Element: BoxModel> {
         dispatchQueue = DispatchQueue(label: "com.box.swiftsdk.pagingiterator", qos: .userInitiated)
     }
 
-    /// Initializer
-    ///
-    /// - Parameters:
-    ///   - response: A BoxResponse from the API. The iterator is initialized from the data in the response.
-    ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
-    convenience init(response: BoxResponse, client: BoxClient) throws {
-        let result: Result<EntryContainer<Element>, BoxSDKError> = ObjectDeserializer.deserialize(data: response.body)
-
-        switch result {
-        case let .success(page):
-            self.init(
-                client: client,
-                url: response.request.url,
-                headers: response.request.httpHeaders,
-                queryParams: response.request.queryParams
-            )
-            totalCount = page.totalCount
-            updatePaging(page: page)
-
-        case let .failure(error):
-            throw error
-        }
-    }
-
     /// Update internal paging parameters to be used for the next API call
     private func updatePaging(page: EntryContainer<Element>) {
         // Update total count if available
