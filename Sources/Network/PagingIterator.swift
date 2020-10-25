@@ -35,7 +35,7 @@ public class PagingIterator<Element: BoxModel> {
     private let client: BoxClient
 
     /// Gets offset, marker or stream position for the next page
-    private var _nextPage: PagingParameter?
+    private var nextPage: PagingParameter?
     private var isDone: Bool
     private var isStreamEmpty: Bool
 
@@ -49,6 +49,13 @@ public class PagingIterator<Element: BoxModel> {
     /// The total count of the result set, if known
     public private(set) var totalCount: Int?
 
+    /// Initializer
+    ///
+    /// - Parameters:
+    ///   - client: A BoxClient that will be used for any API calls the iterator makes internally in order to get more data.
+    ///   - url: The endpoint from which to get pages, using HTTP GET.
+    ///   - headers: The HTTP headers to send with each request (authorization is handled by the client).
+    ///   - queryParams: The query parameters for the initial page. Paging parameters are updated for subsequent pages.
     init(client: BoxClient, url: URL, headers: BoxHTTPHeaders, queryParams: QueryParameters) {
         self.client = client
         self.url = url
@@ -87,33 +94,44 @@ public class PagingIterator<Element: BoxModel> {
 
     /// Update internal paging parameters to be used for the next API call
     private func updatePaging(page: EntryContainer<Element>) {
+        // Update total count if available
+        if let totalCountFromPage = page.totalCount {
+            totalCount = totalCountFromPage
+        }
+
+        // Handle offset-based paging
         if let previousOffset = page.offset {
             let limit = page.limit ?? page.entries.count
-            _nextPage = .offset(previousOffset + limit)
-            if page.totalCount != nil {
-                isDone = page.offset! + limit > page.totalCount!
+            nextPage = .offset(previousOffset + limit)
+            if let totalCount = totalCount {
+                isDone = previousOffset + limit > totalCount
             }
             else {
                 isDone = page.entries.isEmpty
             }
         }
+        // Handle stream position paging
         else if let nextStreamPosition = page.nextStreamPosition {
             if page.entries.isEmpty {
                 isStreamEmpty = true
             }
-            _nextPage = .streamPosition(nextStreamPosition)
+            nextPage = .streamPosition(nextStreamPosition)
         }
+        // Handle marker based paging
         else if let nextPageMarker = page.nextMarker {
-            _nextPage = .marker(nextPageMarker)
+            nextPage = .marker(nextPageMarker)
         }
+        // Handle unexpected value with no paging information
         else {
             // Default to a finished marker collection when there's no field present,
             // since some endpoints indicate completed paging this way
-            _nextPage = .marker(nil)
+            nextPage = .marker(nil)
             isDone = true
         }
 
-        queryParams = queryParams.merging(_nextPage!.asQueryParams) { _, right in right }
+        if let updatedParams = nextPage?.asQueryParams {
+            queryParams = queryParams.merging(updatedParams) { _, right in right }
+        }
     }
 
     /// Gets next page of elements from the iterator
@@ -149,7 +167,7 @@ public class PagingIterator<Element: BoxModel> {
 
     /// Get the next page of items from the API
     private func getData() {
-        self.client.get(
+        client.get(
             url: url,
             httpHeaders: headers,
             queryParameters: queryParams
