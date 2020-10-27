@@ -92,3 +92,6 @@ jobs:
 
 after_script:
   - bundle exec slather
+  
+after_failure:
+  - cat $TMPDIR/carthage-*.log
