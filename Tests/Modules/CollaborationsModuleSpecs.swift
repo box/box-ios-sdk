@@ -37,7 +37,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborations.get(collaborationId: "791293") { result in
                             switch result {
                             case let .success(collaboration):
@@ -83,7 +83,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
-                        waitUntil(timeout: 10.0) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group, canViewPath: true) { result in
                                 switch result {
                                 case let .success(collaboration):
@@ -126,7 +126,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
-                        waitUntil(timeout: 10.0) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
                                 switch result {
                                 case let .success(collaboration):
@@ -171,7 +171,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborations.update(collaborationId: "791293", role: .viewer) { result in
                             switch result {
                             case let .success(collaboration):
@@ -214,7 +214,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborations.getAcceptanceRequirementsStatus(collaborationId: "12345") { result in
                             switch result {
                             case let .success(acceptanceRequirement):
@@ -238,7 +238,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                     ) { _ in
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborations.delete(collaborationId: "123456") { result in
                             switch result {
                             case .success:
@@ -265,7 +265,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2) { results in
                             switch results {
                             case let .success(iterator):

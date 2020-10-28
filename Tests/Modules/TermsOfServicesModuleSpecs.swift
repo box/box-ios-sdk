@@ -45,7 +45,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.termsOfService.create(status: TermsOfServiceStatus.enabled, tosType: TermsOfServiceType.managed, text: "Example Text") { result in
                             switch result {
                             case let .success(termsOfService):
@@ -81,7 +81,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.termsOfService.update(tosId: "12345", text: "Example Text", status: TermsOfServiceStatus.enabled) { result in
                             switch result {
                             case let .success(termsOfService):
@@ -113,7 +113,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.termsOfService.get(tosId: "12345") { result in
                             switch result {
                             case let .success(termsOfService):
@@ -145,7 +145,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.termsOfService.listForEnterprise() { result in
                             switch result {
                             case let .success(tos):
@@ -179,7 +179,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.termsOfService.listForEnterprise(tosType: TermsOfServiceType.managed) { result in
                         switch result {
                         case let .success(tos):
@@ -221,7 +221,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.termsOfService.createUserStatus(tosId: "12345", isAccepted: true, userId: "11111") { result in
                         switch result {
                         case let .success(userStatus):
@@ -254,7 +254,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.termsOfService.getUserStatus(tosId: "12345", userId: "88888") { result in
                         switch result {
                         case let .success(userStatus):
@@ -284,7 +284,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.termsOfService.updateUserStatus(userStatusId: "88888", isAccepted: true) { result in
                         switch result {
                         case let .success(userStatus):

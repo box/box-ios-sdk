@@ -38,7 +38,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.get(policyId: id) { result in
                             switch result {
                             case let .success(retentionPolicy):
@@ -90,7 +90,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.create(
                             name: "Tax Documents",
                             type: .finite,
@@ -140,7 +140,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.update(
                             policyId: id,
                             name: "Tax Documents",
@@ -177,7 +177,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.list(
                             name: "name",
                             type: .finite,
@@ -219,7 +219,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.getAssignment(assignmentId: id) { result in
                             switch result {
                             case let .success(retentionPolicyAssignment):
@@ -265,7 +265,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.assign(
                             policyId: id,
                             assignedContentId: id,
@@ -306,7 +306,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.retentionPolicy.listAssignments(policyId: id, type: .finite) { results in
                             switch results {
                             case let .success(iterator):
@@ -344,7 +344,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.getVersionRetention(
                             retentionId: id
                         ) { result in
@@ -386,7 +386,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.listVersionRetentions(
                             fileId: "1234",
                             fileVersionId: "1234",

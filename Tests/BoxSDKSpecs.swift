@@ -70,7 +70,7 @@ class BoxSDKSpecs: QuickSpec {
                     let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
                     var client: BoxClient?
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         sdk.getOAuth2Client(tokenInfo: tokenInfo) { result in
                             switch result {
                             case let .success(ouathClient):
@@ -99,7 +99,7 @@ class BoxSDKSpecs: QuickSpec {
                     let tokenStore = TestTokenStore(shouldFail: false)
                     let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
                     tokenStore.write(tokenInfo: tokenInfo) { _ in }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         sdk.getOAuth2Client(tokenStore: tokenStore) { result in
                             switch result {
                             case let .success(ouathClient):
@@ -129,7 +129,7 @@ class BoxSDKSpecs: QuickSpec {
                     let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
                     tokenStore.write(tokenInfo: tokenInfo) { _ in }
                     tokenStore.shouldFail = true
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         sdk.getOAuth2Client(tokenStore: tokenStore) { result in
                             switch result {
                             case let .success(ouathClient):
@@ -156,7 +156,7 @@ class BoxSDKSpecs: QuickSpec {
                     let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
                     var client: BoxClient?
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: TestTokenStore(shouldFail: false)) { result in
                             switch result {
                             case let .success(ouathClient):
@@ -182,7 +182,7 @@ class BoxSDKSpecs: QuickSpec {
                 it("should not initialize client with provided token info and tokenStore as tokenStore fail to write token info ") {
                     let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: TestTokenStore(shouldFail: true)) { result in
                             switch result {
                             case let .success(ouathClient):
@@ -212,7 +212,7 @@ class BoxSDKSpecs: QuickSpec {
                 it("should get a new client after the web flow") {
                     let sdk = BoxSDKSpy()
                     var client: BoxClient?
-                    waitUntil(timeout: 1.0) { done in
+                    waitUntil(timeout: .seconds(1)) { done in
                         sdk.getOAuth2Client { result in
                             switch result {
                             case let .success(ouathClient):

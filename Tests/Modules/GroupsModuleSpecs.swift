@@ -39,7 +39,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.get(groupId: "11111") { result in
                             switch result {
                             case let .success(group):
@@ -79,7 +79,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.create(name: "Team A", provenance: "IDP", externalSyncIdentifier: "idp-team-a", description: "Team A from IDP", invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
                             switch result {
                             case let .success(group):
@@ -119,7 +119,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.update(groupId: "11111", name: "Team A", provenance: .value("IDP"), externalSyncIdentifier: .value("idp-team-a"), description: .value("Team A from IDP"), invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
                             switch result {
                             case let .success(group):
@@ -145,7 +145,7 @@ class GroupsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.delete(groupId: "11111") { response in
                             switch response {
                             case .success:
@@ -172,7 +172,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.getMembershipInfo(membershipId: "12345") { result in
                             switch result {
                             case let .success(membership):
@@ -220,7 +220,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.createMembership(userId: "54321", groupId: "11111", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
                             switch result {
                             case let .success(membership):
@@ -261,7 +261,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.updateMembership(membershipId: "12345", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
                             switch result {
                             case let .success(membership):
@@ -287,7 +287,7 @@ class GroupsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.deleteMembership(membershipId: "12345") { response in
                             switch response {
                             case .success:
@@ -314,7 +314,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.listMemberships(groupId: "12345") { results in
                             switch results {
                             case let .success(iterator):
@@ -352,7 +352,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.listMembershipsForUser(userId: "12345") { results in
                             switch results {
                             case let .success(iterator):
@@ -393,7 +393,7 @@ class GroupsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.groups.listCollaborations(groupId: "12345") { results in
                             switch results {
                             case let .success(iterator):

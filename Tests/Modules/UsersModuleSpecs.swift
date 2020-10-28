@@ -34,7 +34,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.get(userId: "10543463") { result in
                             switch result {
                             case let .success(user):
@@ -70,7 +70,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.get(userId: "10543463", fields: ["type", "id", "name"]) { result in
                             switch result {
                             case let .success(user):
@@ -100,7 +100,7 @@ class UsersModuleSpecs: QuickSpec {
                         return OHHTTPStubsResponse(data: data, statusCode: 200, headers: [:])
                     }
 
-                    waitUntil(timeout: 100) { done in
+                    waitUntil(timeout: .seconds(100)) { done in
                         self.sut.users.getAvatar(userId: "10543463") { result in
                             switch result {
                             case .success:
@@ -135,7 +135,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 100) { done in
+                    waitUntil(timeout: .seconds(100)) { done in
                         self.sut.users.create(
                             login: "testuser@example.com",
                             name: "Test User",
@@ -176,7 +176,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.getCurrent() { result in
                             switch result {
                             case let .success(user):
@@ -213,7 +213,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.createAppUser(name: "Test User") { result in
                             switch result {
                             case let .success(newAppUser):
@@ -252,7 +252,7 @@ class UsersModuleSpecs: QuickSpec {
 
                     let trackingCode = User.TrackingCode(name: "foo", value: "bar")
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.update(userId: "123456", trackingCodes: [trackingCode]) { result in
                             switch result {
                             case .success:
@@ -272,7 +272,7 @@ class UsersModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.delete(userId: "123456", notify: true, force: true) { result in
                             switch result {
                             case .success:
@@ -295,7 +295,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100) { results in
                             switch results {
                             case let .success(iterator):
@@ -328,7 +328,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.listForEnterprise(usemarker: true, limit: 100) { results in
                             switch results {
                             case let .success(iterator):
@@ -365,7 +365,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.inviteToJoinEnterprise(login: "freeuser@email.com", enterpriseId: "42500") { result in
                             switch result {
                             case let .success(invitation):
@@ -392,7 +392,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.moveItemsOwnedByUser(withID: "1234", toUserWithID: "123456") { result in
                             switch result {
                             case let .success(folder):
@@ -415,7 +415,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.changeLogin(userId: "18180156", login: "testuser@example.com") { result in
                             switch result {
                             case let .success(folder):
@@ -440,7 +440,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.listEmailAliases(userId: "123456") { result in
                             switch result {
                             case let .success(aliases):
@@ -465,7 +465,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.createEmailAlias(userId: "123456", email: "user@email.com") { result in
                             switch result {
                             case let .success(emailAlias):
@@ -487,7 +487,7 @@ class UsersModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.deleteEmailAlias(userId: "12", emailAliasId: "1234567890") { result in
                             switch result {
                             case .success():
@@ -510,7 +510,7 @@ class UsersModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.users.rollOutOfEnterprise(userId: "12345", notify: true) { result in
                             switch result {
                             case let .success(user):

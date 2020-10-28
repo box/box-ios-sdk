@@ -41,7 +41,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         authClosure: { _, _ in }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
@@ -60,7 +60,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 999))) }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
@@ -79,7 +79,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 0))) }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case .success:
@@ -98,7 +98,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         authClosure: { _, completion in completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure))) }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case .success:
@@ -127,7 +127,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         }
                     )
 
-                    waitUntil(timeout: 30) { done in
+                    waitUntil(timeout: .seconds(30)) { done in
                         self.testClosure = { array in
                             DispatchQueue.main.async {
                                 expect(array).to(equal(["first result", "second result", "third result", "fourth result"]))
@@ -198,7 +198,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
                             switch result {
                             case let .success(tokenInfo):
@@ -241,7 +241,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case .success:
@@ -274,7 +274,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):

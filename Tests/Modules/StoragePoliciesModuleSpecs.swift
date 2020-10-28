@@ -38,7 +38,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.get(storagePolicyId: "12345") { result in
                             guard case let .success(policy) = result else {
                                 fail("Expected call to get to succeed, but it failed")
@@ -69,7 +69,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.listForEnterprise { results in
                             switch results {
                             case let .success(iterator):
@@ -108,7 +108,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.getAssignment(storagePolicyAssignmentId: "enterprise_36907420") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to getPolicyAssignment to succeed, but it failed")
@@ -140,7 +140,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.listAssignments(resolvedForType: "enterprise", resolvedForId: "36690620") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to listAssignments to succeed, but it failed")
@@ -181,7 +181,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.assign(storagePolicyId: "12", assignedToType: "user", assignedToId: "3093450887") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to assign to succeed, but it failed")
@@ -248,7 +248,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.forceAssign(storagePolicyId: "192", assignedToType: "user", assignedToId: "3093450887") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to assignPolicy to succeed, but it failed")
@@ -286,7 +286,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.updateAssignment(storagePolicyAssignmentId: "user_7993870887", storagePolicyId: "192") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to updateAssignment to succeed, but it failed")
@@ -313,7 +313,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "user_3093870887") { response in
                             switch response {
                             case .success:

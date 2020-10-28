@@ -46,7 +46,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webhooks.create(targetType: "file", targetId: "5016243669", triggers: [.fileDownloaded, .fileUploaded], address: "https://dev.name/actions/file_changed") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to createWebhook to succeed, but it failed")
@@ -83,7 +83,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webhooks.update(webhookId: "4133", targetType: "folder", targetId: "1000605797", address: "https://notification.example.net") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to updateWebhook to succeed, but it failed")
@@ -114,7 +114,7 @@ class WebhooksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webhooks.get(webhookId: "4137") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to get to succeed, but it failed")
@@ -144,7 +144,7 @@ class WebhooksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webhooks.list { results in
                             switch results {
                             case let .success(iterator):
@@ -178,7 +178,7 @@ class WebhooksModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webhooks.delete(webhookId: "12345") { response in
                             switch response {
                             case .success:
