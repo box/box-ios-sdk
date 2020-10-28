@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode12
+osx_image: xcode12.2
 branches:
   only:
     - master
@@ -92,3 +92,6 @@ jobs:
 
 after_script:
   - bundle exec slather
+  
+after_failure:
+  - cat $TMPDIR/carthage-*.log
