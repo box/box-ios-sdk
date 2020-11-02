@@ -49,7 +49,7 @@ __Step 2__: Update dependencies
 ```shell
 $ carthage update --platform iOS
 ```
-**If you are using Xcode 12, you must follow the steps outlined [here](https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323) to install dependecies via carthage.**
+**If you are using Xcode 12, you must follow the steps outlined [here](https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323) to install dependecies due to a bug in carthage.**
 
 __Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
 
