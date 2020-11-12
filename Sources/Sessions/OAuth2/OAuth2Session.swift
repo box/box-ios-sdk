@@ -119,7 +119,6 @@ public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
             switch result {
             case .success:
                 self.tokenStore.clear { _ in }
-                self.tokenInfo = nil
                 completion(.success(()))
             case let .failure(error):
                 completion(.failure(error))
