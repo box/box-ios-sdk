@@ -14,7 +14,7 @@
     <a title="BoxRequest Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -578,6 +578,21 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Formatter.html">Formatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -591,6 +606,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIDevice.html">UIDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -765,10 +792,105 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Request%20Endpoint%20Construction"></a>
+                <a name="//apple_ref/swift/Section/Request Endpoint Construction" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Request%20Endpoint%20Construction"></a>
+                  <h3 class="section-name"><p>Request Endpoint Construction</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A7RequestC8endpoint10Foundation3URLVyF"></a>
+                    <a name="//apple_ref/swift/Method/endpoint()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A7RequestC8endpoint10Foundation3URLVyF">endpoint()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">endpoint</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">URL</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A7RequestC03addA17APIRelatedHeadersyySDyS2SGSgF"></a>
+                    <a name="//apple_ref/swift/Method/addBoxAPIRelatedHeaders(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A7RequestC03addA17APIRelatedHeadersyySDyS2SGSgF">addBoxAPIRelatedHeaders(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">addBoxAPIRelatedHeaders</span><span class="p">(</span><span class="n">_</span> <span class="nv">headers</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK0A7RequestC15bodyDescription10Foundation4DataVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/bodyDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK0A7RequestC15bodyDescription10Foundation4DataVSgvp">bodyDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A description of the request body suitable for logging or debugging.  May not
+include the full contents of the body.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">bodyDescription</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-05-15)</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
