@@ -59,6 +59,11 @@ public struct BoxSDKConfiguration {
     public let consoleLogDestination: ConsoleLogDestination
     /// File log destination.
     public let fileLogDestination: FileLogDestination?
+    /// An optional string containing the URI to load after the user completes the OAuth 2 webview authentication flow.
+    /// This URI allows Box to redirect back to your app with an authentication code.
+    /// This should be a custom url scheme registered to your app. Do not set this to a custom value,
+    /// unless you are also setting a custom redirect URI in your app's developer settings.
+    public let callbackURL: String?
 
     /// Initializer
     ///
@@ -73,6 +78,7 @@ public struct BoxSDKConfiguration {
     ///   - consoleLogDestination: Console log destination.
     ///   - fileLogDestination: File log destination.
     ///   - clientAnalyticsInfo: Analytics info that is set to request headers.
+    ///   - callbackURL: Optional callback URL for OAuth 2 authentication flow
     init(
         clientId: String = "",
         clientSecret: String = "",
@@ -84,7 +90,8 @@ public struct BoxSDKConfiguration {
         retryBaseInterval: TimeInterval? = defaultRetryBaseInterval,
         consoleLogDestination: ConsoleLogDestination? = ConsoleLogDestination(),
         fileLogDestination: FileLogDestination? = nil,
-        clientAnalyticsInfo: ClientAnalyticsInfo? = nil
+        clientAnalyticsInfo: ClientAnalyticsInfo? = nil,
+        callbackURL: String? = nil
     ) throws {
         self.clientId = clientId
         self.clientSecret = clientSecret
@@ -92,6 +99,7 @@ public struct BoxSDKConfiguration {
         self.apiBaseURL = apiBaseURL ?? defaultAPIBaseURL
         self.uploadApiBaseURL = uploadApiBaseURL ?? defaultUploadAPIBaseURL
         self.oauth2AuthorizeURL = oauth2AuthorizeURL ?? defaultOAuth2AuthorizeURL
+        self.callbackURL = callbackURL
 
         try URLValidation.validate(networkUrl: self.apiBaseURL)
         try URLValidation.validate(networkUrl: self.uploadApiBaseURL)
