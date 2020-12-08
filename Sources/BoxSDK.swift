@@ -35,6 +35,7 @@ public class BoxSDK {
         private var webSession: AuthenticationSession?
     #endif
     private var networkAgent: BoxNetworkAgent
+    private var customCallbackURL: String?
 
     /// Auth module providing authorization and token related requests.
     /// Is set upon BoxSDK initialisation
@@ -181,10 +182,12 @@ public class BoxSDK {
         public func getOAuth2Client(
             tokenInfo: TokenInfo? = nil,
             tokenStore: TokenStore? = nil,
+            callbackURL: String? = nil,
             context: ASWebAuthenticationPresentationContextProviding,
             completion: @escaping Callback<BoxClient>
         ) {
             var designatedTokenStore: TokenStore
+            customCallbackURL = callbackURL
 
             if tokenInfo == nil, let unWrappedTokenStore = tokenStore {
                 designatedTokenStore = unWrappedTokenStore
@@ -239,9 +242,11 @@ public class BoxSDK {
     public func getOAuth2Client(
         tokenInfo: TokenInfo? = nil,
         tokenStore: TokenStore? = nil,
+        callbackURL: String? = nil,
         completion: @escaping Callback<BoxClient>
     ) {
         var designatedTokenStore: TokenStore
+        customCallbackURL = callbackURL
 
         if tokenInfo == nil, let unWrappedTokenStore = tokenStore {
             designatedTokenStore = unWrappedTokenStore
@@ -357,7 +362,7 @@ public class BoxSDK {
         @available(iOS 13.0, *)
         func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
             let authorizeURL = makeAuthorizeURL(state: nonce)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: defaultCallbackURL, context: context) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.customCallbackURL ?? defaultCallbackURL, context: context) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
@@ -385,7 +390,7 @@ public class BoxSDK {
     func obtainAuthorizationCodeFromWebSession(completion: @escaping Callback<String>) {
         let authorizeURL = makeAuthorizeURL(state: nonce)
         #if os(iOS)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: defaultCallbackURL) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.customCallbackURL ?? defaultCallbackURL) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
@@ -469,7 +474,7 @@ extension BoxSDK {
     /// - Returns: Standard URL object to be used for authorization in external browser.
     public func makeAuthorizeURL(callbackURL: String? = nil, state: String? = nil) -> URL {
         // swiftlint:disable:next line_length
-        var urlString = "\(configuration.oauth2AuthorizeURL)?\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)&\(BoxOAuth2ParamsKey.redirectURL)=\(callbackURL ?? defaultCallbackURL)"
+        var urlString = "\(configuration.oauth2AuthorizeURL)?\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)&\(BoxOAuth2ParamsKey.redirectURL)=\(callbackURL ?? self.customCallbackURL ?? defaultCallbackURL)"
 
         if let state = state {
             urlString.append("&\(BoxOAuth2ParamsKey.state)=\(state)")
