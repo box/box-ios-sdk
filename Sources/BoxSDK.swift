@@ -51,10 +51,9 @@ public class BoxSDK {
     ///     log in to your Box developer console and click the Edit Application link for the application you're working with.
     ///     In the OAuth 2 Parameters section of the configuration page, find the item labeled "client_secret".
     ///     The text of that item is your application's client secret.
-    ///   - callbackURL: An optional string containing the URI to load after the user completes the OAuth 2 webview authentication flow.
-    ///     This URI allows Box to redirect back to your app with an authentication code.
-    ///     This should be a custom url scheme registered to your app. Do not set this to a custom value,
-    ///     unless you are also setting a custom redirect URI in your app's developer settings.
+    ///   - callbackURL: An optional custom callback URL string. The URL to which Box redirects the browser when authentication completes.
+    ///     The user's actual interaction with your application begins when Box redirects to this URL.
+    ///     If not specified, default URL is used in a format of `boxsdk-clientId://boxsdkoauth2redirect` with the real value of `clientId`.
     public init(clientId: String, clientSecret: String, callbackURL: String? = nil) {
         // swiftlint:disable:next force_try
         configuration = try! BoxSDKConfiguration(clientId: clientId, clientSecret: clientSecret, callbackURL: callbackURL)
@@ -361,7 +360,7 @@ public class BoxSDK {
         @available(iOS 13.0, *)
         func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
             let authorizeURL = makeAuthorizeURL(state: nonce)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.configuration.callbackURL ?? defaultCallbackURL, context: context) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.configuration.callbackURL, context: context) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
@@ -389,7 +388,7 @@ public class BoxSDK {
     func obtainAuthorizationCodeFromWebSession(completion: @escaping Callback<String>) {
         let authorizeURL = makeAuthorizeURL(state: nonce)
         #if os(iOS)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.configuration.callbackURL ?? defaultCallbackURL) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: self.configuration.callbackURL) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
@@ -465,15 +464,12 @@ extension BoxSDK {
     /// Creates OAuth2 authorization URL you can use in browser to authorize.
     ///
     /// - Parameters:
-    ///   - callbackURL: Custom callback URL string. The URL to which Box redirects the browser when authentication completes.
-    ///     The user's actual interaction with your application begins when Box redirects to this URL.
-    ///     If not specified, default URL is used in a format of `boxsdk-clientId://boxsdkoauth2redirect` with the real value of `clientId`.
     ///   - state: A text string that you choose. Box sends the same string to your redirect URL when authentication is complete.
     ///     This parameter is provided for your use in protecting against hijacked sessions and other attacks.
     /// - Returns: Standard URL object to be used for authorization in external browser.
-    public func makeAuthorizeURL(callbackURL: String? = nil, state: String? = nil) -> URL {
+    public func makeAuthorizeURL(state: String? = nil) -> URL {
         // swiftlint:disable:next line_length
-        var urlString = "\(configuration.oauth2AuthorizeURL)?\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)&\(BoxOAuth2ParamsKey.redirectURL)=\(callbackURL ?? self.configuration.callbackURL ?? defaultCallbackURL)"
+        var urlString = "\(configuration.oauth2AuthorizeURL)?\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)&\(BoxOAuth2ParamsKey.redirectURL)=\(configuration.callbackURL)"
 
         if let state = state {
             urlString.append("&\(BoxOAuth2ParamsKey.state)=\(state)")
@@ -489,10 +485,6 @@ extension BoxSDK {
         // swiftlint:disable:next force_unwrapping
         let randomCharacters = (0 ..< length).map { _ in characters.randomElement()! }
         return String(randomCharacters)
-    }
-
-    private var defaultCallbackURL: String {
-        return "boxsdk-\(configuration.clientId)://boxsdkoauth2redirect"
     }
 
     private func getURLComponentValueAt(key: String, from url: URL?) -> String? {

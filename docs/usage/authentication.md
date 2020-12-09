@@ -107,6 +107,24 @@ sdk.getOAuth2Client() { result in
 }
 ```
 
+If your application requires a custom URL scheme that differs from the default format `boxsdk-<<CLIENT ID>>://boxsdkoauth2redirect`,
+you have the option to pass in a custom callback URL string when creating the SDK client. This is the URL to which Box will redirect the user
+when authentication completes. This requires that the application using the SDK registers itself for the same custom callback URL.
+
+```swift
+import BoxSDK
+
+let sdk = BoxSDK(clientId: "YOUR CLIENT ID HERE", clientSecret: "YOUR CLIENT SECRET HERE", callbackURL: "YOUR CALLBACK URL HERE")
+sdk.getOAuth2Client() { result in
+    switch result {
+    case let .success(client):
+        // Use client to make API calls
+    case let .failure(error):
+        // Handle error creating client
+    }
+}
+```
+
 Token Store
 -----------
 

@@ -19,6 +19,16 @@ class BoxSDKSpecs: QuickSpec {
                     let sut = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     expect(sut.configuration.clientId).to(equal("1234567"))
                     expect(sut.configuration.clientSecret).to(equal("abcdef"))
+                    expect(sut.configuration.callbackURL).to(equal("boxsdk-1234567://boxsdkoauth2redirect"))
+                }
+            }
+
+            context("User is able to configure SDK with clientId, clientSecret and callbackURL") {
+                it("Box SDK should be initialized with clientId, clientSecret and callbackURL") {
+                    let sut = BoxSDK(clientId: "1234567", clientSecret: "abcdef", callbackURL: "https://app.box.com")
+                    expect(sut.configuration.clientId).to(equal("1234567"))
+                    expect(sut.configuration.clientSecret).to(equal("abcdef"))
+                    expect(sut.configuration.callbackURL).to(equal("https://app.box.com"))
                 }
             }
 
@@ -75,6 +85,31 @@ class BoxSDKSpecs: QuickSpec {
                             switch result {
                             case let .success(ouathClient):
                                 client = ouathClient
+                                client?.session.getAccessToken { result in
+                                    switch result {
+                                    case let .success(token):
+                                        expect(token).to(equal(tokenInfo.accessToken))
+                                    case let .failure(error):
+                                        fail("getOAuth2Client should succeed, but instead got \(error)")
+                                    }
+                                    done()
+                                }
+                            case let .failure(error):
+                                fail("getOAuth2Client should succeed, but instead got \(error)")
+                            }
+                        }
+                    }
+                }
+
+                it("should initialize client with provided token info when token info is passed in and custom callbackURL has been set") {
+                    let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef", callbackURL: "https://app.box.com")
+                    let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
+                    var client: BoxClient?
+                    waitUntil(timeout: 10) { done in
+                        sdk.getOAuth2Client(tokenInfo: tokenInfo) { result in
+                            switch result {
+                            case let .success(oauthClient):
+                                client = oauthClient
                                 client?.session.getAccessToken { result in
                                     switch result {
                                     case let .success(token):
@@ -241,8 +276,9 @@ class BoxSDKSpecs: QuickSpec {
                     let sut = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     let state = "123456"
                     let authURL = sut.makeAuthorizeURL(state: state)
-                    expect(authURL.absoluteString).to(contain([state, sut.configuration.oauth2AuthorizeURL.absoluteString]))
+                    expect(authURL.absoluteString).to(contain([state, sut.configuration.oauth2AuthorizeURL.absoluteString, sut.configuration.callbackURL]))
                     expect(sut.configuration.clientSecret).to(equal("abcdef"))
+                    expect(sut.configuration.callbackURL).to(equal("boxsdk-1234567://boxsdkoauth2redirect"))
                 }
             }
 
@@ -250,9 +286,21 @@ class BoxSDKSpecs: QuickSpec {
                 it("should get a new client after the web flow") {
                     let sut = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
                     let authURL = sut.makeAuthorizeURL()
-                    expect(authURL.absoluteString).to(contain([sut.configuration.oauth2AuthorizeURL.absoluteString, "1234567"]))
+                    expect(authURL.absoluteString).to(contain([sut.configuration.oauth2AuthorizeURL.absoluteString, "1234567", sut.configuration.callbackURL]))
                     expect(authURL.absoluteString).toNot(contain([BoxOAuth2ParamsKey.state]))
                     expect(sut.configuration.clientSecret).to(equal("abcdef"))
+                    expect(sut.configuration.callbackURL).to(equal("boxsdk-1234567://boxsdkoauth2redirect"))
+                }
+            }
+
+            context("User is able to get an OAuth client with a custom callbackURL") {
+                it("should get a new client after the web flow") {
+                    let sut = BoxSDK(clientId: "1234567", clientSecret: "abcdef", callbackURL: "https://app.box.com")
+                    let authURL = sut.makeAuthorizeURL()
+                    expect(authURL.absoluteString).to(contain([sut.configuration.oauth2AuthorizeURL.absoluteString, "1234567", sut.configuration.callbackURL]))
+                    expect(authURL.absoluteString).toNot(contain([BoxOAuth2ParamsKey.state]))
+                    expect(sut.configuration.clientSecret).to(equal("abcdef"))
+                    expect(sut.configuration.callbackURL).to(equal("https://app.box.com"))
                 }
             }
         }
