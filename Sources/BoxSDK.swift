@@ -53,7 +53,7 @@ public class BoxSDK {
     ///     The text of that item is your application's client secret.
     ///   - callbackURL: An optional custom callback URL string. The URL to which Box redirects the browser when authentication completes.
     ///     The user's actual interaction with your application begins when Box redirects to this URL.
-    ///     If not specified, default URL is used in a format of `boxsdk-clientId://boxsdkoauth2redirect` with the real value of `clientId`.
+    ///     If not specified, the default URL is used, in the format of `boxsdk-CLIENTID://boxsdkoauth2redirect`, where CLIENTID is replaced with the value of the `clientId` parameter.
     public init(clientId: String, clientSecret: String, callbackURL: String? = nil) {
         // swiftlint:disable:next force_try
         configuration = try! BoxSDKConfiguration(clientId: clientId, clientSecret: clientSecret, callbackURL: callbackURL)
