@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+- Add support for OAuth 2 custom callback URL
+
+__Bug Fixes:__
+
 ## v4.2.0 [2020-11-16]
 
 __Breaking Changes:__
