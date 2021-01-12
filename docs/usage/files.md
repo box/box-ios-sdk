@@ -520,3 +520,45 @@ client.files.listRepresentations(
 ```
 
 [get-representations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF
+
+Create Zip
+-------------------
+
+Calling [`client.files.createZip(name:items:completion:)`][create-zip] will let you create a new zip file with the specified name and with the specified items and will return a response with the download and status link. This file does not show up in your Box account, but will be temporarily available for download.
+
+<!-- sample create_zip -->
+```swift
+let name = "New zip name"
+let items: [[String: String]] = [["type": "file", "id": "11111"]]
+client.files.createZip(name: name, items: items) { (result: Result<ZipDownload, BoxSDKError>) in
+    guard case let .success(zip) = result else {
+        print("Error creating zip")
+        return
+    }
+
+    print("Zip file URL is \(zip.downloadUrl.absoluteString)")
+}
+```
+
+Download Zip
+-------------------
+
+Calling [`client.files.downloadZip(name:items:destinationURL:completion:)`][download-zip] will let you create a new zip file with the specified name and with the specified items and download it to the specified URL location where the file should be downloaded to. The created zip file does not show up in your Box account.
+
+<!-- sample download_zip -->
+```swift
+let name = "New zip name"
+let items: [[String: String]] = [["type": "file", "id": "11111"], ["type": "folder", "id": "22222"]]
+let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+let destinationURL = documentsURL.appendingPathComponent("New zip name.zip")
+
+
+client.files.downloadZip(name: name, items: items, destinationURL: destinationURL) { (result: Result<Void, BoxSDKError>) in
+    guard case .success = result else {
+        print("Error downloading zip")
+        return
+    }
+
+    print("Zip downloaded successfully")
+}
+```

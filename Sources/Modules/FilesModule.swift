@@ -1188,5 +1188,54 @@ public class FilesModule {
         }
     }
 
+    /// Creates a zip of multiple files and folders.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the zip file to be created
+    ///   - items: Array of files or folders to be part of the created zip
+    ///   - completion: Returns a standard ZipDownload object or an error
+    public func createZip(
+        name: String,
+        items: [[String: String]],
+        completion: @escaping Callback<ZipDownload>
+    ) {
+        var body: [String: Any] = [:]
+        body["download_file_name"] = name
+        body["items"] = items
+
+        boxClient.post(
+            url: URL.boxAPIEndpoint("/2.0/zip_downloads", configuration: boxClient.configuration),
+            json: body,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+
+    /// Creates a zip of multiple files and folders and downloads it.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the zip file to be created
+    ///   - items: Array of files or folders to be part of the created zip
+    ///   - destinationURL: A URL for the location on device that we want to store the file once it has been downloaded
+    ///   - completion: Returns an empty response or an error
+    public func downloadZip(name: String, items: [[String: String]], destinationURL: URL, completion: @escaping Callback<Void>) {
+        createZip(name: name, items: items) { [weak self] result in
+            guard let self = self else {
+                completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable to download Zip - FilesModule deallocated"))))
+                return
+            }
+
+            switch result {
+            case let .success(zip):
+                self.boxClient.download(
+                    url: URL.boxAPIEndpoint(zip.downloadUrl.absoluteString, configuration: self.boxClient.configuration),
+                    downloadDestinationURL: destinationURL,
+                    completion: ResponseHandler.default(wrapping: completion)
+                )
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
     // swiftlint:disable:next file_length
 }

@@ -1875,6 +1875,105 @@ class FilesModuleSpecs: QuickSpec {
             })
         }
 
+        describe("createZip()") {
+            it("should produce zip download model when API call succeeds") {
+                stub(
+                    condition: isHost("api.box.com") &&
+                    isPath("/2.0/zip_downloads") &&
+                    isMethodPOST() &&
+                    hasJsonBody([
+                        "download_file_name": "New zip file",
+                        "items": [[
+                            "type": "file",
+                            "id": "5000948880"
+                        ]]
+                    ])
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
+                        statusCode: 202, headers: ["Content-Type": "application/json"]
+                    )
+                }
+
+                waitUntil(timeout: 10) { done in
+                    let item: [String: String] = ["type": "file", "id": "5000948880"]
+                    let items: [[String: String]] = [item]
+                    self.sut.files.createZip(name: "New zip file", items: items, completion: { result in
+                        switch result {
+                        case let .success(file):
+                            expect(file).toNot(beNil())
+                            expect(file.expiresAt).to(equal(Date(fromISO8601String: "2020-07-22T11:26:08Z")))
+                            expect(file.downloadUrl).toNot(beNil())
+                        case let .failure(error):
+                            fail("Expected call to succeed, but instead got \(error)")
+                        }
+                        done()
+                    })
+                }
+            }
+        }
+
+        describe("downloadZip()") {
+            context("Download zip file to the provided destination folder") {
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let fileURL = documentsURL.appendingPathComponent("New zip file 2.zip")
+
+                beforeEach {
+                    try? FileManager.default.removeItem(at: fileURL.absoluteURL)
+                }
+
+                it("should download zip when API call succeeds") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                        isPath("/2.0/zip_downloads") &&
+                        isMethodPOST() &&
+                        hasJsonBody([
+                            "download_file_name": "New zip file 2",
+                            "items": [[
+                                "type": "file",
+                                "id": "5000948880"
+                            ]]
+                        ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
+                            statusCode: 202, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    stub(
+                        condition: isHost("dl.boxcloud.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content")
+                    ) { _ in
+                        // swiftlint:disable:next force_unwrapping
+                        OHHTTPStubsResponse(data: "Downloaded zip".data(using: .utf8)!, statusCode: 201, headers: [:])
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        let item: [String: String] = ["type": "file", "id": "5000948880"]
+                        let items: [[String: String]] = [item]
+
+                        self.sut.files.downloadZip(name: "New zip file 2", items: items, destinationURL: fileURL, completion: { result in
+                            switch result {
+                            case .success:
+                                expect(FileManager.default.fileExists(atPath: fileURL.absoluteURL.path)).to(equal(true))
+
+                                guard let fileContents = try? String(contentsOf: fileURL.absoluteURL, encoding: .utf8) else {
+                                    fail("Unable to load file contents")
+                                    done()
+                                    return
+                                }
+
+                                expect(fileContents).to(equal("Downloaded zip"))
+
+                            case let .failure(error):
+                                fail("Expected call to downloadZip to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        })
+                    }
+                }
+            }
+        }
+
         // MARK: - Chunked Uploads
 
         describe("createUploadSession()") {
