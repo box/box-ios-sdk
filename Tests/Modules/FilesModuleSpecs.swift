@@ -1896,8 +1896,11 @@ class FilesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: 10) { done in
-                    let item: [String: String] = ["type": "file", "id": "5000948880"]
-                    let items: [[String: String]] = [item]
+                    var items: [ZipDownloadItem] = []
+                    items.append(ZipDownloadItem(
+                        id: "5000948880",
+                        type: "file"
+                    ))
                     self.sut.files.createZip(name: "New zip file", items: items, completion: { result in
                         switch result {
                         case let .success(file):
@@ -1946,14 +1949,25 @@ class FilesModuleSpecs: QuickSpec {
                         // swiftlint:disable:next force_unwrapping
                         OHHTTPStubsResponse(data: "Downloaded zip".data(using: .utf8)!, statusCode: 201, headers: [:])
                     }
+                    stub(
+                        condition: isHost("api.box.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status")
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("ZipDownloadStatus.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
 
                     waitUntil(timeout: 10) { done in
-                        let item: [String: String] = ["type": "file", "id": "5000948880"]
-                        let items: [[String: String]] = [item]
+                        var items: [ZipDownloadItem] = []
+                        items.append(ZipDownloadItem(
+                            id: "5000948880",
+                            type: "file"
+                        ))
 
                         self.sut.files.downloadZip(name: "New zip file 2", items: items, destinationURL: fileURL, completion: { result in
                             switch result {
-                            case .success:
+                            case let .success(status):
                                 expect(FileManager.default.fileExists(atPath: fileURL.absoluteURL.path)).to(equal(true))
 
                                 guard let fileContents = try? String(contentsOf: fileURL.absoluteURL, encoding: .utf8) else {
@@ -1963,6 +1977,7 @@ class FilesModuleSpecs: QuickSpec {
                                 }
 
                                 expect(fileContents).to(equal("Downloaded zip"))
+                                expect(status.state).to(equal("succeeded"))
 
                             case let .failure(error):
                                 fail("Expected call to downloadZip to suceeded, but instead got \(error)")

@@ -1196,12 +1196,12 @@ public class FilesModule {
     ///   - completion: Returns a standard ZipDownload object or an error
     public func createZip(
         name: String,
-        items: [[String: String]],
+        items: [ZipDownloadItem],
         completion: @escaping Callback<ZipDownload>
     ) {
         var body: [String: Any] = [:]
         body["download_file_name"] = name
-        body["items"] = items
+        body["items"] = items.map { $0.bodyDictWithDefaultKeys }
 
         boxClient.post(
             url: URL.boxAPIEndpoint("/2.0/zip_downloads", configuration: boxClient.configuration),
@@ -1217,10 +1217,10 @@ public class FilesModule {
     ///   - items: Array of files or folders to be part of the created zip
     ///   - destinationURL: A URL for the location on device that we want to store the file once it has been downloaded
     ///   - completion: Returns an empty response or an error
-    public func downloadZip(name: String, items: [[String: String]], destinationURL: URL, completion: @escaping Callback<Void>) {
+    public func downloadZip(name: String, items: [ZipDownloadItem], destinationURL: URL, completion: @escaping Callback<ZipDownloadStatus>) {
         createZip(name: name, items: items) { [weak self] result in
             guard let self = self else {
-                completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable to download Zip - FilesModule deallocated"))))
+                completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable to create Zip - FilesModule deallocated"))))
                 return
             }
 
@@ -1228,13 +1228,36 @@ public class FilesModule {
             case let .success(zip):
                 self.boxClient.download(
                     url: URL.boxAPIEndpoint(zip.downloadUrl.absoluteString, configuration: self.boxClient.configuration),
-                    downloadDestinationURL: destinationURL,
-                    completion: ResponseHandler.default(wrapping: completion)
-                )
+                    downloadDestinationURL: destinationURL
+                ) { [weak self] zipDownloadResult in
+                    guard let self = self else {
+                        completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable to download Zip - FilesModule deallocated"))))
+                        return
+                    }
+
+                    switch zipDownloadResult {
+                    case .success:
+                        self.getZipDownloadStatus(statusURL: zip.statusUrl, completion: completion)
+                    case let .failure(error):
+                        completion(.failure(error))
+                    }
+                }
             case let .failure(error):
                 completion(.failure(error))
             }
         }
+    }
+
+    /// Gets zip download status
+    ///
+    /// - Parameters:
+    ///   - statusURL: The URL to monitor the status of the zip download
+    ///   - completion: Returns a standard ZipDownloadStatus object or an error
+    private func getZipDownloadStatus(statusURL: URL, completion: @escaping Callback<ZipDownloadStatus>) {
+        boxClient.get(
+            url: statusURL,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
     }
 
     // swiftlint:disable:next file_length

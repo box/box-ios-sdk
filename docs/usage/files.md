@@ -529,7 +529,11 @@ Calling [`client.files.createZip(name:items:completion:)`][create-zip] will let 
 <!-- sample create_zip -->
 ```swift
 let name = "New zip name"
-let items: [[String: String]] = [["type": "file", "id": "11111"]]
+var items: [ZipDownloadItem] = []
+items.append(ZipDownloadItem(
+    type: "file",
+    id: "11111"
+))
 client.files.createZip(name: name, items: items) { (result: Result<ZipDownload, BoxSDKError>) in
     guard case let .success(zip) = result else {
         print("Error creating zip")
@@ -548,17 +552,27 @@ Calling [`client.files.downloadZip(name:items:destinationURL:completion:)`][down
 <!-- sample download_zip -->
 ```swift
 let name = "New zip name"
-let items: [[String: String]] = [["type": "file", "id": "11111"], ["type": "folder", "id": "22222"]]
+var items: [ZipDownloadItem] = []
+items.append(ZipDownloadItem(
+    type: "file",
+    id: "11111"
+))
+let items: [ZipDownloadItem] = []
+items.append(ZipDownloadItem(
+    type: "folder",
+    id: "22222"
+))
 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 let destinationURL = documentsURL.appendingPathComponent("New zip name.zip")
 
 
-client.files.downloadZip(name: name, items: items, destinationURL: destinationURL) { (result: Result<Void, BoxSDKError>) in
+client.files.downloadZip(name: name, items: items, destinationURL: destinationURL) { (result: Result<ZipDownloadStatus, BoxSDKError>) in
     guard case .success = result else {
+    guard case let .success(zipDownloadStatus) = result else {
         print("Error downloading zip")
         return
     }
 
-    print("Zip downloaded successfully")
+    print("Zip download status: \(zipDownloadStatus.state)")
 }
 ```
