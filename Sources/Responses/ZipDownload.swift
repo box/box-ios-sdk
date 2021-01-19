@@ -21,7 +21,7 @@ public class ZipDownload: BoxModel {
     /// Expiration date of the Zip file download.
     public let expiresAt: Date?
     /// Conflicts that occur between items that have the same name.
-    public let nameConflicts: [[[String: String]]]?
+    public let nameConflicts: [ZipDownloadConflict]?
 
 
     /// Initializer.
@@ -33,6 +33,6 @@ public class ZipDownload: BoxModel {
         downloadUrl = try BoxJSONDecoder.decodeURL(json: json, forKey: "download_url")
         statusUrl = try BoxJSONDecoder.decodeURL(json: json, forKey: "status_url")
         expiresAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "expires_at")
-        nameConflicts = json["name_conflicts"] as? [[[String: String]]]
+        nameConflicts = try BoxJSONDecoder.optionalDecodeZipCollection(json: json, forKey: "name_conflicts")
     }
 }

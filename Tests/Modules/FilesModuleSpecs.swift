@@ -1907,6 +1907,8 @@ class FilesModuleSpecs: QuickSpec {
                             expect(file).toNot(beNil())
                             expect(file.expiresAt).to(equal(Date(fromISO8601String: "2020-07-22T11:26:08Z")))
                             expect(file.downloadUrl).toNot(beNil())
+                            expect(file.nameConflicts).toNot(beNil())
+                            expect(file.nameConflicts?[0].conflict?[0].downloadName).to(equal("3aa6a7.pdf"))
                         case let .failure(error):
                             fail("Expected call to succeed, but instead got \(error)")
                         }

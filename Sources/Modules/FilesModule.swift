@@ -1227,7 +1227,7 @@ public class FilesModule {
             switch result {
             case let .success(zip):
                 self.boxClient.download(
-                    url: URL.boxAPIEndpoint(zip.downloadUrl.absoluteString, configuration: self.boxClient.configuration),
+                    url: zip.downloadUrl,
                     downloadDestinationURL: destinationURL
                 ) { [weak self] zipDownloadResult in
                     guard let self = self else {
