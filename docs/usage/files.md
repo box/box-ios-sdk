@@ -521,29 +521,6 @@ client.files.listRepresentations(
 
 [get-representations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF
 
-Create Zip
--------------------
-
-Calling [`client.files.createZip(name:items:completion:)`][create-zip] will let you create a new zip file with the specified name and with the specified items and will return a response with the download and status link. This file does not show up in your Box account, but will be temporarily available for download.
-
-<!-- sample create_zip -->
-```swift
-let name = "New zip name"
-var items: [ZipDownloadItem] = []
-items.append(ZipDownloadItem(
-    type: "file",
-    id: "11111"
-))
-client.files.createZip(name: name, items: items) { (result: Result<ZipDownload, BoxSDKError>) in
-    guard case let .success(zip) = result else {
-        print("Error creating zip")
-        return
-    }
-
-    print("Zip file URL is \(zip.downloadUrl.absoluteString)")
-}
-```
-
 Download Zip
 -------------------
 

@@ -1194,7 +1194,7 @@ public class FilesModule {
     ///   - name: The name of the zip file to be created
     ///   - items: Array of files or folders to be part of the created zip
     ///   - completion: Returns a standard ZipDownload object or an error
-    public func createZip(
+    private func createZip(
         name: String,
         items: [ZipDownloadItem],
         completion: @escaping Callback<ZipDownload>

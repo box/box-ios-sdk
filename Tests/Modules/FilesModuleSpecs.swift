@@ -1875,49 +1875,6 @@ class FilesModuleSpecs: QuickSpec {
             })
         }
 
-        describe("createZip()") {
-            it("should produce zip download model when API call succeeds") {
-                stub(
-                    condition: isHost("api.box.com") &&
-                    isPath("/2.0/zip_downloads") &&
-                    isMethodPOST() &&
-                    hasJsonBody([
-                        "download_file_name": "New zip file",
-                        "items": [[
-                            "type": "file",
-                            "id": "5000948880"
-                        ]]
-                    ])
-                ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
-                        statusCode: 202, headers: ["Content-Type": "application/json"]
-                    )
-                }
-
-                waitUntil(timeout: 10) { done in
-                    var items: [ZipDownloadItem] = []
-                    items.append(ZipDownloadItem(
-                        id: "5000948880",
-                        type: "file"
-                    ))
-                    self.sut.files.createZip(name: "New zip file", items: items, completion: { result in
-                        switch result {
-                        case let .success(file):
-                            expect(file).toNot(beNil())
-                            expect(file.expiresAt).to(equal(Date(fromISO8601String: "2020-07-22T11:26:08Z")))
-                            expect(file.downloadUrl).toNot(beNil())
-                            expect(file.nameConflicts).toNot(beNil())
-                            expect(file.nameConflicts?[0].conflict?[0].downloadName).to(equal("3aa6a7.pdf"))
-                        case let .failure(error):
-                            fail("Expected call to succeed, but instead got \(error)")
-                        }
-                        done()
-                    })
-                }
-            }
-        }
-
         describe("downloadZip()") {
             context("Download zip file to the provided destination folder") {
                 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
