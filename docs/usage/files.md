@@ -28,6 +28,7 @@ file's contents, upload new versions, and perform other common file operations
 - [Set Shared Link](#set-shared-link)
 - [Remove Shared Link](#remove-shared-link)
 - [Get Representations](#get-representations)
+- [Download Zip](#download-zip)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -553,3 +554,5 @@ client.files.downloadZip(name: name, items: items, destinationURL: destinationUR
     print("Zip download status: \(zipDownloadStatus.state)")
 }
 ```
+
+[download-zip]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html
