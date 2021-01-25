@@ -1216,7 +1216,7 @@ public class FilesModule {
     ///   - name: The name of the zip file to be created
     ///   - items: Array of files or folders to be part of the created zip
     ///   - destinationURL: A URL for the location on device that we want to store the file once it has been downloaded
-    ///   - completion: Returns an empty response or an error
+    ///   - completion: Returns a standard ZipDownloadStatus object or an error
     public func downloadZip(name: String, items: [ZipDownloadItem], destinationURL: URL, completion: @escaping Callback<ZipDownloadStatus>) {
         createZip(name: name, items: items) { [weak self] result in
             guard let self = self else {
@@ -1237,7 +1237,7 @@ public class FilesModule {
 
                     switch zipDownloadResult {
                     case .success:
-                        self.getZipDownloadStatus(statusURL: zip.statusUrl, completion: completion)
+                        self.getZipDownloadStatus(zip: zip, completion: completion)
                     case let .failure(error):
                         completion(.failure(error))
                     }
@@ -1251,12 +1251,20 @@ public class FilesModule {
     /// Gets zip download status
     ///
     /// - Parameters:
-    ///   - statusURL: The URL to monitor the status of the zip download
+    ///   - zip: The ZipDownload response object
     ///   - completion: Returns a standard ZipDownloadStatus object or an error
-    private func getZipDownloadStatus(statusURL: URL, completion: @escaping Callback<ZipDownloadStatus>) {
+    private func getZipDownloadStatus(zip: ZipDownload, completion: @escaping Callback<ZipDownloadStatus>) {
         boxClient.get(
-            url: statusURL,
-            completion: ResponseHandler.default(wrapping: completion)
+            url: zip.statusUrl,
+            completion: ResponseHandler.default(wrapping: { (result: Result<ZipDownloadStatus, BoxSDKError>) in
+                switch result {
+                case let .success(zipDownloadStatus):
+                    zipDownloadStatus.nameConflicts = zip.nameConflicts
+                    completion(.success(zipDownloadStatus))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            })
         )
     }
 

@@ -554,5 +554,3 @@ client.files.downloadZip(name: name, items: items, destinationURL: destinationUR
     print("Zip download status: \(zipDownloadStatus.state)")
 }
 ```
-
-[download-zip]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html

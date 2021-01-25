@@ -1937,6 +1937,7 @@ class FilesModuleSpecs: QuickSpec {
 
                                 expect(fileContents).to(equal("Downloaded zip"))
                                 expect(status.state).to(equal("succeeded"))
+                                expect(status.nameConflicts?[0].conflict?[0].downloadName).to(equal("3aa6a7.pdf"))
 
                             case let .failure(error):
                                 fail("Expected call to downloadZip to suceeded, but instead got \(error)")
