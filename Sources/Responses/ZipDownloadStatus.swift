@@ -24,7 +24,7 @@ public class ZipDownloadStatus: BoxModel {
     public let skippedFolderCount: Int
     /// State of the download for the zip file
     public let state: String
-    /// Conflicts that occur between items that have the same name. This is manually added in the FilesModule.getZipDownloadStatus() method.
+    /// Conflicts that occur between items that have the same name. This is always initially nil and updated manually later, via the FilesModule.getZipDownloadStatus() method.
     public var nameConflicts: [ZipDownloadConflict]?
 
 
