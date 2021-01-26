@@ -1875,6 +1875,80 @@ class FilesModuleSpecs: QuickSpec {
             })
         }
 
+        describe("downloadZip()") {
+            context("Download zip file to the provided destination folder") {
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let fileURL = documentsURL.appendingPathComponent("New zip file 2.zip")
+
+                beforeEach {
+                    try? FileManager.default.removeItem(at: fileURL.absoluteURL)
+                }
+
+                it("should download zip when API call succeeds") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                        isPath("/2.0/zip_downloads") &&
+                        isMethodPOST() &&
+                        hasJsonBody([
+                            "download_file_name": "New zip file 2",
+                            "items": [[
+                                "type": "file",
+                                "id": "5000948880"
+                            ]]
+                        ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
+                            statusCode: 202, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    stub(
+                        condition: isHost("dl.boxcloud.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content")
+                    ) { _ in
+                        // swiftlint:disable:next force_unwrapping
+                        OHHTTPStubsResponse(data: "Downloaded zip".data(using: .utf8)!, statusCode: 201, headers: [:])
+                    }
+                    stub(
+                        condition: isHost("api.box.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status")
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("ZipDownloadStatus.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        var items: [ZipDownloadItem] = []
+                        items.append(ZipDownloadItem(
+                            id: "5000948880",
+                            type: "file"
+                        ))
+
+                        self.sut.files.downloadZip(name: "New zip file 2", items: items, destinationURL: fileURL, completion: { result in
+                            switch result {
+                            case let .success(status):
+                                expect(FileManager.default.fileExists(atPath: fileURL.absoluteURL.path)).to(equal(true))
+
+                                guard let fileContents = try? String(contentsOf: fileURL.absoluteURL, encoding: .utf8) else {
+                                    fail("Unable to load file contents")
+                                    done()
+                                    return
+                                }
+
+                                expect(fileContents).to(equal("Downloaded zip"))
+                                expect(status.state).to(equal("succeeded"))
+                                expect(status.nameConflicts?[0].conflict?[0].downloadName).to(equal("3aa6a7.pdf"))
+
+                            case let .failure(error):
+                                fail("Expected call to downloadZip to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        })
+                    }
+                }
+            }
+        }
+
         // MARK: - Chunked Uploads
 
         describe("createUploadSession()") {

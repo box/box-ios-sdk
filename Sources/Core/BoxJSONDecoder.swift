@@ -164,6 +164,21 @@ class BoxJSONDecoder {
         return color
     }
 
+    static func optionalDecodeZip<T>(json: [[String: Any]]) throws -> T? where T: BoxModel {
+        var modelJSON: [String: Any] = [:]
+        modelJSON["conflict"] = json
+
+        return try decode(json: modelJSON)
+    }
+
+    static func optionalDecodeZipCollection<T>(json: [String: Any], forKey key: String) throws -> [T]? where T: BoxModel {
+        guard let modelCollectionJSON: [[[String: Any]]] = try optionalExtractJSON(json: json, key: key) else {
+            return nil
+        }
+
+        return try modelCollectionJSON.compactMap { try optionalDecodeZip(json: $0) }
+    }
+
     // MARK: - Decodes
 
     static func decode<T>(json: [String: Any]) throws -> T where T: BoxModel {
