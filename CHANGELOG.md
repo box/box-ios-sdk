@@ -1,15 +1,19 @@
 Changelog
 =========
 
-## Next Release
+## v4.3.0 [2021-02-01]
 
 __Breaking Changes:__
 
 __New Features and Enhancements:__
 
-- Add support for OAuth 2 custom callback URL
+- Add support for OAuth 2 custom callback URL ([#746](https://github.com/box/box-ios-sdk/pull/746))
+- Add support for zip download ([#749](https://github.com/box/box-ios-sdk/pull/749))
 
 __Bug Fixes:__
+
+- Update gems to patch kramdown vulnerability ([#742](https://github.com/box/box-ios-sdk/pull/742))
+- Update gems to patch activesupport vulnerability ([#745](https://github.com/box/box-ios-sdk/pull/745))
 
 ## v4.2.0 [2020-11-16]
 
