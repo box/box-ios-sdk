@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/TasksModule" class="dashAnchor"></a>
     <a title="TasksModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -408,6 +416,18 @@
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -578,21 +598,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -606,18 +611,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -716,6 +709,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -752,6 +748,7 @@
             <h1>TasksModule</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TasksModule</span></code></pre>
 
                 </div>
@@ -776,7 +773,7 @@
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC3get6taskId6fields10completionySS_SaySSGSgys6ResultOyAA4TaskCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/get(taskId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC3get6taskId6fields10completionySS_SaySSGSgys6ResultOyAA4TaskCAA0A8SDKErrorCGctF">get(taskId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC3get6taskId6fields10completionySS_SaySSGSgys6ResultOyAA4TaskCAA0A8SDKErrorCGctF">get(taskId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -851,7 +848,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC6create6fileId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/create(fileId:action:message:dueAt:completionRule:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6create6fileId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF">create(fileId:action:message:dueAt:completionRule:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6create6fileId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF">create(fileId:<wbr>action:<wbr>message:<wbr>dueAt:<wbr>completionRule:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -979,7 +976,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC6update6taskId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/update(taskId:action:message:dueAt:completionRule:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6update6taskId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF">update(taskId:action:message:dueAt:completionRule:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6update6taskId6action7message5dueAt14completionRule6fields0L0ySS_AA10TaskActionOSSSg10Foundation4DateVSgAA0o10CompletionM0OSgSaySSGSgys6ResultOyAA0O0CAA0A8SDKErrorCGctF">update(taskId:<wbr>action:<wbr>message:<wbr>dueAt:<wbr>completionRule:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1107,7 +1104,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC6delete6taskId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/delete(taskId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6delete6taskId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(taskId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6delete6taskId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(taskId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1181,7 +1178,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC13getAssignment04taskF2Id6fields10completionySS_SaySSGSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getAssignment(taskAssignmentId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC13getAssignment04taskF2Id6fields10completionySS_SaySSGSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF">getAssignment(taskAssignmentId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC13getAssignment04taskF2Id6fields10completionySS_SaySSGSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF">getAssignment(taskAssignmentId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1256,7 +1253,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC6assign6taskId04userG06fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/assign(taskId:userId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6assign6taskId04userG06fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF">assign(taskId:userId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC6assign6taskId04userG06fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF">assign(taskId:<wbr>userId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1345,7 +1342,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC13assignByEmail6taskId5email6fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/assignByEmail(taskId:email:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC13assignByEmail6taskId5email6fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF">assignByEmail(taskId:email:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC13assignByEmail6taskId5email6fields10completionySS_SSSaySSGSgys6ResultOyAA14TaskAssignmentCAA0A8SDKErrorCGctF">assignByEmail(taskId:<wbr>email:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1434,7 +1431,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC16updateAssignment04taskF2Id7message15resolutionState10completionySS_SSSgAA0fK0OSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/updateAssignment(taskAssignmentId:message:resolutionState:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC16updateAssignment04taskF2Id7message15resolutionState10completionySS_SSSgAA0fK0OSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF">updateAssignment(taskAssignmentId:message:resolutionState:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC16updateAssignment04taskF2Id7message15resolutionState10completionySS_SSSgAA0fK0OSgys6ResultOyAA04TaskF0CAA0A8SDKErrorCGctF">updateAssignment(taskAssignmentId:<wbr>message:<wbr>resolutionState:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1525,7 +1522,7 @@ can have a resolutionState of incomplete or completed.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC16deleteAssignment04taskF2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deleteAssignment(taskAssignmentId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC16deleteAssignment04taskF2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteAssignment(taskAssignmentId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC16deleteAssignment04taskF2Id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteAssignment(taskAssignmentId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1586,7 +1583,7 @@ can have a resolutionState of incomplete or completed.</p>
                     <code>
                     <a name="/s:6BoxSDK11TasksModuleC15listAssignments9forTaskId10completionySS_ys6ResultOySayAA0H10AssignmentCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listAssignments(forTaskId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11TasksModuleC15listAssignments9forTaskId10completionySS_ys6ResultOySayAA0H10AssignmentCGAA0A8SDKErrorCGctF">listAssignments(forTaskId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11TasksModuleC15listAssignments9forTaskId10completionySS_ys6ResultOySayAA0H10AssignmentCGAA0A8SDKErrorCGctF">listAssignments(forTaskId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1647,8 +1644,8 @@ can have a resolutionState of incomplete or completed.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
