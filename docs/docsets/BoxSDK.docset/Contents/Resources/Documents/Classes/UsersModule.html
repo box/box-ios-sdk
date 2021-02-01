@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/UsersModule" class="dashAnchor"></a>
     <a title="UsersModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -408,6 +416,18 @@
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -578,21 +598,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -606,18 +611,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -716,6 +709,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -752,6 +748,7 @@
             <h1>UsersModule</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">UsersModule</span></code></pre>
 
                 </div>
@@ -767,7 +764,7 @@
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC10getCurrent6fields10completionySaySSGSg_ys6ResultOyAA4UserCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getCurrent(fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC10getCurrent6fields10completionySaySSGSg_ys6ResultOyAA4UserCAA0A8SDKErrorCGctF">getCurrent(fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC10getCurrent6fields10completionySaySSGSg_ys6ResultOyAA4UserCAA0A8SDKErrorCGctF">getCurrent(fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -830,7 +827,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC3get6userId6fields10completionySS_SaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/get(userId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC3get6userId6fields10completionySS_SaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">get(userId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC3get6userId6fields10completionySS_SaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">get(userId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -907,7 +904,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC9getAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getAvatar(userId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC9getAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF">getAvatar(userId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC9getAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF">getAvatar(userId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -968,7 +965,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC6create5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0J24ExternalCollabRestricted0J22ExemptFromDeviceLimits0J27ExemptFromLoginVerification6status6fields10completionySS_SSAA8UserRoleOSgSSSgSbSgA3Zs5Int64VSgSayAA4UserC12TrackingCodeVGSgA_AZA_A_A_AA10UserStatusOSgSaySSGSgys6ResultOyA4_AA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/create(login:name:role:language:isSyncEnabled:jobTitle:phone:address:spaceAmount:trackingCodes:canSeeManagedUsers:timezone:isExternalCollabRestricted:isExemptFromDeviceLimits:isExemptFromLoginVerification:status:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6create5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0J24ExternalCollabRestricted0J22ExemptFromDeviceLimits0J27ExemptFromLoginVerification6status6fields10completionySS_SSAA8UserRoleOSgSSSgSbSgA3Zs5Int64VSgSayAA4UserC12TrackingCodeVGSgA_AZA_A_A_AA10UserStatusOSgSaySSGSgys6ResultOyA4_AA0A8SDKErrorCGctF">create(login:name:role:language:isSyncEnabled:jobTitle:phone:address:spaceAmount:trackingCodes:canSeeManagedUsers:timezone:isExternalCollabRestricted:isExemptFromDeviceLimits:isExemptFromLoginVerification:status:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6create5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0J24ExternalCollabRestricted0J22ExemptFromDeviceLimits0J27ExemptFromLoginVerification6status6fields10completionySS_SSAA8UserRoleOSgSSSgSbSgA3Zs5Int64VSgSayAA4UserC12TrackingCodeVGSgA_AZA_A_A_AA10UserStatusOSgSaySSGSgys6ResultOyA4_AA0A8SDKErrorCGctF">create(login:<wbr>name:<wbr>role:<wbr>language:<wbr>isSyncEnabled:<wbr>jobTitle:<wbr>phone:<wbr>address:<wbr>spaceAmount:<wbr>trackingCodes:<wbr>canSeeManagedUsers:<wbr>timezone:<wbr>isExternalCollabRestricted:<wbr>isExemptFromDeviceLimits:<wbr>isExemptFromLoginVerification:<wbr>status:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1239,7 +1236,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC6update6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0L24ExternalCollabRestricted0L22ExemptFromDeviceLimits0L27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA8UserRoleOSgAXSbSgA3Xs5Int64VSgSayAA4UserC12TrackingCodeVGSgA0_AXA0_A0_A0_AA10UserStatusOSgSaySSGSgys6ResultOyA5_AA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/update(userId:login:name:role:language:isSyncEnabled:jobTitle:phone:address:spaceAmount:trackingCodes:canSeeManagedUsers:timezone:isExternalCollabRestricted:isExemptFromDeviceLimits:isExemptFromLoginVerification:status:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6update6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0L24ExternalCollabRestricted0L22ExemptFromDeviceLimits0L27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA8UserRoleOSgAXSbSgA3Xs5Int64VSgSayAA4UserC12TrackingCodeVGSgA0_AXA0_A0_A0_AA10UserStatusOSgSaySSGSgys6ResultOyA5_AA0A8SDKErrorCGctF">update(userId:login:name:role:language:isSyncEnabled:jobTitle:phone:address:spaceAmount:trackingCodes:canSeeManagedUsers:timezone:isExternalCollabRestricted:isExemptFromDeviceLimits:isExemptFromLoginVerification:status:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6update6userId5login4name4role8language13isSyncEnabled8jobTitle5phone7address11spaceAmount13trackingCodes013canSeeManagedC08timezone0L24ExternalCollabRestricted0L22ExemptFromDeviceLimits0L27ExemptFromLoginVerification6status6fields10completionySS_SSSgAxA8UserRoleOSgAXSbSgA3Xs5Int64VSgSayAA4UserC12TrackingCodeVGSgA0_AXA0_A0_A0_AA10UserStatusOSgSaySSGSgys6ResultOyA5_AA0A8SDKErrorCGctF">update(userId:<wbr>login:<wbr>name:<wbr>role:<wbr>language:<wbr>isSyncEnabled:<wbr>jobTitle:<wbr>phone:<wbr>address:<wbr>spaceAmount:<wbr>trackingCodes:<wbr>canSeeManagedUsers:<wbr>timezone:<wbr>isExternalCollabRestricted:<wbr>isExemptFromDeviceLimits:<wbr>isExemptFromLoginVerification:<wbr>status:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1523,7 +1520,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC13createAppUser4name8language8jobTitle8timezone5phone7address11spaceAmount6status26isExternalCollabRestricted013canSeeManagedC06fields10completionySS_SSSgA4Qs5Int64VSgAA0G6StatusOSgSbSgAXSaySSGSgys6ResultOyAA0G0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/createAppUser(name:language:jobTitle:timezone:phone:address:spaceAmount:status:isExternalCollabRestricted:canSeeManagedUsers:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC13createAppUser4name8language8jobTitle8timezone5phone7address11spaceAmount6status26isExternalCollabRestricted013canSeeManagedC06fields10completionySS_SSSgA4Qs5Int64VSgAA0G6StatusOSgSbSgAXSaySSGSgys6ResultOyAA0G0CAA0A8SDKErrorCGctF">createAppUser(name:language:jobTitle:timezone:phone:address:spaceAmount:status:isExternalCollabRestricted:canSeeManagedUsers:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC13createAppUser4name8language8jobTitle8timezone5phone7address11spaceAmount6status26isExternalCollabRestricted013canSeeManagedC06fields10completionySS_SSSgA4Qs5Int64VSgAA0G6StatusOSgSbSgAXSaySSGSgys6ResultOyAA0G0CAA0A8SDKErrorCGctF">createAppUser(name:<wbr>language:<wbr>jobTitle:<wbr>timezone:<wbr>phone:<wbr>address:<wbr>spaceAmount:<wbr>status:<wbr>isExternalCollabRestricted:<wbr>canSeeManagedUsers:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1716,7 +1713,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC6delete6userId6notify5force10completionySS_SbSgAIys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/delete(userId:notify:force:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6delete6userId6notify5force10completionySS_SbSgAIys6ResultOyytAA0A8SDKErrorCGctF">delete(userId:notify:force:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC6delete6userId6notify5force10completionySS_SbSgAIys6ResultOyytAA0A8SDKErrorCGctF">delete(userId:<wbr>notify:<wbr>force:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1804,7 +1801,7 @@ thrown if the folder is not empty and the ‘recursive’ parameter is not inclu
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listForEnterprise(filterTerm:fields:usemarker:marker:offset:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF">listForEnterprise(filterTerm:fields:usemarker:marker:offset:limit:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC17listForEnterprise10filterTerm6fields9usemarker6marker6offset5limit10completionySSSg_SaySSGSgSbSgALSiSgAPys6ResultOyAA14PagingIteratorCyAA4UserCGAA0A8SDKErrorCGctF">listForEnterprise(filterTerm:<wbr>fields:<wbr>usemarker:<wbr>marker:<wbr>offset:<wbr>limit:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1938,7 +1935,7 @@ parameter cannot be used simultaneously with the &lsquo;offset&rsquo; parameter.
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC22inviteToJoinEnterprise5login12enterpriseId6fields10completionySS_SSSaySSGSgys6ResultOyAA6InviteCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/inviteToJoinEnterprise(login:enterpriseId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC22inviteToJoinEnterprise5login12enterpriseId6fields10completionySS_SSSaySSGSgys6ResultOyAA6InviteCAA0A8SDKErrorCGctF">inviteToJoinEnterprise(login:enterpriseId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC22inviteToJoinEnterprise5login12enterpriseId6fields10completionySS_SSSaySSGSgys6ResultOyAA6InviteCAA0A8SDKErrorCGctF">inviteToJoinEnterprise(login:<wbr>enterpriseId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2027,7 +2024,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC20moveItemsOwnedByUser6withID02toi4WithK06notify6fields10completionySS_SSSbSgSaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/moveItemsOwnedByUser(withID:toUserWithID:notify:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC20moveItemsOwnedByUser6withID02toi4WithK06notify6fields10completionySS_SSSbSgSaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF">moveItemsOwnedByUser(withID:toUserWithID:notify:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC20moveItemsOwnedByUser6withID02toi4WithK06notify6fields10completionySS_SSSbSgSaySSGSgys6ResultOyAA6FolderCAA0A8SDKErrorCGctF">moveItemsOwnedByUser(withID:<wbr>toUserWithID:<wbr>notify:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2129,7 +2126,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC11changeLogin6userId5login6fields10completionySS_SSSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/changeLogin(userId:login:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC11changeLogin6userId5login6fields10completionySS_SSSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">changeLogin(userId:login:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC11changeLogin6userId5login6fields10completionySS_SSSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">changeLogin(userId:<wbr>login:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2218,7 +2215,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC16listEmailAliases6userId10completionySS_ys6ResultOyAA14EntryContainerCyAA0F5AliasCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listEmailAliases(userId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16listEmailAliases6userId10completionySS_ys6ResultOyAA14EntryContainerCyAA0F5AliasCGAA0A8SDKErrorCGctF">listEmailAliases(userId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16listEmailAliases6userId10completionySS_ys6ResultOyAA14EntryContainerCyAA0F5AliasCGAA0A8SDKErrorCGctF">listEmailAliases(userId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2279,7 +2276,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC16createEmailAlias6userId5email10completionySS_SSys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/createEmailAlias(userId:email:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16createEmailAlias6userId5email10completionySS_SSys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createEmailAlias(userId:email:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16createEmailAlias6userId5email10completionySS_SSys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createEmailAlias(userId:<wbr>email:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2353,7 +2350,7 @@ If not passed, a default set of fields will be returned.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC16deleteEmailAlias6userId05emailgI010completionySS_SSys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deleteEmailAlias(userId:emailAliasId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16deleteEmailAlias6userId05emailgI010completionySS_SSys6ResultOyytAA0A8SDKErrorCGctF">deleteEmailAlias(userId:emailAliasId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC16deleteEmailAlias6userId05emailgI010completionySS_SSys6ResultOyytAA0A8SDKErrorCGctF">deleteEmailAlias(userId:<wbr>emailAliasId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2428,7 +2425,7 @@ thrown if the user don&rsquo;t have permission to delete the email alias.</p>
                     <code>
                     <a name="/s:6BoxSDK11UsersModuleC19rollOutOfEnterprise6userId6notify6fields10completionySS_SbSgSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/rollOutOfEnterprise(userId:notify:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11UsersModuleC19rollOutOfEnterprise6userId6notify6fields10completionySS_SbSgSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">rollOutOfEnterprise(userId:notify:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11UsersModuleC19rollOutOfEnterprise6userId6notify6fields10completionySS_SbSgSaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF">rollOutOfEnterprise(userId:<wbr>notify:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2517,8 +2514,8 @@ If not passed, a default set of fields will be returned.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

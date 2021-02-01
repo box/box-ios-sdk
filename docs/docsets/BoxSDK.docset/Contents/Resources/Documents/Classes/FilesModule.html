@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/FilesModule" class="dashAnchor"></a>
     <a title="FilesModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -408,6 +416,18 @@
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -578,21 +598,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -606,18 +611,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -716,6 +709,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -752,6 +748,7 @@
             <h1>FilesModule</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FilesModule</span></code></pre>
 
                 </div>
@@ -767,7 +764,7 @@
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC3get6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/get(fileId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC3get6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">get(fileId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC3get6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">get(fileId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -846,7 +843,7 @@ user doesn&rsquo;t have access to the file.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/update(fileId:name:description:parentId:sharedLink:tags:collections:lock:ifMatch:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF">update(fileId:name:description:parentId:sharedLink:tags:collections:lock:ifMatch:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF">update(fileId:<wbr>name:<wbr>description:<wbr>parentId:<wbr>sharedLink:<wbr>tags:<wbr>collections:<wbr>lock:<wbr>ifMatch:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -957,7 +954,7 @@ user doesn&rsquo;t have access to the file.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC4copy6fileId06parentG04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/copy(fileId:parentId:name:version:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC4copy6fileId06parentG04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">copy(fileId:parentId:name:version:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC4copy6fileId06parentG04name7version6fields10completionySS_S2SSgAKSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">copy(fileId:<wbr>parentId:<wbr>name:<wbr>version:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1079,7 +1076,7 @@ invalid or if a file name collision occurs.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC6upload4data4name8parentId8progress21performPreflightCheck10completionAA0A10UploadTaskC10Foundation4DataV_S2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/upload(data:name:parentId:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6upload4data4name8parentId8progress21performPreflightCheck10completionAA0A10UploadTaskC10Foundation4DataV_S2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF">upload(data:name:parentId:progress:performPreflightCheck:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6upload4data4name8parentId8progress21performPreflightCheck10completionAA0A10UploadTaskC10Foundation4DataV_S2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF">upload(data:<wbr>name:<wbr>parentId:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1177,7 +1174,7 @@ name collision occurs.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAN10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/uploadVersion(forFile:name:contentModifiedAt:data:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAN10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF">uploadVersion(forFile:name:contentModifiedAt:data:progress:performPreflightCheck:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAN10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF">uploadVersion(forFile:<wbr>name:<wbr>contentModifiedAt:<wbr>data:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1274,7 +1271,7 @@ spaces, and the special names “.” and “..” are also not allowed.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12streamUpload0E08fileSize4name8parentId8progress21performPreflightCheck10completionAA0aF4TaskCSo13NSInputStreamC_SiS2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/streamUpload(stream:fileSize:name:parentId:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12streamUpload0E08fileSize4name8parentId8progress21performPreflightCheck10completionAA0aF4TaskCSo13NSInputStreamC_SiS2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF">streamUpload(stream:fileSize:name:parentId:progress:performPreflightCheck:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12streamUpload0E08fileSize4name8parentId8progress21performPreflightCheck10completionAA0aF4TaskCSo13NSInputStreamC_SiS2SySo10NSProgressCcSbys6ResultOyAA4FileCAA0A8SDKErrorCGctF">streamUpload(stream:<wbr>fileSize:<wbr>name:<wbr>parentId:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1397,7 +1394,7 @@ name collision occurs.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC14preflightCheck4name8parentId4size10completionAA0A11NetworkTaskCSS_SSs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/preflightCheck(name:parentId:size:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14preflightCheck4name8parentId4size10completionAA0A11NetworkTaskCSS_SSs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF">preflightCheck(name:parentId:size:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14preflightCheck4name8parentId4size10completionAA0A11NetworkTaskCSS_SSs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF">preflightCheck(name:<wbr>parentId:<wbr>size:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1491,7 +1488,7 @@ folder and file name restrictions, folder and account storage quota.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC27preflightCheckForNewVersion7forFile4name4size10completionAA0A11NetworkTaskCSS_SSSgs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/preflightCheckForNewVersion(forFile:name:size:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC27preflightCheckForNewVersion7forFile4name4size10completionAA0A11NetworkTaskCSS_SSSgs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF">preflightCheckForNewVersion(forFile:name:size:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC27preflightCheckForNewVersion7forFile4name4size10completionAA0A11NetworkTaskCSS_SSSgs5Int64VSgys6ResultOyytAA0A8SDKErrorCGctF">preflightCheckForNewVersion(forFile:<wbr>name:<wbr>size:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1598,7 +1595,7 @@ folder and file name restrictions, folder and account storage quota.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC4lock6fileId9expiresAt19isDownloadPrevented6fields10completionySS_10Foundation4DateVSgSbSgSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/lock(fileId:expiresAt:isDownloadPrevented:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC4lock6fileId9expiresAt19isDownloadPrevented6fields10completionySS_10Foundation4DateVSgSbSgSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">lock(fileId:expiresAt:isDownloadPrevented:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC4lock6fileId9expiresAt19isDownloadPrevented6fields10completionySS_10Foundation4DateVSgSbSgSaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">lock(fileId:<wbr>expiresAt:<wbr>isDownloadPrevented:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1701,7 +1698,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC6unlock6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/unlock(fileId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6unlock6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">unlock(fileId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6unlock6fileId6fields10completionySS_SaySSGSgys6ResultOyAA4FileCAA0A8SDKErrorCGctF">unlock(fileId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1779,7 +1776,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getThumbnail(forFile:extension:minHeight:minWidth:maxHeight:maxWidth:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF">getThumbnail(forFile:extension:minHeight:minWidth:maxHeight:maxWidth:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getThumbnail7forFile9extension9minHeight0J5Width03maxK00mL010completionySS_AA0F9ExtensionOSiSgA3Nys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF">getThumbnail(forFile:<wbr>extension:<wbr>minHeight:<wbr>minWidth:<wbr>maxHeight:<wbr>maxWidth:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1892,7 +1889,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getEmbedLink(forFile:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A8SDKErrorCGctF">getEmbedLink(forFile:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getEmbedLink7forFile10completionySS_ys6ResultOyAA08ExpiringfG0CAA0A8SDKErrorCGctF">getEmbedLink(forFile:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1969,7 +1966,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listCollaborations(forFile:marker:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF">listCollaborations(forFile:marker:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC18listCollaborations7forFile6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF">listCollaborations(forFile:<wbr>marker:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2062,7 +2059,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listComments(forFile:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF">listComments(forFile:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listComments7forFile6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA7CommentCGAA0A8SDKErrorCGctF">listComments(forFile:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2159,7 +2156,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listTasks(forFile:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF">listTasks(forFile:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC9listTasks7forFile6fields10completionySS_SaySSGSgys6ResultOyAA14PagingIteratorCyAA4TaskCGAA0A8SDKErrorCGctF">listTasks(forFile:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2237,7 +2234,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC8download6fileId14destinationURL7version8progress10completionAA0A12DownloadTaskCSS_10Foundation0I0VSSSgySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/download(fileId:destinationURL:version:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC8download6fileId14destinationURL7version8progress10completionAA0A12DownloadTaskCSS_10Foundation0I0VSSSgySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">download(fileId:destinationURL:version:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC8download6fileId14destinationURL7version8progress10completionAA0A12DownloadTaskCSS_10Foundation0I0VSSSgySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">download(fileId:<wbr>destinationURL:<wbr>version:<wbr>progress:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2330,7 +2327,7 @@ attributes back; otherwise, the mini format is returned for each item by default
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC6delete6fileId7ifMatch10completionySS_SSSgys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/delete(fileId:ifMatch:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6delete6fileId7ifMatch10completionySS_SSSgys6ResultOyytAA0A8SDKErrorCGctF">delete(fileId:ifMatch:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC6delete6fileId7ifMatch10completionySS_SSSgys6ResultOyytAA0A8SDKErrorCGctF">delete(fileId:<wbr>ifMatch:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2405,7 +2402,7 @@ Depending on the enterprise settings for this user, the item will either be actu
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC14addToFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/addToFavorites(fileId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14addToFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">addToFavorites(fileId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14addToFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">addToFavorites(fileId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2466,7 +2463,7 @@ Depending on the enterprise settings for this user, the item will either be actu
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC15addToCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/addToCollection(fileId:collectionId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC15addToCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF">addToCollection(fileId:collectionId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC15addToCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF">addToCollection(fileId:<wbr>collectionId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2540,7 +2537,7 @@ Depending on the enterprise settings for this user, the item will either be actu
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC19removeFromFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/removeFromFavorites(fileId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19removeFromFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">removeFromFavorites(fileId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19removeFromFavorites6fileId10completionySS_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">removeFromFavorites(fileId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2601,7 +2598,7 @@ Depending on the enterprise settings for this user, the item will either be actu
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC20removeFromCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/removeFromCollection(fileId:collectionId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC20removeFromCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF">removeFromCollection(fileId:collectionId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC20removeFromCollection6fileId010collectionI010completionySS_SSys6ResultOyAA4FileCAA0A8SDKErrorCGctF">removeFromCollection(fileId:<wbr>collectionId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2675,7 +2672,7 @@ Depending on the enterprise settings for this user, the item will either be actu
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA11FileVersionCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listVersions(fileId:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA11FileVersionCGAA0A8SDKErrorCGctF">listVersions(fileId:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12listVersions6fileId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA11FileVersionCGAA0A8SDKErrorCGctF">listVersions(fileId:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2764,7 +2761,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC10getVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getVersion(fileId:fileVersionId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC10getVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF">getVersion(fileId:fileVersionId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC10getVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF">getVersion(fileId:<wbr>fileVersionId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2852,7 +2849,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC14promoteVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/promoteVersion(fileId:fileVersionId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14promoteVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF">promoteVersion(fileId:fileVersionId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14promoteVersion6fileId0gfH06fields10completionySS_SSSaySSGSgys6ResultOyAA04FileF0CAA0A8SDKErrorCGctF">promoteVersion(fileId:<wbr>fileVersionId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2940,7 +2937,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC13deleteVersion6fileId0gfH07ifMatch10completionySS_S2SSgys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deleteVersion(fileId:fileVersionId:ifMatch:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13deleteVersion6fileId0gfH07ifMatch10completionySS_S2SSgys6ResultOyytAA0A8SDKErrorCGctF">deleteVersion(fileId:fileVersionId:ifMatch:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13deleteVersion6fileId0gfH07ifMatch10completionySS_S2SSgys6ResultOyytAA0A8SDKErrorCGctF">deleteVersion(fileId:<wbr>fileVersionId:<wbr>ifMatch:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3027,7 +3024,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12getWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getWatermark(fileId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF">getWatermark(fileId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12getWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF">getWatermark(fileId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3088,7 +3085,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC14applyWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/applyWatermark(fileId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14applyWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF">applyWatermark(fileId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC14applyWatermark6fileId10completionySS_ys6ResultOyAA0F0CAA0A8SDKErrorCGctF">applyWatermark(fileId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3149,7 +3146,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC15removeWatermark6fileId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/removeWatermark(fileId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC15removeWatermark6fileId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">removeWatermark(fileId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC15removeWatermark6fileId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">removeWatermark(fileId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3210,7 +3207,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getSharedLink(forFile:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">getSharedLink(forFile:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13getSharedLink7forFile10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">getSharedLink(forFile:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3271,7 +3268,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">setSharedLink(forFile:<wbr>unsharedAt:<wbr>access:<wbr>password:<wbr>canDownload:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3384,7 +3381,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deleteSharedLink(forFile:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteSharedLink(forFile:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC16deleteSharedLink7forFile10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteSharedLink(forFile:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3443,9 +3440,91 @@ include in the response.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK11FilesModuleC11downloadZip4name5items14destinationURL10completionySS_SayAA0F12DownloadItemVG10Foundation0J0Vys6ResultOyAA0fL6StatusCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/downloadZip(name:items:destinationURL:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC11downloadZip4name5items14destinationURL10completionySS_SayAA0F12DownloadItemVG10Foundation0J0Vys6ResultOyAA0fL6StatusCAA0A8SDKErrorCGctF">downloadZip(name:<wbr>items:<wbr>destinationURL:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a zip of multiple files and folders and downloads it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">downloadZip</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a></span><span class="p">],</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a></span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the zip file to be created</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>items</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array of files or folders to be part of the created zip</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>destinationURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A URL for the location on device that we want to store the file once it has been downloaded</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns a standard ZipDownloadStatus object or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK11FilesModuleC19createUploadSession8folderId8fileName0J4Size10completionySS_SSs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/createUploadSession(folderId:fileName:fileSize:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19createUploadSession8folderId8fileName0J4Size10completionySS_SSs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createUploadSession(folderId:fileName:fileSize:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19createUploadSession8folderId8fileName0J4Size10completionySS_SSs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createUploadSession(folderId:<wbr>fileName:<wbr>fileSize:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3533,7 +3612,7 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC32createUploadSessionForNewVersion6ofFile8fileName0M4Size10completionySS_SSSgs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/createUploadSessionForNewVersion(ofFile:fileName:fileSize:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC32createUploadSessionForNewVersion6ofFile8fileName0M4Size10completionySS_SSSgs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createUploadSessionForNewVersion(ofFile:fileName:fileSize:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC32createUploadSessionForNewVersion6ofFile8fileName0M4Size10completionySS_SSSgs5Int32Vys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">createUploadSessionForNewVersion(ofFile:<wbr>fileName:<wbr>fileSize:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3620,7 +3699,7 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC10uploadPart9sessionId4data6offset9totalSize8progress10completionAA0A10UploadTaskCSS_10Foundation4DataVS2iySo10NSProgressCcys6ResultOyAA0oF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/uploadPart(sessionId:data:offset:totalSize:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC10uploadPart9sessionId4data6offset9totalSize8progress10completionAA0A10UploadTaskCSS_10Foundation4DataVS2iySo10NSProgressCcys6ResultOyAA0oF0CAA0A8SDKErrorCGctF">uploadPart(sessionId:data:offset:totalSize:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC10uploadPart9sessionId4data6offset9totalSize8progress10completionAA0A10UploadTaskCSS_10Foundation4DataVS2iySo10NSProgressCcys6ResultOyAA0oF0CAA0A8SDKErrorCGctF">uploadPart(sessionId:<wbr>data:<wbr>offset:<wbr>totalSize:<wbr>progress:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3726,7 +3805,7 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limit10completionySS_SiSgAIys6ResultOyAA14PagingIteratorCyAA0F15PartDescriptionVGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listUploadSessionParts(sessionId:offset:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limit10completionySS_SiSgAIys6ResultOyAA14PagingIteratorCyAA0F15PartDescriptionVGAA0A8SDKErrorCGctF">listUploadSessionParts(sessionId:offset:limit:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22listUploadSessionParts9sessionId6offset5limit10completionySS_SiSgAIys6ResultOyAA14PagingIteratorCyAA0F15PartDescriptionVGAA0A8SDKErrorCGctF">listUploadSessionParts(sessionId:<wbr>offset:<wbr>limit:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3802,7 +3881,7 @@ for example when folder with specified ID doesn&rsquo;t exist</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC12commitUpload9sessionId5parts4sha111description10sharedLink4tags11collections4lock16contentCreatedAt0q8ModifiedS010completionySS_SayAA0F15PartDescriptionVGS2SSgAA06SharedM4DataVSgSaySSGSgAxA04LockY0VSg10Foundation4DateVSgA3_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/commitUpload(sessionId:parts:sha1:description:sharedLink:tags:collections:lock:contentCreatedAt:contentModifiedAt:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12commitUpload9sessionId5parts4sha111description10sharedLink4tags11collections4lock16contentCreatedAt0q8ModifiedS010completionySS_SayAA0F15PartDescriptionVGS2SSgAA06SharedM4DataVSgSaySSGSgAxA04LockY0VSg10Foundation4DateVSgA3_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">commitUpload(sessionId:parts:sha1:description:sharedLink:tags:collections:lock:contentCreatedAt:contentModifiedAt:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC12commitUpload9sessionId5parts4sha111description10sharedLink4tags11collections4lock16contentCreatedAt0q8ModifiedS010completionySS_SayAA0F15PartDescriptionVGS2SSgAA06SharedM4DataVSgSaySSGSgAxA04LockY0VSg10Foundation4DateVSgA3_ys6ResultOyAA4FileCAA0A8SDKErrorCGctF">commitUpload(sessionId:<wbr>parts:<wbr>sha1:<wbr>description:<wbr>sharedLink:<wbr>tags:<wbr>collections:<wbr>lock:<wbr>contentCreatedAt:<wbr>contentModifiedAt:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3981,7 +4060,7 @@ be null or have a timestamp in the past.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC11abortUpload9sessionId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/abortUpload(sessionId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC11abortUpload9sessionId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">abortUpload(sessionId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC11abortUpload9sessionId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">abortUpload(sessionId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4042,7 +4121,7 @@ be null or have a timestamp in the past.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC16getUploadSession9sessionId10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getUploadSession(sessionId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC16getUploadSession9sessionId10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">getUploadSession(sessionId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC16getUploadSession9sessionId10completionySS_ys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">getUploadSession(sessionId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4103,7 +4182,7 @@ be null or have a timestamp in the past.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listRepresentations(fileId:representationHint:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF">listRepresentations(fileId:representationHint:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF">listRepresentations(fileId:<wbr>representationHint:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4179,7 +4258,7 @@ documentation</a>.</p>
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC24getRepresentationContent6fileId18representationHint9assetPath14destinationURL8progress10completionySS_AA04FilefK0OSS10Foundation0O0VySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getRepresentationContent(fileId:representationHint:assetPath:destinationURL:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC24getRepresentationContent6fileId18representationHint9assetPath14destinationURL8progress10completionySS_AA04FilefK0OSS10Foundation0O0VySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">getRepresentationContent(fileId:representationHint:assetPath:destinationURL:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC24getRepresentationContent6fileId18representationHint9assetPath14destinationURL8progress10completionySS_AA04FilefK0OSS10Foundation0O0VySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">getRepresentationContent(fileId:<wbr>representationHint:<wbr>assetPath:<wbr>destinationURL:<wbr>progress:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4281,71 +4360,9 @@ See <a href="https://developer.box.com/reference#representations">representation
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC21processRepresentation_9assetPath10completionyAA04FileF0V_SSys6ResultOy10Foundation3URLVAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/processRepresentation(_:assetPath:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC21processRepresentation_9assetPath10completionyAA04FileF0V_SSys6ResultOy10Foundation3URLVAA0A8SDKErrorCGctF">processRepresentation(_:assetPath:completion:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">processRepresentation</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">representation</span><span class="p">:</span> <span class="kt"><a href="../Structs/FileRepresentation.html">FileRepresentation</a></span><span class="p">,</span>
-    <span class="nv">assetPath</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">URL</span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK11FilesModuleC18pollRepresentation7infoURL9assetPath10completiony10Foundation0H0V_SSys6ResultOyAjA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/pollRepresentation(infoURL:assetPath:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC18pollRepresentation7infoURL9assetPath10completiony10Foundation0H0V_SSys6ResultOyAjA0A8SDKErrorCGctF">pollRepresentation(infoURL:assetPath:completion:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pollRepresentation</span><span class="p">(</span>
-    <span class="nv">infoURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">assetPath</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">URL</span><span class="o">&gt;</span>
-<span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:6BoxSDK11FilesModuleC22downloadRepresentation9sourceURL011destinationH08progress10completionAA0A12DownloadTaskC10Foundation0H0V_AMySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/downloadRepresentation(sourceURL:destinationURL:progress:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22downloadRepresentation9sourceURL011destinationH08progress10completionAA0A12DownloadTaskC10Foundation0H0V_AMySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">downloadRepresentation(sourceURL:destinationURL:progress:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC22downloadRepresentation9sourceURL011destinationH08progress10completionAA0A12DownloadTaskC10Foundation0H0V_AMySo10NSProgressCcys6ResultOyytAA0A8SDKErrorCGctF">downloadRepresentation(sourceURL:<wbr>destinationURL:<wbr>progress:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4437,7 +4454,7 @@ See <a href="https://developer.box.com/reference#representations">representation
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC19getVersionRetention11retentionId10completionySS_ys6ResultOyAA04FilefG0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getVersionRetention(retentionId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19getVersionRetention11retentionId10completionySS_ys6ResultOyAA04FilefG0CAA0A8SDKErrorCGctF">getVersionRetention(retentionId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19getVersionRetention11retentionId10completionySS_ys6ResultOyAA04FilefG0CAA0A8SDKErrorCGctF">getVersionRetention(retentionId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4498,7 +4515,7 @@ See <a href="https://developer.box.com/reference#representations">representation
                     <code>
                     <a name="/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6marker10completionySSSg_A2nA011DispositionL0OSg10Foundation4DateVSgAUSiSgANys6ResultOyAA14PagingIteratorCyAA04FileF9RetentionCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6marker10completionySSSg_A2nA011DispositionL0OSg10Foundation4DateVSgAUSiSgANys6ResultOyAA14PagingIteratorCyAA04FileF9RetentionCGAA0A8SDKErrorCGctF">listVersionRetentions(fileId:fileVersionId:policyId:dispositionAction:dispositionBefore:dispositionAfter:limit:marker:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC21listVersionRetentions6fileId0hfI006policyI017dispositionAction0K6Before0K5After5limit6marker10completionySSSg_A2nA011DispositionL0OSg10Foundation4DateVSgAUSiSgANys6ResultOyAA14PagingIteratorCyAA04FileF9RetentionCGAA0A8SDKErrorCGctF">listVersionRetentions(fileId:<wbr>fileVersionId:<wbr>policyId:<wbr>dispositionAction:<wbr>dispositionBefore:<wbr>dispositionAfter:<wbr>limit:<wbr>marker:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4643,8 +4660,8 @@ If optional parameters are given, only the file version retentions that match th
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

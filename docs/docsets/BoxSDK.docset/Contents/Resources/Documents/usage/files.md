@@ -28,6 +28,7 @@ file's contents, upload new versions, and perform other common file operations
 - [Set Shared Link](#set-shared-link)
 - [Remove Shared Link](#remove-shared-link)
 - [Get Representations](#get-representations)
+- [Download Zip](#download-zip)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -520,3 +521,36 @@ client.files.listRepresentations(
 ```
 
 [get-representations]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC19listRepresentations6fileId18representationHint10completionySS_AA018FileRepresentationJ0OSgys6ResultOySayAA0lM0VGAA0A8SDKErrorCGctF
+
+Download Zip
+-------------------
+
+Calling [`client.files.downloadZip(name:items:destinationURL:completion:)`][download-zip] will let you create a new zip file with the specified name and with the specified items and download it to the specified URL location where the file should be downloaded to. The created zip file does not show up in your Box account.
+
+<!-- sample download_zip -->
+```swift
+let name = "New zip name"
+var items: [ZipDownloadItem] = []
+items.append(ZipDownloadItem(
+    type: "file",
+    id: "11111"
+))
+let items: [ZipDownloadItem] = []
+items.append(ZipDownloadItem(
+    type: "folder",
+    id: "22222"
+))
+let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+let destinationURL = documentsURL.appendingPathComponent("New zip name.zip")
+
+
+client.files.downloadZip(name: name, items: items, destinationURL: destinationURL) { (result: Result<ZipDownloadStatus, BoxSDKError>) in
+    guard case .success = result else {
+    guard case let .success(zipDownloadStatus) = result else {
+        print("Error downloading zip")
+        return
+    }
+
+    print("Zip download status: \(zipDownloadStatus.state)")
+}
+```

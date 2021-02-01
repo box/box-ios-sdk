@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/GroupsModule" class="dashAnchor"></a>
     <a title="GroupsModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -408,6 +416,18 @@
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -578,21 +598,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -606,18 +611,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -716,6 +709,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -752,6 +748,7 @@
             <h1>GroupsModule</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">GroupsModule</span></code></pre>
 
                 </div>
@@ -767,7 +764,7 @@
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC3get7groupId6fields10completionySS_SaySSGSgys6ResultOyAA5GroupCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/get(groupId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC3get7groupId6fields10completionySS_SaySSGSgys6ResultOyAA5GroupCAA0A8SDKErrorCGctF">get(groupId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC3get7groupId6fields10completionySS_SaySSGSgys6ResultOyAA5GroupCAA0A8SDKErrorCGctF">get(groupId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -842,7 +839,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC6create4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityM06fields10completionySS_SSSgA2mA017GroupInvitabilityM0OSgAA0r6MemberoM0OSgSaySSGSgys6ResultOyAA0R0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/create(name:provenance:externalSyncIdentifier:description:invitabilityLevel:memberViewabilityLevel:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6create4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityM06fields10completionySS_SSSgA2mA017GroupInvitabilityM0OSgAA0r6MemberoM0OSgSaySSGSgys6ResultOyAA0R0CAA0A8SDKErrorCGctF">create(name:provenance:externalSyncIdentifier:description:invitabilityLevel:memberViewabilityLevel:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6create4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityM06fields10completionySS_SSSgA2mA017GroupInvitabilityM0OSgAA0r6MemberoM0OSgSaySSGSgys6ResultOyAA0R0CAA0A8SDKErrorCGctF">create(name:<wbr>provenance:<wbr>externalSyncIdentifier:<wbr>description:<wbr>invitabilityLevel:<wbr>memberViewabilityLevel:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -982,7 +979,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC6update7groupId4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityO06fields10completionySS_SSSgAA17NullableParameterOySSGSgA2rA017GroupInvitabilityO0OSgAA0v6MemberqO0OSgSaySSGSgys6ResultOyAA0V0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/update(groupId:name:provenance:externalSyncIdentifier:description:invitabilityLevel:memberViewabilityLevel:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6update7groupId4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityO06fields10completionySS_SSSgAA17NullableParameterOySSGSgA2rA017GroupInvitabilityO0OSgAA0v6MemberqO0OSgSaySSGSgys6ResultOyAA0V0CAA0A8SDKErrorCGctF">update(groupId:name:provenance:externalSyncIdentifier:description:invitabilityLevel:memberViewabilityLevel:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6update7groupId4name10provenance22externalSyncIdentifier11description17invitabilityLevel017memberViewabilityO06fields10completionySS_SSSgAA17NullableParameterOySSGSgA2rA017GroupInvitabilityO0OSgAA0v6MemberqO0OSgSaySSGSgys6ResultOyAA0V0CAA0A8SDKErrorCGctF">update(groupId:<wbr>name:<wbr>provenance:<wbr>externalSyncIdentifier:<wbr>description:<wbr>invitabilityLevel:<wbr>memberViewabilityLevel:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1135,7 +1132,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC6delete7groupId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/delete(groupId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6delete7groupId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(groupId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC6delete7groupId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(groupId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1196,7 +1193,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC17listForEnterprise4name6offset5limit6fields10completionySSSg_SiSgAKSaySSGSgys6ResultOyAA14PagingIteratorCyAA5GroupCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listForEnterprise(name:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC17listForEnterprise4name6offset5limit6fields10completionySSSg_SiSgAKSaySSGSgys6ResultOyAA14PagingIteratorCyAA5GroupCGAA0A8SDKErrorCGctF">listForEnterprise(name:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC17listForEnterprise4name6offset5limit6fields10completionySSSg_SiSgAKSaySSGSgys6ResultOyAA14PagingIteratorCyAA5GroupCGAA0A8SDKErrorCGctF">listForEnterprise(name:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1285,7 +1282,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC17getMembershipInfo12membershipId6fields10completionySS_SaySSGSgys6ResultOyAA05GroupF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getMembershipInfo(membershipId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC17getMembershipInfo12membershipId6fields10completionySS_SaySSGSgys6ResultOyAA05GroupF0CAA0A8SDKErrorCGctF">getMembershipInfo(membershipId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC17getMembershipInfo12membershipId6fields10completionySS_SaySSGSgys6ResultOyAA05GroupF0CAA0A8SDKErrorCGctF">getMembershipInfo(membershipId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1360,7 +1357,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC16createMembership6userId05groupH04role22configurablePermission6fields10completionySS_SSAA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableL4DataVGSgSaySSGSgys6ResultOyAA0oF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/createMembership(userId:groupId:role:configurablePermission:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16createMembership6userId05groupH04role22configurablePermission6fields10completionySS_SSAA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableL4DataVGSgSaySSGSgys6ResultOyAA0oF0CAA0A8SDKErrorCGctF">createMembership(userId:groupId:role:configurablePermission:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16createMembership6userId05groupH04role22configurablePermission6fields10completionySS_SSAA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableL4DataVGSgSaySSGSgys6ResultOyAA0oF0CAA0A8SDKErrorCGctF">createMembership(userId:<wbr>groupId:<wbr>role:<wbr>configurablePermission:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1474,7 +1471,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC16updateMembership12membershipId4role22configurablePermission6fields10completionySS_AA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableK4DataVGSgSaySSGSgys6ResultOyAA0nF0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/updateMembership(membershipId:role:configurablePermission:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16updateMembership12membershipId4role22configurablePermission6fields10completionySS_AA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableK4DataVGSgSaySSGSgys6ResultOyAA0nF0CAA0A8SDKErrorCGctF">updateMembership(membershipId:role:configurablePermission:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16updateMembership12membershipId4role22configurablePermission6fields10completionySS_AA9GroupRoleOSgAA17NullableParameterOyAA012ConfigurableK4DataVGSgSaySSGSgys6ResultOyAA0nF0CAA0A8SDKErrorCGctF">updateMembership(membershipId:<wbr>role:<wbr>configurablePermission:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1575,7 +1572,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC16deleteMembership12membershipId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deleteMembership(membershipId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16deleteMembership12membershipId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteMembership(membershipId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC16deleteMembership12membershipId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteMembership(membershipId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1636,7 +1633,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC15listMemberships7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listMemberships(groupId:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC15listMemberships7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF">listMemberships(groupId:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC15listMemberships7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF">listMemberships(groupId:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1725,7 +1722,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC22listMembershipsForUser6userId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listMembershipsForUser(userId:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC22listMembershipsForUser6userId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF">listMembershipsForUser(userId:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC22listMembershipsForUser6userId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA15GroupMembershipCGAA0A8SDKErrorCGctF">listMembershipsForUser(userId:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1814,7 +1811,7 @@ include in the response.</p>
                     <code>
                     <a name="/s:6BoxSDK12GroupsModuleC18listCollaborations7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listCollaborations(groupId:offset:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC18listCollaborations7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF">listCollaborations(groupId:offset:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK12GroupsModuleC18listCollaborations7groupId6offset5limit6fields10completionySS_SiSgAJSaySSGSgys6ResultOyAA14PagingIteratorCyAA13CollaborationCGAA0A8SDKErrorCGctF">listCollaborations(groupId:<wbr>offset:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1903,8 +1900,8 @@ include in the response.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

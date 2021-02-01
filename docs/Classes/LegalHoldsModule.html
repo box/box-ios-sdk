@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/LegalHoldsModule" class="dashAnchor"></a>
     <a title="LegalHoldsModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -408,6 +416,18 @@
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -578,21 +598,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -606,18 +611,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -716,6 +709,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -752,6 +748,7 @@
             <h1>LegalHoldsModule</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">LegalHoldsModule</span></code></pre>
 
                 </div>
@@ -767,7 +764,7 @@
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC3get8policyId6fields10completionySS_SaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/get(policyId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC3get8policyId6fields10completionySS_SaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">get(policyId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC3get8policyId6fields10completionySS_SaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">get(policyId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -843,7 +840,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC6create10policyName11description15filterStartedAt0j5EndedL09isOngoing6fields10completionySS_SSSg10Foundation4DateVSgAPSbSgSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/create(policyName:description:filterStartedAt:filterEndedAt:isOngoing:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6create10policyName11description15filterStartedAt0j5EndedL09isOngoing6fields10completionySS_SSSg10Foundation4DateVSgAPSbSgSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">create(policyName:description:filterStartedAt:filterEndedAt:isOngoing:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6create10policyName11description15filterStartedAt0j5EndedL09isOngoing6fields10completionySS_SSSg10Foundation4DateVSgAPSbSgSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">create(policyName:<wbr>description:<wbr>filterStartedAt:<wbr>filterEndedAt:<wbr>isOngoing:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -971,7 +968,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC6update8policyId0G4Name11description12releaseNotes6fields10completionySS_SSSgA2KSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/update(policyId:policyName:description:releaseNotes:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6update8policyId0G4Name11description12releaseNotes6fields10completionySS_SSSgA2KSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">update(policyId:policyName:description:releaseNotes:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6update8policyId0G4Name11description12releaseNotes6fields10completionySS_SSSgA2KSaySSGSgys6ResultOyAA0C10HoldPolicyCAA0A8SDKErrorCGctF">update(policyId:<wbr>policyName:<wbr>description:<wbr>releaseNotes:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1086,7 +1083,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC6delete8policyId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/delete(policyId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6delete8policyId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(policyId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC6delete8policyId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(policyId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1147,7 +1144,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC17listForEnterprise10policyName6marker5limit6fields10completionySSSg_AJSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C10HoldPolicyCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listForEnterprise(policyName:marker:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC17listForEnterprise10policyName6marker5limit6fields10completionySSSg_AJSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C10HoldPolicyCGAA0A8SDKErrorCGctF">listForEnterprise(policyName:marker:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC17listForEnterprise10policyName6marker5limit6fields10completionySSSg_AJSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C10HoldPolicyCGAA0A8SDKErrorCGctF">listForEnterprise(policyName:<wbr>marker:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1239,7 +1236,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC19getPolicyAssignment12assignmentId6fields10completionySS_SaySSGSgys6ResultOyAA0c4HoldgH0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getPolicyAssignment(assignmentId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC19getPolicyAssignment12assignmentId6fields10completionySS_SaySSGSgys6ResultOyAA0c4HoldgH0CAA0A8SDKErrorCGctF">getPolicyAssignment(assignmentId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC19getPolicyAssignment12assignmentId6fields10completionySS_SaySSGSgys6ResultOyAA0c4HoldgH0CAA0A8SDKErrorCGctF">getPolicyAssignment(assignmentId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1315,7 +1312,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC12assignPolicy8policyId0f2ToI00fJ4Type6fields10completionySS_S2SSaySSGSgys6ResultOyAA0c4HoldG10AssignmentCAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/assignPolicy(policyId:assignToId:assignToType:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC12assignPolicy8policyId0f2ToI00fJ4Type6fields10completionySS_S2SSaySSGSgys6ResultOyAA0c4HoldG10AssignmentCAA0A8SDKErrorCGctF">assignPolicy(policyId:assignToId:assignToType:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC12assignPolicy8policyId0f2ToI00fJ4Type6fields10completionySS_S2SSaySSGSgys6ResultOyAA0c4HoldG10AssignmentCAA0A8SDKErrorCGctF">assignPolicy(policyId:<wbr>assignToId:<wbr>assignToType:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1429,7 +1426,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC22deletePolicyAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/deletePolicyAssignment(assignmentId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC22deletePolicyAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deletePolicyAssignment(assignmentId:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC22deletePolicyAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deletePolicyAssignment(assignmentId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1490,7 +1487,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC21listPolicyAssignments8policyId12assignToType0klJ06marker5limit6fields10completionySS_SSSgA2LSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0c4HoldG10AssignmentCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listPolicyAssignments(policyId:assignToType:assignToId:marker:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC21listPolicyAssignments8policyId12assignToType0klJ06marker5limit6fields10completionySS_SSSgA2LSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0c4HoldG10AssignmentCGAA0A8SDKErrorCGctF">listPolicyAssignments(policyId:assignToType:assignToId:marker:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC21listPolicyAssignments8policyId12assignToType0klJ06marker5limit6fields10completionySS_SSSgA2LSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0c4HoldG10AssignmentCGAA0A8SDKErrorCGctF">listPolicyAssignments(policyId:<wbr>assignToType:<wbr>assignToId:<wbr>marker:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1608,7 +1605,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC20getFileVersionPolicy11legalHoldId6fields10completionySS_SaySSGSgys6ResultOyAA0ghcK0CAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/getFileVersionPolicy(legalHoldId:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC20getFileVersionPolicy11legalHoldId6fields10completionySS_SaySSGSgys6ResultOyAA0ghcK0CAA0A8SDKErrorCGctF">getFileVersionPolicy(legalHoldId:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC20getFileVersionPolicy11legalHoldId6fields10completionySS_SaySSGSgys6ResultOyAA0ghcK0CAA0A8SDKErrorCGctF">getFileVersionPolicy(legalHoldId:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1684,7 +1681,7 @@ passed in the fields parameter to get specific attributes.</p>
                     <code>
                     <a name="/s:6BoxSDK16LegalHoldsModuleC23listFileVersionPolicies8policyId6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0ghC4HoldCGAA0A8SDKErrorCGctF"></a>
                     <a name="//apple_ref/swift/Method/listFileVersionPolicies(policyId:marker:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC23listFileVersionPolicies8policyId6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0ghC4HoldCGAA0A8SDKErrorCGctF">listFileVersionPolicies(policyId:marker:limit:fields:completion:)</a>
+                    <a class="token" href="#/s:6BoxSDK16LegalHoldsModuleC23listFileVersionPolicies8policyId6marker5limit6fields10completionySS_SSSgSiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0ghC4HoldCGAA0A8SDKErrorCGctF">listFileVersionPolicies(policyId:<wbr>marker:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1775,8 +1772,8 @@ passed in the fields parameter to get specific attributes.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
