@@ -158,17 +158,7 @@ Using the same client ID from the previous step, set the redirect URL for your a
 is replaced with your client ID.  For example, if your client ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect
 URL should be `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
 
-__Step 5__: Insert your client ID to receive the redirect in the app
-
-Open the `Info.plist` file in the sample app and find the key under `URL Types --> Item 0 --> URL Schemes --> Item 0`.
-Using the same client ID from the previous step, set the value for Item 0 to
-`boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
-ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
-`boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
-
-![location to add redirect URL scheme in Xcode](docs/usage/redirect-url-scheme.png)
-
-__Step 6__: Run the sample app
+__Step 5__: Run the sample app
 
 ### JWT Auth Sample App
 
