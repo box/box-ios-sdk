@@ -7,9 +7,9 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
-- Add support for filtering groups by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
-
 __Bug Fixes:__
+
+- Update `listEnterpriseGroups()` to use documented parameter for filtering by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
 
 ## v4.3.0 [2021-02-01]
 
