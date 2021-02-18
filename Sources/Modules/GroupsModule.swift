@@ -164,12 +164,14 @@ public class GroupsModule {
     ///
     /// - Parameters:
     ///   - name: Only return groups whose name contains the given string (case insensitive).
+    ///   - filterTerm: Limits the results to only groups whose name starts with the search term
     ///   - offset: The offset of the item at which to begin the response.
     ///   - limit: The maximum number of items to return. The default is 100 and the maximum is 1,000.
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
     public func listForEnterprise(
         name: String? = nil,
+        filterTerm: String? = nil,
         offset: Int? = nil,
         limit: Int? = nil,
         fields: [String]? = nil,
@@ -179,6 +181,7 @@ public class GroupsModule {
             url: URL.boxAPIEndpoint("/2.0/groups", configuration: boxClient.configuration),
             queryParameters: [
                 "name": name,
+                "filter_term": filterTerm,
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
