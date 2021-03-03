@@ -712,6 +712,103 @@ class FolderModuleSpecs: QuickSpec {
                     }
                 }
             }
+
+            describe("listLocks()") {
+                it("should get folder locks") {
+                    stub(condition: isHost("api.box.com") && isPath("/2.0/folder_locks") && isMethodGET() &&
+                        containsQueryParams(["folder_id": "14176246"])) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("FolderLocks.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.folders.listLocks(folderId: "14176246") { results in
+                            switch results {
+                            case let .success(iterator):
+                                iterator.next { result in
+                                    switch result {
+                                    case let .success(item):
+                                        expect(item).to(beAKindOf(FolderLock.self))
+                                        expect(item.id).to(equal("12345678"))
+                                        expect(item.createdBy).to(beAKindOf(User.self))
+                                        expect(item.createdBy?.id).to(equal("11446498"))
+                                        expect(item.lockType).to(equal("freeze"))
+
+                                    case let .failure(error):
+                                        fail("Expected folder locks, but it failed: \(error)")
+                                    }
+                                    done()
+                                }
+
+                            case let .failure(error):
+                                fail("Expected folder locks, but it failed: \(error)")
+                                done()
+                            }
+                        }
+                    }
+                }
+            }
+
+            describe("lock()") {
+                it("should create a folder lock") {
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/2.0/folder_locks")
+                            && isMethodPOST()
+                            && hasJsonBody([
+                                "folder": [
+                                    "type": "folder",
+                                    "id": "14176246"
+                                ],
+                                "locked_operations": [
+                                    "move": true,
+                                    "delete": true
+                                ]
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("FolderLock.json", type(of: self))!,
+                            statusCode: 201, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.folders.lock(folderId: "14176246") { result in
+                            switch result {
+                            case let .success(folderLock):
+                                expect(folderLock).toNot(beNil())
+                                expect(folderLock).to(beAKindOf(FolderLock.self))
+                                expect(folderLock.lockType).to(equal("freeze"))
+                            case let .failure(error):
+                                fail("Expected call to create to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
+            describe("deleteLock()") {
+                it("should delete the lock") {
+                    stub(condition: isHost("api.box.com") && isPath("/2.0/folder_locks/1234567") && isMethodDELETE()) { _ in
+                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.folders.deleteLock(folderLockId: "1234567") { response in
+                            switch response {
+                            case .success:
+                                break
+                            case let .failure(error):
+                                fail("Expected call to deleteLock to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
         }
     }
 }

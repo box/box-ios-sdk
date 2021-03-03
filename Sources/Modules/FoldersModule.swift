@@ -598,4 +598,71 @@ public class FoldersModule {
             completion: ResponseHandler.default(wrapping: completion)
         )
     }
+
+    /// Get all of the locks on a folder.
+    ///
+    /// - Parameters:
+    ///   - folderId: The ID of the folder on which to retrieve folder locks.
+    ///   - marker: The position marker at which to begin the response. See [marker-based paging]
+    ///     (https://developer.box.com/guides/api-calls/pagination/marker-based/) for details.
+    ///   - limit: The maximum number of items to return. The default is 100 and the maximum is 1,000.
+    ///   - completion: Returns all of the locks on the folder, or an error if the request is unsuccessful.
+    public func listLocks(
+        folderId: String,
+        marker: String? = nil,
+        limit: Int? = nil,
+        completion: @escaping Callback<PagingIterator<FolderLock>>
+    ) {
+        boxClient.get(
+            url: URL.boxAPIEndpoint("/2.0/folder_locks", configuration: boxClient.configuration),
+            queryParameters: [
+                "folder_id": folderId,
+                "marker": marker,
+                "limit": limit
+            ],
+            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+        )
+    }
+
+    /// Creates a folder lock on a folder, preventing it from being moved and/or deleted.
+    ///
+    /// - Parameters:
+    ///   - folderId: The ID of the folder to apply the lock to.
+    ///   - completion: Returns a folder lock object or an error if the request is unsuccessful.
+    public func lock(
+        folderId: String,
+        completion: @escaping Callback<FolderLock>
+    ) {
+        let body: [String: Any] = [
+            "folder": [
+                "type": "folder",
+                "id": folderId
+            ],
+            "locked_operations": [
+                "move": true,
+                "delete": true
+            ]
+        ]
+
+        boxClient.post(
+            url: URL.boxAPIEndpoint("/2.0/folder_locks", configuration: boxClient.configuration),
+            json: body,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+
+    /// Remove the specified folder lock.
+    ///
+    /// - Parameters:
+    ///   - folderLockId: The id of the folder lock to remove.
+    ///   - completion: Returns an empty response or an error.
+    public func deleteLock(
+        folderLockId: String,
+        completion: @escaping Callback<Void>
+    ) {
+        boxClient.delete(
+            url: URL.boxAPIEndpoint("/2.0/folder_locks/\(folderLockId)", configuration: boxClient.configuration),
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
 }
