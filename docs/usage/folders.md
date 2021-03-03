@@ -286,7 +286,7 @@ Get Folder Locks
 -------------------------
 
 To retrieve a list of the locks on a folder, call
-[`client.folders.listLocks(folderId:marker:limit:completion:)`][get-folder-locks]
+[`client.folders.listLocks(folderId:completion:)`][get-folder-locks]
 with the ID of the folder. Folder locks define access restrictions placed by folder owners to prevent specific folders from being moved or deleted.
 
 <!-- sample get_folder_locks -->
