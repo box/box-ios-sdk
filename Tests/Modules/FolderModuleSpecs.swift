@@ -751,7 +751,7 @@ class FolderModuleSpecs: QuickSpec {
                 }
             }
 
-            describe("lock()") {
+            describe("createLock()") {
                 it("should create a folder lock") {
                     stub(
                         condition: isHost("api.box.com")
@@ -775,7 +775,7 @@ class FolderModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.folders.lock(folderId: "14176246") { result in
+                        self.sut.folders.createLock(folderId: "14176246") { result in
                             switch result {
                             case let .success(folderLock):
                                 expect(folderLock).toNot(beNil())

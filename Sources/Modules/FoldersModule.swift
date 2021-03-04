@@ -622,7 +622,7 @@ public class FoldersModule {
     /// - Parameters:
     ///   - folderId: The ID of the folder to apply the lock to.
     ///   - completion: Returns a folder lock object or an error if the request is unsuccessful.
-    public func lock(
+    public func createLock(
         folderId: String,
         completion: @escaping Callback<FolderLock>
     ) {

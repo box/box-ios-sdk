@@ -314,12 +314,12 @@ Create Folder Lock
 -------------
 
 To lock a folder, call
-[`client.folders.lock(folderId:completion:)`][create-folder-lock]
+[`client.folders.createLock(folderId:completion:)`][create-folder-lock]
 with the ID of the folder. This prevents the folder from being moved and/or deleted.
 
 <!-- sample post_folder_locks -->
 ```swift
-client.folders.lock(folderId: "22222") { (result: Result<FolderLock, BoxSDKError>) in
+client.folders.createLock(folderId: "22222") { (result: Result<FolderLock, BoxSDKError>) in
     guard case let .success(folderLock) = result else {
         print("Error creating folder lock")
         return
