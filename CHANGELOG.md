@@ -7,6 +7,8 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Add support for folder lock functionality ([#759](https://github.com/box/box-ios-sdk/pull/759))
+
 __Bug Fixes:__
 
 - Update `listEnterpriseGroups()` to use documented parameter for filtering by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
