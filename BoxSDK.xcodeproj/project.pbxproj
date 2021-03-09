@@ -377,6 +377,11 @@
 		B41D9DB325D33456000BFE59 /* SearchResult200.json in Resources */ = {isa = PBXBuildFile; fileRef = B41D9DB225D33456000BFE59 /* SearchResult200.json */; };
 		B41D9DB525D3347C000BFE59 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D9DB425D3347C000BFE59 /* SearchResult.swift */; };
 		B41D9DB625D335F2000BFE59 /* SearchResult200.json in Resources */ = {isa = PBXBuildFile; fileRef = B41D9DB225D33456000BFE59 /* SearchResult200.json */; };
+		B4882E6E25EEBE1800EB57BA /* FolderLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4882E6D25EEBE1800EB57BA /* FolderLock.swift */; };
+		B4882E7025EEE12F00EB57BA /* FolderLock.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E6F25EEE12F00EB57BA /* FolderLock.json */; };
+		B4882E7125EEE14100EB57BA /* FolderLock.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E6F25EEE12F00EB57BA /* FolderLock.json */; };
+		B4882E7325EEFBC600EB57BA /* FolderLocks.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E7225EEFBC600EB57BA /* FolderLocks.json */; };
+		B4882E7425EEFBD900EB57BA /* FolderLocks.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E7225EEFBC600EB57BA /* FolderLocks.json */; };
 		B492C0AB25B78A4500F3823D /* ZipDownloadConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B492C0AA25B78A4500F3823D /* ZipDownloadConflict.swift */; };
 		B492C0AD25B78A6A00F3823D /* ZipDownloadConflictItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B492C0AC25B78A6A00F3823D /* ZipDownloadConflictItem.swift */; };
 		F90888EF246DAC110002267A /* URLSessionTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90888EE246DAC110002267A /* URLSessionTaskExtension.swift */; };
@@ -866,6 +871,9 @@
 		B40558BA25AE57C10068784E /* ZipDownloadStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ZipDownloadStatus.json; sourceTree = "<group>"; };
 		B41D9DB225D33456000BFE59 /* SearchResult200.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchResult200.json; sourceTree = "<group>"; };
 		B41D9DB425D3347C000BFE59 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		B4882E6D25EEBE1800EB57BA /* FolderLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLock.swift; sourceTree = "<group>"; };
+		B4882E6F25EEE12F00EB57BA /* FolderLock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FolderLock.json; sourceTree = "<group>"; };
+		B4882E7225EEFBC600EB57BA /* FolderLocks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FolderLocks.json; sourceTree = "<group>"; };
 		B492C0AA25B78A4500F3823D /* ZipDownloadConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDownloadConflict.swift; sourceTree = "<group>"; };
 		B492C0AC25B78A6A00F3823D /* ZipDownloadConflictItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDownloadConflictItem.swift; sourceTree = "<group>"; };
 		F90888EE246DAC110002267A /* URLSessionTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskExtension.swift; sourceTree = "<group>"; };
@@ -1262,6 +1270,7 @@
 				9D472E6C231BE5FF004C8023 /* FileVersionRetention.swift */,
 				2256391A2253897D00D951B5 /* Folder.swift */,
 				225639232253897D00D951B5 /* FolderItem.swift */,
+				B4882E6D25EEBE1800EB57BA /* FolderLock.swift */,
 				0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */,
 				97F04DB422B97EF90034B9A3 /* Group.swift */,
 				80FEB7AC231EF2130037331C /* GroupMembership.swift */,
@@ -1486,6 +1495,8 @@
 				9DEA474822D391220035C959 /* GetFolderSharedLink.json */,
 				9DD6F53F22DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json */,
 				9717866C22F0C694004A5F6D /* RemoveFolderSharedLink.json */,
+				B4882E6F25EEE12F00EB57BA /* FolderLock.json */,
+				B4882E7225EEFBC600EB57BA /* FolderLocks.json */,
 			);
 			path = Folders;
 			sourceTree = "<group>";
@@ -2106,7 +2117,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B40558B025AD2ABF0068784E /* ZipDownload.json in Resources */,
+				B4882E7325EEFBC600EB57BA /* FolderLocks.json in Resources */,
 				8093D29822FA398500DB628E /* GetWebLink.json in Resources */,
+				B4882E7025EEE12F00EB57BA /* FolderLock.json in Resources */,
 				8093D29A22FA399D00DB628E /* UpdateWebLink.json in Resources */,
 				80E5679822FB931300798E3A /* FullWebLink.json in Resources */,
 				80E5679F2303683100798E3A /* GetWebLinkSharedLink_PasswordNotEnabled.json in Resources */,
@@ -2121,6 +2134,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4882E7425EEFBD900EB57BA /* FolderLocks.json in Resources */,
+				B4882E7125EEE14100EB57BA /* FolderLock.json in Resources */,
 				B41D9DB625D335F2000BFE59 /* SearchResult200.json in Resources */,
 				B40558BC25AE58540068784E /* ZipDownloadStatus.json in Resources */,
 				B40558B125AD2AFC0068784E /* ZipDownload.json in Resources */,
@@ -2480,6 +2495,7 @@
 				9D472E69231BD9C4004C8023 /* RetentionPolicyAssignment.swift in Sources */,
 				176CADFB231D4BEB004269F5 /* RetentionPolicyEntry.swift in Sources */,
 				22DCC3C622E0D19E007F74E2 /* TrackingCode.swift in Sources */,
+				B4882E6E25EEBE1800EB57BA /* FolderLock.swift in Sources */,
 				225639A22253897D00D951B5 /* FolderItem.swift in Sources */,
 				228B36A622BC234D00078283 /* MetadataTemplate.swift in Sources */,
 				F92CF99E235539710046A277 /* BoxSDKError.swift in Sources */,
