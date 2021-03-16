@@ -8,6 +8,7 @@ __Breaking Changes:__
 __New Features and Enhancements:__
 
 - Add support for folder lock functionality ([#759](https://github.com/box/box-ios-sdk/pull/759))
+- Add support for copyInstanceOnItemCopy field for metadata templates ([#763](https://github.com/box/box-ios-sdk/pull/763))
 
 __Bug Fixes:__
 
