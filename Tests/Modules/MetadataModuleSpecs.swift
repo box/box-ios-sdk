@@ -114,7 +114,28 @@ class MetadataModuleSpecs: QuickSpec {
 
             describe("createTemplate()") {
                 it("should make API call to create metadata template and produce file model when API call succeeds") {
-                    stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/schema") && isMethodPOST()) { _ in
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/metadata_templates/schema") &&
+                            isMethodPOST() &&
+                            hasJsonBody([
+                                "scope": "enterprise_490685",
+                                "templateKey": "customer",
+                                "displayName": "Customer",
+                                "hidden": false,
+                                "fields": [
+                                    ["type": "string", "key": "customerTeam", "displayName": "Customer team", "hidden": false],
+                                    ["type": "multiSelect", "hidden": false, "options": [
+                                        ["key": "FY11"],
+                                        ["key": "FY12"],
+                                        ["key": "FY13"],
+                                        ["key": "FY14"],
+                                        ["key": "FY15"]
+                                    ],
+                                    "key": "fy", "displayName": "FY"]
+                                ]
+                            ])
+                    ) { _ in
                         OHHTTPStubsResponse(
                             fileAtPath: OHPathForFile("CreateMetadataTemplate.json", type(of: self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
@@ -179,6 +200,67 @@ class MetadataModuleSpecs: QuickSpec {
 
                                 expect(firstOption).toNot(beNil())
                                 expect(firstOption["key"]).to(equal("FY11"))
+
+                            case let .failure(error):
+                                fail("Expected call to createTemplate to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+
+                it("should make API call to create metadata template with copyInstanceOnItemCopy and produce file model when API call succeeds") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/metadata_templates/schema") &&
+                            isMethodPOST() &&
+                            hasJsonBody([
+                                "scope": "enterprise_490685",
+                                "templateKey": "customer",
+                                "displayName": "Customer",
+                                "hidden": false,
+                                "copyInstanceOnItemCopy": true,
+                                "fields": [
+                                    ["type": "string", "key": "customerTeam", "displayName": "Customer team", "hidden": false]
+                                ]
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("CreateMetadataTemplate2.json", type(of: self))!,
+                            statusCode: 201, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.sut.metadata.createTemplate(
+                            scope: "enterprise_490685",
+                            templateKey: "customer",
+                            displayName: "Customer",
+                            hidden: false,
+                            copyInstanceOnItemCopy: true,
+                            fields: [
+                                MetadataField(id: nil, type: "string", key: "customerTeam", displayName: "Customer team", options: nil, hidden: false)
+                            ]
+                        ) { result in
+                            switch result {
+                            case let .success(template):
+                                expect(template).toNot(beNil())
+                                expect(template.templateKey).to(equal("customer"))
+                                expect(template.scope).to(equal("enterprise_490685"))
+                                expect(template.displayName).to(equal("Customer"))
+                                expect(template.copyInstanceOnItemCopy).to(equal(true))
+
+                                guard let firstField = template.fields?[0] else {
+                                    fail()
+                                    done()
+                                    return
+                                }
+
+                                expect(firstField).toNot(beNil())
+                                expect(firstField.type).to(equal("string"))
+                                expect(firstField.key).to(equal("customerTeam"))
+                                expect(firstField.displayName).to(equal("Customer team"))
+                                expect(firstField.hidden).to(equal(false))
 
                             case let .failure(error):
                                 fail("Expected call to createTemplate to succeed, but instead got \(error)")
