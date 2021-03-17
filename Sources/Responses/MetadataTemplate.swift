@@ -111,6 +111,8 @@ public class MetadataTemplate: BoxModel {
     public let displayName: String?
     /// Whether this template is hidden in the UI.
     public let hidden: Bool?
+    /// Whether or not to copy any metadata attached to a file or folder when it is copied. By default, metadata is not copied along with a file or folder when it is copied.
+    public let copyInstanceOnItemCopy: Bool?
     /// The ordered set of key:value pairs for the template.
     public let fields: [MetadataField]?
 
@@ -126,6 +128,7 @@ public class MetadataTemplate: BoxModel {
         scope = try BoxJSONDecoder.optionalDecode(json: json, forKey: "scope")
         displayName = try BoxJSONDecoder.optionalDecode(json: json, forKey: "displayName")
         hidden = try BoxJSONDecoder.optionalDecode(json: json, forKey: "hidden")
+        copyInstanceOnItemCopy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "copyInstanceOnItemCopy")
         fields = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "fields")
     }
 }

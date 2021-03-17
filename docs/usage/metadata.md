@@ -86,7 +86,7 @@ Create Metadata Template
 ------------------------
 
 To create a new metadata template, call
-[`client.metadata.createTemplate(scope:templateKey:displayName:hidden:fields:completion:)`][create-md-template]
+[`client.metadata.createTemplate(scope:templateKey:displayName:hidden:copyInstanceOnItemCopy:fields:completion:)`][create-md-template]
 with the scope and name of the template, as well as the fields the template should contain.
 
 <!-- sample post_metadata_templates_schema -->
