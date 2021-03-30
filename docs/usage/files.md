@@ -162,7 +162,36 @@ if someConditionIsSatisfied {
 }
 ```
 
+To upload a new version of an existing file from a stream, use
+[`client.files.streamUploadVersion(stream:fileSize:forFile:name:contentModifiedAt:progress:completion:)`][upload-file-version-stream].
+
+```swift
+let data = "updated file content".data(using: .utf8)
+let stream = InputStream(data: data)
+
+let task: BoxUploadTask = client.files.streamUploadVersion(
+    stream: stream,
+    fileSize: 12,
+    forFile: "11111",
+    name: "New file name.txt",
+    contentModifiedAt: "2021-03-07T09:19:13-07:00"
+) { (result: Result<File, BoxSDKError>) in
+    guard case let .success(file) = result else {
+        print("Error uploading file version")
+        return
+    }
+
+    print("New version of \(file.name) was uploaded")
+}
+
+// To cancel upload
+if someConditionIsSatisfied {
+    task.cancel()
+}
+```
+
 [upload-file-version]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionySS_SSSgAL10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF
+[upload-file-version-stream]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionySS_SSSgAL10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF
 
 Download File
 -------------

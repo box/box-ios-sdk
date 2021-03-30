@@ -474,6 +474,93 @@ public class FilesModule {
         )
     }
 
+
+    /// Upload a new version of an existing file.
+    ///
+    /// - Parameters:
+    ///   - stream: An InputStream of data for the file to be uploaded.
+    ///   - fileSize: The length of the InputStream
+    ///   - forFile: The ID of the file
+    ///   - name: The name of the file. Box supports file names of 255 characters or
+    ///     less. Names containing non-printable ASCII characters, "/" or "\", names with trailing
+    ///     spaces, and the special names “.” and “..” are also not allowed.
+    ///   - contentModifiedAt: The time the file was last modified. Defaults to time of upload.
+    ///   - performPreflightCheck: Defines whether to perform preflight request first check to see whether uploaded file parameters
+    ///     such as size and name won't cause an upload error.
+    ///   - completion: Returns a standard file object or an error.
+    /// - Returns: BoxUploadTask
+    @discardableResult
+    public func streamUploadVersion(
+        stream: InputStream,
+        fileSize: Int,
+        forFile fileId: String,
+        name: String,
+        contentModifiedAt: String? = nil,
+        progress: @escaping (Progress) -> Void = { _ in },
+        performPreflightCheck: Bool = false,
+        completion: @escaping Callback<File>
+    ) -> BoxUploadTask {
+        let task = BoxUploadTask()
+        task.receiveTask(
+            updateWithPreflightCheck(
+                performCheck: performPreflightCheck,
+                fileId: fileId,
+                name: name,
+                size: Int64(fileSize),
+                request: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    task.receiveTask(
+                        self.streamUploadVersion(
+                            stream: stream,
+                            fileSize: fileSize,
+                            forFile: fileId,
+                            name: name,
+                            contentModifiedAt: contentModifiedAt,
+                            progress: progress,
+                            completion: completion
+                        )
+                    )
+                },
+                completion: completion
+            )
+        )
+        return task
+    }
+
+    /// Stream upload request without preflight check.
+    private func streamUploadVersion(
+        stream: InputStream,
+        fileSize: Int,
+        forFile fileId: String,
+        name: String,
+        contentModifiedAt: String? = nil,
+        progress: @escaping (Progress) -> Void = { _ in },
+        completion: @escaping Callback<File>
+    ) -> BoxUploadTask {
+        var attributes: [String: Any] = [:]
+        attributes["name"] = name
+        attributes["content_modified_at"] = contentModifiedAt
+
+        var body = MultipartForm()
+        do {
+            body.appendPart(name: "attributes", contents: try JSONSerialization.data(withJSONObject: attributes))
+            body.appendFilePart(name: "file", contents: stream, length: fileSize, fileName: "UNUSED", mimeType: "application/octet-stream")
+        }
+        catch {
+            completion(.failure(BoxCodingError(message: "Error with encoding multipart from", error: error)))
+            return BoxUploadTask()
+        }
+
+        return boxClient.post(
+            url: URL.boxUploadEndpoint("/api/2.0/files/\(fileId)/content", configuration: boxClient.configuration),
+            multipartBody: body,
+            progress: progress,
+            completion: ResponseHandler.unwrapCollection(wrapping: completion)
+        )
+    }
+
     /// Verifies that new file will be accepted by Box before you send all the bytes over the wire.
     /// Verifies all permissions as if the file was actually uploaded including: folder upload permission, file name collisions, file size caps,
     /// folder and file name restrictions, folder and account storage quota.
