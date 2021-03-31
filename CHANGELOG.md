@@ -14,6 +14,7 @@ __New Features and Enhancements:__
 __Bug Fixes:__
 
 - Update `listEnterpriseGroups()` to use documented parameter for filtering by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
+- Fix bug for OAuth where the callback is not called if token has been revoked ([#762](https://github.com/box/box-ios-sdk/pull/762))
 
 ## v4.3.0 [2021-02-01]
 

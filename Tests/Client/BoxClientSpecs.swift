@@ -147,6 +147,51 @@ class BoxClientSpecs: QuickSpec {
                     }
                 }
             }
+            
+            it("should produce error when OAuth2 access token has been revoked") {
+                let clientID = "ksdjfksadfisdg"
+                let clientSecret = "liuwerfiberdus"
+                let accessToken = "nekoTssecca"
+                let expiresIn: TimeInterval = 3681
+
+                var client: BoxClient!
+                let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
+                waitUntil(timeout: 10) { done in
+                    let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
+                    sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
+                        switch result {
+                        case .success(let c):
+                            client = c
+                        case .failure(let error):
+                            fail("Expected getting client to succeed, but instead got \(error)")
+                        }
+                        done()
+                    }
+                }
+                
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/2.0/users/me")
+                        && isMethodGET()
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        data: Data(), statusCode: 401, headers: [:]
+                    )
+                }
+
+                waitUntil(timeout: 10) { done in
+                    client.users.getCurrent { result in
+                        guard case let .failure(error) = result else {
+                            fail("Expected request method to result in an error")
+                            done()
+                            return
+                        }
+                        
+                        expect(error).to(matchError(BoxAPIAuthError(message: .unauthorizedAccess)))
+                        done()
+                    }
+                }
+            }
         }
     }
 

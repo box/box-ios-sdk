@@ -176,7 +176,7 @@ A sample app using JWT Authentication can be found in the repository [here][jwt-
 set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
 tokens.
 
-[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/limited-beta-release/SampleApps/JWTSampleApp
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/master/SampleApps/JWTSampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
