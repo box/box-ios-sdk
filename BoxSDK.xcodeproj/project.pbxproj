@@ -377,6 +377,8 @@
 		B41D9DB325D33456000BFE59 /* SearchResult200.json in Resources */ = {isa = PBXBuildFile; fileRef = B41D9DB225D33456000BFE59 /* SearchResult200.json */; };
 		B41D9DB525D3347C000BFE59 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D9DB425D3347C000BFE59 /* SearchResult.swift */; };
 		B41D9DB625D335F2000BFE59 /* SearchResult200.json in Resources */ = {isa = PBXBuildFile; fileRef = B41D9DB225D33456000BFE59 /* SearchResult200.json */; };
+		B47486CA26013A30005F4475 /* CreateMetadataTemplate2.json in Resources */ = {isa = PBXBuildFile; fileRef = B47486C926013A30005F4475 /* CreateMetadataTemplate2.json */; };
+		B47486CB26013B02005F4475 /* CreateMetadataTemplate2.json in Resources */ = {isa = PBXBuildFile; fileRef = B47486C926013A30005F4475 /* CreateMetadataTemplate2.json */; };
 		B4882E6E25EEBE1800EB57BA /* FolderLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4882E6D25EEBE1800EB57BA /* FolderLock.swift */; };
 		B4882E7025EEE12F00EB57BA /* FolderLock.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E6F25EEE12F00EB57BA /* FolderLock.json */; };
 		B4882E7125EEE14100EB57BA /* FolderLock.json in Resources */ = {isa = PBXBuildFile; fileRef = B4882E6F25EEE12F00EB57BA /* FolderLock.json */; };
@@ -871,6 +873,7 @@
 		B40558BA25AE57C10068784E /* ZipDownloadStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ZipDownloadStatus.json; sourceTree = "<group>"; };
 		B41D9DB225D33456000BFE59 /* SearchResult200.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchResult200.json; sourceTree = "<group>"; };
 		B41D9DB425D3347C000BFE59 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		B47486C926013A30005F4475 /* CreateMetadataTemplate2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateMetadataTemplate2.json; sourceTree = "<group>"; };
 		B4882E6D25EEBE1800EB57BA /* FolderLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLock.swift; sourceTree = "<group>"; };
 		B4882E6F25EEE12F00EB57BA /* FolderLock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FolderLock.json; sourceTree = "<group>"; };
 		B4882E7225EEFBC600EB57BA /* FolderLocks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FolderLocks.json; sourceTree = "<group>"; };
@@ -1515,6 +1518,7 @@
 				224E1BEB22C5365400F31F3A /* GetEnterpriseTemplates.json */,
 				224E1BE922C522D800F31F3A /* UpdateMetadataTemplate.json */,
 				2268B33422BD880700ABBD47 /* CreateMetadataTemplate.json */,
+				B47486C926013A30005F4475 /* CreateMetadataTemplate2.json */,
 				2268B33522BD880700ABBD47 /* GetMetadataTemplate.json */,
 			);
 			path = Metadata;
@@ -2119,6 +2123,7 @@
 				B40558B025AD2ABF0068784E /* ZipDownload.json in Resources */,
 				B4882E7325EEFBC600EB57BA /* FolderLocks.json in Resources */,
 				8093D29822FA398500DB628E /* GetWebLink.json in Resources */,
+				B47486CA26013A30005F4475 /* CreateMetadataTemplate2.json in Resources */,
 				B4882E7025EEE12F00EB57BA /* FolderLock.json in Resources */,
 				8093D29A22FA399D00DB628E /* UpdateWebLink.json in Resources */,
 				80E5679822FB931300798E3A /* FullWebLink.json in Resources */,
@@ -2134,6 +2139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47486CB26013B02005F4475 /* CreateMetadataTemplate2.json in Resources */,
 				B4882E7425EEFBD900EB57BA /* FolderLocks.json in Resources */,
 				B4882E7125EEE14100EB57BA /* FolderLock.json in Resources */,
 				B41D9DB625D335F2000BFE59 /* SearchResult200.json in Resources */,
