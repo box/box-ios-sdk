@@ -314,7 +314,7 @@ public class FilesModule {
     ///   - name: The name of the file. Box supports file names of 255 characters or
     ///     less. Names containing non-printable ASCII characters, "/" or "\", names with trailing
     ///     spaces, and the special names “.” and “..” are also not allowed.
-    ///   - ifMatch: The `etag` of the file version. Ensures this item hasn't recently changed before making changes.
+    ///   - ifMatch: The `etag` of the old file version. Ensures that the file hasn't been updated since getting the etag, which could indicate conflicting edits.
     ///   - performPreflightCheck: Checks whether new file version will be accepted before whole new version is uploaded.
     ///   - completion: Returns a standard file object or an error.
     /// - Returns: BoxUploadTask
