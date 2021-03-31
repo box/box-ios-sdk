@@ -136,7 +136,7 @@ Upload New File Version
 -----------------------
 
 To upload a new version of an existing file, call
-[`client.files.uploadVersion(forFile:name:contentModifiedAt:data:progress:completion:)`][upload-file-version]
+[`client.files.uploadVersion(forFile:name:contentModifiedAt:data:ifMatch:progress:completion:)`][upload-file-version]
 with the ID of the file and the file contents to be uploaded.
 
 <!-- sample post_files_id_content -->
@@ -163,7 +163,7 @@ if someConditionIsSatisfied {
 ```
 
 To upload a new version of an existing file from a stream, use
-[`client.files.streamUploadVersion(stream:fileSize:forFile:name:contentModifiedAt:progress:completion:)`][upload-file-version-stream].
+[`client.files.streamUploadVersion(stream:fileSize:forFile:name:contentModifiedAt:ifMatch:progress:completion:)`][upload-file-version-stream].
 
 ```swift
 let data = "updated file content".data(using: .utf8)
