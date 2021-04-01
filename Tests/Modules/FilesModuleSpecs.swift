@@ -1004,6 +1004,39 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("streamUploadVersion()") {
+
+                it("should produce file model when API call succeeds") {
+                    stub(condition: isHost("upload.box.com") && isPath("/api/2.0/files/123456/content") && isMethodPOST()) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                            statusCode: 201, headers: [:]
+                        )
+                    }
+
+                    let data = Data("updated file content".utf8)
+                    waitUntil(timeout: 999) { done in
+                        self.sut.files.streamUploadVersion(stream: InputStream(data: data), fileSize: data.count, forFile: "123456", name: "tigers.jpeg") { result in
+                            switch result {
+                            case let .success(file):
+                                expect(file).toNot(beNil())
+                                expect(file.id).to(equal("5000948880"))
+                                expect(file.name).to(equal("testfile.jpeg"))
+                                expect(file.description).to(equal("Test File"))
+                                expect(file.size).to(equal(629_644))
+                                expect(file.createdBy).to(beAKindOf(User.self))
+                                expect(file.createdBy?.name).to(equal("Test User"))
+                                expect(file.createdBy?.login).to(equal("testuser@example.com"))
+                                expect(file.createdBy?.id).to(equal("17738362"))
+                            case let .failure(error):
+                                fail("Expected call to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
             describe("preflightCheck()") {
                 context("preflight check for new file") {
                     it("should be able to pass the check") {
