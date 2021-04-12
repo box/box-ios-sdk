@@ -1,15 +1,15 @@
 # Box iOS SDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK)
-[![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-swift-sdk/master/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-ios-sdk/main/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
  [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
- [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-swift-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
+ [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
 
 NOTE:
 ===================
 
-The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
-Going forward, the master branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
+The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the main branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
+Going forward, the main branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
 
 Box iOS SDK
 - [Requirements](#requirements)
@@ -115,7 +115,7 @@ client.users.getCurrentUser() { result in
 
 [dev-console]: https://app.box.com/developers/console
 
-The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/master/docs/usage).
+The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/main/docs/usage).
 
 The Jazzy docs that show class, method, variable, etc definitions can be found [here](https://opensource.box.com/box-ios-sdk/).
 
@@ -128,7 +128,7 @@ A sample app using OAuth2 Authentication can be found in the repository [here][o
 how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
 
 [oauth2-sample-app]:
-https://github.com/box/box-ios-sdk/tree/master/SampleApps/OAuth2SampleApp
+https://github.com/box/box-ios-sdk/tree/main/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
@@ -176,7 +176,7 @@ A sample app using JWT Authentication can be found in the repository [here][jwt-
 set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
 tokens.
 
-[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/master/SampleApps/JWTSampleApp
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/main/SampleApps/JWTSampleApp
 
 To execute the sample app:
 __Step 1__: Run carthage
