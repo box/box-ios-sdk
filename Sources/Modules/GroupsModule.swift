@@ -178,7 +178,7 @@ public class GroupsModule {
         boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/groups", configuration: boxClient.configuration),
             queryParameters: [
-                "name": name,
+                "filter_term": name,
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)

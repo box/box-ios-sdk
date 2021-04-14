@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+- Add support for folder lock functionality ([#759](https://github.com/box/box-ios-sdk/pull/759))
+- Add support for copyInstanceOnItemCopy field for metadata templates ([#763](https://github.com/box/box-ios-sdk/pull/763))
+- Add support for stream upload of new file versions and add support for 'If-Match' header when uploading new file versions ([#766](https://github.com/box/box-ios-sdk/pull/766))
+
+__Bug Fixes:__
+
+- Update `listEnterpriseGroups()` to use documented parameter for filtering by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
+- Fix bug for OAuth where the callback is not called if token has been revoked ([#762](https://github.com/box/box-ios-sdk/pull/762))
+
 ## v4.3.0 [2021-02-01]
 
 __Breaking Changes:__

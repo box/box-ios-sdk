@@ -84,7 +84,7 @@ The Code of Conduct governs how we behave in public or in private
 whenever the project will be judged by our actions.
 We expect it to be honored by everyone who contributes to this project.
 
-See [CODE_OF_CONDUCT.md](https://github.com/box/box-swift-sdk//blob/master/CODE_OF_CONDUCT.md) for details.
+See [CODE_OF_CONDUCT.md](https://github.com/box/box-ios-sdk//blob/main/CODE_OF_CONDUCT.md) for details.
 
 ---
 

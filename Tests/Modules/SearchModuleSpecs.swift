@@ -269,6 +269,54 @@ class SearchModuleSpecs: QuickSpec {
                     }
                 }
             }
+
+            context("queryWithSharedLinks()") {
+
+                it("should make request with simple search query and shared links query parameter when only query is provided") {
+                    stub(
+                        condition:
+                        isHost("api.box.com") && isPath("/2.0/search")
+                            && containsQueryParams(["query": "test", "include_recent_shared_links": "true"])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("SearchResult200.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: 10) { done in
+                        self.client.search.queryWithSharedLinks(query: "test") { results in
+                            switch results {
+                            case let .success(iterator):
+                                iterator.next { result in
+                                    switch result {
+                                    case let .success(searchResult):
+                                        let item = searchResult.item
+                                        guard case let .file(file) = item else {
+                                            fail("Expected test item to be a file")
+                                            done()
+                                            return
+                                        }
+                                        expect(file).toNot(beNil())
+                                        expect(file.id).to(equal("11111"))
+                                        expect(file.name).to(equal("test file.txt"))
+                                        expect(file.description).to(equal(""))
+                                        expect(file.size).to(equal(16))
+                                        expect(searchResult.accessibleViaSharedLink?.absoluteString).to(equal("https://www.box.com/s/vspke7y05sb214wjokpk"))
+
+                                    case let .failure(error):
+                                        fail("Expected search request to succeed, but it failed: \(error)")
+                                    }
+                                    done()
+                                }
+                            case let .failure(error):
+                                fail("Expected search request to succeed, but it failed: \(error)")
+                                done()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

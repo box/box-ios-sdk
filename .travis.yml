@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode11
 branches:
   only:
-    - master
+    - main
 cache:
   directories:
     - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
@@ -57,7 +57,7 @@ jobs:
     # keep-history: true
     # local-dir:    docs
     # on:
-      # branch:     master
+      # branch:     main
 
     # - stage: Danger
     #   script: bundle exec danger
