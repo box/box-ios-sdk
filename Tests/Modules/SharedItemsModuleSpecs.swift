@@ -40,7 +40,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.sharedItems.get(sharedLinkURL: "https://example.com", sharedLinkPassword: "test_password") { result in
                             switch result {
                             case let .success(sharedItem):
@@ -73,7 +73,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.sharedItems.get(sharedLinkURL: "https://example.com") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to get to succeed, but it failed with error: \(error)")

@@ -42,7 +42,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.create(policyName: "Policy", isOngoing: true) { result in
                             switch result {
                             case let .success(legalHoldPolicy):
@@ -73,7 +73,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.get(policyId: "166757") { result in
                             switch result {
                             case let .success(legalHoldPolicy):
@@ -108,7 +108,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.update(policyId: "166921", policyName: "New Policy 3", description: "Policy 3 New Description") { result in
                             switch result {
                             case let .success(legalHoldPolicy):
@@ -135,7 +135,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.delete(policyId: "16692") { response in
                             switch response {
                             case .success:
@@ -163,7 +163,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.listForEnterprise { results in
                             switch results {
                             case let .success(iterator):
@@ -208,7 +208,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.assignPolicy(policyId: "166757", assignToId: "5025127885", assignToType: "file") { result in
                             switch result {
                             case let .success(assignment):
@@ -239,7 +239,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.getPolicyAssignment(assignmentId: "255473") { result in
                             switch result {
                             case let .success(assignment):
@@ -266,7 +266,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.deletePolicyAssignment(assignmentId: "166921") { response in
                             switch response {
                             case .success:
@@ -295,7 +295,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.listPolicyAssignments(policyId: "255473") { results in
                             switch results {
                             case let .success(iterator):
@@ -332,7 +332,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.getFileVersionPolicy(legalHoldId: "166757") { result in
                             switch result {
                             case let .success(legalHold):
@@ -364,7 +364,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.legalHolds.listFileVersionPolicies(policyId: "240997") { results in
                             switch results {
                             case let .success(iterator):

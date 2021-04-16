@@ -48,7 +48,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.create(url: "http://example.com", parentId: "33333", name: "Example Web Link", description: "A web link for testing") { result in
                             switch result {
                             case let .success(webLink):
@@ -91,7 +91,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.create(url: "http://example.com", parentId: "33333", name: "Test", description: "A web link for testing", sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true))) { result in
                             switch result {
                             case let .success(webLink):
@@ -123,7 +123,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.get(webLinkId: "12345") { result in
                             switch result {
                             case let .success(webLink):
@@ -149,7 +149,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.delete(webLinkId: "12345") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to delete to succeed, but instead got \(error)")
@@ -182,7 +182,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.update(webLinkId: "12345", url: "https://updatedexample.com", parentId: "11111", name: "Updated Test", description: "Updated Test Description") { result in
                             switch result {
                             case let .success(webLink):
@@ -224,7 +224,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.update(
                             webLinkId: "12345",
                             url: "https://updatedexample.com",
@@ -268,7 +268,7 @@ class WebLinksModuleSpecs: QuickSpec {
                 }
 
                 it("should download a shared link for a web link", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.getSharedLink(forWebLink: "12345") { result in
                             switch result {
                             case let .success(sharedLink):
@@ -301,7 +301,7 @@ class WebLinksModuleSpecs: QuickSpec {
                     }
                 }
                 it("should delete a shared link for a web link", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.webLinks.deleteSharedLink(forWebLink: "12345") { result in
                             switch result {
                             case .success:
@@ -333,7 +333,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a web link", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .value("test")) { result in
                                 switch result {
                                 case let .success(sharedLink):
@@ -367,7 +367,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a web link", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open) { result in
                                 switch result {
                                 case let .success(sharedLink):
@@ -401,7 +401,7 @@ class WebLinksModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a web link", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .null) { result in
                                 switch result {
                                 case let .success(sharedLink):

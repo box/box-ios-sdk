@@ -79,7 +79,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { result in
                         switch result {
                         case .success:
@@ -106,7 +106,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { result in
                         switch result {
                         case .success:
@@ -132,7 +132,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { _ in
                         client.users.getCurrent { result in
                             guard case let .failure(error) = result else {

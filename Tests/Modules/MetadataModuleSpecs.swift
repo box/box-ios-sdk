@@ -37,7 +37,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.getTemplateByKey(scope: "enterprise", templateKey: "productInfo") { result in
                             switch result {
                             case let .success(template):
@@ -79,7 +79,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.getTemplateById(id: "f7a9891f") { result in
                             switch result {
                             case let .success(template):
@@ -142,7 +142,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let options: [[String: String]] = [
                             ["key": "FY11"],
                             ["key": "FY12"],
@@ -280,7 +280,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.updateTemplate(
                             scope: "enterprise_490685",
                             templateKey: "customer",
@@ -343,7 +343,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.deleteTemplate(
                             scope: "enterprise",
                             templateKey: "vendorContract"
@@ -369,7 +369,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
                             switch results {
                             case let .success(iterator):
@@ -407,7 +407,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.list(forFileId: "5010739061") { result in
                             switch result {
                             case let .success(metadataObjects):
@@ -453,7 +453,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.get(forFileWithId: "5010739061", scope: "enterprise", templateKey: "marketingCollateral") { result in
                             switch result {
                             case let .success(metadataObject):
@@ -498,7 +498,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let keys: [String: Any] = [
                             "audience1": "internal",
                             "documentType": "Q1 plans",
@@ -557,7 +557,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let operations: [FileMetadataOperation] = [
                             .test(path: "/competitiveDocument", value: "no"),
                             .remove(path: "/competitiveDocument"),
@@ -618,7 +618,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.delete(
                             forFileWithId: "5010739061",
                             scope: "enterprise",
@@ -647,7 +647,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.list(forFolderId: "998951261") { result in
                             switch result {
                             case let .success(metadataObjects):
@@ -687,7 +687,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.get(forFolderWithId: "998951261", scope: "enterprise", templateKey: "documentFlow") { result in
                             switch result {
                             case let .success(metadataObject):
@@ -729,7 +729,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let keys: [String: Any] = [
                             "currentDocumentStage": "initial vetting",
                             "needsApprovalFrom": "vetting team",
@@ -782,7 +782,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let operations: [FolderMetadataOperation] = [
                             .test(path: "/currentDocumentStage", value: "initial vetting"),
                             .replace(path: "/currentDocumentStage", value: "prioritization"),
@@ -832,7 +832,7 @@ class MetadataModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadata.delete(
                             forFolderWithId: "998951261",
                             scope: "enterprise",

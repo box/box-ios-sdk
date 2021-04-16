@@ -46,7 +46,7 @@ class CommentsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment.") { result in
                             switch result {
                             case let .success(comment):
@@ -82,7 +82,7 @@ class CommentsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment for @[11111:Test User].") { result in
                             switch result {
                             case let .success(comment):
@@ -114,7 +114,7 @@ class CommentsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.get(commentId: "12345") { result in
                             switch result {
                             case let .success(comment):
@@ -148,7 +148,7 @@ class CommentsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.update(commentId: "12345", message: "This is an updated comment.") { result in
                             switch result {
                             case let .success(comment):
@@ -180,7 +180,7 @@ class CommentsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.update(commentId: "12345", message: "This is an updated comment for @[11111:Test User].") { result in
                             switch result {
                             case let .success(comment):
@@ -208,7 +208,7 @@ class CommentsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.comments.delete(commentId: "12345") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to delete to suceed, but it failed: \(error)")

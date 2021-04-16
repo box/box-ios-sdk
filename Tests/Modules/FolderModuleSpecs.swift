@@ -45,7 +45,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
                             switch result {
                             case let .success(folder):
@@ -72,7 +72,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
                             switch result {
                             case .success:
@@ -104,7 +104,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
 
                         self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
                             switch results {
@@ -152,7 +152,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
 
                         self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: true, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
                             switch results {
@@ -193,7 +193,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
 
                         self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"]) { results in
                             switch results {
@@ -222,7 +222,7 @@ class FolderModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.delete(folderId: "1234567") { response in
                             switch response {
                             case .success:
@@ -240,7 +240,7 @@ class FolderModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.delete(folderId: "1234567", recursive: true) { response in
                             switch response {
                             case .success:
@@ -258,7 +258,7 @@ class FolderModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.delete(folderId: "1234567", recursive: false) { response in
                             switch response {
                             case .success:
@@ -279,7 +279,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.delete(folderId: "1231231", recursive: true) { response in
                             switch response {
                             case .success:
@@ -303,7 +303,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.copy(folderId: "11446498", destinationFolderID: "123456", name: "Pictures copy") { result in
                             switch result {
                             case let .success(folder):
@@ -338,7 +338,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.listCollaborations(folderId: "14176246") { results in
                             switch results {
                             case let .success(iterator):
@@ -401,7 +401,7 @@ class FolderModuleSpecs: QuickSpec {
                     }
                 }
                 it("should make API call to add folder to favorites") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.addToFavorites(folderId: "5000948880", completion: { result in
                             switch result {
                             case let .success(folder):
@@ -451,7 +451,7 @@ class FolderModuleSpecs: QuickSpec {
                     }
                 }
                 it("should make API call to remove folder from favorites") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.removeFromFavorites(folderId: "5000948880", completion: { result in
                             switch result {
                             case let .success(folder):
@@ -482,7 +482,7 @@ class FolderModuleSpecs: QuickSpec {
                 }
 
                 it("should download a shared link for a folder", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.getSharedLink(forFolder: "5000948880") { result in
                             switch result {
                             case let .success(sharedLink):
@@ -514,7 +514,7 @@ class FolderModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a folder", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .value("frog")) { result in
                                 switch result {
                                 case let .success(sharedLink):
@@ -548,7 +548,7 @@ class FolderModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a folder", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open) { result in
                                 switch result {
                                 case let .success(sharedLink):
@@ -582,7 +582,7 @@ class FolderModuleSpecs: QuickSpec {
                         }
                     }
                     it("should update a shared link on a folder", closure: {
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
                                 switch result {
                                 case let .success(sharedLink):
@@ -616,7 +616,7 @@ class FolderModuleSpecs: QuickSpec {
                     }
                 }
                 it("should delete a shared link for a folder", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.deleteSharedLink(forFolder: "5000948880") { result in
                             switch result {
                             case .success:
@@ -643,7 +643,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.getWatermark(folderId: "12345") { result in
                             switch result {
                             case let .success(watermark):
@@ -677,7 +677,7 @@ class FolderModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.applyWatermark(folderId: "12345") { result in
                             switch result {
                             case let .success(watermark):
@@ -699,7 +699,7 @@ class FolderModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.folders.removeWatermark(folderId: "12345") { response in
                             switch response {
                             case .success:

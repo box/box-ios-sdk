@@ -39,7 +39,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.get(taskId: "11111") { result in
                             switch result {
                             case let .success(task):
@@ -99,7 +99,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.create(fileId: "7287087200", action: .review, dueAt: Date(fromISO8601String: "2014-04-03T11:09:43-07:00")) { result in
                             switch result {
                             case let .success(task):
@@ -158,7 +158,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.update(
                             taskId: "11111",
                             action: .review,
@@ -216,7 +216,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.delete(taskId: "123456") { result in
                             switch result {
                             case .success:
@@ -245,7 +245,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.getAssignment(taskAssignmentId: "11111") { result in
                             switch result {
                             case let .success(taskAssignment):
@@ -320,7 +320,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.assign(taskId: "1992432", userId: "12345") { result in
                             switch result {
                             case let .success(taskAssignment):
@@ -395,7 +395,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.assignByEmail(taskId: "1992432", email: "steve@email.com") { result in
                             switch result {
                             case let .success(taskAssignment):
@@ -465,7 +465,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.updateAssignment(taskAssignmentId: "2698512", message: "Test Message", resolutionState: .approved) { result in
                             switch result {
                             case let .success(taskAssignment):
@@ -530,7 +530,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.deleteAssignment(taskAssignmentId: "12345") { result in
                             switch result {
                             case .success:
@@ -559,7 +559,7 @@ class TasksModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.tasks.listAssignments(forTaskId: "12345") { result in
                             switch result {
                             case let .success(taskAssignments):

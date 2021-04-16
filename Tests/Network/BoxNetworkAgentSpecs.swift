@@ -48,7 +48,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                 }
 
                 it("should fail and the intervals between retries should fit expected ranges when API returns transient error") {
-                    waitUntil(timeout: 200) { done in
+                    waitUntil(timeout: .seconds(200)) { done in
                         let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
                         self.networkAgent.send(request: request) { result in
                             switch result {
@@ -90,7 +90,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
                     self.networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {
@@ -116,7 +116,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
                     self.networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {

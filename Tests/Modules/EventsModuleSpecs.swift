@@ -41,7 +41,7 @@ class EventsModuleSpecs: QuickSpec {
                         }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25) { results in
                             switch results {
                             case let .success(iterator):
@@ -86,7 +86,7 @@ class EventsModuleSpecs: QuickSpec {
                         }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25) { results in
                             switch results {
                             case let .success(iterator):
@@ -129,7 +129,7 @@ class EventsModuleSpecs: QuickSpec {
                         }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.events.getUserEvents(streamType: .all, limit: 25) { results in
                             switch results {
                             case let .success(iterator):
@@ -172,7 +172,7 @@ class EventsModuleSpecs: QuickSpec {
                         }
                     )
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25) { results in
                             switch results {
                             case let .success(iterator):
@@ -225,7 +225,7 @@ class EventsModuleSpecs: QuickSpec {
                     }
                 )
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.events.getEnterpriseEvents(
                         eventTypes: [.abnormalDownloadActivity, .accessGranted],
                         createdAfter: createdAfter,
@@ -298,7 +298,7 @@ class EventsModuleSpecs: QuickSpec {
                     }
                 )
 
-                waitUntil(timeout: 100) { done in
+                waitUntil(timeout: .seconds(100)) { done in
                     self.sut.events.getPollingURL() { result in
                         switch result {
                         case let .success(pollingURLInfo):
@@ -338,7 +338,7 @@ class EventsModuleSpecs: QuickSpec {
                     fail("Unable to create polling url info from file")
                     return
                 }
-                waitUntil(timeout: 1000) { done in
+                waitUntil(timeout: .seconds(1000)) { done in
                     self.sut.events.observeForNewEvents(with: pollingURLInfo) { result in
                         switch result {
                         case let .success(pollingResult):

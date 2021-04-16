@@ -38,7 +38,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should return the access token when the session has a valid token") {
                     self.sut = self.makeSUT(tokenInfo: self.makeValidTokenInfo())
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
@@ -53,7 +53,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should call to refresh token when the token is expired") {
                     self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo())
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
@@ -73,7 +73,7 @@ class OAuth2SessionSpecs: QuickSpec {
                         refreshTokenCalls += 1
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
 
                         self.testClosure = { array in
                             DispatchQueue.main.async {
@@ -106,7 +106,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should attempt to refresh access token") {
                     self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo())
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.refreshToken { result in
                             switch result {
                             case let .success(token):
@@ -121,7 +121,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should produce error when session has invalid token info") {
                     self.sut = self.makeSUT(tokenInfo: self.makeInvalidTokenInfo())
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.refreshToken { result in
                             switch result {
                             case .success:
@@ -137,7 +137,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should produce error when refresh fails") {
                     self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo(), needToFailRefreshToken: true)
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.refreshToken { result in
                             switch result {
                             case .success:
@@ -156,7 +156,7 @@ class OAuth2SessionSpecs: QuickSpec {
 
                 it("should clear the token store") {
                     self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo(), needToFailRefreshToken: true)
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.handleExpiredToken { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to succeed, but instead got \(error)")
@@ -219,7 +219,7 @@ class OAuth2SessionSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
                             switch result {
                             case let .success(tokenInfo):
@@ -258,7 +258,7 @@ class OAuth2SessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case .success:
@@ -288,7 +288,7 @@ class OAuth2SessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case .success:
@@ -325,7 +325,7 @@ class OAuth2SessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):
@@ -356,7 +356,7 @@ class OAuth2SessionSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):
