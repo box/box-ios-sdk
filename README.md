@@ -169,6 +169,7 @@ tokens.
 [jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/main/SampleApps/JWTSampleApp
 
 To execute the sample app:
+
 __Step 1__: Run carthage
 ```shell
 $ cd SampleApps/JWTSampleApp
