@@ -360,7 +360,7 @@ public class BoxSDK {
         @available(iOS 13.0, *)
         func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
             let authorizeURL = makeAuthorizeURL(state: nonce)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: configuration.callbackURL, context: context) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: self.configuration.callbackURL)?.scheme) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
@@ -388,7 +388,7 @@ public class BoxSDK {
     func obtainAuthorizationCodeFromWebSession(completion: @escaping Callback<String>) {
         let authorizeURL = makeAuthorizeURL(state: nonce)
         #if os(iOS)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: configuration.callbackURL) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: self.configuration.callbackURL)?.scheme) { resultURL, error in
                 guard error == nil,
                     let successURL = resultURL else {
                     print(error.debugDescription)
