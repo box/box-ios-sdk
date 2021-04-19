@@ -27,7 +27,6 @@ public class ZipDownloadStatus: BoxModel {
     /// Conflicts that occur between items that have the same name. This is always initially nil and updated manually later, via the FilesModule.getZipDownloadStatus() method.
     public var nameConflicts: [ZipDownloadConflict]?
 
-
     /// Initializer.
     ///
     /// - Parameter json: JSON dictionary.

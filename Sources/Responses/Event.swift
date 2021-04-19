@@ -34,6 +34,8 @@ public class Event: BoxModel {
     public let createdAt: Date?
     /// When the event was stored in the Box database.
     public let recordedAt: Date?
+    /// Additional details for the event
+    public let additionalDetails: [String: Any]?
 
     /// Initializer.
     ///
@@ -58,5 +60,6 @@ public class Event: BoxModel {
         source = try BoxJSONDecoder.optionalDecode(json: json, forKey: "source")
         createdAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "created_at")
         recordedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "recorded_at")
+        additionalDetails = try BoxJSONDecoder.optionalExtractJSON(json: json, key: "additional_details")
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 // swiftlint:disable:next convenience_type
 class BoxJSONDecoder {
 
-    private static func extractJSON<T>(json: [String: Any], key: String) throws -> T {
+    static func extractJSON<T>(json: [String: Any], key: String) throws -> T {
         guard let objectJSON = json[key] else {
             throw BoxCodingError(message: .notPresent(key: key))
         }
@@ -24,7 +24,7 @@ class BoxJSONDecoder {
         return object
     }
 
-    private static func optionalExtractJSON<T>(json: [String: Any], key: String) throws -> T? {
+    static func optionalExtractJSON<T>(json: [String: Any], key: String) throws -> T? {
         guard let objectJSON = json[key] else {
             return nil
         }
