@@ -131,6 +131,7 @@ how to use the SDK to make calls, and can be run directly by entering your own c
 https://github.com/box/box-ios-sdk/tree/main/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
+
 __Step 1__: Run carthage
 ```shell
 $ cd SampleApps/OAuth2SampleApp

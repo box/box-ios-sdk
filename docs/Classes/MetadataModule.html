@@ -17,7 +17,7 @@
     <a title="MetadataModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.4.0 Docs</a> (100% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -201,6 +201,12 @@
                 <a href="../Classes/Folder/Permissions.html">– Permissions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/FolderLock.html">FolderLock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderLock/LockedOperations.html">– LockedOperations</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
               </li>
               <li class="nav-group-task">
@@ -316,6 +322,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchResult.html">SearchResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedItem.html">SharedItem</a>
@@ -1707,9 +1716,9 @@ the user doesn&rsquo;t have access to the template.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK14MetadataModuleC14createTemplate5scope11templateKey11displayName6hidden6fields10completionySS_S2SSbSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/createTemplate(scope:templateKey:displayName:hidden:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK14MetadataModuleC14createTemplate5scope11templateKey11displayName6hidden6fields10completionySS_S2SSbSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A8SDKErrorCGctF">createTemplate(scope:<wbr>templateKey:<wbr>displayName:<wbr>hidden:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK14MetadataModuleC14createTemplate5scope11templateKey11displayName6hidden22copyInstanceOnItemCopy6fields10completionySS_S2SS2bSgSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/createTemplate(scope:templateKey:displayName:hidden:copyInstanceOnItemCopy:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK14MetadataModuleC14createTemplate5scope11templateKey11displayName6hidden22copyInstanceOnItemCopy6fields10completionySS_S2SS2bSgSayAA0C5FieldVGys6ResultOyAA0cF0CAA0A8SDKErrorCGctF">createTemplate(scope:<wbr>templateKey:<wbr>displayName:<wbr>hidden:<wbr>copyInstanceOnItemCopy:<wbr>fields:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1729,6 +1738,7 @@ the user doesn&rsquo;t have access to the template.</p>
     <span class="nv">templateKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">displayName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">hidden</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+    <span class="nv">copyInstanceOnItemCopy</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/MetadataField.html">MetadataField</a></span><span class="p">],</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/MetadataTemplate.html">MetadataTemplate</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
@@ -1784,6 +1794,18 @@ the user doesn&rsquo;t have access to the template.</p>
                               <td>
                                 <div>
                                   <p>Whether this template is hidden in the UI. Defaults to false.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>copyInstanceOnItemCopy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to copy any metadata attached to a file or folder when it is copied. Defaults to false.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2062,7 +2084,7 @@ the user doesn&rsquo;t have access to the file.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
