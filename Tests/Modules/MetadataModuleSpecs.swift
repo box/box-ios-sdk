@@ -132,7 +132,7 @@ class MetadataModuleSpecs: QuickSpec {
                                         ["key": "FY14"],
                                         ["key": "FY15"]
                                     ],
-                                    "key": "fy", "displayName": "FY"]
+                                     "key": "fy", "displayName": "FY"]
                                 ]
                             ])
                     ) { _ in

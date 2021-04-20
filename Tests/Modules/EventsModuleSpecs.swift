@@ -250,6 +250,7 @@ class EventsModuleSpecs: QuickSpec {
                                     default:
                                         fail("Unable to get event source")
                                     }
+                                    expect(event.additionalDetails?["size"] as? Int).to(equal(21696))
                                 case let .failure(error):
                                     fail("Unable to get event details, but instead got \(error)")
                                 }

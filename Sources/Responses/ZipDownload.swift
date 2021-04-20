@@ -23,7 +23,6 @@ public class ZipDownload: BoxModel {
     /// Conflicts that occur between items that have the same name.
     public let nameConflicts: [ZipDownloadConflict]?
 
-
     /// Initializer.
     ///
     /// - Parameter json: JSON dictionary.

@@ -715,8 +715,10 @@ class FolderModuleSpecs: QuickSpec {
 
             describe("listLocks()") {
                 it("should get folder locks") {
-                    stub(condition: isHost("api.box.com") && isPath("/2.0/folder_locks") && isMethodGET() &&
-                        containsQueryParams(["folder_id": "14176246"])) { _ in
+                    stub(
+                        condition: isHost("api.box.com") && isPath("/2.0/folder_locks") && isMethodGET() &&
+                            containsQueryParams(["folder_id": "14176246"])
+                    ) { _ in
                         OHHTTPStubsResponse(
                             fileAtPath: OHPathForFile("FolderLocks.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]

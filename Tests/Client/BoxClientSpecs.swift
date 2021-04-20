@@ -147,7 +147,7 @@ class BoxClientSpecs: QuickSpec {
                     }
                 }
             }
-            
+
             it("should produce error when OAuth2 access token has been revoked") {
                 let clientID = "ksdjfksadfisdg"
                 let clientSecret = "liuwerfiberdus"
@@ -160,15 +160,15 @@ class BoxClientSpecs: QuickSpec {
                     let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
                     sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
                         switch result {
-                        case .success(let c):
+                        case let .success(c):
                             client = c
-                        case .failure(let error):
+                        case let .failure(error):
                             fail("Expected getting client to succeed, but instead got \(error)")
                         }
                         done()
                     }
                 }
-                
+
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/2.0/users/me")
@@ -186,7 +186,7 @@ class BoxClientSpecs: QuickSpec {
                             done()
                             return
                         }
-                        
+
                         expect(error).to(matchError(BoxAPIAuthError(message: .unauthorizedAccess)))
                         done()
                     }

@@ -484,7 +484,6 @@ public class FilesModule {
         )
     }
 
-
     /// Upload a new version of an existing file.
     ///
     /// - Parameters:

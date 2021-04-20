@@ -1920,15 +1920,15 @@ class FilesModuleSpecs: QuickSpec {
                 it("should download zip when API call succeeds") {
                     stub(
                         condition: isHost("api.box.com") &&
-                        isPath("/2.0/zip_downloads") &&
-                        isMethodPOST() &&
-                        hasJsonBody([
-                            "download_file_name": "New zip file 2",
-                            "items": [[
-                                "type": "file",
-                                "id": "5000948880"
-                            ]]
-                        ])
+                            isPath("/2.0/zip_downloads") &&
+                            isMethodPOST() &&
+                            hasJsonBody([
+                                "download_file_name": "New zip file 2",
+                                "items": [[
+                                    "type": "file",
+                                    "id": "5000948880"
+                                ]]
+                            ])
                     ) { _ in
                         OHHTTPStubsResponse(
                             fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
