@@ -17,7 +17,7 @@
     <a title="FilesModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 4.4.0 Docs</a> (100% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -201,6 +201,12 @@
                 <a href="../Classes/Folder/Permissions.html">– Permissions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/FolderLock.html">FolderLock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderLock/LockedOperations.html">– LockedOperations</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
               </li>
               <li class="nav-group-task">
@@ -316,6 +322,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SearchResult.html">SearchResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedItem.html">SharedItem</a>
@@ -1172,9 +1181,9 @@ name collision occurs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAN10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/uploadVersion(forFile:name:contentModifiedAt:data:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAN10Foundation4DataVySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF">uploadVersion(forFile:<wbr>name:<wbr>contentModifiedAt:<wbr>data:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data7ifMatch8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAO10Foundation4DataVAOySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/uploadVersion(forFile:name:contentModifiedAt:data:ifMatch:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13uploadVersion7forFile4name17contentModifiedAt4data7ifMatch8progress21performPreflightCheck10completionAA0A10UploadTaskCSS_SSSgAO10Foundation4DataVAOySo10NSProgressCcSbys6ResultOyAA0H0CAA0A8SDKErrorCGctF">uploadVersion(forFile:<wbr>name:<wbr>contentModifiedAt:<wbr>data:<wbr>ifMatch:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1195,6 +1204,7 @@ name collision occurs.</p>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentModifiedAt</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">ifMatch</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
     <span class="nv">performPreflightCheck</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/File.html">File</a></span><span class="o">&gt;</span>
@@ -1229,6 +1239,18 @@ name collision occurs.</p>
                                   <p>The name of the file. Box supports file names of 255 characters or
 less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
 spaces, and the special names “.” and “..” are also not allowed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifMatch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>etag</code> of the old file version. Ensures that the file hasn&rsquo;t been updated since getting the etag, which could indicate conflicting edits.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1376,6 +1398,154 @@ such as size and name won&rsquo;t cause an upload error.</p>
                                 <div>
                                   <p>Returns a standard file object or an error if the parentId is invalid or if a file
 name collision occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BoxUploadTask</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK11FilesModuleC19streamUploadVersion0E08fileSize7forFile4name17contentModifiedAt7ifMatch8progress21performPreflightCheck10completionAA0aF4TaskCSo13NSInputStreamC_SiS3SSgARySo10NSProgressCcSbys6ResultOyAA0K0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/streamUploadVersion(stream:fileSize:forFile:name:contentModifiedAt:ifMatch:progress:performPreflightCheck:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC19streamUploadVersion0E08fileSize7forFile4name17contentModifiedAt7ifMatch8progress21performPreflightCheck10completionAA0aF4TaskCSo13NSInputStreamC_SiS3SSgARySo10NSProgressCcSbys6ResultOyAA0K0CAA0A8SDKErrorCGctF">streamUploadVersion(stream:<wbr>fileSize:<wbr>forFile:<wbr>name:<wbr>contentModifiedAt:<wbr>ifMatch:<wbr>progress:<wbr>performPreflightCheck:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Upload a new version of an existing file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">streamUploadVersion</span><span class="p">(</span>
+    <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStream</span><span class="p">,</span>
+    <span class="nv">fileSize</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+    <span class="n">forFile</span> <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentModifiedAt</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">ifMatch</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
+    <span class="nv">performPreflightCheck</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/File.html">File</a></span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stream</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An InputStream of data for the file to be uploaded.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The length of the InputStream</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the file</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the file. Box supports file names of 255 characters or
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
+spaces, and the special names “.” and “..” are also not allowed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentModifiedAt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The time the file was last modified. Defaults to time of upload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifMatch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>etag</code> of the file version. Ensures this item hasn&rsquo;t recently changed before making changes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>performPreflightCheck</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Defines whether to perform preflight request first check to see whether uploaded file parameters
+such as size and name won&rsquo;t cause an upload error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns a standard file object or an error.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4660,7 +4830,7 @@ If optional parameters are given, only the file version retentions that match th
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

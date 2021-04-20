@@ -16,7 +16,7 @@
     <a title="BoxSDK  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxSDK 4.3.0 Docs</a> (100% documented)</p>
+        <p><a href="index.html">BoxSDK 4.4.0 Docs</a> (100% documented)</p>
         <p class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -200,6 +200,12 @@
                 <a href="Classes/Folder/Permissions.html">– Permissions</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/FolderLock.html">FolderLock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FolderLock/LockedOperations.html">– LockedOperations</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/FolderUploadEmail.html">FolderUploadEmail</a>
               </li>
               <li class="nav-group-task">
@@ -315,6 +321,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/SearchModule.html">SearchModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SearchResult.html">SearchResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/SharedItem.html">SharedItem</a>
@@ -748,13 +757,13 @@
             <h1 id='box-ios-sdk' class='heading'>Box iOS SDK</h1>
 
 <p><a href="https://cocoapods.org/pods/BoxSDK"><img src="https://img.shields.io/cocoapods/p/BoxSDK.svg" alt="Platforms"></a>
-<a href="https://raw.githubusercontent.com/box/box-swift-sdk/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/BoxSDK.svg" alt="License"></a> <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="Swift Package Manager"></a>
+<a href="https://raw.githubusercontent.com/box/box-ios-sdk/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/BoxSDK.svg" alt="License"></a> <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="Swift Package Manager"></a>
  <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a>
- <a href="https://cocoapods.org/pods/BoxSDK"><img src="https://img.shields.io/cocoapods/v/BoxSDK.svg" alt="CocoaPods compatible"></a> <a href="https://travis-ci.com/box/box-swift-sdk"><img src="https://travis-ci.com/box/box-swift-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/box/box-swift-sdk"><img src="https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr" alt="Coverage Status"></a></p>
+ <a href="https://cocoapods.org/pods/BoxSDK"><img src="https://img.shields.io/cocoapods/v/BoxSDK.svg" alt="CocoaPods compatible"></a> <a href="https://travis-ci.com/box/box-swift-sdk"><img src="https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main" alt="Build Status"></a> <a href="https://coveralls.io/github/box/box-swift-sdk"><img src="https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr" alt="Coverage Status"></a></p>
 <h1 id='note' class='heading'>NOTE:</h1>
 
-<p>The Box iOS SDK in <strong>Objective-C</strong> (prior to v3.0.0) has been moved from the master branch to the <a href="https://github.com/box/box-ios-sdk/tree/objective-c-maintenance">objective-c-maintenance branch</a>.
-Going forward, the master branch will contain the iOS SDK in <strong>Swift</strong>, starting with v3.0.0.</p>
+<p>The Box iOS SDK in <strong>Objective-C</strong> (prior to v3.0.0) has been moved from the main branch to the <a href="https://github.com/box/box-ios-sdk/tree/objective-c-maintenance">objective-c-maintenance branch</a>.
+Going forward, the main branch will contain the iOS SDK in <strong>Swift</strong>, starting with v3.0.0.</p>
 
 <p>Box iOS SDK</p>
 
@@ -846,13 +855,13 @@ Going forward, the master branch will contain the iOS SDK in <strong>Swift</stro
 <span class="p">}</span>
 </code></pre>
 
-<p>The usage docs that show how to make calls to the Box API with the SDK can be found <a href="https://github.com/box/box-ios-sdk/tree/master/docs/usage">here</a>.</p>
+<p>The usage docs that show how to make calls to the Box API with the SDK can be found <a href="https://github.com/box/box-ios-sdk/tree/main/docs/usage">here</a>.</p>
 
 <p>The Jazzy docs that show class, method, variable, etc definitions can be found <a href="https://opensource.box.com/box-ios-sdk/">here</a>.</p>
 <h2 id='sample-apps' class='heading'>Sample Apps</h2>
 <h3 id='oauth2-sample-app' class='heading'>OAuth2 Sample App</h3>
 
-<p>A sample app using OAuth2 Authentication can be found in the repository <a href="https://github.com/box/box-ios-sdk/tree/master/SampleApps/OAuth2SampleApp">here</a>.  This app demonstrates
+<p>A sample app using OAuth2 Authentication can be found in the repository <a href="https://github.com/box/box-ios-sdk/tree/main/SampleApps/OAuth2SampleApp">here</a>.  This app demonstrates
 how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.</p>
 
 <p>To execute the sample app:
@@ -880,25 +889,16 @@ values to the sample app in the <code>Constants.swift</code> file in the sample 
 is replaced with your client ID.  For example, if your client ID were <code>vvxff7v61xi7gqveejo8jh9d2z9xhox5</code> the redirect
 URL should be <code>boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect</code></p>
 
-<p><strong>Step 5</strong>: Insert your client ID to receive the redirect in the app</p>
-
-<p>Open the <code>Info.plist</code> file in the sample app and find the key under <code>URL Types --&gt; Item 0 --&gt; URL Schemes --&gt; Item 0</code>.
-Using the same client ID from the previous step, set the value for Item 0 to
-<code>boxsdk-&lt;&lt;YOUR CLIENT ID&gt;&gt;</code>, where <code>&lt;&lt;YOUR CLIENT ID&gt;&gt;</code> is replaced with your client ID.  For example, if your client
-ID were <code>vvxff7v61xi7gqveejo8jh9d2z9xhox5</code> the redirect URL should be
-<code>boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5</code></p>
-
-<p><img src="docs/usage/redirect-url-scheme.png" alt="location to add redirect URL scheme in Xcode"></p>
-
-<p><strong>Step 6</strong>: Run the sample app</p>
+<p><strong>Step 5</strong>: Run the sample app</p>
 <h3 id='jwt-auth-sample-app' class='heading'>JWT Auth Sample App</h3>
 
-<p>A sample app using JWT Authentication can be found in the repository <a href="https://github.com/box/box-ios-sdk/tree/limited-beta-release/SampleApps/JWTSampleApp">here</a>.  This app demonstrates how to
+<p>A sample app using JWT Authentication can be found in the repository <a href="https://github.com/box/box-ios-sdk/tree/main/SampleApps/JWTSampleApp">here</a>.  This app demonstrates how to
 set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
 tokens.</p>
 
-<p>To execute the sample app:
-<strong>Step 1</strong>: Run carthage</p>
+<p>To execute the sample app:</p>
+
+<p><strong>Step 1</strong>: Run carthage</p>
 <pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>SampleApps/JWTSampleApp
 <span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
 </code></pre>
@@ -1029,7 +1029,7 @@ values to the sample app in the <code>Constants.swift</code> file in the sample 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-02-01)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
