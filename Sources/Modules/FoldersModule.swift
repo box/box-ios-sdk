@@ -603,15 +603,15 @@ public class FoldersModule {
     ///   - folderId: The ID of the folder on which to retrieve folder locks.
     ///   - completion: Returns all of the locks on the folder, or an error if the request is unsuccessful.
     public func listLocks(
-        folderId: String,
-        completion: @escaping Callback<PagingIterator<FolderLock>>
-    ) {
-        boxClient.get(
+        folderId: String
+    ) -> PagingIterator<FolderLock> {
+
+        return .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/folder_locks", configuration: boxClient.configuration),
             queryParameters: [
                 "folder_id": folderId
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

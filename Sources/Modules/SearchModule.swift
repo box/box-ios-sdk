@@ -278,9 +278,8 @@ public class SearchModule {
         metadataFilter: MetadataSearchFilter? = nil,
         fields: [String]? = nil,
         offset: Int? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<SearchResult>>
-    ) {
+        limit: Int? = nil
+    ) -> PagingIterator<SearchResult> {
 
         let dateEncoder = JSONEncoder()
         dateEncoder.dateEncodingStrategy = .iso8601
@@ -313,10 +312,10 @@ public class SearchModule {
             queryParams["size_range"] = "\(sizeAtLeast.flatMap { String($0) } ?? ""),\(sizeAtMost.flatMap { String($0) } ?? "")"
         }
 
-        boxClient.get(
+        return .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/search", configuration: boxClient.configuration),
-            queryParameters: queryParams,
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            queryParameters: queryParams
         )
     }
 }

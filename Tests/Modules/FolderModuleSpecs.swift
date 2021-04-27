@@ -701,28 +701,21 @@ class FolderModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.folders.listLocks(folderId: "14176246") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(item):
-                                        expect(item).to(beAKindOf(FolderLock.self))
-                                        expect(item.id).to(equal("12345678"))
-                                        expect(item.createdBy).to(beAKindOf(User.self))
-                                        expect(item.createdBy?.id).to(equal("11446498"))
-                                        expect(item.lockType).to(equal("freeze"))
-
-                                    case let .failure(error):
-                                        fail("Expected folder locks, but it failed: \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.folders.listLocks(folderId: "14176246")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let item = page.entries[0]
+                                expect(item).to(beAKindOf(FolderLock.self))
+                                expect(item.id).to(equal("12345678"))
+                                expect(item.createdBy).to(beAKindOf(User.self))
+                                expect(item.createdBy?.id).to(equal("11446498"))
+                                expect(item.lockType).to(equal("freeze"))
 
                             case let .failure(error):
                                 fail("Expected folder locks, but it failed: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

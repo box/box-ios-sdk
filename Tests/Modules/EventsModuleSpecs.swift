@@ -217,6 +217,7 @@ class EventsModuleSpecs: QuickSpec {
                             expect(event1.id).to(equal("1a4ade15-b1ff-4cc3-89a8-955e1522557c"))
                             expect(event1.createdBy?.id).to(equal("55555"))
                             expect(event1.sessionId).to(beNil())
+                            expect(event1.additionalDetails?["size"] as? Int).to(equal(21696))
                             switch event1.source?.itemValue {
                             case let .file(file):
                                 expect(file.type).to(equal("file"))

@@ -244,34 +244,28 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.client.search.queryWithSharedLinks(query: "test") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(searchResult):
-                                        let item = searchResult.item
-                                        guard case let .file(file) = item else {
-                                            fail("Expected test item to be a file")
-                                            done()
-                                            return
-                                        }
-                                        expect(file).toNot(beNil())
-                                        expect(file.id).to(equal("11111"))
-                                        expect(file.name).to(equal("test file.txt"))
-                                        expect(file.description).to(equal(""))
-                                        expect(file.size).to(equal(16))
-                                        expect(searchResult.accessibleViaSharedLink?.absoluteString).to(equal("https://www.box.com/s/vspke7y05sb214wjokpk"))
-
-                                    case let .failure(error):
-                                        fail("Expected search request to succeed, but it failed: \(error)")
-                                    }
+                        let iterator = self.client.search.queryWithSharedLinks(query: "test")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let searchResult = page.entries[0]
+                                let item = searchResult.item
+                                guard case let .file(file) = item else {
+                                    fail("Expected test item to be a file")
                                     done()
+                                    return
                                 }
+                                expect(file).toNot(beNil())
+                                expect(file.id).to(equal("11111"))
+                                expect(file.name).to(equal("test file.txt"))
+                                expect(file.description).to(equal(""))
+                                expect(file.size).to(equal(16))
+                                expect(searchResult.accessibleViaSharedLink?.absoluteString).to(equal("https://www.box.com/s/vspke7y05sb214wjokpk"))
+
                             case let .failure(error):
                                 fail("Expected search request to succeed, but it failed: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
