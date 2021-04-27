@@ -15,23 +15,18 @@ Get Recent Items
 ----------------
 
 To get recently accessed items, call
-[`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object in the completion, which is used to retrieve recent items.
+[`client.recentItems.list(marker: String?, limit: Int?, fields: [String]?)`][get-recent-items]. This method will return an iterator object, which is used to retrieve recent items.
 
 <!-- sample get_items_recent -->   
 ```swift
-client.recentItems.list() { results in
+let iterator = client.recentItems.list()
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(item):
-                    print("Interaction type is \(item.interactionType)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for item in page.entries {
+            print("Interaction type is \(item.interactionType)")
         }
+
     case let .failure(error):
         print(error)
     }

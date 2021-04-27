@@ -334,23 +334,18 @@ Get File Collaborations
 
 To retrieve a list of collaborations on a file, call
 [`client.files.listCollaborations(forFile:marker:limit:fields:)`][get-collaborations]
-with the ID of the file.  This method returns an iterator in the completion, which is used to retrieve file collaborations.
+with the ID of the file.  This method returns an iterator, which is used to retrieve file collaborations.
 
 <!-- sample get_files_id_collaborations -->
 ```swift
-client.files.listCollaborations(forFile: "11111") { result in
+let iterator = client.files.listCollaborations(forFile: "11111")
+iterator.next { result in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(collaboration):
-                    print("Collaboration created by \(collaboration.createdBy?.name)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for collaboration in page.entries {
+            print("Collaboration created by \(collaboration.createdBy?.name)")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -364,24 +359,19 @@ Get File Comments
 
 To retrieve a list of comments on the file, call
 [`client.files.listComments(forFile:offset:limit:fields:)`][get-comments]
-with the ID of the file.  This method returns an iterator in the completion, which is used to page through the collection
+with the ID of the file.  This method returns an iterator, which is used to page through the collection
 of file comments.
 
 <!-- sample get_files_id_comments -->
 ```swift
-client.files.listComments(forFile: "11111"){ results in
+let iterator = client.files.listComments(forFile: "11111")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(comment):
-                    print(comment.message)
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for comment in page.entries {
+            print(comment.message)
         }
+
     case let .failure(error):
         print(error)
     }
@@ -394,23 +384,18 @@ Get File Tasks
 --------------
 
 To retrieve a list of file tasks, call [`client.files.listTasks(forFile:fields:)`][get-tasks] with the ID of the
-file.  This method returns an iterator in the completion, which is used to retrieve file comments.
+file.  This method returns an iterator, which is used to retrieve file comments.
 
 <!-- sample get_files_id_tasks -->
 ```swift
-client.files.listTasks(forFile: "11111") { results in
+let iterator = client.files.listTasks(forFile: "11111")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(item):
-                    print("Task messsage: \(task.message)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for task in page.entries {
+            print("Task messsage: \(task.message)")
         }
+
     case let .failure(error):
         print(error)
     }

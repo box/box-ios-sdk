@@ -186,23 +186,18 @@ List Metadata Templates
 
 To retrieve the collection of available metadata templates in a particular scope, call
 [`client.metadata.listEnterpriseTemplates(scope:marker:limit:)`][list-templates]
-with the scope. This method will return an iterator object in the completion, which is used to retrieve metadata templates.
+with the scope. This method will return an iterator, which is used to retrieve metadata templates.
 
 <!-- sample get_metadata_templates_enterprise -->
 ```swift
-client.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
+let iterator = client.metadata.listEnterpriseTemplates(scope: "enterprise")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(template):
-                    print("Template name: \(template.displayName)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for template in page.entries {
+            print("Template name: \(template.displayName)")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -213,19 +208,14 @@ Similarly, to get all templates available in the `global` scope.
 
 <!-- sample get_metadata_templates_global -->
 ```swift
-client.metadata.listEnterpriseTemplates(scope: "global") { results in
+let iterator = client.metadata.listEnterpriseTemplates(scope: "global")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(template):
-                    print("Template name: \(template.displayName)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for template in page.entries {
+            print("Template name: \(template.displayName)")
         }
+
     case let .failure(error):
         print(error)
     }
