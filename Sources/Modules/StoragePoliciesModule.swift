@@ -55,17 +55,16 @@ public class StoragePoliciesModule {
     public func listForEnterprise(
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<StoragePolicy>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<StoragePolicy> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/storage_policies", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

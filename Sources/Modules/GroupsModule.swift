@@ -172,18 +172,17 @@ public class GroupsModule {
         name: String? = nil,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Group>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Group> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/groups", configuration: boxClient.configuration),
             queryParameters: [
                 "filter_term": name,
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -315,17 +314,16 @@ public class GroupsModule {
         groupId: String,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<GroupMembership>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<GroupMembership> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/groups/\(groupId)/memberships", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -341,17 +339,16 @@ public class GroupsModule {
         userId: String,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<GroupMembership>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<GroupMembership> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/users/\(userId)/memberships", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -367,17 +364,16 @@ public class GroupsModule {
         groupId: String,
         offset: Int? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<Collaboration>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<Collaboration> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/groups/\(groupId)/collaborations", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

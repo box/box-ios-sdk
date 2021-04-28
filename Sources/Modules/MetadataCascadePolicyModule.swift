@@ -70,22 +70,18 @@ public class MetadataCascadePolicyModule {
         ownerEnterpriseId: String? = nil,
         fields: [String]? = nil,
         marker: String? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<MetadataCascadePolicy>>
-    ) {
-
-        let queryParameters: QueryParameters = [
-            "fields": FieldsQueryParam(fields),
-            "folder_id": folderId,
-            "owner_enterprise_id": ownerEnterpriseId,
-            "limit": limit,
-            "marker": marker
-        ]
-
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<MetadataCascadePolicy> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/metadata_cascade_policies", configuration: boxClient.configuration),
-            queryParameters: queryParameters,
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            queryParameters: [
+                "fields": FieldsQueryParam(fields),
+                "folder_id": folderId,
+                "owner_enterprise_id": ownerEnterpriseId,
+                "limit": limit,
+                "marker": marker
+            ]
         )
     }
 

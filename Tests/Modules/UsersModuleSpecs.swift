@@ -296,26 +296,20 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(user):
-                                        expect(user).to(beAKindOf(User.self))
-                                        expect(user.id).to(equal("11111"))
-                                        expect(user.name).to(equal("Test User"))
-                                        expect(user.login).to(equal("testuser@example.com"))
+                        let iterator = self.sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let user = page.entries[0]
+                                expect(user).to(beAKindOf(User.self))
+                                expect(user.id).to(equal("11111"))
+                                expect(user.name).to(equal("Test User"))
+                                expect(user.login).to(equal("testuser@example.com"))
 
-                                    case let .failure(error):
-                                        fail("Expected call to succeed, but it got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Expected call to succeed, but it got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -329,26 +323,20 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.users.listForEnterprise(usemarker: true, limit: 100) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(user):
-                                        expect(user).to(beAKindOf(User.self))
-                                        expect(user.id).to(equal("11111"))
-                                        expect(user.name).to(equal("Test User"))
-                                        expect(user.login).to(equal("testuser@example.com"))
+                        let iterator = self.sut.users.listForEnterprise(usemarker: true, limit: 100)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let user = page.entries[0]
+                                expect(user).to(beAKindOf(User.self))
+                                expect(user.id).to(equal("11111"))
+                                expect(user.name).to(equal("Test User"))
+                                expect(user.login).to(equal("testuser@example.com"))
 
-                                    case let .failure(error):
-                                        fail("Expected call to succeed, but it got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Expected call to succeed, but it got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

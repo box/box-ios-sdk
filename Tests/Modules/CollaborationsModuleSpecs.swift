@@ -266,37 +266,31 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        expect(firstItem.type).to(equal("collaboration"))
-                                        expect(firstItem.id).to(equal("11111"))
-                                        expect(firstItem.createdBy?.id).to(equal("22222"))
-                                        expect(firstItem.createdBy?.login).to(equal("testuser@example.com"))
-                                        expect(firstItem.createdBy?.name).to(equal("Test User"))
-                                        expect(firstItem.role?.description).to(equal("editor"))
+                        let iterator = self.sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                expect(firstItem.type).to(equal("collaboration"))
+                                expect(firstItem.id).to(equal("11111"))
+                                expect(firstItem.createdBy?.id).to(equal("22222"))
+                                expect(firstItem.createdBy?.login).to(equal("testuser@example.com"))
+                                expect(firstItem.createdBy?.name).to(equal("Test User"))
+                                expect(firstItem.role?.description).to(equal("editor"))
 
-                                        guard let collaborator = firstItem.accessibleBy?.collaboratorValue, case let .user(user) = collaborator else {
-                                            fail("Unable to unwrap expected user value")
-                                            done()
-                                            return
-                                        }
-                                        expect(user.id).to(equal("22222"))
-                                        expect(user.login).to(equal("testuser@example.com"))
-                                        expect(user.name).to(equal("Test User"))
-
-                                    case let .failure(error):
-                                        fail("Unable to get pending collaborations instead got \(error)")
-                                    }
+                                guard let collaborator = firstItem.accessibleBy?.collaboratorValue, case let .user(user) = collaborator else {
+                                    fail("Unable to unwrap expected user value")
                                     done()
+                                    return
                                 }
+                                expect(user.id).to(equal("22222"))
+                                expect(user.login).to(equal("testuser@example.com"))
+                                expect(user.name).to(equal("Test User"))
+
                             case let .failure(error):
                                 fail("Unable to get pending collaborations instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

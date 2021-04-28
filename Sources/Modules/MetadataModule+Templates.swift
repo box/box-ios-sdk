@@ -136,16 +136,15 @@ public extension MetadataModule {
     func listEnterpriseTemplates(
         scope: String,
         marker: String? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<MetadataTemplate>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<MetadataTemplate> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/metadata_templates/\(scope)", configuration: boxClient.configuration),
             queryParameters: [
                 "marker": marker,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

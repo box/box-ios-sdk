@@ -128,10 +128,10 @@ public class RetentionPoliciesModule {
         type: RetentionPolicyType? = nil,
         createdByUserId: String? = nil,
         marker: String? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<RetentionPolicyEntry>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<RetentionPolicyEntry> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/retention_policies", configuration: boxClient.configuration),
             queryParameters: [
                 "policy_name": name,
@@ -139,8 +139,7 @@ public class RetentionPoliciesModule {
                 "created_by_user_id": createdByUserId,
                 "marker": marker,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -204,17 +203,16 @@ public class RetentionPoliciesModule {
         policyId id: String,
         type: RetentionPolicyType? = nil,
         marker: String? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<RetentionPolicyAssignment>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<RetentionPolicyAssignment> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/retention_policies/\(id)/assignments", configuration: boxClient.configuration),
             queryParameters: [
                 "policy_type": type?.description,
                 "marker": marker,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

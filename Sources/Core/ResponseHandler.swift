@@ -59,29 +59,4 @@ enum ResponseHandler {
             })
         }
     }
-
-    static func pagingIterator<T: BoxModel>(
-        client: BoxClient,
-        wrapping completion: @escaping Callback<PagingIterator<T>>
-    ) -> Callback<BoxResponse> {
-        return { (result: Result<BoxResponse, BoxSDKError>) in
-            switch result {
-            case let .success(response):
-                do {
-                    let iterator = try PagingIterator<T>(response: response, client: client)
-                    completion(.success(iterator))
-                }
-                catch let error as BoxSDKError {
-                    print(error)
-                    completion(.failure(error))
-                }
-                catch {
-                    let errorMessage = "Iterator init throws error: \(error.localizedDescription)"
-                    completion(.failure(BoxSDKError(message: .customValue(errorMessage), error: error)))
-                }
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
 }

@@ -41,35 +41,29 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-//                                    print("in iterator")
-                                    switch result {
-                                    case let .success(firstPolicy):
-                                        expect(firstPolicy).to(beAKindOf(MetadataCascadePolicy.self))
-                                        expect(firstPolicy.id).to(equal("84113349-794d-445c-b93c-d8481b223434"))
-                                        expect(firstPolicy.scope?.description).to(equal("enterprise_11111"))
-                                        expect(firstPolicy.templateKey).to(equal("testTemplate"))
-                                        expect(firstPolicy.ownerEnterprise?.id).to(equal("11111"))
+                        let iterator = self.sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
+                        iterator.next { result in
+//                            print("in iterator")
+                            switch result {
+                            case let .success(page):
+                                let firstPolicy = page.entries[0]
+                                expect(firstPolicy).to(beAKindOf(MetadataCascadePolicy.self))
+                                expect(firstPolicy.id).to(equal("84113349-794d-445c-b93c-d8481b223434"))
+                                expect(firstPolicy.scope?.description).to(equal("enterprise_11111"))
+                                expect(firstPolicy.templateKey).to(equal("testTemplate"))
+                                expect(firstPolicy.ownerEnterprise?.id).to(equal("11111"))
 
-                                        guard let folder = firstPolicy.parent else {
-                                            fail("Parent folder is not present")
-                                            done()
-                                            return
-                                        }
-
-                                        expect(folder.id).to(equal("22222"))
-                                    case let .failure(error):
-                                        fail("Expected call to list() to succeed, but instead got \(error)")
-                                    }
+                                guard let folder = firstPolicy.parent else {
+                                    fail("Parent folder is not present")
                                     done()
+                                    return
                                 }
+
+                                expect(folder.id).to(equal("22222"))
                             case let .failure(error):
                                 fail("Expected call to list() to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

@@ -140,18 +140,17 @@ public class LegalHoldsModule {
         policyName: String? = nil,
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<LegalHoldPolicy>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<LegalHoldPolicy> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/legal_hold_policies", configuration: boxClient.configuration),
             queryParameters: [
                 "policy_name": policyName,
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -240,10 +239,10 @@ public class LegalHoldsModule {
         assignToId: String? = nil,
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<LegalHoldPolicyAssignment>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<LegalHoldPolicyAssignment> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/legal_hold_policy_assignments", configuration: boxClient.configuration),
             queryParameters: [
                 "policy_id": policyId,
@@ -252,8 +251,7 @@ public class LegalHoldsModule {
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 
@@ -293,18 +291,17 @@ public class LegalHoldsModule {
         policyId: String,
         marker: String? = nil,
         limit: Int? = nil,
-        fields: [String]? = nil,
-        completion: @escaping Callback<PagingIterator<FileVersionLegalHold>>
-    ) {
-        boxClient.get(
+        fields: [String]? = nil
+    ) -> PagingIterator<FileVersionLegalHold> {
+        .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/file_version_legal_holds", configuration: boxClient.configuration),
             queryParameters: [
                 "policy_id": policyId,
                 "marker": marker,
                 "limit": limit,
                 "fields": FieldsQueryParam(fields)
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 }

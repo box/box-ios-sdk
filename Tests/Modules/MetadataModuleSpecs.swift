@@ -370,27 +370,21 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.metadata.listEnterpriseTemplates(scope: "enterprise") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstTemplate):
-                                        expect(firstTemplate).to(beAKindOf(MetadataTemplate.self))
-                                        expect(firstTemplate.templateKey).to(equal("documentFlow"))
-                                        expect(firstTemplate.scope).to(equal("enterprise_12345"))
-                                        expect(firstTemplate.displayName).to(equal("Document Flow"))
-                                        expect(firstTemplate.hidden).to(equal(false))
+                        let iterator = self.sut.metadata.listEnterpriseTemplates(scope: "enterprise")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstTemplate = page.entries[0]
+                                expect(firstTemplate).to(beAKindOf(MetadataTemplate.self))
+                                expect(firstTemplate.templateKey).to(equal("documentFlow"))
+                                expect(firstTemplate.scope).to(equal("enterprise_12345"))
+                                expect(firstTemplate.displayName).to(equal("Document Flow"))
+                                expect(firstTemplate.hidden).to(equal(false))
 
-                                    case let .failure(error):
-                                        fail("Expected call to listEnterpriseTemplates to succeed, but instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Expected call to listEnterpriseTemplates to succeed, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

@@ -256,7 +256,8 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                     parameters[part.name] = String(decoding: data, as: UTF8.self)
                 case let .stream(stream):
                     guard let unwrapFileName = part.fileName,
-                        let unwrapMimeType = part.mimeType else {
+                        let unwrapMimeType = part.mimeType
+                    else {
                         fatalError("Could not get file name or type from multipart request body - \(part)")
                     }
                     partName = part.name

@@ -39,24 +39,18 @@ class RecentItemsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10) { done in
-                        self.sut.recentItems.list { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        expect(firstItem.type).to(equal("recent_item"))
-                                        expect(firstItem.interactionType.description).to(equal("item_preview"))
-                                        expect(firstItem.item.id).to(equal("181937331928"))
-                                    case let .failure(error):
-                                        fail("Unable to get recent items instead got \(error)")
-                                    }
-                                    done()
-                                }
+                        let iterator = self.sut.recentItems.list()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                expect(firstItem.type).to(equal("recent_item"))
+                                expect(firstItem.interactionType.description).to(equal("item_preview"))
+                                expect(firstItem.item.id).to(equal("181937331928"))
                             case let .failure(error):
                                 fail("Unable to get recent items instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

@@ -315,25 +315,19 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.groups.listMemberships(groupId: "12345") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(group):
-                                        expect(group).toNot(beNil())
-                                        expect(group.id).to(equal("12345"))
-                                        expect(group.type).to(equal("group_membership"))
+                        let iterator = self.sut.groups.listMemberships(groupId: "12345")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let group = page.entries[0]
+                                expect(group).toNot(beNil())
+                                expect(group.id).to(equal("12345"))
+                                expect(group.type).to(equal("group_membership"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get memberships for the specified group instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get memberships for the specified group instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -353,28 +347,22 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.groups.listMembershipsForUser(userId: "12345") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(group):
-                                        expect(group).toNot(beNil())
-                                        expect(group.id).to(equal("12345"))
-                                        expect(group.type).to(equal("group_membership"))
-                                        expect(group.user?.type).to(equal("user"))
-                                        expect(group.user?.id).to(equal("11111"))
-                                        expect(group.group?.id).to(equal("54321"))
+                        let iterator = self.sut.groups.listMembershipsForUser(userId: "12345")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let group = page.entries[0]
+                                expect(group).toNot(beNil())
+                                expect(group.id).to(equal("12345"))
+                                expect(group.type).to(equal("group_membership"))
+                                expect(group.user?.type).to(equal("user"))
+                                expect(group.user?.id).to(equal("11111"))
+                                expect(group.group?.id).to(equal("54321"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get memberships for the specified user instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get memberships for the specified user instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -394,26 +382,20 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.groups.listCollaborations(groupId: "12345") { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(collaboration):
-                                        expect(collaboration).toNot(beNil())
-                                        expect(collaboration.id).to(equal("12345"))
-                                        expect(collaboration.type).to(equal("collaboration"))
-                                        expect(collaboration.role).to(equal(.viewer))
+                        let iterator = self.sut.groups.listCollaborations(groupId: "12345")
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let collaboration = page.entries[0]
+                                expect(collaboration).toNot(beNil())
+                                expect(collaboration.id).to(equal("12345"))
+                                expect(collaboration.type).to(equal("collaboration"))
+                                expect(collaboration.role).to(equal(.viewer))
 
-                                    case let .failure(error):
-                                        fail("Unable to get collaborations for the specified group instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get collaborations for the specified group instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }

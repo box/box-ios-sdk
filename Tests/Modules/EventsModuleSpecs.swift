@@ -42,28 +42,22 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(event):
-                                        expect(event).toNot(beNil())
-                                        expect(event).to(beAKindOf(Event.self))
-                                        expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
-                                        expect(event.createdBy?.id).to(equal("11111"))
-                                        expect(event.eventType).to(equal(.itemCreated))
-                                        expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
+                        let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let event = page.entries[0]
+                                expect(event).toNot(beNil())
+                                expect(event).to(beAKindOf(Event.self))
+                                expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
+                                expect(event.createdBy?.id).to(equal("11111"))
+                                expect(event.eventType).to(equal(.itemCreated))
+                                expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get event details, but instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get event details, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -87,28 +81,22 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(event):
-                                        expect(event).toNot(beNil())
-                                        expect(event).to(beAKindOf(Event.self))
-                                        expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
-                                        expect(event.createdBy?.id).to(equal("11111"))
-                                        expect(event.eventType).to(equal(.itemCreated))
-                                        expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
+                        let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let event = page.entries[0]
+                                expect(event).toNot(beNil())
+                                expect(event).to(beAKindOf(Event.self))
+                                expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
+                                expect(event.createdBy?.id).to(equal("11111"))
+                                expect(event.eventType).to(equal(.itemCreated))
+                                expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get event details, but instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get event details, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -130,28 +118,22 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.events.getUserEvents(streamType: .all, limit: 25) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(event):
-                                        expect(event).toNot(beNil())
-                                        expect(event).to(beAKindOf(Event.self))
-                                        expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
-                                        expect(event.createdBy?.id).to(equal("11111"))
-                                        expect(event.eventType).to(equal(.itemCreated))
-                                        expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
+                        let iterator = self.sut.events.getUserEvents(streamType: .all, limit: 25)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let event = page.entries[0]
+                                expect(event).toNot(beNil())
+                                expect(event).to(beAKindOf(Event.self))
+                                expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
+                                expect(event.createdBy?.id).to(equal("11111"))
+                                expect(event.eventType).to(equal(.itemCreated))
+                                expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get event details, but instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get event details, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -173,28 +155,22 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25) { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(event):
-                                        expect(event).toNot(beNil())
-                                        expect(event).to(beAKindOf(Event.self))
-                                        expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
-                                        expect(event.createdBy?.id).to(equal("11111"))
-                                        expect(event.eventType).to(equal(.itemCreated))
-                                        expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
+                        let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let event = page.entries[0]
+                                expect(event).toNot(beNil())
+                                expect(event).to(beAKindOf(Event.self))
+                                expect(event.id).to(equal("f82c3ba03e41f7e8a7608363cc6c0390183c3f83"))
+                                expect(event.createdBy?.id).to(equal("11111"))
+                                expect(event.eventType).to(equal(.itemCreated))
+                                expect(event.sessionId).to(equal("70090280850c8d2a1933c1"))
 
-                                    case let .failure(error):
-                                        fail("Unable to get event details, but instead got \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get event details, but instead got \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -226,60 +202,48 @@ class EventsModuleSpecs: QuickSpec {
                 )
 
                 waitUntil(timeout: 10) { done in
-                    self.sut.events.getEnterpriseEvents(
+                    let iterator = self.sut.events.getEnterpriseEvents(
                         eventTypes: [.abnormalDownloadActivity, .accessGranted],
                         createdAfter: createdAfter,
                         streamPosition: .now,
                         limit: 100
-                    ) { results in
-                        switch results {
-                        case let .success(iterator):
-                            iterator.next { result in
-                                switch result {
-                                case let .success(event):
-                                    expect(event).toNot(beNil())
-                                    expect(event).to(beAKindOf(Event.self))
-                                    expect(event.id).to(equal("1a4ade15-b1ff-4cc3-89a8-955e1522557c"))
-                                    expect(event.createdBy?.id).to(equal("55555"))
-                                    expect(event.sessionId).to(beNil())
-                                    switch event.source?.itemValue {
-                                    case let .file(file):
-                                        expect(file.type).to(equal("file"))
-                                        expect(file.id).to(equal("22222"))
-                                        expect(file.name).to(equal("test.docx"))
-                                    default:
-                                        fail("Unable to get event source")
-                                    }
-                                    expect(event.additionalDetails?["size"] as? Int).to(equal(21696))
-                                case let .failure(error):
-                                    fail("Unable to get event details, but instead got \(error)")
-                                }
+                    )
+                    iterator.next { result in
+                        switch result {
+                        case let .success(page):
+                            let event1 = page.entries[0]
+                            expect(event1).toNot(beNil())
+                            expect(event1).to(beAKindOf(Event.self))
+                            expect(event1.id).to(equal("1a4ade15-b1ff-4cc3-89a8-955e1522557c"))
+                            expect(event1.createdBy?.id).to(equal("55555"))
+                            expect(event1.sessionId).to(beNil())
+                            expect(event1.additionalDetails?["size"] as? Int).to(equal(21696))
+                            switch event1.source?.itemValue {
+                            case let .file(file):
+                                expect(file.type).to(equal("file"))
+                                expect(file.id).to(equal("22222"))
+                                expect(file.name).to(equal("test.docx"))
+                            default:
+                                fail("Unable to get event source")
                             }
 
-                            iterator.next { result in
-                                switch result {
-                                case let .success(event):
-                                    expect(event).toNot(beNil())
-                                    expect(event).to(beAKindOf(Event.self))
-                                    expect(event.id).to(equal("b9a2393a-20cf-4307-90f5-004110dec209"))
-                                    expect(event.createdBy?.id).to(equal("222853849"))
-                                    expect(event.sessionId).to(beNil())
-                                    switch event.source?.itemValue {
-                                    case let .user(user):
-                                        expect(user.type).to(equal("user"))
-                                        expect(user.id).to(equal("11111"))
-                                        expect(user.name).to(equal("Test User"))
-                                        done()
-                                    default:
-                                        fail("Unable to get event source")
-                                    }
-                                case let .failure(error):
-                                    fail("Unable to get event details, but instead got \(error)")
-                                }
+                            let event2 = page.entries[1]
+                            expect(event2).toNot(beNil())
+                            expect(event2).to(beAKindOf(Event.self))
+                            expect(event2.id).to(equal("b9a2393a-20cf-4307-90f5-004110dec209"))
+                            expect(event2.createdBy?.id).to(equal("222853849"))
+                            expect(event2.sessionId).to(beNil())
+                            switch event2.source?.itemValue {
+                            case let .user(user):
+                                expect(user.type).to(equal("user"))
+                                expect(user.id).to(equal("11111"))
+                                expect(user.name).to(equal("Test User"))
+                                done()
+                            default:
+                                fail("Unable to get event source")
                             }
                         case let .failure(error):
                             fail("Unable to get event details, but instead got \(error)")
-                            done()
                         }
                     }
                 }

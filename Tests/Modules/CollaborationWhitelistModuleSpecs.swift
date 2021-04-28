@@ -38,26 +38,20 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.listEntries { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstItem):
-                                        expect(firstItem).to(beAKindOf(CollaborationWhitelistEntry.self))
-                                        expect(firstItem.id).to(equal("123456"))
-                                        expect(firstItem.domain).to(equal("somedomain.com"))
-                                        expect(firstItem.direction).to(equal(.inbound))
+                        let iterator = self.sut.collaborationWhiteList.listEntries()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstItem = page.entries[0]
+                                expect(firstItem).to(beAKindOf(CollaborationWhitelistEntry.self))
+                                expect(firstItem.id).to(equal("123456"))
+                                expect(firstItem.domain).to(equal("somedomain.com"))
+                                expect(firstItem.direction).to(equal(.inbound))
 
-                                    case let .failure(error):
-                                        fail("Unable to get collaboration whitelist items: \(error)")
-                                    }
-                                    done()
-                                }
                             case let .failure(error):
                                 fail("Unable to get collaboration whitelist items: \(error)")
-                                done()
                             }
+                            done()
                         }
                     }
                 }
@@ -194,34 +188,28 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.listExemptTargets { results in
-                            switch results {
-                            case let .success(iterator):
-                                iterator.next { result in
-                                    switch result {
-                                    case let .success(firstTarget):
-                                        expect(firstTarget).to(beAKindOf(CollaborationWhitelistExemptTarget.self))
-                                        expect(firstTarget.id).to(equal("1234567890"))
+                        let iterator = self.sut.collaborationWhiteList.listExemptTargets()
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let firstTarget = page.entries[0]
+                                expect(firstTarget).to(beAKindOf(CollaborationWhitelistExemptTarget.self))
+                                expect(firstTarget.id).to(equal("1234567890"))
 
-                                        guard let user = firstTarget.user else {
-                                            fail("Target should contain user")
-                                            done()
-                                            return
-                                        }
-
-                                        expect(user).to(beAKindOf(User.self))
-                                        expect(user.id).to(equal("12345"))
-                                        expect(user.name).to(equal("John Doe"))
-                                        expect(user.login).to(equal("john@doe.com"))
-                                    case let .failure(error):
-                                        fail("Target array should not be empty: \(error)")
-                                    }
+                                guard let user = firstTarget.user else {
+                                    fail("Target should contain user")
                                     done()
+                                    return
                                 }
+
+                                expect(user).to(beAKindOf(User.self))
+                                expect(user.id).to(equal("12345"))
+                                expect(user.name).to(equal("John Doe"))
+                                expect(user.login).to(equal("john@doe.com"))
                             case let .failure(error):
-                                fail("Unable to get collaboration whitelist exempt targets: \(error)")
-                                done()
+                                fail("Target array should not be empty: \(error)")
                             }
+                            done()
                         }
                     }
                 }

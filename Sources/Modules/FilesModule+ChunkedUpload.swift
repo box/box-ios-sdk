@@ -104,16 +104,15 @@ public extension FilesModule {
     func listUploadSessionParts(
         sessionId: String,
         offset: Int? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<UploadPartDescription>>
-    ) {
-        boxClient.get(
+        limit: Int? = nil
+    ) -> PagingIterator<UploadPartDescription> {
+        .init(
+            client: boxClient,
             url: URL.boxUploadEndpoint("/api/2.0/files/upload_sessions/\(sessionId)/parts", configuration: boxClient.configuration),
             queryParameters: [
                 "offset": offset,
                 "limit": limit
-            ],
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            ]
         )
     }
 

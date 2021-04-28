@@ -408,9 +408,8 @@ public class UsersModule {
         usemarker: Bool? = nil,
         marker: String? = nil,
         offset: Int? = nil,
-        limit: Int? = nil,
-        completion: @escaping Callback<PagingIterator<User>>
-    ) {
+        limit: Int? = nil
+    ) -> PagingIterator<User> {
 
         var queryParams: QueryParameters = [
             "filter_term": filterTerm,
@@ -426,10 +425,10 @@ public class UsersModule {
             queryParams["offset"] = offset
         }
 
-        boxClient.get(
+        return .init(
+            client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/users", configuration: boxClient.configuration),
-            queryParameters: queryParams,
-            completion: ResponseHandler.pagingIterator(client: boxClient, wrapping: completion)
+            queryParameters: queryParams
         )
     }
 
