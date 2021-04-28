@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+- Update PagingIterator to return pages and simplify logic ([#737](https://github.com/box/box-ios-sdk/pull/737))
+
+__New Features and Enhancements:__
+
+__Bug Fixes:__
+
 ## v4.4.0 [2021-04-20]
 
 __Breaking Changes:__
