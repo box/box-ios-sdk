@@ -27,10 +27,9 @@ env:
     - TVOS_FRAMEWORK_SCHEME="BoxSDK-tvOS"
     - WATCHOS_FRAMEWORK_SCHEME="BoxSDK-watchOS"
     - TEST_APP_SCHEME="TestApp"
-    - IOS_VERSION="13.0"
-    - DESTINATION="platform=iOS Simulator,OS=13.0,name=iPhone 11"
-    - RUN_TESTS="YES"
-    - SDK="iphonesimulator13.0"
+  matrix:
+    - IOS_VERSION="12.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone XS" SDK="iphonesimulator12.0" RUN_TESTS="YES"
+    - IOS_VERSION="13.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone 11" SDK="iphonesimulator13.0" RUN_TESTS="YES"
 
 before_script:
   - sh scripts/bootstrap
