@@ -63,6 +63,8 @@ To add a collaborator to an item, call
 with the type and ID of the item, as well as the type and ID of the collaborator — a user or a group.  A `role` for the
 collaborator must be specified, which will determine the permissions the collaborator receives on the item.
 
+To collaborate a user, pass in a user id and the `.user` accessible by type. 
+
 <!-- sample post_collaborations -->
 ```swift
 client.collaborations.create(
@@ -70,7 +72,27 @@ client.collaborations.create(
     itemId: "22222",
     role: .editor,
     accessibleBy: "33333",
-    accessibleByType: "user"
+    accessibleByType: .user
+) { (result: Result<Collaboration, BoxSDKError>) in
+    guard case let .success(collaboration) = result else {
+        print("Error creating collaboration")
+        return
+    }
+
+    print("Collaboration successfully created")
+}
+```
+
+To collaborate a user, pass in a group id and the `.group` accessible by type.
+
+<!-- sample post_collaborations group-->
+```swift
+client.collaborations.create(
+    itemType: "folder",
+    itemId: "22222",
+    role: .editor,
+    accessibleBy: "44444",
+    accessibleByType: .group
 ) { (result: Result<Collaboration, BoxSDKError>) in
     guard case let .success(collaboration) = result else {
         print("Error creating collaboration")
