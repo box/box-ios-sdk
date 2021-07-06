@@ -1967,7 +1967,7 @@ class FilesModuleSpecs: QuickSpec {
                         isMethodPOST() &&
                         hasJsonBody([
                             "folder_id": "123456",
-                            "file_name": "Dummy.txt",
+                            "file_name": "Temp.txt",
                             "file_size": 2
                         ])
 
@@ -1980,7 +1980,7 @@ class FilesModuleSpecs: QuickSpec {
             }
             it("should create a chunked upload session for a new file") {
                 waitUntil(timeout: 10) { done in
-                    self.sut.files.createUploadSession(folderId: "123456", fileName: "Dummy.txt", fileSize: 2) { result in
+                    self.sut.files.createUploadSession(folderId: "123456", fileName: "Temp.txt", fileSize: 2) { result in
                         switch result {
                         case let .success(session):
                             expect(session.totalParts).to(equal(3))
@@ -2006,7 +2006,7 @@ class FilesModuleSpecs: QuickSpec {
                         isPath("/api/2.0/files/12345/upload_sessions") &&
                         isMethodPOST() &&
                         hasJsonBody([
-                            "file_name": "Dummy.txt",
+                            "file_name": "Temp.txt",
                             "file_size": 2
                         ])
 
@@ -2019,7 +2019,7 @@ class FilesModuleSpecs: QuickSpec {
             }
             it("should create a chunked upload session for a new version of file") {
                 waitUntil(timeout: 10) { done in
-                    self.sut.files.createUploadSessionForNewVersion(ofFile: "12345", fileName: "Dummy.txt", fileSize: 2) { result in
+                    self.sut.files.createUploadSessionForNewVersion(ofFile: "12345", fileName: "Temp.txt", fileSize: 2) { result in
                         switch result {
                         case let .success(session):
                             expect(session.totalParts).to(equal(2))
