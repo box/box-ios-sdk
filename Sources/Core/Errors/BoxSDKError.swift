@@ -193,7 +193,8 @@ extension BoxSDKError: CustomStringConvertible {
     public var description: String {
         guard
             let encodedData = try? JSONSerialization.data(withJSONObject: getDictionary(), options: [.prettyPrinted, .sortedKeys]),
-            let JSONString = String(data: encodedData, encoding: .utf8) else {
+            let JSONString = String(data: encodedData, encoding: .utf8)
+        else {
             return "<Unparsed Box Error>"
         }
         return JSONString.replacingOccurrences(of: "\\", with: "")

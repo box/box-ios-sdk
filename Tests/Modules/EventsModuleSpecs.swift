@@ -179,7 +179,7 @@ class EventsModuleSpecs: QuickSpec {
 
         describe("getEnterpriseEvents()") {
 
-            let createdAfter: Date = Date()
+            let createdAfter = Date()
 
             it("should make API call to get admin events") {
                 stub(
@@ -264,7 +264,7 @@ class EventsModuleSpecs: QuickSpec {
                 )
 
                 waitUntil(timeout: 100) { done in
-                    self.sut.events.getPollingURL() { result in
+                    self.sut.events.getPollingURL { result in
                         switch result {
                         case let .success(pollingURLInfo):
                             expect(pollingURLInfo.url.absoluteString).to(equal("http://2.realtime.services.box.net/subscribe?channel=cc807c9c4869ffb1c81a&stream_type=all"))

@@ -31,7 +31,8 @@ public class PollingURLInfo: BoxModel {
         rawData = json
 
         guard let entries = json["entries"] as? [[String: Any]],
-            let firstEntryJSON = entries.first else {
+              let firstEntryJSON = entries.first
+        else {
             throw BoxCodingError(message: .typeMismatch(key: "entries"))
         }
 
