@@ -356,7 +356,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
 
             describe("listVersionRetentions()") {
                 it("should get all file version retentions for the given enterprise") {
-                    let dispositionBefore: Date = Date()
+                    let dispositionBefore = Date()
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/file_version_retentions") &&

@@ -41,23 +41,18 @@ Get Storage Policies
 --------------------
 
 To retrieve the storage policies in an enterprise, call
-[`client.storagePolicies.list(marker: String?, limit: Int?, fields: [String]?)`][get-storage-policies].  This method will return an iterator in the completion, which is used to get the policies.
+[`client.storagePolicies.listForEnterprise(marker: String?, limit: Int?, fields: [String]?)`][get-storage-policies].  This method will return an iterator, which is used to get the policies.
 
 <!-- sample get_storage_policies -->   
 ```swift
-client.storagePolicies.list() { results in
+let iterator = client.storagePolicies.listForEnterprise()
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(policy):
-                    print("Storage policy \(policy.id)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for policy in page.entries {
+            print("Storage policy \(policy.id)")
         }
+
     case let .failure(error):
         print(error)
     }

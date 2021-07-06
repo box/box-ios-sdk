@@ -96,7 +96,8 @@ extension TokenInfo: Equatable {
     /// - Returns: True in case tokens are the same, false otherwise.
     public static func == (lhs: TokenInfo, rhs: TokenInfo) -> Bool {
         guard lhs.accessToken == rhs.accessToken,
-            lhs.refreshToken == rhs.refreshToken else {
+              lhs.refreshToken == rhs.refreshToken
+        else {
             return false
         }
         return true

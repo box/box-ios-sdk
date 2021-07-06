@@ -36,23 +36,18 @@ client.devicePins.get(devicePinId: "11111", fields: ["product_name"]) { (result:
 Get Device Pins for Enterprise
 ------------------------------
 
-To retrieve information about the device pins active for the enterprise, call [`client.devicePins.listForEnterprise(enterpriseId: String, marker: String?, limit: Int?, direction: OrdeDirection?, fields: [String]?)`][get-device-pins] with the ID of the enterpise. This method will return an iterator object in the completion, which is used to retrieve device pins for the enterprise.
+To retrieve information about the device pins active for the enterprise, call [`client.devicePins.listForEnterprise(enterpriseId: String, marker: String?, limit: Int?, direction: OrdeDirection?, fields: [String]?)`][get-device-pins] with the ID of the enterpise. This method will return an iterator, which is used to retrieve device pins for the enterprise.
 
 <!-- sample get_enterprise_id_device_pinners -->
 ```swift
-client.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending) { results in 
+let iterator = client.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(devicePin):
-                    print("Device type: \(devicePin.productName)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for devicePin in page.entries {
+            print("Device type: \(devicePin.productName)")
         }
+
     case let .failure(error):
         print(error)
     }

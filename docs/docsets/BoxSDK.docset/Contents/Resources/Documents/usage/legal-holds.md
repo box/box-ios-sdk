@@ -44,23 +44,18 @@ Get Legal Hold Policies
 
 To retrieve information about the items contained in a folder, call
 [`client.legalHolds.listForEnterprise(policyName: String, marker: String?, limit: Int?, fields: [String]?)`][get-legal-hold-policies]
-with the ID of the policy.  This method will return an iterator object in the completion, which is used to retrieve policies in the enterprise.
+with the ID of the policy.  This method will return an iterator object, which is used to retrieve policies in the enterprise.
 
 <!-- sample get_legal_hold_policies -->
 ```swift
-client.legalHolds.listForEnterprise(policyName: "policy1") { results in
+let iterator = client.legalHolds.listForEnterprise(policyName: "policy1")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(policy):
-                    print("Legal hold policy \(policy.name)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for policy in page.entries {
+            print("Legal hold policy \(policy.name)")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -154,23 +149,18 @@ Get Policy Assignments
 
 To retrieve legal hold policy assignments, call
 [`client.legalHolds.listPolicyAssignments(policyId: String, assignToType: String?, assignToId: String?, marker: String?, limit: String?, fields: [String]?)`][get-policy-assignments]
-with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve policy assignments for a policy.
+with the ID of a policy.  This method will return an iterator object, which is used to retrieve policy assignments for a policy.
 
 <!-- sample get_legal_hold_policy_assignments -->
 ```swift
-client.legalHolds.listPolicyAssignments(policyId: "1234") { results in
+let iterator = client.legalHolds.listPolicyAssignments(policyId: "1234")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(assignment):
-                    print("Policy Assignment \(assignment.id)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for assignment in page.entries {
+            print("Policy Assignment \(assignment.id)")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -246,23 +236,18 @@ Get File Version Legal Holds
 
 To retrieve all of the non-deleted legal holds for a single legal hold policy, call
 [`client.legalHolds.listFileVersionPolicies(policyId: String, marker: String?, limit: String?, fields: [String]?)`][get-file-version-legal-holds]
-with the ID of a policy.  This method will return an iterator object in the completion, which is used to retrieve legal holds for a policy.
+with the ID of a policy.  This method will return an iterator object, which is used to retrieve legal holds for a policy.
 
 <!-- sample get_file_version_legal_holds -->
 ```swift
-client.legalHolds.listFileVersionPolicies(policyId: "1234") {
+let iterator = client.legalHolds.listFileVersionPolicies(policyId: "1234")
+iterator.next { result in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(hold):
-                    print("Legal hold \(hold.id)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for hold in page.entries {
+            print("Legal hold \(hold.id)")
         }
+
     case let .failure(error):
         print(error)
     }

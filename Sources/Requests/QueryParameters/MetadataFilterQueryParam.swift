@@ -20,7 +20,7 @@ struct MetadataFilterQueryParam {
 extension MetadataFilterQueryParam: QueryParameterConvertible {
 
     public var queryParamValue: String? {
-        guard let filter = self.metadataFilter else {
+        guard let filter = metadataFilter else {
             return nil
         }
         // swiftlint:disable:next force_unwrapping

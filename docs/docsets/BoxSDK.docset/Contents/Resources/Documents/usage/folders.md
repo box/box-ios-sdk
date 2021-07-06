@@ -55,30 +55,25 @@ Get Folder Items
 
 To retrieve information about the items contained in a folder, call
 [`client.folders.listItems(folderId:usemarker:marker:offset:limit:sort:direction:fields:)`][get-folder-items]
-with the ID of the folder.  This method will return an iterator in the completion, which is used to retrieve folder items.
+with the ID of the folder.  This method will return an iterator, which is used to retrieve folder items.
 
 <!-- sample get_folders_id_items -->
 ```swift
-let folderItems = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending) { results in
+let iterator = client.folders.listItems(folderId: "22222", sort: .name, direction: .ascending)
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(item):
-                    switch item {
-                    case let .file(file):
-                        print("File \(file.name) (ID: \(file.id)) is in the folder")
-                    case let .folder(folder):
-                        print("Subfolder \(folder.name) (ID: \(folder.id)) is in the folder")
-                    case let .webLink(webLink):
-                        print("Web link \(webLink.name) (ID: \(webLink.id)) is in the folder")
-                    }
-                case let .failure(error):
-                    print(error)
-                }
+    case let .success(page):
+        for item in page.entries {
+            switch item {
+            case let .file(file):
+                print("File \(file.name) (ID: \(file.id)) is in the folder")
+            case let .folder(folder):
+                print("Subfolder \(folder.name) (ID: \(folder.id)) is in the folder")
+            case let .webLink(webLink):
+                print("Web link \(webLink.name) (ID: \(webLink.id)) is in the folder")
             }
         }
+
     case let .failure(error):
         print(error)
     }
@@ -167,19 +162,14 @@ with the ID of the folder.
 
 <!-- sample get_folders_id_collaborations -->
 ```swift
-client.folders.listCollaborations(folderId: "22222") { results in
+let iterator = client.folders.listCollaborations(folderId: "22222")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(collaboration):
-                    print("- \(collaboration.accessibleBy?.name)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for collaboration in page.entries {
+            print("- \(collaboration.accessibleBy?.name)")
         }
+
     case let .failure(error):
         print(error)
     }
