@@ -10,7 +10,7 @@ import Foundation
 
 /// Specifies who can invite the group to collaborate on folders.
 public enum GroupInvitabilityLevel: BoxEnum {
-    /// Main Admin, Co-admins, the group's Group Admin can invites
+    /// Main Admin, Co-admins, the group's Group Admin can invite
     case adminsOnly
     /// Admins and group members can invite
     case adminsAndMembers
