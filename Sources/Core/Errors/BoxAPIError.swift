@@ -74,7 +74,7 @@ public class BoxAPIError: BoxSDKError {
     }
 
     /// Get a dictionary representing BoxAPIError
-    public override func getDictionary() -> [String: Any] {
+    override public func getDictionary() -> [String: Any] {
         var dict = super.getDictionary()
         dict["request"] = request?.getDictionary()
         dict["response"] = response?.getDictionary()

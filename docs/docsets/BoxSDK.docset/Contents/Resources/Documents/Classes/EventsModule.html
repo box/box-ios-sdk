@@ -771,9 +771,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK12EventsModuleC07getUserC010streamType0G8Position5limit10completionyAA06StreamH0OSg_AA0lI0OSgSiSgys6ResultOyAA14PagingIteratorCyAA5EventCGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/getUserEvents(streamType:streamPosition:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12EventsModuleC07getUserC010streamType0G8Position5limit10completionyAA06StreamH0OSg_AA0lI0OSgSiSgys6ResultOyAA14PagingIteratorCyAA5EventCGAA0A8SDKErrorCGctF">getUserEvents(streamType:<wbr>streamPosition:<wbr>limit:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK12EventsModuleC07getUserC010streamType0G8Position5limitAA14PagingIteratorCyAA5EventCGAA06StreamH0OSg_AA0nI0OSgSiSgtF"></a>
+                    <a name="//apple_ref/swift/Method/getUserEvents(streamType:streamPosition:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK12EventsModuleC07getUserC010streamType0G8Position5limitAA14PagingIteratorCyAA5EventCGAA06StreamH0OSg_AA0nI0OSgSiSgtF">getUserEvents(streamType:<wbr>streamPosition:<wbr>limit:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -794,9 +794,8 @@ after which the user events are removed.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getUserEvents</span><span class="p">(</span>
     <span class="nv">streamType</span><span class="p">:</span> <span class="kt"><a href="../Enums/StreamType.html">StreamType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">streamPosition</span><span class="p">:</span> <span class="kt"><a href="../Enums/StreamPosition.html">StreamPosition</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Event.html">Event</a></span><span class="o">&gt;&gt;</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Event.html">Event</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -862,9 +861,9 @@ Box API will return all available events beginning with the oldest stream positi
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK12EventsModuleC013getEnterpriseC010eventTypes12createdAfter0I6Before14streamPosition5limit10completionySayAA9EventTypeOGSg_10Foundation4DateVSgArA06StreamM0OSgSiSgys6ResultOyAA14PagingIteratorCyAA0P0CGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/getEnterpriseEvents(eventTypes:createdAfter:createdBefore:streamPosition:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK12EventsModuleC013getEnterpriseC010eventTypes12createdAfter0I6Before14streamPosition5limit10completionySayAA9EventTypeOGSg_10Foundation4DateVSgArA06StreamM0OSgSiSgys6ResultOyAA14PagingIteratorCyAA0P0CGAA0A8SDKErrorCGctF">getEnterpriseEvents(eventTypes:<wbr>createdAfter:<wbr>createdBefore:<wbr>streamPosition:<wbr>limit:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK12EventsModuleC013getEnterpriseC010eventTypes12createdAfter0I6Before14streamPosition5limitAA14PagingIteratorCyAA5EventCGSayAA0Q4TypeOGSg_10Foundation4DateVSgAvA06StreamM0OSgSiSgtF"></a>
+                    <a name="//apple_ref/swift/Method/getEnterpriseEvents(eventTypes:createdAfter:createdBefore:streamPosition:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK12EventsModuleC013getEnterpriseC010eventTypes12createdAfter0I6Before14streamPosition5limitAA14PagingIteratorCyAA5EventCGSayAA0Q4TypeOGSg_10Foundation4DateVSgAvA06StreamM0OSgSiSgtF">getEnterpriseEvents(eventTypes:<wbr>createdAfter:<wbr>createdBefore:<wbr>streamPosition:<wbr>limit:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -885,9 +884,8 @@ and seven years via exported reports in the Box Admin Console.</p>
     <span class="nv">createdAfter</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">createdBefore</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">streamPosition</span><span class="p">:</span> <span class="kt"><a href="../Enums/StreamPosition.html">StreamPosition</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Event.html">Event</a></span><span class="o">&gt;&gt;</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Event.html">Event</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1084,7 +1082,7 @@ Check the timeout value in the PollingURLInfo object to determine the time that 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
