@@ -1,5 +1,5 @@
 //
-//  CollaborationWhitelistModuleSpecs.swift
+//  CollaborationAllowlistModuleSpecs.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 8/29/19.
@@ -12,11 +12,11 @@ import OHHTTPStubs
 import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
-class CollaborationWhitelistModuleSpecs: QuickSpec {
+class CollaborationAllowlistModuleSpecs: QuickSpec {
     var sut: BoxClient!
 
     override func spec() {
-        describe("CollaborationsWhitelistModule") {
+        describe("CollaborationsAllowlistModule") {
             beforeEach {
                 self.sut = BoxSDK.getClient(token: "")
             }
@@ -26,7 +26,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("listEntries()") {
-                it("should retrieve collaboration whitelist entries") {
+                it("should retrieve collaboration allowlist entries") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_entries") &&
@@ -38,18 +38,18 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        let iterator = self.sut.collaborationWhiteList.listEntries()
+                        let iterator = self.sut.collaborationAllowList.listEntries()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
                                 let firstItem = page.entries[0]
-                                expect(firstItem).to(beAKindOf(CollaborationWhitelistEntry.self))
+                                expect(firstItem).to(beAKindOf(CollaborationAllowlistEntry.self))
                                 expect(firstItem.id).to(equal("123456"))
                                 expect(firstItem.domain).to(equal("somedomain.com"))
                                 expect(firstItem.direction).to(equal(.inbound))
 
                             case let .failure(error):
-                                fail("Unable to get collaboration whitelist items: \(error)")
+                                fail("Unable to get collaboration allowlist items: \(error)")
                             }
                             done()
                         }
@@ -58,7 +58,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("get()") {
-                it("should retrieve collaboration whitelist entry with particular ID") {
+                it("should retrieve collaboration allowlist entry with particular ID") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
@@ -70,10 +70,10 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.get(id: "12345") { result in
+                        self.sut.collaborationAllowList.get(id: "12345") { result in
                             switch result {
                             case let .success(entry):
-                                expect(entry).to(beAKindOf(CollaborationWhitelistEntry.self))
+                                expect(entry).to(beAKindOf(CollaborationAllowlistEntry.self))
                                 expect(entry.id).to(equal("12345"))
                                 expect(entry.domain).to(equal("somedomain.com"))
                                 expect(entry.direction).to(equal(.outbound))
@@ -92,7 +92,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
 
                             case let .failure(error):
                                 print(error)
-                                fail("Unable to get collaboration whitelist item")
+                                fail("Unable to get collaboration allowlist item")
                             }
 
                             done()
@@ -102,7 +102,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("create()") {
-                it("should create collaboration whitelist entry") {
+                it("should create collaboration allowlist entry") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_entries") &&
@@ -118,13 +118,13 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.create(
+                        self.sut.collaborationAllowList.create(
                             domain: "example.com",
                             direction: .both
                         ) { result in
                             switch result {
                             case let .success(entry):
-                                expect(entry).to(beAKindOf(CollaborationWhitelistEntry.self))
+                                expect(entry).to(beAKindOf(CollaborationAllowlistEntry.self))
                                 expect(entry.id).to(equal("11111"))
                                 expect(entry.domain).to(equal("example.com"))
                                 expect(entry.direction).to(equal(.both))
@@ -142,7 +142,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
 
                             case let .failure(error):
                                 print(error)
-                                fail("Unable to get collaboration whitelist item")
+                                fail("Unable to get collaboration allowlist item")
                             }
 
                             done()
@@ -152,7 +152,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("delete()") {
-                it("should delete collaboration whitelist entry") {
+                it("should delete collaboration allowlist entry") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
@@ -162,7 +162,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.collaborationWhiteList.delete(id: "12345") { response in
+                        self.sut.collaborationAllowList.delete(id: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -176,7 +176,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("listExemptTargets()") {
-                it("should retrieve collaboration whitelist exempt targets") {
+                it("should retrieve collaboration allowlist exempt targets") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_exempt_targets") &&
@@ -188,7 +188,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        let iterator = self.sut.collaborationWhiteList.listExemptTargets()
+                        let iterator = self.sut.collaborationAllowList.listExemptTargets()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -216,7 +216,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("getExemptTarget()") {
-                it("should retrieve collaboration whitelist exempt target with particular ID") {
+                it("should retrieve collaboration allowlist exempt target with particular ID") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
@@ -228,10 +228,10 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.getExemptTarget(id: "12345") { result in
+                        self.sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
                             switch result {
                             case let .success(target):
-                                expect(target).to(beAKindOf(CollaborationWhitelistExemptTarget.self))
+                                expect(target).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
                                 expect(target.id).to(equal("12345"))
                                 expect(target.createdAt?.iso8601).to(equal("2019-06-18T20:01:49Z"))
                                 expect(target.modifiedAt?.iso8601).to(equal("2019-06-18T20:01:49Z"))
@@ -259,7 +259,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
 
                             case let .failure(error):
                                 print(error)
-                                fail("Unable to get collaboration whitelist exempt target item")
+                                fail("Unable to get collaboration allowlist exempt target item")
                             }
 
                             done()
@@ -269,7 +269,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("exemptUser()") {
-                it("should create collaboration whitelist exempt target entry") {
+                it("should create collaboration allowlist exempt target entry") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_exempt_targets") &&
@@ -282,12 +282,12 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: 10.0) { done in
-                        self.sut.collaborationWhiteList.exemptUser(
+                        self.sut.collaborationAllowList.exemptUser(
                             userId: "12345"
                         ) { result in
                             switch result {
                             case let .success(target):
-                                expect(target).to(beAKindOf(CollaborationWhitelistExemptTarget.self))
+                                expect(target).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
                                 expect(target.id).to(equal("collaboration_whitelist_exempt_target_id"))
                                 expect(target.createdAt?.iso8601).to(equal("2019-06-18T20:01:49Z"))
                                 expect(target.modifiedAt?.iso8601).to(equal("2019-06-18T20:01:49Z"))
@@ -315,7 +315,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
 
                             case let .failure(error):
                                 print(error)
-                                fail("Unable to get collaboration whitelist exempt target item")
+                                fail("Unable to get collaboration allowlist exempt target item")
                             }
 
                             done()
@@ -325,7 +325,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
             }
 
             describe("deleteExemptTarget()") {
-                it("should delete collaboration whitelist exempt target entry") {
+                it("should delete collaboration allowlist exempt target entry") {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
@@ -335,7 +335,7 @@ class CollaborationWhitelistModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.collaborationWhiteList.deleteExemptTarget(id: "12345") { response in
+                        self.sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
                             switch response {
                             case .success:
                                 break
