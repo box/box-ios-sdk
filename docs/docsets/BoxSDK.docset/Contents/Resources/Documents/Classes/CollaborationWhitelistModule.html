@@ -771,9 +771,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limit10completionySaySSGSg_SSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cD5EntryCGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/listEntries(fields:marker:limit:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limit10completionySaySSGSg_SSSgSiSgys6ResultOyAA14PagingIteratorCyAA0cD5EntryCGAA0A8SDKErrorCGctF">listEntries(fields:<wbr>marker:<wbr>limit:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limitAA14PagingIteratorCyAA0cD5EntryCGSaySSGSg_SSSgSiSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listEntries(fields:marker:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC11listEntries6fields6marker5limitAA14PagingIteratorCyAA0cD5EntryCGSaySSGSg_SSSgSiSgtF">listEntries(fields:<wbr>marker:<wbr>limit:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -792,9 +792,8 @@ domain, and direction. You can specify more by using the fields parameter.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listEntries</span><span class="p">(</span>
     <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a></span><span class="o">&gt;&gt;</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1076,9 +1075,9 @@ thrown if the collaboration whitelist cannot be deleted.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0cdG6TargetCGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/listExemptTargets(marker:limit:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fields10completionySSSg_SiSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0cdG6TargetCGAA0A8SDKErrorCGctF">listExemptTargets(marker:<wbr>limit:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fieldsAA14PagingIteratorCyAA0cdG6TargetCGSSSg_SiSgSaySSGSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listExemptTargets(marker:limit:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationWhitelistModuleC17listExemptTargets6marker5limit6fieldsAA14PagingIteratorCyAA0cdG6TargetCGSSSg_SiSgSaySSGSgtF">listExemptTargets(marker:<wbr>limit:<wbr>fields:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1098,9 +1097,8 @@ fields parameter.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listExemptTargets</span><span class="p">(</span>
     <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a></span><span class="o">&gt;&gt;</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1369,7 +1367,7 @@ thrown if the exempt target cannot be deleted.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

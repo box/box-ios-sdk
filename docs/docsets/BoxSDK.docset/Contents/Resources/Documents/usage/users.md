@@ -201,23 +201,18 @@ Get Enterprise Users
 
 To retrieve the users in an enterprise, call
 [`client.users.listForEnterprise(filterTerm:fields:offset:limit:)`][get-enterprise-users].
-The method returns an iterator object in the completion, which is used to get the users.
+The method returns an iterator object, which is used to get the users.
 
 <!-- sample get_users -->
 ```swift
-client.users.listForEnterprise() {
+let iterator = client.users.listForEnterprise()
+iterator.next { result in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(user):
-                    print("\(user.name) (ID: \(user.id))")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for user in page.entries {
+            print("\(user.name) (ID: \(user.id))")
         }
+
     case let .failure(error):
         print(error)
     }

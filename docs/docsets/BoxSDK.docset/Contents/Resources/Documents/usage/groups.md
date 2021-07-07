@@ -87,23 +87,18 @@ client.groups.get(groupId: "12345") {
 Get Enterprise Groups
 ---------------------
 
-To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object in the completion, which is used to retrieve groups in the enterprise.
+To retrieve information about the groups within the enterprise, call [`client.groups.listForEnterprise(name: String?, offset: Int?, limit: Int?, fields: [String]?)`][get-enterprise-groups]. You can also pass in a `name` paramter to act as a filter. This method will return an iterator object, which is used to retrieve groups in the enterprise.
 
 <!-- sample get_groups -->
 ```swift
-client.groups.listForEnterprise() { results in
+let iterator = client.groups.listForEnterprise()
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(group):
-                    print("Group with name \(group.name) retrieved")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for group in page.entries {
+            print("Group with name \(group.name) retrieved")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -218,23 +213,18 @@ client.groups.deleteMembership(membershipId: "12345") {
 Get Memberships for Group
 -------------------------
 
-To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
+To retrieve information about the memberships in a group, call [`client.groups.listMemberships(groupID: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-group] with the ID of the group to retrieve group memberships for. This method will return an iterator object, which is used to retrieve the memberships.
 
 <!-- sample get_groups_id_memberships -->
 ```swift
-client.groups.listMembership(groupId: "12345") {
+let iterator = client.groups.listMembership(groupId: "12345")
+iterator.next { result in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(membership):
-                    print("Group Membership with ID \(membership.id) was retrieved")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for membership in page.entries {
+            print("Group Membership with ID \(membership.id) was retrieved")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -247,23 +237,18 @@ Get Memberships for User
 ------------------------
 
 To retrieve information about the group memberships for a given user, call
-[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for. This method will return an iterator object in the completion, which is used to retrieve the memberships.
+[`client.groups.listMembershipsForUser(userId: String, offset: Int?, limit: Int?, fields: [String]?)`][get-memberships-for-user] with the ID of the user to retreive group memberships for. This method will return an iterator object, which is used to retrieve the memberships.
 
 <!-- sample get_users_id_memberships -->
 ```swift
-client.groups.listMembershipsForUser(userId: "12345") {
+let iterator = client.groups.listMembershipsForUser(userId: "12345")
+iterator.next { result in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(membership):
-                    print("Group Membership with ID \(membership.id) was retrieved")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for membership in page.entries {
+            print("Group Membership with ID \(membership.id) was retrieved")
         }
+
     case let .failure(error):
         print(error)
     }
@@ -275,23 +260,18 @@ client.groups.listMembershipsForUser(userId: "12345") {
 Get Collaborations for Group
 ----------------------------
 
-To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for. This method will return an iterator object in the completion, which is used to retrieve the collaborations.
+To retrieve all group collaborations for a given group, call [`client.groups.listCollaborations(groupId: String, offset: Int?, limit: Int? fields: [String]?)`][get-collaborations-for-group] with the ID of the group to retrieve collaborations for. This method will return an iterator object, which is used to retrieve the collaborations.
 
 <!-- sample get_groups_id_collaborations -->
 ```swift
-client.groups.listCollaborations(groupId: "12345") { results in
+let iterator = client.groups.listCollaborations(groupId: "12345")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { (result in
-                switch result {
-                case let .success(collaboration):
-                    print("Collaboration with ID \(collaboration.id) was retrieved")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for collaboration in page.entries {
+            print("Collaboration with ID \(collaboration.id) was retrieved")
         }
+
     case let .failure(error):
         print(error)
     }  

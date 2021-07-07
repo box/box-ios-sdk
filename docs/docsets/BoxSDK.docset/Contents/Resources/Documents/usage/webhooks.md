@@ -41,23 +41,18 @@ List Webhooks
 ----------------
 
 To retrieve information about webhooks in an enterprise, call
-[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`][list-webhooks].  This method will return an iterator object in the completion, which is used to get the webhooks.
+[`client.webhook.list(webhookId: String, marker: String?, limit: Int?, fields: [String]?)`][list-webhooks].  This method will return an iterator object, which is used to get the webhooks.
 
 <!-- sample get_webhooks -->
 ```swift
-client.webhooks.list() { results in
+let iterator = client.webhooks.list()
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(webhook):
-                    print("Webhook \(webhook.id) was created at \(webhook.createdAt)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
+    case let .success(page):
+        for webhook in page.entries {
+            print("Webhook \(webhook.id) was created at \(webhook.createdAt)")
         }
+
     case let .failure(error):
         print(error)
     }
