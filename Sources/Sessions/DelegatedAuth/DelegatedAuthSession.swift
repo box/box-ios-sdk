@@ -103,7 +103,7 @@ public class DelegatedAuthSession: SessionProtocol {
 
             self.authClosure(self.uniqueID) { result in
                 switch result {
-                case let .success(accessToken, expiresIn):
+                case let .success((accessToken, expiresIn)):
                     if expiresIn < self.configuration.tokenRefreshThreshold {
                         completion(.failure(BoxAPIAuthError(message: .expiredToken)))
                         done()
