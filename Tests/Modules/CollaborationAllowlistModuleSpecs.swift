@@ -193,7 +193,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             switch result {
                             case let .success(page):
                                 let firstTarget = page.entries[0]
-                                expect(firstTarget).to(beAKindOf(CollaborationWhitelistExemptTarget.self))
+                                expect(firstTarget).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
                                 expect(firstTarget.id).to(equal("1234567890"))
 
                                 guard let user = firstTarget.user else {
