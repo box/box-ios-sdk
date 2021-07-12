@@ -153,10 +153,10 @@
 		22720EA12316BE9F00887AA4 /* UpdateTaskAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 22720E9A2316BE9F00887AA4 /* UpdateTaskAssignment.json */; };
 		22720EA22316BE9F00887AA4 /* GetAssignments.json in Resources */ = {isa = PBXBuildFile; fileRef = 22720E9B2316BE9F00887AA4 /* GetAssignments.json */; };
 		22720EA32316BE9F00887AA4 /* GetTaskAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 22720E9C2316BE9F00887AA4 /* GetTaskAssignment.json */; };
-		2278C539231D6D5A0048FF45 /* CollaborationWhitelistExemptTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C537231D6D560048FF45 /* CollaborationWhitelistExemptTarget.swift */; };
-		2278C53D231D6D5A0048FF45 /* CollaborationWhitelistEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C538231D6D5A0048FF45 /* CollaborationWhitelistEntry.swift */; };
-		2278C542231D72960048FF45 /* CollaborationWhitelistModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C541231D72960048FF45 /* CollaborationWhitelistModule.swift */; };
-		2278C547231D78F10048FF45 /* CollaborationWhitelistModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C546231D78F00048FF45 /* CollaborationWhitelistModuleSpecs.swift */; };
+		2278C539231D6D5A0048FF45 /* CollaborationAllowlistExemptTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C537231D6D560048FF45 /* CollaborationAllowlistExemptTarget.swift */; };
+		2278C53D231D6D5A0048FF45 /* CollaborationAllowlistEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C538231D6D5A0048FF45 /* CollaborationAllowlistEntry.swift */; };
+		2278C542231D72960048FF45 /* CollaborationAllowlistModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */; };
+		2278C547231D78F10048FF45 /* CollaborationAllowlistModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278C546231D78F00048FF45 /* CollaborationAllowlistModuleSpecs.swift */; };
 		2278C54F231D808E0048FF45 /* CreateCollaborationWhitelistEntry.json in Resources */ = {isa = PBXBuildFile; fileRef = 2278C549231D808D0048FF45 /* CreateCollaborationWhitelistEntry.json */; };
 		2278C550231D808E0048FF45 /* CreateCollaborationWhitelistExemptUser.json in Resources */ = {isa = PBXBuildFile; fileRef = 2278C54A231D808D0048FF45 /* CreateCollaborationWhitelistExemptUser.json */; };
 		2278C551231D808E0048FF45 /* GetCollaborationWhitelistEntries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2278C54B231D808D0048FF45 /* GetCollaborationWhitelistEntries.json */; };
@@ -647,10 +647,10 @@
 		22720E9A2316BE9F00887AA4 /* UpdateTaskAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateTaskAssignment.json; sourceTree = "<group>"; };
 		22720E9B2316BE9F00887AA4 /* GetAssignments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetAssignments.json; sourceTree = "<group>"; };
 		22720E9C2316BE9F00887AA4 /* GetTaskAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetTaskAssignment.json; sourceTree = "<group>"; };
-		2278C537231D6D560048FF45 /* CollaborationWhitelistExemptTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationWhitelistExemptTarget.swift; sourceTree = "<group>"; };
-		2278C538231D6D5A0048FF45 /* CollaborationWhitelistEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationWhitelistEntry.swift; sourceTree = "<group>"; };
-		2278C541231D72960048FF45 /* CollaborationWhitelistModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationWhitelistModule.swift; sourceTree = "<group>"; };
-		2278C546231D78F00048FF45 /* CollaborationWhitelistModuleSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationWhitelistModuleSpecs.swift; sourceTree = "<group>"; };
+		2278C537231D6D560048FF45 /* CollaborationAllowlistExemptTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistExemptTarget.swift; sourceTree = "<group>"; };
+		2278C538231D6D5A0048FF45 /* CollaborationAllowlistEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistEntry.swift; sourceTree = "<group>"; };
+		2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistModule.swift; sourceTree = "<group>"; };
+		2278C546231D78F00048FF45 /* CollaborationAllowlistModuleSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistModuleSpecs.swift; sourceTree = "<group>"; };
 		2278C549231D808D0048FF45 /* CreateCollaborationWhitelistEntry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateCollaborationWhitelistEntry.json; sourceTree = "<group>"; };
 		2278C54A231D808D0048FF45 /* CreateCollaborationWhitelistExemptUser.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateCollaborationWhitelistExemptUser.json; sourceTree = "<group>"; };
 		2278C54B231D808D0048FF45 /* GetCollaborationWhitelistEntries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetCollaborationWhitelistEntries.json; sourceTree = "<group>"; };
@@ -1024,7 +1024,7 @@
 			children = (
 				22C41456231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift */,
 				22E335102316A36E0000E231 /* TasksModuleSpecs.swift */,
-				2278C546231D78F00048FF45 /* CollaborationWhitelistModuleSpecs.swift */,
+				2278C546231D78F00048FF45 /* CollaborationAllowlistModuleSpecs.swift */,
 				22E39EDA22F09E820061E182 /* TrashModuleSpecs.swift */,
 				228B36A322BBC1E200078283 /* MetadataModuleSpecs.swift */,
 				22D0041322AFB25500478F1E /* CollectionsModuleSpecs.swift */,
@@ -1247,8 +1247,8 @@
 		225639192253897D00D951B5 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				2278C538231D6D5A0048FF45 /* CollaborationWhitelistEntry.swift */,
-				2278C537231D6D560048FF45 /* CollaborationWhitelistExemptTarget.swift */,
+				2278C538231D6D5A0048FF45 /* CollaborationAllowlistEntry.swift */,
+				2278C537231D6D560048FF45 /* CollaborationAllowlistExemptTarget.swift */,
 				22D003FD22AFB19200478F1E /* BoxCollection.swift */,
 				2256391F2253897D00D951B5 /* BoxModel.swift */,
 				228C361A2255F82800AC8888 /* BoxResponse.swift */,
@@ -1333,7 +1333,7 @@
 			children = (
 				22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */,
 				2246361D2315923B009DC4E9 /* TasksModule.swift */,
-				2278C541231D72960048FF45 /* CollaborationWhitelistModule.swift */,
+				2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */,
 				228B369E22BBC1CE00078283 /* MetadataModule.swift */,
 				224E1BF222C57D4A00F31F3A /* MetadataModule+Templates.swift */,
 				224E1BED22C57C8400F31F3A /* MetadataModule+Files.swift */,
@@ -2436,7 +2436,7 @@
 				22CE539722DD005400F3D59F /* MetadataModule+Folders.swift in Sources */,
 				2256399A2253897D00D951B5 /* WebLink.swift in Sources */,
 				F929D5E723319E640039E452 /* FileVersionLegalHold.swift in Sources */,
-				2278C539231D6D5A0048FF45 /* CollaborationWhitelistExemptTarget.swift in Sources */,
+				2278C539231D6D5A0048FF45 /* CollaborationAllowlistExemptTarget.swift in Sources */,
 				F99D41232314A0B400327698 /* RecentItemsModule.swift in Sources */,
 				0C6398952253A4ED004021D3 /* Token.swift in Sources */,
 				0CCBC2A022841C0900640FA8 /* KeychainTokenStore.swift in Sources */,
@@ -2456,13 +2456,13 @@
 				225639AE2253897D00D951B5 /* FoldersModule.swift in Sources */,
 				0C4A9D18226DBCB4002D069D /* BoxSDKConfiguration.swift in Sources */,
 				8053E2C622AF06FF000B42E1 /* SharedItemsModule.swift in Sources */,
-				2278C53D231D6D5A0048FF45 /* CollaborationWhitelistEntry.swift in Sources */,
+				2278C53D231D6D5A0048FF45 /* CollaborationAllowlistEntry.swift in Sources */,
 				0CCBC2AA2284301E00640FA8 /* KeychainStoreQueryable.swift in Sources */,
 				0CC1C909229EC8C1003F134C /* CollaborationsModule.swift in Sources */,
 				225639B22253897D00D951B5 /* AuthModule.swift in Sources */,
 				80BC841A232C52FF00010E08 /* TermsOfService.swift in Sources */,
 				2256394E2253897D00D951B5 /* SessionProtocol.swift in Sources */,
-				2278C542231D72960048FF45 /* CollaborationWhitelistModule.swift in Sources */,
+				2278C542231D72960048FF45 /* CollaborationAllowlistModule.swift in Sources */,
 				804F3BF722A59250008CF915 /* CommentsModule.swift in Sources */,
 				22640BB82305902A00C19ECA /* UploadSession.swift in Sources */,
 				223C6DAF22C636C100F4023C /* MetadataObject.swift in Sources */,
@@ -2588,7 +2588,7 @@
 				0C506CBD22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift in Sources */,
 				97021E9B22A5DF55004988C8 /* BoxNetworkAgentSpecs.swift in Sources */,
 				F969D38B233A7242001301FC /* StoragePoliciesModuleSpecs.swift in Sources */,
-				2278C547231D78F10048FF45 /* CollaborationWhitelistModuleSpecs.swift in Sources */,
+				2278C547231D78F10048FF45 /* CollaborationAllowlistModuleSpecs.swift in Sources */,
 				97F04DAD22B96B120034B9A3 /* TaskSpecs.swift in Sources */,
 				22E39EDB22F09E820061E182 /* TrashModuleSpecs.swift in Sources */,
 				22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */,

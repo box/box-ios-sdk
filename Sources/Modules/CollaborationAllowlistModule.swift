@@ -1,5 +1,5 @@
 //
-//  CollaborationWhitelistModule.swift
+//  CollaborationAllowlistModule.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 29/08/2019.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Provides [Collaborations](../Structs/Collaborations.html) management.
-public class CollaborationWhitelistModule {
+public class CollaborationAllowlistModule {
     /// Required for communicating with Box APIs.
     weak var boxClient: BoxClient!
     // swiftlint:disable:previous implicitly_unwrapped_optional
@@ -21,7 +21,7 @@ public class CollaborationWhitelistModule {
         self.boxClient = boxClient
     }
 
-    /// Returns the list of Whitelist entries for the current Enterprise. Each entry lists type, id,
+    /// Returns the list of Allowlist entries for the current Enterprise. Each entry lists type, id,
     /// domain, and direction. You can specify more by using the fields parameter.
     ///
     /// - Parameters:
@@ -35,7 +35,7 @@ public class CollaborationWhitelistModule {
         fields: [String]? = nil,
         marker: String? = nil,
         limit: Int? = nil
-    ) -> PagingIterator<CollaborationWhitelistEntry> {
+    ) -> PagingIterator<CollaborationAllowlistEntry> {
         .init(
             client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_entries", configuration: boxClient.configuration),
@@ -47,17 +47,17 @@ public class CollaborationWhitelistModule {
         )
     }
 
-    /// Get Collaboration Whitelist Entry by ID.
+    /// Get Collaboration Allowlist Entry by ID.
     ///
     /// - Parameters:
-    ///   - id: The ID of the collaboration whitelist entry to get details
+    ///   - id: The ID of the collaboration allowlist entry to get details
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
-    ///   - completion: The collaboration whitelist entry object is returned or an error
+    ///   - completion: The collaboration allowlist entry object is returned or an error
     public func get(
         id: String,
         fields: [String]? = nil,
-        completion: @escaping Callback<CollaborationWhitelistEntry>
+        completion: @escaping Callback<CollaborationAllowlistEntry>
     ) {
         boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_entries/\(id)", configuration: boxClient.configuration),
@@ -66,19 +66,19 @@ public class CollaborationWhitelistModule {
         )
     }
 
-    /// Create Collaboration Whitelist Entry.
+    /// Create Collaboration Allowlist Entry.
     ///
     /// - Parameters:
-    ///   - domain: Domain to add to whitelist (e.g. box.com).
+    ///   - domain: Domain to add to allowlist (e.g. box.com).
     ///   - direction: inbound, outbound, or both.
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
-    ///   - completion: The collaboration whitelist entry object is returned or an error
+    ///   - completion: The collaboration allowlist entry object is returned or an error
     public func create(
         domain: String,
         direction: CollaborationDirection,
         fields: [String]? = nil,
-        completion: @escaping Callback<CollaborationWhitelistEntry>
+        completion: @escaping Callback<CollaborationAllowlistEntry>
     ) {
         let json = ["domain": domain, "direction": direction.description]
 
@@ -90,14 +90,14 @@ public class CollaborationWhitelistModule {
         )
     }
 
-    /// Remove a single item from the Enterprise's Collaboration Whitelist by id.
-    /// If there are no longer any entries in the whitelist table, the Collaboration
-    /// Whitelist feature will be turned off.
+    /// Remove a single item from the Enterprise's Collaboration Allowlist by id.
+    /// If there are no longer any entries in the allowlist table, the Collaboration
+    /// Allowlist feature will be turned off.
     ///
     /// - Parameters:
-    ///   - id: The ID of the collaboration whitelist entry to remove.
+    ///   - id: The ID of the collaboration allowlist entry to remove.
     ///   - completion: An empty response will be returned upon successful deletion. An error is
-    ///     thrown if the collaboration whitelist cannot be deleted.
+    ///     thrown if the collaboration allowlist cannot be deleted.
     public func delete(
         id: String,
         completion: @escaping Callback<Void>
@@ -123,7 +123,7 @@ public class CollaborationWhitelistModule {
         marker: String? = nil,
         limit: Int? = nil,
         fields: [String]? = nil
-    ) -> PagingIterator<CollaborationWhitelistExemptTarget> {
+    ) -> PagingIterator<CollaborationAllowlistExemptTarget> {
         .init(
             client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_exempt_targets", configuration: boxClient.configuration),
@@ -138,14 +138,14 @@ public class CollaborationWhitelistModule {
     /// Returns a specific exempt target for the passed in ID.
     ///
     /// - Parameters:
-    ///   - id: The ID of the collaboration whitelist entry to get details
+    ///   - id: The ID of the collaboration allowlist entry to get details
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
     ///   - completion: The exempt target entry, object is returned or an error
     public func getExemptTarget(
         id: String,
         fields: [String]? = nil,
-        completion: @escaping Callback<CollaborationWhitelistExemptTarget>
+        completion: @escaping Callback<CollaborationAllowlistExemptTarget>
     ) {
         boxClient.get(
             url: URL.boxAPIEndpoint("/2.0/collaboration_whitelist_exempt_targets/\(id)", configuration: boxClient.configuration),
@@ -160,11 +160,11 @@ public class CollaborationWhitelistModule {
     ///   - userId: The ID of user to add to exempt target list.
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
-    ///   - completion: The collaboration whitelist entry object is returned or an error
+    ///   - completion: The collaboration allowlist entry object is returned or an error
     public func exemptUser(
         userId: String,
         fields: [String]? = nil,
-        completion: @escaping Callback<CollaborationWhitelistExemptTarget>
+        completion: @escaping Callback<CollaborationAllowlistExemptTarget>
     ) {
         let json = ["user": ["id": userId]]
 
@@ -179,7 +179,7 @@ public class CollaborationWhitelistModule {
     /// Remove a single user from the exempt target list.
     ///
     /// - Parameters:
-    ///   - id: The ID of the collaboration whitelist exempt target to remove.
+    ///   - id: The ID of the collaboration allowlist exempt target to remove.
     ///   - completion: An empty response will be returned upon successful deletion. An error is
     ///     thrown if the exempt target cannot be deleted.
     public func deleteExemptTarget(

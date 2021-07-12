@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CollaborationWhitelistExemptTarget Class Reference</title>
+    <title>CollaborationAllowlistModule Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/CollaborationWhitelistExemptTarget" class="dashAnchor"></a>
-    <a title="CollaborationWhitelistExemptTarget Class Reference"></a>
+    <a name="//apple_ref/swift/Class/CollaborationAllowlistModule" class="dashAnchor"></a>
+    <a title="CollaborationAllowlistModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">BoxSDK 4.4.0 Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">BoxSDK Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CollaborationWhitelistExemptTarget Class Reference
+        CollaborationAllowlistModule Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -105,13 +105,13 @@
                 <a href="../Classes/Collaboration/TwoFactorAuthenticationRequirement.html">– TwoFactorAuthenticationRequirement</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a>
+                <a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a>
+                <a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistModule.html">CollaborationWhitelistModule</a>
+                <a href="../Classes/CollaborationAllowlistModule.html">CollaborationAllowlistModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
@@ -754,36 +754,26 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CollaborationWhitelistExemptTarget</h1>
+            <h1>CollaborationAllowlistModule</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollaborationWhitelistExemptTarget</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollaborationAllowlistModule</span></code></pre>
 
                 </div>
               </div>
-            <p>The record that represents a target (at the moment, only users are supported as targets)
-that is exempt from the collaboration whitelist.</p>
+            <p>Provides <a href="../Structs/Collaborations.html">Collaborations</a> management.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
-              <div class="task-name-container">
-                <a name="/BoxModel"></a>
-                <a name="//apple_ref/swift/Section/BoxModel" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/BoxModel"></a>
-                  <h3 class="section-name"><p>BoxModel</p>
-</h3>
-                </div>
-              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK0A5ModelP7rawDataSDySSypGvp"></a>
-                    <a name="//apple_ref/swift/Property/rawData" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK0A5ModelP7rawDataSDySSypGvp">rawData</a>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC11listEntries6fields6marker5limitAA14PagingIteratorCyAA0cD5EntryCGSaySSGSg_SSSgSiSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listEntries(fields:marker:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC11listEntries6fields6marker5limitAA14PagingIteratorCyAA0cD5EntryCGSaySSGSg_SSSgSiSgtF">listEntries(fields:<wbr>marker:<wbr>limit:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -791,207 +781,19 @@ that is exempt from the collaboration whitelist.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">rawData</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC4typeSSvp"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC4typeSSvp">type</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Box item type</p>
+                        <p>Returns the list of Allowlist entries for the current Enterprise. Each entry lists type, id,
+domain, and direction. You can specify more by using the fields parameter.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC2idSSvp"></a>
-                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC2idSSvp">id</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Identifier</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC4userAA4UserCSgvp"></a>
-                    <a name="//apple_ref/swift/Property/user" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC4userAA4UserCSgvp">user</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The user that is exempted from the collaboration whitelist</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Classes/User.html">User</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC10enterpriseAA10EnterpriseCSgvp"></a>
-                    <a name="//apple_ref/swift/Property/enterprise" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC10enterpriseAA10EnterpriseCSgvp">enterprise</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Mini representation of the enterprise.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">enterprise</span><span class="p">:</span> <span class="kt"><a href="../Classes/Enterprise.html">Enterprise</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC9createdAt10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/createdAt" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC9createdAt10Foundation4DateVSgvp">createdAt</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>When the target object was created.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">createdAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC10modifiedAt10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/modifiedAt" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC10modifiedAt10Foundation4DateVSgvp">modifiedAt</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>When the target object was last modified.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">modifiedAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6BoxSDK34CollaborationWhitelistExemptTargetC4jsonACSDySSypG_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK34CollaborationWhitelistExemptTargetC4jsonACSDySSypG_tKcfc">init(json:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initializer.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Decoding error.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listEntries</span><span class="p">(</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1002,12 +804,555 @@ that is exempt from the collaboration whitelist.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>json</em>
+                                <em>fields</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON dictionary.</p>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return. The default is 100 and the maximum is
+1,000.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC3get2id6fields10completionySS_SaySSGSgys6ResultOyAA0cD5EntryCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/get(id:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC3get2id6fields10completionySS_SaySSGSgys6ResultOyAA0cD5EntryCAA0A8SDKErrorCGctF">get(id:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get Collaboration Allowlist Entry by ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration allowlist entry to get details</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration allowlist entry object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC6create6domain9direction6fields10completionySS_AA0C9DirectionOSaySSGSgys6ResultOyAA0cD5EntryCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/create(domain:direction:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC6create6domain9direction6fields10completionySS_AA0C9DirectionOSaySSGSgys6ResultOyAA0cD5EntryCAA0A8SDKErrorCGctF">create(domain:<wbr>direction:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create Collaboration Allowlist Entry.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span>
+    <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">direction</span><span class="p">:</span> <span class="kt"><a href="../Enums/CollaborationDirection.html">CollaborationDirection</a></span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>domain</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Domain to add to allowlist (e.g. box.com).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>inbound, outbound, or both.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration allowlist entry object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC6delete2id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/delete(id:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC6delete2id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">delete(id:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove a single item from the Enterprise&rsquo;s Collaboration Allowlist by id.
+If there are no longer any entries in the allowlist table, the Collaboration
+Allowlist feature will be turned off.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration allowlist entry to remove.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An empty response will be returned upon successful deletion. An error is
+thrown if the collaboration allowlist cannot be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC17listExemptTargets6marker5limit6fieldsAA14PagingIteratorCyAA0cdG6TargetCGSSSg_SiSgSaySSGSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listExemptTargets(marker:limit:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC17listExemptTargets6marker5limit6fieldsAA14PagingIteratorCyAA0cdG6TargetCGSSSg_SiSgSaySSGSgtF">listExemptTargets(marker:<wbr>limit:<wbr>fields:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an interator for listing of Exempt User entries for the current Enterprise.
+By default, each will return type, id, and user, but you can specify more by using the
+fields parameter.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listExemptTargets</span><span class="p">(</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return. The default is 100 and the maximum is
+1,000.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC15getExemptTarget2id6fields10completionySS_SaySSGSgys6ResultOyAA0cdgH0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/getExemptTarget(id:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC15getExemptTarget2id6fields10completionySS_SaySSGSgys6ResultOyAA0cdgH0CAA0A8SDKErrorCGctF">getExemptTarget(id:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a specific exempt target for the passed in ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getExemptTarget</span><span class="p">(</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration allowlist entry to get details</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The exempt target entry, object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC10exemptUser6userId6fields10completionySS_SaySSGSgys6ResultOyAA0cD12ExemptTargetCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/exemptUser(userId:fields:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC10exemptUser6userId6fields10completionySS_SaySSGSgys6ResultOyAA0cD12ExemptTargetCAA0A8SDKErrorCGctF">exemptUser(userId:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates the Exempt Target entry.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exemptUser</span><span class="p">(</span>
+    <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of user to add to exempt target list.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comma-separated list of <a href="https://developer.box.com/reference#fields">fields</a> to
+include in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collaboration allowlist entry object is returned or an error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK28CollaborationAllowlistModuleC18deleteExemptTarget2id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteExemptTarget(id:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK28CollaborationAllowlistModuleC18deleteExemptTarget2id10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteExemptTarget(id:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove a single user from the exempt target list.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteExemptTarget</span><span class="p">(</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collaboration allowlist exempt target to remove.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An empty response will be returned upon successful deletion. An error is
+thrown if the exempt target cannot be deleted.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1022,7 +1367,7 @@ that is exempt from the collaboration whitelist.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-06)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-09)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -23,8 +23,10 @@ public class BoxClient {
     public private(set) lazy var collections = CollectionsModule(boxClient: self)
     /// Provides collaborations functionality.
     public private(set) lazy var collaborations = CollaborationsModule(boxClient: self)
-    /// Provides collaborations whitelist functionality.
-    public private(set) lazy var collaborationWhiteList = CollaborationWhitelistModule(boxClient: self)
+    /// Provides collaborations whitelist functionality (deprecated)
+    public private(set) lazy var collaborationWhiteList = CollaborationAllowlistModule(boxClient: self)
+    /// Provides collaborations whitelist functionality
+    public private(set) lazy var collaborationAllowList = CollaborationAllowlistModule(boxClient: self)
     /// Metadata management.
     public private(set) lazy var metadata = MetadataModule(boxClient: self)
     /// Provides [Events](../Structs/Events.html) management.
