@@ -360,9 +360,10 @@ public class BoxSDK {
         @available(iOS 13.0, *)
         func obtainAuthorizationCodeFromWebSession(context: ASWebAuthenticationPresentationContextProviding, completion: @escaping Callback<String>) {
             let authorizeURL = makeAuthorizeURL(state: nonce)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: self.configuration.callbackURL)?.scheme, context: context) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: configuration.callbackURL)?.scheme, context: context) { resultURL, error in
                 guard error == nil,
-                    let successURL = resultURL else {
+                      let successURL = resultURL
+                else {
                     print(error.debugDescription)
                     completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
                     return
@@ -371,8 +372,9 @@ public class BoxSDK {
                 let usedState = self.getURLComponentValueAt(key: "state", from: authorizeURL)
 
                 if let authorizationCode = self.getURLComponentValueAt(key: "code", from: successURL),
-                    let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
-                    receivedState == usedState {
+                   let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
+                   receivedState == usedState
+                {
                     completion(.success(authorizationCode))
                     return
                 }
@@ -388,9 +390,10 @@ public class BoxSDK {
     func obtainAuthorizationCodeFromWebSession(completion: @escaping Callback<String>) {
         let authorizeURL = makeAuthorizeURL(state: nonce)
         #if os(iOS)
-            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: self.configuration.callbackURL)?.scheme) { resultURL, error in
+            webSession = AuthenticationSession(url: authorizeURL, callbackURLScheme: URL(string: configuration.callbackURL)?.scheme) { resultURL, error in
                 guard error == nil,
-                    let successURL = resultURL else {
+                      let successURL = resultURL
+                else {
                     print(error.debugDescription)
                     completion(.failure(BoxAPIAuthError(message: .invalidOAuthRedirectConfiguration, error: error)))
                     return
@@ -399,8 +402,9 @@ public class BoxSDK {
                 let usedState = self.getURLComponentValueAt(key: "state", from: authorizeURL)
 
                 if let authorizationCode = self.getURLComponentValueAt(key: "code", from: successURL),
-                    let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
-                    receivedState == usedState {
+                   let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
+                   receivedState == usedState
+                {
                     completion(.success(authorizationCode))
                     return
                 }
@@ -489,7 +493,8 @@ extension BoxSDK {
 
     private func getURLComponentValueAt(key: String, from url: URL?) -> String? {
         guard let url = url, let urlComponent = NSURLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == key }),
-            let value = urlComponent.value else {
+              let value = urlComponent.value
+        else {
             return nil
         }
         return value

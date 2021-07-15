@@ -146,7 +146,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.termsOfService.listForEnterprise() { result in
+                        self.sut.termsOfService.listForEnterprise { result in
                             switch result {
                             case let .success(tos):
                                 expect(tos).notTo(beEmpty())

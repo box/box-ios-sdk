@@ -1,5 +1,5 @@
 //
-//  CollaborationWhitelistExemptTarget.swift
+//  CollaborationAllowlistExemptTarget.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 8/29/19.
@@ -9,8 +9,8 @@
 import Foundation
 
 /// The record that represents a target (at the moment, only users are supported as targets)
-/// that is exempt from the collaboration whitelist.
-public class CollaborationWhitelistExemptTarget: BoxModel {
+/// that is exempt from the collaboration allowlist.
+public class CollaborationAllowlistExemptTarget: BoxModel {
     // MARK: - BoxModel
 
     public private(set) var rawData: [String: Any]
@@ -21,7 +21,7 @@ public class CollaborationWhitelistExemptTarget: BoxModel {
 
     /// Identifier
     public let id: String
-    /// The user that is exempted from the collaboration whitelist
+    /// The user that is exempted from the collaboration allowlist
     public let user: User?
     /// Mini representation of the enterprise.
     public let enterprise: Enterprise?
@@ -37,7 +37,7 @@ public class CollaborationWhitelistExemptTarget: BoxModel {
     public required init(json: [String: Any]) throws {
         rawData = json
 
-        guard let itemType = json["type"] as? String, itemType == CollaborationWhitelistExemptTarget.resourceType else {
+        guard let itemType = json["type"] as? String, itemType == CollaborationAllowlistExemptTarget.resourceType else {
             throw BoxCodingError(message: .typeMismatch(key: "type"))
         }
 

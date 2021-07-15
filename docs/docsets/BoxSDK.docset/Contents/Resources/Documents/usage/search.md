@@ -16,30 +16,25 @@ Content Search
 
 To get a list of items matching a search query, call [`client.search.query(query:...)`][search] with the
 string to query for.  There are many possible options for advanced search filtering, which can be used to narrow down
-the search results. This method will return an iterator object in the completion, which is used to get the results.
+the search results. This method will return an iterator object, which is used to get the results.
 
 <!-- sample get_search -->   
 ```swift
-client.search.query(query: "Quarterly Business Review") { results in
+let iterator = client.search.query(query: "Quarterly Business Review")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(item):
-                    switch item {
-                    case let .file(file):
-                        print("- File \(file.name) (ID: \(file.id))")
-                    case let .folder(folder):
-                        print("- Folder \(file.name) (ID: \(file.id))")
-                    case let .webLink(webLink):
-                        print("- Web Link \(file.name) (ID: \(file.id))")
-                    }
-                case let .failure(error):
-                    print(error)
-                }
+    case let .success(page):
+        for item in page.entries {
+            switch item {
+            case let .file(file):
+                print("- File \(file.name) (ID: \(file.id))")
+            case let .folder(folder):
+                print("- Folder \(file.name) (ID: \(file.id))")
+            case let .webLink(webLink):
+                print("- Web Link \(file.name) (ID: \(file.id))")
             }
         }
+
     case let .failure(error):
         print(error)
     }
@@ -53,31 +48,26 @@ Content Search with Shared Link Items
 
 To get a list of items matching a search query, including items that a user might have accessed recently through a shared link, call [`client.search.queryWithSharedLinks(query:...)`][search_with_shared_link_items] with the
 string to query for.  There are many possible options for advanced search filtering, which can be used to narrow down
-the search results. This method will return an iterator object in the completion, which is used to get the results.
+the search results. This method will return an iterator object, which is used to get the results.
 
 <!-- sample get_search_with_shared_link_items -->
 ```swift
-client.search.queryWithSharedLinks(query: "Quarterly Business Review") { results in
+let iterator = client.search.queryWithSharedLinks(query: "Quarterly Business Review")
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(searchResult):
-                    let item = searchResult.item
-                    switch item {
-                    case let .file(file):
-                        print("- File \(file.name) (ID: \(file.id))")
-                    case let .folder(folder):
-                        print("- Folder \(file.name) (ID: \(file.id))")
-                    case let .webLink(webLink):
-                        print("- Web Link \(file.name) (ID: \(file.id))")
-                    }
-                case let .failure(error):
-                    print(error)
-                }
+    case let .success(page):
+        for searchResult in page.entries {
+            let item = searchResult.item
+            switch item {
+            case let .file(file):
+                print("- File \(file.name) (ID: \(file.id))")
+            case let .folder(folder):
+                print("- Folder \(file.name) (ID: \(file.id))")
+            case let .webLink(webLink):
+                print("- Web Link \(file.name) (ID: \(file.id))")
             }
         }
+
     case let .failure(error):
         print(error)
     }
@@ -91,32 +81,27 @@ Metadata Search
 
 To search within metadata for specific values, use the helper methods included in the SDK to construct the metadata
 query and call [`client.search.query(query:...)`][search] with the metadata filters and optionally a
-search query.  If no additional content query string is needed, just set the `query` parameter to `nil`. This method will return an iterator object in the completion, which is used to get the results. 
+search query.  If no additional content query string is needed, just set the `query` parameter to `nil`. This method will return an iterator object, which is used to get the results. 
 
 ```swift
 let metadataFilters = MetadataSearchFilter()
 metadataFilters.addFilter(templateKey: "contract", fieldKey: "contractType", fieldValue: "NDA")
 metadataFilters.addFilter(templateKey: "contract", fieldKey: "date", fieldValue: "2019-01-01T00:00:00Z", relation: .greaterThan)
-client.search.query(query: nil, metadataFilter: metadataFilters) { results in
+let iterator = client.search.query(query: nil, metadataFilter: metadataFilters)
+iterator.next { results in
     switch results {
-    case let .success(iterator):
-        for i in 1 ... 10 {
-            iterator.next { result in
-                switch result {
-                case let .success(item):
-                    switch item {
-                    case let .file(file):
-                        print("- File \(file.name) (ID: \(file.id))")
-                    case let .folder(folder):
-                        print("- Folder \(file.name) (ID: \(file.id))")
-                    case let .webLink(webLink):
-                        print("- Web Link \(file.name) (ID: \(file.id))")
-                    }
-                case let .failure(error):
-                    print(error)
-                }
+    case let .success(page):
+        for item in page.entries {
+            switch item {
+            case let .file(file):
+                print("- File \(file.name) (ID: \(file.id))")
+            case let .folder(folder):
+                print("- Folder \(file.name) (ID: \(file.id))")
+            case let .webLink(webLink):
+                print("- Web Link \(file.name) (ID: \(file.id))")
             }
         }
+
     case let .failure(error):
         print(error)
     }  

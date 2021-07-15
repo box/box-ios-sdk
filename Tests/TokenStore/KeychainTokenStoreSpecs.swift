@@ -11,7 +11,7 @@ import Nimble
 import Quick
 
 class KeychainTokenStoreSpecs: QuickSpec {
-    var sut: KeychainTokenStore = KeychainTokenStore()
+    var sut = KeychainTokenStore()
     let tokenInfo = TokenInfo(
         accessToken: "1234567890",
         refreshToken: "1234567890",

@@ -1,5 +1,5 @@
 //
-//  CollaborationWhitelistEntry.swift
+//  CollaborationAllowlistEntry.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 8/29/19.
@@ -47,9 +47,9 @@ public enum CollaborationDirection: BoxEnum {
     }
 }
 
-/// A whitelisted domain in the enterprise. This record consists of both direction
+/// An allowlisted domain in the enterprise. This record consists of both direction
 /// (inbound, outbound, or both) and a domain (box.com).
-public class CollaborationWhitelistEntry: BoxModel {
+public class CollaborationAllowlistEntry: BoxModel {
     // MARK: - BoxModel
 
     public private(set) var rawData: [String: Any]
@@ -78,7 +78,7 @@ public class CollaborationWhitelistEntry: BoxModel {
     public required init(json: [String: Any]) throws {
         rawData = json
 
-        guard let itemType = json["type"] as? String, itemType == CollaborationWhitelistEntry.resourceType else {
+        guard let itemType = json["type"] as? String, itemType == CollaborationAllowlistEntry.resourceType else {
             throw BoxCodingError(message: .typeMismatch(key: "type"))
         }
 

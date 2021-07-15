@@ -10,7 +10,7 @@ import Foundation
 
 /// Specifies who can invite the group to collaborate on folders.
 public enum GroupInvitabilityLevel: BoxEnum {
-    /// Master Admin, Co-admins, the group's Group Admin can invite
+    /// Main Admin, Co-admins, the group's Group Admin can invite
     case adminsOnly
     /// Admins and group members can invite
     case adminsAndMembers
@@ -52,7 +52,7 @@ public enum GroupInvitabilityLevel: BoxEnum {
 
 /// Specifies who can view the members of the group.
 public enum GroupMemberViewabilityLevel: BoxEnum {
-    /// Master Admin, Coadmins and group's Group Admin can view the members of the group.
+    /// Main Admin, Coadmins and group's Group Admin can view the members of the group.
     case adminsOnly
     /// Admins and group members can view the members of the group.
     case adminsAndMembers

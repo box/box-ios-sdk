@@ -47,7 +47,7 @@ class WatermarkSpecs: QuickSpec {
                         do {
                             let contents = try String(contentsOfFile: filepath)
                             let watermarkDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
-                            let expectedError: BoxError = BoxError.decoding(error: BoxDecodingError.typeMismatch(key: "watermark", expectedType: [String: Any].self))
+                            let expectedError = BoxError.decoding(error: BoxDecodingError.typeMismatch(key: "watermark", expectedType: [String: Any].self))
                             expect(try Watermark(json: watermarkDictionary as! [String: Any])).to(throwError(expectedError))
                         }
                         catch {
@@ -67,7 +67,7 @@ class WatermarkSpecs: QuickSpec {
                         do {
                             let contents = try String(contentsOfFile: filepath)
                             let watermarkDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
-                            let expectedError: BoxError = BoxError.decoding(error: BoxDecodingError.invalidValueFormat(key: "created_at", value: "2019-08-26", expectedType: Date.self))
+                            let expectedError = BoxError.decoding(error: BoxDecodingError.invalidValueFormat(key: "created_at", value: "2019-08-26", expectedType: Date.self))
                             expect(try Watermark(json: watermarkDictionary as! [String: Any])).to(throwError(expectedError))
                         }
                         catch {

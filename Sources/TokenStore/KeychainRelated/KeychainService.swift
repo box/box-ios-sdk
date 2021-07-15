@@ -18,7 +18,8 @@ struct KeychainService {
 
     func set<T: Encodable>(_ value: T?, key: String) throws {
         guard let json = value?.dictionary,
-            let data = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions()) else {
+              let data = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions())
+        else {
             throw BoxSDKError(message: .keychainDataConversionError)
         }
 

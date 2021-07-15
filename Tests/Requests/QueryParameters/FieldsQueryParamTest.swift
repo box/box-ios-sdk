@@ -13,7 +13,7 @@ import Quick
 
 class FieldsQueryParamTest: QuickSpec {
 
-    public override func spec() {
+    override public func spec() {
 
         describe("FieldsQueryParam") {
 

@@ -105,13 +105,13 @@
                 <a href="../Classes/Collaboration/TwoFactorAuthenticationRequirement.html">– TwoFactorAuthenticationRequirement</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a>
+                <a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a>
+                <a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistModule.html">CollaborationWhitelistModule</a>
+                <a href="../Classes/CollaborationAllowlistModule.html">CollaborationAllowlistModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
@@ -834,9 +834,9 @@ include in the response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fields10completionySS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C3PinCGAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/listForEnterprise(enterpriseId:marker:limit:direction:fields:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fields10completionySS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgys6ResultOyAA14PagingIteratorCyAA0C3PinCGAA0A8SDKErrorCGctF">listForEnterprise(enterpriseId:<wbr>marker:<wbr>limit:<wbr>direction:<wbr>fields:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fieldsAA14PagingIteratorCyAA0C3PinCGSS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listForEnterprise(enterpriseId:marker:limit:direction:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK16DevicePinsModuleC17listForEnterprise12enterpriseId6marker5limit9direction6fieldsAA14PagingIteratorCyAA0C3PinCGSS_SSSgSiSgAA14OrderDirectionOSgSaySSGSgtF">listForEnterprise(enterpriseId:<wbr>marker:<wbr>limit:<wbr>direction:<wbr>fields:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -856,9 +856,8 @@ include in the response.</p>
     <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">direction</span><span class="p">:</span> <span class="kt"><a href="../Enums/OrderDirection.html">OrderDirection</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/DevicePin.html">DevicePin</a></span><span class="o">&gt;&gt;</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/DevicePin.html">DevicePin</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -988,7 +987,7 @@ include in the response.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-04-20)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-09)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

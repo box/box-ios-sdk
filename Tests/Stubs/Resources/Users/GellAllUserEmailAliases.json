@@ -11,7 +11,7 @@
             "type": "email_alias",
             "id": "1235",
             "is_confirmed": true,
-            "email": "dummy2@email.com"
+            "email": "temp2@email.com"
         }
     ]
 }

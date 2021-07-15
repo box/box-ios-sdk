@@ -15,7 +15,7 @@ import Quick
 public class DevicePinsModuleSpecs: QuickSpec {
     var sut: BoxClient!
 
-    public override func spec() {
+    override public func spec() {
 
         describe("Device Pins Module") {
             beforeEach {

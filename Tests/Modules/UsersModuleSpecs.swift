@@ -177,7 +177,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: 10) { done in
-                        self.sut.users.getCurrent() { result in
+                        self.sut.users.getCurrent { result in
                             switch result {
                             case let .success(user):
                                 expect(user).toNot(beNil())

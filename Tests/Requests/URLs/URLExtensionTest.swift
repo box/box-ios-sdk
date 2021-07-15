@@ -13,7 +13,7 @@ import Quick
 
 class URLExtensionTest: QuickSpec {
 
-    public override func spec() {
+    override public func spec() {
 
         let configuration: BoxSDKConfiguration = try! BoxSDKConfiguration(clientId: "", clientSecret: "")
         let customURLPart: String = "/testurl"

@@ -79,7 +79,7 @@ public class DelegatedAuthSession: SessionProtocol {
     public func getAccessToken(completion: @escaping AccessTokenClosure) {
         // Check if the cached token info is valid, if so just return that access token
 
-        if let unwrappedTokenInfo = self.tokenInfo {
+        if let unwrappedTokenInfo = tokenInfo {
             if isValidToken() {
                 completion(.success(unwrappedTokenInfo.accessToken))
                 return
@@ -103,7 +103,7 @@ public class DelegatedAuthSession: SessionProtocol {
 
             self.authClosure(self.uniqueID) { result in
                 switch result {
-                case let .success(accessToken, expiresIn):
+                case let .success((accessToken, expiresIn)):
                     if expiresIn < self.configuration.tokenRefreshThreshold {
                         completion(.failure(BoxAPIAuthError(message: .expiredToken)))
                         done()
