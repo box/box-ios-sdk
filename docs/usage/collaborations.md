@@ -83,7 +83,7 @@ client.collaborations.create(
 }
 ```
 
-To collaborate a user, pass in a group id and the `.group` accessible by type.
+To collaborate a group, pass in a group id and the `.group` accessible by type.
 
 <!-- sample post_collaborations group-->
 ```swift
