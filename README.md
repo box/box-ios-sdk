@@ -5,6 +5,8 @@
  [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
  [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
 
+Getting Started Docs: https://developer.box.com/guides/mobile/ios/quick-start/
+
 NOTE:
 ===================
 
