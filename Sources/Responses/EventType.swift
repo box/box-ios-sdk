@@ -68,9 +68,9 @@ public enum EventType: BoxEnum {
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
     /// Free user accepts invitation to become a managed user.
-    case masterInviteAccepted
+    case adminInviteAccepted
     /// Free user rejects invitation to become a managed user.
-    case masterInviteRejected
+    case adminInviteRejected
     /// Granted Box access to account.
     case accessGranted
     /// Revoke Box access to account.
@@ -306,10 +306,14 @@ public enum EventType: BoxEnum {
             self = .tagAdded
         case "ENABLE_TWO_FACTOR_AUTH":
             self = .twoFactorEnabled
+        case "ADMIN_INVITE_ACCEPT":
+            self = .adminInviteAccepted
         case "MASTER_INVITE_ACCEPT":
-            self = .masterInviteAccepted
+            self = .adminInviteAccepted
+        case "ADMIN_INVITE_REJECT":
+            self = .adminInviteRejected
         case "MASTER_INVITE_REJECT":
-            self = .masterInviteRejected
+            self = .adminInviteRejected
         case "ACCESS_GRANTED":
             self = .accessGranted
         case "ACCESS_REVOKED":
@@ -508,9 +512,9 @@ public enum EventType: BoxEnum {
             return "TAG_ITEM_CREATE"
         case .twoFactorEnabled:
             return "ENABLE_TWO_FACTOR_AUTH"
-        case .masterInviteAccepted:
+        case .adminInviteAccepted:
             return "MASTER_INVITE_ACCEPT"
-        case .masterInviteRejected:
+        case .adminInviteRejected:
             return "MASTER_INVITE_REJECT"
         case .accessGranted:
             return "ACCESS_GRANTED"
