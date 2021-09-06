@@ -68,8 +68,10 @@ public enum EventType: BoxEnum {
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
     /// Free user accepts invitation to become a managed user.
+    case masterInviteAccepted
     case adminInviteAccepted
     /// Free user rejects invitation to become a managed user.
+    case masterInviteRejected
     case adminInviteRejected
     /// Granted Box access to account.
     case accessGranted
