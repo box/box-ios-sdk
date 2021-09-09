@@ -9,6 +9,8 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Replace insensitive event types ([#785](https://github.com/box/box-ios-sdk/pull/785))
+
 __Bug Fixes:__
 
 ## v4.4.0 [2021-04-20]
