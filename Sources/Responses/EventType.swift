@@ -67,11 +67,13 @@ public enum EventType: BoxEnum {
     case tagAdded
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
-    /// Free user accepts invitation to become a managed user.
+    /// (deprecated)
     case masterInviteAccepted
+    /// Free user accepts invitation to become a managed user.
     case adminInviteAccepted
-    /// Free user rejects invitation to become a managed user.
+    /// (deprecated)
     case masterInviteRejected
+    /// Free user rejects invitation to become a managed user.
     case adminInviteRejected
     /// Granted Box access to account.
     case accessGranted
