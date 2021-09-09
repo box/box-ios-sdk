@@ -516,8 +516,12 @@ public enum EventType: BoxEnum {
             return "TAG_ITEM_CREATE"
         case .twoFactorEnabled:
             return "ENABLE_TWO_FACTOR_AUTH"
+        case .masterInviteAccepted:
+            return "MASTER_INVITE_ACCEPT"
         case .adminInviteAccepted:
             return "MASTER_INVITE_ACCEPT"
+        case .masterInviteRejected:
+            return "MASTER_INVITE_REJECT"
         case .adminInviteRejected:
             return "MASTER_INVITE_REJECT"
         case .accessGranted:
