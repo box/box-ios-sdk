@@ -39,7 +39,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.trash.listItems()
                         iterator.next { result in
                             switch result {
@@ -80,7 +80,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.getFile(id: "5859258256") { result in
                             switch result {
                             case let .success(file):
@@ -115,7 +115,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.getFolder(id: "11446498") { result in
                             switch result {
                             case let .success(folder):
@@ -150,7 +150,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.getWebLink(id: "6742981") { result in
                             switch result {
                             case let .success(webLink):
@@ -189,7 +189,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.restoreFile(
                             id: "123456",
                             name: "non-conflicting-name.jpg",
@@ -232,7 +232,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.restoreFolder(
                             id: "11446498",
                             name: "non-conflicting-name",
@@ -275,7 +275,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.restoreWebLink(
                             id: "6742981",
                             name: "non-conflicting-name",
@@ -313,7 +313,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.permanentlyDeleteFile(id: "123456") { result in
                             switch result {
                             case .success:
@@ -341,7 +341,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.permanentlyDeleteFolder(id: "123456") { result in
                             switch result {
                             case .success:
@@ -369,7 +369,7 @@ class TrashModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.trash.permanentlyDeleteWebLink(id: "123456") { result in
                             switch result {
                             case .success:

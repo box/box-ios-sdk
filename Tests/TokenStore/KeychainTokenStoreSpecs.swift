@@ -28,7 +28,7 @@ class KeychainTokenStoreSpecs: QuickSpec {
 
             context("write token info to an empty keychain") {
                 it("KeychainStore should insert a new TokenInfo") {
-                    waitUntil(timeout: 1.0) { done in
+                    waitUntil(timeout: .seconds(1)) { done in
                         self.sut.write(tokenInfo: self.tokenInfo) { result in
                             switch result {
                             case .success:
@@ -45,7 +45,7 @@ class KeychainTokenStoreSpecs: QuickSpec {
             context("delete a token info from keychain") {
                 it("KeychainStore should delete the tokenInfo from the Keychain") {
                     self.sut.write(tokenInfo: self.tokenInfo) { _ in }
-                    waitUntil(timeout: 1.0) { done in
+                    waitUntil(timeout: .seconds(1)) { done in
                         self.sut.clear { result in
                             switch result {
                             case .success:
@@ -61,7 +61,7 @@ class KeychainTokenStoreSpecs: QuickSpec {
 
             context("retreive token info from empty keychain") {
                 it("KeychainStore shouldn't return any token info") {
-                    waitUntil(timeout: 1.0) { done in
+                    waitUntil(timeout: .seconds(1)) { done in
                         self.sut.read { result in
                             switch result {
                             case .success:
@@ -77,7 +77,7 @@ class KeychainTokenStoreSpecs: QuickSpec {
 
             context("retreive token info from non empty keychain") {
                 it("KeychainStore should return a token info object") {
-                    waitUntil(timeout: 1.0) { done in
+                    waitUntil(timeout: .seconds(1)) { done in
                         self.sut.write(tokenInfo: self.tokenInfo) { _ in }
                         self.sut.read { result in
                             switch result {

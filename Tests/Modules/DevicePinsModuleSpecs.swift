@@ -33,7 +33,7 @@ public class DevicePinsModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.devicePins.delete(devicePinId: "12345") { response in
                             switch response {
                             case .success:
@@ -57,7 +57,7 @@ public class DevicePinsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.devicePins.get(devicePinId: "12345") { result in
                             switch result {
                             case let .success(devicePin):
@@ -89,7 +89,7 @@ public class DevicePinsModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
                         iterator.next { result in
                             switch result {

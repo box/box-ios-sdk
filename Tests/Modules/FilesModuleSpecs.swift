@@ -34,7 +34,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.get(fileId: "5000948880") { result in
                             switch result {
                             case let .success(file):
@@ -63,7 +63,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.get(fileId: "500094889") { result in
                             switch result {
                             case .success:
@@ -121,7 +121,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.listRepresentations(fileId: "12345", representationHint: .extractedText) { result in
                             switch result {
                             case let .success(representations):
@@ -159,7 +159,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.listRepresentations(fileId: "12345") { result in
                             switch result {
                             case let .success(representations):
@@ -205,7 +205,7 @@ class FilesModuleSpecs: QuickSpec {
                             OHHTTPStubsResponse(data: "Extracted text".data(using: .utf8)!, statusCode: 200, headers: [:])
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
 
                             self.sut.files.getRepresentationContent(
                                 fileId: "12345",
@@ -245,7 +245,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
 
                             self.sut.files.getRepresentationContent(
                                 fileId: "12345",
@@ -284,7 +284,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.files.getRepresentationContent(
                                 fileId: "12345",
                                 representationHint: .thumbnail,
@@ -338,7 +338,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.files.getRepresentationContent(
                                 fileId: "12345",
                                 representationHint: .extractedText,
@@ -388,7 +388,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.update(fileId: "5000948880", name: "hello.jpg", description: nil, parentId: "0", sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true)), tags: nil) { result in
                             switch result {
                             case let .success(file):
@@ -429,7 +429,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.update(fileId: "5000948880", sharedLink: .value(SharedLinkData(password: .null))) { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to updateFileInfo to succeed, but instead got \(error)")
@@ -448,7 +448,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.update(fileId: "50009488812", name: nil, description: nil, parentId: nil, sharedLink: nil, tags: nil) { result in
                             switch result {
                             case .success:
@@ -480,7 +480,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.copy(fileId: "5000948880", parentId: "0") { result in
                             switch result {
                             case let .success(file):
@@ -510,7 +510,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.copy(fileId: "500094889", parentId: "0") { result in
                             switch result {
                             case .success:
@@ -540,7 +540,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
 
                             self.sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
@@ -579,7 +579,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
 
                             self.sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
@@ -609,7 +609,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
                             var progressed: Double?
                             let task = self.sut.files.upload(
@@ -650,7 +650,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
                             var progressed: Double?
                             var task: BoxUploadTask?
@@ -699,7 +699,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
 
                             self.sut.files.upload(
                                 data: data, name: "tigers.jpeg", parentId: "0", performPreflightCheck: true,
@@ -745,7 +745,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             var progressed: Double?
                             let task = self.sut.files.upload(
                                 data: data,
@@ -791,7 +791,7 @@ class FilesModuleSpecs: QuickSpec {
                             )
                         }
 
-                        waitUntil(timeout: 200) { done in
+                        waitUntil(timeout: .seconds(200)) { done in
                             var progressed: Double?
                             var task: BoxUploadTask?
                             task = self.sut.files.upload(
@@ -838,7 +838,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 200) { done in
+                    waitUntil(timeout: .seconds(200)) { done in
 
                         self.sut.files.upload(
                             data: data, name: "tigers.jpeg", parentId: "0", performPreflightCheck: true,
@@ -869,7 +869,7 @@ class FilesModuleSpecs: QuickSpec {
                                 statusCode: 201, headers: [:]
                             )
                         }
-                        waitUntil(timeout: 100) { done in
+                        waitUntil(timeout: .seconds(100)) { done in
                             let uploadedData: Data = "This is upload file version test file content".data(using: .utf8)!
                             self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: uploadedData) { result in
                                 switch result {
@@ -913,7 +913,7 @@ class FilesModuleSpecs: QuickSpec {
                                 statusCode: 201, headers: [:]
                             )
                         }
-                        waitUntil(timeout: 100) { done in
+                        waitUntil(timeout: .seconds(100)) { done in
                             self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
                                 switch result {
                                 case let .success(file):
@@ -956,7 +956,7 @@ class FilesModuleSpecs: QuickSpec {
                                 statusCode: 201, headers: [:]
                             )
                         }
-                        waitUntil(timeout: 100) { done in
+                        waitUntil(timeout: .seconds(100)) { done in
                             self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
                                 switch result {
                                 case .success:
@@ -982,7 +982,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
 
                     let data = Data("hello from tests".utf8)
-                    waitUntil(timeout: 999) { done in
+                    waitUntil(timeout: .seconds(999)) { done in
                         self.sut.files.streamUpload(stream: InputStream(data: data), fileSize: data.count, name: "tigers.jpeg", parentId: "0", completion: { result in
                             switch result {
                             case let .success(file):
@@ -1015,7 +1015,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
 
                     let data = Data("updated file content".utf8)
-                    waitUntil(timeout: 999) { done in
+                    waitUntil(timeout: .seconds(999)) { done in
                         self.sut.files.streamUploadVersion(stream: InputStream(data: data), fileSize: data.count, forFile: "123456", name: "tigers.jpeg") { result in
                             switch result {
                             case let .success(file):
@@ -1048,7 +1048,7 @@ class FilesModuleSpecs: QuickSpec {
                             OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.files.preflightCheck(name: "random.txt", parentId: "0", size: 12345) { result in
                                 switch result {
                                 case .success:
@@ -1072,7 +1072,7 @@ class FilesModuleSpecs: QuickSpec {
                             OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                         }
 
-                        waitUntil(timeout: 10) { done in
+                        waitUntil(timeout: .seconds(10)) { done in
                             self.sut.files.preflightCheckForNewVersion(forFile: "1234", name: "random.txt", size: 12345) { result in
                                 switch result {
                                 case .success:
@@ -1096,7 +1096,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.lock(
                             fileId: "76017730626",
                             isDownloadPrevented: false,
@@ -1129,7 +1129,7 @@ class FilesModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.unlock(
                             fileId: "76017730626",
                             fields: ["lock"]
@@ -1157,7 +1157,7 @@ class FilesModuleSpecs: QuickSpec {
                         return OHHTTPStubsResponse(data: data, statusCode: 200, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.getThumbnail(
                             forFile: "76017730626",
                             extension: .jpg,
@@ -1189,7 +1189,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
 
                 it("should be able to embed link the file") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.getEmbedLink(forFile: "34122832467") { result in
                             switch result {
                             case let .success(expiringEmbedLink):
@@ -1214,7 +1214,7 @@ class FilesModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.files.listCollaborations(forFile: "123456", limit: 100)
                         iterator.next { result in
                             switch result {
@@ -1250,7 +1250,7 @@ class FilesModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
 
                         let iterator = self.sut.files.listComments(forFile: "5000948880", offset: 0, limit: 100)
                         iterator.next { result in
@@ -1281,7 +1281,7 @@ class FilesModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.files.listTasks(forFile: "5000948880")
                         iterator.next { result in
                             switch result {
@@ -1335,7 +1335,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
                 it("should make API call to add file to favorites") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.addToFavorites(fileId: "5000948880", completion: { result in
                             switch result {
                             case let .success(file):
@@ -1386,7 +1386,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
                 it("should make API call to remove file from favorites") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.removeFromFavorites(fileId: "5000948880", completion: { result in
                             switch result {
                             case let .success(file):
@@ -1416,7 +1416,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.getVersion(fileId: "12345", fileVersionId: "11111") { result in
                         switch result {
                         case let .success(fileVersion):
@@ -1452,7 +1452,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.promoteVersion(fileId: "12345", fileVersionId: "11111") { result in
                         switch result {
                         case let .success(fileVersion):
@@ -1477,7 +1477,7 @@ class FilesModuleSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.deleteVersion(fileId: "12345", fileVersionId: "11111") { response in
                         switch response {
                         case .success:
@@ -1502,7 +1502,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let iterator = self.sut.files.listVersions(fileId: "12345")
                     iterator.next { result in
                         switch result {
@@ -1535,7 +1535,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.getWatermark(fileId: "12345") { result in
                         switch result {
                         case let .success(watermark):
@@ -1569,7 +1569,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.applyWatermark(fileId: "12345") { result in
                         switch result {
                         case let .success(watermark):
@@ -1591,7 +1591,7 @@ class FilesModuleSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.removeWatermark(fileId: "12345") { response in
                         switch response {
                         case .success:
@@ -1619,7 +1619,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
                 it("should be able to download a file") {
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                         let fileURL = documentsURL.appendingPathComponent("doc.txt")
                         self.sut.files.download(
@@ -1640,7 +1640,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 it("should be cancelled immediately") {
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                         let fileURL = documentsURL.appendingPathComponent("doc.txt")
                         var progressed: Double?
@@ -1667,7 +1667,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 it("should be cancelled after 50% was downloaded") {
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                         let fileURL = documentsURL.appendingPathComponent("doc.txt")
                         var progressed: Double?
@@ -1707,7 +1707,7 @@ class FilesModuleSpecs: QuickSpec {
                     OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.delete(fileId: "12345") { response in
                         switch response {
                         case .success:
@@ -1736,7 +1736,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
             it("should download a shared link for a file", closure: {
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.getSharedLink(forFile: "5000948880") { result in
                         switch result {
                         case let .success(sharedLink):
@@ -1767,7 +1767,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
                 it("should update a shared link on a file", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.setSharedLink(forFile: "5000948880", access: .open, password: .value("frog")) { result in
                             switch result {
                             case let .success(sharedLink):
@@ -1801,7 +1801,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
                 it("should update a shared link on a file", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open) { result in
                             switch result {
                             case let .success(sharedLink):
@@ -1835,7 +1835,7 @@ class FilesModuleSpecs: QuickSpec {
                     }
                 }
                 it("should update a shared link on a file", closure: {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
                             switch result {
                             case let .success(sharedLink):
@@ -1869,7 +1869,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
             it("should delete a shared link for a file", closure: {
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.deleteSharedLink(forFile: "5000948880") { result in
                         switch result {
                         case .success:
@@ -1925,7 +1925,7 @@ class FilesModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         var items: [ZipDownloadItem] = []
                         items.append(ZipDownloadItem(
                             id: "5000948880",
@@ -1979,7 +1979,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
             it("should create a chunked upload session for a new file") {
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.createUploadSession(folderId: "123456", fileName: "Temp.txt", fileSize: 2) { result in
                         switch result {
                         case let .success(session):
@@ -2018,7 +2018,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
             it("should create a chunked upload session for a new version of file") {
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.createUploadSessionForNewVersion(ofFile: "12345", fileName: "Temp.txt", fileSize: 2) { result in
                         switch result {
                         case let .success(session):
@@ -2059,7 +2059,7 @@ class FilesModuleSpecs: QuickSpec {
             }
             it("should upload part of file using chunked upload session") {
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.uploadPart(sessionId: "F971964745A5CD0C001BBE4E58196BFD", data: data, offset: 8_388_608, totalSize: 100_000_000) { result in
                         switch result {
                         case let .success(uploadPart):
@@ -2094,7 +2094,7 @@ class FilesModuleSpecs: QuickSpec {
 
             it("should be able to return the list of parts uploaded so far") {
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let iterator = self.sut.files.listUploadSessionParts(sessionId: "F971964745A5CD0C001BBE4E58196BFD")
                     iterator.next { result in
                         switch result {
@@ -2141,7 +2141,7 @@ class FilesModuleSpecs: QuickSpec {
                 }
             }
             it("should perform a commit for chunked upload session") {
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let parts = [
                         UploadPartDescription(partId: "BFDF5379", offset: 0, size: 8_388_608, sha1: nil),
                         UploadPartDescription(partId: "E8A3ED8E", offset: 8_388_608, size: 1_611_392, sha1: nil)
@@ -2184,7 +2184,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.abortUpload(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
                         switch result {
                         case .success:
@@ -2213,7 +2213,7 @@ class FilesModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.files.getUploadSession(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
                         switch result {
                         case let .success(session):

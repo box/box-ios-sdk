@@ -79,7 +79,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { result in
                         switch result {
                         case .success:
@@ -106,7 +106,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { result in
                         switch result {
                         case .success:
@@ -132,7 +132,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.destroy { _ in
                         client.users.getCurrent { result in
                             guard case let .failure(error) = result else {
@@ -156,7 +156,7 @@ class BoxClientSpecs: QuickSpec {
 
                 var client: BoxClient!
                 let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
                     sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
                         switch result {
@@ -179,7 +179,7 @@ class BoxClientSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     client.users.getCurrent { result in
                         guard case let .failure(error) = result else {
                             fail("Expected request method to result in an error")
