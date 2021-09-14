@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		056FE12A26EF6F6800098F00 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
-		056FE12B26EF6F6800098F00 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
-		056FE12C26EF6F6800098F00 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
+		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
+		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
+		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
 		0C008372229C45480067C1AF /* UpdateFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C008371229C45480067C1AF /* UpdateFolder.json */; };
@@ -488,6 +491,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */,
+				05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */,
+				05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +504,9 @@
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
+		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
 		0C008369229C39F00067C1AF /* CopyFolder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CopyFolder.json; sourceTree = "<group>"; };
@@ -969,9 +978,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3549BB661DA38ADB00C63030 /* BoxSDK.framework in Frameworks */,
-				056FE12A26EF6F6800098F00 /* Quick.xcframework in Frameworks */,
-				056FE12B26EF6F6800098F00 /* OHHTTPStubs.xcframework in Frameworks */,
-				056FE12C26EF6F6800098F00 /* Nimble.xcframework in Frameworks */,
+				05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */,
+				05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */,
+				05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1605,9 @@
 		3549BAFB1DA387DB00C63030 = {
 			isa = PBXGroup;
 			children = (
+				05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */,
+				05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */,
+				05EFAB2026F0F01100DF1830 /* Quick.xcframework */,
 				97FA4FE9234FF47900A615B8 /* docs */,
 				3549BB161DA3890B00C63030 /* Sources */,
 				3549BB191DA3890B00C63030 /* Tests */,
@@ -2768,7 +2780,17 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3068,7 +3090,17 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3095,7 +3127,17 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
