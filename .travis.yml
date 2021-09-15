@@ -13,10 +13,11 @@ before_install:
   - gem install bundler
   - bundle install --path vendor/bundle
   - gem install xcpretty
+  - brew install carthage || true
   - brew outdated carthage || brew upgrade carthage
   - brew outdated swiftlint || brew upgrade swiftlint
   - gem install xcode-install
-  - echo "" | xcversion simulators --install="iOS $IOS_VERSION" --force
+  # - echo "" | xcversion simulators --install="iOS $IOS_VERSION" --force
 
 install:
   - gem install jazzy
