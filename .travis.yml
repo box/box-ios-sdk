@@ -5,8 +5,8 @@ branches:
     - main
 cache:
   directories:
-    - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
-    - Carthage
+#    - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
+#    - Carthage
     - vendor/bundle
 
 before_install:
