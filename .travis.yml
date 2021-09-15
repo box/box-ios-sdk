@@ -5,15 +5,15 @@ branches:
     - main
 cache:
   directories:
-#    - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
-#    - Carthage
+    - $HOME/Library/Caches/org.carthage.CarthageKit/dependencies
+    - Carthage
     - vendor/bundle
 
 before_install:
   - gem install bundler
   - bundle install --path vendor/bundle
+  - brew update
   - gem install xcpretty
-  - brew install carthage || true
   - brew outdated carthage || brew upgrade carthage
   - brew outdated swiftlint || brew upgrade swiftlint
   - gem install xcode-install
@@ -34,9 +34,9 @@ env:
     - TEST_APP_SCHEME="TestApp"
   matrix:
     - IOS_VERSION="14.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone 11"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
-    - IOS_VERSION="13.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone 11"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
-    - IOS_VERSION="12.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone XS"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
-    - IOS_VERSION="11.4" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone X"                   SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+    # - IOS_VERSION="13.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone 11"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+    # - IOS_VERSION="12.0" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone XS"                  SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+    # - IOS_VERSION="11.4" DESTINATION="platform=iOS Simulator,OS=$IOS_VERSION,name=iPhone X"                   SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
 
 before_script:
   - sh scripts/bootstrap
