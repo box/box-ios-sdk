@@ -13,6 +13,7 @@
 		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
 		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
+		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
 		0C008372229C45480067C1AF /* UpdateFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C008371229C45480067C1AF /* UpdateFolder.json */; };
@@ -507,6 +508,7 @@
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
+		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
 		0C008369229C39F00067C1AF /* CopyFolder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CopyFolder.json; sourceTree = "<group>"; };
@@ -1570,6 +1572,7 @@
 				9299AE372326B72400E8F235 /* UIDeviceExtensionSpecs.swift */,
 				97FA4FDF234D123A00A615B8 /* BoxJSONDecoderSpecs.swift */,
 				F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */,
+				05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2614,6 +2617,7 @@
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */,
+				05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */,
 				80BC844A232C56E000010E08 /* TermsOfServicesModuleSpecs.swift in Sources */,
 				0C6398A72253A605004021D3 /* BoxClientSpecs.swift in Sources */,
 				22D0041422AFB25500478F1E /* CollectionsModuleSpecs.swift in Sources */,
