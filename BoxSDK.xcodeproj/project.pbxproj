@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
 		054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */; };
 		054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */; };
@@ -2645,6 +2646,7 @@
 				0C6398A72253A605004021D3 /* BoxClientSpecs.swift in Sources */,
 				05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */,
 				22D0041422AFB25500478F1E /* CollectionsModuleSpecs.swift in Sources */,
+				052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */,
 				F99D418D2319CE7E00327698 /* WebhooksModuleSpecs.swift in Sources */,
 				0C28DCC022AF099B0005AC46 /* JSONComparer.swift in Sources */,
 				9DC6D81522F467A300A72284 /* EventsModuleSpecs.swift in Sources */,
