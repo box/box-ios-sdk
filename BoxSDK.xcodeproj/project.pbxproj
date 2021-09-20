@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
+		054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */; };
+		054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */; };
+		05B705A526FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705A326FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json */; };
+		05B705A626FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705A426FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -503,9 +508,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationItemSpecs.swift; sourceTree = "<group>"; };
+		054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFile.json; sourceTree = "<group>"; };
+		054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFolder.json; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05B705A326FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItem_ValueFormatMismatch.json; sourceTree = "<group>"; };
+		05B705A426FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItem_MissingRequiredField.json; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -1010,6 +1020,10 @@
 		0C506CAC22A6AB30007F18A4 /* Collaborations */ = {
 			isa = PBXGroup;
 			children = (
+				05B705A426FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json */,
+				05B705A326FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json */,
+				054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */,
+				054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */,
 				0C506CB322A6ABA4007F18A4 /* GetCollaboration.json */,
 				0C506CB722A6AE76007F18A4 /* CreateCollaboration.json */,
 				0C506CC022A6B376007F18A4 /* PendingCollaborations.json */,
@@ -1746,6 +1760,7 @@
 				F99DB496233C41440065317F /* RetentionPolicySpecs.swift */,
 				F928144A233E840100E42EEE /* RetentionPolicyAssignmentSpecs.swift */,
 				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
+				054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2235,6 +2250,8 @@
 				0C59EA3C2289C63300DAE688 /* UpdateUser.json in Resources */,
 				F929D6172331AE280039E452 /* GetPolicyAssignmentInfo.json in Resources */,
 				22720EA32316BE9F00887AA4 /* GetTaskAssignment.json in Resources */,
+				054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */,
+				054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */,
 				0CD34255228AEDE600BAFF4B /* GetEnterpriseUsersOffset-Pagination.json in Resources */,
 				0CD34269228B029400BAFF4B /* GellAllUserEmailAliases.json in Resources */,
 				9D472E7D231BF4B2004C8023 /* UpdateRetentionPolicy.json in Resources */,
@@ -2274,6 +2291,7 @@
 				2280E3342301630B00F98892 /* GetTrashedFolder.json in Resources */,
 				224E1BEC22C5365400F31F3A /* GetEnterpriseTemplates.json in Resources */,
 				22D0043B22AFBC6B00478F1E /* AddFolderToFavorites.json in Resources */,
+				05B705A526FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json in Resources */,
 				22C41453231ED19700D3992C /* GetMetadataCascadePolicy.json in Resources */,
 				9717866D22F0C694004A5F6D /* RemoveFolderSharedLink.json in Resources */,
 				0CA0651E22980EE900A751B1 /* image.png in Resources */,
@@ -2302,6 +2320,7 @@
 				9D8AF93C22D63137009D3D01 /* UploadFileVersion.json in Resources */,
 				0CD34259228AF07800BAFF4B /* InviteUserToEnterprise.json in Resources */,
 				F969D3AC233A73A4001301FC /* GetStoragePolicies.json in Resources */,
+				05B705A626FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json in Resources */,
 				0CD3425D228AF94700BAFF4B /* MoveUserItemsToAnotherUser.json in Resources */,
 				176CAE09231D72BC004269F5 /* GetFileVersionRetention.json in Resources */,
 				22E60D67230317C100E86A4A /* GetRepresentationsUnknownState.json in Resources */,
@@ -2609,6 +2628,7 @@
 				2278C547231D78F10048FF45 /* CollaborationAllowlistModuleSpecs.swift in Sources */,
 				97F04DAD22B96B120034B9A3 /* TaskSpecs.swift in Sources */,
 				22E39EDB22F09E820061E182 /* TrashModuleSpecs.swift in Sources */,
+				054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */,
 				22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */,
 				F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */,
 				97F04DA122B84E540034B9A3 /* UserSpecs.swift in Sources */,
