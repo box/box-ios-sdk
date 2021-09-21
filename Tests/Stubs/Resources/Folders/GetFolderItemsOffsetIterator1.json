@@ -7,11 +7,12 @@
         "etag": "0",
         "name": "TestFolder"
     }, {
-        "type": "folder",
-        "id": "22222",
-        "sequence_id": "0",
+        "type": "web_link",
+        "id": "11111",
         "etag": "0",
-        "name": "My Box Notes"
+        "sequence_id": "0",
+        "name": "Example Web Link",
+        "url": "http://example.com"
     }],
     "offset": 0,
     "limit": 2,
