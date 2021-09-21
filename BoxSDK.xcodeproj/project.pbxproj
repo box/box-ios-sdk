@@ -18,12 +18,17 @@
 		054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */; };
 		054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */; };
 		05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */; };
+		05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */; };
 		05B705A526FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705A326FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json */; };
 		05B705A626FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705A426FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json */; };
 		05B705BD26FA2D89000BC365 /* FullFolderItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705BB26FA2D89000BC365 /* FullFolderItem_ValueFormatMismatch.json */; };
 		05B705BE26FA2D89000BC365 /* FullFolderItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705BB26FA2D89000BC365 /* FullFolderItem_ValueFormatMismatch.json */; };
 		05B705BF26FA2D89000BC365 /* FullFolderItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705BC26FA2D89000BC365 /* FullFolderItem_MissingRequiredField.json */; };
 		05B705C026FA2D89000BC365 /* FullFolderItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705BC26FA2D89000BC365 /* FullFolderItem_MissingRequiredField.json */; };
+		05B705C426FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705C226FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json */; };
+		05B705C526FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705C226FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json */; };
+		05B705C626FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705C326FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json */; };
+		05B705C726FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B705C326FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -533,10 +538,13 @@
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderItemSpecs.swift; sourceTree = "<group>"; };
+		05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookItemSpecs.swift; sourceTree = "<group>"; };
 		05B705A326FA1DEB000BC365 /* FullCollaborationItem_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItem_ValueFormatMismatch.json; sourceTree = "<group>"; };
 		05B705A426FA1DEB000BC365 /* FullCollaborationItem_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItem_MissingRequiredField.json; sourceTree = "<group>"; };
 		05B705BB26FA2D89000BC365 /* FullFolderItem_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFolderItem_ValueFormatMismatch.json; sourceTree = "<group>"; };
 		05B705BC26FA2D89000BC365 /* FullFolderItem_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFolderItem_MissingRequiredField.json; sourceTree = "<group>"; };
+		05B705C226FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullWebhookItem_ValueFormatMismatch.json; sourceTree = "<group>"; };
+		05B705C326FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullWebhookItem_MissingRequiredField.json; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -1791,6 +1799,7 @@
 				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
 				0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */,
 				05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */,
+				05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2034,6 +2043,8 @@
 		F99D413D2318901600327698 /* Webhooks */ = {
 			isa = PBXGroup;
 			children = (
+				05B705C326FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json */,
+				05B705C226FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json */,
 				F99D413E2318925D00327698 /* GetWebhooks.json */,
 				F99D41402318927400327698 /* GetWebhookInfo.json */,
 				F99D4142231892A400327698 /* UpdateWebhook.json */,
@@ -2183,6 +2194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05B705C626FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json in Resources */,
 				B40558B025AD2ABF0068784E /* ZipDownload.json in Resources */,
 				B4882E7325EEFBC600EB57BA /* FolderLocks.json in Resources */,
 				8093D29822FA398500DB628E /* GetWebLink.json in Resources */,
@@ -2196,6 +2208,7 @@
 				B40558BB25AE57C10068784E /* ZipDownloadStatus.json in Resources */,
 				806ACE4D22FB8E0000257353 /* GetWebLinkSharedLink.json in Resources */,
 				80E567B523061A5000798E3A /* RemoveWebLinkSharedLink.json in Resources */,
+				05B705C426FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json in Resources */,
 				B41D9DB325D33456000BFE59 /* SearchResult200.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2288,6 +2301,7 @@
 				054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */,
 				0CD34255228AEDE600BAFF4B /* GetEnterpriseUsersOffset-Pagination.json in Resources */,
 				0CD34269228B029400BAFF4B /* GellAllUserEmailAliases.json in Resources */,
+				05B705C726FA2E3A000BC365 /* FullWebhookItem_MissingRequiredField.json in Resources */,
 				9D472E7D231BF4B2004C8023 /* UpdateRetentionPolicy.json in Resources */,
 				22D0041E22AFB31600478F1E /* UpdateComment.json in Resources */,
 				22720E9F2316BE9F00887AA4 /* CreateTask.json in Resources */,
@@ -2382,6 +2396,7 @@
 				22A6576B225B805B00FB13F4 /* UploadFile.json in Resources */,
 				2278C552231D808E0048FF45 /* GetCollaborationWhitelistEntryByID.json in Resources */,
 				97F04DA422B867910034B9A3 /* FullWebLink.json in Resources */,
+				05B705C526FA2E3A000BC365 /* FullWebhookItem_ValueFormatMismatch.json in Resources */,
 				92514E992319CA04002D44A8 /* InvalidWatermarkInvalid.json in Resources */,
 				97C8B57822B05C9000F36435 /* FullFile.json in Resources */,
 				9D472E81231BF4C8004C8023 /* GetRetentionPolicies.json in Resources */,
@@ -2640,6 +2655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80E567E42315E52300798E3A /* DevicePinSpecs.swift in Sources */,
+				05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */,
 				0C63989C2253A536004021D3 /* FilesModuleSpecs.swift in Sources */,
 				9DE4586E22D6490800C93CF5 /* URLExtensionTest.swift in Sources */,
 				F969D38F233A7279001301FC /* StoragePolicyAssignmentSpecs.swift in Sources */,
