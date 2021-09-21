@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
+		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
+		0546B30326F9F6D500922C04 /* FullCommentItemComment.json in Resources */ = {isa = PBXBuildFile; fileRef = 0546B30126F9F6D500922C04 /* FullCommentItemComment.json */; };
+		0546B30426F9F6D500922C04 /* FullCommentItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0546B30226F9F6D500922C04 /* FullCommentItemFile.json */; };
+		0546B30826FA00EE00922C04 /* FullCommentItem_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 0546B30626FA00EE00922C04 /* FullCommentItem_ValueFormatMismatch.json */; };
+		0546B30926FA00EE00922C04 /* FullCommentItem_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 0546B30726FA00EE00922C04 /* FullCommentItem_MissingRequiredField.json */; };
 		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
 		054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */; };
 		054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */; };
@@ -511,6 +516,11 @@
 
 /* Begin PBXFileReference section */
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
+		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
+		0546B30126F9F6D500922C04 /* FullCommentItemComment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCommentItemComment.json; sourceTree = "<group>"; };
+		0546B30226F9F6D500922C04 /* FullCommentItemFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCommentItemFile.json; sourceTree = "<group>"; };
+		0546B30626FA00EE00922C04 /* FullCommentItem_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCommentItem_ValueFormatMismatch.json; sourceTree = "<group>"; };
+		0546B30726FA00EE00922C04 /* FullCommentItem_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCommentItem_MissingRequiredField.json; sourceTree = "<group>"; };
 		054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationItemSpecs.swift; sourceTree = "<group>"; };
 		054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFile.json; sourceTree = "<group>"; };
 		054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFolder.json; sourceTree = "<group>"; };
@@ -1723,6 +1733,10 @@
 		804F3BFF22A594E2008CF915 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				0546B30726FA00EE00922C04 /* FullCommentItem_MissingRequiredField.json */,
+				0546B30626FA00EE00922C04 /* FullCommentItem_ValueFormatMismatch.json */,
+				0546B30126F9F6D500922C04 /* FullCommentItemComment.json */,
+				0546B30226F9F6D500922C04 /* FullCommentItemFile.json */,
 				22D0041D22AFB31600478F1E /* UpdateComment.json */,
 				804F3C0022A5955C008CF915 /* CreateComment.json */,
 				8053E2C922AF0FFD000B42E1 /* UpdateTaggedComment.json */,
@@ -1765,6 +1779,7 @@
 				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
 				054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */,
 				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
+				0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2299,11 +2314,13 @@
 				22C41453231ED19700D3992C /* GetMetadataCascadePolicy.json in Resources */,
 				9717866D22F0C694004A5F6D /* RemoveFolderSharedLink.json in Resources */,
 				0CA0651E22980EE900A751B1 /* image.png in Resources */,
+				0546B30826FA00EE00922C04 /* FullCommentItem_ValueFormatMismatch.json in Resources */,
 				F99D416F2319CDC800327698 /* GetWebhooks.json in Resources */,
 				9D472E79231BF499004C8023 /* CreateRetentionPolicy.json in Resources */,
 				2262403E227214820048E638 /* GetFolderItemsOffsetIterator2.json in Resources */,
 				22C95BD5230AD650004F5C18 /* ChunkedUploadSessionNewFileVersion.json in Resources */,
 				22C41454231ED19700D3992C /* GetMetadataCascadePolicies.json in Resources */,
+				0546B30426F9F6D500922C04 /* FullCommentItemFile.json in Resources */,
 				0CD3426D228B04CD00BAFF4B /* AddEmailAlias.json in Resources */,
 				9D14D4F522E12658001DC7A6 /* FaultyComment_MissingRequiredField.json in Resources */,
 				9DC6D81C22F4878100A72284 /* GetPollingURL.json in Resources */,
@@ -2366,11 +2383,13 @@
 				9731D2C6227D29D40092BCCE /* Search200.json in Resources */,
 				8061988F22AB18B100B09896 /* CreateComment.json in Resources */,
 				0CD34251228AE60C00BAFF4B /* CreateAppUser.json in Resources */,
+				0546B30326F9F6D500922C04 /* FullCommentItemComment.json in Resources */,
 				80BC8435232C56B700010E08 /* GetTermsOfServiceUserStatuses.json in Resources */,
 				22CE53A122DD0C3E00F3D59F /* CreateMetadataOnFolder.json in Resources */,
 				80BC843E232C56C700010E08 /* FullTermsOfService.json in Resources */,
 				225639D8225389B100D951B5 /* GetCurrentUserInfo.json in Resources */,
 				8061988522AB164D00B09896 /* GetComment.json in Resources */,
+				0546B30926FA00EE00922C04 /* FullCommentItem_MissingRequiredField.json in Resources */,
 				80E567F223160E5800798E3A /* GetDevicePins.json in Resources */,
 				9D14D4F722E12A70001DC7A6 /* FaultyComment_ValueFormatMismatch.json in Resources */,
 				92514E9D2319CA28002D44A8 /* InvalidWatermarkMissing.json in Resources */,
@@ -2642,6 +2661,7 @@
 				F928144F233E925800E42EEE /* RetentionPolicyAssignmentSpecs.swift in Sources */,
 				174DEB85231919AB00AA3335 /* RecentItemSpecs.swift in Sources */,
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
+				0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */,
 				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */,

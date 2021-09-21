@@ -1,0 +1,55 @@
+{
+    "type": "file",
+    "id": "11111",
+    "etag": "2",
+    "sequence_id": "2",
+    "sha1": "14acc506f2021b2f1a9d81097ca82e14887b34fe",
+    "name": "script.js",
+    "extension": "js",
+    "description": "My test script",
+    "size": 33510,
+    "path_collection": {
+        "total_count": 2,
+        "entries": [
+            {
+                "type": "folder",
+                "id": "0",
+                "sequence_id": null,
+                "etag": null,
+                "name": "All Files"
+            },
+            {
+                "type": "folder",
+                "id": "22222",
+                "sequence_id": "0",
+                "etag": "0",
+                "name": "Test Folder"
+            }
+        ]
+    },
+    "comment_count": 0,
+    "created_at": "2018-02-27T10:57:08-08:00",
+    "modified_at": "2018-02-27T10:57:14-08:00",
+    "trashed_at": null,
+    "purged_at": null,
+    "content_created_at": "2017-10-09T15:09:01-07:00",
+    "content_modified_at": "2017-10-09T15:09:01-07:00",
+    "created_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "modified_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    },
+    "owned_by": {
+        "type": "user",
+        "id": "33333",
+        "name": "Example User",
+        "login": "user@example.com"
+    }
+}
