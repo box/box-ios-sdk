@@ -35,6 +35,6 @@ public class Token: BoxModel {
         accessToken = try BoxJSONDecoder.optionalDecode(json: json, forKey: "access_token")
         expiresIn = try BoxJSONDecoder.optionalDecode(json: json, forKey: "expires_in")
         tokenType = try BoxJSONDecoder.optionalDecode(json: json, forKey: "token_type")
-        restrictedTo = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "scope")
+        restrictedTo = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "restricted_to")
     }
 }
