@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
+		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
 		054E58EC26F4B97300C604D2 /* FullCollaborationItemFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */; };
 		054E58ED26F4B97300C604D2 /* FullCollaborationItemFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */; };
@@ -509,6 +510,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationItemSpecs.swift; sourceTree = "<group>"; };
 		054E58EA26F4B97300C604D2 /* FullCollaborationItemFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFile.json; sourceTree = "<group>"; };
 		054E58EB26F4B97300C604D2 /* FullCollaborationItemFolder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullCollaborationItemFolder.json; sourceTree = "<group>"; };
@@ -1762,6 +1764,7 @@
 				F928144A233E840100E42EEE /* RetentionPolicyAssignmentSpecs.swift */,
 				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
 				054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */,
+				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2639,6 +2642,7 @@
 				F928144F233E925800E42EEE /* RetentionPolicyAssignmentSpecs.swift in Sources */,
 				174DEB85231919AB00AA3335 /* RecentItemSpecs.swift in Sources */,
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
+				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */,
 				05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */,
