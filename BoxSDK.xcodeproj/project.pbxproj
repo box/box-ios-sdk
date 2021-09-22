@@ -17,6 +17,7 @@
 		05A58A3226FB216A00AB309C /* FullFile_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */; };
 		05A58A3426FB216A00AB309C /* FullFile_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */; };
 		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
+		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -525,6 +526,7 @@
 		05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFile_MissingRequiredField.json; sourceTree = "<group>"; };
 		05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFile_ValueFormatMismatch.json; sourceTree = "<group>"; };
 		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
+		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -1773,6 +1775,7 @@
 				05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */,
 				05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */,
 				05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */,
+				05A58A4626FB487500AB309C /* EventTypeSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2647,6 +2650,7 @@
 				22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */,
 				F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */,
 				97F04DA122B84E540034B9A3 /* UserSpecs.swift in Sources */,
+				05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */,
 				F929D63C2331B06B0039E452 /* LegalHoldsModuleSpecs.swift in Sources */,
 				1725D2A12310321100935000 /* URLValidationTest.swift in Sources */,
 				9299AE382326B72400E8F235 /* UIDeviceExtensionSpecs.swift in Sources */,
