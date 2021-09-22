@@ -18,6 +18,7 @@
 		05A58A3426FB216A00AB309C /* FullFile_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */; };
 		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
 		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
+		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -527,6 +528,7 @@
 		05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFile_ValueFormatMismatch.json; sourceTree = "<group>"; };
 		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
 		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
+		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -1747,6 +1749,7 @@
 			children = (
 				9DB4F7B822E1EB66002C4697 /* BoxModel */,
 				8061989722AB258500B09896 /* CommentSpecs.swift */,
+				05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */,
 				9771D4DE22B01CC200B76DF8 /* CollaborationSpecs.swift */,
 				97C8B57622B05BB100F36435 /* FileSpecs.swift */,
 				97D3FFB722B1C8F7008C1CE6 /* FileVersionSpecs.swift */,
@@ -2633,6 +2636,7 @@
 				05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */,
 				80FEB7BF23203ABB0037331C /* GroupMembershipSpecs.swift in Sources */,
 				9731D2C5227D1DB20092BCCE /* SearchModuleSpecs.swift in Sources */,
+				05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */,
 				F929D6302331AE3E0039E452 /* FileVersionLegalHoldSpecs.swift in Sources */,
 				F969D393233A72C0001301FC /* StoragePolicySpecs.swift in Sources */,
 				22C4775322E1BB70008FDC1A /* BoxEnumSpecs.swift in Sources */,

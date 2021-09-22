@@ -24,11 +24,11 @@ class WatermarkSpecs: QuickSpec {
 
                         do {
                             let contents = try String(contentsOfFile: filepath)
-                            let watermarkDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
-                            let watermark = try Watermark(json: watermarkDictionary as! [String: Any])
+                            let watermarkResponseDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
+                            let watermarkResponse = try Watermark.WatermarkResponse(json: watermarkResponseDictionary as! [String: Any])
 
-                            expect(watermark.createdAt?.iso8601).to(equal("2019-08-27T00:55:33Z"))
-                            expect(watermark.modifiedAt?.iso8601).to(equal("2019-08-27T01:55:33Z"))
+                            expect(watermarkResponse.watermark.createdAt?.iso8601).to(equal("2019-08-27T00:55:33Z"))
+                            expect(watermarkResponse.watermark.modifiedAt?.iso8601).to(equal("2019-08-27T01:55:33Z"))
                         }
                         catch {
                             fail("Failed with Error: \(error)")
@@ -46,9 +46,9 @@ class WatermarkSpecs: QuickSpec {
 
                         do {
                             let contents = try String(contentsOfFile: filepath)
-                            let watermarkDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
-                            let expectedError = BoxError.decoding(error: BoxDecodingError.typeMismatch(key: "watermark", expectedType: [String: Any].self))
-                            expect(try Watermark(json: watermarkDictionary as! [String: Any])).to(throwError(expectedError))
+                            let watermarkResponseDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
+                            let expectedError: BoxSDKError = BoxCodingError(message: .typeMismatch(key: "watermark"))
+                            expect(try Watermark.WatermarkResponse(json: watermarkResponseDictionary as! [String: Any])).to(throwError(expectedError))
                         }
                         catch {
                             fail("Failed with Error: \(error)")
@@ -66,9 +66,9 @@ class WatermarkSpecs: QuickSpec {
 
                         do {
                             let contents = try String(contentsOfFile: filepath)
-                            let watermarkDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
-                            let expectedError = BoxError.decoding(error: BoxDecodingError.invalidValueFormat(key: "created_at", value: "2019-08-26", expectedType: Date.self))
-                            expect(try Watermark(json: watermarkDictionary as! [String: Any])).to(throwError(expectedError))
+                            let watermarkResponseDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
+                            let expectedError: BoxSDKError = BoxCodingError(message: .invalidValueFormat(key: "created_at"))
+                            expect(try Watermark.WatermarkResponse(json: watermarkResponseDictionary as! [String: Any])).to(throwError(expectedError))
                         }
                         catch {
                             fail("Failed with Error: \(error)")
