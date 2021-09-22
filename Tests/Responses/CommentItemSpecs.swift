@@ -11,28 +11,28 @@ import Nimble
 import Quick
 
 class CommentItemSpecs: QuickSpec {
-    
+
     override func spec() {
         describe("Comment Item") {
-            
+
             describe("init()") {
-                
+
                 it("should correctly deserialize a file type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
                         let commentItem = try CommentItem(json: jsonDict)
-                        
+
                         guard case let .file(file) = commentItem else {
                             fail("This should be a file")
                             return
                         }
-                        
+
                         expect(file.type).to(equal("file"))
                         expect(file.id).to(equal("11111"))
                         expect(file.etag).to(equal("2"))
@@ -51,23 +51,23 @@ class CommentItemSpecs: QuickSpec {
                         fail("Failed with Error: \(error)")
                     }
                 }
-                
+
                 it("should correctly deserialize a comment type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemComment", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
                         let commentItem = try CommentItem(json: jsonDict)
-                        
+
                         guard case let .comment(comment) = commentItem else {
                             fail("This should be a folder")
                             return
                         }
-                        
+
                         expect(comment.id).to(equal("11111"))
                         expect(comment.type).to(equal("comment"))
                         expect(comment.message).to(equal("Bob, can you review this?"))
@@ -80,13 +80,13 @@ class CommentItemSpecs: QuickSpec {
                         fail("Failed with Error: \(error)")
                     }
                 }
-                
+
                 it("should throw BoxCodingError.valueMismatch exception when deserialize an object with an unknown value in `type` filed") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItem_ValueFormatMismatch", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_ValueFormatMismatch", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let commentItemDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
@@ -97,13 +97,13 @@ class CommentItemSpecs: QuickSpec {
                         fail("Failed with Error: \(error)")
                     }
                 }
-                
+
                 it("should throw BoxCodingError.typeMismatch exception when deserialize object with no `type` field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItem_MissingRequiredField", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_MissingRequiredField", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let commentItemDictionary = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!)
@@ -115,14 +115,14 @@ class CommentItemSpecs: QuickSpec {
                     }
                 }
             }
-            
+
             describe("rawData") {
                 it("should be equal to json data used to create the CommentItem file type object") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
@@ -135,13 +135,13 @@ class CommentItemSpecs: QuickSpec {
                         fail("Failed with Error: \(error)")
                     }
                 }
-                
+
                 it("should be equal to json data used to create the CommentItem comment type object") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemComment", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
@@ -155,14 +155,14 @@ class CommentItemSpecs: QuickSpec {
                     }
                 }
             }
-            
+
             describe("debugDescription") {
                 it("should return correct description for a file type") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
@@ -173,18 +173,18 @@ class CommentItemSpecs: QuickSpec {
                         fail("Failed with Error: \(error)")
                     }
                 }
-                
+
                 it("should return correct description for comment type") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCommentItemComment", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
-                    
+
                     do {
                         let contents = try String(contentsOfFile: filepath)
                         let jsonDict = try JSONSerialization.jsonObject(with: contents.data(using: .utf8)!) as! [String: Any]
                         let commentItem = try CommentItem(json: jsonDict)
-                        
+
                         expect(commentItem.debugDescription).to(equal("comment 11111"))
                     }
                     catch {

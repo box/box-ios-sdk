@@ -81,8 +81,8 @@ class WebhookItemSpecs: QuickSpec {
                     }
                 }
 
-                it("should throw BoxCodingError.valueMismatch exception when deserialize an object with an unknown value in type field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullWebhookItem_ValueFormatMismatch", ofType: "json") else {
+                it("should throw BoxCodingError.valueMismatch exception when deserialize an object with an unknown value in type filed") {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_ValueFormatMismatch", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -99,7 +99,7 @@ class WebhookItemSpecs: QuickSpec {
                 }
 
                 it("should throw BoxCodingError.typeMismatch exception when deserialize object with no type field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullWebhookItem_MissingRequiredField", ofType: "json") else {
+                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_MissingRequiredField", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
