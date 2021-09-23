@@ -25,6 +25,7 @@
 		05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */; };
 		05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */; };
 		05F59F0E26FC984900D9A539 /* AuthenticationSessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */; };
+		05F59F1126FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */; };
 		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
 		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
@@ -538,6 +539,7 @@
 		05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepresentationSpecs.swift; sourceTree = "<group>"; };
 		05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemSpecs.swift; sourceTree = "<group>"; };
 		05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionSpecs.swift; sourceTree = "<group>"; };
+		05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStreamSpecs.swift; sourceTree = "<group>"; };
 		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
 		05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueSpecs.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
@@ -1849,6 +1851,7 @@
 			children = (
 				97021E9A22A5DF55004988C8 /* BoxNetworkAgentSpecs.swift */,
 				05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */,
+				05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2705,6 +2708,7 @@
 				80BC8447232C56D700010E08 /* TermsOfServiceSpecs.swift in Sources */,
 				F99D412E2314BA2800327698 /* RecentItemsModuleSpecs.swift in Sources */,
 				0CCBC2B02284312D00640FA8 /* KeychainTokenStoreSpecs.swift in Sources */,
+				05F59F1126FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
