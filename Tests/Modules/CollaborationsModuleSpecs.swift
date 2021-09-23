@@ -157,6 +157,92 @@ class CollaborationsModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("createByUserEmail()") {
+                it("should create collaboration") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/collaborations") &&
+                            isMethodPOST() &&
+                            self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["login": "testuser@example.com", "type": "user"], "role": "editor"])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.collaborations.createByUserEmail(itemType: "folder", itemId: "11446500", role: .editor, login: "testuser@example.com") { result in
+                            switch result {
+                            case let .success(collaboration):
+                                expect(collaboration.type).to(equal("collaboration"))
+                                expect(collaboration.id).to(equal("11111"))
+                                expect(collaboration.createdBy?.id).to(equal("22222"))
+                                expect(collaboration.createdBy?.login).to(equal("testuser@example.com"))
+                                expect(collaboration.createdBy?.name).to(equal("Test User"))
+                                expect(collaboration.role?.description).to(equal("editor"))
+                                guard case let .folder(folder)? = collaboration.item else {
+                                    fail("Expected that the item is a folder and instead receive other object type")
+                                    done()
+                                    return
+                                }
+
+                                expect(folder).to(beAKindOf(Folder.self))
+                                expect(folder.id).to(equal("22222"))
+                                expect(folder.name).to(equal("Shared Pictures"))
+                                expect(folder.etag).to(equal("0"))
+                                expect(folder.sequenceId).to(equal("0"))
+                            case let .failure(error):
+                                fail("Expected call to create to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+
+                context("case when user did not specify canViewPath parameter") {
+                    it("should create collaboration") {
+                        stub(
+                            condition: isHost("api.box.com") &&
+                                isPath("/2.0/collaborations") &&
+                                isMethodPOST() &&
+                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
+                        ) { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+                                statusCode: 200, headers: ["Content-Type": "application/json"]
+                            )
+                        }
+                        waitUntil(timeout: .seconds(10)) { done in
+                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
+                                switch result {
+                                case let .success(collaboration):
+                                    expect(collaboration.type).to(equal("collaboration"))
+                                    expect(collaboration.id).to(equal("11111"))
+                                    expect(collaboration.createdBy?.id).to(equal("22222"))
+                                    expect(collaboration.createdBy?.login).to(equal("testuser@example.com"))
+                                    expect(collaboration.createdBy?.name).to(equal("Test User"))
+                                    expect(collaboration.role?.description).to(equal("editor"))
+                                    guard case let .folder(folder)? = collaboration.item else {
+                                        fail("Expected that the item is a folder and instead receive other object type")
+                                        done()
+                                        return
+                                    }
+
+                                    expect(folder).to(beAKindOf(Folder.self))
+                                    expect(folder.id).to(equal("22222"))
+                                    expect(folder.name).to(equal("Shared Pictures"))
+                                    expect(folder.etag).to(equal("0"))
+                                    expect(folder.sequenceId).to(equal("0"))
+                                case let .failure(error):
+                                    fail("Expected call to create to suceeded, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        }
+                    }
+                }
+            }
+
             describe("update()") {
                 it("should update collaboration") {
                     stub(
@@ -292,6 +378,18 @@ class CollaborationsModuleSpecs: QuickSpec {
                             }
                             done()
                         }
+                    }
+                }
+            }
+
+            context("AccessibleBy") {
+
+                describe("init()") {
+
+                    it("should correctly create an enum value from it's string representation") {
+                        expect(AccessibleBy.user).to(equal(AccessibleBy(AccessibleBy.user.description)))
+                        expect(AccessibleBy.group).to(equal(AccessibleBy(AccessibleBy.group.description)))
+                        expect(AccessibleBy.customValue("custom value")).to(equal(AccessibleBy("custom value")))
                     }
                 }
             }
