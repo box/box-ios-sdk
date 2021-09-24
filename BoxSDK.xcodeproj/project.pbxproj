@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
+		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
+		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
 		0C008372229C45480067C1AF /* UpdateFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C008371229C45480067C1AF /* UpdateFolder.json */; };
@@ -37,8 +43,6 @@
 		0C66A63722832925008D5AEB /* AuthModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C66A63622832925008D5AEB /* AuthModuleSpecs.swift */; };
 		0C66A63F228330FE008D5AEB /* AccessToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C66A63E228330FE008D5AEB /* AccessToken.json */; };
 		0C66EAE72241345100E8E335 /* BoxSDKSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C66EAE62241345100E8E335 /* BoxSDKSpecs.swift */; };
-		0C66EBA0224265DF00E8E335 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C66EB9F224265DF00E8E335 /* OHHTTPStubs.framework */; };
-		0C66EBA1224265ED00E8E335 /* OHHTTPStubs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C66EB9F224265DF00E8E335 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C78709D228771F0006FBDAE /* OAuth2SessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78709C228771F0006FBDAE /* OAuth2SessionSpecs.swift */; };
 		0C8B8DF72285C9F600D8A42F /* ConsoleLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B8DF62285C9F600D8A42F /* ConsoleLogDestination.swift */; };
 		0C8B8DFC2285CA2C00D8A42F /* FileLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B8DFB2285CA2C00D8A42F /* FileLogDestination.swift */; };
@@ -227,10 +231,6 @@
 		22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7966822EF987600908A85 /* DelegatedAuthSessionSpecs.swift */; };
 		3549BB501DA38A2000C63030 /* BoxSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* BoxSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3549BB661DA38ADB00C63030 /* BoxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549BB211DA389CD00C63030 /* BoxSDK.framework */; };
-		35B7422F1F82A5E000829B21 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422D1F82A5DF00829B21 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		35B742301F82A5E000829B21 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422E1F82A5E000829B21 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		35B742311F82A5EC00829B21 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422D1F82A5DF00829B21 /* Nimble.framework */; };
-		35B742321F82A5EC00829B21 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422E1F82A5E000829B21 /* Quick.framework */; };
 		804F3BF722A59250008CF915 /* CommentsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F3BF622A59250008CF915 /* CommentsModule.swift */; };
 		804F3BFB22A5934E008CF915 /* CommentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F3BFA22A5934E008CF915 /* CommentItem.swift */; };
 		8053E2C622AF06FF000B42E1 /* SharedItemsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053E2C522AF06FF000B42E1 /* SharedItemsModule.swift */; };
@@ -491,9 +491,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0C66EBA1224265ED00E8E335 /* OHHTTPStubs.framework in Embed Frameworks */,
-				35B7422F1F82A5E000829B21 /* Nimble.framework in Embed Frameworks */,
-				35B742301F82A5E000829B21 /* Quick.framework in Embed Frameworks */,
+				05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */,
+				05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */,
+				05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +501,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
+		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
+		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
+		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
 		0C008369229C39F00067C1AF /* CopyFolder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CopyFolder.json; sourceTree = "<group>"; };
@@ -971,10 +977,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35B742311F82A5EC00829B21 /* Nimble.framework in Frameworks */,
-				0C66EBA0224265DF00E8E335 /* OHHTTPStubs.framework in Frameworks */,
-				35B742321F82A5EC00829B21 /* Quick.framework in Frameworks */,
 				3549BB661DA38ADB00C63030 /* BoxSDK.framework in Frameworks */,
+				05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */,
+				05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */,
+				05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1599,6 +1605,9 @@
 		3549BAFB1DA387DB00C63030 = {
 			isa = PBXGroup;
 			children = (
+				05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */,
+				05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */,
+				05EFAB2026F0F01100DF1830 /* Quick.xcframework */,
 				97FA4FE9234FF47900A615B8 /* docs */,
 				3549BB161DA3890B00C63030 /* Sources */,
 				3549BB191DA3890B00C63030 /* Tests */,
@@ -1678,6 +1687,9 @@
 		357D954B1DA3F2B400AEC55F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				056FE12926EF6F6800098F00 /* Nimble.xcframework */,
+				056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */,
+				056FE12726EF6F6800098F00 /* Quick.xcframework */,
 				0C66EB9F224265DF00E8E335 /* OHHTTPStubs.framework */,
 				35B7422D1F82A5DF00829B21 /* Nimble.framework */,
 				35B7422E1F82A5E000829B21 /* Quick.framework */,
@@ -2713,7 +2725,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2744,7 +2757,11 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK;
 				PRODUCT_NAME = BoxSDK;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2763,10 +2780,24 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2790,7 +2821,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/TestApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = Box.TestApp;
@@ -2814,7 +2848,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/TestApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = Box.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2837,7 +2874,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/TestApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = Box.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2962,7 +3002,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2993,7 +3034,11 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK;
 				PRODUCT_NAME = BoxSDK;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3022,7 +3067,11 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK;
 				PRODUCT_NAME = BoxSDK;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3041,10 +3090,24 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3064,10 +3127,24 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/OHHTTPStubs.xcframework/ios-arm64_i386_x86_64-simulator",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

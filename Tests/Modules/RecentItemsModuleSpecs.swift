@@ -38,7 +38,7 @@ class RecentItemsModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.recentItems.list()
                         iterator.next { result in
                             switch result {

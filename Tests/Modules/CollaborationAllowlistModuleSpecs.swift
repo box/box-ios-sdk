@@ -37,7 +37,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.collaborationAllowList.listEntries()
                         iterator.next { result in
                             switch result {
@@ -69,7 +69,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.get(id: "12345") { result in
                             switch result {
                             case let .success(entry):
@@ -117,7 +117,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.create(
                             domain: "example.com",
                             direction: .both
@@ -161,7 +161,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.delete(id: "12345") { response in
                             switch response {
                             case .success:
@@ -187,7 +187,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.collaborationAllowList.listExemptTargets()
                         iterator.next { result in
                             switch result {
@@ -227,7 +227,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
                             switch result {
                             case let .success(target):
@@ -281,7 +281,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
-                    waitUntil(timeout: 10.0) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.exemptUser(
                             userId: "12345"
                         ) { result in
@@ -334,7 +334,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
                             switch response {
                             case .success:

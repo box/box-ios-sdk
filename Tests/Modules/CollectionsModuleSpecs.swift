@@ -40,7 +40,7 @@ class CollectionsModulesSpecs: QuickSpec {
                 }
 
                 it("should be able to get a list of collections") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.collections.list()
                         iterator.next { result in
                             switch result {
@@ -73,7 +73,7 @@ class CollectionsModulesSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collections.getFavorites { result in
                             switch result {
                             case let .success(favoritesCollection):
@@ -101,7 +101,7 @@ class CollectionsModulesSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.collections.getFavorites { result in
                             switch result {
                             case .success:
@@ -130,7 +130,7 @@ class CollectionsModulesSpecs: QuickSpec {
                     }
                 }
                 it("should be able to get list of collection items") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.collections.listItems(collectionId: "123")
                         iterator.next { result in
                             switch result {

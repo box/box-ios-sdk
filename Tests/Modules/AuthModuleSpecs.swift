@@ -49,7 +49,7 @@ class AuthModuleSpecs: QuickSpec {
                 }
 
                 it("should get access token") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getToken(withCode: "zaqxswedc") { result in
                             switch result {
                             case let .success(tokenInfo):
@@ -83,7 +83,7 @@ class AuthModuleSpecs: QuickSpec {
                 }
 
                 it("should get an 400 error") {
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.getToken(withCode: "zaqxswedc") { result in
                             switch result {
                             case .success:
@@ -116,7 +116,7 @@ class AuthModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeToken(token: tokenToRevoke) { result in
                         switch result {
                         case .success:
@@ -140,7 +140,7 @@ class AuthModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.revokeToken(token: "adjhfgbs") { result in
                         switch result {
                         case .success:
@@ -196,7 +196,7 @@ class AuthModuleSpecs: QuickSpec {
                     )
                 }
 
-                waitUntil(timeout: 10) { done in
+                waitUntil(timeout: .seconds(10)) { done in
                     self.sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
                         switch result {
                         case let .success(tokenInfo):

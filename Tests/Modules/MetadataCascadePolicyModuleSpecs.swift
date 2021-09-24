@@ -40,7 +40,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
                         iterator.next { result in
 //                            print("in iterator")
@@ -82,7 +82,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadataCascadePolicy.get(id: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7") { result in
                             switch result {
                             case let .success(policy):
@@ -115,7 +115,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadataCascadePolicy.create(
                             folderId: "998951261",
                             scope: .enterprise,
@@ -146,7 +146,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadataCascadePolicy.delete(id: "123456") { result in
                             switch result {
                             case .success:
@@ -173,7 +173,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         self.sut.metadataCascadePolicy.forceApply(
                             id: "12345",
                             conflictResolution: .overwrite

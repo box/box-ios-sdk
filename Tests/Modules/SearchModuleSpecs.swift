@@ -38,7 +38,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.client.search.query(query: "test")
                         iterator.next { result in
                             switch result {
@@ -75,7 +75,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.global, relation: MetadataFilterBound.greaterThan)
                         let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
@@ -103,7 +103,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.enterprise, relation: MetadataFilterBound.lessThan)
                         let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
@@ -131,7 +131,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.enterprise)
                         let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
@@ -159,7 +159,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.global)
                         let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
@@ -199,7 +199,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.client.search.query(
                             query: "test",
                             scope: .user,
@@ -243,7 +243,7 @@ class SearchModuleSpecs: QuickSpec {
                         )
                     }
 
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: .seconds(10)) { done in
                         let iterator = self.client.search.queryWithSharedLinks(query: "test")
                         iterator.next { result in
                             switch result {
