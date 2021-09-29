@@ -17,5 +17,6 @@
 # rules
 --disable blankLinesAroundMark
 --disable blankLinesAtStartOfScope
+--disable wrapMultilineStatementBraces
 --wraparguments before-first
 --elseposition next-line

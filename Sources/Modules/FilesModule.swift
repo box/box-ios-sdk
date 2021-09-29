@@ -81,6 +81,8 @@ public enum ThumbnailExtension: BoxEnum {
 
 /// Provides [File](../Structs/File.html) management.
 public class FilesModule {
+    // swiftlint:disable:previous type_body_length
+
     /// Required for communicating with Box APIs.
     weak var boxClient: BoxClient!
     // swiftlint:disable:previous implicitly_unwrapped_optional

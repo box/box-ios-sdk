@@ -10,9 +10,7 @@ import Foundation
 
 enum URLValidation {
     static func validate(networkUrl: URL) throws {
-        if networkUrl.scheme != "https" ||
-            networkUrl.host == nil
-        {
+        if networkUrl.scheme != "https" || networkUrl.host == nil {
             throw BoxSDKError(message: .invalidURL(urlString: networkUrl.absoluteString))
         }
     }

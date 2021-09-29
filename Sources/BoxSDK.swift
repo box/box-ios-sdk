@@ -373,8 +373,7 @@ public class BoxSDK {
 
                 if let authorizationCode = self.getURLComponentValueAt(key: "code", from: successURL),
                    let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
-                   receivedState == usedState
-                {
+                   receivedState == usedState {
                     completion(.success(authorizationCode))
                     return
                 }
@@ -403,8 +402,7 @@ public class BoxSDK {
 
                 if let authorizationCode = self.getURLComponentValueAt(key: "code", from: successURL),
                    let receivedState = self.getURLComponentValueAt(key: "state", from: successURL),
-                   receivedState == usedState
-                {
+                   receivedState == usedState {
                     completion(.success(authorizationCode))
                     return
                 }

@@ -1,3 +1,5 @@
+// swiftlint:disable all
+
 /// Notes:
 /// The purpose of this class (ArrayInputStream) is to "merge" multiple InputStreams into a single InputStream.
 /// This merging can be implemented by sequentially reading from an array of input streams with an interface that is the same as InputStream.
@@ -18,8 +20,6 @@
 import Foundation
 
 class ArrayInputStream: InputStream {
-    // swiftlint:disable all
-
     private let inputStreams: [InputStream]
 
     private var currentIndex: Int
@@ -132,6 +132,4 @@ class ArrayInputStream: InputStream {
     override func schedule(in _: RunLoop, forMode _: RunLoop.Mode) {}
 
     override func remove(from _: RunLoop, forMode _: RunLoop.Mode) {}
-
-    // swiftlint:enable all
 }
