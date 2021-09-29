@@ -67,12 +67,8 @@ public enum EventType: BoxEnum {
     case tagAdded
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
-    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteAccepted instead.")
-    case masterInviteAccepted
     /// Free user accepts invitation to become a managed user.
     case adminInviteAccepted
-    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteRejected instead.")
-    case masterInviteRejected
     /// Free user rejects invitation to become a managed user.
     case adminInviteRejected
     /// Granted Box access to account.
@@ -174,6 +170,8 @@ public enum EventType: BoxEnum {
     case userAdminRoleChanged
     /// A collaborator violated an admin-set upload policy
     case contentWorkflowUploadPolicyViolated
+    /// A content was accessed by a user.
+    case contentAccessed
     /// Creation of metadata instance.
     case metadataInstanceCreated
     /// Update of metadata instance.
@@ -240,10 +238,22 @@ public enum EventType: BoxEnum {
     case abnormalDownloadActivity
     /// Folders were removed from a group in the Admin console.
     case itemsRemovedFromGroup
-    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use itemAddedToGroup instead.")
-    case itemsAddedToGroup
     /// A watermarked file was downloaded.
     case watermarkedFileDownloaded
+    /// When a JWT application has been authorized or reauthorized
+    case enterpriseAppAuthorizationUpdated
+    /// A Shield justification is approved
+    case shieldJustificationApproved
+    /// Shield detected an anomalous download, session, location, or malicious content based on enterprise Shield rules
+    case shieldAlert
+    /// Access to an external collaboration is blocked
+    case shieldAccessBlocked
+    /// Access to an external collaboration is blocked due to missing a justification
+    case shieldBlockedMissingJustification
+    /// An invite to externally collaborate is blocked
+    case shieldInviteBlocked
+    /// An invite to externally collaborate is blocked due to missing a justification
+    case shieldInviteBlockedMissingJustification
 
     // MARK: - Custom value
 
@@ -310,12 +320,8 @@ public enum EventType: BoxEnum {
             self = .tagAdded
         case "ENABLE_TWO_FACTOR_AUTH":
             self = .twoFactorEnabled
-        case "ADMIN_INVITE_ACCEPT":
-            self = .adminInviteAccepted
         case "MASTER_INVITE_ACCEPT":
             self = .adminInviteAccepted
-        case "ADMIN_INVITE_REJECT":
-            self = .adminInviteRejected
         case "MASTER_INVITE_REJECT":
             self = .adminInviteRejected
         case "ACCESS_GRANTED":
@@ -384,6 +390,8 @@ public enum EventType: BoxEnum {
             self = .userAdminRoleChanged
         case "CONTENT_WORKFLOW_UPLOAD_POLICY_VIOLATION":
             self = .contentWorkflowUploadPolicyViolated
+        case "CONTENT_ACCESS":
+            self = .contentAccessed
         case "METADATA_INSTANCE_CREATE":
             self = .metadataInstanceCreated
         case "METADATA_INSTANCE_UPDATE":
@@ -482,6 +490,20 @@ public enum EventType: BoxEnum {
             self = .downloaded
         case "DELETE_USER":
             self = .deletedUser
+        case "ENTERPRISE_APP_AUTHORIZATION_UPDATE":
+            self = .enterpriseAppAuthorizationUpdated
+        case "SHIELD_JUSTIFICATION_APPROVAL":
+            self = .shieldJustificationApproved
+        case "SHIELD_ALERT":
+            self = .shieldAlert
+        case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED":
+            self = .shieldAccessBlocked
+        case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION":
+            self = .shieldBlockedMissingJustification
+        case "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED":
+            self = .shieldInviteBlocked
+        case "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION":
+            self = .shieldInviteBlockedMissingJustification
         default:
             self = .customValue(value)
         }
@@ -546,12 +568,8 @@ public enum EventType: BoxEnum {
             return "TAG_ITEM_CREATE"
         case .twoFactorEnabled:
             return "ENABLE_TWO_FACTOR_AUTH"
-        case .masterInviteAccepted:
-            return "MASTER_INVITE_ACCEPT"
         case .adminInviteAccepted:
             return "MASTER_INVITE_ACCEPT"
-        case .masterInviteRejected:
-            return "MASTER_INVITE_REJECT"
         case .adminInviteRejected:
             return "MASTER_INVITE_REJECT"
         case .accessGranted:
@@ -650,6 +668,8 @@ public enum EventType: BoxEnum {
             return "CHANGE_ADMIN_ROLE"
         case .contentWorkflowUploadPolicyViolated:
             return "CONTENT_WORKFLOW_UPLOAD_POLICY_VIOLATION"
+        case .contentAccessed:
+            return "CONTENT_ACCESS"
         case .metadataInstanceCreated:
             return "METADATA_INSTANCE_CREATE"
         case .matadataInstanceUpdated:
@@ -714,12 +734,24 @@ public enum EventType: BoxEnum {
             return "CONTENT_WORKFLOW_ABNORMAL_DOWNLOAD_ACTIVITY"
         case .itemsRemovedFromGroup:
             return "GROUP_REMOVE_ITEM"
-        case .itemsAddedToGroup:
-            return "GROUP_ADD_ITEM"
         case .watermarkedFileDownloaded:
             return "FILE_WATERMARKED_DOWNLOAD"
         case .itemAddedToGroup:
             return "GROUP_ADD_ITEM"
+        case .enterpriseAppAuthorizationUpdated:
+            return "ENTERPRISE_APP_AUTHORIZATION_UPDATE"
+        case .shieldJustificationApproved:
+            return "SHIELD_JUSTIFICATION_APPROVAL"
+        case .shieldAlert:
+            return "SHIELD_ALERT"
+        case .shieldAccessBlocked:
+            return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED"
+        case .shieldBlockedMissingJustification:
+            return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION"
+        case .shieldInviteBlocked:
+            return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED"
+        case .shieldInviteBlockedMissingJustification:
+            return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION"
         case let .customValue(value):
             return value
         }

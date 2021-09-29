@@ -95,6 +95,7 @@ class EventTypeSpecs: QuickSpec {
                     expect(EventType.userOAuth2AccessTokenCreated).to(equal(EventType(EventType.userOAuth2AccessTokenCreated.description)))
                     expect(EventType.userAdminRoleChanged).to(equal(EventType(EventType.userAdminRoleChanged.description)))
                     expect(EventType.contentWorkflowUploadPolicyViolated).to(equal(EventType(EventType.contentWorkflowUploadPolicyViolated.description)))
+                    expect(EventType.contentAccessed).to(equal(EventType(EventType.contentAccessed.description)))
                     expect(EventType.metadataInstanceCreated).to(equal(EventType(EventType.metadataInstanceCreated.description)))
                     expect(EventType.matadataInstanceUpdated).to(equal(EventType(EventType.matadataInstanceUpdated.description)))
                     expect(EventType.matadataInstanceDeleted).to(equal(EventType(EventType.matadataInstanceDeleted.description)))
@@ -129,12 +130,14 @@ class EventTypeSpecs: QuickSpec {
                     expect(EventType.abnormalDownloadActivity).to(equal(EventType(EventType.abnormalDownloadActivity.description)))
                     expect(EventType.itemsRemovedFromGroup).to(equal(EventType(EventType.itemsRemovedFromGroup.description)))
                     expect(EventType.watermarkedFileDownloaded).to(equal(EventType(EventType.watermarkedFileDownloaded.description)))
+                    expect(EventType.enterpriseAppAuthorizationUpdated).to(equal(EventType(EventType.enterpriseAppAuthorizationUpdated.description)))
+                    expect(EventType.shieldJustificationApproved).to(equal(EventType(EventType.shieldJustificationApproved.description)))
+                    expect(EventType.shieldAlert).to(equal(EventType(EventType.shieldAlert.description)))
+                    expect(EventType.shieldAccessBlocked).to(equal(EventType(EventType.shieldAccessBlocked.description)))
+                    expect(EventType.shieldBlockedMissingJustification).to(equal(EventType(EventType.shieldBlockedMissingJustification.description)))
+                    expect(EventType.shieldInviteBlocked).to(equal(EventType(EventType.shieldInviteBlocked.description)))
+                    expect(EventType.shieldInviteBlockedMissingJustification).to(equal(EventType(EventType.shieldInviteBlockedMissingJustification.description)))
                     expect(EventType.customValue("custom value")).to(equal(EventType("custom value")))
-
-                    // These case items are obsoleted and will be removed in v5.0
-                    // expect(EventType.masterInviteAccepted).to(equal(EventType(EventType.masterInviteAccepted.description))) -> adminInviteAccepted
-                    // expect(EventType.masterInviteRejected).to(equal(EventType(EventType.masterInviteRejected.description))) -> adminInviteRejected
-                    // expect(EventType.itemsAddedToGroup).to(equal(EventType(EventType.itemsAddedToGroup.description))) -> itemAddedToGroup
                 }
             }
         }
