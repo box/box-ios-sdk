@@ -23,9 +23,9 @@ public enum SearchScope: BoxEnum {
     /// - Parameter value: String representing search scope
     public init(_ value: String) {
         switch value {
-        case "user":
+        case "user_content":
             self = .user
-        case "enterprise":
+        case "enterprise_content":
             self = .enterprise
         default:
             self = .customValue(value)

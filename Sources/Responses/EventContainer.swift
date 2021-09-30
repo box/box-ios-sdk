@@ -9,6 +9,7 @@
 import Foundation
 
 /// Container for Events
+@available(*, deprecated, message: "This class is obsoleted and will be removed. Please use EntryContainer<Element> instead.")
 public class EventContainer: BoxModel {
     // MARK: - BoxModel
 

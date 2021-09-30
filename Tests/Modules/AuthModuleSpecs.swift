@@ -214,5 +214,76 @@ class AuthModuleSpecs: QuickSpec {
                 }
             }
         }
+
+        describe("refresh()") {
+
+            it("should get a valid access token after pass valid refresh token") {
+
+                let refreshToken = "zaqxswedc"
+
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/oauth2/token")
+                        && isMethodPOST()
+                        && self.compareURLEncodedBody(
+                            [
+                                "grant_type": "refresh_token",
+                                "client_id": self.clientId,
+                                "client_secret": self.clientSecret,
+                                "refresh_token": refreshToken
+                            ]
+                        )
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                        statusCode: 200, headers: ["Content-Type": "application/json"]
+                    )
+                }
+
+                waitUntil(timeout: .seconds(10)) { done in
+                    self.sut.refresh(refreshToken: refreshToken) { result in
+                        switch result {
+                        case let .success(tokenInfo):
+                            expect(tokenInfo).to(beAKindOf(TokenInfo.self))
+                            expect(tokenInfo.accessToken).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
+                            expect(tokenInfo.expiresIn).to(equal(3600))
+                            expect(tokenInfo.tokenType).to(equal("bearer"))
+                            expect(tokenInfo.refreshToken).to(equal("J7rxTiWOHMoSC1isKZKBZWizoRXjkQzig5C6jFgCVJ9bUnsUfGMinKBDLZWP9BgR"))
+                        case let .failure(error):
+                            fail("OAuth authentication failed got \(error)")
+                        }
+                        done()
+                    }
+                }
+            }
+
+            it("should get an 400 error after pass invalid refresh token") {
+
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/oauth2/token")
+                        && isMethodPOST()
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        jsonObject: ["error": "invalid_grant", "error_description": "Invalid refresh token"],
+                        statusCode: 400,
+                        headers: [:]
+                    )
+                }
+
+                waitUntil(timeout: .seconds(10)) { done in
+                    self.sut.refresh(refreshToken: "invalid token") { result in
+                        switch result {
+                        case .success:
+                            fail("OAuth authentication succeded but was expected to fail")
+                        case let .failure(error):
+                            expect(error).toNot(beNil())
+                            expect(error).to(beAKindOf(BoxSDKError.self))
+                        }
+                        done()
+                    }
+                }
+            }
+        }
     }
 }

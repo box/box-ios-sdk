@@ -122,6 +122,20 @@ class FolderModuleSpecs: QuickSpec {
                                 expect(folder.etag).to(equal("0"))
                                 expect(folder.sequenceId).to(equal("0"))
 
+                                let secondItem = page.entries[1]
+                                guard case let .webLink(webLink) = secondItem else {
+                                    fail("Unable to get folder items")
+                                    done()
+                                    return
+                                }
+
+                                expect(webLink).to(beAKindOf(WebLink.self))
+                                expect(webLink.id).to(equal("11111"))
+                                expect(webLink.name).to(equal("Example Web Link"))
+                                expect(webLink.etag).to(equal("0"))
+                                expect(webLink.sequenceId).to(equal("0"))
+                                expect(webLink.url).to(equal(URL(string: "http://example.com")))
+
                             case let .failure(error):
                                 fail("Unable to get folder items: \(error)")
                             }
@@ -776,6 +790,32 @@ class FolderModuleSpecs: QuickSpec {
                             }
                             done()
                         }
+                    }
+                }
+            }
+
+            describe("FolderUploadEmailAccess") {
+
+                describe("init()") {
+
+                    it("should correctly create an enum value from it's string representation") {
+                        expect(FolderUploadEmailAccess.open).to(equal(FolderUploadEmailAccess(FolderUploadEmailAccess.open.description)))
+                        expect(FolderUploadEmailAccess.collaborators).to(equal(FolderUploadEmailAccess(FolderUploadEmailAccess.collaborators.description)))
+                        expect(FolderUploadEmailAccess.customValue("custom value")).to(equal(FolderUploadEmailAccess("custom value")))
+                    }
+                }
+            }
+
+            describe("FolderItemsOrderBy") {
+
+                describe("init()") {
+
+                    it("should correctly create an enum value from it's string representation") {
+                        expect(FolderItemsOrderBy.id).to(equal(FolderItemsOrderBy(FolderItemsOrderBy.id.description)))
+                        expect(FolderItemsOrderBy.name).to(equal(FolderItemsOrderBy(FolderItemsOrderBy.name.description)))
+                        expect(FolderItemsOrderBy.date).to(equal(FolderItemsOrderBy(FolderItemsOrderBy.date.description)))
+                        expect(FolderItemsOrderBy.type).to(equal(FolderItemsOrderBy(FolderItemsOrderBy.type.description)))
+                        expect(FolderItemsOrderBy.customValue("custom value")).to(equal(FolderItemsOrderBy("custom value")))
                     }
                 }
             }

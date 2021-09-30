@@ -67,11 +67,11 @@ public enum EventType: BoxEnum {
     case tagAdded
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
-    /// (deprecated)
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteAccepted instead.")
     case masterInviteAccepted
     /// Free user accepts invitation to become a managed user.
     case adminInviteAccepted
-    /// (deprecated)
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteRejected instead.")
     case masterInviteRejected
     /// Free user rejects invitation to become a managed user.
     case adminInviteRejected
@@ -240,7 +240,7 @@ public enum EventType: BoxEnum {
     case abnormalDownloadActivity
     /// Folders were removed from a group in the Admin console.
     case itemsRemovedFromGroup
-    /// Folders were added to a group in the Admin console.
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use itemAddedToGroup instead.")
     case itemsAddedToGroup
     /// A watermarked file was downloaded.
     case watermarkedFileDownloaded
@@ -452,6 +452,36 @@ public enum EventType: BoxEnum {
             self = .itemsRemovedFromGroup
         case "FILE_WATERMARKED_DOWNLOAD":
             self = .watermarkedFileDownloaded
+        case "GROUP_CREATION":
+            self = .createdGroup
+        case "GROUP_DELETION":
+            self = .deletedGroup
+        case "GROUP_EDITED":
+            self = .editedGroup
+        case "EDIT_USER":
+            self = .editedUser
+        case "ADMIN_LOGIN":
+            self = .adminLogin
+        case "ADD_DEVICE_ASSOCIATION":
+            self = .addedDeviceAssocation
+        case "CHANGE_FOLDER_PERMISSION":
+            self = .changeFolderPermission
+        case "FAILED_LOGIN":
+            self = .failedLogin
+        case "LOGIN":
+            self = .login
+        case "REMOVE_DEVICE_ASSOCIATION":
+            self = .removedDeviceAssociation
+        case "DEVICE_TRUST_CHECK_FAILED":
+            self = .deviceTrustCheckFailed
+        case "TERMS_OF_SERVICE_ACCEPT":
+            self = .termsOfServiceAccepted
+        case "TERMS_OF_SERVICE_REJECT":
+            self = .termsOfServiceRejected
+        case "DOWNLOAD":
+            self = .downloaded
+        case "DELETE_USER":
+            self = .deletedUser
         default:
             self = .customValue(value)
         }

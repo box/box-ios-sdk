@@ -30,13 +30,13 @@ class ThreadSafeQueue<T> {
                 return
             }
 
+            var firstItem: T?
+            if !self.list.isEmpty {
+                firstItem = self.list.removeFirst()
+            }
+
             self.completionQueue.async {
-                if !self.list.isEmpty {
-                    completion(self.list.removeFirst())
-                }
-                else {
-                    completion(nil)
-                }
+                completion(firstItem)
             }
         }
     }
@@ -47,13 +47,13 @@ class ThreadSafeQueue<T> {
                 return
             }
 
+            var firstItem: T?
+            if !self.list.isEmpty {
+                firstItem = self.list[0]
+            }
+
             self.completionQueue.async {
-                if !self.list.isEmpty {
-                    completion(self.list[0])
-                }
-                else {
-                    completion(nil)
-                }
+                completion(firstItem)
             }
         }
     }

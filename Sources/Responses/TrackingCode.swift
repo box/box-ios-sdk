@@ -9,6 +9,7 @@
 import Foundation
 
 /// Admin-defined information about a user
+@available(*, deprecated, message: "This class is obsoleted and will be removed. Please use User.TrackingCode instead.")
 public class TrackingCode: BoxModel {
     // MARK: - BoxModel
 

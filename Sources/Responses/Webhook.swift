@@ -202,9 +202,9 @@ public class Webhook: BoxModel {
             case .taskAssignmentUpdated:
                 return "TASK_ASSIGNMENT.UPDATED"
             case .metadataInstanceCreated:
-                return "METEDATA_INSTANCE.CREATED"
+                return "METADATA_INSTANCE.CREATED"
             case .metadataInstanceUpdated:
-                return "METEDATA_INSTANCE.UPDATED"
+                return "METADATA_INSTANCE.UPDATED"
             case .metadataInstanceDeleted:
                 return "METADATA_INSTANCE.DELETED"
             case .folderCreated:

@@ -133,6 +133,22 @@ class FileSpecs: QuickSpec {
                         expect(file.classification?.color).to(equal(UIColor.red))
                         expect(file.classification?.definition).to(equal("Content that should not be shared outside the company."))
                         expect(file.classification?.name).to(equal("Top Secret"))
+
+                        guard let expiringEmbedLink = file.expiringEmbedLink else {
+                            fail("Expected expiringEmbedLink to be present")
+                            return
+                        }
+
+                        expect(expiringEmbedLink.url?.absoluteString).to(beginWith("https://cloud.app.box.com/preview/expiring_embed/"))
+                        expect(expiringEmbedLink.token?.tokenType).to(equal("bearer"))
+                        expect(expiringEmbedLink.token?.expiresIn).to(equal(3709))
+                        expect(expiringEmbedLink.token?.restrictedTo?.count).to(equal(4))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].scope).to(equal("base_preview"))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].object?.type).to(equal("file"))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].object?.id).to(equal("11111"))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].object?.sequenceId).to(equal("2"))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].object?.etag).to(equal("2"))
+                        expect(expiringEmbedLink.token?.restrictedTo?[0].object?.name).to(equal("script.js"))
                     }
                     catch {
                         fail("Failed with Error: \(error)")

@@ -7,12 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
+		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
+		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
+		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
+		05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */; };
+		05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */; };
+		05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */; };
+		05A58A3226FB216A00AB309C /* FullFile_MissingRequiredField.json in Resources */ = {isa = PBXBuildFile; fileRef = 05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */; };
+		05A58A3426FB216A00AB309C /* FullFile_ValueFormatMismatch.json in Resources */ = {isa = PBXBuildFile; fileRef = 05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */; };
+		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
+		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
+		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */; };
+		05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */; };
+		05F59F0E26FC984900D9A539 /* AuthenticationSessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */; };
+		05F59F1126FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */; };
 		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
 		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
+		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
+		05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
 		0C008372229C45480067C1AF /* UpdateFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C008371229C45480067C1AF /* UpdateFolder.json */; };
@@ -501,12 +519,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
+		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
+		054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationItemSpecs.swift; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderItemSpecs.swift; sourceTree = "<group>"; };
+		05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookItemSpecs.swift; sourceTree = "<group>"; };
+		05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemSpecs.swift; sourceTree = "<group>"; };
+		05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFile_MissingRequiredField.json; sourceTree = "<group>"; };
+		05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullFile_ValueFormatMismatch.json; sourceTree = "<group>"; };
+		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
+		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
+		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
+		05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepresentationSpecs.swift; sourceTree = "<group>"; };
+		05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemSpecs.swift; sourceTree = "<group>"; };
+		05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionSpecs.swift; sourceTree = "<group>"; };
+		05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStreamSpecs.swift; sourceTree = "<group>"; };
+		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
+		05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueSpecs.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
 		0C008369229C39F00067C1AF /* CopyFolder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CopyFolder.json; sourceTree = "<group>"; };
@@ -1086,6 +1121,7 @@
 			children = (
 				22F7966822EF987600908A85 /* DelegatedAuthSessionSpecs.swift */,
 				0C78709C228771F0006FBDAE /* OAuth2SessionSpecs.swift */,
+				05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -1444,6 +1480,8 @@
 		225639C7225389B100D951B5 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */,
+				05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */,
 				22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */,
 				22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */,
 				22C95BE2230AF90F004F5C18 /* ChunkedUploadSessionListParts.json */,
@@ -1570,6 +1608,8 @@
 				9299AE372326B72400E8F235 /* UIDeviceExtensionSpecs.swift */,
 				97FA4FDF234D123A00A615B8 /* BoxJSONDecoderSpecs.swift */,
 				F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */,
+				05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */,
+				05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1718,6 +1758,7 @@
 			children = (
 				9DB4F7B822E1EB66002C4697 /* BoxModel */,
 				8061989722AB258500B09896 /* CommentSpecs.swift */,
+				05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */,
 				9771D4DE22B01CC200B76DF8 /* CollaborationSpecs.swift */,
 				97C8B57622B05BB100F36435 /* FileSpecs.swift */,
 				97D3FFB722B1C8F7008C1CE6 /* FileVersionSpecs.swift */,
@@ -1740,6 +1781,15 @@
 				F99DB496233C41440065317F /* RetentionPolicySpecs.swift */,
 				F928144A233E840100E42EEE /* RetentionPolicyAssignmentSpecs.swift */,
 				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
+				054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */,
+				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
+				0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */,
+				05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */,
+				05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */,
+				05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */,
+				05A58A4626FB487500AB309C /* EventTypeSpecs.swift */,
+				05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */,
+				05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1800,6 +1850,8 @@
 			isa = PBXGroup;
 			children = (
 				97021E9A22A5DF55004988C8 /* BoxNetworkAgentSpecs.swift */,
+				05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */,
+				05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2165,6 +2217,7 @@
 				80BC8441232C56CB00010E08 /* CreateTermsOfService.json in Resources */,
 				9D472E75231BF47A004C8023 /* GetRetentionPolicy.json in Resources */,
 				9771D4E122B020F400B76DF8 /* FullCollaboration.json in Resources */,
+				05A58A3226FB216A00AB309C /* FullFile_MissingRequiredField.json in Resources */,
 				97D3FFB622B1C8AE008C1CE6 /* FullFileVersion.json in Resources */,
 				22720EA12316BE9F00887AA4 /* UpdateTaskAssignment.json in Resources */,
 				2280E3372301630B00F98892 /* RestoreFolder.json in Resources */,
@@ -2187,6 +2240,7 @@
 				F929D6162331AE280039E452 /* GetLegalHoldPolicyInfo.json in Resources */,
 				F9A3F0D223A18926007C7393 /* GetEnterpriseUsersMarker-Pagination.json in Resources */,
 				22C95BE3230AF910004F5C18 /* ChunkedUploadSessionListParts.json in Resources */,
+				05A58A3426FB216A00AB309C /* FullFile_ValueFormatMismatch.json in Resources */,
 				0C506CC122A6B376007F18A4 /* PendingCollaborations.json in Resources */,
 				9DD6F54022DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json in Resources */,
 				22720E9D2316BE9F00887AA4 /* GetTask.json in Resources */,
@@ -2577,8 +2631,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				80E567E42315E52300798E3A /* DevicePinSpecs.swift in Sources */,
+				05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */,
 				0C63989C2253A536004021D3 /* FilesModuleSpecs.swift in Sources */,
 				9DE4586E22D6490800C93CF5 /* URLExtensionTest.swift in Sources */,
+				05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */,
 				F969D38F233A7279001301FC /* StoragePolicyAssignmentSpecs.swift in Sources */,
 				F929D6322331AE3E0039E452 /* LegalHoldPolicySpecs.swift in Sources */,
 				0C506CA922A6AA76007F18A4 /* CollaborationsModuleSpecs.swift in Sources */,
@@ -2589,34 +2645,47 @@
 				8053E2D022B04534000B42E1 /* SharedItemsModuleSpecs.swift in Sources */,
 				97FA4FE0234D123A00A615B8 /* BoxJSONDecoderSpecs.swift in Sources */,
 				0C78709D228771F0006FBDAE /* OAuth2SessionSpecs.swift in Sources */,
+				05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */,
 				80FEB7BF23203ABB0037331C /* GroupMembershipSpecs.swift in Sources */,
 				9731D2C5227D1DB20092BCCE /* SearchModuleSpecs.swift in Sources */,
+				05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */,
 				F929D6302331AE3E0039E452 /* FileVersionLegalHoldSpecs.swift in Sources */,
 				F969D393233A72C0001301FC /* StoragePolicySpecs.swift in Sources */,
 				22C4775322E1BB70008FDC1A /* BoxEnumSpecs.swift in Sources */,
 				80FEB7C7232175DF0037331C /* GroupsModuleSpecs.swift in Sources */,
 				228B36A422BBC1E300078283 /* MetadataModuleSpecs.swift in Sources */,
 				0C6398A22253A536004021D3 /* UsersModuleSpecs.swift in Sources */,
+				05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */,
 				0C506CBD22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift in Sources */,
 				97021E9B22A5DF55004988C8 /* BoxNetworkAgentSpecs.swift in Sources */,
 				F969D38B233A7242001301FC /* StoragePoliciesModuleSpecs.swift in Sources */,
 				2278C547231D78F10048FF45 /* CollaborationAllowlistModuleSpecs.swift in Sources */,
 				97F04DAD22B96B120034B9A3 /* TaskSpecs.swift in Sources */,
 				22E39EDB22F09E820061E182 /* TrashModuleSpecs.swift in Sources */,
+				054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */,
 				22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */,
 				F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */,
 				97F04DA122B84E540034B9A3 /* UserSpecs.swift in Sources */,
+				05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */,
+				05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */,
+				05F59F0E26FC984900D9A539 /* AuthenticationSessionSpecs.swift in Sources */,
 				F929D63C2331B06B0039E452 /* LegalHoldsModuleSpecs.swift in Sources */,
 				1725D2A12310321100935000 /* URLValidationTest.swift in Sources */,
 				9299AE382326B72400E8F235 /* UIDeviceExtensionSpecs.swift in Sources */,
+				05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */,
 				F928144F233E925800E42EEE /* RetentionPolicyAssignmentSpecs.swift in Sources */,
 				174DEB85231919AB00AA3335 /* RecentItemSpecs.swift in Sources */,
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
+				0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */,
+				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */,
+				05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */,
 				80BC844A232C56E000010E08 /* TermsOfServicesModuleSpecs.swift in Sources */,
 				0C6398A72253A605004021D3 /* BoxClientSpecs.swift in Sources */,
+				05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */,
 				22D0041422AFB25500478F1E /* CollectionsModuleSpecs.swift in Sources */,
+				052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */,
 				F99D418D2319CE7E00327698 /* WebhooksModuleSpecs.swift in Sources */,
 				0C28DCC022AF099B0005AC46 /* JSONComparer.swift in Sources */,
 				9DC6D81522F467A300A72284 /* EventsModuleSpecs.swift in Sources */,
@@ -2639,6 +2708,7 @@
 				80BC8447232C56D700010E08 /* TermsOfServiceSpecs.swift in Sources */,
 				F99D412E2314BA2800327698 /* RecentItemsModuleSpecs.swift in Sources */,
 				0CCBC2B02284312D00640FA8 /* KeychainTokenStoreSpecs.swift in Sources */,
+				05F59F1126FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
