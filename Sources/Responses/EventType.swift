@@ -67,11 +67,11 @@ public enum EventType: BoxEnum {
     case tagAdded
     /// 2 factor authentication enabled by user.
     case twoFactorEnabled
-    @available(*, deprecated, message: "This value is obsoleted and will be removed in v5.0. Please use adminInviteAccepted instead.")
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteAccepted instead.")
     case masterInviteAccepted
     /// Free user accepts invitation to become a managed user.
     case adminInviteAccepted
-    @available(*, deprecated, message: "This value is obsoleted and will be removed in v5.0. Please use adminInviteRejected instead.")
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use adminInviteRejected instead.")
     case masterInviteRejected
     /// Free user rejects invitation to become a managed user.
     case adminInviteRejected
@@ -240,7 +240,7 @@ public enum EventType: BoxEnum {
     case abnormalDownloadActivity
     /// Folders were removed from a group in the Admin console.
     case itemsRemovedFromGroup
-    @available(*, deprecated, message: "This value is obsoleted and will be removed in v5.0. Please use itemAddedToGroup instead.")
+    @available(*, deprecated, message: "This value is obsoleted and will be removed. Please use itemAddedToGroup instead.")
     case itemsAddedToGroup
     /// A watermarked file was downloaded.
     case watermarkedFileDownloaded
