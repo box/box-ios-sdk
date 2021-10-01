@@ -44,7 +44,7 @@ Installing the SDK
 __Step 1__: Add to your `Cartfile`
 
 ```
-git "https://github.com/box/box-ios-sdk.git" ~> 4.0
+git "https://github.com/box/box-ios-sdk.git" ~> 5.0
 ```
 
 __Step 2__: Update dependencies
@@ -62,7 +62,7 @@ For more detailed instructions, please see the [official documentation for Carth
 __Step 1__: Add to your `Podfile`
 
 ```
-pod 'BoxSDK', '~> 4.0'
+pod 'BoxSDK', '~> 5.0'
 ```
 
 __Step 2__: Install pod by running the following command in the directory with the `Podfile`
