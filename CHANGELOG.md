@@ -6,6 +6,7 @@ Changelog
 __Breaking Changes:__
 
 - Update PagingIterator to return pages and simplify logic ([#737](https://github.com/box/box-ios-sdk/pull/737))
+- Remove insensitive language field `collaborationWhiteList` in BoxClient. Use `collaborationAllowList` instead. ([#790](https://github.com/box/box-ios-sdk/pull/790))
 
 __New Features and Enhancements:__
 
