@@ -1,7 +1,9 @@
+ci_service: github
 coverage_service: coveralls
 xcodeproj: ./BoxSDK.xcodeproj
 workspace: ./BoxSDK.xcworkspace
 scheme: BoxSDK-iOS
 configuration: Release
+arch: x86_64
 ignore:
   - Tests/*
