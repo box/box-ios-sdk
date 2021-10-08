@@ -19,6 +19,7 @@ extension ISO8601DateFormatter {
 
 extension Formatter {
     static let iso8601 = ISO8601DateFormatter()
+    static let iso8601WithMilliseconds = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
 }
 
 extension Date {
@@ -36,6 +37,6 @@ extension Date {
 
 extension String {
     var iso8601: Date? {
-        return Formatter.iso8601.date(from: self)
+        return Formatter.iso8601.date(from: self) ?? Formatter.iso8601WithMilliseconds.date(from: self)
     }
 }

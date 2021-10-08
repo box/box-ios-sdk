@@ -10,7 +10,15 @@
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
+		054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */; };
+		054D789B2715989800E1E273 /* SignRequestSignFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789A2715989800E1E273 /* SignRequestSignFiles.swift */; };
+		054D789D2715E13B00E1E273 /* SignRequestsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789C2715E13B00E1E273 /* SignRequestsModule.swift */; };
 		054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */; };
+		05610A952710612A009F92CC /* SignRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A942710612A009F92CC /* SignRequest.swift */; };
+		05610A9727106ACA009F92CC /* SignRequestSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9627106ACA009F92CC /* SignRequestSigner.swift */; };
+		05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9827107079009F92CC /* SignRequestCreateParameters.swift */; };
+		05610A9B271099A7009F92CC /* SignRequestPrefillTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */; };
+		05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */; };
 		05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */; };
 		05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */; };
 		05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */; };
@@ -521,7 +529,15 @@
 /* Begin PBXFileReference section */
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
+		054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerDecision.swift; sourceTree = "<group>"; };
+		054D789A2715989800E1E273 /* SignRequestSignFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignFiles.swift; sourceTree = "<group>"; };
+		054D789C2715E13B00E1E273 /* SignRequestsModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRequestsModule.swift; sourceTree = "<group>"; };
 		054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationItemSpecs.swift; sourceTree = "<group>"; };
+		05610A942710612A009F92CC /* SignRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequest.swift; sourceTree = "<group>"; };
+		05610A9627106ACA009F92CC /* SignRequestSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSigner.swift; sourceTree = "<group>"; };
+		05610A9827107079009F92CC /* SignRequestCreateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCreateParameters.swift; sourceTree = "<group>"; };
+		05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTag.swift; sourceTree = "<group>"; };
+		05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInput.swift; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
@@ -1282,6 +1298,7 @@
 				97A4E5F72294F05E00A03307 /* MultipartForm.swift */,
 				9717866A22F0B868004A5F6D /* LockData.swift */,
 				80FEB7B9232031280037331C /* ConfigurablePermissionData.swift */,
+				05610A9827107079009F92CC /* SignRequestCreateParameters.swift */,
 			);
 			path = BodyData;
 			sourceTree = "<group>";
@@ -1366,6 +1383,12 @@
 				B492C0AA25B78A4500F3823D /* ZipDownloadConflict.swift */,
 				B492C0AC25B78A6A00F3823D /* ZipDownloadConflictItem.swift */,
 				B41D9DB425D3347C000BFE59 /* SearchResult.swift */,
+				05610A942710612A009F92CC /* SignRequest.swift */,
+				05610A9627106ACA009F92CC /* SignRequestSigner.swift */,
+				05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */,
+				05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */,
+				054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */,
+				054D789A2715989800E1E273 /* SignRequestSignFiles.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1373,6 +1396,7 @@
 		225639242253897D00D951B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				054D789C2715E13B00E1E273 /* SignRequestsModule.swift */,
 				22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */,
 				2246361D2315923B009DC4E9 /* TasksModule.swift */,
 				2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */,
@@ -2557,14 +2581,19 @@
 				B40558B925AE54810068784E /* ZipDownloadItem.swift in Sources */,
 				1772A480230EBEBC00546866 /* EventContainer.swift in Sources */,
 				0C10B2CE22AA8D130035371D /* CollaborationItem.swift in Sources */,
+				05610A9B271099A7009F92CC /* SignRequestPrefillTag.swift in Sources */,
+				05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */,
 				97F04DB322B97E500034B9A3 /* Collaborator.swift in Sources */,
 				228B369F22BBC1CF00078283 /* MetadataModule.swift in Sources */,
+				05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */,
 				228B36AB22BC243900078283 /* MetadataField.swift in Sources */,
+				05610A9727106ACA009F92CC /* SignRequestSigner.swift in Sources */,
 				2256398A2253897D00D951B5 /* File.swift in Sources */,
 				225639722253897D00D951B5 /* SharedLinkData.swift in Sources */,
 				0C66A62D2283147F008D5AEB /* OAuthWebAuthentication.swift in Sources */,
 				2261F82C228477B8008E7BD0 /* UIDeviceExtension.swift in Sources */,
 				9D472E69231BD9C4004C8023 /* RetentionPolicyAssignment.swift in Sources */,
+				054D789D2715E13B00E1E273 /* SignRequestsModule.swift in Sources */,
 				176CADFB231D4BEB004269F5 /* RetentionPolicyEntry.swift in Sources */,
 				22DCC3C622E0D19E007F74E2 /* TrackingCode.swift in Sources */,
 				B4882E6E25EEBE1800EB57BA /* FolderLock.swift in Sources */,
@@ -2575,6 +2604,7 @@
 				F99D4121231495BC00327698 /* RecentItem.swift in Sources */,
 				F929D5EB23319E9D0039E452 /* LegalHoldPolicyAssignment.swift in Sources */,
 				2246CD9422B2924700C29DE5 /* AuthModuleDispatcher.swift in Sources */,
+				05610A952710612A009F92CC /* SignRequest.swift in Sources */,
 				22E25088228D5F8700BBC6F2 /* BoxResponseDescription.swift in Sources */,
 				0C6398892253A4ED004021D3 /* Scope.swift in Sources */,
 				0C63987D2253A4ED004021D3 /* Enterprise.swift in Sources */,
@@ -2606,9 +2636,11 @@
 				225639922253897D00D951B5 /* BoxModel.swift in Sources */,
 				80FEB7AB231EE5D50037331C /* GroupsModule.swift in Sources */,
 				2256398E2253897D00D951B5 /* EntryContainer.swift in Sources */,
+				054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */,
 				F99D41382318495700327698 /* Webhook.swift in Sources */,
 				2261F8272284517B008E7BD0 /* AnalyticsHeaderGenerator.swift in Sources */,
 				F969D37C233A7146001301FC /* StoragePoliciesModule.swift in Sources */,
+				054D789B2715989800E1E273 /* SignRequestSignFiles.swift in Sources */,
 				2227648B2296FA19008113D1 /* DelegatedAuthSession.swift in Sources */,
 				928810AD237038470076ABA0 /* PagingIterator.swift in Sources */,
 				9DC6D81222F423E000A72284 /* PollingURLInfo.swift in Sources */,

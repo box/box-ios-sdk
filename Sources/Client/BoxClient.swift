@@ -49,6 +49,8 @@ public class BoxClient {
     public private(set) lazy var legalHolds = LegalHoldsModule(boxClient: self)
     /// Storage Policies management
     public private(set) lazy var storagePolicies = StoragePoliciesModule(boxClient: self)
+    /// Provides sign requests functionality.
+    public private(set) lazy var signRequests = SignRequestsModule(boxClient: self)
 
     /// Provides network communication with the Box APIs.
     private var networkAgent: NetworkAgentProtocol
