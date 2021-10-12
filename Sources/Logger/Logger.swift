@@ -57,8 +57,7 @@ extension Logger {
         let file = URL(fileURLWithPath: String(describing: file)).deletingPathExtension().lastPathComponent
         var function = String(describing: function)
         if let firstIndex = function.firstIndex(of: "("),
-           let lastIndex = function.lastIndex(of: ")")
-        {
+           let lastIndex = function.lastIndex(of: ")") {
             function.removeSubrange(firstIndex ... lastIndex)
         }
         log("%{public}@.%{public}@():%ld", level: .debug, [file, function, line])

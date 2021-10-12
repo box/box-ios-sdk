@@ -6,11 +6,13 @@
 //  Copyright © 2019 box. All rights reserved.
 //
 
+// swiftlint:disable file_length
+
 import Foundation
 
 /// Defines user or enterprise event type
 public enum EventType: BoxEnum {
-
+    // swiftlint:disable:previous type_body_length
     // MARK: - User events
 
     /// A folder or file was created.

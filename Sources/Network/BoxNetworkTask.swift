@@ -17,7 +17,7 @@ public class BoxNetworkTask: Cancellable {
 
     var tasks: [Cancellable] = []
     /// Whether the task is cancelled or not
-    public internal(set) var cancelled: Bool = false
+    public internal(set) var cancelled = false
 
     /// Closure that is called when API calls are nested within each other
     func receiveTask(_ task: Cancellable) {

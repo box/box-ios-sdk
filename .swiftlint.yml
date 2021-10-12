@@ -42,7 +42,7 @@ opt_in_rules:
   # - function_default_parameter_at_end
   - identical_operands
   - implicitly_unwrapped_optional
-  - implicit_return
+  #- implicit_return
   - last_where
   - legacy_multiple
   - legacy_random
@@ -76,7 +76,7 @@ opt_in_rules:
   - unowned_variable_capture
   - untyped_error_in_catch
   - unused_import
-  - unused_private_declaration
+  - unused_declaration
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
   - yoda_condition
