@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
+		052D63C227182FA500C76281 /* CreateSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C127182FA500C76281 /* CreateSignRequest.json */; };
+		052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C3271843FA00C76281 /* GetSignRequests.json */; };
+		052D85CB271734FC00648C70 /* SignRequestsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
 		054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */; };
@@ -27,6 +30,15 @@
 		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
 		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
 		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
+		05EE814027184A4B006A2329 /* GetSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE813F27184A4B006A2329 /* GetSignRequest.json */; };
+		05EE814227184EB3006A2329 /* CancelSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814127184EB3006A2329 /* CancelSignRequest.json */; };
+		05EE814427185047006A2329 /* FullSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814327185047006A2329 /* FullSignRequest.json */; };
+		05EE814627185554006A2329 /* SignRequestSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE814527185554006A2329 /* SignRequestSpecs.swift */; };
+		05EE814827186336006A2329 /* SignRequestSignerRoleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */; };
+		05EE814A27186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */; };
+		05EE814C2718658F006A2329 /* SignRequestPrefillTagSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */; };
+		05EE814E27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */; };
+		05EE8151271869B4006A2329 /* SignRequestCreateRequestSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE8150271869B4006A2329 /* SignRequestCreateRequestSpecs.swift */; };
 		05EFAB2226F0F01100DF1830 /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -527,6 +539,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		052D63C127182FA500C76281 /* CreateSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSignRequest.json; sourceTree = "<group>"; };
+		052D63C3271843FA00C76281 /* GetSignRequests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequests.json; sourceTree = "<group>"; };
+		052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleSpecs.swift; sourceTree = "<group>"; };
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
 		054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerDecision.swift; sourceTree = "<group>"; };
@@ -549,6 +564,15 @@
 		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
 		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
 		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
+		05EE813F27184A4B006A2329 /* GetSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequest.json; sourceTree = "<group>"; };
+		05EE814127184EB3006A2329 /* CancelSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CancelSignRequest.json; sourceTree = "<group>"; };
+		05EE814327185047006A2329 /* FullSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullSignRequest.json; sourceTree = "<group>"; };
+		05EE814527185554006A2329 /* SignRequestSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSpecs.swift; sourceTree = "<group>"; };
+		05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerRoleSpecs.swift; sourceTree = "<group>"; };
+		05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerDecisionTypeSpecs.swift; sourceTree = "<group>"; };
+		05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTagSpecs.swift; sourceTree = "<group>"; };
+		05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInputTypeSpecs.swift; sourceTree = "<group>"; };
+		05EE8150271869B4006A2329 /* SignRequestCreateRequestSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCreateRequestSpecs.swift; sourceTree = "<group>"; };
 		05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -1038,6 +1062,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		052D63C027182D7C00C76281 /* SignRequests */ = {
+			isa = PBXGroup;
+			children = (
+				05EE814327185047006A2329 /* FullSignRequest.json */,
+				05EE814127184EB3006A2329 /* CancelSignRequest.json */,
+				05EE813F27184A4B006A2329 /* GetSignRequest.json */,
+				052D63C3271843FA00C76281 /* GetSignRequests.json */,
+				052D63C127182FA500C76281 /* CreateSignRequest.json */,
+			);
+			path = SignRequests;
+			sourceTree = "<group>";
+		};
+		05EE814F271869A2006A2329 /* BodyData */ = {
+			isa = PBXGroup;
+			children = (
+				05EE8150271869B4006A2329 /* SignRequestCreateRequestSpecs.swift */,
+			);
+			path = BodyData;
+			sourceTree = "<group>";
+		};
 		0C28DCC322AF099F0005AC46 /* JSONComparison */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1147,7 @@
 				80BC841D232C535600010E08 /* TermsOfServicesModuleSpecs.swift */,
 				F929D5EE2331AAF00039E452 /* LegalHoldsModuleSpecs.swift */,
 				F969D38A233A7242001301FC /* StoragePoliciesModuleSpecs.swift */,
+				052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1452,6 +1497,7 @@
 		225639C3225389B100D951B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				052D63C027182D7C00C76281 /* SignRequests */,
 				22C4144F231ED19700D3992C /* MetadataCascadePolicy */,
 				F969D396233A72D2001301FC /* Storage Policies */,
 				80BC8423232C53F200010E08 /* TermsOfService */,
@@ -1814,6 +1860,11 @@
 				05A58A4626FB487500AB309C /* EventTypeSpecs.swift */,
 				05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */,
 				05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */,
+				05EE814527185554006A2329 /* SignRequestSpecs.swift */,
+				05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */,
+				05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */,
+				05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */,
+				05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1892,6 +1943,7 @@
 		97678BDE2280E5C3007726D6 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				05EE814F271869A2006A2329 /* BodyData */,
 				9DE4586C22D648E500C93CF5 /* URLs */,
 				97BC7AAE228B6C1D00DDE998 /* QueryParameters */,
 				97678BDF2280E5DF007726D6 /* BoxRequestTest.swift */,
@@ -2265,6 +2317,7 @@
 				F9A3F0D223A18926007C7393 /* GetEnterpriseUsersMarker-Pagination.json in Resources */,
 				22C95BE3230AF910004F5C18 /* ChunkedUploadSessionListParts.json in Resources */,
 				05A58A3426FB216A00AB309C /* FullFile_ValueFormatMismatch.json in Resources */,
+				05EE814227184EB3006A2329 /* CancelSignRequest.json in Resources */,
 				0C506CC122A6B376007F18A4 /* PendingCollaborations.json in Resources */,
 				9DD6F54022DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json in Resources */,
 				22720E9D2316BE9F00887AA4 /* GetTask.json in Resources */,
@@ -2280,6 +2333,7 @@
 				97F04DA822B963770034B9A3 /* FullComment.json in Resources */,
 				2278C550231D808E0048FF45 /* CreateCollaborationWhitelistExemptUser.json in Resources */,
 				97FA4FDC234CFF3F00A615B8 /* UpdateTaggedComment.json in Resources */,
+				052D63C227182FA500C76281 /* CreateSignRequest.json in Resources */,
 				80F652D022BC44E200F38485 /* GetRepresentationsNoHeader.json in Resources */,
 				22CE53A022DD0C3E00F3D59F /* GetMetadataOnFolder.json in Resources */,
 				225639DB225389B100D951B5 /* CopyFile.json in Resources */,
@@ -2293,6 +2347,7 @@
 				22D0041B22AFB30500478F1E /* GetCollections.json in Resources */,
 				2280E3322301630B00F98892 /* RestoreWebLink.json in Resources */,
 				0C506CB422A6ABA4007F18A4 /* GetCollaboration.json in Resources */,
+				052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */,
 				22D0043822AFBC6B00478F1E /* RemoveFolderFromFavorites.json in Resources */,
 				0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */,
 				97F04D9F22B84D260034B9A3 /* FullUser.json in Resources */,
@@ -2350,6 +2405,7 @@
 				9717866D22F0C694004A5F6D /* RemoveFolderSharedLink.json in Resources */,
 				0CA0651E22980EE900A751B1 /* image.png in Resources */,
 				F99D416F2319CDC800327698 /* GetWebhooks.json in Resources */,
+				05EE814027184A4B006A2329 /* GetSignRequest.json in Resources */,
 				9D472E79231BF499004C8023 /* CreateRetentionPolicy.json in Resources */,
 				2262403E227214820048E638 /* GetFolderItemsOffsetIterator2.json in Resources */,
 				22C95BD5230AD650004F5C18 /* ChunkedUploadSessionNewFileVersion.json in Resources */,
@@ -2392,6 +2448,7 @@
 				9717866F22F0C9ED004A5F6D /* RemoveFileSharedLink.json in Resources */,
 				F929D6192331AE280039E452 /* UpdateLegalHoldPolicy.json in Resources */,
 				80E5679B22FB931E00798E3A /* UpdateWebLink.json in Resources */,
+				05EE814427185047006A2329 /* FullSignRequest.json in Resources */,
 				97F04DB822B981220034B9A3 /* FullGroup.json in Resources */,
 				223C6DB622C6838A00F4023C /* GetMetadataOnFile.json in Resources */,
 				0CA065262298121E00A751B1 /* FileCollaborations.json in Resources */,
@@ -2675,6 +2732,7 @@
 				0C63989F2253A536004021D3 /* FolderModuleSpecs.swift in Sources */,
 				9DB4F7BC22E1EBAA002C4697 /* BoxModelSpecs.swift in Sources */,
 				8053E2D022B04534000B42E1 /* SharedItemsModuleSpecs.swift in Sources */,
+				05EE814E27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift in Sources */,
 				97FA4FE0234D123A00A615B8 /* BoxJSONDecoderSpecs.swift in Sources */,
 				0C78709D228771F0006FBDAE /* OAuth2SessionSpecs.swift in Sources */,
 				05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */,
@@ -2684,6 +2742,8 @@
 				F929D6302331AE3E0039E452 /* FileVersionLegalHoldSpecs.swift in Sources */,
 				F969D393233A72C0001301FC /* StoragePolicySpecs.swift in Sources */,
 				22C4775322E1BB70008FDC1A /* BoxEnumSpecs.swift in Sources */,
+				05EE8151271869B4006A2329 /* SignRequestCreateRequestSpecs.swift in Sources */,
+				05EE814A27186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift in Sources */,
 				80FEB7C7232175DF0037331C /* GroupsModuleSpecs.swift in Sources */,
 				228B36A422BBC1E300078283 /* MetadataModuleSpecs.swift in Sources */,
 				0C6398A22253A536004021D3 /* UsersModuleSpecs.swift in Sources */,
@@ -2697,6 +2757,7 @@
 				054E58E926F4B8D100C604D2 /* CollaborationItemSpecs.swift in Sources */,
 				22F7966922EF987600908A85 /* DelegatedAuthSessionSpecs.swift in Sources */,
 				F99DB49D233C498F0065317F /* RetentionPolicySpecs.swift in Sources */,
+				05EE814827186336006A2329 /* SignRequestSignerRoleSpecs.swift in Sources */,
 				97F04DA122B84E540034B9A3 /* UserSpecs.swift in Sources */,
 				05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */,
 				05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */,
@@ -2706,11 +2767,13 @@
 				9299AE382326B72400E8F235 /* UIDeviceExtensionSpecs.swift in Sources */,
 				05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */,
 				F928144F233E925800E42EEE /* RetentionPolicyAssignmentSpecs.swift in Sources */,
+				05EE814C2718658F006A2329 /* SignRequestPrefillTagSpecs.swift in Sources */,
 				174DEB85231919AB00AA3335 /* RecentItemSpecs.swift in Sources */,
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
 				0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */,
 				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
+				05EE814627185554006A2329 /* SignRequestSpecs.swift in Sources */,
 				F9571FB42371F47400D30EF1 /* LoggingSpecs.swift in Sources */,
 				05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */,
 				80BC844A232C56E000010E08 /* TermsOfServicesModuleSpecs.swift in Sources */,
@@ -2735,6 +2798,7 @@
 				97C8B57722B05BB100F36435 /* FileSpecs.swift in Sources */,
 				97BC7AB0228B6C3500DDE998 /* FieldsQueryParamTest.swift in Sources */,
 				97678BE02280E5DF007726D6 /* BoxRequestTest.swift in Sources */,
+				052D85CB271734FC00648C70 /* SignRequestsModuleSpecs.swift in Sources */,
 				97D3FFB822B1C8F7008C1CE6 /* FileVersionSpecs.swift in Sources */,
 				0C66A63722832925008D5AEB /* AuthModuleSpecs.swift in Sources */,
 				80BC8447232C56D700010E08 /* TermsOfServiceSpecs.swift in Sources */,
