@@ -111,16 +111,8 @@ static NSString *disableCalloutScriptString = @"document.documentElement.style.w
 
 - (void)loadView
 {
-    WKUserContentController *controller = [WKUserContentController new];
-    WKUserScript *viewPortScript = [[WKUserScript alloc] initWithSource:viewPortScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
-    WKUserScript *disableSelectionScript = [[WKUserScript alloc] initWithSource:disableSelectionScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    WKUserScript *disableCalloutScript = [[WKUserScript alloc] initWithSource:disableCalloutScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    [controller addUserScript:viewPortScript];
-    [controller addUserScript:disableSelectionScript];
-    [controller addUserScript:disableCalloutScript];
-    
     WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-    config.userContentController = controller;
+    config.userContentController = self.userContentController;
     config.websiteDataStore = [WKWebsiteDataStore nonPersistentDataStore];
 
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
@@ -134,6 +126,18 @@ static NSString *disableCalloutScriptString = @"document.documentElement.style.w
     webView.scrollView.delegate = self;
 
     self.view = webView;
+}
+
+- (WKUserContentController *)userContentController
+{
+    WKUserContentController *controller = [WKUserContentController new];
+    WKUserScript *viewPortScript = [[WKUserScript alloc] initWithSource:viewPortScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+    WKUserScript *disableSelectionScript = [[WKUserScript alloc] initWithSource:disableSelectionScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserScript *disableCalloutScript = [[WKUserScript alloc] initWithSource:disableCalloutScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    [controller addUserScript:viewPortScript];
+    [controller addUserScript:disableSelectionScript];
+    [controller addUserScript:disableCalloutScript];
+    return controller;
 }
 
 - (void)viewDidLoad

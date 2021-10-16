@@ -57,4 +57,12 @@
                   completionBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController, BOXUser *user, NSError *error))completionBlock
                       cancelBlock:(void (^)(BOXAuthorizationViewController *authorizationViewController))cancelBlock;
 
+/**
+ * Constructs the user content controller for the web view.
+ *
+ * Exposed only for customization by subclasses. This will not return the
+ * user content controller that is in use.
+ */
+- (WKUserContentController *)userContentController;
+
 @end
