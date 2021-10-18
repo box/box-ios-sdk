@@ -22,6 +22,8 @@ jobs:
           bundler-cache: true
       - name: Setup carthage dependencies
         run: ./scripts/bootstrap
+      - name: Lint
+        run: swiftlint
       - name: Run unit tests
         run: set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDK-iOS -destination "${{ matrix.destination }}" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES -enableCodeCoverage YES test
       - name: Extract branch name
@@ -33,5 +35,3 @@ jobs:
           GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
           CI_PULL_REQUEST: ${{ github.event.number }}
           COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Lint
-        run: swiftlint
