@@ -1,0 +1,37 @@
+name: Pull request checklist
+on: 
+  pull_request:
+    branches:
+      - main
+jobs:
+  Run-Tests:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,OS=14.5,name=iPhone 11']
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+      - name: List Xcode available versions
+        run: ls -n /Applications/ | grep Xcode*
+      - name: Setup - Xcode
+        run: sudo xcode-select -s /Applications/Xcode_12.5.1.app
+      - name: Setup - Ruby and bundler dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup carthage dependencies
+        run: ./scripts/bootstrap
+      - name: Lint
+        run: swiftlint
+      - name: Run unit tests
+        run: set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDK-iOS -destination "${{ matrix.destination }}" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES -enableCodeCoverage YES test
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: get_branch
+      - run: bundle exec slather
+        env:
+          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
+          CI_PULL_REQUEST: ${{ github.event.number }}
+          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
