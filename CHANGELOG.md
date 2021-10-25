@@ -11,6 +11,7 @@ __Breaking Changes:__
 __New Features and Enhancements:__
 
 - Replace insensitive event types ([#785](https://github.com/box/box-ios-sdk/pull/785))
+- Add SignAPI support ([#792](https://github.com/box/box-ios-sdk/pull/792))
 
 __Bug Fixes:__
 
