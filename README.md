@@ -14,17 +14,28 @@ The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the mai
 Going forward, the main branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
 
 Box iOS SDK
-- [Requirements](#requirements)
-- [Installing the SDK](#installing-the-sdk)
-  - [Carthage](#carthage)
-  - [CocoaPods](#cocoapods)
-  - [Swift Package Manager](#swift-package-manager)
-- [Getting Started](#getting-started)
-- [Sample Apps](#sample-apps)
-  - [OAuth2 Sample App](#oauth2-sample-app)
-  - [JWT Auth Sample App](#jwt-auth-sample-app)
-- [Release Definitions](#release-definitions)
-- [Copyright and License](#copyright-and-license)
+- [Box iOS SDK](#box-ios-sdk)
+- [NOTE:](#note)
+  - [Requirements](#requirements)
+  - [Installing the SDK](#installing-the-sdk)
+    - [Carthage](#carthage)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+      - [Importing BoxSDK into Project](#importing-boxsdk-into-project)
+      - [Adding BoxSDK as a Dependency](#adding-boxsdk-as-a-dependency)
+  - [Getting Started](#getting-started)
+  - [Sample Apps](#sample-apps)
+    - [OAuth2 Sample App](#oauth2-sample-app)
+    - [JWT Auth Sample App](#jwt-auth-sample-app)
+  - [Release Definitions](#release-definitions)
+    - [Release Candidate (RC)](#release-candidate-rc)
+    - [Current Release](#current-release)
+    - [Long Term Support](#long-term-support)
+    - [Support Phases](#support-phases)
+      - [Active](#active)
+      - [Maintenance](#maintenance)
+      - [End-of-life](#end-of-life)
+  - [Copyright and License](#copyright-and-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,11 +60,10 @@ git "https://github.com/box/box-ios-sdk.git" ~> 5.0
 
 __Step 2__: Update dependencies
 ```shell
-$ carthage update --platform iOS
+$ carthage update --use-xcframeworks --platform iOS
 ```
-**If you are using Xcode 12, you must follow the steps outlined [here](https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323) to install dependecies due to a bug in carthage.**
 
-__Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
+__Step 3__: Drag the built xcframework from Carthage/Build into your project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 
@@ -137,7 +147,7 @@ To execute the sample app:
 __Step 1__: Run carthage
 ```shell
 $ cd SampleApps/OAuth2SampleApp
-$ carthage update --platform iOS
+$ carthage update --use-xcframeworks --platform iOS
 ```
 
 __Step 2__: Open Xcode Project File
@@ -176,7 +186,7 @@ To execute the sample app:
 __Step 1__: Run carthage
 ```shell
 $ cd SampleApps/JWTSampleApp
-$ carthage update --platform iOS
+$ carthage update --use-xcframeworks --platform iOS
 ```
 
 __Step 2__: Open Xcode Project File

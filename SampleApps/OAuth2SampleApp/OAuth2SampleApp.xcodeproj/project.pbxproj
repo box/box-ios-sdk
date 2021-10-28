@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05B4D8FB272AED6F00B1601E /* BoxSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B4D8FA272AED6F00B1601E /* BoxSDK.xcframework */; };
+		05B4D8FC272AED6F00B1601E /* BoxSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05B4D8FA272AED6F00B1601E /* BoxSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		916689202329998800FB752C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916689122329998800FB752C /* Constants.swift */; };
 		916689212329998800FB752C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 916689142329998800FB752C /* Assets.xcassets */; };
 		916689222329998800FB752C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916689152329998800FB752C /* LaunchScreen.storyboard */; };
@@ -14,18 +16,16 @@
 		916689252329998800FB752C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166891C2329998800FB752C /* ViewController.swift */; };
 		916689262329998800FB752C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166891D2329998800FB752C /* AppDelegate.swift */; };
 		916689272329998800FB752C /* BasicErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166891F2329998800FB752C /* BasicErrorView.swift */; };
-		91B7911222E907DE007BFB96 /* BoxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7910C22E907A4007BFB96 /* BoxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		91B7911522E907EE007BFB96 /* BoxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7910C22E907A4007BFB96 /* BoxSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		91B7911322E907DE007BFB96 /* Embed Frameworks */ = {
+		05B4D8FD272AED6F00B1601E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				91B7911222E907DE007BFB96 /* BoxSDK.framework in Embed Frameworks */,
+				05B4D8FC272AED6F00B1601E /* BoxSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05B4D8FA272AED6F00B1601E /* BoxSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BoxSDK.xcframework; path = Carthage/Build/BoxSDK.xcframework; sourceTree = "<group>"; };
 		916689122329998800FB752C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		916689142329998800FB752C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		916689162329998800FB752C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B7911522E907EE007BFB96 /* BoxSDK.framework in Frameworks */,
+				05B4D8FB272AED6F00B1601E /* BoxSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +64,7 @@
 		82810C620693AA1B5001CE43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05B4D8FA272AED6F00B1601E /* BoxSDK.xcframework */,
 				91B7910C22E907A4007BFB96 /* BoxSDK.framework */,
 			);
 			name = Frameworks;
@@ -139,7 +141,7 @@
 				9DDC2AC222C4E0E500F1DBAC /* Frameworks */,
 				9DDC2AC322C4E0E500F1DBAC /* Resources */,
 				5A2FB60A367277CF7F18191A /* [CP] Embed Pods Frameworks */,
-				91B7911322E907DE007BFB96 /* Embed Frameworks */,
+				05B4D8FD272AED6F00B1601E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,9 +399,14 @@
 				CODE_SIGN_ENTITLEMENTS = OAuth2SampleApp/Resources/OAuth2SampleApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/OAuth2SampleApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -421,9 +428,14 @@
 				CODE_SIGN_ENTITLEMENTS = OAuth2SampleApp/Resources/OAuth2SampleApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/OAuth2SampleApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -3,29 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05B4D8FF272AEEAA00B1601E /* BoxSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B4D8FE272AEEAA00B1601E /* BoxSDK.xcframework */; };
+		05B4D900272AEEAA00B1601E /* BoxSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05B4D8FE272AEEAA00B1601E /* BoxSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		916688E4232996A600FB752C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 916688DA232996A600FB752C /* Assets.xcassets */; };
 		916688E5232996A600FB752C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916688DB232996A600FB752C /* LaunchScreen.storyboard */; };
 		916688E6232996A600FB752C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916688DD232996A600FB752C /* Main.storyboard */; };
 		916688E8232996A600FB752C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916688E1232996A600FB752C /* ViewController.swift */; };
 		916688E9232996A600FB752C /* BasicErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916688E3232996A600FB752C /* BasicErrorView.swift */; };
-		91B7911C22E917CF007BFB96 /* BoxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7911722E917BD007BFB96 /* BoxSDK.framework */; };
-		91B7911D22E917CF007BFB96 /* BoxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7911722E917BD007BFB96 /* BoxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DB30FFE22C65AEB00C1A05C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB30FFD22C65AEB00C1A05C /* Constants.swift */; };
 		9DDC2AC922C4E0E500F1DBAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC2AC822C4E0E500F1DBAC /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		91B7911E22E917CF007BFB96 /* Embed Frameworks */ = {
+		05B4D901272AEEAA00B1601E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				91B7911D22E917CF007BFB96 /* BoxSDK.framework in Embed Frameworks */,
+				05B4D900272AEEAA00B1601E /* BoxSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05B4D8FE272AEEAA00B1601E /* BoxSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BoxSDK.xcframework; path = Carthage/Build/BoxSDK.xcframework; sourceTree = "<group>"; };
 		916688DA232996A600FB752C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		916688DC232996A600FB752C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		916688DE232996A600FB752C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B7911C22E917CF007BFB96 /* BoxSDK.framework in Frameworks */,
+				05B4D8FF272AEEAA00B1601E /* BoxSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +63,7 @@
 		82810C620693AA1B5001CE43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05B4D8FE272AEEAA00B1601E /* BoxSDK.xcframework */,
 				91B7911722E917BD007BFB96 /* BoxSDK.framework */,
 			);
 			name = Frameworks;
@@ -137,7 +139,7 @@
 				9DDC2AC222C4E0E500F1DBAC /* Frameworks */,
 				9DDC2AC322C4E0E500F1DBAC /* Resources */,
 				5A2FB60A367277CF7F18191A /* [CP] Embed Pods Frameworks */,
-				91B7911E22E917CF007BFB96 /* Embed Frameworks */,
+				05B4D901272AEEAA00B1601E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -389,9 +391,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/JWTSampleApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -412,9 +419,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/JWTSampleApp/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
