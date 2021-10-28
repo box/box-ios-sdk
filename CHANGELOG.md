@@ -5,6 +5,14 @@ Changelog
 
 __Breaking Changes:__
 
+__New Features and Enhancements:__
+
+__Bug Fixes:__
+
+## v5.0.0 [2021-10-28]
+
+__Breaking Changes:__
+
 - Update PagingIterator to return pages and simplify logic ([#737](https://github.com/box/box-ios-sdk/pull/737))
 - Remove insensitive language field `collaborationWhiteList` in BoxClient. Use `collaborationAllowList` instead. ([#790](https://github.com/box/box-ios-sdk/pull/790))
 
@@ -12,8 +20,6 @@ __New Features and Enhancements:__
 
 - Replace insensitive event types ([#785](https://github.com/box/box-ios-sdk/pull/785))
 - Add SignAPI support ([#792](https://github.com/box/box-ios-sdk/pull/792))
-
-__Bug Fixes:__
 
 ## v4.4.0 [2021-04-20]
 

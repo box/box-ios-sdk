@@ -17,18 +17,18 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxSDK 4.4.0 Docs</a> (100% documented)</p>
-        <p class="header-right">
+        <p><a href="index.html">BoxSDK 5.0.0 Docs</a> (100% documented)</p>
+        <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="index.html">BoxSDK Reference</a>
-        <img id="carat" src="img/carat.png" />
+        <img id="carat" src="img/carat.png" alt=""/>
         Classes  Reference
       </p>
     </div>
@@ -342,6 +342,27 @@
                 <a href="Classes/SharedLink/Permissions.html">– Permissions</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/SignRequest.html">SignRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestPrefillTag.html">SignRequestPrefillTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestSignFiles.html">SignRequestSignFiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestSigner.html">SignRequestSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestSignerDecision.html">SignRequestSignerDecision</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestSignerInput.html">SignRequestSignerInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SignRequestsModule.html">SignRequestsModule</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/SingleTokenSession.html">SingleTokenSession</a>
               </li>
               <li class="nav-group-task">
@@ -557,6 +578,18 @@
                 <a href="Enums/SharedLinkAccess.html">SharedLinkAccess</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SignRequestSignerInputType.html">SignRequestSignerInputType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SignRequestSignerRole.html">SignRequestSignerRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SignRequestStatus.html">SignRequestStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/StreamPosition.html">StreamPosition</a>
               </li>
               <li class="nav-group-task">
@@ -714,6 +747,21 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SharedLinkData.html">SharedLinkData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignRequestCreateParameters.html">SignRequestCreateParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignRequestCreateParentFolder.html">SignRequestCreateParentFolder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignRequestCreateSigner.html">SignRequestCreateSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignRequestCreateSourceFile.html">SignRequestCreateSourceFile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignRequestCreateSourceFileVersion.html">SignRequestCreateSourceFileVersion</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/UploadPartDescription.html">UploadPartDescription</a>
@@ -1520,6 +1568,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK18SignRequestsModuleC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestsModule" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK18SignRequestsModuleC">SignRequestsModule</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides management of Sign Requests</p>
+
+                        <a href="Classes/SignRequestsModule.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestsModule</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK21StoragePoliciesModuleC"></a>
                     <a name="//apple_ref/swift/Class/StoragePoliciesModule" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK21StoragePoliciesModuleC">StoragePoliciesModule</a>
@@ -2298,7 +2374,8 @@ You can create comments independently or create them as responses to other comme
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">EventContainer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "This class is obsoleted and will be removed. Please use EntryContainer&lt;Element&gt; instead.")</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">EventContainer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
 
                         </div>
                       </div>
@@ -3179,6 +3256,176 @@ or place a blanket policy over the entire enterprise.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK11SignRequestC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11SignRequestC">SignRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A standard representation of a sign request, as returned from any Box Sign API endpoints by default.</p>
+
+                        <a href="Classes/SignRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequest</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK21SignRequestPrefillTagC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestPrefillTag" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK21SignRequestPrefillTagC">SignRequestPrefillTag</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prefill tags are used to prefill placeholders with signer input data.
+Only one value field can be included.</p>
+
+                        <a href="Classes/SignRequestPrefillTag.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestPrefillTag</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:6BoxSDK0A10InnerModelP">BoxInnerModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK011SignRequestC5FilesC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestSignFiles" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK011SignRequestC5FilesC">SignRequestSignFiles</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List of files that will be signed, which are copies of the original source files.
+A new version of these files are created as signers sign and can be downloaded at any point in the signing process.</p>
+
+                        <a href="Classes/SignRequestSignFiles.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestSignFiles</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestSigner" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC">SignRequestSigner</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Represents a signer fields for GET Sign Request response.</p>
+
+                        <a href="Classes/SignRequestSigner.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestSigner</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK25SignRequestSignerDecisionC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestSignerDecision" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK25SignRequestSignerDecisionC">SignRequestSignerDecision</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Final decision made by the signer</p>
+
+                        <a href="Classes/SignRequestSignerDecision.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestSignerDecision</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK22SignRequestSignerInputC"></a>
+                    <a name="//apple_ref/swift/Class/SignRequestSignerInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK22SignRequestSignerInputC">SignRequestSignerInput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prefill tags are used to prefill placeholders with signer input data. Only none value field can be included.</p>
+
+                        <a href="Classes/SignRequestSignerInput.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SignRequestSignerInput</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK13StoragePolicyC"></a>
                     <a name="//apple_ref/swift/Class/StoragePolicy" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK13StoragePolicyC">StoragePolicy</a>
@@ -3424,7 +3671,8 @@ Users can accept/ re-accept for custom applications.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TrackingCode</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "This class is obsoleted and will be removed. Please use User.TrackingCode instead.")</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">TrackingCode</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxModel.html">BoxModel</a></span></code></pre>
 
                         </div>
                       </div>
@@ -3829,11 +4077,10 @@ Watermarks can be applied to folders and files independently.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
