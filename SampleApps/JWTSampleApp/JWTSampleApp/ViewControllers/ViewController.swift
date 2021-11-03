@@ -14,7 +14,6 @@ class ViewController: UITableViewController {
     private var sdk: BoxSDK!
     private var client: BoxClient!
     private var folderItems: [FolderItem] = []
-    private let initialPageSize: Int = 100
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -130,32 +129,25 @@ extension ViewController {
 private extension ViewController {
 
     func getSinglePageOfFolderItems() {
-        client.folders.listItems(
+        let iterator = client.folders.listItems(
             folderId: BoxSDK.Constants.rootFolder,
             usemarker: true,
             fields: ["modified_at", "name", "extension"]
-        ){ [weak self] result in
-            guard let self = self else {return}
-
+        )
+        
+        iterator.next { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
-            case let .success(items):
+            case let .success(page):
                 self.folderItems = []
-
-                for i in 1...self.initialPageSize {
-                    print ("Request Item #\(String(format: "%03d", i)) |")
-                    items.next { result in
-                        switch result {
-                        case let .success(item):
-                            print ("    Got Item #\(String(format: "%03d", i)) | \(item.debugDescription))")
-                            DispatchQueue.main.async {
-                                self.folderItems.append(item)
-                                self.tableView.reloadData()
-                                self.navigationItem.rightBarButtonItem?.title = "Refresh"
-                            }
-                        case let .failure(error):
-                            print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")
-                            return
-                        }
+                
+                for (i, item) in page.entries.enumerated() {
+                    print ("Item #\(String(format: "%03d", i + 1)) | \(item.debugDescription))")
+                    DispatchQueue.main.async {
+                        self.folderItems.append(item)
+                        self.tableView.reloadData()
+                        self.navigationItem.rightBarButtonItem?.title = "Refresh"
                     }
                 }
             case let .failure(error):
