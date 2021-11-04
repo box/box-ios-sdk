@@ -18,6 +18,10 @@ jobs:
         AUTHORIZED_USERS: "${{ secrets.AUTHORIZED_USERS }}"
       run: |
          if [[ " ${AUTHORIZED_USERS} " =~ " ${{ github.actor }} " ]]; then echo "::notice::User authorized!"; else echo "::error::Not authorized user to create release"; exit 1; fi
+    - name: Print parameters
+      run: |
+        echo "Running release ${{ github.event_name }}!"
+        echo "version: ${{ github.event.inputs.version }}!"
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
@@ -28,6 +32,10 @@ jobs:
       run: |
           git config --global user.name "Artur Jankowski"
           git config --global user.email "ajankowski@box.com"
+    - name: List Xcode available versions
+      run: ls -n /Applications/ | grep Xcode*
+    - name: Setup - Xcode
+      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app
     - name: Setup - Ruby and bundler dependencies
       uses: ruby/setup-ruby@v1
       with:
