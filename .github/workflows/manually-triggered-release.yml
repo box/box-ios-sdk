@@ -4,11 +4,7 @@ on:
     inputs:
       version:
         description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATH> e.g.: 1.0.0'
-        default: '5.0.1'
         required: true
-  pull_request:
-    branches:
-      - 'main'
 jobs:
   release_job:
     runs-on: macos-11
@@ -17,7 +13,7 @@ jobs:
       env:
         AUTHORIZED_USERS: "${{ secrets.AUTHORIZED_USERS }}"
       run: |
-         if [[ " ${AUTHORIZED_USERS} " =~ " ${{ github.actor }} " ]]; then echo "::notice::User authorized!"; else echo "::error::Not authorized user to create release"; exit 1; fi
+         if [[ " ${AUTHORIZED_USERS} " =~ " ${{ github.actor }} " ]]; then echo "::notice::User is authorized to create release!"; else echo "::error::User is not authorized to create release"; exit 1; fi
     - name: Print parameters
       run: |
         echo "Running release ${{ github.event_name }}!"
@@ -42,4 +38,4 @@ jobs:
         bundler-cache: true
     - name: Run fastlane release script
       run: |
-        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }} dry_run:true
+        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }}
