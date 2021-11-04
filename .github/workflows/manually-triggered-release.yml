@@ -21,7 +21,6 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.ref_name }}
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0
         submodules: true
@@ -35,4 +34,4 @@ jobs:
         bundler-cache: true
     - name: Run fastlane release script
       run: |
-        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }} release_branch: ${{ github.ref_name }} dry_run:true
+        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }} dry_run:true
