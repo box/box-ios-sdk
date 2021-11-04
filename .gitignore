@@ -50,6 +50,7 @@ xcuserdata/
 
 ## Bundler
 vendor/
+.bundle/
 
 ## Obj-C/Swift specific
 *.hmap

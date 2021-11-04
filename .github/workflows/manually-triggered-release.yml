@@ -1,0 +1,38 @@
+name: Manually triggered release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATH> e.g.: 1.0.0'
+        default: 5.0.1
+        required: true
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  release_job:
+    runs-on: macos-11
+    steps:
+    - name: Authorize user
+      env:
+        AUTHORIZED_USERS: "${{ secrets.AUTHORIZED_USERS }}"
+      run: |
+         if [[ " ${AUTHORIZED_USERS} " =~ " ${{ github.actor }} " ]]; then echo "::notice::User authorized!"; else echo "::error::Not authorized user to create release"; exit 1; fi
+    - name: Checkout main branch
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref_name }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        submodules: true
+    - name: Setup git user
+      run: |
+          git config --global user.name "Artur Jankowski"
+          git config --global user.email "ajankowski@box.com"
+    - name: Setup - Ruby and bundler dependencies
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Run fastlane release script
+      run: |
+        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }} release_branch: ${{ github.ref_name }} dry_run:true
