@@ -4,7 +4,7 @@ on:
     inputs:
       version:
         description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATH> e.g.: 1.0.0'
-        default: 5.0.1
+        default: '5.0.1'
         required: true
   pull_request:
     branches:
