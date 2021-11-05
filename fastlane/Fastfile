@@ -9,7 +9,8 @@
 #
 # PARAMETERS:
 #############
-# version:        Required parameter. It determines which version we want to release.
+# version:        Required parameter. It determines which version we want to release
+#                 in format: <MAJOR>.<MINOR>.<PATCH>
 #                 e.g. version:9.1.1
 #                 e.g. version:10.11.12
 #

@@ -5,6 +5,10 @@ on:
       version:
         description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0'
         required: true
+  push:
+    branches:
+      - 'aj/sdk-1811-release-workflow'
+
 jobs:
   release_box-ios-sdk:
     runs-on: macos-11
