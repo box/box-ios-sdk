@@ -25,7 +25,7 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
-        ref: main
+        ref: aj/sdk-1811-release-workflow
         token: ${{ secrets.GITHUB_TOKEN }}
         submodules: true
     - name: Setup git user
