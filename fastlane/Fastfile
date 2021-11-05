@@ -57,6 +57,10 @@ platform :ios do
       UI.user_error!("Missing required parameter \"version\"")
     end
 
+    if !is_version_valid(version: version)
+      UI.user_error!("\"version\" parameter is in invalid format. Required \"version\" format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
+    end
+
     # Script phases
     update_version(version: version)
     update_changelog(
@@ -157,6 +161,12 @@ platform :ios do
 ##############################################################################
 # VERSION UPDATE
 ##############################################################################
+
+  desc "Validate version"
+  private_lane :is_version_valid do |options|
+    version = options[:version]
+    !!(version =~ /^\d+\.\d+\.\d+$/)
+  end
 
   desc "Update SDK version"
   private_lane :update_version do |options|
