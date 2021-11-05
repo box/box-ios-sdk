@@ -5,10 +5,6 @@ on:
       version:
         description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0'
         required: true
-  push:
-    branches:
-      - 'aj/sdk-1811-release-workflow'
-
 jobs:
   release_box-ios-sdk:
     runs-on: macos-11
@@ -25,7 +21,7 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
-        ref: aj/sdk-1811-release-workflow
+        ref: main
         token: ${{ secrets.GITHUB_TOKEN }}
         submodules: true
     - name: Setup git user
@@ -42,4 +38,4 @@ jobs:
         bundler-cache: true
     - name: Run fastlane release script
       run: |
-        bundle exec fastlane ios release version:5.6.7 github_token:${{ secrets.RELEASE_TOKEN }} dry_run:true
+        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }}
