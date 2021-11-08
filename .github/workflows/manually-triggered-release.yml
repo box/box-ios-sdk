@@ -1,0 +1,41 @@
+name: Manually triggered release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Please provide the version you want to release in format <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0'
+        required: true
+jobs:
+  release_box-ios-sdk:
+    runs-on: macos-11
+    steps:
+    - name: Authorize user
+      env:
+        AUTHORIZED_USERS: "${{ secrets.AUTHORIZED_USERS }}"
+      run: |
+         if [[ " ${AUTHORIZED_USERS} " =~ " ${{ github.actor }} " ]]; then echo "::notice::User is authorized to create release!"; else echo "::error::User is not authorized to create release"; exit 1; fi
+    - name: Print parameters
+      run: |
+        echo "Running release ${{ github.event_name }}!"
+        echo "version: ${{ github.event.inputs.version }}!"
+    - name: Checkout main branch
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        token: ${{ secrets.GITHUB_TOKEN }}
+        submodules: true
+    - name: Setup git user
+      run: |
+          git config --global user.name "Artur Jankowski"
+          git config --global user.email "ajankowski@box.com"
+    - name: List Xcode available versions
+      run: ls -n /Applications/ | grep Xcode*
+    - name: Setup - Xcode
+      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app
+    - name: Setup - Ruby and bundler dependencies
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Run fastlane release script
+      run: |
+        bundle exec fastlane ios release version:${{ github.event.inputs.version }} github_token:${{ secrets.RELEASE_TOKEN }}

@@ -9,7 +9,8 @@
 #
 # PARAMETERS:
 #############
-# version:        Required parameter. It determines which version we want to release.
+# version:        Required parameter. It determines which version we want to release
+#                 in format: <MAJOR>.<MINOR>.<PATCH>
 #                 e.g. version:9.1.1
 #                 e.g. version:10.11.12
 #
@@ -55,6 +56,10 @@ platform :ios do
     # Preconditions
     if version.nil?
       UI.user_error!("Missing required parameter \"version\"")
+    end
+
+    if !is_version_valid(version: version)
+      UI.user_error!("\"version\" parameter is in invalid format. Required \"version\" format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
     end
 
     # Script phases
@@ -157,6 +162,12 @@ platform :ios do
 ##############################################################################
 # VERSION UPDATE
 ##############################################################################
+
+  desc "Validate version"
+  private_lane :is_version_valid do |options|
+    version = options[:version]
+    !!(version =~ /^\d+\.\d+\.\d+$/)
+  end
 
   desc "Update SDK version"
   private_lane :update_version do |options|
