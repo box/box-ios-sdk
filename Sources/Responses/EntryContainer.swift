@@ -68,11 +68,21 @@ public class EntryContainer<T: BoxModel>: BoxModel {
         limit = try BoxJSONDecoder.optionalDecode(json: json, forKey: "limit")
         entries = try BoxJSONDecoder.decodeCollection(json: json, forKey: "entries")
 
-        do {
-            let intStreamPosition: Int = try BoxJSONDecoder.decode(json: json, forKey: "next_stream_position")
-            nextStreamPosition = String(intStreamPosition)
+        // The `nextStreamPosition` field is inconsistent in the API
+        // Sometimes it could be an Int and another time it could be a String.
+        // So as a work around we should check both of these types and try to decode original value.
+        if json.keys.contains("next_stream_position") {
+            if let intNextStreamPosition: Int = try? BoxJSONDecoder.decode(json: json, forKey: "next_stream_position") {
+                nextStreamPosition = String(intNextStreamPosition)
+            }
+            else if let stringNextStreamPosition: String = try? BoxJSONDecoder.decode(json: json, forKey: "next_stream_position") {
+                nextStreamPosition = stringNextStreamPosition
+            }
+            else {
+                nextStreamPosition = nil
+            }
         }
-        catch {
+        else {
             nextStreamPosition = nil
         }
 

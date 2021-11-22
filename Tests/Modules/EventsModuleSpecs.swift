@@ -251,6 +251,81 @@ class EventsModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("getEnterpriseEventsStreaming()") {
+
+                it("should make API call to get admin events streaming") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/events") &&
+                            containsQueryParams([
+                                "stream_type": "admin_logs_streaming",
+                                "event_type": [EventType.loginActivityDeviceAdded.description, EventType.invitedToCollaboration.description].joined(separator: ","),
+                                "stream_position": StreamPosition.now.description,
+                                "limit": "100"
+                            ]) &&
+                            isMethodGET(),
+                        response: { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("GetEnterpriseEventsStreaming.json", type(of: self))!,
+                                statusCode: 200, headers: [:]
+                            )
+                        }
+                    )
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        let iterator = self.sut.events.getEnterpriseEventsStreaming(
+                            eventTypes: [.loginActivityDeviceAdded, .invitedToCollaboration],
+                            streamPosition: .now,
+                            limit: 100
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let event1 = page.entries[0]
+                                expect(event1).toNot(beNil())
+                                expect(event1).to(beAKindOf(Event.self))
+                                expect(event1.id).to(equal("1a4ade15-b1ff-4cc3-89a8-955e1522557c"))
+                                expect(event1.createdBy?.id).to(equal("11111"))
+                                expect(event1.sessionId).to(beNil())
+                                expect(event1.additionalDetails).to(beNil())
+                                expect(event1.eventType).to(equal(.loginActivityDeviceAdded))
+                                switch event1.source?.itemValue {
+                                case let .user(user):
+                                    expect(user.type).to(equal("user"))
+                                    expect(user.id).to(equal("11111"))
+                                    expect(user.name).to(equal("Test User"))
+                                    expect(user.login).to(equal("testuser@example.com"))
+                                default:
+                                    fail("Unable to get event source")
+                                }
+
+                                let event2 = page.entries[1]
+                                expect(event2).toNot(beNil())
+                                expect(event2).to(beAKindOf(Event.self))
+                                expect(event2.id).to(equal("b9a2393a-20cf-4307-90f5-004110dec209"))
+                                expect(event2.createdBy?.id).to(equal("55555"))
+                                expect(event2.sessionId).to(beNil())
+                                expect(event2.eventType).to(equal(.invitedToCollaboration))
+                                switch event2.source?.itemValue {
+                                case .unknown:
+                                    let sourceRawData = event2.source?.rawData
+                                    expect(sourceRawData?["folder_id"] as? String).to(equal("123"))
+                                    expect(sourceRawData!["folder_name"] as? String).to(equal("Folder 1"))
+                                    expect(sourceRawData?["user_id"] as? String).to(equal("55555"))
+                                    expect(sourceRawData!["user_name"] as? String).to(equal("TestUser"))
+                                    done()
+
+                                default:
+                                    fail("Unable to get event source")
+                                }
+                            case let .failure(error):
+                                fail("Unable to get event details, but instead got \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+
             describe("getPollingURL()") {
                 it("should make API call to get url for polling request to observe on new events") {
                     stub(
