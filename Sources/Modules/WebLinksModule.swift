@@ -41,6 +41,8 @@ public class WebLinksModule {
         )
     }
 
+    // swiftlint:disable unused_param
+
     /// Creates a new web link with the specified url on the specified item.
     ///
     /// - Parameters:
@@ -52,31 +54,52 @@ public class WebLinksModule {
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
     ///   - completion: Returns a full web link object or an error.
+    @available(*, deprecated, message: "Please use create(url:parentId:name:description:fields:completion:)'instead.")
     public func create(
         url: String,
         parentId: String,
         name: String? = nil,
         description: String? = nil,
-        sharedLink: NullableParameter<SharedLinkData>? = nil,
+        sharedLink _: NullableParameter<SharedLinkData>? = nil,
         fields: [String]? = nil,
         completion: @escaping Callback<WebLink>
     ) {
+        create(
+            url: url,
+            parentId: parentId,
+            name: name,
+            description: description,
+            fields: fields,
+            completion: completion
+        )
+    }
 
+    // swiftlint:enable unused_param
+
+    /// Creates a new web link with the specified url on the specified item.
+    ///
+    /// - Parameters:
+    ///   - url: The specified url to create the web link for.
+    ///   - parentId: The id of the folder item that the web link lives in.
+    ///   - name: Optional name value for the created web link. If no name value is specified, defaults to url.
+    ///   - description: Optional description value for the created web link.
+    ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
+    ///   - completion: Returns a full web link object or an error.
+    public func create(
+        url: String,
+        parentId: String,
+        name: String? = nil,
+        description: String? = nil,
+        fields: [String]? = nil,
+        completion: @escaping Callback<WebLink>
+    ) {
         var body: [String: Any] = [:]
 
         body["parent"] = ["id": parentId]
         body["url"] = url
         body["name"] = name
         body["description"] = description
-
-        if let unwrappedSharedLink = sharedLink {
-            switch unwrappedSharedLink {
-            case .null:
-                body["shared_link"] = NSNull()
-            case let .value(sharedLinkValue):
-                body["shared_link"] = sharedLinkValue.bodyDict
-            }
-        }
 
         boxClient.post(
             url: URL.boxAPIEndpoint("/2.0/web_links", configuration: boxClient.configuration),
@@ -94,7 +117,8 @@ public class WebLinksModule {
     ///   - parentId: The id of the new parent folder to move the web link.
     ///   - name: The new name for the web link to update to.
     ///   - description: The new description for the web link to update to.
-    ///   - sharedLink: Shared links provide direct, read-only access to files or folder on Box using a URL.
+    ///   - sharedLink: Shared links provide direct, read-only access to web link on Box using a URL.
+    ///     The canDownload which is inner property in sharedLink is not supported in web links.
     ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.
     ///   - completion: Returns the updated web link object or an error.
@@ -122,7 +146,11 @@ public class WebLinksModule {
             case .null:
                 body["shared_link"] = NSNull()
             case let .value(sharedLinkValue):
-                body["shared_link"] = sharedLinkValue.bodyDict
+                var bodyDict = sharedLinkValue.bodyDict
+                // The permissions property is not supported in web link.
+                // So we need to remove this property in case when user set it.
+                bodyDict.removeValue(forKey: "permissions")
+                body["shared_link"] = bodyDict
             }
         }
 
@@ -163,21 +191,57 @@ public class WebLinksModule {
         }
     }
 
+    // swiftlint:disable unused_param
+
     /// Creates or updates shared link for a web link
     ///
     /// - Parameters:
     ///   - webLink: The ID of the web link
     ///   - access: The level of access. If you omit this field then the access level will be set to the default access level specified by the enterprise admin
     ///   - unsharedAt: The date-time that this link will become disabled. This field can only be set by users with paid accounts
+    ///   - vanityName: The custom name of a shared link, as used in the vanityUrl field.
+    ///     It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.
     ///   - password: The password required to access the shared link. Set to .null to remove the password
     ///   - canDownload: Whether the shared link allows downloads. Applies to any items in the folder
+    ///   - completion: Returns a standard SharedLink object or an error
+    @available(*, deprecated, message: "Please use setSharedLink(forWebLink:access:unsharedAt:vanityName:password:completion:)'instead.")
+    public func setSharedLink(
+        forWebLink webLinkId: String,
+        access: SharedLinkAccess? = nil,
+        unsharedAt: NullableParameter<Date>? = nil,
+        vanityName: NullableParameter<String>? = nil,
+        password: NullableParameter<String>? = nil,
+        canDownload _: Bool? = nil,
+        completion: @escaping Callback<SharedLink>
+    ) {
+        setSharedLink(
+            forWebLink: webLinkId,
+            access: access,
+            unsharedAt: unsharedAt,
+            vanityName: vanityName,
+            password: password,
+            completion: completion
+        )
+    }
+
+    // swiftlint:enable unused_param
+
+    /// Creates or updates shared link for a web link
+    ///
+    /// - Parameters:
+    ///   - webLink: The ID of the web link
+    ///   - access: The level of access. If you omit this field then the access level will be set to the default access level specified by the enterprise admin
+    ///   - unsharedAt: The date-time that this link will become disabled. This field can only be set by users with paid accounts
+    ///   - vanityName: The custom name of a shared link, as used in the vanity_url field.
+    ///     It should be between 12 and 30 characters. This field can contains only  letters, numbers, and hyphens.
+    ///   - password: The password required to access the shared link. Set to .null to remove the password
     ///   - completion: Returns a standard SharedLink object or an error
     public func setSharedLink(
         forWebLink webLinkId: String,
         access: SharedLinkAccess? = nil,
         unsharedAt: NullableParameter<Date>? = nil,
+        vanityName: NullableParameter<String>? = nil,
         password: NullableParameter<String>? = nil,
-        canDownload: Bool? = nil,
         completion: @escaping Callback<SharedLink>
     ) {
         update(
@@ -186,7 +250,7 @@ public class WebLinksModule {
                 access: access,
                 password: password,
                 unsharedAt: unsharedAt,
-                canDownload: canDownload
+                vanityName: vanityName
             )),
             fields: ["shared_link"]
         ) { result in

@@ -65,52 +65,6 @@ class WebLinksModuleSpecs: QuickSpec {
                         }
                     }
                 }
-
-                it("should make an API call to create a new web link with a shared link") {
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/2.0/web_links")
-                            && isMethodPOST()
-                            && hasJsonBody([
-                                "description": "A web link for testing",
-                                "parent": [
-                                    "id": "33333"
-                                ],
-                                "url": "http://example.com",
-                                "name": "Test",
-                                "shared_link": [
-                                    "access": "open",
-                                    "permissions": ["can_download": true],
-                                    "password": "password"
-                                ]
-                            ])
-                    ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
-                            statusCode: 201, headers: ["Content-Type": "application/json"]
-                        )
-                    }
-
-                    waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.create(url: "http://example.com", parentId: "33333", name: "Test", description: "A web link for testing", sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true))) { result in
-                            switch result {
-                            case let .success(webLink):
-                                expect(webLink).toNot(beNil())
-                                expect(webLink.id).to(equal("11111"))
-                                expect(webLink.type).to(equal("web_link"))
-                                expect(webLink.url).to(equal(URL(string: "http://example.com")))
-                                expect(webLink.parent?.id).to(equal("33333"))
-                                expect(webLink.description).to(equal("A web link for testing"))
-                                expect(webLink.sharedLink?.access).to(equal(.company))
-                                expect(webLink.sharedLink?.url).to(equal(URL(string: "https://app.box.com/s/ioh1ue6n5htav8h3c0m3f1gj40pbxpnz")))
-                                expect(webLink.sharedLink?.previewCount).to(equal(0))
-                            case let .failure(error):
-                                fail("Expected call to succeed, but instead got \(error)")
-                            }
-                            done()
-                        }
-                    }
-                }
             }
 
             describe("get()") {
@@ -213,7 +167,6 @@ class WebLinksModuleSpecs: QuickSpec {
                                 "url": "https://updatedexample.com",
                                 "shared_link": [
                                     "access": "open",
-                                    "permissions": ["can_download": true],
                                     "password": "password"
                                 ]
                             ])
@@ -231,7 +184,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             parentId: "11111",
                             name: "Updated Test",
                             description: "Updated Test Description",
-                            sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true))
+                            sharedLink: .value(SharedLinkData(access: .open, password: .value("password")))
                         ) { result in
                             switch result {
                             case let .success(webLink):
@@ -410,6 +363,43 @@ class WebLinksModuleSpecs: QuickSpec {
                                     expect(sharedLink.downloadCount).to(equal(0))
                                     expect(sharedLink.downloadURL).to(beNil())
                                     expect(sharedLink.isPasswordEnabled).to(equal(false))
+                                case let .failure(error):
+                                    fail("Expected call to setSharedLink to suceeded, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        }
+                    })
+                }
+
+                context("updating web link with vanity name value for shared link") {
+                    beforeEach {
+                        stub(
+                            condition: isHost("api.box.com") &&
+                                isPath("/2.0/web_links/12345") &&
+                                isMethodPUT() &&
+                                containsQueryParams(["fields": "shared_link"]) &&
+                                hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
+                        ) { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("GetWebLinkSharedLink_VanityNameEnabled.json", type(of: self))!,
+                                statusCode: 200, headers: ["Content-Type": "application/json"]
+                            )
+                        }
+                    }
+                    it("should update a shared link on a web link", closure: {
+                        waitUntil(timeout: .seconds(10)) { done in
+                            self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
+                                switch result {
+                                case let .success(sharedLink):
+                                    expect(sharedLink.access).to(equal(.open))
+                                    expect(sharedLink.previewCount).to(equal(0))
+                                    expect(sharedLink.downloadCount).to(equal(0))
+                                    expect(sharedLink.downloadURL).to(beNil())
+                                    expect(sharedLink.isPasswordEnabled).to(equal(false))
+                                    expect(sharedLink.url).to(equal(URL(string: "https://cloud.box.com/v/testVanityName")))
+                                    expect(sharedLink.vanityName).to(equal("testVanityName"))
+                                    expect(sharedLink.vanityURL).to(equal(URL(string: "https://cloud.box.com/v/testVanityName")))
                                 case let .failure(error):
                                     fail("Expected call to setSharedLink to suceeded, but instead got \(error)")
                                 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */; };
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		052D63C227182FA500C76281 /* CreateSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C127182FA500C76281 /* CreateSignRequest.json */; };
 		052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C3271843FA00C76281 /* GetSignRequests.json */; };
@@ -30,6 +31,8 @@
 		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
 		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
 		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
+		05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */; };
+		05BFA091274EED9B00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */; };
 		05EE814027184A4B006A2329 /* GetSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE813F27184A4B006A2329 /* GetSignRequest.json */; };
 		05EE814227184EB3006A2329 /* CancelSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814127184EB3006A2329 /* CancelSignRequest.json */; };
 		05EE814427185047006A2329 /* FullSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814327185047006A2329 /* FullSignRequest.json */; };
@@ -539,6 +542,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetWebLinkSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		052D63C127182FA500C76281 /* CreateSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSignRequest.json; sourceTree = "<group>"; };
 		052D63C3271843FA00C76281 /* GetSignRequests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequests.json; sourceTree = "<group>"; };
 		052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleSpecs.swift; sourceTree = "<group>"; };
@@ -564,6 +568,8 @@
 		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
 		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
 		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
+		05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
+		05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFolderSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05EE813F27184A4B006A2329 /* GetSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequest.json; sourceTree = "<group>"; };
 		05EE814127184EB3006A2329 /* CancelSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CancelSignRequest.json; sourceTree = "<group>"; };
 		05EE814327185047006A2329 /* FullSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullSignRequest.json; sourceTree = "<group>"; };
@@ -1550,39 +1556,40 @@
 		225639C7225389B100D951B5 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				22643AC722B952D1009497CA /* AddFileToFavorites.json */,
+				22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */,
+				22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */,
+				22C95BE2230AF90F004F5C18 /* ChunkedUploadSessionListParts.json */,
+				22C95BD2230AC54E004F5C18 /* ChunkedUploadSessionNewFile.json */,
+				22C95BD4230AD64F004F5C18 /* ChunkedUploadSessionNewFileVersion.json */,
+				22C95BD6230AD97E004F5C18 /* ChunkedUploadSessionUploadPart.json */,
+				225639CA225389B100D951B5 /* CopyFile.json */,
+				0CA065252298121E00A751B1 /* FileCollaborations.json */,
+				0CA0652D22981B4C00A751B1 /* FileComments.json */,
+				22E60D6A2303207300E86A4A /* FileRepresentationState.json */,
 				05A58A2F26FB216A00AB309C /* FullFile_MissingRequiredField.json */,
 				05A58A3026FB216A00AB309C /* FullFile_ValueFormatMismatch.json */,
-				22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */,
-				22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */,
-				22C95BE2230AF90F004F5C18 /* ChunkedUploadSessionListParts.json */,
-				22C95BD6230AD97E004F5C18 /* ChunkedUploadSessionUploadPart.json */,
-				22C95BD4230AD64F004F5C18 /* ChunkedUploadSessionNewFileVersion.json */,
-				22C95BD2230AC54E004F5C18 /* ChunkedUploadSessionNewFile.json */,
-				22E60D6A2303207300E86A4A /* FileRepresentationState.json */,
+				9771D4E622B058E800B76DF8 /* FullFile.json */,
+				0CA06521229810C700A751B1 /* GetEmbedLink.json */,
+				225639C8225389B100D951B5 /* GetFileInfo.json */,
+				9DD0AA4422DDBFDD0028702B /* GetFileSharedLink_PasswordNotEnabled.json */,
+				05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */,
+				9DEA474322D380A50035C959 /* GetFileSharedLink.json */,
+				0CA0653122982E0F00A751B1 /* GetFileTasks.json */,
+				80F652CB22BAFF4200F38485 /* GetRepresentations.json */,
+				22E60D642303074C00E86A4A /* GetRepresentationsErrorState.json */,
+				80F652CE22BC431800F38485 /* GetRepresentationsNoHeader.json */,
 				22E60D6823031E6100E86A4A /* GetRepresentationsPendingState.json */,
 				22E60D66230317C100E86A4A /* GetRepresentationsUnknownState.json */,
-				22E60D642303074C00E86A4A /* GetRepresentationsErrorState.json */,
-				22D8D12F22E605B60022FA44 /* SharedLinkPermissions.json */,
-				22643AC722B952D1009497CA /* AddFileToFavorites.json */,
-				22643AC622B952D1009497CA /* RemoveFileFromFavorites.json */,
 				0CA0651D22980EE900A751B1 /* image.png */,
-				225639CA225389B100D951B5 /* CopyFile.json */,
-				225639C8225389B100D951B5 /* GetFileInfo.json */,
+				0CD484292295A22C00E61C35 /* LockFile.json */,
+				22643AC622B952D1009497CA /* RemoveFileFromFavorites.json */,
+				9717866E22F0C9ED004A5F6D /* RemoveFileSharedLink.json */,
+				22D8D12F22E605B60022FA44 /* SharedLinkPermissions.json */,
+				0CD4843C2295F8CA00E61C35 /* UnlockFile.json */,
 				225639C9225389B100D951B5 /* UpdateFileInfo.json */,
 				22A6576A225B805B00FB13F4 /* UploadFile.json */,
 				9D8AF93B22D63137009D3D01 /* UploadFileVersion.json */,
-				9771D4E622B058E800B76DF8 /* FullFile.json */,
-				0CD484292295A22C00E61C35 /* LockFile.json */,
-				0CD4843C2295F8CA00E61C35 /* UnlockFile.json */,
-				0CA06521229810C700A751B1 /* GetEmbedLink.json */,
-				0CA065252298121E00A751B1 /* FileCollaborations.json */,
-				0CA0652D22981B4C00A751B1 /* FileComments.json */,
-				0CA0653122982E0F00A751B1 /* GetFileTasks.json */,
-				80F652CB22BAFF4200F38485 /* GetRepresentations.json */,
-				80F652CE22BC431800F38485 /* GetRepresentationsNoHeader.json */,
-				9DEA474322D380A50035C959 /* GetFileSharedLink.json */,
-				9DD0AA4422DDBFDD0028702B /* GetFileSharedLink_PasswordNotEnabled.json */,
-				9717866E22F0C9ED004A5F6D /* RemoveFileSharedLink.json */,
 				B40558AF25AD2ABF0068784E /* ZipDownload.json */,
 				B40558BA25AE57C10068784E /* ZipDownloadStatus.json */,
 			);
@@ -1594,26 +1601,27 @@
 			children = (
 				22D0043522AFBC6A00478F1E /* AddFolderToFavorites.json */,
 				22D0043622AFBC6A00478F1E /* CopyFolder.json */,
+				225639CC225389B100D951B5 /* CreateFolder.json */,
 				22D0043422AFBC6A00478F1E /* FolderCollaborations.json */,
+				B4882E6F25EEE12F00EB57BA /* FolderLock.json */,
+				B4882E7225EEFBC600EB57BA /* FolderLocks.json */,
+				97D3FFB922B1D4A4008C1CE6 /* FullFolder.json */,
 				22D0043122AFBC6A00478F1E /* GetFolderInfo.json */,
-				22D0043222AFBC6A00478F1E /* RemoveFolderFromFavorites.json */,
-				22D0043322AFBC6A00478F1E /* UpdateFolder.json */,
 				2259225022722F1A000568FC /* GetFolderItems.json */,
 				2262403B227214810048E638 /* GetFolderItemsMarkerIterator1.json */,
 				22624039227214810048E638 /* GetFolderItemsMarkerIterator2.json */,
 				22624038227214810048E638 /* GetFolderItemsOffsetIterator1.json */,
 				2262403A227214810048E638 /* GetFolderItemsOffsetIterator2.json */,
-				225639CC225389B100D951B5 /* CreateFolder.json */,
-				97D3FFB922B1D4A4008C1CE6 /* FullFolder.json */,
+				9DD6F53F22DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json */,
+				05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */,
+				9DEA474822D391220035C959 /* GetFolderSharedLink.json */,
+				22D0043222AFBC6A00478F1E /* RemoveFolderFromFavorites.json */,
+				9717866C22F0C694004A5F6D /* RemoveFolderSharedLink.json */,
+				22D0043322AFBC6A00478F1E /* UpdateFolder.json */,
 				0C00835B229C06FE0067C1AF /* GetFolderInfo.json */,
 				0C008369229C39F00067C1AF /* CopyFolder.json */,
 				0C00836D229C41CA0067C1AF /* FolderCollaborations.json */,
 				0C008371229C45480067C1AF /* UpdateFolder.json */,
-				9DEA474822D391220035C959 /* GetFolderSharedLink.json */,
-				9DD6F53F22DDB89300F9D2D5 /* GetFolderSharedLink_PasswordNotEnabled.json */,
-				9717866C22F0C694004A5F6D /* RemoveFolderSharedLink.json */,
-				B4882E6F25EEE12F00EB57BA /* FolderLock.json */,
-				B4882E7225EEFBC600EB57BA /* FolderLocks.json */,
 			);
 			path = Folders;
 			sourceTree = "<group>";
@@ -1983,10 +1991,11 @@
 			children = (
 				97F04DA322B867910034B9A3 /* FullWebLink.json */,
 				8093D29722FA398500DB628E /* GetWebLink.json */,
-				8093D29922FA399D00DB628E /* UpdateWebLink.json */,
-				806ACE4C22FB8E0000257353 /* GetWebLinkSharedLink.json */,
 				80E5679E2303683100798E3A /* GetWebLinkSharedLink_PasswordNotEnabled.json */,
+				05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */,
+				806ACE4C22FB8E0000257353 /* GetWebLinkSharedLink.json */,
 				80E567B0230619AB00798E3A /* RemoveWebLinkSharedLink.json */,
+				8093D29922FA399D00DB628E /* UpdateWebLink.json */,
 			);
 			path = "Web Links";
 			sourceTree = "<group>";
@@ -2353,6 +2362,7 @@
 				97F04D9F22B84D260034B9A3 /* FullUser.json in Resources */,
 				0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */,
 				80E5679C22FB932000798E3A /* GetWebLinkSharedLink.json in Resources */,
+				05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */,
 				0CD4843D2295F8CA00E61C35 /* UnlockFile.json in Resources */,
 				2262403F227214820048E638 /* GetFolderItemsMarkerIterator1.json in Resources */,
 				80FEB7D32321BDE10037331C /* GetMembershipsForUser.json in Resources */,
@@ -2431,6 +2441,7 @@
 				0CD34259228AF07800BAFF4B /* InviteUserToEnterprise.json in Resources */,
 				F969D3AC233A73A4001301FC /* GetStoragePolicies.json in Resources */,
 				0CD3425D228AF94700BAFF4B /* MoveUserItemsToAnotherUser.json in Resources */,
+				05BFA091274EED9B00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json in Resources */,
 				176CAE09231D72BC004269F5 /* GetFileVersionRetention.json in Resources */,
 				22E60D67230317C100E86A4A /* GetRepresentationsUnknownState.json in Resources */,
 				22B01E3422AAC8D400E434ED /* DownscopeToken.json in Resources */,
@@ -2472,6 +2483,7 @@
 				9731D2C6227D29D40092BCCE /* Search200.json in Resources */,
 				8061988F22AB18B100B09896 /* CreateComment.json in Resources */,
 				0CD34251228AE60C00BAFF4B /* CreateAppUser.json in Resources */,
+				05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */,
 				80BC8435232C56B700010E08 /* GetTermsOfServiceUserStatuses.json in Resources */,
 				22CE53A122DD0C3E00F3D59F /* CreateMetadataOnFolder.json in Resources */,
 				80BC843E232C56C700010E08 /* FullTermsOfService.json in Resources */,

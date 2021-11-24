@@ -64,6 +64,8 @@ public class SharedLink: BoxModel {
     /// The "Custom URL" that can also be used to preview the item on Box.
     /// Custom URLs can only be created or modified in the Box Web application.
     public let vanityURL: URL?
+    /// The custom name of a shared link, as used in the vanityURL field.
+    public let vanityName: String?
     /// The effective access level for the shared link. This can be lower than the value in the access field
     /// if the enterprise settings restrict the allowed access levels.
     public let effectiveAccess: String?
@@ -91,6 +93,7 @@ public class SharedLink: BoxModel {
         url = try BoxJSONDecoder.optionalDecodeURL(json: json, forKey: "url")
         downloadURL = try BoxJSONDecoder.optionalDecodeURL(json: json, forKey: "download_url")
         vanityURL = try BoxJSONDecoder.optionalDecodeURL(json: json, forKey: "vanity_url")
+        vanityName = try BoxJSONDecoder.optionalDecode(json: json, forKey: "vanity_name")
         effectiveAccess = try BoxJSONDecoder.optionalDecode(json: json, forKey: "effective_access")
         effectivePermission = try BoxJSONDecoder.optionalDecode(json: json, forKey: "effective_permission")
         isPasswordEnabled = try BoxJSONDecoder.optionalDecode(json: json, forKey: "is_password_enabled")
