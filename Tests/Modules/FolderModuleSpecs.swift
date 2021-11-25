@@ -487,7 +487,7 @@ class FolderModuleSpecs: QuickSpec {
 
             describe("setSharedLink()") {
 
-                context("updating folder with new password value") {
+                context("updating shared link and setting password to new value") {
                     beforeEach {
                         stub(
                             condition: isHost("api.box.com") &&
@@ -521,7 +521,44 @@ class FolderModuleSpecs: QuickSpec {
                     })
                 }
 
-                context("updating folder without updating password") {
+                context("updating shared link and setting vanity name to new value") {
+                    beforeEach {
+                        stub(
+                            condition: isHost("api.box.com") &&
+                                isPath("/2.0/folders/5000948880") &&
+                                isMethodPUT() &&
+                                containsQueryParams(["fields": "shared_link"]) &&
+                                hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
+                        ) { _ in
+                            OHHTTPStubsResponse(
+                                fileAtPath: OHPathForFile("GetFolderSharedLink_VanityNameEnabled.json", type(of: self))!,
+                                statusCode: 200, headers: ["Content-Type": "application/json"]
+                            )
+                        }
+                    }
+                    it("should update a shared link on a folder", closure: {
+                        waitUntil(timeout: .seconds(10)) { done in
+                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
+                                switch result {
+                                case let .success(sharedLink):
+                                    expect(sharedLink.access).to(equal(.open))
+                                    expect(sharedLink.previewCount).to(equal(0))
+                                    expect(sharedLink.downloadCount).to(equal(0))
+                                    expect(sharedLink.downloadURL).to(beNil())
+                                    expect(sharedLink.isPasswordEnabled).to(equal(true))
+                                    expect(sharedLink.url).to(equal(URL(string: "https://cloud.box.com/v/testVanityName")))
+                                    expect(sharedLink.vanityName).to(equal("testVanityName"))
+                                    expect(sharedLink.vanityURL).to(equal(URL(string: "https://cloud.box.com/v/testVanityName")))
+                                case let .failure(error):
+                                    fail("Expected call to createOrUpdateSharedLink to suceeded, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        }
+                    })
+                }
+
+                context("updating shared link without updating password") {
                     beforeEach {
                         stub(
                             condition: isHost("api.box.com") &&
@@ -555,7 +592,7 @@ class FolderModuleSpecs: QuickSpec {
                     })
                 }
 
-                context("updating folder with password deletion") {
+                context("updating shared link and deleting the password") {
                     beforeEach {
                         stub(
                             condition: isHost("api.box.com") &&

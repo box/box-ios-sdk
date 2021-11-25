@@ -122,7 +122,17 @@ public class FilesModule {
     ///
     /// - Parameters:
     ///   - fileId: The ID of the file on which to perform the update.
-    ///   - updateFileInfo: The new values with which to update the file.
+    ///   - name: An optional new name for the file. Box supports file names of 255 characters or
+    ///     less. Names containing non-printable ASCII characters, "/" or "\", names with trailing
+    ///     spaces, and the special names “.” and “..” are also not allowed.
+    ///   - description: The description of the file.
+    ///   - parentId: The ID of the parent folder.
+    ///   - sharedLink: Shared links provide direct, read-only access to file on Box using a URL.
+    ///   - tags: Array of tags to be added or replaced to the file
+    ///   - collections: List of collection identifiers to which the file membership will be set.
+    ///   - lock: Defines a lock on an item.
+    ///     This prevents the item from being moved, renamed, or otherwise changed by anyone other than the user who created the lock.
+    ///     Set this to null to remove the lock.
     ///   - ifMatch: This is in the ‘etag’ field of the file object, which can be included to prevent race conditions.
     ///   - fields: String array of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.  Any attribute in the full
@@ -1235,7 +1245,9 @@ public class FilesModule {
     ///
     /// - Parameters:
     ///   - fileId: The ID of the file
-    ///   - stopSharingAt: The date-time that this link will become disabled. This field can only be set by users with paid accounts
+    ///   - unsharedAt: The date-time that this link will become disabled. This field can only be set by users with paid accounts
+    ///   - vanityName: The custom name of a shared link, as used in the vanityUrl field.
+    ///     It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.
     ///   - access: The level of access. If you omit this field then the access level will be set to the default access level specified by the enterprise admin
     ///   - password: The password required to access the shared link. Set to .empty to delete the password
     ///   - canDownload: Whether the shared link allows downloads
@@ -1243,6 +1255,7 @@ public class FilesModule {
     public func setSharedLink(
         forFile fileId: String,
         unsharedAt: NullableParameter<Date>? = nil,
+        vanityName: NullableParameter<String>? = nil,
         access: SharedLinkAccess? = nil,
         password: NullableParameter<String>? = nil,
         canDownload: Bool? = nil,
@@ -1254,6 +1267,7 @@ public class FilesModule {
                 access: access,
                 password: password,
                 unsharedAt: unsharedAt,
+                vanityName: vanityName,
                 canDownload: canDownload
             )),
             fields: ["shared_link"]
