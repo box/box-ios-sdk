@@ -146,7 +146,7 @@ public class EventsModule {
     ///   - streamPosition: The location in the event stream from which you want to start receiving events. If no stream position specified
     ///     Box API will return all available events beginning with the oldest stream position.
     ///   - limit: The maximum number of items to return. If not specified, [default API limit](https://developer.box.com/reference#get-events-for-a-user) is used.
-    ///   - completion: Returns an iterator of events or an error.
+    /// - Returns: An iterator of events or an error.
     public func getUserEvents(
         streamType: StreamType? = nil,
         streamPosition: StreamPosition? = nil,
@@ -171,12 +171,12 @@ public class EventsModule {
     /// This method will only work with an API connection for an enterprise admin account.
     ///
     /// - Parameters:
-    ///   - eventType: Restricts returned value to listed events.
+    ///   - eventTypes: Restricts returned value to listed events.
     ///   - createdAfter: A lower bound on the timestamp of the events returned.
     ///   - createdBefore: An upper bound on the timestamp of the events returned.
     ///   - streamPosition: The location in the event stream from which you want to start receiving events.
     ///   - limit: The maximum number of items to return.
-    ///   - completion: Returns an iterator of events or an error.
+    /// - Returns: An iterator of events or an error.
     public func getEnterpriseEvents(
         eventTypes: [EventType]? = nil,
         createdAfter: Date? = nil,
@@ -206,10 +206,10 @@ public class EventsModule {
     /// This method will only work with an API connection for an enterprise admin account.
     ///
     /// - Parameters:
-    ///   - eventType: Restricts returned value to listed events.
+    ///   - eventTypes: Restricts returned value to listed events.
     ///   - streamPosition: The location in the event stream from which you want to start receiving events.
     ///   - limit: The maximum number of items to return.
-    ///   - completion: Returns an iterator of events or an error.
+    /// - Returns: An iterator of events or an error.
     public func getEnterpriseEventsStreaming(
         eventTypes: [EventType]? = nil,
         streamPosition: StreamPosition? = nil,
