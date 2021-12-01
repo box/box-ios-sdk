@@ -1,0 +1,559 @@
+//
+//  FolderModuleIntegrationSpecs.swift
+//  BoxSDK-iOS
+//
+//  Created by Artur Jankowski on 01/12/2021.
+//  Copyright © 2021 box. All rights reserved.
+//
+
+@testable import BoxSDK
+import Nimble
+import Quick
+
+class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
+    override func spec() {
+        super.spec()
+
+        describe("Folders Module") {
+
+            context("live cycle") {
+
+                it("should correctly create and delete a folder") {
+                    var folder: Folder?
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.create(name: Folder.generateUniqueName(), parentId: "0") { result in
+                            switch result {
+                            case let .success(folderItem):
+                                folder = folderItem
+                            case let .failure(error):
+                                fail("Expected create call to succeed, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    guard let folder = folder else { return }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.delete(folderId: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected delete call to succeed, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("get") {
+                var folderName: String!
+                var folder: Folder?
+
+                beforeEach {
+                    folderName = Folder.generateUniqueName()
+                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should correctly get a folder information") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.get(folderId: folder.id) { result in
+                            switch result {
+                            case let .success(folderItem):
+                                expect(folderItem).toNot(beNil())
+                                expect(folderItem).to(beAKindOf(Folder.self))
+                                expect(folderItem.name).to(equal(folderName))
+                                expect(folderItem.parent?.id).to(equal("0"))
+                                expect(folderItem.itemStatus).to(equal(.active))
+                            case let .failure(error):
+                                fail("Expected get call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("list") {
+                var folder: Folder?
+
+                beforeEach {
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    guard let folder = folder else { return }
+
+                    self.createFolder(name: "folder_1", parentId: folder.id) { _ in }
+                    self.createFolder(name: "folder_2", parentId: folder.id) { _ in }
+                    self.createFolder(name: "folder_3", parentId: folder.id) { _ in }
+                    self.createFolder(name: "folder_4", parentId: folder.id) { _ in }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder, recursive: true)
+                }
+
+                it("should correctly list folder items when set offset") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    let iterator = self.client.folders.listItems(folderId: folder.id, offset: 1, limit: 2)
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let folders = page.entries.compactMap { $0.folder }
+                                expect(page.entries.count).to(equal(2))
+                                expect(folders.count).to(equal(2))
+                                expect(folders.map { $0.name }).to(contain(["folder_2", "folder_3"]))
+                            case let .failure(error):
+                                fail("Expected list call to succeed, but instead got \(error)")
+                            }
+                        }
+
+                        done()
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let folders = page.entries.compactMap { $0.folder }
+                                expect(page.entries.count).to(equal(1))
+                                expect(folders.count).to(equal(1))
+                                expect(folders.map { $0.name }).to(contain(["folder_4"]))
+                            case let .failure(error):
+                                fail("Expected list call to succeed, but instead got \(error)")
+                            }
+                        }
+
+                        done()
+                    }
+                }
+
+                it("should correctly list folder items when using marker") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    let iterator = self.client.folders.listItems(folderId: folder.id, usemarker: true, limit: 1)
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let folders = page.entries.compactMap { $0.folder }
+                                expect(page.entries.count).to(equal(1))
+                                expect(folders.count).to(equal(1))
+                                expect(folders.map { $0.name }).to(contain(["folder_1"]))
+                            case let .failure(error):
+                                fail("Expected list call to succeed, but instead got \(error)")
+                            }
+                        }
+
+                        done()
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let folders = page.entries.compactMap { $0.folder }
+                                expect(page.entries.count).to(equal(1))
+                                expect(folders.count).to(equal(1))
+                                expect(folders.map { $0.name }).to(contain(["folder_2"]))
+                            case let .failure(error):
+                                fail("Expected list call to succeed, but instead got \(error)")
+                            }
+                        }
+
+                        done()
+                    }
+                }
+            }
+
+            context("update") {
+                var folderName: String!
+                var folder: Folder?
+                var destinationFolder: Folder?
+
+                beforeEach {
+                    folderName = Folder.generateUniqueName()
+                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in destinationFolder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(destinationFolder, recursive: true)
+                }
+
+                it("should correctly update folder") {
+                    guard let folder = folder,
+                          let destinationFolder = destinationFolder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    let changedFolderName = Folder.generateUniqueName()
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.update(
+                            folderId: folder.id,
+                            name: changedFolderName,
+                            description: "sample description",
+                            parentId: destinationFolder.id,
+                            tags: ["sample tag 1"],
+                            fields: ["name", "description", "tags", "parent"]
+                        ) { result in
+                            switch result {
+                            case let .success(folderItem):
+                                expect(folderItem.id).to(equal(folder.id))
+                                expect(folderItem.parent?.id).to(equal(destinationFolder.id))
+                                expect(folderItem.id).to(equal(folder.id))
+                                expect(folderItem.name).to(equal(changedFolderName))
+                                expect(folderItem.description).to(equal("sample description"))
+                                expect(folderItem.tags?[0]).to(equal("sample tag 1"))
+                            case let .failure(error):
+                                fail("Expected update call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("copy") {
+                var folderName: String!
+                var folder: Folder?
+
+                var copiedFolderName: String!
+                var copiedFolder: Folder?
+
+                beforeEach {
+                    folderName = Folder.generateUniqueName()
+                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
+
+                    copiedFolderName = Folder.generateUniqueName()
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                    self.deleteFolder(copiedFolder)
+                }
+
+                it("should correctly copy folder") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.copy(
+                            folderId: folder.id,
+                            destinationFolderID: "0",
+                            name: copiedFolderName
+                        ) { result in
+                            switch result {
+                            case let .success(folderItem):
+                                copiedFolder = folderItem
+                                expect(folderItem.name).to(equal(copiedFolderName))
+                                expect(folderItem.parent?.id).to(equal("0"))
+                                expect(folderItem.id).toNot(equal(folder.id))
+                            case let .failure(error):
+                                fail("Expected copy call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("collaborations") {
+                var folderName: String!
+                var folder: Folder?
+
+                beforeEach {
+                    folderName = Folder.generateUniqueName()
+                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should get zero collaborations on just created folder") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        let iterator = self.client.folders.listCollaborations(folderId: folder.id)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                expect(page.totalCount).to(equal(0))
+                                expect(page.entries.count).to(equal(0))
+                            case let .failure(error):
+                                fail("Expected listCollaborations call to succeeded, but it instead got: \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("favorites") {
+                var folder: Folder?
+
+                beforeEach {
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should correctly add folder to and remove folder from favorites") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.addToFavorites(folderId: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected addToFavorites call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.removeFromFavorites(folderId: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected removeFromFavorites call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("shared link") {
+                var folder: Folder?
+
+                beforeEach {
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should correctly set get delete a shared link") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.setSharedLink(
+                            forFolder: folder.id,
+                            access: .open,
+                            vanityName: .value("iOS-SDK-Folder-VanityName"),
+                            password: .value("secretPassword"),
+                            canDownload: true
+                        ) { result in
+                            switch result {
+                            case let .success(sharedLink):
+                                expect(sharedLink.access).to(equal(.open))
+                                expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.isPasswordEnabled).to(equal(true))
+                                expect(sharedLink.vanityName).to(equal("iOS-SDK-Folder-VanityName"))
+                            case let .failure(error):
+                                fail("Expected setSharedLink call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.getSharedLink(forFolder: folder.id) { result in
+                            switch result {
+                            case let .success(sharedLink):
+                                expect(sharedLink.access).to(equal(.open))
+                                expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.isPasswordEnabled).to(equal(true))
+                                expect(sharedLink.vanityName).to(equal("iOS-SDK-Folder-VanityName"))
+                            case let .failure(error):
+                                fail("Expected getSharedLink call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.deleteSharedLink(forFolder: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected deleteSharedLink call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("watermark") {
+                var folder: Folder?
+
+                beforeEach {
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should correctly apply get remove a watermark") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.applyWatermark(folderId: folder.id) { result in
+                            switch result {
+                            case let .success(watermark):
+                                expect(watermark).toNot(beNil())
+                            case let .failure(error):
+                                fail("Expected applyWatermark call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.getWatermark(folderId: folder.id) { result in
+                            switch result {
+                            case let .success(watermark):
+                                expect(watermark).toNot(beNil())
+                            case let .failure(error):
+                                fail("Expected getWatermark call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.removeWatermark(folderId: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected removeWatermark call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+
+            context("lock") {
+                var folder: Folder?
+
+                beforeEach {
+                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                }
+
+                afterEach {
+                    self.deleteFolder(folder)
+                }
+
+                it("should correctly create get delete a lock") {
+                    guard let folder = folder else {
+                        fail("An error occurred during setup initial data")
+                        return
+                    }
+
+                    var folderLock: FolderLock!
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.createLock(folderId: folder.id) { result in
+                            switch result {
+                            case let .success(folderLockItem):
+                                folderLock = folderLockItem
+                                expect(folderLockItem).toNot(beNil())
+                                expect(folderLockItem).to(beAKindOf(FolderLock.self))
+                                expect(folderLockItem.lockType).to(equal("freeze"))
+                            case let .failure(error):
+                                fail("Expected createLock call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        let iterator = self.client.folders.listLocks(folderId: folder.id)
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                expect(page.entries.count).to(equal(1))
+                                let item = page.entries[0]
+                                expect(item).to(beAKindOf(FolderLock.self))
+                                expect(item.id).to(equal(folderLock.id))
+                            case let .failure(error):
+                                fail("Expected listLocks call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                        self.client.folders.deleteLock(folderLockId: folderLock.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected deleteLock call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension FolderItem {
+    var folder: Folder? {
+        if case let .folder(folder) = self {
+            return folder
+        }
+
+        return nil
+    }
+}

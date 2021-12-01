@@ -47,6 +47,7 @@ class EventsModuleSpecs: QuickSpec {
                             iterator.next { result in
                                 switch result {
                                 case let .success(page):
+                                    expect(page.nextStreamPosition).to(equal("1348790499819"))
                                     let event = page.entries[0]
                                     expect(event).toNot(beNil())
                                     expect(event).to(beAKindOf(Event.self))
@@ -212,6 +213,7 @@ class EventsModuleSpecs: QuickSpec {
                         iterator.next { result in
                             switch result {
                             case let .success(page):
+                                expect(page.nextStreamPosition).to(equal("1152922976252290886"))
                                 let event1 = page.entries[0]
                                 expect(event1).toNot(beNil())
                                 expect(event1).to(beAKindOf(Event.self))
