@@ -1,91 +1,105 @@
-# Contributing Guidelines
+# Contributing
 
-This document contains information and guidelines about contributing to this project.
-Please read it before you start participating.
+All contributions are welcome to this project.
 
-**Topics**
+## Contributor License Agreement
 
-* [Asking Questions](#asking-questions)
-* [Reporting Security Issues](#reporting-security-issues)
-* [Reporting Issues](#reporting-other-issues)
-* [Developers Certificate of Origin](#developers-certificate-of-origin)
-* [Code of Conduct](#code-of-conduct)
+Before a contribution can be merged into this project, please fill out the Contributor License Agreement (CLA) located at:
 
-## Asking Questions
+http://opensource.box.com/cla
 
-We don't use GitHub as a support forum.
-For any usage questions that are not specific to the project itself,
-please ask on [Stack Overflow](https://stackoverflow.com) instead.
-By doing so, you'll be more likely to quickly solve your problem,
-and you'll allow anyone else with the same question to find the answer.
-This also allows maintainers to focus on improving the project for others.
-
-## Reporting Security Issues
-
-The BoxSDK maintainers takes security seriously.
-If you discover a security issue, please bring it to our attention right away!
-
-Please **DO NOT** file a public issue,
-instead send your report privately to <oss@box.com>.
-This will help ensure that any vulnerabilities that _are_ found
-can be [disclosed responsibly](http://en.wikipedia.org/wiki/Responsible_disclosure)
-to any affected parties.
-
-## Reporting Other Issues
-
-A great way to contribute to the project
-is to send a detailed issue when you encounter a problem.
-We always appreciate a well-written, thorough bug report.
-
-Check that the project issues database
-doesn't already include that problem or suggestion before submitting an issue.
-If you find a match, add a quick "+1" or "I have this problem too."
-Doing this helps prioritize the most common problems and requests.
-
-When reporting issues, please include the following:
-
-* The version of Xcode you're using
-* The version of iOS or macOS you're targeting
-* The full output of any stack trace or compiler error
-* A code snippet that reproduces the described behavior, if applicable
-* Any other details that would be useful in understanding the problem
-
-This information will help us review and fix your issue faster.
-
-## Developer's Certificate of Origin 1.1
-
-By making a contribution to this project, I certify that:
-
-- (a) The contribution was created in whole or in part by me and I
-      have the right to submit it under the open source license
-      indicated in the file; or
-
-- (b) The contribution is based upon previous work that, to the best
-      of my knowledge, is covered under an appropriate open source
-      license and I have the right under that license to submit that
-      work with modifications, whether created in whole or in part
-      by me, under the same open source license (unless I am
-      permitted to submit under a different license), as indicated
-      in the file; or
-
-- (c) The contribution was provided directly to me by some other
-      person who certified (a), (b) or (c) and I have not modified
-      it.
-
-- (d) I understand and agree that this project and the contribution
-      are public and that a record of the contribution (including all
-      personal information I submit with it, including my sign-off) is
-      maintained indefinitely and may be redistributed consistent with
-      this project or the open source license(s) involved.
+To learn more about CLAs and why they are important to open source projects, please see the [Wikipedia entry](http://en.wikipedia.org/wiki/Contributor_License_Agreement).
 
 ## Code of Conduct
 
-The Code of Conduct governs how we behave in public or in private
-whenever the project will be judged by our actions.
-We expect it to be honored by everyone who contributes to this project.
+This project adheres to the [Box Open Code of Conduct](http://opensource.box.com/code-of-conduct/). By participating, you are expected to uphold this code.
 
-See [CODE_OF_CONDUCT.md](https://github.com/box/box-ios-sdk//blob/main/CODE_OF_CONDUCT.md) for details.
+## How to contribute
 
----
+* **File an issue** - if you found a bug, want to request an enhancement, or want to implement something (bug fix or feature).
+* **Send a pull request** - if you want to contribute code. Please be sure to file an issue first.
 
-*Some of the ideas and wording for the statements above were based on work by the [Docker](https://github.com/docker/docker/blob/master/CONTRIBUTING.md) and [Linux](http://elinux.org/Developer_Certificate_Of_Origin) communities. We commend them for their efforts to facilitate collaboration in their projects.*
+## Pull request best practices
+
+We want to accept your pull requests. Please follow these steps:
+
+### Step 1: File an issue
+
+Before writing any code, please file an issue stating the problem you want to solve or the feature you want to implement. This allows us to give you feedback before you spend any time writing code. There may be a known limitation that can't be addressed, or a bug that has already been fixed in a different way. The issue allows us to communicate and figure out if it's worth your time to write a bunch of code for the project.
+
+### Step 2: Fork this repository in GitHub
+
+This will create your own copy of our repository.
+
+### Step 3: Add the upstream source
+
+The upstream source is the project under the Box organization on GitHub. To add an upstream source for this project, type:
+
+```
+git remote add upstream git@github.com:box/box-ios-sdk.git
+```
+
+This will come in useful later.
+
+### Step 4: Create a feature branch
+
+Create a branch with a descriptive name, such as `add-search`.
+
+### Step 5: Push your feature branch to your fork
+
+We use [semantic-versioning](https://semver.org/) and the [conventional commit message format](https://www.conventionalcommits.org/en/v1.0.0/). Keep a separate feature branch for each issue you want to address. As you develop code, continue to push code to your remote feature branch. Example:
+
+```
+tag: short description
+
+longer description here if necessary.
+```
+
+The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. For a list of tags, please [click here](https://github.com/commitizen/conventional-commit-types/blob/master/index.json). Note that you must include the `!` for breaking changes (e.g. `feat!: removed old apis`).
+
+Shown below are examples of the release type that will be done based on a commit message.
+
+#### Commit Types
+
+"Semantic versioning" means that changes to the version number of the package (e.g. `3.42.11` to `3.43.0`) are done according to rules that indicate how the change will affect consumers. Read more on the [semver page](https://semver.org/).
+
+The version number is broken into 3 positions &mdash; `Major.Minor.Patch`. In semantic release terms, changes to the numbers follow `Breaking.Feature.Fix`. The `release` script parses commit messages and decides what type of release to make based on the types of commits detected since the last release.
+
+The rules for commit types are:
+
+- Anything that changes or removes an API, option, or output format is a breaking change denoted by `!`.
+- Anything that adds new functionality in a backwards-compatible way is a feature (`feat`). Consumers have to upgrade to the new version to use the feature, but nothing will break if they do so.
+- Bugfixes (`fix`) for existing behavior are a patch. Consumers don't have to do anything but upgrade.
+- Other prefixes, such as `docs` or `chore`, don't trigger releases and don't appear in the changelog. These tags signal that there are **no external changes to _any_ APIs** (including non-breaking ones).
+
+In most cases, commits will be a `feat` or `fix`. Make sure to include the `!` in the title if there are non-backwards-compatible changes in the commit.
+
+| Commit message                                                                                                                                          | Release type       | New version |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----------- |
+| `feat!: remove old files endpoints`                                                                                                                     | Major ("breaking") | `X+1.0.0`   |
+| `feat: add new file upload endpoint`                                                                                                                    | Minor ("feature")  | `X.Y+1.0`   |
+| `fix: file streaming during download`                                                                                                                   | Patch ("fix")      | `X.Y.Z+1`   |
+| `docs: document files api`                                                                                                                              | No release         | `X.Y.Z`     |
+| `chore: remove commented code from file upload`                                                                                                         | No release         | `X.Y.Z`     |
+| `refactor: rename a variable (invisible change)`                                                                                                        | No release         | `X.Y.Z`     |
+
+### Step 6: Rebase
+
+Before sending a pull request, rebase against upstream, such as:
+
+```
+git fetch upstream
+git rebase upstream/main
+```
+
+This will add your changes on top of what's already in upstream, minimizing merge issues.
+
+### Step 7: Run the tests
+
+Make sure that all tests are passing before submitting a pull request.
+
+### Step 8: Send the pull request
+
+Send the pull request from your feature branch to us. Be sure to include a description that lets us know what work you did.
+
+Keep in mind that we like to see one issue addressed per pull request, as this helps keep our git history clean and we can more easily track down issues.
