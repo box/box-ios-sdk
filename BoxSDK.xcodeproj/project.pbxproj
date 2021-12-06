@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */; };
+		05070D2A2757C88F000AFE20 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D282757C717000AFE20 /* NameGenerator.swift */; };
+		05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */; };
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		052D63C227182FA500C76281 /* CreateSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C127182FA500C76281 /* CreateSignRequest.json */; };
 		052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C3271843FA00C76281 /* GetSignRequests.json */; };
 		052D85CB271734FC00648C70 /* SignRequestsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */; };
+		0532AC4C275A752A004902F9 /* Folder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0532AC4B275A752A004902F9 /* Folder+Extensions.swift */; };
+		0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543A2382757AA2C0005CA23 /* Configuration.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
 		054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */; };
@@ -23,6 +27,10 @@
 		05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9827107079009F92CC /* SignRequestCreateParameters.swift */; };
 		05610A9B271099A7009F92CC /* SignRequestPrefillTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */; };
 		05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */; };
+		05637B37275917EE006976DC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05637B36275917EE006976DC /* Constants.swift */; };
+		0579F6F727577DAD00473A3C /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0579F6F827577DAD00473A3C /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */; };
 		05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */; };
 		05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */; };
 		05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */; };
@@ -33,6 +41,7 @@
 		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
 		05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */; };
 		05BFA091274EED9B00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */; };
+		05EC89D827577AF900FEBAC6 /* BoxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549BB211DA389CD00C63030 /* BoxSDK.framework */; };
 		05EE814027184A4B006A2329 /* GetSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE813F27184A4B006A2329 /* GetSignRequest.json */; };
 		05EE814227184EB3006A2329 /* CancelSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814127184EB3006A2329 /* CancelSignRequest.json */; };
 		05EE814427185047006A2329 /* FullSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 05EE814327185047006A2329 /* FullSignRequest.json */; };
@@ -50,8 +59,9 @@
 		05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */; };
 		05F59F0E26FC984900D9A539 /* AuthenticationSessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */; };
 		05F59F1126FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */; };
+		05F610D4275CEC760072AF6C /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; };
+		05F610D5275CEC7A0072AF6C /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; };
 		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
-		05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */; };
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
 		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
 		05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */; };
@@ -500,6 +510,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0579F6F427577D6700473A3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3549BAFC1DA387DB00C63030 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1734EAF62321482F008E3958;
+			remoteInfo = TestApp;
+		};
+		05EC89D927577AF900FEBAC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3549BAFC1DA387DB00C63030 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3549BB201DA389CD00C63030;
+			remoteInfo = "BoxSDK-iOS";
+		};
 		1734EB0A23214839008E3958 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3549BAFC1DA387DB00C63030 /* Project object */;
@@ -517,6 +541,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0579F6F627577D8C00473A3C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0579F6F727577DAD00473A3C /* Nimble.xcframework in Embed Frameworks */,
+				0579F6F827577DAD00473A3C /* Quick.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22A71AED2253523B007761EF /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,9 +580,13 @@
 
 /* Begin PBXFileReference section */
 		05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetWebLinkSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
+		05070D282757C717000AFE20 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
+		05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIntegrationSpecs.swift; sourceTree = "<group>"; };
 		052D63C127182FA500C76281 /* CreateSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSignRequest.json; sourceTree = "<group>"; };
 		052D63C3271843FA00C76281 /* GetSignRequests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequests.json; sourceTree = "<group>"; };
 		052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleSpecs.swift; sourceTree = "<group>"; };
+		0532AC4B275A752A004902F9 /* Folder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Extensions.swift"; sourceTree = "<group>"; };
+		0543A2382757AA2C0005CA23 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
 		054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerDecision.swift; sourceTree = "<group>"; };
@@ -558,9 +598,11 @@
 		05610A9827107079009F92CC /* SignRequestCreateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCreateParameters.swift; sourceTree = "<group>"; };
 		05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTag.swift; sourceTree = "<group>"; };
 		05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInput.swift; sourceTree = "<group>"; };
+		05637B36275917EE006976DC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
+		0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderItemSpecs.swift; sourceTree = "<group>"; };
 		05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookItemSpecs.swift; sourceTree = "<group>"; };
 		05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemSpecs.swift; sourceTree = "<group>"; };
@@ -571,6 +613,7 @@
 		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
 		05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFolderSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
+		05EC89D427577AF900FEBAC6 /* BoxSDKIntegrationTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BoxSDKIntegrationTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EE813F27184A4B006A2329 /* GetSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequest.json; sourceTree = "<group>"; };
 		05EE814127184EB3006A2329 /* CancelSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CancelSignRequest.json; sourceTree = "<group>"; };
 		05EE814327185047006A2329 /* FullSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullSignRequest.json; sourceTree = "<group>"; };
@@ -1042,6 +1085,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		05EC89D127577AF900FEBAC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F610D5275CEC7A0072AF6C /* Nimble.xcframework in Frameworks */,
+				05F610D4275CEC760072AF6C /* Quick.xcframework in Frameworks */,
+				05EC89D827577AF900FEBAC6 /* BoxSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1734EAF42321482F008E3958 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1062,7 +1115,6 @@
 			files = (
 				3549BB661DA38ADB00C63030 /* BoxSDK.framework in Frameworks */,
 				05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */,
-				05F6C90126F137B9008F38C0 /* OHHTTPStubs.xcframework in Frameworks */,
 				05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1070,6 +1122,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05070D272757C6BB000AFE20 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				05637B36275917EE006976DC /* Constants.swift */,
+				05070D282757C717000AFE20 /* NameGenerator.swift */,
+				0532AC4B275A752A004902F9 /* Folder+Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		052D63C027182D7C00C76281 /* SignRequests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1142,17 @@
 				052D63C127182FA500C76281 /* CreateSignRequest.json */,
 			);
 			path = SignRequests;
+			sourceTree = "<group>";
+		};
+		05EC89D527577AF900FEBAC6 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				05070D272757C6BB000AFE20 /* Utils */,
+				05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */,
+				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
+				0543A2382757AA2C0005CA23 /* Configuration.swift */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		05EE814F271869A2006A2329 /* BodyData */ = {
@@ -1731,6 +1804,7 @@
 				97FA4FE9234FF47900A615B8 /* docs */,
 				3549BB161DA3890B00C63030 /* Sources */,
 				3549BB191DA3890B00C63030 /* Tests */,
+				05EC89D527577AF900FEBAC6 /* IntegrationTests */,
 				1734EAF823214830008E3958 /* TestApp */,
 				3549BB061DA387DB00C63030 /* Products */,
 				357D954B1DA3F2B400AEC55F /* Frameworks */,
@@ -1743,6 +1817,7 @@
 				3549BB211DA389CD00C63030 /* BoxSDK.framework */,
 				3549BB611DA38ADB00C63030 /* BoxSDKTests-iOS.xctest */,
 				1734EAF72321482F008E3958 /* TestApp.app */,
+				05EC89D427577AF900FEBAC6 /* BoxSDKIntegrationTests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2146,6 +2221,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		05EC89D327577AF900FEBAC6 /* BoxSDKIntegrationTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EC89DB27577AF900FEBAC6 /* Build configuration list for PBXNativeTarget "BoxSDKIntegrationTests-iOS" */;
+			buildPhases = (
+				05EC89D027577AF900FEBAC6 /* Sources */,
+				05EC89D127577AF900FEBAC6 /* Frameworks */,
+				0579F6F627577D8C00473A3C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05EC89DA27577AF900FEBAC6 /* PBXTargetDependency */,
+				0579F6F527577D6700473A3C /* PBXTargetDependency */,
+			);
+			name = "BoxSDKIntegrationTests-iOS";
+			productName = "BoxSDKIntegrationTests-iOS";
+			productReference = 05EC89D427577AF900FEBAC6 /* BoxSDKIntegrationTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1734EAF62321482F008E3958 /* TestApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1734EB0923214831008E3958 /* Build configuration list for PBXNativeTarget "TestApp" */;
@@ -2210,10 +2304,14 @@
 		3549BAFC1DA387DB00C63030 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = box;
 				TargetAttributes = {
+					05EC89D327577AF900FEBAC6 = {
+						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
+					};
 					1734EAF62321482F008E3958 = {
 						CreatedOnToolsVersion = 10.3;
 						ProvisioningStyle = Automatic;
@@ -2252,6 +2350,7 @@
 			targets = (
 				3549BB201DA389CD00C63030 /* BoxSDK-iOS */,
 				3549BB601DA38ADB00C63030 /* BoxSDKTests-iOS */,
+				05EC89D327577AF900FEBAC6 /* BoxSDKIntegrationTests-iOS */,
 				1734EAF62321482F008E3958 /* TestApp */,
 			);
 		};
@@ -2541,6 +2640,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		05EC89D027577AF900FEBAC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05637B37275917EE006976DC /* Constants.swift in Sources */,
+				0532AC4C275A752A004902F9 /* Folder+Extensions.swift in Sources */,
+				05070D2A2757C88F000AFE20 /* NameGenerator.swift in Sources */,
+				0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */,
+				0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */,
+				05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1734EAF32321482F008E3958 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2827,6 +2939,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0579F6F527577D6700473A3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1734EAF62321482F008E3958 /* TestApp */;
+			targetProxy = 0579F6F427577D6700473A3C /* PBXContainerItemProxy */;
+		};
+		05EC89DA27577AF900FEBAC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3549BB201DA389CD00C63030 /* BoxSDK-iOS */;
+			targetProxy = 05EC89D927577AF900FEBAC6 /* PBXContainerItemProxy */;
+		};
 		1734EB0B23214839008E3958 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1734EAF62321482F008E3958 /* TestApp */;
@@ -2859,6 +2981,125 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		05EC89DC27577AF900FEBAC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		05EC89DD27577AF900FEBAC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		05EC89DE27577AF900FEBAC6 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_armv7",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_i386_x86_64-simulator",
+					"$(PROJECT_DIR)/Carthage/Build/Nimble.xcframework/ios-arm64_i386_x86_64-simulator",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Staging;
+		};
 		0C08112B22846110003418C3 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3339,6 +3580,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		05EC89DB27577AF900FEBAC6 /* Build configuration list for PBXNativeTarget "BoxSDKIntegrationTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EC89DC27577AF900FEBAC6 /* Debug */,
+				05EC89DD27577AF900FEBAC6 /* Release */,
+				05EC89DE27577AF900FEBAC6 /* Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1734EB0923214831008E3958 /* Build configuration list for PBXNativeTarget "TestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
