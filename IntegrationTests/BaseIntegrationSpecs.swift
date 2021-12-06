@@ -41,7 +41,7 @@ class BaseIntegrationSpecs: QuickSpec {
             return
         }
 
-        waitUntil(timeout: .seconds(10)) { done in
+        waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
             self.client.folders.delete(folderId: folder.id, recursive: recursive) { result in
                 if case let .failure(error) = result {
                     fail("Expected delete call to succeed, but instead got \(error)")
