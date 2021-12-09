@@ -11,18 +11,28 @@ import Nimble
 import Quick
 
 class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
+    var rootFolder: Folder!
+
     override func spec() {
-        super.spec()
+        beforeSuite {
+            self.createFolder(name: NameGenerator.getUniqueFolderName(for: "FolderModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
+        }
+
+        afterSuite {
+            self.deleteFolder(self.rootFolder)
+        }
 
         describe("Folders Module") {
 
             context("live cycle") {
 
-                it("should correctly create and delete a folder") {
+                it("should correctly create get and delete a folder") {
                     var folder: Folder?
+                    let folderName = NameGenerator.getUniqueFolderName()
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
-                        self.client.folders.create(name: Folder.generateUniqueName(), parentId: "0") { result in
+                    // create
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                        self.client.folders.create(name: folderName, parentId: self.rootFolder.id) { result in
                             switch result {
                             case let .success(folderItem):
                                 folder = folderItem
@@ -36,48 +46,29 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     guard let folder = folder else { return }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
-                        self.client.folders.delete(folderId: folder.id) { result in
-                            if case let .failure(error) = result {
-                                fail("Expected delete call to succeed, but instead got \(error)")
-                            }
-
-                            done()
-                        }
-                    }
-                }
-            }
-
-            context("get") {
-                var folderName: String!
-                var folder: Folder?
-
-                beforeEach {
-                    folderName = Folder.generateUniqueName()
-                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
-                }
-
-                afterEach {
-                    self.deleteFolder(folder)
-                }
-
-                it("should correctly get a folder information") {
-                    guard let folder = folder else {
-                        fail("An error occurred during setup initial data")
-                        return
-                    }
-
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // get
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.get(folderId: folder.id) { result in
                             switch result {
                             case let .success(folderItem):
                                 expect(folderItem).toNot(beNil())
                                 expect(folderItem).to(beAKindOf(Folder.self))
                                 expect(folderItem.name).to(equal(folderName))
-                                expect(folderItem.parent?.id).to(equal("0"))
+                                expect(folderItem.parent?.id).to(equal(self.rootFolder.id))
                                 expect(folderItem.itemStatus).to(equal(.active))
                             case let .failure(error):
                                 fail("Expected get call to suceeded, but instead got \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    // delete
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                        self.client.folders.delete(folderId: folder.id) { result in
+                            if case let .failure(error) = result {
+                                fail("Expected delete call to succeed, but instead got \(error)")
                             }
 
                             done()
@@ -90,7 +81,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
+
                     guard let folder = folder else { return }
 
                     self.createFolder(name: "folder_1", parentId: folder.id) { _ in }
@@ -111,7 +103,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     let iterator = self.client.folders.listItems(folderId: folder.id, offset: 1, limit: 2)
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -127,7 +119,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         done()
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -152,7 +144,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     let iterator = self.client.folders.listItems(folderId: folder.id, usemarker: true, limit: 1)
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -168,7 +160,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         done()
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -192,9 +184,9 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var destinationFolder: Folder?
 
                 beforeEach {
-                    folderName = Folder.generateUniqueName()
-                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in destinationFolder = createdFolder }
+                    folderName = NameGenerator.getUniqueFolderName()
+                    self.createFolder(name: folderName, parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in destinationFolder = createdFolder }
                 }
 
                 afterEach {
@@ -208,9 +200,9 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    let changedFolderName = Folder.generateUniqueName()
+                    let changedFolderName = NameGenerator.getUniqueFolderName()
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.update(
                             folderId: folder.id,
                             name: changedFolderName,
@@ -238,42 +230,39 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
             }
 
             context("copy") {
-                var folderName: String!
-                var folder: Folder?
+                var sourceFolder: Folder?
 
                 var copiedFolderName: String!
                 var copiedFolder: Folder?
 
                 beforeEach {
-                    folderName = Folder.generateUniqueName()
-                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
-
-                    copiedFolderName = Folder.generateUniqueName()
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in sourceFolder = createdFolder }
+                    copiedFolderName = NameGenerator.getUniqueFolderName()
                 }
 
                 afterEach {
-                    self.deleteFolder(folder)
+                    self.deleteFolder(sourceFolder)
                     self.deleteFolder(copiedFolder)
                 }
 
                 it("should correctly copy folder") {
-                    guard let folder = folder else {
+                    guard let sourceFolder = sourceFolder else {
                         fail("An error occurred during setup initial data")
                         return
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.copy(
-                            folderId: folder.id,
-                            destinationFolderID: "0",
+                            folderId: sourceFolder.id,
+                            destinationFolderID: self.rootFolder.id,
                             name: copiedFolderName
                         ) { result in
                             switch result {
                             case let .success(folderItem):
                                 copiedFolder = folderItem
                                 expect(folderItem.name).to(equal(copiedFolderName))
-                                expect(folderItem.parent?.id).to(equal("0"))
-                                expect(folderItem.id).toNot(equal(folder.id))
+                                expect(folderItem.parent?.id).to(equal(self.rootFolder.id))
+                                expect(folderItem.id).toNot(equal(sourceFolder.id))
                             case let .failure(error):
                                 fail("Expected copy call to suceeded, but instead got \(error)")
                             }
@@ -289,27 +278,57 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    folderName = Folder.generateUniqueName()
-                    self.createFolder(name: folderName) { createdFolder in folder = createdFolder }
+                    folderName = NameGenerator.getUniqueFolderName()
+                    self.createFolder(name: folderName, parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
                 }
 
                 afterEach {
                     self.deleteFolder(folder)
                 }
 
-                it("should get zero collaborations on just created folder") {
+                it("should correctly add and list a collaborations for a folder") {
                     guard let folder = folder else {
                         fail("An error occurred during setup initial data")
                         return
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
-                        let iterator = self.client.folders.listCollaborations(folderId: folder.id)
+                    var collaboration: Collaboration?
+
+                    // create
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                        self.client.collaborations.create(
+                            itemType: "folder",
+                            itemId: folder.id,
+                            role: .editor,
+                            accessibleBy: Configuration.shared.collaboratorId,
+                            accessibleByType: .user,
+                            fields: ["role", "accessible_by"]
+                        ) { result in
+                            switch result {
+                            case let .success(collaborationItem):
+                                collaboration = collaborationItem
+                                expect(collaborationItem.role).to(equal(.editor))
+                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                            case let .failure(error):
+                                fail("Expected create call to suceeded, but it failed \(error)")
+                            }
+
+                            done()
+                        }
+                    }
+
+                    guard let collaboration = collaboration else { return }
+
+                    // listCollaborations
+                    let iterator = self.client.folders.listCollaborations(folderId: folder.id, fields: ["role", "accessible_by"])
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
                             case let .success(page):
-                                expect(page.totalCount).to(equal(0))
-                                expect(page.entries.count).to(equal(0))
+                                expect(page.entries.count).to(equal(1))
+                                expect(page.entries[0].id).to(equal(collaboration.id))
+                                expect(page.entries[0].role).to(equal(.editor))
+                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
                             case let .failure(error):
                                 fail("Expected listCollaborations call to succeeded, but it instead got: \(error)")
                             }
@@ -324,7 +343,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
                 }
 
                 afterEach {
@@ -337,7 +356,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // addToFavorites
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.addToFavorites(folderId: folder.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected addToFavorites call to suceeded, but instead got \(error)")
@@ -347,7 +367,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // removeFromFavorites
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.removeFromFavorites(folderId: folder.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected removeFromFavorites call to suceeded, but instead got \(error)")
@@ -363,7 +384,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
                 }
 
                 afterEach {
@@ -376,7 +397,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // setSharedLink
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.setSharedLink(
                             forFolder: folder.id,
                             access: .open,
@@ -398,7 +420,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // getSharedLink
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.getSharedLink(forFolder: folder.id) { result in
                             switch result {
                             case let .success(sharedLink):
@@ -414,7 +437,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // deleteSharedLink
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.deleteSharedLink(forFolder: folder.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected deleteSharedLink call to suceeded, but instead got \(error)")
@@ -430,7 +454,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
                 }
 
                 afterEach {
@@ -443,7 +467,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // applyWatermark
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.applyWatermark(folderId: folder.id) { result in
                             switch result {
                             case let .success(watermark):
@@ -456,7 +481,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // getWatermark
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.getWatermark(folderId: folder.id) { result in
                             switch result {
                             case let .success(watermark):
@@ -469,7 +495,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // removeWatermark
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.removeWatermark(folderId: folder.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected removeWatermark call to suceeded, but instead got \(error)")
@@ -485,7 +512,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var folder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: Folder.generateUniqueName()) { createdFolder in folder = createdFolder }
+                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
                 }
 
                 afterEach {
@@ -500,7 +527,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     var folderLock: FolderLock!
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // createLock
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.createLock(folderId: folder.id) { result in
                             switch result {
                             case let .success(folderLockItem):
@@ -516,7 +544,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // listLocks
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         let iterator = self.client.folders.listLocks(folderId: folder.id)
                         iterator.next { result in
                             switch result {
@@ -533,7 +562,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    waitUntil(timeout: .seconds(Constants.defaultTimeout)) { done in
+                    // deleteLock
+                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.folders.deleteLock(folderLockId: folderLock.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected deleteLock call to suceeded, but instead got \(error)")
@@ -545,15 +575,5 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                 }
             }
         }
-    }
-}
-
-extension FolderItem {
-    var folder: Folder? {
-        if case let .folder(folder) = self {
-            return folder
-        }
-
-        return nil
     }
 }
