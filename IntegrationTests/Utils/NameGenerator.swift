@@ -15,7 +15,7 @@ final class NameGenerator {
         return "\(prefix)_\(scope)_\(UUID().uuidString)"
     }
 
-    static func generateUniqueFileName(withExtension extension: String = "txt") -> String {
+    static func getUniqueFileName(withExtension extension: String = "txt") -> String {
         return "\(prefix)_\(UUID().uuidString).\(`extension`)"
     }
 }

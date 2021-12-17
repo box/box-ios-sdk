@@ -199,7 +199,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 it("should succeed if checked against unique file name") {
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.files.preflightCheck(
-                            name: NameGenerator.generateUniqueFileName(),
+                            name: NameGenerator.getUniqueFileName(),
                             parentId: self.rootFolder.id
                         ) { result in
                             switch result {
@@ -217,7 +217,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
             context("version") {
                 var file: File?
-                let versionName1 = NameGenerator.generateUniqueFileName()
+                let versionName1 = NameGenerator.getUniqueFileName()
                 let versionContent1 = "First Version"
 
                 beforeEach {
@@ -236,7 +236,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Upload data version
                     var fileVersion2: FileVersion?
-                    let versionName2 = NameGenerator.generateUniqueFileName()
+                    let versionName2 = NameGenerator.getUniqueFileName()
                     let versionContent2 = "Second Version"
                     let versionContentData2 = versionContent2.data(using: .utf8)!
                     let version2ContentModifiedAt = Date().iso8601
@@ -265,7 +265,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Upload stream version
                     var fileVersion3: FileVersion?
-                    let versionName3 = NameGenerator.generateUniqueFileName()
+                    let versionName3 = NameGenerator.getUniqueFileName()
                     let versionContent3 = "Last third Version"
                     let versionContentData3 = versionContent3.data(using: .utf8)!
                     let version3ContentModifiedAt = Date().iso8601
@@ -434,7 +434,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    let changedFileName = NameGenerator.generateUniqueFileName()
+                    let changedFileName = NameGenerator.getUniqueFileName()
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.files.update(
@@ -1038,7 +1038,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         ZipDownloadItem(id: childFolder.id, type: "folder")
                     ]
 
-                    let zipFileName = NameGenerator.generateUniqueFileName(withExtension: "zip")
+                    let zipFileName = NameGenerator.getUniqueFileName(withExtension: "zip")
                     let destinationUrl = FileUtil.getDestinationUrl(for: zipFileName)
 
                     // create & download
@@ -1105,7 +1105,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         }
                     }
 
-                    let downloadedFileName = NameGenerator.generateUniqueFileName(withExtension: "pdf")
+                    let downloadedFileName = NameGenerator.getUniqueFileName(withExtension: "pdf")
                     let destinationUrl = FileUtil.getDestinationUrl(for: downloadedFileName)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
