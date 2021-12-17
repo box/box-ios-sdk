@@ -517,7 +517,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     self.deleteFile(file)
                 }
 
-                it("should correctly create list and delete a lock") {
+                it("should correctly create lock and delete a lock") {
                     guard let file = file else {
                         fail("An error occurred during setup initial data")
                         return
@@ -1134,7 +1134,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 }
             }
 
-            context("chanked upload") {
+            context("chunked upload") {
                 let fileContent = FileUtil.getFileContent(fileName: IntegrationTestResources.bigImage.fileName)
                 var file: File?
 
