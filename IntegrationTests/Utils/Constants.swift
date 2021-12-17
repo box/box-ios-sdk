@@ -9,5 +9,8 @@
 import Foundation
 
 enum Constants {
-    static var defaultTimeout: Int = 10
+    enum Timeout {
+        static var `default`: Int = 10
+        static var large: Int = 60
+    }
 }
