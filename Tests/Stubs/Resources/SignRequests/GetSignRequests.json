@@ -22,10 +22,20 @@
                     },
                     "inputs": [
                         {
-                            "document_tag_id": "1234",
-                            "text_value": "text",
-                            "type": "text",
-                            "page_index": 4
+                            "document_tag_id": null,
+                            "text_value": "April 26, 2021",
+                            "checkbox_value": null,
+                            "date_value": "2021-04-26",
+                            "type": "date",
+                            "page_index": 0
+                        },
+                        {
+                            "document_tag_id": null,
+                            "text_value": "",
+                            "checkbox_value": null,
+                            "date_value": null,
+                            "type": "signature",
+                            "page_index": 0
                         }
                     ],
                     "embed_url": "https://example.com"

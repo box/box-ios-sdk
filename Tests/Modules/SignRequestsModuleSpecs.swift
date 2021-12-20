@@ -119,6 +119,9 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(firstSignRequest).toNot(beNil())
                                 expect(firstSignRequest.id).to(equal("12345"))
                                 expect(firstSignRequest.signers.first?.email).to(equal("example@gmail.com"))
+                                let firstInput = firstSignRequest.signers[0].inputs?[0]
+                                expect(firstInput?.dateValue).to(equal("2021-04-26".iso8601))
+                                expect(firstInput?.textValue).to(equal("April 26, 2021"))
                                 expect(firstSignRequest.sourceFiles.first?.id).to(equal("12345"))
                                 expect(firstSignRequest.sourceFiles.first?.name).to(equal("Contract.pdf"))
                                 expect(firstSignRequest.parentFolder.id).to(equal("12345"))
