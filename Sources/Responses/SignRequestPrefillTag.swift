@@ -13,10 +13,10 @@ import Foundation
 public class SignRequestPrefillTag: BoxInnerModel {
 
     private enum CodingKeys: String, CodingKey {
-        case documentTagId = "document_tag_id"
-        case textValue = "text_value"
-        case checkboxValue = "checkbox_value"
-        case dateValue = "date_value"
+        case documentTagId
+        case textValue
+        case checkboxValue
+        case dateValue
     }
 
     // MARK: - Properties
@@ -88,12 +88,13 @@ public class SignRequestPrefillTag: BoxInnerModel {
         checkboxValue = try container.decodeIfPresent(Bool.self, forKey: .checkboxValue)
 
         if let dateString = try? container.decodeIfPresent(String.self, forKey: .dateValue),
-           let date = Formatter.iso8601WithDateOnly.date(from: dateString)  {
+           let date = Formatter.iso8601WithDateOnly.date(from: dateString) {
             dateValue = date
-        } else {
+        }
+        else {
             dateValue = nil
         }
-     }
+    }
 
     /// Encodes this value into the given encoder.
     /// If the value fails to encode anything, `encoder` will encode an empty
@@ -109,11 +110,8 @@ public class SignRequestPrefillTag: BoxInnerModel {
         try container.encodeIfPresent(textValue, forKey: .textValue)
         try container.encodeIfPresent(checkboxValue, forKey: .checkboxValue)
 
-        var dateString: String? = nil
         if let date = dateValue {
-            dateString = Formatter.iso8601WithDateOnly.string(from: date)
+            try container.encodeIfPresent(Formatter.iso8601WithDateOnly.string(from: date), forKey: .dateValue)
         }
-
-        try container.encodeIfPresent(dateString, forKey: .dateValue)
     }
 }

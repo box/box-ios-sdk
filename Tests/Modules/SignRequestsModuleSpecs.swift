@@ -39,7 +39,10 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "is_document_preparation_needed": true,
                                 "are_text_signatures_enabled": true,
                                 "are_reminders_enabled": true,
-                                "prefill_tags": [["document_tag_id": "1234", "text_value": "text"]],
+                                "prefill_tags": [
+                                    ["document_tag_id": "1234", "text_value": "text"],
+                                    ["document_tag_id": "4567", "date_value": "2021-12-03"]
+                                ],
                                 "email_subject": "Sign Request from Acme",
                                 "email_message": "Hello! Please sign the document below",
                                 "external_id": "123",
@@ -56,7 +59,10 @@ class SignRequestsModuleSpecs: QuickSpec {
                         let signers = [SignRequestCreateSigner(email: "example@gmail.com", role: .signer)]
                         let sourceFiles = [SignRequestCreateSourceFile(id: "12345")]
                         let parentFolder = SignRequestCreateParentFolder(id: "12345")
-                        let tags = [SignRequestPrefillTag(documentTagId: "1234", textValue: "text")]
+                        let tags = [
+                            SignRequestPrefillTag(documentTagId: "1234", textValue: "text"),
+                            SignRequestPrefillTag(documentTagId: "4567", dateValue: "2021-12-03T08:12:13.982Z".iso8601)
+                        ]
                         let params = SignRequestCreateParameters(
                             isDocumentPreparationNeeded: true,
                             areTextSignaturesEnabled: true,
@@ -83,6 +89,14 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.sourceFiles.first?.name).to(equal("Contract.pdf"))
                                 expect(signRequest.parentFolder.id).to(equal("12345"))
                                 expect(signRequest.parentFolder.name).to(equal("Contracts"))
+                                expect(signRequest.signers[0].inputs?[0].documentTagId).to(equal("1234"))
+                                expect(signRequest.signers[0].inputs?[0].textValue).to(equal("text"))
+                                expect(signRequest.signers[0].inputs?[1].documentTagId).to(equal("4567"))
+                                expect(signRequest.signers[0].inputs?[1].dateValue).to(equal("2021-12-03".iso8601))
+                                expect(signRequest.prefillTags?[0].documentTagId).to(equal("1234"))
+                                expect(signRequest.prefillTags?[0].textValue).to(equal("text"))
+                                expect(signRequest.prefillTags?[1].documentTagId).to(equal("4567"))
+                                expect(signRequest.prefillTags?[1].dateValue).to(equal("2021-12-03".iso8601))
                                 expect(signRequest.emailSubject).to(equal("Sign Request from Acme"))
                                 expect(signRequest.emailMessage).to(equal("Hello! Please sign the document below"))
                                 expect(signRequest.externalId).to(equal("123"))
