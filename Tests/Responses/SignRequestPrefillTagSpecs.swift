@@ -34,9 +34,9 @@ class SignRequestPrefillTagSpecs: QuickSpec {
                 }
 
                 it("should correctly create an object using init with dateValue parameter") {
-                    let sut = SignRequestPrefillTag(documentTagId: "1", dateValue: "2021-04-26T08:12:13Z".iso8601)
+                    let sut = SignRequestPrefillTag(documentTagId: "1", dateValue: "2021-04-26".iso8601)
                     expect(sut.documentTagId).to(equal("1"))
-                    expect(sut.dateValue).to(equal("2021-04-26T08:12:13Z".iso8601))
+                    expect(sut.dateValue).to(equal("2021-04-26".iso8601))
                     expect(sut.checkboxValue).to(beNil())
                     expect(sut.textValue).to(beNil())
                 }

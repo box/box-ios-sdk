@@ -17,12 +17,22 @@
         "finalized_at": "2021-04-26T08:12:13.982Z"
       },
       "inputs": [
-        {
-          "document_tag_id": "1234",
-          "text_value": "text",
-          "type": "text",
-          "page_index": 4
-        }
+          {
+              "document_tag_id": "1234",
+              "text_value": "text",
+              "checkbox_value": null,
+              "date_value": null,
+              "type": "text",
+              "page_index": 4
+          },
+          {
+              "document_tag_id": "4567",
+              "text_value": "Dec 3, 2021",
+              "checkbox_value": null,
+              "date_value": "2021-12-03",
+              "type": "date",
+              "page_index": 4
+          }
       ],
       "embed_url": "https://example.com"
     }
@@ -53,6 +63,10 @@
     {
       "document_tag_id": "1234",
       "text_value": "text",
+    },
+    {
+      "document_tag_id": "4567",
+      "date_value": "2021-12-03",
     }
   ],
   "days_valid": 2,

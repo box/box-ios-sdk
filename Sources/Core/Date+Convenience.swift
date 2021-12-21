@@ -17,14 +17,24 @@ extension ISO8601DateFormatter {
     }
 }
 
+extension DateFormatter {
+    // swiftlint:disable:next force_unwrapping
+    convenience init(dateFormat: String, timeZone: TimeZone = TimeZone(secondsFromGMT: 0)!) {
+        self.init()
+        self.dateFormat = dateFormat
+        self.timeZone = timeZone
+    }
+}
+
 extension Formatter {
-    static let iso8601 = ISO8601DateFormatter()
-    static let iso8601WithMilliseconds = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
+    static let iso8601WithDateOnly = DateFormatter(dateFormat: "yyyy-MM-dd")
+    static let iso8601WithSeconds = ISO8601DateFormatter()
+    static let iso8601WithMilliseconds = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds, .withDashSeparatorInDate])
 }
 
 extension Date {
     var iso8601: String {
-        return Formatter.iso8601.string(from: self)
+        return Formatter.iso8601WithSeconds.string(from: self)
     }
 
     init?(fromISO8601String dateValue: String) {
@@ -37,6 +47,8 @@ extension Date {
 
 extension String {
     var iso8601: Date? {
-        return Formatter.iso8601.date(from: self) ?? Formatter.iso8601WithMilliseconds.date(from: self)
+        return Formatter.iso8601WithSeconds.date(from: self)
+            ?? Formatter.iso8601WithMilliseconds.date(from: self)
+            ?? Formatter.iso8601WithDateOnly.date(from: self)
     }
 }
