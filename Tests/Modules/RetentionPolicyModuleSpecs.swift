@@ -394,6 +394,80 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                     }
                 }
             }
+
+            describe("listFilesUnderRetentionForAssignment()") {
+                it("should get all file version retentions for the given enterprise") {
+                    let retentionPolicyAssignmentId = "1234"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policy_assignments/\(retentionPolicyAssignmentId)/files_under_retention") &&
+                            isMethodGET() &&
+                            containsQueryParams([
+                                "limit": "100"
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetFilesUnderRetentionForAssignment.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        let iterator = self.sut.retentionPolicy.listFilesUnderRetentionForAssignment(
+                            retentionPolicyAssignmentId: retentionPolicyAssignmentId,
+                            limit: 100
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let fileUnderRetention = page.entries[0]
+                                expect(fileUnderRetention.id).to(equal("12345"))
+                                expect(fileUnderRetention.name).to(equal("Contract.pdf"))
+                                expect(fileUnderRetention.fileVersion?.id).to(equal("123456"))
+                            case let .failure(error):
+                                fail("Expected call to listFilesUnderRetentionForAssignment to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
+            describe("listFileVersionsUnderRetentionForAssignment()") {
+                it("should get all file version retentions for the given enterprise") {
+                    let retentionPolicyAssignmentId = "1234"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policy_assignments/\(retentionPolicyAssignmentId)/file_versions_under_retention") &&
+                            isMethodGET() &&
+                            containsQueryParams([
+                                "limit": "100"
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetFileVersionsUnderRetentionForAssignment.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        let iterator = self.sut.retentionPolicy.listFileVersionsUnderRetentionForAssignment(
+                            retentionPolicyAssignmentId: retentionPolicyAssignmentId,
+                            limit: 100
+                        )
+                        iterator.next { result in
+                            switch result {
+                            case let .success(page):
+                                let fileUnderRetention = page.entries[0]
+                                expect(fileUnderRetention.id).to(equal("123456"))
+                                expect(fileUnderRetention.name).to(equal("Contract.pdf"))
+                                expect(fileUnderRetention.fileVersion?.id).to(equal("1234567"))
+                            case let .failure(error):
+                                fail("Expected call to listFilesUnderRetentionForAssignment to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
         }
     }
 }
