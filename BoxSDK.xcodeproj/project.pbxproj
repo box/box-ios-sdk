@@ -14,6 +14,8 @@
 		052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C3271843FA00C76281 /* GetSignRequests.json */; };
 		052D85CB271734FC00648C70 /* SignRequestsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */; };
 		053637BD276C96E400C18D26 /* IntegrationTestResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053637BC276C96E400C18D26 /* IntegrationTestResources.swift */; };
+		0538E0342774BBEF00E804FD /* GetFilesUnderRetentionForAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 0538E0332774BBEE00E804FD /* GetFilesUnderRetentionForAssignment.json */; };
+		0538E0362774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 0538E0352774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json */; };
 		0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543A2382757AA2C0005CA23 /* Configuration.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
@@ -596,6 +598,8 @@
 		052D63C3271843FA00C76281 /* GetSignRequests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequests.json; sourceTree = "<group>"; };
 		052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleSpecs.swift; sourceTree = "<group>"; };
 		053637BC276C96E400C18D26 /* IntegrationTestResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestResources.swift; sourceTree = "<group>"; };
+		0538E0332774BBEE00E804FD /* GetFilesUnderRetentionForAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFilesUnderRetentionForAssignment.json; sourceTree = "<group>"; };
+		0538E0352774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileVersionsUnderRetentionForAssignment.json; sourceTree = "<group>"; };
 		0543A2382757AA2C0005CA23 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
@@ -2156,6 +2160,8 @@
 		9D472E73231BF30D004C8023 /* RetentionPolicy */ = {
 			isa = PBXGroup;
 			children = (
+				0538E0352774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json */,
+				0538E0332774BBEE00E804FD /* GetFilesUnderRetentionForAssignment.json */,
 				9D472E74231BF47A004C8023 /* GetRetentionPolicy.json */,
 				9D472E78231BF499004C8023 /* CreateRetentionPolicy.json */,
 				9D472E7C231BF4B2004C8023 /* UpdateRetentionPolicy.json */,
@@ -2587,6 +2593,7 @@
 				22C41454231ED19700D3992C /* GetMetadataCascadePolicies.json in Resources */,
 				0CD3426D228B04CD00BAFF4B /* AddEmailAlias.json in Resources */,
 				9D14D4F522E12658001DC7A6 /* FaultyComment_MissingRequiredField.json in Resources */,
+				0538E0362774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json in Resources */,
 				9DC6D81C22F4878100A72284 /* GetPollingURL.json in Resources */,
 				F969D398233A72FC001301FC /* CreateStoragePolicyAssignment.json in Resources */,
 				22E60D6923031E6100E86A4A /* GetRepresentationsPendingState.json in Resources */,
@@ -2649,6 +2656,7 @@
 				8061988F22AB18B100B09896 /* CreateComment.json in Resources */,
 				0CD34251228AE60C00BAFF4B /* CreateAppUser.json in Resources */,
 				05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */,
+				0538E0342774BBEF00E804FD /* GetFilesUnderRetentionForAssignment.json in Resources */,
 				80BC8435232C56B700010E08 /* GetTermsOfServiceUserStatuses.json in Resources */,
 				22CE53A122DD0C3E00F3D59F /* CreateMetadataOnFolder.json in Resources */,
 				80BC843E232C56C700010E08 /* FullTermsOfService.json in Resources */,
