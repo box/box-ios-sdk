@@ -474,7 +474,7 @@ To add or update the shared link for a file, call
 [`client.files.setSharedLink(forFile:unsharedAt:vanityName:access:password:canDownload:completion:)][set-shared-link]
 with the ID of the file and the shared link properties to set.
 
-<!-- sample put_files_id create_shared_link -->
+<!-- sample put_files_id_shared_link_create -->
 ```swift
 client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -495,7 +495,7 @@ To remove a file's shared link, call
 [`client.files.deleteSharedLink(forFile:completion:)`][delete-shared-link]
 with the ID of the file.
 
-<!-- sample put_files_id remove_shared_link -->
+<!-- sample put_files_id_shared_link_remove -->
 ```swift
 client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
