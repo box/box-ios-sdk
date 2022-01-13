@@ -17,7 +17,7 @@
     <a title="EventsModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.0.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.1.0 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -888,20 +888,12 @@ Box API will return all available events beginning with the oldest stream positi
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Returns an iterator of events or an error.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An iterator of events or an error.</p>
                       </div>
                     </section>
                   </div>
@@ -919,8 +911,12 @@ Box API will return all available events beginning with the oldest stream positi
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Gets events for all users and content in the enterprise. Enterprise events are accessible for one year via the API,
-and seven years via exported reports in the Box Admin Console.</p>
+                        <p>Gets events for all users and content in the enterprise from <code>admin_logs</code> stream type.
+The emphasis for this stream is on completeness over latency,
+which means that Box will deliver admin events in chronological order and without duplicates,
+but with higher latency.
+Events with <code>admin_logs</code> stream type are accessible via this API up to one year.
+This method will only work with an API connection for an enterprise admin account.</p>
 
                       </div>
                       <div class="declaration">
@@ -944,7 +940,7 @@ and seven years via exported reports in the Box Admin Console.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>eventType</em>
+                                <em>eventTypes</em>
                                 </code>
                               </td>
                               <td>
@@ -1001,20 +997,95 @@ and seven years via exported reports in the Box Admin Console.</p>
                                 </div>
                               </td>
                             </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An iterator of events or an error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK12EventsModuleC013getEnterpriseC9Streaming10eventTypes14streamPosition5limitAA14PagingIteratorCyAA5EventCGSayAA0O4TypeOGSg_AA06StreamK0OSgSiSgtF"></a>
+                    <a name="//apple_ref/swift/Method/getEnterpriseEventsStreaming(eventTypes:streamPosition:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK12EventsModuleC013getEnterpriseC9Streaming10eventTypes14streamPosition5limitAA14PagingIteratorCyAA5EventCGSayAA0O4TypeOGSg_AA06StreamK0OSgSiSgtF">getEnterpriseEventsStreaming(eventTypes:<wbr>streamPosition:<wbr>limit:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets events for all users and content in the enterprise from <code>admin_logs_streaming</code> stream type.
+The emphasis for this feed is on low latency rather than chronological accuracy, which means that Box may return
+events more than once and out of chronological order. Events are returned via the API around 12 seconds after they
+are processed by Box (the 12 seconds buffer ensures that new events are not written after your cursor position).
+Events with <code>admin_logs_streaming</code> stream type are accessible via this API up to two weeks only.
+This method will only work with an API connection for an enterprise admin account.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnterpriseEventsStreaming</span><span class="p">(</span>
+    <span class="nv">eventTypes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/EventType.html">EventType</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">streamPosition</span><span class="p">:</span> <span class="kt"><a href="../Enums/StreamPosition.html">StreamPosition</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Event.html">Event</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
                             <tr>
                               <td>
                                 <code>
-                                <em>completion</em>
+                                <em>eventTypes</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Returns an iterator of events or an error.</p>
+                                  <p>Restricts returned value to listed events.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>streamPosition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The location in the event stream from which you want to start receiving events.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An iterator of events or an error.</p>
                       </div>
                     </section>
                   </div>
@@ -1130,7 +1201,7 @@ Check the timeout value in the PollingURLInfo object to determine the time that 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-28)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-01-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

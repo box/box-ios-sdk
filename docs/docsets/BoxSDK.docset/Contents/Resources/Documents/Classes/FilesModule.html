@@ -17,7 +17,7 @@
     <a title="FilesModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.0.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.1.0 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -950,12 +950,88 @@ user doesn&rsquo;t have access to the file.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>updateFileInfo</em>
+                                <em>name</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The new values with which to update the file.</p>
+                                  <p>An optional new name for the file. Box supports file names of 255 characters or
+less. Names containing non-printable ASCII characters, &ldquo;/&rdquo; or &ldquo;\&rdquo;, names with trailing
+spaces, and the special names “.” and “..” are also not allowed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parentId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the parent folder.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sharedLink</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Shared links provide direct, read-only access to file on Box using a URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tags</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array of tags to be added or replaced to the file</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collections</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>List of collection identifiers to which the file membership will be set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Defines a lock on an item.
+This prevents the item from being moved, renamed, or otherwise changed by anyone other than the user who created the lock.
+Set this to null to remove the lock.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3480,9 +3556,9 @@ include in the response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">setSharedLink(forFile:<wbr>unsharedAt:<wbr>access:<wbr>password:<wbr>canDownload:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt10vanityName6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAMySSGSgAA0fG6AccessOSgATSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/setSharedLink(forFile:unsharedAt:vanityName:access:password:canDownload:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt10vanityName6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAMySSGSgAA0fG6AccessOSgATSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF">setSharedLink(forFile:<wbr>unsharedAt:<wbr>vanityName:<wbr>access:<wbr>password:<wbr>canDownload:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3500,6 +3576,7 @@ include in the response.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setSharedLink</span><span class="p">(</span>
     <span class="n">forFile</span> <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">unsharedAt</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">vanityName</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">access</span><span class="p">:</span> <span class="kt"><a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">password</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">canDownload</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -3527,12 +3604,25 @@ include in the response.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>stopSharingAt</em>
+                                <em>unsharedAt</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
                                   <p>The date-time that this link will become disabled. This field can only be set by users with paid accounts</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>vanityName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The custom name of a shared link, as used in the vanityUrl field.
+It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4743,7 +4833,8 @@ See <a href="https://developer.box.com/reference#representations">representation
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listVersionRetentions</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "Please use RetentionPoliciesModule#listFilesUnderRetentionForAssignment(retentionPolicyAssignmentId:limit:marker﹚ instead.")</span>
+<span class="kd">func</span> <span class="nf">listVersionRetentions</span><span class="p">(</span>
     <span class="nv">fileId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileVersionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">policyId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4872,7 +4963,7 @@ If optional parameters are given, only the file version retentions that match th
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-28)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-01-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

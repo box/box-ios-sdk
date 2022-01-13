@@ -344,18 +344,18 @@ end
 
     sh("git remote update")
 
-    if current_branch != release_branch
-      UI.user_error!("Local branch: \"#{current_branch}\" is different than release branch: \"#{release_branch}\". Abort script.")
-    end
+    # if current_branch != release_branch
+    #   UI.user_error!("Local branch: \"#{current_branch}\" is different than release branch: \"#{release_branch}\". Abort script.")
+    # end
 
-    different_commits_count = sh(" git rev-list HEAD...origin/#{release_branch} --count | tr -d \"\n\"")
-    if different_commits_count != "0"
-      UI.user_error!("Local branch HEAD is different than remote branch HEAD. Abort script.")
-    end
+    # different_commits_count = sh(" git rev-list HEAD...origin/#{release_branch} --count | tr -d \"\n\"")
+    # if different_commits_count != "0"
+    #   UI.user_error!("Local branch HEAD is different than remote branch HEAD. Abort script.")
+    # end
 
-    status_result = sh("git status --porcelain")
-    if status_result != ""
-      UI.user_error!("There are local changes that are not present on the remote. Aborting script.")
-    end
+    # status_result = sh("git status --porcelain")
+    # if status_result != ""
+    #   UI.user_error!("There are local changes that are not present on the remote. Aborting script.")
+    # end
   end
 end

@@ -17,7 +17,7 @@
     <a title="SharedLinkData Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.0.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.1.0 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -904,6 +904,35 @@ to the default access level specified by the enterprise admin.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK14SharedLinkDataV10vanityNameAA17NullableParameterOySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/vanityName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK14SharedLinkDataV10vanityNameAA17NullableParameterOySSGSgvp">vanityName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The custom vanity name to use in the shared link URL.
+It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.
+Custom URLs should not be used when sharing sensitive content as vanity URLs are a lot easier to guess than regular shared links.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">vanityName</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK14SharedLinkDataV11permissionsSDySSSbGSgvp"></a>
                     <a name="//apple_ref/swift/Property/permissions" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK14SharedLinkDataV11permissionsSDySSSbGSgvp">permissions</a>
@@ -931,9 +960,9 @@ to the default access level specified by the enterprise admin.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK14SharedLinkDataV6access8password10unsharedAt11canDownloadAcA0cD6AccessOSg_AA17NullableParameterOySSGSgALy10Foundation4DateVGSgSbSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(access:password:unsharedAt:canDownload:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK14SharedLinkDataV6access8password10unsharedAt11canDownloadAcA0cD6AccessOSg_AA17NullableParameterOySSGSgALy10Foundation4DateVGSgSbSgtcfc">init(access:<wbr>password:<wbr>unsharedAt:<wbr>canDownload:<wbr>)</a>
+                    <a name="/s:6BoxSDK14SharedLinkDataV6access8password10unsharedAt10vanityName11canDownloadAcA0cD6AccessOSg_AA17NullableParameterOySSGSgAMy10Foundation4DateVGSgAOSbSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(access:password:unsharedAt:vanityName:canDownload:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK14SharedLinkDataV6access8password10unsharedAt10vanityName11canDownloadAcA0cD6AccessOSg_AA17NullableParameterOySSGSgAMy10Foundation4DateVGSgAOSbSgtcfc">init(access:<wbr>password:<wbr>unsharedAt:<wbr>vanityName:<wbr>canDownload:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -952,6 +981,7 @@ to the default access level specified by the enterprise admin.</p>
     <span class="nv">access</span><span class="p">:</span> <span class="kt"><a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">password</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">unsharedAt</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">vanityName</span><span class="p">:</span> <span class="kt"><a href="../Enums/NullableParameter.html">NullableParameter</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">canDownload</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
@@ -1000,6 +1030,19 @@ to the default access level specified by the enterprise admin.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>vanityName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The custom vanity name to use in the shared link URL.
+It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>canDownload</em>
                                 </code>
                               </td>
@@ -1020,7 +1063,7 @@ to the default access level specified by the enterprise admin.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-28)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-01-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
