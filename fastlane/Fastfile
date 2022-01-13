@@ -26,10 +26,6 @@
 #                       It is needed to communicate with GitHub.
 #                       e.g. github_token:secret_token_123
 #     
-# is_draft:             Optinoal parameter. Default value is fasle.
-#                       It determines whether the release should be marked as draft.
-#                       e.g. is_draft:true
-#     
 # dry_run:              Optional parameter. Default value is false.
 #                       If false then no any changes will be made on external systems.
 #                       e.g. dry_run:true
@@ -96,7 +92,7 @@ platform :ios do
   end
 
 ##############################################################################
-# STEP 2) CREATE NEW RELEASE ON GITHUG
+# STEP 2) CREATE NEW RELEASE ON GITHUB
 ##############################################################################
 
   desc "Create new release on github"
