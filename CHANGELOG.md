@@ -1,31 +1,23 @@
-Changelog
-=========
+# Changelog
 
-## Next Release
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-__Breaking Changes:__
+## [5.0.0](https://github.com/box/box-ios-sdk/compare/v4.4.0...v5.0.0) (2021-10-28)
 
-__New Features and Enhancements:__
 
-__Bug Fixes:__
-
-## v5.0.0 [2021-10-28]
-
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Update PagingIterator to return pages and simplify logic ([#737](https://github.com/box/box-ios-sdk/pull/737))
 - Remove insensitive language field `collaborationWhiteList` in BoxClient. Use `collaborationAllowList` instead. ([#790](https://github.com/box/box-ios-sdk/pull/790))
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Replace insensitive event types ([#785](https://github.com/box/box-ios-sdk/pull/785))
 - Add SignAPI support ([#792](https://github.com/box/box-ios-sdk/pull/792))
 
-## v4.4.0 [2021-04-20]
+## [4.4.0](https://github.com/box/box-ios-sdk/compare/v4.3.0...v4.4.0) (2021-04-20)
 
-__Breaking Changes:__
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Add support for search param to get shared link items ([#756](https://github.com/box/box-ios-sdk/pull/756))
 - Add support for folder lock functionality ([#759](https://github.com/box/box-ios-sdk/pull/759))
@@ -33,91 +25,79 @@ __New Features and Enhancements:__
 - Add support for stream upload of new file versions and add support for 'If-Match' header when uploading new file versions ([#766](https://github.com/box/box-ios-sdk/pull/766))
 - Add additional details field for `Event` model ([#770](https://github.com/box/box-ios-sdk/pull/770))
 
-__Bug Fixes:__
+### Bug Fixes
 
 - Pass only a scheme to iOS Authentication APIs ([#755](https://github.com/box/box-ios-sdk/pull/755))
 - Update `listEnterpriseGroups()` to use documented parameter for filtering by name ([#757](https://github.com/box/box-ios-sdk/pull/757))
 - Fix bug for OAuth where the callback is not called if token has been revoked ([#762](https://github.com/box/box-ios-sdk/pull/762))
 
-## v4.3.0 [2021-02-01]
+## [4.3.0](https://github.com/box/box-ios-sdk/compare/v4.2.0...v4.3.0) (2021-02-01)
 
-__Breaking Changes:__
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Add support for OAuth 2 custom callback URL ([#746](https://github.com/box/box-ios-sdk/pull/746))
 - Add support for zip download ([#749](https://github.com/box/box-ios-sdk/pull/749))
 
-__Bug Fixes:__
+### Bug Fixes
 
 - Update gems to patch kramdown vulnerability ([#742](https://github.com/box/box-ios-sdk/pull/742))
 - Update gems to patch activesupport vulnerability ([#745](https://github.com/box/box-ios-sdk/pull/745))
 
-## v4.2.0 [2020-11-16]
+## [4.2.0](https://github.com/box/box-ios-sdk/compare/v4.1.0...v4.2.0) (2020-11-16)
 
-__Breaking Changes:__
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Add error information to OAuth web session failures
 
-__Bug Fixes:__
+### Bug Fixes
 
 - Fix bug with creating collaboration
 - Fix bug with getting enterprise events
 
-## v4.1.0 [2020-05-15]
+## [4.1.0](https://github.com/box/box-ios-sdk/compare/v4.0.0...v4.1.0) (2020-05-15)
 
-__Breaking Changes:__
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Add ability to cancel uploads and downloads
 - Add support for the uploader display name field for Files and File Versions
 - Add support for the classification field for Files and Folders
 - Add path parameter sanitization
 
-__Bug Fixes:__
+### Bug Fixes
 
 - Fix logging of API responses
 
-## v4.0.0 [2020-02-13]
+## [4.0.0](https://github.com/box/box-ios-sdk/compare/v3.1.0...v4.0.0) (2020-02-13)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Change `status` field for task assignments from a String to an Enum
 - Remove macOS, tvOS, and watchOS support
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Make authentication session classes `OAuth2Session`, `SingleTokenSession`, and `DelegatedAuthSession` public
 
 
-## v3.1.0 [2020-01-09]
+## [3.1.0](https://github.com/box/box-ios-sdk/compare/v3.0.0...v3.1.0) (2020-01-09)
 
-__Breaking Changes:__
-
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Add shared link downscoping
 - Add closure parameter for progress of uploads and downloads
 - Add marker based pagination to list users endpoint
 
 
-## v3.0.0 [2019-11-18]
+## [3.0.0](https://github.com/box/box-ios-sdk/compare/v3.0.0-rc.3...v3.0.0) (2019-11-18)
 
-__Breaking Changes:__
-
-
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Added file specific icons for the Sample Apps.
 
 
-## v3.0.0-rc.3 [2019-11-14]
+## [3.0.0-rc.3](https://github.com/box/box-ios-sdk/compare/v3.0.0-rc.2...v3.0.0-rc.3) (2019-11-14)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - For Module methods that returned a collection of objects, changed from returning a PaginationIterator to returning a PagingIterator in a completion.
 - Modules are now automatically instantiated with the BoxClient object and no longer allow the client app to instantiate them 
@@ -126,7 +106,7 @@ __Breaking Changes:__
 - Fixed bug with exponential backoff and changed SDK configuration item "retryAfterTime" to "retryBaseInterval"
 
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - RetentionPolicyModule methods made public 
 - Added additional supporting types 
@@ -135,21 +115,21 @@ __New Features and Enhancements:__
 - Updated Sample Apps to use new PagingIterator responses 
 
 
-## v3.0.0-rc.2 [2019-10-30]
+## [3.0.0-rc.2](https://github.com/box/box-ios-sdk/compare/v3.0.0-rc.1...v3.0.0-rc.2) (2019-10-30)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Changed SDK errors from customValue enum cases to specific enum cases
 
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Added Xcode 11 + iOS 13 support to Travis CI
 
 
-## v3.0.0-rc.1 [2019-10-18]
+## [3.0.0-rc.1](https://github.com/box/box-ios-sdk/compare/v3.0.0-alpha.3...v3.0.0-rc.1)  (2019-10-18)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Changed TaskAssignment.resolutionState from String to new AssignmentState enum type
 - Changed Group.groupType from String to new GroupType enum type
@@ -167,7 +147,7 @@ __Breaking Changes:__
 - Temporarily removed progress closure for uploads and downloads
 
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Added Xcode 11 support (SDK builds still target iOS 11.0)
 - Removed AlamoFire dependency
@@ -192,14 +172,14 @@ __New Features and Enhancements:__
 - Improved structure and usability of Sample Apps
 
 
-## v3.0.0-alpha.3 [2019-08-29]
+## [3.0.0-alpha.3](https://github.com/box/box-ios-sdk/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2019-08-29)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Changed File Entry Container "entries" from optional to not optional
 
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Added support for Web Links
 - Added support for Trash endpoints
@@ -213,9 +193,9 @@ __New Features and Enhancements:__
 - Added KeychainTokenStore for OAuth2SampleApp
 
 
-## v3.0.0-alpha.2 [2019-08-08]
+## [3.0.0-alpha.2](https://github.com/box/box-ios-sdk/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2019-08-08)
 
-__Breaking Changes:__
+### ⚠ BREAKING CHANGES
 
 - Moved some constants to different namespaces:
     * `Box.rootFolder` is now `BoxSDK.Constants.rootFolder`
@@ -237,13 +217,13 @@ __Breaking Changes:__
   `Folder`
 
 
-__New Features and Enhancements:__
+### New Features and Enhancements
 
 - Added support for [token downscoping](./docs/usage/authentication.md#token-exchange)
 - Added a `KeychainTokenStore` implementation to enable persisting authentication state on the Keychain
 - The SDK now automatically clears the token store after destroying a client and revoking its tokens
 
 
-## v3.0.0-alpha.1 [2019-07-25]
+## [3.0.0-alpha.1] (2019-07-25)
 
 Initial beta release :tada:
