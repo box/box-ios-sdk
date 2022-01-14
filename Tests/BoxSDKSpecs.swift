@@ -55,13 +55,20 @@ class BoxSDKSpecs: QuickSpec {
 
                     expect(sdk.configuration.apiBaseURL).to(equal(BoxSDK.defaultConfiguration.apiBaseURL))
                     expect(sdk.configuration.uploadApiBaseURL).to(equal(BoxSDK.defaultConfiguration.uploadApiBaseURL))
+                    expect(sdk.configuration.oauth2AuthorizeURL).to(equal(BoxSDK.defaultConfiguration.oauth2AuthorizeURL))
+
+                    let apiBaseURL = "https://validapibaseurl.com"
+                    let uploadApiBaseURL = "https://validuploadapibaseurl.com"
+                    let oauth2AuthorizeURL = "https://validurl.com/oauth2/authorize"
 
                     expect { try sdk.updateConfiguration(
-                        apiBaseURL: URL(string: "https://validurl.com"),
-                        uploadApiBaseURL: URL(string: "https://validurl.com")
+                        apiBaseURL: URL(string: apiBaseURL),
+                        uploadApiBaseURL: URL(string: uploadApiBaseURL),
+                        oauth2AuthorizeURL: URL(string: oauth2AuthorizeURL)
                     ) }.toNot(throwError())
-                    expect(sdk.configuration.apiBaseURL).toNot(equal(BoxSDK.defaultConfiguration.apiBaseURL))
-                    expect(sdk.configuration.uploadApiBaseURL).toNot(equal(BoxSDK.defaultConfiguration.uploadApiBaseURL))
+                    expect(sdk.configuration.apiBaseURL).to(equal(URL(string: apiBaseURL)))
+                    expect(sdk.configuration.uploadApiBaseURL).to(equal(URL(string: uploadApiBaseURL)))
+                    expect(sdk.configuration.oauth2AuthorizeURL).to(equal(URL(string: oauth2AuthorizeURL)))
                 }
             }
 
