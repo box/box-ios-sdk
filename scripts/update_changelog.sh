@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 SECTION_HEADER_ARRAY=("⚠ BREAKING CHANGES") 
@@ -70,4 +70,4 @@ done < "${CHANGELOG_FILE_NAME}"
 
 # STEP 3.
 # Overwrite CHANGELOG.md file with fixed order of current release
-echo  "${OUTPUT}\c" > "${CHANGELOG_FILE_NAME}"
+echo -e "${OUTPUT}\c" > "${CHANGELOG_FILE_NAME}"
