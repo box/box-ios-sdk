@@ -27,7 +27,7 @@ file's contents, upload new versions, and perform other common file operations
 - [Get Shared Link](#get-shared-link)
 - [Set Shared Link](#set-shared-link)
 - [Remove Shared Link](#remove-shared-link)
-- [Get Representations](#get-representations)
+- [List Representations](#list-representations)
 - [Download Zip](#download-zip)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -471,10 +471,10 @@ Set Shared Link
 ---------------
 
 To add or update the shared link for a file, call
-[`client.files.setSharedLink(forFile:unsharedAt:access:password:canDownload:completion:)][set-shared-link]
+[`client.files.setSharedLink(forFile:unsharedAt:vanityName:access:password:canDownload:completion:)][set-shared-link]
 with the ID of the file and the shared link properties to set.
 
-<!-- sample put_files_id create_shared_link -->
+<!-- sample put_files_id_shared_link_create -->
 ```swift
 client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -486,7 +486,7 @@ client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<Sh
 }
 ```
 
-[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAA0fG6AccessOSgALySSGSgSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
+[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt10vanityName6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAMySSGSgAA0fG6AccessOSgATSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Remove Shared Link
 ------------------
@@ -495,7 +495,7 @@ To remove a file's shared link, call
 [`client.files.deleteSharedLink(forFile:completion:)`][delete-shared-link]
 with the ID of the file.
 
-<!-- sample put_files_id remove_shared_link -->
+<!-- sample put_files_id_shared_link_remove -->
 ```swift
 client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
