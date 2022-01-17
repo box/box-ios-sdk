@@ -17,7 +17,7 @@
     <a title="RetentionPoliciesModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.0.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.1.0 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -1471,7 +1471,163 @@ If query parameters are given, only the retention policies that match the query 
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Returns either a list of the retention policy assignments associated with the specified retention policy or an error.</p>
+                        <p>Returns a pagination iterator to fetch a list of the retention policy assignments associated with the specified retention policy.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC014listFilesUnderC13ForAssignment015retentionPolicyJ2Id5limit6markerAA14PagingIteratorCyAA4FileCGSS_SiSgSSSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listFilesUnderRetentionForAssignment(retentionPolicyAssignmentId:limit:marker:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC014listFilesUnderC13ForAssignment015retentionPolicyJ2Id5limit6markerAA14PagingIteratorCyAA4FileCGSS_SiSgSSSgtF">listFilesUnderRetentionForAssignment(retentionPolicyAssignmentId:<wbr>limit:<wbr>marker:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves all files under retention for a retention policy assignment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listFilesUnderRetentionForAssignment</span><span class="p">(</span>
+    <span class="n">retentionPolicyAssignmentId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/File.html">File</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>retentionPolicyAssignmentId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the retention policy assignment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return in a page.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a pagination iterator to fetch all files under retention.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC021listFileVersionsUnderC13ForAssignment015retentionPolicyK2Id5limit6markerAA14PagingIteratorCyAA0G0CGSS_SiSgSSSgtF"></a>
+                    <a name="//apple_ref/swift/Method/listFileVersionsUnderRetentionForAssignment(retentionPolicyAssignmentId:limit:marker:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC021listFileVersionsUnderC13ForAssignment015retentionPolicyK2Id5limit6markerAA14PagingIteratorCyAA0G0CGSS_SiSgSSSgtF">listFileVersionsUnderRetentionForAssignment(retentionPolicyAssignmentId:<wbr>limit:<wbr>marker:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves all file versions under retention placed in the file objects for a retention policy assignment .</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listFileVersionsUnderRetentionForAssignment</span><span class="p">(</span>
+    <span class="n">retentionPolicyAssignmentId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">marker</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PagingIterator.html">PagingIterator</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/File.html">File</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>retentionPolicyAssignmentId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the retention policy assignment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of items to return in a page.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>marker</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position marker at which to begin the response. See <a href="https://developer.box.com/reference#section-marker-based-paging">marker-based paging</a> for details.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a pagination iterator to fetch all file versions under retention .</p>
                       </div>
                     </section>
                   </div>
@@ -1481,7 +1637,7 @@ If query parameters are given, only the retention policies that match the query 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-28)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-01-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
