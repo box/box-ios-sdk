@@ -7,15 +7,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### New Features and Enhancements
 
-* adjust sample apps to PagingIterator changes ([#797](https://github.com/box/box-ios-sdk/issues/797)) ([2c7e8f4](https://github.com/box/box-ios-sdk/commit/2c7e8f422476fa187c312f5ab6e85b198bddbc94))
-* Allow to customize URL for the OAuth2 authorization page ([#811](https://github.com/box/box-ios-sdk/issues/811)) ([1901d29](https://github.com/box/box-ios-sdk/commit/1901d296a2be4b0f2eef25eda06928aebc81de9a))
-* **Events:** Add support for admin_logs_streaming stream type ([#800](https://github.com/box/box-ios-sdk/issues/800)) ([0a3118e](https://github.com/box/box-ios-sdk/commit/0a3118ef95c2eb42b0080d0352784849e85eb422))
+* Allow to customize URL for the `OAuth2` authorization page ([#811](https://github.com/box/box-ios-sdk/issues/811)) ([1901d29](https://github.com/box/box-ios-sdk/commit/1901d296a2be4b0f2eef25eda06928aebc81de9a))
+* **Events:** Add support for `admin_logs_streaming` stream type ([#800](https://github.com/box/box-ios-sdk/issues/800)) ([0a3118e](https://github.com/box/box-ios-sdk/commit/0a3118ef95c2eb42b0080d0352784849e85eb422))
 * **RetentionPolicy:** New API for get files and file versions under retention ([#807](https://github.com/box/box-ios-sdk/issues/807)) ([38327f0](https://github.com/box/box-ios-sdk/commit/38327f09a92dba7827e1866940a643d624757762))
-* **SharedLink:** add support for vanity_name ([#799](https://github.com/box/box-ios-sdk/issues/799)) ([3ea6eb2](https://github.com/box/box-ios-sdk/commit/3ea6eb2a1c2b713fd0769e93a2dc4ee51da695fd))
+* **SharedLink:** add support for `vanity_name` ([#799](https://github.com/box/box-ios-sdk/issues/799)) ([3ea6eb2](https://github.com/box/box-ios-sdk/commit/3ea6eb2a1c2b713fd0769e93a2dc4ee51da695fd))
 
 ### Bug Fixes
 
-* **SignRequest:** Fix encoding date_value to yyyy-mm-dd format in prefillTag ([#806](https://github.com/box/box-ios-sdk/issues/806)) ([4f902a4](https://github.com/box/box-ios-sdk/commit/4f902a47482de55ec69b5522e6cf5affd653b4c8))
+* **SignRequest:** Fix encoding `date_value` to `yyyy-mm-dd` format in `prefillTag` ([#806](https://github.com/box/box-ios-sdk/issues/806)) ([4f902a4](https://github.com/box/box-ios-sdk/commit/4f902a47482de55ec69b5522e6cf5affd653b4c8))
 
 ## [5.0.0](https://github.com/box/box-ios-sdk/compare/v4.4.0...v5.0.0) (2021-10-28)
 
