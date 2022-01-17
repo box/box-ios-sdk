@@ -426,6 +426,7 @@ public extension BoxSDK {
     /// - Parameters:
     ///   - apiBaseURL: Base URL for majority of the requests.
     ///   - uploadApiBaseURL: Base URL for upload requests. If not specified, default URL is used.
+    ///   - oauth2AuthorizeURL: URL for the OAuth2 authorization page, where users are redirected to enter their credentials
     ///   - maxRetryAttempts: Maximum number of request retries in case of error result. If not specified, default value 5 is used.
     ///   - tokenRefreshThreshold: Specifies how many seconds before token expires it shuld be refreshed.
     ///     If not specified, default value 60 seconds is used.
@@ -435,6 +436,7 @@ public extension BoxSDK {
     func updateConfiguration(
         apiBaseURL: URL? = nil,
         uploadApiBaseURL: URL? = nil,
+        oauth2AuthorizeURL: URL? = nil,
         maxRetryAttempts: Int? = nil,
         tokenRefreshThreshold: TimeInterval? = nil,
         consoleLogDestination: ConsoleLogDestination? = nil,
@@ -446,6 +448,7 @@ public extension BoxSDK {
             clientSecret: configuration.clientSecret,
             apiBaseURL: apiBaseURL,
             uploadApiBaseURL: uploadApiBaseURL,
+            oauth2AuthorizeURL: oauth2AuthorizeURL,
             maxRetryAttempts: maxRetryAttempts,
             tokenRefreshThreshold: tokenRefreshThreshold,
             consoleLogDestination: consoleLogDestination,

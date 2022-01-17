@@ -34,6 +34,11 @@ public class File: BoxModel {
     // MARK: - Properties
 
     public private(set) var rawData: [String: Any]
+    /// This alt resoure type is a workaround for a bug in the  API.
+    /// According to documentation https://developer.box.com/reference/get-retention-policy-assignments-id-file-versions-under-retention/
+    /// the API shold return a list of files with file versions.  But the `type` field in outer item is `file_version` instead of `file` what is a bug.
+    /// So to fix that we need to treat `file_version` as a `file` in this particular case.
+    private static var alternativeResourceType: String = "file_version"
     private static var resourceType: String = "file"
     /// Box item type
     public var type: String
@@ -125,8 +130,8 @@ public class File: BoxModel {
             throw BoxCodingError(message: .typeMismatch(key: "type"))
         }
 
-        guard itemType == File.resourceType else {
-            throw BoxCodingError(message: .valueMismatch(key: "type", value: itemType, acceptedValues: [File.resourceType]))
+        guard [File.resourceType, File.alternativeResourceType].contains(itemType) else {
+            throw BoxCodingError(message: .valueMismatch(key: "type", value: itemType, acceptedValues: [File.resourceType, File.alternativeResourceType]))
         }
 
         rawData = json

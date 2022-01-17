@@ -71,6 +71,7 @@ public struct BoxSDKConfiguration {
     ///   - clientSecret: The client secret of the application requesting authentication.
     ///   - apiBaseURL: Base URL for majority of the requests.
     ///   - uploadApiBaseURL: Base URL for upload requests
+    ///   - oauth2AuthorizeURL: URL for the OAuth2 authorization page, where users are redirected to enter their credentials
     ///   - maxRetryAttempts: Base URL for file upload requests.
     ///   - tokenRefreshThreshold: Specifies how long before token expiration date it should be refreshed.
     ///   - retryBaseInterval: The base factor used in calculating exponential backoff delay for retries

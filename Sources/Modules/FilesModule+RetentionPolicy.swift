@@ -43,6 +43,7 @@ public extension FilesModule {
     ///     (https://developer.box.com/reference#section-marker-based-paging) for details.
     /// - Returns: Returns either the list of all file version retentions for the enterprise or an error.
     ///     If optional parameters are given, only the file version retentions that match the query parameters are returned.
+    @available(*, deprecated, message: "Please use RetentionPoliciesModule#listFilesUnderRetentionForAssignment(retentionPolicyAssignmentId:limit:marker) instead.")
     func listVersionRetentions(
         fileId: String? = nil,
         fileVersionId: String? = nil,
