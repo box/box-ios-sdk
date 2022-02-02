@@ -37,6 +37,7 @@ class FileSpecs: QuickSpec {
                         expect(file.extension).to(equal("js"))
                         expect(file.description).to(equal("My test script"))
                         expect(file.size).to(equal(33510))
+                        expect(file.dispositionAt?.iso8601).to(equal("2018-03-12T19:55:26Z"))
 
                         guard let pathCollection = file.pathCollection else {
                             fail("Expected path collection to be present")

@@ -368,8 +368,12 @@ class FilesModuleSpecs: QuickSpec {
 
             describe("update()") {
                 it("should make API call to update info of the file and produce file model when API call succeeds") {
+                    let dispositionDate = "2012-12-12T19:55:26Z".iso8601!
+
                     stub(
-                        condition: isHost("api.box.com") && isPath("/2.0/files/5000948880") && isMethodPUT()
+                        condition: isHost("api.box.com") && isPath("/2.0/files/5000948880")
+                            && containsQueryParams(["fields": "disposition_at,shared_link,created_by"])
+                            && isMethodPUT()
                             && hasJsonBody([
                                 "name": "hello.jpg",
                                 "parent": [
@@ -379,7 +383,8 @@ class FilesModuleSpecs: QuickSpec {
                                     "access": "open",
                                     "permissions": ["can_download": true],
                                     "password": "password"
-                                ]
+                                ],
+                                "disposition_at": dispositionDate.iso8601
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -389,7 +394,16 @@ class FilesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.files.update(fileId: "5000948880", name: "hello.jpg", description: nil, parentId: "0", sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true)), tags: nil) { result in
+                        self.sut.files.update(
+                            fileId: "5000948880",
+                            name: "hello.jpg",
+                            description: nil,
+                            parentId: "0",
+                            sharedLink: .value(SharedLinkData(access: .open, password: .value("password"), canDownload: true)),
+                            tags: nil,
+                            dispositionAt: dispositionDate,
+                            fields: ["disposition_at", "shared_link", "created_by"]
+                        ) { result in
                             switch result {
                             case let .success(file):
                                 expect(file).toNot(beNil())
@@ -398,6 +412,7 @@ class FilesModuleSpecs: QuickSpec {
                                 expect(file.name).to(equal("testfile.jpg"))
                                 expect(file.description).to(equal("Test File"))
                                 expect(file.size).to(equal(629_644))
+                                expect(file.dispositionAt?.iso8601).to(equal(dispositionDate.iso8601))
                                 expect(file.createdBy).to(beAKindOf(User.self))
                                 expect(file.createdBy?.name).to(equal("Test User"))
                                 expect(file.createdBy?.login).to(equal("testuser@example.com"))

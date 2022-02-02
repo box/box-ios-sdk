@@ -133,6 +133,7 @@ public class FilesModule {
     ///   - lock: Defines a lock on an item.
     ///     This prevents the item from being moved, renamed, or otherwise changed by anyone other than the user who created the lock.
     ///     Set this to null to remove the lock.
+    ///   - dispositionAt: The retention expiration timestamp for the given file. This date cannot be shortened once set on a file.
     ///   - ifMatch: This is in the ‘etag’ field of the file object, which can be included to prevent race conditions.
     ///   - fields: String array of [fields](https://developer.box.com/reference#fields) to
     ///     include in the response.  Any attribute in the full
@@ -150,6 +151,7 @@ public class FilesModule {
         tags: [String]? = nil,
         collections: [String]? = nil,
         lock: NullableParameter<LockData>? = nil,
+        dispositionAt: Date? = nil,
         ifMatch: String? = nil,
         fields: [String]? = nil,
         completion: @escaping Callback<File>
@@ -187,6 +189,10 @@ public class FilesModule {
             case let .value(lockValue):
                 body["lock"] = lockValue.bodyDict
             }
+        }
+
+        if let unwrappedDispositionAt = dispositionAt {
+            body["disposition_at"] = unwrappedDispositionAt.iso8601
         }
 
         boxClient.put(
