@@ -58,7 +58,7 @@ Update File
 -----------
 
 To update a file record, call
-[`client.files.updateFileInfo(fileId:name:description:parentId:sharedLink:tags:collections:lock:ifMatch:fields:completion:)`][update-file]
+[`client.files.updateFileInfo(fileId:name:description:parentId:sharedLink:tags:collections:lock:dispositionAt:ifMatch:fields:completion:)`][update-file]
 with the ID of the file to update and the properties to update.
 
 <!-- sample put_files_id -->
@@ -73,7 +73,7 @@ client.files.update(fileId: "11111", name: "New file name.docx") { (result: Resu
 }
 ```
 
-[update-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock7ifMatch6fields10completionySS_SSSgA2pA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAxRyAA04LockW0VGSgApXys6ResultOyAA4FileCAA0A8SDKErrorCGctF
+[update-file]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC6update6fileId4name11description06parentG010sharedLink4tags11collections4lock13dispositionAt7ifMatch6fields10completionySS_SSSgA2qA17NullableParameterOyAA06SharedL4DataVGSgSaySSGSgAySyAA04LockY0VGSg10Foundation4DateVSgAqYys6ResultOyAA4FileCAA0A8SDKErrorCGctF
 
 Upload File
 -----------
