@@ -119,6 +119,8 @@ public class File: BoxModel {
     public let representations: EntryContainerInnerModel<FileRepresentation>?
     /// Details about the classification applied to a Box file
     public let classification: Classification?
+    /// The retention expiration timestamp for the given file
+    public let dispositionAt: Date?
 
     /// Initializer.
     ///
@@ -175,5 +177,6 @@ public class File: BoxModel {
         representations = try BoxJSONDecoder.optionalDecode(json: json, forKey: "representations")
         collections = json["collections"] as? [[String: String]]
         classification = try BoxJSONDecoder.optionalDecode(json: json, forKey: "classification")
+        dispositionAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "disposition_at")
     }
 }

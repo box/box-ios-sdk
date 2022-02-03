@@ -11,6 +11,10 @@ import Foundation
 final class NameGenerator {
     private static let prefix = "iOS_SDK"
 
+    static func getUniqueName(for scope: String) -> String {
+        return "\(prefix)_\(scope)_\(UUID().uuidString)"
+    }
+
     static func getUniqueFolderName(for scope: String = "test") -> String {
         return "\(prefix)_\(scope)_\(UUID().uuidString)"
     }

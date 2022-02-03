@@ -414,49 +414,97 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 }
             }
 
-            context("update") {
-                var file: File?
-                var destinationFolder: Folder?
+            describe("update") {
 
-                beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
-                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in destinationFolder = createdFolder }
-                }
+                context("basic fields") {
+                    var file: File?
+                    var destinationFolder: Folder?
 
-                afterEach {
-                    self.deleteFile(file)
-                    self.deleteFolder(destinationFolder)
-                }
-
-                it("should correctly update file") {
-                    guard let file = file, let destinationFolder = destinationFolder else {
-                        fail("An error occurred during setup initial data")
-                        return
+                    beforeEach {
+                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                        self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in destinationFolder = createdFolder }
                     }
 
-                    let changedFileName = NameGenerator.getUniqueFileName()
+                    afterEach {
+                        self.deleteFile(file)
+                        self.deleteFolder(destinationFolder)
+                    }
 
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.update(
-                            fileId: file.id,
-                            name: changedFileName,
-                            description: "sample description",
-                            parentId: destinationFolder.id,
-                            tags: ["sample tag 1"],
-                            fields: ["name", "description", "tags", "parent"]
-                        ) { result in
-                            switch result {
-                            case let .success(fileItem):
-                                expect(fileItem.id).to(equal(file.id))
-                                expect(fileItem.parent?.id).to(equal(destinationFolder.id))
-                                expect(fileItem.name).to(equal(changedFileName))
-                                expect(fileItem.description).to(equal("sample description"))
-                                expect(fileItem.tags?[0]).to(equal("sample tag 1"))
-                            case let .failure(error):
-                                fail("Expected update call to suceeded, but instead got \(error)")
+                    it("should correctly update file") {
+                        guard let file = file, let destinationFolder = destinationFolder else {
+                            fail("An error occurred during setup initial data")
+                            return
+                        }
+
+                        let changedFileName = NameGenerator.getUniqueFileName()
+
+                        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                            self.client.files.update(
+                                fileId: file.id,
+                                name: changedFileName,
+                                description: "sample description",
+                                parentId: destinationFolder.id,
+                                tags: ["sample tag 1"],
+                                fields: ["name", "description", "tags", "parent"]
+                            ) { result in
+                                switch result {
+                                case let .success(fileItem):
+                                    expect(fileItem.id).to(equal(file.id))
+                                    expect(fileItem.parent?.id).to(equal(destinationFolder.id))
+                                    expect(fileItem.name).to(equal(changedFileName))
+                                    expect(fileItem.description).to(equal("sample description"))
+                                    expect(fileItem.tags?[0]).to(equal("sample tag 1"))
+                                case let .failure(error):
+                                    fail("Expected update call to suceeded, but instead got \(error)")
+                                }
+
+                                done()
                             }
+                        }
+                    }
+                }
 
-                            done()
+                context("disposition_at field") {
+                    var folder: Folder?
+                    var file: File?
+                    var retentionPolicy: RetentionPolicy?
+
+                    beforeEach {
+                        self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
+                        self.createRetention(name: NameGenerator.getUniqueName(for: "retention")) { createdRetention in retentionPolicy = createdRetention }
+                        self.assignRetention(retentionPolicy, assignedContentId: folder?.id) { _ in }
+                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: folder?.id) { uploadedFile in file = uploadedFile }
+                    }
+
+                    afterEach {
+                        self.retireRetention(retentionPolicy)
+                        self.deleteFolder(folder, recursive: true)
+                    }
+
+                    it("should correctly update file") {
+                        guard let file = file else {
+                            fail("An error occurred during setup initial data")
+                            return
+                        }
+
+                        let changeDispositionDate = Date.now.addDays(2)
+
+                        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                            self.client.files.update(
+                                fileId: file.id,
+                                dispositionAt: changeDispositionDate,
+                                fields: ["disposition_at"]
+                            ) { result in
+                                switch result {
+                                case let .success(fileItem):
+                                    expect(fileItem.id).to(equal(file.id))
+                                    expect(fileItem.dispositionAt?.iso8601).to(equal(changeDispositionDate.iso8601))
+                                case let .failure(error):
+                                    fail("Expected update call to suceeded, but instead got \(error)")
+                                }
+
+                                done()
+                            }
                         }
                     }
                 }
