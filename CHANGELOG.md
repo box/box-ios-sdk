@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/box/box-ios-sdk/compare/v5.1.0...v5.2.0) (2022-02-15)
+
+
+### New Features and Enhancements
+
+* Add `disposition_at` field to the `File` object ([#814](https://github.com/box/box-ios-sdk/issues/814)) ([3c90df0](https://github.com/box/box-ios-sdk/commit/3c90df038b9f490a9d38af85404fa1d6ddcd5d0d))
+
 ## [5.1.0](https://github.com/box/box-ios-sdk/compare/v5.0.0...v5.1.0) (2022-01-17)
 
 
