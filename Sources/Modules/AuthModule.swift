@@ -41,12 +41,14 @@ public protocol TokenRefreshing {
 /// Provides [Token](../Structs/Token.html) management.
 public class AuthModule: TokenRefreshing {
     /// Required for communicating with Box APIs.
-    private var networkAgent: NetworkAgentProtocol
-    private var configuration: BoxSDKConfiguration
+    private(set) var networkAgent: NetworkAgentProtocol
+    private(set) var configuration: BoxSDKConfiguration
 
     /// Initializer
     ///
-    /// - Parameter networkAgent: Provides network communication with the Box APIs.
+    /// - Parameters:
+    ///   - networkAgent: Provides network communication with the Box APIs.
+    ///   - configuration: Provides parameters to makes API calls in order to tailor it to their application's specific needs
     init(networkAgent: NetworkAgentProtocol, configuration: BoxSDKConfiguration) {
         self.networkAgent = networkAgent
         self.configuration = configuration
@@ -149,6 +151,76 @@ public class AuthModule: TokenRefreshing {
         if let unwrappedSharedLink = sharedLink {
             params["box_shared_link"] = unwrappedSharedLink
         }
+
+        networkAgent.send(
+            request: BoxRequest(
+                httpMethod: HTTPMethod.post,
+                url: URL.boxAPIEndpoint("oauth2/token", configuration: configuration),
+                body: .urlencodedForm(params)
+            ),
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+}
+
+/// Provides management for Client Credentials Grant authentication.
+public class CCGAuthModule: AuthModule {
+
+    /// The type of CCG connection, either user with userId or application service with enterpriseId.
+    public enum CCGConnectionType {
+        /// User connection type with associated userId
+        case user(String)
+        /// Application service connection type with associated enterpriseId
+        case applicationService(String)
+
+        /// A`box_subject_type` used in requesting CCG access token
+        var subjectType: String {
+            switch self {
+            case .user:
+                return "user"
+            case .applicationService:
+                return "enterprise"
+            }
+        }
+
+        /// A `box_subject_id` used in requesting CCG access token
+        var subjectId: String {
+            switch self {
+            case let .user(id):
+                return id
+            case let .applicationService(id):
+                return id
+            }
+        }
+    }
+
+    /// The type of CCG connection, either user with userId or application service with enterpriseId.
+    private let connectionType: CCGConnectionType
+
+    /// Initializer
+    ///
+    /// - Parameters:
+    ///   - connectionType: The type of CCG connection, either user with userId or application service with enterpriseId.
+    ///   - networkAgent: Provides network communication with the Box APIs.
+    ///   - configuration: Provides parameters to makes API calls in order to tailor it to their application's specific needs
+    init(connectionType: CCGConnectionType, networkAgent: NetworkAgentProtocol, configuration: BoxSDKConfiguration) {
+        self.connectionType = connectionType
+        super.init(networkAgent: networkAgent, configuration: configuration)
+    }
+
+    /// Get CCG access token
+    ///
+    /// - Parameters:
+    ///   - completion: Returns the token data or an error.
+    public func getCCGToken(completion: @escaping TokenInfoClosure) {
+
+        let params = [
+            "grant_type": "client_credentials",
+            "client_id": configuration.clientId,
+            "client_secret": configuration.clientSecret,
+            "box_subject_id": connectionType.subjectId,
+            "box_subject_type": connectionType.subjectType
+        ]
 
         networkAgent.send(
             request: BoxRequest(

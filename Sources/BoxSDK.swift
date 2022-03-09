@@ -61,6 +61,8 @@ public class BoxSDK {
         auth = AuthModule(networkAgent: networkAgent, configuration: configuration)
     }
 
+    // MARK: - Developer Token Client
+
     /// Creates BoxClient object based on developer token
     ///
     /// - Parameter token: Developer token
@@ -84,6 +86,8 @@ public class BoxSDK {
     public func getClient(token: String) -> BoxClient {
         return BoxClient(networkAgent: networkAgent, session: SingleTokenSession(token: token, authModule: auth), configuration: configuration)
     }
+
+    // MARK: - JWT Client
 
     /// Creates BoxClient using JWT token.
     ///
@@ -171,6 +175,113 @@ public class BoxSDK {
             completion(.success(client))
         }
     }
+
+    // MARK: - CCG Client
+
+    /// Creates BoxClient using Server Authentication with Client Credentials Grant
+    ///
+    /// - Parameters:
+    ///   - enterpriseId: The enterprise ID to use when getting the access token.
+    ///   - tokenInfo: Information about token
+    ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
+    ///   - completion: Returns standard BoxClient object or error.
+    public func getCCGClientForAccountService(
+        enterpriseId: String,
+        tokenInfo: TokenInfo? = nil,
+        tokenStore: TokenStore? = nil,
+        completion: @escaping Callback<BoxClient>
+    ) {
+        getCCGClinet(
+            connectionType: CCGAuthModule.CCGConnectionType.applicationService(enterpriseId),
+            tokenInfo: tokenInfo,
+            tokenStore: tokenStore,
+            completion: completion
+        )
+    }
+
+    /// Creates BoxClient using Server Authentication with Client Credentials Grant
+    ///
+    /// - Parameters:
+    ///   - userId: The user ID to use when getting the access token.
+    ///   - tokenInfo: Information about token
+    ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
+    ///   - completion: Returns standard BoxClient object or error.
+    public func getCCGClientForUser(
+        userId: String,
+        tokenInfo: TokenInfo? = nil,
+        tokenStore: TokenStore? = nil,
+        completion: @escaping Callback<BoxClient>
+    ) {
+        getCCGClinet(
+            connectionType: CCGAuthModule.CCGConnectionType.user(userId),
+            tokenInfo: tokenInfo,
+            tokenStore: tokenStore,
+            completion: completion
+        )
+    }
+
+    /// Creates BoxClient using Server Authentication with Client Credentials Grant
+    ///
+    /// - Parameters:
+    ///   - connectionType: The type of CCG connection, either user with userId or application service with enterpriseId.
+    ///   - tokenInfo: Information about token
+    ///   - tokenStore: Custom token store. To use custom store, implement TokenStore protocol.
+    ///   - completion: Returns standard BoxClient object or error.
+    private func getCCGClinet(
+        connectionType: CCGAuthModule.CCGConnectionType,
+        tokenInfo: TokenInfo? = nil,
+        tokenStore: TokenStore? = nil,
+        completion: @escaping Callback<BoxClient>
+    ) {
+        var designatedTokenStore: TokenStore
+        let authModule = CCGAuthModule(connectionType: connectionType, networkAgent: networkAgent, configuration: configuration)
+
+        if tokenInfo == nil, let unWrappedTokenStore = tokenStore {
+            designatedTokenStore = unWrappedTokenStore
+            designatedTokenStore.read { [weak self] result in
+                guard let self = self else {
+                    completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get CCG client - BoxSDK deallocated"))))
+                    return
+                }
+
+                switch result {
+                case let .success(tokenInfo):
+                    let session = CCGAuthSession(authModule: authModule, configuration: self.configuration, tokenInfo: tokenInfo, tokenStore: designatedTokenStore)
+                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                    completion(.success(client))
+                case .failure:
+                    let session = CCGAuthSession(authModule: authModule, configuration: self.configuration, tokenInfo: tokenInfo, tokenStore: designatedTokenStore)
+                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                    completion(.success(client))
+                }
+            }
+        }
+        else if let tokenInfo = tokenInfo {
+            designatedTokenStore = tokenStore ?? MemoryTokenStore()
+            designatedTokenStore.write(tokenInfo: tokenInfo) { [weak self] result in
+                guard let self = self else {
+                    completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get CCG client - BoxSDK deallocated"))))
+                    return
+                }
+                switch result {
+                case .success:
+                    let session = CCGAuthSession(authModule: authModule, configuration: self.configuration, tokenInfo: tokenInfo, tokenStore: designatedTokenStore)
+                    let client = BoxClient(networkAgent: self.networkAgent, session: session, configuration: self.configuration)
+                    completion(.success(client))
+                case let .failure(error):
+                    completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure, error: error)))
+                }
+            }
+        }
+        else {
+            designatedTokenStore = MemoryTokenStore()
+            let session = CCGAuthSession(authModule: authModule, configuration: configuration, tokenInfo: tokenInfo, tokenStore: designatedTokenStore)
+            let client = BoxClient(networkAgent: networkAgent, session: session, configuration: configuration)
+            completion(.success(client))
+        }
+    }
+
+    // MARK: - OAUTH2 Client
 
     #if os(iOS)
         /// Creates BoxClient in a completion with OAuth 2.0 type of authentication

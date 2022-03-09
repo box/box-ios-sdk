@@ -333,6 +333,177 @@ class BoxSDKSpecs: QuickSpec {
             }
         }
 
+        context("User is able to get a CCG client with a provided token info") {
+            it("should initialize user client with provided token info when token info is passed in") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
+                var client: BoxClient?
+                waitUntil(timeout: .seconds(10)) { done in
+                    sdk.getCCGClientForUser(userId: "654321", tokenInfo: tokenInfo) { result in
+                        switch result {
+                        case let .success(ccgClient):
+                            client = ccgClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal(tokenInfo.accessToken))
+                                case let .failure(error):
+                                    fail("getCCGClientForUser should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForUser should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+
+            it("should initialize account service client with provided token info when token info is passed in") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
+                var client: BoxClient?
+                waitUntil(timeout: .seconds(10)) { done in
+                    sdk.getCCGClientForAccountService(enterpriseId: "987654321", tokenInfo: tokenInfo) { result in
+                        switch result {
+                        case let .success(ccgClient):
+                            client = ccgClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal(tokenInfo.accessToken))
+                                case let .failure(error):
+                                    fail("getCCGClientForUser should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForUser should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+        }
+
+        context("User is able to get a CCG client with a provided TokenStore") {
+            it("should initialize user client with provided TokenStore and valid tokenInfo on it") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                var client: BoxClient?
+                let tokenStore = TestTokenStore(shouldFail: false)
+                let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
+                tokenStore.write(tokenInfo: tokenInfo) { _ in }
+                waitUntil(timeout: .seconds(10)) { done in
+                    sdk.getCCGClientForUser(userId: "654321", tokenStore: tokenStore) { result in
+                        switch result {
+                        case let .success(ouathClient):
+                            client = ouathClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal(tokenInfo.accessToken))
+                                case let .failure(error):
+                                    fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+
+            it("should initialize account service client with provided TokenStore and valid tokenInfo on it") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                var client: BoxClient?
+                let tokenStore = TestTokenStore(shouldFail: false)
+                let tokenInfo = TokenInfo(accessToken: "a valid token", refreshToken: "a valid refresh token", expiresIn: 3600, tokenType: "bearer")
+                tokenStore.write(tokenInfo: tokenInfo) { _ in }
+                waitUntil(timeout: .seconds(10)) { done in
+                    sdk.getCCGClientForAccountService(enterpriseId: "987654321", tokenStore: tokenStore) { result in
+                        switch result {
+                        case let .success(ouathClient):
+                            client = ouathClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal(tokenInfo.accessToken))
+                                case let .failure(error):
+                                    fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+        }
+
+        context("User is able to get a CCG client without provide TokenStore nor TokenInfo") {
+            beforeEach {
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/oauth2/token")
+                        && isMethodPOST()
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                        statusCode: 200, headers: ["Content-Type": "application/json"]
+                    )
+                }
+            }
+
+            it("should get a new client for user and fetch valid access token") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                var client: BoxClient?
+                waitUntil(timeout: .seconds(1)) { done in
+                    sdk.getCCGClientForUser(userId: "654321") { result in
+                        switch result {
+                        case let .success(ouathClient):
+                            client = ouathClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
+                                case let .failure(error):
+                                    fail("getCCGClientForUser should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForUser should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+
+            it("should get a new client for account service and fetch valid access token") {
+                let sdk = BoxSDK(clientId: "1234567", clientSecret: "abcdef")
+                var client: BoxClient?
+                waitUntil(timeout: .seconds(1)) { done in
+                    sdk.getCCGClientForAccountService(enterpriseId: "987654321") { result in
+                        switch result {
+                        case let .success(ouathClient):
+                            client = ouathClient
+                            client?.session.getAccessToken { result in
+                                switch result {
+                                case let .success(token):
+                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
+                                case let .failure(error):
+                                    fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                                }
+                                done()
+                            }
+                        case let .failure(error):
+                            fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                        }
+                    }
+                }
+            }
+        }
+
         describe("makeAuthorizeURL()") {
             context("specifying all optional parameters") {
                 it("should get a new client after the web flow") {
