@@ -178,7 +178,7 @@ public class BoxSDK {
 
     // MARK: - CCG Client
 
-    /// Creates BoxClient using Server Authentication with Client Credentials Grant
+    /// Creates BoxClient using Server Authentication with Client Credentials Grant for account service
     ///
     /// - Parameters:
     ///   - enterpriseId: The enterprise ID to use when getting the access token.
@@ -199,7 +199,7 @@ public class BoxSDK {
         )
     }
 
-    /// Creates BoxClient using Server Authentication with Client Credentials Grant
+    /// Creates BoxClient using Server Authentication with Client Credentials Grant for user account
     ///
     /// - Parameters:
     ///   - userId: The user ID to use when getting the access token.
