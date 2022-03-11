@@ -216,7 +216,7 @@ __Step 5__: Run the sample app
 
 
 ## Versions
-We use a modified version of [Semantic Versioning](https://semver.org/) for all changes. See [versions](VERSIONS.md) for details.
+We use a modified version of [Semantic Versioning](https://semver.org/) for all changes.See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022. 
 
 ### Supported Version
 
@@ -229,7 +229,7 @@ A current release is on the leading edge of our SDK development, and is intended
 | Version | Current Patch/Minor | Supported Environments                                  | State     | First Release | EOL/Terminated |
 |---------|---------------------|---------------------------------------------------------|-----------|---------------|----------------|
 | 5       | 5.1.0               | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
-| 4       | 4.4.0               |                                                         | EOL       | 13 Feb 2020   | 30 July 2022   |
+| 4       | 4.4.0               |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
 | 3       | 3.1.0               |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
 
 
