@@ -9,6 +9,9 @@ Authentication
   - [Developer Token](#developer-token)
   - [Server Auth with JWT](#server-auth-with-jwt)
   - [Traditional 3-Legged OAuth2](#traditional-3-legged-oauth2)
+  - [Client Credentials Grant](#client-credentials-grant)
+    - [Obtaining Service Account token](#obtaining-service-account-token)
+    - [Obtaining User token](#obtaining-user-token)
 - [Token Store](#token-store)
 - [As-User](#as-user)
 - [Token Exchange](#token-exchange)
@@ -116,6 +119,53 @@ import BoxSDK
 
 let sdk = BoxSDK(clientId: "YOUR CLIENT ID HERE", clientSecret: "YOUR CLIENT SECRET HERE", callbackURL: "YOUR CALLBACK URL HERE")
 sdk.getOAuth2Client() { result in
+    switch result {
+    case let .success(client):
+        // Use client to make API calls
+    case let .failure(error):
+        // Handle error creating client
+    }
+}
+```
+
+### Client Credentials Grant
+
+Server auth with CCG allows you to obtain an access token by having client credentials and secret with enterprise or user ID,
+which allows you to work using service or user account. Obtained token is valid for specified amount of time and it will be refreshed automatically by default. A detailed guide for
+this process is available in the [Setup with Client Credentials Grant](https://developer.box.com/guides/authentication/client-credentials/client-credentials-setup/).
+
+#### Obtaining Service Account token
+
+By default, your application has a [Service Account](https://developer.box.com/guides/getting-started/user-types/service-account/) that represents it and can perform API calls. The Service Account is separate from the Box accounts of the application developer and the enterprise admin of any enterprise that has authorized the app — files stored in that account are not accessible in any other account by default, and vice versa.
+To obtain service account you will have to provide enterprise ID:
+
+<!-- sample x_auth with_client_credentials -->
+```swift
+import BoxSDK
+
+let sdk = BoxSDK(clientId: "YOUR CLIENT ID HERE", clientSecret: "YOUR CLIENT SECRET HERE")
+sdk.getCCGClientForAccountService(enterpriseId: "YOUR ENTERPRISE ID HERE") { result in
+    switch result {
+    case let .success(client):
+        // Use client to make API calls
+    case let .failure(error):
+        // Handle error creating client
+    }
+}
+```
+
+Remember that you can still make calls on behalf of managed users, which are part of your enterprise, by using
+[As-User](#as-user) behavior.
+
+#### Obtaining User token
+
+To obtain client for making calls as an App User or Managed User you will have to provide user ID:
+
+```swift
+import BoxSDK
+
+let sdk = BoxSDK(clientId: "YOUR CLIENT ID HERE", clientSecret: "YOUR CLIENT SECRET HERE")
+sdk.getCCGClientForUser(userId: "YOUR USER ID HERE") { result in
     switch result {
     case let .success(client):
         // Use client to make API calls
