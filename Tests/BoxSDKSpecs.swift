@@ -373,12 +373,12 @@ class BoxSDKSpecs: QuickSpec {
                                 case let .success(token):
                                     expect(token).to(equal(tokenInfo.accessToken))
                                 case let .failure(error):
-                                    fail("getCCGClientForUser should succeed, but instead got \(error)")
+                                    fail("getCCGClientForAccountService should succeed, but instead got \(error)")
                                 }
                                 done()
                             }
                         case let .failure(error):
-                            fail("getCCGClientForUser should succeed, but instead got \(error)")
+                            fail("getCCGClientForAccountService should succeed, but instead got \(error)")
                         }
                     }
                 }
@@ -402,12 +402,12 @@ class BoxSDKSpecs: QuickSpec {
                                 case let .success(token):
                                     expect(token).to(equal(tokenInfo.accessToken))
                                 case let .failure(error):
-                                    fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                                    fail("getCCGClientForUser should succeed, but instead got \(error)")
                                 }
                                 done()
                             }
                         case let .failure(error):
-                            fail("getCCGClientForAccountService should succeed, but instead got \(error)")
+                            fail("getCCGClientForUser should succeed, but instead got \(error)")
                         }
                     }
                 }
