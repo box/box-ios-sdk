@@ -216,13 +216,14 @@ __Step 5__: Run the sample app
 
 
 ## Versions
-We use a modified version of [Semantic Versioning](https://semver.org/) for all changes.See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022. 
+
+We use a modified version of [Semantic Versioning](https://semver.org/) for all changes. See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022.
 
 ### Supported Version
 
 Only the current MAJOR version of SDK is supported. New features, functionality, bug fixes, and security updates will only be added to the current MAJOR version.
 
-A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a minor or path release cadence of 2-3 months. At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
+A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
 
 ### Version schedule
 
@@ -231,8 +232,6 @@ A current release is on the leading edge of our SDK development, and is intended
 | 5       | 5.1.0               | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
 | 4       | 4.4.0               |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
 | 3       | 3.1.0               |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
-
-
 
 
 Copyright and License
