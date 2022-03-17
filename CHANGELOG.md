@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/box/box-ios-sdk/compare/v5.1.0...v5.2.0) (2022-03-17)
+
+
+### New Features and Enhancements
+
+* Add `disposition_at` field to the `File` object ([#814](https://github.com/box/box-ios-sdk/issues/814)) ([3c90df0](https://github.com/box/box-ios-sdk/commit/3c90df038b9f490a9d38af85404fa1d6ddcd5d0d))
+* Add support for Client Credentials Grant authentication method ([#821](https://github.com/box/box-ios-sdk/issues/821)) ([f6d7542](https://github.com/box/box-ios-sdk/commit/f6d75424e8c0d91517e3ffb8df67f77ad3f2374b))
+
 ## [5.1.0](https://github.com/box/box-ios-sdk/compare/v5.0.0...v5.1.0) (2022-01-17)
 
 
