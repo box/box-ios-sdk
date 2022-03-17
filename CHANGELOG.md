@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## [5.2.0](https://github.com/box/box-ios-sdk/compare/v5.1.0...v5.2.0) (2022-03-17)
-
+ 
 
 ### New Features and Enhancements
 
