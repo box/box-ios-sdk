@@ -53,6 +53,8 @@ public enum BoxSDKErrorEnum: BoxEnum {
     case expiredToken
     /// Authorization with JWT token failed
     case jwtAuthError
+    /// Authorization with CCG token failed
+    case ccgAuthError
     /// Couldn't create paging iterable for non-paged response
     case nonIterableResponse
     /// The end of the list was reached
@@ -141,6 +143,8 @@ public enum BoxSDKErrorEnum: BoxEnum {
             return "Access token has expired"
         case .jwtAuthError:
             return "Authorization with JWT token failed"
+        case .ccgAuthError:
+            return "Client Credentials Grant authorization failed"
         case .nonIterableResponse:
             return "Could not create paging iterable for non-paged response"
         case .endOfList:
