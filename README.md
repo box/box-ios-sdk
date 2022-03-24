@@ -227,11 +227,11 @@ A current release is on the leading edge of our SDK development, and is intended
 
 ### Version schedule
 
-| Version | Current Patch/Minor | Supported Environments                                  | State     | First Release | EOL/Terminated |
-|---------|---------------------|---------------------------------------------------------|-----------|---------------|----------------|
-| 5       | 5.1.0               | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
-| 4       | 4.4.0               |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
-| 3       | 3.1.0               |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
+| Version | Supported Environments                                  | State     | First Release | EOL/Terminated |
+|---------|---------------------------------------------------------|-----------|---------------|----------------|
+| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
+| 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
+| 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
 
 
 Copyright and License
