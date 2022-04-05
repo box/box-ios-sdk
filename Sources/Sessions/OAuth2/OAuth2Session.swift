@@ -50,6 +50,9 @@ public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
         }
     }
 
+    /// Handles token expiration.
+    ///
+    /// - Parameter completion: Returns either empty result representing success or error.
     public func handleExpiredToken(completion: @escaping Callback<Void>) {
         tokenStore.clear { result in
             switch result {

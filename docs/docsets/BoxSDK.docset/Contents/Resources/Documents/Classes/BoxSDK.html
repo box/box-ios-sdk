@@ -17,7 +17,7 @@
     <a title="BoxSDK Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.1.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.2.0 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -85,6 +85,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CCGAuthModule.html">CCGAuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CCGAuthModule/CCGConnectionType.html">– CCGConnectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CCGAuthSession.html">CCGAuthSession</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Classification.html">Classification</a>
@@ -1004,6 +1013,19 @@ If not specified, the default URL is used, in the format of <code>boxsdk-CLIENTI
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Developer%20Token%20Client"></a>
+                <a name="//apple_ref/swift/Section/Developer Token Client" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Developer%20Token%20Client"></a>
+                  <h3 class="section-name"><span>Developer Token Client</span>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1104,6 +1126,19 @@ If not specified, the default URL is used, in the format of <code>boxsdk-CLIENTI
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/JWT%20Client"></a>
+                <a name="//apple_ref/swift/Section/JWT Client" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/JWT%20Client"></a>
+                  <h3 class="section-name"><span>JWT Client</span>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1204,6 +1239,206 @@ If not specified, the default URL is used, in the format of <code>boxsdk-CLIENTI
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/CCG%20Client"></a>
+                <a name="//apple_ref/swift/Section/CCG Client" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CCG%20Client"></a>
+                  <h3 class="section-name"><span>CCG Client</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC29getCCGClientForAccountService12enterpriseId9tokenInfo0J5Store10completionySS_AA05TokenK0CSgAA0nL0_pSgys6ResultOyAA0A6ClientCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/getCCGClientForAccountService(enterpriseId:tokenInfo:tokenStore:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC29getCCGClientForAccountService12enterpriseId9tokenInfo0J5Store10completionySS_AA05TokenK0CSgAA0nL0_pSgys6ResultOyAA0A6ClientCAA0A8SDKErrorCGctF">getCCGClientForAccountService(enterpriseId:<wbr>tokenInfo:<wbr>tokenStore:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient using Server Authentication with Client Credentials Grant for account service</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCCGClientForAccountService</span><span class="p">(</span>
+    <span class="nv">enterpriseId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">tokenInfo</span><span class="p">:</span> <span class="kt"><a href="../Classes/TokenInfo.html">TokenInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tokenStore</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TokenStore.html">TokenStore</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enterpriseId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The enterprise ID to use when getting the access token.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Information about token</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenStore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom token store. To use custom store, implement TokenStore protocol.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns standard BoxClient object or error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDKAAC19getCCGClientForUser6userId9tokenInfo0I5Store10completionySS_AA05TokenJ0CSgAA0mK0_pSgys6ResultOyAA0A6ClientCAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/getCCGClientForUser(userId:tokenInfo:tokenStore:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDKAAC19getCCGClientForUser6userId9tokenInfo0I5Store10completionySS_AA05TokenJ0CSgAA0mK0_pSgys6ResultOyAA0A6ClientCAA0A8SDKErrorCGctF">getCCGClientForUser(userId:<wbr>tokenInfo:<wbr>tokenStore:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates BoxClient using Server Authentication with Client Credentials Grant for user account</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCCGClientForUser</span><span class="p">(</span>
+    <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">tokenInfo</span><span class="p">:</span> <span class="kt"><a href="../Classes/TokenInfo.html">TokenInfo</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tokenStore</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TokenStore.html">TokenStore</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/BoxClient.html">BoxClient</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user ID to use when getting the access token.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Information about token</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tokenStore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Custom token store. To use custom store, implement TokenStore protocol.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns standard BoxClient object or error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/OAUTH2%20Client"></a>
+                <a name="//apple_ref/swift/Section/OAUTH2 Client" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/OAUTH2%20Client"></a>
+                  <h3 class="section-name"><span>OAUTH2 Client</span>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1589,7 +1824,7 @@ This parameter is provided for your use in protecting against hijacked sessions 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-01-17)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-03-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
