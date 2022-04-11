@@ -8,12 +8,24 @@
 
 import Foundation
 
-extension URL {
+public extension URL {
 
+    /// Creates a valid `URL` based on configuration's `apiBaseURL` and `endpoint` path
+    ///
+    /// - Parameters:
+    ///   - endpoint: The relative path that will be appended to `apiBaseURL`
+    ///   - configuration: The SDK configuration that provides `apiBaseURL` URL
+    /// - Returns: The URL of the API endpoint.
     static func boxAPIEndpoint(_ endpoint: String, configuration: BoxSDKConfiguration) -> URL {
         return URL.make(from: endpoint, relativeTo: configuration.apiBaseURL)
     }
 
+    /// Creates a valid `URL` based on configuration's `uploadApiBaseURL` and `endpoint` path
+    ///
+    /// - Parameters:
+    ///   - endpoint: The relative path that will be appended to `uploadApiBaseURL`
+    ///   - configuration: The SDK configuration that provides `uploadApiBaseURL` URL
+    /// - Returns: The URL of the upload API endpoint.
     static func boxUploadEndpoint(_ endpoint: String, configuration: BoxSDKConfiguration) -> URL {
         return URL.make(from: endpoint, relativeTo: configuration.uploadApiBaseURL)
     }
