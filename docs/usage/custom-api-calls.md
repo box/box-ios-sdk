@@ -6,7 +6,7 @@ There are a few situations, where a user might want to make a custom API call â€
 - Beta endpoints, that are not yet suitable for inclusion in the SDK
 - Hitting URLs specified directly in the response of another API call, e.g. Representation Info and Download URLs
 
-For this reasons BoxClient exposes this functionality through a set of methods on the client mapping to HTTP verbs:
+For these reasons BoxClient exposes this functionality through a set of methods on the client mapping to HTTP verbs:
 
 ```swift
 client.get(/*...*/)
