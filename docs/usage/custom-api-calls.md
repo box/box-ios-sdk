@@ -1,12 +1,12 @@
 Custom API Calls
 ================
 
-There are a few situations where a user might want to make a custom API call — utilizing the SDK's authentication handling but creating the API request manually:
-- When new endpoints and parameters have been introduced to the API, but are not yet supported directly by the SDK
-- Beta endpoints that are not yet suitable for inclusion in the SDK
+There are a few situations, where a user might want to make a custom API call — utilizing the SDK's authentication handling, but creating the API request manually:
+- When new endpoints and parameters have been introduced to the API, but they are not yet supported directly by the SDK
+- Beta endpoints, that are not yet suitable for inclusion in the SDK
 - Hitting URLs specified directly in the response of another API call, e.g. Representation Info and Download URLs
 
-For this reason BoxClient exposes this functionality through a set of methods on the client mapping to HTTP verbs:
+For this reasons BoxClient exposes this functionality through a set of methods on the client mapping to HTTP verbs:
 
 ```swift
 client.get(/*...*/)
@@ -41,7 +41,7 @@ client.download(/*...*/)
 
 Create URL
 ----------
- When you want to execute custom API call you must specify an destination URL.
+ When you want to execute custom API call, you must specify a destination URL.
  You can create it by yourself:
 
 ``` swift
@@ -49,7 +49,7 @@ let fileId = "<YOUR_FILE_ID_HERE>"
 let url = URL(string: "https://api.box.com/2.0/files/\(fileId)")!
 ```
 
-or you can use SDK's predefined method for this
+or you can use SDK's predefined method:
 [`URL.boxAPIEndpoint(_ endpoint:configuration)`][create-box-api-endpoint]
 
 
@@ -58,7 +58,7 @@ let fileId = "<YOUR_FILE_ID_HERE>"
 let url = URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: client.configuration)
 ```
 
-The `boxAPIEndpoint` method requires from you to pass endpoint path and a configuration from current `BoxClient` instance. It internally fetches `apiBaseURL` and appends to it the endpoint path you passed. The `apiBaseURL` default value is `https://api.box.com` but you change this through 
+The `boxAPIEndpoint` method requires to pass an endpoint path and configuration from the current `BoxClient` instance. It internally fetches `apiBaseURL` and appends to it the endpoint path you passed. The default value of `apiBaseURL` is `https://api.box.com`, but you can change it with 
 [`sdk.updateConfiguration(apiBaseURL:uploadApiBaseURL:oauth2AuthorizeURL:maxRetryAttempts:tokenRefreshThreshold:consoleLogDestination:fileLogDestination:clientAnalyticsInfo:)`][update-configure] method.
 
 [create-box-api-endpoint]: https://opensource.box.com/box-ios-sdk/Extensions/URL.html#/s:10Foundation3URLV6BoxSDKE14boxAPIEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ
@@ -67,7 +67,7 @@ The `boxAPIEndpoint` method requires from you to pass endpoint path and a config
 
 Deserialize Response Body
 -------------------------
-All of exposed custom API methods return a [`BoxResponse`][box-response] object or an error if request fails.
+All exposed custom API methods return a [`BoxResponse`][box-response] object or an error if request fails.
 The `BoxResponse` type has a `body` property of type `Data?`. If you want to deserialize its json content to specific custom type, you can use SDK's
 [`ObjectDeserializer.deserialize(data:)`][deserialize-data] method to deserialize `Data?` to any type that conforms to `BoxModel`, or
 [`ObjectDeserializer.deserialize(response:)`][deserialize-response] to deserialize `BoxResponse` to any type that conforms to `Decodable`.
@@ -87,7 +87,7 @@ client.get(url: URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: client
 }
 ```
 
-As you can see we are using `flatMap` operator on `Result` type to deserialize origin `body` to specific type which is `File` in our case. The [`ObjectDeserializer.deserialize(data: Data?)`][deserialize-data]  method returns `Result<ReturnType, BoxSDKError>` where `ReturnType` is inferenced as a `File`.
+As you can see, we are using `flatMap` operator on `Result` type to deserialize origin `body` to the specific type, which is `File` in our case. The [`ObjectDeserializer.deserialize(data: Data?)`][deserialize-data]  method returns `Result<ReturnType, BoxSDKError>`, where `ReturnType` is inferenced as a `File`.
 
 [deserialize-data]: https://opensource.box.com/box-ios-sdk/Enums/ObjectDeserializer.html#/s:6BoxSDK18ObjectDeserializerO11deserialize4datas6ResultOyxAA0A8SDKErrorCG10Foundation4DataVSg_tAA0A5ModelRzlFZ
 
@@ -101,7 +101,7 @@ API Calls
 
 To perform a custom HTTP GET method, call
 [`client.get(url:httpHeaders:queryParameters:completion:)`][custom-client-get] 
-with the destination `url` and with headers and query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returning a [`BoxResponse`][box-response] type. The `body` of the response you can find in `body` property which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as in the example below:
+with the destination `url` and with headers or query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response] type. You can find the `body` of the response in `body` property, which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as in the example below:
 
 ```swift
 let fileId = "<YOUR_FILE_ID_HERE>"
@@ -119,7 +119,7 @@ client.get(url: URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: client
 }
 ```
 
-As an alternative to to manually deserialize a response body you can use [`ResponseHandler.default(wrapping completion:)`][response-handler-default] method: 
+As an alternative, to manually deserialize a response body, you can use [`ResponseHandler.default(wrapping completion:)`][response-handler-default] method: 
 
 ```swift
 let fileId = "<YOUR_FILE_ID_HERE>"
@@ -140,9 +140,9 @@ client.get(
 )
 ```
 
-This method will make sure that the response is successful (status code 2xx) and deserialize the response body into the appropriate type.
+This method will make sure that the response is successful (status code 2xx) and will deserialize the response body into the appropriate type.
 
-In this examples above we used existing SDKs type `File` but this can be either any your type that conforms either to `Decodable` either `BoxModel`.
+In these examples above, we used existing SDKs type `File`, but this can be replaced with any custom type that conforms to either `Decodable` or `BoxModel`.
 
 
 [custom-client-get]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC3get3url11httpHeaders15queryParameters10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
@@ -153,7 +153,7 @@ In this examples above we used existing SDKs type `File` but this can be either 
 
 To perform a custom HTTP POST method, call
 [`client.post(url:httpHeaders:queryParameters:json:completion)`][custom-client-post] 
-with the `url`, `json` body and with headers and query parameters if needed. As you can see in the `completion` parameter the `Callback` closure returning a [`BoxResponse`][box-response]  type. The `body` of the response you can find in `body` property which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as in the examples below:
+with the `url`, `json` body and with headers or query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response]  type. You can find the `body` of the response in `body` property, which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as shown in the examples below:
 
 ```swift
 var body: [String: Any] = [:]
@@ -199,7 +199,7 @@ client.post(
 )
 ```
 
-In this examples we deserialized `body` as `WebLink` type but you can deserialize response's body to any of your types that conforms either to `Decodable` either `BoxModel`.
+In these examples we deserialized `body` as `WebLink` type, but you can deserialize response's body to any custom type that conforms to either `Decodable` or `BoxModel`.
 
 [custom-client-post]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC4post3url11httpHeaders15queryParameters4json10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
 
@@ -207,7 +207,7 @@ In this examples we deserialized `body` as `WebLink` type but you can deserializ
 
 To perform a custom HTTP PUT method, call
 [`client.put(url:httpHeaders:queryParameters:json:completion:)`][custom-client-put] 
-with the `url`, `json` body and with headers and query parameters if needed. As you can see in the `completion` parameter the `Callback` closure returning a [`BoxResponse`][box-response] type. The `body` of the response you can find in `body` property which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as in the examples below:
+with the `url`, `json` body and with headers or query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response] type. You can find the `body` of the response in `body` property, which is of type `Data?`. If you want to deserialize it to a specific type, you can do so as shown in the examples below:
 
 ```swift
 let taskId = "<YOUR_TASK_ID_HERE>"
@@ -253,7 +253,7 @@ client.put(
 )
 ```
 
-In this examples we deserialized `body` as `Task` type but we can deserialize it to any of your types that conforms either to `Decodable` either `BoxModel`.
+In these examples we deserialized `body` as `Task` type, but we can deserialize it to any custom type that conforms to either `Decodable` or `BoxModel`.
 
 [custom-client-put]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC3put3url11httpHeaders15queryParameters4json10completiony10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
 
@@ -261,7 +261,7 @@ In this examples we deserialized `body` as `Task` type but we can deserialize it
 
 To perform a custom HTTP DELETE method, call
 [`client.delete(url:httpHeaders:queryParameters:completion:)`][custom-client-delete] 
-with the `url` and with headers and query parameters if needed. As you can see in the `completion` parameter the `Callback` closure returning a [`BoxResponse`][box-response] type. The `body` of the response you can find in `body` property which is of type `Data?`. In most cases the `body` property on success will be just nil so to handle this you can do as follows:
+with the `url` and with headers and query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response] type. You can find the `body` of the response in `body` property, which is of type `Data?`. In most cases the `body` property on success will be just nil, so to handle this you can do as follows:
 
 ```swift
 let fileId = "<YOUR_FILE_ID_HERE>"
@@ -283,7 +283,7 @@ client.delete(url: URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: cli
 
 To perform a custom HTTP OPTIONS method, call
 [`client.options(url:httpHeaders:queryParameters:json:completion:)`][custom-client-options] 
-with the `url`, `json` body and with headers and query parameters if needed. As you can see in the `completion` parameter the `Callback` closure returning a [`BoxResponse`][box-response] type. The `body` of the response you can find in `body` property which is of type `Data?`.
+with the `url`, `json` body and with headers or query parameters if needed. As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response] type. You can find the `body` of the response in `body` property, which is of type `Data?`.
 
 ```swift
 var body: [String: Any] = ["parent": ["id": "<YOUR_FOLDER_ID_HERE>"]]
@@ -300,15 +300,15 @@ client.options(url: URL.boxAPIEndpoint("/2.0/files/content", configuration: clie
 }
 ```
 
-This example will returns an empty response in case of the checks have been passed and user can proceed to make a upload call or an error.
+This example will return an empty response when the checks pass or an error when the checks fail. In case of an empty response, the user can proceed with making an upload call.
 
 [custom-client-options]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completionAA0A11NetworkTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
 
 ### Download
 
-To perform a HTTP GET method call for downloading on an API, call
+To perform a HTTP GET method call for downloading on the API, call
 [`client.download(url:downloadDestinationURL:httpHeaders:queryParameters:progress:completion:)`][custom-download].
-You must to specify an `url` of the API endpoint to call and `downloadDestinationURL` which specify the URL on disk where the data will be saved. The `completion` is callback which returns a [`BoxResponse`][box-response] object or an error if request fails. Headers and query parameters are optionals so add them if needed.
+You must specify `url` of the API endpoint to call `downloadDestinationURL`, which specifies the URL on a disk, where the data will be saved. The `completion` is a callback, which returns a [`BoxResponse`][box-response] object or an error if request fails. Headers and query parameters are optional, so add them if needed.
 
 ```swift
 let fileId = "<YOUR_FILE_ID_HERE>"
@@ -328,6 +328,6 @@ client.download(
 }
 ```
 
-This example will returns an empty response in case of the success or an error.
+This example will return an empty response on success or an error on failure.
 
 [custom-download]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completionAA0A11NetworkTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
