@@ -58,7 +58,7 @@ let fileId = "<YOUR_FILE_ID_HERE>"
 let url = URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: client.configuration)
 ```
 
-The `boxAPIEndpoint` method requires form you to pass endpoint path and a configuration from current `BoxClient` instance. It internally fetches `apiBaseURL` and appends to it the endpoint path you passed. The `apiBaseURL` default value is `https://api.box.com` but you change this through 
+The `boxAPIEndpoint` method requires from you to pass endpoint path and a configuration from current `BoxClient` instance. It internally fetches `apiBaseURL` and appends to it the endpoint path you passed. The `apiBaseURL` default value is `https://api.box.com` but you change this through 
 [`sdk.updateConfiguration(apiBaseURL:uploadApiBaseURL:oauth2AuthorizeURL:maxRetryAttempts:tokenRefreshThreshold:consoleLogDestination:fileLogDestination:clientAnalyticsInfo:)`][update-configure] method.
 
 [create-box-api-endpoint]: https://opensource.box.com/box-ios-sdk/Extensions/URL.html#/s:10Foundation3URLV6BoxSDKE14boxAPIEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ
