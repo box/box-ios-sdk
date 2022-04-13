@@ -8,9 +8,16 @@
 
 import Foundation
 
-enum ObjectDeserializer {
+/// Provides methods for deserialization JSON data to custom objects
+public enum ObjectDeserializer {
 
-    static func deserialize<ReturnType: BoxModel>(data: Data?) -> Result<ReturnType, BoxSDKError> {
+    /// Deserializes `Data?` object to the type that conforms to `BoxModel` and returns a `Result` of this type if success
+    /// or `BoxSDKError` on failure.
+    ///
+    /// - Parameters:
+    ///   - data: Binary data to deserialize
+    /// - Returns: Returns an object if success otherwise error
+    public static func deserialize<ReturnType: BoxModel>(data: Data?) -> Result<ReturnType, BoxSDKError> {
 
         guard let bodyData = data else {
             return .failure(BoxCodingError(message: "Invalid response to deserialize"))
@@ -33,7 +40,13 @@ enum ObjectDeserializer {
         }
     }
 
-    static func deserialize<ReturnType: Decodable>(response: BoxResponse) -> Result<ReturnType, BoxSDKError> {
+    /// Deserializes `BoxResponse` object to the type that conforms to `Decodable` and returns a `Result` of this type if success
+    /// or `BoxSDKError` on failure.
+    ///
+    /// - Parameters:
+    ///   - response: The `BoxResponse` object which `body` will be deserialize
+    /// - Returns: Returns an object if success otherwise error
+    public static func deserialize<ReturnType: Decodable>(response: BoxResponse) -> Result<ReturnType, BoxSDKError> {
 
         guard let bodyData = response.body else {
             return .failure(BoxCodingError(message: "Invalid response to deserialize"))

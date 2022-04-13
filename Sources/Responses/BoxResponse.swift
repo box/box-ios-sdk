@@ -8,11 +8,15 @@
 
 import Foundation
 
-/// Box API request response
+/// Box API response
 public struct BoxResponse {
-    var request: BoxRequest
-    var body: Data?
-    var urlResponse: HTTPURLResponse?
+    /// The Box SDK API request related to this response.
+    public let request: BoxRequest
+    ///  The body of the response in a binary format
+    public let body: Data?
+    ///  The object that represents a  HTTP response which includes data such as
+    /// `statusCode` or `allHeaderFields`
+    public let urlResponse: HTTPURLResponse?
 
     init(request: BoxRequest, body: Data?, urlResponse: URLResponse?) {
         self.request = request
