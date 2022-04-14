@@ -1,9 +1,10 @@
 # Box iOS SDK
 
+[![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
 [![Platforms](https://img.shields.io/cocoapods/p/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK)
 [![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-ios-sdk/main/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
  [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
- [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-sdk) [![Coverage Status](https://coveralls.io/repos/github/box/box-swift-sdk/badge.svg?t=hF1jxr)](https://coveralls.io/github/box/box-swift-sdk)
+ [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-sdk) [![Coverage](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=main)](https://coveralls.io/github/box/box-ios-sdk?branch=main)
 
 Getting Started Docs: https://developer.box.com/guides/mobile/ios/quick-start/
 
@@ -28,6 +29,8 @@ Box iOS SDK
     - [OAuth2 Sample App](#oauth2-sample-app)
     - [JWT Auth Sample App](#jwt-auth-sample-app)
   - [Versions](#versions)
+    - [Supported Version](#supported-version)
+    - [Version schedule](#version-schedule)
   - [Copyright and License](#copyright-and-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
