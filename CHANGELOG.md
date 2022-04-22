@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.1](https://github.com/box/box-ios-sdk/compare/v5.2.0...v5.2.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* Expose fields from `BoxResponse` for custom API calls ([#833](https://github.com/box/box-ios-sdk/issues/833)) ([bae1536](https://github.com/box/box-ios-sdk/commit/bae1536236a22de198281012b0ee43c84b0e3485))
+
 ## [5.2.0](https://github.com/box/box-ios-sdk/compare/v5.1.0...v5.2.0) (2022-03-18)
 
 
