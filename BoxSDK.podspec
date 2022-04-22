@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "BoxSDK"
-  spec.version      = "5.2.0"
+  spec.version      = "5.2.1"
   spec.summary      = "Box Swift SDK"
   spec.description  = <<-DESC
   Official Box Swift SDK.

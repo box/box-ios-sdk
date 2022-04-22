@@ -1,10 +1,13 @@
-name: Pull request checklist
+name: Build and Test
 on: 
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 jobs:
-  Run-Tests:
+  build-and-test:
     runs-on: macos-11
     strategy:
       matrix:
