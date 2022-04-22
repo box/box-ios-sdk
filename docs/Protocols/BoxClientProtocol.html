@@ -17,7 +17,7 @@
     <a title="BoxClientProtocol Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.2.0 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.2.1 Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -560,10 +560,16 @@
                 <a href="../Enums/NullableParameter.html">NullableParameter</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ObjectDeserializer.html">ObjectDeserializer</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/PagingParameter.html">PagingParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseHandler.html">ResponseHandler</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -663,6 +669,9 @@
               <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -710,7 +719,7 @@
                 <a href="../Structs/BoxRequestDescription.html">BoxRequestDescription</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+                <a href="../Structs/BoxResponse.html">BoxResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/BoxResponseDescription.html">BoxResponseDescription</a>
@@ -849,7 +858,7 @@
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">,</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -937,7 +946,7 @@
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">,</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">json</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -1038,7 +1047,7 @@
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">multipartBody</span><span class="p">:</span> <span class="kt"><a href="../Structs/MultipartForm.html">MultipartForm</a></span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
@@ -1150,7 +1159,7 @@
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">,</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">json</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -1251,7 +1260,7 @@
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">multipartBody</span><span class="p">:</span> <span class="kt"><a href="../Structs/MultipartForm.html">MultipartForm</a></span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
@@ -1368,7 +1377,7 @@
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">progress</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a></span></code></pre>
 
                         </div>
@@ -1484,7 +1493,7 @@
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">,</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
     <span class="nv">json</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BoxNetworkTask.html">BoxNetworkTask</a></span></code></pre>
 
                         </div>
@@ -1587,7 +1596,7 @@
     <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">httpHeaders</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK0A11HTTPHeadersa">BoxHTTPHeaders</a></span><span class="p">,</span>
     <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK15QueryParametersa">QueryParameters</a></span><span class="p">,</span>
-    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a></span><span class="o">&gt;</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BoxResponse.html">BoxResponse</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -1655,7 +1664,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-03-18)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-04-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

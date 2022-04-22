@@ -8,19 +8,27 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Extension/URL" class="dashAnchor"></a>
     <a title="URL Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK Docs</a> (98% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.2.1 Docs</a> (100% documented)</p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">BoxSDK Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         URL Extension Reference
       </p>
     </div>
@@ -79,6 +87,15 @@
                 <a href="../Classes.html#/s:6BoxSDK0A10UploadTaskC">BoxUploadTask</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/CCGAuthModule.html">CCGAuthModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CCGAuthModule/CCGConnectionType.html">– CCGConnectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CCGAuthSession.html">CCGAuthSession</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Classification.html">Classification</a>
               </li>
               <li class="nav-group-task">
@@ -97,13 +114,13 @@
                 <a href="../Classes/Collaboration/TwoFactorAuthenticationRequirement.html">– TwoFactorAuthenticationRequirement</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistEntry.html">CollaborationWhitelistEntry</a>
+                <a href="../Classes/CollaborationAllowlistEntry.html">CollaborationAllowlistEntry</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistExemptTarget.html">CollaborationWhitelistExemptTarget</a>
+                <a href="../Classes/CollaborationAllowlistExemptTarget.html">CollaborationAllowlistExemptTarget</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/CollaborationWhitelistModule.html">CollaborationWhitelistModule</a>
+                <a href="../Classes/CollaborationAllowlistModule.html">CollaborationAllowlistModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CollaborationsModule.html">CollaborationsModule</a>
@@ -191,6 +208,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Folder/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderLock.html">FolderLock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FolderLock/LockedOperations.html">– LockedOperations</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/FolderUploadEmail.html">FolderUploadEmail</a>
@@ -310,6 +333,9 @@
                 <a href="../Classes/SearchModule.html">SearchModule</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/SearchResult.html">SearchResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/SharedItem.html">SharedItem</a>
               </li>
               <li class="nav-group-task">
@@ -323,6 +349,27 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SharedLink/Permissions.html">– Permissions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequest.html">SignRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestPrefillTag.html">SignRequestPrefillTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestSignFiles.html">SignRequestSignFiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestSigner.html">SignRequestSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestSignerDecision.html">SignRequestSignerDecision</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestSignerInput.html">SignRequestSignerInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SignRequestsModule.html">SignRequestsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SingleTokenSession.html">SingleTokenSession</a>
@@ -407,6 +454,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/WebhooksModule.html">WebhooksModule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownload.html">ZipDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflict.html">ZipDownloadConflict</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadConflictItem.html">ZipDownloadConflictItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ZipDownloadStatus.html">ZipDownloadStatus</a>
               </li>
             </ul>
           </li>
@@ -501,10 +560,16 @@
                 <a href="../Enums/NullableParameter.html">NullableParameter</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ObjectDeserializer.html">ObjectDeserializer</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/OrderDirection.html">OrderDirection</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/PagingParameter.html">PagingParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseHandler.html">ResponseHandler</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RetentionPolicyAssignmentItemType.html">RetentionPolicyAssignmentItemType</a>
@@ -526,6 +591,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignerInputType.html">SignRequestSignerInputType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignerRole.html">SignRequestSignerRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestStatus.html">SignRequestStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/StreamPosition.html">StreamPosition</a>
@@ -578,21 +655,6 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Date.html">Date</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Encodable.html">Encodable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Formatter.html">Formatter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/ISO8601DateFormatter.html">ISO8601DateFormatter</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -608,16 +670,7 @@
                 <a href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIDevice.html">UIDevice</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/URL.html">URL</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
@@ -666,7 +719,7 @@
                 <a href="../Structs/BoxRequestDescription.html">BoxRequestDescription</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:6BoxSDK0A8ResponseV">BoxResponse</a>
+                <a href="../Structs/BoxResponse.html">BoxResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/BoxResponseDescription.html">BoxResponseDescription</a>
@@ -714,7 +767,25 @@
                 <a href="../Structs/SharedLinkData.html">SharedLinkData</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SignRequestCreateParameters.html">SignRequestCreateParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignRequestCreateParentFolder.html">SignRequestCreateParentFolder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignRequestCreateSigner.html">SignRequestCreateSigner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignRequestCreateSourceFile.html">SignRequestCreateSourceFile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignRequestCreateSourceFileVersion.html">SignRequestCreateSourceFileVersion</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UploadPartDescription.html">UploadPartDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ZipDownloadItem.html">ZipDownloadItem</a>
               </li>
             </ul>
           </li>
@@ -752,7 +823,8 @@
             <h1>URL</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">URL</span></code></pre>
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">URL</span></code></pre>
 
                 </div>
               </div>
@@ -766,7 +838,7 @@
                     <code>
                     <a name="/s:10Foundation3URLV6BoxSDKE14boxAPIEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ"></a>
                     <a name="//apple_ref/swift/Method/boxAPIEndpoint(_:configuration:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Foundation3URLV6BoxSDKE14boxAPIEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ">boxAPIEndpoint(_:configuration:)</a>
+                    <a class="token" href="#/s:10Foundation3URLV6BoxSDKE14boxAPIEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ">boxAPIEndpoint(_:<wbr>configuration:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -774,7 +846,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a valid <code>URL</code> based on configuration&rsquo;s <code>apiBaseURL</code> and <code>endpoint</code> path</p>
 
                       </div>
                       <div class="declaration">
@@ -785,6 +857,41 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relative path that will be appended to <code>apiBaseURL</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The SDK configuration that provides <code>apiBaseURL</code> URL</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The URL of the API endpoint.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -793,7 +900,7 @@
                     <code>
                     <a name="/s:10Foundation3URLV6BoxSDKE17boxUploadEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ"></a>
                     <a name="//apple_ref/swift/Method/boxUploadEndpoint(_:configuration:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Foundation3URLV6BoxSDKE17boxUploadEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ">boxUploadEndpoint(_:configuration:)</a>
+                    <a class="token" href="#/s:10Foundation3URLV6BoxSDKE17boxUploadEndpoint_13configurationACSS_AD0C16SDKConfigurationVtFZ">boxUploadEndpoint(_:<wbr>configuration:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -801,7 +908,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a valid <code>URL</code> based on configuration&rsquo;s <code>uploadApiBaseURL</code> and <code>endpoint</code> path</p>
 
                       </div>
                       <div class="declaration">
@@ -812,6 +919,41 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endpoint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relative path that will be appended to <code>uploadApiBaseURL</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The SDK configuration that provides <code>uploadApiBaseURL</code> URL</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The URL of the upload API endpoint.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -820,11 +962,10 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2020-11-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-04-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
