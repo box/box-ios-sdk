@@ -206,6 +206,15 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         }
     }
 
+    private func setBodyAndContentType(_ json: Any, _ hasCustomContentType: Bool, _ urlRequest: inout URLRequest) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        // For json content types do not override if it's already been set.
+        if !hasCustomContentType {
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        urlRequest.httpBody = jsonData
+    }
+
     private func createRequest(for request: BoxRequest) -> URLRequest {
         let method = request.httpMethod.rawValue.uppercased()
         let url = request.endpoint()
@@ -215,17 +224,15 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         urlRequest.httpMethod = method
         urlRequest.allHTTPHeaderFields = headers
 
+        let hasCustomContentType = headers.index(forKey: "Content-Type") != nil
+
         switch request.body {
         case .empty:
             break
         case let .jsonObject(json):
-            let jsonData = try? JSONSerialization.data(withJSONObject: json)
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.httpBody = jsonData
+            setBodyAndContentType(json, hasCustomContentType, &urlRequest)
         case let .jsonArray(jsonArray):
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
-            urlRequest.httpBody = jsonData
+            setBodyAndContentType(jsonArray, hasCustomContentType, &urlRequest)
         case let .urlencodedForm(params):
             let urlencodedForm = params
                 .map { key, value in
@@ -271,6 +278,7 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest.httpBodyStream = ArrayInputStream(inputStreams: bodyStreams)
         }
+
         return urlRequest
     }
 
