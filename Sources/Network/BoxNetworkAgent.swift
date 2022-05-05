@@ -13,6 +13,7 @@ enum BoxHTTPHeaderKey {
     static let ifMatch = "If-Match"
     static let asUser = "As-User"
     static let boxApi = "BoxApi"
+    static let contentType = "Content-Type"
 }
 
 /// BoxApi header key constants
@@ -206,6 +207,13 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         }
     }
 
+    private func setHeaderIfNotExists(for key: String, value: String, urlRequest: inout URLRequest) {
+        guard let headers = urlRequest.allHTTPHeaderFields, headers.keys.contains(key) else {
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+            return
+        }
+    }
+
     private func createRequest(for request: BoxRequest) -> URLRequest {
         let method = request.httpMethod.rawValue.uppercased()
         let url = request.endpoint()
@@ -220,12 +228,12 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             break
         case let .jsonObject(json):
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = jsonData
+            setHeaderIfNotExists(for: BoxHTTPHeaderKey.contentType, value: "application/json", urlRequest: &urlRequest)
         case let .jsonArray(jsonArray):
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
             urlRequest.httpBody = jsonData
+            setHeaderIfNotExists(for: BoxHTTPHeaderKey.contentType, value: "application/json", urlRequest: &urlRequest)
         case let .urlencodedForm(params):
             let urlencodedForm = params
                 .map { key, value in
@@ -239,8 +247,8 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 }
                 .joined(separator: "&")
                 .data(using: .utf8)
-            urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = urlencodedForm
+            setHeaderIfNotExists(for: BoxHTTPHeaderKey.contentType, value: "application/x-www-form-urlencoded", urlRequest: &urlRequest)
         case let .data(data):
             urlRequest.httpBody = data
         case let .multipart(body):
@@ -267,10 +275,11 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
                 }
             }
             let bodyStreams = createMultipartBodyStreams(parameters, partName: partName, fileName: fileName, mimetype: mimeType, bodyStream: bodyStream, boundary: boundary)
-            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: BoxHTTPHeaderKey.contentType)
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest.httpBodyStream = ArrayInputStream(inputStreams: bodyStreams)
         }
+
         return urlRequest
     }
 
