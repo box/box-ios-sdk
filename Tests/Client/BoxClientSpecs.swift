@@ -57,83 +57,173 @@ class BoxClientSpecs: QuickSpec {
                     expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com"]))
                 }
             }
-        }
 
-        describe("destroy()") {
+            describe("destroy()") {
+                it("should make request to revoke the current access token") {
+                    let currentToken = "sdufhgseit983e4g"
+                    let clientID = "ksdjfksadfisdg"
+                    let clientSecret = "liuwerfiberdus"
+                    let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
+                    let client = sdk.getClient(token: currentToken)
 
-            it("should make request to revoke the current access token") {
-                let currentToken = "sdufhgseit983e4g"
-                let clientID = "ksdjfksadfisdg"
-                let clientSecret = "liuwerfiberdus"
-                let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
-                let client = sdk.getClient(token: currentToken)
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/oauth2/revoke")
+                            && isMethodPOST()
+                            && self.compareURLEncodedBody(["client_id": clientID, "client_secret": clientSecret, "token": currentToken])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            data: Data(), statusCode: 200, headers: [:]
+                        )
+                    }
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/revoke")
-                        && isMethodPOST()
-                        && self.compareURLEncodedBody(["client_id": clientID, "client_secret": clientSecret, "token": currentToken])
-                ) { _ in
-                    OHHTTPStubsResponse(
-                        data: Data(), statusCode: 200, headers: [:]
-                    )
+                    waitUntil(timeout: .seconds(10)) { done in
+                        client.destroy { result in
+                            switch result {
+                            case .success:
+                                break
+                            case let .failure(error):
+                                fail("Expected revocation to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
                 }
 
-                waitUntil(timeout: .seconds(10)) { done in
-                    client.destroy { result in
-                        switch result {
-                        case .success:
-                            break
-                        case let .failure(error):
-                            fail("Expected revocation to succeed, but instead got \(error)")
+                it("should produce error when revocation request fails") {
+                    let client = BoxSDK.getClient(token: "sajkhdbldf")
+
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/oauth2/revoke")
+                            && isMethodPOST()
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            data: Data(), statusCode: 400, headers: [:]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        client.destroy { result in
+                            switch result {
+                            case .success:
+                                fail("Expected revocation to fail")
+                            case let .failure(error):
+                                expect(error).to(beAKindOf(BoxSDKError.self))
+                            }
+                            done()
                         }
-                        done()
+                    }
+                }
+
+                it("should render client inoperable when revocation request succeeds") {
+                    let client = BoxSDK.getClient(token: "sajkhdbldf")
+
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/oauth2/revoke")
+                            && isMethodPOST()
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            data: Data(), statusCode: 200, headers: [:]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        client.destroy { _ in
+                            client.users.getCurrent { result in
+                                guard case let .failure(error) = result else {
+                                    fail("Expected request method to result in an error")
+                                    done()
+                                    return
+                                }
+
+                                expect(error).to(matchError(BoxSDKError(message: .clientDestroyed)))
+                                done()
+                            }
+                        }
                     }
                 }
             }
 
-            it("should produce error when revocation request fails") {
-
-                let client = BoxSDK.getClient(token: "sajkhdbldf")
-
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/revoke")
-                        && isMethodPOST()
-                ) { _ in
-                    OHHTTPStubsResponse(
-                        data: Data(), statusCode: 400, headers: [:]
+            describe("send()") {
+                it("should make valid API call respecting all given parameters") {
+                    let client = BoxSDK.getClient(token: "sajkhdbldf")
+                    let userId = 123
+                    let boxRequest = BoxRequest(
+                        httpMethod: .get,
+                        url: URL.boxAPIEndpoint("/2.0/users/\(userId)", configuration: client.configuration),
+                        httpHeaders: ["X-Custom-Header": "CustomValue", "Content-Type": "application/vnd.box+json"],
+                        queryParams: ["fields": "name,login"],
+                        body: .jsonObject(["some_key": "some_value"])
                     )
-                }
 
-                waitUntil(timeout: .seconds(10)) { done in
-                    client.destroy { result in
-                        switch result {
-                        case .success:
-                            fail("Expected revocation to fail")
-                        case let .failure(error):
-                            expect(error).to(beAKindOf(BoxSDKError.self))
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/2.0/users/\(userId)")
+                            && isMethodGET()
+                            && hasHeaderNamed("X-Custom-Header", value: "CustomValue")
+                            && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
+                            && containsQueryParams(["fields": "name,login"])
+                            && hasJsonBody(["some_key": "some_value"])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        client.send(request: boxRequest) { result in
+                            let userResult: Result<User, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
+
+                            switch userResult {
+                            case let .success(user):
+                                expect(user.id).to(equal("11111"))
+                                expect(user.name).to(equal("Test User"))
+                                expect(user.login).to(equal("testuser@example.com"))
+                            case let .failure(error):
+                                fail("Expected call to succeed, but instead got \(error)")
+                            }
+                            done()
                         }
-                        done()
                     }
                 }
             }
 
-            it("should render client inoperable when revocation request succeeds") {
-                let client = BoxSDK.getClient(token: "sajkhdbldf")
+            describe("OAuth2") {
+                it("should produce error when OAuth2 access token has been revoked") {
+                    let clientID = "ksdjfksadfisdg"
+                    let clientSecret = "liuwerfiberdus"
+                    let accessToken = "nekoTssecca"
+                    let expiresIn: TimeInterval = 3681
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/revoke")
-                        && isMethodPOST()
-                ) { _ in
-                    OHHTTPStubsResponse(
-                        data: Data(), statusCode: 200, headers: [:]
-                    )
-                }
+                    var client: BoxClient!
+                    let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
+                    waitUntil(timeout: .seconds(10)) { done in
+                        let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
+                        sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
+                            switch result {
+                            case let .success(c):
+                                client = c
+                            case let .failure(error):
+                                fail("Expected getting client to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
 
-                waitUntil(timeout: .seconds(10)) { done in
-                    client.destroy { _ in
+                    stub(
+                        condition: isHost("api.box.com")
+                            && isPath("/2.0/users/me")
+                            && isMethodGET()
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            data: Data(), statusCode: 401, headers: [:]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
                         client.users.getCurrent { result in
                             guard case let .failure(error) = result else {
                                 fail("Expected request method to result in an error")
@@ -141,54 +231,9 @@ class BoxClientSpecs: QuickSpec {
                                 return
                             }
 
-                            expect(error).to(matchError(BoxSDKError(message: .clientDestroyed)))
+                            expect(error).to(matchError(BoxAPIAuthError(message: .unauthorizedAccess)))
                             done()
                         }
-                    }
-                }
-            }
-
-            it("should produce error when OAuth2 access token has been revoked") {
-                let clientID = "ksdjfksadfisdg"
-                let clientSecret = "liuwerfiberdus"
-                let accessToken = "nekoTssecca"
-                let expiresIn: TimeInterval = 3681
-
-                var client: BoxClient!
-                let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
-                waitUntil(timeout: .seconds(10)) { done in
-                    let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
-                    sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
-                        switch result {
-                        case let .success(c):
-                            client = c
-                        case let .failure(error):
-                            fail("Expected getting client to succeed, but instead got \(error)")
-                        }
-                        done()
-                    }
-                }
-
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/2.0/users/me")
-                        && isMethodGET()
-                ) { _ in
-                    OHHTTPStubsResponse(
-                        data: Data(), statusCode: 401, headers: [:]
-                    )
-                }
-
-                waitUntil(timeout: .seconds(10)) { done in
-                    client.users.getCurrent { result in
-                        guard case let .failure(error) = result else {
-                            fail("Expected request method to result in an error")
-                            done()
-                            return
-                        }
-
-                        expect(error).to(matchError(BoxAPIAuthError(message: .unauthorizedAccess)))
-                        done()
                     }
                 }
             }

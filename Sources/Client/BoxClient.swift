@@ -135,8 +135,14 @@ public class BoxClient {
     }
 }
 
-private extension BoxClient {
-    func send(
+extension BoxClient {
+
+    /// Makes a Box SDK request
+    ///
+    /// - Parameters:
+    ///   - request: Box SDK request
+    ///   - completion: Returns standard BoxResponse object or error.
+    public func send(
         request: BoxRequest,
         completion: @escaping Callback<BoxResponse>
     ) {
@@ -169,7 +175,7 @@ private extension BoxClient {
         }
     }
 
-    func handleAuthIssues(
+    private func handleAuthIssues(
         result: Result<BoxResponse, BoxSDKError>,
         completion: @escaping Callback<BoxResponse>
     ) {
@@ -187,7 +193,7 @@ private extension BoxClient {
         }
     }
 
-    func addSharedLinkHeader(sharedLink: URL, sharedLinkPassword: String?) {
+    private func addSharedLinkHeader(sharedLink: URL, sharedLinkPassword: String?) {
         if let sharedLinkPassword = sharedLinkPassword {
             headers?[BoxHTTPHeaderKey.boxApi] = "\(BoxAPIHeaderKey.sharedLink)=\(sharedLink.absoluteString)&\(BoxAPIHeaderKey.sharedLinkPassword)=\(sharedLinkPassword)"
         }
@@ -196,7 +202,7 @@ private extension BoxClient {
         }
     }
 
-    func addAsUserHeader(userId: String) {
+    private func addAsUserHeader(userId: String) {
         headers?[BoxHTTPHeaderKey.asUser] = userId
     }
 }

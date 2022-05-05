@@ -27,18 +27,41 @@ public class BoxRequest {
         case empty
     }
 
-    var httpMethod: HTTPMethod
-    var url: URL
-    var httpHeaders: BoxHTTPHeaders
-    var queryParams: QueryParameters
-    var body: BodyType
-    var task: (URLSessionTask) -> Void
-    var progress: (Progress) -> Void
+    /// Additional information to be passed in the HTTP headers of the request.
+    public internal(set) var httpHeaders: BoxHTTPHeaders
+    /// The HTTP request method (e.g. get, post, delete)
+    public let httpMethod: HTTPMethod
+    /// The URL of the API endpoint to call.
+    public let url: URL
+    /// Additional parameters to be passed in the URL that is called.
+    public let queryParams: QueryParameters
+    /// Body of the request.
+    public let body: BodyType
+    /// The closure that should add URLSessionTask to BoxNetworkTask store, in order to be able to cancel
+    /// upload or download request during execution.
+    public let task: (URLSessionTask) -> Void
+    /// The closure where  progress of the request will be reported
+    public let progress: (Progress) -> Void
+    /// The URL  on the local FileSystem where a download request will write the data
+    public let downloadDestination: URL?
 
-    // The path on the local FileSystem where a download request will write the data
-    var downloadDestination: URL?
-
-    init(
+    /// Initializer.
+    ///
+    /// - Parameters:
+    ///   - httpMethod: The HTTP request method (e.g. get, post, delete)
+    ///   - url: The URL of the API endpoint to call.
+    ///   - httpHeaders: Additional information to be passed in the HTTP headers of the request.
+    ///   - queryParams: Additional parameters to be passed in the URL that is called.
+    ///   - body: Body of the request.
+    ///   - downloadDestination: The URL on disk  where a download request will write the data
+    ///     Please omit this parameter when not downloading a file.
+    ///   - task: The closure that should add URLSessionTask to BoxNetworkTask store, in order to be able to cancel
+    ///     upload or download request during execution.
+    ///     You should use here `receiveTask` either from `BoxDownloadTask` or `BoxUploadTask` instance.
+    ///     Then in order to cancel the request, call `cancel` method on this instance.
+    ///     Please omit this parameter when you not intent to cancel upload or download a file.
+    ///   - progress: Closure where  progress of the request will be reported
+    public init(
         httpMethod: HTTPMethod,
         url: URL,
         httpHeaders: BoxHTTPHeaders = [:],
