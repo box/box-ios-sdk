@@ -109,7 +109,12 @@ class BoxNetworkAgentSpecs: QuickSpec {
                 let analytics = AnalyticsHeaderGenerator()
                 let analyticsHeader = "agent=box-swift-sdk/\(analytics.swiftSDKVersion); env=\(analytics.deviceName)/\(analytics.iOSVersion); client=testApp/1.2.3"
 
-                stub(condition: isHost("api.box.com") && isPath("/2.0/users/me") && isMethodGET() && hasHeaderNamed("X-Box-UA", value: analyticsHeader)) { _ in
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/2.0/users/me")
+                        && isMethodGET()
+                        && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
+                ) { _ in
                     OHHTTPStubsResponse(
                         fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
@@ -118,6 +123,35 @@ class BoxNetworkAgentSpecs: QuickSpec {
 
                 waitUntil(timeout: .seconds(10)) { done in
                     let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
+                    self.networkAgent.send(request: request) { result in
+                        if case let .failure(error) = result {
+                            fail("Expected call to succeed, but instead got \(error)")
+                        }
+                        done()
+                    }
+                }
+            }
+
+            it("should use custom Content-Type header if specified") {
+                stub(
+                    condition: isHost("api.box.com")
+                        && isPath("/2.0/users/me")
+                        && isMethodGET()
+                        && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
+                ) { _ in
+                    OHHTTPStubsResponse(
+                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                        statusCode: 200, headers: ["Content-Type": "application/json"]
+                    )
+                }
+
+                waitUntil(timeout: .seconds(10)) { done in
+                    let request = BoxRequest(
+                        httpMethod: .get,
+                        url: URL(string: "https://api.box.com/2.0/users/me")!,
+                        httpHeaders: ["Content-Type": "application/vnd.box+json"],
+                        body: .jsonObject(["type": "user"])
+                    )
                     self.networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {
                             fail("Expected call to succeed, but instead got \(error)")
