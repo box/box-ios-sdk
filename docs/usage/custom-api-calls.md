@@ -22,19 +22,27 @@ and additionally a HTTP GET method call for downloading:
 client.download(/*...*/)
 ```
 
+Moreover, the SDK exposes a low-level method that is used under the hood by the all previous methods. However because of its complexity, we recommend that you should only use this method if all the other options do not suit your needs.
+
+```swift
+client.send(/*...*/)
+```
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Create URL](#create-url)
-- [Deserialize Response Body](#deserialize-response-body)
-- [API Calls](#api-calls)
+- [Custom API Calls](#custom-api-calls)
+  - [Create URL](#create-url)
+  - [Deserialize Response Body](#deserialize-response-body)
+  - [API Calls](#api-calls)
     - [Custom GET](#custom-get)
     - [Custom POST](#custom-post)
     - [Custom PUT](#custom-put)
     - [Custom DELETE](#custom-delete)
     - [Custom OPTIONS](#custom-options)
     - [Download](#download)
+    - [Send](#send)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -331,3 +339,74 @@ client.download(
 This example will return an empty response on success or an error on failure.
 
 [custom-download]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC7options3url11httpHeaders15queryParameters4json10completionAA0A11NetworkTaskC10Foundation3URLV_SDyS2SGSDySSAA25QueryParameterConvertible_pSgGypSgys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
+
+### Send
+
+To perform a send method, call
+[`client.send(request:completion:)`][custom-send-client] 
+with the [`request`][box-request] object, which represents the Box SDK API request.  As you can see in the `completion` parameter, the `Callback` closure returns a [`BoxResponse`][box-response] type. You can find the `body` of the response in `body` property, which is of type `Data?`.
+
+When creating a `BoxRequest` instance, please call [`init(httpMethod:url:httpHeaders:queryParams:body:downloadDestination:task:progress:)`][box-request] with the parameters you need, leaving unused parameters with their default value.
+
+Below is an example of how we can use `send()` method to update a particular file:
+
+```swift
+let fileId = "<YOUR_FILE_ID_HERE>"
+
+var body: [String: Any] = [:]
+body["name"] = "new_file_name.txt"
+body["description"] = "new description"
+
+let request = BoxRequest(
+    httpMethod: .put,
+    url: URL.boxAPIEndpoint("/2.0/files/\(fileId)", configuration: client.configuration),
+    queryParams: ["fields": "name,description"],
+    body: .jsonObject(body)
+)
+
+client.send(request: request) { result in
+    let fileResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
+    switch fileResult {
+    case let .success(fileItem):
+        print("The file was updated successfully")
+    case let .failure(error):
+        print("Error updating a file \(error)")
+    }
+}
+```
+
+This is an another example showing the use of the `send()` method to download a file:
+
+```swift
+let fileId = "<YOUR_FILE_ID_HERE>"
+let filename = "<YOUR_DESTINATION_FILE_NAME>"
+
+let destinationURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(filename)
+let task = BoxDownloadTask()
+
+let request = BoxRequest(
+    httpMethod: .get,
+    url: URL.boxAPIEndpoint("/2.0/files/\(fileId)/content", configuration: client.configuration),
+    downloadDestination: destinationURL,
+    task: task.receiveTask,
+    progress: { progress in
+        let completed = String(format: "%.2f", progress.fractionCompleted * 100)
+        print("Completed... \(completed)%")
+    }
+)
+
+client.send(request: request) { result in
+    switch result {
+    case .success:
+        print("The file was downloaded")
+    case let .failure(error):
+        print("Error downloaded a file \(error)")
+    }
+}
+
+// If you want to cancel downloading a file, please call `task.cancel()` method.
+```
+
+[custom-send-client]: https://opensource.box.com/box-ios-sdk/Classes/BoxClient.html#/s:6BoxSDK0A6ClientC4send7request10completionyAA0A7RequestC_ys6ResultOyAA0A8ResponseVAA0A8SDKErrorCGctF
+
+[box-request]: https://opensource.box.com/box-ios-sdk/Classes/BoxRequest.html#/s:6BoxSDK0A7RequestC10httpMethod3url0D7Headers11queryParams4body19downloadDestination4task8progressAcA10HTTPMethodO_10Foundation3URLVSDyS2SGSDySSAA25QueryParameterConvertible_pSgGAC8BodyTypeOAPSgySo16NSURLSessionTaskCcySo10NSProgressCctcfc
