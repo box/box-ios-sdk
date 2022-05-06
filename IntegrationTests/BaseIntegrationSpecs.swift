@@ -172,4 +172,22 @@ class BaseIntegrationSpecs: QuickSpec {
             }
         }
     }
+
+    // MARK: WebLink helper methods
+
+    func deleteWebLink(_ webLink: WebLink?) {
+        guard let webLink = webLink else {
+            return
+        }
+
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            self.client.webLinks.delete(webLinkId: webLink.id) { result in
+                if case let .failure(error) = result {
+                    fail("Expected delete call to succeed, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
 }

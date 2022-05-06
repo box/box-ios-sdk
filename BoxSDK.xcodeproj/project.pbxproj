@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */; };
 		05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */; };
 		05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */; };
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
@@ -594,6 +595,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxClientIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetWebLinkSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIntegrationSpecs.swift; sourceTree = "<group>"; };
 		052D63C127182FA500C76281 /* CreateSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSignRequest.json; sourceTree = "<group>"; };
@@ -1208,6 +1210,7 @@
 				05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */,
 				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
 				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
+				0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -2740,6 +2743,7 @@
 				0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */,
 				0547B743276C9A89002D9E7A /* FileUtil.swift in Sources */,
 				05EC1086276A1CFE00252112 /* Task+Extensions.swift in Sources */,
+				0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */,
 				05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
