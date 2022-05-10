@@ -15,6 +15,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
 
     override func spec() {
         beforeSuite {
+            self.initializeClient()
             self.createFolder(name: NameGenerator.getUniqueFolderName(for: "FolderModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
         }
 
@@ -300,7 +301,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                             itemType: "folder",
                             itemId: folder.id,
                             role: .editor,
-                            accessibleBy: Configuration.shared.collaboratorId,
+                            accessibleBy: Configuration.shared.data.collaboratorId,
                             accessibleByType: .user,
                             fields: ["role", "accessible_by"]
                         ) { result in
@@ -308,7 +309,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(collaborationItem):
                                 collaboration = collaborationItem
                                 expect(collaborationItem.role).to(equal(.editor))
-                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected create call to suceeded, but it failed \(error)")
                             }
@@ -328,7 +329,7 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(1))
                                 expect(page.entries[0].id).to(equal(collaboration.id))
                                 expect(page.entries[0].role).to(equal(.editor))
-                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected listCollaborations call to succeeded, but it instead got: \(error)")
                             }
