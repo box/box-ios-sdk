@@ -32,3 +32,4 @@ jobs:
           set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDKIntegrationTests-iOS -destination "${{ matrix.destination }}" -configuration Debug ENABLE_TESTABILITY=YES test
         env:
           INTEGRATION_TESTING_CONFIG: ${{secrets.INTEGRATION_TESTING_CONFIG}}
+
