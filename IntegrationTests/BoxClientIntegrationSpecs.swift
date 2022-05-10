@@ -15,6 +15,7 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
 
     override func spec() {
         beforeSuite {
+            self.initializeClient()
             self.createFolder(name: NameGenerator.getUniqueFolderName(for: "BoxClient")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
         }
 

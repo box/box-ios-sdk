@@ -29,6 +29,6 @@ jobs:
       - name: Run Integration Tests
         run: |
           echo "${INTEGRATION_TESTING_CONFIG}" > IntegrationTests/Resources/Configuration.json
-          set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDKIntegrationTests-iOS -destination "${{ matrix.destination }}" -configuration Debug ENABLE_TESTABILITY=YES test | bundler exec xcpretty
+          set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDKIntegrationTests-iOS -destination "${{ matrix.destination }}" -configuration Debug ENABLE_TESTABILITY=YES clean test | bundler exec xcpretty
         env:
           INTEGRATION_TESTING_CONFIG: ${{secrets.INTEGRATION_TESTING_CONFIG}}
