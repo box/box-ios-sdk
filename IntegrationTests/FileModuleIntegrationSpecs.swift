@@ -15,6 +15,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
     override func spec() {
         beforeSuite {
+            self.initializeClient()
             self.createFolder(name: NameGenerator.getUniqueFolderName(for: "FileModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
         }
 
@@ -487,7 +488,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             return
                         }
 
-                        let changeDispositionDate = Date.now.addDays(2)
+                        let changeDispositionDate = Date.addDays(2)
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                             self.client.files.update(
@@ -571,7 +572,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    let lockExpiresAt = Date().tomorrow
+                    let lockExpiresAt = Date.tomorrow
 
                     // Lock
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
@@ -950,7 +951,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             itemType: "file",
                             itemId: file.id,
                             role: .editor,
-                            accessibleBy: Configuration.shared.collaboratorId,
+                            accessibleBy: Configuration.shared.data.collaboratorId,
                             accessibleByType: .user,
                             fields: ["role", "accessible_by"]
                         ) { result in
@@ -958,7 +959,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(collaborationItem):
                                 collaboration = collaborationItem
                                 expect(collaborationItem.role).to(equal(.editor))
-                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected create call to suceeded, but it failed \(error)")
                             }
@@ -979,7 +980,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(1))
                                 expect(page.entries[0].id).to(equal(collaboration.id))
                                 expect(page.entries[0].role).to(equal(.editor))
-                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected list call to succeed, but instead got \(error)")
                             }
@@ -1008,7 +1009,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     var task: Task?
-                    let dueAtDate = Date().tomorrow
+                    let dueAtDate = Date.tomorrow
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in

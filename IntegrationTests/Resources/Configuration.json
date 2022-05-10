@@ -1,4 +1,11 @@
 {
-   "accessToken": "",
-   "collaboratorId": ""
+    "ccg": {
+        "clientId": "",
+        "clientSecret": "",
+        "enterpriseId": "",
+        "userId": ""
+    },
+    "data": {
+        "collaboratorId": ""
+    }
 }

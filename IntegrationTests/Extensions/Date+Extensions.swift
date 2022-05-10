@@ -10,11 +10,11 @@ import BoxSDK
 import Foundation
 
 extension Date {
-    var tomorrow: Date {
+    static var tomorrow: Date {
         Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     }
 
-    func addDays(_ days: Int) -> Date {
+    static func addDays(_ days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: days, to: Date())!
     }
 }
