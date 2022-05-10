@@ -3,11 +3,11 @@ name: Integration tests
 on:
   push:
     branches:
-      - main
+      - aj/integration-test
   pull_request_target:
     types: [ opened, synchronize, edited ]
     branches:
-      - main
+      - aj/integration-test
 
 jobs:
   integration-tests:
