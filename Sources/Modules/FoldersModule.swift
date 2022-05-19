@@ -350,9 +350,12 @@ public class FoldersModule {
     ///
     /// - Parameters:
     ///   - folderId: The ID of the folder
+    ///   - fields: Comma-separated list of folder [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     ///   - completion: Returns the updated folder or an error
     public func addToFavorites(
         folderId: String,
+        fields: [String]? = nil,
         completion: @escaping Callback<Folder>
     ) {
         boxClient.collections.getFavorites { [weak self] result in
@@ -363,7 +366,12 @@ public class FoldersModule {
 
             switch result {
             case let .success(favorites):
-                self.addToCollection(folderId: folderId, collectionId: favorites.id, completion: completion)
+                self.addToCollection(
+                    folderId: folderId,
+                    collectionId: favorites.id,
+                    fields: fields,
+                    completion: completion
+                )
             case let .failure(error):
                 completion(.failure(error))
             }
@@ -375,13 +383,16 @@ public class FoldersModule {
     /// - Parameters:
     ///   - folderId: The ID of the folder
     ///   - collectionId: The ID of the collection
+    ///   - fields: Comma-separated list of folder [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     ///   - completion: Returns the updated folder or an error
     public func addToCollection(
         folderId: String,
         collectionId: String,
+        fields: [String]? = nil,
         completion: @escaping Callback<Folder>
     ) {
-        get(folderId: folderId) { [weak self] result in
+        get(folderId: folderId, fields: ["collections"]) { [weak self] result in
             guard let self = self else {
                 completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable add to Collection - FoldersModule deallocated"))))
                 return
@@ -393,7 +404,12 @@ public class FoldersModule {
                 let collectionIdList = collectionList.compactMap { $0["id"] }
                 let updatedCollectionIdList = Array(Set(collectionIdList + [collectionId])) // Add only new
 
-                self.update(folderId: folderId, collections: updatedCollectionIdList, completion: completion)
+                self.update(
+                    folderId: folderId,
+                    collections: updatedCollectionIdList,
+                    fields: fields,
+                    completion: completion
+                )
             case let .failure(error):
                 completion(.failure(error))
             }
@@ -404,9 +420,12 @@ public class FoldersModule {
     ///
     /// - Parameters:
     ///   - folderId: The ID of the folder
+    ///   - fields: Comma-separated list of folder [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     ///   - completion: Returns the updated folder or an error
     public func removeFromFavorites(
         folderId: String,
+        fields: [String]? = nil,
         completion: @escaping Callback<Folder>
     ) {
         boxClient.collections.getFavorites { [weak self] result in
@@ -417,25 +436,33 @@ public class FoldersModule {
 
             switch result {
             case let .success(favorites):
-                self.removeFromCollection(folderId: folderId, collectionId: favorites.id, completion: completion)
+                self.removeFromCollection(
+                    folderId: folderId,
+                    collectionId: favorites.id,
+                    fields: fields,
+                    completion: completion
+                )
             case let .failure(error):
                 completion(.failure(error))
             }
         }
     }
 
-    /// Add folder to particular collection
+    /// Remove folder from particular collection
     ///
     /// - Parameters:
     ///   - folderId: The ID of the folder
     ///   - collectionId: The ID of the collection
+    ///   - fields: Comma-separated list of folder [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     ///   - completion: Returns the updated folder or an error
     public func removeFromCollection(
         folderId: String,
         collectionId: String,
+        fields: [String]? = nil,
         completion: @escaping Callback<Folder>
     ) {
-        get(folderId: folderId) { [weak self] result in
+        get(folderId: folderId, fields: ["collections"]) { [weak self] result in
             guard let self = self else {
                 completion(.failure(BoxSDKError(message: .instanceDeallocated("Unable to remove from Collection - FoldersModule deallocated"))))
                 return
@@ -450,7 +477,12 @@ public class FoldersModule {
                     collectionIdList.remove(at: index)
                 }
 
-                self.update(folderId: folderId, collections: collectionIdList, completion: completion)
+                self.update(
+                    folderId: folderId,
+                    collections: collectionIdList,
+                    fields: fields,
+                    completion: completion
+                )
             case let .failure(error):
                 completion(.failure(error))
             }

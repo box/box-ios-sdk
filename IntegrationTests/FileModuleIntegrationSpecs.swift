@@ -1145,7 +1145,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         ) { result in
                             switch result {
                             case let .success(representations):
-                                expect(representations.contains { item in item.representation == "jpg" }).to(be(true))
+                                expect(representations.contains { item in item.representation == "jpg" }).to(equal(true))
                             case let .failure(error):
                                 fail("Expected listRepresentations call to suceeded, but it failed \(error)")
                             }

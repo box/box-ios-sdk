@@ -17,6 +17,7 @@
 		053637BD276C96E400C18D26 /* IntegrationTestResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053637BC276C96E400C18D26 /* IntegrationTestResources.swift */; };
 		0538E0342774BBEF00E804FD /* GetFilesUnderRetentionForAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 0538E0332774BBEE00E804FD /* GetFilesUnderRetentionForAssignment.json */; };
 		0538E0362774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json in Resources */ = {isa = PBXBuildFile; fileRef = 0538E0352774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json */; };
+		053EE331283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EE330283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift */; };
 		0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543A2382757AA2C0005CA23 /* Configuration.swift */; };
 		0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */; };
 		0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */; };
@@ -25,6 +26,10 @@
 		0547B73F276C99AA002D9E7A /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547B73A276C99AA002D9E7A /* NameGenerator.swift */; };
 		0547B743276C9A89002D9E7A /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547B742276C9A89002D9E7A /* FileUtil.swift */; };
 		0547B745276CCA9B002D9E7A /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0547B744276CCA9B002D9E7A /* Configuration.json */; };
+		054D536128352BC900CC2CBC /* FoldersModule+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D536028352BC900CC2CBC /* FoldersModule+Async.swift */; };
+		054D536428367A7C00CC2CBC /* AsyncHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D536328367A7C00CC2CBC /* AsyncHelper.swift */; };
+		054D53662836992000CC2CBC /* BoxSDK+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D53652836992000CC2CBC /* BoxSDK+Async.swift */; };
+		054D53682837CEE400CC2CBC /* PagingIterator+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D53672837CEE400CC2CBC /* PagingIterator+Async.swift */; };
 		054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */; };
 		054D789B2715989800E1E273 /* SignRequestSignFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789A2715989800E1E273 /* SignRequestSignFiles.swift */; };
 		054D789D2715E13B00E1E273 /* SignRequestsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D789C2715E13B00E1E273 /* SignRequestsModule.swift */; };
@@ -38,6 +43,7 @@
 		0579F6F827577DAD00473A3C /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */; };
 		057C8CE4276799760092A6EC /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C8CE3276799760092A6EC /* Date+Extensions.swift */; };
+		059CF241283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059CF240283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift */; };
 		05A58A0F26FB16DF00AB309C /* FolderItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */; };
 		05A58A1726FB196100AB309C /* WebhookItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */; };
 		05A58A1C26FB19F400AB309C /* TaskItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */; };
@@ -604,6 +610,7 @@
 		053637BC276C96E400C18D26 /* IntegrationTestResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestResources.swift; sourceTree = "<group>"; };
 		0538E0332774BBEE00E804FD /* GetFilesUnderRetentionForAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFilesUnderRetentionForAssignment.json; sourceTree = "<group>"; };
 		0538E0352774BF6800E804FD /* GetFileVersionsUnderRetentionForAssignment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileVersionsUnderRetentionForAssignment.json; sourceTree = "<group>"; };
+		053EE330283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAsyncIntegrationTests.swift; sourceTree = "<group>"; };
 		0543A2382757AA2C0005CA23 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenScopeSpecs.swift; sourceTree = "<group>"; };
 		0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemSpecs.swift; sourceTree = "<group>"; };
@@ -612,6 +619,10 @@
 		0547B73A276C99AA002D9E7A /* NameGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
 		0547B742276C9A89002D9E7A /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		0547B744276CCA9B002D9E7A /* Configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
+		054D536028352BC900CC2CBC /* FoldersModule+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoldersModule+Async.swift"; sourceTree = "<group>"; };
+		054D536328367A7C00CC2CBC /* AsyncHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelper.swift; sourceTree = "<group>"; };
+		054D53652836992000CC2CBC /* BoxSDK+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoxSDK+Async.swift"; sourceTree = "<group>"; };
+		054D53672837CEE400CC2CBC /* PagingIterator+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PagingIterator+Async.swift"; sourceTree = "<group>"; };
 		054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerDecision.swift; sourceTree = "<group>"; };
 		054D789A2715989800E1E273 /* SignRequestSignFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignFiles.swift; sourceTree = "<group>"; };
 		054D789C2715E13B00E1E273 /* SignRequestsModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRequestsModule.swift; sourceTree = "<group>"; };
@@ -626,6 +637,7 @@
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		057C8CE3276799760092A6EC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		059CF240283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModuleAsyncIntegrationTests.swift; sourceTree = "<group>"; };
 		05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderItemSpecs.swift; sourceTree = "<group>"; };
 		05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookItemSpecs.swift; sourceTree = "<group>"; };
 		05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemSpecs.swift; sourceTree = "<group>"; };
@@ -1188,6 +1200,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		054D536B283CFAB800CC2CBC /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				059CF240283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift */,
+				053EE330283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift */,
+			);
+			path = Async;
+			sourceTree = "<group>";
+		};
 		05EA725C2762649B001ECFF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1204,13 +1225,14 @@
 		05EC89D527577AF900FEBAC6 /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				053637BB276C952D00C18D26 /* Extensions */,
-				0547B737276C99AA002D9E7A /* Utils */,
-				05EA725C2762649B001ECFF3 /* Resources */,
+				054D536B283CFAB800CC2CBC /* Async */,
 				05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */,
-				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
-				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
 				0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */,
+				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
+				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
+				053637BB276C952D00C18D26 /* Extensions */,
+				05EA725C2762649B001ECFF3 /* Resources */,
+				0547B737276C99AA002D9E7A /* Utils */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -1444,6 +1466,7 @@
 				805E069E22DE52B800892E5C /* MetadataSearchFilter.swift */,
 				97D8727922F3D05500FB9DFE /* ResponseHandler.swift */,
 				17145DC5230D8C3E00857868 /* URLValidation.swift */,
+				054D536328367A7C00CC2CBC /* AsyncHelper.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1470,6 +1493,7 @@
 				227E3F312257503000EF2BC9 /* ObjectDeserializer.swift */,
 				F941067123513DD00061A3F8 /* ArrayInputStream.swift */,
 				928810AC237038470076ABA0 /* PagingIterator.swift */,
+				054D53672837CEE400CC2CBC /* PagingIterator+Async.swift */,
 				F95D6F822453415A008B09CF /* BoxUploadTask.swift */,
 			);
 			path = Network;
@@ -1592,38 +1616,39 @@
 		225639242253897D00D951B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				054D789C2715E13B00E1E273 /* SignRequestsModule.swift */,
-				22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */,
-				2246361D2315923B009DC4E9 /* TasksModule.swift */,
-				2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */,
-				228B369E22BBC1CE00078283 /* MetadataModule.swift */,
-				224E1BF222C57D4A00F31F3A /* MetadataModule+Templates.swift */,
-				224E1BED22C57C8400F31F3A /* MetadataModule+Files.swift */,
-				22CE539622DD005400F3D59F /* MetadataModule+Folders.swift */,
 				225639282253897D00D951B5 /* AuthModule.swift */,
 				2246CD9322B2924700C29DE5 /* AuthModuleDispatcher.swift */,
+				2278C541231D72960048FF45 /* CollaborationAllowlistModule.swift */,
 				0CC1C908229EC8C1003F134C /* CollaborationsModule.swift */,
-				804F3BF622A59250008CF915 /* CommentsModule.swift */,
 				22D0040E22AFB1F500478F1E /* CollectionsModule.swift */,
+				804F3BF622A59250008CF915 /* CommentsModule.swift */,
+				80E567DA2315DBA000798E3A /* DevicePinsModule.swift */,
+				9DE5D7DB22EF2CBC0081A031 /* EventsModule.swift */,
 				225639262253897D00D951B5 /* FilesModule.swift */,
 				22640BB2230571E500C19ECA /* FilesModule+ChunkedUpload.swift */,
 				22D675FD22F2E51F00C7E51B /* FilesModule+Representations.swift */,
 				9D472E6A231BE39A004C8023 /* FilesModule+RetentionPolicy.swift */,
 				225639272253897D00D951B5 /* FoldersModule.swift */,
+				054D536028352BC900CC2CBC /* FoldersModule+Async.swift */,
+				80FEB7AA231EE5D50037331C /* GroupsModule.swift */,
+				F929D5E423319E280039E452 /* LegalHoldsModule.swift */,
+				22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */,
+				228B369E22BBC1CE00078283 /* MetadataModule.swift */,
+				224E1BED22C57C8400F31F3A /* MetadataModule+Files.swift */,
+				22CE539622DD005400F3D59F /* MetadataModule+Folders.swift */,
+				224E1BF222C57D4A00F31F3A /* MetadataModule+Templates.swift */,
+				F99D41222314A0B400327698 /* RecentItemsModule.swift */,
+				172A4F202317F464009F5293 /* RetentionPolicyModule.swift */,
 				9731D2BD227CDFD10092BCCE /* SearchModule.swift */,
 				8053E2C522AF06FF000B42E1 /* SharedItemsModule.swift */,
-				225639252253897D00D951B5 /* UsersModule.swift */,
-				9DE5D7DB22EF2CBC0081A031 /* EventsModule.swift */,
-				8093D29122FA319E00DB628E /* WebLinksModule.swift */,
-				22E39ED522F0913F0061E182 /* TrashModule.swift */,
-				80E567DA2315DBA000798E3A /* DevicePinsModule.swift */,
-				F99D41222314A0B400327698 /* RecentItemsModule.swift */,
-				80FEB7AA231EE5D50037331C /* GroupsModule.swift */,
-				F99D41392318533200327698 /* WebhooksModule.swift */,
-				172A4F202317F464009F5293 /* RetentionPolicyModule.swift */,
-				80BC8417232C526400010E08 /* TermsOfServicesModule.swift */,
-				F929D5E423319E280039E452 /* LegalHoldsModule.swift */,
+				054D789C2715E13B00E1E273 /* SignRequestsModule.swift */,
 				F969D37B233A7146001301FC /* StoragePoliciesModule.swift */,
+				2246361D2315923B009DC4E9 /* TasksModule.swift */,
+				80BC8417232C526400010E08 /* TermsOfServicesModule.swift */,
+				22E39ED522F0913F0061E182 /* TrashModule.swift */,
+				225639252253897D00D951B5 /* UsersModule.swift */,
+				F99D41392318533200327698 /* WebhooksModule.swift */,
+				8093D29122FA319E00DB628E /* WebLinksModule.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1896,6 +1921,7 @@
 			isa = PBXGroup;
 			children = (
 				225639ED22539E8E00D951B5 /* BoxSDK.swift */,
+				054D53652836992000CC2CBC /* BoxSDK+Async.swift */,
 				2256392B2253897D00D951B5 /* Client */,
 				225638FF2253897C00D951B5 /* Core */,
 				0C9FA5F6226711F200607FB9 /* Logger */,
@@ -2334,9 +2360,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3549BB261DA389CD00C63030 /* Build configuration list for PBXNativeTarget "BoxSDK-iOS" */;
 			buildPhases = (
+				3549BB1E1DA389CD00C63030 /* Headers */,
 				3549BB1C1DA389CD00C63030 /* Sources */,
 				3549BB1D1DA389CD00C63030 /* Frameworks */,
-				3549BB1E1DA389CD00C63030 /* Headers */,
 				3549BB1F1DA389CD00C63030 /* Resources */,
 				0C4D9F5F2237E1480061671D /* SwiftFormat Run Script */,
 				0C4D9F5B2237DCF70061671D /* SwiftLint Run Script */,
@@ -2740,6 +2766,8 @@
 				0547B73F276C99AA002D9E7A /* NameGenerator.swift in Sources */,
 				0547B73D276C99AA002D9E7A /* Constants.swift in Sources */,
 				0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */,
+				059CF241283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift in Sources */,
+				053EE331283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift in Sources */,
 				0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */,
 				0547B743276C9A89002D9E7A /* FileUtil.swift in Sources */,
 				05EC1086276A1CFE00252112 /* Task+Extensions.swift in Sources */,
@@ -2868,6 +2896,7 @@
 				05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */,
 				228B36AB22BC243900078283 /* MetadataField.swift in Sources */,
 				05610A9727106ACA009F92CC /* SignRequestSigner.swift in Sources */,
+				054D536428367A7C00CC2CBC /* AsyncHelper.swift in Sources */,
 				2256398A2253897D00D951B5 /* File.swift in Sources */,
 				225639722253897D00D951B5 /* SharedLinkData.swift in Sources */,
 				0C66A62D2283147F008D5AEB /* OAuthWebAuthentication.swift in Sources */,
@@ -2878,6 +2907,7 @@
 				22DCC3C622E0D19E007F74E2 /* TrackingCode.swift in Sources */,
 				B4882E6E25EEBE1800EB57BA /* FolderLock.swift in Sources */,
 				225639A22253897D00D951B5 /* FolderItem.swift in Sources */,
+				054D53682837CEE400CC2CBC /* PagingIterator+Async.swift in Sources */,
 				228B36A622BC234D00078283 /* MetadataTemplate.swift in Sources */,
 				F92CF99E235539710046A277 /* BoxSDKError.swift in Sources */,
 				F929D5E523319E280039E452 /* LegalHoldsModule.swift in Sources */,
@@ -2907,6 +2937,7 @@
 				2256399E2253897D00D951B5 /* TokenInfo.swift in Sources */,
 				228C361B2255F82800AC8888 /* BoxResponse.swift in Sources */,
 				F9DF56B42425E2B7009E131E /* BoxNetworkTask.swift in Sources */,
+				054D536128352BC900CC2CBC /* FoldersModule+Async.swift in Sources */,
 				804F3BFB22A5934E008CF915 /* CommentItem.swift in Sources */,
 				0C987133229D75FE005F19AF /* BoxJSONDecoder.swift in Sources */,
 				805E06A722E120AC00892E5C /* MetadataFilterQueryParam.swift in Sources */,
@@ -2916,6 +2947,7 @@
 				0C3DA58722A6819200199AAD /* MemoryTokenStore.swift in Sources */,
 				225639922253897D00D951B5 /* BoxModel.swift in Sources */,
 				80FEB7AB231EE5D50037331C /* GroupsModule.swift in Sources */,
+				054D53662836992000CC2CBC /* BoxSDK+Async.swift in Sources */,
 				2256398E2253897D00D951B5 /* EntryContainer.swift in Sources */,
 				054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */,
 				F99D41382318495700327698 /* Webhook.swift in Sources */,
