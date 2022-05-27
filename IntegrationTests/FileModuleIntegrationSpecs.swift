@@ -1091,7 +1091,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: zipFileName)
 
                     // create & download
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         self.client.files.downloadZip(
                             name: zipFileName,
                             items: zipItems,
@@ -1145,7 +1145,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         ) { result in
                             switch result {
                             case let .success(representations):
-                                expect(representations.contains { item in item.representation == "jpg" }).to(be(true))
+                                expect(representations.contains { item in item.representation == "jpg" }).to(equal(true))
                             case let .failure(error):
                                 fail("Expected listRepresentations call to suceeded, but it failed \(error)")
                             }

@@ -338,7 +338,7 @@ public class BoxSDK {
             }
             else {
                 designatedTokenStore = MemoryTokenStore()
-                startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore)
+                startOAuth2WebSession(completion: completion, tokenStore: designatedTokenStore, context: context)
             }
         }
     #endif
