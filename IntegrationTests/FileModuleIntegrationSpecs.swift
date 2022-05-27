@@ -1091,7 +1091,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: zipFileName)
 
                     // create & download
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         self.client.files.downloadZip(
                             name: zipFileName,
                             items: zipItems,
