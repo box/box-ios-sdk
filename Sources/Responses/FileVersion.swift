@@ -45,6 +45,8 @@ public class FileVersion: BoxModel {
     public let restoredAt: Date?
     /// The user who restored the file version.
     public let restoredBy: User?
+    /// The version number of the file version.
+    public let versionNumber: String?
 
     /// Initializer.
     ///
@@ -75,5 +77,6 @@ public class FileVersion: BoxModel {
         purgedAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "purged_at")
         restoredAt = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "restored_at")
         restoredBy = try BoxJSONDecoder.optionalDecode(json: json, forKey: "restored_by")
+        versionNumber = try BoxJSONDecoder.optionalDecode(json: json, forKey: "version_number")
     }
 }

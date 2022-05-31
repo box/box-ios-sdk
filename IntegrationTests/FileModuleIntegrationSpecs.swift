@@ -320,7 +320,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     // List versions
-                    let iterator = self.client.files.listVersions(fileId: file.id, offset: 0, limit: 1000)
+                    let iterator = self.client.files.listVersions(
+                        fileId: file.id,
+                        offset: 0,
+                        limit: 1000,
+                        fields: ["name,version_number"]
+                    )
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -329,8 +334,10 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(2))
                                 expect(page.entries[0].id).to(equal(fileVersion2.id))
                                 expect(page.entries[0].name).to(equal(versionName2))
+                                expect(page.entries[0].versionNumber).to(equal("2"))
                                 expect(page.entries[1].id).to(equal(file.fileVersion?.id))
                                 expect(page.entries[1].name).to(equal(versionName1))
+                                expect(page.entries[1].versionNumber).to(equal("1"))
                             case let .failure(error):
                                 fail("Expected list call to succeed, but instead got \(error)")
                             }
@@ -341,11 +348,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get version
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name"]) { result in
+                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name,version_number"]) { result in
                             switch result {
                             case let .success(fileVersionItem):
                                 expect(fileVersionItem.id).to(equal(fileVersion2.id))
                                 expect(fileVersionItem.name).to(equal(versionName2))
+                                expect(fileVersionItem.versionNumber).to(equal("2"))
                             case let .failure(error):
                                 fail("Expected getVersion call to succeed, but instead got \(error)")
                             }
@@ -373,11 +381,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.get(fileId: file.id) { result in
+                        self.client.files.get(fileId: file.id, fields: ["name,version_number,file_version"]) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(fileItem.fileVersion?.id).to(equal(fileVersion4?.id))
                                 expect(fileItem.name).to(equal(versionName2))
+                                expect(fileItem.versionNumber).to(equal("4"))
                             case let .failure(error):
                                 fail("Expected get call to succeed, but instead got \(error)")
                             }
