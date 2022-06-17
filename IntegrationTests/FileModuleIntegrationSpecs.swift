@@ -1240,7 +1240,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     guard let session = session else { return }
 
                     // upload all parts of file
-                    var isUploadedSuccessfully: Bool = false
+                    var isUploadedSuccessfully = false
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         self.uploadParts(in: session, data: fileContent) { isSuccess in
@@ -1394,7 +1394,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     guard let session = session else { return }
 
                     // upload all parts of file
-                    var isUploadedSuccessfully: Bool = false
+                    var isUploadedSuccessfully = false
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         self.uploadParts(in: session, data: fileContent) { isSuccess in

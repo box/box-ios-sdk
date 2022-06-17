@@ -29,10 +29,6 @@ let prettyPrintEncoder: JSONEncoder = {
     return encoder
 }()
 
-let queryParameterEncoder: JSONEncoder = {
-    JSONEncoder()
-}()
+let queryParameterEncoder: JSONEncoder = .init()
 
-let queryParameterDecoder: JSONDecoder = {
-    JSONDecoder()
-}()
+let queryParameterDecoder: JSONDecoder = .init()

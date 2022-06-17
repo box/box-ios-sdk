@@ -16,9 +16,9 @@ class URLExtensionTest: QuickSpec {
     override public func spec() {
 
         let configuration: BoxSDKConfiguration = try! BoxSDKConfiguration(clientId: "", clientSecret: "")
-        let customURLPart: String = "/testurl"
-        let invalidURLPart: String = "/test/../"
-        let invalidURLPart2: String = "/test/.."
+        let customURLPart = "/testurl"
+        let invalidURLPart = "/test/../"
+        let invalidURLPart2 = "/test/.."
 
         describe("boxAPIEndpoint()") {
             it("should create an API Endpoint URL containing base url from configuration") {
