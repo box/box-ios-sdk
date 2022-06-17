@@ -17,7 +17,7 @@
     <a title="Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxSDK 5.2.1 Docs</a> (100% documented)</p>
+        <p><a href="index.html">BoxSDK 5.3.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -482,6 +482,9 @@
                 <a href="Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/AsyncHelper.html">AsyncHelper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
               </li>
               <li class="nav-group-task">
@@ -537,6 +540,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/GroupRole.html">GroupRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/HTTPMethod.html">HTTPMethod</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/ItemStatus.html">ItemStatus</a>
@@ -655,6 +661,9 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -672,6 +681,9 @@
               <li class="nav-group-task">
                 <a href="Extensions/URL.html">URL</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/c:objc(cs)NSURLSessionTask">URLSessionTask</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -688,6 +700,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/Cancellable.html">Cancellable</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
@@ -827,6 +842,35 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK11AsyncHelperO"></a>
+                    <a name="//apple_ref/swift/Enum/AsyncHelper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11AsyncHelperO">AsyncHelper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides method for converting Callback based API into an async API</p>
+
+                        <a href="Enums/AsyncHelper.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(iOS 13.0, *)</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AsyncHelper</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -1441,6 +1485,34 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">UserRole</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BoxEnum.html">BoxEnum</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK10HTTPMethodO"></a>
+                    <a name="//apple_ref/swift/Enum/HTTPMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK10HTTPMethodO">HTTPMethod</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Represents HTTP methods.</p>
+
+                        <a href="Enums/HTTPMethod.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HTTPMethod</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -2440,8 +2512,8 @@ Should be used mainly with optinal method parameters to differentiate between ig
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-04-22)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-06-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
