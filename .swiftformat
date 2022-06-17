@@ -20,3 +20,5 @@
 --disable wrapMultilineStatementBraces
 --wraparguments before-first
 --elseposition next-line
+--disable redundanttype
+--disable redundantClosure
