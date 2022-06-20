@@ -87,6 +87,53 @@ class FolderModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("update()") {
+                it("should not send can_edit sharedLink permission") {
+                    stub(condition: isHost("api.box.com")
+                        && isPath("/2.0/folders/11111")
+                        && isMethodPUT()
+                        && containsQueryParams(["fields": "name,shared_link"])
+                        && hasJsonBody([
+                            "shared_link": [
+                                "access": "open",
+                                "permissions": ["can_download": true]
+                            ]
+                        ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.folders.update(
+                            folderId: "11111",
+                            sharedLink: .value(SharedLinkData(access: .open, canDownload: true, canEdit: true)),
+                            fields: ["name", "shared_link"]
+                        ) { result in
+                            switch result {
+                            case let .success(folder):
+                                expect(folder).toNot(beNil())
+                                expect(folder).to(beAKindOf(Folder.self))
+                                expect(folder.id).to(equal("11111"))
+                                expect(folder.name).to(equal("Pictures"))
+                                expect(folder.etag).to(equal("1"))
+                                expect(folder.sequenceId).to(equal("1"))
+                                expect(folder.type).to(equal("folder"))
+                                expect(folder.sharedLink).toNot(beNil())
+                                expect(folder.sharedLink?.access).to(equal(.open))
+                                expect(folder.sharedLink?.permissions?.canDownload).to(equal(true))
+                                expect(folder.sharedLink?.permissions?.canEdit).to(equal(false))
+                            case let .failure(error):
+                                fail("Expected call to update to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
             describe("listItems()") {
 
                 it("should get folder items using offset pagination iterator when usemarker flag is not set") {
@@ -558,14 +605,14 @@ class FolderModuleSpecs: QuickSpec {
                     })
                 }
 
-                context("updating shared link without updating password") {
+                context("updating shared link permissions without updating password") {
                     beforeEach {
                         stub(
                             condition: isHost("api.box.com") &&
                                 isPath("/2.0/folders/5000948880") &&
                                 isMethodPUT() &&
                                 containsQueryParams(["fields": "shared_link"]) &&
-                                hasJsonBody(["shared_link": ["access": "open"]])
+                                hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true]]])
                         ) { _ in
                             OHHTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
@@ -575,7 +622,7 @@ class FolderModuleSpecs: QuickSpec {
                     }
                     it("should update a shared link on a folder", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open) { result in
+                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, canDownload: true) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -583,6 +630,9 @@ class FolderModuleSpecs: QuickSpec {
                                     expect(sharedLink.downloadCount).to(equal(0))
                                     expect(sharedLink.downloadURL).to(beNil())
                                     expect(sharedLink.isPasswordEnabled).to(equal(true))
+                                    expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                    expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                    expect(sharedLink.permissions?.canEdit).to(equal(false))
                                 case let .failure(error):
                                     fail("Expected call to createOrUpdateSharedLink to suceeded, but instead got \(error)")
                                 }

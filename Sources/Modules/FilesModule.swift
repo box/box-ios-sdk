@@ -1257,6 +1257,7 @@ public class FilesModule {
     ///   - access: The level of access. If you omit this field then the access level will be set to the default access level specified by the enterprise admin
     ///   - password: The password required to access the shared link. Set to .empty to delete the password
     ///   - canDownload: Whether the shared link allows downloads
+    ///   - canEdit: Whether the shared link allows editing
     ///   - completion: Returns a standard SharedLink object or an error
     public func setSharedLink(
         forFile fileId: String,
@@ -1265,6 +1266,7 @@ public class FilesModule {
         access: SharedLinkAccess? = nil,
         password: NullableParameter<String>? = nil,
         canDownload: Bool? = nil,
+        canEdit: Bool? = nil,
         completion: @escaping Callback<SharedLink>
     ) {
         update(
@@ -1274,7 +1276,8 @@ public class FilesModule {
                 password: password,
                 unsharedAt: unsharedAt,
                 vanityName: vanityName,
-                canDownload: canDownload
+                canDownload: canDownload,
+                canEdit: canEdit
             )),
             fields: ["shared_link"]
         ) { result in

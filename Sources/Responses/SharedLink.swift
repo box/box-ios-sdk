@@ -47,6 +47,8 @@ public class SharedLink: BoxModel {
         public let canPreview: Bool?
         /// Whether the shared link allows downloads. For shared links on folders, this also applies to any items in the folder.
         public let canDownload: Bool?
+        /// Whether the shared link allows editing of files.
+        public let canEdit: Bool?
     }
 
     // MARK: - BoxModel

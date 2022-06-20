@@ -157,6 +157,8 @@ class FolderModuleAsyncIntegrationTests: BaseAsyncIntegrationTests {
 
         XCTAssertEqual(createdSharedLink.access, .open)
         XCTAssertEqual(createdSharedLink.permissions?.canDownload, true)
+        XCTAssertEqual(createdSharedLink.permissions?.canPreview, true)
+        XCTAssertEqual(createdSharedLink.permissions?.canEdit, false)
         XCTAssertEqual(createdSharedLink.isPasswordEnabled, true)
         XCTAssertEqual(createdSharedLink.vanityName, "iOS-SDK-Folder-VanityName")
 
@@ -164,7 +166,9 @@ class FolderModuleAsyncIntegrationTests: BaseAsyncIntegrationTests {
         let fetchedSharedLink = try await client.folders.getSharedLink(forFolder: folder.id)
 
         XCTAssertEqual(fetchedSharedLink.access, .open)
-        XCTAssertEqual(fetchedSharedLink.permissions?.canDownload, true)
+        XCTAssertEqual(createdSharedLink.permissions?.canDownload, true)
+        XCTAssertEqual(createdSharedLink.permissions?.canPreview, true)
+        XCTAssertEqual(createdSharedLink.permissions?.canEdit, false)
         XCTAssertEqual(fetchedSharedLink.isPasswordEnabled, true)
         XCTAssertEqual(fetchedSharedLink.vanityName, "iOS-SDK-Folder-VanityName")
 

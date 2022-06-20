@@ -39,6 +39,7 @@
 		05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9827107079009F92CC /* SignRequestCreateParameters.swift */; };
 		05610A9B271099A7009F92CC /* SignRequestPrefillTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */; };
 		05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */; };
+		056B628B2860C16F008E9418 /* SharedLinkDataSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */; };
 		0579F6F727577DAD00473A3C /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0579F6F827577DAD00473A3C /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */; };
@@ -632,6 +633,7 @@
 		05610A9827107079009F92CC /* SignRequestCreateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCreateParameters.swift; sourceTree = "<group>"; };
 		05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTag.swift; sourceTree = "<group>"; };
 		05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInput.swift; sourceTree = "<group>"; };
+		056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLinkDataSpecs.swift; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
@@ -1241,6 +1243,7 @@
 			isa = PBXGroup;
 			children = (
 				05EE8150271869B4006A2329 /* SignRequestCreateRequestSpecs.swift */,
+				056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */,
 			);
 			path = BodyData;
 			sourceTree = "<group>";
@@ -3016,6 +3019,7 @@
 				05EE814827186336006A2329 /* SignRequestSignerRoleSpecs.swift in Sources */,
 				97F04DA122B84E540034B9A3 /* UserSpecs.swift in Sources */,
 				05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */,
+				056B628B2860C16F008E9418 /* SharedLinkDataSpecs.swift in Sources */,
 				05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */,
 				05F59F0E26FC984900D9A539 /* AuthenticationSessionSpecs.swift in Sources */,
 				F929D63C2331B06B0039E452 /* LegalHoldsModuleSpecs.swift in Sources */,

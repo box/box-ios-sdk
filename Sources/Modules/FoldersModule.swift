@@ -255,7 +255,7 @@ public class FoldersModule {
             case .null:
                 body["shared_link"] = NSNull()
             case let .value(sharedLinkValue):
-                body["shared_link"] = sharedLinkValue.bodyDict
+                body["shared_link"] = sharedLinkValue.copyWithoutPermissions(["can_edit"]).bodyDict
             }
         }
 
