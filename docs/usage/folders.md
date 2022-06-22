@@ -411,7 +411,7 @@ To add or update the shared link for a folder, call
 [`client.folders.setSharedLink(forFolder:access:unsharedAt:vanityName:password:canDownload:completion:)`][set-shared-link]
 with the ID of the folder and the shared link properties to set.
 
-<!-- sample put_folders_id_shared_link_create -->
+<!-- sample put_folders_id add_shared_link -->
 ```swift
 client.folders.setSharedLink(forFolder: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -447,7 +447,7 @@ To remove a file's shared link, call
 [`client.folders.deleteSharedLink(forFolder:completion:)`][delete-shared-link]
 with the ID of the folder.
 
-<!-- sample put_folders_id_shared_link_remove -->
+<!-- sample put_folders_id remove_shared_link -->
 ```swift
 client.folders.deleteSharedLink(forFolder: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
