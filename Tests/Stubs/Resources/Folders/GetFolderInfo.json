@@ -50,7 +50,8 @@
         "access": "open",
         "permissions": {
             "can_download": true,
-            "can_preview": true
+            "can_preview": true,
+            "can_edit": false
         }
     },
     "folder_upload_email": {

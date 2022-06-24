@@ -411,6 +411,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(false))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-Folder-VanityName"))
                             case let .failure(error):
@@ -428,6 +430,8 @@ class FolderModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(false))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-Folder-VanityName"))
                             case let .failure(error):

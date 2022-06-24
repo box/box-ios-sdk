@@ -699,12 +699,15 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         self.client.files.setSharedLink(
                             forFile: file.id,
                             access: .open,
-                            canDownload: true
+                            canDownload: true,
+                            canEdit: true
                         ) { result in
                             switch result {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(false))
                                 expect(sharedLink.vanityName).to(beNil())
                             case let .failure(error):
@@ -728,6 +731,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-File-VanityName"))
                             case let .failure(error):
@@ -745,6 +750,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-File-VanityName"))
                             case let .failure(error):

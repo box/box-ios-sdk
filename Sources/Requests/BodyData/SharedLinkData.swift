@@ -28,23 +28,48 @@ public struct SharedLinkData: Encodable {
     ///   - vanityName: The custom vanity name to use in the shared link URL.
     ///     It should be between 12 and 30 characters. This field can contains only letters, numbers, and hyphens.
     ///   - canDownload: Permission specifying whether user can download from the shared link.
+    ///   - canEdit: Permission specifying whether user can edit from the shared link.
+    ///     This value can only be true if `canDownload` is also true and if the item has a type of file.
     public init(
         access: SharedLinkAccess? = nil,
         password: NullableParameter<String>? = nil,
         unsharedAt: NullableParameter<Date>? = nil,
         vanityName: NullableParameter<String>? = nil,
-        canDownload: Bool? = nil
+        canDownload: Bool? = nil,
+        canEdit: Bool? = nil
     ) {
         self.access = access
         self.password = password
         self.unsharedAt = unsharedAt
         self.vanityName = vanityName
 
-        if let canDownload = canDownload {
-            permissions = ["can_download": canDownload]
+        var permissions = [String: Bool]()
+        permissions["can_download"] = canDownload
+        permissions["can_edit"] = canEdit
+        self.permissions = permissions.isEmpty ? nil : permissions
+    }
+
+    /// Create a copy of current SharedLinkData object with excluded passed permissions
+    /// - Parameters:
+    ///   - permissions: Array of permissions that should be excluded during copying
+    /// - Returns: Returns copied SharedLinkData object.
+    internal func copyWithoutPermissions(_ permissions: [String]?) -> SharedLinkData {
+        guard let permissions = permissions, let sourcePermissions = self.permissions else {
+            return self
         }
-        else {
-            permissions = nil
+
+        var destinationPermissions = sourcePermissions
+        for item in permissions {
+            destinationPermissions[item] = nil
         }
+
+        return SharedLinkData(
+            access: access,
+            password: password,
+            unsharedAt: unsharedAt,
+            vanityName: vanityName,
+            canDownload: destinationPermissions.first { $0.key == "can_download" }?.value,
+            canEdit: destinationPermissions.first { $0.key == "can_edit" }?.value
+        )
     }
 }

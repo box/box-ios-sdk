@@ -30,3 +30,6 @@ extension NullableParameter: Encodable where T: Encodable {
         }
     }
 }
+
+/// Extension for Equatable conformance
+extension NullableParameter: Equatable where T: Equatable {}
