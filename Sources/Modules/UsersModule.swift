@@ -145,6 +145,77 @@ public class UsersModule {
         )
     }
 
+    /// Upload avatar image to user account. Supported formats are JPG, JPEG and PNG.
+    /// Maximum allowed file size is 1MB and resolution 1024x1024 pixels.
+    ///
+    /// - Parameters:
+    ///   - userId: The ID of the user.
+    ///   - data: The  content of image file as binary data.
+    ///   - name: File name of the avatar image. File name should also contains file extension (.jpg, .jpeg or .png).
+    ///   - progress: Closure where upload progress will be reported
+    ///   - completion: Returns an `UserAvatarUpload` object which contains avatar urls if successful otherwise a BoxSDKError.
+    /// - Returns: BoxUploadTask
+    @discardableResult
+    public func uploadAvatar(
+        userId: String,
+        data: Data,
+        name: String,
+        progress: @escaping (Progress) -> Void = { _ in },
+        completion: @escaping Callback<UserAvatarUpload>
+    ) -> BoxUploadTask {
+        print(name)
+        var body = MultipartForm()
+        body.appendFilePart(
+            name: "pic",
+            contents: InputStream(data: data),
+            length: data.count,
+            fileName: name,
+            mimeType: MimeTypeProvider.getMimeTypeFrom(filename: name)
+        )
+
+        return boxClient.post(
+            url: URL.boxAPIEndpoint("/2.0/users/\(userId)/avatar", configuration: boxClient.configuration),
+            multipartBody: body,
+            progress: progress,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+
+    /// Upload avatar image to user account. Supported formats are JPG, JPEG and PNG.
+    /// Maximum allowed file size is 1MB and resolution 1024x1024 pixels.
+    ///
+    /// - Parameters:
+    ///   - userId: The ID of the user.
+    ///   - stream: An InputStream of an image for been uploaded.
+    ///   - name: File name of the avatar image. File name should also contains file extension (.jpg, .jpeg or .png).
+    ///   - progress: Closure where upload progress will be reported
+    ///   - completion: Returns an `UserAvatarUpload` object which contains avatar urls if successful otherwise a BoxSDKError.
+    /// - Returns: BoxUploadTask
+    @discardableResult
+    public func streamUploadAvatar(
+        userId: String,
+        stream: InputStream,
+        name: String,
+        progress: @escaping (Progress) -> Void = { _ in },
+        completion: @escaping Callback<UserAvatarUpload>
+    ) -> BoxUploadTask {
+        var body = MultipartForm()
+        body.appendFilePart(
+            name: "pic",
+            contents: stream,
+            length: 0,
+            fileName: name,
+            mimeType: MimeTypeProvider.getMimeTypeFrom(filename: name)
+        )
+
+        return boxClient.post(
+            url: URL.boxAPIEndpoint("/2.0/users/\(userId)/avatar", configuration: boxClient.configuration),
+            multipartBody: body,
+            progress: progress,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+
     /// Get image of a user's avatar
     ///
     /// - Parameters:
@@ -165,6 +236,21 @@ public class UsersModule {
                 }
                 completion(objectResult)
             }
+        )
+    }
+
+    /// Deletes a user's avatar image.
+    ///
+    /// - Parameters:
+    ///   - userId: The ID of the user.
+    ///   - completion: Empty response in case of success or an error.
+    public func deleteAvatar(
+        userId: String,
+        completion: @escaping Callback<Void>
+    ) {
+        boxClient.delete(
+            url: URL.boxAPIEndpoint("/2.0/users/\(userId)/avatar", configuration: boxClient.configuration),
+            completion: ResponseHandler.default(wrapping: completion)
         )
     }
 

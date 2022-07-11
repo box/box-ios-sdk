@@ -235,4 +235,37 @@ class BaseIntegrationSpecs: QuickSpec {
             }
         }
     }
+
+    // MARK: Users helper methods
+
+    func createUser(name: String, callback: @escaping (User) -> Void) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            self.client.users.createAppUser(name: name) { result in
+                switch result {
+                case let .success(user):
+                    callback(user)
+                case let .failure(error):
+                    fail("Expected create call to suceeded, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
+
+    func deleteUser(_ user: User?) {
+        guard let user = user else {
+            return
+        }
+
+        waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
+            self.client.users.delete(userId: user.id, force: true) { result in
+                if case let .failure(error) = result {
+                    fail("Expected delete call to succeed, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
 }

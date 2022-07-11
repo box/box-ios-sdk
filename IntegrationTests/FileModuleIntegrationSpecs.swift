@@ -20,7 +20,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder)
+            self.deleteFolder(self.rootFolder, recursive: true)
         }
 
         describe("File Module") {
