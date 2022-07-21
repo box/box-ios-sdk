@@ -10,6 +10,12 @@
 		0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */; };
 		05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */; };
 		05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */; };
+		052A03F328772E2F0063513C /* UserAvatarUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F228772E2F0063513C /* UserAvatarUpload.swift */; };
+		052A03F5287885860063513C /* MimeTypeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F4287885860063513C /* MimeTypeProvider.swift */; };
+		052A03F828788CAF0063513C /* MimeTypeProviderSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */; };
+		052A03FA287C1FC20063513C /* UsersModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F9287C1FC20063513C /* UsersModuleIntegrationSpecs.swift */; };
+		052A0400287C8ED80063513C /* small_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A03FF287C8ED80063513C /* small_image.png */; };
+		052A0407287D9A730063513C /* UploadUserAvatar.json in Resources */ = {isa = PBXBuildFile; fileRef = 052A0405287D9A6E0063513C /* UploadUserAvatar.json */; };
 		052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D1DF22A84090006B5611 /* CommentsModuleSpecs.swift */; };
 		052D63C227182FA500C76281 /* CreateSignRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C127182FA500C76281 /* CreateSignRequest.json */; };
 		052D63C4271843FA00C76281 /* GetSignRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 052D63C3271843FA00C76281 /* GetSignRequests.json */; };
@@ -53,11 +59,11 @@
 		05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */; };
 		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
 		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
+		05B4FFAB287DD6CB00214E3A /* UserAvatarUploadSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B4FFAA287DD6CB00214E3A /* UserAvatarUploadSpecs.swift */; };
 		05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */; };
 		05BFA091274EED9B00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */; };
 		05EA725B27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */; };
 		05EA7268276265A9001ECFF3 /* big_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EA725D276264E9001ECFF3 /* big_image.jpg */; };
-		05EA726B276265A9001ECFF3 /* small_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EA7262276264E9001ECFF3 /* small_image.png */; };
 		05EA726C276265A9001ECFF3 /* small_pdf.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05EA7263276264E9001ECFF3 /* small_pdf.pdf */; };
 		05EC1082276A195100252112 /* Collaboration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EC1081276A195100252112 /* Collaboration+Extensions.swift */; };
 		05EC1084276A19A100252112 /* FolderItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EC1083276A19A100252112 /* FolderItem+Extensions.swift */; };
@@ -605,6 +611,12 @@
 		0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxClientIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetWebLinkSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIntegrationSpecs.swift; sourceTree = "<group>"; };
+		052A03F228772E2F0063513C /* UserAvatarUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarUpload.swift; sourceTree = "<group>"; };
+		052A03F4287885860063513C /* MimeTypeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProvider.swift; sourceTree = "<group>"; };
+		052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProviderSpecs.swift; sourceTree = "<group>"; };
+		052A03F9287C1FC20063513C /* UsersModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
+		052A03FF287C8ED80063513C /* small_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_image.png; sourceTree = "<group>"; };
+		052A0405287D9A6E0063513C /* UploadUserAvatar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UploadUserAvatar.json; sourceTree = "<group>"; };
 		052D63C127182FA500C76281 /* CreateSignRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSignRequest.json; sourceTree = "<group>"; };
 		052D63C3271843FA00C76281 /* GetSignRequests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignRequests.json; sourceTree = "<group>"; };
 		052D85CA271734FC00648C70 /* SignRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleSpecs.swift; sourceTree = "<group>"; };
@@ -648,11 +660,11 @@
 		05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterConvertibleSpecs.swift; sourceTree = "<group>"; };
 		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
 		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
+		05B4FFAA287DD6CB00214E3A /* UserAvatarUploadSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarUploadSpecs.swift; sourceTree = "<group>"; };
 		05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFolderSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05EA725D276264E9001ECFF3 /* big_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = big_image.jpg; sourceTree = "<group>"; };
-		05EA7262276264E9001ECFF3 /* small_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_image.png; sourceTree = "<group>"; };
 		05EA7263276264E9001ECFF3 /* small_pdf.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = small_pdf.pdf; sourceTree = "<group>"; };
 		05EC1081276A195100252112 /* Collaboration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collaboration+Extensions.swift"; sourceTree = "<group>"; };
 		05EC1083276A19A100252112 /* FolderItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderItem+Extensions.swift"; sourceTree = "<group>"; };
@@ -1214,8 +1226,8 @@
 		05EA725C2762649B001ECFF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				052A03FF287C8ED80063513C /* small_image.png */,
 				0547B744276CCA9B002D9E7A /* Configuration.json */,
-				05EA7262276264E9001ECFF3 /* small_image.png */,
 				05EA725D276264E9001ECFF3 /* big_image.jpg */,
 				05EA7263276264E9001ECFF3 /* small_pdf.pdf */,
 				053637BC276C96E400C18D26 /* IntegrationTestResources.swift */,
@@ -1232,6 +1244,7 @@
 				0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */,
 				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
 				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
+				052A03F9287C1FC20063513C /* UsersModuleIntegrationSpecs.swift */,
 				053637BB276C952D00C18D26 /* Extensions */,
 				05EA725C2762649B001ECFF3 /* Resources */,
 				0547B737276C99AA002D9E7A /* Utils */,
@@ -1470,6 +1483,7 @@
 				97D8727922F3D05500FB9DFE /* ResponseHandler.swift */,
 				17145DC5230D8C3E00857868 /* URLValidation.swift */,
 				054D536328367A7C00CC2CBC /* AsyncHelper.swift */,
+				052A03F4287885860063513C /* MimeTypeProvider.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1580,6 +1594,7 @@
 				2263863D2306D5BD002CE1BE /* UploadPart.swift */,
 				22640BB72305902A00C19ECA /* UploadSession.swift */,
 				2256391B2253897D00D951B5 /* User.swift */,
+				052A03F228772E2F0063513C /* UserAvatarUpload.swift */,
 				92514E6D2319C477002D44A8 /* Watermark.swift */,
 				225639212253897D00D951B5 /* WebLink.swift */,
 				228B36AA22BC243900078283 /* MetadataField.swift */,
@@ -1709,6 +1724,7 @@
 		225639C4225389B100D951B5 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				052A0405287D9A6E0063513C /* UploadUserAvatar.json */,
 				F9A3F0D023A18804007C7393 /* GetEnterpriseUsersMarker-Pagination.json */,
 				225639C5225389B100D951B5 /* GetUserInfo.json */,
 				225639C6225389B100D951B5 /* GetCurrentUserInfo.json */,
@@ -1861,6 +1877,7 @@
 				F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */,
 				05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */,
 				05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */,
+				052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2011,44 +2028,45 @@
 			isa = PBXGroup;
 			children = (
 				9DB4F7B822E1EB66002C4697 /* BoxModel */,
-				8061989722AB258500B09896 /* CommentSpecs.swift */,
-				05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */,
-				9771D4DE22B01CC200B76DF8 /* CollaborationSpecs.swift */,
-				97C8B57622B05BB100F36435 /* FileSpecs.swift */,
-				97D3FFB722B1C8F7008C1CE6 /* FileVersionSpecs.swift */,
-				97D3FFBB22B1DBB9008C1CE6 /* FolderSpecs.swift */,
-				97F04DA022B84E540034B9A3 /* UserSpecs.swift */,
-				97F04DA522B86AEC0034B9A3 /* WebLinkSpecs.swift */,
-				97F04DAC22B96B120034B9A3 /* TaskSpecs.swift */,
-				97F04DB922B981430034B9A3 /* GroupSpecs.swift */,
-				80FEB7BD23203A940037331C /* GroupMembershipSpecs.swift */,
-				80E567DF2315E4E400798E3A /* DevicePinSpecs.swift */,
-				F99D41312315AF4700327698 /* RecentItemSpecs.swift */,
-				F99D414A2319845700327698 /* WebhookSpecs.swift */,
-				80BC841F232C53B700010E08 /* TermsOfServiceSpecs.swift */,
-				80BC8421232C53D800010E08 /* TermsOfServiceUserStatusSpecs.swift */,
-				F929D5F02331AB2A0039E452 /* FileVersionLegalHoldSpecs.swift */,
-				F929D5F22331AB4F0039E452 /* LegalHoldPolicyAssignmentSpecs.swift */,
-				F929D5F42331AB940039E452 /* LegalHoldPolicySpecs.swift */,
-				F969D38E233A7279001301FC /* StoragePolicyAssignmentSpecs.swift */,
-				F969D392233A72C0001301FC /* StoragePolicySpecs.swift */,
-				F99DB496233C41440065317F /* RetentionPolicySpecs.swift */,
-				F928144A233E840100E42EEE /* RetentionPolicyAssignmentSpecs.swift */,
-				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
 				054E58E826F4B8D100C604D2 /* CollaborationItemSpecs.swift */,
-				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
+				9771D4DE22B01CC200B76DF8 /* CollaborationSpecs.swift */,
 				0546B2FE26F9F5C500922C04 /* CommentItemSpecs.swift */,
-				05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */,
-				05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */,
-				05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */,
+				8061989722AB258500B09896 /* CommentSpecs.swift */,
+				80E567DF2315E4E400798E3A /* DevicePinSpecs.swift */,
 				05A58A4626FB487500AB309C /* EventTypeSpecs.swift */,
 				05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */,
+				97C8B57622B05BB100F36435 /* FileSpecs.swift */,
+				F929D5F02331AB2A0039E452 /* FileVersionLegalHoldSpecs.swift */,
+				F9281452233E98B300E42EEE /* FileVersionRetentionSpecs.swift */,
+				97D3FFB722B1C8F7008C1CE6 /* FileVersionSpecs.swift */,
+				05A58A0E26FB16DF00AB309C /* FolderItemSpecs.swift */,
+				97D3FFBB22B1DBB9008C1CE6 /* FolderSpecs.swift */,
+				80FEB7BD23203A940037331C /* GroupMembershipSpecs.swift */,
+				97F04DB922B981430034B9A3 /* GroupSpecs.swift */,
+				F929D5F22331AB4F0039E452 /* LegalHoldPolicyAssignmentSpecs.swift */,
+				F929D5F42331AB940039E452 /* LegalHoldPolicySpecs.swift */,
+				F99D41312315AF4700327698 /* RecentItemSpecs.swift */,
+				F928144A233E840100E42EEE /* RetentionPolicyAssignmentSpecs.swift */,
+				F99DB496233C41440065317F /* RetentionPolicySpecs.swift */,
 				05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */,
-				05EE814527185554006A2329 /* SignRequestSpecs.swift */,
-				05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */,
-				05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */,
 				05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */,
+				05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */,
 				05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */,
+				05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */,
+				05EE814527185554006A2329 /* SignRequestSpecs.swift */,
+				F969D38E233A7279001301FC /* StoragePolicyAssignmentSpecs.swift */,
+				F969D392233A72C0001301FC /* StoragePolicySpecs.swift */,
+				05A58A1B26FB19F400AB309C /* TaskItemSpecs.swift */,
+				97F04DAC22B96B120034B9A3 /* TaskSpecs.swift */,
+				80BC841F232C53B700010E08 /* TermsOfServiceSpecs.swift */,
+				80BC8421232C53D800010E08 /* TermsOfServiceUserStatusSpecs.swift */,
+				0546B2FB26F9EDDA00922C04 /* TokenScopeSpecs.swift */,
+				05B4FFAA287DD6CB00214E3A /* UserAvatarUploadSpecs.swift */,
+				97F04DA022B84E540034B9A3 /* UserSpecs.swift */,
+				05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */,
+				05A58A1626FB196100AB309C /* WebhookItemSpecs.swift */,
+				F99D414A2319845700327698 /* WebhookSpecs.swift */,
+				97F04DA522B86AEC0034B9A3 /* WebLinkSpecs.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2465,8 +2483,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				05EA7268276265A9001ECFF3 /* big_image.jpg in Resources */,
-				05EA726B276265A9001ECFF3 /* small_image.png in Resources */,
 				0547B745276CCA9B002D9E7A /* Configuration.json in Resources */,
+				052A0400287C8ED80063513C /* small_image.png in Resources */,
 				05EA726C276265A9001ECFF3 /* small_pdf.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2597,6 +2615,7 @@
 				22B77833230C440B00FF6614 /* ChunkedUploadSessionGetSession.json in Resources */,
 				2278C551231D808E0048FF45 /* GetCollaborationWhitelistEntries.json in Resources */,
 				F929D6112331AE280039E452 /* FullLegalHoldPolicy.json in Resources */,
+				052A0407287D9A730063513C /* UploadUserAvatar.json in Resources */,
 				80E567A0230368DC00798E3A /* GetWebLinkSharedLink_PasswordNotEnabled.json in Resources */,
 				22643AC922B952D1009497CA /* AddFileToFavorites.json in Resources */,
 				F929D6122331AE280039E452 /* FullPolicyAssignment.json in Resources */,
@@ -2772,6 +2791,7 @@
 				059CF241283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift in Sources */,
 				053EE331283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift in Sources */,
 				0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */,
+				052A03FA287C1FC20063513C /* UsersModuleIntegrationSpecs.swift in Sources */,
 				0547B743276C9A89002D9E7A /* FileUtil.swift in Sources */,
 				05EC1086276A1CFE00252112 /* Task+Extensions.swift in Sources */,
 				0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */,
@@ -2804,6 +2824,7 @@
 				97BC7AAD228B69DE00DDE998 /* FieldsQueryParam.swift in Sources */,
 				F95D6F85245C9DFF008B09CF /* Classification.swift in Sources */,
 				0C44FF6C227C4B890018D8E9 /* LogDestination.swift in Sources */,
+				052A03F328772E2F0063513C /* UserAvatarUpload.swift in Sources */,
 				228C36162255F82000AC8888 /* BoxRequest.swift in Sources */,
 				0C44FF7B227C786D0018D8E9 /* Logger.swift in Sources */,
 				9771D4E522B02AF700B76DF8 /* BoxEnum.swift in Sources */,
@@ -2953,6 +2974,7 @@
 				054D53662836992000CC2CBC /* BoxSDK+Async.swift in Sources */,
 				2256398E2253897D00D951B5 /* EntryContainer.swift in Sources */,
 				054D789927158DAB00E1E273 /* SignRequestSignerDecision.swift in Sources */,
+				052A03F5287885860063513C /* MimeTypeProvider.swift in Sources */,
 				F99D41382318495700327698 /* Webhook.swift in Sources */,
 				2261F8272284517B008E7BD0 /* AnalyticsHeaderGenerator.swift in Sources */,
 				F969D37C233A7146001301FC /* StoragePoliciesModule.swift in Sources */,
@@ -3039,6 +3061,7 @@
 				80BC844A232C56E000010E08 /* TermsOfServicesModuleSpecs.swift in Sources */,
 				0C6398A72253A605004021D3 /* BoxClientSpecs.swift in Sources */,
 				05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */,
+				052A03F828788CAF0063513C /* MimeTypeProviderSpecs.swift in Sources */,
 				22D0041422AFB25500478F1E /* CollectionsModuleSpecs.swift in Sources */,
 				052BC90426F8AD09001E64D2 /* CommentsModuleSpecs.swift in Sources */,
 				F99D418D2319CE7E00327698 /* WebhooksModuleSpecs.swift in Sources */,
@@ -3046,6 +3069,7 @@
 				9DC6D81522F467A300A72284 /* EventsModuleSpecs.swift in Sources */,
 				9D472E6F231BEE7B004C8023 /* RetentionPolicyModuleSpecs.swift in Sources */,
 				80BC8444232C56D100010E08 /* TermsOfServiceUserStatusSpecs.swift in Sources */,
+				05B4FFAB287DD6CB00214E3A /* UserAvatarUploadSpecs.swift in Sources */,
 				F99D41902319CE8C00327698 /* WebhookSpecs.swift in Sources */,
 				F9281453233E98B300E42EEE /* FileVersionRetentionSpecs.swift in Sources */,
 				0C66EAE72241345100E8E335 /* BoxSDKSpecs.swift in Sources */,
@@ -3125,6 +3149,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				COMPRESS_PNG_FILES = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
@@ -3147,6 +3172,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_PNG_TEXT = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3166,6 +3192,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				COMPRESS_PNG_FILES = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
@@ -3187,6 +3214,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_PNG_TEXT = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3205,6 +3233,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				COMPRESS_PNG_FILES = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(PROJECT_DIR)/Carthage/Build/Quick.xcframework/ios-arm64_armv7",
@@ -3226,6 +3255,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.box.SwiftSDK.BoxSDKIntegrationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_PNG_TEXT = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
