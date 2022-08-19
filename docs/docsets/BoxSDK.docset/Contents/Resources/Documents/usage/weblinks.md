@@ -113,7 +113,7 @@ Set Shared Link
 To add or update the shared link for a web link, call [`client.webLinks.setSharedLink(forWebLink:access:unsharedAt:vanityName:password:completion:)`][set-shared-link]
 with the ID of the web link and the shared link properties to set.
 
-<!-- sample put_web_links_id_shared_link_create -->
+<!-- sample put_web_links_id add_shared_link -->
 ```swift
 client.webLinks.setSharedLink(forWebLink: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
@@ -134,7 +134,7 @@ To remove a webLink's shared link, call
 [`client.webLinks.deleteSharedLink(forWebLink:completion:)`][delete-shared-link]
 with the ID of the file.
 
-<!-- sample put_web_links_id_shared_link_remove -->
+<!-- sample put_web_links_id remove_shared_link -->
 ```swift
 client.webLinks.deleteSharedLink(forWebLink: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {
