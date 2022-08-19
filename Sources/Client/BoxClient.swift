@@ -51,6 +51,8 @@ public class BoxClient {
     public private(set) lazy var storagePolicies = StoragePoliciesModule(boxClient: self)
     /// Provides sign requests functionality.
     public private(set) lazy var signRequests = SignRequestsModule(boxClient: self)
+    /// Provides file requests functionality.
+    public private(set) lazy var fileRequests = FileRequestsModule(boxClient: self)
 
     /// Provides network communication with the Box APIs.
     private var networkAgent: NetworkAgentProtocol
