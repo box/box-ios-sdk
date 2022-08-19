@@ -9,8 +9,10 @@ Users represent an individual's account on Box.
 
 - [Get Current User](#get-current-user)
 - [Get User](#get-user)
+- [Upload User Avatar](#upload-user-avatar)
 - [Get User Avatar](#get-user-avatar)
-- [Create User](#list-terms-of-services-for-an-enterprise)
+- [Delete User Avatar](#delete-user-avatar)
+- [Create User](#create-user)
 - [Create App User](#create-app-user)
 - [Update User](#update-user)
 - [Change User Login](#change-user-login)
@@ -66,6 +68,54 @@ client.users.get(userId: "33333", fields: ["name", "login"]) { (result: Result<U
 
 [get-user]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC3get6userId6fields10completionySS_SaySSGSgys6ResultOyAA4UserCAA0A8SDKErrorCGctF
 
+Upload User Avatar
+------------------
+
+To add or update the avatar for a user, call
+[`client.users.uploadAvatar(userId:data:name:progress:completion:)`][upload-user-avatar]
+with the ID of the user, the data to be uploaded and the name of the file. 
+Optionally you can also pass an progress closure, where
+upload progress will be reported.
+In return, you will get an object with links to several representations of an avatar within Box account
+
+The supported image extensions are `jpg`, `jpeg` and `png`. The image size cannot exceed 1024 * 1024 pixels or 1MB.
+
+<!-- sample post_users_id_avatar -->
+```swift
+let image: UIImage = <YOUR_IMAGE_HERE> // Initialize image here e.g. from UIImagePickerController
+let data = image.jpegData(compressionQuality: 1)!
+
+client.users.uploadAvatar(userId: "33333", data: data, name: "avatar.jpeg") { result in
+    guard case let .success(uploadAvatar) = result else {
+        print("Error uploading user avatar")
+        return
+    }
+
+    print("User avatar uploaded successfully!")
+}
+```
+
+Alternatively, you can upload the avatar by passing the `InputStream` the method
+[`client.users.streamUploadAvatar(userId:stream:name:progress:completion:)`][stream-upload-user-avatar].
+
+```swift
+let stream = InputStream(fileAtPath: "PATH_TO_IMAGE_FILE_HERE")
+
+client.users.streamUploadAvatar(userId: "33333", stream: data, name: "avatar.jpeg") { result in
+    guard case let .success(uploadAvatar) = result else {
+        print("Error uploading user avatar")
+        return
+    }
+
+    print("User avatar uploaded successfully!")
+}
+```
+
+Please remember that in both of these methods, the `name` parameter should also contains file extension (.jpg, .jpeg or .png).
+
+[upload-user-avatar]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC12uploadAvataryXeXeF
+[stream-upload-user-avatar]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC18streamUploadAvataryXeXeF
+
 Get User Avatar
 ---------------
 
@@ -86,6 +136,27 @@ client.users.getAvatar(userId: "33333") { (result: Result<Data, BoxSDKError>) in
 ```
 
 [get-user-avatar]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC9getAvatar6userId10completionySS_ys6ResultOy10Foundation4DataVAA0A8SDKErrorCGctF
+
+Delete User Avatar
+------------------
+
+To remove existing user avatar, call
+[`client.users.deleteAvatar(userId:completion:)`][delete-user-avatar]
+with the ID of the user.
+
+<!-- sample delete_users_id_avatar -->
+```swift
+client.users.deleteAvatar(userId: "33333") { result in
+    guard case .success = result else {
+        print("Error deleting avatar")
+        return
+    }
+
+    print("Avatar successfully deleted")
+}
+```
+
+[delete-user-avatar]: https://opensource.box.com/box-ios-sdk/Classes/UsersModule.html#/s:6BoxSDK11UsersModuleC12deleteAvatar6userId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF
 
 Create User
 -----------

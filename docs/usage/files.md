@@ -471,12 +471,17 @@ Set Shared Link
 ---------------
 
 To add or update the shared link for a file, call
-[`client.files.setSharedLink(forFile:unsharedAt:vanityName:access:password:canDownload:completion:)][set-shared-link]
+[`client.files.setSharedLink(forFile:unsharedAt:vanityName:access:password:canDownload:canEdit:completion:)`][set-shared-link]
 with the ID of the file and the shared link properties to set.
 
-<!-- sample put_files_id_shared_link_create -->
+<!-- sample put_files_id add_shared_link -->
 ```swift
-client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<SharedLink, BoxSDKError>) in
+client.files.setSharedLink(
+    forFile: "11111", 
+    access: .open, 
+    canDownload: true, 
+    canEdit: true
+) { (result: Result<SharedLink, BoxSDKError>) in
     guard case let .success(sharedLink) = result else {
         print("Error setting file shared link")
         return
@@ -486,7 +491,7 @@ client.files.setSharedLink(forFile: "11111", access: .open) { (result: Result<Sh
 }
 ```
 
-[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt10vanityName6access8password11canDownload10completionySS_AA17NullableParameterOy10Foundation4DateVGSgAMySSGSgAA0fG6AccessOSgATSbSgys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
+[set-shared-link]: https://opensource.box.com/box-ios-sdk/Classes/FilesModule.html#/s:6BoxSDK11FilesModuleC13setSharedLink7forFile10unsharedAt10vanityName6access8password11canDownload0P4Edit10completionySS_AA17NullableParameterOy10Foundation4DateVGSgANySSGSgAA0fG6AccessOSgAUSbSgAYys6ResultOyAA0fG0CAA0A8SDKErrorCGctF
 
 Remove Shared Link
 ------------------
@@ -495,7 +500,7 @@ To remove a file's shared link, call
 [`client.files.deleteSharedLink(forFile:completion:)`][delete-shared-link]
 with the ID of the file.
 
-<!-- sample put_files_id_shared_link_remove -->
+<!-- sample put_files_id remove_shared_link -->
 ```swift
 client.files.deleteSharedLink(fileId: "11111") { (result: Result<Void, BoxSDKError>) in
     guard case .success = result else {

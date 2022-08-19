@@ -5,17 +5,18 @@ Authentication
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Ways to Authenticate](#ways-to-authenticate)
-  - [Developer Token](#developer-token)
-  - [Server Auth with JWT](#server-auth-with-jwt)
-  - [Traditional 3-Legged OAuth2](#traditional-3-legged-oauth2)
-  - [Client Credentials Grant](#client-credentials-grant)
-    - [Obtaining Service Account token](#obtaining-service-account-token)
-    - [Obtaining User token](#obtaining-user-token)
-- [Token Store](#token-store)
-- [As-User](#as-user)
-- [Token Exchange](#token-exchange)
-- [Revoking Tokens](#revoking-tokens)
+- [Authentication](#authentication)
+  - [Ways to Authenticate](#ways-to-authenticate)
+    - [Developer Token](#developer-token)
+    - [Server Auth with JWT](#server-auth-with-jwt)
+    - [Traditional 3-Legged OAuth2](#traditional-3-legged-oauth2)
+    - [Client Credentials Grant](#client-credentials-grant)
+      - [Obtaining Service Account token](#obtaining-service-account-token)
+      - [Obtaining User token](#obtaining-user-token)
+  - [Token Store](#token-store)
+  - [As-User](#as-user)
+  - [Token Exchange](#token-exchange)
+  - [Revoking Tokens](#revoking-tokens)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -84,6 +85,18 @@ sdk.getDelegatedAuthClient(authClosure: getTokensFromAuthServer, uniqueID: "myUs
 }
 ```
 
+As an alternative, you can call `async` version of `getDelegatedAuthClient(authClosure:uniqueID:)` method:
+```swift
+do {
+    let client = try await sdk.getDelegatedAuthClient(authClosure: getTokensFromAuthServer, uniqueID: "myUser12345")
+    // Use client to make API calls
+}
+catch {
+    // Handle error creating client
+}
+```
+
+
 ### Traditional 3-Legged OAuth2
 
 If your application needs to integrate with existing Box users who will provide their login credentials to grant your
@@ -107,6 +120,17 @@ sdk.getOAuth2Client() { result in
     case let .failure(error):
         // Handle error creating client
     }
+}
+```
+
+As an alternative, you can call `async` version of `getOAuth2Client()` method:
+```swift
+do {
+    let client = try await sdk.getOAuth2Client(tokenStore: KeychainTokenStore())
+    // Use client to make API calls
+}
+catch {
+    // Handle error creating client
 }
 ```
 
@@ -154,6 +178,17 @@ sdk.getCCGClientForAccountService(enterpriseId: "YOUR ENTERPRISE ID HERE") { res
 }
 ```
 
+As an alternative, you can call `async` version of `getCCGClientForAccountService(enterpriseId:)` method:
+```swift
+do {
+    let client = try await sdk.getCCGClientForAccountService(enterpriseId: "YOUR ENTERPRISE ID HERE")
+    // Use client to make API calls
+}
+catch {
+    // Handle error creating client
+}
+```
+
 Remember that you can still make calls on behalf of managed users, which are part of your enterprise, by using
 [As-User](#as-user) behavior.
 
@@ -172,6 +207,17 @@ sdk.getCCGClientForUser(userId: "YOUR USER ID HERE") { result in
     case let .failure(error):
         // Handle error creating client
     }
+}
+```
+
+As an alternative, you can call `async` version of `getCCGClientForUser(userId:)` method:
+```swift
+do {
+    let client = try await sdk.getCCGClientForUser(userId: "YOUR USER ID HERE")
+    // Use client to make API calls
+}
+catch {
+    // Handle error creating client
 }
 ```
 
