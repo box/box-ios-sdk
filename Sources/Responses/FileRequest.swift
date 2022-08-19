@@ -53,7 +53,7 @@ public final class FileRequest: BoxModel {
     // MARK: - Properties
 
     /// The unique identifier for this file request.
-    public let id: String?
+    public let id: String
     /// The title of file request. This is shown in the Box UI to users uploading files.
     public let title: String?
     /// The optional description of this file request. This is shown in the Box UI to users uploading files.
@@ -98,7 +98,7 @@ public final class FileRequest: BoxModel {
 
         type = itemType
         rawData = json
-        id = try BoxJSONDecoder.optionalDecode(json: json, forKey: "id")
+        id = try BoxJSONDecoder.decode(json: json, forKey: "id")
         title = try BoxJSONDecoder.optionalDecode(json: json, forKey: "title")
         description = try BoxJSONDecoder.optionalDecode(json: json, forKey: "description")
         status = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "status")
