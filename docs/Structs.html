@@ -17,7 +17,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxSDK 5.2.1 Docs</a> (100% documented)</p>
+        <p><a href="index.html">BoxSDK 5.3.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -190,6 +190,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/FileLogDestination.html">FileLogDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FileRequest.html">FileRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FileRequestsModule.html">FileRequestsModule</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/FileVersion.html">FileVersion</a>
@@ -432,6 +438,12 @@
                 <a href="Classes/User/TrackingCode.html">– TrackingCode</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/UserAvatarUpload.html">UserAvatarUpload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UserAvatarUpload/PicUrls.html">– PicUrls</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/UsersModule.html">UsersModule</a>
               </li>
               <li class="nav-group-task">
@@ -482,6 +494,9 @@
                 <a href="Enums/AssignmentStatus.html">AssignmentStatus</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/AsyncHelper.html">AsyncHelper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/BoxSDKErrorEnum.html">BoxSDKErrorEnum</a>
               </li>
               <li class="nav-group-task">
@@ -518,6 +533,9 @@
                 <a href="Enums/FileRepresentationHint.html">FileRepresentationHint</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/FileRequestStatus.html">FileRequestStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/FolderItem.html">FolderItem</a>
               </li>
               <li class="nav-group-task">
@@ -537,6 +555,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/GroupRole.html">GroupRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/HTTPMethod.html">HTTPMethod</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/ItemStatus.html">ItemStatus</a>
@@ -655,6 +676,9 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Int.html">Int</a>
               </li>
               <li class="nav-group-task">
@@ -671,6 +695,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/c:objc(cs)NSURLSessionTask">URLSessionTask</a>
               </li>
             </ul>
           </li>
@@ -690,6 +717,9 @@
                 <a href="Protocols/BoxModel.html">BoxModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/Cancellable.html">Cancellable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ExpiredTokenHandling.html">ExpiredTokenHandling</a>
               </li>
               <li class="nav-group-task">
@@ -700,6 +730,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/QueryParameterConvertible.html">QueryParameterConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ResourceTypeEntity.html">ResourceTypeEntity</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/SessionProtocol.html">SessionProtocol</a>
@@ -750,6 +783,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/FileRepresentation/StatusEnum.html">– StatusEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FileRequestCopyRequest.html">FileRequestCopyRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FileRequestUpdateRequest.html">FileRequestUpdateRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FolderEntity.html">FolderEntity</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LockData.html">LockData</a>
@@ -906,6 +948,90 @@ Configurable Permission defines what the user of the groups have abilities to do
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConfigurablePermissionData</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK015FileRequestCopyD0V"></a>
+                    <a name="//apple_ref/swift/Struct/FileRequestCopyRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK015FileRequestCopyD0V">FileRequestCopyRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/FileRequestCopyRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FileRequestCopyRequest</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK017FileRequestUpdateD0V"></a>
+                    <a name="//apple_ref/swift/Struct/FileRequestUpdateRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK017FileRequestUpdateD0V">FileRequestUpdateRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/FileRequestUpdateRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FileRequestUpdateRequest</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK12FolderEntityV"></a>
+                    <a name="//apple_ref/swift/Struct/FolderEntity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK12FolderEntityV">FolderEntity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Represents folder resource</p>
+
+                        <a href="Structs/FolderEntity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FolderEntity</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ResourceTypeEntity.html">ResourceTypeEntity</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1394,8 +1520,8 @@ Shared links provide direct, read-only access to files or folder on Box using a 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-04-22)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-08-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>

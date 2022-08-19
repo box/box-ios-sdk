@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/box/box-ios-sdk/compare/v5.2.1...v5.3.0) (2022-08-19)
+
+
+### New Features and Enhancements
+
+* add `version_number` to `FileVersion` ([#853](https://github.com/box/box-ios-sdk/issues/853)) ([ac81667](https://github.com/box/box-ios-sdk/commit/ac81667ea409cbbe3de9be0c316c630ec6fbc2f5))
+* Add support for async API in `FoldersModule` ([#851](https://github.com/box/box-ios-sdk/issues/851)) ([58b9dde](https://github.com/box/box-ios-sdk/commit/58b9dde412eddc76915c99b960702f4af95b62a4))
+* Add support for file request API ([#867](https://github.com/box/box-ios-sdk/issues/867)) ([ec7813e](https://github.com/box/box-ios-sdk/commit/ec7813e31706c08aaaeac75debdba8d7802786cb))
+* Add support for upload and delete Avatar API ([#863](https://github.com/box/box-ios-sdk/issues/863)) ([1e967f5](https://github.com/box/box-ios-sdk/commit/1e967f5a3eaafbeb894cf8289032ad8ce8664266))
+* Add support of Editable Shared Link ([#861](https://github.com/box/box-ios-sdk/issues/861)) ([bc6ea18](https://github.com/box/box-ios-sdk/commit/bc6ea18bf2e10bebeb62401a55001139f05c76df))
+* Expose `send()` method public in `BoxClient` ([#843](https://github.com/box/box-ios-sdk/issues/843)) ([23caaca](https://github.com/box/box-ios-sdk/commit/23caaca5b6fe8ec1b23470193bc011a62c66d49f))
+
+### Bug Fixes
+
+* Respect Content-Type coming from custom headers ([#841](https://github.com/box/box-ios-sdk/issues/841)) ([a7c69a7](https://github.com/box/box-ios-sdk/commit/a7c69a73c6142d4b82c718d2d311098dd2b70250))
+
 ### [5.2.1](https://github.com/box/box-ios-sdk/compare/v5.2.0...v5.2.1) (2022-04-22)
 
 
