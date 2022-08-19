@@ -147,8 +147,8 @@ platform :ios do
       end
     
       Dir.chdir("..") do
-        sh("pod lib lint --allow-warnings")
-        sh("pod trunk push #{podpsec_name} --allow-warnings")
+        sh("bundle exec pod lib lint --allow-warnings")
+        sh("bundle exec pod trunk push #{podpsec_name} --allow-warnings")
       end
     end
   end
@@ -308,7 +308,7 @@ end
   desc "Update jazzy documentation"
   private_lane :update_documentation do |options|
     Dir.chdir("..") do
-      sh("jazzy --output docs")
+      sh("bundle exec jazzy --output docs")
     end
   end
 

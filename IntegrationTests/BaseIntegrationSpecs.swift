@@ -11,7 +11,52 @@ import Nimble
 import Quick
 
 class BaseIntegrationSpecs: QuickSpec {
-    let client = BoxSDK.getClient(token: Configuration.shared.accessToken)
+    let sdk = BoxSDK(clientId: Configuration.shared.ccg.clientId, clientSecret: Configuration.shared.ccg.clientSecret)
+    var client: BoxClient!
+
+    // MARK: BoxClient helper methods
+
+    func initializeClient() {
+        if let enterpriseId = Configuration.shared.ccg.enterpriseId, !enterpriseId.isEmpty {
+            initializeCCGForAccountService(enterpriseId: enterpriseId)
+        }
+        else if let userId = Configuration.shared.ccg.userId, !userId.isEmpty {
+            initializeCCGForUser(userId: userId)
+        }
+        else {
+            fail("Can not create the CCG Client instance: either \"enterpriseId\" or \"userId\" is required")
+        }
+    }
+
+    func initializeCCGForAccountService(enterpriseId: String) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { [weak self] done in
+            self?.sdk.getCCGClientForAccountService(enterpriseId: enterpriseId) { result in
+                switch result {
+                case let .success(resultClient):
+                    self?.client = resultClient
+                case let .failure(error):
+                    fail("Expected getCCGClientForAccountService call to suceeded, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
+
+    func initializeCCGForUser(userId: String) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { [weak self] done in
+            self?.sdk.getCCGClientForUser(userId: userId) { result in
+                switch result {
+                case let .success(resultClient):
+                    self?.client = resultClient
+                case let .failure(error):
+                    fail("Expected getCCGClientForUser call to suceeded, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
 
     // MARK: Folder helper methods
 
@@ -166,6 +211,57 @@ class BaseIntegrationSpecs: QuickSpec {
             self.client.retentionPolicy.update(policyId: retention.id, status: .retired) { result in
                 if case let .failure(error) = result {
                     fail("Expected update retention call to succeed, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
+
+    // MARK: WebLink helper methods
+
+    func deleteWebLink(_ webLink: WebLink?) {
+        guard let webLink = webLink else {
+            return
+        }
+
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            self.client.webLinks.delete(webLinkId: webLink.id) { result in
+                if case let .failure(error) = result {
+                    fail("Expected delete call to succeed, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
+
+    // MARK: Users helper methods
+
+    func createUser(name: String, callback: @escaping (User) -> Void) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            self.client.users.createAppUser(name: name) { result in
+                switch result {
+                case let .success(user):
+                    callback(user)
+                case let .failure(error):
+                    fail("Expected create call to suceeded, but instead got \(error)")
+                }
+
+                done()
+            }
+        }
+    }
+
+    func deleteUser(_ user: User?) {
+        guard let user = user else {
+            return
+        }
+
+        waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
+            self.client.users.delete(userId: user.id, force: true) { result in
+                if case let .failure(error) = result {
+                    fail("Expected delete call to succeed, but instead got \(error)")
                 }
 
                 done()

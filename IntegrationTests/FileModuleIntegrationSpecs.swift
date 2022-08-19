@@ -15,11 +15,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
     override func spec() {
         beforeSuite {
+            self.initializeClient()
             self.createFolder(name: NameGenerator.getUniqueFolderName(for: "FileModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder)
+            self.deleteFolder(self.rootFolder, recursive: true)
         }
 
         describe("File Module") {
@@ -319,7 +320,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     // List versions
-                    let iterator = self.client.files.listVersions(fileId: file.id, offset: 0, limit: 1000)
+                    let iterator = self.client.files.listVersions(
+                        fileId: file.id,
+                        offset: 0,
+                        limit: 1000,
+                        fields: ["name,version_number"]
+                    )
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -328,8 +334,10 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(2))
                                 expect(page.entries[0].id).to(equal(fileVersion2.id))
                                 expect(page.entries[0].name).to(equal(versionName2))
+                                expect(page.entries[0].versionNumber).to(equal("2"))
                                 expect(page.entries[1].id).to(equal(file.fileVersion?.id))
                                 expect(page.entries[1].name).to(equal(versionName1))
+                                expect(page.entries[1].versionNumber).to(equal("1"))
                             case let .failure(error):
                                 fail("Expected list call to succeed, but instead got \(error)")
                             }
@@ -340,11 +348,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get version
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name"]) { result in
+                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name,version_number"]) { result in
                             switch result {
                             case let .success(fileVersionItem):
                                 expect(fileVersionItem.id).to(equal(fileVersion2.id))
                                 expect(fileVersionItem.name).to(equal(versionName2))
+                                expect(fileVersionItem.versionNumber).to(equal("2"))
                             case let .failure(error):
                                 fail("Expected getVersion call to succeed, but instead got \(error)")
                             }
@@ -372,11 +381,12 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.get(fileId: file.id) { result in
+                        self.client.files.get(fileId: file.id, fields: ["name,version_number,file_version"]) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(fileItem.fileVersion?.id).to(equal(fileVersion4?.id))
                                 expect(fileItem.name).to(equal(versionName2))
+                                expect(fileItem.versionNumber).to(equal("4"))
                             case let .failure(error):
                                 fail("Expected get call to succeed, but instead got \(error)")
                             }
@@ -487,7 +497,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             return
                         }
 
-                        let changeDispositionDate = Date.now.addDays(2)
+                        let changeDispositionDate = Date.addDays(2)
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                             self.client.files.update(
@@ -571,7 +581,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    let lockExpiresAt = Date().tomorrow
+                    let lockExpiresAt = Date.tomorrow
 
                     // Lock
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
@@ -689,12 +699,15 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         self.client.files.setSharedLink(
                             forFile: file.id,
                             access: .open,
-                            canDownload: true
+                            canDownload: true,
+                            canEdit: true
                         ) { result in
                             switch result {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(false))
                                 expect(sharedLink.vanityName).to(beNil())
                             case let .failure(error):
@@ -718,6 +731,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-File-VanityName"))
                             case let .failure(error):
@@ -735,6 +750,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
                                 expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canPreview).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
                                 expect(sharedLink.isPasswordEnabled).to(equal(true))
                                 expect(sharedLink.vanityName).to(equal("iOS-SDK-File-VanityName"))
                             case let .failure(error):
@@ -950,7 +967,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             itemType: "file",
                             itemId: file.id,
                             role: .editor,
-                            accessibleBy: Configuration.shared.collaboratorId,
+                            accessibleBy: Configuration.shared.data.collaboratorId,
                             accessibleByType: .user,
                             fields: ["role", "accessible_by"]
                         ) { result in
@@ -958,7 +975,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                             case let .success(collaborationItem):
                                 collaboration = collaborationItem
                                 expect(collaborationItem.role).to(equal(.editor))
-                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(collaborationItem.accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected create call to suceeded, but it failed \(error)")
                             }
@@ -979,7 +996,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(1))
                                 expect(page.entries[0].id).to(equal(collaboration.id))
                                 expect(page.entries[0].role).to(equal(.editor))
-                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.collaboratorId))
+                                expect(page.entries[0].accessibleByUser?.id).to(equal(Configuration.shared.data.collaboratorId))
                             case let .failure(error):
                                 fail("Expected list call to succeed, but instead got \(error)")
                             }
@@ -1008,7 +1025,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     var task: Task?
-                    let dueAtDate = Date().tomorrow
+                    let dueAtDate = Date.tomorrow
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
@@ -1090,7 +1107,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: zipFileName)
 
                     // create & download
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         self.client.files.downloadZip(
                             name: zipFileName,
                             items: zipItems,
@@ -1144,7 +1161,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         ) { result in
                             switch result {
                             case let .success(representations):
-                                expect(representations.contains { item in item.representation == "jpg" }).to(be(true))
+                                expect(representations.contains { item in item.representation == "jpg" }).to(equal(true))
                             case let .failure(error):
                                 fail("Expected listRepresentations call to suceeded, but it failed \(error)")
                             }

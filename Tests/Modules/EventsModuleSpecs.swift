@@ -17,7 +17,7 @@ class EventsModuleSpecs: QuickSpec {
     var sut: BoxClient!
 
     override func spec() {
-        describe("CollaborationsModule") {
+        describe("EventsModule") {
             beforeEach {
                 self.sut = BoxSDK.getClient(token: "asdads")
             }

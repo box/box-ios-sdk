@@ -88,6 +88,82 @@ class UsersModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("uploadAvatar()") {
+                it("should upload an image and return valid response") {
+                    let image = UIImage(named: "image", in: Bundle(for: type(of: self)), compatibleWith: nil)!
+                    let data = image.pngData()!
+
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/users/10543463/avatar")
+
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("UploadUserAvatar.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(100)) { done in
+                        self.sut.users.uploadAvatar(
+                            userId: "10543463",
+                            data: data,
+                            name: "avatar.png"
+                        ) { result in
+                            switch result {
+                            case let .success(userAvatarUpload):
+                                expect(userAvatarUpload).toNot(beNil())
+                                expect(userAvatarUpload).to(beAKindOf(UserAvatarUpload.self))
+                                expect(userAvatarUpload.picUrls.preview).toNot(beNil() && beEmpty())
+                                expect(userAvatarUpload.picUrls.small).toNot(beNil() && beEmpty())
+                                expect(userAvatarUpload.picUrls.large).toNot(beNil() && beEmpty())
+                            case let .failure(error):
+                                fail("Expected call to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
+            describe("streamUploadAvatar()") {
+                it("should upload an image and return valid response") {
+                    let image = UIImage(named: "image", in: Bundle(for: type(of: self)), compatibleWith: nil)!
+                    let stream = InputStream(data: image.pngData()!)
+
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/users/10543463/avatar")
+
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("UploadUserAvatar.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+
+                    waitUntil(timeout: .seconds(100)) { done in
+                        self.sut.users.streamUploadAvatar(
+                            userId: "10543463",
+                            stream: stream,
+                            name: "avatar.png"
+                        ) { result in
+                            switch result {
+                            case let .success(userAvatarUpload):
+                                expect(userAvatarUpload).toNot(beNil())
+                                expect(userAvatarUpload).to(beAKindOf(UserAvatarUpload.self))
+                                expect(userAvatarUpload.picUrls.preview).toNot(beNil() && beEmpty())
+                                expect(userAvatarUpload.picUrls.small).toNot(beNil() && beEmpty())
+                                expect(userAvatarUpload.picUrls.large).toNot(beNil() && beEmpty())
+                            case let .failure(error):
+                                fail("Expected call to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
             describe("getAvatar()") {
                 it("download user's avatar") {
                     stub(
@@ -107,6 +183,30 @@ class UsersModuleSpecs: QuickSpec {
                                 break
                             case let .failure(error):
                                 fail("Expected call to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
+            describe("deleteAvatar()") {
+                it("should delete a user avatar") {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/users/10543463/avatar") &&
+                            isMethodDELETE()
+                    ) { _ in
+                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                    }
+
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.users.deleteAvatar(userId: "10543463") { result in
+                            switch result {
+                            case .success:
+                                break
+                            case let .failure(error):
+                                fail("Expected deleteAvatar call to succeed, but instead got \(error)")
                             }
                             done()
                         }

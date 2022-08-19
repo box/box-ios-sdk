@@ -1766,6 +1766,75 @@ class FilesModuleSpecs: QuickSpec {
         }
 
         describe("setSharedLink()") {
+            context("updating shared link with setting canDownload and canEdit to true") {
+                beforeEach {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/files/5000948880") &&
+                            isMethodPUT() &&
+                            containsQueryParams(["fields": "shared_link"]) &&
+                            hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": true]]])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                }
+                it("should update a shared link on a file", closure: {
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: true) { result in
+                            switch result {
+                            case let .success(sharedLink):
+                                expect(sharedLink.access).to(equal(.open))
+                                expect(sharedLink.previewCount).to(equal(0))
+                                expect(sharedLink.downloadCount).to(equal(0))
+                                expect(sharedLink.downloadURL).toNot(beNil())
+                                expect(sharedLink.permissions?.canDownload).to(equal(true))
+                                expect(sharedLink.permissions?.canEdit).to(equal(true))
+                            case let .failure(error):
+                                fail("Expected call to setSharedLink to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                })
+            }
+
+            context("updating shared link with setting canDownload to true and canEdit to false") {
+                beforeEach {
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/files/5000948880") &&
+                            isMethodPUT() &&
+                            containsQueryParams(["fields": "shared_link"]) &&
+                            hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": false]]])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                }
+                it("should update a shared link on a file", closure: {
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: false) { result in
+                            switch result {
+                            case let .success(sharedLink):
+                                expect(sharedLink.access).to(equal(.open))
+                                expect(sharedLink.previewCount).to(equal(0))
+                                expect(sharedLink.downloadCount).to(equal(0))
+                                expect(sharedLink.downloadURL).toNot(beNil())
+                                expect(sharedLink.permissions?.canDownload).to(equal(true))
+                            case let .failure(error):
+                                fail("Expected call to setSharedLink to suceeded, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                })
+            }
+
             context("updating shared link and setting password to new value") {
                 beforeEach {
                     stub(

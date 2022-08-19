@@ -7,6 +7,16 @@ public typealias QueryParameters = [String: QueryParameterConvertible?]
 /// Represents HTTP headers for API requests.
 public typealias BoxHTTPHeaders = [String: String]
 
+/// Represents HTTP methods.
+public enum HTTPMethod: String {
+    case get
+    case post
+    case put
+    case patch
+    case delete
+    case options
+}
+
 /// HTTPHeader key constants
 enum BoxHTTPHeaderKey {
     static let authorization = "Authorization"
@@ -20,15 +30,6 @@ enum BoxHTTPHeaderKey {
 enum BoxAPIHeaderKey {
     static let sharedLink = "shared_link"
     static let sharedLinkPassword = "shared_link_password"
-}
-
-enum HTTPMethod: String {
-    case get
-    case post
-    case put
-    case patch
-    case delete
-    case options
 }
 
 // Error codes allowing for request retry

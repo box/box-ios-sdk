@@ -8,7 +8,10 @@
 
 import Foundation
 
-protocol Cancellable {
+/// Defines an interface for cancelling API calls.
+public protocol Cancellable {
+
+    /// Method to cancel a API calls
     func cancel()
 }
 
@@ -19,8 +22,11 @@ public class BoxNetworkTask: Cancellable {
     /// Whether the task is cancelled or not
     public internal(set) var cancelled = false
 
+    /// Initializer
+    public init() {}
+
     /// Closure that is called when API calls are nested within each other
-    func receiveTask(_ task: Cancellable) {
+    public func receiveTask(_ task: Cancellable) {
         if cancelled {
             cancel()
         }
