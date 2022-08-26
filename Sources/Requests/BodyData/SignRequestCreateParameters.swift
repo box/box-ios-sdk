@@ -105,6 +105,10 @@ public struct SignRequestCreateSigner: Encodable {
     public let order: Int?
     /// User ID for the signer in an external application responsible for authentication when accessing the embed URL.
     public let embedUrlExternalUserId: String?
+    /// The URL that the signer will be redirected to after signing.
+    public let redirectUrl: String?
+    /// The URL that a signer will be redirect to after declining to sign a document.
+    public let declinedRedirectUrl: String?
 
     /// Initializer.
     ///
@@ -115,18 +119,24 @@ public struct SignRequestCreateSigner: Encodable {
     ///   After the sender signs, they will be redirected to the next `inPerson` signer.
     ///   - order: Order of the signer.
     ///   - embedUrlExternalUserId: User ID for the signer in an external application responsible for authentication when accessing the embed URL.
+    ///   - redirectUrl: The URL that the signer will be redirected to after signing.
+    ///   - declinedRedirectUrl: The URL that a signer will be redirect to after declining to sign a document.
     public init(
         email: String,
         role: SignRequestSignerRole? = nil,
         isInPerson: Bool? = nil,
         order: Int? = nil,
-        embedUrlExternalUserId: String? = nil
+        embedUrlExternalUserId: String? = nil,
+        redirectUrl: String? = nil,
+        declinedRedirectUrl: String? = nil
     ) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
         self.order = order
         self.embedUrlExternalUserId = embedUrlExternalUserId
+        self.redirectUrl = redirectUrl
+        self.declinedRedirectUrl = declinedRedirectUrl
     }
 }
 
@@ -156,6 +166,10 @@ public struct SignRequestCreateParameters: Encodable {
     public let daysValid: Int?
     /// This can be used to reference an ID in an external system that the sign request is related to.
     public let externalId: String?
+    /// The URL that a signer will be redirected to after signing a document.
+    public let redirectUrl: String?
+    /// The URL that the signer will be redirected to after declining to sign a document.
+    public let declinedRedirectUrl: String?
 
     /// Initializer.
     ///
@@ -168,6 +182,8 @@ public struct SignRequestCreateParameters: Encodable {
     ///   - prefillTags: List of prefill tags.
     ///   - daysValid: Number of days after which this request will automatically expire if not completed.
     ///   - externalId: ID that serve as reference in an external system that the sign request is related to.
+    ///   - redirectUrl: The URL that a signer will be redirected to after signing a document.
+    ///   - declinedRedirectUrl: The URL that the signer will be redirected to after declining to sign a document.
     public init(
         isDocumentPreparationNeeded: Bool? = nil,
         areTextSignaturesEnabled: Bool? = nil,
@@ -176,7 +192,9 @@ public struct SignRequestCreateParameters: Encodable {
         areRemindersEnabled: Bool? = nil,
         prefillTags: [SignRequestPrefillTag]? = nil,
         daysValid: Int? = nil,
-        externalId: String? = nil
+        externalId: String? = nil,
+        redirectUrl: String? = nil,
+        declinedRedirectUrl: String? = nil
     ) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.areTextSignaturesEnabled = areTextSignaturesEnabled
@@ -186,5 +204,7 @@ public struct SignRequestCreateParameters: Encodable {
         self.prefillTags = prefillTags
         self.daysValid = daysValid
         self.externalId = externalId
+        self.redirectUrl = redirectUrl
+        self.declinedRedirectUrl = declinedRedirectUrl
     }
 }
