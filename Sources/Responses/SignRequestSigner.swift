@@ -73,6 +73,10 @@ public class SignRequestSigner: BoxModel {
     public let inputs: [SignRequestSignerInput]?
     /// URL to direct a signer to for signing.
     public let embedUrl: String?
+    /// The URL that a signer will be redirected to after signing a document.
+    public let redirectUrl: String?
+    /// The URL that a signer will be redirect to after declining to sign a document.
+    public let declinedRedirectUrl: String?
 
     /// Initializer.
     ///
@@ -89,5 +93,7 @@ public class SignRequestSigner: BoxModel {
         signerDecision = try BoxJSONDecoder.optionalDecode(json: json, forKey: "signer_decision")
         inputs = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "inputs")
         embedUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "embed_url")
+        redirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "redirect_url")
+        declinedRedirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "declined_redirect_url")
     }
 }

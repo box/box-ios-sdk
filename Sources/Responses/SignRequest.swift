@@ -146,6 +146,10 @@ public class SignRequest: BoxModel {
     public let daysValid: Int?
     /// A reference ID in an external system that the sign request is related to.
     public let externalId: String?
+    /// The URL that a signer will be redirected to after signing a document.
+    public let redirectUrl: String?
+    /// The URL that a signer will be redirected to after declined signing a document.
+    public let declinedRedirectUrl: String?
 
     /// Initializer.
     ///
@@ -180,5 +184,7 @@ public class SignRequest: BoxModel {
         prefillTags = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "prefill_tags")
         daysValid = try BoxJSONDecoder.optionalDecode(json: json, forKey: "days_valid")
         externalId = try BoxJSONDecoder.optionalDecode(json: json, forKey: "external_id")
+        redirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "redirect_url")
+        declinedRedirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "declined_redirect_url")
     }
 }

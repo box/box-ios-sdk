@@ -33,7 +33,14 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/sign_requests")
                             && isMethodPOST()
                             && hasJsonBody([
-                                "signers": [["email": "example@gmail.com", "role": "signer"]],
+                                "signers": [
+                                    [
+                                        "email": "example@gmail.com", 
+                                        "role": "signer",
+                                        "redirect_url": "https://box.com/redirect_url_signer_1",
+                                        "declined_redirect_url": "https://box.com/declined_redirect_url_signer_1"
+                                    ]
+                                ],
                                 "source_files": [["id": "12345", "type": "file"]],
                                 "parent_folder": ["type": "folder", "id": "12345"],
                                 "is_document_preparation_needed": true,
@@ -46,7 +53,9 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "email_subject": "Sign Request from Acme",
                                 "email_message": "Hello! Please sign the document below",
                                 "external_id": "123",
-                                "days_valid": 2
+                                "days_valid": 2,
+                                "redirect_url": "https://box.com/redirect_url",
+                                "declined_redirect_url": "https://box.com/declined_redirect_url",
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -56,7 +65,12 @@ class SignRequestsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let signers = [SignRequestCreateSigner(email: "example@gmail.com", role: .signer)]
+                        let signers = [SignRequestCreateSigner(
+                            email: "example@gmail.com",
+                            role: .signer,
+                            redirectUrl: "https://box.com/redirect_url_signer_1",
+                            declinedRedirectUrl: "https://box.com/declined_redirect_url_signer_1"
+                        )]
                         let sourceFiles = [SignRequestCreateSourceFile(id: "12345")]
                         let parentFolder = SignRequestCreateParentFolder(id: "12345")
                         let tags = [
@@ -71,7 +85,9 @@ class SignRequestsModuleSpecs: QuickSpec {
                             areRemindersEnabled: true,
                             prefillTags: tags,
                             daysValid: 2,
-                            externalId: "123"
+                            externalId: "123",
+                            redirectUrl: "https://box.com/redirect_url",
+                            declinedRedirectUrl: "https://box.com/declined_redirect_url"
                         )
 
                         self.sut.signRequests.create(
@@ -89,6 +105,8 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.sourceFiles.first?.name).to(equal("Contract.pdf"))
                                 expect(signRequest.parentFolder.id).to(equal("12345"))
                                 expect(signRequest.parentFolder.name).to(equal("Contracts"))
+                                expect(signRequest.signers[0].redirectUrl).to(equal("https://box.com/redirect_url_signer_1"))
+                                expect(signRequest.signers[0].declinedRedirectUrl).to(equal("https://box.com/declined_redirect_url_signer_1"))
                                 expect(signRequest.signers[0].inputs?[0].documentTagId).to(equal("1234"))
                                 expect(signRequest.signers[0].inputs?[0].textValue).to(equal("text"))
                                 expect(signRequest.signers[0].inputs?[1].documentTagId).to(equal("4567"))
@@ -101,6 +119,8 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.emailMessage).to(equal("Hello! Please sign the document below"))
                                 expect(signRequest.externalId).to(equal("123"))
                                 expect(signRequest.daysValid).to(equal(2))
+                                expect(signRequest.redirectUrl).to(equal("https://box.com/redirect_url"))
+                                expect(signRequest.declinedRedirectUrl).to(equal("https://box.com/declined_redirect_url"))
                             case let .failure(error):
                                 fail("Expected call to create to succeed, but it failed: \(error)")
                             }
