@@ -3,7 +3,8 @@
         {
             "type": "retention_policy",
             "id": "123456789",
-            "name": "Tax Documents"
+            "name": "Tax Documents",
+            "retention_type": "non_modifiable"
         }
     ],
     "limit": 100,

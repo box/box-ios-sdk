@@ -53,6 +53,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.customNotificationRecipients?.count).to(equal(2))
                                 expect(retentionPolicy.customNotificationRecipients?.first?.id).to(equal("960"))
                                 expect(retentionPolicy.createdBy?.id).to(equal("958"))
+                                expect(retentionPolicy.retentionType).to(equal(.nonModifiable))
                             case let .failure(error):
                                 fail("Expected call to getRetentionPolicy to succeed, but instead got \(error)")
                             }
@@ -82,7 +83,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "disposition_action": "remove_retention",
                                 "can_owner_extend_retention": false,
                                 "are_owners_notified": true,
-                                "custom_notification_recipients": [user.rawData]
+                                "custom_notification_recipients": [user.rawData],
+                                "retention_type": "modifiable"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -98,7 +100,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             dispositionAction: .removeRetention,
                             canOwnerExtendRetention: false,
                             areOwnersNotified: true,
-                            customNotificationRecipients: [user]
+                            customNotificationRecipients: [user],
+                            retentionType: .modifiable
                         ) { result in
                             switch result {
                             case let .success(retentionPolicy):
@@ -120,6 +123,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         }
                     }
                 }
+                // TODO: czy musze testować że opcjonalne parametry się są wysyłane?
             }
 
             describe("update()") {
@@ -132,7 +136,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             hasJsonBody([
                                 "policy_name": "Tax Documents",
                                 "disposition_action": "remove_retention",
-                                "status": "active"
+                                "status": "active",
+                                "retention_type": "non_modifiable"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -145,7 +150,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             policyId: id,
                             name: "Tax Documents",
                             dispositionAction: .removeRetention,
-                            status: .active
+                            status: .active,
+                            retentionType: .nonModifiable
                         ) { result in
                             switch result {
                             case let .success(retentionPolicy):
@@ -189,6 +195,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 let retentionPolicy = page.entries[0]
                                 expect(retentionPolicy.name).to(equal("Tax Documents"))
                                 expect(retentionPolicy.id).to(equal("123456789"))
+                                expect(retentionPolicy.retentionType).to(equal(.nonModifiable))
                             case let .failure(error):
                                 fail("Expected call to list to succeed, but instead got \(error)")
                             }

@@ -49,6 +49,7 @@ public class RetentionPoliciesModule {
     ///   - areOwnersNotified: The Owner or Co-owner will get notified when a file is nearing expiration.
     ///   - customNotificationRecipients: Notified users.
     ///   - completion: Returns either standard RetentionPolicy object or an error.
+    ///   - retentionType: Specifies the retention type which can be `modifiable` or `non-modifiable`
     public func create(
         name: String,
         type: RetentionPolicyType,
@@ -57,12 +58,14 @@ public class RetentionPoliciesModule {
         canOwnerExtendRetention: Bool? = nil,
         areOwnersNotified: Bool? = nil,
         customNotificationRecipients: [User]? = nil,
-        completion: @escaping Callback<RetentionPolicy>
+        completion: @escaping Callback<RetentionPolicy>,
+        retentionType: RetentionType? = nil
     ) {
 
         var body: [String: Any] = [:]
         body["policy_name"] = name
         body["policy_type"] = type.description
+        body["retention_type"] = retentionType?.description
         body["retention_length"] = length
         body["disposition_action"] = dispositionAction.description
         body["can_owner_extend_retention"] = canOwnerExtendRetention
@@ -92,18 +95,21 @@ public class RetentionPoliciesModule {
     ///     For indefinite policies, disposition action must be remove_retention.
     ///   - status: Used to `retire` a retention policy if status is set to `retired`. If not retiring a policy, do not include or set to null.
     ///   - completion: Returns either updated retention policy object or an error.
+    ///   - retentionType: Specifies the retention type which can be `modifiable` or `non-modifiable`
     public func update(
         policyId id: String,
         name: String? = nil,
         dispositionAction: DispositionAction? = nil,
         status: RetentionPolicyStatus? = nil,
-        completion: @escaping Callback<RetentionPolicy>
+        completion: @escaping Callback<RetentionPolicy>,
+        retentionType: RetentionType? = nil
     ) {
 
         var body: [String: Any] = [:]
         body["policy_name"] = name
         body["disposition_action"] = dispositionAction?.description
         body["status"] = status?.description
+        body["retention_type"] = retentionType?.description
 
         boxClient.put(
             url: URL.boxAPIEndpoint("/2.0/retention_policies/\(id)", configuration: boxClient.configuration),

@@ -105,6 +105,34 @@ public enum RetentionPolicyStatus: BoxEnum {
     }
 }
 
+public enum RetentionType: BoxEnum {
+    case modifiable
+    case nonModifiable
+    case customValue(String)
+
+    public init(_ value: String) {
+        switch value {
+        case "modifiable":
+            self = .modifiable
+        case "non_modifiable":
+            self = .nonModifiable
+        default:
+            self = .customValue(value)
+        }
+    }
+
+    public var description: String {
+        switch self {
+        case .modifiable:
+            return "modifiable"
+        case .nonModifiable:
+            return "non_modifiable"
+        case let .customValue(value):
+            return value
+        }
+    }
+}
+
 /// A retention policy blocks permanent deletion of content for a specified amount of time.
 public class RetentionPolicy: BoxModel {
 
@@ -139,6 +167,8 @@ public class RetentionPolicy: BoxModel {
     public let areOwnersNotified: Bool?
     /// Other users notified about retention policy changes.
     public let customNotificationRecipients: [User]?
+    /// Specifies the retention type which can be `modifiable` or `non-modifiable`
+    public let retentionType: RetentionType?
 
     public required init(json: [String: Any]) throws {
         guard let itemType = json["type"] as? String else {
@@ -164,5 +194,6 @@ public class RetentionPolicy: BoxModel {
         canOwnerExtendRetention = try BoxJSONDecoder.optionalDecode(json: json, forKey: "can_owner_extend_retention")
         areOwnersNotified = try BoxJSONDecoder.optionalDecode(json: json, forKey: "are_owners_notified")
         customNotificationRecipients = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "custom_notification_recipients")
+        retentionType = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "retention_type")
     }
 }
