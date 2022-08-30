@@ -21,6 +21,7 @@
 		0508665F28A2A19D0073DC77 /* FileRequestsModuleSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508665E28A2A19D0073DC77 /* FileRequestsModuleSpecs.swift */; };
 		0508666128A2A62B0073DC77 /* UpdateFileRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0508666028A2A62B0073DC77 /* UpdateFileRequest.json */; };
 		0508666328A2B1240073DC77 /* CopyFileRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0508666228A2B1240073DC77 /* CopyFileRequest.json */; };
+		050E725128BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */; };
 		052A03F328772E2F0063513C /* UserAvatarUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F228772E2F0063513C /* UserAvatarUpload.swift */; };
 		052A03F5287885860063513C /* MimeTypeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F4287885860063513C /* MimeTypeProvider.swift */; };
 		052A03F828788CAF0063513C /* MimeTypeProviderSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */; };
@@ -633,6 +634,7 @@
 		0508665E28A2A19D0073DC77 /* FileRequestsModuleSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRequestsModuleSpecs.swift; sourceTree = "<group>"; };
 		0508666028A2A62B0073DC77 /* UpdateFileRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateFileRequest.json; sourceTree = "<group>"; };
 		0508666228A2B1240073DC77 /* CopyFileRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CopyFileRequest.json; sourceTree = "<group>"; };
+		050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInputContentTypeSpecs.swift; sourceTree = "<group>"; };
 		052A03F228772E2F0063513C /* UserAvatarUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarUpload.swift; sourceTree = "<group>"; };
 		052A03F4287885860063513C /* MimeTypeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProvider.swift; sourceTree = "<group>"; };
 		052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProviderSpecs.swift; sourceTree = "<group>"; };
@@ -2092,6 +2094,7 @@
 				05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */,
 				05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */,
 				05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */,
+				050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */,
 				05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */,
 				05EE814727186336006A2329 /* SignRequestSignerRoleSpecs.swift */,
 				05EE814527185554006A2329 /* SignRequestSpecs.swift */,
@@ -3055,6 +3058,7 @@
 				0C63989C2253A536004021D3 /* FilesModuleSpecs.swift in Sources */,
 				9DE4586E22D6490800C93CF5 /* URLExtensionTest.swift in Sources */,
 				05A58A4426FB415700AB309C /* QueryParameterConvertibleSpecs.swift in Sources */,
+				050E725128BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift in Sources */,
 				F969D38F233A7279001301FC /* StoragePolicyAssignmentSpecs.swift in Sources */,
 				F929D6322331AE3E0039E452 /* LegalHoldPolicySpecs.swift in Sources */,
 				0C506CA922A6AA76007F18A4 /* CollaborationsModuleSpecs.swift in Sources */,

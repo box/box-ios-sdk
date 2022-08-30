@@ -35,7 +35,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && hasJsonBody([
                                 "signers": [
                                     [
-                                        "email": "example@gmail.com", 
+                                        "email": "example@gmail.com",
                                         "role": "signer",
                                         "redirect_url": "https://box.com/redirect_url_signer_1",
                                         "declined_redirect_url": "https://box.com/declined_redirect_url_signer_1"
@@ -55,7 +55,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "external_id": "123",
                                 "days_valid": 2,
                                 "redirect_url": "https://box.com/redirect_url",
-                                "declined_redirect_url": "https://box.com/declined_redirect_url",
+                                "declined_redirect_url": "https://box.com/declined_redirect_url"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -109,8 +109,10 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.signers[0].declinedRedirectUrl).to(equal("https://box.com/declined_redirect_url_signer_1"))
                                 expect(signRequest.signers[0].inputs?[0].documentTagId).to(equal("1234"))
                                 expect(signRequest.signers[0].inputs?[0].textValue).to(equal("text"))
+                                expect(signRequest.signers[0].inputs?[0].contentType).to(equal(.text))
                                 expect(signRequest.signers[0].inputs?[1].documentTagId).to(equal("4567"))
                                 expect(signRequest.signers[0].inputs?[1].dateValue).to(equal("2021-12-03".iso8601))
+                                expect(signRequest.signers[0].inputs?[1].contentType).to(equal(.date))
                                 expect(signRequest.prefillTags?[0].documentTagId).to(equal("1234"))
                                 expect(signRequest.prefillTags?[0].textValue).to(equal("text"))
                                 expect(signRequest.prefillTags?[1].documentTagId).to(equal("4567"))

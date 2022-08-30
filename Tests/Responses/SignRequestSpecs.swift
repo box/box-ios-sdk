@@ -55,6 +55,7 @@ class SignRequestSpecs: QuickSpec {
                         expect(signRequest.signers[0].inputs?[0].type).to(equal(.text))
                         expect(signRequest.signers[0].inputs?[0].textValue).to(equal("text"))
                         expect(signRequest.signers[0].inputs?[0].pageIndex).to(equal(4))
+                        expect(signRequest.signers[0].inputs?[0].contentType).to(equal(.text))
                         expect(signRequest.sourceFiles[0].id).to(equal("12345"))
                         expect(signRequest.sourceFiles[0].etag).to(equal("1"))
                         expect(signRequest.sourceFiles[0].name).to(equal("Contract.pdf"))
