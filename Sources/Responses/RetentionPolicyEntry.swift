@@ -19,8 +19,6 @@ public class RetentionPolicyEntry: BoxModel {
     public let id: String
     /// The name of the retention policy.
     public let name: String?
-    /// Specifies the retention type which can be `modifiable` or `non-modifiable`
-    public let retentionType: RetentionType?
 
     public required init(json: [String: Any]) throws {
         guard let itemType = json["type"] as? String else {
@@ -35,7 +33,6 @@ public class RetentionPolicyEntry: BoxModel {
         type = itemType
 
         id = try BoxJSONDecoder.decode(json: json, forKey: "id")
-        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "name")
-        retentionType = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "retention_type")
+        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "policy_name")
     }
 }

@@ -48,8 +48,8 @@ public class RetentionPoliciesModule {
     ///   - canOwnerExtendRetention: The Owner of a file will be allowed to extend the retention.
     ///   - areOwnersNotified: The Owner or Co-owner will get notified when a file is nearing expiration.
     ///   - customNotificationRecipients: Notified users.
+    ///   - retentionType: Specifies the retention type which can be `modifiable` or `non-modifiable`.
     ///   - completion: Returns either standard RetentionPolicy object or an error.
-    ///   - retentionType: Specifies the retention type which can be `modifiable` or `non-modifiable`
     public func create(
         name: String,
         type: RetentionPolicyType,
@@ -58,8 +58,8 @@ public class RetentionPoliciesModule {
         canOwnerExtendRetention: Bool? = nil,
         areOwnersNotified: Bool? = nil,
         customNotificationRecipients: [User]? = nil,
-        completion: @escaping Callback<RetentionPolicy>,
-        retentionType: RetentionType? = nil
+        retentionType: RetentionType? = nil,
+        completion: @escaping Callback<RetentionPolicy>
     ) {
 
         var body: [String: Any] = [:]
@@ -94,22 +94,24 @@ public class RetentionPoliciesModule {
     ///   - dispositionAction: If updating a `finite` policy, the disposition action can be `permanently_delete` or `remove_retention`.
     ///     For indefinite policies, disposition action must be remove_retention.
     ///   - status: Used to `retire` a retention policy if status is set to `retired`. If not retiring a policy, do not include or set to null.
+    ///   - setRetentionTypeToNonModifiable: If value is `false` retention type is not changed. If value is true retention type is changed to `non_modifiable`.
     ///   - completion: Returns either updated retention policy object or an error.
-    ///   - retentionType: Specifies the retention type which can be `modifiable` or `non-modifiable`
     public func update(
         policyId id: String,
         name: String? = nil,
         dispositionAction: DispositionAction? = nil,
         status: RetentionPolicyStatus? = nil,
-        completion: @escaping Callback<RetentionPolicy>,
-        retentionType: RetentionType? = nil
+        setRetentionTypeToNonModifiable: Bool = false,
+        completion: @escaping Callback<RetentionPolicy>
     ) {
 
         var body: [String: Any] = [:]
         body["policy_name"] = name
         body["disposition_action"] = dispositionAction?.description
         body["status"] = status?.description
-        body["retention_type"] = retentionType?.description
+        if setRetentionTypeToNonModifiable {
+            body["retention_type"] = RetentionType.nonModifiable.description
+        }
 
         boxClient.put(
             url: URL.boxAPIEndpoint("/2.0/retention_policies/\(id)", configuration: boxClient.configuration),

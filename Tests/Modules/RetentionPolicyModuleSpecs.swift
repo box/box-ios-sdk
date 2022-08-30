@@ -116,6 +116,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.customNotificationRecipients?.count).to(equal(1))
                                 expect(retentionPolicy.customNotificationRecipients?.first?.id).to(equal("22222"))
                                 expect(retentionPolicy.createdBy?.id).to(equal("33333"))
+                                expect(retentionPolicy.retentionType).to(equal(.modifiable))
                             case let .failure(error):
                                 fail("Expected call to create to succeed, but instead got \(error)")
                             }
@@ -123,7 +124,6 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         }
                     }
                 }
-                // TODO: czy musze testować że opcjonalne parametry się są wysyłane?
             }
 
             describe("update()") {
@@ -136,8 +136,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             hasJsonBody([
                                 "policy_name": "Tax Documents",
                                 "disposition_action": "remove_retention",
-                                "status": "active",
-                                "retention_type": "non_modifiable"
+                                "status": "active"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -150,8 +149,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             policyId: id,
                             name: "Tax Documents",
                             dispositionAction: .removeRetention,
-                            status: .active,
-                            retentionType: .nonModifiable
+                            status: .active
                         ) { result in
                             switch result {
                             case let .success(retentionPolicy):
@@ -162,6 +160,38 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.dispositionAction).to(equal(.removeRetention))
                                 expect(retentionPolicy.status).to(equal(.active))
                                 expect(retentionPolicy.createdBy?.id).to(equal("22222"))
+                                expect(retentionPolicy.retentionType).to(equal(.modifiable))
+                            case let .failure(error):
+                                fail("Expected call to updateto succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+
+                it("should update retention type to non_modifiable") {
+                    let id = "123456789"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policies/\(id)") &&
+                            isMethodPUT() &&
+                            hasJsonBody([
+                                "retention_type": "non_modifiable"
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.retentionPolicy.update(
+                            policyId: id,
+                            setRetentionTypeToNonModifiable: true
+                        ) { result in
+                            switch result {
+                            case let .success(retentionPolicy):
+                                expect(retentionPolicy.id).to(equal(id))
                             case let .failure(error):
                                 fail("Expected call to updateto succeed, but instead got \(error)")
                             }
@@ -176,6 +206,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/retention_policies") &&
+                            containsQueryParams(["policy_name": "name", "policy_type": "finite", "created_by_user_id": "1234"]) &&
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -195,7 +226,6 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 let retentionPolicy = page.entries[0]
                                 expect(retentionPolicy.name).to(equal("Tax Documents"))
                                 expect(retentionPolicy.id).to(equal("123456789"))
-                                expect(retentionPolicy.retentionType).to(equal(.nonModifiable))
                             case let .failure(error):
                                 fail("Expected call to list to succeed, but instead got \(error)")
                             }
