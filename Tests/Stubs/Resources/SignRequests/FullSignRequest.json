@@ -21,7 +21,8 @@
                     "document_tag_id": "1234",
                     "text_value": "text",
                     "type": "text",
-                    "page_index": 4
+                    "page_index": 4,
+                    "content_type": "text"
                 }
             ],
             "embed_url": "https://example.com",
