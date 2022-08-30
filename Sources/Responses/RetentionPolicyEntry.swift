@@ -33,6 +33,6 @@ public class RetentionPolicyEntry: BoxModel {
         type = itemType
 
         id = try BoxJSONDecoder.decode(json: json, forKey: "id")
-        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "name")
+        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "policy_name")
     }
 }

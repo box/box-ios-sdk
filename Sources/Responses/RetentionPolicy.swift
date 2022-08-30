@@ -17,6 +17,9 @@ public enum RetentionPolicyType: BoxEnum {
     /// Custom value not yet implemented in this SDK version.
     case customValue(String)
 
+    /// Creates a new value
+    ///
+    /// - Parameter value: String representation of a RetentionPolicyType rawValue
     public init(_ value: String) {
         switch value {
         case "finite":
@@ -28,6 +31,7 @@ public enum RetentionPolicyType: BoxEnum {
         }
     }
 
+    /// Returns string representation of RetentionPolicyType
     public var description: String {
         switch self {
         case .finite:
@@ -105,6 +109,45 @@ public enum RetentionPolicyStatus: BoxEnum {
     }
 }
 
+/// Specifies the retention type
+public enum RetentionType: BoxEnum {
+    /// You can modify the retention policy. For example, you can add or remove folders, shorten or lengthen the policy duration, or delete the assignment.
+    /// Use this type if your retention policy is not related to any regulatory purposes.
+    case modifiable
+    /// You can modify the retention policy only in a limited way: add a folder, lengthen the duration, retire the policy, change the disposition action or notification settings.
+    /// You cannot perform other actions, such as deleting the assignment or shortening the policy duration.
+    /// Use this type to ensure compliance with regulatory retention policies.
+    case nonModifiable
+    /// Custom value that was not yet implemented in current SDK version.
+    case customValue(String)
+
+    /// Creates a new value
+    ///
+    /// - Parameter value: String representation of a RetentionType rawValue
+    public init(_ value: String) {
+        switch value {
+        case "modifiable":
+            self = .modifiable
+        case "non_modifiable":
+            self = .nonModifiable
+        default:
+            self = .customValue(value)
+        }
+    }
+
+    /// Returns string representation of RetentionType
+    public var description: String {
+        switch self {
+        case .modifiable:
+            return "modifiable"
+        case .nonModifiable:
+            return "non_modifiable"
+        case let .customValue(value):
+            return value
+        }
+    }
+}
+
 /// A retention policy blocks permanent deletion of content for a specified amount of time.
 public class RetentionPolicy: BoxModel {
 
@@ -139,6 +182,8 @@ public class RetentionPolicy: BoxModel {
     public let areOwnersNotified: Bool?
     /// Other users notified about retention policy changes.
     public let customNotificationRecipients: [User]?
+    /// Specifies the retention type which can be `modifiable` or `non-modifiable`
+    public let retentionType: RetentionType?
 
     public required init(json: [String: Any]) throws {
         guard let itemType = json["type"] as? String else {
@@ -164,5 +209,6 @@ public class RetentionPolicy: BoxModel {
         canOwnerExtendRetention = try BoxJSONDecoder.optionalDecode(json: json, forKey: "can_owner_extend_retention")
         areOwnersNotified = try BoxJSONDecoder.optionalDecode(json: json, forKey: "are_owners_notified")
         customNotificationRecipients = try BoxJSONDecoder.optionalDecodeCollection(json: json, forKey: "custom_notification_recipients")
+        retentionType = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "retention_type")
     }
 }

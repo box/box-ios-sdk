@@ -54,5 +54,17 @@ class RetentionPolicySpecs: QuickSpec {
                 }
             }
         }
+
+        describe("RetentionType") {
+
+            describe("init()") {
+
+                it("should correctly create an enum value from it's string representation") {
+                    expect(RetentionType.modifiable).to(equal(RetentionType(RetentionType.modifiable.description)))
+                    expect(RetentionType.nonModifiable).to(equal(RetentionType(RetentionType.nonModifiable.description)))
+                    expect(RetentionType.customValue("custom value")).to(equal(RetentionType("custom value")))
+                }
+            }
+        }
     }
 }
