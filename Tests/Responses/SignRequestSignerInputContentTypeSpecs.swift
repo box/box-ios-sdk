@@ -10,7 +10,7 @@
 import Nimble
 import Quick
 
-class SignRequestSignerInputTypeSpecs: QuickSpec {
+class SignRequestSignerInputContentTypeSpecs: QuickSpec {
 
     override func spec() {
         describe("SignRequestSignerInputContentType") {
@@ -21,7 +21,7 @@ class SignRequestSignerInputTypeSpecs: QuickSpec {
                     expect(SignRequestSignerInputContentType.initial).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.initial.description)))
                     expect(SignRequestSignerInputContentType.stamp).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.stamp.description)))
                     expect(SignRequestSignerInputContentType.signature).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.signature.description)))
-                    expect(SignRequestSignerInputContentType.company).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.company.description)))\
+                    expect(SignRequestSignerInputContentType.company).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.company.description)))
                     expect(SignRequestSignerInputContentType.title).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.title.description)))
                     expect(SignRequestSignerInputContentType.email).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.email.description)))
                     expect(SignRequestSignerInputContentType.fullName).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.fullName.description)))

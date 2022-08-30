@@ -52,6 +52,8 @@ public enum SignRequestSignerInputType: BoxEnum {
     }
 }
 
+//    swiftlint:disable cyclomatic_complexity
+
 /// Represents a content_type of input.
 public enum SignRequestSignerInputContentType: BoxEnum {
     /// Initial
@@ -81,7 +83,6 @@ public enum SignRequestSignerInputContentType: BoxEnum {
     /// Custom value for enum values not yet implemented in the SDK
     case customValue(String)
 
-    // swiftlint:disable cyclomatic_complexity
     /// Initializer
     /// - Parameter value: The string value of the content type
     public init(_ value: String) {
@@ -146,6 +147,8 @@ public enum SignRequestSignerInputContentType: BoxEnum {
         }
     }
 }
+
+//    swiftlint:enable cyclomatic_complexity
 
 /// Prefill tags are used to prefill placeholders with signer input data. Only none value field can be included.
 public class SignRequestSignerInput: BoxModel {

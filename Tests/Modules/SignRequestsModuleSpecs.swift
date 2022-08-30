@@ -35,7 +35,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && hasJsonBody([
                                 "signers": [
                                     [
-                                        "email": "example@gmail.com", 
+                                        "email": "example@gmail.com",
                                         "role": "signer",
                                         "redirect_url": "https://box.com/redirect_url_signer_1",
                                         "declined_redirect_url": "https://box.com/declined_redirect_url_signer_1"
@@ -55,7 +55,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "external_id": "123",
                                 "days_valid": 2,
                                 "redirect_url": "https://box.com/redirect_url",
-                                "declined_redirect_url": "https://box.com/declined_redirect_url",
+                                "declined_redirect_url": "https://box.com/declined_redirect_url"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
