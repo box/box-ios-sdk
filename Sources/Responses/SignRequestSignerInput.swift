@@ -52,6 +52,101 @@ public enum SignRequestSignerInputType: BoxEnum {
     }
 }
 
+/// Represents a content_type of input.
+public enum SignRequestSignerInputContentType: BoxEnum {
+    /// Initial
+    case initial
+    /// Stamp
+    case stamp
+    /// Signature
+    case signature
+    /// Company
+    case company
+    /// Title
+    case title
+    /// Email
+    case email
+    /// Full name
+    case fullName
+    /// First name
+    case firstName
+    /// Last name
+    case lastName
+    /// Text
+    case text
+    /// Date
+    case date
+    /// Checkbox
+    case checkbox
+    /// Custom value for enum values not yet implemented in the SDK
+    case customValue(String)
+
+    // swiftlint:disable cyclomatic_complexity
+    /// Initializer
+    /// - Parameter value: The string value of the content type
+    public init(_ value: String) {
+        switch value {
+        case "initial":
+            self = .initial
+        case "stamp":
+            self = .stamp
+        case "signature":
+            self = .signature
+        case "company":
+            self = .company
+        case "title":
+            self = .title
+        case "email":
+            self = .email
+        case "full_name":
+            self = .fullName
+        case "first_name":
+            self = .firstName
+        case "last_name":
+            self = .lastName
+        case "text":
+            self = .text
+        case "date":
+            self = .date
+        case "checkbox":
+            self = .checkbox
+        default:
+            self = .customValue(value)
+        }
+    }
+
+    public var description: String {
+        switch self {
+        case .initial:
+            return "initial"
+        case .stamp:
+            return "stamp"
+        case .signature:
+            return "signature"
+        case .company:
+            return "company"
+        case .title:
+            return "title"
+        case .email:
+            return "email"
+        case .fullName:
+            return "full_name"
+        case .firstName:
+            return "first_name"
+        case .lastName:
+            return "last_name"
+        case .text:
+            return "text"
+        case .date:
+            return "date"
+        case .checkbox:
+            return "checkbox"
+        case let .customValue(value):
+            return value
+        }
+    }
+}
+
 /// Prefill tags are used to prefill placeholders with signer input data. Only none value field can be included.
 public class SignRequestSignerInput: BoxModel {
 
@@ -71,6 +166,8 @@ public class SignRequestSignerInput: BoxModel {
     public let checkboxValue: Bool?
     /// Date prefill value
     public let dateValue: Date?
+    /// Content type value
+    public let contentType: SignRequestSignerInputContentType?
 
     /// Initializer.
     ///
@@ -84,5 +181,6 @@ public class SignRequestSignerInput: BoxModel {
         textValue = try BoxJSONDecoder.optionalDecode(json: json, forKey: "text_value")
         checkboxValue = try BoxJSONDecoder.optionalDecode(json: json, forKey: "checkbox_value")
         dateValue = try BoxJSONDecoder.optionalDecodeDate(json: json, forKey: "date_value")
+        contentType = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "content_type")
     }
 }
