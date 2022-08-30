@@ -53,6 +53,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.customNotificationRecipients?.count).to(equal(2))
                                 expect(retentionPolicy.customNotificationRecipients?.first?.id).to(equal("960"))
                                 expect(retentionPolicy.createdBy?.id).to(equal("958"))
+                                expect(retentionPolicy.retentionType).to(equal(.nonModifiable))
                             case let .failure(error):
                                 fail("Expected call to getRetentionPolicy to succeed, but instead got \(error)")
                             }
@@ -82,7 +83,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "disposition_action": "remove_retention",
                                 "can_owner_extend_retention": false,
                                 "are_owners_notified": true,
-                                "custom_notification_recipients": [user.rawData]
+                                "custom_notification_recipients": [user.rawData],
+                                "retention_type": "modifiable"
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
@@ -98,7 +100,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             dispositionAction: .removeRetention,
                             canOwnerExtendRetention: false,
                             areOwnersNotified: true,
-                            customNotificationRecipients: [user]
+                            customNotificationRecipients: [user],
+                            retentionType: .modifiable
                         ) { result in
                             switch result {
                             case let .success(retentionPolicy):
@@ -113,6 +116,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.customNotificationRecipients?.count).to(equal(1))
                                 expect(retentionPolicy.customNotificationRecipients?.first?.id).to(equal("22222"))
                                 expect(retentionPolicy.createdBy?.id).to(equal("33333"))
+                                expect(retentionPolicy.retentionType).to(equal(.modifiable))
                             case let .failure(error):
                                 fail("Expected call to create to succeed, but instead got \(error)")
                             }
@@ -156,6 +160,38 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 expect(retentionPolicy.dispositionAction).to(equal(.removeRetention))
                                 expect(retentionPolicy.status).to(equal(.active))
                                 expect(retentionPolicy.createdBy?.id).to(equal("22222"))
+                                expect(retentionPolicy.retentionType).to(equal(.modifiable))
+                            case let .failure(error):
+                                fail("Expected call to updateto succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+
+                it("should update retention type to non_modifiable") {
+                    let id = "123456789"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policies/\(id)") &&
+                            isMethodPUT() &&
+                            hasJsonBody([
+                                "retention_type": "non_modifiable"
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.retentionPolicy.update(
+                            policyId: id,
+                            setRetentionTypeToNonModifiable: true
+                        ) { result in
+                            switch result {
+                            case let .success(retentionPolicy):
+                                expect(retentionPolicy.id).to(equal(id))
                             case let .failure(error):
                                 fail("Expected call to updateto succeed, but instead got \(error)")
                             }
@@ -170,6 +206,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                     stub(
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/retention_policies") &&
+                            containsQueryParams(["policy_name": "name", "policy_type": "finite", "created_by_user_id": "1234"]) &&
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(

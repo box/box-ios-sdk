@@ -29,5 +29,6 @@
         "id": "958",
         "name": "Unit Test User File Owner 1",
         "login": "boxautomatedqa+fileowner1@gmail.com"
-    }
+    },
+    "retention_type": "non_modifiable"
 }
