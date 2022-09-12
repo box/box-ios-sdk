@@ -321,6 +321,30 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                 }
             }
 
+            describe("deleteAssignment()") {
+                it("should delete retention policy assignment") {
+                    let id = "11446498"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policy_assignments/\(id)") &&
+                            isMethodDELETE()
+                    ) { _ in
+                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.retentionPolicy.deleteAssignment(assignmentId: id) { response in
+                            switch response {
+                            case .success:
+                                break
+                            case let .failure(error):
+                                fail("Expected call to deleteAssignment to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
+            }
+
             describe("listAssignments()") {
                 it("should get a list of all retention policy assignments associated with a specified retention policy") {
                     let id = "123456"

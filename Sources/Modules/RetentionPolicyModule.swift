@@ -95,6 +95,8 @@ public class RetentionPoliciesModule {
     ///     For indefinite policies, disposition action must be remove_retention.
     ///   - status: Used to `retire` a retention policy if status is set to `retired`. If not retiring a policy, do not include or set to null.
     ///   - setRetentionTypeToNonModifiable: If value is `false` retention type is not changed. If value is true retention type is changed to `non_modifiable`.
+    ///   - length: The retention_length is the amount of time, in days, to apply the retention policy to the selected content in days.
+    ///     Do not specify for `indefinite` policies. Required for `finite` policies.
     ///   - completion: Returns either updated retention policy object or an error.
     public func update(
         policyId id: String,
@@ -102,6 +104,7 @@ public class RetentionPoliciesModule {
         dispositionAction: DispositionAction? = nil,
         status: RetentionPolicyStatus? = nil,
         setRetentionTypeToNonModifiable: Bool = false,
+        length: Int? = nil,
         completion: @escaping Callback<RetentionPolicy>
     ) {
 
@@ -112,6 +115,7 @@ public class RetentionPoliciesModule {
         if setRetentionTypeToNonModifiable {
             body["retention_type"] = RetentionType.nonModifiable.description
         }
+        body["retention_length"] = length
 
         boxClient.put(
             url: URL.boxAPIEndpoint("/2.0/retention_policies/\(id)", configuration: boxClient.configuration),
@@ -194,6 +198,21 @@ public class RetentionPoliciesModule {
         boxClient.post(
             url: URL.boxAPIEndpoint("/2.0/retention_policy_assignments", configuration: boxClient.configuration),
             json: body,
+            completion: ResponseHandler.default(wrapping: completion)
+        )
+    }
+
+    /// Remove retention policy assignment
+    ///
+    /// - Parameters:
+    ///   - id: Retention policy assignment ID.
+    ///   - completion: An empty response will be returned upon successful deletion or error if assignment cannot be deleted.
+    public func deleteAssignment(
+        assignmentId id: String,
+        completion: @escaping Callback<Void>
+    ) {
+        boxClient.delete(
+            url: URL.boxAPIEndpoint("/2.0/retention_policy_assignments/\(id)", configuration: boxClient.configuration),
             completion: ResponseHandler.default(wrapping: completion)
         )
     }
