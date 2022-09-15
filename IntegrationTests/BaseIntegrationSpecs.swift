@@ -268,4 +268,8 @@ class BaseIntegrationSpecs: QuickSpec {
             }
         }
     }
+
+    func randomizeName(name: String) -> String {
+        return "\(name)_\(UUID().uuidString)"
+    }
 }
