@@ -106,6 +106,7 @@
 		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
 		05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */; };
 		05FA797527D793B100669B6D /* CCGAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FA797427D793B100669B6D /* CCGAuthSession.swift */; };
+		0BD51EDC28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
 		0C008372229C45480067C1AF /* UpdateFolder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C008371229C45480067C1AF /* UpdateFolder.json */; };
@@ -715,6 +716,7 @@
 		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
 		05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueSpecs.swift; sourceTree = "<group>"; };
 		05FA797427D793B100669B6D /* CCGAuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCGAuthSession.swift; sourceTree = "<group>"; };
+		0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetentionPoliciesModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
 		0C008369229C39F00067C1AF /* CopyFolder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CopyFolder.json; sourceTree = "<group>"; };
@@ -1273,12 +1275,13 @@
 		05EC89D527577AF900FEBAC6 /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				054D536B283CFAB800CC2CBC /* Async */,
 				05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */,
 				0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */,
 				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
 				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
+				0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */,
 				052A03F9287C1FC20063513C /* UsersModuleIntegrationSpecs.swift */,
+				054D536B283CFAB800CC2CBC /* Async */,
 				053637BB276C952D00C18D26 /* Extensions */,
 				05EA725C2762649B001ECFF3 /* Resources */,
 				0547B737276C99AA002D9E7A /* Utils */,
@@ -2826,6 +2829,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD51EDC28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift in Sources */,
 				0547B73E276C99AA002D9E7A /* CryptographyUtil.swift in Sources */,
 				053637BD276C96E400C18D26 /* IntegrationTestResources.swift in Sources */,
 				057C8CE4276799760092A6EC /* Date+Extensions.swift in Sources */,
