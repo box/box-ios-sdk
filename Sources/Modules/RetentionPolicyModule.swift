@@ -92,7 +92,7 @@ public class RetentionPoliciesModule {
     ///   - id: Retention policy id.
     ///   - name: Updated name of retention policy.
     ///   - dispositionAction: If updating a `finite` policy, the disposition action can be `permanently_delete` or `remove_retention`.
-    ///     For indefinite policies, disposition action must be remove_retention.
+    ///     For indefinite policies, disposition action must be `remove_retention`.
     ///   - status: Used to `retire` a retention policy if status is set to `retired`. If not retiring a policy, do not include or set to null.
     ///   - setRetentionTypeToNonModifiable: If value is `false` retention type is not changed. If value is true retention type is changed to `non_modifiable`.
     ///   - length: The retention_length is the amount of time, in days, to apply the retention policy to the selected content in days.

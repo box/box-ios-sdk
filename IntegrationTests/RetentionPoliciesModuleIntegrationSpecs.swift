@@ -33,6 +33,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                 it("assign then get and unassign retention policy") {
                     var retentionPolicyAssignment: RetentionPolicyAssignment?
 
+                    // Assign
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.retentionPolicy.assign(
                             policyId: self.retentionPolicy.id,
@@ -46,7 +47,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(retentionPolicyAssignment?.assignedTo?.type).to(equal(RetentionPolicyAssignmentItemType.folder))
                                 expect(retentionPolicyAssignment?.assignedTo?.id).to(equal(self.folder.id))
                             case let .failure(error):
-                                fail("Expected upload call to succeed, but instead got \(error)")
+                                fail("Expected assign call to succeed, but instead got \(error)")
                             }
 
                             done()
@@ -55,6 +56,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     guard let retentionPolicyAssignment = retentionPolicyAssignment else { return }
 
+                    // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.retentionPolicy.getAssignment(assignmentId: retentionPolicyAssignment.id) { result in
                             switch result {
@@ -63,13 +65,14 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(assignment.assignedTo?.type).to(equal(RetentionPolicyAssignmentItemType.folder))
                                 expect(assignment.assignedTo?.id).to(equal(self.folder.id))
                             case let .failure(error):
-                                fail("Expected upload call to succeed, but instead got \(error)")
+                                fail("Expected get call to succeed, but instead got \(error)")
                             }
 
                             done()
                         }
                     }
 
+                    // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         self.client.retentionPolicy.deleteAssignment(assignmentId: retentionPolicyAssignment.id) { result in
                             if case let .failure(error) = result {
