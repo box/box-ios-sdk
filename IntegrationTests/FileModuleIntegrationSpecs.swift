@@ -1125,7 +1125,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                                 expect(downloadedContent.count).notTo(equal(0))
                                 expect(status.totalFileCount).to(equal(2))
-                                expect(status.state).to(equal("succeeded"))
+                                expect(["succeeded", "in_progress"]).to(contain(status.state))
 
                             case let .failure(error):
                                 fail("Expected downloadZip call to suceeded, but it failed \(error)")

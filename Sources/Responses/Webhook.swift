@@ -85,6 +85,12 @@ public class Webhook: BoxModel {
         case sharedLinkCreated
         /// A shared link was updated
         case sharedLinkUpdated
+        /// A sign request is completed
+        case signRequestCompleted
+        /// A sign request is declined
+        case signRequestDeclined
+        /// A sign request is expired
+        case signRequestExpired
         /// Custom value for enum values not yet implemented in the SDK
         case customValue(String)
 
@@ -162,6 +168,12 @@ public class Webhook: BoxModel {
                 self = .sharedLinkCreated
             case "SHARED_LINK.UPDATED":
                 self = .sharedLinkUpdated
+            case "SIGN_REQUEST.COMPLETED":
+                self = .signRequestCompleted
+            case "SIGN_REQUEST.DECLINED":
+                self = .signRequestDeclined
+            case "SIGN_REQUEST.EXPIRED":
+                self = .signRequestExpired
             default:
                 self = .customValue(value)
             }
@@ -241,6 +253,12 @@ public class Webhook: BoxModel {
                 return "SHARED_LINK.CREATED"
             case .sharedLinkUpdated:
                 return "SHARED_LINK.UPDATED"
+            case .signRequestCompleted:
+                return "SIGN_REQUEST.COMPLETED"
+            case .signRequestDeclined:
+                return "SIGN_REQUEST.DECLINED"
+            case .signRequestExpired:
+                return "SIGN_REQUEST.EXPIRED"
             case let .customValue(value):
                 return value
             }
