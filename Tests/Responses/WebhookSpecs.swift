@@ -90,6 +90,9 @@ class WebhookSpecs: QuickSpec {
                         expect(Webhook.EventTriggers.sharedLinkDeleted).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.sharedLinkDeleted.description)))
                         expect(Webhook.EventTriggers.sharedLinkCreated).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.sharedLinkCreated.description)))
                         expect(Webhook.EventTriggers.sharedLinkUpdated).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.sharedLinkUpdated.description)))
+                        expect(Webhook.EventTriggers.signRequestCompleted).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.signRequestCompleted.description)))
+                        expect(Webhook.EventTriggers.signRequestDeclined).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.signRequestDeclined.description)))
+                        expect(Webhook.EventTriggers.signRequestExpired).to(equal(Webhook.EventTriggers(Webhook.EventTriggers.signRequestExpired.description)))
                         expect(Webhook.EventTriggers.customValue("custom value")).to(equal(Webhook.EventTriggers("custom value")))
                     }
                 }
