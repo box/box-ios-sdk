@@ -17,7 +17,7 @@
     <a title="SignRequestCreateSigner Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.3.0 Docs</a> (99% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.4.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -602,6 +602,9 @@
                 <a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/RetentionType.html">RetentionType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/SearchContentType.html">SearchContentType</a>
               </li>
               <li class="nav-group-task">
@@ -615,6 +618,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignerInputContentType.html">SignRequestSignerInputContentType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerInputType.html">SignRequestSignerInputType</a>
@@ -1014,9 +1020,63 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK23SignRequestCreateSignerV5email4role10isInPerson5order22embedUrlExternalUserIdACSS_AA0cdF4RoleOSgSbSgSiSgSSSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(email:role:isInPerson:order:embedUrlExternalUserId:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK23SignRequestCreateSignerV5email4role10isInPerson5order22embedUrlExternalUserIdACSS_AA0cdF4RoleOSgSbSgSiSgSSSgtcfc">init(email:<wbr>role:<wbr>isInPerson:<wbr>order:<wbr>embedUrlExternalUserId:<wbr>)</a>
+                    <a name="/s:6BoxSDK23SignRequestCreateSignerV11redirectUrlSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/redirectUrl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23SignRequestCreateSignerV11redirectUrlSSSgvp">redirectUrl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The URL that the signer will be redirected to after signing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">redirectUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23SignRequestCreateSignerV19declinedRedirectUrlSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/declinedRedirectUrl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23SignRequestCreateSignerV19declinedRedirectUrlSSSgvp">declinedRedirectUrl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The URL that a signer will be redirect to after declining to sign a document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">declinedRedirectUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK23SignRequestCreateSignerV5email4role10isInPerson5order22embedUrlExternalUserId08redirectN0016declinedRedirectN0ACSS_AA0cdF4RoleOSgSbSgSiSgSSSgA2Ptcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(email:role:isInPerson:order:embedUrlExternalUserId:redirectUrl:declinedRedirectUrl:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23SignRequestCreateSignerV5email4role10isInPerson5order22embedUrlExternalUserId08redirectN0016declinedRedirectN0ACSS_AA0cdF4RoleOSgSbSgSiSgSSSgA2Ptcfc">init(email:<wbr>role:<wbr>isInPerson:<wbr>order:<wbr>embedUrlExternalUserId:<wbr>redirectUrl:<wbr>declinedRedirectUrl:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1036,7 +1096,9 @@
     <span class="nv">role</span><span class="p">:</span> <span class="kt"><a href="../Enums/SignRequestSignerRole.html">SignRequestSignerRole</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">isInPerson</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">order</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">embedUrlExternalUserId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">embedUrlExternalUserId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redirectUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">declinedRedirectUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -1106,6 +1168,30 @@ After the sender signs, they will be redirected to the next <code>inPerson</code
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL that the signer will be redirected to after signing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>declinedRedirectUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL that a signer will be redirect to after declining to sign a document.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -1117,7 +1203,7 @@ After the sender signs, they will be redirected to the next <code>inPerson</code
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-08-19)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-11-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

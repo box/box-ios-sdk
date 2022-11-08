@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/box/box-ios-sdk/compare/v5.3.0...v5.4.0) (2022-11-08)
+
+
+### New Features and Enhancements
+
+* Add `content_type` field to Sign Requests signer ([#871](https://github.com/box/box-ios-sdk/issues/871)) ([1ec5b01](https://github.com/box/box-ios-sdk/commit/1ec5b0149f01cd3a18f5cba39b77e01678655932))
+* Add `redirect_url` and `declined_redirect_url` to Sign Request ([#870](https://github.com/box/box-ios-sdk/issues/870)) ([f94d988](https://github.com/box/box-ios-sdk/commit/f94d98862d2fdb2603f4684b963d29d04e0fdb3d))
+* Add support for `sign` webhook triggers ([#875](https://github.com/box/box-ios-sdk/issues/875)) ([994bfaf](https://github.com/box/box-ios-sdk/commit/994bfaf3ead983f5014808f6c9e5ffe167ab8e42))
+* Added method to remove retention policy assignment ([#873](https://github.com/box/box-ios-sdk/issues/873)) ([c5f146c](https://github.com/box/box-ios-sdk/commit/c5f146c960bb1f940418975078d83fb63ff3bdec))
+* Added support for Modifiable Retention Policies ([#872](https://github.com/box/box-ios-sdk/issues/872)) ([e2b7a17](https://github.com/box/box-ios-sdk/commit/e2b7a178c6592c9f7d1e7ce691c215680b3f45d0))
+
 ## [5.3.0](https://github.com/box/box-ios-sdk/compare/v5.2.1...v5.3.0) (2022-08-19)
 
 
