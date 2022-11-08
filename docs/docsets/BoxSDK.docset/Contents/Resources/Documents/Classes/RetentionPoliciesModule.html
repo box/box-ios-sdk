@@ -17,7 +17,7 @@
     <a title="RetentionPoliciesModule Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.3.0 Docs</a> (99% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.4.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -602,6 +602,9 @@
                 <a href="../Enums/RetentionPolicyType.html">RetentionPolicyType</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/RetentionType.html">RetentionType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/SearchContentType.html">SearchContentType</a>
               </li>
               <li class="nav-group-task">
@@ -615,6 +618,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignerInputContentType.html">SignRequestSignerInputContentType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerInputType.html">SignRequestSignerInputType</a>
@@ -940,9 +946,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients10completionySS_AA0C10PolicyTypeOSiSgAA011DispositionK0OSbSgARSayAA4UserCGSgys6ResultOyAA0cV0CAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/create(name:type:length:dispositionAction:canOwnerExtendRetention:areOwnersNotified:customNotificationRecipients:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients10completionySS_AA0C10PolicyTypeOSiSgAA011DispositionK0OSbSgARSayAA4UserCGSgys6ResultOyAA0cV0CAA0A8SDKErrorCGctF">create(name:<wbr>type:<wbr>length:<wbr>dispositionAction:<wbr>canOwnerExtendRetention:<wbr>areOwnersNotified:<wbr>customNotificationRecipients:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients13retentionType10completionySS_AA0c6PolicyV0OSiSgAA011DispositionK0OSbSgASSayAA4UserCGSgAA0cV0OSgys6ResultOyAA0cX0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/create(name:type:length:dispositionAction:canOwnerExtendRetention:areOwnersNotified:customNotificationRecipients:retentionType:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6create4name4type6length17dispositionAction014canOwnerExtendC017areOwnersNotified28customNotificationRecipients13retentionType10completionySS_AA0c6PolicyV0OSiSgAA011DispositionK0OSbSgASSayAA4UserCGSgAA0cV0OSgys6ResultOyAA0cX0CAA0A8SDKErrorCGctF">create(name:<wbr>type:<wbr>length:<wbr>dispositionAction:<wbr>canOwnerExtendRetention:<wbr>areOwnersNotified:<wbr>customNotificationRecipients:<wbr>retentionType:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -965,6 +971,7 @@
     <span class="nv">canOwnerExtendRetention</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">areOwnersNotified</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customNotificationRecipients</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/User.html">User</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">retentionType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionType.html">RetentionType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicy.html">RetentionPolicy</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
@@ -1063,6 +1070,18 @@ For <code>indefinite</code> policies, disposition action must be <code>remove_re
                             <tr>
                               <td>
                                 <code>
+                                <em>retentionType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies the retention type which can be <code>modifiable</code> or <code>non-modifiable</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>completion</em>
                                 </code>
                               </td>
@@ -1081,9 +1100,9 @@ For <code>indefinite</code> policies, disposition action must be <code>remove_re
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgys6ResultOyAA0cO0CAA0A8SDKErrorCGctF"></a>
-                    <a name="//apple_ref/swift/Method/update(policyId:name:dispositionAction:status:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgys6ResultOyAA0cO0CAA0A8SDKErrorCGctF">update(policyId:<wbr>name:<wbr>dispositionAction:<wbr>status:<wbr>completion:<wbr>)</a>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status03setC19TypeToNonModifiable6length10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgSbSiSgys6ResultOyAA0cU0CAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/update(policyId:name:dispositionAction:status:setRetentionTypeToNonModifiable:length:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC6update8policyId4name17dispositionAction6status03setC19TypeToNonModifiable6length10completionySS_SSSgAA011DispositionK0OSgAA0C12PolicyStatusOSgSbSiSgys6ResultOyAA0cU0CAA0A8SDKErrorCGctF">update(policyId:<wbr>name:<wbr>dispositionAction:<wbr>status:<wbr>setRetentionTypeToNonModifiable:<wbr>length:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1103,6 +1122,8 @@ For <code>indefinite</code> policies, disposition action must be <code>remove_re
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">dispositionAction</span><span class="p">:</span> <span class="kt"><a href="../Enums/DispositionAction.html">DispositionAction</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/RetentionPolicyStatus.html">RetentionPolicyStatus</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">setRetentionTypeToNonModifiable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/RetentionPolicy.html">RetentionPolicy</a></span><span class="o">&gt;</span>
 <span class="p">)</span></code></pre>
 
@@ -1145,7 +1166,7 @@ For <code>indefinite</code> policies, disposition action must be <code>remove_re
                               <td>
                                 <div>
                                   <p>If updating a <code>finite</code> policy, the disposition action can be <code>permanently_delete</code> or <code>remove_retention</code>.
-For indefinite policies, disposition action must be remove_retention.</p>
+For indefinite policies, disposition action must be <code>remove_retention</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1158,6 +1179,31 @@ For indefinite policies, disposition action must be remove_retention.</p>
                               <td>
                                 <div>
                                   <p>Used to <code>retire</code> a retention policy if status is set to <code>retired</code>. If not retiring a policy, do not include or set to null.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setRetentionTypeToNonModifiable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If value is <code>false</code> retention type is not changed. If value is true retention type is changed to <code>non_modifiable</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>length</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The retention_length is the amount of time, in days, to apply the retention policy to the selected content in days.
+Do not specify for <code>indefinite</code> policies. Required for <code>finite</code> policies.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1448,6 +1494,67 @@ If query parameters are given, only the retention policies that match the query 
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK23RetentionPoliciesModuleC16deleteAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteAssignment(assignmentId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC16deleteAssignment12assignmentId10completionySS_ys6ResultOyytAA0A8SDKErrorCGctF">deleteAssignment(assignmentId:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove retention policy assignment</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteAssignment</span><span class="p">(</span>
+    <span class="n">assignmentId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6BoxSDK8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Retention policy assignment ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An empty response will be returned upon successful deletion or error if assignment cannot be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limitAA14PagingIteratorCyAA0C16PolicyAssignmentCGSS_AA0cO4TypeOSgSSSgSiSgtF"></a>
                     <a name="//apple_ref/swift/Method/listAssignments(policyId:type:marker:limit:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limitAA14PagingIteratorCyAA0C16PolicyAssignmentCGSS_AA0cO4TypeOSgSSSgSiSgtF">listAssignments(policyId:<wbr>type:<wbr>marker:<wbr>limit:<wbr>)</a>
@@ -1697,7 +1804,7 @@ If query parameters are given, only the retention policies that match the query 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-08-19)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-11-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
