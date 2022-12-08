@@ -29,7 +29,7 @@ To create a retention policy, call
 [`client.retentionPolicy.create(name:type:length:dispositionAction:canOwnerExtendRetention:areOwnersNotified:customNotificationRecipients:retentionType:completion:)`][create-retention-policy].
 
 You can create either a `indefinite` retention policy, or a `finite`.
-To create a `indefinite` retention policy, you mast set a `type` to `.indefinite` and a `dispositionAction` to `remove_retention`.
+To create a `indefinite` retention policy, you must set a `type` to `.indefinite` and a `dispositionAction` to `.removeRetention`.
 
 <!-- sample post_retention_policies -->
 ```swift
@@ -49,7 +49,7 @@ client.retentionPolicy.create(
 
 To create a `finite` retention policy, you must set `type` to `.finite`,
 set amount of time in days to apply the retention policy (`length`) and a `dispositionAction`.
-The disposition action can be `permanently_delete` or `remove_retention`.
+The disposition action can be `.permanentlyDelete` or `.removeRetention`.
 
 ```swift
 client.retentionPolicy.create(
@@ -189,7 +189,7 @@ iterator.next { results in
 }
 ```
 
-You can also filter assignments by setting `type` parameter to one of values: `folder`, `metadataTemplate` or `enterprise`:
+You can also filter assignments by setting `type` parameter to one of values: `.folder`, `.metadataTemplate` or `.enterprise`:
 
 ```swift
 let iterator = client.retentionPolicy.listAssignments(policyId:"12345", type: .folder)
