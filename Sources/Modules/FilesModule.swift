@@ -753,9 +753,9 @@ public class FilesModule {
     }
 
     /// Get a thumbnail image for a file.
-    // Sizes of 32x32, 64x64, 128x128, and 256x256 can be returned in the .png format and sizes of 32x32, 94x94,
-    // 160x160, and 320x320 can be returned in the .jpg format. Thumbnails can be generated for the image and video
-    // file formats listed on (http://community.box.com/t5/Managing-Your-Content/What-file-types-are-supported-by-Box-s-Content-Preview/ta-p/327)
+    /// Sizes of 32x32, 64x64, 128x128, and 256x256 can be returned in the .png format and sizes of 32x32, 94x94,
+    /// 160x160, and 320x320 can be returned in the .jpg format. Thumbnails can be generated for the image and video
+    /// file formats listed on (http://community.box.com/t5/Managing-Your-Content/What-file-types-are-supported-by-Box-s-Content-Preview/ta-p/327)
     ///
     /// - Parameters:
     ///   - fileId: The ID of the file
