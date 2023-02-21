@@ -271,7 +271,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
             }
 
             describe("assign()") {
-                it("should create new retention policy assignment") {
+                it("should create new retention policy assignment for folder") {
                     let id = "11446498"
                     stub(
                         condition: isHost("api.box.com") &&
@@ -319,6 +319,54 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         }
                     }
                 }
+
+                it("should create new retention policy assignment for enterprise") {
+                    let id = "11446498"
+                    stub(
+                        condition: isHost("api.box.com") &&
+                            isPath("/2.0/retention_policy_assignments") &&
+                            isMethodPOST() &&
+                            hasJsonBody([
+                                "policy_id": id,
+                                "assign_to": [
+                                    "id": nil,
+                                    "type": "enterprise"
+                                ],
+                                "filter_fields": [
+                                    [
+                                        "field": "test",
+                                        "value": "test"
+                                    ]
+                                ]
+                            ])
+                    ) { _ in
+                        OHHTTPStubsResponse(
+                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+                            statusCode: 200, headers: ["Content-Type": "application/json"]
+                        )
+                    }
+                    waitUntil(timeout: .seconds(10)) { done in
+                        self.sut.retentionPolicy.assign(
+                            policyId: id,
+                            assignedContentId: nil,
+                            assignContentType: RetentionPolicyAssignmentItemType.enterprise,
+                            filterFields: [MetadataFieldFilter(field: "test", value: "test")]
+                        ) { result in
+                            switch result {
+                            case let .success(retentionPolicyAssignment):
+                                expect(retentionPolicyAssignment.id).to(equal(id))
+                                expect(retentionPolicyAssignment.retentionPolicy?.id).to(equal("11446498"))
+                                expect(retentionPolicyAssignment.retentionPolicy?.name).to(equal("Some Policy Name"))
+                                expect(retentionPolicyAssignment.assignedBy?.id).to(equal("11111"))
+                                expect(retentionPolicyAssignment.assignedBy?.name).to(equal("Test User"))
+                                expect(retentionPolicyAssignment.assignedBy?.login).to(equal("testuser@example.com"))
+                            case let .failure(error):
+                                fail("Expected call to assign to succeed, but instead got \(error)")
+                            }
+                            done()
+                        }
+                    }
+                }
             }
 
             describe("deleteAssignment()") {
@@ -352,9 +400,8 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/retention_policies/\(id)/assignments") &&
                             isMethodGET() &&
-                            containsQueryParams([
-                                "policy_type": "finite"
-                            ])
+                            containsQueryParams(["fields": "retention_policy,assigned_to", "type": "folder"])
+
                     ) { _ in
                         OHHTTPStubsResponse(
                             fileAtPath: OHPathForFile("GetRetentionPolicyAssignments.json", type(of: self))!,
@@ -362,7 +409,11 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.retentionPolicy.listAssignments(policyId: id, type: .finite)
+                        let iterator = self.sut.retentionPolicy.listAssignments(
+                            policyId: id,
+                            type: .folder,
+                            fields: ["retention_policy", "assigned_to"]
+                        )
                         iterator.next { result in
                             switch result {
                             case let .success(page):
