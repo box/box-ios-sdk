@@ -170,7 +170,7 @@ client.retentionPolicy.getAssignment(assignmentId: "123456")  { result in
 ## Get Retention Policy Assignments
 
 To get a list of all retention policy assignments associated with a specified retention policy, call
-[`client.retentionPolicy.listAssignments(policyId:type:marker:limit:)`][get-all-assignments].
+[`client.retentionPolicy.listAssignments(policyId:type:marker:limit:fields)`][get-all-assignments].
 This method will return an iterator, which is used to get the assignments.
 
 <!-- sample get_retention_policies_id_assignments -->
@@ -206,7 +206,7 @@ iterator.next { results in
 }
 ```
 
-[get-all-assignments]: https://opensource.box.com/box-ios-sdk/Classes/RetentionPoliciesModule.html#/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limitAA14PagingIteratorCyAA0C16PolicyAssignmentCGSS_AA0coP8ItemTypeOSgSSSgSiSgtF
+[get-all-assignments]: https://opensource.box.com/box-ios-sdk/Classes/RetentionPoliciesModule.html#/s:6BoxSDK23RetentionPoliciesModuleC15listAssignments8policyId4type6marker5limit6fieldsAA14PagingIteratorCyAA0C16PolicyAssignmentCGSS_AA0cpQ8ItemTypeOSgSSSgSiSgSaySSGSgtF
 
 ## Delete Retention Policy Assignment
 
