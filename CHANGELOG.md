@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/box/box-ios-sdk/compare/v5.4.0...v5.4.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* Fix `listAssignments` and `assign` methods in `RetentionPolicyModule` ([#886](https://github.com/box/box-ios-sdk/issues/886)) ([b668888](https://github.com/box/box-ios-sdk/commit/b668888f35136dd1239526b70cc31a10bdd04744))
+
 ## [5.4.0](https://github.com/box/box-ios-sdk/compare/v5.3.0...v5.4.0) (2022-11-08)
 
 
