@@ -174,13 +174,13 @@ public class RetentionPoliciesModule {
     ///
     /// - Parameters:
     ///   - id: The id of the retention policy to assign this content to.
-    ///   - assignedContentId: The id of the content to assign the retention policy to. If assigning to an enterprise, no id should be provided.
+    ///   - assignedContentId: The id of the content to assign the retention policy to. If assigning to an enterprise set this to nil.
     ///   - assignContentType: The type of item policy is assigned to. The type can only be one of three attributes: enterprise, folder, or metadata_template.
     ///   - filterFields: The array of metadata field filters
     ///   - completion: Returns either new assignment upon success or an error.
     public func assign(
         policyId id: String,
-        assignedContentId: String,
+        assignedContentId: String?,
         assignContentType: RetentionPolicyAssignmentItemType,
         filterFields: [MetadataFieldFilter]? = nil,
         completion: @escaping Callback<RetentionPolicyAssignment>
@@ -225,20 +225,24 @@ public class RetentionPoliciesModule {
     ///   - marker: The position marker at which to begin the response. See [marker-based paging]
     ///     (https://developer.box.com/reference#section-marker-based-paging) for details.
     ///   - limit: The maximum number of items to return. The default is 100.
+    ///   - fields: Comma-separated list of [fields](https://developer.box.com/reference#fields) to
+    ///     include in the response.
     /// - Returns: Returns a pagination iterator to fetch a list of the retention policy assignments associated with the specified retention policy.
     public func listAssignments(
         policyId id: String,
-        type: RetentionPolicyType? = nil,
+        type: RetentionPolicyAssignmentItemType? = nil,
         marker: String? = nil,
-        limit: Int? = nil
+        limit: Int? = nil,
+        fields: [String]? = nil
     ) -> PagingIterator<RetentionPolicyAssignment> {
         .init(
             client: boxClient,
             url: URL.boxAPIEndpoint("/2.0/retention_policies/\(id)/assignments", configuration: boxClient.configuration),
             queryParameters: [
-                "policy_type": type?.description,
+                "type": type?.description,
                 "marker": marker,
-                "limit": limit
+                "limit": limit,
+                "fields": FieldsQueryParam(fields)
             ]
         )
     }
