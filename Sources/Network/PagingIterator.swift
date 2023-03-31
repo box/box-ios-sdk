@@ -94,7 +94,9 @@ public class PagingIterator<Element: BoxModel> {
             nextPage = .streamPosition(nextStreamPosition)
         }
         // Handle marker based paging
-        else if let nextPageMarker = page.nextMarker {
+        // An Empty string, like a nil `nextMarker`, indicates the end has been reached.
+        // ref: https://developer.box.com/guides/api-calls/pagination/marker-based/
+        else if let nextPageMarker = page.nextMarker, !nextPageMarker.isEmpty {
             nextPage = .marker(nextPageMarker)
         }
         // Handle unexpected value with no paging information
