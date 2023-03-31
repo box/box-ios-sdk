@@ -79,6 +79,12 @@
 		05A58A4726FB487500AB309C /* EventTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A4626FB487500AB309C /* EventTypeSpecs.swift */; };
 		05A58A5826FB6F0700AB309C /* WatermarkSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */; };
 		05B4FFAB287DD6CB00214E3A /* UserAvatarUploadSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B4FFAA287DD6CB00214E3A /* UserAvatarUploadSpecs.swift */; };
+		05B51E0429D7144C00CDFA9B /* PagingIteratorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B51E0329D7144C00CDFA9B /* PagingIteratorSpecs.swift */; };
+		05B51E0729D72FF000CDFA9B /* MarkerBasedPagingWithValidNext.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B51E0629D72FF000CDFA9B /* MarkerBasedPagingWithValidNext.json */; };
+		05B51E0929D730F200CDFA9B /* MarkerBasedPagingWithEmptyNext.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B51E0829D730F200CDFA9B /* MarkerBasedPagingWithEmptyNext.json */; };
+		05B51E0B29D7313D00CDFA9B /* MarkerBasedPagingWithNullNext.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B51E0A29D7313D00CDFA9B /* MarkerBasedPagingWithNullNext.json */; };
+		05B51E0E29D740F900CDFA9B /* OffsetBasedPagingWithoutMoreItems.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B51E0C29D740F900CDFA9B /* OffsetBasedPagingWithoutMoreItems.json */; };
+		05B51E0F29D740F900CDFA9B /* OffsetBasedPagingWithMoreItems.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B51E0D29D740F900CDFA9B /* OffsetBasedPagingWithMoreItems.json */; };
 		05BFA08F274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */; };
 		05BFA091274EED9B00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */; };
 		05EA725B27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */; };
@@ -700,6 +706,12 @@
 		05A58A4626FB487500AB309C /* EventTypeSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeSpecs.swift; sourceTree = "<group>"; };
 		05A58A5726FB6F0700AB309C /* WatermarkSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkSpecs.swift; sourceTree = "<group>"; };
 		05B4FFAA287DD6CB00214E3A /* UserAvatarUploadSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarUploadSpecs.swift; sourceTree = "<group>"; };
+		05B51E0329D7144C00CDFA9B /* PagingIteratorSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingIteratorSpecs.swift; sourceTree = "<group>"; };
+		05B51E0629D72FF000CDFA9B /* MarkerBasedPagingWithValidNext.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MarkerBasedPagingWithValidNext.json; sourceTree = "<group>"; };
+		05B51E0829D730F200CDFA9B /* MarkerBasedPagingWithEmptyNext.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MarkerBasedPagingWithEmptyNext.json; sourceTree = "<group>"; };
+		05B51E0A29D7313D00CDFA9B /* MarkerBasedPagingWithNullNext.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MarkerBasedPagingWithNullNext.json; sourceTree = "<group>"; };
+		05B51E0C29D740F900CDFA9B /* OffsetBasedPagingWithoutMoreItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffsetBasedPagingWithoutMoreItems.json; sourceTree = "<group>"; };
+		05B51E0D29D740F900CDFA9B /* OffsetBasedPagingWithMoreItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffsetBasedPagingWithMoreItems.json; sourceTree = "<group>"; };
 		05BFA08D274EEA5A00BC2448 /* GetFileSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFileSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05BFA090274EED9A00BC2448 /* GetFolderSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetFolderSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
 		05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
@@ -1287,6 +1299,18 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		05B51E0529D72FB400CDFA9B /* PagingIterator */ = {
+			isa = PBXGroup;
+			children = (
+				05B51E0D29D740F900CDFA9B /* OffsetBasedPagingWithMoreItems.json */,
+				05B51E0C29D740F900CDFA9B /* OffsetBasedPagingWithoutMoreItems.json */,
+				05B51E0629D72FF000CDFA9B /* MarkerBasedPagingWithValidNext.json */,
+				05B51E0829D730F200CDFA9B /* MarkerBasedPagingWithEmptyNext.json */,
+				05B51E0A29D7313D00CDFA9B /* MarkerBasedPagingWithNullNext.json */,
+			);
+			path = PagingIterator;
+			sourceTree = "<group>";
+		};
 		05EA725C2762649B001ECFF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1764,6 +1788,7 @@
 		225639C3225389B100D951B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				05B51E0529D72FB400CDFA9B /* PagingIterator */,
 				0C506CAC22A6AB30007F18A4 /* Collaborations */,
 				2278C548231D808D0048FF45 /* CollaborationWhitelist */,
 				22D0041822AFB30400478F1E /* Collections */,
@@ -2205,6 +2230,7 @@
 				97021E9A22A5DF55004988C8 /* BoxNetworkAgentSpecs.swift */,
 				05A58A4326FB415700AB309C /* QueryParameterConvertibleSpecs.swift */,
 				05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */,
+				05B51E0329D7144C00CDFA9B /* PagingIteratorSpecs.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2626,6 +2652,7 @@
 				2280E3362301630B00F98892 /* GetTrashedFile.json in Resources */,
 				9D51B14A22E0D5490057308E /* RemoveFileFromCollection.json in Resources */,
 				22CE53A422DD0C3E00F3D59F /* UpdateMetadataOnFolder.json in Resources */,
+				05B51E0729D72FF000CDFA9B /* MarkerBasedPagingWithValidNext.json in Resources */,
 				0C008372229C45480067C1AF /* UpdateFolder.json in Resources */,
 				80FEB7D82321BF7D0037331C /* GetCollaborationsForGroup.json in Resources */,
 				0CA0653222982E0F00A751B1 /* GetFileTasks.json in Resources */,
@@ -2728,6 +2755,7 @@
 				22C41453231ED19700D3992C /* GetMetadataCascadePolicy.json in Resources */,
 				9717866D22F0C694004A5F6D /* RemoveFolderSharedLink.json in Resources */,
 				0CA0651E22980EE900A751B1 /* image.png in Resources */,
+				05B51E0929D730F200CDFA9B /* MarkerBasedPagingWithEmptyNext.json in Resources */,
 				F99D416F2319CDC800327698 /* GetWebhooks.json in Resources */,
 				05EE814027184A4B006A2329 /* GetSignRequest.json in Resources */,
 				0508665A28A296E30073DC77 /* GetFileRequest.json in Resources */,
@@ -2762,7 +2790,9 @@
 				22E60D67230317C100E86A4A /* GetRepresentationsUnknownState.json in Resources */,
 				22B01E3422AAC8D400E434ED /* DownscopeToken.json in Resources */,
 				22CE53A222DD0C3E00F3D59F /* GetAllMetadataOnFolder.json in Resources */,
+				05B51E0B29D7313D00CDFA9B /* MarkerBasedPagingWithNullNext.json in Resources */,
 				22E60D652303074D00E86A4A /* GetRepresentationsErrorState.json in Resources */,
+				05B51E0F29D740F900CDFA9B /* OffsetBasedPagingWithMoreItems.json in Resources */,
 				2278C554231D808E0048FF45 /* GetCollaborationWhitelistExemptUsersByID.json in Resources */,
 				225639D9225389B100D951B5 /* GetFileInfo.json in Resources */,
 				80FEB7C223203AC40037331C /* FullGroupMembership.json in Resources */,
@@ -2786,6 +2816,7 @@
 				92514E992319CA04002D44A8 /* InvalidWatermarkInvalid.json in Resources */,
 				97C8B57822B05C9000F36435 /* FullFile.json in Resources */,
 				9D472E81231BF4C8004C8023 /* GetRetentionPolicies.json in Resources */,
+				05B51E0E29D740F900CDFA9B /* OffsetBasedPagingWithoutMoreItems.json in Resources */,
 				0C66A63F228330FE008D5AEB /* AccessToken.json in Resources */,
 				F929D6142331AE280039E452 /* GetFileVersionLegalHolds.json in Resources */,
 				225639DA225389B100D951B5 /* UpdateFileInfo.json in Resources */,
@@ -3148,6 +3179,7 @@
 				174DEB85231919AB00AA3335 /* RecentItemSpecs.swift in Sources */,
 				22C41457231ED1A500D3992C /* MetadataCascadePolicyModuleSpecs.swift in Sources */,
 				0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */,
+				05B51E0429D7144C00CDFA9B /* PagingIteratorSpecs.swift in Sources */,
 				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				05EE814627185554006A2329 /* SignRequestSpecs.swift in Sources */,

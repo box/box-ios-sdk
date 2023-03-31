@@ -80,7 +80,7 @@ public class PagingIterator<Element: BoxModel> {
             let limit = page.limit ?? page.entries.count
             nextPage = .offset(previousOffset + limit)
             if let totalCount = totalCount {
-                isDone = previousOffset + limit > totalCount
+                isDone = previousOffset + limit >= totalCount
             }
             else {
                 isDone = page.entries.isEmpty
