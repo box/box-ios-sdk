@@ -11,6 +11,7 @@ disabled_rules:
   - modifier_order
   - statement_position
   - todo
+  - blanket_disable_command
   # - trailing_whitespace
 
 #
