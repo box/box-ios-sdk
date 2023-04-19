@@ -24,7 +24,7 @@ extension MetadataFilterQueryParam: QueryParameterConvertible {
             return nil
         }
         // swiftlint:disable:next force_unwrapping
-        let filterString = try? filter.filterArray.map { String(data: try queryParameterEncoder.encode($0), encoding: .utf8)! }
+        let filterString = try? filter.filterArray.map { try String(data: queryParameterEncoder.encode($0), encoding: .utf8)! }
             .joined(separator: ",")
 
         guard let unwrappedFilterString = filterString else {

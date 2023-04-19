@@ -39,7 +39,7 @@ struct AnyCodable: Decodable {
         else if var container = try? decoder.unkeyedContainer() {
             var result = [Any]()
             while !container.isAtEnd {
-                result.append(try container.decode(AnyCodable.self).value)
+                try result.append(container.decode(AnyCodable.self).value)
             }
             value = result
         }
