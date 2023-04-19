@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.2](https://github.com/box/box-ios-sdk/compare/v5.4.1...v5.4.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* An emoty string `nextMarker` should be treated as end-of-paging. ([#893](https://github.com/box/box-ios-sdk/issues/893)) ([49c17de](https://github.com/box/box-ios-sdk/commit/49c17de588fcffcd2d151ce9047ebc09965f80ce))
+
 ### [5.4.1](https://github.com/box/box-ios-sdk/compare/v5.4.0...v5.4.1) (2023-02-24)
 
 
