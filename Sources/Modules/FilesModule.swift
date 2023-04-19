@@ -309,7 +309,7 @@ public class FilesModule {
 
         var body = MultipartForm()
         do {
-            body.appendPart(name: "attributes", contents: try JSONSerialization.data(withJSONObject: attributes))
+            try body.appendPart(name: "attributes", contents: JSONSerialization.data(withJSONObject: attributes))
             body.appendFilePart(name: "file", contents: InputStream(data: data), length: data.count, fileName: "UNUSED", mimeType: "application/octet-stream")
         }
         catch {
@@ -398,7 +398,7 @@ public class FilesModule {
 
         var body = MultipartForm()
         do {
-            body.appendPart(name: "attributes", contents: try JSONSerialization.data(withJSONObject: attributes))
+            try body.appendPart(name: "attributes", contents: JSONSerialization.data(withJSONObject: attributes))
             body.appendFilePart(name: "file", contents: InputStream(data: data), length: data.count, fileName: "UNUSED", mimeType: "application/octet-stream")
         }
         catch {
@@ -486,7 +486,7 @@ public class FilesModule {
 
         var body = MultipartForm()
         do {
-            body.appendPart(name: "attributes", contents: try JSONSerialization.data(withJSONObject: attributes))
+            try body.appendPart(name: "attributes", contents: JSONSerialization.data(withJSONObject: attributes))
             body.appendFilePart(name: "file", contents: stream, length: fileSize, fileName: "UNUSED", mimeType: "application/octet-stream")
         }
         catch {
@@ -581,7 +581,7 @@ public class FilesModule {
 
         var body = MultipartForm()
         do {
-            body.appendPart(name: "attributes", contents: try JSONSerialization.data(withJSONObject: attributes))
+            try body.appendPart(name: "attributes", contents: JSONSerialization.data(withJSONObject: attributes))
             body.appendFilePart(name: "file", contents: stream, length: fileSize, fileName: "UNUSED", mimeType: "application/octet-stream")
         }
         catch {

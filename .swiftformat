@@ -18,7 +18,6 @@
 --disable blankLinesAroundMark
 --disable blankLinesAtStartOfScope
 --disable wrapMultilineStatementBraces
---disable hoistTry
 --wraparguments before-first
 --elseposition next-line
 --disable redundanttype
