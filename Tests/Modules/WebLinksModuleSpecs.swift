@@ -6,17 +6,17 @@
 //  Copyright © 2019 box. All rights reserved.
 //
 
-@testable import BoxSDK
-import Nimble
-import OHHTTPStubs
-import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
-import Quick
+ @testable import BoxSDK
+ import Nimble
+ import OHHTTPStubs
+ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
+ import Quick
 
-class WebLinksModuleSpecs: QuickSpec {
-    var sut: BoxClient!
+ class WebLinksModuleSpecs: QuickSpec {
 
-    override func spec() {
-
+    override class func spec() {
+        var sut: BoxClient!
+        
         describe("Web Links Module") {
             beforeEach {
                 self.sut = BoxSDK.getClient(token: "")
@@ -42,7 +42,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 "name": "Example Web Link"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -71,7 +71,7 @@ class WebLinksModuleSpecs: QuickSpec {
 
                 it("should make an API call to retrieve a specified web link") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/web_links/12345") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -100,7 +100,7 @@ class WebLinksModuleSpecs: QuickSpec {
 
                 it("should delete the specified web link") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/web_links/12345") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
@@ -130,7 +130,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 "url": "https://updatedexample.com"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -171,7 +171,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -213,7 +213,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             isMethodGET() &&
                             containsQueryParams(["fields": "shared_link"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -247,7 +247,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             isMethodPUT() &&
                             hasJsonBody(["shared_link": NSNull()])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: OHPathForFile("RemoveWebLinkSharedLink.json", type(of: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -279,7 +279,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "password": "test"]])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -313,7 +313,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open"]])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -347,7 +347,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetWebLinkSharedLink_PasswordNotEnabled.json", type(of: self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -381,7 +381,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: OHPathForFile("GetWebLinkSharedLink_VanityNameEnabled.json", type(of: self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -411,4 +411,4 @@ class WebLinksModuleSpecs: QuickSpec {
             }
         }
     }
-}
+ }
