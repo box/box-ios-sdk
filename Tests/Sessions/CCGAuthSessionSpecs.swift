@@ -63,7 +63,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -102,7 +102,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -141,7 +141,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -253,7 +253,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -292,7 +292,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -331,7 +331,7 @@
 //                                )
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -551,7 +551,7 @@
 //                            )
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("DownscopeToken.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }

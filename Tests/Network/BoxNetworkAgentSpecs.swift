@@ -85,7 +85,7 @@
 //                        && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
@@ -116,7 +116,7 @@
 //                        && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
@@ -140,7 +140,7 @@
 //                        && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }

@@ -34,7 +34,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("MarkerBasedPagingWithValidNext.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("MarkerBasedPagingWithValidNext.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -43,7 +43,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["usemarker": "true", "marker": "next_marker_value_1"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("MarkerBasedPagingWithEmptyNext.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("MarkerBasedPagingWithEmptyNext.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -84,7 +84,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("MarkerBasedPagingWithEmptyNext.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("MarkerBasedPagingWithEmptyNext.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -124,7 +124,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("MarkerBasedPagingWithNullNext.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("MarkerBasedPagingWithNullNext.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -167,7 +167,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["limit": "2"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("OffsetBasedPagingWithMoreItems.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("OffsetBasedPagingWithMoreItems.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -176,7 +176,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("OffsetBasedPagingWithoutMoreItems.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("OffsetBasedPagingWithoutMoreItems.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
@@ -221,7 +221,7 @@
 //                        && isPath("/2.0/list_items")
 //                        && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("OffsetBasedPagingWithoutMoreItems.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("OffsetBasedPagingWithoutMoreItems.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
