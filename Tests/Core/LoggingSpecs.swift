@@ -14,7 +14,7 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class LoggingSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("Logging") {
 
             describe("formattedMessage()") {

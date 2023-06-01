@@ -24,16 +24,15 @@ class BoxNetworkAgentSpy: BoxNetworkAgent {
 
 class BoxNetworkAgentSpecs: QuickSpec {
 
-    var networkAgent: BoxNetworkAgentSpy!
-
-    override func spec() {
+    override class func spec() {
+        var networkAgent: BoxNetworkAgentSpy!
 
         beforeEach {
-            self.networkAgent = BoxNetworkAgentSpy(configuration: BoxSDK.defaultConfiguration)
+            networkAgent = BoxNetworkAgentSpy(configuration: BoxSDK.defaultConfiguration)
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("send()") {
@@ -41,7 +40,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
             context("retry with exponential backoff") {
                 beforeEach {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/me") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 500, headers: [:]
                         )
                     }
@@ -50,14 +49,14 @@ class BoxNetworkAgentSpecs: QuickSpec {
                 it("should fail and the intervals between retries should fit expected ranges when API returns transient error") {
                     waitUntil(timeout: .seconds(200)) { done in
                         let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
-                        self.networkAgent.send(request: request) { result in
+                        networkAgent.send(request: request) { result in
                             switch result {
                             case .success:
                                 fail("Expected call to fail, but it succeeded")
                             case .failure:
                                 let bounds: [(min: TimeInterval, max: TimeInterval)] = [(0, 2), (1, 3), (2, 6), (4, 12), (8, 24), (16, 48), (32, 96)]
 
-                                let responseIntervals = self.networkAgent.responseIntervals
+                                let responseIntervals = networkAgent.responseIntervals
                                 expect(responseIntervals.count).to(equal(BoxSDK.defaultConfiguration.maxRetryAttempts))
 
                                 for index in 0 ..< min(6, responseIntervals.count) {
@@ -84,15 +83,15 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
                 ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                    HTTPStubsResponse(
+                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
                     let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
-                    self.networkAgent.send(request: request) { result in
+                    networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {
                             fail("Expected call to succeed, but instead got \(error)")
                         }
@@ -104,7 +103,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
             it("should send analytics header containing client analytics info when configuration includes client info") {
                 let clientInfo = ClientAnalyticsInfo(appName: "testApp", appVersion: "1.2.3")
                 let config = try! BoxSDKConfiguration(clientId: "", clientSecret: "", clientAnalyticsInfo: clientInfo)
-                self.networkAgent = BoxNetworkAgentSpy(configuration: config)
+                networkAgent = BoxNetworkAgentSpy(configuration: config)
 
                 let analytics = AnalyticsHeaderGenerator()
                 let analyticsHeader = "agent=box-swift-sdk/\(analytics.swiftSDKVersion); env=\(analytics.deviceName)/\(analytics.iOSVersion); client=testApp/1.2.3"
@@ -115,15 +114,15 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
                 ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                    HTTPStubsResponse(
+                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
                     let request = BoxRequest(httpMethod: .get, url: URL(string: "https://api.box.com/2.0/users/me")!)
-                    self.networkAgent.send(request: request) { result in
+                    networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {
                             fail("Expected call to succeed, but instead got \(error)")
                         }
@@ -139,8 +138,8 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
                 ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                    HTTPStubsResponse(
+                        fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -152,7 +151,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         httpHeaders: ["Content-Type": "application/vnd.box+json"],
                         body: .jsonObject(["type": "user"])
                     )
-                    self.networkAgent.send(request: request) { result in
+                    networkAgent.send(request: request) { result in
                         if case let .failure(error) = result {
                             fail("Expected call to succeed, but instead got \(error)")
                         }

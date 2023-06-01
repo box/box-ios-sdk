@@ -14,22 +14,23 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class BoxEnumSpecs: QuickSpec {
-    var sut: AccessibleBy!
 
-    override func spec() {
+    override class func spec() {
+        var sut: AccessibleBy!
+
         describe("Comments Module") {
             beforeEach {
-                self.sut = AccessibleBy.group
+                sut = AccessibleBy.group
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("BoxEnum comparisons") {
 
                 it("it should match the enum and string representation") {
-                    expect(self.sut == "group").to(equal(true))
+                    expect(sut == "group").to(equal(true))
                 }
             }
         }

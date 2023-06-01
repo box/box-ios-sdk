@@ -13,17 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class FolderModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
 
         describe("Folders Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("create()") {
@@ -39,14 +39,14 @@ class FolderModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateFolder.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateFolder.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
+                        sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).toNot(beNil())
@@ -66,14 +66,14 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders") && isMethodPOST()) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateFolder.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateFolder.json", Bundle(for: Self.self))!,
                             statusCode: 409, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
+                        sut.folders.create(name: "Pictures", parentId: BoxSDK.Constants.rootFolder) { result in
                             switch result {
                             case .success:
                                 fail("Expected call to create to suceeded, but it failed")
@@ -100,14 +100,14 @@ class FolderModuleSpecs: QuickSpec {
                             ]
                         ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.update(
+                        sut.folders.update(
                             folderId: "11111",
                             sharedLink: .value(SharedLinkData(access: .open, canDownload: true, canEdit: true)),
                             fields: ["name", "shared_link"]
@@ -138,22 +138,22 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should get folder items using offset pagination iterator when usemarker flag is not set") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["offset": "0"])) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsOffsetIterator1.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItemsOffsetIterator1.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["offset": "2"])) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsOffsetIterator2.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItemsOffsetIterator2.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
 
-                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        let iterator = sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -193,22 +193,22 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should get folder items using marker pagination iterator when usemarker flag is set") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["marker": "eyJ0eXBlIjoiZm9sZGVyIiwiZGlyIjoibmV4dCIsInRhaWwiOiJleUoxYzJWeVgybGtJam8zTlRBeU5UUTNPRGd5TENKd1lYSmxiblJmWm05c1pHVnlYMmxrSWpvd0xDSmtaV3hsZEdWa0lqb3dMQ0ptYjJ4a1pYSmZibUZ0WlNJNklrMTVJRUp2ZUNCT2IzUmxjeUlzSW1admJHUmxjbDlwWkNJNk5qa3hNREk1TURRNE5UVjkifQ"])) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsMarkerIterator2.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItemsMarkerIterator2.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && !containsQueryParams(["marker": "eyJ0eXBlIjoiZm9sZGVyIiwiZGlyIjoibmV4dCIsInRhaWwiOiJleUoxYzJWeVgybGtJam8zTlRBeU5UUTNPRGd5TENKd1lYSmxiblJmWm05c1pHVnlYMmxrSWpvd0xDSmtaV3hsZEdWa0lqb3dMQ0ptYjJ4a1pYSmZibUZ0WlNJNklrMTVJRUp2ZUNCT2IzUmxjeUlzSW1admJHUmxjbDlwWkNJNk5qa3hNREk1TURRNE5UVjkifQ"]) && !containsQueryParams(["offset": "2"])) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsMarkerIterator1.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItemsMarkerIterator1.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
 
-                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: true, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        let iterator = sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: true, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -235,15 +235,15 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItems.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItems.json", Bundle(for: Self.self))!,
                             statusCode: 404, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
 
-                        let iterator = self.sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
+                        let iterator = sut.folders.listItems(folderId: BoxSDK.Constants.rootFolder, usemarker: false, offset: 0, limit: 2, direction: .ascending, fields: ["name", "url", "description"])
                         iterator.next { result in
                             switch result {
                             case let .failure(error):
@@ -262,11 +262,11 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should delete the folder") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/1234567") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.delete(folderId: "1234567") { response in
+                        sut.folders.delete(folderId: "1234567") { response in
                             switch response {
                             case .success:
                                 break
@@ -280,11 +280,11 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should delete the folder and contents when recursive parameter is true") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/1234567") && isMethodDELETE() && containsQueryParams(["recursive": "true"])) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.delete(folderId: "1234567", recursive: true) { response in
+                        sut.folders.delete(folderId: "1234567", recursive: true) { response in
                             switch response {
                             case .success:
                                 break
@@ -298,11 +298,11 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should not delete folder contents when recursive parameter is set to false") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/1234567") && isMethodDELETE() && containsQueryParams(["recursive": "false"])) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.delete(folderId: "1234567", recursive: false) { response in
+                        sut.folders.delete(folderId: "1234567", recursive: false) { response in
                             switch response {
                             case .success:
                                 break
@@ -316,14 +316,14 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should produce error when the API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/1231231") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItems.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderItems.json", Bundle(for: Self.self))!,
                             statusCode: 404, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.delete(folderId: "1231231", recursive: true) { response in
+                        sut.folders.delete(folderId: "1231231", recursive: true) { response in
                             switch response {
                             case .success:
                                 fail("Expected call to delete folder to fail, but it suceeded")
@@ -340,14 +340,14 @@ class FolderModuleSpecs: QuickSpec {
             describe("copy()") {
                 it("should copy the folder in the destinated folder") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/11446498/copy") && isMethodPOST() && self.compareJSONBody(["parent": ["id": "123456"], "name": "Pictures copy"])) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CopyFolder.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CopyFolder.json", Bundle(for: Self.self))!,
                             statusCode: 202, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.copy(folderId: "11446498", destinationFolderID: "123456", name: "Pictures copy") { result in
+                        sut.folders.copy(folderId: "11446498", destinationFolderID: "123456", name: "Pictures copy") { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).toNot(beNil())
@@ -375,14 +375,14 @@ class FolderModuleSpecs: QuickSpec {
             describe("listCollaborations ") {
                 it("should get folder collaborations") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/14176246/collaborations") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderCollaborations.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FolderCollaborations.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.folders.listCollaborations(folderId: "14176246")
+                        let iterator = sut.folders.listCollaborations(folderId: "14176246")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -408,8 +408,8 @@ class FolderModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -419,8 +419,8 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/folders/5000948880") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -430,15 +430,15 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/folders/5000948880") &&
                             isMethodPUT()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AddFolderToFavorites.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("AddFolderToFavorites.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                 }
                 it("should make API call to add folder to favorites") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.addToFavorites(folderId: "5000948880", completion: { result in
+                        sut.folders.addToFavorites(folderId: "5000948880", completion: { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).to(beAKindOf(Folder.self))
@@ -458,8 +458,8 @@ class FolderModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -469,8 +469,8 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/folders/5000948880") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -480,15 +480,15 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/folders/5000948880") &&
                             isMethodPUT()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveFolderFromFavorites.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("RemoveFolderFromFavorites.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                 }
                 it("should make API call to remove folder from favorites") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.removeFromFavorites(folderId: "5000948880", completion: { result in
+                        sut.folders.removeFromFavorites(folderId: "5000948880", completion: { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).to(beAKindOf(Folder.self))
@@ -510,8 +510,8 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodGET() &&
                             containsQueryParams(["fields": "shared_link"])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFolderSharedLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -519,7 +519,7 @@ class FolderModuleSpecs: QuickSpec {
 
                 it("should download a shared link for a folder", closure: {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.getSharedLink(forFolder: "5000948880") { result in
+                        sut.folders.getSharedLink(forFolder: "5000948880") { result in
                             switch result {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).toNot(beNil())
@@ -543,15 +543,15 @@ class FolderModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "password": "frog"]])
                         ) { _ in
-                            OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                            HTTPStubsResponse(
+                                fileAtPath: OHPathForFileInBundle("GetFolderSharedLink.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a folder", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .value("frog")) { result in
+                            sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .value("frog")) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -577,15 +577,15 @@ class FolderModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                         ) { _ in
-                            OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink_VanityNameEnabled.json", type(of: self))!,
+                            HTTPStubsResponse(
+                                fileAtPath: OHPathForFileInBundle("GetFolderSharedLink_VanityNameEnabled.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a folder", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
+                            sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -614,15 +614,15 @@ class FolderModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true]]])
                         ) { _ in
-                            OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                            HTTPStubsResponse(
+                                fileAtPath: OHPathForFileInBundle("GetFolderSharedLink.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a folder", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, canDownload: true) { result in
+                            sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, canDownload: true) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -651,15 +651,15 @@ class FolderModuleSpecs: QuickSpec {
                                 containsQueryParams(["fields": "shared_link"]) &&
                                 hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                         ) { _ in
-                            OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink_PasswordNotEnabled.json", type(of: self))!,
+                            HTTPStubsResponse(
+                                fileAtPath: OHPathForFileInBundle("GetFolderSharedLink_PasswordNotEnabled.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a folder", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
+                            sut.folders.setSharedLink(forFolder: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -685,15 +685,15 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodPUT() &&
                             hasJsonBody(["shared_link": NSNull()])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveFolderSharedLink.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("RemoveFolderSharedLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                 }
                 it("should delete a shared link for a folder", closure: {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.deleteSharedLink(forFolder: "5000948880") { result in
+                        sut.folders.deleteSharedLink(forFolder: "5000948880") { result in
                             switch result {
                             case .success:
                                 break
@@ -713,14 +713,14 @@ class FolderModuleSpecs: QuickSpec {
                             && isPath("/2.0/folders/12345/watermark")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FullWatermark.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.getWatermark(folderId: "12345") { result in
+                        sut.folders.getWatermark(folderId: "12345") { result in
                             switch result {
                             case let .success(watermark):
                                 expect(watermark).toNot(beNil())
@@ -747,14 +747,14 @@ class FolderModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FullWatermark.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.applyWatermark(folderId: "12345") { result in
+                        sut.folders.applyWatermark(folderId: "12345") { result in
                             switch result {
                             case let .success(watermark):
                                 expect(watermark).toNot(beNil())
@@ -772,11 +772,11 @@ class FolderModuleSpecs: QuickSpec {
             describe("removeWatermark()") {
                 it("should remove the watermark from folder") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/12345/watermark") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.removeWatermark(folderId: "12345") { response in
+                        sut.folders.removeWatermark(folderId: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -795,14 +795,14 @@ class FolderModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") && isPath("/2.0/folder_locks") && isMethodGET() &&
                             containsQueryParams(["folder_id": "14176246"])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderLocks.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FolderLocks.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.folders.listLocks(folderId: "14176246")
+                        let iterator = sut.folders.listLocks(folderId: "14176246")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -839,14 +839,14 @@ class FolderModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderLock.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FolderLock.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.createLock(folderId: "14176246") { result in
+                        sut.folders.createLock(folderId: "14176246") { result in
                             switch result {
                             case let .success(folderLock):
                                 expect(folderLock).toNot(beNil())
@@ -864,11 +864,11 @@ class FolderModuleSpecs: QuickSpec {
             describe("deleteLock()") {
                 it("should delete the lock") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folder_locks/1234567") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.folders.deleteLock(folderLockId: "1234567") { response in
+                        sut.folders.deleteLock(folderLockId: "1234567") { response in
                             switch response {
                             case .success:
                                 break

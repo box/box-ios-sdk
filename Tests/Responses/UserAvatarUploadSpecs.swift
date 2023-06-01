@@ -12,12 +12,12 @@ import Quick
 
 class UserAvatarUploadSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("UserAvatarUpload") {
 
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "UploadUserAvatar", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "UploadUserAvatar", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

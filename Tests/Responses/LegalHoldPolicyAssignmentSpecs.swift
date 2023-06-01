@@ -11,13 +11,13 @@ import Quick
 
 class LegalHoldPolicyAssignmentSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Legal Hold Policy Assignment") {
 
             describe("init()") {
 
                 it("should correctly deserialize legal hold assignment from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullPolicyAssignment", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullPolicyAssignment", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

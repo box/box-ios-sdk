@@ -4,22 +4,24 @@ on:
   push:
     branches:
       - main
+      - aj/update_deps
   pull_request:
     types: [ opened, synchronize, edited ]
     branches:
       - main
+      - aj/update_deps
 
 jobs:
   integration-tests:
-    runs-on: macos-12
+    runs-on: macos-13
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=15.5,name=iPhone 11']
+        destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14']
     steps:
       - name: Git - Checkout
         uses: actions/checkout@v2
       - name: Setup - Xcode
-        run: sudo xcode-select -s /Applications/Xcode_13.4.app
+        run: sudo xcode-select -s /Applications/Xcode_14.2.app
       - name: Setup - Ruby and bundler dependencies
         uses: ruby/setup-ruby@v1
         with:

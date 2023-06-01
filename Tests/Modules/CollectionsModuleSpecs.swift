@@ -13,16 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CollectionsModulesSpecs: QuickSpec {
-    var sut: BoxClient!
-    var file: File?
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdads")
+            sut = BoxSDK.getClient(token: "asdads")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("CollectionsModuleSpecs") {
@@ -32,8 +32,8 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -41,7 +41,7 @@ class CollectionsModulesSpecs: QuickSpec {
 
                 it("should be able to get a list of collections") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collections.list()
+                        let iterator = sut.collections.list()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -67,14 +67,14 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collections.getFavorites { result in
+                        sut.collections.getFavorites { result in
                             switch result {
                             case let .success(favoritesCollection):
                                 expect(favoritesCollection).to(beAKindOf(BoxCollection.self))
@@ -95,14 +95,14 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollectionsEmpty.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollectionsEmpty.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collections.getFavorites { result in
+                        sut.collections.getFavorites { result in
                             switch result {
                             case .success:
                                 fail("Expected method to produce an error, but it succeeded")
@@ -123,15 +123,15 @@ class CollectionsModulesSpecs: QuickSpec {
                             isPath("/2.0/collections/123/items") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollectionItems.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollectionItems.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                 }
                 it("should be able to get list of collection items") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collections.listItems(collectionId: "123")
+                        let iterator = sut.collections.listItems(collectionId: "123")
                         iterator.next { result in
                             switch result {
                             case let .success(page):

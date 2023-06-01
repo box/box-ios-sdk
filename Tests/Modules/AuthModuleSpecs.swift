@@ -13,23 +13,23 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class AuthModuleSpecs: QuickSpec {
-    var client: BoxClient!
-    var sdk: BoxSDK!
-    var sut: AuthModule!
 
-    let clientId: String = "aqswdefrgthyju"
-    let clientSecret: String = "aqswdefrgt"
-    let code: String = "zaqxswedc"
+    static let clientId: String = "aqswdefrgthyju"
+    static let clientSecret: String = "aqswdefrgt"
+    static let code: String = "zaqxswedc"
 
-    override func spec() {
+    override class func spec() {
+        var sdk: BoxSDK!
+        var sut: AuthModule!
+
         beforeEach {
-            self.sdk = BoxSDK(clientId: self.clientId, clientSecret: self.clientSecret)
-            let networkAgent = BoxNetworkAgent(configuration: self.sdk.configuration)
-            self.sut = AuthModule(networkAgent: networkAgent, configuration: self.sdk.configuration)
+            sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
+            let networkAgent = BoxNetworkAgent(configuration: sdk.configuration)
+            sut = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("AuthModuleSpecs") {
@@ -39,10 +39,10 @@ class AuthModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com")
                             && isPath("/oauth2/token")
                             && isMethodPOST()
-                            && self.compareURLEncodedBody(["client_id": self.clientId, "client_secret": self.clientSecret, "code": self.code, "grant_type": "authorization_code"])
+                            && compareURLEncodedBody(["client_id": clientId, "client_secret": clientSecret, "code": code, "grant_type": "authorization_code"])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -50,7 +50,7 @@ class AuthModuleSpecs: QuickSpec {
 
                 it("should get access token") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getToken(withCode: "zaqxswedc") { result in
+                        sut.getToken(withCode: "zaqxswedc") { result in
                             switch result {
                             case let .success(tokenInfo):
                                 expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -74,7 +74,7 @@ class AuthModuleSpecs: QuickSpec {
                             && isPath("/oauth2/token")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             jsonObject: ["error": "invalid_grant", "error_description": "Auth code doesn't exist or is invalid for the client"],
                             statusCode: 400,
                             headers: [:]
@@ -84,7 +84,7 @@ class AuthModuleSpecs: QuickSpec {
 
                 it("should get an 400 error") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getToken(withCode: "zaqxswedc") { result in
+                        sut.getToken(withCode: "zaqxswedc") { result in
                             switch result {
                             case .success:
                                 fail("OAuth authentication succeded but was expected to fail")
@@ -109,15 +109,15 @@ class AuthModuleSpecs: QuickSpec {
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(["client_id": self.clientId, "client_secret": self.clientSecret, "token": tokenToRevoke])
+                        && compareURLEncodedBody(["client_id": clientId, "client_secret": clientSecret, "token": tokenToRevoke])
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         data: Data(), statusCode: 200, headers: [:]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeToken(token: tokenToRevoke) { result in
+                    sut.revokeToken(token: tokenToRevoke) { result in
                         switch result {
                         case .success:
                             break
@@ -135,13 +135,13 @@ class AuthModuleSpecs: QuickSpec {
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         data: Data(), statusCode: 400, headers: [:]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeToken(token: "adjhfgbs") { result in
+                    sut.revokeToken(token: "adjhfgbs") { result in
                         switch result {
                         case .success:
                             fail("Expected call to fail")
@@ -164,7 +164,7 @@ class AuthModuleSpecs: QuickSpec {
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/token")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "subject_token": tokenToDownscope,
                                 "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
@@ -190,14 +190,14 @@ class AuthModuleSpecs: QuickSpec {
                             }
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+                    HTTPStubsResponse(
+                        fileAtPath: OHPathForFileInBundle("DownscopeToken.json", Bundle(for: Self.self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
+                    sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
                         switch result {
                         case let .success(tokenInfo):
                             expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -225,23 +225,23 @@ class AuthModuleSpecs: QuickSpec {
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/token")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "grant_type": "refresh_token",
-                                "client_id": self.clientId,
-                                "client_secret": self.clientSecret,
+                                "client_id": clientId,
+                                "client_secret": clientSecret,
                                 "refresh_token": refreshToken
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                    HTTPStubsResponse(
+                        fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.refresh(refreshToken: refreshToken) { result in
+                    sut.refresh(refreshToken: refreshToken) { result in
                         switch result {
                         case let .success(tokenInfo):
                             expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -264,7 +264,7 @@ class AuthModuleSpecs: QuickSpec {
                         && isPath("/oauth2/token")
                         && isMethodPOST()
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         jsonObject: ["error": "invalid_grant", "error_description": "Invalid refresh token"],
                         statusCode: 400,
                         headers: [:]
@@ -272,7 +272,7 @@ class AuthModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.refresh(refreshToken: "invalid token") { result in
+                    sut.refresh(refreshToken: "invalid token") { result in
                         switch result {
                         case .success:
                             fail("OAuth authentication succeded but was expected to fail")

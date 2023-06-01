@@ -12,12 +12,12 @@ import Quick
 
 class WatermarkSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Watermark") {
             describe("init()") {
                 context("success case") {
                     it("should make call to init() to initialize watermark response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullWatermark", ofType: "json") else {
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "FullWatermark", ofType: "json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -38,7 +38,7 @@ class WatermarkSpecs: QuickSpec {
 
                 context("decoding error case when required field is missing") {
                     it("should make call to init() to initialize watermark response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "InvalidWatermarkMissing", ofType: "json")
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "InvalidWatermarkMissing", ofType: "json")
                         else {
                             fail("Could not find fixture file.")
                             return
@@ -58,7 +58,7 @@ class WatermarkSpecs: QuickSpec {
 
                 context("decoding error case when required field is invalid type") {
                     it("should make call to init() to initialize watermark response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "InvalidWatermarkInvalid", ofType: "json")
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "InvalidWatermarkInvalid", ofType: "json")
                         else {
                             fail("Could not find fixture file.")
                             return

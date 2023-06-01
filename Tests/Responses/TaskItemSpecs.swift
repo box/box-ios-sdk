@@ -12,13 +12,13 @@ import Quick
 
 class TaskItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Task Item") {
 
             describe("init()") {
 
                 it("should correctly deserialize a file type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -49,7 +49,7 @@ class TaskItemSpecs: QuickSpec {
                 }
 
                 it("should throw BoxCodingError.valueMismatch exception when deserialize an object with an unknown value in type field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_ValueFormatMismatch", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile_ValueFormatMismatch", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -66,7 +66,7 @@ class TaskItemSpecs: QuickSpec {
                 }
 
                 it("should throw BoxCodingError.typeMismatch exception when deserialize object with no type field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_MissingRequiredField", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile_MissingRequiredField", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -85,7 +85,7 @@ class TaskItemSpecs: QuickSpec {
 
             describe("rawData") {
                 it("should be equal to json data used to create the TaskItem file type object") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -106,7 +106,7 @@ class TaskItemSpecs: QuickSpec {
 
             describe("debugDescription") {
                 it("should return correct description for a file type") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

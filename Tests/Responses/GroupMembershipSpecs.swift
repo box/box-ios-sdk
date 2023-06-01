@@ -12,11 +12,11 @@ import Quick
 
 class GroupMembershipSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("GroupMembership") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullGroupMembership", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullGroupMembership", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

@@ -13,10 +13,10 @@ import Nimble
 import Quick
 
 class BoxModelSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("testing boxmodel on comment") {
             it("should make call to init() to initalize comment response object from JSON dictionary") {
-                guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
+                guard let filepath = Bundle(for: Self.self).path(forResource: "FullComment", ofType: "json") else {
                     fail("Could not find fixture file.")
                     return
                 }
@@ -50,7 +50,7 @@ class BoxModelSpecs: QuickSpec {
             }
 
             it("should make call to init() to initalize comment response object from JSON Data") {
-                guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
+                guard let filepath = Bundle(for: Self.self).path(forResource: "FullComment", ofType: "json") else {
                     fail("Could not find fixture file.")
                     return
                 }

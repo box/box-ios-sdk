@@ -11,13 +11,13 @@ import Quick
 
 class FileVersionLegalHoldSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("File Version Legal Hold") {
 
             describe("init()") {
 
                 it("should correctly deserialize file version legal hold from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFileVersionLegalHold", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFileVersionLegalHold", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

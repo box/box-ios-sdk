@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class FileRequestsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("FileRequestsModule") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get()") {
@@ -32,14 +33,14 @@ class FileRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/file_requests/42037322")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileRequest.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFileRequest.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.fileRequests.get(fileRequestId: "42037322") { result in
+                        sut.fileRequests.get(fileRequestId: "42037322") { result in
                             switch result {
                             case let .success(fileRequest):
                                 expect(fileRequest.type).to(equal("file_request"))
@@ -93,8 +94,8 @@ class FileRequestsModuleSpecs: QuickSpec {
                             ])
                             && hasHeaderNamed("If-Match", value: "1")
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileRequest.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateFileRequest.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -109,7 +110,7 @@ class FileRequestsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.fileRequests.update(
+                        sut.fileRequests.update(
                             fileRequestId: "42037322",
                             ifMatch: "1",
                             updateRequest: updateRequest
@@ -165,8 +166,8 @@ class FileRequestsModuleSpecs: QuickSpec {
 
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CopyFileRequest.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CopyFileRequest.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -181,7 +182,7 @@ class FileRequestsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.fileRequests.copy(fileRequestId: "42037322", copyRequest: copyRequest) { result in
+                        sut.fileRequests.copy(fileRequestId: "42037322", copyRequest: copyRequest) { result in
                             switch result {
                             case let .success(fileRequest):
                                 expect(fileRequest.type).to(equal("file_request"))
@@ -225,11 +226,11 @@ class FileRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/file_requests/42037322")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.fileRequests.delete(fileRequestId: "42037322") { result in
+                        sut.fileRequests.delete(fileRequestId: "42037322") { result in
                             switch result {
                             case .success:
                                 break

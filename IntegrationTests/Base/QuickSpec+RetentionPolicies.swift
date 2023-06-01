@@ -1,5 +1,5 @@
 //
-//  BaseIntegrationSpecs+RetentionPolicies.swift
+//  QuickSpec+RetentionPolicies.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 14/10/2022.
@@ -10,9 +10,10 @@
 import Nimble
 import Quick
 
-extension BaseIntegrationSpecs {
+extension QuickSpec {
 
-    func createRetention(
+    static func createRetention(
+        client: BoxClient,
         name: String,
         type: RetentionPolicyType = .finite,
         length: Int? = 1,
@@ -20,7 +21,7 @@ extension BaseIntegrationSpecs {
         callback: @escaping (RetentionPolicy) -> Void
     ) {
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.retentionPolicy.create(
+            client.retentionPolicy.create(
                 name: name,
                 type: type,
                 length: length,
@@ -38,8 +39,9 @@ extension BaseIntegrationSpecs {
         }
     }
 
-    func assignRetention(
-        _ retention: RetentionPolicy?,
+    static func assignRetention(
+        client: BoxClient,
+        retention: RetentionPolicy?,
         assignedContentId: String?,
         assignContentType: RetentionPolicyAssignmentItemType = .folder,
         callback: @escaping (RetentionPolicyAssignment) -> Void
@@ -49,7 +51,7 @@ extension BaseIntegrationSpecs {
         }
 
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.retentionPolicy.assign(
+            client.retentionPolicy.assign(
                 policyId: retention.id,
                 assignedContentId: assignedContentId,
                 assignContentType: assignContentType
@@ -66,13 +68,13 @@ extension BaseIntegrationSpecs {
         }
     }
 
-    func retireRetention(_ retention: RetentionPolicy?) {
+    static func retireRetention(client: BoxClient, retention: RetentionPolicy?) {
         guard let retention = retention else {
             return
         }
 
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.retentionPolicy.update(policyId: retention.id, status: .retired) { result in
+            client.retentionPolicy.update(policyId: retention.id, status: .retired) { result in
                 if case let .failure(error) = result {
                     fail("Expected update retention call to succeed, but instead got \(error)")
                 }

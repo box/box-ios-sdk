@@ -13,24 +13,25 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class BoxClientSpecs: QuickSpec {
-    var sut: BoxClient?
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient?
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdasd")
+            sut = BoxSDK.getClient(token: "asdasd")
         }
 
         afterEach {
-            self.sut = nil
+            sut = nil
         }
 
         describe("BoxClientSpec") {
             context("Box Modules and BoxClient reference relationship") {
                 it("BoxClient Module shouldn't have a BoxClient reference once the client is destroyed") {
-                    let fileModule = self.sut!.files
-                    let foldersModule = self.sut!.folders
-                    let usersModule = self.sut!.users
-                    self.sut = nil
+                    let fileModule = sut!.files
+                    let foldersModule = sut!.folders
+                    let usersModule = sut!.users
+                    sut = nil
                     expect(fileModule.boxClient).to(beNil())
                     expect(foldersModule.boxClient).to(beNil())
                     expect(usersModule.boxClient).to(beNil())
@@ -39,21 +40,21 @@ class BoxClientSpecs: QuickSpec {
 
             context("Get new client to behave as another user") {
                 it("should add as User header to be able to passed it to the Network Client") {
-                    let asUserClient = self.sut?.asUser(withId: "1234567")
+                    let asUserClient = sut?.asUser(withId: "1234567")
                     expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.asUser: "1234567"]))
                 }
             }
 
             context("BoxClient add valid headers when user request a new client to use with") {
                 it("should add proper shared_Link and password header to be able to passed it to the Network Client") {
-                    let asUserClient = self.sut?.withSharedLink(url: URL(string: "http://box.com")!, password: "123121")
+                    let asUserClient = sut?.withSharedLink(url: URL(string: "http://box.com")!, password: "123121")
                     expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com&shared_link_password=123121"]))
                 }
             }
 
             context("BoxClient add valid headers when user request a new client to use with") {
                 it("should add shared_Link header to be able to passed it to the Network Client") {
-                    let asUserClient = self.sut?.withSharedLink(url: URL(string: "http://box.com")!, password: nil)
+                    let asUserClient = sut?.withSharedLink(url: URL(string: "http://box.com")!, password: nil)
                     expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com"]))
                 }
             }
@@ -72,7 +73,7 @@ class BoxClientSpecs: QuickSpec {
                             && isMethodPOST()
                             && self.compareURLEncodedBody(["client_id": clientID, "client_secret": clientSecret, "token": currentToken])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 200, headers: [:]
                         )
                     }
@@ -98,7 +99,7 @@ class BoxClientSpecs: QuickSpec {
                             && isPath("/oauth2/revoke")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 400, headers: [:]
                         )
                     }
@@ -124,7 +125,7 @@ class BoxClientSpecs: QuickSpec {
                             && isPath("/oauth2/revoke")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 200, headers: [:]
                         )
                     }
@@ -173,7 +174,7 @@ class BoxClientSpecs: QuickSpec {
                             && isPath("/2.0/users/me")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 401, headers: [:]
                         )
                     }
@@ -199,14 +200,14 @@ class BoxClientSpecs: QuickSpec {
                         && isPath("/2.0/files/5000948880")
                         && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFileInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.get(url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: self.sut!.configuration)) { result in
+                        sut!.get(url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: sut!.configuration)) { result in
                             let fileResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
 
                             switch fileResult {
@@ -234,15 +235,15 @@ class BoxClientSpecs: QuickSpec {
                             && isMethodPOST()
                             && hasJsonBody(body)
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FullWebLink.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.post(
-                            url: URL.boxAPIEndpoint("/2.0/web_links", configuration: self.sut!.configuration),
+                        sut!.post(
+                            url: URL.boxAPIEndpoint("/2.0/web_links", configuration: sut!.configuration),
                             json: body
                         ) { result in
                             let webLinkResult: Result<WebLink, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
@@ -273,15 +274,15 @@ class BoxClientSpecs: QuickSpec {
                             && isMethodPUT()
                             && hasJsonBody(body)
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateFileInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.put(
-                            url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: self.sut!.configuration),
+                        sut!.put(
+                            url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: sut!.configuration),
                             queryParameters: ["fields": "name,created_by"],
                             json: body
                         ) { result in
@@ -309,11 +310,11 @@ class BoxClientSpecs: QuickSpec {
                             isPath("/2.0/files/12345") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.delete(url: URL.boxAPIEndpoint("/2.0/files/12345", configuration: self.sut!.configuration)) { result in
+                        sut!.delete(url: URL.boxAPIEndpoint("/2.0/files/12345", configuration: sut!.configuration)) { result in
                             if case let .failure(error) = result {
                                 fail("Expected delete call to succeed, but instead got \(error)")
                             }
@@ -334,12 +335,12 @@ class BoxClientSpecs: QuickSpec {
                             && { $0.httpMethod == "OPTIONS" }
                             && hasJsonBody(body)
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.options(
-                            url: URL.boxAPIEndpoint("/2.0/files/content", configuration: self.sut!.configuration),
+                        sut!.options(
+                            url: URL.boxAPIEndpoint("/2.0/files/content", configuration: sut!.configuration),
                             json: body
                         ) { result in
                             if case let .failure(error) = result {
@@ -360,12 +361,12 @@ class BoxClientSpecs: QuickSpec {
                             isMethodGET() &&
                             containsQueryParams(["version": "1"])
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.download(
-                            url: URL.boxAPIEndpoint("/2.0/files/12345/content", configuration: self.sut!.configuration),
+                        sut!.download(
+                            url: URL.boxAPIEndpoint("/2.0/files/12345/content", configuration: sut!.configuration),
                             downloadDestinationURL: destinationURL,
                             queryParameters: ["version": "1"]
                         ) { result in
@@ -384,7 +385,7 @@ class BoxClientSpecs: QuickSpec {
                 it("should make valid send() API call") {
                     let boxRequest = BoxRequest(
                         httpMethod: .get,
-                        url: URL.boxAPIEndpoint("/2.0/users/11111", configuration: self.sut!.configuration),
+                        url: URL.boxAPIEndpoint("/2.0/users/11111", configuration: sut!.configuration),
                         httpHeaders: ["X-Custom-Header": "CustomValue", "Content-Type": "application/vnd.box+json"],
                         queryParams: ["fields": "name,login"],
                         body: .jsonObject(["some_key": "some_value"])
@@ -399,14 +400,14 @@ class BoxClientSpecs: QuickSpec {
                             && containsQueryParams(["fields": "name,login"])
                             && hasJsonBody(["some_key": "some_value"])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut!.send(request: boxRequest) { result in
+                        sut!.send(request: boxRequest) { result in
                             let userResult: Result<User, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
 
                             switch userResult {

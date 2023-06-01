@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class TasksModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Tasks Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get()") {
@@ -33,14 +34,14 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/tasks/11111")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetTask.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetTask.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.get(taskId: "11111") { result in
+                        sut.tasks.get(taskId: "11111") { result in
                             switch result {
                             case let .success(task):
                                 expect(task).to(beAKindOf(Task.self))
@@ -93,14 +94,14 @@ class TasksModuleSpecs: QuickSpec {
                                 "action": "review"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateTask.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateTask.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.create(fileId: "7287087200", action: .review, dueAt: Date(fromISO8601String: "2014-04-03T11:09:43-07:00")) { result in
+                        sut.tasks.create(fileId: "7287087200", action: .review, dueAt: Date(fromISO8601String: "2014-04-03T11:09:43-07:00")) { result in
                             switch result {
                             case let .success(task):
                                 expect(task).to(beAKindOf(Task.self))
@@ -152,14 +153,14 @@ class TasksModuleSpecs: QuickSpec {
                                 "completion_rule": "any_assignee"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateTask.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateTask.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.update(
+                        sut.tasks.update(
                             taskId: "11111",
                             action: .review,
                             message: "Updated Message",
@@ -211,13 +212,13 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/tasks/123456")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.delete(taskId: "123456") { result in
+                        sut.tasks.delete(taskId: "123456") { result in
                             switch result {
                             case .success:
                                 break
@@ -239,14 +240,14 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/task_assignments/11111")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetTaskAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetTaskAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.getAssignment(taskAssignmentId: "11111") { result in
+                        sut.tasks.getAssignment(taskAssignmentId: "11111") { result in
                             switch result {
                             case let .success(taskAssignment):
                                 expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -314,14 +315,14 @@ class TasksModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateTaskAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateTaskAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.assign(taskId: "1992432", userId: "12345") { result in
+                        sut.tasks.assign(taskId: "1992432", userId: "12345") { result in
                             switch result {
                             case let .success(taskAssignment):
                                 expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -389,14 +390,14 @@ class TasksModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateTaskAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateTaskAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.assignByEmail(taskId: "1992432", email: "steve@email.com") { result in
+                        sut.tasks.assignByEmail(taskId: "1992432", email: "steve@email.com") { result in
                             switch result {
                             case let .success(taskAssignment):
                                 expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -459,14 +460,14 @@ class TasksModuleSpecs: QuickSpec {
                                 "resolution_state": "approved"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateTaskAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateTaskAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.updateAssignment(taskAssignmentId: "2698512", message: "Test Message", resolutionState: .approved) { result in
+                        sut.tasks.updateAssignment(taskAssignmentId: "2698512", message: "Test Message", resolutionState: .approved) { result in
                             switch result {
                             case let .success(taskAssignment):
                                 expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -525,13 +526,13 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/task_assignments/12345")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.deleteAssignment(taskAssignmentId: "12345") { result in
+                        sut.tasks.deleteAssignment(taskAssignmentId: "12345") { result in
                             switch result {
                             case .success:
                                 break
@@ -553,14 +554,14 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/tasks/12345/assignments")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetAssignments.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetAssignments.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.tasks.listAssignments(forTaskId: "12345") { result in
+                        sut.tasks.listAssignments(forTaskId: "12345") { result in
                             switch result {
                             case let .success(taskAssignments):
                                 guard let firstAssignment = taskAssignments.first else {

@@ -12,16 +12,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class StoragePoliciesModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Storage Policies Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "asdads")
+                sut = BoxSDK.getClient(token: "asdads")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get)") {
@@ -32,14 +33,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policies/12345")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.get(storagePolicyId: "12345") { result in
+                        sut.storagePolicies.get(storagePolicyId: "12345") { result in
                             guard case let .success(policy) = result else {
                                 fail("Expected call to get to succeed, but it failed")
                                 done()
@@ -63,14 +64,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policies")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicies.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetStoragePolicies.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.storagePolicies.listForEnterprise()
+                        let iterator = sut.storagePolicies.listForEnterprise()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -96,14 +97,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policy_assignments/enterprise_36907420")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignmentInfo.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignmentInfo.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.getAssignment(storagePolicyAssignmentId: "enterprise_36907420") { result in
+                        sut.storagePolicies.getAssignment(storagePolicyAssignmentId: "enterprise_36907420") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to getPolicyAssignment to succeed, but it failed")
                                 done()
@@ -128,14 +129,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && containsQueryParams(["resolved_for_type": "enterprise", "resolved_for_id": "36690620"])
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignments.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.listAssignments(resolvedForType: "enterprise", resolvedForId: "36690620") { result in
+                        sut.storagePolicies.listAssignments(resolvedForType: "enterprise", resolvedForId: "36690620") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to listAssignments to succeed, but it failed")
                                 done()
@@ -169,14 +170,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateStoragePolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.assign(storagePolicyId: "12", assignedToType: "user", assignedToId: "3093450887") { result in
+                        sut.storagePolicies.assign(storagePolicyId: "12", assignedToType: "user", assignedToId: "3093450887") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to assign to succeed, but it failed")
                                 done()
@@ -210,7 +211,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 409, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 409, headers: [:])
                     }
 
                     stub(
@@ -219,8 +220,8 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && containsQueryParams(["resolved_for_type": "user", "resolved_for_id": "3093450887"])
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignments.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -236,14 +237,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.forceAssign(storagePolicyId: "192", assignedToType: "user", assignedToId: "3093450887") { result in
+                        sut.storagePolicies.forceAssign(storagePolicyId: "192", assignedToType: "user", assignedToId: "3093450887") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to assignPolicy to succeed, but it failed")
                                 done()
@@ -274,14 +275,14 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.updateAssignment(storagePolicyAssignmentId: "user_7993870887", storagePolicyId: "192") { result in
+                        sut.storagePolicies.updateAssignment(storagePolicyAssignmentId: "user_7993870887", storagePolicyId: "192") { result in
                             guard case let .success(assignment) = result else {
                                 fail("Expected call to updateAssignment to succeed, but it failed")
                                 done()
@@ -304,11 +305,11 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policy_assignments/user_3093870887")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "user_3093870887") { response in
+                        sut.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "user_3093870887") { response in
                             switch response {
                             case .success:
                                 break

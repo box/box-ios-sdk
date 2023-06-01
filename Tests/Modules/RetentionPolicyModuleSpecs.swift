@@ -13,15 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class RetentionPolicyModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdads")
+            sut = BoxSDK.getClient(token: "asdads")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("Retention policy") {
@@ -33,13 +34,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isPath("/2.0/retention_policies/\(id)") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicy.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicy.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.get(policyId: id) { result in
+                        sut.retentionPolicy.get(policyId: id) { result in
                             switch result {
                             case let .success(retentionPolicy):
                                 expect(retentionPolicy.id).to(equal(id))
@@ -87,13 +88,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "retention_type": "modifiable"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicy.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicy.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.create(
+                        sut.retentionPolicy.create(
                             name: "Tax Documents",
                             type: .finite,
                             length: 365,
@@ -139,13 +140,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "status": "active"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateRetentionPolicy.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.update(
+                        sut.retentionPolicy.update(
                             policyId: id,
                             name: "Tax Documents",
                             dispositionAction: .removeRetention,
@@ -179,13 +180,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "retention_type": "non_modifiable"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("UpdateRetentionPolicy.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.update(
+                        sut.retentionPolicy.update(
                             policyId: id,
                             setRetentionTypeToNonModifiable: true
                         ) { result in
@@ -209,13 +210,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             containsQueryParams(["policy_name": "name", "policy_type": "finite", "created_by_user_id": "1234"]) &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicies.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicies.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.retentionPolicy.list(
+                        let iterator = sut.retentionPolicy.list(
                             name: "name",
                             type: .finite,
                             createdByUserId: "1234"
@@ -245,13 +246,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isPath("/2.0/retention_policy_assignments/\(id)") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.getAssignment(assignmentId: id) { result in
+                        sut.retentionPolicy.getAssignment(assignmentId: id) { result in
                             switch result {
                             case let .success(retentionPolicyAssignment):
                                 expect(retentionPolicyAssignment.id).to(equal(id))
@@ -291,13 +292,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.assign(
+                        sut.retentionPolicy.assign(
                             policyId: id,
                             assignedContentId: id,
                             assignContentType: RetentionPolicyAssignmentItemType.folder,
@@ -340,13 +341,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.assign(
+                        sut.retentionPolicy.assign(
                             policyId: id,
                             assignedContentId: nil,
                             assignContentType: RetentionPolicyAssignmentItemType.enterprise,
@@ -377,10 +378,10 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isPath("/2.0/retention_policy_assignments/\(id)") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.retentionPolicy.deleteAssignment(assignmentId: id) { response in
+                        sut.retentionPolicy.deleteAssignment(assignmentId: id) { response in
                             switch response {
                             case .success:
                                 break
@@ -403,13 +404,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             containsQueryParams(["fields": "retention_policy,assigned_to", "type": "folder"])
 
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignments.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicyAssignments.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.retentionPolicy.listAssignments(
+                        let iterator = sut.retentionPolicy.listAssignments(
                             policyId: id,
                             type: .folder,
                             fields: ["retention_policy", "assigned_to"]
@@ -439,13 +440,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isPath("/2.0/file_version_retentions/\(id)") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionRetention.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFileVersionRetention.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.files.getVersionRetention(
+                        sut.files.getVersionRetention(
                             retentionId: id
                         ) { result in
                             switch result {
@@ -481,13 +482,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "disposition_before": dispositionBefore.iso8601
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionRetentions.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFileVersionRetentions.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.files.listVersionRetentions(
+                        let iterator = sut.files.listVersionRetentions(
                             fileId: "1234",
                             fileVersionId: "1234",
                             policyId: "1234",
@@ -518,13 +519,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "limit": "100"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFilesUnderRetentionForAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFilesUnderRetentionForAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.retentionPolicy.listFilesUnderRetentionForAssignment(
+                        let iterator = sut.retentionPolicy.listFilesUnderRetentionForAssignment(
                             retentionPolicyAssignmentId: retentionPolicyAssignmentId,
                             limit: 100
                         )
@@ -555,13 +556,13 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                                 "limit": "100"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionsUnderRetentionForAssignment.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetFileVersionsUnderRetentionForAssignment.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.retentionPolicy.listFileVersionsUnderRetentionForAssignment(
+                        let iterator = sut.retentionPolicy.listFileVersionsUnderRetentionForAssignment(
                             retentionPolicyAssignmentId: retentionPolicyAssignmentId,
                             limit: 100
                         )

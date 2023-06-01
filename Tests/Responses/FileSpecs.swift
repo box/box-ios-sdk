@@ -12,13 +12,13 @@ import Quick
 
 class FileSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("File") {
 
             describe("init()") {
 
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFile", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -123,7 +123,6 @@ class FileSpecs: QuickSpec {
                         expect(file.lock?.createdAt?.iso8601).to(equal("2019-06-11T21:45:08Z"))
                         expect(file.lock?.expiresAt?.iso8601).to(equal("2019-06-12T21:45:08Z"))
                         expect(file.lock?.isDownloadPrevented).to(beTrue())
-//                        expect(file.isHideCollaboratorsEnabled).to(beFalse())
                         expect(file.tags?.count).to(equal(1))
                         expect(file.tags?[0]).to(equal("script"))
                         expect(file.hasCollaborations).to(beFalse())

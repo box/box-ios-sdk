@@ -14,35 +14,33 @@ import Quick
 
 class DelegatedAuthSessionSpecs: QuickSpec {
 
-    private var sut: DelegatedAuthSession!
-
-    private let testQueue = DispatchQueue(label: "testQueue")
-    private var testArray = [String]()
-    private var testClosure: (([String]) -> Void)?
-
-    private func logTestMessage(_ message: String) {
-        testQueue.async { [weak self] in
-            guard let self = self else { return }
-
-            self.testArray.append(message)
-            if self.testArray.count == 4 {
-                self.testClosure?(self.testArray)
+    override class func spec() {
+        func logTestMessage(_ message: String) {
+            testQueue.async { () in
+                testArray.append(message)
+                if testArray.count == 4 {
+                    testClosure?(testArray)
+                }
             }
         }
-    }
 
-    override func spec() {
+        var sut: DelegatedAuthSession!
+
+        let testQueue = DispatchQueue(label: "testQueue")
+        var testArray = [String]()
+        var testClosure: (([String]) -> Void)?
+
         describe("DelegatedAuthSession") {
             describe("getAccessToken()") {
 
                 it("should return the accessToken as the TokenInfo is in a valid state") {
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeValidTokenInfo(),
+                    sut = makeSUT(
+                        tokenInfo: makeValidTokenInfo(),
                         authClosure: { _, _ in }
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
                                 expect(token).to(equal("valid access token"))
@@ -55,13 +53,13 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                 }
 
                 it("should get new access token when current token is expired") {
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeExpiredTokenInfo(),
+                    sut = makeSUT(
+                        tokenInfo: makeExpiredTokenInfo(),
                         authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 999))) }
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
                                 expect(token).to(equal("new access token"))
@@ -74,13 +72,13 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                 }
 
                 it("should get new access token (which is expired) when stored token is expired") {
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeExpiredTokenInfo(),
+                    sut = makeSUT(
+                        tokenInfo: makeExpiredTokenInfo(),
                         authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 0))) }
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case .success:
                                 fail("getAccessToken should not succeed because returned token is expired")
@@ -93,13 +91,13 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                 }
 
                 it("should get access token should fail when authClosure returns error") {
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeExpiredTokenInfo(),
+                    sut = makeSUT(
+                        tokenInfo: makeExpiredTokenInfo(),
                         authClosure: { _, completion in completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure))) }
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case .success:
                                 fail("authClosure returned error so getAccessToken should not succeed.")
@@ -115,8 +113,8 @@ class DelegatedAuthSessionSpecs: QuickSpec {
 
                 it("should call the refresh token requests serially with mutual exclusion") {
                     var authClosureCalls = 0
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeExpiredTokenInfo(),
+                    sut = makeSUT(
+                        tokenInfo: makeExpiredTokenInfo(),
                         authClosure: { _, completion in
                             authClosureCalls += 1
                             DispatchQueue.main.asyncAfter(
@@ -128,7 +126,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(30)) { done in
-                        self.testClosure = { array in
+                        testClosure = { array in
                             DispatchQueue.main.async {
                                 expect(array).to(equal(["first result", "second result", "third result", "fourth result"]))
                                 expect(authClosureCalls).to(equal(1))
@@ -136,20 +134,20 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                             }
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("first result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("first result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("second result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("second result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("third result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("third result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("fourth result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("fourth result")
                         }
                     }
                 }
@@ -158,8 +156,8 @@ class DelegatedAuthSessionSpecs: QuickSpec {
             describe("downscopeToken()") {
 
                 it("should make request to downscope the token") {
-                    self.sut = self.makeSUT(
-                        tokenInfo: self.makeTokenInfoForDownscope(),
+                    sut = makeSUT(
+                        tokenInfo: makeTokenInfoForDownscope(),
                         authClosure: { _, _ in }
                     )
 
@@ -167,7 +165,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                         condition: isHost("api.box.com")
                             && isPath("/oauth2/token")
                             && isMethodPOST()
-                            && self.compareURLEncodedBody(
+                            && compareURLEncodedBody(
                                 [
                                     "subject_token": "asjhkdbfoq83w47gtlqiuwberg",
                                     "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
@@ -192,14 +190,14 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                                 }
                             )
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("DownscopeToken.json", Bundle(for: self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
+                        sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
                             switch result {
                             case let .success(tokenInfo):
                                 expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -222,15 +220,15 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         describe("revokeTokens()") {
 
             it("should revoke the token when sending valid payload") {
-                self.sut = self.makeSUT(
-                    tokenInfo: self.makeTokenInfoForRevoke(),
+                sut = makeSUT(
+                    tokenInfo: makeTokenInfoForRevoke(),
                     authClosure: { _, _ in }
                 )
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -238,11 +236,11 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case .success:
                             break
@@ -255,15 +253,15 @@ class DelegatedAuthSessionSpecs: QuickSpec {
             }
 
             it("shouldn't revoke the token when sending an invalid payload") {
-                self.sut = self.makeSUT(
-                    tokenInfo: self.makeInvalidTokenInfoForRevoke(),
+                sut = makeSUT(
+                    tokenInfo: makeInvalidTokenInfoForRevoke(),
                     authClosure: { _, _ in }
                 )
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -271,11 +269,11 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):
                             expect(error).toNot(beNil())
@@ -290,7 +288,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         }
     }
 
-    private func makeSUT(tokenInfo: TokenInfo, authClosure: @escaping DelegatedAuthClosure) -> DelegatedAuthSession {
+    private static func makeSUT(tokenInfo: TokenInfo, authClosure: @escaping DelegatedAuthClosure) -> DelegatedAuthSession {
         let configuration = try! BoxSDKConfiguration(clientId: "123", clientSecret: "123")
         let networkAgent = BoxNetworkAgent(configuration: configuration)
         let authModule = AuthModule(networkAgent: networkAgent, configuration: configuration)
@@ -306,7 +304,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         )
     }
 
-    private func makeValidTokenInfo() -> TokenInfo {
+    private static func makeValidTokenInfo() -> TokenInfo {
         return TokenInfo(
             accessToken: "valid access token",
             refreshToken: "valid refresh token",
@@ -315,7 +313,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         )
     }
 
-    private func makeExpiredTokenInfo() -> TokenInfo {
+    private static func makeExpiredTokenInfo() -> TokenInfo {
         return TokenInfo(
             accessToken: "expired access token",
             refreshToken: "a refresh token",
@@ -324,7 +322,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         )
     }
 
-    private func makeTokenInfoForDownscope() -> TokenInfo {
+    private static func makeTokenInfoForDownscope() -> TokenInfo {
         return TokenInfo(
             accessToken: "asjhkdbfoq83w47gtlqiuwberg",
             refreshToken: "valid refresh token",
@@ -333,7 +331,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         )
     }
 
-    private func makeTokenInfoForRevoke() -> TokenInfo {
+    private static func makeTokenInfoForRevoke() -> TokenInfo {
         return TokenInfo(
             accessToken: "asjhkdbfoq83w47gtlqiuwberg",
             refreshToken: "valid refresh token",
@@ -342,7 +340,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
         )
     }
 
-    private func makeInvalidTokenInfoForRevoke() -> TokenInfo {
+    private static func makeInvalidTokenInfoForRevoke() -> TokenInfo {
         return TokenInfo(
             accessToken: "",
             refreshToken: "valid refresh token",

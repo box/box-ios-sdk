@@ -10,17 +10,19 @@
 import Nimble
 import Quick
 
-class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
-    var rootFolder: Folder!
+class RetentionPoliciesModuleIntegrationSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
+        var client: BoxClient!
+        var rootFolder: Folder!
+
         beforeSuite {
-            self.initializeClient()
-            self.createFolder(name: NameGenerator.getUniqueFolderName(for: "RetentionPoliciesModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
+            initializeClient { createdClient in client = createdClient }
+            createFolder(client: client, name: NameGenerator.getUniqueFolderName(for: "RetentionPoliciesModule")) { createdFolder in rootFolder = createdFolder }
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder, recursive: true)
+            deleteFolder(client: client, folder: rootFolder, recursive: true)
         }
 
         describe("Retention Policy Assignment") {
@@ -29,11 +31,11 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var retentionPolicy: RetentionPolicy?
 
                 beforeEach {
-                    self.createRetention(name: NameGenerator.getUniqueName(for: "Retention")) { createdRetention in retentionPolicy = createdRetention }
+                    createRetention(client: client, name: NameGenerator.getUniqueName(for: "Retention")) { createdRetention in retentionPolicy = createdRetention }
                 }
 
                 afterEach {
-                    self.retireRetention(retentionPolicy)
+                    retireRetention(client: client, retention: retentionPolicy)
                 }
 
                 it("assign get list unassign retention policy in folder context") {
@@ -46,9 +48,9 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Assign
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.retentionPolicy.assign(
+                        client.retentionPolicy.assign(
                             policyId: retentionPolicy.id,
-                            assignedContentId: self.rootFolder.id,
+                            assignedContentId: rootFolder.id,
                             assignContentType: .folder
                         ) { result in
                             switch result {
@@ -56,7 +58,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 retentionPolicyAssignment = assignment
                                 expect(retentionPolicyAssignment?.retentionPolicy?.id).to(equal(retentionPolicy.id))
                                 expect(retentionPolicyAssignment?.assignedTo?.type).to(equal(.folder))
-                                expect(retentionPolicyAssignment?.assignedTo?.id).to(equal(self.rootFolder.id))
+                                expect(retentionPolicyAssignment?.assignedTo?.id).to(equal(rootFolder.id))
                             case let .failure(error):
                                 fail("Expected assign call to succeed, but instead got \(error)")
                             }
@@ -69,12 +71,12 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.retentionPolicy.getAssignment(assignmentId: retentionPolicyAssignment.id) { result in
+                        client.retentionPolicy.getAssignment(assignmentId: retentionPolicyAssignment.id) { result in
                             switch result {
                             case let .success(assignment):
                                 expect(assignment.retentionPolicy?.id).to(equal(retentionPolicy.id))
                                 expect(assignment.assignedTo?.type).to(equal(.folder))
-                                expect(assignment.assignedTo?.id).to(equal(self.rootFolder.id))
+                                expect(assignment.assignedTo?.id).to(equal(rootFolder.id))
                             case let .failure(error):
                                 fail("Expected get call to succeed, but instead got \(error)")
                             }
@@ -84,7 +86,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     // List
-                    let iterator = self.client.retentionPolicy.listAssignments(policyId: retentionPolicy.id, type: .folder, fields: ["assigned_to"])
+                    let iterator = client.retentionPolicy.listAssignments(policyId: retentionPolicy.id, type: .folder, fields: ["assigned_to"])
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
@@ -92,7 +94,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 expect(page.entries.count).to(equal(1))
                                 expect(page.entries[0].id).to(equal(retentionPolicyAssignment.id))
                                 expect(page.entries[0].assignedTo?.type).to(equal(.folder))
-                                expect(page.entries[0].assignedTo?.id).to(equal(self.rootFolder.id))
+                                expect(page.entries[0].assignedTo?.id).to(equal(rootFolder.id))
                             case let .failure(error):
                                 fail("Expected listAssignments call to succeeded, but it instead got: \(error)")
                             }
@@ -103,7 +105,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.retentionPolicy.deleteAssignment(assignmentId: retentionPolicyAssignment.id) { result in
+                        client.retentionPolicy.deleteAssignment(assignmentId: retentionPolicyAssignment.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected delete call to succeed, but instead got \(error)")
                             }
@@ -123,7 +125,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Assign
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.retentionPolicy.assign(
+                        client.retentionPolicy.assign(
                             policyId: retentionPolicy.id,
                             assignedContentId: nil,
                             assignContentType: .enterprise
@@ -146,7 +148,7 @@ class RetentionPoliciesModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.retentionPolicy.deleteAssignment(assignmentId: retentionPolicyAssignment.id) { result in
+                        client.retentionPolicy.deleteAssignment(assignmentId: retentionPolicyAssignment.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected delete call to succeed, but instead got \(error)")
                             }

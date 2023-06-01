@@ -12,12 +12,12 @@ import Quick
 
 class CommentSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Comment") {
             describe("init()") {
                 context("success case") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "FullComment", ofType: "json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -56,7 +56,7 @@ class CommentSpecs: QuickSpec {
 
                 context("decoding error case when required field is missing or mismatched") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FaultyComment_MissingRequiredField", ofType: "json") else {
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "FaultyComment_MissingRequiredField", ofType: "json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -75,7 +75,7 @@ class CommentSpecs: QuickSpec {
 
                 context("decoding error case when required field is missing or mismatched") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FaultyComment_ValueFormatMismatch", ofType: "json") else {
+                        guard let filepath = Bundle(for: Self.self).path(forResource: "FaultyComment_ValueFormatMismatch", ofType: "json") else {
                             fail("Could not find fixture file.")
                             return
                         }

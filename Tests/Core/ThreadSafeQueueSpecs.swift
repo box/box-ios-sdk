@@ -12,28 +12,29 @@ import Nimble
 import Quick
 
 class ThreadSafeQueueSpecs: QuickSpec {
-    var sut: ThreadSafeQueue<Int>!
 
-    override func spec() {
+    override class func spec() {
+        var sut: ThreadSafeQueue<Int>!
+
         describe("ThreadSafeQueueSpecs") {
 
             beforeEach {
-                self.sut = ThreadSafeQueue(completionQueue: DispatchQueue(label: "com.box.swiftsdk.threadsafequeue.test", qos: .utility))
+                sut = ThreadSafeQueue(completionQueue: DispatchQueue(label: "com.box.swiftsdk.threadsafequeue.test", qos: .utility))
             }
 
             context("enqueue()") {
                 it("should add item in order of execution") {
                     var orderedCompletionResult: [Int] = []
 
-                    self.sut.enqueue(1) {
+                    sut.enqueue(1) {
                         orderedCompletionResult.append(1)
                     }
 
-                    self.sut.enqueue(2) {
+                    sut.enqueue(2) {
                         orderedCompletionResult.append(2)
                     }
 
-                    expect(orderedCompletionResult).toEventually(equal([1, 2]), timeout: DispatchTimeInterval.seconds(5))
+                    expect(orderedCompletionResult).toEventually(equal([1, 2]), timeout: .seconds(5))
                 }
             }
 
@@ -41,33 +42,33 @@ class ThreadSafeQueueSpecs: QuickSpec {
                 it("should pass nil to completion clousure if queue is empty") {
                     var orderedCompletionResult: [Int?] = []
 
-                    self.sut.dequeue { result in
+                    sut.dequeue { result in
                         orderedCompletionResult.append(result)
                     }
 
-                    expect(orderedCompletionResult).toEventually(equal([nil]), timeout: DispatchTimeInterval.seconds(2))
+                    expect(orderedCompletionResult).toEventually(equal([nil]), timeout: .seconds(2))
                 }
 
                 it("should be executed in the same order as enqueue elements") {
                     var orderedCompletionResult: [Int?] = []
 
-                    self.sut.enqueue(1) {
+                    sut.enqueue(1) {
                         orderedCompletionResult.append(1)
                     }
 
-                    self.sut.enqueue(2) {
+                    sut.enqueue(2) {
                         orderedCompletionResult.append(2)
                     }
 
-                    self.sut.dequeue { result in
+                    sut.dequeue { result in
                         orderedCompletionResult.append(result)
                     }
 
-                    self.sut.dequeue { result in
+                    sut.dequeue { result in
                         orderedCompletionResult.append(result)
                     }
 
-                    expect(orderedCompletionResult).toEventually(equal([1, 2, 1, 2]), timeout: DispatchTimeInterval.seconds(3))
+                    expect(orderedCompletionResult).toEventually(equal([1, 2, 1, 2]), timeout: .seconds(3))
                 }
             }
 
@@ -75,37 +76,37 @@ class ThreadSafeQueueSpecs: QuickSpec {
                 it("should return first item added to queue if queue is not empty") {
                     var peekCompletionResult: Int?
 
-                    self.sut.enqueue(1) {}
+                    sut.enqueue(1) {}
 
-                    self.sut.enqueue(2) {}
+                    sut.enqueue(2) {}
 
-                    self.sut.enqueue(3) {}
+                    sut.enqueue(3) {}
 
-                    self.sut.dequeue { _ in }
+                    sut.dequeue { _ in }
 
-                    self.sut.peek { result in
+                    sut.peek { result in
                         peekCompletionResult = result
                     }
 
-                    expect(peekCompletionResult).toEventually(equal(2), timeout: DispatchTimeInterval.seconds(3))
+                    expect(peekCompletionResult).toEventually(equal(2), timeout: .seconds(3))
                 }
 
                 it("should return nil if queue is empty") {
                     var peekCompletionResult: Int?
 
-                    self.sut.enqueue(1) {}
+                    sut.enqueue(1) {}
 
-                    self.sut.enqueue(2) {}
+                    sut.enqueue(2) {}
 
-                    self.sut.dequeue { _ in }
+                    sut.dequeue { _ in }
 
-                    self.sut.dequeue { _ in }
+                    sut.dequeue { _ in }
 
-                    self.sut.peek { result in
+                    sut.peek { result in
                         peekCompletionResult = result
                     }
 
-                    expect(peekCompletionResult).toEventually(beNil(), timeout: DispatchTimeInterval.seconds(3))
+                    expect(peekCompletionResult).toEventually(beNil(), timeout: .seconds(3))
                 }
             }
 
@@ -113,27 +114,27 @@ class ThreadSafeQueueSpecs: QuickSpec {
                 it("should return false if queue is not empty") {
                     var isEmptyCompletionResult: Bool?
 
-                    self.sut.enqueue(1) {}
+                    sut.enqueue(1) {}
 
-                    self.sut.isEmpty { result in
+                    sut.isEmpty { result in
                         isEmptyCompletionResult = result
                     }
 
-                    expect(isEmptyCompletionResult).toEventually(equal(false), timeout: DispatchTimeInterval.seconds(3))
+                    expect(isEmptyCompletionResult).toEventually(equal(false), timeout: .seconds(3))
                 }
 
                 it("should return true if queue is empty") {
                     var isEmptyCompletionResult: Bool?
 
-                    self.sut.enqueue(1) {}
+                    sut.enqueue(1) {}
 
-                    self.sut.dequeue { _ in }
+                    sut.dequeue { _ in }
 
-                    self.sut.isEmpty { result in
+                    sut.isEmpty { result in
                         isEmptyCompletionResult = result
                     }
 
-                    expect(isEmptyCompletionResult).toEventually(equal(true), timeout: DispatchTimeInterval.seconds(3))
+                    expect(isEmptyCompletionResult).toEventually(equal(true), timeout: .seconds(3))
                 }
             }
         }

@@ -10,17 +10,19 @@
 import Nimble
 import Quick
 
-class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
-    var rootFolder: Folder!
+class FileModuleIntegrationSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
+        var client: BoxClient!
+        var rootFolder: Folder!
+
         beforeSuite {
-            self.initializeClient()
-            self.createFolder(name: NameGenerator.getUniqueFolderName(for: "FileModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
+            initializeClient { createdClient in client = createdClient }
+            createFolder(client: client, name: NameGenerator.getUniqueFolderName(for: "FileModule")) { createdFolder in rootFolder = createdFolder }
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder, recursive: true)
+            deleteFolder(client: client, folder: rootFolder, recursive: true)
         }
 
         describe("File Module") {
@@ -34,10 +36,10 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Upload
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.upload(
+                        client.files.upload(
                             data: fileContent,
                             name: fileName,
-                            parentId: self.rootFolder.id,
+                            parentId: rootFolder.id,
                             performPreflightCheck: true
                         ) { result in
                             switch result {
@@ -45,7 +47,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 file = fileItem
                                 expect(fileItem.name).to(equal(fileName))
                                 expect(fileItem.size).to(equal(fileContent.count))
-                                expect(fileItem.parent?.id).to(equal(self.rootFolder.id))
+                                expect(fileItem.parent?.id).to(equal(rootFolder.id))
                             case let .failure(error):
                                 fail("Expected upload call to succeed, but instead got \(error)")
                             }
@@ -58,7 +60,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.get(fileId: file.id) { result in
+                        client.files.get(fileId: file.id) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(file).toNot(beNil())
@@ -76,7 +78,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: IntegrationTestResources.smallImage.fileName)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.download(fileId: file.id, destinationURL: destinationUrl) { result in
+                        client.files.download(fileId: file.id, destinationURL: destinationUrl) { result in
                             switch result {
                             case .success:
                                 expect(FileManager().fileExists(atPath: destinationUrl.path)).to(equal(true))
@@ -97,7 +99,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.delete(fileId: file.id) { result in
+                        client.files.delete(fileId: file.id) { result in
                             switch result {
                             case .success:
                                 break
@@ -117,11 +119,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Upload
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.streamUpload(
+                        client.files.streamUpload(
                             stream: fileStream,
                             fileSize: fileContent.count,
                             name: IntegrationTestResources.smallImage.fileName,
-                            parentId: self.rootFolder.id,
+                            parentId: rootFolder.id,
                             performPreflightCheck: true
                         ) { result in
                             switch result {
@@ -129,7 +131,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                                 file = fileItem
                                 expect(fileItem.name).to(equal(IntegrationTestResources.smallImage.fileName))
                                 expect(fileItem.size).to(equal(fileContent.count))
-                                expect(fileItem.parent?.id).to(equal(self.rootFolder.id))
+                                expect(fileItem.parent?.id).to(equal(rootFolder.id))
                             case let .failure(error):
                                 fail("Expected upload call to succeed, but instead got \(error)")
                             }
@@ -142,7 +144,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.get(fileId: file.id) { result in
+                        client.files.get(fileId: file.id) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(file).toNot(beNil())
@@ -160,7 +162,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: IntegrationTestResources.smallImage.fileName)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.download(fileId: file.id, destinationURL: destinationUrl) { result in
+                        client.files.download(fileId: file.id, destinationURL: destinationUrl) { result in
                             switch result {
                             case .success:
                                 expect(FileManager().fileExists(atPath: destinationUrl.path)).to(equal(true))
@@ -181,7 +183,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.delete(fileId: file.id) { result in
+                        client.files.delete(fileId: file.id) { result in
                             switch result {
                             case .success:
                                 break
@@ -199,9 +201,9 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                 it("should succeed if checked against unique file name") {
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.preflightCheck(
+                        client.files.preflightCheck(
                             name: NameGenerator.getUniqueFileName(),
-                            parentId: self.rootFolder.id
+                            parentId: rootFolder.id
                         ) { result in
                             switch result {
                             case .success:
@@ -222,11 +224,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 let versionContent1 = "First Version"
 
                 beforeEach {
-                    self.uploadFile(fileName: versionName1, stringContent: versionContent1, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: versionName1, stringContent: versionContent1, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly operate on file versions") {
@@ -243,7 +245,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let version2ContentModifiedAt = Date().iso8601
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.uploadVersion(
+                        client.files.uploadVersion(
                             forFile: file.id,
                             name: versionName2,
                             contentModifiedAt: version2ContentModifiedAt,
@@ -272,7 +274,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let version3ContentModifiedAt = Date().iso8601
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.streamUploadVersion(
+                        client.files.streamUploadVersion(
                             stream: InputStream(data: versionContentData3),
                             fileSize: versionContentData3.count,
                             forFile: file.id,
@@ -300,7 +302,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: versionName2)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.download(fileId: file.id, destinationURL: destinationUrl, version: fileVersion2.id) { result in
+                        client.files.download(fileId: file.id, destinationURL: destinationUrl, version: fileVersion2.id) { result in
                             switch result {
                             case .success:
                                 expect(FileManager().fileExists(atPath: destinationUrl.path)).to(equal(true))
@@ -320,7 +322,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     // List versions
-                    let iterator = self.client.files.listVersions(
+                    let iterator = client.files.listVersions(
                         fileId: file.id,
                         offset: 0,
                         limit: 1000,
@@ -348,7 +350,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get version
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name,version_number"]) { result in
+                        client.files.getVersion(fileId: file.id, fileVersionId: fileVersion2.id, fields: ["name,version_number"]) { result in
                             switch result {
                             case let .success(fileVersionItem):
                                 expect(fileVersionItem.id).to(equal(fileVersion2.id))
@@ -366,7 +368,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var fileVersion4: FileVersion?
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.promoteVersion(fileId: file.id, fileVersionId: fileVersion2.id) { result in
+                        client.files.promoteVersion(fileId: file.id, fileVersionId: fileVersion2.id) { result in
                             switch result {
                             case let .success(fileVersionItem):
                                 fileVersion4 = fileVersionItem
@@ -381,7 +383,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.get(fileId: file.id, fields: ["name,version_number,file_version"]) { result in
+                        client.files.get(fileId: file.id, fields: ["name,version_number,file_version"]) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(fileItem.fileVersion?.id).to(equal(fileVersion4?.id))
@@ -397,7 +399,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // delete version
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.deleteVersion(fileId: file.id, fileVersionId: fileVersion3.id) { result in
+                        client.files.deleteVersion(fileId: file.id, fileVersionId: fileVersion3.id) { result in
                             switch result {
                             case .success:
                                 break
@@ -410,7 +412,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getVersion(fileId: file.id, fileVersionId: fileVersion3.id) { result in
+                        client.files.getVersion(fileId: file.id, fileVersionId: fileVersion3.id) { result in
                             switch result {
                             case let .success(fileVersionItem):
                                 expect(fileVersionItem.trashedAt).notTo(beNil())
@@ -431,13 +433,13 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var destinationFolder: Folder?
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
-                        self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in destinationFolder = createdFolder }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
+                        createFolder(client: client, name: NameGenerator.getUniqueFolderName(), parentId: rootFolder.id) { createdFolder in destinationFolder = createdFolder }
                     }
 
                     afterEach {
-                        self.deleteFile(file)
-                        self.deleteFolder(destinationFolder)
+                        deleteFile(client: client, file: file)
+                        deleteFolder(client: client, folder: destinationFolder)
                     }
 
                     it("should correctly update file") {
@@ -449,7 +451,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         let changedFileName = NameGenerator.getUniqueFileName()
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.files.update(
+                            client.files.update(
                                 fileId: file.id,
                                 name: changedFileName,
                                 description: "sample description",
@@ -480,15 +482,15 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var retentionPolicy: RetentionPolicy?
 
                     beforeEach {
-                        self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in folder = createdFolder }
-                        self.createRetention(name: NameGenerator.getUniqueName(for: "retention")) { createdRetention in retentionPolicy = createdRetention }
-                        self.assignRetention(retentionPolicy, assignedContentId: folder?.id) { _ in }
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: folder?.id) { uploadedFile in file = uploadedFile }
+                        createFolder(client: client, name: NameGenerator.getUniqueFolderName(), parentId: rootFolder.id) { createdFolder in folder = createdFolder }
+                        createRetention(client: client, name: NameGenerator.getUniqueName(for: "retention")) { createdRetention in retentionPolicy = createdRetention }
+                        assignRetention(client: client, retention: retentionPolicy, assignedContentId: folder?.id) { _ in }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: folder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     afterEach {
-                        self.retireRetention(retentionPolicy)
-                        self.deleteFolder(folder, recursive: true)
+                        retireRetention(client: client, retention: retentionPolicy)
+                        deleteFolder(client: client, folder: folder, recursive: true)
                     }
 
                     it("should correctly update file") {
@@ -500,7 +502,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                         let changeDispositionDate = Date.addDays(2)
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.files.update(
+                            client.files.update(
                                 fileId: file.id,
                                 dispositionAt: changeDispositionDate,
                                 fields: ["disposition_at"]
@@ -525,13 +527,13 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var destinationFolder: Folder?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
-                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in destinationFolder = createdFolder }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
+                    createFolder(client: client, name: NameGenerator.getUniqueFolderName(), parentId: rootFolder.id) { createdFolder in destinationFolder = createdFolder }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
-                    self.deleteFolder(destinationFolder, recursive: true)
+                    deleteFile(client: client, file: file)
+                    deleteFolder(client: client, folder: destinationFolder, recursive: true)
                 }
 
                 it("should correctly copy file") {
@@ -543,7 +545,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let changedFileName = NameGenerator.getUniqueFolderName()
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.copy(
+                        client.files.copy(
                             fileId: file.id,
                             parentId: destinationFolder.id,
                             name: changedFileName,
@@ -568,11 +570,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly create lock and delete a lock") {
@@ -585,7 +587,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Lock
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.lock(
+                        client.files.lock(
                             fileId: file.id,
                             expiresAt: lockExpiresAt,
                             isDownloadPrevented: true,
@@ -607,7 +609,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Unlock
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.unlock(fileId: file.id, fields: ["name", "lock"]) { result in
+                        client.files.unlock(fileId: file.id, fields: ["name", "lock"]) { result in
                             switch result {
                             case let .success(fileItem):
                                 expect(fileItem.id).to(equal(file.id))
@@ -626,11 +628,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly apply get remove a watermark") {
@@ -640,7 +642,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.applyWatermark(fileId: file.id) { result in
+                        client.files.applyWatermark(fileId: file.id) { result in
                             switch result {
                             case let .success(watermarkItem):
                                 expect(watermarkItem).toNot(beNil())
@@ -653,7 +655,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getWatermark(fileId: file.id) { result in
+                        client.files.getWatermark(fileId: file.id) { result in
                             switch result {
                             case let .success(watermark):
                                 expect(watermark).toNot(beNil())
@@ -666,7 +668,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.removeWatermark(fileId: file.id) { result in
+                        client.files.removeWatermark(fileId: file.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected removeWatermark call to suceeded, but instead got \(error)")
                             }
@@ -681,11 +683,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly set get delete a shared link") {
@@ -696,7 +698,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Create shared link
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.setSharedLink(
+                        client.files.setSharedLink(
                             forFile: file.id,
                             access: .open,
                             canDownload: true,
@@ -720,7 +722,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Update shared link
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.setSharedLink(
+                        client.files.setSharedLink(
                             forFile: file.id,
                             vanityName: .value("iOS-SDK-File-VanityName"),
                             access: .open,
@@ -745,7 +747,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get shared link
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getSharedLink(forFile: file.id) { result in
+                        client.files.getSharedLink(forFile: file.id) { result in
                             switch result {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).to(equal(.open))
@@ -764,7 +766,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete shared link
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.deleteSharedLink(forFile: file.id) { result in
+                        client.files.deleteSharedLink(forFile: file.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected deleteSharedLink call to suceeded, but instead got \(error)")
                             }
@@ -779,11 +781,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly add file to and remove file from favorites") {
@@ -793,7 +795,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.addToFavorites(fileId: file.id) { result in
+                        client.files.addToFavorites(fileId: file.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected addToFavorites call to suceeded, but instead got \(error)")
                             }
@@ -803,7 +805,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.removeFromFavorites(fileId: file.id) { result in
+                        client.files.removeFromFavorites(fileId: file.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected removeFromFavorites call to suceeded, but instead got \(error)")
                             }
@@ -818,11 +820,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly get thumbnail image for a file") {
@@ -832,7 +834,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getThumbnail(
+                        client.files.getThumbnail(
                             forFile: file.id,
                             extension: .png,
                             minHeight: 256,
@@ -857,11 +859,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly get embed link for a file") {
@@ -871,7 +873,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getEmbedLink(forFile: file.id) { result in
+                        client.files.getEmbedLink(forFile: file.id) { result in
                             switch result {
                             case let .success(expiringEmbedLink):
                                 expect(expiringEmbedLink.url).notTo(beNil())
@@ -890,11 +892,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly add and list a comment for a file") {
@@ -907,7 +909,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.comments.create(itemId: file.id, itemType: "file", message: "sample comment") { result in
+                        client.comments.create(itemId: file.id, itemType: "file", message: "sample comment") { result in
                             switch result {
                             case let .success(commentItem):
                                 comment = commentItem
@@ -923,7 +925,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     guard let comment = comment else { return }
 
                     // list
-                    let iterator = self.client.files.listComments(forFile: file.id, offset: 0, limit: 100)
+                    let iterator = client.files.listComments(forFile: file.id, offset: 0, limit: 100)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -946,11 +948,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly add and list a collaborations for a file") {
@@ -963,7 +965,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.collaborations.create(
+                        client.collaborations.create(
                             itemType: "file",
                             itemId: file.id,
                             role: .editor,
@@ -987,7 +989,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     guard let collaboration = collaboration else { return }
 
                     // list
-                    let iterator = self.client.files.listCollaborations(forFile: file.id, limit: 100, fields: ["role", "accessible_by"])
+                    let iterator = client.files.listCollaborations(forFile: file.id, limit: 100, fields: ["role", "accessible_by"])
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -1011,11 +1013,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly create and list a tasks for a file") {
@@ -1029,7 +1031,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.tasks.create(
+                        client.tasks.create(
                             fileId: file.id,
                             action: .review,
                             message: "sample message",
@@ -1055,7 +1057,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     guard let task = task else { return }
 
                     // list
-                    let iterator = self.client.files.listTasks(forFile: file.id, fields: ["item", "action", "message", "due_at"])
+                    let iterator = client.files.listTasks(forFile: file.id, fields: ["item", "action", "message", "due_at"])
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -1082,14 +1084,14 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var childFolder: Folder?
 
                 beforeEach {
-                    self.createFolder(name: NameGenerator.getUniqueFolderName(), parentId: self.rootFolder.id) { createdFolder in childFolder = createdFolder }
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
-                    self.uploadFile(fileName: IntegrationTestResources.smallImage.fileName, toFolder: childFolder?.id) { _ in }
+                    createFolder(client: client, name: NameGenerator.getUniqueFolderName(), parentId: rootFolder.id) { createdFolder in childFolder = createdFolder }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallImage.fileName, toFolder: childFolder?.id) { _ in }
                 }
 
                 afterEach {
-                    self.deleteFolder(childFolder, recursive: true)
-                    self.deleteFile(file)
+                    deleteFolder(client: client, folder: childFolder, recursive: true)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly download zip file") {
@@ -1108,7 +1110,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // create & download
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.files.downloadZip(
+                        client.files.downloadZip(
                             name: zipFileName,
                             items: zipItems,
                             destinationURL: destinationUrl
@@ -1141,11 +1143,11 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly list and get content of representations") {
@@ -1155,7 +1157,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.listRepresentations(
+                        client.files.listRepresentations(
                             fileId: file.id,
                             representationHint: .thumbnail
                         ) { result in
@@ -1174,7 +1176,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let destinationUrl = FileUtil.getDestinationUrl(for: downloadedFileName)
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getRepresentationContent(
+                        client.files.getRepresentationContent(
                             fileId: file.id,
                             representationHint: .imageMedium,
                             destinationURL: destinationUrl
@@ -1208,7 +1210,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly upload and commit a file by using session") {
@@ -1221,8 +1223,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var session: UploadSession?
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.createUploadSession(
-                            folderId: self.rootFolder.id,
+                        client.files.createUploadSession(
+                            folderId: rootFolder.id,
                             fileName: IntegrationTestResources.bigImage.fileName,
                             fileSize: Int32(fileContent.count)
                         ) { result in
@@ -1250,7 +1252,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var isUploadedSuccessfully: Bool = false
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.uploadParts(in: session, data: fileContent) { isSuccess in
+                        uploadParts(client: client, in: session, data: fileContent) { isSuccess in
                             isUploadedSuccessfully = isSuccess
                             done()
                         }
@@ -1263,7 +1265,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     // get uploaded parts
                     var uploadedParts: [UploadPartDescription] = []
 
-                    let iterator = self.client.files.listUploadSessionParts(sessionId: session.id, offset: 0, limit: 100)
+                    let iterator = client.files.listUploadSessionParts(sessionId: session.id, offset: 0, limit: 100)
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
@@ -1280,7 +1282,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // commit upload session
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.commitUpload(
+                        client.files.commitUpload(
                             sessionId: session.id,
                             parts: uploadedParts,
                             sha1: CryptographyUtil.sha1(for: fileContent).base64EncodedString()
@@ -1308,8 +1310,8 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var session: UploadSession?
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.createUploadSession(
-                            folderId: self.rootFolder.id,
+                        client.files.createUploadSession(
+                            folderId: rootFolder.id,
                             fileName: IntegrationTestResources.bigImage.fileName,
                             fileSize: Int32(fileContent.count)
                         ) { result in
@@ -1335,7 +1337,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // abort session
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.abortUpload(sessionId: session.id) { result in
+                        client.files.abortUpload(sessionId: session.id) { result in
                             switch result {
                             case .success:
                                 break
@@ -1349,7 +1351,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // get upload session
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.getUploadSession(sessionId: session.id) { result in
+                        client.files.getUploadSession(sessionId: session.id) { result in
                             switch result {
                             case .success:
                                 fail("Expected getUploadSession call to fail, but instead call succeeded.")
@@ -1364,7 +1366,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                 it("should correctly upload and commit a file version by using session") {
                     var initialFile: File?
-                    self.uploadFile(fileName: IntegrationTestResources.smallImage.fileName, toFolder: self.rootFolder.id) { uploadedFile in initialFile = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallImage.fileName, toFolder: rootFolder.id) { uploadedFile in initialFile = uploadedFile }
 
                     guard let initialFile = initialFile, let fileContent = fileContent else {
                         fail("An error occurred during setup initial data")
@@ -1375,7 +1377,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var session: UploadSession?
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.createUploadSessionForNewVersion(
+                        client.files.createUploadSessionForNewVersion(
                             ofFile: initialFile.id,
                             fileName: IntegrationTestResources.bigImage.fileName,
                             fileSize: Int32(fileContent.count)
@@ -1404,7 +1406,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     var isUploadedSuccessfully: Bool = false
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.uploadParts(in: session, data: fileContent) { isSuccess in
+                        uploadParts(client: client, in: session, data: fileContent) { isSuccess in
                             isUploadedSuccessfully = isSuccess
                             done()
                         }
@@ -1418,7 +1420,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
                     // get uploaded parts
                     var uploadedParts: [UploadPartDescription] = []
 
-                    let iterator = self.client.files.listUploadSessionParts(sessionId: session.id, offset: 0, limit: 100)
+                    let iterator = client.files.listUploadSessionParts(sessionId: session.id, offset: 0, limit: 100)
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
                             switch result {
@@ -1435,7 +1437,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // commit upload session
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.files.commitUpload(
+                        client.files.commitUpload(
                             sessionId: session.id,
                             parts: uploadedParts,
                             sha1: CryptographyUtil.sha1(for: fileContent).base64EncodedString()
@@ -1458,7 +1460,7 @@ class FileModuleIntegrationSpecs: BaseIntegrationSpecs {
 }
 
 extension FileModuleIntegrationSpecs {
-    func uploadParts(in session: UploadSession, data: Data, part: Int = 0, completion: @escaping (Bool) -> Void) {
+    static func uploadParts(client: BoxClient, in session: UploadSession, data: Data, part: Int = 0, completion: @escaping (Bool) -> Void) {
         let startPosition = part * session.partSize
         let endPosition = min(data.count, startPosition + session.partSize)
         let chunk = data.subdata(in: startPosition ..< endPosition)
@@ -1475,7 +1477,7 @@ extension FileModuleIntegrationSpecs {
                     completion(true)
                 }
                 else {
-                    self.uploadParts(in: session, data: data, part: part + 1, completion: completion)
+                    uploadParts(client: client, in: session, data: data, part: part + 1, completion: completion)
                 }
             case let .failure(error):
                 fail("Expected uploadPart call to suceeded, but it failed \(error)")

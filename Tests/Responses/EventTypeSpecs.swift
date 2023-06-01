@@ -12,7 +12,7 @@ import Quick
 
 class EventTypeSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("EventType") {
 
             describe("init()") {

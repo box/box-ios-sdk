@@ -12,13 +12,13 @@ import Quick
 
 class FileVersionRetentionSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("File Version Retention") {
 
             describe("init()") {
 
                 it("should correctly deserialize file version retention from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFileVersionRetention", ofType: "json") else {
+                    guard let filepath = Bundle(for: Self.self).path(forResource: "FullFileVersionRetention", ofType: "json") else {
                         fail("Could not find fixture file.")
                         return
                     }

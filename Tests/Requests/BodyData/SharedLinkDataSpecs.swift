@@ -12,7 +12,7 @@ import Quick
 
 class SharedLinkDataSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("SharedLinkData") {
 
             context("init") {

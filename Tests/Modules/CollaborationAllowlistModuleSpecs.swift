@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CollaborationAllowlistModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("CollaborationsAllowlistModule") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("listEntries()") {
@@ -32,13 +33,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollaborationWhitelistEntries.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistEntries.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collaborationAllowList.listEntries()
+                        let iterator = sut.collaborationAllowList.listEntries()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -64,13 +65,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollaborationWhitelistEntryByID.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistEntryByID.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.get(id: "12345") { result in
+                        sut.collaborationAllowList.get(id: "12345") { result in
                             switch result {
                             case let .success(entry):
                                 expect(entry).to(beAKindOf(CollaborationAllowlistEntry.self))
@@ -112,13 +113,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                                 "domain": "example.com"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateCollaborationWhitelistEntry.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateCollaborationWhitelistEntry.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.create(
+                        sut.collaborationAllowList.create(
                             domain: "example.com",
                             direction: .both
                         ) { result in
@@ -158,11 +159,11 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.delete(id: "12345") { response in
+                        sut.collaborationAllowList.delete(id: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -182,13 +183,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollaborationWhitelistExemptUsers.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistExemptUsers.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collaborationAllowList.listExemptTargets()
+                        let iterator = sut.collaborationAllowList.listExemptTargets()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -222,13 +223,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollaborationWhitelistExemptUsersByID.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistExemptUsersByID.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
+                        sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
                             switch result {
                             case let .success(target):
                                 expect(target).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
@@ -276,13 +277,13 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isMethodPOST() &&
                             hasJsonBody(["user": ["id": "12345"]])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateCollaborationWhitelistExemptUser.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("CreateCollaborationWhitelistExemptUser.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.exemptUser(
+                        sut.collaborationAllowList.exemptUser(
                             userId: "12345"
                         ) { result in
                             switch result {
@@ -331,11 +332,11 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
+                        sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
                             switch response {
                             case .success:
                                 break

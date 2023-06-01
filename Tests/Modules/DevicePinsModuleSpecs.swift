@@ -12,29 +12,29 @@ import OHHTTPStubs
 import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
-public class DevicePinsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
+class DevicePinsModuleSpecs: QuickSpec {
 
-    override public func spec() {
+    override class func spec() {
+        var sut: BoxClient!
 
         describe("Device Pins Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("delete()") {
 
                 it("should make API call to delete the specified device pin") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/device_pinners/12345") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.devicePins.delete(devicePinId: "12345") { response in
+                        sut.devicePins.delete(devicePinId: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -51,14 +51,14 @@ public class DevicePinsModuleSpecs: QuickSpec {
 
                 it("should make an API call to retrieve a specified Device Pin") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/device_pinners/12345") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullDevicePin.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("FullDevicePin.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.devicePins.get(devicePinId: "12345") { result in
+                        sut.devicePins.get(devicePinId: "12345") { result in
                             switch result {
                             case let .success(devicePin):
                                 expect(devicePin).toNot(beNil())
@@ -83,14 +83,14 @@ public class DevicePinsModuleSpecs: QuickSpec {
                             && isMethodGET()
                             && containsQueryParams(["direction": "ASC"])
                     ) { _ in
-                        OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetDevicePins.json", type(of: self))!,
+                        HTTPStubsResponse(
+                            fileAtPath: OHPathForFileInBundle("GetDevicePins.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
+                        let iterator = sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
                         iterator.next { result in
                             switch result {
                             case let .success(page):

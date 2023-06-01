@@ -12,7 +12,7 @@ import Quick
 
 class QueryParameterConvertibleSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("QueryParameterConvertible") {
 
             describe("queryParamValue") {
