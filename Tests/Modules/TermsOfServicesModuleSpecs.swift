@@ -14,15 +14,16 @@ import Quick
 import Foundation
 
 class TermsOfServicesModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "")
+            sut = BoxSDK.getClient(token: "")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("TermsOfServicesModule") {
@@ -46,7 +47,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.termsOfService.create(status: TermsOfServiceStatus.enabled, tosType: TermsOfServiceType.managed, text: "Example Text") { result in
+                        sut.termsOfService.create(status: TermsOfServiceStatus.enabled, tosType: TermsOfServiceType.managed, text: "Example Text") { result in
                             switch result {
                             case let .success(termsOfService):
                                 expect(termsOfService).toNot(beNil())
@@ -82,7 +83,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.termsOfService.update(tosId: "12345", text: "Example Text", status: TermsOfServiceStatus.enabled) { result in
+                        sut.termsOfService.update(tosId: "12345", text: "Example Text", status: TermsOfServiceStatus.enabled) { result in
                             switch result {
                             case let .success(termsOfService):
                                 expect(termsOfService).toNot(beNil())
@@ -114,7 +115,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.termsOfService.get(tosId: "12345") { result in
+                        sut.termsOfService.get(tosId: "12345") { result in
                             switch result {
                             case let .success(termsOfService):
                                 expect(termsOfService).toNot(beNil())
@@ -146,7 +147,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.termsOfService.listForEnterprise { result in
+                        sut.termsOfService.listForEnterprise { result in
                             switch result {
                             case let .success(tos):
                                 expect(tos).notTo(beEmpty())
@@ -180,7 +181,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.termsOfService.listForEnterprise(tosType: TermsOfServiceType.managed) { result in
+                    sut.termsOfService.listForEnterprise(tosType: TermsOfServiceType.managed) { result in
                         switch result {
                         case let .success(tos):
                             expect(tos).notTo(beEmpty())
@@ -222,7 +223,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.termsOfService.createUserStatus(tosId: "12345", isAccepted: true, userId: "11111") { result in
+                    sut.termsOfService.createUserStatus(tosId: "12345", isAccepted: true, userId: "11111") { result in
                         switch result {
                         case let .success(userStatus):
                             expect(userStatus).toNot(beNil())
@@ -255,7 +256,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.termsOfService.getUserStatus(tosId: "12345", userId: "88888") { result in
+                    sut.termsOfService.getUserStatus(tosId: "12345", userId: "88888") { result in
                         switch result {
                         case let .success(userStatus):
                             expect(userStatus).to(beAKindOf(TermsOfServiceUserStatus.self))
@@ -285,7 +286,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.termsOfService.updateUserStatus(userStatusId: "88888", isAccepted: true) { result in
+                    sut.termsOfService.updateUserStatus(userStatusId: "88888", isAccepted: true) { result in
                         switch result {
                         case let .success(userStatus):
                             expect(userStatus).to(beAKindOf(TermsOfServiceUserStatus.self))

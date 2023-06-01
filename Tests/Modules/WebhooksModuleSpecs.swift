@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class WebhooksModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Webhooks Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("create()") {
@@ -47,7 +48,7 @@ class WebhooksModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webhooks.create(targetType: "file", targetId: "5016243669", triggers: [.fileDownloaded, .fileUploaded], address: "https://dev.name/actions/file_changed") { result in
+                        sut.webhooks.create(targetType: "file", targetId: "5016243669", triggers: [.fileDownloaded, .fileUploaded], address: "https://dev.name/actions/file_changed") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to createWebhook to succeed, but it failed")
                                 done()
@@ -84,7 +85,7 @@ class WebhooksModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webhooks.update(webhookId: "4133", targetType: "folder", targetId: "1000605797", address: "https://notification.example.net") { result in
+                        sut.webhooks.update(webhookId: "4133", targetType: "folder", targetId: "1000605797", address: "https://notification.example.net") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to updateWebhook to succeed, but it failed")
                                 done()
@@ -115,7 +116,7 @@ class WebhooksModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webhooks.get(webhookId: "4137") { result in
+                        sut.webhooks.get(webhookId: "4137") { result in
                             guard case let .success(webhook) = result else {
                                 fail("Expected call to get to succeed, but it failed")
                                 done()
@@ -145,7 +146,7 @@ class WebhooksModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.webhooks.list()
+                        let iterator = sut.webhooks.list()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -169,11 +170,11 @@ class WebhooksModuleSpecs: QuickSpec {
                             && isPath("/2.0/webhooks/12345")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webhooks.delete(webhookId: "12345") { response in
+                        sut.webhooks.delete(webhookId: "12345") { response in
                             switch response {
                             case .success:
                                 break

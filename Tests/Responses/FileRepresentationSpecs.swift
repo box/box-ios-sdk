@@ -12,7 +12,7 @@ import Quick
 
 class FileRepresentationSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("FileRepresentation") {
 
             describe("init") {

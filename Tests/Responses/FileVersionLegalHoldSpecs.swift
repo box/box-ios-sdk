@@ -11,7 +11,7 @@ import Quick
 
 class FileVersionLegalHoldSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("File Version Legal Hold") {
 
             describe("init()") {

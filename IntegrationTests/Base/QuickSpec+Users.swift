@@ -1,5 +1,5 @@
 //
-//  BaseIntegrationSpecs+Folders.swift
+//  QuickSpec+Users.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 14/10/2022.
@@ -10,14 +10,14 @@
 import Nimble
 import Quick
 
-extension BaseIntegrationSpecs {
+extension QuickSpec {
 
-    func createFolder(name: String, parentId: String = "0", callback: @escaping (Folder) -> Void) {
+    static func createUser(client: BoxClient, name: String, callback: @escaping (User) -> Void) {
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.folders.create(name: name, parentId: parentId) { result in
+            client.users.createAppUser(name: name) { result in
                 switch result {
-                case let .success(folder):
-                    callback(folder)
+                case let .success(user):
+                    callback(user)
                 case let .failure(error):
                     fail("Expected create call to suceeded, but instead got \(error)")
                 }
@@ -27,13 +27,13 @@ extension BaseIntegrationSpecs {
         }
     }
 
-    func deleteFolder(_ folder: Folder?, recursive: Bool = false) {
-        guard let folder = folder else {
+    static func deleteUser(client: BoxClient, user: User?) {
+        guard let user = user else {
             return
         }
 
-        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.folders.delete(folderId: folder.id, recursive: recursive) { result in
+        waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
+            client.users.delete(userId: user.id, force: true) { result in
                 if case let .failure(error) = result {
                     fail("Expected delete call to succeed, but instead got \(error)")
                 }

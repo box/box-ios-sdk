@@ -13,15 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class UsersModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "dasda")
+            sut = BoxSDK.getClient(token: "dasda")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("Users Module") {
@@ -35,7 +36,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.get(userId: "10543463") { result in
+                        sut.users.get(userId: "10543463") { result in
                             switch result {
                             case let .success(user):
                                 expect(user).toNot(beNil())
@@ -71,7 +72,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.get(userId: "10543463", fields: ["type", "id", "name"]) { result in
+                        sut.users.get(userId: "10543463", fields: ["type", "id", "name"]) { result in
                             switch result {
                             case let .success(user):
                                 expect(user).toNot(beNil())
@@ -105,7 +106,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(100)) { done in
-                        self.sut.users.uploadAvatar(
+                        sut.users.uploadAvatar(
                             userId: "10543463",
                             data: data,
                             name: "avatar.png"
@@ -143,7 +144,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(100)) { done in
-                        self.sut.users.streamUploadAvatar(
+                        sut.users.streamUploadAvatar(
                             userId: "10543463",
                             stream: stream,
                             name: "avatar.png"
@@ -173,11 +174,11 @@ class UsersModuleSpecs: QuickSpec {
                     ) { _ in
                         let image = TestAssets.image(named: "image")!
                         let data = image.jpegData(compressionQuality: 1.0)!
-                        return OHHTTPStubsResponse(data: data, statusCode: 200, headers: [:])
+                        return HTTPStubsResponse(data: data, statusCode: 200, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(100)) { done in
-                        self.sut.users.getAvatar(userId: "10543463") { result in
+                        sut.users.getAvatar(userId: "10543463") { result in
                             switch result {
                             case .success:
                                 break
@@ -197,11 +198,11 @@ class UsersModuleSpecs: QuickSpec {
                             isPath("/2.0/users/10543463/avatar") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.deleteAvatar(userId: "10543463") { result in
+                        sut.users.deleteAvatar(userId: "10543463") { result in
                             switch result {
                             case .success:
                                 break
@@ -236,7 +237,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(100)) { done in
-                        self.sut.users.create(
+                        sut.users.create(
                             login: "testuser@example.com",
                             name: "Test User",
                             role: .user,
@@ -277,7 +278,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.getCurrent { result in
+                        sut.users.getCurrent { result in
                             switch result {
                             case let .success(user):
                                 expect(user).toNot(beNil())
@@ -314,7 +315,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.createAppUser(name: "Test User") { result in
+                        sut.users.createAppUser(name: "Test User") { result in
                             switch result {
                             case let .success(newAppUser):
                                 expect(newAppUser).toNot(beNil())
@@ -353,7 +354,7 @@ class UsersModuleSpecs: QuickSpec {
                     let trackingCode = User.TrackingCode(name: "foo", value: "bar")
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.update(userId: "123456", trackingCodes: [trackingCode]) { result in
+                        sut.users.update(userId: "123456", trackingCodes: [trackingCode]) { result in
                             switch result {
                             case .success:
                                 break
@@ -369,11 +370,11 @@ class UsersModuleSpecs: QuickSpec {
             describe("delete()") {
                 it("should delete user with the id provided and send notify and force when parameters are passed") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/123456") && isMethodDELETE() && containsQueryParams(["notify": "true", "force": "true"])) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.delete(userId: "123456", notify: true, force: true) { result in
+                        sut.users.delete(userId: "123456", notify: true, force: true) { result in
                             switch result {
                             case .success:
                                 break
@@ -396,7 +397,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100)
+                        let iterator = sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100)
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -423,7 +424,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.users.listForEnterprise(usemarker: true, limit: 100)
+                        let iterator = sut.users.listForEnterprise(usemarker: true, limit: 100)
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -454,7 +455,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.inviteToJoinEnterprise(login: "freeuser@email.com", enterpriseId: "42500") { result in
+                        sut.users.inviteToJoinEnterprise(login: "freeuser@email.com", enterpriseId: "42500") { result in
                             switch result {
                             case let .success(invitation):
                                 expect(invitation).to(beAKindOf(Invite.self))
@@ -481,7 +482,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.moveItemsOwnedByUser(withID: "1234", toUserWithID: "123456") { result in
+                        sut.users.moveItemsOwnedByUser(withID: "1234", toUserWithID: "123456") { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).to(beAKindOf(Folder.self))
@@ -504,7 +505,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.changeLogin(userId: "18180156", login: "testuser@example.com") { result in
+                        sut.users.changeLogin(userId: "18180156", login: "testuser@example.com") { result in
                             switch result {
                             case let .success(folder):
                                 expect(folder).to(beAKindOf(User.self))
@@ -529,7 +530,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.listEmailAliases(userId: "123456") { result in
+                        sut.users.listEmailAliases(userId: "123456") { result in
                             switch result {
                             case let .success(aliases):
                                 expect(aliases).notTo(beNil())
@@ -554,7 +555,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.createEmailAlias(userId: "123456", email: "user@email.com") { result in
+                        sut.users.createEmailAlias(userId: "123456", email: "user@email.com") { result in
                             switch result {
                             case let .success(emailAlias):
                                 expect(emailAlias).to(beAKindOf(EmailAlias.self))
@@ -572,11 +573,11 @@ class UsersModuleSpecs: QuickSpec {
             describe("deleteEmailAlias()") {
                 it("should delete email aliases for a user and get and empty response with 204 HTTP status value") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/12/email_aliases/1234567890") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.deleteEmailAlias(userId: "12", emailAliasId: "1234567890") { result in
+                        sut.users.deleteEmailAlias(userId: "12", emailAliasId: "1234567890") { result in
                             switch result {
                             case .success():
                                 break
@@ -599,7 +600,7 @@ class UsersModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.users.rollOutOfEnterprise(userId: "12345", notify: true) { result in
+                        sut.users.rollOutOfEnterprise(userId: "12345", notify: true) { result in
                             switch result {
                             case let .success(user):
                                 expect(user).toNot(beNil())
@@ -617,7 +618,7 @@ class UsersModuleSpecs: QuickSpec {
         }
     }
 
-    public func testRollOutUserFromEnterpriseBody() -> OHHTTPStubsTestBlock {
+    public static func testRollOutUserFromEnterpriseBody() -> HTTPStubsTestBlock {
         return { request in
             let body = request.ohhttpStubs_httpBody!
             if let jsonBody = try! JSONSerialization.jsonObject(with: body) as? [String: Any] {

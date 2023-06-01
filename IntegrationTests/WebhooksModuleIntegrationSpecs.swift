@@ -10,18 +10,19 @@
 import Nimble
 import Quick
 
-class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
-    var rootFolder: Folder!
+class WebhooksModuleIntegrationSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
+        var client: BoxClient!
+        var rootFolder: Folder!
 
         beforeSuite {
-            self.initializeClient()
-            self.createFolder(name: NameGenerator.getUniqueFolderName(for: "WebhooksModule")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
+            initializeClient { createdClient in client = createdClient }
+            createFolder(client: client, name: NameGenerator.getUniqueFolderName(for: "WebhooksModule")) { createdFolder in rootFolder = createdFolder }
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder, recursive: true)
+            deleteFolder(client: client, folder: rootFolder, recursive: true)
         }
 
         describe("Webhooks Module") {
@@ -30,11 +31,11 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallImage.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallImage.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly create update get and delete a webhook") {
@@ -47,7 +48,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // create
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.webhooks.create(
+                        client.webhooks.create(
                             targetType: "file",
                             targetId: file.id,
                             triggers: [.fileDownloaded, .commentCreated, .sharedLinkCreated],
@@ -77,7 +78,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // update
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.webhooks.update(
+                        client.webhooks.update(
                             webhookId: webhook.id,
                             triggers: [.taskAssignmentUpdated, .metadataInstanceDeleted, .fileCopied],
                             address: "https://example.com/webhooks2"
@@ -98,7 +99,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // get
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.webhooks.get(webhookId: webhook.id) { result in
+                        client.webhooks.get(webhookId: webhook.id) { result in
                             switch result {
                             case let .success(webhookItem):
                                 expect(webhookItem.address).to(equal(URL(string: "https://example.com/webhooks2")))
@@ -120,7 +121,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // delete
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.webhooks.delete(webhookId: webhook.id) { result in
+                        client.webhooks.delete(webhookId: webhook.id) { result in
                             if case let .failure(error) = result {
                                 fail("Expected delete call to succeed, but instead got \(error)")
                             }
@@ -136,20 +137,22 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.createFolder(name: self.rootFolder.id) { createdFolder in folder = createdFolder }
+                    createFolder(client: client, name: rootFolder.id) { createdFolder in folder = createdFolder }
                     guard let folder = folder else { return }
 
-                    self.uploadFile(fileName: IntegrationTestResources.smallImage.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallImage.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                     guard let file = file else { return }
 
-                    self.createWebhook(
+                    createWebhook(
+                        client: client,
                         targetType: "folder",
                         targetId: folder.id,
                         triggers: [.folderDownloaded, .signRequestExpired],
                         address: "https://example.com/webhooks"
                     ) { _ in }
 
-                    self.createWebhook(
+                    createWebhook(
+                        client: client,
                         targetType: "file",
                         targetId: file.id,
                         triggers: [.fileRenamed],
@@ -158,8 +161,8 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                 }
 
                 afterEach {
-                    self.deleteFile(file)
-                    self.deleteFolder(folder)
+                    deleteFile(client: client, file: file)
+                    deleteFolder(client: client, folder: folder)
                 }
 
                 it("should correctly list all webhook items") {
@@ -168,7 +171,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                         return
                     }
 
-                    let iterator = self.client.webhooks.list()
+                    let iterator = client.webhooks.list()
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
                         iterator.next { result in
@@ -190,11 +193,11 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var file: File?
 
                 beforeEach {
-                    self.uploadFile(fileName: IntegrationTestResources.smallImage.fileName, toFolder: self.rootFolder.id) { uploadedFile in file = uploadedFile }
+                    uploadFile(client: client, fileName: IntegrationTestResources.smallImage.fileName, toFolder: rootFolder.id) { uploadedFile in file = uploadedFile }
                 }
 
                 afterEach {
-                    self.deleteFile(file)
+                    deleteFile(client: client, file: file)
                 }
 
                 it("should correctly create webhook with SIGN_REQUEST triggers") {
@@ -204,7 +207,7 @@ class WebhooksModuleIntegrationSpecs: BaseIntegrationSpecs {
                     }
 
                     waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                        self.client.webhooks.create(
+                        client.webhooks.create(
                             targetType: "file",
                             targetId: file.id,
                             triggers: [.signRequestExpired, .signRequestDeclined, .signRequestCompleted],

@@ -12,16 +12,18 @@ import OHHTTPStubs
 import Quick
 
 class SearchModuleSpecs: QuickSpec {
-    var client: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+
         describe("SearchModule") {
+            var client: BoxClient!
+
             beforeEach {
-                self.client = BoxSDK.getClient(token: "asdf")
+                client = BoxSDK.getClient(token: "asdf")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             context("query()") {
@@ -39,7 +41,7 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.client.search.query(query: "test")
+                        let iterator = client.search.query(query: "test")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -78,7 +80,7 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.global, relation: MetadataFilterBound.greaterThan)
-                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        let iterator = client.search.query(query: nil, metadataFilter: searchFilter)
                         iterator.next { result in
                             switch result {
                             case .success:
@@ -106,7 +108,7 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "date", fieldValue: "2019-07-24T12:00:00Z", scope: MetadataScope.enterprise, relation: MetadataFilterBound.lessThan)
-                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        let iterator = client.search.query(query: nil, metadataFilter: searchFilter)
                         iterator.next { result in
                             switch result {
                             case .success:
@@ -134,7 +136,7 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.enterprise)
-                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        let iterator = client.search.query(query: nil, metadataFilter: searchFilter)
                         iterator.next { result in
                             switch result {
                             case .success:
@@ -162,7 +164,7 @@ class SearchModuleSpecs: QuickSpec {
                     waitUntil(timeout: .seconds(10)) { done in
                         let searchFilter = MetadataSearchFilter()
                         searchFilter.addFilter(templateKey: "marketingCollateral", fieldKey: "documentType", fieldValue: "dataSheet", scope: MetadataScope.global)
-                        let iterator = self.client.search.query(query: nil, metadataFilter: searchFilter)
+                        let iterator = client.search.query(query: nil, metadataFilter: searchFilter)
                         iterator.next { result in
                             switch result {
                             case .success:
@@ -200,7 +202,7 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.client.search.query(
+                        let iterator = client.search.query(
                             query: "test",
                             scope: .user,
                             fileExtensions: ["pdf", "docx"],
@@ -250,7 +252,7 @@ class SearchModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.client.search.queryWithSharedLinks(
+                        let iterator = client.search.queryWithSharedLinks(
                             query: "test",
                             createdAfter: Date(timeIntervalSince1970: 1_557_957_135), // 2019-05-15T21:52:15Z
                             createdBefore: Date(timeIntervalSince1970: 1_557_957_180), // 2019-05-15T21:53:00Z

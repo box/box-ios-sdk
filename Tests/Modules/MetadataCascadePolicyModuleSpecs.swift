@@ -13,15 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class MetadataCascadePolicyModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdads")
+            sut = BoxSDK.getClient(token: "asdads")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("MetadataCascadePolicyModule") {
@@ -41,7 +42,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
+                        let iterator = sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
                         iterator.next { result in
 //                            print("in iterator")
                             switch result {
@@ -83,7 +84,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadataCascadePolicy.get(id: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7") { result in
+                        sut.metadataCascadePolicy.get(id: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7") { result in
                             switch result {
                             case let .success(policy):
                                 expect(policy).to(beAKindOf(MetadataCascadePolicy.self))
@@ -116,7 +117,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadataCascadePolicy.create(
+                        sut.metadataCascadePolicy.create(
                             folderId: "998951261",
                             scope: .enterprise,
                             templateKey: "documentFlow"
@@ -141,13 +142,13 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
             describe("delete()") {
                 it("should make API call to delete metadata cascade policy when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_cascade_policies/123456") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadataCascadePolicy.delete(id: "123456") { result in
+                        sut.metadataCascadePolicy.delete(id: "123456") { result in
                             switch result {
                             case .success:
                                 break
@@ -168,13 +169,13 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                             && isMethodPOST()
                             && hasJsonBody(["conflict_resolution": "overwrite"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadataCascadePolicy.forceApply(
+                        sut.metadataCascadePolicy.forceApply(
                             id: "12345",
                             conflictResolution: .overwrite
                         ) { result in

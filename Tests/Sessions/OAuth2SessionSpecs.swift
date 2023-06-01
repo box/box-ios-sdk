@@ -14,32 +14,31 @@ import Quick
 
 class OAuth2SessionSpecs: QuickSpec {
 
-    private var sut: OAuth2SessionMock!
+    override class func spec() {
+        var sut: OAuth2SessionMock!
 
-    private let testQueue = DispatchQueue(label: "testQueue")
-    private var testArray = [String]()
-    private var testClosure: (([String]) -> Void)?
+        let testQueue = DispatchQueue(label: "testQueue")
+        var testArray = [String]()
+        var testClosure: (([String]) -> Void)?
 
-    private func logTestMessage(_ message: String) {
-        testQueue.async { [weak self] in
-            guard let self = self else { return }
+        func logTestMessage(_ message: String) {
+            testQueue.async { () in
 
-            self.testArray.append(message)
-            if self.testArray.count == 4 {
-                self.testClosure?(self.testArray)
+                testArray.append(message)
+                if testArray.count == 4 {
+                    testClosure?(testArray)
+                }
             }
         }
-    }
 
-    override func spec() {
         describe("OAuth2Session") {
 
             describe("getAccessToken()") {
 
                 it("should return the access token when the session has a valid token") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeValidTokenInfo())
+                    sut = makeSUT(tokenInfo: makeValidTokenInfo())
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
                                 expect(token).to(equal("valid access token"))
@@ -52,9 +51,9 @@ class OAuth2SessionSpecs: QuickSpec {
                 }
 
                 it("should call to refresh token when the token is expired") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo())
+                    sut = makeSUT(tokenInfo: makeExpiredTokenInfo())
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.getAccessToken { result in
+                        sut.getAccessToken { result in
                             switch result {
                             case let .success(token):
                                 expect(token).to(equal("new access token"))
@@ -67,15 +66,15 @@ class OAuth2SessionSpecs: QuickSpec {
                 }
 
                 it("should call the refresh token requests serially with mutual exclusion") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo())
+                    sut = makeSUT(tokenInfo: makeExpiredTokenInfo())
                     var refreshTokenCalls = 0
-                    self.sut.refreshTokenClosure = {
+                    sut.refreshTokenClosure = {
                         refreshTokenCalls += 1
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
 
-                        self.testClosure = { array in
+                        testClosure = { array in
                             DispatchQueue.main.async {
                                 expect(array).to(equal(["first result", "second result", "third result", "fourth result"]))
                                 expect(refreshTokenCalls).to(equal(1))
@@ -83,20 +82,20 @@ class OAuth2SessionSpecs: QuickSpec {
                             }
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("first result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("first result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("second result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("second result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("third result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("third result")
                         }
 
-                        self.sut.getAccessToken { _ in
-                            self.logTestMessage("fourth result")
+                        sut.getAccessToken { _ in
+                            logTestMessage("fourth result")
                         }
                     }
                 }
@@ -105,9 +104,9 @@ class OAuth2SessionSpecs: QuickSpec {
             describe("refreshToken()") {
 
                 it("should attempt to refresh access token") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo())
+                    sut = makeSUT(tokenInfo: makeExpiredTokenInfo())
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.refreshToken { result in
+                        sut.refreshToken { result in
                             switch result {
                             case let .success(token):
                                 expect(token).to(equal("new access token"))
@@ -120,9 +119,9 @@ class OAuth2SessionSpecs: QuickSpec {
                 }
 
                 it("should produce error when session has invalid token info") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeInvalidTokenInfo())
+                    sut = makeSUT(tokenInfo: makeInvalidTokenInfo())
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.refreshToken { result in
+                        sut.refreshToken { result in
                             switch result {
                             case .success:
                                 fail("refreshToken should fail, but instead got success")
@@ -136,9 +135,9 @@ class OAuth2SessionSpecs: QuickSpec {
                 }
 
                 it("should produce error when refresh fails") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo(), needToFailRefreshToken: true)
+                    sut = makeSUT(tokenInfo: makeExpiredTokenInfo(), needToFailRefreshToken: true)
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.refreshToken { result in
+                        sut.refreshToken { result in
                             switch result {
                             case .success:
                                 fail("refreshToken should fail, but instead got success")
@@ -155,16 +154,16 @@ class OAuth2SessionSpecs: QuickSpec {
             describe("handleExpiredToken()") {
 
                 it("should clear the token store") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeExpiredTokenInfo(), needToFailRefreshToken: true)
+                    sut = makeSUT(tokenInfo: makeExpiredTokenInfo(), needToFailRefreshToken: true)
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.handleExpiredToken { result in
+                        sut.handleExpiredToken { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to succeed, but instead got \(error)")
                                 done()
                                 return
                             }
 
-                            self.sut.tokenStore.read { result in
+                            sut.tokenStore.read { result in
                                 switch result {
                                 case let .failure(error):
                                     expect(error).toNot(beNil())
@@ -182,13 +181,13 @@ class OAuth2SessionSpecs: QuickSpec {
             describe("downscopeToken()") {
 
                 it("should make request to downscope the token") {
-                    self.sut = self.makeSUT(tokenInfo: self.makeTokenInfoForDownscope(), needToFailRefreshToken: true)
+                    sut = makeSUT(tokenInfo: makeTokenInfoForDownscope(), needToFailRefreshToken: true)
 
                     stub(
                         condition: isHost("api.box.com")
                             && isPath("/oauth2/token")
                             && isMethodPOST()
-                            && self.compareURLEncodedBody(
+                            && compareURLEncodedBody(
                                 [
                                     "subject_token": "asjhkdbfoq83w47gtlqiuwberg",
                                     "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
@@ -220,7 +219,7 @@ class OAuth2SessionSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
+                        sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
                             switch result {
                             case let .success(tokenInfo):
                                 expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -242,12 +241,12 @@ class OAuth2SessionSpecs: QuickSpec {
         describe("revokeTokens()") {
 
             it("should revoke the token when sending valid payload") {
-                self.sut = self.makeSUT(tokenInfo: self.makeValidTokenInfoForRevoke(), needToFailRefreshToken: true)
+                sut = makeSUT(tokenInfo: makeValidTokenInfoForRevoke(), needToFailRefreshToken: true)
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -255,11 +254,11 @@ class OAuth2SessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case .success:
                             break
@@ -272,12 +271,12 @@ class OAuth2SessionSpecs: QuickSpec {
             }
 
             it("should revoke the token when sending valid payload and token store should be empty") {
-                self.sut = self.makeSUT(tokenInfo: self.makeValidTokenInfoForRevoke(), needToFailRefreshToken: true)
+                sut = makeSUT(tokenInfo: makeValidTokenInfoForRevoke(), needToFailRefreshToken: true)
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -285,14 +284,14 @@ class OAuth2SessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case .success:
-                            self.sut.tokenStore.read { result in
+                            sut.tokenStore.read { result in
                                 switch result {
                                 case .success:
                                     fail("Expected read to fail, but it succeeded")
@@ -309,12 +308,12 @@ class OAuth2SessionSpecs: QuickSpec {
             }
 
             it("shouldn't revoke the token when sending an invalid payload") {
-                self.sut = self.makeSUT(tokenInfo: self.makeInvalidTokenInfo(), needToFailRefreshToken: true)
+                sut = makeSUT(tokenInfo: makeInvalidTokenInfo(), needToFailRefreshToken: true)
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -322,11 +321,11 @@ class OAuth2SessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):
                             expect(error).toNot(beNil())
@@ -340,12 +339,12 @@ class OAuth2SessionSpecs: QuickSpec {
             }
 
             it("shouldn't revoke the token when sending an invalid payload and token store shouldn't be empty") {
-                self.sut = self.makeSUT(tokenInfo: self.makeInvalidTokenInfo(), needToFailRefreshToken: true)
+                sut = makeSUT(tokenInfo: makeInvalidTokenInfo(), needToFailRefreshToken: true)
                 stub(
                     condition: isHost("api.box.com")
                         && isPath("/oauth2/revoke")
                         && isMethodPOST()
-                        && self.compareURLEncodedBody(
+                        && compareURLEncodedBody(
                             [
                                 "client_id": "123",
                                 "client_secret": "123",
@@ -353,16 +352,16 @@ class OAuth2SessionSpecs: QuickSpec {
                             ]
                         )
                 ) { _ in
-                    OHHTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
+                    HTTPStubsResponse(data: Data(), statusCode: 400, headers: [:])
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
-                    self.sut.revokeTokens { result in
+                    sut.revokeTokens { result in
                         switch result {
                         case let .failure(error):
                             expect(error).toNot(beNil())
                             expect(error).to(beAKindOf(BoxSDKError.self))
-                            self.sut.tokenStore.read { result in
+                            sut.tokenStore.read { result in
                                 switch result {
                                 case let .success(tokenInfo):
                                     expect(error).toNot(beNil())
@@ -381,7 +380,7 @@ class OAuth2SessionSpecs: QuickSpec {
         }
     }
 
-    private func makeSUT(tokenInfo: TokenInfo, needToFailRefreshToken: Bool = false) -> OAuth2SessionMock {
+    private static func makeSUT(tokenInfo: TokenInfo, needToFailRefreshToken: Bool = false) -> OAuth2SessionMock {
         let configuration = try! BoxSDKConfiguration(clientId: "123", clientSecret: "123")
         let networkAgent = BoxNetworkAgent(configuration: configuration)
         let authModule = AuthModuleSpy(networkAgent: networkAgent, configuration: configuration, needsToFailRefresh: needToFailRefreshToken)
@@ -418,7 +417,7 @@ class OAuth2SessionSpecs: QuickSpec {
         }
     }
 
-    private func makeValidTokenInfo() -> TokenInfo {
+    private static func makeValidTokenInfo() -> TokenInfo {
         return TokenInfo(
             accessToken: "valid access token",
             refreshToken: "valid refresh token",
@@ -427,7 +426,7 @@ class OAuth2SessionSpecs: QuickSpec {
         )
     }
 
-    private func makeExpiredTokenInfo() -> TokenInfo {
+    private static func makeExpiredTokenInfo() -> TokenInfo {
         return TokenInfo(
             accessToken: "expired access token",
             refreshToken: "a refresh token",
@@ -436,7 +435,7 @@ class OAuth2SessionSpecs: QuickSpec {
         )
     }
 
-    private func makeInvalidTokenInfo() -> TokenInfo {
+    private static func makeInvalidTokenInfo() -> TokenInfo {
         return TokenInfo(
             accessToken: "valid access token",
             refreshToken: nil,
@@ -445,7 +444,7 @@ class OAuth2SessionSpecs: QuickSpec {
         )
     }
 
-    private func makeTokenInfoForDownscope() -> TokenInfo {
+    private static func makeTokenInfoForDownscope() -> TokenInfo {
         return TokenInfo(
             accessToken: "asjhkdbfoq83w47gtlqiuwberg",
             refreshToken: "valid refresh token",
@@ -454,7 +453,7 @@ class OAuth2SessionSpecs: QuickSpec {
         )
     }
 
-    private func makeValidTokenInfoForRevoke() -> TokenInfo {
+    private static func makeValidTokenInfoForRevoke() -> TokenInfo {
         return TokenInfo(
             accessToken: "revokeToken",
             refreshToken: "valid refresh token",

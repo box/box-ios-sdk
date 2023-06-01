@@ -12,7 +12,7 @@ import Nimble
 import Quick
 
 class UIDeviceExtensionSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("UIDevice modelName") {
 
             it("should compute correctly for test simulator") {

@@ -13,15 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class MetadataModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdads")
+            sut = BoxSDK.getClient(token: "asdads")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("MetadataModule") {
@@ -38,7 +39,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.getTemplateByKey(scope: "enterprise", templateKey: "productInfo") { result in
+                        sut.metadata.getTemplateByKey(scope: "enterprise", templateKey: "productInfo") { result in
                             switch result {
                             case let .success(template):
                                 expect(template).toNot(beNil())
@@ -80,7 +81,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.getTemplateById(id: "f7a9891f") { result in
+                        sut.metadata.getTemplateById(id: "f7a9891f") { result in
                             switch result {
                             case let .success(template):
                                 expect(template).toNot(beNil())
@@ -151,7 +152,7 @@ class MetadataModuleSpecs: QuickSpec {
                             ["key": "FY15"]
                         ]
 
-                        self.sut.metadata.createTemplate(
+                        sut.metadata.createTemplate(
                             scope: "enterprise_490685",
                             templateKey: "customer",
                             displayName: "Customer",
@@ -232,7 +233,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.createTemplate(
+                        sut.metadata.createTemplate(
                             scope: "enterprise_490685",
                             templateKey: "customer",
                             displayName: "Customer",
@@ -281,7 +282,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.updateTemplate(
+                        sut.metadata.updateTemplate(
                             scope: "enterprise_490685",
                             templateKey: "customer",
                             operation: .editTemplate(data: ["displayName": "Client"])
@@ -338,13 +339,13 @@ class MetadataModuleSpecs: QuickSpec {
             describe("deleteTemplate()") {
                 it("should make API call to create metadata template and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/enterprise/vendorContract/schema") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.deleteTemplate(
+                        sut.metadata.deleteTemplate(
                             scope: "enterprise",
                             templateKey: "vendorContract"
                         ) { result in
@@ -370,7 +371,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.metadata.listEnterpriseTemplates(scope: "enterprise")
+                        let iterator = sut.metadata.listEnterpriseTemplates(scope: "enterprise")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -402,7 +403,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.list(forFileId: "5010739061") { result in
+                        sut.metadata.list(forFileId: "5010739061") { result in
                             switch result {
                             case let .success(metadataObjects):
                                 guard let firstMetadataObject = metadataObjects.first else {
@@ -448,7 +449,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.get(forFileWithId: "5010739061", scope: "enterprise", templateKey: "marketingCollateral") { result in
+                        sut.metadata.get(forFileWithId: "5010739061", scope: "enterprise", templateKey: "marketingCollateral") { result in
                             switch result {
                             case let .success(metadataObject):
 
@@ -502,7 +503,7 @@ class MetadataModuleSpecs: QuickSpec {
                             "currentState": "proposal"
                         ]
 
-                        self.sut.metadata.create(
+                        sut.metadata.create(
                             forFileWithId: "5010739061",
                             scope: "enterprise",
                             templateKey: "marketingCollateral",
@@ -564,7 +565,7 @@ class MetadataModuleSpecs: QuickSpec {
                             .add(path: "/currentState", value: "reviewed")
                         ]
 
-                        self.sut.metadata.update(
+                        sut.metadata.update(
                             forFileWithId: "5010739061",
                             scope: "enterprise",
                             templateKey: "marketingCollateral",
@@ -607,13 +608,13 @@ class MetadataModuleSpecs: QuickSpec {
             describe("delete(forFileWithId:)") {
                 it("should make API call to delete metadata objects for particular file when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5010739061/metadata/enterprise/marketingCollateral") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.delete(
+                        sut.metadata.delete(
                             forFileWithId: "5010739061",
                             scope: "enterprise",
                             templateKey: "marketingCollateral"
@@ -642,7 +643,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.list(forFolderId: "998951261") { result in
+                        sut.metadata.list(forFolderId: "998951261") { result in
                             switch result {
                             case let .success(metadataObjects):
                                 guard let firstMetadataObject = metadataObjects.first else {
@@ -682,7 +683,7 @@ class MetadataModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.get(forFolderWithId: "998951261", scope: "enterprise", templateKey: "documentFlow") { result in
+                        sut.metadata.get(forFolderWithId: "998951261", scope: "enterprise", templateKey: "documentFlow") { result in
                             switch result {
                             case let .success(metadataObject):
 
@@ -730,7 +731,7 @@ class MetadataModuleSpecs: QuickSpec {
                             "nextDocumentStage": "prioritization"
                         ]
 
-                        self.sut.metadata.create(
+                        sut.metadata.create(
                             forFolderWithId: "998951261",
                             scope: "enterprise",
                             templateKey: "documentFlow",
@@ -787,7 +788,7 @@ class MetadataModuleSpecs: QuickSpec {
                             .remove(path: "/nextDocumentStage")
                         ]
 
-                        self.sut.metadata.update(
+                        sut.metadata.update(
                             forFolderWithId: "998951261",
                             scope: "enterprise",
                             templateKey: "documentFlow",
@@ -821,13 +822,13 @@ class MetadataModuleSpecs: QuickSpec {
             describe("delete(forFolderWithId:)") {
                 it("should make API call to delete metadata objects for particular folder when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/998951261/metadata/enterprise/documentFlow") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             data: Data(), statusCode: 204, headers: [:]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.metadata.delete(
+                        sut.metadata.delete(
                             forFolderWithId: "998951261",
                             scope: "enterprise",
                             templateKey: "documentFlow"

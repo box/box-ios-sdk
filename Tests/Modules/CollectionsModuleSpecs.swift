@@ -13,16 +13,16 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CollectionsModulesSpecs: QuickSpec {
-    var sut: BoxClient!
-    var file: File?
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         beforeEach {
-            self.sut = BoxSDK.getClient(token: "asdads")
+            sut = BoxSDK.getClient(token: "asdads")
         }
 
         afterEach {
-            OHHTTPStubs.removeAllStubs()
+            HTTPStubs.removeAllStubs()
         }
 
         describe("CollectionsModuleSpecs") {
@@ -41,7 +41,7 @@ class CollectionsModulesSpecs: QuickSpec {
 
                 it("should be able to get a list of collections") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collections.list()
+                        let iterator = sut.collections.list()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -74,7 +74,7 @@ class CollectionsModulesSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collections.getFavorites { result in
+                        sut.collections.getFavorites { result in
                             switch result {
                             case let .success(favoritesCollection):
                                 expect(favoritesCollection).to(beAKindOf(BoxCollection.self))
@@ -102,7 +102,7 @@ class CollectionsModulesSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collections.getFavorites { result in
+                        sut.collections.getFavorites { result in
                             switch result {
                             case .success:
                                 fail("Expected method to produce an error, but it succeeded")
@@ -131,7 +131,7 @@ class CollectionsModulesSpecs: QuickSpec {
                 }
                 it("should be able to get list of collection items") {
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collections.listItems(collectionId: "123")
+                        let iterator = sut.collections.listItems(collectionId: "123")
                         iterator.next { result in
                             switch result {
                             case let .success(page):

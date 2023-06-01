@@ -11,24 +11,25 @@
     import Quick
 
     class AuthenticationSessionSpecs: QuickSpec {
-        private var sdk: BoxSDK!
-        let clientId: String = "aqswdefrgthyju"
-        let clientSecret: String = "aqswdefrgt"
-        let callbackURL: String = "https://app.box.com"
 
-        override func spec() {
+        override class func spec() {
+            var sdk: BoxSDK!
+            let clientId: String = "aqswdefrgthyju"
+            let clientSecret: String = "aqswdefrgt"
+            let callbackURL: String = "https://app.box.com"
+
             describe("AuthenticationSession") {
 
                 beforeEach {
-                    self.sdk = BoxSDK(clientId: self.clientId, clientSecret: self.clientSecret, callbackURL: self.callbackURL)
+                    sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret, callbackURL: callbackURL)
                 }
 
                 describe("init()") {
                     it("should create an instacne of AuthenticationSession") {
                         expect {
                             _ = MockAuthenticationSession(
-                                url: self.sdk.makeAuthorizeURL(),
-                                callbackURLScheme: URL(string: self.sdk.configuration.callbackURL)?.scheme
+                                url: sdk.makeAuthorizeURL(),
+                                callbackURLScheme: URL(string: sdk.configuration.callbackURL)?.scheme
                             ) { _, _ in }
                         }
                         .toNot(throwError())
@@ -38,8 +39,8 @@
                 describe("start()") {
                     it("should call start method") {
                         let sut = MockAuthenticationSession(
-                            url: self.sdk.makeAuthorizeURL(),
-                            callbackURLScheme: URL(string: self.sdk.configuration.callbackURL)?.scheme
+                            url: sdk.makeAuthorizeURL(),
+                            callbackURLScheme: URL(string: sdk.configuration.callbackURL)?.scheme
                         ) { _, _ in }
 
                         expect(sut.startCalled).to(equal(false))
@@ -51,8 +52,8 @@
                 describe("cancel()") {
                     it("should call cancel method") {
                         let sut = MockAuthenticationSession(
-                            url: self.sdk.makeAuthorizeURL(),
-                            callbackURLScheme: URL(string: self.sdk.configuration.callbackURL)?.scheme
+                            url: sdk.makeAuthorizeURL(),
+                            callbackURLScheme: URL(string: sdk.configuration.callbackURL)?.scheme
                         ) { _, _ in }
 
                         expect(sut.cancelCalled).to(equal(false))

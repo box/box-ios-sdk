@@ -12,7 +12,7 @@ import Quick
 
 class CommentItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Comment Item") {
 
             describe("init()") {

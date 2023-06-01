@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CollaborationAllowlistModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("CollaborationsAllowlistModule") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("listEntries()") {
@@ -38,7 +39,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collaborationAllowList.listEntries()
+                        let iterator = sut.collaborationAllowList.listEntries()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -70,7 +71,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.get(id: "12345") { result in
+                        sut.collaborationAllowList.get(id: "12345") { result in
                             switch result {
                             case let .success(entry):
                                 expect(entry).to(beAKindOf(CollaborationAllowlistEntry.self))
@@ -118,7 +119,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.create(
+                        sut.collaborationAllowList.create(
                             domain: "example.com",
                             direction: .both
                         ) { result in
@@ -158,11 +159,11 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.delete(id: "12345") { response in
+                        sut.collaborationAllowList.delete(id: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -188,7 +189,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collaborationAllowList.listExemptTargets()
+                        let iterator = sut.collaborationAllowList.listExemptTargets()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -228,7 +229,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
+                        sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
                             switch result {
                             case let .success(target):
                                 expect(target).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
@@ -282,7 +283,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.exemptUser(
+                        sut.collaborationAllowList.exemptUser(
                             userId: "12345"
                         ) { result in
                             switch result {
@@ -331,11 +332,11 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
+                        sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
                             switch response {
                             case .success:
                                 break

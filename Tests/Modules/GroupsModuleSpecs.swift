@@ -13,17 +13,18 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class GroupsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Groups Module") {
 
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get()") {
@@ -40,7 +41,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.get(groupId: "11111") { result in
+                        sut.groups.get(groupId: "11111") { result in
                             switch result {
                             case let .success(group):
                                 expect(group).toNot(beNil())
@@ -80,7 +81,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.create(name: "Team A", provenance: "IDP", externalSyncIdentifier: "idp-team-a", description: "Team A from IDP", invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
+                        sut.groups.create(name: "Team A", provenance: "IDP", externalSyncIdentifier: "idp-team-a", description: "Team A from IDP", invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
                             switch result {
                             case let .success(group):
                                 expect(group).toNot(beNil())
@@ -120,7 +121,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.update(groupId: "11111", name: "Team A", provenance: .value("IDP"), externalSyncIdentifier: .value("idp-team-a"), description: .value("Team A from IDP"), invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
+                        sut.groups.update(groupId: "11111", name: "Team A", provenance: .value("IDP"), externalSyncIdentifier: .value("idp-team-a"), description: .value("Team A from IDP"), invitabilityLevel: .allManagedUsers, memberViewabilityLevel: .allManagedUsers) { result in
                             switch result {
                             case let .success(group):
                                 expect(group).toNot(beNil())
@@ -142,11 +143,11 @@ class GroupsModuleSpecs: QuickSpec {
 
                 it("should make API call to delete the specified group") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/groups/11111") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.delete(groupId: "11111") { response in
+                        sut.groups.delete(groupId: "11111") { response in
                             switch response {
                             case .success:
                                 break
@@ -173,7 +174,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.getMembershipInfo(membershipId: "12345") { result in
+                        sut.groups.getMembershipInfo(membershipId: "12345") { result in
                             switch result {
                             case let .success(membership):
                                 expect(membership).toNot(beNil())
@@ -221,7 +222,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.createMembership(userId: "54321", groupId: "11111", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
+                        sut.groups.createMembership(userId: "54321", groupId: "11111", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
                             switch result {
                             case let .success(membership):
                                 expect(membership).toNot(beNil())
@@ -262,7 +263,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.updateMembership(membershipId: "12345", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
+                        sut.groups.updateMembership(membershipId: "12345", role: .admin, configurablePermission: .value(ConfigurablePermissionData(canRunReports: true, canInstantLogin: true, canCreateAccounts: false, canEditAccounts: true))) { result in
                             switch result {
                             case let .success(membership):
                                 expect(membership).toNot(beNil())
@@ -284,11 +285,11 @@ class GroupsModuleSpecs: QuickSpec {
 
                 it("should make API call to delete the specified group membership") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/group_memberships/12345") && isMethodDELETE()) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.groups.deleteMembership(membershipId: "12345") { response in
+                        sut.groups.deleteMembership(membershipId: "12345") { response in
                             switch response {
                             case .success:
                                 break
@@ -315,7 +316,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.groups.listMemberships(groupId: "12345")
+                        let iterator = sut.groups.listMemberships(groupId: "12345")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -347,7 +348,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.groups.listMembershipsForUser(userId: "12345")
+                        let iterator = sut.groups.listMembershipsForUser(userId: "12345")
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -382,7 +383,7 @@ class GroupsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.groups.listCollaborations(groupId: "12345")
+                        let iterator = sut.groups.listCollaborations(groupId: "12345")
                         iterator.next { result in
                             switch result {
                             case let .success(page):

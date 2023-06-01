@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class SharedItemsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Shared Items Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get()") {
@@ -41,7 +42,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.sharedItems.get(sharedLinkURL: "https://example.com", sharedLinkPassword: "test_password") { result in
+                        sut.sharedItems.get(sharedLinkURL: "https://example.com", sharedLinkPassword: "test_password") { result in
                             switch result {
                             case let .success(sharedItem):
                                 guard case let .file(file) = sharedItem.itemValue else {
@@ -74,7 +75,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.sharedItems.get(sharedLinkURL: "https://example.com") { result in
+                        sut.sharedItems.get(sharedLinkURL: "https://example.com") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to get to succeed, but it failed with error: \(error)")
                             }

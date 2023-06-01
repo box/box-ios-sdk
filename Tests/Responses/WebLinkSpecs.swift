@@ -12,7 +12,7 @@ import Quick
 
 class WebLinkSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("WebLink") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {
@@ -45,7 +45,6 @@ class WebLinkSpecs: QuickSpec {
                         expect(webLink.parent?.name).to(equal("Test Folder"))
                         expect(webLink.description).to(equal("A web link for testing"))
                         expect(webLink.itemStatus).to(equal(.active))
-//                        expect(webLink.expiresAt).to(equal("2020-01-23T00:19:34Z"))
                         expect(webLink.permissions?.canRename).to(beTrue())
                         expect(webLink.permissions?.canDelete).to(beTrue())
                         expect(webLink.permissions?.canComment).to(beTrue())

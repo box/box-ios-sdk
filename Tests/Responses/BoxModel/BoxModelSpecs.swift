@@ -13,7 +13,7 @@ import Nimble
 import Quick
 
 class BoxModelSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("testing boxmodel on comment") {
             it("should make call to init() to initalize comment response object from JSON dictionary") {
                 guard let filepath = TestAssets.path(forResource: "FullComment.json") else {

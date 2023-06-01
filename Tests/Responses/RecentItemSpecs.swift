@@ -12,7 +12,7 @@ import Quick
 
 class RecentItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Recent Item") {
 
             describe("init()") {

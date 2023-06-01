@@ -12,7 +12,7 @@ import Quick
 
 class UserSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("User") {
 
             describe("init()") {

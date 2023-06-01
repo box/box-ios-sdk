@@ -1,5 +1,5 @@
 //
-//  BaseIntegrationSpecs+Webhooks.swift
+//  QuickSpec+Webhooks.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 14/10/2022.
@@ -10,9 +10,10 @@
 import Nimble
 import Quick
 
-extension BaseIntegrationSpecs {
+extension QuickSpec {
 
-    func createWebhook(
+    static func createWebhook(
+        client: BoxClient,
         targetType: String,
         targetId: String,
         triggers: [Webhook.EventTriggers],
@@ -20,7 +21,7 @@ extension BaseIntegrationSpecs {
         callback: @escaping (Webhook) -> Void
     ) {
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.webhooks.create(targetType: targetType, targetId: targetId, triggers: triggers, address: address) { result in
+            client.webhooks.create(targetType: targetType, targetId: targetId, triggers: triggers, address: address) { result in
                 switch result {
                 case let .success(webhook):
                     callback(webhook)

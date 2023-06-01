@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CollaborationsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("CollaborationsModule") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("get()") {
@@ -38,7 +39,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborations.get(collaborationId: "791293") { result in
+                        sut.collaborations.get(collaborationId: "791293") { result in
                             switch result {
                             case let .success(collaboration):
                                 expect(collaboration.type).to(equal("collaboration"))
@@ -84,7 +85,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             )
                         }
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group, canViewPath: true) { result in
+                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group, canViewPath: true) { result in
                                 switch result {
                                 case let .success(collaboration):
                                     expect(collaboration.type).to(equal("collaboration"))
@@ -127,7 +128,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             )
                         }
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
+                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
                                 switch result {
                                 case let .success(collaboration):
                                     expect(collaboration.type).to(equal("collaboration"))
@@ -171,7 +172,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborations.createByUserEmail(itemType: "folder", itemId: "11446500", role: .editor, login: "testuser@example.com") { result in
+                        sut.collaborations.createByUserEmail(itemType: "folder", itemId: "11446500", role: .editor, login: "testuser@example.com") { result in
                             switch result {
                             case let .success(collaboration):
                                 expect(collaboration.type).to(equal("collaboration"))
@@ -213,7 +214,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             )
                         }
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
+                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
                                 switch result {
                                 case let .success(collaboration):
                                     expect(collaboration.type).to(equal("collaboration"))
@@ -258,7 +259,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborations.update(collaborationId: "791293", role: .viewer) { result in
+                        sut.collaborations.update(collaborationId: "791293", role: .viewer) { result in
                             switch result {
                             case let .success(collaboration):
                                 expect(collaboration.type).to(equal("collaboration"))
@@ -301,7 +302,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborations.getAcceptanceRequirementsStatus(collaborationId: "12345") { result in
+                        sut.collaborations.getAcceptanceRequirementsStatus(collaborationId: "12345") { result in
                             switch result {
                             case let .success(acceptanceRequirement):
                                 expect(acceptanceRequirement).toNot(beNil())
@@ -322,10 +323,10 @@ class CollaborationsModuleSpecs: QuickSpec {
                             isPath("/2.0/collaborations/123456") &&
                             isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.collaborations.delete(collaborationId: "123456") { result in
+                        sut.collaborations.delete(collaborationId: "123456") { result in
                             switch result {
                             case .success:
                                 break
@@ -352,7 +353,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2)
+                        let iterator = sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2)
                         iterator.next { result in
                             switch result {
                             case let .success(page):

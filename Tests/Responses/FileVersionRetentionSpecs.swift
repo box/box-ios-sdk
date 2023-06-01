@@ -12,7 +12,7 @@ import Quick
 
 class FileVersionRetentionSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("File Version Retention") {
 
             describe("init()") {

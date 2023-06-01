@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class RecentItemsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Recent Items Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("list()") {
@@ -39,7 +40,7 @@ class RecentItemsModuleSpecs: QuickSpec {
                         )
                     }
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.recentItems.list()
+                        let iterator = sut.recentItems.list()
                         iterator.next { result in
                             switch result {
                             case let .success(page):

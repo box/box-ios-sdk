@@ -12,7 +12,7 @@ import Quick
 
 class FileVersionSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("FileVersion") {
 
             describe("init()") {

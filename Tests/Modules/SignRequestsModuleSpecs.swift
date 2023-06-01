@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class SignRequestsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Sign Requests Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("create()") {
@@ -90,7 +91,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             declinedRedirectUrl: "https://box.com/declined_redirect_url"
                         )
 
-                        self.sut.signRequests.create(
+                        sut.signRequests.create(
                             signers: signers,
                             sourceFiles: sourceFiles,
                             parentFolder: parentFolder,
@@ -147,7 +148,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.signRequests.list()
+                        let iterator = sut.signRequests.list()
                         iterator.next { result in
                             switch result {
                             case let .success(page):
@@ -191,7 +192,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.signRequests.getById(id: "12345") { result in
+                        sut.signRequests.getById(id: "12345") { result in
                             switch result {
                             case let .success(signRequest):
                                 expect(signRequest).toNot(beNil())
@@ -223,11 +224,11 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/sign_requests/12345/resend")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 202, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 202, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.signRequests.resendById(id: "12345") { result in
+                        sut.signRequests.resendById(id: "12345") { result in
                             switch result {
                             case .success:
                                 break
@@ -256,7 +257,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.signRequests.cancelById(id: "12345") { result in
+                        sut.signRequests.cancelById(id: "12345") { result in
                             switch result {
                             case let .success(signRequest):
                                 expect(signRequest).toNot(beNil())

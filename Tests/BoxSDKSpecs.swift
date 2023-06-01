@@ -12,7 +12,7 @@ import OHHTTPStubs
 import Quick
 
 class BoxSDKSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("BoxSDKSpec") {
             context("User is able to configure SDK with clientId and clientSecret") {
                 it("Box SDK should be initialize with clientId and clientSecret") {

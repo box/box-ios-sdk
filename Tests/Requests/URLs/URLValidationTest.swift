@@ -13,7 +13,7 @@ import Quick
 
 class URLValidationTest: QuickSpec {
 
-    override public func spec() {
+    override class func spec() {
 
         describe("validate()") {
             it("should validate url and validation should not throw an error") {

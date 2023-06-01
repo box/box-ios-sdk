@@ -13,7 +13,7 @@ import Quick
 
 class BoxRequestUnitTests: QuickSpec {
 
-    override public func spec() {
+    override class func spec() {
 
         describe("BoxRequest") {
 
