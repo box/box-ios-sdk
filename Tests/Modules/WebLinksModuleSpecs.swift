@@ -6,24 +6,24 @@
 //  Copyright © 2019 box. All rights reserved.
 //
 
- @testable import BoxSDK
- import Nimble
- import OHHTTPStubs
- import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
- import Quick
+@testable import BoxSDK
+import Nimble
+import OHHTTPStubs
+import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
+import Quick
 
- class WebLinksModuleSpecs: QuickSpec {
+class WebLinksModuleSpecs: QuickSpec {
 
     override class func spec() {
         var sut: BoxClient!
-        
+
         describe("Web Links Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("create()") {
@@ -43,13 +43,13 @@
                             ])
                     ) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("FullWebLink.json", Bundle(for: Self.self))!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.create(url: "http://example.com", parentId: "33333", name: "Example Web Link", description: "A web link for testing") { result in
+                        sut.webLinks.create(url: "http://example.com", parentId: "33333", name: "Example Web Link", description: "A web link for testing") { result in
                             switch result {
                             case let .success(webLink):
                                 expect(webLink).toNot(beNil())
@@ -72,13 +72,13 @@
                 it("should make an API call to retrieve a specified web link") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/web_links/12345") && isMethodGET()) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("FullWebLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.get(webLinkId: "12345") { result in
+                        sut.webLinks.get(webLinkId: "12345") { result in
                             switch result {
                             case let .success(webLink):
                                 expect(webLink).toNot(beNil())
@@ -104,7 +104,7 @@
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.delete(webLinkId: "12345") { result in
+                        sut.webLinks.delete(webLinkId: "12345") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to delete to succeed, but instead got \(error)")
                             }
@@ -131,13 +131,13 @@
                             ])
                     ) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("UpdateWebLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.update(webLinkId: "12345", url: "https://updatedexample.com", parentId: "11111", name: "Updated Test", description: "Updated Test Description") { result in
+                        sut.webLinks.update(webLinkId: "12345", url: "https://updatedexample.com", parentId: "11111", name: "Updated Test", description: "Updated Test Description") { result in
                             switch result {
                             case let .success(webLink):
                                 expect(webLink).toNot(beNil())
@@ -172,13 +172,13 @@
                             ])
                     ) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("UpdateWebLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.update(
+                        sut.webLinks.update(
                             webLinkId: "12345",
                             url: "https://updatedexample.com",
                             parentId: "11111",
@@ -214,7 +214,7 @@
                             containsQueryParams(["fields": "shared_link"])
                     ) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("GetWebLinkSharedLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -222,7 +222,7 @@
 
                 it("should download a shared link for a web link", closure: {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.getSharedLink(forWebLink: "12345") { result in
+                        sut.webLinks.getSharedLink(forWebLink: "12345") { result in
                             switch result {
                             case let .success(sharedLink):
                                 expect(sharedLink.access).toNot(beNil())
@@ -248,14 +248,14 @@
                             hasJsonBody(["shared_link": NSNull()])
                     ) { _ in
                         HTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveWebLinkSharedLink.json", type(of: self))!,
+                            fileAtPath: OHPathForFileInBundle("RemoveWebLinkSharedLink.json", Bundle(for: Self.self))!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
                 }
                 it("should delete a shared link for a web link", closure: {
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.webLinks.deleteSharedLink(forWebLink: "12345") { result in
+                        sut.webLinks.deleteSharedLink(forWebLink: "12345") { result in
                             switch result {
                             case .success:
                                 break
@@ -280,14 +280,14 @@
                                 hasJsonBody(["shared_link": ["access": "open", "password": "test"]])
                         ) { _ in
                             HTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                                fileAtPath: OHPathForFileInBundle("GetWebLinkSharedLink.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a web link", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .value("test")) { result in
+                            sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .value("test")) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -314,14 +314,14 @@
                                 hasJsonBody(["shared_link": ["access": "open"]])
                         ) { _ in
                             HTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                                fileAtPath: OHPathForFileInBundle("GetWebLinkSharedLink.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a web link", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open) { result in
+                            sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -348,14 +348,14 @@
                                 hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                         ) { _ in
                             HTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink_PasswordNotEnabled.json", type(of: self))!,
+                                fileAtPath: OHPathForFileInBundle("GetWebLinkSharedLink_PasswordNotEnabled.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a web link", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .null) { result in
+                            sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, password: .null) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -382,14 +382,14 @@
                                 hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                         ) { _ in
                             HTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink_VanityNameEnabled.json", type(of: self))!,
+                                fileAtPath: OHPathForFileInBundle("GetWebLinkSharedLink_VanityNameEnabled.json", Bundle(for: Self.self))!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
                     }
                     it("should update a shared link on a web link", closure: {
                         waitUntil(timeout: .seconds(10)) { done in
-                            self.sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
+                            sut.webLinks.setSharedLink(forWebLink: "12345", access: SharedLinkAccess.open, vanityName: .value("testVanityName")) { result in
                                 switch result {
                                 case let .success(sharedLink):
                                     expect(sharedLink.access).to(equal(.open))
@@ -411,4 +411,4 @@
             }
         }
     }
- }
+}

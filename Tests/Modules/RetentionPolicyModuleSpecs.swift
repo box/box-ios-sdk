@@ -17,11 +17,11 @@
 //
 //    override class func spec() {
 //        beforeEach {
-//            self.sut = BoxSDK.getClient(token: "asdads")
+//            sut = BoxSDK.getClient(token: "asdads")
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("Retention policy") {
@@ -34,12 +34,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRetentionPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.get(policyId: id) { result in
+//                        sut.retentionPolicy.get(policyId: id) { result in
 //                            switch result {
 //                            case let .success(retentionPolicy):
 //                                expect(retentionPolicy.id).to(equal(id))
@@ -88,12 +88,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateRetentionPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.create(
+//                        sut.retentionPolicy.create(
 //                            name: "Tax Documents",
 //                            type: .finite,
 //                            length: 365,
@@ -140,12 +140,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateRetentionPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.update(
+//                        sut.retentionPolicy.update(
 //                            policyId: id,
 //                            name: "Tax Documents",
 //                            dispositionAction: .removeRetention,
@@ -180,12 +180,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateRetentionPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.update(
+//                        sut.retentionPolicy.update(
 //                            policyId: id,
 //                            setRetentionTypeToNonModifiable: true
 //                        ) { result in
@@ -210,12 +210,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRetentionPolicies.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicies.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.retentionPolicy.list(
+//                        let iterator = sut.retentionPolicy.list(
 //                            name: "name",
 //                            type: .finite,
 //                            createdByUserId: "1234"
@@ -246,12 +246,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.getAssignment(assignmentId: id) { result in
+//                        sut.retentionPolicy.getAssignment(assignmentId: id) { result in
 //                            switch result {
 //                            case let .success(retentionPolicyAssignment):
 //                                expect(retentionPolicyAssignment.id).to(equal(id))
@@ -292,12 +292,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.assign(
+//                        sut.retentionPolicy.assign(
 //                            policyId: id,
 //                            assignedContentId: id,
 //                            assignContentType: RetentionPolicyAssignmentItemType.folder,
@@ -341,12 +341,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateRetentionPolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.assign(
+//                        sut.retentionPolicy.assign(
 //                            policyId: id,
 //                            assignedContentId: nil,
 //                            assignContentType: RetentionPolicyAssignmentItemType.enterprise,
@@ -380,7 +380,7 @@
 //                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.retentionPolicy.deleteAssignment(assignmentId: id) { response in
+//                        sut.retentionPolicy.deleteAssignment(assignmentId: id) { response in
 //                            switch response {
 //                            case .success:
 //                                break
@@ -404,12 +404,12 @@
 //
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRetentionPolicyAssignments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.retentionPolicy.listAssignments(
+//                        let iterator = sut.retentionPolicy.listAssignments(
 //                            policyId: id,
 //                            type: .folder,
 //                            fields: ["retention_policy", "assigned_to"]
@@ -440,12 +440,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileVersionRetention.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileVersionRetention.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.getVersionRetention(
+//                        sut.files.getVersionRetention(
 //                            retentionId: id
 //                        ) { result in
 //                            switch result {
@@ -482,12 +482,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileVersionRetentions.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileVersionRetentions.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.files.listVersionRetentions(
+//                        let iterator = sut.files.listVersionRetentions(
 //                            fileId: "1234",
 //                            fileVersionId: "1234",
 //                            policyId: "1234",
@@ -519,12 +519,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFilesUnderRetentionForAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFilesUnderRetentionForAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.retentionPolicy.listFilesUnderRetentionForAssignment(
+//                        let iterator = sut.retentionPolicy.listFilesUnderRetentionForAssignment(
 //                            retentionPolicyAssignmentId: retentionPolicyAssignmentId,
 //                            limit: 100
 //                        )
@@ -556,12 +556,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileVersionsUnderRetentionForAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileVersionsUnderRetentionForAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.retentionPolicy.listFileVersionsUnderRetentionForAssignment(
+//                        let iterator = sut.retentionPolicy.listFileVersionsUnderRetentionForAssignment(
 //                            retentionPolicyAssignmentId: retentionPolicyAssignmentId,
 //                            limit: 100
 //                        )

@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("CollaborationsModule") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("get()") {
@@ -33,12 +33,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaboration.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborations.get(collaborationId: "791293") { result in
+//                        sut.collaborations.get(collaborationId: "791293") { result in
 //                            switch result {
 //                            case let .success(collaboration):
 //                                expect(collaboration.type).to(equal("collaboration"))
@@ -79,12 +79,12 @@
 //                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor", "can_view_path": true])
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetCollaboration.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group, canViewPath: true) { result in
+//                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group, canViewPath: true) { result in
 //                                switch result {
 //                                case let .success(collaboration):
 //                                    expect(collaboration.type).to(equal("collaboration"))
@@ -122,12 +122,12 @@
 //                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetCollaboration.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
+//                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
 //                                switch result {
 //                                case let .success(collaboration):
 //                                    expect(collaboration.type).to(equal("collaboration"))
@@ -166,12 +166,12 @@
 //                            self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["login": "testuser@example.com", "type": "user"], "role": "editor"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaboration.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborations.createByUserEmail(itemType: "folder", itemId: "11446500", role: .editor, login: "testuser@example.com") { result in
+//                        sut.collaborations.createByUserEmail(itemType: "folder", itemId: "11446500", role: .editor, login: "testuser@example.com") { result in
 //                            switch result {
 //                            case let .success(collaboration):
 //                                expect(collaboration.type).to(equal("collaboration"))
@@ -208,12 +208,12 @@
 //                                self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetCollaboration.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetCollaboration.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["Content-Type": "application/json"]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
+//                            sut.collaborations.create(itemType: "folder", itemId: "11446500", role: .editor, accessibleBy: "123456", accessibleByType: .group) { result in
 //                                switch result {
 //                                case let .success(collaboration):
 //                                    expect(collaboration.type).to(equal("collaboration"))
@@ -253,12 +253,12 @@
 //
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateCollaboration.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateCollaboration.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborations.update(collaborationId: "791293", role: .viewer) { result in
+//                        sut.collaborations.update(collaborationId: "791293", role: .viewer) { result in
 //                            switch result {
 //                            case let .success(collaboration):
 //                                expect(collaboration.type).to(equal("collaboration"))
@@ -296,12 +296,12 @@
 //                            containsQueryParams(["fields": "acceptance_requirements_status"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("FullCollaboration.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("FullCollaboration.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborations.getAcceptanceRequirementsStatus(collaborationId: "12345") { result in
+//                        sut.collaborations.getAcceptanceRequirementsStatus(collaborationId: "12345") { result in
 //                            switch result {
 //                            case let .success(acceptanceRequirement):
 //                                expect(acceptanceRequirement).toNot(beNil())
@@ -325,7 +325,7 @@
 //                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborations.delete(collaborationId: "123456") { result in
+//                        sut.collaborations.delete(collaborationId: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -347,12 +347,12 @@
 //                            containsQueryParams(["status": "pending", "offset": "0", "limit": "2"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("PendingCollaborations.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("PendingCollaborations.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2)
+//                        let iterator = sut.collaborations.listPendingForEnterprise(offset: 0, limit: 2)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):

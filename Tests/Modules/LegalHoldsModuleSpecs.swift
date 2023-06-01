@@ -17,11 +17,11 @@
 //    override class func spec() {
 //        describe("Legal Holds Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("create()") {
@@ -37,13 +37,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateLegalHoldPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateLegalHoldPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.create(policyName: "Policy", isOngoing: true) { result in
+//                        sut.legalHolds.create(policyName: "Policy", isOngoing: true) { result in
 //                            switch result {
 //                            case let .success(legalHoldPolicy):
 //                                expect(legalHoldPolicy).toNot(beNil())
@@ -68,13 +68,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetLegalHoldPolicyInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetLegalHoldPolicyInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.get(policyId: "166757") { result in
+//                        sut.legalHolds.get(policyId: "166757") { result in
 //                            switch result {
 //                            case let .success(legalHoldPolicy):
 //                                expect(legalHoldPolicy).toNot(beNil())
@@ -103,13 +103,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateLegalHoldPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateLegalHoldPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.update(policyId: "166921", policyName: "New Policy 3", description: "Policy 3 New Description") { result in
+//                        sut.legalHolds.update(policyId: "166921", policyName: "New Policy 3", description: "Policy 3 New Description") { result in
 //                            switch result {
 //                            case let .success(legalHoldPolicy):
 //                                expect(legalHoldPolicy).toNot(beNil())
@@ -136,7 +136,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.delete(policyId: "16692") { response in
+//                        sut.legalHolds.delete(policyId: "16692") { response in
 //                            switch response {
 //                            case .success:
 //                                break
@@ -158,13 +158,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetLegalHoldPolicies.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetLegalHoldPolicies.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.legalHolds.listForEnterprise()
+//                        let iterator = sut.legalHolds.listForEnterprise()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -197,13 +197,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("AssignPolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("AssignPolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.assignPolicy(policyId: "166757", assignToId: "5025127885", assignToType: "file") { result in
+//                        sut.legalHolds.assignPolicy(policyId: "166757", assignToId: "5025127885", assignToType: "file") { result in
 //                            switch result {
 //                            case let .success(assignment):
 //                                expect(assignment).toNot(beNil())
@@ -228,13 +228,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetPolicyAssignmentInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetPolicyAssignmentInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.getPolicyAssignment(assignmentId: "255473") { result in
+//                        sut.legalHolds.getPolicyAssignment(assignmentId: "255473") { result in
 //                            switch result {
 //                            case let .success(assignment):
 //                                expect(assignment).toNot(beNil())
@@ -261,7 +261,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.deletePolicyAssignment(assignmentId: "166921") { response in
+//                        sut.legalHolds.deletePolicyAssignment(assignmentId: "166921") { response in
 //                            switch response {
 //                            case .success:
 //                                break
@@ -284,13 +284,13 @@
 //                            && containsQueryParams(["policy_id": "255473"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetPolicyAssignments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetPolicyAssignments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.legalHolds.listPolicyAssignments(policyId: "255473")
+//                        let iterator = sut.legalHolds.listPolicyAssignments(policyId: "255473")
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -315,13 +315,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileVersionLegalHoldInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileVersionLegalHoldInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.legalHolds.getFileVersionPolicy(legalHoldId: "166757") { result in
+//                        sut.legalHolds.getFileVersionPolicy(legalHoldId: "166757") { result in
 //                            switch result {
 //                            case let .success(legalHold):
 //                                expect(legalHold).toNot(beNil())
@@ -347,13 +347,13 @@
 //                            && containsQueryParams(["policy_id": "240997"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileVersionLegalHolds.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileVersionLegalHolds.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.legalHolds.listFileVersionPolicies(policyId: "240997")
+//                        let iterator = sut.legalHolds.listFileVersionPolicies(policyId: "240997")
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):

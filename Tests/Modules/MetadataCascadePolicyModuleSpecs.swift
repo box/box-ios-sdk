@@ -17,11 +17,11 @@
 //
 //    override class func spec() {
 //        beforeEach {
-//            self.sut = BoxSDK.getClient(token: "asdads")
+//            sut = BoxSDK.getClient(token: "asdads")
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("MetadataCascadePolicyModule") {
@@ -35,13 +35,13 @@
 //                            && containsQueryParams(["owner_enterprise_id": "abcde", "folder_id": "12345"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetMetadataCascadePolicies.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetMetadataCascadePolicies.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
+//                        let iterator = sut.metadataCascadePolicy.list(folderId: "12345", ownerEnterpriseId: "abcde")
 //                        iterator.next { result in
 ////                            print("in iterator")
 //                            switch result {
@@ -77,13 +77,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetMetadataCascadePolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetMetadataCascadePolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.metadataCascadePolicy.get(id: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7") { result in
+//                        sut.metadataCascadePolicy.get(id: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7") { result in
 //                            switch result {
 //                            case let .success(policy):
 //                                expect(policy).to(beAKindOf(MetadataCascadePolicy.self))
@@ -110,13 +110,13 @@
 //                            && hasJsonBody(["scope": "enterprise", "folder_id": "998951261", "templateKey": "documentFlow"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateMetadataCascadePolicy.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateMetadataCascadePolicy.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.metadataCascadePolicy.create(
+//                        sut.metadataCascadePolicy.create(
 //                            folderId: "998951261",
 //                            scope: .enterprise,
 //                            templateKey: "documentFlow"
@@ -147,7 +147,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.metadataCascadePolicy.delete(id: "123456") { result in
+//                        sut.metadataCascadePolicy.delete(id: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -174,7 +174,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.metadataCascadePolicy.forceApply(
+//                        sut.metadataCascadePolicy.forceApply(
 //                            id: "12345",
 //                            conflictResolution: .overwrite
 //                        ) { result in

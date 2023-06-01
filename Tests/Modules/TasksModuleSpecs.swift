@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("Tasks Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("get()") {
@@ -34,13 +34,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTask.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTask.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.get(taskId: "11111") { result in
+//                        sut.tasks.get(taskId: "11111") { result in
 //                            switch result {
 //                            case let .success(task):
 //                                expect(task).to(beAKindOf(Task.self))
@@ -94,13 +94,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateTask.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateTask.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.create(fileId: "7287087200", action: .review, dueAt: Date(fromISO8601String: "2014-04-03T11:09:43-07:00")) { result in
+//                        sut.tasks.create(fileId: "7287087200", action: .review, dueAt: Date(fromISO8601String: "2014-04-03T11:09:43-07:00")) { result in
 //                            switch result {
 //                            case let .success(task):
 //                                expect(task).to(beAKindOf(Task.self))
@@ -153,13 +153,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateTask.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateTask.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.update(
+//                        sut.tasks.update(
 //                            taskId: "11111",
 //                            action: .review,
 //                            message: "Updated Message",
@@ -217,7 +217,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.delete(taskId: "123456") { result in
+//                        sut.tasks.delete(taskId: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -240,13 +240,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTaskAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTaskAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.getAssignment(taskAssignmentId: "11111") { result in
+//                        sut.tasks.getAssignment(taskAssignmentId: "11111") { result in
 //                            switch result {
 //                            case let .success(taskAssignment):
 //                                expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -315,13 +315,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateTaskAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateTaskAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.assign(taskId: "1992432", userId: "12345") { result in
+//                        sut.tasks.assign(taskId: "1992432", userId: "12345") { result in
 //                            switch result {
 //                            case let .success(taskAssignment):
 //                                expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -390,13 +390,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateTaskAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateTaskAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.assignByEmail(taskId: "1992432", email: "steve@email.com") { result in
+//                        sut.tasks.assignByEmail(taskId: "1992432", email: "steve@email.com") { result in
 //                            switch result {
 //                            case let .success(taskAssignment):
 //                                expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -460,13 +460,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateTaskAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateTaskAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.updateAssignment(taskAssignmentId: "2698512", message: "Test Message", resolutionState: .approved) { result in
+//                        sut.tasks.updateAssignment(taskAssignmentId: "2698512", message: "Test Message", resolutionState: .approved) { result in
 //                            switch result {
 //                            case let .success(taskAssignment):
 //                                expect(taskAssignment).to(beAKindOf(TaskAssignment.self))
@@ -531,7 +531,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.deleteAssignment(taskAssignmentId: "12345") { result in
+//                        sut.tasks.deleteAssignment(taskAssignmentId: "12345") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -554,13 +554,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetAssignments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetAssignments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.tasks.listAssignments(forTaskId: "12345") { result in
+//                        sut.tasks.listAssignments(forTaskId: "12345") { result in
 //                            switch result {
 //                            case let .success(taskAssignments):
 //                                guard let firstAssignment = taskAssignments.first else {

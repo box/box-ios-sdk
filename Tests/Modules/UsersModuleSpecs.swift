@@ -17,11 +17,11 @@
 //
 //    override class func spec() {
 //        beforeEach {
-//            self.sut = BoxSDK.getClient(token: "dasda")
+//            sut = BoxSDK.getClient(token: "dasda")
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("Users Module") {
@@ -29,13 +29,13 @@
 //                it("should make API call to retrieve user and produce user model when API call succeeds") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/10543463") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.get(userId: "10543463") { result in
+//                        sut.users.get(userId: "10543463") { result in
 //                            switch result {
 //                            case let .success(user):
 //                                expect(user).toNot(beNil())
@@ -65,13 +65,13 @@
 //                it("should send fields as comma-separated values when field parameter is passed") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/10543463") && isMethodGET() && containsQueryParams(["fields": "type,id,name"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetUserInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.get(userId: "10543463", fields: ["type", "id", "name"]) { result in
+//                        sut.users.get(userId: "10543463", fields: ["type", "id", "name"]) { result in
 //                            switch result {
 //                            case let .success(user):
 //                                expect(user).toNot(beNil())
@@ -99,13 +99,13 @@
 //
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UploadUserAvatar.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UploadUserAvatar.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(100)) { done in
-//                        self.sut.users.uploadAvatar(
+//                        sut.users.uploadAvatar(
 //                            userId: "10543463",
 //                            data: data,
 //                            name: "avatar.png"
@@ -137,13 +137,13 @@
 //
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UploadUserAvatar.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UploadUserAvatar.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(100)) { done in
-//                        self.sut.users.streamUploadAvatar(
+//                        sut.users.streamUploadAvatar(
 //                            userId: "10543463",
 //                            stream: stream,
 //                            name: "avatar.png"
@@ -177,7 +177,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(100)) { done in
-//                        self.sut.users.getAvatar(userId: "10543463") { result in
+//                        sut.users.getAvatar(userId: "10543463") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -201,7 +201,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.deleteAvatar(userId: "10543463") { result in
+//                        sut.users.deleteAvatar(userId: "10543463") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -230,13 +230,13 @@
 //                                         "status": UserStatus.active.description])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(100)) { done in
-//                        self.sut.users.create(
+//                        sut.users.create(
 //                            login: "testuser@example.com",
 //                            name: "Test User",
 //                            role: .user,
@@ -271,13 +271,13 @@
 //                it("should retreive current user information") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/me") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCurrentUserInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCurrentUserInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.getCurrent { result in
+//                        sut.users.getCurrent { result in
 //                            switch result {
 //                            case let .success(user):
 //                                expect(user).toNot(beNil())
@@ -308,13 +308,13 @@
 //                it("should create a new app user") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodPOST() && hasJsonBody(["name": "Test User", "is_platform_access_only": true])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateAppUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateAppUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.createAppUser(name: "Test User") { result in
+//                        sut.users.createAppUser(name: "Test User") { result in
 //                            switch result {
 //                            case let .success(newAppUser):
 //                                expect(newAppUser).toNot(beNil())
@@ -345,7 +345,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -353,7 +353,7 @@
 //                    let trackingCode = User.TrackingCode(name: "foo", value: "bar")
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.update(userId: "123456", trackingCodes: [trackingCode]) { result in
+//                        sut.users.update(userId: "123456", trackingCodes: [trackingCode]) { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -373,7 +373,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.delete(userId: "123456", notify: true, force: true) { result in
+//                        sut.users.delete(userId: "123456", notify: true, force: true) { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -390,13 +390,13 @@
 //                it("should return a list of users of the enterprise") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodGET() && containsQueryParams(["limit": "100"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetEnterpriseUsersOffset-Pagination.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetEnterpriseUsersOffset-Pagination.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100)
+//                        let iterator = sut.users.listForEnterprise(filterTerm: nil, fields: nil, offset: nil, limit: 100)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -417,13 +417,13 @@
 //                it("should return a list of users of the enterprise using marker pagination") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodGET() && containsQueryParams(["limit": "100", "usemarker": "true"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetEnterpriseUsersMarker-Pagination.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetEnterpriseUsersMarker-Pagination.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.users.listForEnterprise(usemarker: true, limit: 100)
+//                        let iterator = sut.users.listForEnterprise(usemarker: true, limit: 100)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -448,13 +448,13 @@
 //                        condition: isHost("api.box.com") && isPath("/2.0/invites") && isMethodPOST() && hasJsonBody(["enterprise": ["id": "42500"], "actionable_by": ["login": "freeuser@email.com"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("InviteUserToEnterprise.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("InviteUserToEnterprise.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.inviteToJoinEnterprise(login: "freeuser@email.com", enterpriseId: "42500") { result in
+//                        sut.users.inviteToJoinEnterprise(login: "freeuser@email.com", enterpriseId: "42500") { result in
 //                            switch result {
 //                            case let .success(invitation):
 //                                expect(invitation).to(beAKindOf(Invite.self))
@@ -475,13 +475,13 @@
 //                        condition: isHost("api.box.com") && isPath("/2.0/users/1234/folders/0") && isMethodPUT() && hasJsonBody(["owned_by": ["id": "123456"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("MoveUserItemsToAnotherUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("MoveUserItemsToAnotherUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.moveItemsOwnedByUser(withID: "1234", toUserWithID: "123456") { result in
+//                        sut.users.moveItemsOwnedByUser(withID: "1234", toUserWithID: "123456") { result in
 //                            switch result {
 //                            case let .success(folder):
 //                                expect(folder).to(beAKindOf(Folder.self))
@@ -498,13 +498,13 @@
 //                it("should change user login and return the user with the new login") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/18180156") && isMethodPUT() && hasJsonBody(["login": "testuser@example.com"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateUserLogin.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateUserLogin.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.changeLogin(userId: "18180156", login: "testuser@example.com") { result in
+//                        sut.users.changeLogin(userId: "18180156", login: "testuser@example.com") { result in
 //                            switch result {
 //                            case let .success(folder):
 //                                expect(folder).to(beAKindOf(User.self))
@@ -523,13 +523,13 @@
 //                it("should retrieves all email aliases for a user and return the iterator with the email aliases of the user ") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/123456/email_aliases") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GellAllUserEmailAliases.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GellAllUserEmailAliases.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.listEmailAliases(userId: "123456") { result in
+//                        sut.users.listEmailAliases(userId: "123456") { result in
 //                            switch result {
 //                            case let .success(aliases):
 //                                expect(aliases).notTo(beNil())
@@ -548,13 +548,13 @@
 //                it("should Add new email aliases for a user and return the new email alias for the user") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/123456/email_aliases") && isMethodPOST() && hasJsonBody(["email": "user@email.com"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("AddEmailAlias.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("AddEmailAlias.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.createEmailAlias(userId: "123456", email: "user@email.com") { result in
+//                        sut.users.createEmailAlias(userId: "123456", email: "user@email.com") { result in
 //                            switch result {
 //                            case let .success(emailAlias):
 //                                expect(emailAlias).to(beAKindOf(EmailAlias.self))
@@ -576,7 +576,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.deleteEmailAlias(userId: "12", emailAliasId: "1234567890") { result in
+//                        sut.users.deleteEmailAlias(userId: "12", emailAliasId: "1234567890") { result in
 //                            switch result {
 //                            case .success():
 //                                break
@@ -593,13 +593,13 @@
 //                it("should roll out user from enterprise get the updated user") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/users/12345") && isMethodPUT() && self.testRollOutUserFromEnterpriseBody()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.users.rollOutOfEnterprise(userId: "12345", notify: true) { result in
+//                        sut.users.rollOutOfEnterprise(userId: "12345", notify: true) { result in
 //                            switch result {
 //                            case let .success(user):
 //                                expect(user).toNot(beNil())
@@ -617,9 +617,9 @@
 //        }
 //    }
 //
-//    public func testRollOutUserFromEnterpriseBody() -> OHHTTPStubsTestBlock {
+//    public func testRollOutUserFromEnterpriseBody() -> HTTPStubsTestBlock {
 //        return { request in
-//            let body = request.ohhttpStubs_httpBody!
+//            let body = request.HTTPStubs_httpBody!
 //            if let jsonBody = try! JSONSerialization.jsonObject(with: body) as? [String: Any] {
 //                return jsonBody["notify"] as? Bool == true && jsonBody["enterprise"] as? NSNull == NSNull()
 //            }

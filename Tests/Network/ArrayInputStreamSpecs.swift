@@ -22,18 +22,18 @@
 //                self.stream1 = InputStream(data: "1".data(using: .utf8)!)
 //                self.stream2 = InputStream(data: "22".data(using: .utf8)!)
 //                self.stream3 = InputStream(data: "333".data(using: .utf8)!)
-//                self.sut = ArrayInputStream(inputStreams: [self.stream1, self.stream2, self.stream3])
+//                sut = ArrayInputStream(inputStreams: [self.stream1, self.stream2, self.stream3])
 //            }
 //
 //            afterEach {
-//                self.sut.close()
+//                sut.close()
 //            }
 //
 //            describe("read()") {
 //                it("should read all available data in ArrayInputStream if bufferSize is bigger than stream content") {
 //                    let bufferSize = 128
 //                    let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-//                    let readBytes = self.sut.read(buffer, maxLength: bufferSize)
+//                    let readBytes = sut.read(buffer, maxLength: bufferSize)
 //                    expect(readBytes).to(equal(6))
 //
 //                    var readData = Data()
@@ -47,7 +47,7 @@
 //                it("should read 1 byte from ArrayInputStream if bufferSize is set to 1") {
 //                    let bufferSize = 1
 //                    let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-//                    let readBytes = self.sut.read(buffer, maxLength: bufferSize)
+//                    let readBytes = sut.read(buffer, maxLength: bufferSize)
 //                    expect(readBytes).to(equal(1))
 //
 //                    var readData = Data()
@@ -65,7 +65,7 @@
 //                    var readData = Data()
 //
 //                    repeat {
-//                        readBytes = self.sut.read(buffer, maxLength: bufferSize)
+//                        readBytes = sut.read(buffer, maxLength: bufferSize)
 //                        readData.append(buffer, count: readBytes)
 //                    }
 //                    while readBytes > 0

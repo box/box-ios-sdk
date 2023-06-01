@@ -17,11 +17,11 @@
 //    override class func spec() {
 //        describe("Storage Policies Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "asdads")
+//                sut = BoxSDK.getClient(token: "asdads")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("get)") {
@@ -33,13 +33,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetStoragePolicyInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.get(storagePolicyId: "12345") { result in
+//                        sut.storagePolicies.get(storagePolicyId: "12345") { result in
 //                            guard case let .success(policy) = result else {
 //                                fail("Expected call to get to succeed, but it failed")
 //                                done()
@@ -64,13 +64,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetStoragePolicies.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetStoragePolicies.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.storagePolicies.listForEnterprise()
+//                        let iterator = sut.storagePolicies.listForEnterprise()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -97,13 +97,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetStoragePolicyAssignmentInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignmentInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.getAssignment(storagePolicyAssignmentId: "enterprise_36907420") { result in
+//                        sut.storagePolicies.getAssignment(storagePolicyAssignmentId: "enterprise_36907420") { result in
 //                            guard case let .success(assignment) = result else {
 //                                fail("Expected call to getPolicyAssignment to succeed, but it failed")
 //                                done()
@@ -129,13 +129,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.listAssignments(resolvedForType: "enterprise", resolvedForId: "36690620") { result in
+//                        sut.storagePolicies.listAssignments(resolvedForType: "enterprise", resolvedForId: "36690620") { result in
 //                            guard case let .success(assignment) = result else {
 //                                fail("Expected call to listAssignments to succeed, but it failed")
 //                                done()
@@ -170,13 +170,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateStoragePolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.assign(storagePolicyId: "12", assignedToType: "user", assignedToId: "3093450887") { result in
+//                        sut.storagePolicies.assign(storagePolicyId: "12", assignedToType: "user", assignedToId: "3093450887") { result in
 //                            guard case let .success(assignment) = result else {
 //                                fail("Expected call to assign to succeed, but it failed")
 //                                done()
@@ -220,7 +220,7 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetStoragePolicyAssignments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -237,13 +237,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.forceAssign(storagePolicyId: "192", assignedToType: "user", assignedToId: "3093450887") { result in
+//                        sut.storagePolicies.forceAssign(storagePolicyId: "192", assignedToType: "user", assignedToId: "3093450887") { result in
 //                            guard case let .success(assignment) = result else {
 //                                fail("Expected call to assignPolicy to succeed, but it failed")
 //                                done()
@@ -275,13 +275,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateStoragePolicyAssignment.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.updateAssignment(storagePolicyAssignmentId: "user_7993870887", storagePolicyId: "192") { result in
+//                        sut.storagePolicies.updateAssignment(storagePolicyAssignmentId: "user_7993870887", storagePolicyId: "192") { result in
 //                            guard case let .success(assignment) = result else {
 //                                fail("Expected call to updateAssignment to succeed, but it failed")
 //                                done()
@@ -308,7 +308,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "user_3093870887") { response in
+//                        sut.storagePolicies.deleteAssignment(storagePolicyAssignmentId: "user_3093870887") { response in
 //                            switch response {
 //                            case .success:
 //                                break

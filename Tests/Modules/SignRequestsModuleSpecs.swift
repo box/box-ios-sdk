@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("Sign Requests Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("create()") {
@@ -59,7 +59,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateSignRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateSignRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -90,7 +90,7 @@
 //                            declinedRedirectUrl: "https://box.com/declined_redirect_url"
 //                        )
 //
-//                        self.sut.signRequests.create(
+//                        sut.signRequests.create(
 //                            signers: signers,
 //                            sourceFiles: sourceFiles,
 //                            parentFolder: parentFolder,
@@ -141,13 +141,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetSignRequests.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetSignRequests.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.signRequests.list()
+//                        let iterator = sut.signRequests.list()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -185,13 +185,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetSignRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetSignRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.signRequests.getById(id: "12345") { result in
+//                        sut.signRequests.getById(id: "12345") { result in
 //                            switch result {
 //                            case let .success(signRequest):
 //                                expect(signRequest).toNot(beNil())
@@ -227,7 +227,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.signRequests.resendById(id: "12345") { result in
+//                        sut.signRequests.resendById(id: "12345") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -250,13 +250,13 @@
 //                            && isMethodPOST()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CancelSignRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CancelSignRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.signRequests.cancelById(id: "12345") { result in
+//                        sut.signRequests.cancelById(id: "12345") { result in
 //                            switch result {
 //                            case let .success(signRequest):
 //                                expect(signRequest).toNot(beNil())

@@ -24,13 +24,13 @@
 //                context("for user") {
 //
 //                    it("should return the accessToken as the TokenInfo is in a valid state") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .user("123456"),
 //                            tokenInfo: self.makeValidTokenInfo()
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("valid access token"))
@@ -43,7 +43,7 @@
 //                    }
 //
 //                    it("should get new access token when current TokenInfo is nil") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .user("123456"),
 //                            tokenInfo: nil
 //                        )
@@ -69,7 +69,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
@@ -82,7 +82,7 @@
 //                    }
 //
 //                    it("should get new access token when current token is expired") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .user("123456"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -108,7 +108,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
@@ -121,7 +121,7 @@
 //                    }
 //
 //                    it("should call the refresh token requests serially with mutual exclusion") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .user("123456"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -148,7 +148,7 @@
 //
 //                        let queueWrapper = TestQueueWrapper()
 //                        var getAccessTokenCalls = 0
-//                        self.sut.authModuleMock.getCCGTokenClosure = {
+//                        sut.authModuleMock.getCCGTokenClosure = {
 //                            getAccessTokenCalls += 1
 //                        }
 //
@@ -162,26 +162,26 @@
 //                                }
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("first result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("second result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("third result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("fourth result")
 //                            }
 //                        }
 //                    }
 //
 //                    it("should produce error when get new access token fails") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .user("123456"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -197,7 +197,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case .success:
 //                                    fail("getAccessToken should fail, but instead got success")
@@ -214,13 +214,13 @@
 //                context("for account service") {
 //
 //                    it("should return the accessToken as the TokenInfo is in a valid state") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .applicationService("987654321"),
 //                            tokenInfo: self.makeValidTokenInfo()
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("valid access token"))
@@ -233,7 +233,7 @@
 //                    }
 //
 //                    it("should get new access token when current TokenInfo is nil") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .applicationService("987654321"),
 //                            tokenInfo: nil
 //                        )
@@ -259,7 +259,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
@@ -272,7 +272,7 @@
 //                    }
 //
 //                    it("should get new access token when current token is expired") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .applicationService("987654321"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -298,7 +298,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case let .success(token):
 //                                    expect(token).to(equal("T9cE5asGnuyYCCqIZFoWjFHvNbvVqHjl"))
@@ -311,7 +311,7 @@
 //                    }
 //
 //                    it("should call the refresh token requests serially with mutual exclusion") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .applicationService("987654321"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -338,7 +338,7 @@
 //
 //                        let queueWrapper = TestQueueWrapper()
 //                        var getAccessTokenCalls = 0
-//                        self.sut.authModuleMock.getCCGTokenClosure = {
+//                        sut.authModuleMock.getCCGTokenClosure = {
 //                            getAccessTokenCalls += 1
 //                        }
 //
@@ -352,26 +352,26 @@
 //                                }
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("first result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("second result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("third result")
 //                            }
 //
-//                            self.sut.getAccessToken { _ in
+//                            sut.getAccessToken { _ in
 //                                queueWrapper.logMessage("fourth result")
 //                            }
 //                        }
 //                    }
 //
 //                    it("should produce error when get new access token fails") {
-//                        self.sut = self.makeSUT(
+//                        sut = self.makeSUT(
 //                            connectionType: .applicationService("987654321"),
 //                            tokenInfo: self.makeExpiredTokenInfo()
 //                        )
@@ -387,7 +387,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.getAccessToken { result in
+//                            sut.getAccessToken { result in
 //                                switch result {
 //                                case .success:
 //                                    fail("getAccessToken should fail, but instead got success")
@@ -405,20 +405,20 @@
 //            describe("handleExpiredToken()") {
 //
 //                it("should clear the token store") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        connectionType: .user("123456"),
 //                        tokenInfo: self.makeExpiredTokenInfo()
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.handleExpiredToken { result in
+//                        sut.handleExpiredToken { result in
 //                            if case let .failure(error) = result {
 //                                fail("Expected call to succeed, but instead got \(error)")
 //                                done()
 //                                return
 //                            }
 //
-//                            self.sut.tokenStore.read { result in
+//                            sut.tokenStore.read { result in
 //                                switch result {
 //                                case let .failure(error):
 //                                    expect(error).toNot(beNil())
@@ -436,7 +436,7 @@
 //            describe("revokeTokens()") {
 //
 //                it("should revoke the token when sending valid payload and token store should be empty") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        connectionType: .user("123456"),
 //                        tokenInfo: self.makeValidTokenInfoForRevoke()
 //                    )
@@ -456,10 +456,10 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.revokeTokens { result in
+//                        sut.revokeTokens { result in
 //                            switch result {
 //                            case .success:
-//                                self.sut.tokenStore.read { result in
+//                                sut.tokenStore.read { result in
 //                                    switch result {
 //                                    case .success:
 //                                        fail("Expected read to fail, but it succeeded")
@@ -476,7 +476,7 @@
 //                }
 //
 //                it("shouldn't revoke the token when sending an invalid payload and token store shouldn't be empty") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        connectionType: .applicationService("987654321"),
 //                        tokenInfo: self.makeExpiredTokenInfo()
 //                    )
@@ -490,12 +490,12 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.revokeTokens { result in
+//                        sut.revokeTokens { result in
 //                            switch result {
 //                            case let .failure(error):
 //                                expect(error).toNot(beNil())
 //                                expect(error).to(beAKindOf(BoxSDKError.self))
-//                                self.sut.tokenStore.read { result in
+//                                sut.tokenStore.read { result in
 //                                    switch result {
 //                                    case let .success(tokenInfo):
 //                                        expect(error).toNot(beNil())
@@ -516,7 +516,7 @@
 //            describe("downscopeToken()") {
 //
 //                it("should make request to downscope the token") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        connectionType: .applicationService("987654321"),
 //                        tokenInfo: self.makeTokenInfoForDownscope()
 //                    )
@@ -557,7 +557,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
+//                        sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
 //                            switch result {
 //                            case let .success(tokenInfo):
 //                                expect(tokenInfo).to(beAKindOf(TokenInfo.self))

@@ -33,7 +33,7 @@
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("send()") {

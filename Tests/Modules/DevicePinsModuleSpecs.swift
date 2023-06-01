@@ -19,11 +19,11 @@
 //
 //        describe("Device Pins Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("delete()") {
@@ -34,7 +34,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.devicePins.delete(devicePinId: "12345") { response in
+//                        sut.devicePins.delete(devicePinId: "12345") { response in
 //                            switch response {
 //                            case .success:
 //                                break
@@ -52,13 +52,13 @@
 //                it("should make an API call to retrieve a specified Device Pin") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/device_pinners/12345") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("FullDevicePin.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("FullDevicePin.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.devicePins.get(devicePinId: "12345") { result in
+//                        sut.devicePins.get(devicePinId: "12345") { result in
 //                            switch result {
 //                            case let .success(devicePin):
 //                                expect(devicePin).toNot(beNil())
@@ -84,13 +84,13 @@
 //                            && containsQueryParams(["direction": "ASC"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetDevicePins.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetDevicePins.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
+//                        let iterator = sut.devicePins.listForEnterprise(enterpriseId: "12345", direction: .ascending)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):

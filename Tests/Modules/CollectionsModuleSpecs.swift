@@ -18,11 +18,11 @@
 //
 //    override class func spec() {
 //        beforeEach {
-//            self.sut = BoxSDK.getClient(token: "asdads")
+//            sut = BoxSDK.getClient(token: "asdads")
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("CollectionsModuleSpecs") {
@@ -33,7 +33,7 @@
 //                            isPath("/2.0/collections")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -41,7 +41,7 @@
 //
 //                it("should be able to get a list of collections") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.collections.list()
+//                        let iterator = sut.collections.list()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -68,13 +68,13 @@
 //                            isPath("/2.0/collections")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collections.getFavorites { result in
+//                        sut.collections.getFavorites { result in
 //                            switch result {
 //                            case let .success(favoritesCollection):
 //                                expect(favoritesCollection).to(beAKindOf(BoxCollection.self))
@@ -96,13 +96,13 @@
 //                            isPath("/2.0/collections")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollectionsEmpty.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollectionsEmpty.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collections.getFavorites { result in
+//                        sut.collections.getFavorites { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected method to produce an error, but it succeeded")
@@ -124,14 +124,14 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollectionItems.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollectionItems.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should be able to get list of collection items") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.collections.listItems(collectionId: "123")
+//                        let iterator = sut.collections.listItems(collectionId: "123")
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):

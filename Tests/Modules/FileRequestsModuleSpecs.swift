@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("FileRequestsModule") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("get()") {
@@ -33,13 +33,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.fileRequests.get(fileRequestId: "42037322") { result in
+//                        sut.fileRequests.get(fileRequestId: "42037322") { result in
 //                            switch result {
 //                            case let .success(fileRequest):
 //                                expect(fileRequest.type).to(equal("file_request"))
@@ -94,7 +94,7 @@
 //                            && hasHeaderNamed("If-Match", value: "1")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateFileRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateFileRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: [:]
 //                        )
 //                    }
@@ -109,7 +109,7 @@
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.fileRequests.update(
+//                        sut.fileRequests.update(
 //                            fileRequestId: "42037322",
 //                            ifMatch: "1",
 //                            updateRequest: updateRequest
@@ -166,7 +166,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CopyFileRequest.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CopyFileRequest.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: [:]
 //                        )
 //                    }
@@ -181,7 +181,7 @@
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.fileRequests.copy(fileRequestId: "42037322", copyRequest: copyRequest) { result in
+//                        sut.fileRequests.copy(fileRequestId: "42037322", copyRequest: copyRequest) { result in
 //                            switch result {
 //                            case let .success(fileRequest):
 //                                expect(fileRequest.type).to(equal("file_request"))
@@ -229,7 +229,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.fileRequests.delete(fileRequestId: "42037322") { result in
+//                        sut.fileRequests.delete(fileRequestId: "42037322") { result in
 //                            switch result {
 //                            case .success:
 //                                break

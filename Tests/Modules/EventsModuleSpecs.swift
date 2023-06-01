@@ -19,11 +19,11 @@
 //    override class func spec() {
 //        describe("EventsModule") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "asdads")
+//                sut = BoxSDK.getClient(token: "asdads")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("getUserEvents()") {
@@ -36,14 +36,14 @@
 //                                isMethodGET(),
 //                            response: { _ in
 //                                HTTPStubsResponse(
-//                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+//                                    fileAtPath: OHPathForFileInBundle("GetUserEvents.json", Bundle(for: Self.self))!,
 //                                    statusCode: 200, headers: [:]
 //                                )
 //                            }
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25)
+//                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25)
 //                            iterator.next { result in
 //                                switch result {
 //                                case let .success(page):
@@ -76,14 +76,14 @@
 //                                isMethodGET(),
 //                            response: { _ in
 //                                HTTPStubsResponse(
-//                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+//                                    fileAtPath: OHPathForFileInBundle("GetUserEvents.json", Bundle(for: Self.self))!,
 //                                    statusCode: 200, headers: [:]
 //                                )
 //                            }
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25)
+//                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25)
 //                            iterator.next { result in
 //                                switch result {
 //                                case let .success(page):
@@ -113,14 +113,14 @@
 //                                isMethodGET(),
 //                            response: { _ in
 //                                HTTPStubsResponse(
-//                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+//                                    fileAtPath: OHPathForFileInBundle("GetUserEvents.json", Bundle(for: Self.self))!,
 //                                    statusCode: 200, headers: [:]
 //                                )
 //                            }
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            let iterator = self.sut.events.getUserEvents(streamType: .all, limit: 25)
+//                            let iterator = sut.events.getUserEvents(streamType: .all, limit: 25)
 //                            iterator.next { result in
 //                                switch result {
 //                                case let .success(page):
@@ -150,14 +150,14 @@
 //                                isMethodGET(),
 //                            response: { _ in
 //                                HTTPStubsResponse(
-//                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+//                                    fileAtPath: OHPathForFileInBundle("GetUserEvents.json", Bundle(for: Self.self))!,
 //                                    statusCode: 200, headers: [:]
 //                                )
 //                            }
 //                        )
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25)
+//                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25)
 //                            iterator.next { result in
 //                                switch result {
 //                                case let .success(page):
@@ -197,14 +197,14 @@
 //                            isMethodGET(),
 //                        response: { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetEnterpriseEvents.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetEnterpriseEvents.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: [:]
 //                            )
 //                        }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.events.getEnterpriseEvents(
+//                        let iterator = sut.events.getEnterpriseEvents(
 //                            eventTypes: [.abnormalDownloadActivity, .accessGranted],
 //                            createdAfter: createdAfter,
 //                            streamPosition: .now,
@@ -268,14 +268,14 @@
 //                            isMethodGET(),
 //                        response: { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetEnterpriseEventsStreaming.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetEnterpriseEventsStreaming.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: [:]
 //                            )
 //                        }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.events.getEnterpriseEventsStreaming(
+//                        let iterator = sut.events.getEnterpriseEventsStreaming(
 //                            eventTypes: [.loginActivityDeviceAdded, .invitedToCollaboration],
 //                            streamPosition: .now,
 //                            limit: 100
@@ -335,14 +335,14 @@
 //                            isPath("/2.0/events"),
 //                        response: { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetPollingURL.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetPollingURL.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: [:]
 //                            )
 //                        }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(100)) { done in
-//                        self.sut.events.getPollingURL { result in
+//                        sut.events.getPollingURL { result in
 //                            switch result {
 //                            case let .success(pollingURLInfo):
 //                                expect(pollingURLInfo.url.absoluteString).to(equal("http://2.realtime.services.box.net/subscribe?channel=cc807c9c4869ffb1c81a&stream_type=all"))
@@ -364,7 +364,7 @@
 //                        isMethodGET(),
 //                        response: { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetNewEvents.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetNewEvents.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: [:]
 //                            )
 //                        }
@@ -382,7 +382,7 @@
 //                        return
 //                    }
 //                    waitUntil(timeout: .seconds(1000)) { done in
-//                        self.sut.events.observeForNewEvents(with: pollingURLInfo) { result in
+//                        sut.events.observeForNewEvents(with: pollingURLInfo) { result in
 //                            switch result {
 //                            case let .success(pollingResult):
 //                                expect(pollingResult.version).to(equal(1))

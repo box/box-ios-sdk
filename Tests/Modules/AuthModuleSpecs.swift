@@ -25,11 +25,11 @@
 //        beforeEach {
 //            self.sdk = BoxSDK(clientId: self.clientId, clientSecret: self.clientSecret)
 //            let networkAgent = BoxNetworkAgent(configuration: self.sdk.configuration)
-//            self.sut = AuthModule(networkAgent: networkAgent, configuration: self.sdk.configuration)
+//            sut = AuthModule(networkAgent: networkAgent, configuration: self.sdk.configuration)
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("AuthModuleSpecs") {
@@ -42,7 +42,7 @@
 //                            && self.compareURLEncodedBody(["client_id": self.clientId, "client_secret": self.clientSecret, "code": self.code, "grant_type": "authorization_code"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -50,7 +50,7 @@
 //
 //                it("should get access token") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getToken(withCode: "zaqxswedc") { result in
+//                        sut.getToken(withCode: "zaqxswedc") { result in
 //                            switch result {
 //                            case let .success(tokenInfo):
 //                                expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -84,7 +84,7 @@
 //
 //                it("should get an 400 error") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getToken(withCode: "zaqxswedc") { result in
+//                        sut.getToken(withCode: "zaqxswedc") { result in
 //                            switch result {
 //                            case .success:
 //                                fail("OAuth authentication succeded but was expected to fail")
@@ -117,7 +117,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.revokeToken(token: tokenToRevoke) { result in
+//                    sut.revokeToken(token: tokenToRevoke) { result in
 //                        switch result {
 //                        case .success:
 //                            break
@@ -141,7 +141,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.revokeToken(token: "adjhfgbs") { result in
+//                    sut.revokeToken(token: "adjhfgbs") { result in
 //                        switch result {
 //                        case .success:
 //                            fail("Expected call to fail")
@@ -191,13 +191,13 @@
 //                        )
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("DownscopeToken.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
+//                    sut.downscopeToken(parentToken: tokenToDownscope, scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123", sharedLink: "https://app.box.com/s/xyz") { result in
 //                        switch result {
 //                        case let .success(tokenInfo):
 //                            expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -235,13 +235,13 @@
 //                        )
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("AccessToken.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.refresh(refreshToken: refreshToken) { result in
+//                    sut.refresh(refreshToken: refreshToken) { result in
 //                        switch result {
 //                        case let .success(tokenInfo):
 //                            expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -272,7 +272,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.refresh(refreshToken: "invalid token") { result in
+//                    sut.refresh(refreshToken: "invalid token") { result in
 //                        switch result {
 //                        case .success:
 //                            fail("OAuth authentication succeded but was expected to fail")

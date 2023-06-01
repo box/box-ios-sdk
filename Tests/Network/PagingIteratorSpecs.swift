@@ -23,8 +23,8 @@
 //            beforeEach {}
 //
 //            afterEach {
-//                self.sut = nil
-//                OHHTTPStubs.removeAllStubs()
+//                sut = nil
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("marker based paging") {
@@ -48,11 +48,11 @@
 //                            )
 //                        }
 //
-//                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+//                    sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
 //
 //                    // Get first page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.nextMarker).to(equal("next_marker_value_1"))
@@ -66,7 +66,7 @@
 //
 //                    // Get second page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.nextMarker).to(equal(""))
@@ -89,11 +89,11 @@
 //                            )
 //                        }
 //
-//                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+//                    sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
 //
 //                    // Get first page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.nextMarker).to(equal(""))
@@ -107,7 +107,7 @@
 //
 //                    // Get second page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected method to throw, but it didn't")
@@ -129,11 +129,11 @@
 //                            )
 //                        }
 //
-//                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+//                    sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
 //
 //                    // Get first page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.nextMarker).to(beNil())
@@ -147,7 +147,7 @@
 //
 //                    // Get second page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected method to throw, but it didn't")
@@ -181,11 +181,11 @@
 //                            )
 //                        }
 //
-//                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["limit": "2"])
+//                    sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["limit": "2"])
 //
 //                    // Get first page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.offset).to(equal(0))
@@ -201,7 +201,7 @@
 //
 //                    // Get second page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.offset).to(equal(2))
@@ -226,11 +226,11 @@
 //                            )
 //                        }
 //
-//                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["offset": "2", "limit": "2"])
+//                    sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["offset": "2", "limit": "2"])
 //
 //                    // Get first page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case let .success(page):
 //                                expect(page.offset).to(equal(2))
@@ -246,7 +246,7 @@
 //
 //                    // Get second page
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.next { result in
+//                        sut.next { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected method to throw, but it didn't")

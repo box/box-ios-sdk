@@ -36,13 +36,13 @@
 //            describe("getAccessToken()") {
 //
 //                it("should return the accessToken as the TokenInfo is in a valid state") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeValidTokenInfo(),
 //                        authClosure: { _, _ in }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getAccessToken { result in
+//                        sut.getAccessToken { result in
 //                            switch result {
 //                            case let .success(token):
 //                                expect(token).to(equal("valid access token"))
@@ -55,13 +55,13 @@
 //                }
 //
 //                it("should get new access token when current token is expired") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeExpiredTokenInfo(),
 //                        authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 999))) }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getAccessToken { result in
+//                        sut.getAccessToken { result in
 //                            switch result {
 //                            case let .success(token):
 //                                expect(token).to(equal("new access token"))
@@ -74,13 +74,13 @@
 //                }
 //
 //                it("should get new access token (which is expired) when stored token is expired") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeExpiredTokenInfo(),
 //                        authClosure: { _, completion in completion(.success((accessToken: "new access token", expiresIn: 0))) }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getAccessToken { result in
+//                        sut.getAccessToken { result in
 //                            switch result {
 //                            case .success:
 //                                fail("getAccessToken should not succeed because returned token is expired")
@@ -93,13 +93,13 @@
 //                }
 //
 //                it("should get access token should fail when authClosure returns error") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeExpiredTokenInfo(),
 //                        authClosure: { _, completion in completion(.failure(BoxAPIAuthError(message: .tokenStoreFailure))) }
 //                    )
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.getAccessToken { result in
+//                        sut.getAccessToken { result in
 //                            switch result {
 //                            case .success:
 //                                fail("authClosure returned error so getAccessToken should not succeed.")
@@ -115,7 +115,7 @@
 //
 //                it("should call the refresh token requests serially with mutual exclusion") {
 //                    var authClosureCalls = 0
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeExpiredTokenInfo(),
 //                        authClosure: { _, completion in
 //                            authClosureCalls += 1
@@ -136,19 +136,19 @@
 //                            }
 //                        }
 //
-//                        self.sut.getAccessToken { _ in
+//                        sut.getAccessToken { _ in
 //                            self.logTestMessage("first result")
 //                        }
 //
-//                        self.sut.getAccessToken { _ in
+//                        sut.getAccessToken { _ in
 //                            self.logTestMessage("second result")
 //                        }
 //
-//                        self.sut.getAccessToken { _ in
+//                        sut.getAccessToken { _ in
 //                            self.logTestMessage("third result")
 //                        }
 //
-//                        self.sut.getAccessToken { _ in
+//                        sut.getAccessToken { _ in
 //                            self.logTestMessage("fourth result")
 //                        }
 //                    }
@@ -158,7 +158,7 @@
 //            describe("downscopeToken()") {
 //
 //                it("should make request to downscope the token") {
-//                    self.sut = self.makeSUT(
+//                    sut = self.makeSUT(
 //                        tokenInfo: self.makeTokenInfoForDownscope(),
 //                        authClosure: { _, _ in }
 //                    )
@@ -199,7 +199,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
+//                        sut.downscopeToken(scope: [.itemPreview, .itemUpload], resource: "https://api.box.com/2.0/files/123") { result in
 //                            switch result {
 //                            case let .success(tokenInfo):
 //                                expect(tokenInfo).to(beAKindOf(TokenInfo.self))
@@ -222,7 +222,7 @@
 //        describe("revokeTokens()") {
 //
 //            it("should revoke the token when sending valid payload") {
-//                self.sut = self.makeSUT(
+//                sut = self.makeSUT(
 //                    tokenInfo: self.makeTokenInfoForRevoke(),
 //                    authClosure: { _, _ in }
 //                )
@@ -242,7 +242,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.revokeTokens { result in
+//                    sut.revokeTokens { result in
 //                        switch result {
 //                        case .success:
 //                            break
@@ -255,7 +255,7 @@
 //            }
 //
 //            it("shouldn't revoke the token when sending an invalid payload") {
-//                self.sut = self.makeSUT(
+//                sut = self.makeSUT(
 //                    tokenInfo: self.makeInvalidTokenInfoForRevoke(),
 //                    authClosure: { _, _ in }
 //                )
@@ -275,7 +275,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.revokeTokens { result in
+//                    sut.revokeTokens { result in
 //                        switch result {
 //                        case let .failure(error):
 //                            expect(error).toNot(beNil())

@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("CollaborationsAllowlistModule") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("listEntries()") {
@@ -33,12 +33,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaborationWhitelistEntries.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistEntries.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.collaborationAllowList.listEntries()
+//                        let iterator = sut.collaborationAllowList.listEntries()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -65,12 +65,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaborationWhitelistEntryByID.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistEntryByID.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.get(id: "12345") { result in
+//                        sut.collaborationAllowList.get(id: "12345") { result in
 //                            switch result {
 //                            case let .success(entry):
 //                                expect(entry).to(beAKindOf(CollaborationAllowlistEntry.self))
@@ -113,12 +113,12 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateCollaborationWhitelistEntry.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateCollaborationWhitelistEntry.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.create(
+//                        sut.collaborationAllowList.create(
 //                            domain: "example.com",
 //                            direction: .both
 //                        ) { result in
@@ -162,7 +162,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.delete(id: "12345") { response in
+//                        sut.collaborationAllowList.delete(id: "12345") { response in
 //                            switch response {
 //                            case .success:
 //                                break
@@ -183,12 +183,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaborationWhitelistExemptUsers.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistExemptUsers.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.collaborationAllowList.listExemptTargets()
+//                        let iterator = sut.collaborationAllowList.listExemptTargets()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -223,12 +223,12 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollaborationWhitelistExemptUsersByID.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollaborationWhitelistExemptUsersByID.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
+//                        sut.collaborationAllowList.getExemptTarget(id: "12345") { result in
 //                            switch result {
 //                            case let .success(target):
 //                                expect(target).to(beAKindOf(CollaborationAllowlistExemptTarget.self))
@@ -277,12 +277,12 @@
 //                            hasJsonBody(["user": ["id": "12345"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CreateCollaborationWhitelistExemptUser.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CreateCollaborationWhitelistExemptUser.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.exemptUser(
+//                        sut.collaborationAllowList.exemptUser(
 //                            userId: "12345"
 //                        ) { result in
 //                            switch result {
@@ -335,7 +335,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
+//                        sut.collaborationAllowList.deleteExemptTarget(id: "12345") { response in
 //                            switch response {
 //                            case .success:
 //                                break

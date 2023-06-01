@@ -14,16 +14,16 @@
 // public extension QuickSpec {
 //
 //    /// Compare JSONBody
-//    /// We need it to create this method as the build in method hasJSONBody() from OHHTTPStubs doesn't work as
+//    /// We need it to create this method as the build in method hasJSONBody() from HTTPStubs doesn't work as
 //    /// expected, hasJSONBody expects that the jsonObject you pass in have the same keys and values in the same order
 //    /// and it's doesn't fullfill our needs as the serialization of the request can produce multiples results
 //    /// for example hasJSONBody() will fail if you compare {"id": "1234", "name": "sean" } vs {"name": "sean", "id": "1234"}
 //    /// - Parameter jsonObject: The JSON object we want to compare with the response of the stub api call
-//    /// - Returns: Return a OHHTTPStubsTestBlock.
-//    func compareJSONBody(_ jsonObject: [String: Any], checkClosure: CheckClosureType? = nil) -> OHHTTPStubsTestBlock {
+//    /// - Returns: Return a HTTPStubsTestBlock.
+//    func compareJSONBody(_ jsonObject: [String: Any], checkClosure: CheckClosureType? = nil) -> HTTPStubsTestBlock {
 //        return { req in
 //            guard
-//                let httpBody = req.ohhttpStubs_httpBody,
+//                let httpBody = req.HTTPStubs_httpBody,
 //                let bodyString = String(data: httpBody, encoding: .utf8),
 //                let jsonObjectData = try? JSONSerialization.data(withJSONObject: jsonObject),
 //                let jsonObjectString = String(data: jsonObjectData, encoding: .utf8)
@@ -36,10 +36,10 @@
 //        }
 //    }
 //
-//    func compareURLEncodedBody(_ parameters: [String: String], checkClosure: CheckClosureType? = nil) -> OHHTTPStubsTestBlock {
+//    func compareURLEncodedBody(_ parameters: [String: String], checkClosure: CheckClosureType? = nil) -> HTTPStubsTestBlock {
 //        return { req in
 //            guard
-//                let httpBody = req.ohhttpStubs_httpBody,
+//                let httpBody = req.HTTPStubs_httpBody,
 //                let bodyString = String(data: httpBody, encoding: .utf8)
 //            else {
 //                return false

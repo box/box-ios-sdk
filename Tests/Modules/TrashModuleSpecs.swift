@@ -18,11 +18,11 @@
 //    override class func spec() {
 //        describe("Trash Module") {
 //            beforeEach {
-//                self.sut = BoxSDK.getClient(token: "")
+//                sut = BoxSDK.getClient(token: "")
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            describe("listItems()") {
@@ -34,13 +34,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTrashedItems.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTrashedItems.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.trash.listItems()
+//                        let iterator = sut.trash.listItems()
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -75,13 +75,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTrashedFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTrashedFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.getFile(id: "5859258256") { result in
+//                        sut.trash.getFile(id: "5859258256") { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).to(beAKindOf(File.self))
@@ -110,13 +110,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTrashedFolder.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTrashedFolder.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.getFolder(id: "11446498") { result in
+//                        sut.trash.getFolder(id: "11446498") { result in
 //                            switch result {
 //                            case let .success(folder):
 //                                expect(folder).to(beAKindOf(Folder.self))
@@ -145,13 +145,13 @@
 //                            && isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetTrashedWebLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetTrashedWebLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.getWebLink(id: "6742981") { result in
+//                        sut.trash.getWebLink(id: "6742981") { result in
 //                            switch result {
 //                            case let .success(webLink):
 //                                expect(webLink).to(beAKindOf(WebLink.self))
@@ -184,13 +184,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("RestoreFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("RestoreFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.restoreFile(
+//                        sut.trash.restoreFile(
 //                            id: "123456",
 //                            name: "non-conflicting-name.jpg",
 //                            parentFolderId: "14"
@@ -227,13 +227,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("RestoreFolder.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("RestoreFolder.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.restoreFolder(
+//                        sut.trash.restoreFolder(
 //                            id: "11446498",
 //                            name: "non-conflicting-name",
 //                            parentFolderId: "14"
@@ -270,13 +270,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("RestoreWebLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("RestoreWebLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.restoreWebLink(
+//                        sut.trash.restoreWebLink(
 //                            id: "6742981",
 //                            name: "non-conflicting-name",
 //                            parentFolderId: "14"
@@ -314,7 +314,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.permanentlyDeleteFile(id: "123456") { result in
+//                        sut.trash.permanentlyDeleteFile(id: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -342,7 +342,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.permanentlyDeleteFolder(id: "123456") { result in
+//                        sut.trash.permanentlyDeleteFolder(id: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break
@@ -370,7 +370,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.trash.permanentlyDeleteWebLink(id: "123456") { result in
+//                        sut.trash.permanentlyDeleteWebLink(id: "123456") { result in
 //                            switch result {
 //                            case .success:
 //                                break

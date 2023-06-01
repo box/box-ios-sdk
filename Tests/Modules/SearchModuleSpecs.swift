@@ -21,7 +21,7 @@
 //            }
 //
 //            afterEach {
-//                OHHTTPStubs.removeAllStubs()
+//                HTTPStubs.removeAllStubs()
 //            }
 //
 //            context("query()") {
@@ -33,7 +33,7 @@
 //                            && containsQueryParams(["query": "test"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -70,7 +70,7 @@
 //                            && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"gt\":\"2019-07-24T12:00:00Z\"}}}]"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -98,7 +98,7 @@
 //                            && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"lt\":\"2019-07-24T12:00:00Z\"}}}]"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -126,7 +126,7 @@
 //                            && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -154,7 +154,7 @@
 //                            && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -194,7 +194,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("Search200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("Search200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -244,7 +244,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("SearchResult200.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("SearchResult200.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }

@@ -17,11 +17,11 @@
 //
 //    override class func spec() {
 //        beforeEach {
-//            self.sut = BoxSDK.getClient(token: "asdads")
+//            sut = BoxSDK.getClient(token: "asdads")
 //        }
 //
 //        afterEach {
-//            OHHTTPStubs.removeAllStubs()
+//            HTTPStubs.removeAllStubs()
 //        }
 //
 //        describe("FilesModule") {
@@ -29,13 +29,13 @@
 //                it("should make API call to get file info and produce file model when API call succeeds") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.get(fileId: "5000948880") { result in
+//                        sut.files.get(fileId: "5000948880") { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).toNot(beNil())
@@ -58,13 +58,13 @@
 //                it("should produce error when API call fails") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/500094889") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 404, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.get(fileId: "500094889") { result in
+//                        sut.files.get(fileId: "500094889") { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected call to getFileInfo to fail, but it succeeded")
@@ -116,13 +116,13 @@
 //                            && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRepresentations.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRepresentations.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.listRepresentations(fileId: "12345", representationHint: .extractedText) { result in
+//                        sut.files.listRepresentations(fileId: "12345", representationHint: .extractedText) { result in
 //                            switch result {
 //                            case let .success(representations):
 //                                guard let firstRepresentation = representations.first else {
@@ -154,13 +154,13 @@
 //                            && containsQueryParams(["fields": "representations"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetRepresentationsNoHeader.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetRepresentationsNoHeader.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.listRepresentations(fileId: "12345") { result in
+//                        sut.files.listRepresentations(fileId: "12345") { result in
 //                            switch result {
 //                            case let .success(representations):
 //                                expect(representations[0].info?.url).to(equal("https://api.box.com/2.0/internal_files/12345/versions/11111/representations/jpg_thumb_32x32"))
@@ -193,7 +193,7 @@
 //                                && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetRepresentations.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetRepresentations.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
 //                            )
 //                        }
@@ -207,7 +207,7 @@
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
 //
-//                            self.sut.files.getRepresentationContent(
+//                            sut.files.getRepresentationContent(
 //                                fileId: "12345",
 //                                representationHint: .extractedText,
 //                                destinationURL: fileURL
@@ -240,14 +240,14 @@
 //                                && hasHeaderNamed("x-rep-hints", value: "[jpg?dimensions=320x320]")
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetRepresentationsErrorState.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetRepresentationsErrorState.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["x-rep-hints": "[jpg?dimensions=320x320]"]
 //                            )
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
 //
-//                            self.sut.files.getRepresentationContent(
+//                            sut.files.getRepresentationContent(
 //                                fileId: "12345",
 //                                representationHint: .thumbnail,
 //                                destinationURL: fileURL
@@ -279,13 +279,13 @@
 //                                && hasHeaderNamed("x-rep-hints", value: "[jpg?dimensions=320x320]")
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetRepresentationsUnknownState.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetRepresentationsUnknownState.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["x-rep-hints": "[jpg?dimensions=320x320]"]
 //                            )
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.files.getRepresentationContent(
+//                            sut.files.getRepresentationContent(
 //                                fileId: "12345",
 //                                representationHint: .thumbnail,
 //                                destinationURL: fileURL
@@ -317,7 +317,7 @@
 //                                && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("GetRepresentationsPendingState.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("GetRepresentationsPendingState.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
 //                            )
 //                        }
@@ -333,13 +333,13 @@
 //                            condition: isHost("api.box.com") && isPath("/2.0/internal_files/12345/versions/11111/representations/jpg_thumb_320x320")
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("FileRepresentationState.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("FileRepresentationState.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
 //                            )
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.files.getRepresentationContent(
+//                            sut.files.getRepresentationContent(
 //                                fileId: "12345",
 //                                representationHint: .extractedText,
 //                                destinationURL: fileURL
@@ -388,13 +388,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.update(
+//                        sut.files.update(
 //                            fileId: "5000948880",
 //                            name: "hello.jpg",
 //                            description: nil,
@@ -439,13 +439,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.update(fileId: "5000948880", sharedLink: .value(SharedLinkData(password: .null))) { result in
+//                        sut.files.update(fileId: "5000948880", sharedLink: .value(SharedLinkData(password: .null))) { result in
 //                            if case let .failure(error) = result {
 //                                fail("Expected call to updateFileInfo to succeed, but instead got \(error)")
 //                            }
@@ -458,13 +458,13 @@
 //                it("should produce error when API call fails") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/50009488812") && isMethodPUT()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UpdateFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 404, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.update(fileId: "50009488812", name: nil, description: nil, parentId: nil, sharedLink: nil, tags: nil) { result in
+//                        sut.files.update(fileId: "50009488812", name: nil, description: nil, parentId: nil, sharedLink: nil, tags: nil) { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected call to fail, but it succeeded")
@@ -490,13 +490,13 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CopyFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CopyFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.copy(fileId: "5000948880", parentId: "0") { result in
+//                        sut.files.copy(fileId: "5000948880", parentId: "0") { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).toNot(beNil())
@@ -520,13 +520,13 @@
 //                it("should produce error when the API call fails") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/500094889/copy")) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("CopyFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("CopyFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 404, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.copy(fileId: "500094889", parentId: "0") { result in
+//                        sut.files.copy(fileId: "500094889", parentId: "0") { result in
 //                            switch result {
 //                            case .success:
 //                                fail("Expected call to fail, but it succeeded")
@@ -550,7 +550,7 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
@@ -558,7 +558,7 @@
 //                        waitUntil(timeout: .seconds(200)) { done in
 //                            let data = "This is upload test file content".data(using: .utf8)!
 //
-//                            self.sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
+//                            sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
 //                                switch result {
 //                                case let .success(file):
 //                                    expect(file).toNot(beNil())
@@ -589,7 +589,7 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("FullFile.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("FullFile.json", Bundle(for: Self.self))!,
 //                                statusCode: 200, headers: [:]
 //                            )
 //                        }
@@ -597,7 +597,7 @@
 //                        waitUntil(timeout: .seconds(200)) { done in
 //                            let data = "This is upload test file content".data(using: .utf8)!
 //
-//                            self.sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
+//                            sut.files.upload(data: data, name: "tigers.jpeg", parentId: "0", completion: { result in
 //                                switch result {
 //                                case .success:
 //                                    fail("Expected call to fail, but instead it succeeded.")
@@ -619,7 +619,7 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
@@ -627,7 +627,7 @@
 //                        waitUntil(timeout: .seconds(200)) { done in
 //                            let data = "This is upload test file content".data(using: .utf8)!
 //                            var progressed: Double?
-//                            let task = self.sut.files.upload(
+//                            let task = sut.files.upload(
 //                                data: data,
 //                                name: "tigers.jpeg",
 //                                parentId: "0",
@@ -660,7 +660,7 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
@@ -669,7 +669,7 @@
 //                            let data = "This is upload test file content".data(using: .utf8)!
 //                            var progressed: Double?
 //                            var task: BoxUploadTask?
-//                            task = self.sut.files.upload(
+//                            task = sut.files.upload(
 //                                data: data,
 //                                name: "tigers.jpeg",
 //                                parentId: "0",
@@ -709,14 +709,14 @@
 //                            condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
 //
 //                        waitUntil(timeout: .seconds(200)) { done in
 //
-//                            self.sut.files.upload(
+//                            sut.files.upload(
 //                                data: data, name: "tigers.jpeg", parentId: "0", performPreflightCheck: true,
 //                                completion: { result in
 //                                    switch result {
@@ -755,14 +755,14 @@
 //                            condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
 //
 //                        waitUntil(timeout: .seconds(200)) { done in
 //                            var progressed: Double?
-//                            let task = self.sut.files.upload(
+//                            let task = sut.files.upload(
 //                                data: data,
 //                                name: "tigers.jpeg",
 //                                parentId: "0",
@@ -801,7 +801,7 @@
 //                            condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
@@ -809,7 +809,7 @@
 //                        waitUntil(timeout: .seconds(200)) { done in
 //                            var progressed: Double?
 //                            var task: BoxUploadTask?
-//                            task = self.sut.files.upload(
+//                            task = sut.files.upload(
 //                                data: data,
 //                                name: "tigers.jpeg",
 //                                parentId: "0",
@@ -848,14 +848,14 @@
 //                        condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UploadFileVersion.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: [:]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(200)) { done in
 //
-//                        self.sut.files.upload(
+//                        sut.files.upload(
 //                            data: data, name: "tigers.jpeg", parentId: "0", performPreflightCheck: true,
 //                            completion: { result in
 //                                switch result {
@@ -880,13 +880,13 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFile.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(100)) { done in
 //                            let uploadedData: Data = "This is upload file version test file content".data(using: .utf8)!
-//                            self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: uploadedData) { result in
+//                            sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: uploadedData) { result in
 //                                switch result {
 //                                case let .success(file):
 //                                    expect(file).toNot(beNil())
@@ -924,12 +924,12 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFile.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(100)) { done in
-//                            self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
+//                            sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
 //                                switch result {
 //                                case let .success(file):
 //                                    expect(file).toNot(beNil())
@@ -967,12 +967,12 @@
 //                                isMethodPOST()
 //                        ) { _ in
 //                            HTTPStubsResponse(
-//                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+//                                fileAtPath: OHPathForFileInBundle("UploadFile.json", Bundle(for: Self.self))!,
 //                                statusCode: 201, headers: [:]
 //                            )
 //                        }
 //                        waitUntil(timeout: .seconds(100)) { done in
-//                            self.sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
+//                            sut.files.uploadVersion(forFile: "1234", name: "FileName", contentModifiedAt: "1994-11-05T13:15:30Z", data: data, performPreflightCheck: true) { result in
 //                                switch result {
 //                                case .success:
 //                                    fail("Expected call to fail, but instead call succeeded.")
@@ -991,14 +991,14 @@
 //                it("should produce file model when API call succeeds") {
 //                    stub(condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UploadFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: [:]
 //                        )
 //                    }
 //
 //                    let data = Data("hello from tests".utf8)
 //                    waitUntil(timeout: .seconds(999)) { done in
-//                        self.sut.files.streamUpload(stream: InputStream(data: data), fileSize: data.count, name: "tigers.jpeg", parentId: "0", completion: { result in
+//                        sut.files.streamUpload(stream: InputStream(data: data), fileSize: data.count, name: "tigers.jpeg", parentId: "0", completion: { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).toNot(beNil())
@@ -1024,14 +1024,14 @@
 //                it("should produce file model when API call succeeds") {
 //                    stub(condition: isHost("upload.box.com") && isPath("/api/2.0/files/123456/content") && isMethodPOST()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UploadFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: [:]
 //                        )
 //                    }
 //
 //                    let data = Data("updated file content".utf8)
 //                    waitUntil(timeout: .seconds(999)) { done in
-//                        self.sut.files.streamUploadVersion(stream: InputStream(data: data), fileSize: data.count, forFile: "123456", name: "tigers.jpeg") { result in
+//                        sut.files.streamUploadVersion(stream: InputStream(data: data), fileSize: data.count, forFile: "123456", name: "tigers.jpeg") { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).toNot(beNil())
@@ -1064,7 +1064,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.files.preflightCheck(name: "random.txt", parentId: "0", size: 12345) { result in
+//                            sut.files.preflightCheck(name: "random.txt", parentId: "0", size: 12345) { result in
 //                                switch result {
 //                                case .success:
 //                                    break
@@ -1088,7 +1088,7 @@
 //                        }
 //
 //                        waitUntil(timeout: .seconds(10)) { done in
-//                            self.sut.files.preflightCheckForNewVersion(forFile: "1234", name: "random.txt", size: 12345) { result in
+//                            sut.files.preflightCheckForNewVersion(forFile: "1234", name: "random.txt", size: 12345) { result in
 //                                switch result {
 //                                case .success:
 //                                    break
@@ -1106,13 +1106,13 @@
 //                it("should be able to lock a file") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/76017730626") && isMethodPUT() && containsQueryParams(["fields": "lock"]) && hasJsonBody(["lock": ["type": "lock", "is_download_prevented": false]])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("LockFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("LockFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.lock(
+//                        sut.files.lock(
 //                            fileId: "76017730626",
 //                            isDownloadPrevented: false,
 //                            fields: ["lock"]
@@ -1140,12 +1140,12 @@
 //                it("should be able to unlock the file") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/76017730626") && isMethodPUT() && containsQueryParams(["fields": "lock"]) && hasJsonBody(["lock": NSNull()])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("UnlockFile.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("UnlockFile.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.unlock(
+//                        sut.files.unlock(
 //                            fileId: "76017730626",
 //                            fields: ["lock"]
 //                        ) { result in
@@ -1173,7 +1173,7 @@
 //                    }
 //
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.getThumbnail(
+//                        sut.files.getThumbnail(
 //                            forFile: "76017730626",
 //                            extension: .jpg,
 //                            minHeight: 256,
@@ -1197,7 +1197,7 @@
 //                beforeEach {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/34122832467") && isMethodGET() && containsQueryParams(["fields": "expiring_embed_link"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetEmbedLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetEmbedLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -1205,7 +1205,7 @@
 //
 //                it("should be able to embed link the file") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.getEmbedLink(forFile: "34122832467") { result in
+//                        sut.files.getEmbedLink(forFile: "34122832467") { result in
 //                            switch result {
 //                            case let .success(expiringEmbedLink):
 //                                expect(expiringEmbedLink).to(beAKindOf(ExpiringEmbedLink.self))
@@ -1225,12 +1225,12 @@
 //                        condition: isHost("api.box.com") && isPath("/2.0/files/123456/collaborations") && isMethodGET() && containsQueryParams(["limit": "100"])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("FileCollaborations.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("FileCollaborations.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.files.listCollaborations(forFile: "123456", limit: 100)
+//                        let iterator = sut.files.listCollaborations(forFile: "123456", limit: 100)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -1261,13 +1261,13 @@
 //                it("should be able to get file comments") {
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880/comments") && isMethodGET() && containsQueryParams(["offset": "0", "limit": "100"])) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("FileComments.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("FileComments.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
 //
-//                        let iterator = self.sut.files.listComments(forFile: "5000948880", offset: 0, limit: 100)
+//                        let iterator = sut.files.listComments(forFile: "5000948880", offset: 0, limit: 100)
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -1292,12 +1292,12 @@
 //
 //                    stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880/tasks") && isMethodGET()) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileTasks.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileTasks.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        let iterator = self.sut.files.listTasks(forFile: "5000948880")
+//                        let iterator = sut.files.listTasks(forFile: "5000948880")
 //                        iterator.next { result in
 //                            switch result {
 //                            case let .success(page):
@@ -1321,7 +1321,7 @@
 //                            isPath("/2.0/collections")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -1332,7 +1332,7 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -1344,14 +1344,14 @@
 //                            hasJsonBody(["collections": [["id": "405151"]]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("AddFileToFavorites.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("AddFileToFavorites.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should make API call to add file to favorites") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.addToFavorites(fileId: "5000948880", completion: { result in
+//                        sut.files.addToFavorites(fileId: "5000948880", completion: { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).to(beAKindOf(File.self))
@@ -1372,7 +1372,7 @@
 //                            isPath("/2.0/collections")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetCollections.json", Bundle(for: Self.self))!,
 //                            statusCode: 201, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -1383,7 +1383,7 @@
 //                            isMethodGET()
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileInfo.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -1395,14 +1395,14 @@
 //                            hasJsonBody(["collections": []])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("RemoveFileFromFavorites.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("RemoveFileFromFavorites.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should make API call to remove file from favorites") {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.removeFromFavorites(fileId: "5000948880", completion: { result in
+//                        sut.files.removeFromFavorites(fileId: "5000948880", completion: { result in
 //                            switch result {
 //                            case let .success(file):
 //                                expect(file).to(beAKindOf(File.self))
@@ -1426,13 +1426,13 @@
 //                        && isMethodGET()
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("FullFileVersion.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("FullFileVersion.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.getVersion(fileId: "12345", fileVersionId: "11111") { result in
+//                    sut.files.getVersion(fileId: "12345", fileVersionId: "11111") { result in
 //                        switch result {
 //                        case let .success(fileVersion):
 //                            expect(fileVersion).toNot(beNil())
@@ -1462,13 +1462,13 @@
 //                        ])
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("FullFileVersion.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("FullFileVersion.json", Bundle(for: Self.self))!,
 //                        statusCode: 201, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.promoteVersion(fileId: "12345", fileVersionId: "11111") { result in
+//                    sut.files.promoteVersion(fileId: "12345", fileVersionId: "11111") { result in
 //                        switch result {
 //                        case let .success(fileVersion):
 //                            expect(fileVersion).toNot(beNil())
@@ -1493,7 +1493,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.deleteVersion(fileId: "12345", fileVersionId: "11111") { response in
+//                    sut.files.deleteVersion(fileId: "12345", fileVersionId: "11111") { response in
 //                        switch response {
 //                        case .success:
 //                            break
@@ -1512,13 +1512,13 @@
 //
 //                stub(condition: isHost("api.box.com") && isPath("/2.0/files/12345/versions") && isMethodGET()) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("GetFileVersions.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("GetFileVersions.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    let iterator = self.sut.files.listVersions(fileId: "12345")
+//                    let iterator = sut.files.listVersions(fileId: "12345")
 //                    iterator.next { result in
 //                        switch result {
 //                        case let .success(page):
@@ -1545,13 +1545,13 @@
 //                        && isMethodGET()
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("FullWatermark.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.getWatermark(fileId: "12345") { result in
+//                    sut.files.getWatermark(fileId: "12345") { result in
 //                        switch result {
 //                        case let .success(watermark):
 //                            expect(watermark).toNot(beNil())
@@ -1579,13 +1579,13 @@
 //                        ])
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("FullWatermark.json", Bundle(for: Self.self))!,
 //                        statusCode: 201, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.applyWatermark(fileId: "12345") { result in
+//                    sut.files.applyWatermark(fileId: "12345") { result in
 //                        switch result {
 //                        case let .success(watermark):
 //                            expect(watermark).toNot(beNil())
@@ -1607,7 +1607,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.removeWatermark(fileId: "12345") { response in
+//                    sut.files.removeWatermark(fileId: "12345") { response in
 //                        switch response {
 //                        case .success:
 //                            break
@@ -1637,7 +1637,7 @@
 //                    waitUntil(timeout: .seconds(10)) { done in
 //                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 //                        let fileURL = documentsURL.appendingPathComponent("doc.txt")
-//                        self.sut.files.download(
+//                        sut.files.download(
 //                            fileId: "12345",
 //                            destinationURL: fileURL,
 //                            version: "1"
@@ -1659,7 +1659,7 @@
 //                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 //                        let fileURL = documentsURL.appendingPathComponent("doc.txt")
 //                        var progressed: Double?
-//                        let task = self.sut.files.download(
+//                        let task = sut.files.download(
 //                            fileId: "12345",
 //                            destinationURL: fileURL,
 //                            version: "1",
@@ -1687,7 +1687,7 @@
 //                        let fileURL = documentsURL.appendingPathComponent("doc.txt")
 //                        var progressed: Double?
 //                        var task: BoxDownloadTask?
-//                        task = self.sut.files.download(
+//                        task = sut.files.download(
 //                            fileId: "12345",
 //                            destinationURL: fileURL,
 //                            version: "1",
@@ -1723,7 +1723,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.delete(fileId: "12345") { response in
+//                    sut.files.delete(fileId: "12345") { response in
 //                        switch response {
 //                        case .success:
 //                            break
@@ -1745,14 +1745,14 @@
 //                        containsQueryParams(["fields": "shared_link"])
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("GetFileSharedLink.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //            }
 //            it("should download a shared link for a file", closure: {
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.getSharedLink(forFile: "5000948880") { result in
+//                    sut.files.getSharedLink(forFile: "5000948880") { result in
 //                        switch result {
 //                        case let .success(sharedLink):
 //                            expect(sharedLink.access).toNot(beNil())
@@ -1776,14 +1776,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": true]]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: true) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: true) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1811,14 +1811,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": false]]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: false) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", access: .open, canDownload: true, canEdit: false) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1845,14 +1845,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open", "password": "frog"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", access: .open, password: .value("frog")) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", access: .open, password: .value("frog")) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1879,14 +1879,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink_VanityNameEnabled.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink_VanityNameEnabled.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", vanityName: .value("testVanityName"), access: .open) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", vanityName: .value("testVanityName"), access: .open) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1916,14 +1916,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open"]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1950,14 +1950,14 @@
 //                            hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("GetFileSharedLink_PasswordNotEnabled.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("GetFileSharedLink_PasswordNotEnabled.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
 //                }
 //                it("should update a shared link on a file", closure: {
 //                    waitUntil(timeout: .seconds(10)) { done in
-//                        self.sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
+//                        sut.files.setSharedLink(forFile: "5000948880", access: SharedLinkAccess.open, password: .null) { result in
 //                            switch result {
 //                            case let .success(sharedLink):
 //                                expect(sharedLink.access).to(equal(.open))
@@ -1984,14 +1984,14 @@
 //                        hasJsonBody(["shared_link": NSNull()])
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("RemoveFileSharedLink.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("RemoveFileSharedLink.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //            }
 //            it("should delete a shared link for a file", closure: {
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.deleteSharedLink(forFile: "5000948880") { result in
+//                    sut.files.deleteSharedLink(forFile: "5000948880") { result in
 //                        switch result {
 //                        case .success:
 //                            break
@@ -2027,7 +2027,7 @@
 //                            ])
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("ZipDownload.json", Bundle(for: Self.self))!,
 //                            statusCode: 202, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -2041,7 +2041,7 @@
 //                        condition: isHost("api.box.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status")
 //                    ) { _ in
 //                        HTTPStubsResponse(
-//                            fileAtPath: OHPathForFile("ZipDownloadStatus.json", type(of: self))!,
+//                            fileAtPath: OHPathForFileInBundle("ZipDownloadStatus.json", Bundle(for: Self.self))!,
 //                            statusCode: 200, headers: ["Content-Type": "application/json"]
 //                        )
 //                    }
@@ -2053,7 +2053,7 @@
 //                            type: "file"
 //                        ))
 //
-//                        self.sut.files.downloadZip(name: "New zip file 2", items: items, destinationURL: fileURL, completion: { result in
+//                        sut.files.downloadZip(name: "New zip file 2", items: items, destinationURL: fileURL, completion: { result in
 //                            switch result {
 //                            case let .success(status):
 //                                expect(FileManager.default.fileExists(atPath: fileURL.absoluteURL.path)).to(equal(true))
@@ -2094,14 +2094,14 @@
 //
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionNewFile.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionNewFile.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //            }
 //            it("should create a chunked upload session for a new file") {
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.createUploadSession(folderId: "123456", fileName: "Temp.txt", fileSize: 2) { result in
+//                    sut.files.createUploadSession(folderId: "123456", fileName: "Temp.txt", fileSize: 2) { result in
 //                        switch result {
 //                        case let .success(session):
 //                            expect(session.totalParts).to(equal(3))
@@ -2133,14 +2133,14 @@
 //
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionNewFileVersion.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionNewFileVersion.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //            }
 //            it("should create a chunked upload session for a new version of file") {
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.createUploadSessionForNewVersion(ofFile: "12345", fileName: "Temp.txt", fileSize: 2) { result in
+//                    sut.files.createUploadSessionForNewVersion(ofFile: "12345", fileName: "Temp.txt", fileSize: 2) { result in
 //                        switch result {
 //                        case let .success(session):
 //                            expect(session.totalParts).to(equal(2))
@@ -2173,7 +2173,7 @@
 //                        hasHeaderNamed("content-range", value: "bytes 8388608-8389052/100000000")
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionUploadPart.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionUploadPart.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
@@ -2181,7 +2181,7 @@
 //            it("should upload part of file using chunked upload session") {
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.uploadPart(sessionId: "F971964745A5CD0C001BBE4E58196BFD", data: data, offset: 8_388_608, totalSize: 100_000_000) { result in
+//                    sut.files.uploadPart(sessionId: "F971964745A5CD0C001BBE4E58196BFD", data: data, offset: 8_388_608, totalSize: 100_000_000) { result in
 //                        switch result {
 //                        case let .success(uploadPart):
 //                            print(uploadPart)
@@ -2207,7 +2207,7 @@
 //                        isMethodGET()
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionListParts.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionListParts.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
@@ -2216,7 +2216,7 @@
 //            it("should be able to return the list of parts uploaded so far") {
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    let iterator = self.sut.files.listUploadSessionParts(sessionId: "F971964745A5CD0C001BBE4E58196BFD")
+//                    let iterator = sut.files.listUploadSessionParts(sessionId: "F971964745A5CD0C001BBE4E58196BFD")
 //                    iterator.next { result in
 //                        switch result {
 //                        case let .success(page):
@@ -2256,7 +2256,7 @@
 //
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionCommit.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionCommit.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
@@ -2268,7 +2268,7 @@
 //                        UploadPartDescription(partId: "E8A3ED8E", offset: 8_388_608, size: 1_611_392, sha1: nil)
 //                    ]
 //
-//                    self.sut.files.commitUpload(
+//                    sut.files.commitUpload(
 //                        sessionId: "F971964745A5CD0C001BBE4E58196BFD",
 //                        parts: parts,
 //                        sha1: "kD6a81Nw9ccK6i9QMUYnDDBmqTk=",
@@ -2306,7 +2306,7 @@
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.abortUpload(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
+//                    sut.files.abortUpload(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
 //                        switch result {
 //                        case .success:
 //                            break
@@ -2329,13 +2329,13 @@
 //                        && isMethodGET()
 //                ) { _ in
 //                    HTTPStubsResponse(
-//                        fileAtPath: OHPathForFile("ChunkedUploadSessionGetSession.json", type(of: self))!,
+//                        fileAtPath: OHPathForFileInBundle("ChunkedUploadSessionGetSession.json", Bundle(for: Self.self))!,
 //                        statusCode: 200, headers: ["Content-Type": "application/json"]
 //                    )
 //                }
 //
 //                waitUntil(timeout: .seconds(10)) { done in
-//                    self.sut.files.getUploadSession(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
+//                    sut.files.getUploadSession(sessionId: "F971964745A5CD0C001BBE4E58196BFD") { result in
 //                        switch result {
 //                        case let .success(session):
 //                            expect(session.totalParts).to(equal(2))
