@@ -10,17 +10,19 @@
 import Nimble
 import Quick
 
-class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
-    var rootFolder: Folder!
+class BoxClientIntegrationSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
+        var client: BoxClient!
+        var rootFolder: Folder!
+
         beforeSuite {
-            self.initializeClient()
-            self.createFolder(name: NameGenerator.getUniqueFolderName(for: "BoxClient")) { [weak self] createdFolder in self?.rootFolder = createdFolder }
+            initializeClient { createdClient in client = createdClient }
+            createFolder(client: client, name: NameGenerator.getUniqueFolderName(for: "BoxClient")) { createdFolder in rootFolder = createdFolder }
         }
 
         afterSuite {
-            self.deleteFolder(self.rootFolder, recursive: true)
+            deleteFolder(client: client, folder: rootFolder, recursive: true)
         }
 
         describe("BoxClient") {
@@ -31,11 +33,11 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     var file: File?
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder?.id) { uploadedFile in file = uploadedFile }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     afterEach {
-                        self.deleteFile(file)
+                        deleteFile(client: client, file: file)
                     }
 
                     it("should make valid API call") {
@@ -45,7 +47,7 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                         }
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.get(url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: self.client.configuration)) { result in
+                            client.get(url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: client.configuration)) { result in
                                 let fileResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
 
                                 switch fileResult {
@@ -66,18 +68,18 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     var webLink: WebLink?
 
                     afterEach {
-                        self.deleteWebLink(webLink)
+                        deleteWebLink(client: client, webLink: webLink)
                     }
 
                     it("should make valid API call") {
                         var body: [String: Any] = [:]
-                        body["parent"] = ["id": self.rootFolder.id]
+                        body["parent"] = ["id": rootFolder.id]
                         body["url"] = "https://example.com"
                         body["name"] = "example name"
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.post(
-                                url: URL.boxAPIEndpoint("/2.0/web_links", configuration: self.client.configuration),
+                            client.post(
+                                url: URL.boxAPIEndpoint("/2.0/web_links", configuration: client.configuration),
                                 json: body
                             ) { result in
                                 let webLinkResult: Result<WebLink, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
@@ -102,11 +104,11 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     let newDescription = "Sample description"
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder?.id) { uploadedFile in file = uploadedFile }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     afterEach {
-                        self.deleteFile(file)
+                        deleteFile(client: client, file: file)
                     }
 
                     it("should make valid API call") {
@@ -120,8 +122,8 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                         body["description"] = newDescription
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.put(
-                                url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: self.client.configuration),
+                            client.put(
+                                url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: client.configuration),
                                 queryParameters: ["fields": "name,description"],
                                 json: body
                             ) { result in
@@ -146,7 +148,7 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     var file: File?
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder?.id) { uploadedFile in file = uploadedFile }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     it("should make valid API call") {
@@ -156,7 +158,7 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                         }
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.delete(url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: self.client.configuration)) { result in
+                            client.delete(url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: client.configuration)) { result in
                                 if case let .failure(error) = result {
                                     fail("Expected delete call to succeed, but instead got \(error)")
                                 }
@@ -170,12 +172,12 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                 context("options()") {
                     it("should make valid API call") {
                         var body: [String: Any] = [:]
-                        body["parent"] = ["id": "\(self.rootFolder.id)"]
+                        body["parent"] = ["id": "\(rootFolder.id)"]
                         body["name"] = "exampleName.txt"
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.options(
-                                url: URL.boxAPIEndpoint("/2.0/files/content", configuration: self.client.configuration),
+                            client.options(
+                                url: URL.boxAPIEndpoint("/2.0/files/content", configuration: client.configuration),
                                 json: body
                             ) { result in
                                 if case let .failure(error) = result {
@@ -192,11 +194,11 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     var file: File?
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder?.id) { uploadedFile in file = uploadedFile }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     afterEach {
-                        self.deleteFile(file)
+                        deleteFile(client: client, file: file)
                     }
 
                     it("should make valid API call") {
@@ -209,8 +211,8 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                         let destinationURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(IntegrationTestResources.smallPdf.fileName)
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.download(
-                                url: URL.boxAPIEndpoint("/2.0/files/\(file.id)/content", configuration: self.client.configuration),
+                            client.download(
+                                url: URL.boxAPIEndpoint("/2.0/files/\(file.id)/content", configuration: client.configuration),
                                 downloadDestinationURL: destinationURL
                             ) { result in
                                 switch result {
@@ -239,11 +241,11 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
                     let newDescription = "Sample description"
 
                     beforeEach {
-                        self.uploadFile(fileName: IntegrationTestResources.smallPdf.fileName, toFolder: self.rootFolder?.id) { uploadedFile in file = uploadedFile }
+                        uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: rootFolder?.id) { uploadedFile in file = uploadedFile }
                     }
 
                     afterEach {
-                        self.deleteFile(file)
+                        deleteFile(client: client, file: file)
                     }
 
                     it("should make valid API call") {
@@ -258,13 +260,13 @@ class BoxClientIntegrationSpecs: BaseIntegrationSpecs {
 
                         let request = BoxRequest(
                             httpMethod: .put,
-                            url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: self.client.configuration),
+                            url: URL.boxAPIEndpoint("/2.0/files/\(file.id)", configuration: client.configuration),
                             queryParams: ["fields": "name,description"],
                             body: .jsonObject(body)
                         )
 
                         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-                            self.client.send(request: request) { result in
+                            client.send(request: request) { result in
                                 let fileResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
                                 switch fileResult {
                                 case let .success(fileItem):

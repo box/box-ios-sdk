@@ -1,5 +1,5 @@
 //
-//  BaseIntegrationSpecs+Weblinks.swift
+//  QuickSpec+Weblinks.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 14/10/2022.
@@ -10,15 +10,15 @@
 import Nimble
 import Quick
 
-extension BaseIntegrationSpecs {
+extension QuickSpec {
 
-    func deleteWebLink(_ webLink: WebLink?) {
+    static func deleteWebLink(client: BoxClient, webLink: WebLink?) {
         guard let webLink = webLink else {
             return
         }
 
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
-            self.client.webLinks.delete(webLinkId: webLink.id) { result in
+            client.webLinks.delete(webLinkId: webLink.id) { result in
                 if case let .failure(error) = result {
                     fail("Expected delete call to succeed, but instead got \(error)")
                 }

@@ -10,10 +10,12 @@
 import Nimble
 import Quick
 
-class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
-    override func spec() {
+class UsersModuleIntegrationSpecs: QuickSpec {
+    override class func spec() {
+        var client: BoxClient!
+
         beforeSuite {
-            self.initializeClient()
+            initializeClient { createdClient in client = createdClient }
         }
 
         describe("Users Module") {
@@ -21,13 +23,13 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
                 var user: User?
 
                 beforeEach {
-                    self.createUser(name: NameGenerator.getUniqueName(for: "user")) { createdUser in
+                    createUser(client: client, name: NameGenerator.getUniqueName(for: "user")) { createdUser in
                         user = createdUser
                     }
                 }
 
                 afterEach {
-                    self.deleteUser(user)
+                    deleteUser(client: client, user: user)
                     user = nil
                 }
 
@@ -42,7 +44,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let data = FileUtil.getFileContent(fileName: name)!
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.uploadAvatar(userId: user.id, data: data, name: name) { result in
+                        client.users.uploadAvatar(userId: user.id, data: data, name: name) { result in
                             switch result {
                             case let .success(uploadItem):
                                 expect(uploadItem.picUrls.preview).toNot(beNil() && beEmpty())
@@ -58,7 +60,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.getAvatar(userId: user.id) { result in
+                        client.users.getAvatar(userId: user.id) { result in
                             switch result {
                             case let .success(data):
                                 expect(data).toNot(beNil())
@@ -72,7 +74,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.deleteAvatar(userId: user.id) { result in
+                        client.users.deleteAvatar(userId: user.id) { result in
                             switch result {
                             case .success:
                                 break
@@ -97,7 +99,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
                     let inputStream = InputStream(fileAtPath: path)!
 
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.streamUploadAvatar(userId: user.id, stream: inputStream, name: name) { result in
+                        client.users.streamUploadAvatar(userId: user.id, stream: inputStream, name: name) { result in
                             switch result {
                             case let .success(uploadItem):
                                 expect(uploadItem.picUrls.preview).toNot(beNil() && beEmpty())
@@ -113,7 +115,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Get
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.getAvatar(userId: user.id) { result in
+                        client.users.getAvatar(userId: user.id) { result in
                             switch result {
                             case let .success(data):
                                 expect(data).toNot(beNil())
@@ -127,7 +129,7 @@ class UsersModuleIntegrationSpecs: BaseIntegrationSpecs {
 
                     // Delete
                     waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
-                        self.client.users.deleteAvatar(userId: user.id) { result in
+                        client.users.deleteAvatar(userId: user.id) { result in
                             switch result {
                             case .success:
                                 break

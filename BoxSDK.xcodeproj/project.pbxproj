@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */; };
 		05031BFA274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json in Resources */ = {isa = PBXBuildFile; fileRef = 05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */; };
-		05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */; };
+		05070D2D2757DBD7000AFE20 /* QuickSpec+BoxClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05070D2C2757DBD7000AFE20 /* QuickSpec+BoxClient.swift */; };
 		0508660428A258F30073DC77 /* FileRequestsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508660328A258F30073DC77 /* FileRequestsModule.swift */; };
 		0508660A28A261700073DC77 /* FileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508660528A261700073DC77 /* FileRequest.swift */; };
 		0508660C28A261700073DC77 /* FileRequestCopyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508660728A261700073DC77 /* FileRequestCopyRequest.swift */; };
@@ -59,12 +59,12 @@
 		05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */; };
 		056B628B2860C16F008E9418 /* SharedLinkDataSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */; };
 		0571FC6328F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6228F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift */; };
-		0571FC6728F9491D004846E4 /* BaseIntegrationSpecs+Webhooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6628F9491D004846E4 /* BaseIntegrationSpecs+Webhooks.swift */; };
-		0571FC6928F94996004846E4 /* BaseIntegrationSpecs+Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6828F94996004846E4 /* BaseIntegrationSpecs+Users.swift */; };
-		0571FC6B28F949E6004846E4 /* BaseIntegrationSpecs+WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6A28F949E6004846E4 /* BaseIntegrationSpecs+WebLinks.swift */; };
-		0571FC6D28F94A47004846E4 /* BaseIntegrationSpecs+RetentionPolicies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6C28F94A47004846E4 /* BaseIntegrationSpecs+RetentionPolicies.swift */; };
-		0571FC6F28F94A78004846E4 /* BaseIntegrationSpecs+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6E28F94A78004846E4 /* BaseIntegrationSpecs+Files.swift */; };
-		0571FC7128F94ABD004846E4 /* BaseIntegrationSpecs+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC7028F94ABD004846E4 /* BaseIntegrationSpecs+Folders.swift */; };
+		0571FC6728F9491D004846E4 /* QuickSpec+Webhooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6628F9491D004846E4 /* QuickSpec+Webhooks.swift */; };
+		0571FC6928F94996004846E4 /* QuickSpec+Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6828F94996004846E4 /* QuickSpec+Users.swift */; };
+		0571FC6B28F949E6004846E4 /* QuickSpec+WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6A28F949E6004846E4 /* QuickSpec+WebLinks.swift */; };
+		0571FC6D28F94A47004846E4 /* QuickSpec+RetentionPolicies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6C28F94A47004846E4 /* QuickSpec+RetentionPolicies.swift */; };
+		0571FC6F28F94A78004846E4 /* QuickSpec+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6E28F94A78004846E4 /* QuickSpec+Files.swift */; };
+		0571FC7128F94ABD004846E4 /* QuickSpec+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC7028F94ABD004846E4 /* QuickSpec+Folders.swift */; };
 		0579F6F727577DAD00473A3C /* Nimble.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB1F26F0F01100DF1830 /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0579F6F827577DAD00473A3C /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */; };
@@ -636,7 +636,7 @@
 /* Begin PBXFileReference section */
 		0501990B282423970085003B /* BoxClientIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxClientIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05031BF8274EA93D00BB9A19 /* GetWebLinkSharedLink_VanityNameEnabled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetWebLinkSharedLink_VanityNameEnabled.json; sourceTree = "<group>"; };
-		05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIntegrationSpecs.swift; sourceTree = "<group>"; };
+		05070D2C2757DBD7000AFE20 /* QuickSpec+BoxClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+BoxClient.swift"; sourceTree = "<group>"; };
 		0508660328A258F30073DC77 /* FileRequestsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRequestsModule.swift; sourceTree = "<group>"; };
 		0508660528A261700073DC77 /* FileRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRequest.swift; sourceTree = "<group>"; };
 		0508660728A261700073DC77 /* FileRequestCopyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRequestCopyRequest.swift; sourceTree = "<group>"; };
@@ -688,12 +688,12 @@
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		056FE12926EF6F6800098F00 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		0571FC6228F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebhooksModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
-		0571FC6628F9491D004846E4 /* BaseIntegrationSpecs+Webhooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+Webhooks.swift"; sourceTree = "<group>"; };
-		0571FC6828F94996004846E4 /* BaseIntegrationSpecs+Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+Users.swift"; sourceTree = "<group>"; };
-		0571FC6A28F949E6004846E4 /* BaseIntegrationSpecs+WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+WebLinks.swift"; sourceTree = "<group>"; };
-		0571FC6C28F94A47004846E4 /* BaseIntegrationSpecs+RetentionPolicies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+RetentionPolicies.swift"; sourceTree = "<group>"; };
-		0571FC6E28F94A78004846E4 /* BaseIntegrationSpecs+Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+Files.swift"; sourceTree = "<group>"; };
-		0571FC7028F94ABD004846E4 /* BaseIntegrationSpecs+Folders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseIntegrationSpecs+Folders.swift"; sourceTree = "<group>"; };
+		0571FC6628F9491D004846E4 /* QuickSpec+Webhooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+Webhooks.swift"; sourceTree = "<group>"; };
+		0571FC6828F94996004846E4 /* QuickSpec+Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+Users.swift"; sourceTree = "<group>"; };
+		0571FC6A28F949E6004846E4 /* QuickSpec+WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+WebLinks.swift"; sourceTree = "<group>"; };
+		0571FC6C28F94A47004846E4 /* QuickSpec+RetentionPolicies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+RetentionPolicies.swift"; sourceTree = "<group>"; };
+		0571FC6E28F94A78004846E4 /* QuickSpec+Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+Files.swift"; sourceTree = "<group>"; };
+		0571FC7028F94ABD004846E4 /* QuickSpec+Folders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickSpec+Folders.swift"; sourceTree = "<group>"; };
 		0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		057C8CE3276799760092A6EC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		059CF240283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModuleAsyncIntegrationTests.swift; sourceTree = "<group>"; };
@@ -1288,13 +1288,13 @@
 		0571FC6528F948EF004846E4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				05070D2C2757DBD7000AFE20 /* BaseIntegrationSpecs.swift */,
-				0571FC6E28F94A78004846E4 /* BaseIntegrationSpecs+Files.swift */,
-				0571FC7028F94ABD004846E4 /* BaseIntegrationSpecs+Folders.swift */,
-				0571FC6C28F94A47004846E4 /* BaseIntegrationSpecs+RetentionPolicies.swift */,
-				0571FC6828F94996004846E4 /* BaseIntegrationSpecs+Users.swift */,
-				0571FC6628F9491D004846E4 /* BaseIntegrationSpecs+Webhooks.swift */,
-				0571FC6A28F949E6004846E4 /* BaseIntegrationSpecs+WebLinks.swift */,
+				05070D2C2757DBD7000AFE20 /* QuickSpec+BoxClient.swift */,
+				0571FC6E28F94A78004846E4 /* QuickSpec+Files.swift */,
+				0571FC7028F94ABD004846E4 /* QuickSpec+Folders.swift */,
+				0571FC6C28F94A47004846E4 /* QuickSpec+RetentionPolicies.swift */,
+				0571FC6828F94996004846E4 /* QuickSpec+Users.swift */,
+				0571FC6628F9491D004846E4 /* QuickSpec+Webhooks.swift */,
+				0571FC6A28F949E6004846E4 /* QuickSpec+WebLinks.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2895,25 +2895,25 @@
 				053637BD276C96E400C18D26 /* IntegrationTestResources.swift in Sources */,
 				057C8CE4276799760092A6EC /* Date+Extensions.swift in Sources */,
 				05EA725B27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift in Sources */,
-				0571FC7128F94ABD004846E4 /* BaseIntegrationSpecs+Folders.swift in Sources */,
-				0571FC6728F9491D004846E4 /* BaseIntegrationSpecs+Webhooks.swift in Sources */,
+				0571FC7128F94ABD004846E4 /* QuickSpec+Folders.swift in Sources */,
+				0571FC6728F9491D004846E4 /* QuickSpec+Webhooks.swift in Sources */,
 				05EC1082276A195100252112 /* Collaboration+Extensions.swift in Sources */,
 				05EC1084276A19A100252112 /* FolderItem+Extensions.swift in Sources */,
 				0547B73F276C99AA002D9E7A /* NameGenerator.swift in Sources */,
 				0547B73D276C99AA002D9E7A /* Constants.swift in Sources */,
-				0571FC6B28F949E6004846E4 /* BaseIntegrationSpecs+WebLinks.swift in Sources */,
+				0571FC6B28F949E6004846E4 /* QuickSpec+WebLinks.swift in Sources */,
 				0543A2392757AA2C0005CA23 /* Configuration.swift in Sources */,
-				0571FC6928F94996004846E4 /* BaseIntegrationSpecs+Users.swift in Sources */,
+				0571FC6928F94996004846E4 /* QuickSpec+Users.swift in Sources */,
 				059CF241283D0666001809CA /* FolderModuleAsyncIntegrationTests.swift in Sources */,
 				053EE331283D1CB700B4BF5A /* BaseAsyncIntegrationTests.swift in Sources */,
 				0579F70027577FD200473A3C /* FolderModuleIntegrationSpecs.swift in Sources */,
 				052A03FA287C1FC20063513C /* UsersModuleIntegrationSpecs.swift in Sources */,
 				0547B743276C9A89002D9E7A /* FileUtil.swift in Sources */,
 				05EC1086276A1CFE00252112 /* Task+Extensions.swift in Sources */,
-				0571FC6F28F94A78004846E4 /* BaseIntegrationSpecs+Files.swift in Sources */,
+				0571FC6F28F94A78004846E4 /* QuickSpec+Files.swift in Sources */,
 				0501990C282423970085003B /* BoxClientIntegrationSpecs.swift in Sources */,
-				05070D2D2757DBD7000AFE20 /* BaseIntegrationSpecs.swift in Sources */,
-				0571FC6D28F94A47004846E4 /* BaseIntegrationSpecs+RetentionPolicies.swift in Sources */,
+				05070D2D2757DBD7000AFE20 /* QuickSpec+BoxClient.swift in Sources */,
+				0571FC6D28F94A47004846E4 /* QuickSpec+RetentionPolicies.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
