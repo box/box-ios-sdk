@@ -19,7 +19,6 @@ class AuthModuleSpecs: QuickSpec {
     static let code: String = "zaqxswedc"
 
     override class func spec() {
-        var client: BoxClient!
         var sdk: BoxSDK!
         var sut: AuthModule!
 
