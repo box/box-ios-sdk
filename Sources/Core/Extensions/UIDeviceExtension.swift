@@ -29,6 +29,8 @@ import Foundation
                 return "iPhone Simulator"
             case "x86_64":
                 return "iPhone Simulator"
+            case "arm64":
+                return "iPhone Simulator"
 
             case "iPhone1,1":
                 return "iPhone"
