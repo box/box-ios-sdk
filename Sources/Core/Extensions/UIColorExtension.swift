@@ -8,9 +8,13 @@
 
 #if canImport(UIKit)
   import UIKit
+
+  /// The color type used natively on the target platform.
   public typealias PlatformColor = UIColor
 #elseif canImport(AppKit)
   import AppKit
+
+  /// The color type used natively on the target platform.
   public typealias PlatformColor = NSColor
 #endif
 
