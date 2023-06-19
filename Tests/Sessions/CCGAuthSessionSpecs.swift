@@ -63,7 +63,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -102,7 +102,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -141,7 +141,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -253,7 +253,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -292,7 +292,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -331,7 +331,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                                 )
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -551,7 +551,7 @@ class CCGAuthSessionSpecs: QuickSpec {
                             )
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "DownscopeToken.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

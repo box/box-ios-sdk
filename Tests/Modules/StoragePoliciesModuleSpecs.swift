@@ -33,7 +33,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetStoragePolicyInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -64,7 +64,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicies.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetStoragePolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -97,7 +97,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignmentInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignmentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -129,7 +129,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -170,7 +170,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateStoragePolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -220,7 +220,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetStoragePolicyAssignments.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -237,7 +237,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -275,7 +275,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateStoragePolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }

@@ -41,7 +41,7 @@ class CommentsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateComment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -77,7 +77,7 @@ class CommentsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateTaggedComment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateTaggedComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -109,7 +109,7 @@ class CommentsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetComment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -143,7 +143,7 @@ class CommentsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateCommentInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateCommentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -175,7 +175,7 @@ class CommentsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateTaggedComment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateTaggedComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

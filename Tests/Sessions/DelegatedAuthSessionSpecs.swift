@@ -193,7 +193,7 @@ class DelegatedAuthSessionSpecs: QuickSpec {
                             )
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "DownscopeToken.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

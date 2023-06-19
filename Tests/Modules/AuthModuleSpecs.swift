@@ -42,7 +42,7 @@ class AuthModuleSpecs: QuickSpec {
                             && self.compareURLEncodedBody(["client_id": self.clientId, "client_secret": self.clientSecret, "code": self.code, "grant_type": "authorization_code"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -191,7 +191,7 @@ class AuthModuleSpecs: QuickSpec {
                         )
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("DownscopeToken.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "DownscopeToken.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -235,7 +235,7 @@ class AuthModuleSpecs: QuickSpec {
                         )
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("AccessToken.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }

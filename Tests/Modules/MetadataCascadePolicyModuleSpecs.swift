@@ -35,7 +35,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                             && containsQueryParams(["owner_enterprise_id": "abcde", "folder_id": "12345"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetMetadataCascadePolicies.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetMetadataCascadePolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -77,7 +77,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetMetadataCascadePolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetMetadataCascadePolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -110,7 +110,7 @@ class MetadataCascadePolicyModuleSpecs: QuickSpec {
                             && hasJsonBody(["scope": "enterprise", "folder_id": "998951261", "templateKey": "documentFlow"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateMetadataCascadePolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateMetadataCascadePolicy.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }

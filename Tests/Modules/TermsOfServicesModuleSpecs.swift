@@ -40,7 +40,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateTermsOfService.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateTermsOfService.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -76,7 +76,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullTermsOfService.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullTermsOfService.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -108,7 +108,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullTermsOfService.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullTermsOfService.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -140,7 +140,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetTermsOfServices.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetTermsOfServices.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -174,7 +174,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         && containsQueryParams(["tos_type": "managed"])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetManagedTermsOfService.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "GetManagedTermsOfService.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -216,7 +216,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         ])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullTermsOfServiceUserStatus.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullTermsOfServiceUserStatus.json")!,
                         statusCode: 201, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -249,7 +249,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         && containsQueryParams(["tos_id": "12345", "user_id": "88888"])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetTermsOfServiceUserStatuses.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "GetTermsOfServiceUserStatuses.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -279,7 +279,7 @@ class TermsOfServicesModuleSpecs: QuickSpec {
                         ])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullTermsOfServiceUserStatus.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullTermsOfServiceUserStatus.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }

@@ -34,7 +34,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("MarkerBasedPagingWithValidNext.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithValidNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -43,7 +43,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true", "marker": "next_marker_value_1"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("MarkerBasedPagingWithEmptyNext.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -84,7 +84,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("MarkerBasedPagingWithEmptyNext.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -124,7 +124,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("MarkerBasedPagingWithNullNext.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithNullNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -167,7 +167,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["limit": "2"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("OffsetBasedPagingWithMoreItems.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -176,7 +176,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("OffsetBasedPagingWithoutMoreItems.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -221,7 +221,7 @@ class PagingIteratorSpecs: QuickSpec {
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("OffsetBasedPagingWithoutMoreItems.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }

@@ -17,7 +17,7 @@ class CommentSpecs: QuickSpec {
             describe("init()") {
                 context("success case") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullComment", ofType: "json") else {
+                        guard let filepath = TestAssets.path(forResource: "FullComment.json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -56,7 +56,7 @@ class CommentSpecs: QuickSpec {
 
                 context("decoding error case when required field is missing or mismatched") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FaultyComment_MissingRequiredField", ofType: "json") else {
+                        guard let filepath = TestAssets.path(forResource: "FaultyComment_MissingRequiredField.json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -75,7 +75,7 @@ class CommentSpecs: QuickSpec {
 
                 context("decoding error case when required field is missing or mismatched") {
                     it("should make call to init() to initalize comment response object") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FaultyComment_ValueFormatMismatch", ofType: "json") else {
+                        guard let filepath = TestAssets.path(forResource: "FaultyComment_ValueFormatMismatch.json") else {
                             fail("Could not find fixture file.")
                             return
                         }

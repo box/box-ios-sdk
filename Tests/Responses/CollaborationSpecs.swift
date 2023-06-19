@@ -18,7 +18,7 @@ class CollaborationSpecs: QuickSpec {
             describe("init()") {
 
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullCollaboration", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullCollaboration.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -91,7 +91,7 @@ class CollaborationSpecs: QuickSpec {
                 }
 
                 it("should correctly deserialize group collaboration from JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "GroupCollaboration", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "GroupCollaboration.json") else {
                         fail("Could not find fixture file.")
                         return
                     }

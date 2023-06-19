@@ -37,7 +37,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateLegalHoldPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateLegalHoldPolicy.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -68,7 +68,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetLegalHoldPolicyInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetLegalHoldPolicyInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -103,7 +103,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateLegalHoldPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateLegalHoldPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -158,7 +158,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetLegalHoldPolicies.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetLegalHoldPolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -197,7 +197,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AssignPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "AssignPolicy.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -228,7 +228,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetPolicyAssignmentInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetPolicyAssignmentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -284,7 +284,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && containsQueryParams(["policy_id": "255473"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetPolicyAssignments.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetPolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -315,7 +315,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionLegalHoldInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileVersionLegalHoldInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -347,7 +347,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && containsQueryParams(["policy_id": "240997"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionLegalHolds.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileVersionLegalHolds.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

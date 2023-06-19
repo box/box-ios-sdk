@@ -17,7 +17,7 @@ class LegalHoldPolicySpecs: QuickSpec {
             describe("init()") {
 
                 it("should correctly deserialize legal hold policy from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullLegalHoldPolicy", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullLegalHoldPolicy.json") else {
                         fail("Could not find fixture file.")
                         return
                     }

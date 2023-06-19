@@ -18,7 +18,7 @@ class WebhookSpecs: QuickSpec {
             describe("init()") {
 
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullWebhook", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullWebhook.json") else {
                         fail("Could not find fixture file.")
                         return
                     }

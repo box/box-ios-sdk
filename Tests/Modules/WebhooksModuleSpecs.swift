@@ -42,7 +42,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateWebhook.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateWebhook.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -79,7 +79,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateWebhook.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateWebhook.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -109,7 +109,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetWebhookInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetWebhookInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -139,7 +139,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetWebhooks.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetWebhooks.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

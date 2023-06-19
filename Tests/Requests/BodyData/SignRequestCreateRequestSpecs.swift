@@ -26,7 +26,7 @@ class SignRequestCreateRequestSpecs: QuickSpec {
                     }
 
                     it("should correctly create an object using init with file object parameter") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                        guard let filepath = TestAssets.path(forResource: "FullFile.json") else {
                             fail("Could not find fixture file.")
                             return
                         }
@@ -58,7 +58,7 @@ class SignRequestCreateRequestSpecs: QuickSpec {
                     }
 
                     it("should correctly create an object using init with folder object parameter") {
-                        guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFolder", ofType: "json") else {
+                        guard let filepath = TestAssets.path(forResource: "FullFolder.json") else {
                             fail("Could not find fixture file.")
                             return
                         }
