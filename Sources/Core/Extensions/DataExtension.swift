@@ -7,27 +7,15 @@
 //
 
 import CommonCrypto
-import CryptoKit
 import Foundation
 
 extension Data {
     private func sha1data() -> Data {
-        if #available(macOS 10.15, iOS 13, *) {
-            var hasher = Insecure.SHA1()
-            hasher.update(data: self)
-            let digest = hasher.finalize()
-            return Data(digest)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+        withUnsafeBytes {
+            _ = CC_SHA1($0.baseAddress, CC_LONG(self.count), &digest)
         }
-
-        var digest = Data(repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
-        withUnsafeBytes { data in
-            digest.withUnsafeMutableBytes { (rawbuffer: UnsafeMutableRawBufferPointer) in
-                rawbuffer.withMemoryRebound(to: UInt8.self) { buffer in
-                    _ = CC_SHA1(data.baseAddress, CC_LONG(self.count), buffer.baseAddress)
-                }
-            }
-        }
-        return digest
+        return Data(digest)
     }
 
     func sha1() -> String {
