@@ -292,7 +292,6 @@
 		22A6576B225B805B00FB13F4 /* UploadFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 22A6576A225B805B00FB13F4 /* UploadFile.json */; };
 		22B01E3422AAC8D400E434ED /* DownscopeToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B01E3322AAC8D400E434ED /* DownscopeToken.json */; };
 		22B7782C230C367C00FF6614 /* ChunkedUploadSessionCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */; };
-		22B7782E230C3B8D00FF6614 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7782D230C3B8D00FF6614 /* StringExtension.swift */; };
 		22B77833230C440B00FF6614 /* ChunkedUploadSessionGetSession.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */; };
 		22C4144B231ED17D00D3992C /* MetadataCascadePolicyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */; };
 		22C41453231ED19700D3992C /* GetMetadataCascadePolicy.json in Resources */ = {isa = PBXBuildFile; fileRef = 22C41450231ED19700D3992C /* GetMetadataCascadePolicy.json */; };
@@ -915,7 +914,6 @@
 		22A6576A225B805B00FB13F4 /* UploadFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UploadFile.json; sourceTree = "<group>"; };
 		22B01E3322AAC8D400E434ED /* DownscopeToken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DownscopeToken.json; sourceTree = "<group>"; };
 		22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChunkedUploadSessionCommit.json; sourceTree = "<group>"; };
-		22B7782D230C3B8D00FF6614 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChunkedUploadSessionGetSession.json; sourceTree = "<group>"; };
 		22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataCascadePolicyModule.swift; sourceTree = "<group>"; };
 		22C41450231ED19700D3992C /* GetMetadataCascadePolicy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetMetadataCascadePolicy.json; sourceTree = "<group>"; };
@@ -1539,7 +1537,6 @@
 				223917F222787C25000E11E5 /* URLExtension.swift */,
 				2261F82B228477B8008E7BD0 /* UIDeviceExtension.swift */,
 				22C95BDD230AE9A0004F5C18 /* DataExtension.swift */,
-				22B7782D230C3B8D00FF6614 /* StringExtension.swift */,
 				F90888EE246DAC110002267A /* URLSessionTaskExtension.swift */,
 				F95A81C024606DC300C46E98 /* UIColorExtension.swift */,
 			);
@@ -2978,7 +2975,6 @@
 				F929D5E923319E820039E452 /* LegalHoldPolicy.swift in Sources */,
 				225639AA2253897D00D951B5 /* FilesModule.swift in Sources */,
 				2263863E2306D5BD002CE1BE /* UploadPart.swift in Sources */,
-				22B7782E230C3B8D00FF6614 /* StringExtension.swift in Sources */,
 				9717866B22F0B868004A5F6D /* LockData.swift in Sources */,
 				9D9C80A422D8E11000AFC18C /* NullableParameter.swift in Sources */,
 				225639322253897D00D951B5 /* Coders.swift in Sources */,

@@ -10,18 +10,23 @@ import CommonCrypto
 import Foundation
 
 extension Data {
-    func sha1() -> String {
+    private func sha1data() -> Data {
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         withUnsafeBytes {
             _ = CC_SHA1($0.baseAddress, CC_LONG(self.count), &digest)
         }
+        return Data(digest)
+    }
+
+    func sha1() -> String {
+        let digest = sha1data()
         let hexBytes = digest.map { String(format: "%02hhx", $0) }
         return hexBytes.joined()
     }
 
     func sha1Base64Encoded() -> String {
-        let data = sha1().dataFromHexString()
-        let base64String = data.base64EncodedString(options: [])
+        let digest = sha1data()
+        let base64String = digest.base64EncodedString(options: [])
         return base64String
     }
 }
