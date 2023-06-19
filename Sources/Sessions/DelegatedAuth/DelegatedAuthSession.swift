@@ -9,7 +9,6 @@
 import Foundation
 
 typealias AuthActionClosure = (@escaping () -> Void) -> Void
-typealias AuthActionTuple = (id: Int, action: AuthActionClosure)
 
 /// Contains access token and its expiration date.
 public typealias AccessTokenTuple = (accessToken: String, expiresIn: TimeInterval)

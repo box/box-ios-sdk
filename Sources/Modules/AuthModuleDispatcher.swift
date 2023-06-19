@@ -10,32 +10,33 @@ import Foundation
 
 class AuthModuleDispatcher {
 
-    let authQueue = ThreadSafeQueue<AuthActionTuple>(completionQueue: DispatchQueue.main)
-    var active = false
+    // This queue must be serial, and protects access to the other stored properties
+    private let queue = DispatchQueue.main
+    // Actions which have yet to be processed
+    private var actions: [AuthActionClosure] = []
+    // Whether an action is currently processing
+    private var actionInProgress = false
 
-    static var current = 1
-
+    /// Asynchronously run `action` at a time when no other actions are running.
+    /// `action` must indicate that it is finished by calling its argument.
     func start(action: @escaping AuthActionClosure) {
-        let currentId = AuthModuleDispatcher.current
-        AuthModuleDispatcher.current += 1
-
-        authQueue.enqueue((id: currentId, action: action)) {
-            if !self.active {
-                self.active = true
-                self.processAction()
-            }
+        queue.async {
+            self.actions.append(action)
+            self.processActionOnQueue()
         }
     }
 
-    func processAction() {
-        authQueue.dequeue { [weak self] action in
-            if let unwrappedAction = action {
-                unwrappedAction.action {
-                    self?.processAction()
-                }
-            }
-            else {
-                self?.active = false
+    // This MUST be called on `queue`
+    private func processActionOnQueue() {
+        guard !actionInProgress else { return }
+        guard !actions.isEmpty else { return }
+
+        actionInProgress = true
+        let action = actions.removeFirst()
+        action {
+            self.queue.async {
+                self.actionInProgress = false
+                self.processActionOnQueue()
             }
         }
     }
