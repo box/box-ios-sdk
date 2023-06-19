@@ -58,9 +58,11 @@ class AnalyticsHeaderGenerator {
     lazy var swiftSDKVersion: String = {
         // swiftlint:disable:next force_unwrapping
         let dictionary = Bundle(for: type(of: self)).infoDictionary!
-        // swiftlint:disable:next force_cast
-        let version = dictionary["CFBundleShortVersionString"] as! String
-        return version
+        if dictionary["CFBundleIdentifier"] as? String == "com.box.SwiftSDK",
+           let version = dictionary["CFBundleShortVersionString"] as? String {
+            return version
+        }
+        return "static" // SDK was not built as a framework
     }()
 
     func analyticsHeader(forConfiguration configuration: BoxSDKConfiguration) -> String {
