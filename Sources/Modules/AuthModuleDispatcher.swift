@@ -28,8 +28,12 @@ class AuthModuleDispatcher {
 
     // This MUST be called on `queue`
     private func processActionOnQueue() {
-        guard !actionInProgress else { return }
-        guard !actions.isEmpty else { return }
+        guard !actionInProgress else {
+            return
+        }
+        guard !actions.isEmpty else {
+            return
+        }
 
         actionInProgress = true
         let action = actions.removeFirst()
