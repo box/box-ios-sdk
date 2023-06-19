@@ -7,14 +7,13 @@
 //
 
 import Foundation
-#if os(iOS)
-    #if canImport(UniformTypeIdentifiers)
-        import UniformTypeIdentifiers
-    #endif
 
-    #if canImport(MobileCoreServices)
-        import MobileCoreServices
-    #endif
+#if canImport(UniformTypeIdentifiers)
+    import UniformTypeIdentifiers
+#endif
+
+#if canImport(MobileCoreServices)
+    import MobileCoreServices
 #endif
 
 /// Provides method for converting given filename to mime type
