@@ -6,9 +6,15 @@
 //  Copyright © 2020 box. All rights reserved.
 //
 
-import UIKit
+#if canImport(UIKit)
+  import UIKit
+  public typealias PlatformColor = UIColor
+#elseif canImport(AppKit)
+  import AppKit
+  public typealias PlatformColor = NSColor
+#endif
 
-extension UIColor {
+extension PlatformColor {
     convenience init?(hex: String) {
         let red, green, blue, alpha: CGFloat
         if hex.hasPrefix("#") {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 /// Details about the classification applied to a Box file or folder
 public class Classification: BoxModel {
@@ -15,7 +14,7 @@ public class Classification: BoxModel {
 
     public private(set) var rawData: [String: Any]
     /// The color that is used to display the classification label in a user-interface
-    public let color: UIColor?
+    public let color: PlatformColor?
     /// An explanation of the meaning of this classification
     public let definition: String?
     /// Name of the classification
