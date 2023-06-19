@@ -117,7 +117,6 @@
 		05F6C90026F137B9008F38C0 /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12926EF6F6800098F00 /* Nimble.xcframework */; };
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
 		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
-		05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */; };
 		05FA797527D793B100669B6D /* CCGAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FA797427D793B100669B6D /* CCGAuthSession.swift */; };
 		0BD51EDC28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
@@ -207,7 +206,6 @@
 		223C6DB822C6A70000F4023C /* CreateMetadataOnFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 223C6DB722C6A70000F4023C /* CreateMetadataOnFile.json */; };
 		2246361E2315923B009DC4E9 /* TasksModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246361D2315923B009DC4E9 /* TasksModule.swift */; };
 		2246BEE52285D2080040E8A6 /* BoxRequestDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246BEE42285D2080040E8A6 /* BoxRequestDescription.swift */; };
-		2246CD8F22B2842C00C29DE5 /* ThreadSafeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246CD8E22B2842C00C29DE5 /* ThreadSafeQueue.swift */; };
 		2246CD9422B2924700C29DE5 /* AuthModuleDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246CD9322B2924700C29DE5 /* AuthModuleDispatcher.swift */; };
 		224E1BEA22C522D800F31F3A /* UpdateMetadataTemplate.json in Resources */ = {isa = PBXBuildFile; fileRef = 224E1BE922C522D800F31F3A /* UpdateMetadataTemplate.json */; };
 		224E1BEC22C5365400F31F3A /* GetEnterpriseTemplates.json in Resources */ = {isa = PBXBuildFile; fileRef = 224E1BEB22C5365400F31F3A /* GetEnterpriseTemplates.json */; };
@@ -294,7 +292,6 @@
 		22A6576B225B805B00FB13F4 /* UploadFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 22A6576A225B805B00FB13F4 /* UploadFile.json */; };
 		22B01E3422AAC8D400E434ED /* DownscopeToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B01E3322AAC8D400E434ED /* DownscopeToken.json */; };
 		22B7782C230C367C00FF6614 /* ChunkedUploadSessionCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */; };
-		22B7782E230C3B8D00FF6614 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7782D230C3B8D00FF6614 /* StringExtension.swift */; };
 		22B77833230C440B00FF6614 /* ChunkedUploadSessionGetSession.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */; };
 		22C4144B231ED17D00D3992C /* MetadataCascadePolicyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */; };
 		22C41453231ED19700D3992C /* GetMetadataCascadePolicy.json in Resources */ = {isa = PBXBuildFile; fileRef = 22C41450231ED19700D3992C /* GetMetadataCascadePolicy.json */; };
@@ -740,7 +737,6 @@
 		05F59F0D26FC984900D9A539 /* AuthenticationSessionSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionSpecs.swift; sourceTree = "<group>"; };
 		05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStreamSpecs.swift; sourceTree = "<group>"; };
 		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
-		05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueSpecs.swift; sourceTree = "<group>"; };
 		05FA797427D793B100669B6D /* CCGAuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCGAuthSession.swift; sourceTree = "<group>"; };
 		0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetentionPoliciesModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
@@ -832,7 +828,6 @@
 		2246361D2315923B009DC4E9 /* TasksModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksModule.swift; sourceTree = "<group>"; };
 		2246BEE42285D2080040E8A6 /* BoxRequestDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxRequestDescription.swift; sourceTree = "<group>"; };
 		2246BEE92285D2230040E8A6 /* BoxResponseDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxResponseDescription.swift; sourceTree = "<group>"; };
-		2246CD8E22B2842C00C29DE5 /* ThreadSafeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueue.swift; sourceTree = "<group>"; };
 		2246CD9322B2924700C29DE5 /* AuthModuleDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModuleDispatcher.swift; sourceTree = "<group>"; };
 		224E1BE922C522D800F31F3A /* UpdateMetadataTemplate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateMetadataTemplate.json; sourceTree = "<group>"; };
 		224E1BEB22C5365400F31F3A /* GetEnterpriseTemplates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetEnterpriseTemplates.json; sourceTree = "<group>"; };
@@ -919,7 +914,6 @@
 		22A6576A225B805B00FB13F4 /* UploadFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UploadFile.json; sourceTree = "<group>"; };
 		22B01E3322AAC8D400E434ED /* DownscopeToken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DownscopeToken.json; sourceTree = "<group>"; };
 		22B7782B230C367C00FF6614 /* ChunkedUploadSessionCommit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChunkedUploadSessionCommit.json; sourceTree = "<group>"; };
-		22B7782D230C3B8D00FF6614 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		22B77832230C440B00FF6614 /* ChunkedUploadSessionGetSession.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChunkedUploadSessionGetSession.json; sourceTree = "<group>"; };
 		22C4144A231ED17D00D3992C /* MetadataCascadePolicyModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataCascadePolicyModule.swift; sourceTree = "<group>"; };
 		22C41450231ED19700D3992C /* GetMetadataCascadePolicy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetMetadataCascadePolicy.json; sourceTree = "<group>"; };
@@ -1543,7 +1537,6 @@
 				223917F222787C25000E11E5 /* URLExtension.swift */,
 				2261F82B228477B8008E7BD0 /* UIDeviceExtension.swift */,
 				22C95BDD230AE9A0004F5C18 /* DataExtension.swift */,
-				22B7782D230C3B8D00FF6614 /* StringExtension.swift */,
 				F90888EE246DAC110002267A /* URLSessionTaskExtension.swift */,
 				F95A81C024606DC300C46E98 /* UIColorExtension.swift */,
 			);
@@ -1567,7 +1560,6 @@
 				225639012253897C00D951B5 /* Coders.swift */,
 				0CAEC879226098230081548A /* Date+Convenience.swift */,
 				0C987132229D75FE005F19AF /* BoxJSONDecoder.swift */,
-				2246CD8E22B2842C00C29DE5 /* ThreadSafeQueue.swift */,
 				22643AC122B9226F009497CA /* AnyCodable.swift */,
 				9771D4E422B02AF700B76DF8 /* BoxEnum.swift */,
 				805E069E22DE52B800892E5C /* MetadataSearchFilter.swift */,
@@ -1975,7 +1967,6 @@
 				97FA4FDF234D123A00A615B8 /* BoxJSONDecoderSpecs.swift */,
 				F9571FB22371ECCB00D30EF1 /* LoggingSpecs.swift */,
 				05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */,
-				05F770DA26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift */,
 				052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */,
 			);
 			path = Core;
@@ -2984,7 +2975,6 @@
 				F929D5E923319E820039E452 /* LegalHoldPolicy.swift in Sources */,
 				225639AA2253897D00D951B5 /* FilesModule.swift in Sources */,
 				2263863E2306D5BD002CE1BE /* UploadPart.swift in Sources */,
-				22B7782E230C3B8D00FF6614 /* StringExtension.swift in Sources */,
 				9717866B22F0B868004A5F6D /* LockData.swift in Sources */,
 				9D9C80A422D8E11000AFC18C /* NullableParameter.swift in Sources */,
 				225639322253897D00D951B5 /* Coders.swift in Sources */,
@@ -3014,7 +3004,6 @@
 				223917F322787C25000E11E5 /* URLExtension.swift in Sources */,
 				9D472E67231B15A0004C8023 /* RetentionPolicyAssignmentItem.swift in Sources */,
 				225639822253897D00D951B5 /* User.swift in Sources */,
-				2246CD8F22B2842C00C29DE5 /* ThreadSafeQueue.swift in Sources */,
 				80FEB7BA232031280037331C /* ConfigurablePermissionData.swift in Sources */,
 				0CCBC2A62284301E00640FA8 /* KeychainService.swift in Sources */,
 				227E3F322257503000EF2BC9 /* ObjectDeserializer.swift in Sources */,
@@ -3187,7 +3176,6 @@
 				05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */,
 				80BC844A232C56E000010E08 /* TermsOfServicesModuleSpecs.swift in Sources */,
 				0C6398A72253A605004021D3 /* BoxClientSpecs.swift in Sources */,
-				05F770DB26F3879500BDECA2 /* ThreadSafeQueueSpecs.swift in Sources */,
 				052A03F828788CAF0063513C /* MimeTypeProviderSpecs.swift in Sources */,
 				22D0041422AFB25500478F1E /* CollectionsModuleSpecs.swift in Sources */,
 				0508665F28A2A19D0073DC77 /* FileRequestsModuleSpecs.swift in Sources */,
