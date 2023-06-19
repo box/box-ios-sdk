@@ -33,6 +33,8 @@ public class OAuth2Session: SessionProtocol, ExpiredTokenHandling {
 
         authDispatcher.start { [weak self] done in
             guard let self = self else {
+                completion(.failure(BoxAPIAuthError(message: .instanceDeallocated("Unable to get Access Token - OAuth2Session deallocated"))))
+                done()
                 return
             }
 
