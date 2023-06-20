@@ -4,10 +4,12 @@ on:
     branches:
       - main
       - aj/update_deps
+      - v5.4.3
   push:
     branches:
       - main
       - aj/update_deps
+      - v5.4.3
 jobs:
   build-and-test:
     runs-on: macos-13

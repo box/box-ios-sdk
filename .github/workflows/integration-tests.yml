@@ -5,12 +5,13 @@ on:
     branches:
       - main
       - aj/update_deps
+      - v5.4.3
   pull_request:
     types: [ opened, synchronize, edited ]
     branches:
       - main
       - aj/update_deps
-
+      - v5.4.3
 jobs:
   integration-tests:
     runs-on: macos-13
