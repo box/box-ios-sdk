@@ -40,7 +40,7 @@ class FolderModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateFolder.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateFolder.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -67,7 +67,7 @@ class FolderModuleSpecs: QuickSpec {
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders") && isMethodPOST()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateFolder.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateFolder.json")!,
                             statusCode: 409, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -101,7 +101,7 @@ class FolderModuleSpecs: QuickSpec {
                         ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -139,14 +139,14 @@ class FolderModuleSpecs: QuickSpec {
                 it("should get folder items using offset pagination iterator when usemarker flag is not set") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["offset": "0"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsOffsetIterator1.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItemsOffsetIterator1.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["offset": "2"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsOffsetIterator2.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItemsOffsetIterator2.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -194,14 +194,14 @@ class FolderModuleSpecs: QuickSpec {
                 it("should get folder items using marker pagination iterator when usemarker flag is set") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && containsQueryParams(["marker": "eyJ0eXBlIjoiZm9sZGVyIiwiZGlyIjoibmV4dCIsInRhaWwiOiJleUoxYzJWeVgybGtJam8zTlRBeU5UUTNPRGd5TENKd1lYSmxiblJmWm05c1pHVnlYMmxrSWpvd0xDSmtaV3hsZEdWa0lqb3dMQ0ptYjJ4a1pYSmZibUZ0WlNJNklrMTVJRUp2ZUNCT2IzUmxjeUlzSW1admJHUmxjbDlwWkNJNk5qa3hNREk1TURRNE5UVjkifQ"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsMarkerIterator2.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItemsMarkerIterator2.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET() && !containsQueryParams(["marker": "eyJ0eXBlIjoiZm9sZGVyIiwiZGlyIjoibmV4dCIsInRhaWwiOiJleUoxYzJWeVgybGtJam8zTlRBeU5UUTNPRGd5TENKd1lYSmxiblJmWm05c1pHVnlYMmxrSWpvd0xDSmtaV3hsZEdWa0lqb3dMQ0ptYjJ4a1pYSmZibUZ0WlNJNklrMTVJRUp2ZUNCT2IzUmxjeUlzSW1admJHUmxjbDlwWkNJNk5qa3hNREk1TURRNE5UVjkifQ"]) && !containsQueryParams(["offset": "2"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItemsMarkerIterator1.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItemsMarkerIterator1.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -236,7 +236,7 @@ class FolderModuleSpecs: QuickSpec {
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/\(BoxSDK.Constants.rootFolder)/items") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItems.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItems.json")!,
                             statusCode: 404, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -317,7 +317,7 @@ class FolderModuleSpecs: QuickSpec {
                 it("should produce error when the API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/1231231") && isMethodDELETE()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderItems.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderItems.json")!,
                             statusCode: 404, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -341,7 +341,7 @@ class FolderModuleSpecs: QuickSpec {
                 it("should copy the folder in the destinated folder") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/11446498/copy") && isMethodPOST() && self.compareJSONBody(["parent": ["id": "123456"], "name": "Pictures copy"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CopyFolder.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CopyFolder.json")!,
                             statusCode: 202, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -376,7 +376,7 @@ class FolderModuleSpecs: QuickSpec {
                 it("should get folder collaborations") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/14176246/collaborations") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderCollaborations.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FolderCollaborations.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -409,7 +409,7 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -420,7 +420,7 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -431,7 +431,7 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodPUT()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AddFolderToFavorites.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "AddFolderToFavorites.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -459,7 +459,7 @@ class FolderModuleSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -470,7 +470,7 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -481,7 +481,7 @@ class FolderModuleSpecs: QuickSpec {
                             isMethodPUT()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveFolderFromFavorites.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "RemoveFolderFromFavorites.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -511,7 +511,7 @@ class FolderModuleSpecs: QuickSpec {
                             containsQueryParams(["fields": "shared_link"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFolderSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -544,7 +544,7 @@ class FolderModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "password": "frog"]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetFolderSharedLink.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -578,7 +578,7 @@ class FolderModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink_VanityNameEnabled.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetFolderSharedLink_VanityNameEnabled.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -615,7 +615,7 @@ class FolderModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true]]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetFolderSharedLink.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -652,7 +652,7 @@ class FolderModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetFolderSharedLink_PasswordNotEnabled.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetFolderSharedLink_PasswordNotEnabled.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -686,7 +686,7 @@ class FolderModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": NSNull()])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveFolderSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "RemoveFolderSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -714,7 +714,7 @@ class FolderModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullWatermark.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -748,7 +748,7 @@ class FolderModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullWatermark.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -796,7 +796,7 @@ class FolderModuleSpecs: QuickSpec {
                             containsQueryParams(["folder_id": "14176246"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderLocks.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FolderLocks.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -840,7 +840,7 @@ class FolderModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FolderLock.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FolderLock.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }

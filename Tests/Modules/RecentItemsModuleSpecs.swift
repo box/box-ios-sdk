@@ -34,7 +34,7 @@ class RecentItemsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRecentItems.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRecentItems.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

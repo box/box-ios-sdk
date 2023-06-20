@@ -34,7 +34,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRetentionPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -88,7 +88,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateRetentionPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -140,7 +140,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateRetentionPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -180,7 +180,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateRetentionPolicy.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateRetentionPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -210,7 +210,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicies.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRetentionPolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -246,7 +246,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRetentionPolicyAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -292,7 +292,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateRetentionPolicyAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -341,7 +341,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateRetentionPolicyAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateRetentionPolicyAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -404,7 +404,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
 
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRetentionPolicyAssignments.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRetentionPolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -440,7 +440,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionRetention.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileVersionRetention.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -482,7 +482,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionRetentions.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileVersionRetentions.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -519,7 +519,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFilesUnderRetentionForAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFilesUnderRetentionForAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -556,7 +556,7 @@ class RetentionPolicyModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileVersionsUnderRetentionForAssignment.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileVersionsUnderRetentionForAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

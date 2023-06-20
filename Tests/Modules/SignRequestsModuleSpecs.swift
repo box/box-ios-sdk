@@ -59,7 +59,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CreateSignRequest.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CreateSignRequest.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -141,7 +141,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetSignRequests.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetSignRequests.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -185,7 +185,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetSignRequest.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetSignRequest.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -250,7 +250,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isMethodPOST()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CancelSignRequest.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CancelSignRequest.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

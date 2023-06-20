@@ -200,7 +200,7 @@ class BoxClientSpecs: QuickSpec {
                         && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -235,7 +235,7 @@ class BoxClientSpecs: QuickSpec {
                             && hasJsonBody(body)
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullWebLink.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -274,7 +274,7 @@ class BoxClientSpecs: QuickSpec {
                             && hasJsonBody(body)
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -400,7 +400,7 @@ class BoxClientSpecs: QuickSpec {
                             && hasJsonBody(["some_key": "some_value"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetUserInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

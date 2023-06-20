@@ -29,7 +29,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should make API call to get file info and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -58,7 +58,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/500094889") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 404, headers: [:]
                         )
                     }
@@ -76,9 +76,8 @@ class FilesModuleSpecs: QuickSpec {
                                     return
                                 }
 
-                                let bundle = Bundle(for: type(of: self))
                                 // swiftlint:disable:next force_unwrap
-                                let templatePath = bundle.url(forResource: "APIErrorTemplate", withExtension: "json")!.path
+                                let templatePath = TestAssets.path(forResource: "APIErrorTemplate.json")!
                                 var errorNoStackTrace = apiError.getDictionary()
                                 errorNoStackTrace["stackTrace"] = nil
                                 let errorJSON = try! JSONSerialization.data(withJSONObject: errorNoStackTrace)
@@ -116,7 +115,7 @@ class FilesModuleSpecs: QuickSpec {
                             && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRepresentations.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRepresentations.json")!,
                             statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
                         )
                     }
@@ -154,7 +153,7 @@ class FilesModuleSpecs: QuickSpec {
                             && containsQueryParams(["fields": "representations"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetRepresentationsNoHeader.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetRepresentationsNoHeader.json")!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -193,7 +192,7 @@ class FilesModuleSpecs: QuickSpec {
                                 && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetRepresentations.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetRepresentations.json")!,
                                 statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
                             )
                         }
@@ -240,7 +239,7 @@ class FilesModuleSpecs: QuickSpec {
                                 && hasHeaderNamed("x-rep-hints", value: "[jpg?dimensions=320x320]")
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetRepresentationsErrorState.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetRepresentationsErrorState.json")!,
                                 statusCode: 200, headers: ["x-rep-hints": "[jpg?dimensions=320x320]"]
                             )
                         }
@@ -279,7 +278,7 @@ class FilesModuleSpecs: QuickSpec {
                                 && hasHeaderNamed("x-rep-hints", value: "[jpg?dimensions=320x320]")
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetRepresentationsUnknownState.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetRepresentationsUnknownState.json")!,
                                 statusCode: 200, headers: ["x-rep-hints": "[jpg?dimensions=320x320]"]
                             )
                         }
@@ -317,7 +316,7 @@ class FilesModuleSpecs: QuickSpec {
                                 && hasHeaderNamed("x-rep-hints", value: "[extracted_text]")
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetRepresentationsPendingState.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetRepresentationsPendingState.json")!,
                                 statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
                             )
                         }
@@ -333,7 +332,7 @@ class FilesModuleSpecs: QuickSpec {
                             condition: isHost("api.box.com") && isPath("/2.0/internal_files/12345/versions/11111/representations/jpg_thumb_320x320")
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("FileRepresentationState.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "FileRepresentationState.json")!,
                                 statusCode: 200, headers: ["x-rep-hints": "[extracted_text]"]
                             )
                         }
@@ -388,7 +387,7 @@ class FilesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -439,7 +438,7 @@ class FilesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -458,7 +457,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should produce error when API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/50009488812") && isMethodPUT()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
                             statusCode: 404, headers: [:]
                         )
                     }
@@ -490,7 +489,7 @@ class FilesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CopyFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CopyFile.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -520,7 +519,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should produce error when the API call fails") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/500094889/copy")) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("CopyFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "CopyFile.json")!,
                             statusCode: 404, headers: [:]
                         )
                     }
@@ -550,7 +549,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -589,7 +588,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("FullFile.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "FullFile.json")!,
                                 statusCode: 200, headers: [:]
                             )
                         }
@@ -619,7 +618,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -660,7 +659,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -709,7 +708,7 @@ class FilesModuleSpecs: QuickSpec {
                             condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -755,7 +754,7 @@ class FilesModuleSpecs: QuickSpec {
                             condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -801,7 +800,7 @@ class FilesModuleSpecs: QuickSpec {
                             condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -848,7 +847,7 @@ class FilesModuleSpecs: QuickSpec {
                         condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UploadFileVersion.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UploadFileVersion.json")!,
                             statusCode: 201, headers: [:]
                         )
                     }
@@ -880,7 +879,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFile.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -924,7 +923,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFile.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -967,7 +966,7 @@ class FilesModuleSpecs: QuickSpec {
                                 isMethodPOST()
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "UploadFile.json")!,
                                 statusCode: 201, headers: [:]
                             )
                         }
@@ -991,7 +990,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should produce file model when API call succeeds") {
                     stub(condition: isHost("upload.box.com") && isPath("/api/2.0/files/content") && isMethodPOST()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UploadFile.json")!,
                             statusCode: 201, headers: [:]
                         )
                     }
@@ -1024,7 +1023,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should produce file model when API call succeeds") {
                     stub(condition: isHost("upload.box.com") && isPath("/api/2.0/files/123456/content") && isMethodPOST()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UploadFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UploadFile.json")!,
                             statusCode: 201, headers: [:]
                         )
                     }
@@ -1106,7 +1105,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should be able to lock a file") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/76017730626") && isMethodPUT() && containsQueryParams(["fields": "lock"]) && hasJsonBody(["lock": ["type": "lock", "is_download_prevented": false]])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("LockFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "LockFile.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1140,7 +1139,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should be able to unlock the file") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/76017730626") && isMethodPUT() && containsQueryParams(["fields": "lock"]) && hasJsonBody(["lock": NSNull()])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UnlockFile.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UnlockFile.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1167,7 +1166,7 @@ class FilesModuleSpecs: QuickSpec {
             describe("getThumbnail()") {
                 it("should be able to get file thumbnail") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/76017730626/thumbnail.jpg") && isMethodGET() && containsQueryParams(["min_height": "256", "max_width": "256"])) { _ in
-                        let image = UIImage(named: "image", in: Bundle(for: type(of: self)), compatibleWith: nil)!
+                        let image = TestAssets.image(named: "image")!
                         let data = image.jpegData(compressionQuality: 1.0)!
                         return OHHTTPStubsResponse(data: data, statusCode: 200, headers: [:])
                     }
@@ -1197,7 +1196,7 @@ class FilesModuleSpecs: QuickSpec {
                 beforeEach {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/34122832467") && isMethodGET() && containsQueryParams(["fields": "expiring_embed_link"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetEmbedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetEmbedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1225,7 +1224,7 @@ class FilesModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") && isPath("/2.0/files/123456/collaborations") && isMethodGET() && containsQueryParams(["limit": "100"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FileCollaborations.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FileCollaborations.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1261,7 +1260,7 @@ class FilesModuleSpecs: QuickSpec {
                 it("should be able to get file comments") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880/comments") && isMethodGET() && containsQueryParams(["offset": "0", "limit": "100"])) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FileComments.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FileComments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1292,7 +1291,7 @@ class FilesModuleSpecs: QuickSpec {
 
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5000948880/tasks") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileTasks.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileTasks.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1321,7 +1320,7 @@ class FilesModuleSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1332,7 +1331,7 @@ class FilesModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1344,7 +1343,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["collections": [["id": "405151"]]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("AddFileToFavorites.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "AddFileToFavorites.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1372,7 +1371,7 @@ class FilesModuleSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1383,7 +1382,7 @@ class FilesModuleSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1395,7 +1394,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["collections": []])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveFileFromFavorites.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "RemoveFileFromFavorites.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1426,7 +1425,7 @@ class FilesModuleSpecs: QuickSpec {
                         && isMethodGET()
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullFileVersion.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullFileVersion.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1462,7 +1461,7 @@ class FilesModuleSpecs: QuickSpec {
                         ])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullFileVersion.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullFileVersion.json")!,
                         statusCode: 201, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1512,7 +1511,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 stub(condition: isHost("api.box.com") && isPath("/2.0/files/12345/versions") && isMethodGET()) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetFileVersions.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "GetFileVersions.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1545,7 +1544,7 @@ class FilesModuleSpecs: QuickSpec {
                         && isMethodGET()
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullWatermark.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1579,7 +1578,7 @@ class FilesModuleSpecs: QuickSpec {
                         ])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("FullWatermark.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "FullWatermark.json")!,
                         statusCode: 201, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1745,7 +1744,7 @@ class FilesModuleSpecs: QuickSpec {
                         containsQueryParams(["fields": "shared_link"])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "GetFileSharedLink.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -1776,7 +1775,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": true]]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1811,7 +1810,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open", "permissions": ["can_download": true, "can_edit": false]]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1845,7 +1844,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open", "password": "frog"]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1879,7 +1878,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink_VanityNameEnabled.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink_VanityNameEnabled.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1916,7 +1915,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open"]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1950,7 +1949,7 @@ class FilesModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileSharedLink_PasswordNotEnabled.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileSharedLink_PasswordNotEnabled.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -1984,7 +1983,7 @@ class FilesModuleSpecs: QuickSpec {
                         hasJsonBody(["shared_link": NSNull()])
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("RemoveFileSharedLink.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "RemoveFileSharedLink.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2027,7 +2026,7 @@ class FilesModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("ZipDownload.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "ZipDownload.json")!,
                             statusCode: 202, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -2041,7 +2040,7 @@ class FilesModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") && isPath("/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("ZipDownloadStatus.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "ZipDownloadStatus.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -2094,7 +2093,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionNewFile.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionNewFile.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2133,7 +2132,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionNewFileVersion.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionNewFileVersion.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2173,7 +2172,7 @@ class FilesModuleSpecs: QuickSpec {
                         hasHeaderNamed("content-range", value: "bytes 8388608-8389052/100000000")
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionUploadPart.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionUploadPart.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2207,7 +2206,7 @@ class FilesModuleSpecs: QuickSpec {
                         isMethodGET()
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionListParts.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionListParts.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2256,7 +2255,7 @@ class FilesModuleSpecs: QuickSpec {
 
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionCommit.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionCommit.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }
@@ -2329,7 +2328,7 @@ class FilesModuleSpecs: QuickSpec {
                         && isMethodGET()
                 ) { _ in
                     OHHTTPStubsResponse(
-                        fileAtPath: OHPathForFile("ChunkedUploadSessionGetSession.json", type(of: self))!,
+                        fileAtPath: TestAssets.path(forResource: "ChunkedUploadSessionGetSession.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
                 }

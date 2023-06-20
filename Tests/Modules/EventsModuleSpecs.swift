@@ -36,7 +36,7 @@ class EventsModuleSpecs: QuickSpec {
                                 isMethodGET(),
                             response: { _ in
                                 OHHTTPStubsResponse(
-                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+                                    fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
                             }
@@ -76,7 +76,7 @@ class EventsModuleSpecs: QuickSpec {
                                 isMethodGET(),
                             response: { _ in
                                 OHHTTPStubsResponse(
-                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+                                    fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
                             }
@@ -113,7 +113,7 @@ class EventsModuleSpecs: QuickSpec {
                                 isMethodGET(),
                             response: { _ in
                                 OHHTTPStubsResponse(
-                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+                                    fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
                             }
@@ -150,7 +150,7 @@ class EventsModuleSpecs: QuickSpec {
                                 isMethodGET(),
                             response: { _ in
                                 OHHTTPStubsResponse(
-                                    fileAtPath: OHPathForFile("GetUserEvents.json", type(of: self))!,
+                                    fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
                             }
@@ -197,7 +197,7 @@ class EventsModuleSpecs: QuickSpec {
                             isMethodGET(),
                         response: { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetEnterpriseEvents.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetEnterpriseEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )
                         }
@@ -268,7 +268,7 @@ class EventsModuleSpecs: QuickSpec {
                             isMethodGET(),
                         response: { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetEnterpriseEventsStreaming.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetEnterpriseEventsStreaming.json")!,
                                 statusCode: 200, headers: [:]
                             )
                         }
@@ -335,7 +335,7 @@ class EventsModuleSpecs: QuickSpec {
                             isPath("/2.0/events"),
                         response: { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetPollingURL.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetPollingURL.json")!,
                                 statusCode: 200, headers: [:]
                             )
                         }
@@ -364,7 +364,7 @@ class EventsModuleSpecs: QuickSpec {
                         isMethodGET(),
                         response: { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetNewEvents.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetNewEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )
                         }

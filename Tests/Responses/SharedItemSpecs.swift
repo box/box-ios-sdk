@@ -18,7 +18,7 @@ class SharedItemSpecs: QuickSpec {
             describe("init()") {
 
                 it("should correctly deserialize a file type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullFile.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -49,7 +49,7 @@ class SharedItemSpecs: QuickSpec {
                 }
 
                 it("should correctly deserialize a folder type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFolder", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullFolder.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -82,7 +82,7 @@ class SharedItemSpecs: QuickSpec {
                 }
 
                 it("should correctly deserialize a webLink type from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullWebLink", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullWebLink.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -116,7 +116,7 @@ class SharedItemSpecs: QuickSpec {
                 }
 
                 it("should throw BoxCodingError.valueMismatch exception when deserialize an object with an unknown value in type filed") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_ValueFormatMismatch", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullFile_ValueFormatMismatch.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
@@ -133,7 +133,7 @@ class SharedItemSpecs: QuickSpec {
                 }
 
                 it("should throw BoxCodingError.typeMismatch exception when deserialize object with no type field") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFile_MissingRequiredField", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullFile_MissingRequiredField.json") else {
                         fail("Could not find fixture file.")
                         return
                     }

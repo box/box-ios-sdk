@@ -17,7 +17,7 @@ class FileVersionLegalHoldSpecs: QuickSpec {
             describe("init()") {
 
                 it("should correctly deserialize file version legal hold from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullFileVersionLegalHold", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullFileVersionLegalHold.json") else {
                         fail("Could not find fixture file.")
                         return
                     }

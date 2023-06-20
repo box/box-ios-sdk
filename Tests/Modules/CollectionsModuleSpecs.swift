@@ -33,7 +33,7 @@ class CollectionsModulesSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -68,7 +68,7 @@ class CollectionsModulesSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollections.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -96,7 +96,7 @@ class CollectionsModulesSpecs: QuickSpec {
                             isPath("/2.0/collections")
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollectionsEmpty.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollectionsEmpty.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -124,7 +124,7 @@ class CollectionsModulesSpecs: QuickSpec {
                             isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollectionItems.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollectionItems.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

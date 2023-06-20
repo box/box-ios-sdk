@@ -43,7 +43,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullWebLink.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -72,7 +72,7 @@ class WebLinksModuleSpecs: QuickSpec {
                 it("should make an API call to retrieve a specified web link") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/web_links/12345") && isMethodGET()) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullWebLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullWebLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -131,7 +131,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateWebLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -172,7 +172,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("UpdateWebLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "UpdateWebLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -214,7 +214,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             containsQueryParams(["fields": "shared_link"])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetWebLinkSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -248,7 +248,7 @@ class WebLinksModuleSpecs: QuickSpec {
                             hasJsonBody(["shared_link": NSNull()])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("RemoveWebLinkSharedLink.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "RemoveWebLinkSharedLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -280,7 +280,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "password": "test"]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetWebLinkSharedLink.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -314,7 +314,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open"]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetWebLinkSharedLink.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -348,7 +348,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "password": NSNull()]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink_PasswordNotEnabled.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetWebLinkSharedLink_PasswordNotEnabled.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
@@ -382,7 +382,7 @@ class WebLinksModuleSpecs: QuickSpec {
                                 hasJsonBody(["shared_link": ["access": "open", "vanity_name": "testVanityName"]])
                         ) { _ in
                             OHHTTPStubsResponse(
-                                fileAtPath: OHPathForFile("GetWebLinkSharedLink_VanityNameEnabled.json", type(of: self))!,
+                                fileAtPath: TestAssets.path(forResource: "GetWebLinkSharedLink_VanityNameEnabled.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }

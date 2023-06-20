@@ -35,7 +35,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -68,7 +68,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetFileInfo.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

@@ -34,7 +34,7 @@ class GroupsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroup.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroup.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -74,7 +74,7 @@ class GroupsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroup.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroup.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -114,7 +114,7 @@ class GroupsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroup.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroup.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -167,7 +167,7 @@ class GroupsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroupMembership.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroupMembership.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -215,7 +215,7 @@ class GroupsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroupMembership.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroupMembership.json")!,
                             statusCode: 201, headers: [:]
                         )
                     }
@@ -256,7 +256,7 @@ class GroupsModuleSpecs: QuickSpec {
                             ])
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("FullGroupMembership.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "FullGroupMembership.json")!,
                             statusCode: 200, headers: [:]
                         )
                     }
@@ -309,7 +309,7 @@ class GroupsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetMembershipsForGroup.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetMembershipsForGroup.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -341,7 +341,7 @@ class GroupsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetMembershipsForUser.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetMembershipsForUser.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
@@ -376,7 +376,7 @@ class GroupsModuleSpecs: QuickSpec {
                             && isMethodGET()
                     ) { _ in
                         OHHTTPStubsResponse(
-                            fileAtPath: OHPathForFile("GetCollaborationsForGroup.json", type(of: self))!,
+                            fileAtPath: TestAssets.path(forResource: "GetCollaborationsForGroup.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }

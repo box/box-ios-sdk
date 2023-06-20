@@ -16,7 +16,7 @@ class DevicePinSpecs: QuickSpec {
         describe("DevicePin") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {
-                    guard let filepath = Bundle(for: type(of: self)).path(forResource: "FullDevicePin", ofType: "json") else {
+                    guard let filepath = TestAssets.path(forResource: "FullDevicePin.json") else {
                         fail("Could not find fixture file.")
                         return
                     }
