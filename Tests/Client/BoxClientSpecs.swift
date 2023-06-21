@@ -200,7 +200,7 @@ class BoxClientSpecs: QuickSpec {
                         && isPath("/2.0/files/5000948880")
                         && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -235,7 +235,7 @@ class BoxClientSpecs: QuickSpec {
                             && isMethodPOST()
                             && hasJsonBody(body)
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "FullWebLink.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -274,7 +274,7 @@ class BoxClientSpecs: QuickSpec {
                             && isMethodPUT()
                             && hasJsonBody(body)
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
                             statusCode: 200, headers: [:]
                         )
@@ -400,7 +400,7 @@ class BoxClientSpecs: QuickSpec {
                             && containsQueryParams(["fields": "name,login"])
                             && hasJsonBody(["some_key": "some_value"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

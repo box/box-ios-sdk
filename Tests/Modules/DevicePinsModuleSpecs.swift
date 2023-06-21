@@ -51,7 +51,7 @@ class DevicePinsModuleSpecs: QuickSpec {
 
                 it("should make an API call to retrieve a specified Device Pin") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/device_pinners/12345") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "FullDevicePin.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -83,7 +83,7 @@ class DevicePinsModuleSpecs: QuickSpec {
                             && isMethodGET()
                             && containsQueryParams(["direction": "ASC"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetDevicePins.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

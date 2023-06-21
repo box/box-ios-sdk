@@ -37,7 +37,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                                 "is_ongoing": true
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateLegalHoldPolicy.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -68,7 +68,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isPath("/2.0/legal_hold_policies/166757")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetLegalHoldPolicyInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -103,7 +103,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                                 "description": "Policy 3 New Description"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateLegalHoldPolicy.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -158,7 +158,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isPath("/2.0/legal_hold_policies")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetLegalHoldPolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -197,7 +197,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "AssignPolicy.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -228,7 +228,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isPath("/2.0/legal_hold_policy_assignments/255473")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetPolicyAssignmentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -284,7 +284,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                             && containsQueryParams(["policy_id": "255473"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetPolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -315,7 +315,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isPath("/2.0/file_version_legal_holds/166757")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileVersionLegalHoldInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -347,7 +347,7 @@ class LegalHoldsModuleSpecs: QuickSpec {
                             && isMethodGET()
                             && containsQueryParams(["policy_id": "240997"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileVersionLegalHolds.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

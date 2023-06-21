@@ -41,7 +41,7 @@ class CommentsModuleSpecs: QuickSpec {
                                 "message": "This is a comment."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -77,7 +77,7 @@ class CommentsModuleSpecs: QuickSpec {
                                 "tagged_message": "This is a comment for @[11111:Test User]."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateTaggedComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -109,7 +109,7 @@ class CommentsModuleSpecs: QuickSpec {
                             && isPath("/2.0/comments/12345")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -143,7 +143,7 @@ class CommentsModuleSpecs: QuickSpec {
                                 "message": "This is an updated comment."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateCommentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -175,7 +175,7 @@ class CommentsModuleSpecs: QuickSpec {
                                 "tagged_message": "This is an updated comment for @[11111:Test User]."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateTaggedComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

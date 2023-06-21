@@ -34,7 +34,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && containsQueryParams(["query": "test"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -71,7 +71,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"gt\":\"2019-07-24T12:00:00Z\"}}}]"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -99,7 +99,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"lt\":\"2019-07-24T12:00:00Z\"}}}]"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -127,7 +127,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -155,7 +155,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -195,7 +195,7 @@ class SearchModuleSpecs: QuickSpec {
                                 "trash_content": "non_trashed_only"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -245,7 +245,7 @@ class SearchModuleSpecs: QuickSpec {
                                 "include_recent_shared_links": "true"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "SearchResult200.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

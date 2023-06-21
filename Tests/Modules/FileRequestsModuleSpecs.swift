@@ -33,7 +33,7 @@ class FileRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/file_requests/42037322")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileRequest.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -94,7 +94,7 @@ class FileRequestsModuleSpecs: QuickSpec {
                             ])
                             && hasHeaderNamed("If-Match", value: "1")
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateFileRequest.json")!,
                             statusCode: 200, headers: [:]
                         )
@@ -166,7 +166,7 @@ class FileRequestsModuleSpecs: QuickSpec {
 
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CopyFileRequest.json")!,
                             statusCode: 200, headers: [:]
                         )

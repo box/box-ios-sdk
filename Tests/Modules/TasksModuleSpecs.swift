@@ -34,7 +34,7 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/tasks/11111")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTask.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -94,7 +94,7 @@ class TasksModuleSpecs: QuickSpec {
                                 "action": "review"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateTask.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -153,7 +153,7 @@ class TasksModuleSpecs: QuickSpec {
                                 "completion_rule": "any_assignee"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateTask.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -240,7 +240,7 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/task_assignments/11111")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTaskAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -315,7 +315,7 @@ class TasksModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateTaskAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -390,7 +390,7 @@ class TasksModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateTaskAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -460,7 +460,7 @@ class TasksModuleSpecs: QuickSpec {
                                 "resolution_state": "approved"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateTaskAssignment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -554,7 +554,7 @@ class TasksModuleSpecs: QuickSpec {
                             && isPath("/2.0/tasks/12345/assignments")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

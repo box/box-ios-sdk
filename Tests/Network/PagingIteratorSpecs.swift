@@ -33,7 +33,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithValidNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -42,7 +42,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true", "marker": "next_marker_value_1"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -83,7 +83,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -123,7 +123,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithNullNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -166,7 +166,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -175,7 +175,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -220,7 +220,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )

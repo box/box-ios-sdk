@@ -59,7 +59,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "declined_redirect_url": "https://box.com/declined_redirect_url"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateSignRequest.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -141,7 +141,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/sign_requests")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetSignRequests.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -185,7 +185,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/sign_requests/12345")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetSignRequest.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -250,7 +250,7 @@ class SignRequestsModuleSpecs: QuickSpec {
                             && isPath("/2.0/sign_requests/12345/cancel")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CancelSignRequest.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

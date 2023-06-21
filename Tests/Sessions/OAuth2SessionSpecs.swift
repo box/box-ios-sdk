@@ -212,7 +212,7 @@ class OAuth2SessionSpecs: QuickSpec {
                                 }
                             )
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "DownscopeToken.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

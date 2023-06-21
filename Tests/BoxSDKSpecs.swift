@@ -245,7 +245,7 @@ class BoxSDKSpecs: QuickSpec {
                             && isPath("/oauth2/token")
                             && isMethodPOST()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -448,7 +448,7 @@ class BoxSDKSpecs: QuickSpec {
                         && isPath("/oauth2/token")
                         && isMethodPOST()
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )

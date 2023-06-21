@@ -83,7 +83,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
@@ -114,7 +114,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("X-Box-UA", value: analyticsHeader)
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )
@@ -138,7 +138,7 @@ class BoxNetworkAgentSpecs: QuickSpec {
                         && isMethodGET()
                         && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
                 ) { _ in
-                    OHHTTPStubsResponse(
+                    HTTPStubsResponse(
                         fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                         statusCode: 200, headers: ["Content-Type": "application/json"]
                     )

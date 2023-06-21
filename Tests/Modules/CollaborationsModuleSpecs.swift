@@ -33,7 +33,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             isPath("/2.0/collaborations/791293") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaboration.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -79,7 +79,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                                 isMethodPOST() &&
                                 self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor", "can_view_path": true])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetCollaboration.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -122,7 +122,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                                 isMethodPOST() &&
                                 self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetCollaboration.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -166,7 +166,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             isMethodPOST() &&
                             self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["login": "testuser@example.com", "type": "user"], "role": "editor"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaboration.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -208,7 +208,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                                 isMethodPOST() &&
                                 self.compareJSONBody(["item": ["id": "11446500", "type": "folder"], "accessible_by": ["id": "123456", "type": "group"], "role": "editor"])
                         ) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetCollaboration.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -253,7 +253,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             self.compareJSONBody(["role": "viewer"])
 
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateCollaboration.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -296,7 +296,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             isMethodGET() &&
                             containsQueryParams(["fields": "acceptance_requirements_status"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "FullCollaboration.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -347,7 +347,7 @@ class CollaborationsModuleSpecs: QuickSpec {
                             isMethodGET() &&
                             containsQueryParams(["status": "pending", "offset": "0", "limit": "2"])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "PendingCollaborations.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

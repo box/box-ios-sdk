@@ -35,7 +35,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                             && hasHeaderNamed("BoxApi", value: "shared_link=https://example.com&shared_link_password=test_password")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -68,7 +68,7 @@ class SharedItemsModuleSpecs: QuickSpec {
                             && hasHeaderNamed("BoxApi", value: "shared_link=https://example.com")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

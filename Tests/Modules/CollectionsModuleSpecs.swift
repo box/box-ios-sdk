@@ -32,7 +32,7 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -67,7 +67,7 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollections.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -95,7 +95,7 @@ class CollectionsModulesSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/collections")
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollectionsEmpty.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -123,7 +123,7 @@ class CollectionsModulesSpecs: QuickSpec {
                             isPath("/2.0/collections/123/items") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollectionItems.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

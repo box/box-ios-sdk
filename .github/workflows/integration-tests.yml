@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - main
-      - aj/update_deps
   pull_request:
     types: [ opened, synchronize, edited ]
     branches:
       - main
-      - aj/update_deps
 
 jobs:
   integration-tests:

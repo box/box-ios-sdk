@@ -35,7 +35,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": "now", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -75,7 +75,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": customStreamPosition.description, "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -112,7 +112,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -149,7 +149,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": "0", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -196,7 +196,7 @@ class EventsModuleSpecs: QuickSpec {
                             ]) &&
                             isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetEnterpriseEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -267,7 +267,7 @@ class EventsModuleSpecs: QuickSpec {
                             ]) &&
                             isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetEnterpriseEventsStreaming.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -334,7 +334,7 @@ class EventsModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/events"),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetPollingURL.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -363,7 +363,7 @@ class EventsModuleSpecs: QuickSpec {
                         condition:
                         isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetNewEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )

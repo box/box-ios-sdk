@@ -32,7 +32,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("getTemplateByKey(scope:templateId:completion)") {
                 it("should make API call to get metadata template by name and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/enterprise/productInfo/schema") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetMetadataTemplate.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -74,7 +74,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("getTemplateById(id:completion:)") {
                 it("should make API call to get metadata template by id and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/f7a9891f") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetMetadataTemplate.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -137,7 +137,7 @@ class MetadataModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateMetadataTemplate.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -226,7 +226,7 @@ class MetadataModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateMetadataTemplate2.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -275,7 +275,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("updateTemplate()") {
                 it("should make API call to update metadata template and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/enterprise_490685/customer/schema") && isMethodPUT()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateMetadataTemplate.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -364,7 +364,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("listEnterpriseTemplates()") {
                 it("should make API call to get enterprise metadata templates and produce file model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/metadata_templates/enterprise") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetEnterpriseTemplates.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -396,7 +396,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("list(forFileId)") {
                 it("should make API call to get all metadata objects for particular file when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5010739061/metadata") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetAllMetadataOnFile.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -442,7 +442,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("get(forFileWithId:)") {
                 it("should make API call to get metadata objects for particular file when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5010739061/metadata/enterprise/marketingCollateral") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetMetadataOnFile.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -487,7 +487,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("create(forFileWithId:)") {
                 it("should make API call to create metadata objects for particular file when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5010739061/metadata/enterprise/marketingCollateral") && isMethodPOST()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateMetadataOnFile.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -546,7 +546,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("update(forFileWithId:)") {
                 it("should make API call to get metadata objects for particular file when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/files/5010739061/metadata/enterprise/marketingCollateral") && isMethodPUT()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateMetadataOnFile.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -636,7 +636,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("list(forFolderId)") {
                 it("should make API call to get all metadata objects for particular folder when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/998951261/metadata") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetAllMetadataOnFolder.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -676,7 +676,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("get(forFolderWithId:)") {
                 it("should make API call to get metadata objects for particular folder when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/998951261/metadata/enterprise/documentFlow") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetMetadataOnFolder.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -718,7 +718,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("create(forFolderWithId:)") {
                 it("should make API call to create metadata objects for particular folder when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/998951261/metadata/enterprise/documentFlow") && isMethodPOST()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateMetadataOnFolder.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -771,7 +771,7 @@ class MetadataModuleSpecs: QuickSpec {
             describe("update(forFolderWithId:)") {
                 it("should make API call to get metadata objects for particular folder when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/folders/998951261/metadata/enterprise/documentFlow") && isMethodPUT()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateMetadataOnFolder.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )

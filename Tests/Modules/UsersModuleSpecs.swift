@@ -29,7 +29,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("get()") {
                 it("should make API call to retrieve user and produce user model when API call succeeds") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/10543463") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -65,7 +65,7 @@ class UsersModuleSpecs: QuickSpec {
 
                 it("should send fields as comma-separated values when field parameter is passed") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/10543463") && isMethodGET() && containsQueryParams(["fields": "type,id,name"])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -99,7 +99,7 @@ class UsersModuleSpecs: QuickSpec {
                             isPath("/2.0/users/10543463/avatar")
 
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UploadUserAvatar.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -137,7 +137,7 @@ class UsersModuleSpecs: QuickSpec {
                             isPath("/2.0/users/10543463/avatar")
 
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UploadUserAvatar.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -230,7 +230,7 @@ class UsersModuleSpecs: QuickSpec {
                                          "timezone": "America/Los_Angeles",
                                          "status": UserStatus.active.description])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateUser.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -271,7 +271,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("getCurrent()") {
                 it("should retreive current user information") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/me") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCurrentUserInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -308,7 +308,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("createAppUser()") {
                 it("should create a new app user") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodPOST() && hasJsonBody(["name": "Test User", "is_platform_access_only": true])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateAppUser.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -345,7 +345,7 @@ class UsersModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateUser.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -390,7 +390,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("listForEnterprise()") {
                 it("should return a list of users of the enterprise") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodGET() && containsQueryParams(["limit": "100"])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetEnterpriseUsersOffset-Pagination.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -417,7 +417,7 @@ class UsersModuleSpecs: QuickSpec {
 
                 it("should return a list of users of the enterprise using marker pagination") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users") && isMethodGET() && containsQueryParams(["limit": "100", "usemarker": "true"])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetEnterpriseUsersMarker-Pagination.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -448,7 +448,7 @@ class UsersModuleSpecs: QuickSpec {
                     stub(
                         condition: isHost("api.box.com") && isPath("/2.0/invites") && isMethodPOST() && hasJsonBody(["enterprise": ["id": "42500"], "actionable_by": ["login": "freeuser@email.com"]])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "InviteUserToEnterprise.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -475,7 +475,7 @@ class UsersModuleSpecs: QuickSpec {
                     stub(
                         condition: isHost("api.box.com") && isPath("/2.0/users/1234/folders/0") && isMethodPUT() && hasJsonBody(["owned_by": ["id": "123456"]])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "MoveUserItemsToAnotherUser.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -498,7 +498,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("changeLogin()") {
                 it("should change user login and return the user with the new login") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/18180156") && isMethodPUT() && hasJsonBody(["login": "testuser@example.com"])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateUserLogin.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -523,7 +523,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("listEmailAliases()") {
                 it("should retrieves all email aliases for a user and return the iterator with the email aliases of the user ") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/123456/email_aliases") && isMethodGET()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GellAllUserEmailAliases.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -548,7 +548,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("createEmailAlias()") {
                 it("should Add new email aliases for a user and return the new email alias for the user") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/123456/email_aliases") && isMethodPOST() && hasJsonBody(["email": "user@email.com"])) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "AddEmailAlias.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -593,7 +593,7 @@ class UsersModuleSpecs: QuickSpec {
             describe("rollOutOfEnterprise()") {
                 it("should roll out user from enterprise get the updated user") {
                     stub(condition: isHost("api.box.com") && isPath("/2.0/users/12345") && isMethodPUT() && self.testRollOutUserFromEnterpriseBody()) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateUser.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

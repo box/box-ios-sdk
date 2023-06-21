@@ -34,7 +34,7 @@ class TrashModuleSpecs: QuickSpec {
                             && isPath("/2.0/folders/trash/items")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTrashedItems.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -75,7 +75,7 @@ class TrashModuleSpecs: QuickSpec {
                             && isPath("/2.0/files/5859258256/trash")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTrashedFile.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -110,7 +110,7 @@ class TrashModuleSpecs: QuickSpec {
                             && isPath("/2.0/folders/11446498/trash")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTrashedFolder.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -145,7 +145,7 @@ class TrashModuleSpecs: QuickSpec {
                             && isPath("/2.0/web_links/6742981/trash")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetTrashedWebLink.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -184,7 +184,7 @@ class TrashModuleSpecs: QuickSpec {
                                 "parent": ["id": "14"]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "RestoreFile.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -227,7 +227,7 @@ class TrashModuleSpecs: QuickSpec {
                                 "parent": ["id": "14"]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "RestoreFolder.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -270,7 +270,7 @@ class TrashModuleSpecs: QuickSpec {
                                 "parent": ["id": "14"]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "RestoreWebLink.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )

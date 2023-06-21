@@ -33,7 +33,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaborationWhitelistEntries.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -65,7 +65,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_entries/12345") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaborationWhitelistEntryByID.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -113,7 +113,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                                 "domain": "example.com"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateCollaborationWhitelistEntry.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -183,7 +183,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaborationWhitelistExemptUsers.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -223,7 +223,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isPath("/2.0/collaboration_whitelist_exempt_targets/12345") &&
                             isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetCollaborationWhitelistExemptUsersByID.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -277,7 +277,7 @@ class CollaborationAllowlistModuleSpecs: QuickSpec {
                             isMethodPOST() &&
                             hasJsonBody(["user": ["id": "12345"]])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateCollaborationWhitelistExemptUser.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

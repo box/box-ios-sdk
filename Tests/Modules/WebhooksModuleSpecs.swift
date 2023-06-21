@@ -42,7 +42,7 @@ class WebhooksModuleSpecs: QuickSpec {
                                 "address": "https://dev.name/actions/file_changed"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateWebhook.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -79,7 +79,7 @@ class WebhooksModuleSpecs: QuickSpec {
                                 "address": "https://notification.example.net"
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateWebhook.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -109,7 +109,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             && isPath("/2.0/webhooks/4137")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetWebhookInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -139,7 +139,7 @@ class WebhooksModuleSpecs: QuickSpec {
                             && isPath("/2.0/webhooks")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetWebhooks.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )

@@ -33,7 +33,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policies/12345")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetStoragePolicyInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -64,7 +64,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policies")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetStoragePolicies.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -97,7 +97,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && isPath("/2.0/storage_policy_assignments/enterprise_36907420")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignmentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -129,7 +129,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && containsQueryParams(["resolved_for_type": "enterprise", "resolved_for_id": "36690620"])
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -170,7 +170,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -220,7 +220,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                             && containsQueryParams(["resolved_for_type": "user", "resolved_for_id": "3093450887"])
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetStoragePolicyAssignments.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
@@ -237,7 +237,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
@@ -275,7 +275,7 @@ class StoragePoliciesModuleSpecs: QuickSpec {
                                 ]
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateStoragePolicyAssignment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
