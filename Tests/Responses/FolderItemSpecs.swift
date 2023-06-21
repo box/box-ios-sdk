@@ -12,7 +12,7 @@ import Quick
 
 class FolderItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Folder Item") {
 
             describe("init()") {

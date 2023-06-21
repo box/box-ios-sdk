@@ -13,23 +13,22 @@ import UIKit
 #endif
 
 final class TestAssets {
-
+    
     static let resourceBundle: Bundle = {
-        return Bundle(for: TestAssets.self)
+        Bundle(for: TestAssets.self)
     }()
-
+    
     static func url(forResource name: String) -> URL? {
         resourceBundle.url(forResource: name, withExtension: nil)
     }
-
+    
     static func path(forResource name: String) -> String? {
         resourceBundle.path(forResource: name, ofType: nil)
     }
-
+    
 #if canImport(UIKit)
     static func image(named: String) -> UIImage? {
         UIImage(named: named, in: resourceBundle, compatibleWith: nil)
     }
 #endif
 }
-

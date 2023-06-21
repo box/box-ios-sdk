@@ -12,7 +12,7 @@ import Quick
 
 class WatermarkSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Watermark") {
             describe("init()") {
                 context("success case") {

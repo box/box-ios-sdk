@@ -12,7 +12,7 @@ import Quick
 
 class BoxJSONDecoderSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("BoxJSONDecoder") {
 
             describe("optionalDecode<BoxModel>()") {

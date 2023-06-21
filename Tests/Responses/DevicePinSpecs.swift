@@ -12,7 +12,7 @@ import Quick
 
 class DevicePinSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("DevicePin") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {

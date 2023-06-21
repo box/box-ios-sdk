@@ -12,7 +12,7 @@ import Quick
 
 class SharedItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Shared Item") {
 
             describe("init()") {

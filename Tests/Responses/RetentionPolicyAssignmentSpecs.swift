@@ -12,7 +12,7 @@ import Quick
 
 class RetentionPolicyAssignmentSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Retention Policy Assignment") {
 
             describe("init()") {

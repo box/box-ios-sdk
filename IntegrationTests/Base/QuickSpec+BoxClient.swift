@@ -1,5 +1,5 @@
 //
-//  BaseIntegrationSpecs.swift
+//  QuickSpec+BoxClient.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 01/12/2021.
@@ -10,30 +10,29 @@
 import Nimble
 import Quick
 
-class BaseIntegrationSpecs: QuickSpec {
-    let sdk = BoxSDK(clientId: Configuration.shared.ccg.clientId, clientSecret: Configuration.shared.ccg.clientSecret)
-    var client: BoxClient!
+extension QuickSpec {
 
+    static let sdk = BoxSDK(clientId: Configuration.shared.ccg.clientId, clientSecret: Configuration.shared.ccg.clientSecret)
     // MARK: BoxClient helper methods
 
-    func initializeClient() {
+    static func initializeClient(callback: @escaping (BoxClient) -> Void) {
         if let enterpriseId = Configuration.shared.ccg.enterpriseId, !enterpriseId.isEmpty {
-            initializeCCGForAccountService(enterpriseId: enterpriseId)
+            initializeCCGForAccountService(enterpriseId: enterpriseId, callback: callback)
         }
         else if let userId = Configuration.shared.ccg.userId, !userId.isEmpty {
-            initializeCCGForUser(userId: userId)
+            initializeCCGForUser(userId: userId, callback: callback)
         }
         else {
             fail("Can not create the CCG Client instance: either \"enterpriseId\" or \"userId\" is required")
         }
     }
 
-    func initializeCCGForAccountService(enterpriseId: String) {
-        waitUntil(timeout: .seconds(Constants.Timeout.default)) { [weak self] done in
-            self?.sdk.getCCGClientForAccountService(enterpriseId: enterpriseId) { result in
+    static func initializeCCGForAccountService(enterpriseId: String, callback: @escaping (BoxClient) -> Void) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            sdk.getCCGClientForAccountService(enterpriseId: enterpriseId) { result in
                 switch result {
                 case let .success(resultClient):
-                    self?.client = resultClient
+                    callback(resultClient)
                 case let .failure(error):
                     fail("Expected getCCGClientForAccountService call to suceeded, but instead got \(error)")
                 }
@@ -43,12 +42,12 @@ class BaseIntegrationSpecs: QuickSpec {
         }
     }
 
-    func initializeCCGForUser(userId: String) {
-        waitUntil(timeout: .seconds(Constants.Timeout.default)) { [weak self] done in
-            self?.sdk.getCCGClientForUser(userId: userId) { result in
+    static func initializeCCGForUser(userId: String, callback: @escaping (BoxClient) -> Void) {
+        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+            sdk.getCCGClientForUser(userId: userId) { result in
                 switch result {
                 case let .success(resultClient):
-                    self?.client = resultClient
+                    callback(resultClient)
                 case let .failure(error):
                     fail("Expected getCCGClientForUser call to suceeded, but instead got \(error)")
                 }

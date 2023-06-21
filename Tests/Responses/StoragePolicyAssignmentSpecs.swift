@@ -11,7 +11,7 @@ import Quick
 
 class StoragePolicyAssignmentSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Storage Policy Assignment") {
 
             describe("init()") {

@@ -13,7 +13,7 @@ import Quick
 
 class TermsOfServiceUserStatusSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("TermsOfServiceUserStatus") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {

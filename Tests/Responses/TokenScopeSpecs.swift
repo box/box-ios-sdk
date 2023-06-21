@@ -12,7 +12,7 @@ import Quick
 
 class TokenScopeSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("TokenScope") {
 
             describe("init()") {

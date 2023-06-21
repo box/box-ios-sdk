@@ -12,7 +12,7 @@ import Quick
 
 class GroupSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Group") {
             describe("init()") {
                 it("should correctly deserialize from full JSON representation") {

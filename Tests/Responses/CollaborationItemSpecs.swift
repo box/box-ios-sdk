@@ -12,7 +12,7 @@ import Quick
 
 class CollaborationItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Collaboration Item") {
 
             describe("init()") {

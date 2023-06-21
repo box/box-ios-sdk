@@ -13,16 +13,17 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class CommentsModuleSpecs: QuickSpec {
-    var sut: BoxClient!
 
-    override func spec() {
+    override class func spec() {
+        var sut: BoxClient!
+
         describe("Comments Module") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "")
+                sut = BoxSDK.getClient(token: "")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("create()") {
@@ -40,14 +41,14 @@ class CommentsModuleSpecs: QuickSpec {
                                 "message": "This is a comment."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment.") { result in
+                        sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment.") { result in
                             switch result {
                             case let .success(comment):
                                 expect(comment).toNot(beNil())
@@ -76,14 +77,14 @@ class CommentsModuleSpecs: QuickSpec {
                                 "tagged_message": "This is a comment for @[11111:Test User]."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "CreateTaggedComment.json")!,
                             statusCode: 201, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment for @[11111:Test User].") { result in
+                        sut.comments.create(itemId: "12345", itemType: "file", message: "This is a comment for @[11111:Test User].") { result in
                             switch result {
                             case let .success(comment):
                                 expect(comment).toNot(beNil())
@@ -108,14 +109,14 @@ class CommentsModuleSpecs: QuickSpec {
                             && isPath("/2.0/comments/12345")
                             && isMethodGET()
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "GetComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.get(commentId: "12345") { result in
+                        sut.comments.get(commentId: "12345") { result in
                             switch result {
                             case let .success(comment):
                                 expect(comment).toNot(beNil())
@@ -142,14 +143,14 @@ class CommentsModuleSpecs: QuickSpec {
                                 "message": "This is an updated comment."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateCommentInfo.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.update(commentId: "12345", message: "This is an updated comment.") { result in
+                        sut.comments.update(commentId: "12345", message: "This is an updated comment.") { result in
                             switch result {
                             case let .success(comment):
                                 expect(comment).toNot(beNil())
@@ -174,14 +175,14 @@ class CommentsModuleSpecs: QuickSpec {
                                 "tagged_message": "This is an updated comment for @[11111:Test User]."
                             ])
                     ) { _ in
-                        OHHTTPStubsResponse(
+                        HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "UpdateTaggedComment.json")!,
                             statusCode: 200, headers: ["Content-Type": "application/json"]
                         )
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.update(commentId: "12345", message: "This is an updated comment for @[11111:Test User].") { result in
+                        sut.comments.update(commentId: "12345", message: "This is an updated comment for @[11111:Test User].") { result in
                             switch result {
                             case let .success(comment):
                                 expect(comment).toNot(beNil())
@@ -205,11 +206,11 @@ class CommentsModuleSpecs: QuickSpec {
                             && isPath("/2.0/comments/12345")
                             && isMethodDELETE()
                     ) { _ in
-                        OHHTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.comments.delete(commentId: "12345") { result in
+                        sut.comments.delete(commentId: "12345") { result in
                             if case let .failure(error) = result {
                                 fail("Expected call to delete to suceed, but it failed: \(error)")
                             }

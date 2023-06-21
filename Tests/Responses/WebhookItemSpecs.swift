@@ -12,7 +12,7 @@ import Quick
 
 class WebhookItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Webhook Item") {
 
             describe("init()") {

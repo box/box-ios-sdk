@@ -12,7 +12,7 @@ import Quick
 
 class FileRequestSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("FileRequest") {
 
             describe("init()") {

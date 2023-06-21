@@ -11,7 +11,7 @@ import Quick
 
 class LegalHoldPolicyAssignmentSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Legal Hold Policy Assignment") {
 
             describe("init()") {

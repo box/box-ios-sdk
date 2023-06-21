@@ -12,7 +12,7 @@ import Quick
 
 class SignRequestSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("SignRequest") {
 
             describe("init()") {

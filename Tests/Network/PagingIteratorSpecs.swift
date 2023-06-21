@@ -13,18 +13,18 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class PagingIteratorSpecs: QuickSpec {
-    var sut: PagingIterator<FolderItem>!
-    var client = BoxSDK.getClient(token: "")
-    lazy var url = URL.boxAPIEndpoint("/2.0/list_items/", configuration: self.client.configuration)
 
-    override func spec() {
+    override class func spec() {
+        var sut: PagingIterator<FolderItem>!
+        var client = BoxSDK.getClient(token: "")
+        lazy var url = URL.boxAPIEndpoint("/2.0/list_items/", configuration: client.configuration)
 
         describe("PageIteratorSpecs") {
             beforeEach {}
 
             afterEach {
-                self.sut = nil
-                OHHTTPStubs.removeAllStubs()
+                sut = nil
+                HTTPStubs.removeAllStubs()
             }
 
             describe("marker based paging") {
@@ -33,7 +33,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithValidNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -42,17 +42,17 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true", "marker": "next_marker_value_1"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
 
-                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+                    sut = PagingIterator<FolderItem>(client: client, url: url, queryParameters: ["usemarker": "true"])
 
                     // Get first page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.nextMarker).to(equal("next_marker_value_1"))
@@ -66,7 +66,7 @@ class PagingIteratorSpecs: QuickSpec {
 
                     // Get second page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.nextMarker).to(equal(""))
@@ -83,17 +83,17 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithEmptyNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
 
-                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+                    sut = PagingIterator<FolderItem>(client: client, url: url, queryParameters: ["usemarker": "true"])
 
                     // Get first page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.nextMarker).to(equal(""))
@@ -107,7 +107,7 @@ class PagingIteratorSpecs: QuickSpec {
 
                     // Get second page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case .success:
                                 fail("Expected method to throw, but it didn't")
@@ -123,17 +123,17 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["usemarker": "true"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "MarkerBasedPagingWithNullNext.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
 
-                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["usemarker": "true"])
+                    sut = PagingIterator<FolderItem>(client: client, url: url, queryParameters: ["usemarker": "true"])
 
                     // Get first page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.nextMarker).to(beNil())
@@ -147,7 +147,7 @@ class PagingIteratorSpecs: QuickSpec {
 
                     // Get second page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case .success:
                                 fail("Expected method to throw, but it didn't")
@@ -166,7 +166,7 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
@@ -175,17 +175,17 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
 
-                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["limit": "2"])
+                    sut = PagingIterator<FolderItem>(client: client, url: url, queryParameters: ["limit": "2"])
 
                     // Get first page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.offset).to(equal(0))
@@ -201,7 +201,7 @@ class PagingIteratorSpecs: QuickSpec {
 
                     // Get second page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.offset).to(equal(2))
@@ -220,17 +220,17 @@ class PagingIteratorSpecs: QuickSpec {
                     stub(condition: isHost("api.box.com")
                         && isPath("/2.0/list_items")
                         && isMethodGET() && containsQueryParams(["offset": "2", "limit": "2"])) { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "OffsetBasedPagingWithoutMoreItems.json")!,
                                 statusCode: 200, headers: ["Content-Type": "application/json"]
                             )
                         }
 
-                    self.sut = PagingIterator<FolderItem>(client: self.client, url: self.url, queryParameters: ["offset": "2", "limit": "2"])
+                    sut = PagingIterator<FolderItem>(client: client, url: url, queryParameters: ["offset": "2", "limit": "2"])
 
                     // Get first page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case let .success(page):
                                 expect(page.offset).to(equal(2))
@@ -246,7 +246,7 @@ class PagingIteratorSpecs: QuickSpec {
 
                     // Get second page
                     waitUntil(timeout: .seconds(10)) { done in
-                        self.sut.next { result in
+                        sut.next { result in
                             switch result {
                             case .success:
                                 fail("Expected method to throw, but it didn't")

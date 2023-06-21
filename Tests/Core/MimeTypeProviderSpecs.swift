@@ -12,7 +12,7 @@ import Nimble
 import Quick
 
 class MimeTypeProviderSpecs: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("MimeTypeProvider") {
 
             describe("getMimeTypeFrom()") {

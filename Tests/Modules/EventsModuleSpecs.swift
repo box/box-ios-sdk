@@ -14,16 +14,16 @@ import Quick
 
 class EventsModuleSpecs: QuickSpec {
 
-    var sut: BoxClient!
+    override class func spec() {
+        var sut: BoxClient!
 
-    override func spec() {
         describe("EventsModule") {
             beforeEach {
-                self.sut = BoxSDK.getClient(token: "asdads")
+                sut = BoxSDK.getClient(token: "asdads")
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             describe("getUserEvents()") {
@@ -35,7 +35,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": "now", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -43,7 +43,7 @@ class EventsModuleSpecs: QuickSpec {
                         )
 
                         waitUntil(timeout: .seconds(10)) { done in
-                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25)
+                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: .now, limit: 25)
                             iterator.next { result in
                                 switch result {
                                 case let .success(page):
@@ -75,7 +75,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": customStreamPosition.description, "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -83,7 +83,7 @@ class EventsModuleSpecs: QuickSpec {
                         )
 
                         waitUntil(timeout: .seconds(10)) { done in
-                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25)
+                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: customStreamPosition, limit: 25)
                             iterator.next { result in
                                 switch result {
                                 case let .success(page):
@@ -112,7 +112,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -120,7 +120,7 @@ class EventsModuleSpecs: QuickSpec {
                         )
 
                         waitUntil(timeout: .seconds(10)) { done in
-                            let iterator = self.sut.events.getUserEvents(streamType: .all, limit: 25)
+                            let iterator = sut.events.getUserEvents(streamType: .all, limit: 25)
                             iterator.next { result in
                                 switch result {
                                 case let .success(page):
@@ -149,7 +149,7 @@ class EventsModuleSpecs: QuickSpec {
                                 containsQueryParams(["stream_type": "all", "stream_position": "0", "limit": "25"]) &&
                                 isMethodGET(),
                             response: { _ in
-                                OHHTTPStubsResponse(
+                                HTTPStubsResponse(
                                     fileAtPath: TestAssets.path(forResource: "GetUserEvents.json")!,
                                     statusCode: 200, headers: [:]
                                 )
@@ -157,7 +157,7 @@ class EventsModuleSpecs: QuickSpec {
                         )
 
                         waitUntil(timeout: .seconds(10)) { done in
-                            let iterator = self.sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25)
+                            let iterator = sut.events.getUserEvents(streamType: .all, streamPosition: .zero, limit: 25)
                             iterator.next { result in
                                 switch result {
                                 case let .success(page):
@@ -196,7 +196,7 @@ class EventsModuleSpecs: QuickSpec {
                             ]) &&
                             isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetEnterpriseEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -204,7 +204,7 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.events.getEnterpriseEvents(
+                        let iterator = sut.events.getEnterpriseEvents(
                             eventTypes: [.abnormalDownloadActivity, .accessGranted],
                             createdAfter: createdAfter,
                             streamPosition: .now,
@@ -267,7 +267,7 @@ class EventsModuleSpecs: QuickSpec {
                             ]) &&
                             isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetEnterpriseEventsStreaming.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -275,7 +275,7 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let iterator = self.sut.events.getEnterpriseEventsStreaming(
+                        let iterator = sut.events.getEnterpriseEventsStreaming(
                             eventTypes: [.loginActivityDeviceAdded, .invitedToCollaboration],
                             streamPosition: .now,
                             limit: 100
@@ -334,7 +334,7 @@ class EventsModuleSpecs: QuickSpec {
                         condition: isHost("api.box.com") &&
                             isPath("/2.0/events"),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetPollingURL.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -342,7 +342,7 @@ class EventsModuleSpecs: QuickSpec {
                     )
 
                     waitUntil(timeout: .seconds(100)) { done in
-                        self.sut.events.getPollingURL { result in
+                        sut.events.getPollingURL { result in
                             switch result {
                             case let .success(pollingURLInfo):
                                 expect(pollingURLInfo.url.absoluteString).to(equal("http://2.realtime.services.box.net/subscribe?channel=cc807c9c4869ffb1c81a&stream_type=all"))
@@ -363,7 +363,7 @@ class EventsModuleSpecs: QuickSpec {
                         condition:
                         isMethodGET(),
                         response: { _ in
-                            OHHTTPStubsResponse(
+                            HTTPStubsResponse(
                                 fileAtPath: TestAssets.path(forResource: "GetNewEvents.json")!,
                                 statusCode: 200, headers: [:]
                             )
@@ -382,7 +382,7 @@ class EventsModuleSpecs: QuickSpec {
                         return
                     }
                     waitUntil(timeout: .seconds(1000)) { done in
-                        self.sut.events.observeForNewEvents(with: pollingURLInfo) { result in
+                        sut.events.observeForNewEvents(with: pollingURLInfo) { result in
                             switch result {
                             case let .success(pollingResult):
                                 expect(pollingResult.version).to(equal(1))

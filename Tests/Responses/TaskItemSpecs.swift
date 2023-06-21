@@ -12,7 +12,7 @@ import Quick
 
 class TaskItemSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("Task Item") {
 
             describe("init()") {

@@ -14,45 +14,46 @@ import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class FileLogDestinationSpec: QuickSpec {
-    var fileURL: URL!
-    var sut: FileLogDestination!
 
-    override func spec() {
+    override class func spec() {
+        var fileURL: URL!
+        var sut: FileLogDestination!
+
         describe("FileLogDestination") {
 
             describe("init()") {
                 afterEach {
-                    self.sut = nil
-                    self.removeFile(fileURL: self.fileURL)
-                    self.fileURL = nil
+                    sut = nil
+                    removeFile(fileURL: fileURL)
+                    fileURL = nil
                 }
 
                 it("after init() a file at specific URL should exists") {
-                    self.fileURL = self.makeFileURL()
+                    fileURL = makeFileURL()
 
-                    self.sut = FileLogDestination(fileURL: self.fileURL)
+                    sut = FileLogDestination(fileURL: fileURL)
 
-                    expect { FileManager.default.fileExists(atPath: self.fileURL.path) }
+                    expect { FileManager.default.fileExists(atPath: fileURL.path) }
                         .to(equal(true))
                 }
             }
 
             describe("write()") {
                 beforeEach {
-                    self.fileURL = self.makeFileURL()
-                    self.sut = FileLogDestination(fileURL: self.fileURL)
+                    fileURL = makeFileURL()
+                    sut = FileLogDestination(fileURL: fileURL)
                 }
 
                 afterEach {
-                    self.sut = nil
-                    self.removeFile(fileURL: self.fileURL)
-                    self.fileURL = nil
+                    sut = nil
+                    self.removeFile(fileURL: fileURL)
+                    fileURL = nil
                 }
 
                 it("should write single message to a log file") {
-                    self.sut.write("Log message", level: .debug, category: .client, [])
+                    sut.write("Log message", level: .debug, category: .client, [])
                     do {
-                        let fileContent = try String(contentsOf: self.fileURL)
+                        let fileContent = try String(contentsOf: fileURL)
                         expect(fileContent).to(equal("[DEBUG] CLIENT Log message\n"))
                     }
                     catch {
@@ -62,10 +63,10 @@ class FileLogDestinationSpec: QuickSpec {
                 }
 
                 it("should keep order when adding logs to a file") {
-                    self.sut.write("First log message", level: .error, category: .networkAgent, [])
-                    self.sut.write("Second log message", level: .error, category: .networkAgent, [])
+                    sut.write("First log message", level: .error, category: .networkAgent, [])
+                    sut.write("Second log message", level: .error, category: .networkAgent, [])
                     do {
-                        let fileContent = try String(contentsOf: self.fileURL)
+                        let fileContent = try String(contentsOf: fileURL)
                         expect(fileContent).to(beginWith("[ERROR] NETWORK AGENT First log message\n"))
                         expect(fileContent).to(endWith("[ERROR] NETWORK AGENT Second log message\n"))
                     }
@@ -78,12 +79,12 @@ class FileLogDestinationSpec: QuickSpec {
         }
     }
 
-    private func makeFileURL() -> URL {
+    private static func makeFileURL() -> URL {
         let temporaryFolderURL = URL(fileURLWithPath: NSTemporaryDirectory())
         return temporaryFolderURL.appendingPathComponent("logs.txt").absoluteURL
     }
 
-    private func removeFile(fileURL: URL) {
+    private static func removeFile(fileURL: URL) {
         if FileManager.default.fileExists(atPath: fileURL.path) {
             do {
                 try FileManager.default.removeItem(at: fileURL)

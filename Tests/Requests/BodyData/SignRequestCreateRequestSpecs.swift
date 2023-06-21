@@ -12,7 +12,8 @@ import Quick
 
 class SignRequestCreateRequestSpecs: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
+
         describe("SignRequestCreateRequest") {
 
             describe("SignRequestCreateSourceFile") {
