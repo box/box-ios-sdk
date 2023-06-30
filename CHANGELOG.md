@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.3](https://github.com/box/box-ios-sdk/compare/v5.4.2...v5.4.3) (2023-06-30)
+
+
+### Bug Fixes
+
+* Identify iPhone Simulator on Apple Silicon ([#902](https://github.com/box/box-ios-sdk/issues/902)) ([7731a7f](https://github.com/box/box-ios-sdk/commit/7731a7f434add74e163a76511fe1e2a3f26517f7))
+* Make code compatible with macOS. ([#900](https://github.com/box/box-ios-sdk/issues/900)) ([3b0016e](https://github.com/box/box-ios-sdk/commit/3b0016e44e674db0ea429273c03e5a29177372bf))
+* Remove use of deprecated string scanner API. ([#901](https://github.com/box/box-ios-sdk/issues/901)) ([af5f0e5](https://github.com/box/box-ios-sdk/commit/af5f0e52d184fbd27f56d972fb93b3e543547773))
+
 ### [5.4.2](https://github.com/box/box-ios-sdk/compare/v5.4.1...v5.4.2) (2023-04-19)
 
 
