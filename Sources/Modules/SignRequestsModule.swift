@@ -24,7 +24,7 @@ public class SignRequestsModule {
     ///
     /// - Parameters:
     ///   - signers: List of signers for the sign request. 35 is the max number of signers permitted.
-    ///   - sourceFiles: List of files to create a signing document from.
+    ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files.
     ///   - parentFolder: The destination folder to place final, signed document and signing log.
     ///     The root folder, folder ID `0`, cannot be used.
     ///   - parameters: The optional parameters.

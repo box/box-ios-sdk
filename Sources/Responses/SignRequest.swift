@@ -32,6 +32,10 @@ public enum SignRequestStatus: BoxEnum {
     case errorSending
     /// Expired status.
     case expired
+    /// Finalizing status.
+    case finalizing
+    /// Error finalizing status.
+    case errorFinalizing
     /// Custom value for enum values not yet implemented in the SDK
     case customValue(String)
 
@@ -57,6 +61,10 @@ public enum SignRequestStatus: BoxEnum {
             self = .errorSending
         case "expired":
             self = .expired
+        case "finalizing":
+            self = .finalizing
+        case "error_finalizing":
+            self = .errorFinalizing
         default:
             self = .customValue(value)
         }
@@ -84,6 +92,10 @@ public enum SignRequestStatus: BoxEnum {
             return "error_sending"
         case .expired:
             return "expired"
+        case .finalizing:
+            return "finalizing"
+        case .errorFinalizing:
+            return "error_finalizing"
         case let .customValue(value):
             return value
         }

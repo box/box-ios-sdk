@@ -95,6 +95,9 @@ class SignRequestSpecs: QuickSpec {
                     expect(SignRequestStatus.errorConverting).to(equal(SignRequestStatus(SignRequestStatus.errorConverting.description)))
                     expect(SignRequestStatus.errorSending).to(equal(SignRequestStatus(SignRequestStatus.errorSending.description)))
                     expect(SignRequestStatus.expired).to(equal(SignRequestStatus(SignRequestStatus.expired.description)))
+                    expect(SignRequestStatus.finalizing).to(equal(SignRequestStatus(SignRequestStatus.finalizing.description)))
+                    expect(SignRequestStatus.errorFinalizing).to(equal(SignRequestStatus(SignRequestStatus.errorFinalizing.description)))
+
                     expect(SignRequestStatus.customValue("custom value")).to(equal(SignRequestStatus("custom value")))
                 }
             }

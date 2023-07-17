@@ -80,6 +80,8 @@ public enum SignRequestSignerInputContentType: BoxEnum {
     case date
     /// Checkbox
     case checkbox
+    /// Attachment
+    case attachment
     /// Custom value for enum values not yet implemented in the SDK
     case customValue(String)
 
@@ -111,6 +113,8 @@ public enum SignRequestSignerInputContentType: BoxEnum {
             self = .date
         case "checkbox":
             self = .checkbox
+        case "attachment":
+            self = .attachment
         default:
             self = .customValue(value)
         }
@@ -142,6 +146,8 @@ public enum SignRequestSignerInputContentType: BoxEnum {
             return "date"
         case .checkbox:
             return "checkbox"
+        case .attachment:
+            return "attachment"
         case let .customValue(value):
             return value
         }
