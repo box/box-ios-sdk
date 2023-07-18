@@ -107,6 +107,7 @@
 		05EFAB2326F0F01100DF1830 /* Quick.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2026F0F01100DF1830 /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05EFAB2426F0F01100DF1830 /* OHHTTPStubs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05F1113E27D8FCF300079978 /* CCGAuthSessionSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1113D27D8FCF300079978 /* CCGAuthSessionSpecs.swift */; };
+		05F2A1A12A6532C400C8BD92 /* SignRequestsModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A1A02A6532C400C8BD92 /* SignRequestsModuleIntegrationSpecs.swift */; };
 		05F2E39D274FBC5500C32A34 /* GetEnterpriseEventsStreaming.json in Resources */ = {isa = PBXBuildFile; fileRef = 05F2E39C274FBC5500C32A34 /* GetEnterpriseEventsStreaming.json */; };
 		05F59F0626FC740100D9A539 /* FileRepresentationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */; };
 		05F59F0926FC871A00D9A539 /* SharedItemSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */; };
@@ -732,6 +733,7 @@
 		05EFAB2026F0F01100DF1830 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		05EFAB2126F0F01100DF1830 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
 		05F1113D27D8FCF300079978 /* CCGAuthSessionSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCGAuthSessionSpecs.swift; sourceTree = "<group>"; };
+		05F2A1A02A6532C400C8BD92 /* SignRequestsModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRequestsModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		05F2E39C274FBC5500C32A34 /* GetEnterpriseEventsStreaming.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetEnterpriseEventsStreaming.json; sourceTree = "<group>"; };
 		05F59F0526FC740100D9A539 /* FileRepresentationSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepresentationSpecs.swift; sourceTree = "<group>"; };
 		05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemSpecs.swift; sourceTree = "<group>"; };
@@ -1327,6 +1329,7 @@
 				05EA725A27621FA7001ECFF3 /* FileModuleIntegrationSpecs.swift */,
 				0579F6FF27577FD200473A3C /* FolderModuleIntegrationSpecs.swift */,
 				0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */,
+				05F2A1A02A6532C400C8BD92 /* SignRequestsModuleIntegrationSpecs.swift */,
 				052A03F9287C1FC20063513C /* UsersModuleIntegrationSpecs.swift */,
 				0571FC6228F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift */,
 				054D536B283CFAB800CC2CBC /* Async */,
@@ -2885,6 +2888,7 @@
 			files = (
 				0571FC6328F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift in Sources */,
 				0BD51EDC28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift in Sources */,
+				05F2A1A12A6532C400C8BD92 /* SignRequestsModuleIntegrationSpecs.swift in Sources */,
 				0547B73E276C99AA002D9E7A /* CryptographyUtil.swift in Sources */,
 				053637BD276C96E400C18D26 /* IntegrationTestResources.swift in Sources */,
 				057C8CE4276799760092A6EC /* Date+Extensions.swift in Sources */,

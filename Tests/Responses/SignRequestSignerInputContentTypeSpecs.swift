@@ -30,6 +30,7 @@ class SignRequestSignerInputContentTypeSpecs: QuickSpec {
                     expect(SignRequestSignerInputContentType.text).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.text.description)))
                     expect(SignRequestSignerInputContentType.date).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.date.description)))
                     expect(SignRequestSignerInputContentType.checkbox).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.checkbox.description)))
+                    expect(SignRequestSignerInputContentType.attachment).to(equal(SignRequestSignerInputContentType(SignRequestSignerInputContentType.attachment.description)))
                     expect(SignRequestSignerInputContentType.customValue("custom value")).to(equal(SignRequestSignerInputContentType("custom value")))
                 }
             }
