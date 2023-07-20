@@ -32,6 +32,7 @@ Box iOS SDK
   - [Sample Apps](#sample-apps)
     - [OAuth2 Sample App](#oauth2-sample-app)
     - [JWT Auth Sample App](#jwt-auth-sample-app)
+  - [FIPS 140-2 Compliance](#fips-140-2-compliance)
   - [Versions](#versions)
     - [Supported Version](#supported-version)
     - [Version schedule](#version-schedule)
@@ -221,6 +222,9 @@ func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
 
 __Step 5__: Run the sample app
 
+## FIPS 140-2 Compliance
+
+ The Box iOS SDK uses the CommonCrypto library, which relies on Apple's corecrypto cryptographic module. This module has undergone multiple validations by the Cryptographic Module Validation Program (CMVP) and is confirmed to be compliant with FIPS 140-2 standards. For further information, please refer to [Apple's security certification](https://support.apple.com/en-gb/guide/certifications/apc30d0ed034/web) and [iOS security certifications](https://support.apple.com/en-gb/guide/certifications/apc3fa917cb49/1/web/1.0).
 
 ## Versions
 
