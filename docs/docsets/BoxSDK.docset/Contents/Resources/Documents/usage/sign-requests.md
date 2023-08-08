@@ -21,14 +21,14 @@ Create Sign Request
 To create a sign request, call
 [`client.signRequests.create(signers:sourceFiles:parentFolder:parameters:completion:)`][create-sign-request]
 
-You need to provide at least one file (from which the signing document will be created), at least one signer to receive the Sign Request and a destination folder. You should use [`SignRequestCreateSourceFile`][box-sign-request-file]
+You need to provide at least one file and up to ten files (from which the signing document will be created) with at least one signer to receive the Sign Request and a destination folder. You should use [`SignRequestCreateSourceFile`][box-sign-request-file]
 ,[`SignRequestCreateSigner`][box-sign-request-signer] and [`SignRequestCreateParentFolder`][box-sign-request-folder] types to provide the necessary data.
 
 <!-- sample post_sign_requests -->
 ```swift
 
 let signers = [SignRequestCreateSigner(email: "signer@mail.com", role: .approver)]
-let sourceFiles = [SignRequestCreateSourceFile(id: "12345")]
+let sourceFiles = [SignRequestCreateSourceFile(id: "12345"), SignRequestCreateSourceFile(id: "34567")]
 let parentFolder = SignRequestCreateParentFolder(id: "234")
 
 client.signRequests.create(signers: signers, sourceFiles: sourceFiles, parentFolder: parentFolder) { (result: Result<SignRequest, BoxSDKError>) in
