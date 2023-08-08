@@ -173,6 +173,7 @@ private_lane :create_github_pull_request do |options|
     sh("git checkout -b #{commit_version_tag}")
     sh("git add .")
     sh("git commit -am \"#{commit_title}\"")
+    sh("git config --global http.postBuffer 500M")
     sh("git push origin -u #{commit_version_tag}")
 
     if dry_run == true
