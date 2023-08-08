@@ -12,10 +12,6 @@ import Security
 struct KeychainService {
     let secureStoreQueryable: KeychainStoreQueryable
 
-    init(secureStoreQueryable: KeychainStoreQueryable) {
-        self.secureStoreQueryable = secureStoreQueryable
-    }
-
     func set<T: Encodable>(_ value: T?, key: String) throws {
         guard let json = value?.dictionary,
               let data = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions())
