@@ -1,0 +1,15 @@
+name: BoxSDK
+options:
+  bundleIdPrefix: com.box
+targets:
+  BoxSDK:
+    scheme:
+      configVariants:
+    type: framework
+    platform: [iOS, macOS, watchOS, tvOS]
+    deploymentTarget:
+      iOS: "15.0"
+      macOS: "12.0"
+      watchOS: "8.0"
+      tvOS: "15.0"
+    sources: [Sources]
