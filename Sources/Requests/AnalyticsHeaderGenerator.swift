@@ -40,6 +40,8 @@ class AnalyticsHeaderGenerator {
             return WKInterfaceDevice.current().model
         #elseif os(OSX)
             return "macOS"
+        #elseif os(visionOS)
+            return "visionOS"
         #endif
     }()
 
@@ -48,7 +50,7 @@ class AnalyticsHeaderGenerator {
             return UIDevice.current.systemVersion
         #elseif os(watchOS)
             return WKInterfaceDevice.current().systemVersion
-        #elseif os(OSX)
+        #elseif os(OSX) || os(visionOS)
             let version = ProcessInfo.processInfo.operatingSystemVersion
             let versionString = "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
             return versionString
