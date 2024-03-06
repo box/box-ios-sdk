@@ -8,8 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable:next convenience_type
-class BoxJSONDecoder {
+enum BoxJSONDecoder {
 
     static func extractJSON<T>(json: [String: Any], key: String) throws -> T {
         guard let objectJSON = json[key] else {
@@ -144,10 +143,18 @@ class BoxJSONDecoder {
             return nil
         }
 
+        #if compiler(>=5.9)
+            if #available(iOS 17.0, *) {
+                guard let url = URL(string: value, encodingInvalidCharacters: false) else {
+                    throw BoxCodingError(message: .invalidValueFormat(key: key))
+                }
+                return url
+            }
+        #endif
+
         guard let url = URL(string: value) else {
             throw BoxCodingError(message: .invalidValueFormat(key: key))
         }
-
         return url
     }
 
