@@ -18,6 +18,7 @@ extension QuickSpec {
         type: RetentionPolicyType = .finite,
         length: Int? = 1,
         dispositionAction: DispositionAction = .permanentlyDelete,
+        canOwnerExtendRetention: Bool = false,
         callback: @escaping (RetentionPolicy) -> Void
     ) {
         waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
@@ -25,7 +26,8 @@ extension QuickSpec {
                 name: name,
                 type: type,
                 length: length,
-                dispositionAction: dispositionAction
+                dispositionAction: dispositionAction,
+                canOwnerExtendRetention: canOwnerExtendRetention
             ) { result in
                 switch result {
                 case let .success(retention):
