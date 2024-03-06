@@ -77,6 +77,22 @@ public class SignRequestSigner: BoxModel {
     public let redirectUrl: String?
     /// The URL that a signer will be redirect to after declining to sign a document.
     public let declinedRedirectUrl: String?
+    /// This URL is specifically designed for  signing documents within an HTML `iframe` tag.
+    public let iframeableEmbedUrl: String?
+    /// If set to true, signer will need to login to a Box account before signing the request.
+    /// If the signer does not have an existing account, they will have an option to create a free Box account.
+    public let loginRequired: Bool?
+    /// If set, this phone number is be used to verify the signer via two factor authentication before they are able to sign the document.
+    public let verificationPhoneNumber: String?
+    /// If set, the signer is required to enter the password before they are able to sign a document. This field is write only.
+    public let password: String?
+    /// If set, signers who have the same value will be assigned to the same input and to the same signer group.
+    /// A signer group is expected to have more than one signer.
+    /// If the provided value is only used for one signer, this value will be ignored and request will be handled
+    /// as it was intended for an individual signer. The value provided can be any string and only used to
+    /// determine which signers belongs to same group. A successful response will provide a generated UUID value
+    /// instead for signers in the same signer group.
+    public let signerGroupId: String?
 
     /// Initializer.
     ///
@@ -95,5 +111,10 @@ public class SignRequestSigner: BoxModel {
         embedUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "embed_url")
         redirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "redirect_url")
         declinedRedirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "declined_redirect_url")
+        iframeableEmbedUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "iframeable_embed_url")
+        loginRequired = try BoxJSONDecoder.optionalDecode(json: json, forKey: "login_required")
+        verificationPhoneNumber = try BoxJSONDecoder.optionalDecode(json: json, forKey: "verification_phone_number")
+        password = try BoxJSONDecoder.optionalDecode(json: json, forKey: "password")
+        signerGroupId = try BoxJSONDecoder.optionalDecode(json: json, forKey: "signer_group_id")
     }
 }

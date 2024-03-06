@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -119,6 +119,8 @@
 		05F6C90226F137B9008F38C0 /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056FE12726EF6F6800098F00 /* Quick.xcframework */; };
 		05F770D426F337FA00BDECA2 /* FileLogDestinationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */; };
 		05FA797527D793B100669B6D /* CCGAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FA797427D793B100669B6D /* CCGAuthSession.swift */; };
+		05FAB0C72B9782AE000B22E0 /* SignRequestSignatureColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FAB0C62B9782AE000B22E0 /* SignRequestSignatureColor.swift */; };
+		05FAB0CA2B9861B3000B22E0 /* SignRequestSignatureColorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FAB0C82B98614C000B22E0 /* SignRequestSignatureColorSpecs.swift */; };
 		0BD51EDC28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */; };
 		0C00835C229C06FE0067C1AF /* GetFolderInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00835B229C06FE0067C1AF /* GetFolderInfo.json */; };
 		0C00836E229C41CA0067C1AF /* FolderCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C00836D229C41CA0067C1AF /* FolderCollaborations.json */; };
@@ -741,6 +743,8 @@
 		05F59F1026FCAB4E00D9A539 /* ArrayInputStreamSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayInputStreamSpecs.swift; sourceTree = "<group>"; };
 		05F770D326F337FA00BDECA2 /* FileLogDestinationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogDestinationSpec.swift; sourceTree = "<group>"; };
 		05FA797427D793B100669B6D /* CCGAuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCGAuthSession.swift; sourceTree = "<group>"; };
+		05FAB0C62B9782AE000B22E0 /* SignRequestSignatureColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignatureColor.swift; sourceTree = "<group>"; };
+		05FAB0C82B98614C000B22E0 /* SignRequestSignatureColorSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignatureColorSpecs.swift; sourceTree = "<group>"; };
 		0BD51EDB28CF257E000DE69E /* RetentionPoliciesModuleIntegrationSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetentionPoliciesModuleIntegrationSpecs.swift; sourceTree = "<group>"; };
 		0C00835B229C06FE0067C1AF /* GetFolderInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetFolderInfo.json; sourceTree = "<group>"; };
 		0C00835F229C08F40067C1AF /* FolderUploadEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderUploadEmail.swift; sourceTree = "<group>"; };
@@ -1694,6 +1698,7 @@
 				225639202253897D00D951B5 /* SharedLink.swift */,
 				05610A942710612A009F92CC /* SignRequest.swift */,
 				05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */,
+				05FAB0C62B9782AE000B22E0 /* SignRequestSignatureColor.swift */,
 				05610A9627106ACA009F92CC /* SignRequestSigner.swift */,
 				054D789827158DAB00E1E273 /* SignRequestSignerDecision.swift */,
 				05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */,
@@ -2147,6 +2152,7 @@
 				F99DB496233C41440065317F /* RetentionPolicySpecs.swift */,
 				05F59F0826FC871A00D9A539 /* SharedItemSpecs.swift */,
 				05EE814B2718658F006A2329 /* SignRequestPrefillTagSpecs.swift */,
+				05FAB0C82B98614C000B22E0 /* SignRequestSignatureColorSpecs.swift */,
 				05EE814927186427006A2329 /* SignRequestSignerDecisionTypeSpecs.swift */,
 				050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */,
 				05EE814D27186880006A2329 /* SignRequestSignerInputTypeSpecs.swift */,
@@ -2983,6 +2989,7 @@
 				225639AA2253897D00D951B5 /* FilesModule.swift in Sources */,
 				2263863E2306D5BD002CE1BE /* UploadPart.swift in Sources */,
 				9717866B22F0B868004A5F6D /* LockData.swift in Sources */,
+				05FAB0C72B9782AE000B22E0 /* SignRequestSignatureColor.swift in Sources */,
 				9D9C80A422D8E11000AFC18C /* NullableParameter.swift in Sources */,
 				225639322253897D00D951B5 /* Coders.swift in Sources */,
 				22C41459231FDB4B00D3992C /* MetadataCascadePolicy.swift in Sources */,
@@ -3131,6 +3138,7 @@
 				0C506CA922A6AA76007F18A4 /* CollaborationsModuleSpecs.swift in Sources */,
 				97F04DBA22B981430034B9A3 /* GroupSpecs.swift in Sources */,
 				9771D4DF22B01CC200B76DF8 /* CollaborationSpecs.swift in Sources */,
+				05FAB0CA2B9861B3000B22E0 /* SignRequestSignatureColorSpecs.swift in Sources */,
 				0C63989F2253A536004021D3 /* FolderModuleSpecs.swift in Sources */,
 				9DB4F7BC22E1EBAA002C4697 /* BoxModelSpecs.swift in Sources */,
 				8053E2D022B04534000B42E1 /* SharedItemsModuleSpecs.swift in Sources */,
