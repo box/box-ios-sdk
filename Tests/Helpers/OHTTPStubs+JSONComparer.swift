@@ -60,4 +60,27 @@ public extension QuickSpec {
             return match
         }
     }
+
+    static func compareComplexQueryParam(_ key: String, _ partValues: [String], checkClosure _: CheckClosureType? = nil) -> HTTPStubsTestBlock {
+        return { req in
+            if let url = req.url {
+                let comps = NSURLComponents(url: url, resolvingAgainstBaseURL: true)
+                guard let queryItems = comps?.queryItems else {
+                    return false
+                }
+
+                guard let item = queryItems.first(where: { $0.name == key }) else {
+                    return false
+                }
+
+                guard let value = item.value else {
+                    return false
+                }
+
+                return partValues.allSatisfy { value.contains($0) }
+            }
+
+            return false
+        }
+    }
 }

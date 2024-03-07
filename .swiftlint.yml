@@ -117,8 +117,6 @@ identifier_name:
     - id
     - by
 
-empty_count: warning
-
 trailing_whitespace:
   ignores_empty_lines: no
 

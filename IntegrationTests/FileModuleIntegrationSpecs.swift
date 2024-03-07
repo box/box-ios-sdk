@@ -483,7 +483,7 @@ class FileModuleIntegrationSpecs: QuickSpec {
 
                     beforeEach {
                         createFolder(client: client, name: NameGenerator.getUniqueFolderName(), parentId: rootFolder.id) { createdFolder in folder = createdFolder }
-                        createRetention(client: client, name: NameGenerator.getUniqueName(for: "retention")) { createdRetention in retentionPolicy = createdRetention }
+                        createRetention(client: client, name: NameGenerator.getUniqueName(for: "retention"), canOwnerExtendRetention: true) { createdRetention in retentionPolicy = createdRetention }
                         assignRetention(client: client, retention: retentionPolicy, assignedContentId: folder?.id) { _ in }
                         uploadFile(client: client, fileName: IntegrationTestResources.smallPdf.fileName, toFolder: folder?.id) { uploadedFile in file = uploadedFile }
                     }

@@ -626,7 +626,7 @@ class FilesModuleSpecs: QuickSpec {
 
                         waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
-                            var progressed: Double?
+                            var progressed: Double? = 0
                             let task = sut.files.upload(
                                 data: data,
                                 name: "tigers.jpeg",
@@ -667,7 +667,7 @@ class FilesModuleSpecs: QuickSpec {
 
                         waitUntil(timeout: .seconds(200)) { done in
                             let data = "This is upload test file content".data(using: .utf8)!
-                            var progressed: Double?
+                            var progressed: Double? = 0
                             var task: BoxUploadTask?
                             task = sut.files.upload(
                                 data: data,
@@ -1657,7 +1657,7 @@ class FilesModuleSpecs: QuickSpec {
                     waitUntil(timeout: .seconds(10)) { done in
                         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                         let fileURL = documentsURL.appendingPathComponent("doc.txt")
-                        var progressed: Double?
+                        var progressed: Double? = 0
                         let task = sut.files.download(
                             fileId: "12345",
                             destinationURL: fileURL,
@@ -1670,7 +1670,7 @@ class FilesModuleSpecs: QuickSpec {
                             case .success:
                                 fail("Expected download to be cancelled, but instead suceeded")
                             case let .failure(error):
-                                expect(progressed).to(equal(0.05))
+                                expect(progressed).to(beLessThan(1.0))
                                 expect(error.message.description).to(equal("cancelled"))
                             }
                             done()

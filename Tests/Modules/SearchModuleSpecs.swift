@@ -69,7 +69,10 @@ class SearchModuleSpecs: QuickSpec {
                     stub(
                         condition:
                         isHost("api.box.com") && isPath("/2.0/search")
-                            && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"gt\":\"2019-07-24T12:00:00Z\"}}}]"])
+                            && compareComplexQueryParam("mdfilters", ["\"filters\":{\"date\":{\"gt\":\"2019-07-24T12:00:00Z\"}}",
+                                                                      "\"templateKey\":\"marketingCollateral\"",
+                                                                      "\"scope\":\"global\""
+                                ])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -97,7 +100,10 @@ class SearchModuleSpecs: QuickSpec {
                     stub(
                         condition:
                         isHost("api.box.com") && isPath("/2.0/search")
-                            && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"date\":{\"lt\":\"2019-07-24T12:00:00Z\"}}}]"])
+                            && compareComplexQueryParam("mdfilters", ["\"filters\":{\"date\":{\"lt\":\"2019-07-24T12:00:00Z\"}}",
+                                                                      "\"templateKey\":\"marketingCollateral\"",
+                                                                      "\"scope\":\"enterprise\""
+                                ])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -125,7 +131,10 @@ class SearchModuleSpecs: QuickSpec {
                     stub(
                         condition:
                         isHost("api.box.com") && isPath("/2.0/search")
-                            && containsQueryParams(["mdfilters": "[{\"scope\":\"enterprise\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
+                            && compareComplexQueryParam("mdfilters", ["\"filters\":{\"documentType\":\"dataSheet\"}",
+                                                                      "\"templateKey\":\"marketingCollateral\"",
+                                                                      "\"scope\":\"enterprise\""
+                                ])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -153,7 +162,10 @@ class SearchModuleSpecs: QuickSpec {
                     stub(
                         condition:
                         isHost("api.box.com") && isPath("/2.0/search")
-                            && containsQueryParams(["mdfilters": "[{\"scope\":\"global\",\"templateKey\":\"marketingCollateral\",\"filters\":{\"documentType\":\"dataSheet\"}}]"])
+                            && compareComplexQueryParam("mdfilters", ["\"filters\":{\"documentType\":\"dataSheet\"}",
+                                                                      "\"templateKey\":\"marketingCollateral\"",
+                                                                      "\"scope\":\"global\""
+                                ])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
