@@ -77,7 +77,7 @@ public class SignRequestSigner: BoxModel {
     public let redirectUrl: String?
     /// The URL that a signer will be redirect to after declining to sign a document.
     public let declinedRedirectUrl: String?
-    /// This URL is specifically designed for  signing documents within an HTML `iframe` tag.
+    /// This URL is specifically designed for signing documents within an HTML `iframe` tag.
     public let iframeableEmbedUrl: String?
     /// If set to true, signer will need to login to a Box account before signing the request.
     /// If the signer does not have an existing account, they will have an option to create a free Box account.
