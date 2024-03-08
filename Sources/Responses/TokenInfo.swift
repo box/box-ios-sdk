@@ -22,15 +22,21 @@ public class TokenInfo: Codable {
         case issuedTokenType
     }
 
-    var accessToken: String
-    var refreshToken: String?
-    var expiresIn: TimeInterval
-    var tokenType: String
+    /// The access token
+    public let accessToken: String
+    /// The refresh token for this access token, which can be used to request a new access token when the current one expires
+    public let refreshToken: String?
+    /// The time in seconds by which this token will expire
+    public let expiresIn: TimeInterval
+    /// The type of access token returned
+    public let tokenType: String
     private var restrictedTo: [[String: AnyCodable]]?
-    let expiresAt: Date
-    var issuedTokenType: String?
-
-    var restrictedToObjects: [[String: Any]] {
+    /// Expiration date of the token
+    public let expiresAt: Date
+    /// The type of downscoped access token returned. This is only returned if an access token has been downscoped
+    public let issuedTokenType: String?
+    /// The permissions that this access token permits, providing a list of resources (files, folders, etc) and the scopes permitted for each of those resources
+    public var restrictedToObjects: [[String: Any]] {
         guard let unwrappedRestrictedTo = restrictedTo else {
             return []
         }
@@ -71,6 +77,7 @@ public class TokenInfo: Codable {
         self.expiresIn = expiresIn
         self.tokenType = tokenType
         expiresAt = Date(timeInterval: expiresIn, since: Date())
+        issuedTokenType = nil
     }
 
     /// Initializer.
@@ -84,6 +91,7 @@ public class TokenInfo: Codable {
         self.expiresIn = expiresIn
         tokenType = "bearer"
         expiresAt = Date(timeInterval: expiresIn, since: Date())
+        issuedTokenType = nil
     }
 }
 
