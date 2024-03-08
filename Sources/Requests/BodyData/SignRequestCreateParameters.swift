@@ -109,6 +109,20 @@ public struct SignRequestCreateSigner: Encodable {
     public let redirectUrl: String?
     /// The URL that a signer will be redirect to after declining to sign a document.
     public let declinedRedirectUrl: String?
+    /// If set to true, signer will need to login to a Box account before signing the request.
+    /// If the signer does not have an existing account, they will have an option to create a free Box account.
+    public let loginRequired: Bool?
+    /// If set, this phone number is be used to verify the signer via two factor authentication before they are able to sign the document.
+    public let verificationPhoneNumber: String?
+    /// If set, the signer is required to enter the password before they are able to sign a document. This field is write only.
+    public let password: String?
+    /// If set, signers who have the same value will be assigned to the same input and to the same signer group.
+    /// A signer group is expected to have more than one signer.
+    /// If the provided value is only used for one signer, this value will be ignored and request will be handled
+    /// as it was intended for an individual signer. The value provided can be any string and only used to
+    /// determine which signers belongs to same group. A successful response will provide a generated UUID value
+    /// instead for signers in the same signer group.
+    public let signerGroupId: String?
 
     /// Initializer.
     ///
@@ -121,6 +135,12 @@ public struct SignRequestCreateSigner: Encodable {
     ///   - embedUrlExternalUserId: User ID for the signer in an external application responsible for authentication when accessing the embed URL.
     ///   - redirectUrl: The URL that the signer will be redirected to after signing.
     ///   - declinedRedirectUrl: The URL that a signer will be redirect to after declining to sign a document.
+    ///   - loginRequired: If set to true, signer will need to login to a Box account before signing the request.
+    ///   If the signer does not have an existing account, they will have an option to create a free Box account.
+    ///   - verificationPhoneNumber: If set, the signer is required to enter the password before they are able to sign a document. This field is write only.
+    ///   - password: If set, the signer is required to enter the password before they are able to sign a document. This field is write only.
+    ///   - signerGroupId: If set, signers who have the same value will be assigned to the same input and to the same signer group.
+    ///   A signer group is expected to have more than one signer.
     public init(
         email: String,
         role: SignRequestSignerRole? = nil,
@@ -128,7 +148,11 @@ public struct SignRequestCreateSigner: Encodable {
         order: Int? = nil,
         embedUrlExternalUserId: String? = nil,
         redirectUrl: String? = nil,
-        declinedRedirectUrl: String? = nil
+        declinedRedirectUrl: String? = nil,
+        loginRequired: Bool? = nil,
+        verificationPhoneNumber: String? = nil,
+        password: String? = nil,
+        signerGroupId: String? = nil
     ) {
         self.email = email
         self.role = role
@@ -137,6 +161,10 @@ public struct SignRequestCreateSigner: Encodable {
         self.embedUrlExternalUserId = embedUrlExternalUserId
         self.redirectUrl = redirectUrl
         self.declinedRedirectUrl = declinedRedirectUrl
+        self.loginRequired = loginRequired
+        self.verificationPhoneNumber = verificationPhoneNumber
+        self.password = password
+        self.signerGroupId = signerGroupId
     }
 }
 
@@ -170,6 +198,14 @@ public struct SignRequestCreateParameters: Encodable {
     public let redirectUrl: String?
     /// The URL that the signer will be redirected to after declining to sign a document.
     public let declinedRedirectUrl: String?
+    /// Name of the sign request.
+    public let name: String?
+    /// Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
+    public let isPhoneVerificationRequiredToView: Bool?
+    /// When a signature request is created from a template this field will indicate the id of that template.
+    public let templateId: String?
+    /// Specific color for the signature (blue, black, or red).
+    public let signatureColor: SignRequestSignatureColor?
 
     /// Initializer.
     ///
@@ -184,6 +220,10 @@ public struct SignRequestCreateParameters: Encodable {
     ///   - externalId: ID that serve as reference in an external system that the sign request is related to.
     ///   - redirectUrl: The URL that a signer will be redirected to after signing a document.
     ///   - declinedRedirectUrl: The URL that the signer will be redirected to after declining to sign a document.
+    ///   - name: Name of the sign request.
+    ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
+    ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
+    ///   - signatureColor: Force a specific color for the signature (blue, black, or red).
     public init(
         isDocumentPreparationNeeded: Bool? = nil,
         areTextSignaturesEnabled: Bool? = nil,
@@ -194,7 +234,11 @@ public struct SignRequestCreateParameters: Encodable {
         daysValid: Int? = nil,
         externalId: String? = nil,
         redirectUrl: String? = nil,
-        declinedRedirectUrl: String? = nil
+        declinedRedirectUrl: String? = nil,
+        name: String? = nil,
+        isPhoneVerificationRequiredToView: Bool? = nil,
+        templateId: String? = nil,
+        signatureColor: SignRequestSignatureColor? = nil
     ) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.areTextSignaturesEnabled = areTextSignaturesEnabled
@@ -206,5 +250,9 @@ public struct SignRequestCreateParameters: Encodable {
         self.externalId = externalId
         self.redirectUrl = redirectUrl
         self.declinedRedirectUrl = declinedRedirectUrl
+        self.name = name
+        self.isPhoneVerificationRequiredToView = isPhoneVerificationRequiredToView
+        self.templateId = templateId
+        self.signatureColor = signatureColor
     }
 }

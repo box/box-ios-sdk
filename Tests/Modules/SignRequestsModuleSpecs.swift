@@ -39,7 +39,18 @@ class SignRequestsModuleSpecs: QuickSpec {
                                         "email": "example@gmail.com",
                                         "role": "signer",
                                         "redirect_url": "https://box.com/redirect_url_signer_1",
-                                        "declined_redirect_url": "https://box.com/declined_redirect_url_signer_1"
+                                        "declined_redirect_url": "https://box.com/declined_redirect_url_signer_1",
+                                        "login_required": true,
+                                        "password": "1234567890",
+                                        "signer_group_id": "SignerGroup",
+                                        "verification_phone_number": "1234567890"
+                                    ],
+                                    [
+                                        "email": "other-example@gmail.com",
+                                        "role": "signer",
+                                        "login_required": false,
+                                        "signer_group_id": "SignerGroup",
+                                        "verification_phone_number": "1234567890"
                                     ]
                                 ],
                                 "source_files": [["id": "12345", "type": "file"]],
@@ -56,7 +67,12 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 "external_id": "123",
                                 "days_valid": 2,
                                 "redirect_url": "https://box.com/redirect_url",
-                                "declined_redirect_url": "https://box.com/declined_redirect_url"
+                                "declined_redirect_url": "https://box.com/declined_redirect_url",
+                                "name": "Sign Acme",
+                                "is_phone_verification_required_to_view": true,
+                                "template_id": "123075213-af2c8822-3ef2-4952-8557-52d69c2fe9cb",
+                                "signature_color": "black"
+
                             ])
                     ) { _ in
                         HTTPStubsResponse(
@@ -66,12 +82,25 @@ class SignRequestsModuleSpecs: QuickSpec {
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        let signers = [SignRequestCreateSigner(
-                            email: "example@gmail.com",
-                            role: .signer,
-                            redirectUrl: "https://box.com/redirect_url_signer_1",
-                            declinedRedirectUrl: "https://box.com/declined_redirect_url_signer_1"
-                        )]
+                        let signers = [
+                            SignRequestCreateSigner(
+                                email: "example@gmail.com",
+                                role: .signer,
+                                redirectUrl: "https://box.com/redirect_url_signer_1",
+                                declinedRedirectUrl: "https://box.com/declined_redirect_url_signer_1",
+                                loginRequired: true,
+                                verificationPhoneNumber: "1234567890",
+                                password: "1234567890",
+                                signerGroupId: "SignerGroup"
+                            ),
+                            SignRequestCreateSigner(
+                                email: "other-example@gmail.com",
+                                role: .signer,
+                                loginRequired: false,
+                                verificationPhoneNumber: "1234567890",
+                                signerGroupId: "SignerGroup"
+                            )
+                        ]
                         let sourceFiles = [SignRequestCreateSourceFile(id: "12345")]
                         let parentFolder = SignRequestCreateParentFolder(id: "12345")
                         let tags = [
@@ -88,7 +117,11 @@ class SignRequestsModuleSpecs: QuickSpec {
                             daysValid: 2,
                             externalId: "123",
                             redirectUrl: "https://box.com/redirect_url",
-                            declinedRedirectUrl: "https://box.com/declined_redirect_url"
+                            declinedRedirectUrl: "https://box.com/declined_redirect_url",
+                            name: "Sign Acme",
+                            isPhoneVerificationRequiredToView: true,
+                            templateId: "123075213-af2c8822-3ef2-4952-8557-52d69c2fe9cb",
+                            signatureColor: .black
                         )
 
                         sut.signRequests.create(
@@ -106,14 +139,22 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.sourceFiles.first?.name).to(equal("Contract.pdf"))
                                 expect(signRequest.parentFolder.id).to(equal("12345"))
                                 expect(signRequest.parentFolder.name).to(equal("Contracts"))
+                                expect(signRequest.signers.count).to(equal(2))
                                 expect(signRequest.signers[0].redirectUrl).to(equal("https://box.com/redirect_url_signer_1"))
                                 expect(signRequest.signers[0].declinedRedirectUrl).to(equal("https://box.com/declined_redirect_url_signer_1"))
+                                expect(signRequest.signers[0].loginRequired).to(equal(true))
+                                expect(signRequest.signers[0].password).to(equal("1234567890"))
+                                expect(signRequest.signers[0].signerGroupId).to(equal("cd4ff89-8fc1-42cf-8b29-1890dedd26d7"))
+                                expect(signRequest.signers[0].verificationPhoneNumber).to(equal("1234567890"))
                                 expect(signRequest.signers[0].inputs?[0].documentTagId).to(equal("1234"))
                                 expect(signRequest.signers[0].inputs?[0].textValue).to(equal("text"))
                                 expect(signRequest.signers[0].inputs?[0].contentType).to(equal(.text))
                                 expect(signRequest.signers[0].inputs?[1].documentTagId).to(equal("4567"))
                                 expect(signRequest.signers[0].inputs?[1].dateValue).to(equal("2021-12-03".iso8601))
                                 expect(signRequest.signers[0].inputs?[1].contentType).to(equal(.date))
+                                expect(signRequest.signers[1].loginRequired).to(equal(false))
+                                expect(signRequest.signers[1].signerGroupId).to(equal("cd4ff89-8fc1-42cf-8b29-1890dedd26d7"))
+                                expect(signRequest.signers[1].verificationPhoneNumber).to(equal("1234567890"))
                                 expect(signRequest.prefillTags?[0].documentTagId).to(equal("1234"))
                                 expect(signRequest.prefillTags?[0].textValue).to(equal("text"))
                                 expect(signRequest.prefillTags?[1].documentTagId).to(equal("4567"))
@@ -124,6 +165,10 @@ class SignRequestsModuleSpecs: QuickSpec {
                                 expect(signRequest.daysValid).to(equal(2))
                                 expect(signRequest.redirectUrl).to(equal("https://box.com/redirect_url"))
                                 expect(signRequest.declinedRedirectUrl).to(equal("https://box.com/declined_redirect_url"))
+                                expect(signRequest.name).to(equal("Sign Acme"))
+                                expect(signRequest.isPhoneVerificationRequiredToView).to(equal(true))
+                                expect(signRequest.templateId).to(equal("123075213-af2c8822-3ef2-4952-8557-52d69c2fe9cb"))
+                                expect(signRequest.signatureColor).to(equal(.black))
                             case let .failure(error):
                                 fail("Expected call to create to succeed, but it failed: \(error)")
                             }

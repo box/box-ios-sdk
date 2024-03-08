@@ -18,6 +18,10 @@ public enum SignRequestSignerInputType: BoxEnum {
     case text
     /// Checkbox input.
     case checkbox
+    /// Radio
+    case radio
+    /// Dropdown
+    case dropdown
     /// Custom value for enum values not yet implemented in the SDK
     case customValue(String)
 
@@ -31,6 +35,10 @@ public enum SignRequestSignerInputType: BoxEnum {
             self = .text
         case "checkbox":
             self = .checkbox
+        case "radio":
+            self = .radio
+        case "dropdown":
+            self = .dropdown
         default:
             self = .customValue(value)
         }
@@ -46,6 +54,10 @@ public enum SignRequestSignerInputType: BoxEnum {
             return "text"
         case .checkbox:
             return "checkbox"
+        case .radio:
+            return "radio"
+        case .dropdown:
+            return "dropdown"
         case let .customValue(value):
             return value
         }
@@ -82,6 +94,10 @@ public enum SignRequestSignerInputContentType: BoxEnum {
     case checkbox
     /// Attachment
     case attachment
+    /// Radio
+    case radio
+    /// Dropdown
+    case dropdown
     /// Custom value for enum values not yet implemented in the SDK
     case customValue(String)
 
@@ -115,6 +131,10 @@ public enum SignRequestSignerInputContentType: BoxEnum {
             self = .checkbox
         case "attachment":
             self = .attachment
+        case "radio":
+            self = .radio
+        case "dropdown":
+            self = .dropdown
         default:
             self = .customValue(value)
         }
@@ -148,6 +168,10 @@ public enum SignRequestSignerInputContentType: BoxEnum {
             return "checkbox"
         case .attachment:
             return "attachment"
+        case .radio:
+            return "radio"
+        case .dropdown:
+            return "dropdown"
         case let .customValue(value):
             return value
         }

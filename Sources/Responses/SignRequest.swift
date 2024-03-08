@@ -162,6 +162,14 @@ public class SignRequest: BoxModel {
     public let redirectUrl: String?
     /// The URL that a signer will be redirected to after declined signing a document.
     public let declinedRedirectUrl: String?
+    /// Name of the sign request.
+    public let name: String?
+    /// Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
+    public let isPhoneVerificationRequiredToView: Bool?
+    /// When a signature request is created from a template this field will indicate the id of that template.
+    public let templateId: String?
+    /// Specific color for the signature (blue, black, or red).
+    public let signatureColor: SignRequestSignatureColor?
 
     /// Initializer.
     ///
@@ -198,5 +206,9 @@ public class SignRequest: BoxModel {
         externalId = try BoxJSONDecoder.optionalDecode(json: json, forKey: "external_id")
         redirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "redirect_url")
         declinedRedirectUrl = try BoxJSONDecoder.optionalDecode(json: json, forKey: "declined_redirect_url")
+        name = try BoxJSONDecoder.optionalDecode(json: json, forKey: "name")
+        isPhoneVerificationRequiredToView = try BoxJSONDecoder.optionalDecode(json: json, forKey: "is_phone_verification_required_to_view")
+        templateId = try BoxJSONDecoder.optionalDecode(json: json, forKey: "template_id")
+        signatureColor = try BoxJSONDecoder.optionalDecodeEnum(json: json, forKey: "signature_color")
     }
 }
