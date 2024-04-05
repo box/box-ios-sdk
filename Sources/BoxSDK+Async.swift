@@ -11,7 +11,7 @@
 #endif
 import Foundation
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public extension BoxSDK {
 
     // MARK: - JWT Client
