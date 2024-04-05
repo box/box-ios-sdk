@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
+
+
+### New Features and Enhancements
+
+* Add privacy manifest files ([#924](https://github.com/box/box-ios-sdk/issues/924)) ([cbef168](https://github.com/box/box-ios-sdk/commit/cbef168bb872941899be26116c647ac29f5dd44b))
+* Add support for `visionOS` ([#916](https://github.com/box/box-ios-sdk/issues/916)) ([a05b243](https://github.com/box/box-ios-sdk/commit/a05b2433f1b2d0c1ec72f946e0706d03a4548703))
+* Add support for additional fields in `SignRequest` ([#919](https://github.com/box/box-ios-sdk/issues/919)) ([36f464c](https://github.com/box/box-ios-sdk/commit/36f464c23a161f5d0fcc6858c3615d884ce8ee07))
+* Make fields from `TokenInfo` publicly available ([#920](https://github.com/box/box-ios-sdk/issues/920)) ([eb26f47](https://github.com/box/box-ios-sdk/commit/eb26f47bbde6749f44f149e95b3610e41c16d2f2))
+
 ## [5.5.0](https://github.com/box/box-ios-sdk/compare/v5.4.2...v5.5.0) (2023-08-08)
 
 

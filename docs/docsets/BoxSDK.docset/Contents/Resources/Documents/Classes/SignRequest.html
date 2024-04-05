@@ -17,7 +17,7 @@
     <a title="SignRequest Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.5.0 Docs</a> (99% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.6.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -615,6 +615,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignatureColor.html">SignRequestSignatureColor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
@@ -1487,6 +1490,114 @@ Custom styles on these tags are not allowed. If this field is not passed, a defa
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK11SignRequestC4nameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11SignRequestC4nameSSSgvp">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Name of the sign request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK11SignRequestC33isPhoneVerificationRequiredToViewSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/isPhoneVerificationRequiredToView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11SignRequestC33isPhoneVerificationRequiredToViewSbSgvp">isPhoneVerificationRequiredToView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isPhoneVerificationRequiredToView</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK11SignRequestC10templateIdSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/templateId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11SignRequestC10templateIdSSSgvp">templateId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When a signature request is created from a template this field will indicate the id of that template.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">templateId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK11SignRequestC14signatureColorAA0cd9SignatureF0OSgvp"></a>
+                    <a name="//apple_ref/swift/Property/signatureColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK11SignRequestC14signatureColorAA0cd9SignatureF0OSgvp">signatureColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Specific color for the signature (blue, black, or red).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">signatureColor</span><span class="p">:</span> <span class="kt"><a href="../Enums/SignRequestSignatureColor.html">SignRequestSignatureColor</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK11SignRequestC4jsonACSDySSypG_tKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK11SignRequestC4jsonACSDySSypG_tKcfc">init(json:<wbr>)</a>
@@ -1540,7 +1651,7 @@ Custom styles on these tags are not allowed. If this field is not passed, a defa
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2023-08-08)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2024-04-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
