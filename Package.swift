@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 //
 //  BoxSDK.swift
 //  BoxSDK
@@ -25,12 +25,14 @@ let package = Package(
         .target(
             name: "BoxSDK",
             dependencies: [],
-            path: "Sources"
+            path: "Sources",
+            resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
         .testTarget(
             name: "BoxSDKTests",
             dependencies: ["BoxSDK"],
             path: "Tests"
         )
-    ]
+    ],
+     swiftLanguageVersions: [.v5]
 )

@@ -144,7 +144,7 @@ enum BoxJSONDecoder {
         }
 
         #if compiler(>=5.9)
-            if #available(iOS 17.0, *) {
+            if #available(iOS 17.0, macOS 14.0, *) {
                 guard let url = URL(string: value, encodingInvalidCharacters: false) else {
                     throw BoxCodingError(message: .invalidValueFormat(key: key))
                 }

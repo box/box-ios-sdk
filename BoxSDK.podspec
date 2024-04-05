@@ -11,13 +11,13 @@ Pod::Spec.new do |spec|
   spec.social_media_url   = "https://twitter.com/box"
   spec.ios.deployment_target = "11.0"
   spec.source       = { :git => "https://github.com/box/box-ios-sdk.git", :tag => "v"+spec.version.to_s }
-  spec.swift_versions = ["5.0", "5.1", "5.2", "5.3", "5.4", "5.5"]
+  spec.swift_versions = ["5"]
   spec.requires_arc = true
 
   spec.default_subspec = "Core"
   spec.subspec "Core" do |ss|
       ss.source_files  = "Sources/**/*.swift" , "Sources/**/Environment.plist"
-      # spec.exclude_files = "Sources/Exclude"
+      ss.resource_bundle = {"BoxSDK" => "Sources/PrivacyInfo.xcprivacy"}
       ss.framework  = "Foundation"
   end
 end

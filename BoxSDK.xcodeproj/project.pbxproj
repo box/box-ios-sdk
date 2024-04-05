@@ -57,6 +57,7 @@
 		05610A9927107079009F92CC /* SignRequestCreateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9827107079009F92CC /* SignRequestCreateParameters.swift */; };
 		05610A9B271099A7009F92CC /* SignRequestPrefillTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */; };
 		05610A9D27109BFB009F92CC /* SignRequestSignerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */; };
+		056290D12BC03AB0008C2BEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 056290D02BC03AAF008C2BEE /* PrivacyInfo.xcprivacy */; };
 		056B628B2860C16F008E9418 /* SharedLinkDataSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */; };
 		0571FC6328F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6228F7FA07004846E4 /* WebhooksModuleIntegrationSpecs.swift */; };
 		0571FC6728F9491D004846E4 /* QuickSpec+Webhooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571FC6628F9491D004846E4 /* QuickSpec+Webhooks.swift */; };
@@ -684,6 +685,7 @@
 		05610A9827107079009F92CC /* SignRequestCreateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCreateParameters.swift; sourceTree = "<group>"; };
 		05610A9A271099A7009F92CC /* SignRequestPrefillTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTag.swift; sourceTree = "<group>"; };
 		05610A9C27109BFB009F92CC /* SignRequestSignerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInput.swift; sourceTree = "<group>"; };
+		056290D02BC03AAF008C2BEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		056B628A2860C16F008E9418 /* SharedLinkDataSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLinkDataSpecs.swift; sourceTree = "<group>"; };
 		056FE12726EF6F6800098F00 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		056FE12826EF6F6800098F00 /* OHHTTPStubs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OHHTTPStubs.xcframework; path = Carthage/Build/OHHTTPStubs.xcframework; sourceTree = "<group>"; };
@@ -2080,6 +2082,7 @@
 		3549BB541DA38A4000C63030 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				056290D02BC03AAF008C2BEE /* PrivacyInfo.xcprivacy */,
 				3549BB181DA3890B00C63030 /* BoxSDK.h */,
 				3549BB171DA3890B00C63030 /* Info.plist */,
 				3549BB551DA38A5E00C63030 /* Info-tvOS.plist */,
@@ -2611,6 +2614,7 @@
 				B40558B025AD2ABF0068784E /* ZipDownload.json in Resources */,
 				B4882E7325EEFBC600EB57BA /* FolderLocks.json in Resources */,
 				8093D29822FA398500DB628E /* GetWebLink.json in Resources */,
+				056290D12BC03AB0008C2BEE /* PrivacyInfo.xcprivacy in Resources */,
 				B47486CA26013A30005F4475 /* CreateMetadataTemplate2.json in Resources */,
 				B4882E7025EEE12F00EB57BA /* FolderLock.json in Resources */,
 				8093D29A22FA399D00DB628E /* UpdateWebLink.json in Resources */,
