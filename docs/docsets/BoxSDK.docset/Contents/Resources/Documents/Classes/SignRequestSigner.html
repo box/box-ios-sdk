@@ -17,7 +17,7 @@
     <a title="SignRequestSigner Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">BoxSDK 5.5.0 Docs</a> (99% documented)</p>
+        <p><a href="../index.html">BoxSDK 5.6.0 Docs</a> (99% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -615,6 +615,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SharedLinkAccess.html">SharedLinkAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SignRequestSignatureColor.html">SignRequestSignatureColor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SignRequestSignerDecisionType.html">SignRequestSignerDecisionType</a>
@@ -1236,6 +1239,147 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC18iframeableEmbedUrlSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/iframeableEmbedUrl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC18iframeableEmbedUrlSSSgvp">iframeableEmbedUrl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This URL is specifically designed for signing documents within an HTML <code>iframe</code> tag.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">iframeableEmbedUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC13loginRequiredSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/loginRequired" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC13loginRequiredSbSgvp">loginRequired</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If set to true, signer will need to login to a Box account before signing the request.
+If the signer does not have an existing account, they will have an option to create a free Box account.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">loginRequired</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC23verificationPhoneNumberSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/verificationPhoneNumber" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC23verificationPhoneNumberSSSgvp">verificationPhoneNumber</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If set, this phone number is be used to verify the signer via two factor authentication before they are able to sign the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">verificationPhoneNumber</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC8passwordSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/password" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC8passwordSSSgvp">password</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If set, the signer is required to enter the password before they are able to sign a document. This field is write only.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6BoxSDK17SignRequestSignerC13signerGroupIdSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/signerGroupId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6BoxSDK17SignRequestSignerC13signerGroupIdSSSgvp">signerGroupId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If set, signers who have the same value will be assigned to the same input and to the same signer group.
+A signer group is expected to have more than one signer.
+If the provided value is only used for one signer, this value will be ignored and request will be handled
+as it was intended for an individual signer. The value provided can be any string and only used to
+determine which signers belongs to same group. A successful response will provide a generated UUID value
+instead for signers in the same signer group.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">signerGroupId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6BoxSDK17SignRequestSignerC4jsonACSDySSypG_tKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6BoxSDK17SignRequestSignerC4jsonACSDySSypG_tKcfc">init(json:<wbr>)</a>
@@ -1289,7 +1433,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2023-08-08)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/box/box-ios-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2024-04-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
