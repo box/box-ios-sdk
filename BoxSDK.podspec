@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
 
   spec.default_subspec = "Core"
   spec.subspec "Core" do |ss|
-      ss.source_files  = "Sources/**/*.swift" , "Sources/**/Environment.plist"
-      ss.resource_bundle = {"BoxSDK" => "Sources/PrivacyInfo.xcprivacy"}
+      ss.source_files  = "BoxSDK/Sources/**/*.swift" , "BoxSDK/Sources/**/Environment.plist"
+      ss.resource_bundle = {"BoxSDK" => "BoxSDK/Sources/PrivacyInfo.xcprivacy"}
       ss.framework  = "Foundation"
   end
 end
