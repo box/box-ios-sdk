@@ -23,7 +23,7 @@ class URLValidationTest: QuickSpec {
                     URL(string: "https://validurl.com")!,
                     URL(string: "https://api.box.com")!
                 ]
-                validURLs.forEach { url in
+                for url in validURLs {
                     expect { try URLValidation.validate(networkUrl: url) }.toNot(throwError())
                 }
             }
@@ -34,14 +34,14 @@ class URLValidationTest: QuickSpec {
                     URL(string: "http://www.google.com")!
                 ]
 
-                invalidURLs.forEach { url in
+                for url in invalidURLs {
                     do {
                         try URLValidation.validate(networkUrl: url)
                     }
                     catch {
                         guard let boxError = error as? BoxSDKError else {
                             fail("Expected invalid url error, but cought different error \(error.localizedDescription)")
-                            return
+                            continue
                         }
                         expect(boxError.message.description).to(equal("Invalid URL: \(url.absoluteString)"))
                     }

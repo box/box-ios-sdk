@@ -1,5 +1,5 @@
 //
-//  OAuth2SessionUnitSpec.swift
+//  OAuth2SessionSpecs.swift
 //  BoxSDK
 //
 //  Created by Abel Osorio on 5/11/19.

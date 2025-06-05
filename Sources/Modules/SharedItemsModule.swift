@@ -1,5 +1,5 @@
 //
-//  SharedLinksModule.swift
+//  SharedItemsModule.swift
 //  BoxSDK-iOS
 //
 //  Created by Cary Cheng on 6/10/19.

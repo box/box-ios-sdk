@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class NameGenerator {
+enum NameGenerator {
     private static let prefix = "iOS_SDK"
 
     static func getUniqueName(for scope: String) -> String {

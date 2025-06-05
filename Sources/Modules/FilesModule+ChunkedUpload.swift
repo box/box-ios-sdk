@@ -1,5 +1,5 @@
 //
-//  FilesModule.swift
+//  FilesModule+ChunkedUpload.swift
 //  BoxSDK-iOS
 //
 //  Copyright © 2019 Box. All rights reserved.

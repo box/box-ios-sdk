@@ -12,13 +12,14 @@ disabled_rules:
   - statement_position
   - todo
   - blanket_disable_command
+  - non_optional_string_data_conversion
+  - optional_data_string_conversion
   # - trailing_whitespace
 
 #
 # Some rules are only opt-in. Find all the available rules by running: swiftlint rules
 #
 opt_in_rules:
-  - anyobject_protocol
   - array_init
   - attributes
   - closure_end_indentation
@@ -76,15 +77,13 @@ opt_in_rules:
   - unneeded_parentheses_in_closure_argument
   - unowned_variable_capture
   - untyped_error_in_catch
-  - unused_import
-  - unused_declaration
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
   - yoda_condition
 
-# TODO: Enable once these rules are no longer experimental
-# analyzer_rules:
-#   - explicit_self
+analyzer_rules:
+- unused_import
+- unused_declaration
 
 #
 # Paths to include during linting. `--path` is ignored if present.
@@ -118,14 +117,12 @@ identifier_name:
     - by
 
 trailing_whitespace:
-  ignores_empty_lines: no
+  ignores_empty_lines: false
 
 line_length:
-  ignores_function_declarations: yes
-  ignores_comments: yes
-  ignores_urls: yes
-
-line_length:
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_urls: true
   error: 300
   warning: 200
 

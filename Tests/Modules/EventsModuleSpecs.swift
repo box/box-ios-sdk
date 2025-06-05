@@ -1,5 +1,5 @@
 //
-//  EventsSpecs.swift
+//  EventsModuleSpecs.swift
 //  BoxSDK-iOS
 //
 //  Created by Martina Stremenova on 02/08/2019.

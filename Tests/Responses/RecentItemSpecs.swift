@@ -1,5 +1,5 @@
 //
-//  RecentItems.swift
+//  RecentItemSpecs.swift
 //  BoxSDK-iOS
 //
 //  Created by Sujay Garlanka on 8/27/19.

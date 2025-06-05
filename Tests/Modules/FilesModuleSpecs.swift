@@ -1,5 +1,5 @@
 //
-//  BoxFileModulesSpecs.swift
+//  FilesModuleSpecs.swift
 //  BoxSDK
 //
 //  Created by Abel Osorio on 3/28/19.

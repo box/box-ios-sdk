@@ -53,7 +53,7 @@ public struct SharedLinkData: Encodable {
     /// - Parameters:
     ///   - permissions: Array of permissions that should be excluded during copying
     /// - Returns: Returns copied SharedLinkData object.
-    internal func copyWithoutPermissions(_ permissions: [String]?) -> SharedLinkData {
+    func copyWithoutPermissions(_ permissions: [String]?) -> SharedLinkData {
         guard let permissions = permissions, let sourcePermissions = self.permissions else {
             return self
         }
