@@ -9,7 +9,7 @@
 import Foundation
 
 /// Provides method for converting Callback based API into an async API
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public enum AsyncHelper {
 
     /// Converting a Callback based API into an async API.
