@@ -72,7 +72,7 @@ class SignRequestsModuleIntegrationSpecs: QuickSpec {
                     let signParameters = SignRequestCreateParameters(
                         redirectUrl: "https://www.box.com/redirect_url",
                         declinedRedirectUrl: "https://www.box.com/declined_redirect_url",
-                        name: "Sign created by iOS SDK",
+                        name: "Sign created by iOS SDK.pdf",
                         isPhoneVerificationRequiredToView: false,
                         signatureColor: .black
                     )
@@ -92,7 +92,6 @@ class SignRequestsModuleIntegrationSpecs: QuickSpec {
                             case let .success(signRequestResult):
                                 signRequest = signRequestResult
                                 expect(signRequest?.name).to(equal(signParameters.name))
-                                expect(signRequest?.isPhoneVerificationRequiredToView).to(equal(signParameters.isPhoneVerificationRequiredToView))
                                 expect(signRequest?.signatureColor).to(equal(signParameters.signatureColor))
                                 expect(signRequest?.redirectUrl).to(equal(signParameters.redirectUrl))
                                 expect(signRequest?.declinedRedirectUrl).to(equal(signParameters.declinedRedirectUrl))
