@@ -9,7 +9,7 @@
 import Foundation
 
 /// Provides paged iterator access for a collection of BoxModel's
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public extension PagingIterator {
 
     /// Gets next page of elements from the iterator

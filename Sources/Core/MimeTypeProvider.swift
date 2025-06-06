@@ -32,7 +32,7 @@ enum MimeTypeProvider {
             return defaultMimeType
         }
 
-        if #available(iOS 14, macOS 11.0, *) {
+        if #available(iOS 14, macOS 11.0, watchOS 7.0, tvOS 14.0, *) {
             return UTType(filenameExtension: pathExtension)?.preferredMIMEType ?? defaultMimeType
         }
         else {
