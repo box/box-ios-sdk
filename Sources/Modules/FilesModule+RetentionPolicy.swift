@@ -1,5 +1,5 @@
 //
-//  RetentionPolicy+File.swift
+//  FilesModule+RetentionPolicy.swift
 //  BoxSDK-iOS
 //
 //  Created by Martina Stremenova on 01/09/2019.

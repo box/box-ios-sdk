@@ -31,7 +31,6 @@ import Foundation
                 return "iPhone Simulator"
             case "arm64":
                 return "iPhone Simulator"
-
             case "iPhone1,1":
                 return "iPhone"
             case "iPhone1,2":
@@ -102,7 +101,6 @@ import Foundation
                 return "iPhone 11 Pro"
             case "iPhone12,5":
                 return "iPhone 11 Pro Max"
-
             case "iPod1,1":
                 return "1st Gen iPod"
             case "iPod2,1":
@@ -117,7 +115,6 @@ import Foundation
                 return "6th Gen iPod"
             case "iPod9,1":
                 return "7th Gen iPod"
-
             case "iPad1,1":
                 return "iPad"
             case "iPad1,2":
@@ -226,7 +223,6 @@ import Foundation
                 return "iPad Air 3rd Gen (WiFi)"
             case "iPad11,4":
                 return "iPad Air 3rd Gen"
-
             case "Watch1,1":
                 return "Apple Watch 38mm case"
             case "Watch1,2":
@@ -263,7 +259,6 @@ import Foundation
                 return "Apple Watch Series 5 40mm case (GPS+Cellular)"
             case "Watch5,4":
                 return "Apple Watch Series 5 44mm case (GPS+Cellular)"
-
             default:
                 return identifier
             }

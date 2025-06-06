@@ -1,5 +1,5 @@
 //
-//  Optional.swift
+//  NullableParameter.swift
 //  BoxSDK-iOS
 //
 //  Created by Martina Stremenova on 12/07/2019.

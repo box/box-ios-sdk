@@ -1,5 +1,5 @@
 //
-//  QuickSpec+Weblinks.swift
+//  QuickSpec+WebLinks.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 14/10/2022.

@@ -50,7 +50,6 @@ public enum CollaborationStatus: BoxEnum {
     }
 }
 
-// swiftlint:disable:next line_length
 /// The level of access granted. To see exactly which role has which permission, please look [here](https://community.box.com/t5/Collaboration-and-Sharing/What-Are-The-Different-Access-Levels-For-Collaborators/ta-p/144)
 public enum CollaborationRole: BoxEnum {
     /// Editor role

@@ -1,5 +1,5 @@
 //
-//  OAuthWebAuthtentication.swift
+//  OAuthWebAuthentication.swift
 //  BoxSDK
 //
 //  Created by Abel Osorio on 4/23/19.

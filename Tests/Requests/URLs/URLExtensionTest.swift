@@ -1,5 +1,5 @@
 //
-//  URLCreationTest.swift
+//  URLExtensionTest.swift
 //  BoxSDKTests-iOS
 //
 //  Created by Martina Stremenova on 10/07/2019.

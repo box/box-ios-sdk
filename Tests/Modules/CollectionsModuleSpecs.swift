@@ -1,5 +1,5 @@
 //
-//  CollectionsModulesSpecs.swift
+//  CollectionsModuleSpecs.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 06/04/19.

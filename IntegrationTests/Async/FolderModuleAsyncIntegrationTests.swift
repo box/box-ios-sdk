@@ -1,5 +1,5 @@
 //
-//  FolderModuleAsyncTests.swift
+//  FolderModuleAsyncIntegrationTests.swift
 //  BoxSDKIntegrationTests-iOS
 //
 //  Created by Artur Jankowski on 24/05/2022.

@@ -80,7 +80,6 @@ public struct BoxRequestDescription {
         dict["method"] = method
         dict["url"] = url.getDictionary()
         dict["headers"] = headers
-        // swiftlint:disable:next force_https
         dict["body"] = body
         return dict
     }

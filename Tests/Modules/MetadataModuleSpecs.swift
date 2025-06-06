@@ -1,5 +1,5 @@
 //
-//  BoxFileModulesSpecs.swift
+//  MetadataModuleSpecs.swift
 //  BoxSDK
 //
 //  Created by Daniel Cech on 6/20/19.

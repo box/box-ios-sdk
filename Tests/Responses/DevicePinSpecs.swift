@@ -1,5 +1,5 @@
 //
-//  GroupSpecs.swift
+//  DevicePinSpecs.swift
 //  BoxSDKTests-iOS
 //
 //  Created by Matthew Willer on 6/18/19.

@@ -1,5 +1,5 @@
 //
-//  GroupSpecs.swift
+//  GroupMembershipSpecs.swift
 //  BoxSDKTests-iOS
 //
 //  Created by Matthew Willer on 6/18/19.
