@@ -128,7 +128,7 @@ client.users.getCurrentUser() { result in
 
 [dev-console]: https://app.box.com/developers/console
 
-The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/main/docs/usage).
+The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/main/BoxSDK/docs/usage).
 
 The Jazzy docs that show class, method, variable, etc definitions can be found [here](https://opensource.box.com/box-ios-sdk/).
 
@@ -141,7 +141,7 @@ A sample app using OAuth2 Authentication can be found in the repository [here][o
 how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
 
 [oauth2-sample-app]:
-https://github.com/box/box-ios-sdk/tree/main/SampleApps/OAuth2SampleApp
+https://github.com/box/box-ios-sdk/tree/main/BoxSDK/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 
@@ -180,7 +180,7 @@ A sample app using JWT Authentication can be found in the repository [here][jwt-
 set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
 tokens.
 
-[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/main/SampleApps/JWTSampleApp
+[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/main/BoxSDK/SampleApps/JWTSampleApp
 
 To execute the sample app:
 

@@ -4,5 +4,6 @@ github_url: https://github.com/box/box-ios-sdk
 root_url: https://box.github.io/box-ios-sdk/
 module: BoxSDK
 output: docs
+readme: ../README.md
 theme: fullwidth
 xcodebuild_arguments: [-workspace, 'BoxSDK.xcworkspace', -scheme, 'BoxSDK-iOS']
