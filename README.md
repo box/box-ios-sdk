@@ -45,8 +45,8 @@ Box iOS SDK
 Requirements
 ------------------
 
-- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+
-- Xcode 10.0+
+- iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+
+- Xcode 13.3+
 
 Installing the SDK
 ------------------
