@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.7
 //
 //  BoxSDK.swift
 //  BoxSDK
@@ -10,7 +10,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "BoxSDK",
+    name: "BoxSDKSuite",
     platforms: [
         .iOS(.v11)
     ],
@@ -25,13 +25,8 @@ let package = Package(
         .target(
             name: "BoxSDK",
             dependencies: [],
-            path: "Sources",
+            path: "BoxSDK/Sources",
             resources: [.copy("PrivacyInfo.xcprivacy")]
-        ),
-        .testTarget(
-            name: "BoxSDKTests",
-            dependencies: ["BoxSDK"],
-            path: "Tests"
         )
     ],
     swiftLanguageVersions: [.v5]

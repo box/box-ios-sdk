@@ -309,7 +309,7 @@ end
   desc "Update jazzy documentation"
   private_lane :update_documentation do |options|
     Dir.chdir("..") do
-      sh("bundle exec jazzy --output docs")
+      sh("bundle exec jazzy --config .jazzy.yml")
     end
   end
 

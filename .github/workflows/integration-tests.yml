@@ -26,10 +26,12 @@ jobs:
           bundler-cache: true
       - name: Setup carthage dependencies
         run: ./scripts/bootstrap
+        working-directory: BoxSDK
       - name: Run Integration Tests
         run: |
           echo "${INTEGRATION_TESTING_CONFIG}" > IntegrationTests/Resources/Configuration.json
           set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDKIntegrationTests-iOS -destination "${{ matrix.destination }}" -configuration Debug ENABLE_TESTABILITY=YES test
+        working-directory: BoxSDK
         env:
           INTEGRATION_TESTING_CONFIG: ${{secrets.INTEGRATION_TESTING_CONFIG}}
 
