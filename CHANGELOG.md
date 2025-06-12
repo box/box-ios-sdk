@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.7.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v5.7.0) (2025-06-12)
+
+
+### New Features and Enhancements
+
+* Adjust code to `watchOS` and `tvOS` ([#934](https://github.com/box/box-ios-sdk/issues/934)) ([3f3c120](https://github.com/box/box-ios-sdk/commit/3f3c1204714785299a349dfc341c08adf95ee4e3))
+
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
 
