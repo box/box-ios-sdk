@@ -6,6 +6,9 @@
 # Icon must end with two \r
 Icon
 
+# Ignore any directory ending with @tmp
+**/*@tmp/
+
 # Thumbnails
 ._*
 
@@ -93,7 +96,7 @@ Pods/
 #
 undocumented.json
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
+BoxSDK/fastlane/report.xml
+BoxSDK/fastlane/Preview.html
+BoxSDK/fastlane/screenshots
+BoxSDK/fastlane/test_output

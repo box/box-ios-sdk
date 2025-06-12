@@ -4,7 +4,7 @@
 #############
 # 1) Make sure to run `bundle install` before first run this script in root directory of this repository.
 # 2) The computer that invoke these script should have installed node.js with standard-version package.
-# 3) To run `bundle exec fastlane make_publish_pod` command, system enviornment `COCOAPODS_TRUNK_TOKEN` should be set to a valid token.
+# 3) To run `bundle exec fastlane make_publish_pod` command, system environment `COCOAPODS_TRUNK_TOKEN` should be set to a valid token.
 #
 # USAGE:
 #############
@@ -16,25 +16,25 @@
 # PARAMETERS:
 #############
 # version:              Optional parameter. It determines which version we want to release
-#                       in format: <MAJOR>.<MINOR>.<PATCH>. 
-#                       When not specified then new version will be based on the previous one with consider commits convetions.
+#                       in format: <MAJOR>.<MINOR>.<PATCH>.
+#                       When not specified then new version will be based on the previous one with consider commits conventions.
 #                       e.g. version:9.1.1
 #                       e.g. version:10.11.12
-#     
+#
 # github_token:         Required only if we don't have defined environment variable name "GITHUB_TOKEN".
 #                       It's a personal API Token for GitHub - generate one at https://github.com/settings/tokens
 #                       It is needed to communicate with GitHub.
 #                       e.g. github_token:secret_token_123
-#     
+#
 # dry_run:              Optional parameter. Default value is false.
 #                       If false then no any changes will be made on external systems.
 #                       e.g. dry_run:true
-#     
-# release_branch:       Optional paremeter. Default value is "main".
-#                       It specifies the branch used to create release.
-#                       e.g. release_branch:relese_beta_10.11.12
 #
-# skip_setup_git_user: Optional parameter. Default value is fasle.
+# release_branch:       Optional parameter. Default value is "main".
+#                       It specifies the branch used to create release.
+#                       e.g. release_branch:release_beta_10.11.12
+#
+# skip_setup_git_user: Optional parameter. Default value is false.
 #                      It `true` then local git config and `origin` will be used without any modification.
 #                      Otherwise these settings will be overwritten by `git_user_name`, `git_user_email`
 #                      and `origin` will be set to https url with github_token.
@@ -72,7 +72,7 @@ platform :ios do
     end
 
     setup_git_user(
-      git_user_name: git_user_name, 
+      git_user_name: git_user_name,
       git_user_email: git_user_email,
       github_token: github_token,
       skip_setup_git_user: skip_setup_git_user
@@ -141,13 +141,17 @@ platform :ios do
 
     if dry_run == true
       UI.important("Running in \"dry run\" mode. Publish to cocoapods won't happen.")
+
+      Dir.chdir("../..") do
+		  sh("bundle exec pod lib lint --allow-warnings #{podpsec_name} --verbose")
+      end
     else
       if trunk_token.nil?
         UI.user_error!("System environment \"COCOAPODS_TRUNK_TOKEN\" is required to publish a pod. Aborting script.")
       end
-    
-      Dir.chdir("..") do
-        sh("bundle exec pod lib lint --allow-warnings")
+
+      Dir.chdir("../..") do
+        sh("bundle exec pod lib lint --allow-warnings #{podpsec_name} --verbose")
         sh("bundle exec pod trunk push #{podpsec_name} --allow-warnings")
       end
     end
@@ -197,7 +201,7 @@ end
 desc "Create release on GitHub"
 private_lane :create_github_release do |options|
   version = options[:version]
-  version_tag = "v#{version}"
+  version_tag = "#{version}"
   release_notes = options[:release_notes]
   github_token = options[:github_token]
   release_branch = options[:release_branch]
@@ -249,11 +253,11 @@ end
     version = options[:version]
     major_version = version.split('.').first.to_i
     dependency_version = "#{major_version}.0"
-    
+
     # Update BoxSDK.podspec
     podspec_path = ENV["PODSPEC_PATH"]
     sh("sed -i '' -E 's|(.*spec.version.* = ).*|\\1\"#{version}\"|g' #{podspec_path}")
-    
+
     # # Update Info.plist
     info_plist_path = ENV["INFO_PLIST_PATH"]
     sh("plutil -replace CFBundleShortVersionString -string \"#{version}\" #{info_plist_path}")
@@ -282,11 +286,11 @@ end
     version = options[:version]
     escaped_version = sh("echo \"#{version}\" | sed -E 's/(\\.)/\\\\\\./g' | tr -d \"\n\"")
     release_notes = ""
-    
-    Dir.chdir("..") do
+
+    Dir.chdir("../..") do
       release_notes = sh("sed -nE '/^#\{1,\} \\[#{escaped_version}\\]/,/^#\{1,\} \\[[0-9]+\.[0-9]+\.[0-9]+\\]/p' CHANGELOG.md | sed '1,2d' | sed '$d'")
     end
-    
+
     release_notes
   end
 
@@ -295,7 +299,7 @@ end
     version = options[:version]
     update_changelog_script_path = ENV["UPDATE_CHANGELOG_SCRIPT_PATH"]
 
-    Dir.chdir("..") do
+    Dir.chdir("../..") do
       sh("standard-version --skip.tag --skip.commit --release-as #{version}")
       sh("#{update_changelog_script_path}")
     end
