@@ -2,10 +2,11 @@ name: build-and-test
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - sdk-gen
   push:
-    branches: [main]
-
+    branches:
+      - sdk-gen
 jobs:
   check-xcodeproj:
     name: Check Xcode Project
