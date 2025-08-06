@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2BB70A80F44A1560FF638B79"
-               BuildableName = "BoxSdkGen.framework"
-               BlueprintName = "BoxSdkGen_watchOS"
-               ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+               BlueprintIdentifier = "4CBEFDADD7B0D47B82C713DF"
+               BuildableName = "BoxSDKGenTests_watchOS.xctest"
+               BlueprintName = "BoxSDKGenTests_watchOS"
+               ReferencedContainer = "container:BoxSDKGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,13 +29,19 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       onlyGenerateCoverageForSpecifiedTargets = "NO">
+      <TestPlans>
+         <TestPlanReference
+            default = "YES"
+            reference = "container:Tests/BoxSDKGenTests.xctestplan">
+         </TestPlanReference>
+      </TestPlans>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB70A80F44A1560FF638B79"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_watchOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "4CBEFDADD7B0D47B82C713DF"
+            BuildableName = "BoxSDKGenTests_watchOS.xctest"
+            BlueprintName = "BoxSDKGenTests_watchOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -56,10 +62,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB70A80F44A1560FF638B79"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_watchOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "4CBEFDADD7B0D47B82C713DF"
+            BuildableName = "BoxSDKGenTests_watchOS.xctest"
+            BlueprintName = "BoxSDKGenTests_watchOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CommandLineArguments>
@@ -76,10 +82,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB70A80F44A1560FF638B79"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_watchOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "4CBEFDADD7B0D47B82C713DF"
+            BuildableName = "BoxSDKGenTests_watchOS.xctest"
+            BlueprintName = "BoxSDKGenTests_watchOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

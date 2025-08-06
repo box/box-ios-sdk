@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2BC78A2B0E1559B2E573B713"
-               BuildableName = "BoxSdkGen.framework"
-               BlueprintName = "BoxSdkGen_macOS"
-               ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+               BlueprintIdentifier = "A90D7C873B2343A723F25E05"
+               BuildableName = "BoxSDKGen.framework"
+               BlueprintName = "BoxSDKGen_macOS"
+               ReferencedContainer = "container:BoxSDKGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BC78A2B0E1559B2E573B713"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_macOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "A90D7C873B2343A723F25E05"
+            BuildableName = "BoxSDKGen.framework"
+            BlueprintName = "BoxSDKGen_macOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -56,10 +56,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BC78A2B0E1559B2E573B713"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_macOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "A90D7C873B2343A723F25E05"
+            BuildableName = "BoxSDKGen.framework"
+            BlueprintName = "BoxSDKGen_macOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CommandLineArguments>
@@ -76,10 +76,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BC78A2B0E1559B2E573B713"
-            BuildableName = "BoxSdkGen.framework"
-            BlueprintName = "BoxSdkGen_macOS"
-            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
+            BlueprintIdentifier = "A90D7C873B2343A723F25E05"
+            BuildableName = "BoxSDKGen.framework"
+            BlueprintName = "BoxSDKGen_macOS"
+            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -24,4 +24,4 @@ jobs:
           token: ${{ secrets.DISPATCH_ACCESS_TOKEN }}
           repository: box/box-developer-changelog
           event-type: new-release-note
-          client-payload: '{"ref": "${{ github.ref }}", "repository": "${{github.repository}}", "labels": "sdks,swift", "repo_display_name": "Box Swift SDK Generated"}'
+          client-payload: '{"ref": "${{ github.ref }}", "repository": "${{github.repository}}", "labels": "sdks,swift", "repo_display_name": "Box iOS SDK"}'

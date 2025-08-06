@@ -14,9 +14,9 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:BoxSdkGen.xcodeproj",
+        "containerPath" : "container:BoxSDKGen.xcodeproj",
         "identifier" : "31869E9885AFFB43C63A9436",
-        "name" : "BoxSdkGenTests"
+        "name" : "BoxSDKGenTests"
       }
     }
   ],

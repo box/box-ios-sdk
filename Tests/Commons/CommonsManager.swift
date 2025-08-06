@@ -1,5 +1,5 @@
 import Foundation
-import BoxSdkGen
+import BoxSDKGen
 
 public class CommonsManager {
     public init() {
