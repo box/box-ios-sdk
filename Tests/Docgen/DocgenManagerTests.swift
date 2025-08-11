@@ -25,7 +25,7 @@ class DocgenManagerTests: RetryableTestCase {
             XCTAssertTrue(Utils.Strings.toString(value: docgenBatchJobs.entries![0].status) != "")
             XCTAssertTrue(docgenBatchJobs.entries![0].templateFile.id == uploadedFile.id)
             XCTAssertTrue(docgenBatchJobs.entries![0].batch.id == docgenBatch.id)
-            let docgenJobs: DocGenJobsFullV2025R0 = try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(500)))
+            let docgenJobs: DocGenJobsFullV2025R0 = try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(10000)))
             XCTAssertTrue(docgenJobs.entries!.count >= 1)
             XCTAssertTrue(docgenJobs.entries![0].batch.id != "")
             XCTAssertTrue(docgenJobs.entries![0].createdBy.id != "")
