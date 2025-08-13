@@ -46,7 +46,7 @@ See the endpoint docs at
 
 <!-- sample get_docgen_jobs_v2025.0 -->
 ```
-try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(500)))
+try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(10000)))
 ```
 
 ### Arguments

@@ -1,5 +1,5 @@
 import Foundation
-import BoxSDKGen
+import BoxSdkGen
 import XCTest
 
 class FilesManagerTests: RetryableTestCase {

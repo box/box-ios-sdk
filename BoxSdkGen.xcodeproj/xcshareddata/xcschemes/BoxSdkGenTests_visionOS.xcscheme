@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DABC189B4A283F94BA4E7684"
-               BuildableName = "BoxSDKGenTests_iOS.xctest"
-               BlueprintName = "BoxSDKGenTests_iOS"
-               ReferencedContainer = "container:BoxSDKGen.xcodeproj">
+               BlueprintIdentifier = "F94213E9972E54674A401252"
+               BuildableName = "BoxSdkGenTests_visionOS.xctest"
+               BlueprintName = "BoxSdkGenTests_visionOS"
+               ReferencedContainer = "container:BoxSdkGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,16 +32,16 @@
       <TestPlans>
          <TestPlanReference
             default = "YES"
-            reference = "container:Tests/BoxSDKGenTests.xctestplan">
+            reference = "container:Tests/BoxSdkGenTests.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DABC189B4A283F94BA4E7684"
-            BuildableName = "BoxSDKGenTests_iOS.xctest"
-            BlueprintName = "BoxSDKGenTests_iOS"
-            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
+            BlueprintIdentifier = "F94213E9972E54674A401252"
+            BuildableName = "BoxSdkGenTests_visionOS.xctest"
+            BlueprintName = "BoxSdkGenTests_visionOS"
+            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -62,10 +62,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DABC189B4A283F94BA4E7684"
-            BuildableName = "BoxSDKGenTests_iOS.xctest"
-            BlueprintName = "BoxSDKGenTests_iOS"
-            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
+            BlueprintIdentifier = "F94213E9972E54674A401252"
+            BuildableName = "BoxSdkGenTests_visionOS.xctest"
+            BlueprintName = "BoxSdkGenTests_visionOS"
+            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CommandLineArguments>
@@ -82,10 +82,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DABC189B4A283F94BA4E7684"
-            BuildableName = "BoxSDKGenTests_iOS.xctest"
-            BlueprintName = "BoxSDKGenTests_iOS"
-            ReferencedContainer = "container:BoxSDKGen.xcodeproj">
+            BlueprintIdentifier = "F94213E9972E54674A401252"
+            BuildableName = "BoxSdkGenTests_visionOS.xctest"
+            BlueprintName = "BoxSdkGenTests_visionOS"
+            ReferencedContainer = "container:BoxSdkGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
