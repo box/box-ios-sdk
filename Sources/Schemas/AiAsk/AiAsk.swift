@@ -20,12 +20,12 @@ public class AiAsk: Codable, RawJSONReadable {
     }
 
 
-    /// Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files, 
-    /// whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed. 
-    /// Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages 
-    /// for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will 
-    /// be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only. 
-    /// Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only 
+    /// Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files,
+    /// whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed.
+    /// Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages
+    /// for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will
+    /// be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only.
+    /// Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only
     /// process the text.
     public let mode: AiAskModeField
 
@@ -42,17 +42,17 @@ public class AiAsk: Codable, RawJSONReadable {
     /// A flag to indicate whether citations should be returned.
     public let includeCitations: Bool?
 
-    public let aiAgent: AiAgentAskOrAiAgentReference?
+    public let aiAgent: AiAskAgent?
 
     /// Initializer for a AiAsk.
     ///
     /// - Parameters:
-    ///   - mode: Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files, 
-    ///     whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed. 
-    ///     Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages 
-    ///     for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will 
-    ///     be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only. 
-    ///     Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only 
+    ///   - mode: Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files,
+    ///     whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed.
+    ///     Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages
+    ///     for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will
+    ///     be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only.
+    ///     Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only
     ///     process the text.
     ///   - prompt: The prompt provided by the client to be answered by the LLM.
     ///     The prompt's length is limited to 10000 characters.
@@ -60,7 +60,7 @@ public class AiAsk: Codable, RawJSONReadable {
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
-    public init(mode: AiAskModeField, prompt: String, items: [AiItemAsk], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAskOrAiAgentReference? = nil) {
+    public init(mode: AiAskModeField, prompt: String, items: [AiItemAsk], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAskAgent? = nil) {
         self.mode = mode
         self.prompt = prompt
         self.items = items
@@ -76,7 +76,7 @@ public class AiAsk: Codable, RawJSONReadable {
         items = try container.decode([AiItemAsk].self, forKey: .items)
         dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
         includeCitations = try container.decodeIfPresent(Bool.self, forKey: .includeCitations)
-        aiAgent = try container.decodeIfPresent(AiAgentAskOrAiAgentReference.self, forKey: .aiAgent)
+        aiAgent = try container.decodeIfPresent(AiAskAgent.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {

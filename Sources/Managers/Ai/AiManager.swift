@@ -45,13 +45,13 @@ public class AiManager {
     /// - Parameters:
     ///   - queryParams: Query parameters of getAiAgentDefaultConfig method
     ///   - headers: Headers of getAiAgentDefaultConfig method
-    /// - Returns: The `AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen`.
+    /// - Returns: The `AiAgent`.
     /// - Throws: The `GeneralError`.
-    public func getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams, headers: GetAiAgentDefaultConfigHeaders = GetAiAgentDefaultConfigHeaders()) async throws -> AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen {
+    public func getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams, headers: GetAiAgentDefaultConfigHeaders = GetAiAgentDefaultConfigHeaders()) async throws -> AiAgent {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["mode": Utils.Strings.toString(value: queryParams.mode), "language": Utils.Strings.toString(value: queryParams.language), "model": Utils.Strings.toString(value: queryParams.model)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
-        return try AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen.deserialize(from: response.data!)
+        return try AiAgent.deserialize(from: response.data!)
     }
 
     /// Sends an AI request to supported Large Language Models (LLMs) and extracts metadata in form of key-value pairs.

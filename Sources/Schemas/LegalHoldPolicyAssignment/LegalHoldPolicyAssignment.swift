@@ -26,7 +26,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
 
     public let legalHoldPolicy: LegalHoldPolicyMini?
 
-    public let assignedTo: FileOrFolderOrWebLink?
+    public let assignedTo: LegalHoldPolicyAssignedItem?
 
     public let assignedBy: UserMini?
 
@@ -56,7 +56,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     ///     delete, this isn't quite the same time that the
     ///     assignment is fully deleted). If null, Assignment
     ///     was not deleted.
-    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: FileOrFolderOrWebLink? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, deletedAt: Date? = nil) {
+    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: LegalHoldPolicyAssignedItem? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, deletedAt: Date? = nil) {
         self.legalHoldPolicy = legalHoldPolicy
         self.assignedTo = assignedTo
         self.assignedBy = assignedBy
@@ -69,7 +69,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         legalHoldPolicy = try container.decodeIfPresent(LegalHoldPolicyMini.self, forKey: .legalHoldPolicy)
-        assignedTo = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .assignedTo)
+        assignedTo = try container.decodeIfPresent(LegalHoldPolicyAssignedItem.self, forKey: .assignedTo)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
         assignedAt = try container.decodeDateTimeIfPresent(forKey: .assignedAt)
         deletedAt = try container.decodeDateTimeIfPresent(forKey: .deletedAt)

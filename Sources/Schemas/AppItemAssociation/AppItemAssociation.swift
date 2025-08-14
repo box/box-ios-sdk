@@ -25,7 +25,7 @@ public class AppItemAssociation: Codable, RawJSONReadable {
 
     public let appItem: AppItem
 
-    public let item: FileBaseOrFolderBaseOrWebLinkBase
+    public let item: AppItemAssociatedItem
 
     /// The value will always be `app_item_association`.
     public let type: AppItemAssociationTypeField
@@ -37,7 +37,7 @@ public class AppItemAssociation: Codable, RawJSONReadable {
     ///   - appItem: 
     ///   - item: 
     ///   - type: The value will always be `app_item_association`.
-    public init(id: String, appItem: AppItem, item: FileBaseOrFolderBaseOrWebLinkBase, type: AppItemAssociationTypeField = AppItemAssociationTypeField.appItemAssociation) {
+    public init(id: String, appItem: AppItem, item: AppItemAssociatedItem, type: AppItemAssociationTypeField = AppItemAssociationTypeField.appItemAssociation) {
         self.id = id
         self.appItem = appItem
         self.item = item
@@ -48,7 +48,7 @@ public class AppItemAssociation: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         appItem = try container.decode(AppItem.self, forKey: .appItem)
-        item = try container.decode(FileBaseOrFolderBaseOrWebLinkBase.self, forKey: .item)
+        item = try container.decode(AppItemAssociatedItem.self, forKey: .item)
         type = try container.decode(AppItemAssociationTypeField.self, forKey: .type)
     }
 

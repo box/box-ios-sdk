@@ -19,7 +19,7 @@ public class MetadataTemplateFieldsOptionsField: Codable, RawJSONReadable {
     /// option and the internal key used when updating templates.
     public let key: String
 
-    /// The internal unique identifier of the the option.
+    /// The internal unique identifier of the option.
     public let id: String?
 
     /// Initializer for a MetadataTemplateFieldsOptionsField.
@@ -27,7 +27,7 @@ public class MetadataTemplateFieldsOptionsField: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - key: The text value of the option. This represents both the display name of the
     ///     option and the internal key used when updating templates.
-    ///   - id: The internal unique identifier of the the option.
+    ///   - id: The internal unique identifier of the option.
     public init(key: String, id: String? = nil) {
         self.key = key
         self.id = id

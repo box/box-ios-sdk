@@ -61,7 +61,7 @@ public class SearchForContentQueryParams {
     /// Date ranges are defined as comma separated RFC3339
     /// timestamps.
     /// 
-    /// If the the start date is omitted (`,2014-05-17T13:35:01-07:00`)
+    /// If the start date is omitted (`,2014-05-17T13:35:01-07:00`)
     /// anything created before the end date will be returned.
     /// 
     /// If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
@@ -171,7 +171,7 @@ public class SearchForContentQueryParams {
     public let trashContent: SearchForContentQueryParamsTrashContentField?
 
     /// Limits the search results to any items for which the metadata matches the provided filter.
-    /// This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
+    /// This parameter is a list that specifies exactly **one** metadata template used to filter the search results.
     /// The parameter is required unless the `query` parameter is provided.
     public let mdfilters: [MetadataFilter]?
 
@@ -246,7 +246,7 @@ public class SearchForContentQueryParams {
     /// 
     /// Date ranges are defined as comma separated RFC3339 timestamps.
     /// 
-    /// If the the start date is omitted (`2014-05-17T13:35:01-07:00`),
+    /// If the start date is omitted (`2014-05-17T13:35:01-07:00`),
     /// anything deleted before the end date will be returned.
     /// 
     /// If the end date is omitted (`2014-05-15T13:35:01-07:00`),
@@ -317,7 +317,7 @@ public class SearchForContentQueryParams {
     ///     Date ranges are defined as comma separated RFC3339
     ///     timestamps.
     ///     
-    ///     If the the start date is omitted (`,2014-05-17T13:35:01-07:00`)
+    ///     If the start date is omitted (`,2014-05-17T13:35:01-07:00`)
     ///     anything created before the end date will be returned.
     ///     
     ///     If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
@@ -409,7 +409,7 @@ public class SearchForContentQueryParams {
     ///       the trash
     ///     * `all_items` - Searches for both trashed and non-trashed items.
     ///   - mdfilters: Limits the search results to any items for which the metadata matches the provided filter.
-    ///     This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
+    ///     This parameter is a list that specifies exactly **one** metadata template used to filter the search results.
     ///     The parameter is required unless the `query` parameter is provided.
     ///   - sort: Defines the order in which search results are returned. This API
     ///     defaults to returning items by relevance unless this parameter is
@@ -468,7 +468,7 @@ public class SearchForContentQueryParams {
     ///     
     ///     Date ranges are defined as comma separated RFC3339 timestamps.
     ///     
-    ///     If the the start date is omitted (`2014-05-17T13:35:01-07:00`),
+    ///     If the start date is omitted (`2014-05-17T13:35:01-07:00`),
     ///     anything deleted before the end date will be returned.
     ///     
     ///     If the end date is omitted (`2014-05-15T13:35:01-07:00`),

@@ -28,7 +28,7 @@ public class SearchResultWithSharedLink: Codable, RawJSONReadable {
     /// items this value will return `null`.
     public let accessibleViaSharedLink: String?
 
-    public let item: FileFullOrFolderFullOrWebLink?
+    public let item: SearchResultWithSharedLinkItem?
 
     /// The result type. The value is always `search_result`.
     public let type: String?
@@ -42,7 +42,7 @@ public class SearchResultWithSharedLink: Codable, RawJSONReadable {
     ///     items this value will return `null`.
     ///   - item: 
     ///   - type: The result type. The value is always `search_result`.
-    public init(accessibleViaSharedLink: String? = nil, item: FileFullOrFolderFullOrWebLink? = nil, type: String? = nil) {
+    public init(accessibleViaSharedLink: String? = nil, item: SearchResultWithSharedLinkItem? = nil, type: String? = nil) {
         self.accessibleViaSharedLink = accessibleViaSharedLink
         self.item = item
         self.type = type
@@ -51,7 +51,7 @@ public class SearchResultWithSharedLink: Codable, RawJSONReadable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         accessibleViaSharedLink = try container.decodeIfPresent(String.self, forKey: .accessibleViaSharedLink)
-        item = try container.decodeIfPresent(FileFullOrFolderFullOrWebLink.self, forKey: .item)
+        item = try container.decodeIfPresent(SearchResultWithSharedLinkItem.self, forKey: .item)
         type = try container.decodeIfPresent(String.self, forKey: .type)
     }
 

@@ -22,7 +22,7 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
 
 
     /// Mapped item object for Teams.
-    public let partnerItem: IntegrationMappingPartnerItemTeamsUnion
+    public let partnerItem: IntegrationMappingPartnerItemTeams
 
     public let boxItem: FolderReference
 
@@ -61,7 +61,7 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
     ///     (as opposed to being automatically created).
     ///   - createdAt: When the integration mapping object was created.
     ///   - modifiedAt: When the integration mapping object was last modified.
-    public init(id: String, partnerItem: IntegrationMappingPartnerItemTeamsUnion, boxItem: FolderReference, type: IntegrationMappingBaseTypeField = IntegrationMappingBaseTypeField.integrationMapping, integrationType: IntegrationMappingTeamsIntegrationTypeField? = nil, isOverriddenByManualMapping: Bool? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    public init(id: String, partnerItem: IntegrationMappingPartnerItemTeams, boxItem: FolderReference, type: IntegrationMappingBaseTypeField = IntegrationMappingBaseTypeField.integrationMapping, integrationType: IntegrationMappingTeamsIntegrationTypeField? = nil, isOverriddenByManualMapping: Bool? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem
         self.integrationType = integrationType
@@ -74,7 +74,7 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        partnerItem = try container.decode(IntegrationMappingPartnerItemTeamsUnion.self, forKey: .partnerItem)
+        partnerItem = try container.decode(IntegrationMappingPartnerItemTeams.self, forKey: .partnerItem)
         boxItem = try container.decode(FolderReference.self, forKey: .boxItem)
         integrationType = try container.decodeIfPresent(IntegrationMappingTeamsIntegrationTypeField.self, forKey: .integrationType)
         isOverriddenByManualMapping = try container.decodeIfPresent(Bool.self, forKey: .isOverriddenByManualMapping)

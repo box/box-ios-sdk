@@ -31,7 +31,7 @@ public class AiTextGen: Codable, RawJSONReadable {
     /// The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
     public let dialogueHistory: [AiDialogueHistory]?
 
-    public let aiAgent: AiAgentReferenceOrAiAgentTextGen?
+    public let aiAgent: AiTextGenAgent?
 
     /// Initializer for a AiTextGen.
     ///
@@ -44,7 +44,7 @@ public class AiTextGen: Codable, RawJSONReadable {
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
     ///   - aiAgent: 
-    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiDialogueHistory]? = nil, aiAgent: AiAgentReferenceOrAiAgentTextGen? = nil) {
+    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiDialogueHistory]? = nil, aiAgent: AiTextGenAgent? = nil) {
         self.prompt = prompt
         self.items = items
         self.dialogueHistory = dialogueHistory
@@ -56,7 +56,7 @@ public class AiTextGen: Codable, RawJSONReadable {
         prompt = try container.decode(String.self, forKey: .prompt)
         items = try container.decode([AiTextGenItemsField].self, forKey: .items)
         dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
-        aiAgent = try container.decodeIfPresent(AiAgentReferenceOrAiAgentTextGen.self, forKey: .aiAgent)
+        aiAgent = try container.decodeIfPresent(AiTextGenAgent.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {

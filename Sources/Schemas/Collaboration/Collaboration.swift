@@ -38,11 +38,11 @@ public class Collaboration: Codable, RawJSONReadable {
     /// The value will always be `collaboration`.
     public let type: CollaborationTypeField
 
-    @CodableTriState public private(set) var item: FileOrFolderOrWebLink?
+    @CodableTriState public private(set) var item: CollaborationItem?
 
     @CodableTriState public private(set) var appItem: AppItem?
 
-    public let accessibleBy: GroupMiniOrUserCollaborations?
+    public let accessibleBy: CollaborationAccessGrantee?
 
     /// The email address used to invite an unregistered collaborator, if
     /// they are not a registered user.
@@ -58,7 +58,7 @@ public class Collaboration: Codable, RawJSONReadable {
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
     /// All Files list. Additionally, collaborators won't
-    /// see the the path to the root folder for the
+    /// see the path to the root folder for the
     /// shared item.
     public let isAccessOnly: Bool?
 
@@ -96,7 +96,7 @@ public class Collaboration: Codable, RawJSONReadable {
     ///   - isAccessOnly: If set to `true`, collaborators have access to
     ///     shared items, but such items won't be visible in the
     ///     All Files list. Additionally, collaborators won't
-    ///     see the the path to the root folder for the
+    ///     see the path to the root folder for the
     ///     shared item.
     ///   - status: The status of the collaboration invitation. If the status
     ///     is `pending`, `login` and `name` return an empty string.
@@ -106,7 +106,7 @@ public class Collaboration: Codable, RawJSONReadable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: 
-    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: TriStateField<FileOrFolderOrWebLink> = nil, appItem: TriStateField<AppItem> = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: TriStateField<String> = nil, role: CollaborationRoleField? = nil, expiresAt: TriStateField<Date> = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: Date? = nil, createdBy: UserCollaborations? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: TriStateField<CollaborationItem> = nil, appItem: TriStateField<AppItem> = nil, accessibleBy: CollaborationAccessGrantee? = nil, inviteEmail: TriStateField<String> = nil, role: CollaborationRoleField? = nil, expiresAt: TriStateField<Date> = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: Date? = nil, createdBy: UserCollaborations? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self._item = CodableTriState(state: item)
@@ -128,9 +128,9 @@ public class Collaboration: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         type = try container.decode(CollaborationTypeField.self, forKey: .type)
-        item = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .item)
+        item = try container.decodeIfPresent(CollaborationItem.self, forKey: .item)
         appItem = try container.decodeIfPresent(AppItem.self, forKey: .appItem)
-        accessibleBy = try container.decodeIfPresent(GroupMiniOrUserCollaborations.self, forKey: .accessibleBy)
+        accessibleBy = try container.decodeIfPresent(CollaborationAccessGrantee.self, forKey: .accessibleBy)
         inviteEmail = try container.decodeIfPresent(String.self, forKey: .inviteEmail)
         role = try container.decodeIfPresent(CollaborationRoleField.self, forKey: .role)
         expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)

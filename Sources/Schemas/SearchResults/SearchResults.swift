@@ -37,7 +37,7 @@ public class SearchResults: Codable, RawJSONReadable {
     public let type: SearchResultsTypeField
 
     /// The search results for the query provided.
-    public let entries: [FileFullOrFolderFullOrWebLink]?
+    public let entries: [SearchResultItem]?
 
     /// Initializer for a SearchResults.
     ///
@@ -52,7 +52,7 @@ public class SearchResults: Codable, RawJSONReadable {
     ///     as the `offset` query parameter used.
     ///   - type: Specifies the response as search result items without shared links.
     ///   - entries: The search results for the query provided.
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, type: SearchResultsTypeField = SearchResultsTypeField.searchResultsItems, entries: [FileFullOrFolderFullOrWebLink]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, type: SearchResultsTypeField = SearchResultsTypeField.searchResultsItems, entries: [SearchResultItem]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -66,7 +66,7 @@ public class SearchResults: Codable, RawJSONReadable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         type = try container.decode(SearchResultsTypeField.self, forKey: .type)
-        entries = try container.decodeIfPresent([FileFullOrFolderFullOrWebLink].self, forKey: .entries)
+        entries = try container.decodeIfPresent([SearchResultItem].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -59,9 +59,9 @@ public class Task: Codable, RawJSONReadable {
     /// is considered completed.
     /// 
     /// * `all_assignees` requires all assignees to review or
-    /// approve the the task in order for it to be considered completed.
+    /// approve the task in order for it to be considered completed.
     /// * `any_assignee` accepts any one assignee to review or
-    /// approve the the task in order for it to be considered completed.
+    /// approve the task in order for it to be considered completed.
     public let completionRule: TaskCompletionRuleField?
 
     /// Initializer for a Task.
@@ -82,9 +82,9 @@ public class Task: Codable, RawJSONReadable {
     ///     is considered completed.
     ///     
     ///     * `all_assignees` requires all assignees to review or
-    ///     approve the the task in order for it to be considered completed.
+    ///     approve the task in order for it to be considered completed.
     ///     * `any_assignee` accepts any one assignee to review or
-    ///     approve the the task in order for it to be considered completed.
+    ///     approve the task in order for it to be considered completed.
     public init(id: String? = nil, type: TaskTypeField? = nil, item: FileMini? = nil, dueAt: Date? = nil, action: TaskActionField? = nil, message: String? = nil, taskAssignmentCollection: TaskAssignments? = nil, isCompleted: Bool? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, completionRule: TaskCompletionRuleField? = nil) {
         self.id = id
         self.type = type
