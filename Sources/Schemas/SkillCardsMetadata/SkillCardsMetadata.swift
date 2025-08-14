@@ -52,7 +52,7 @@ public class SkillCardsMetadata: Codable, RawJSONReadable {
     public let version: Int64?
 
     /// A list of Box Skill cards that have been applied to this file.
-    public let cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]?
+    public let cards: [SkillCard]?
 
     /// Initializer for a SkillCardsMetadata.
     ///
@@ -70,7 +70,7 @@ public class SkillCardsMetadata: Codable, RawJSONReadable {
     ///   - version: The version of the metadata object. Starts at 0 and increases every time
     ///     a user-defined property is modified.
     ///   - cards: A list of Box Skill cards that have been applied to this file.
-    public init(canEdit: Bool? = nil, id: String? = nil, parent: String? = nil, scope: String? = nil, template: String? = nil, type: String? = nil, typeVersion: Int64? = nil, version: Int64? = nil, cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]? = nil) {
+    public init(canEdit: Bool? = nil, id: String? = nil, parent: String? = nil, scope: String? = nil, template: String? = nil, type: String? = nil, typeVersion: Int64? = nil, version: Int64? = nil, cards: [SkillCard]? = nil) {
         self.canEdit = canEdit
         self.id = id
         self.parent = parent
@@ -92,7 +92,7 @@ public class SkillCardsMetadata: Codable, RawJSONReadable {
         type = try container.decodeIfPresent(String.self, forKey: .type)
         typeVersion = try container.decodeIfPresent(Int64.self, forKey: .typeVersion)
         version = try container.decodeIfPresent(Int64.self, forKey: .version)
-        cards = try container.decodeIfPresent([KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard].self, forKey: .cards)
+        cards = try container.decodeIfPresent([SkillCard].self, forKey: .cards)
     }
 
     public func encode(to encoder: Encoder) throws {

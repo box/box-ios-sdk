@@ -22,7 +22,7 @@ public class RecentItem: Codable, RawJSONReadable {
     /// The value will always be `recent_item`.
     public let type: String?
 
-    public let item: FileFullOrFolderFullOrWebLink?
+    public let item: RecentItemResource?
 
     /// The most recent type of access the user performed on
     /// the item.
@@ -45,7 +45,7 @@ public class RecentItem: Codable, RawJSONReadable {
     ///   - interactedAt: The time of the most recent interaction.
     ///   - interactionSharedLink: If the item was accessed through a shared link it will appear here,
     ///     otherwise this will be null.
-    public init(type: String? = nil, item: FileFullOrFolderFullOrWebLink? = nil, interactionType: RecentItemInteractionTypeField? = nil, interactedAt: Date? = nil, interactionSharedLink: String? = nil) {
+    public init(type: String? = nil, item: RecentItemResource? = nil, interactionType: RecentItemInteractionTypeField? = nil, interactedAt: Date? = nil, interactionSharedLink: String? = nil) {
         self.type = type
         self.item = item
         self.interactionType = interactionType
@@ -56,7 +56,7 @@ public class RecentItem: Codable, RawJSONReadable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decodeIfPresent(String.self, forKey: .type)
-        item = try container.decodeIfPresent(FileFullOrFolderFullOrWebLink.self, forKey: .item)
+        item = try container.decodeIfPresent(RecentItemResource.self, forKey: .item)
         interactionType = try container.decodeIfPresent(RecentItemInteractionTypeField.self, forKey: .interactionType)
         interactedAt = try container.decodeDateTimeIfPresent(forKey: .interactedAt)
         interactionSharedLink = try container.decodeIfPresent(String.self, forKey: .interactionSharedLink)

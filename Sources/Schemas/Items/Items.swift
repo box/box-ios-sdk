@@ -55,7 +55,7 @@ public class Items: Codable, RawJSONReadable {
     public let order: [ItemsOrderField]?
 
     /// The items in this collection.
-    public let entries: [FileFullOrFolderMiniOrWebLink]?
+    public let entries: [Item]?
 
     /// Initializer for a Items.
     ///
@@ -81,7 +81,7 @@ public class Items: Codable, RawJSONReadable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: The items in this collection.
-    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [FileFullOrFolderMiniOrWebLink]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [Item]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)
         self._prevMarker = CodableTriState(state: prevMarker)
@@ -99,7 +99,7 @@ public class Items: Codable, RawJSONReadable {
         totalCount = try container.decodeIfPresent(Int64.self, forKey: .totalCount)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([ItemsOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([FileFullOrFolderMiniOrWebLink].self, forKey: .entries)
+        entries = try container.decodeIfPresent([Item].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

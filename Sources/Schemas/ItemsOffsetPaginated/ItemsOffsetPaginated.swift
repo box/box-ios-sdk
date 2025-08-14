@@ -47,7 +47,7 @@ public class ItemsOffsetPaginated: Codable, RawJSONReadable {
     public let order: [ItemsOffsetPaginatedOrderField]?
 
     /// The items in this collection.
-    public let entries: [FileFullOrFolderMiniOrWebLink]?
+    public let entries: [Item]?
 
     /// Initializer for a ItemsOffsetPaginated.
     ///
@@ -71,7 +71,7 @@ public class ItemsOffsetPaginated: Codable, RawJSONReadable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: The items in this collection.
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOffsetPaginatedOrderField]? = nil, entries: [FileFullOrFolderMiniOrWebLink]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOffsetPaginatedOrderField]? = nil, entries: [Item]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -85,7 +85,7 @@ public class ItemsOffsetPaginated: Codable, RawJSONReadable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([ItemsOffsetPaginatedOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([FileFullOrFolderMiniOrWebLink].self, forKey: .entries)
+        entries = try container.decodeIfPresent([Item].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

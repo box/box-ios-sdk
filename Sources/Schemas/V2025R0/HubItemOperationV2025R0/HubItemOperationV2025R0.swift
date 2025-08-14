@@ -19,15 +19,14 @@ public class HubItemOperationV2025R0: Codable, RawJSONReadable {
     /// The action to perform on a Hub item.
     public let action: HubItemOperationV2025R0ActionField
 
-    /// Reference to an item that can be added to a Hub.
-    public let item: FileReferenceOrFolderReferenceOrWeblinkReferenceV2025R0
+    public let item: HubItemReferenceV2025R0
 
     /// Initializer for a HubItemOperationV2025R0.
     ///
     /// - Parameters:
     ///   - action: The action to perform on a Hub item.
-    ///   - item: Reference to an item that can be added to a Hub.
-    public init(action: HubItemOperationV2025R0ActionField, item: FileReferenceOrFolderReferenceOrWeblinkReferenceV2025R0) {
+    ///   - item: 
+    public init(action: HubItemOperationV2025R0ActionField, item: HubItemReferenceV2025R0) {
         self.action = action
         self.item = item
     }
@@ -35,7 +34,7 @@ public class HubItemOperationV2025R0: Codable, RawJSONReadable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         action = try container.decode(HubItemOperationV2025R0ActionField.self, forKey: .action)
-        item = try container.decode(FileReferenceOrFolderReferenceOrWeblinkReferenceV2025R0.self, forKey: .item)
+        item = try container.decode(HubItemReferenceV2025R0.self, forKey: .item)
     }
 
     public func encode(to encoder: Encoder) throws {

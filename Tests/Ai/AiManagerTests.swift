@@ -11,7 +11,7 @@ class AiManagerTests: RetryableTestCase {
 
     public func testAskAiSingleItem() async throws {
         await runWithRetryAsync {
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
             let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
             let response: AiResponseFull? = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "Sun rises in the East")]))
             XCTAssertTrue(response!.answer.contains("East"))
@@ -35,7 +35,7 @@ class AiManagerTests: RetryableTestCase {
     public func testAiTextGenWithDialogueHistory() async throws {
         await runWithRetryAsync {
             let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
             let response: AiResponse = try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Parapharse the document.s", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the sun. Sun rises in the East in the morning.")], dialogueHistory: [AiDialogueHistory(prompt: "What does the earth go around?", answer: "The sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiDialogueHistory(prompt: "On Earth, where does the sun rise?", answer: "East", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
             XCTAssertTrue(response.answer.contains("sun"))
             XCTAssertTrue(response.completionReason == "done")
@@ -45,19 +45,19 @@ class AiManagerTests: RetryableTestCase {
 
     public func testGettingAiAskAgentConfig() async throws {
         await runWithRetryAsync {
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
         }
     }
 
     public func testGettingAiTextGenAgentConfig() async throws {
         await runWithRetryAsync {
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
         }
     }
 
     public func testAiExtract() async throws {
         await runWithRetryAsync {
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.extract, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.extract, language: "en-US"))
             let uploadedFiles: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: "\(Utils.getUUID())\(".txt")", parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.stringToByteStream(text: "My name is John Doe. I live in San Francisco. I was born in 1990. I work at Box.")))
             let file: FileFull = uploadedFiles.entries![0]
             try await Utils.delayInSeconds(seconds: 5)
@@ -71,7 +71,7 @@ class AiManagerTests: RetryableTestCase {
 
     public func testAiExtractStructuredWithFields() async throws {
         await runWithRetryAsync {
-            let aiAgentConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.extractStructured, language: "en-US"))
+            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.extractStructured, language: "en-US"))
             let uploadedFiles: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: "\(Utils.getUUID())\(".txt")", parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.stringToByteStream(text: "My name is John Doe. I was born in 4th July 1990. I am 34 years old. My hobby is guitar.")))
             let file: FileFull = uploadedFiles.entries![0]
             try await Utils.delayInSeconds(seconds: 5)

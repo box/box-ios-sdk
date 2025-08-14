@@ -34,13 +34,13 @@ public class SearchManager {
     /// - Parameters:
     ///   - queryParams: Query parameters of searchForContent method
     ///   - headers: Headers of searchForContent method
-    /// - Returns: The `SearchResultsOrSearchResultsWithSharedLinks`.
+    /// - Returns: The `SearchResultsResponse`.
     /// - Throws: The `GeneralError`.
-    public func searchForContent(queryParams: SearchForContentQueryParams = SearchForContentQueryParams(), headers: SearchForContentHeaders = SearchForContentHeaders()) async throws -> SearchResultsOrSearchResultsWithSharedLinks {
+    public func searchForContent(queryParams: SearchForContentQueryParams = SearchForContentQueryParams(), headers: SearchForContentHeaders = SearchForContentHeaders()) async throws -> SearchResultsResponse {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["query": Utils.Strings.toString(value: queryParams.query), "scope": Utils.Strings.toString(value: queryParams.scope), "file_extensions": Utils.Strings.toString(value: queryParams.fileExtensions), "created_at_range": Utils.Strings.toString(value: queryParams.createdAtRange), "updated_at_range": Utils.Strings.toString(value: queryParams.updatedAtRange), "size_range": Utils.Strings.toString(value: queryParams.sizeRange), "owner_user_ids": Utils.Strings.toString(value: queryParams.ownerUserIds), "recent_updater_user_ids": Utils.Strings.toString(value: queryParams.recentUpdaterUserIds), "ancestor_folder_ids": Utils.Strings.toString(value: queryParams.ancestorFolderIds), "content_types": Utils.Strings.toString(value: queryParams.contentTypes), "type": Utils.Strings.toString(value: queryParams.type), "trash_content": Utils.Strings.toString(value: queryParams.trashContent), "mdfilters": Utils.Strings.toString(value: queryParams.mdfilters), "sort": Utils.Strings.toString(value: queryParams.sort), "direction": Utils.Strings.toString(value: queryParams.direction), "limit": Utils.Strings.toString(value: queryParams.limit), "include_recent_shared_links": Utils.Strings.toString(value: queryParams.includeRecentSharedLinks), "fields": Utils.Strings.toString(value: queryParams.fields), "offset": Utils.Strings.toString(value: queryParams.offset), "deleted_user_ids": Utils.Strings.toString(value: queryParams.deletedUserIds), "deleted_at_range": Utils.Strings.toString(value: queryParams.deletedAtRange)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/search")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
-        return try SearchResultsOrSearchResultsWithSharedLinks.deserialize(from: response.data!)
+        return try SearchResultsResponse.deserialize(from: response.data!)
     }
 
 }

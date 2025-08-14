@@ -15,19 +15,19 @@ public class CreateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
 
 
     /// A list of Box Skill cards to apply to this file.
-    public let cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]
+    public let cards: [SkillCard]
 
     /// Initializer for a CreateBoxSkillCardsOnFileRequestBody.
     ///
     /// - Parameters:
     ///   - cards: A list of Box Skill cards to apply to this file.
-    public init(cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]) {
+    public init(cards: [SkillCard]) {
         self.cards = cards
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        cards = try container.decode([KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard].self, forKey: .cards)
+        cards = try container.decode([SkillCard].self, forKey: .cards)
     }
 
     public func encode(to encoder: Encoder) throws {

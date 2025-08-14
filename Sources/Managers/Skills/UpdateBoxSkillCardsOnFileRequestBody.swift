@@ -24,7 +24,7 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     /// zero-indexed position of the card in the list of cards.
     public let path: String?
 
-    public let value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard?
+    public let value: SkillCard?
 
     /// Initializer for a UpdateBoxSkillCardsOnFileRequestBody.
     ///
@@ -34,7 +34,7 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     ///     this will be in the format `/cards/{index}` where `index` is the
     ///     zero-indexed position of the card in the list of cards.
     ///   - value: 
-    public init(op: UpdateBoxSkillCardsOnFileRequestBodyOpField? = nil, path: String? = nil, value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard? = nil) {
+    public init(op: UpdateBoxSkillCardsOnFileRequestBodyOpField? = nil, path: String? = nil, value: SkillCard? = nil) {
         self.op = op
         self.path = path
         self.value = value
@@ -44,7 +44,7 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         op = try container.decodeIfPresent(UpdateBoxSkillCardsOnFileRequestBodyOpField.self, forKey: .op)
         path = try container.decodeIfPresent(String.self, forKey: .path)
-        value = try container.decodeIfPresent(KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard.self, forKey: .value)
+        value = try container.decodeIfPresent(SkillCard.self, forKey: .value)
     }
 
     public func encode(to encoder: Encoder) throws {

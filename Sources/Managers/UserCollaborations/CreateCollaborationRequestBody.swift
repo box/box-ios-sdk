@@ -31,7 +31,7 @@ public class CreateCollaborationRequestBody: Codable, RawJSONReadable {
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
     /// All Files list. Additionally, collaborators won't
-    /// see the the path to the root folder for the
+    /// see the path to the root folder for the
     /// shared item.
     public let isAccessOnly: Bool?
 
@@ -70,7 +70,7 @@ public class CreateCollaborationRequestBody: Codable, RawJSONReadable {
     ///   - isAccessOnly: If set to `true`, collaborators have access to
     ///     shared items, but such items won't be visible in the
     ///     All Files list. Additionally, collaborators won't
-    ///     see the the path to the root folder for the
+    ///     see the path to the root folder for the
     ///     shared item.
     ///   - canViewPath: Determines if the invited users can see the entire parent path to
     ///     the associated folder. The user will not gain privileges in any

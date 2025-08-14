@@ -44,7 +44,7 @@ public class MetadataFilter: Codable, RawJSONReadable {
     /// results by. When more than one field is specified, the query
     /// performs a logical `AND` to ensure that the instance of the
     /// template matches each of the fields specified.
-    public let filters: [String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString]?
+    public let filters: [String: MetadataFilterValue]?
 
     /// Initializer for a MetadataFilter.
     ///
@@ -72,7 +72,7 @@ public class MetadataFilter: Codable, RawJSONReadable {
     ///     results by. When more than one field is specified, the query
     ///     performs a logical `AND` to ensure that the instance of the
     ///     template matches each of the fields specified.
-    public init(scope: MetadataFilterScopeField? = nil, templateKey: String? = nil, filters: [String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString]? = nil) {
+    public init(scope: MetadataFilterScopeField? = nil, templateKey: String? = nil, filters: [String: MetadataFilterValue]? = nil) {
         self.scope = scope
         self.templateKey = templateKey
         self.filters = filters
@@ -82,7 +82,7 @@ public class MetadataFilter: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         scope = try container.decodeIfPresent(MetadataFilterScopeField.self, forKey: .scope)
         templateKey = try container.decodeIfPresent(String.self, forKey: .templateKey)
-        filters = try container.decodeIfPresent([String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString].self, forKey: .filters)
+        filters = try container.decodeIfPresent([String: MetadataFilterValue].self, forKey: .filters)
     }
 
     public func encode(to encoder: Encoder) throws {

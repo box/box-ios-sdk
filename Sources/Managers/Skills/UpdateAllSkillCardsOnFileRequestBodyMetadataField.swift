@@ -15,19 +15,19 @@ public class UpdateAllSkillCardsOnFileRequestBodyMetadataField: Codable, RawJSON
 
 
     /// A list of Box Skill cards to apply to this file.
-    public let cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]?
+    public let cards: [SkillCard]?
 
     /// Initializer for a UpdateAllSkillCardsOnFileRequestBodyMetadataField.
     ///
     /// - Parameters:
     ///   - cards: A list of Box Skill cards to apply to this file.
-    public init(cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]? = nil) {
+    public init(cards: [SkillCard]? = nil) {
         self.cards = cards
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        cards = try container.decodeIfPresent([KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard].self, forKey: .cards)
+        cards = try container.decodeIfPresent([SkillCard].self, forKey: .cards)
     }
 
     public func encode(to encoder: Encoder) throws {
