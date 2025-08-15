@@ -16,7 +16,7 @@ public class ShieldListContentIpV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// List of ips and cidrs.
+    /// List of ip addresses and CIDRs.
     public let ipAddresses: [String]
 
     /// The type of content in the shield list.
@@ -25,7 +25,7 @@ public class ShieldListContentIpV2025R0: Codable, RawJSONReadable {
     /// Initializer for a ShieldListContentIpV2025R0.
     ///
     /// - Parameters:
-    ///   - ipAddresses: List of ips and cidrs.
+    ///   - ipAddresses: List of ip addresses and CIDRs.
     ///   - type: The type of content in the shield list.
     public init(ipAddresses: [String], type: ShieldListContentIpV2025R0TypeField = ShieldListContentIpV2025R0TypeField.ip) {
         self.ipAddresses = ipAddresses
