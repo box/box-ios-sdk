@@ -1,10 +1,8 @@
-// swift-tools-version: 5.6
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
-    name: "BoxSdkGen",
+    name: "BoxSDKSuite",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
@@ -13,22 +11,30 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "BoxSdkGen",
-            targets: ["BoxSdkGen"]
+            name: "BoxSDK",
+            targets: ["BoxSDKSuite"]
         )
     ],
+    dependencies: [],
     targets: [
         .target(
-            name: "BoxSdkGen",
+            name: "BoxSDKGen",
             dependencies: [],
-            path: "Sources",
-            exclude: ["Info.plist"],
-            resources: [.copy("PrivacyInfo.xcprivacy")]
+            path: "BoxSDKGen/Sources",
+            resources: [
+                .copy("PrivacyInfo.xcprivacy")
+            ]
+        ),
+        .target(
+            name: "BoxSDKSuite",
+            dependencies: ["BoxSDKGen"],
+            path: "BoxSDKSuite/Sources"
         ),
         .testTarget(
-            name: "BoxSdkGenTests",
-            dependencies: ["BoxSdkGen"],
-            path: "Tests"
+            name: "BoxSDKGenTests",
+            dependencies: ["BoxSDKGen"],
+            path: "BoxSDKGen/Tests"
         )
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

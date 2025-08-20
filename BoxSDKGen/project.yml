@@ -1,0 +1,106 @@
+name: BoxSDKGen
+options:
+  bundleIdPrefix: box.com
+targets:
+  BoxSDKGen:
+    scheme:
+      configVariants:
+    type: framework
+    info:
+      path: Sources/Info.plist
+    platform: [macOS, iOS, tvOS, watchOS, visionOS]
+    deploymentTarget:
+      macOS: "10.15"
+      iOS: "13.0"
+      tvOS: "13.0"
+      watchOS: "6.0"
+      visionOS: "1.0"
+    sources: [Sources]
+    settings:
+      PRODUCT_MODULE_NAME: BoxSDKGen
+
+  # Tests for macOS
+  BoxSDKGenTests_macOS:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: 10.15
+    sources: [Tests]
+    dependencies:
+      - target: BoxSDKGen_macOS
+    link: true
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+    scheme:
+      testPlans:
+        - path: Tests/BoxSDKGenTests_macOS.xctestplan
+          default: true
+  
+  # Tests for iOS
+  BoxSDKGenTests_iOS:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: 13.0
+    sources: [Tests]
+    dependencies:
+      - target: BoxSDKGen_iOS
+    link: true
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+    scheme:
+      testPlans:
+        - path: Tests/BoxSDKGenTests_iOS.xctestplan
+          default: true
+  
+  # Tests for tvOS
+  BoxSDKGenTests_tvOS:
+    type: bundle.unit-test
+    platform: tvOS
+    deploymentTarget: 13.0
+    sources: [Tests]
+    dependencies:
+      - target: BoxSDKGen_tvOS
+    link: true
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+    scheme:
+      testPlans:
+        - path: Tests/BoxSDKGenTests_tvOS.xctestplan
+          default: true
+  
+  # Tests for watchOS
+  BoxSDKGenTests_watchOS:
+    type: bundle.unit-test
+    platform: watchOS
+    deploymentTarget: 6.0
+    sources: [Tests]
+    dependencies:
+      - target: BoxSDKGen_watchOS
+    link: true
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+    scheme:
+      testPlans:
+        - path: Tests/BoxSDKGenTests_watchOS.xctestplan
+          default: true
+  
+  # Tests for visionOS
+  BoxSDKGenTests_visionOS:
+    type: bundle.unit-test
+    platform: visionOS
+    deploymentTarget: 1.0
+    sources: [Tests]
+    dependencies:
+      - target: BoxSDKGen_visionOS
+    link: true
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+    scheme:
+      testPlans:
+        - path: Tests/BoxSDKGenTests_visionOS.xctestplan
+          default: true
+  
