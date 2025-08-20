@@ -1,7 +1,7 @@
 import Foundation
 
-/// Web link reference.
-public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
+/// User reference.
+public class UserReferenceV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -16,18 +16,18 @@ public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the web link.
+    /// The unique identifier for the user.
     public let id: String
 
-    /// The value will always be `weblink`.
-    public let type: WeblinkReferenceV2025R0TypeField
+    /// The value is always `user`.
+    public let type: UserReferenceV2025R0TypeField
 
-    /// Initializer for a WeblinkReferenceV2025R0.
+    /// Initializer for a UserReferenceV2025R0.
     ///
     /// - Parameters:
-    ///   - id: ID of the web link.
-    ///   - type: The value will always be `weblink`.
-    public init(id: String, type: WeblinkReferenceV2025R0TypeField = WeblinkReferenceV2025R0TypeField.weblink) {
+    ///   - id: The unique identifier for the user.
+    ///   - type: The value is always `user`.
+    public init(id: String, type: UserReferenceV2025R0TypeField = UserReferenceV2025R0TypeField.user) {
         self.id = id
         self.type = type
     }
@@ -35,7 +35,7 @@ public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(WeblinkReferenceV2025R0TypeField.self, forKey: .type)
+        type = try container.decode(UserReferenceV2025R0TypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
