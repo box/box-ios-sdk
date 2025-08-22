@@ -23,7 +23,7 @@ public class ExternalUserDeletionResultV2025R0: Codable, RawJSONReadable {
     /// HTTP status code for a specific user's deletion request.
     public let status: Int64
 
-    /// Deletion request status details.
+    /// Deletion request status details. This property is only present when the deletion request is not successful.
     public let detail: String?
 
     /// Initializer for a ExternalUserDeletionResultV2025R0.
@@ -31,7 +31,7 @@ public class ExternalUserDeletionResultV2025R0: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - userId: The ID of the external user.
     ///   - status: HTTP status code for a specific user's deletion request.
-    ///   - detail: Deletion request status details.
+    ///   - detail: Deletion request status details. This property is only present when the deletion request is not successful.
     public init(userId: String, status: Int64, detail: String? = nil) {
         self.userId = userId
         self.status = status
