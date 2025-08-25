@@ -13,7 +13,10 @@ This operation is performed by calling function `submitJobToDeleteExternalUsersV
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/post-external-users-submit-delete-job/).
 
-*Currently we don't have an example for calling `submitJobToDeleteExternalUsersV2025R0` in integration tests*
+<!-- sample post_external_users_submit_delete_job_v2025.0 -->
+```
+try await client.externalUsers.submitJobToDeleteExternalUsersV2025R0(requestBody: ExternalUsersSubmitDeleteJobRequestV2025R0(externalUsers: [UserReferenceV2025R0(id: Utils.getEnvironmentVariable(name: "BOX_EXTERNAL_USER_ID"))]))
+```
 
 ### Arguments
 
