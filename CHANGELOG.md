@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v9.0.0) (2025-08-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change names of unions (box/box-codegen#789) (#967)
+* remove unused models from schemas (box/box-openapi#547) (#962)
+
+### Bug Fixes
+
+* Rename external user deletion method (box/box-codegen[#796](https://github.com/box/box-ios-sdk/issues/796)) ([#988](https://github.com/box/box-ios-sdk/issues/988)) ([1643363](https://github.com/box/box-ios-sdk/commit/16433634bc887e045298abfd3ae8c7106db37fda))
+
+
+### New Features and Enhancements
+
+* Add External User Deletion API (box/box-openapi[#550](https://github.com/box/box-ios-sdk/issues/550)) ([#969](https://github.com/box/box-ios-sdk/issues/969)) ([255e3ca](https://github.com/box/box-ios-sdk/commit/255e3ca16cd703d704504e052eaf03b972768ac8))
+* Adjust code to `watchOS` and `tvOS` ([#934](https://github.com/box/box-ios-sdk/issues/934)) ([3f3c120](https://github.com/box/box-ios-sdk/commit/3f3c1204714785299a349dfc341c08adf95ee4e3))
+* Change names of unions (box/box-codegen[#789](https://github.com/box/box-ios-sdk/issues/789)) ([#967](https://github.com/box/box-ios-sdk/issues/967)) ([1c29a5f](https://github.com/box/box-ios-sdk/commit/1c29a5fac3fc12c87271af74080a7b3c33d2a02a))
+* remove unused models from schemas (box/box-openapi[#547](https://github.com/box/box-ios-sdk/issues/547)) ([#962](https://github.com/box/box-ios-sdk/issues/962)) ([4ef11d1](https://github.com/box/box-ios-sdk/commit/4ef11d1331f5a85d575712b46cb977f9beb9fe21)), closes [box/box-codegen#773](https://github.com/box/box-codegen/issues/773) [box/box-codegen#771](https://github.com/box/box-codegen/issues/771) [box/box-openapi#542](https://github.com/box/box-openapi/issues/542) [box/box-openapi#543](https://github.com/box/box-openapi/issues/543) [box/box-openapi#544](https://github.com/box/box-openapi/issues/544) [box/box-codegen#781](https://github.com/box/box-codegen/issues/781) [box/box-codegen#777](https://github.com/box/box-codegen/issues/777) [box/box-openapi#545](https://github.com/box/box-openapi/issues/545) [box/box-codegen#782](https://github.com/box/box-codegen/issues/782)
+
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
 
