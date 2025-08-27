@@ -16,8 +16,8 @@ jobs:
 
       - name: Ensure Xcode project file exists
         run: |
-          if [ ! -f './BoxSDKGen/BoxSDKGen.xcodeproj/project.pbxproj' ]; then
-            echo '❌ Xcode project file './BoxSDKGen/BoxSDKGen.xcodeproj/project.pbxproj' not found'
+          if [ ! -f './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' ]; then
+            echo '❌ Xcode project file './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' not found'
             echo 'It will be added in the next commit into this PR with title \"chore: Generate xcode project\"'
             exit 1
           else
@@ -61,15 +61,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        working-directory: ./BoxSDKGen
+        working-directory: ./BoxSdkGen
         run: |
           gem install xcpretty
           gem install slather
 
       - name: Inject environment variables into .xctestplan
-        working-directory: ./BoxSDKGen
+        working-directory: ./BoxSdkGen
         run: |
-          XCTESTPLAN_PATH="Tests/BoxSDKGenTests_${{ matrix.platform }}.xctestplan"
+          XCTESTPLAN_PATH="Tests/BoxSdkGenTests_${{ matrix.platform }}.xctestplan"
 
           ENV_JSON=$(jq -n '[
             {key: "CLIENT_ID", value: env.CLIENT_ID},
@@ -96,26 +96,26 @@ jobs:
           echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
 
       - name: Run iOS tests
-        working-directory: ./BoxSDKGen
+        working-directory: ./BoxSdkGen
         run: |
           set -o pipefail
           xcodebuild \
             OTHER_SWIFT_FLAGS="-suppress-warnings" \
-            -project "BoxSDKGen.xcodeproj" \
-            -scheme "BoxSDKGenTests_${{ matrix.platform }}" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
             -destination "${{ matrix.destination }}" \
-            -testPlan "BoxSDKGenTests_${{ matrix.platform }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
             -enableCodeCoverage YES \
             -derivedDataPath build/DerivedData \
             clean test | xcpretty
 
       - name: Extract branch name
-        working-directory: ./BoxSDKGen
+        working-directory: ./BoxSdkGen
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: get_branch
 
       - name: Upload coverage via Slather → Coveralls
-        working-directory: ./BoxSDKGen
+        working-directory: ./BoxSdkGen
         env:
           GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
           CI_PULL_REQUEST: ${{ github.event.number }}
@@ -160,5 +160,5 @@ jobs:
         run: swift --version
 
       - name: Run Swift tests
-        working-directory: BoxSDKGen
+        working-directory: BoxSdkGen
         run: swift test -Xswiftc -suppress-warnings

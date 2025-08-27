@@ -18,22 +18,22 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(
-            name: "BoxSDKGen",
+            name: "BoxSdkGen",
             dependencies: [],
-            path: "BoxSDKGen/Sources",
+            path: "BoxSdkGen/Sources",
             resources: [
                 .copy("PrivacyInfo.xcprivacy")
             ]
         ),
         .target(
             name: "BoxSDKSuite",
-            dependencies: ["BoxSDKGen"],
+            dependencies: ["BoxSdkGen"],
             path: "BoxSDKSuite/Sources"
         ),
         .testTarget(
-            name: "BoxSDKGenTests",
-            dependencies: ["BoxSDKGen"],
-            path: "BoxSDKGen/Tests"
+            name: "BoxSdkGenTests",
+            dependencies: ["BoxSdkGen"],
+            path: "BoxSdkGen/Tests"
         )
     ],
     swiftLanguageVersions: [.v5]
