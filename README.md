@@ -2,17 +2,17 @@
   <img src="https://github.com/box/sdks/blob/master/images/box-dev-logo.png" alt= “box-dev-logo” width="30%" height="50%">
 </p>
 
-# Box Swift SDK GENERATED
+# Box iOS SDK
 
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
-![build](https://github.com/box/box-swift-sdk-gen/actions/workflows/build_and_test.yml/badge.svg)
+![build](https://github.com/box/box-ios-sdk/actions/workflows/build_and_test.yml/badge.svg?branch=sdk-gen)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)
-[![Coverage](https://coveralls.io/repos/github/box/box-swift-sdk-gen/badge.svg?branch=main)](https://coveralls.io/github/box/box-swift-sdk-gen?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=sdk-gen)](https://coveralls.io/github/box/box-ios-sdk?branch=sdk-gen)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSdkGen.svg)](https://cocoapods.org/pods/BoxSdkGen)
+[![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-orange.svg)](https://cocoapods.org/pods/BoxSDK)
 
-We are excited to introduce the latest generation (currently in Beta) of Box Swift SDK Gen, designed to elevate the developer experience and streamline your integration with the Box Content Cloud.
+We are excited to introduce the stable release of the latest generation of Box iOS SDK, designed to elevate the developer experience and streamline your integration with the Box Content Cloud.
 
 With this SDK, you’ll have access to:
 
@@ -29,16 +29,16 @@ Embrace the new generation of Box SDKs and unlock the full potential of the Box 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Box Swift SDK GENERATED](#box-swift-sdk-generated)
-- [Table of contents](#table-of-contents)
 - [Installing](#installing)
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
   - [CocoaPods](#cocoapods)
 - [Getting Started](#getting-started)
+- [Documentation](#documentation)
+- [Upgrades](#upgrades)
 - [Integration Tests](#integration-tests)
   - [Running integration tests locally](#running-integration-tests-locally)
-    - [Create Platform Application](#create-custom-application)
+    - [Create Platform Application](#create-platform-application)
     - [Export configuration](#export-configuration)
     - [Running tests](#running-tests)
 - [Questions, Bugs, and Feature Requests?](#questions-bugs-and-feature-requests)
@@ -48,14 +48,29 @@ Embrace the new generation of Box SDKs and unlock the full potential of the Box 
 
 # Installing
 
+The next generation of the SDK starts with version `10.0.0`.
+
 ## Swift Package Manager
 
 The Swift Package Manager is a tool for managing the distribution of Swift code.
 It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
 
-To add a dependency to your Xcode project, click on Xcode project file on `Packages Dependencies` and click on the plus icon to add a package. Then enter the following repository url https://github.com/box/box-swift-sdk-gen.git and click next.
+To add a dependency to your Xcode project, click on Xcode project file on `Packages Dependencies` and click on the plus icon to add a package.
+Then enter the following repository url https://github.com/box/box-ios-sdk.git and select the version by choosing `Up to Next Major Version` and entering `10.0.0` as the starting version.
 
-Alternatively you can add a dependency to the dependencies value of your Package.swift.
+Alternatively, add the package in your `Package.swift` under the top-level `dependencies` array:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "10.0.0"))
+]
+```
+
+Then add the `BoxSDK` product to your target's `dependencies`:
+
+```swift
+   .product(name: "BoxSDK", package: "box-ios-sdk")
+```
 
 For detailed instructions, please see the [official documentation for SPM](https://www.swift.org/package-manager/).
 
@@ -63,10 +78,10 @@ For detailed instructions, please see the [official documentation for SPM](https
 
 Carthage is a decentralized dependency manager which builds your dependencies and provides you with binary frameworks.
 
-To add a dependency to `BoxSdkGen`, you need to add the following line to your `Cartfile` :
+To add a dependency to SDK, you need to add the following line to your `Cartfile` :
 
 ```shell
-git "https://github.com/box/box-swift-sdk-gen.git"
+git "https://github.com/box/box-ios-sdk.git" >= 10.0.0
 ```
 
 Then run:
@@ -82,10 +97,10 @@ For more detailed instructions, please see the [official documentation for Carth
 ## CocoaPods
 
 CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
-To start using `BoxSdkGen` with CocoaPods, you need to add `BoxSdkGen` dependency to your `Podfile`:
+To start using `BoxSDK` with CocoaPods, you need to add `BoxSDK` dependency to your `Podfile`:
 
 ```shell
-pod 'BoxSdkGen'
+pod 'BoxSDK', '>= 10.0.0'
 ```
 
 Then run the following command in your project directory:
@@ -106,6 +121,8 @@ Console](https://app.box.com/developers/console). You can use this token to make
 The SDK provides a `BoxDeveloperTokenAuth` class, which allows you to authenticate using your Developer Token.
 Use instance of `BoxDeveloperTokenAuth` to initialize `BoxClient` object.
 Using `BoxClient` object you can access managers, which allow you to perform some operations on your Box account.
+
+> **Important:** Before using those classes, make sure to import `BoxSdkGen` module in your file.
 
 The example below demonstrates how to authenticate with Developer Token and print names of all items inside a root folder.
 
@@ -130,9 +147,17 @@ if let entries = items.entries {
 }
 ```
 
-The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-swift-sdk-gen/tree/main/docs).
+The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs).
 
-We recommend, familiarizing yourself with the remaining [authentication methods](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Authentication.md), [uploading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Uploads.md) and [downloading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Downloads.md).
+We recommend, familiarizing yourself with the remaining [authentication methods](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Authentication.md), [uploading files](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Uploads.md) and [downloading files](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Downloads.md).
+
+# Documentation
+
+Browse the [docs](docs/README.md) or see [API Reference](https://developer.box.com/reference/) for more information.
+
+# Upgrades
+
+The SDK is updated regularly to include new features, enhancements, and bug fixes. If you are upgrading from manual SDK to this new generated SDK checkout the [migration guide](migration-guides/from-v5-to-v10.md) and [changelog](CHANGELOG.md) for more information.
 
 # Integration Tests
 
@@ -175,9 +200,9 @@ To run integration tests locally:
 # Questions, Bugs, and Feature Requests?
 
 Need to contact us directly? [Browse the issues
-tickets](https://github.com/box/box-swift-sdk-gen/issues)! Or, if that
+tickets](https://github.com/box/box-ios-sdk/issues)! Or, if that
 doesn't work, [file a new
-one](https://github.com/box/box-swift-sdk-gen/issues/new) and we will get
+one](https://github.com/box/box-ios-sdk/issues/new) and we will get
 back to you. If you have general questions about the Box API, you can
 post to the [Box Developer Forum](https://forum.box.com/).
 
