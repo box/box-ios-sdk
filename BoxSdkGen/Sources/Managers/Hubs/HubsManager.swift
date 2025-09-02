@@ -10,7 +10,7 @@ public class HubsManager {
         self.networkSession = networkSession
     }
 
-    /// Retrieves all hubs for requesting user.
+    /// Retrieves all Box Hubs for requesting user.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getHubsV2025R0 method
@@ -24,7 +24,7 @@ public class HubsManager {
         return try HubsV2025R0.deserialize(from: response.data!)
     }
 
-    /// Creates a new Hub.
+    /// Creates a new Box Hub.
     ///
     /// - Parameters:
     ///   - requestBody: Request body of createHubV2025R0 method
@@ -37,7 +37,7 @@ public class HubsManager {
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
-    /// Retrieves all hubs for a given enterprise.
+    /// Retrieves all Box Hubs for a given enterprise.
     /// 
     /// Admins or Hub Co-admins of an enterprise
     /// with GCM scope can make this call.
@@ -54,7 +54,7 @@ public class HubsManager {
         return try HubsV2025R0.deserialize(from: response.data!)
     }
 
-    /// Retrieves details for a hub by its ID.
+    /// Retrieves details for a Box Hub by its ID.
     ///
     /// - Parameters:
     ///   - hubId: The unique identifier that represent a hub.
@@ -74,7 +74,7 @@ public class HubsManager {
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
-    /// Updates a Hub. Can be used to change title, description, or Hub settings.
+    /// Updates a Box Hub. Can be used to change title, description, or Box Hub settings.
     ///
     /// - Parameters:
     ///   - hubId: The unique identifier that represent a hub.
@@ -95,7 +95,7 @@ public class HubsManager {
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
-    /// Deletes a single hub.
+    /// Deletes a single Box Hub.
     ///
     /// - Parameters:
     ///   - hubId: The unique identifier that represent a hub.
@@ -113,9 +113,9 @@ public class HubsManager {
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
-    /// Creates a copy of a Hub.
+    /// Creates a copy of a Box Hub.
     /// 
-    /// The original Hub will not be modified.
+    /// The original Box Hub will not be modified.
     ///
     /// - Parameters:
     ///   - hubId: The unique identifier that represent a hub.

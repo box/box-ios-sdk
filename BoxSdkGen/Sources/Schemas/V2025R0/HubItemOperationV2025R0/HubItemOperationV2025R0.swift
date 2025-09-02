@@ -1,6 +1,6 @@
 import Foundation
 
-/// An operation to perform on a Hub item.
+/// An operation to perform on a Box Hub item.
 public class HubItemOperationV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case action
@@ -16,7 +16,7 @@ public class HubItemOperationV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// The action to perform on a Hub item.
+    /// The action to perform on a Box Hub item.
     public let action: HubItemOperationV2025R0ActionField
 
     public let item: HubItemReferenceV2025R0
@@ -24,7 +24,7 @@ public class HubItemOperationV2025R0: Codable, RawJSONReadable {
     /// Initializer for a HubItemOperationV2025R0.
     ///
     /// - Parameters:
-    ///   - action: The action to perform on a Hub item.
+    ///   - action: The action to perform on a Box Hub item.
     ///   - item: 
     public init(action: HubItemOperationV2025R0ActionField, item: HubItemReferenceV2025R0) {
         self.action = action

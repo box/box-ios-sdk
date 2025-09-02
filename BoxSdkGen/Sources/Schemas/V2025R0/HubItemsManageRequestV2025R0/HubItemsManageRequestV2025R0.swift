@@ -1,6 +1,6 @@
 import Foundation
 
-/// Request schema for managing Hub items.
+/// Request schema for managing Box Hub items.
 public class HubItemsManageRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case operations
@@ -15,13 +15,13 @@ public class HubItemsManageRequestV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// List of operations to perform on Hub items.
+    /// List of operations to perform on Box Hub items.
     public let operations: [HubItemOperationV2025R0]?
 
     /// Initializer for a HubItemsManageRequestV2025R0.
     ///
     /// - Parameters:
-    ///   - operations: List of operations to perform on Hub items.
+    ///   - operations: List of operations to perform on Box Hub items.
     public init(operations: [HubItemOperationV2025R0]? = nil) {
         self.operations = operations
     }

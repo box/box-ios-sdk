@@ -1,6 +1,6 @@
 import Foundation
 
-/// Request body for creating a new Hub collaboration.
+/// Request body for creating a new Box Hub collaboration.
 public class HubCollaborationCreateRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case hub
@@ -17,22 +17,22 @@ public class HubCollaborationCreateRequestV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// Hubs reference.
+    /// Box Hubs reference.
     public let hub: HubCollaborationCreateRequestV2025R0HubField
 
     /// The user or group who gets access to the item.
     public let accessibleBy: HubCollaborationCreateRequestV2025R0AccessibleByField
 
-    /// The level of access granted to hub.
+    /// The level of access granted to a Box Hub.
     /// Possible values are `editor`, `viewer`, and `co-owner`.
     public let role: String
 
     /// Initializer for a HubCollaborationCreateRequestV2025R0.
     ///
     /// - Parameters:
-    ///   - hub: Hubs reference.
+    ///   - hub: Box Hubs reference.
     ///   - accessibleBy: The user or group who gets access to the item.
-    ///   - role: The level of access granted to hub.
+    ///   - role: The level of access granted to a Box Hub.
     ///     Possible values are `editor`, `viewer`, and `co-owner`.
     public init(hub: HubCollaborationCreateRequestV2025R0HubField, accessibleBy: HubCollaborationCreateRequestV2025R0AccessibleByField, role: String) {
         self.hub = hub
