@@ -1,6 +1,6 @@
 import Foundation
 
-/// A Hub Item is a Box Item that is referenced in a Hub.
+/// A Box Hub Item is a Box Item that is referenced in a Box Hub.
 public class HubItemV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id

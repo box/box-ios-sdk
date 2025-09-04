@@ -10,7 +10,7 @@ public class HubCollaborationsManager {
         self.networkSession = networkSession
     }
 
-    /// Retrieves all collaborations for a hub.
+    /// Retrieves all collaborations for a Box Hub.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getHubCollaborationsV2025R0 method
@@ -24,7 +24,7 @@ public class HubCollaborationsManager {
         return try HubCollaborationsV2025R0.deserialize(from: response.data!)
     }
 
-    /// Adds a collaboration for a single user or a single group to a hub.
+    /// Adds a collaboration for a single user or a single group to a Box Hub.
     /// 
     /// Collaborations can be created using email address, user IDs, or group IDs.
     ///
@@ -39,7 +39,7 @@ public class HubCollaborationsManager {
         return try HubCollaborationV2025R0.deserialize(from: response.data!)
     }
 
-    /// Retrieves details for a hub collaboration by collaboration ID.
+    /// Retrieves details for a Box Hub collaboration by collaboration ID.
     ///
     /// - Parameters:
     ///   - hubCollaborationId: The ID of the hub collaboration.
@@ -53,8 +53,8 @@ public class HubCollaborationsManager {
         return try HubCollaborationV2025R0.deserialize(from: response.data!)
     }
 
-    /// Updates a hub collaboration.
-    /// Can be used to change the hub role.
+    /// Updates a Box Hub collaboration.
+    /// Can be used to change the Box Hub role.
     ///
     /// - Parameters:
     ///   - hubCollaborationId: The ID of the hub collaboration.
@@ -69,7 +69,7 @@ public class HubCollaborationsManager {
         return try HubCollaborationV2025R0.deserialize(from: response.data!)
     }
 
-    /// Deletes a single hub collaboration.
+    /// Deletes a single Box Hub collaboration.
     ///
     /// - Parameters:
     ///   - hubCollaborationId: The ID of the hub collaboration.

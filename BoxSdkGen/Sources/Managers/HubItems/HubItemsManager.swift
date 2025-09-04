@@ -10,7 +10,7 @@ public class HubItemsManager {
         self.networkSession = networkSession
     }
 
-    /// Retrieves all items associated with a Hub.
+    /// Retrieves all items associated with a Box Hub.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getHubItemsV2025R0 method
@@ -24,7 +24,7 @@ public class HubItemsManager {
         return try HubItemsV2025R0.deserialize(from: response.data!)
     }
 
-    /// Adds and/or removes Hub items from a Hub.
+    /// Adds and/or removes Box Hub items from a Box Hub.
     ///
     /// - Parameters:
     ///   - hubId: The unique identifier that represent a hub.

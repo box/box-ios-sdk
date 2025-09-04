@@ -1,6 +1,6 @@
 import Foundation
 
-/// Reference to an item that can be added to a Hub.
+/// Reference to an item that can be added to a Box Hub.
 public enum HubItemReferenceV2025R0: Codable {
     case fileReferenceV2025R0(FileReferenceV2025R0)
     case folderReferenceV2025R0(FolderReferenceV2025R0)

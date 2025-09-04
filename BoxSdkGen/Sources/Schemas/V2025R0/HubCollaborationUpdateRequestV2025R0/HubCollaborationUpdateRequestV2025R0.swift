@@ -1,6 +1,6 @@
 import Foundation
 
-/// Request body for updating an existing Hub collaboration.
+/// Request body for updating an existing Box Hub collaboration.
 public class HubCollaborationUpdateRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case role
@@ -15,14 +15,14 @@ public class HubCollaborationUpdateRequestV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// The level of access granted to hub.
+    /// The level of access granted to a Box Hub.
     /// Possible values are `editor`, `viewer`, and `co-owner`.
     public let role: String?
 
     /// Initializer for a HubCollaborationUpdateRequestV2025R0.
     ///
     /// - Parameters:
-    ///   - role: The level of access granted to hub.
+    ///   - role: The level of access granted to a Box Hub.
     ///     Possible values are `editor`, `viewer`, and `co-owner`.
     public init(role: String? = nil) {
         self.role = role

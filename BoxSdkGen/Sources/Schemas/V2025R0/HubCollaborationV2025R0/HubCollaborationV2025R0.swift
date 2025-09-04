@@ -1,7 +1,7 @@
 import Foundation
 
-/// A hub collaboration object grants a user or group access 
-/// to a hub with permissions defined by a specific role.
+/// A Box Hub collaboration object grants a user or group access 
+/// to a Box Hub with permissions defined by a specific role.
 public class HubCollaborationV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -32,7 +32,7 @@ public class HubCollaborationV2025R0: Codable, RawJSONReadable {
 
     public let accessibleBy: HubAccessGranteeV2025R0?
 
-    /// The level of access granted to hub.
+    /// The level of access granted to a Box Hub.
     /// Possible values are `editor`, `viewer`, and `co-owner`.
     public let role: String?
 
@@ -49,7 +49,7 @@ public class HubCollaborationV2025R0: Codable, RawJSONReadable {
     ///   - type: The value will always be `hub_collaboration`.
     ///   - hub: 
     ///   - accessibleBy: 
-    ///   - role: The level of access granted to hub.
+    ///   - role: The level of access granted to a Box Hub.
     ///     Possible values are `editor`, `viewer`, and `co-owner`.
     ///   - status: The status of the collaboration invitation. If the status
     ///     is `pending`, `login` and `name` return an empty string.

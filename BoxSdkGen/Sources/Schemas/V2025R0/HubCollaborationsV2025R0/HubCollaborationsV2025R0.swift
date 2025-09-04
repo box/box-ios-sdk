@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of hub collaborations.
+/// A list of Box Hub collaborations.
 public class HubCollaborationsV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -17,7 +17,7 @@ public class HubCollaborationsV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// A list of hub collaborations.
+    /// A list of Box Hub collaborations.
     public let entries: [HubCollaborationV2025R0]?
 
     /// The limit that was used for these entries. This will be the same as the
@@ -31,7 +31,7 @@ public class HubCollaborationsV2025R0: Codable, RawJSONReadable {
     /// Initializer for a HubCollaborationsV2025R0.
     ///
     /// - Parameters:
-    ///   - entries: A list of hub collaborations.
+    ///   - entries: A list of Box Hub collaborations.
     ///   - limit: The limit that was used for these entries. This will be the same as the
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.

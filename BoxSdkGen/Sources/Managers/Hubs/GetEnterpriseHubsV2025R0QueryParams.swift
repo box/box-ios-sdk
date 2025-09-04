@@ -1,7 +1,7 @@
 import Foundation
 
 public class GetEnterpriseHubsV2025R0QueryParams {
-    /// The query string to search for hubs.
+    /// The query string to search for Box Hubs.
     public let query: String?
 
     /// The field to sort results by.
@@ -24,7 +24,7 @@ public class GetEnterpriseHubsV2025R0QueryParams {
     /// Initializer for a GetEnterpriseHubsV2025R0QueryParams.
     ///
     /// - Parameters:
-    ///   - query: The query string to search for hubs.
+    ///   - query: The query string to search for Box Hubs.
     ///   - sort: The field to sort results by.
     ///     Possible values include `name`, `updated_at`,
     ///     `last_accessed_at`, `view_count`, and `relevance`.
