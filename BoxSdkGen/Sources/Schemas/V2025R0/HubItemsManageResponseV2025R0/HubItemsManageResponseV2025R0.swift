@@ -1,6 +1,6 @@
 import Foundation
 
-/// Response schema for the status of Hub items management operations.
+/// Response schema for the status of Box Hub items management operations.
 public class HubItemsManageResponseV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case operations
@@ -15,13 +15,13 @@ public class HubItemsManageResponseV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// List of operations performed on Hub items.
+    /// List of operations performed on Box Hub items.
     public let operations: [HubItemOperationResultV2025R0]
 
     /// Initializer for a HubItemsManageResponseV2025R0.
     ///
     /// - Parameters:
-    ///   - operations: List of operations performed on Hub items.
+    ///   - operations: List of operations performed on Box Hub items.
     public init(operations: [HubItemOperationResultV2025R0]) {
         self.operations = operations
     }

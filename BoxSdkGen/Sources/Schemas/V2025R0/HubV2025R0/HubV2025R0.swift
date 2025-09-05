@@ -1,7 +1,7 @@
 import Foundation
 
-/// A standard representation of a hub, as returned from any
-/// hubs API endpoints by default.
+/// A standard representation of a Box Hub, as returned from any
+/// Box Hubs API endpoints by default.
 public class HubV2025R0: HubBaseV2025R0 {
     private enum CodingKeys: String, CodingKey {
         case title
@@ -26,10 +26,10 @@ public class HubV2025R0: HubBaseV2025R0 {
     }
 
 
-    /// The title given to the hub.
+    /// The title given to the Box Hub.
     public let title: String?
 
-    /// The description of the hub. First 200 characters are returned.
+    /// The description of the Box Hub. First 200 characters are returned.
     public let description: String?
 
     /// The date and time when the folder was created. This value may
@@ -37,52 +37,52 @@ public class HubV2025R0: HubBaseV2025R0 {
     /// folder.
     public let createdAt: Date?
 
-    /// The date and time when the hub was last updated.
+    /// The date and time when the Box Hub was last updated.
     public let updatedAt: Date?
 
     public let createdBy: UserMiniV2025R0?
 
     public let updatedBy: UserMiniV2025R0?
 
-    /// The number of views for the hub.
+    /// The number of views for the Box Hub.
     public let viewCount: Int?
 
-    /// Indicates if AI features are enabled for the hub.
+    /// Indicates if AI features are enabled for the Box Hub.
     public let isAiEnabled: Bool?
 
     /// Indicates if collaboration is restricted to the enterprise.
     public let isCollaborationRestrictedToEnterprise: Bool?
 
-    /// Indicates if non-owners can invite others to the hub.
+    /// Indicates if non-owners can invite others to the Box Hub.
     public let canNonOwnersInvite: Bool?
 
-    /// Indicates if a shared link can be created for the hub.
+    /// Indicates if a shared link can be created for the Box Hub.
     public let canSharedLinkBeCreated: Bool?
 
     /// Initializer for a HubV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier that represent a hub.
+    ///   - id: The unique identifier that represent a Box Hub.
     ///     
-    ///     The ID for any hub can be determined
-    ///     by visiting a hub in the web application
+    ///     The ID for any Box Hub can be determined
+    ///     by visiting a Box Hub in the web application
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/hubs/123`
     ///     the `hub_id` is `123`.
     ///   - type: The value will always be `hubs`.
-    ///   - title: The title given to the hub.
-    ///   - description: The description of the hub. First 200 characters are returned.
+    ///   - title: The title given to the Box Hub.
+    ///   - description: The description of the Box Hub. First 200 characters are returned.
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
-    ///   - updatedAt: The date and time when the hub was last updated.
+    ///   - updatedAt: The date and time when the Box Hub was last updated.
     ///   - createdBy: 
     ///   - updatedBy: 
-    ///   - viewCount: The number of views for the hub.
-    ///   - isAiEnabled: Indicates if AI features are enabled for the hub.
+    ///   - viewCount: The number of views for the Box Hub.
+    ///   - isAiEnabled: Indicates if AI features are enabled for the Box Hub.
     ///   - isCollaborationRestrictedToEnterprise: Indicates if collaboration is restricted to the enterprise.
-    ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the hub.
-    ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the hub.
+    ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the Box Hub.
+    ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the Box Hub.
     public init(id: String, type: HubBaseV2025R0TypeField = HubBaseV2025R0TypeField.hubs, title: String? = nil, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, createdBy: UserMiniV2025R0? = nil, updatedBy: UserMiniV2025R0? = nil, viewCount: Int? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil) {
         self.title = title
         self.description = description

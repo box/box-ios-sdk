@@ -1,6 +1,6 @@
 import Foundation
 
-/// Request schema for updating an existing Hub.
+/// Request schema for updating an existing Box Hub.
 public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case title
@@ -20,33 +20,33 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// Title of the Hub. It cannot be empty and should be less than 50 characters.
+    /// Title of the Box Hub. It cannot be empty and should be less than 50 characters.
     public let title: String?
 
-    /// Description of the Hub.
+    /// Description of the Box Hub.
     public let description: String?
 
-    /// Indicates if AI features are enabled for the Hub.
+    /// Indicates if AI features are enabled for the Box Hub.
     public let isAiEnabled: Bool?
 
     /// Indicates if collaboration is restricted to the enterprise.
     public let isCollaborationRestrictedToEnterprise: Bool?
 
-    /// Indicates if non-owners can invite others to the Hub.
+    /// Indicates if non-owners can invite others to the Box Hub.
     public let canNonOwnersInvite: Bool?
 
-    /// Indicates if a shared link can be created for the Hub.
+    /// Indicates if a shared link can be created for the Box Hub.
     public let canSharedLinkBeCreated: Bool?
 
     /// Initializer for a HubUpdateRequestV2025R0.
     ///
     /// - Parameters:
-    ///   - title: Title of the Hub. It cannot be empty and should be less than 50 characters.
-    ///   - description: Description of the Hub.
-    ///   - isAiEnabled: Indicates if AI features are enabled for the Hub.
+    ///   - title: Title of the Box Hub. It cannot be empty and should be less than 50 characters.
+    ///   - description: Description of the Box Hub.
+    ///   - isAiEnabled: Indicates if AI features are enabled for the Box Hub.
     ///   - isCollaborationRestrictedToEnterprise: Indicates if collaboration is restricted to the enterprise.
-    ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the Hub.
-    ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the Hub.
+    ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the Box Hub.
+    ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the Box Hub.
     public init(title: String? = nil, description: String? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil) {
         self.title = title
         self.description = description

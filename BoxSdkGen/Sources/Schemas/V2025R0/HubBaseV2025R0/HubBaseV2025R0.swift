@@ -1,6 +1,6 @@
 import Foundation
 
-/// The bare basic representation of a hub.
+/// The bare basic representation of a Box Hub.
 public class HubBaseV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,10 +16,10 @@ public class HubBaseV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier that represent a hub.
+    /// The unique identifier that represent a Box Hub.
     /// 
-    /// The ID for any hub can be determined
-    /// by visiting a hub in the web application
+    /// The ID for any Box Hub can be determined
+    /// by visiting a Box Hub in the web application
     /// and copying the ID from the URL. For example,
     /// for the URL `https://*.app.box.com/hubs/123`
     /// the `hub_id` is `123`.
@@ -31,10 +31,10 @@ public class HubBaseV2025R0: Codable, RawJSONReadable {
     /// Initializer for a HubBaseV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier that represent a hub.
+    ///   - id: The unique identifier that represent a Box Hub.
     ///     
-    ///     The ID for any hub can be determined
-    ///     by visiting a hub in the web application
+    ///     The ID for any Box Hub can be determined
+    ///     by visiting a Box Hub in the web application
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/hubs/123`
     ///     the `hub_id` is `123`.

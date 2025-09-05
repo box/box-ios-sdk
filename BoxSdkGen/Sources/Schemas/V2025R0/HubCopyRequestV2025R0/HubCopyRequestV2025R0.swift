@@ -1,6 +1,6 @@
 import Foundation
 
-/// Request schema for copying a Hub.
+/// Request schema for copying a Box Hub.
 public class HubCopyRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case title
@@ -16,17 +16,17 @@ public class HubCopyRequestV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// Title of the Hub. It cannot be empty and should be less than 50 characters.
+    /// Title of the Box Hub. It cannot be empty and should be less than 50 characters.
     public let title: String?
 
-    /// Description of the Hub.
+    /// Description of the Box Hub.
     public let description: String?
 
     /// Initializer for a HubCopyRequestV2025R0.
     ///
     /// - Parameters:
-    ///   - title: Title of the Hub. It cannot be empty and should be less than 50 characters.
-    ///   - description: Description of the Hub.
+    ///   - title: Title of the Box Hub. It cannot be empty and should be less than 50 characters.
+    ///   - description: Description of the Box Hub.
     public init(title: String? = nil, description: String? = nil) {
         self.title = title
         self.description = description

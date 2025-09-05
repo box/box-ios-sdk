@@ -1,6 +1,6 @@
 import Foundation
 
-/// Result of a Hub item operation.
+/// Result of a Box Hub item operation.
 public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case action

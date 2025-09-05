@@ -1,10 +1,10 @@
 import Foundation
 
 public class GetHubsV2025R0QueryParams {
-    /// The query string to search for hubs.
+    /// The query string to search for Box Hubs.
     public let query: String?
 
-    /// The scope of the hubs to retrieve. Possible values include `editable`,
+    /// The scope of the Box Hubs to retrieve. Possible values include `editable`,
     /// `view_only`, and `all`. Default is `all`.
     public let scope: String?
 
@@ -28,8 +28,8 @@ public class GetHubsV2025R0QueryParams {
     /// Initializer for a GetHubsV2025R0QueryParams.
     ///
     /// - Parameters:
-    ///   - query: The query string to search for hubs.
-    ///   - scope: The scope of the hubs to retrieve. Possible values include `editable`,
+    ///   - query: The query string to search for Box Hubs.
+    ///   - scope: The scope of the Box Hubs to retrieve. Possible values include `editable`,
     ///     `view_only`, and `all`. Default is `all`.
     ///   - sort: The field to sort results by. 
     ///     Possible values include `name`, `updated_at`,
