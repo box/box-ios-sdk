@@ -2,6 +2,13 @@
   <img src="https://github.com/box/sdks/blob/master/images/box-dev-logo.png" alt= “box-dev-logo” width="30%" height="50%">
 </p>
 
+# Migration to v10
+
+The `sdk-gen` branch contains the generated code for the `v10` version of the Box iOS SDK. This is intended primarily for developers migrating from [Box Swift SDK Gen](https://github.com/box/box-swift-sdk-gen) to the v10 version.
+As part of our upcoming major release, we will be introducing a combined SDK that consolidates the previously separate generated SDK into one unified SDK package for improved usability and maintenance.
+
+You can find the migration guide [here](https://github.com/box/box-ios-sdk/blob/sdk-gen/migration-guides/from-box-swift-sdk-gen-v0-to-box-ios-sdk-v10.md) for transitioning from Box Swift SDK Gen to Box iOS SDK v10. If you have any questions, please create an issue in the new repository or reach out to [Box Developer Support](https://developer.box.com/support/).
+
 # Box iOS SDK
 
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
@@ -19,6 +26,7 @@ The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the mai
 Going forward, the main branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
 
 Box iOS SDK
+- [Migration to v10](#migration-to-v10)
 - [Box iOS SDK](#box-ios-sdk)
 - [NOTE:](#note)
   - [Requirements](#requirements)
