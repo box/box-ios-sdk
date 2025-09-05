@@ -1,0 +1,13 @@
+ci_service: github
+coverage_service: coveralls
+
+xcodeproj: ./BoxSdkGen.xcodeproj
+build_directory: build/DerivedData
+scheme: BoxSdkGen_iOS
+configuration: Debug
+
+ignore:
+  - Tests/*
+
+output_directory: 'slather-report'
+cobertura_xml: true
