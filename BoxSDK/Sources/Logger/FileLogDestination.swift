@@ -7,13 +7,14 @@
 //
 
 import Foundation
-import os.log
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+    import os.log
 
-// swiftlint:disable:next force_unwrapping
-let fileLoggerDefaultURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!.appendingPathComponent("BOXSDK.txt")
+    // swiftlint:disable:next force_unwrapping
+    let fileLoggerDefaultURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!.appendingPathComponent("BOXSDK.txt")
+#endif
 
-/// Defines logging into a file
-public class FileLogDestination: LogDestination {
+open class FileLogDestination: LogDestination {
     private var fileURL: URL
     private var fileHandler: FileHandle?
 
@@ -21,13 +22,18 @@ public class FileLogDestination: LogDestination {
         fileHandler?.closeFile()
     }
 
-    /// Intializer.
+    /// Initializer.
     ///
     /// - Parameter fileURL: The file path to write the logs to.
     public init(fileURL: URL) {
         if !FileManager.default.fileExists(atPath: fileURL.path) {
-            if !FileManager.default.createFile(atPath: fileURL.path, contents: nil) {
-                os_log("File for logging could not be created: %@", log: .default, type: .error, fileURL.path)
+            let created = FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
+            if !created {
+                #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+                    os_log("File for logging could not be created: %@", log: .default, type: .error, fileURL.path)
+                #else
+                    print("ERROR: File for logging could not be created: \(fileURL.path)")
+                #endif
             }
         }
         self.fileURL = fileURL
@@ -35,7 +41,11 @@ public class FileLogDestination: LogDestination {
             fileHandler = try FileHandle(forWritingTo: fileURL)
         }
         catch {
-            os_log("Cannot write logs to specified file: %@", log: .default, type: .error, fileURL.path)
+            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+                os_log("Cannot write logs to specified file: %@", log: .default, type: .error, fileURL.path)
+            #else
+                print("ERROR: Cannot write logs to specified file \(fileURL.path): \(error)")
+            #endif
         }
     }
 
@@ -46,7 +56,7 @@ public class FileLogDestination: LogDestination {
     ///   - level: Log level defining type of log
     ///   - category: Log category defining type of data logged
     ///   - args: Log arguments
-    public func write(_ message: StaticString, level: LogLevel, category: LogCategory, _ args: [CVarArg]) {
+    open func write(_ message: StaticString, level: LogLevel, category: LogCategory, _ args: [CVarArg]) {
         let logMessage = FileLogDestination.formattedMessage(message: message.description, args: args)
         let log = "[\(level)] \(category) \(logMessage)\n"
 

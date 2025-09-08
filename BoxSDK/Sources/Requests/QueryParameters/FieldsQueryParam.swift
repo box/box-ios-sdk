@@ -21,7 +21,7 @@ struct FieldsQueryParam {
 extension FieldsQueryParam: QueryParameterConvertible {
 
     /// Query parameter value
-    public var queryParamValue: String? {
+    var queryParamValue: String? {
         return fields?.joined(separator: ",")
     }
 }
