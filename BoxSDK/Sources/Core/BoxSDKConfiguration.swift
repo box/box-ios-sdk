@@ -56,7 +56,7 @@ public struct BoxSDKConfiguration {
     /// Analytics info that is set to request headers.
     public let clientAnalyticsInfo: ClientAnalyticsInfo?
     /// Console log destination.
-    public let consoleLogDestination: ConsoleLogDestination
+    public let consoleLogDestination: ConsoleLogDestination?
     /// File log destination.
     public let fileLogDestination: FileLogDestination?
     /// An optional custom callback URL string. The URL to which Box redirects the browser when authentication completes.
@@ -88,7 +88,7 @@ public struct BoxSDKConfiguration {
         maxRetryAttempts: Int? = defaultMaxRetryAttempts,
         tokenRefreshThreshold: TimeInterval? = defaultTokenRefreshThreshold,
         retryBaseInterval: TimeInterval? = defaultRetryBaseInterval,
-        consoleLogDestination: ConsoleLogDestination? = ConsoleLogDestination(),
+        consoleLogDestination: ConsoleLogDestination? = nil,
         fileLogDestination: FileLogDestination? = nil,
         clientAnalyticsInfo: ClientAnalyticsInfo? = nil,
         callbackURL: String? = nil
@@ -110,7 +110,13 @@ public struct BoxSDKConfiguration {
         self.maxRetryAttempts = maxRetryAttempts ?? defaultMaxRetryAttempts
         self.tokenRefreshThreshold = tokenRefreshThreshold ?? defaultTokenRefreshThreshold
         self.retryBaseInterval = retryBaseInterval ?? defaultRetryBaseInterval
-        self.consoleLogDestination = consoleLogDestination ?? ConsoleLogDestination()
+        let defaultConsole: ConsoleLogDestination?
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+            defaultConsole = consoleLogDestination ?? ConsoleLogDestination()
+        #else
+            defaultConsole = nil
+        #endif
+        self.consoleLogDestination = consoleLogDestination ?? defaultConsole
         self.fileLogDestination = fileLogDestination
         self.clientAnalyticsInfo = clientAnalyticsInfo
     }

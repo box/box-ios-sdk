@@ -1,5 +1,7 @@
 import Foundation
-import os
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 /// Represents API request query parameters.
 public typealias QueryParameters = [String: QueryParameterConvertible?]
@@ -67,12 +69,14 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         configuration: BoxSDKConfiguration = BoxSDK.defaultConfiguration
     ) {
         self.configuration = configuration
+        var destinations: [LogDestination] = []
+        if let console = configuration.consoleLogDestination {
+            destinations.append(console)
+        }
         if let fileDestination = configuration.fileLogDestination {
-            logger = Logger(category: .networkAgent, destinations: [configuration.consoleLogDestination, fileDestination])
+            destinations.append(fileDestination)
         }
-        else {
-            logger = Logger(category: .networkAgent, destinations: [configuration.consoleLogDestination])
-        }
+        logger = Logger(category: .networkAgent, destinations: destinations)
     }
 
     /// Makes Box SDK request
@@ -103,14 +107,17 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         let urlRequest = createRequest(for: updatedRequest)
         // swiftlint:disable:next force_unwrapping
         let downloadDestination = request.downloadDestination!
-        var observation: NSKeyValueObservation?
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+            var observation: NSKeyValueObservation?
+        #endif
 
         let task = session.downloadTask(with: urlRequest) { [weak self] location, response, error in
             guard let self = self else {
                 return
             }
-
-            observation?.invalidate()
+            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+                observation?.invalidate()
+            #endif
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -149,10 +156,13 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             )
         }
         request.task(task)
-        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
-        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
-            request.progress(progress)
-        }
+
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+            // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+            observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
+                request.progress(progress)
+            }
+        #endif
 
         utilityQueue.async {
             task.resume()
@@ -169,14 +179,19 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
         logger.logRequest(updatedRequest)
 
         let urlRequest = createRequest(for: updatedRequest)
-        var observation: NSKeyValueObservation?
+
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+            var observation: NSKeyValueObservation?
+        #endif
 
         let task = session.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let self = self else {
                 return
             }
 
-            observation?.invalidate()
+            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+                observation?.invalidate()
+            #endif
 
             if let unwrappedError = error {
                 completion(.failure(BoxNetworkError(message: .customValue(unwrappedError.localizedDescription), error: unwrappedError)))
@@ -198,10 +213,13 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             )
         }
         request.task(task)
-        // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
-        observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
-            request.progress(progress)
-        }
+
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+            // Key value observer: Observer attaches to Progress object on task. Every time the Progress object updates, the callback is called
+            observation = task.progress.observe(\Progress.fractionCompleted, options: [.new]) { progress, _ in
+                request.progress(progress)
+            }
+        #endif
 
         utilityQueue.async {
             task.resume()
@@ -257,7 +275,7 @@ public class BoxNetworkAgent: NSObject, NetworkAgentProtocol {
             var partName = ""
             var fileName = ""
             var mimeType = ""
-            var bodyStream = InputStream()
+            var bodyStream = InputStream(data: Data())
             let boundary = "Boundary-\(UUID().uuidString)"
             for part in body.getParts() {
                 switch part.contents {

@@ -6,50 +6,52 @@
 //  Copyright © 2019 Box. All rights reserved.
 //
 
-import Foundation
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+    import Foundation
 
-// Key for storing the token info
-private let tokenInfoKeychainKey = "TokenInfo"
-/// Token store that uses the Apple keychain
-public class KeychainTokenStore: TokenStore {
-    let secureStore = KeychainService(secureStoreQueryable: GenericPasswordQueryable(service: "com.box.SwiftSDK"))
+    // Key for storing the token info
+    private let tokenInfoKeychainKey = "TokenInfo"
+    /// Token store that uses the Apple keychain
+    public class KeychainTokenStore: TokenStore {
+        let secureStore = KeychainService(secureStoreQueryable: GenericPasswordQueryable(service: "com.box.SwiftSDK"))
 
-    /// Initializer method
-    public init() {}
+        /// Initializer method
+        public init() {}
 
-    public func read(completion: @escaping (Result<TokenInfo, Error>) -> Void) {
-        do {
-            guard let tokenInfo: TokenInfo = try? secureStore.getValue(tokenInfoKeychainKey) else {
-                completion(.failure(BoxSDKError(message: .keychainNoValue)))
-                return
+        public func read(completion: @escaping (Result<TokenInfo, Error>) -> Void) {
+            do {
+                guard let tokenInfo: TokenInfo = try? secureStore.getValue(tokenInfoKeychainKey) else {
+                    completion(.failure(BoxSDKError(message: .keychainNoValue)))
+                    return
+                }
+                completion(.success(tokenInfo))
             }
-            completion(.success(tokenInfo))
         }
-    }
 
-    public func write(tokenInfo: TokenInfo, completion: @escaping (Result<Void, Error>) -> Void) {
-        do {
-            try secureStore.set(tokenInfo, key: tokenInfoKeychainKey)
-            completion(.success(()))
+        public func write(tokenInfo: TokenInfo, completion: @escaping (Result<Void, Error>) -> Void) {
+            do {
+                try secureStore.set(tokenInfo, key: tokenInfoKeychainKey)
+                completion(.success(()))
+            }
+            catch let error as BoxSDKError {
+                completion(.failure(error))
+            }
+            catch {
+                completion(.failure(BoxSDKError(message: .keychainUnhandledError("Cannot write to keychain"))))
+            }
         }
-        catch let error as BoxSDKError {
-            completion(.failure(error))
-        }
-        catch {
-            completion(.failure(BoxSDKError(message: .keychainUnhandledError("Cannot write to keychain"))))
-        }
-    }
 
-    public func clear(completion: @escaping (Result<Void, Error>) -> Void) {
-        do {
-            try secureStore.removeValue(for: tokenInfoKeychainKey)
-            completion(.success(()))
-        }
-        catch let error as BoxSDKError {
-            completion(.failure(error))
-        }
-        catch {
-            completion(.failure(BoxSDKError(message: .keychainUnhandledError("Cannot clear keychain"))))
+        public func clear(completion: @escaping (Result<Void, Error>) -> Void) {
+            do {
+                try secureStore.removeValue(for: tokenInfoKeychainKey)
+                completion(.success(()))
+            }
+            catch let error as BoxSDKError {
+                completion(.failure(error))
+            }
+            catch {
+                completion(.failure(BoxSDKError(message: .keychainUnhandledError("Cannot clear keychain"))))
+            }
         }
     }
-}
+#endif

@@ -22,6 +22,7 @@
 		0508666128A2A62B0073DC77 /* UpdateFileRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0508666028A2A62B0073DC77 /* UpdateFileRequest.json */; };
 		0508666328A2B1240073DC77 /* CopyFileRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0508666228A2B1240073DC77 /* CopyFileRequest.json */; };
 		050E725128BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */; };
+		0517CB4D2E6EF9E1000EBD1A /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0517CB4C2E6EF9DF000EBD1A /* SHA1.swift */; };
 		052A03F328772E2F0063513C /* UserAvatarUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F228772E2F0063513C /* UserAvatarUpload.swift */; };
 		052A03F5287885860063513C /* MimeTypeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F4287885860063513C /* MimeTypeProvider.swift */; };
 		052A03F828788CAF0063513C /* MimeTypeProviderSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */; };
@@ -651,6 +652,7 @@
 		0508666028A2A62B0073DC77 /* UpdateFileRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateFileRequest.json; sourceTree = "<group>"; };
 		0508666228A2B1240073DC77 /* CopyFileRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CopyFileRequest.json; sourceTree = "<group>"; };
 		050E725028BE54C000213B4D /* SignRequestSignerInputContentTypeSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRequestSignerInputContentTypeSpecs.swift; sourceTree = "<group>"; };
+		0517CB4C2E6EF9DF000EBD1A /* SHA1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
 		052A03F228772E2F0063513C /* UserAvatarUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarUpload.swift; sourceTree = "<group>"; };
 		052A03F4287885860063513C /* MimeTypeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProvider.swift; sourceTree = "<group>"; };
 		052A03F628788C7C0063513C /* MimeTypeProviderSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypeProviderSpecs.swift; sourceTree = "<group>"; };
@@ -1566,6 +1568,7 @@
 		225638FF2253897C00D951B5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0517CB4C2E6EF9DF000EBD1A /* SHA1.swift */,
 				222DBFE22289ABB700D03A88 /* Errors */,
 				223A7F2122770A6E00C136E1 /* Extensions */,
 				0C4A9D17226DBCB4002D069D /* BoxSDKConfiguration.swift */,
@@ -3013,6 +3016,7 @@
 				80BC841A232C52FF00010E08 /* TermsOfService.swift in Sources */,
 				2256394E2253897D00D951B5 /* SessionProtocol.swift in Sources */,
 				2278C542231D72960048FF45 /* CollaborationAllowlistModule.swift in Sources */,
+				0517CB4D2E6EF9E1000EBD1A /* SHA1.swift in Sources */,
 				804F3BF722A59250008CF915 /* CommentsModule.swift in Sources */,
 				22640BB82305902A00C19ECA /* UploadSession.swift in Sources */,
 				223C6DAF22C636C100F4023C /* MetadataObject.swift in Sources */,
