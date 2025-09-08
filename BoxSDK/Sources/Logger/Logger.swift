@@ -7,7 +7,9 @@
 //
 
 import Foundation
-import os.log
+#if canImport(FoundationNetworking)
+    import FoundationNetworking
+#endif
 
 // https://www.bignerdranch.com/blog/migrating-to-unified-logging-swift-edition/
 enum LogSubsystem {
