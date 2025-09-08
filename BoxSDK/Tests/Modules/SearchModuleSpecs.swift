@@ -71,8 +71,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && compareComplexQueryParam("mdfilters", ["\"filters\":{\"date\":{\"gt\":\"2019-07-24T12:00:00Z\"}}",
                                                                       "\"templateKey\":\"marketingCollateral\"",
-                                                                      "\"scope\":\"global\""
-                                ])
+                                                                      "\"scope\":\"global\""])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -102,8 +101,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && compareComplexQueryParam("mdfilters", ["\"filters\":{\"date\":{\"lt\":\"2019-07-24T12:00:00Z\"}}",
                                                                       "\"templateKey\":\"marketingCollateral\"",
-                                                                      "\"scope\":\"enterprise\""
-                                ])
+                                                                      "\"scope\":\"enterprise\""])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -133,8 +131,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && compareComplexQueryParam("mdfilters", ["\"filters\":{\"documentType\":\"dataSheet\"}",
                                                                       "\"templateKey\":\"marketingCollateral\"",
-                                                                      "\"scope\":\"enterprise\""
-                                ])
+                                                                      "\"scope\":\"enterprise\""])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
@@ -164,8 +161,7 @@ class SearchModuleSpecs: QuickSpec {
                         isHost("api.box.com") && isPath("/2.0/search")
                             && compareComplexQueryParam("mdfilters", ["\"filters\":{\"documentType\":\"dataSheet\"}",
                                                                       "\"templateKey\":\"marketingCollateral\"",
-                                                                      "\"scope\":\"global\""
-                                ])
+                                                                      "\"scope\":\"global\""])
                     ) { _ in
                         HTTPStubsResponse(
                             fileAtPath: TestAssets.path(forResource: "Search200.json")!,
