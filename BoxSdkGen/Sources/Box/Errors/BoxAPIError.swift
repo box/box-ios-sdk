@@ -63,8 +63,8 @@ extension BoxAPIError {
             json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         }
         let responseInfo = ResponseInfo(
-            statusCode: conversation.urlResponse.statusCode,
-            headers: conversation.urlResponse.allHeaderFields as? [String: String] ?? [:],
+            statusCode: conversation.urlResponse?.statusCode ?? 0,
+            headers: conversation.urlResponse?.allHeaderFields as? [String: String] ?? [:],
             body: body,
             rawBody:  try? Utils.Strings.from(data: body?.toJson() ?? Data()),
             code: json?["code"] as? String,

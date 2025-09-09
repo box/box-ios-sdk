@@ -45,44 +45,67 @@ public class DefaultNetworkClient: NetworkClient {
             let memoryInputStream = MemoryInputStream(data: Utils.readByteStream(byteStream: fileStream))
             options = options.withFileStream(fileStream: memoryInputStream)
         }
+        let networkSession = options.networkSession ?? NetworkSession()
+        var currentAttempt = 1
+        var exceptionRetryCount = 0
+        var conversation: FetchConversation! = nil
+        var sdkError: BoxSDKError? = nil
 
-        return try await fetch(
-            options: options,
-            networkSession: options.networkSession ?? NetworkSession(),
-            attempt: 1
-        )
-    }
+        while (true) {
+            var retryAttemptNumber = currentAttempt
+            let urlRequest = try await createRequest(
+                options: options,
+                networkSession: networkSession
+            )
 
-    /// Executes requests
-    ///
-    /// - Parameters:
-    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
-    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
-    ///   - attempt: The request attempt number.
-    /// - Returns: Response of the request in the form of FetchResponse object.
-    /// - Throws: An error if the request fails for any reason.
-    private func fetch(
-        options: FetchOptions,
-        networkSession: NetworkSession,
-        attempt: Int
-    ) async throws -> FetchResponse {
-        let urlRequest = try await createRequest(
-            options: options,
-            networkSession: networkSession
-        )
+            if let fileStream = options.fileStream, let memoryInputStream = fileStream as? MemoryInputStream, currentAttempt > 1 {
+                memoryInputStream.reset()
+            }
 
-        if let fileStream = options.fileStream, let memoryInputStream = fileStream as? MemoryInputStream, attempt > 1 {
-            memoryInputStream.reset()
-        }
+            do {
+                if let downloadDestinationUrl = options.downloadDestinationUrl, options.responseFormat == .binary {
+                    let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationUrl)
+                    conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as? HTTPURLResponse, responseType: .url(downloadUrl))
+                } else {
+                    let (data, urlResponse) =  try await sendDataRequest(urlRequest, followRedirects: options.followRedirects ?? true)
+                    conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as? HTTPURLResponse, responseType: .data(data))
+                }
+            } catch {
+                sdkError = (error as? BoxSDKError) ?? BoxSDKError(message: error.localizedDescription, error: error)
+                conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: nil, responseType: .data(Data()))
+                exceptionRetryCount += 1
+                retryAttemptNumber = exceptionRetryCount
+            }
 
-        if let downloadDestinationUrl = options.downloadDestinationUrl, options.responseFormat == .binary {
-            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationUrl)
-            let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
-            return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
-        } else {
-            let (data, urlResponse) =  try await sendDataRequest(urlRequest, followRedirects: options.followRedirects ?? true)
-            let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .data(data))
-            return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
+            let response = conversation.convertToFetchResponse()
+            let shouldRetry = try await networkSession.retryStrategy.shouldRetry(
+                fetchOptions: options,
+                fetchResponse: response,
+                attemptNumber: retryAttemptNumber
+            )
+
+            if(shouldRetry){
+                let retryDelay = networkSession.retryStrategy.retryAfter(
+                    fetchOptions: options,
+                    fetchResponse: response,
+                    attemptNumber: retryAttemptNumber
+                )
+
+                currentAttempt += 1
+                try await wait(seconds: retryDelay)
+                continue
+            }
+
+            let statusCode = response.status
+            if statusCode >= 200 && statusCode < 400 {
+                return conversation.convertToFetchResponse()
+            }
+
+            if let sdkError, statusCode == 0 {
+                throw sdkError
+            } else {
+                throw BoxAPIError(fromConversation: conversation)
+            }
         }
     }
 
@@ -336,49 +359,6 @@ public class DefaultNetworkClient: NetworkClient {
         return components.url!
     }
 
-    /// Processes  response and performs the appropriate action
-    ///
-    /// - Parameters:
-    ///   - using: Represents a data combined with the request and the corresponding response.
-    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
-    ///   - attempt: The request attempt number.
-    /// - Returns: Response of the request in the form of FetchResponse object.
-    /// - Throws: An error if the operation fails for any reason.
-    private func processResponse(
-        using conversation: FetchConversation,
-        networkSession: NetworkSession,
-        attempt: Int
-    ) async throws -> FetchResponse {
-        let statusCode = conversation.urlResponse.statusCode
-        let isStatusCodeAcceptedWithRetryAfterHeader = statusCode == 202 && conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) != nil
-
-        // OK
-        if statusCode >= 200 && statusCode < 400 && (!isStatusCodeAcceptedWithRetryAfterHeader || attempt >= networkSession.networkSettings.maxRetryAttempts) {
-            return conversation.convertToFetchResponse()
-        }
-
-        // available attempts exceeded
-        if attempt >= networkSession.networkSettings.maxRetryAttempts {
-            throw BoxAPIError(fromConversation: conversation, message: "Request has hit the maximum number of retries.")
-        }
-
-        // Unauthorized
-        if statusCode == 401, let auth = conversation.options.auth  {
-            _ = try await auth.refreshToken(networkSession: networkSession)
-            return try await fetch(options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
-        }
-
-        // Retryable
-        if statusCode == 429 || statusCode >= 500 || isStatusCodeAcceptedWithRetryAfterHeader {
-            let retryTimeout = Double(conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) ?? "")
-            ?? networkSession.networkSettings.retryStrategy.getRetryTimeout(attempt: attempt)
-            try await wait(seconds: retryTimeout)
-
-            return try await fetch(options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
-        }
-
-        throw BoxAPIError(fromConversation: conversation)
-    }
 
     /// Suspends the current task for the given duration of seconds.
     ///
