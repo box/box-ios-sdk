@@ -436,4 +436,14 @@ public enum Utils {
 
         return nil
     }
+
+    /// Generates a random Double value within the specified range.
+    ///
+    /// - Parameters:
+    ///   - min: The minimum value of the range (inclusive).
+    ///   - max: The maximum value of the range (inclusive).
+    /// - Returns: A random Double value between min and max.
+    public static func random(min: Double, max: Double)-> Double {
+        return Double.random(in: min...max)
+    }
 }

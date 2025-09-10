@@ -16,7 +16,7 @@ class FetchConversation {
     /// Represents an URL request.
     let urlRequest: URLRequest
     /// Represents a response to an HTTP URL.
-    let urlResponse: HTTPURLResponse
+    let urlResponse: HTTPURLResponse?
     /// Represents response type, either data or downloaded file
     let responseType: ResponseType
 
@@ -28,7 +28,7 @@ class FetchConversation {
     ///   - urlRequest: Represents an URL request.
     ///   - urlResponse: Represents a response to an HTTP URL
     ///   - responseType: Represents response type, either data or downloaded file
-    init(options: FetchOptions, urlRequest: URLRequest, urlResponse: HTTPURLResponse, responseType: ResponseType) {
+    init(options: FetchOptions, urlRequest: URLRequest, urlResponse: HTTPURLResponse?, responseType: ResponseType) {
         self.options = options
         self.urlRequest = urlRequest
         self.urlResponse = urlResponse
@@ -39,6 +39,10 @@ class FetchConversation {
     ///
     /// - Returns: An instance of the`FetchResponse`.
     func convertToFetchResponse() -> FetchResponse {
+        guard let urlResponse else {
+            return FetchResponse(status: 0, headers: [:])
+        }
+
         let headers: [String: String] = urlResponse.allHeaderFields.reduce(into: [:]) { result, pair in
             if let key = pair.key as? String, let value = pair.value as? String {
                 result[key] = value
