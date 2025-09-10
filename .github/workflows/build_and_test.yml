@@ -1,45 +1,164 @@
-name: Build and Test
-on: 
+name: build-and-test
+
+on:
   pull_request:
     branches:
-      - main
+      - sdk-gen
   push:
     branches:
-      - main
+      - sdk-gen
 jobs:
-  build-and-test:
-    runs-on: macos-13
+  check-xcodeproj:
+    name: Check Xcode Project
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure Xcode project file exists
+        run: |
+          if [ ! -f './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' ]; then
+            echo '❌ Xcode project file './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' not found'
+            echo 'It will be added in the next commit into this PR with title \"chore: Generate xcode project\"'
+            exit 1
+          else
+            echo '✅ Xcode project file found'
+          fi
+
+  iOS:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    needs: check-xcodeproj
+
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14']
+        include:
+          - destination: 'platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro'
+            name: 'xcodebuild (iOS 18.5)'
+            xcode: 'Xcode_16.4'
+            runsOn: macOS-15
+            platform: iOS
+
+    env:
+      DEVELOPER_DIR: '/Applications/${{ matrix.xcode }}.app/Contents/Developer'
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      USER_ID: ${{ secrets.USER_ID }}
+      ENTERPRISE_ID: ${{ secrets.ENTERPRISE_ID }}
+      BOX_FILE_REQUEST_ID: ${{ secrets.BOX_FILE_REQUEST_ID }}
+      BOX_EXTERNAL_USER_EMAIL: ${{ secrets.BOX_EXTERNAL_USER_EMAIL }}
+      BOX_EXTERNAL_USER_ID: ${{ secrets.BOX_EXTERNAL_USER_ID }}
+      WORKFLOW_FOLDER_ID: ${{ secrets.WORKFLOW_FOLDER_ID }}
+      APP_ITEM_ASSOCIATION_FILE_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FILE_ID }}
+      APP_ITEM_ASSOCIATION_FOLDER_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FOLDER_ID }}
+      APP_ITEM_SHARED_LINK: ${{ secrets.APP_ITEM_SHARED_LINK }}
+      SLACK_AUTOMATION_USER_ID: ${{ secrets.SLACK_AUTOMATION_USER_ID }}
+      SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
+      SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
+      ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+
     steps:
-      - name: Git - Checkout
-        uses: actions/checkout@v2
-      - name: List Xcode available versions
-        run: ls -n /Applications/ | grep Xcode*
-      - name: Setup - Xcode
-        run: sudo xcode-select -s /Applications/Xcode_14.2.app
-      - name: Setup - Ruby and bundler dependencies
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Setup carthage dependencies
-        working-directory: BoxSDK
-        run: ./scripts/bootstrap
-      - name: Lint
-        working-directory: BoxSDK
-        run: swiftlint
-      - name: Run unit tests
-        working-directory: BoxSDK
-        run: set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDK-iOS -destination "${{ matrix.destination }}" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES -enableCodeCoverage YES test
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: ./BoxSdkGen
+        run: |
+          gem install xcpretty
+          gem install slather
+
+      - name: Inject environment variables into .xctestplan
+        working-directory: ./BoxSdkGen
+        run: |
+          XCTESTPLAN_PATH="Tests/BoxSdkGenTests_${{ matrix.platform }}.xctestplan"
+
+          ENV_JSON=$(jq -n '[
+            {key: "CLIENT_ID", value: env.CLIENT_ID},
+            {key: "CLIENT_SECRET", value: env.CLIENT_SECRET},
+            {key: "USER_ID", value: env.USER_ID},
+            {key: "ENTERPRISE_ID", value: env.ENTERPRISE_ID},
+            {key: "BOX_FILE_REQUEST_ID", value: env.BOX_FILE_REQUEST_ID},
+            {key: "BOX_EXTERNAL_USER_EMAIL", value: env.BOX_EXTERNAL_USER_EMAIL},
+            {key: "BOX_EXTERNAL_USER_ID", value: env.BOX_EXTERNAL_USER_ID},
+            {key: "WORKFLOW_FOLDER_ID", value: env.WORKFLOW_FOLDER_ID},
+            {key: "APP_ITEM_ASSOCIATION_FILE_ID", value: env.APP_ITEM_ASSOCIATION_FILE_ID},
+            {key: "APP_ITEM_ASSOCIATION_FOLDER_ID", value: env.APP_ITEM_ASSOCIATION_FOLDER_ID},
+            {key: "APP_ITEM_SHARED_LINK", value: env.APP_ITEM_SHARED_LINK},
+            {key: "SLACK_AUTOMATION_USER_ID", value: env.SLACK_AUTOMATION_USER_ID},
+            {key: "SLACK_ORG_ID", value: env.SLACK_ORG_ID},
+            {key: "SLACK_PARTNER_ITEM_ID", value: env.SLACK_PARTNER_ITEM_ID},
+            {key: "ADMIN_USER_ID", value: env.ADMIN_USER_ID}
+          ]')
+
+          jq --argjson envVars "$ENV_JSON" \
+            '.defaultOptions.environmentVariableEntries = $envVars' \
+            "$XCTESTPLAN_PATH" > "${XCTESTPLAN_PATH}.tmp" && mv "${XCTESTPLAN_PATH}.tmp" "$XCTESTPLAN_PATH"
+
+          echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
+
+      - name: Run iOS tests
+        working-directory: ./BoxSdkGen
+        run: |
+          set -o pipefail
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
+            -enableCodeCoverage YES \
+            -derivedDataPath build/DerivedData \
+            clean test | xcpretty
+
       - name: Extract branch name
-        working-directory: BoxSDK
-        shell: bash
+        working-directory: ./BoxSdkGen
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: get_branch
-      - run: bundle exec slather
-        working-directory: BoxSDK
+
+      - name: Upload coverage via Slather → Coveralls
+        working-directory: ./BoxSdkGen
         env:
           GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
           CI_PULL_REQUEST: ${{ github.event.number }}
           COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: slather
+
+  Linux:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    needs: check-xcodeproj
+
+    strategy:
+      matrix:
+        include:
+          - image: swift:6.0-jammy
+            name: 'SPM (Swift 6.0, Ubuntu 22.04)'
+
+    container:
+      image: ${{ matrix.image }}
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        USER_ID: ${{ secrets.USER_ID }}
+        ENTERPRISE_ID: ${{ secrets.ENTERPRISE_ID }}
+        BOX_FILE_REQUEST_ID: ${{ secrets.BOX_FILE_REQUEST_ID }}
+        BOX_EXTERNAL_USER_EMAIL: ${{ secrets.BOX_EXTERNAL_USER_EMAIL }}
+        BOX_EXTERNAL_USER_ID: ${{ secrets.BOX_EXTERNAL_USER_ID }}
+        WORKFLOW_FOLDER_ID: ${{ secrets.WORKFLOW_FOLDER_ID }}
+        APP_ITEM_ASSOCIATION_FILE_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FILE_ID }}
+        APP_ITEM_ASSOCIATION_FOLDER_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FOLDER_ID }}
+        APP_ITEM_SHARED_LINK: ${{ secrets.APP_ITEM_SHARED_LINK }}
+        SLACK_AUTOMATION_USER_ID: ${{ secrets.SLACK_AUTOMATION_USER_ID }}
+        SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
+        SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
+        ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Display Swift version
+        run: swift --version
+
+      - name: Run Swift tests
+        working-directory: BoxSdkGen
+        run: swift test -Xswiftc -suppress-warnings

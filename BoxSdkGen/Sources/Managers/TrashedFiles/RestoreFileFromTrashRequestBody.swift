@@ -1,0 +1,59 @@
+import Foundation
+
+public class RestoreFileFromTrashRequestBody: Codable, RawJSONReadable {
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case parent
+    }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
+    /// An optional new name for the file.
+    public let name: String?
+
+    public let parent: RestoreFileFromTrashRequestBodyParentField?
+
+    /// Initializer for a RestoreFileFromTrashRequestBody.
+    ///
+    /// - Parameters:
+    ///   - name: An optional new name for the file.
+    ///   - parent: 
+    public init(name: String? = nil, parent: RestoreFileFromTrashRequestBodyParentField? = nil) {
+        self.name = name
+        self.parent = parent
+    }
+
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        parent = try container.decodeIfPresent(RestoreFileFromTrashRequestBodyParentField.self, forKey: .parent)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(parent, forKey: .parent)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
+    }
+
+}
