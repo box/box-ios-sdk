@@ -1,12 +1,4 @@
 // swift-tools-version:5.7
-//
-//  BoxSDK.swift
-//  BoxSDK
-//
-//  Created by Abel Osorio on 03/12/19.
-//  Copyright © 2018 Box Inc. All rights reserved.
-//
-
 import PackageDescription
 
 let package = Package(
@@ -20,16 +12,28 @@ let package = Package(
     products: [
         .library(
             name: "BoxSDK",
-            targets: ["BoxSDK"]
+            targets: ["BoxSDKSuite"]
         )
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "BoxSDK",
+            name: "BoxSdkGen",
             dependencies: [],
-            path: "BoxSDK/Sources",
-            resources: [.copy("PrivacyInfo.xcprivacy")]
+            path: "BoxSdkGen/Sources",
+            resources: [
+                .copy("PrivacyInfo.xcprivacy")
+            ]
+        ),
+        .target(
+            name: "BoxSDKSuite",
+            dependencies: ["BoxSdkGen"],
+            path: "BoxSDKSuite/Sources"
+        ),
+        .testTarget(
+            name: "BoxSdkGenTests",
+            dependencies: ["BoxSdkGen"],
+            path: "BoxSdkGen/Tests"
         )
     ],
     swiftLanguageVersions: [.v5]
