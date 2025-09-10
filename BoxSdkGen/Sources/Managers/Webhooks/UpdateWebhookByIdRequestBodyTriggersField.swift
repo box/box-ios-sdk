@@ -41,6 +41,9 @@ public enum UpdateWebhookByIdRequestBodyTriggersField: CodableStringEnum {
     case signRequestDeclined
     case signRequestExpired
     case signRequestSignerEmailBounced
+    case signRequestSignSignerSigned
+    case signRequestSignDocumentCreated
+    case signRequestSignErrorFinalizing
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -125,6 +128,12 @@ public enum UpdateWebhookByIdRequestBodyTriggersField: CodableStringEnum {
             self = .signRequestExpired
         case "SIGN_REQUEST.SIGNER_EMAIL_BOUNCED".lowercased():
             self = .signRequestSignerEmailBounced
+        case "SIGN_REQUEST.SIGN_SIGNER_SIGNED".lowercased():
+            self = .signRequestSignSignerSigned
+        case "SIGN_REQUEST.SIGN_DOCUMENT_CREATED".lowercased():
+            self = .signRequestSignDocumentCreated
+        case "SIGN_REQUEST.SIGN_ERROR_FINALIZING".lowercased():
+            self = .signRequestSignErrorFinalizing
         default:
             self = .customValue(value)
         }
@@ -212,6 +221,12 @@ public enum UpdateWebhookByIdRequestBodyTriggersField: CodableStringEnum {
             return "SIGN_REQUEST.EXPIRED"
         case .signRequestSignerEmailBounced:
             return "SIGN_REQUEST.SIGNER_EMAIL_BOUNCED"
+        case .signRequestSignSignerSigned:
+            return "SIGN_REQUEST.SIGN_SIGNER_SIGNED"
+        case .signRequestSignDocumentCreated:
+            return "SIGN_REQUEST.SIGN_DOCUMENT_CREATED"
+        case .signRequestSignErrorFinalizing:
+            return "SIGN_REQUEST.SIGN_ERROR_FINALIZING"
         case .customValue(let value):
             return value
         }
