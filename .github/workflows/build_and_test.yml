@@ -1,34 +1,12 @@
 name: build-and-test
-
 on:
   pull_request:
     branches:
-      - sdk-gen
-  push:
-    branches:
-      - sdk-gen
+      - swift_tests_head
 jobs:
-  check-xcodeproj:
-    name: Check Xcode Project
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Ensure Xcode project file exists
-        run: |
-          if [ ! -f './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' ]; then
-            echo '❌ Xcode project file './BoxSdkGen/BoxSdkGen.xcodeproj/project.pbxproj' not found'
-            echo 'It will be added in the next commit into this PR with title \"chore: Generate xcode project\"'
-            exit 1
-          else
-            echo '✅ Xcode project file found'
-          fi
-
-  iOS:
+  ios:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runsOn }}
-    needs: check-xcodeproj
-
     strategy:
       matrix:
         include:
@@ -37,7 +15,6 @@ jobs:
             xcode: 'Xcode_16.4'
             runsOn: macOS-15
             platform: iOS
-
     env:
       DEVELOPER_DIR: '/Applications/${{ matrix.xcode }}.app/Contents/Developer'
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -55,17 +32,14 @@ jobs:
       SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
       SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
       ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Install dependencies
         working-directory: ./BoxSdkGen
         run: |
           gem install xcpretty
           gem install slather
-
       - name: Inject environment variables into .xctestplan
         working-directory: ./BoxSdkGen
         run: |
@@ -94,9 +68,9 @@ jobs:
             "$XCTESTPLAN_PATH" > "${XCTESTPLAN_PATH}.tmp" && mv "${XCTESTPLAN_PATH}.tmp" "$XCTESTPLAN_PATH"
 
           echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
-
-      - name: Run iOS tests
+      - name: Run all iOS tests
         working-directory: ./BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
         run: |
           set -o pipefail
           xcodebuild \
@@ -108,31 +82,58 @@ jobs:
             -enableCodeCoverage YES \
             -derivedDataPath build/DerivedData \
             clean test | xcpretty
-
-      - name: Extract branch name
+      - name: Run Smoke iOS tests
         working-directory: ./BoxSdkGen
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: get_branch
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: |
+          set -o pipefail
+          SMOKE_TESTS=(
+            /AuthManagerTests/testOauthAuthAuthorizeUrl
+            /AuthManagerTests/testOauthDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuth
+            /AuthManagerTests/testCcgAuthDownscope
+            /AuthManagerTests/testCcgDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuthRevoke
+            /AuthManagerTests/testDeveloperDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testDeveloperTokenAuthRevoke
+            /AuthManagerTests/testDeveloperTokenAuthDownscope
+            /AuthManagerTests/testDeveloperTokenAuth
+            /AuthManagerTests/testOauthAuthRevoke
+            /AuthManagerTests/testOauthAuthDownscope
+            /FilesManagerTests/uploadFile
+            /FilesManagerTests/testGetFileThumbnailUrl
+            /FilesManagerTests/testGetFileThumbnail
+            /FilesManagerTests/testGetFileFullExtraFields
+            /FilesManagerTests/testCreateGetAndDeleteFile
+            /FilesManagerTests/testUpdateFile
+            /FilesManagerTests/testFileLock
+            /DownloadsManagerTests/testDownloadFile
+            /DownloadsManagerTests/testGetDownloadUrl
+            /UploadsManagerTests/testUploadFileAndFileVersion
+            /UploadsManagerTests/testUploadFileWithPreflightCheck
+            /UploadsManagerTests/testPreflightCheck
+          )
+          ONLY_TESTING_FLAGS=($(printf "%s\n" "${SMOKE_TESTS[@]}" | sed "s/^/-only-testing BoxSdkGenTests_${{ matrix.platform }}/"))
 
-      - name: Upload coverage via Slather → Coveralls
-        working-directory: ./BoxSdkGen
-        env:
-          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
-          CI_PULL_REQUEST: ${{ github.event.number }}
-          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: slather
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
+            -enableCodeCoverage YES \
+            -derivedDataPath build/DerivedData \
+            "${ONLY_TESTING_FLAGS[@]}" \
+            clean test | xcpretty
 
-  Linux:
+  linux:
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
-    needs: check-xcodeproj
-
     strategy:
       matrix:
         include:
           - image: swift:6.0-jammy
             name: 'SPM (Swift 6.0, Ubuntu 22.04)'
-
     container:
       image: ${{ matrix.image }}
       env:
@@ -151,14 +152,16 @@ jobs:
         SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
         SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
         ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Display Swift version
         run: swift --version
-
-      - name: Run Swift tests
+      - name: Run All Swift tests
         working-directory: BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
         run: swift test -Xswiftc -suppress-warnings
+      - name: Run Smoke Swift tests
+        working-directory: BoxSdkGen
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: swift test -Xswiftc -suppress-warnings --filter "BoxSdkGenTests\.(Auth|Files|Downloads|Uploads)ManagerTests"
