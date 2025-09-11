@@ -6,16 +6,13 @@
 //  Copyright © 2019 box. All rights reserved.
 //
 
-import CommonCrypto
 import Foundation
 
 extension Data {
     private func sha1data() -> Data {
-        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
-        withUnsafeBytes {
-            _ = CC_SHA1($0.baseAddress, CC_LONG(self.count), &digest)
-        }
-        return Data(digest)
+        let sha1 = SHA1()
+        sha1.update(data: self)
+        return sha1.finalize()
     }
 
     func sha1() -> String {

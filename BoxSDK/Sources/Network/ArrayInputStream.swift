@@ -104,13 +104,17 @@ class ArrayInputStream: InputStream {
         }
     }
 
-    override func property(forKey _: Stream.PropertyKey) -> Any? {
-        return nil
-    }
+    #if os(iOS) || os(macOS)
 
-    override func setProperty(_: Any?, forKey _: Stream.PropertyKey) -> Bool {
-        return false
-    }
+        override func property(forKey _: Stream.PropertyKey) -> Any? {
+            return nil
+        }
+
+        override func setProperty(_: Any?, forKey _: Stream.PropertyKey) -> Bool {
+            return false
+        }
+
+    #endif
 
     override var streamStatus: Stream.Status {
         return _streamStatus
