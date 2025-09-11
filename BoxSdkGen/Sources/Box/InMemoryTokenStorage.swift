@@ -3,7 +3,7 @@ import Foundation
 /// TokenStorage which keeps AccessToken directly in memory.
 public class InMemoryTokenStorage: TokenStorage {
 
-    /// Access token
+    /// Access token.
     private var token: AccessToken?
 
     public init(token: AccessToken? = nil) {
