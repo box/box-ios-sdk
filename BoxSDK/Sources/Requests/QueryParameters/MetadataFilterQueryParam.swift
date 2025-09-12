@@ -19,7 +19,7 @@ struct MetadataFilterQueryParam {
 
 extension MetadataFilterQueryParam: QueryParameterConvertible {
 
-    public var queryParamValue: String? {
+    var queryParamValue: String? {
         guard let filter = metadataFilter else {
             return nil
         }
