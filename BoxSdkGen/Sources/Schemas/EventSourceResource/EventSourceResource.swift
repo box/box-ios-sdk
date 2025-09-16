@@ -1,0 +1,97 @@
+import Foundation
+
+/// The resource that triggered an event.
+public enum EventSourceResource: Codable {
+    case user(User)
+    case file(File)
+    case folder(Folder)
+    case appItemEventSource(AppItemEventSource)
+    case eventSource(EventSource)
+    case genericSource(GenericSource)
+
+    private enum DiscriminatorCodingKey: String, CodingKey {
+        case type
+        case itemType = "item_type"
+    }
+
+    public init(from decoder: Decoder) throws {
+        if let container = try? decoder.container(keyedBy: DiscriminatorCodingKey.self) {
+            if let discriminator_0 = try? container.decode(String.self, forKey: .type) {
+                switch discriminator_0 {
+                case "user":
+                    if let content = try? User(from: decoder) {
+                        self = .user(content)
+                        return
+                    }
+
+                case "file":
+                    if let content = try? File(from: decoder) {
+                        self = .file(content)
+                        return
+                    }
+
+                case "folder":
+                    if let content = try? Folder(from: decoder) {
+                        self = .folder(content)
+                        return
+                    }
+
+                case "app_item":
+                    if let content = try? AppItemEventSource(from: decoder) {
+                        self = .appItemEventSource(content)
+                        return
+                    }
+
+                default:
+                    break
+                }
+            }
+
+            if let discriminator_1 = try? container.decode(String.self, forKey: .itemType) {
+                switch discriminator_1 {
+                case "file":
+                    if let content = try? EventSource(from: decoder) {
+                        self = .eventSource(content)
+                        return
+                    }
+
+                case "folder":
+                    if let content = try? EventSource(from: decoder) {
+                        self = .eventSource(content)
+                        return
+                    }
+
+                default:
+                    break
+                }
+            }
+
+        }
+
+        if let content = try? GenericSource(from: decoder) {
+            self = .genericSource(content)
+            return
+        }
+
+        throw DecodingError.typeMismatch(EventSourceResource.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        switch self {
+        case .user(let user):
+            try user.encode(to: encoder)
+        case .file(let file):
+            try file.encode(to: encoder)
+        case .folder(let folder):
+            try folder.encode(to: encoder)
+        case .appItemEventSource(let appItemEventSource):
+            try appItemEventSource.encode(to: encoder)
+        case .eventSource(let eventSource):
+            try eventSource.encode(to: encoder)
+        case .genericSource(let genericSource):
+            try genericSource.encode(to: encoder)
+        }
+    }
+
+}

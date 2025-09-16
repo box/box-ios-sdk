@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B2D607D3-65BF-4D0C-8280-C25B6CBFF86E",
+      "name" : "Test Scheme Action",
+      "options" : {
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+    ]
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:BoxSdkGen.xcodeproj",
+        "identifier" : "31869E9885AFFB43C63A9436",
+        "name" : "BoxSdkGenTests_visionOS"
+      }
+    }
+  ],
+  "version" : 1
+}
