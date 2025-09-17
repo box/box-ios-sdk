@@ -618,7 +618,7 @@ class UsersModuleSpecs: QuickSpec {
         }
     }
 
-    public static func testRollOutUserFromEnterpriseBody() -> HTTPStubsTestBlock {
+    static func testRollOutUserFromEnterpriseBody() -> HTTPStubsTestBlock {
         return { request in
             let body = request.ohhttpStubs_httpBody!
             if let jsonBody = try! JSONSerialization.jsonObject(with: body) as? [String: Any] {

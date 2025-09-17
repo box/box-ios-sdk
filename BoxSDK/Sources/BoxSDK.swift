@@ -584,7 +584,10 @@ extension BoxSDK {
     ///     This parameter is provided for your use in protecting against hijacked sessions and other attacks.
     /// - Returns: Standard URL object to be used for authorization in external browser.
     public func makeAuthorizeURL(state: String? = nil) -> URL {
-        var urlString = "\(configuration.oauth2AuthorizeURL)?\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)&\(BoxOAuth2ParamsKey.redirectURL)=\(configuration.callbackURL)"
+        var urlString = "\(configuration.oauth2AuthorizeURL)?" +
+            "\(BoxOAuth2ParamsKey.responseType)=\(BoxOAuth2ParamsKey.responseTypeValue)" +
+            "&\(BoxOAuth2ParamsKey.clientId)=\(configuration.clientId)" +
+            "&\(BoxOAuth2ParamsKey.redirectURL)=\(configuration.callbackURL)"
 
         if let state = state {
             urlString.append("&\(BoxOAuth2ParamsKey.state)=\(state)")
