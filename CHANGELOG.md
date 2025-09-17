@@ -30,6 +30,7 @@ This version includes the Box Next Generation SDK artifact, previously developed
 
 ### New Features and Enhancements
 
+* Add External User Deletion API (box/box-codegen[#550](https://github.com/box/box-ios-sdk/issues/969)) ([74571fb](https://github.com/box/box-ios-sdk/commit/74571fb6675d0ff90d0ec4ef2baf7113816093f8))
 * Add missing webhook events (box/box-openapi[#554](https://github.com/box/box-ios-sdk/issues/554)) ([#1048](https://github.com/box/box-ios-sdk/issues/1048)) ([b8bf1ad](https://github.com/box/box-ios-sdk/commit/b8bf1add360119f70a626f663cd810f9598ec794))
 * Retry requests for network errors in Swift (box/box-codegen[#820](https://github.com/box/box-ios-sdk/issues/820)) ([#1051](https://github.com/box/box-ios-sdk/issues/1051)) ([ba21450](https://github.com/box/box-ios-sdk/commit/ba214507b37d2a842bcf044b5b4392b442486d6f))
 
