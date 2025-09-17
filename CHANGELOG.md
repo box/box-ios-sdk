@@ -4,16 +4,37 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [10.0.0](https://github.com/box/box-ios-sdk/compare/0.1.0...10.0.0) (2025-09-17)
 
+Introducing **`Box iOS SDK v10`**, a major release designed to elevate your developer experience and streamline integration with Box Content Cloud. Currently available as a separate [`sdk-gen`](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch, `v10` will ultimately become the main branch.
 
-### Bug Fixes
+### Breaking Changes
 
-* Brand Hubs as Box Hubs (box/box-openapi[#553](https://github.com/box/box-ios-sdk/issues/553)) ([#1045](https://github.com/box/box-ios-sdk/issues/1045)) ([e79c803](https://github.com/box/box-ios-sdk/commit/e79c803ddb85d38c3277f2524abb9bcc14682dac))
+- This SDK version is auto-generated and introduces a new interface for all methods. Extensive documentation is available [here](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs).
 
+### What's New in `v10`
+
+- **Full API Support** — Complete coverage of the Box API ecosystem, giving you access to all the latest features and functionalities to build feature-rich applications.
+
+- **Rapid API Updates** — Our new auto-generation approach enables Box API additions within days, ensuring you can leverage the most up-to-date features without delay.
+
+- **Embedded Documentation** — All objects and parameters are documented directly in the SDK source code, keeping essential information in one place.
+
+- **Enhanced Convenience Methods** — New methods for authentication, chunk uploads, automatic retries, retry strategy, and more.
+
+### Important Notes
+
+This version includes the Box Next Generation SDK artifact, previously developed in parallel to core Box SDKs. To facilitate migration and provide access to the newest features, we'll soon release an additional major version combining both artifacts. Migration to `v10` includes breaking changes, please review the [migration guide](https://github.com/box/box-ios-sdk/blob/sdk-gen/migration-guides/from-v5-to-v10.md) for details.  For more information, see the [SDK versioning strategy document](https://developer.box.com/tooling/sdks/sdk-versioning). Follow developer changelog for future updates.
+
+---
+
+### What’s New Compared to [Box Swift SDK Gen](https://github.com/box/box-swift-sdk-gen) `v0.6.3`
 
 ### New Features and Enhancements
 
 * Add missing webhook events (box/box-openapi[#554](https://github.com/box/box-ios-sdk/issues/554)) ([#1048](https://github.com/box/box-ios-sdk/issues/1048)) ([b8bf1ad](https://github.com/box/box-ios-sdk/commit/b8bf1add360119f70a626f663cd810f9598ec794))
 * Retry requests for network errors in Swift (box/box-codegen[#820](https://github.com/box/box-ios-sdk/issues/820)) ([#1051](https://github.com/box/box-ios-sdk/issues/1051)) ([ba21450](https://github.com/box/box-ios-sdk/commit/ba214507b37d2a842bcf044b5b4392b442486d6f))
+
+For more details check [migration guide](https://github.com/box/box-ios-sdk/blob/sdk-gen/migration-guides/from-box-swift-sdk-gen-v0-to-box-ios-sdk-v10.md) from `box-swift-sdk-gen` `v0` to `box-ios-sdk` `v10`.
+
 
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
