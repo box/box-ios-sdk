@@ -366,10 +366,10 @@ class MyCustomTokenStorage: TokenStorage {
 }
 
 let auth = BoxOAuth(config:
-    OAuthConfig(
-      clientId: "<<YOUR CLIENT ID HERE>>",
-      clientSecret: "<<YOUR CLIENT SECRET HERE>>",
-      tokenStorage: MyCustomTokenStorage()
-      )
+        OAuthConfig(
+          clientId: "<<YOUR CLIENT ID HERE>>",
+          clientSecret: "<<YOUR CLIENT SECRET HERE>>",
+          tokenStorage: MyCustomTokenStorage()
+          )
 )
 ```
