@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.0.0](https://github.com/box/box-ios-sdk/compare/0.1.0...10.0.0) (2025-09-17)
+
+
+### Bug Fixes
+
+* Brand Hubs as Box Hubs (box/box-openapi[#553](https://github.com/box/box-ios-sdk/issues/553)) ([#1045](https://github.com/box/box-ios-sdk/issues/1045)) ([e79c803](https://github.com/box/box-ios-sdk/commit/e79c803ddb85d38c3277f2524abb9bcc14682dac))
+
+
+### New Features and Enhancements
+
+* Add missing webhook events (box/box-openapi[#554](https://github.com/box/box-ios-sdk/issues/554)) ([#1048](https://github.com/box/box-ios-sdk/issues/1048)) ([b8bf1ad](https://github.com/box/box-ios-sdk/commit/b8bf1add360119f70a626f663cd810f9598ec794))
+* Retry requests for network errors in Swift (box/box-codegen[#820](https://github.com/box/box-ios-sdk/issues/820)) ([#1051](https://github.com/box/box-ios-sdk/issues/1051)) ([ba21450](https://github.com/box/box-ios-sdk/commit/ba214507b37d2a842bcf044b5b4392b442486d6f))
+
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
 
