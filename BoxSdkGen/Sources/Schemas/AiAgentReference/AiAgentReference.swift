@@ -19,14 +19,18 @@ public class AiAgentReference: Codable, RawJSONReadable {
     /// The type of AI agent used to handle queries.
     public let type: AiAgentReferenceTypeField
 
-    /// The ID of an Agent.
+    /// The ID of an Agent. This can be a numeric ID for custom agents (for example, `14031`) 
+    /// or a unique identifier for pre-built agents (for example, `enhanced_extract_agent` 
+    /// for the [Enhanced Extract Agent](g://box-ai/ai-tutorials/extract-metadata-structured/#enhanced-extract-agent)).
     public let id: String?
 
     /// Initializer for a AiAgentReference.
     ///
     /// - Parameters:
     ///   - type: The type of AI agent used to handle queries.
-    ///   - id: The ID of an Agent.
+    ///   - id: The ID of an Agent. This can be a numeric ID for custom agents (for example, `14031`) 
+    ///     or a unique identifier for pre-built agents (for example, `enhanced_extract_agent` 
+    ///     for the [Enhanced Extract Agent](g://box-ai/ai-tutorials/extract-metadata-structured/#enhanced-extract-agent)).
     public init(type: AiAgentReferenceTypeField = AiAgentReferenceTypeField.aiAgentId, id: String? = nil) {
         self.type = type
         self.id = id
