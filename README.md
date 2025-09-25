@@ -240,7 +240,7 @@ We use a modified version of [Semantic Versioning](https://semver.org/) for all 
 
 ### Supported Version
 
-Only the current MAJOR version of SDK is supported. New features, functionality, bug fixes, and security updates will only be added to the current MAJOR version.
+Currently, we support the v10 version and v5 version of the SDK. New features, functionality, bug fixes, and security updates will only be added to these versions.
 
 A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
 
@@ -248,6 +248,8 @@ A current release is on the leading edge of our SDK development, and is intended
 
 | Version | Supported Environments                                  | State     | First Release | EOL/Terminated |
 |---------|---------------------------------------------------------|-----------|---------------|----------------|
+| 10      | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 17 Sep 2025   | TBD            |
+| 6       | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | Q4 2025       | TBD            |
 | 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
 | 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
 | 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
