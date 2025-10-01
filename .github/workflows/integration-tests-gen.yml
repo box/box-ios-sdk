@@ -1,7 +1,8 @@
-name: build-and-test
+name: integration-tests-gen
 on:
-  schedule:
-    - cron: "20 22 * * 1-5"
+  pull_request:
+    branches:
+      - combined-sdk
 jobs:
   ios:
     name: ${{ matrix.name }}
@@ -34,8 +35,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: sdk-gen
       - name: Install dependencies
         working-directory: ./BoxSdkGen
         run: |
@@ -45,6 +44,7 @@ jobs:
         working-directory: ./BoxSdkGen
         run: |
           XCTESTPLAN_PATH="Tests/BoxSdkGenTests_${{ matrix.platform }}.xctestplan"
+
           ENV_JSON=$(jq -n '[
             {key: "CLIENT_ID", value: env.CLIENT_ID},
             {key: "CLIENT_SECRET", value: env.CLIENT_SECRET},
@@ -68,9 +68,9 @@ jobs:
             "$XCTESTPLAN_PATH" > "${XCTESTPLAN_PATH}.tmp" && mv "${XCTESTPLAN_PATH}.tmp" "$XCTESTPLAN_PATH"
 
           echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
-      
       - name: Run all iOS tests
         working-directory: ./BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
         run: |
           set -o pipefail
           xcodebuild \
@@ -82,13 +82,49 @@ jobs:
             -enableCodeCoverage YES \
             -derivedDataPath build/DerivedData \
             clean test | xcpretty
-
-      - name: Upload coverage via Slather → Coveralls
+      - name: Run Smoke iOS tests
         working-directory: ./BoxSdkGen
-        env:
-          GIT_BRANCH: sdk-gen
-          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: slather
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: |
+          set -o pipefail
+          SMOKE_TESTS=(
+            /AuthManagerTests/testOauthAuthAuthorizeUrl
+            /AuthManagerTests/testOauthDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuth
+            /AuthManagerTests/testCcgAuthDownscope
+            /AuthManagerTests/testCcgDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuthRevoke
+            /AuthManagerTests/testDeveloperDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testDeveloperTokenAuthRevoke
+            /AuthManagerTests/testDeveloperTokenAuthDownscope
+            /AuthManagerTests/testDeveloperTokenAuth
+            /AuthManagerTests/testOauthAuthRevoke
+            /AuthManagerTests/testOauthAuthDownscope
+            /FilesManagerTests/uploadFile
+            /FilesManagerTests/testGetFileThumbnailUrl
+            /FilesManagerTests/testGetFileThumbnail
+            /FilesManagerTests/testGetFileFullExtraFields
+            /FilesManagerTests/testCreateGetAndDeleteFile
+            /FilesManagerTests/testUpdateFile
+            /FilesManagerTests/testFileLock
+            /DownloadsManagerTests/testDownloadFile
+            /DownloadsManagerTests/testGetDownloadUrl
+            /UploadsManagerTests/testUploadFileAndFileVersion
+            /UploadsManagerTests/testUploadFileWithPreflightCheck
+            /UploadsManagerTests/testPreflightCheck
+          )
+          ONLY_TESTING_FLAGS=($(printf "%s\n" "${SMOKE_TESTS[@]}" | sed "s/^/-only-testing BoxSdkGenTests_${{ matrix.platform }}/"))
+
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
+            -enableCodeCoverage YES \
+            -derivedDataPath build/DerivedData \
+            "${ONLY_TESTING_FLAGS[@]}" \
+            clean test | xcpretty
 
   linux:
     name: ${{ matrix.name }}
@@ -119,31 +155,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: sdk-gen
       - name: Display Swift version
         run: swift --version
       - name: Run All Swift tests
         working-directory: BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
         run: swift test -Xswiftc -suppress-warnings
-  
-  notify:
-    name: Send Slack Notification
-    runs-on: ubuntu-latest
-    needs: [ios, linux]
-    if: always()
-    steps:
-      - name: Send Slack Notification
-        env:
-          SLACK_WEBHOOK_TEST_NOTIFICATION_URL: ${{ secrets.SLACK_WEBHOOK_TEST_NOTIFICATION_URL }}
-          BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          if [ "${{ needs.ios.result }}" != "success" ] || [ "${{ needs.linux.result }}" != "success" ]; then
-            STATUS="Failure ❌"
-          else
-            STATUS="Success ✅"
-          fi
-
-          curl -X POST -H "Content-Type: application/json" \
-            --data "{\"text\":\"<${BUILD_URL}|Daily Tests Job> in *${GITHUB_REPOSITORY}* finished with status: ${STATUS}\"}" \
-            "$SLACK_WEBHOOK_TEST_NOTIFICATION_URL"
+      - name: Run Smoke Swift tests
+        working-directory: BoxSdkGen
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: swift test -Xswiftc -suppress-warnings --filter "BoxSdkGenTests\.(Auth|Files|Downloads|Uploads)ManagerTests"

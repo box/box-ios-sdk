@@ -1,11 +1,8 @@
-name: Build and Test
-on: 
+name: unit-tests
+on:
   pull_request:
     branches:
-      - main
-  push:
-    branches:
-      - main
+      - combined-sdk
 jobs:
   ios-build-and-test:
     runs-on: macos-13
