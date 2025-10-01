@@ -1,10 +1,10 @@
-# Handling null values in Box Swift SDK Gen
+# Handling null values in Box iOS SDK v10
 
-While using Box Swift SDK it's important to understand how null values behave. This document provides a general overview of null value behaviour in Box Swift SDK to help developers manage data consistently and predictably.
+While using v10 of Box iOS SDK it's important to understand how null values behave. This document provides a general overview of null value behaviour in Box iOS SDK to help developers manage data consistently and predictably.
 
 ## Understanding null behaviour
 
-The Box Swift SDK follows a consistent pattern for handling null values in update operations.
+The v10 of Box iOS SDK follows a consistent pattern for handling null values in update operations.
 This behavior applies to most endpoints that modify resources such as users, files, folders, and metadata.
 Fields to be updated are wrapped in a `TriStateField` within the initializer. This allows you to specify whether a field should be sent with a value, sent explicitly as null, or omitted entirely.
 
