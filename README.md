@@ -5,10 +5,13 @@
 # Box iOS SDK
 
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
-[![Platforms](https://img.shields.io/cocoapods/p/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK)
-[![License](https://img.shields.io/cocoapods/l/BoxSDK.svg)](https://raw.githubusercontent.com/box/box-ios-sdk/main/LICENSE) [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
- [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
- [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSDK.svg)](https://cocoapods.org/pods/BoxSDK) [![Build Status](https://travis-ci.com/box/box-ios-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-sdk) [![Coverage](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=main)](https://coveralls.io/github/box/box-ios-sdk?branch=main)
+![build legacy](https://github.com/box/box-ios-sdk/actions/workflows/integration-tests.yml/badge.svg?branch=combined-sdk)
+![build generated](https://github.com/box/box-ios-sdk/actions/workflows/integration-tests-gen.yml/badge.svg?branch=combined-sdk)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)
+[![Coverage Status](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=combined-sdk)](https://coveralls.io/github/box/box-ios-sdk?branch=combined-sdk)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-orange.svg)](https://cocoapods.org/pods/BoxSDK)
 
 Getting Started Docs: https://developer.box.com/guides/mobile/ios/quick-start/
 
@@ -98,7 +101,7 @@ __Step 4__: Leave the default settings to get the most recent release and click 
 
 The process should look like below:
 
-![Import Package](docs/usage/import-sdk-spm.gif)
+![Import Package](docs/BoxSDK/import-sdk-spm.gif)
 
 
 

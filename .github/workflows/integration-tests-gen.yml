@@ -1,0 +1,167 @@
+name: integration-tests-gen
+on:
+  pull_request:
+    branches:
+      - combined-sdk
+jobs:
+  ios:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    strategy:
+      matrix:
+        include:
+          - destination: 'platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro'
+            name: 'xcodebuild (iOS 18.5)'
+            xcode: 'Xcode_16.4'
+            runsOn: macOS-15
+            platform: iOS
+    env:
+      DEVELOPER_DIR: '/Applications/${{ matrix.xcode }}.app/Contents/Developer'
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      USER_ID: ${{ secrets.USER_ID }}
+      ENTERPRISE_ID: ${{ secrets.ENTERPRISE_ID }}
+      BOX_FILE_REQUEST_ID: ${{ secrets.BOX_FILE_REQUEST_ID }}
+      BOX_EXTERNAL_USER_EMAIL: ${{ secrets.BOX_EXTERNAL_USER_EMAIL }}
+      BOX_EXTERNAL_USER_ID: ${{ secrets.BOX_EXTERNAL_USER_ID }}
+      WORKFLOW_FOLDER_ID: ${{ secrets.WORKFLOW_FOLDER_ID }}
+      APP_ITEM_ASSOCIATION_FILE_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FILE_ID }}
+      APP_ITEM_ASSOCIATION_FOLDER_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FOLDER_ID }}
+      APP_ITEM_SHARED_LINK: ${{ secrets.APP_ITEM_SHARED_LINK }}
+      SLACK_AUTOMATION_USER_ID: ${{ secrets.SLACK_AUTOMATION_USER_ID }}
+      SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
+      SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
+      ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        working-directory: ./BoxSdkGen
+        run: |
+          gem install xcpretty
+          gem install slather
+      - name: Inject environment variables into .xctestplan
+        working-directory: ./BoxSdkGen
+        run: |
+          XCTESTPLAN_PATH="Tests/BoxSdkGenTests_${{ matrix.platform }}.xctestplan"
+
+          ENV_JSON=$(jq -n '[
+            {key: "CLIENT_ID", value: env.CLIENT_ID},
+            {key: "CLIENT_SECRET", value: env.CLIENT_SECRET},
+            {key: "USER_ID", value: env.USER_ID},
+            {key: "ENTERPRISE_ID", value: env.ENTERPRISE_ID},
+            {key: "BOX_FILE_REQUEST_ID", value: env.BOX_FILE_REQUEST_ID},
+            {key: "BOX_EXTERNAL_USER_EMAIL", value: env.BOX_EXTERNAL_USER_EMAIL},
+            {key: "BOX_EXTERNAL_USER_ID", value: env.BOX_EXTERNAL_USER_ID},
+            {key: "WORKFLOW_FOLDER_ID", value: env.WORKFLOW_FOLDER_ID},
+            {key: "APP_ITEM_ASSOCIATION_FILE_ID", value: env.APP_ITEM_ASSOCIATION_FILE_ID},
+            {key: "APP_ITEM_ASSOCIATION_FOLDER_ID", value: env.APP_ITEM_ASSOCIATION_FOLDER_ID},
+            {key: "APP_ITEM_SHARED_LINK", value: env.APP_ITEM_SHARED_LINK},
+            {key: "SLACK_AUTOMATION_USER_ID", value: env.SLACK_AUTOMATION_USER_ID},
+            {key: "SLACK_ORG_ID", value: env.SLACK_ORG_ID},
+            {key: "SLACK_PARTNER_ITEM_ID", value: env.SLACK_PARTNER_ITEM_ID},
+            {key: "ADMIN_USER_ID", value: env.ADMIN_USER_ID}
+          ]')
+
+          jq --argjson envVars "$ENV_JSON" \
+            '.defaultOptions.environmentVariableEntries = $envVars' \
+            "$XCTESTPLAN_PATH" > "${XCTESTPLAN_PATH}.tmp" && mv "${XCTESTPLAN_PATH}.tmp" "$XCTESTPLAN_PATH"
+
+          echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
+      - name: Run all iOS tests
+        working-directory: ./BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
+        run: |
+          set -o pipefail
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
+            -enableCodeCoverage YES \
+            -derivedDataPath build/DerivedData \
+            clean test | xcpretty
+      - name: Run Smoke iOS tests
+        working-directory: ./BoxSdkGen
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: |
+          set -o pipefail
+          SMOKE_TESTS=(
+            /AuthManagerTests/testOauthAuthAuthorizeUrl
+            /AuthManagerTests/testOauthDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuth
+            /AuthManagerTests/testCcgAuthDownscope
+            /AuthManagerTests/testCcgDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testCcgAuthRevoke
+            /AuthManagerTests/testDeveloperDownscopeTokenSucceedsIfNoTokenAvailable
+            /AuthManagerTests/testDeveloperTokenAuthRevoke
+            /AuthManagerTests/testDeveloperTokenAuthDownscope
+            /AuthManagerTests/testDeveloperTokenAuth
+            /AuthManagerTests/testOauthAuthRevoke
+            /AuthManagerTests/testOauthAuthDownscope
+            /FilesManagerTests/uploadFile
+            /FilesManagerTests/testGetFileThumbnailUrl
+            /FilesManagerTests/testGetFileThumbnail
+            /FilesManagerTests/testGetFileFullExtraFields
+            /FilesManagerTests/testCreateGetAndDeleteFile
+            /FilesManagerTests/testUpdateFile
+            /FilesManagerTests/testFileLock
+            /DownloadsManagerTests/testDownloadFile
+            /DownloadsManagerTests/testGetDownloadUrl
+            /UploadsManagerTests/testUploadFileAndFileVersion
+            /UploadsManagerTests/testUploadFileWithPreflightCheck
+            /UploadsManagerTests/testPreflightCheck
+          )
+          ONLY_TESTING_FLAGS=($(printf "%s\n" "${SMOKE_TESTS[@]}" | sed "s/^/-only-testing BoxSdkGenTests_${{ matrix.platform }}/"))
+
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
+            -enableCodeCoverage YES \
+            -derivedDataPath build/DerivedData \
+            "${ONLY_TESTING_FLAGS[@]}" \
+            clean test | xcpretty
+
+  linux:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: swift:6.0-jammy
+            name: 'SPM (Swift 6.0, Ubuntu 22.04)'
+    container:
+      image: ${{ matrix.image }}
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        USER_ID: ${{ secrets.USER_ID }}
+        ENTERPRISE_ID: ${{ secrets.ENTERPRISE_ID }}
+        BOX_FILE_REQUEST_ID: ${{ secrets.BOX_FILE_REQUEST_ID }}
+        BOX_EXTERNAL_USER_EMAIL: ${{ secrets.BOX_EXTERNAL_USER_EMAIL }}
+        BOX_EXTERNAL_USER_ID: ${{ secrets.BOX_EXTERNAL_USER_ID }}
+        WORKFLOW_FOLDER_ID: ${{ secrets.WORKFLOW_FOLDER_ID }}
+        APP_ITEM_ASSOCIATION_FILE_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FILE_ID }}
+        APP_ITEM_ASSOCIATION_FOLDER_ID: ${{ secrets.APP_ITEM_ASSOCIATION_FOLDER_ID }}
+        APP_ITEM_SHARED_LINK: ${{ secrets.APP_ITEM_SHARED_LINK }}
+        SLACK_AUTOMATION_USER_ID: ${{ secrets.SLACK_AUTOMATION_USER_ID }}
+        SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
+        SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
+        ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Display Swift version
+        run: swift --version
+      - name: Run All Swift tests
+        working-directory: BoxSdkGen
+        if: startsWith(github.head_ref, 'codegen-release')
+        run: swift test -Xswiftc -suppress-warnings
+      - name: Run Smoke Swift tests
+        working-directory: BoxSdkGen
+        if: "!startsWith(github.head_ref, 'codegen-release')"
+        run: swift test -Xswiftc -suppress-warnings --filter "BoxSdkGenTests\.(Auth|Files|Downloads|Uploads)ManagerTests"
