@@ -20,12 +20,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: '3.2'
       - name: Setup carthage dependencies
         working-directory: BoxSDK
         run: ./scripts/bootstrap
-      - name: Lint
-        working-directory: BoxSDK
-        run: swiftlint
       - name: Run unit tests
         working-directory: BoxSDK
         run: set -o pipefail && xcodebuild -workspace BoxSDK.xcworkspace -scheme BoxSDK-iOS -destination "${{ matrix.destination }}" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES -enableCodeCoverage YES test

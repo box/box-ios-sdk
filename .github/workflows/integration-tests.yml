@@ -14,10 +14,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup - Xcode
         run: sudo xcode-select -s /Applications/Xcode_14.2.app
-      - name: Setup - Ruby and bundler dependencies
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
       - name: Setup carthage dependencies
         run: ./scripts/bootstrap
         working-directory: BoxSDK

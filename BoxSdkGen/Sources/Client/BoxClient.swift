@@ -1,6 +1,7 @@
 import Foundation
 
 public class BoxClient {
+
     public let auth: Authentication
 
     public let networkSession: NetworkSession
