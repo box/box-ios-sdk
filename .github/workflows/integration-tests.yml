@@ -2,7 +2,7 @@ name: integration-tests
 on:
   pull_request:
     branches:
-      - combined-sdk
+      - sdk-build-ci
 jobs:
   integration-tests:
     runs-on: macos-13
