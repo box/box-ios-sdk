@@ -51,7 +51,7 @@ public class Event: Codable, RawJSONReadable {
     /// information to correlate an event to external KeySafe logs. Not all events
     /// have an `additional_details` object.  This object is only available in the
     /// Enterprise Events.
-    public let additionalDetails: EventAdditionalDetailsField?
+    public let additionalDetails: [String: AnyCodable]?
 
     /// Initializer for a Event.
     ///
@@ -71,7 +71,7 @@ public class Event: Codable, RawJSONReadable {
     ///     information to correlate an event to external KeySafe logs. Not all events
     ///     have an `additional_details` object.  This object is only available in the
     ///     Enterprise Events.
-    public init(type: String? = nil, createdAt: Date? = nil, recordedAt: Date? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceResource? = nil, additionalDetails: EventAdditionalDetailsField? = nil) {
+    public init(type: String? = nil, createdAt: Date? = nil, recordedAt: Date? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceResource? = nil, additionalDetails: [String: AnyCodable]? = nil) {
         self.type = type
         self.createdAt = createdAt
         self.recordedAt = recordedAt
@@ -93,7 +93,7 @@ public class Event: Codable, RawJSONReadable {
         eventType = try container.decodeIfPresent(EventEventTypeField.self, forKey: .eventType)
         sessionId = try container.decodeIfPresent(String.self, forKey: .sessionId)
         source = try container.decodeIfPresent(EventSourceResource.self, forKey: .source)
-        additionalDetails = try container.decodeIfPresent(EventAdditionalDetailsField.self, forKey: .additionalDetails)
+        additionalDetails = try container.decodeIfPresent([String: AnyCodable].self, forKey: .additionalDetails)
     }
 
     public func encode(to encoder: Encoder) throws {
