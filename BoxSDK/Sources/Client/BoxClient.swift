@@ -483,6 +483,7 @@ extension BoxClient: BoxClientProtocol {
             ),
             completion: completion
         )
+
         return task
     }
 }
