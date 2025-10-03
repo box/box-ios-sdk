@@ -18,7 +18,7 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
 
 
     /// The level of access granted.
-    public let role: UpdateCollaborationByIdRequestBodyRoleField
+    public let role: UpdateCollaborationByIdRequestBodyRoleField?
 
     /// Set the status of a `pending` collaboration invitation,
     /// effectively accepting, or rejecting the invite.
@@ -86,7 +86,7 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
     ///     `true`.
     ///     
     ///     `can_view_path` can only be used for folder collaborations.
-    public init(role: UpdateCollaborationByIdRequestBodyRoleField, status: UpdateCollaborationByIdRequestBodyStatusField? = nil, expiresAt: Date? = nil, canViewPath: Bool? = nil) {
+    public init(role: UpdateCollaborationByIdRequestBodyRoleField? = nil, status: UpdateCollaborationByIdRequestBodyStatusField? = nil, expiresAt: Date? = nil, canViewPath: Bool? = nil) {
         self.role = role
         self.status = status
         self.expiresAt = expiresAt
@@ -95,7 +95,7 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        role = try container.decode(UpdateCollaborationByIdRequestBodyRoleField.self, forKey: .role)
+        role = try container.decodeIfPresent(UpdateCollaborationByIdRequestBodyRoleField.self, forKey: .role)
         status = try container.decodeIfPresent(UpdateCollaborationByIdRequestBodyStatusField.self, forKey: .status)
         expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
@@ -103,7 +103,7 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(role, forKey: .role)
+        try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
