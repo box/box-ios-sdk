@@ -41,7 +41,7 @@ Returns a collaboration object.
 
 Updates a collaboration.
 Can be used to change the owner of an item, or to
-accept collaboration invites.
+accept collaboration invites. In case of accepting collaboration invite, role is not required.
 
 This operation is performed by calling function `updateCollaborationById`.
 
