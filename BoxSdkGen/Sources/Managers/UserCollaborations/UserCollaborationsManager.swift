@@ -28,7 +28,7 @@ public class UserCollaborationsManager {
 
     /// Updates a collaboration.
     /// Can be used to change the owner of an item, or to
-    /// accept collaboration invites.
+    /// accept collaboration invites. In case of accepting collaboration invite, role is not required.
     ///
     /// - Parameters:
     ///   - collaborationId: The ID of the collaboration.
@@ -37,7 +37,7 @@ public class UserCollaborationsManager {
     ///   - headers: Headers of updateCollaborationById method
     /// - Returns: The `Collaboration?`.
     /// - Throws: The `GeneralError`.
-    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody, headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration? {
+    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody = UpdateCollaborationByIdRequestBody(), headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         if Utils.Strings.toString(value: response.status) == "204" {
