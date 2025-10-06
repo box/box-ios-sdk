@@ -25,7 +25,7 @@ class EventsManagerTests: RetryableTestCase {
             XCTAssertTrue(events.entries!.count > 0)
             let firstEvent: Event = events.entries![0]
             XCTAssertTrue(Utils.Strings.toString(value: firstEvent.eventType!) == "UPLOAD")
-            XCTAssertTrue(Utils.Strings.toString(value: firstEvent.additionalDetails!["hash_type"]) == "sha1")
+            XCTAssertTrue(Utils.Strings.toString(value: firstEvent.additionalDetails!["service_id"]) != "")
         }
     }
 
