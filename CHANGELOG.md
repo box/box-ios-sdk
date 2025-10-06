@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.0.1](https://github.com/box/box-ios-sdk/compare/10.0.0...10.0.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* Allow flexible key-value data in `AiExtractResponse.answer` and `Event.additionalDetails` (box/box-openapi[#556](https://github.com/box/box-ios-sdk/issues/556)) ([#1128](https://github.com/box/box-ios-sdk/issues/1128)) ([3e9a78c](https://github.com/box/box-ios-sdk/commit/3e9a78ce710b0161e0912d1ee6af0b7758875fbc))
+* Make `role` parameter of update collaboration optional (box/box-openapi[#557](https://github.com/box/box-ios-sdk/issues/557)) ([#1138](https://github.com/box/box-ios-sdk/issues/1138)) ([3fc5dc9](https://github.com/box/box-ios-sdk/commit/3fc5dc9a62bd0cabc8987d56c0d63b94fa7ef14d))
+
 ## [10.0.0](https://github.com/box/box-ios-sdk/compare/0.1.0...10.0.0) (2025-09-17)
 
 Introducing **`Box iOS SDK v10`**, a major release designed to elevate your developer experience and streamline integration with Box Content Cloud. Currently available as a separate [`sdk-gen`](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch, `v10` will ultimately become the main branch.
