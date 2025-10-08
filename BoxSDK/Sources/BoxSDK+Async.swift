@@ -12,6 +12,7 @@
 import Foundation
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
+@available(*, deprecated, message: "BoxSDK module is deprecated. Please migrate to BoxSdkGen module and use BoxClient instead. Both modules are available within the same BoxSDK library.")
 public extension BoxSDK {
 
     // MARK: - JWT Client

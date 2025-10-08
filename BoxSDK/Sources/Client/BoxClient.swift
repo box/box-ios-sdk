@@ -1,6 +1,7 @@
 import Foundation
 
 /// Provides communication with Box APIs. Defines methods for communication with Box APIs
+@available(*, deprecated, message: "BoxSDK module is deprecated. Please migrate to BoxSdkGen module and use BoxClient instead. Both modules are available within the same BoxSDK library.")
 public class BoxClient {
     /// Provides [File](../Structs/File.html) management.
     public private(set) lazy var files = FilesModule(boxClient: self)

@@ -16,6 +16,7 @@ import Foundation
 public typealias Callback<T> = (Result<T, BoxSDKError>) -> Void
 
 /// Provides methods for creating BoxSDKClient
+@available(*, deprecated, message: "BoxSDK module is deprecated. Please migrate to BoxSdkGen module and use BoxClient instead. Both modules are available within the same BoxSDK library.")
 public class BoxSDK {
 
     /// Box-specific constants
