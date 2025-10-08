@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -409,7 +409,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/OAuth2SampleApp/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -438,7 +438,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/BoxSDK.xcframework/ios-arm64_x86_64-simulator",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/OAuth2SampleApp/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
