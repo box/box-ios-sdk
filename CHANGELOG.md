@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v6.0.0) (2025-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Bump minimum supported platform versions (#936)
+
+### Bug Fixes
+
+* Allow flexible key-value data in `AiExtractResponse.answer` and `Event.additionalDetails` (box/box-openapi[#556](https://github.com/box/box-ios-sdk/issues/556)) ([#1130](https://github.com/box/box-ios-sdk/issues/1130)) ([b7fd7b2](https://github.com/box/box-ios-sdk/commit/b7fd7b2bf59d7b62f1cc9d92976e54939c658d50))
+* Make `role` parameter of update collaboration optional (box/box-openapi[#557](https://github.com/box/box-ios-sdk/issues/557)) ([#1137](https://github.com/box/box-ios-sdk/issues/1137)) ([639b691](https://github.com/box/box-ios-sdk/commit/639b691b99336665a77d203137440309644237c4))
+
+
+### New Features and Enhancements
+
+* Add `BoxSdkGen` project (box/box-codegen[#828](https://github.com/box/box-ios-sdk/issues/828)) ([#1069](https://github.com/box/box-ios-sdk/issues/1069)) ([e91c382](https://github.com/box/box-ios-sdk/commit/e91c3829419d86b098790e34362d122268fa5ec7))
+* Adjust code to `watchOS` and `tvOS` ([#934](https://github.com/box/box-ios-sdk/issues/934)) ([3f3c120](https://github.com/box/box-ios-sdk/commit/3f3c1204714785299a349dfc341c08adf95ee4e3))
+* Bump minimum supported platform versions ([#936](https://github.com/box/box-ios-sdk/issues/936)) ([9f3f774](https://github.com/box/box-ios-sdk/commit/9f3f7749e36f47207af1df27dd191a5e7cdbb7a1))
+
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
 
