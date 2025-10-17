@@ -45,6 +45,6 @@ iOS: <!-- Replace with the version of iOS your application is running on. -->
 Xcode: <!-- Replace with the version of Xcode your application is developed in. -->
 
 [sdk-docs]: ./doc
-[api-docs]: https://developer.box.com/docs
-[dev-forums]: https://community.box.com/t5/Platform-and-Development-Forum/bd-p/DeveloperForum
+[api-docs]: https://developer.box.com/guides/
+[dev-forums]: https://community.box.com/box-platform-5
 [github-repo]: https://github.com/box/box-ios-sdk/search?type=Issues
