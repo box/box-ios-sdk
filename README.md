@@ -13,240 +13,277 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-orange.svg)](https://cocoapods.org/pods/BoxSDK)
 
-Getting Started Docs: https://developer.box.com/guides/mobile/ios/quick-start/
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-NOTE:
-===================
-
-The Box iOS SDK in **Objective-C** (prior to v3.0.0) has been moved from the main branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-sdk/tree/objective-c-maintenance).
-Going forward, the main branch will contain the iOS SDK in **Swift**, starting with v3.0.0.
-
-Box iOS SDK
-- [Box iOS SDK](#box-ios-sdk)
-- [NOTE:](#note)
-  - [Requirements](#requirements)
-  - [Installing the SDK](#installing-the-sdk)
-    - [Carthage](#carthage)
-    - [CocoaPods](#cocoapods)
-    - [Swift Package Manager](#swift-package-manager)
-      - [Importing BoxSDK into Project](#importing-boxsdk-into-project)
-      - [Adding BoxSDK as a Dependency](#adding-boxsdk-as-a-dependency)
-  - [Getting Started](#getting-started)
-  - [Sample Apps](#sample-apps)
-    - [OAuth2 Sample App](#oauth2-sample-app)
-    - [JWT Auth Sample App](#jwt-auth-sample-app)
-  - [FIPS 140-2 Compliance](#fips-140-2-compliance)
-  - [Versions](#versions)
-    - [Supported Version](#supported-version)
+- [Supported versions](#supported-versions)
+  - [Version v6](#version-v6)
+  - [Version v10](#version-v10)
+  - [Which Version Should I Use?](#which-version-should-i-use)
+- [Requirements](#requirements)
+- [Installing](#installing)
+  - [Swift Package Manager](#swift-package-manager)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+- [Getting Started](#getting-started)
+  - [With BoxSdkGen module (recommended)](#with-boxsdkgen-module-recommended)
+  - [With BoxSDK module (deprecated)](#with-boxsdk-module-deprecated)
+- [Authentication](#authentication)
+- [Using both BoxSdkGen and BoxSDK modules simultaneously](#using-both-boxsdkgen-and-boxsdk-modules-simultaneously)
+- [Documentation](#documentation)
+- [Migration guides](#migration-guides)
+- [Versioning](#versioning)
     - [Version schedule](#version-schedule)
+- [Contributing](#contributing)
+- [FIPS 140-2 Compliance](#fips-140-2-compliance)
+- [Questions, Bugs, and Feature Requests?](#questions-bugs-and-feature-requests)
   - [Copyright and License](#copyright-and-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# Supported versions
+
+To enhance developer experience, provide full Box API coverage, and rapid updates we have introduced the new generated codebase through the `BoxSdkGen` module.
+The `BoxSdkGen` module is available in two major supported versions: v6 and v10.
+
+## Version v6
+
+In v6 of the Box iOS SDK, we are introducing a version that consolidates both the manually written module (`BoxSDK`)
+and the new generated module (`BoxSdkGen`). This allows developers to use both modules simultaneously within a single project
+
+Version v6 of the Box iOS SDK will be supported until 2027. During this period,
+the `BoxSDK` module will be marked as deprecated and will receive only bug fixes and security patches.
+All new features and support for new Box APIs will be provided exclusively in the `BoxSdkGen` module.
+
+The codebase for v6 of the Box iOS SDK is currently available on the [combined-sdk](https://github.com/box/box-ios-sdk/tree/combined-sdk) branch.
+Migration guide which would help with migration from `BoxSDK` to `BoxSdkGen` can be found [here](./migration-guides/from-BoxSDK-to-BoxSdkGen.md).
+
+Version v6 is intended for:
+- Existing developers of the Box iOS SDK v5 who want to access new API features while keeping their current codebase largely unchanged.
+- Existing developers who are in the process of migrating to `BoxSdkGen`, but do not want to move all their code to the new module immediately.
+
+## Version v10
+
+Starting with v10, the SDK is built entirely on the generated `BoxSdkGen` module, which fully and exclusively replaces the old `BoxSDK` module.
+The codebase for v10 of the Box iOS SDK is currently available on the [sdk-gen](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch.
+
+Version v10 is intended for:
+- New users of the Box iOS SDK.
+- Developers already working with the generated Box iOS SDK previously available under the [Box Swift SDK Gen repository](https://github.com/box/box-swift-sdk-gen).
+
+## Which Version Should I Use?
+
+| Scenario                                                                                                              | Recommended Version                                                   | Example Dependency (SPM / CocoaPods)                     |
+|-----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|----------------------------------------------------------|
+| Creating a new application                                                                                            | Use [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)            | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'` |
+| App using [BoxSdkGen](https://github.com/box/box-swift-sdk-gen)                                                       | Migrate to [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)     | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'` |
+| App using both [BoxSdkGen](https://github.com/box/box-swift-sdk-gen) and [BoxSDK](https://github.com/box/box-ios-sdk) | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |                                                  |
+| App using v5 of [BoxSDK](https://github.com/box/box-ios-sdk)                                                          | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |
 
 
-Requirements
-------------------
+
+For full guidance on SDK versioning, see the [Box SDK Versioning Guide](https://developer.box.com/guides/tooling/sdks/sdk-versioning/).
+
+# Requirements
 
 - iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+
 - Xcode 13.3+
 
-Installing the SDK
-------------------
+# Installing
 
-### Carthage
+The installation of the Box iOS SDK v6 that consolidates both the manually written module (`BoxSDK`)
+and the new generated module (`BoxSdkGen`) depends on how you want to integrate the SDK into your project.
+Below are instructions for three popular dependency managers: Swift Package Manager, Carthage, and CocoaPods.
 
-__Step 1__: Add to your `Cartfile`
+## Swift Package Manager
 
+The Swift Package Manager is a tool for managing the distribution of Swift code.
+It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+To add a dependency to your Xcode project, click on Xcode project file on `Packages Dependencies` and click on the plus icon to add a package.
+Then enter the following repository url https://github.com/box/box-ios-sdk.git and select the version by choosing `Up to Next Major Version` and entering `6.0.0` as the starting version.
+
+Alternatively, add the package in your `Package.swift` under the top-level `dependencies` array:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))
+]
 ```
-git "https://github.com/box/box-ios-sdk.git" ~> 5.0
+
+Then add the `BoxSDK` product to your target's `dependencies`:
+
+```swift
+   .product(name: "BoxSDK", package: "box-ios-sdk")
 ```
 
-__Step 2__: Update dependencies
+For detailed instructions, please see the [official documentation for SPM](https://www.swift.org/package-manager/).
+
+## Carthage
+
+Carthage is a decentralized dependency manager which builds your dependencies and provides you with binary frameworks.
+
+To add a dependency to SDK, you need to add the following line to your `Cartfile` :
+
 ```shell
-$ carthage update --use-xcframeworks --platform iOS
+git "https://github.com/box/box-ios-sdk.git" ~> 6.0.0
 ```
 
-__Step 3__: Drag the built xcframework from Carthage/Build into your project.
+Then run:
 
-For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
-
-### CocoaPods
-
-__Step 1__: Add to your `Podfile`
-
-```
-pod 'BoxSDK', '~> 5.0'
+```shell
+carthage bootstrap --use-xcframeworks
 ```
 
-__Step 2__: Install pod by running the following command in the directory with the `Podfile`
+And finally drag the built `xcframework` from Carthage/Build into your project.
 
+For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
+
+## CocoaPods
+
+CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+To start using `BoxSDK` with CocoaPods, you need to add `BoxSDK` dependency to your `Podfile`:
+
+```shell
+pod 'BoxSDK', '~> 6.0'
 ```
+
+Then run the following command in your project directory:
+
+```shell
 $ pod install
 ```
 
+Now open your [project].xcworkspace and build.
+
 For more detailed instructions, please see the [official documentation for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
 
-### Swift Package Manager
+# Getting Started
 
-#### Importing BoxSDK into Project
+To get started with the SDK, get a Developer Token from the Configuration page of your app in the [Box Developer Console](https://app.box.com/developers/console).
+Developer Tokens are short-lived and expire after 60 minutes, which is good for testing but not for production use.
+To learn about other authentication methods, see the [Authentication](#Authentication) section below.
 
-__Step 1__: Click on Xcode project file
+The examples below demonstrate how to authenticate with Developer Token and print names of all items inside a root folder.
 
-__Step 2__: Click on Swift Packages and click on the plus to add a package
+## With BoxSdkGen module (recommended)
 
-__Step 3__: Enter the following repository url `https://github.com/box/box-ios-sdk.git` and click next
+The SDK provides an `BoxDeveloperTokenAuth` class, which allows you to authenticate using your Developer Token.
+Use instance of `BoxDeveloperTokenAuth` to initialize BoxClient object. Using `BoxClient` object you can access managers,
+which allow you to perform some operations on your Box account.
 
-__Step 4__: Leave the default settings to get the most recent release and click next to finish importing
+```swift
+import BoxSdkGen
 
-The process should look like below:
+let auth = BoxDeveloperTokenAuth(token: "YOUR_DEVELOPER_TOKEN")
+let client = BoxClient(auth: auth)
 
-![Import Package](docs/BoxSDK/import-sdk-spm.gif)
+let items = try await client.folders.getFolderItems(folderId: "0")
+if let entries = items.entries {
+    for entry in entries {
+        switch entry {
+        case let .fileFull(file):
+            print("file \(file.name!) [\(file.id)]")
+        case let .folderMini(folder):
+            print("folder \(folder.name!) [\(folder.id)]")
+        case let .webLink(webLink):
+            print("webLink \(webLink.name!) [\(webLink.id)]")
+        }
+    }
+}
+```
 
-
-
-#### Adding BoxSDK as a Dependency
-
-For detailed instructions, please see the [official documentation for SPM](https://swift.org/package-manager/). 
-
-Getting Started
----------------
-
-To get started with the SDK, get a Developer Token from the Configuration page of your app in the
-[Box Developer Console][dev-console].  You can use this token to make test calls for your own Box account.
+## With BoxSDK module (deprecated)
 
 ```swift
 import BoxSDK
 
 let client = BoxSDK.getClient(token: "YOUR_DEVELOPER_TOKEN")
-client.users.getCurrentUser() { result in
-    switch result {
-    case let .error(error):
-        print("Error: \(error)")
-    case let .success(user):
-        print("\(user.name) (\(user.login)) is logged in")
+let iterator = client.folders.listItems(folderId: "0")
+iterator.next { results in
+    switch results {
+    case let .success(page):
+        for item in page.entries {
+            switch item {
+            case let .file(file):
+                print("file \(file.name!) [\(file.id)]")
+            case let .folder(folder):
+                print("folder \(folder.name!) [\(folder.id)]")
+            case let .webLink(webLink):
+                print("webLink \(webLink.name!) [\(webLink.id)]")
+            }
+        }
+
+    case let .failure(error):
+        print(error)
     }
 }
 ```
 
-[dev-console]: https://app.box.com/developers/console
+# Authentication
 
-The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/main/BoxSDK/docs/usage).
+Both the `BoxSdkGen` and `BoxSDK` modules support multiple authentication methods, including
+Developer Token, OAuth 2.0 and Client Credentials Grant.
 
-The Jazzy docs that show class, method, variable, etc definitions can be found [here](https://opensource.box.com/box-ios-sdk/).
+You can find detailed instructions and example code for each authentication method in the following documentation:
+- [Authentication for `BoxSdkGen` module](./docs/BoxSdkGen/Authentication.md)
+- [Authentication for `BoxSDK` module](./docs/BoxSDK/authentication.md)
 
-Sample Apps
------------
+# Using both BoxSdkGen and BoxSDK modules simultaneously
 
-### OAuth2 Sample App
+With v6 of the Box iOS SDK, you can use both the `BoxSdkGen` and `BoxSDK` modules in the same project.
+This allows you to gradually migrate your codebase to the new generated module while still using the manually written BoxSDK module for existing functionality.
+If you are not using both modules in the same file, you can simply import the module you need in each file and use it without any issues.
+However, if you need to use both modules in the same file, you may encounter naming conflicts for classes that exist in both modules (e.g., `BoxClient`, `User`, etc.).
 
-A sample app using OAuth2 Authentication can be found in the repository [here][oauth2-sample-app].  This app demonstrates
-how to use the SDK to make calls, and can be run directly by entering your own credentials to log in.
+To see how to resolve these conflicts, refer to the [Migration guide: migrate from v5 to v6 of `Box iOS SDK`](./migration-guides/from-v5-to-v6.md#using-both-modules-boxsdkgen-and-boxsdk).
 
-[oauth2-sample-app]:
-https://github.com/box/box-ios-sdk/tree/main/BoxSDK/SampleApps/OAuth2SampleApp
+# Documentation
+Full documentation of the available functionality, along with example code can be found:
 
-To execute the sample app:
+* for the `BoxSdkGen` module, is available [here](./docs/BoxSdkGen).
+* for the `BoxSDK` module can be found [here](./docs/BoxSDK).
 
-__Step 1__: Run carthage
-```shell
-$ cd SampleApps/OAuth2SampleApp
-$ carthage update --use-xcframeworks --platform iOS
-```
+You can also see the [API Reference](https://developer.box.com/reference/) for additional information.
 
-__Step 2__: Open Xcode Project File
-```shell
-$ open OAuth2SampleApp.xcodeproj
-```
+# Migration guides
 
-__Step 3__: Insert your client ID and client secret
+Migration guides which help you to migrate to supported major SDK versions can be found [here](./migration-guides).
 
-First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
-values to the sample app in the `Constants.swift` file in the sample app:
-```swift
-static let clientId = "YOUR CLIENT ID GOES HERE"
-static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
-```
-
-__Step 4__: Set redirect URL
-
-Using the same client ID from the previous step, set the redirect URL for your application in the
-[Box Developer Console][dev-console] to `boxsdk-<<YOUR CLIENT ID>>://boxsdkoauth2redirect`, where `<<YOUR CLIENT ID>>`
-is replaced with your client ID.  For example, if your client ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect
-URL should be `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
-
-__Step 5__: Run the sample app
-
-### JWT Auth Sample App
-
-A sample app using JWT Authentication can be found in the repository [here][jwt-sample-app].  This app demonstrates how to
-set up JWT authentication with a remote authorization service, and will not run until you provide the code to retrieve
-tokens.
-
-[jwt-sample-app]: https://github.com/box/box-ios-sdk/tree/main/BoxSDK/SampleApps/JWTSampleApp
-
-To execute the sample app:
-
-__Step 1__: Run carthage
-```shell
-$ cd SampleApps/JWTSampleApp
-$ carthage update --use-xcframeworks --platform iOS
-```
-
-__Step 2__: Open Xcode Project File
-```shell
-$ open JWTSampleApp.xcodeproj
-```
-
-__Step 3__: Insert your client ID and client secret
-
-First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
-values to the sample app in the `Constants.swift` file in the sample app:
-```swift
-static let clientId = "YOUR CLIENT ID GOES HERE"
-static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
-```
-
-__Step 4__: Add code for retrieving access tokens
-
-In the `ViewController.swift` file in the sample app, edit the
-`obtainJWTTokenFromExternalSources()` method:
-```swift
-func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
-    return { uniqueID, completion in
-        #error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")
-        // The code below is an example implementation of the delegate function
-        // Please provide your own implementation
-        
-        // ...
-    }
-}
-```
-
-__Step 5__: Run the sample app
-
-## FIPS 140-2 Compliance
-
- The Box iOS SDK uses the CommonCrypto library, which relies on Apple's corecrypto cryptographic module. This module has undergone multiple validations by the Cryptographic Module Validation Program (CMVP) and is confirmed to be compliant with FIPS 140-2 standards. For further information, please refer to [Apple's security certification](https://support.apple.com/en-gb/guide/certifications/apc30d0ed034/web) and [iOS security certifications](https://support.apple.com/en-gb/guide/certifications/apc3fa917cb49/1/web/1.0).
-
-## Versions
+# Versioning
 
 We use a modified version of [Semantic Versioning](https://semver.org/) for all changes. See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022.
 
-### Supported Version
-
-Only the current MAJOR version of SDK is supported. New features, functionality, bug fixes, and security updates will only be added to the current MAJOR version.
-
-A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
+A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  
+Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release.
+Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade.
+We always recommend that all users run the latest available minor release for whatever major version is in use.
+We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
 
 ### Version schedule
 
 | Version | Supported Environments                                  | State     | First Release | EOL/Terminated |
-|---------|---------------------------------------------------------|-----------|---------------|----------------|
-| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | TBD            |
-| 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021    |
-| 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020    |
+|---------|---------------------------------------------------------|-----------|---------------|-------------|
+| 10      | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 17 Sep 2025   | TBD         |
+| 6       | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | Q4 2025       | 2027        |
+| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | 23 Oct 2025 |
+| 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021 |
+| 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020 |
 
+
+# Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+# FIPS 140-2 Compliance
+
+The Box iOS SDK uses the CommonCrypto library, which relies on Apple's corecrypto cryptographic module. This module has undergone multiple validations by the Cryptographic Module Validation Program (CMVP) and is confirmed to be compliant with FIPS 140-2 standards. For further information, please refer to [Apple's security certification](https://support.apple.com/en-gb/guide/certifications/apc30d0ed034/web) and [iOS security certifications](https://support.apple.com/en-gb/guide/certifications/apc3fa917cb49/1/web/1.0).
+
+# Questions, Bugs, and Feature Requests?
+
+Need to contact us directly? [Browse the issues tickets](https://github.com/box/box-ios-sdk/issues)! Or, if that
+doesn't work, [file a new one](https://github.com/box/box-ios-sdk/issues/new) and we will get
+back to you. If you have general questions about the Box API, you can post to the [Box Developer Forum](https://community.box.com/box-platform-5).
 
 Copyright and License
 -------
