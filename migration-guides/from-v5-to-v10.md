@@ -24,12 +24,12 @@ More information and benefits of using the new can be found in the
 
 ## Installation
 
-Soon we are going to introduce v6 version of Box iOS SDK that will combine `BoxSDK` from v5
-and the `BoxSdkGen` from v10 of the SDK, so that code from both versions could be used in the same project.
+We have also introduced v6 version of Box iOS SDK that consolidates both the manually maintained `BoxSDK` module from v5
+and the new, auto-generated `BoxSdkGen` module from v10.
 If you would like to use a feature available only in the new SDK, you won't need to necessarily migrate all your code
 to use generated SDK at once. You will be able to use a new feature from the `BoxSdkGen` project,
-while keeping the rest of your code unchanged. Note that it may be required to use aliases for some of the imported types
-to avoid conflicts between two libraries. However, we recommend to fully migrate to the v10 of the SDK eventually.
+while keeping the rest of your code unchanged. However, we recommend to fully migrate to the v10 of the SDK eventually.
+More information about v6 version can be found in the [migration guide from v5 to v6](./from-v5-to-v6.md).
 
 ### Swift Package Manager
 
