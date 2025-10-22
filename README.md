@@ -16,6 +16,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Introduction](#introduction)
 - [Supported versions](#supported-versions)
   - [Version v6](#version-v6)
   - [Version v10](#version-v10)
