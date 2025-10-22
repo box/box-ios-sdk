@@ -8,6 +8,7 @@
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
 - [CocoaPods](#cocoapods)
+- [Supported Environments](#supported-environments)
 - [Highlighting the Key Differences](#highlighting-the-key-differences)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -24,12 +25,12 @@ More information and benefits of using the new can be found in the
 
 ## Installation
 
-Soon we are going to introduce v6 version of Box iOS SDK that will combine `BoxSDK` from v5
-and the `BoxSdkGen` from v10 of the SDK, so that code from both versions could be used in the same project.
+We have also introduced v6 version of Box iOS SDK that consolidates both the manually maintained `BoxSDK` module from v5
+and the new, auto-generated `BoxSdkGen` module from v10.
 If you would like to use a feature available only in the new SDK, you won't need to necessarily migrate all your code
 to use generated SDK at once. You will be able to use a new feature from the `BoxSdkGen` project,
-while keeping the rest of your code unchanged. Note that it may be required to use aliases for some of the imported types
-to avoid conflicts between two libraries. However, we recommend to fully migrate to the v10 of the SDK eventually.
+while keeping the rest of your code unchanged. However, we recommend to fully migrate to the v10 of the SDK eventually.
+More information about v6 version can be found in the [migration guide from v5 to v6](./from-v5-to-v6.md).
 
 ### Swift Package Manager
 
@@ -79,6 +80,12 @@ Then run the following command in your project directory:
 ```shell
 $ pod install
 ```
+
+## Supported Environments
+
+v10 supports: iOS 13.0+, macOS 10.15+, tvOS 13.0+, and watchOS 6.0+. (By comparison, v5 supported iOS 11.0+, macOS 10.13+, tvOS 11.0+, and watchOS 4.0+.)
+If your app currently targets older OS versions, update your deployment targets to meet these minimums.
+This update aligns the SDK with current Apple development standards and is required to adopt the new features available in the `BoxSdkGen` module. For the latest submission and SDK toolchain requirements, see Apple’s SDK minimum requirements ([Apple Developer](https://developer.apple.com/news/upcoming-requirements/?id=02212025a)).
 
 ## Highlighting the Key Differences
 
