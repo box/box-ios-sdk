@@ -8,6 +8,7 @@
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
 - [CocoaPods](#cocoapods)
+- [Supported Environments](#supported-environments)
 - [Highlighting the Key Differences](#highlighting-the-key-differences)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -79,6 +80,12 @@ Then run the following command in your project directory:
 ```shell
 $ pod install
 ```
+
+## Supported Environments
+
+v10 supports: iOS 13.0+, macOS 10.15+, tvOS 13.0+, and watchOS 6.0+. (By comparison, v5 supported iOS 11.0+, macOS 10.13+, tvOS 11.0+, and watchOS 4.0+.)
+If your app currently targets older OS versions, update your deployment targets to meet these minimums.
+This update aligns the SDK with current Apple development standards and is required to adopt the new features available in the `BoxSdkGen` module. For the latest submission and SDK toolchain requirements, see Apple’s SDK minimum requirements ([Apple Developer](https://developer.apple.com/news/upcoming-requirements/?id=02212025a)).
 
 ## Highlighting the Key Differences
 
