@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v6.0.0) (2025-10-23)
+
+Introducing a new major version of Box iOS SDK `v6` that includes two modules — the manually maintained module and the generated module. The coexisting modules provide easier access to the latest Box API features and support gradual migration to the standalone generated module.
+
+### Breaking Changes
+
+- With `v6` of Box iOS SDK, support for iOS 11.0, macOS 10.13, tvOS 11.0+ and watchOS 4.0 has been dropped.
+
+Starting with `v6`, the minimum supported versions are iOS 13.0, macOS 10.15, tvOS 13.0, and watchOS 6.0.
+
+This update aligns the SDK with current Apple development standards and is required to adopt the new features available in the BoxSdkGen module.
+
+For the latest submission and SDK toolchain requirements, see Apple’s SDK minimum requirements [Apple Developer](https://developer.apple.com/news/upcoming-requirements/?id=02212025a).
+
+For more information about migrating to v6 visit [v5 to v6 migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-v5-to-v6.md)
+
+### What's New in `v6`
+
+With this SDK version, alongside the existing `BoxSDK` module, we’re introducing a new `BoxSdkGen` module, which gives you access to:
+
+- **Full API Support** — Complete coverage of the Box API ecosystem, giving you access to all the latest features and functionalities to build feature-rich applications.  
+
+- **Rapid API Updates** — Our new auto-generation approach enables Box API additions within days, ensuring you can leverage the most up-to-date features without delay.  
+
+- **Embedded Documentation** — All objects and parameters are documented directly in the SDK source code, keeping essential information in one place.  
+
+- **Enhanced Convenience Methods** — New methods for authentication, chunk uploads, automatic retries, retry strategy, and more.
+
+### Important Notes
+
+This version allows you to gradually migrate your codebase to the `BoxSdkGen` module. The key differences between the modules are documented in the [module migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-BoxSDK-to-BoxSdkGen.md).
+
+Ultimately, we recommend to migrate to `v10` which includes only the generated module `BoxSdkGen`. To migrate from `v6` to `v10` follow this [migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-v6-to-v10.md). 
+
+For more information, see the [SDK versioning strategy document](https://developer.box.com/guides/tooling/sdks/sdk-versioning/). Follow developer changelog for future updates.
+
 ## [5.6.0](https://github.com/box/box-ios-sdk/compare/v5.5.0...v5.6.0) (2024-04-05)
 
 
