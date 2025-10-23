@@ -32,7 +32,7 @@ With this SDK version, alongside the existing `BoxSDK` module, we’re introduci
 
 ### Important Notes
 
-This version allows you to gradually migrate your codebase to the `BoxSdkGen` module. The key differences between the namespaces are documented in the [module migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-BoxSDK-to-BoxSdkGen.md).
+This version allows you to gradually migrate your codebase to the `BoxSdkGen` module. The key differences between the modules are documented in the [module migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-BoxSDK-to-BoxSdkGen.md).
 
 Ultimately, we recommend to migrate to `v10` which includes only the generated module `BoxSdkGen`. To migrate from `v6` to `v10` follow this [migration guide](https://github.com/box/box-ios-sdk/blob/combined-sdk/migration-guides/from-v6-to-v10.md). 
 
