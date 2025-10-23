@@ -1,11 +1,10 @@
 import Foundation
 
-/// A representation of a enterprise, used when
-/// nested within another resource.
-public class EnterpriseBase: Codable, RawJSONReadable {
+/// A custom session duration group item.
+public class CustomSessionDurationGroupItemV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
-        case type
+        case name
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,32 +16,32 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise.
+    /// Group ID (numerical).
     public let id: String?
 
-    /// The value will always be `enterprise`.
-    public let type: EnterpriseBaseTypeField?
+    /// Group Name.
+    public let name: String?
 
-    /// Initializer for a EnterpriseBase.
+    /// Initializer for a CustomSessionDurationGroupItemV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise.
-    ///   - type: The value will always be `enterprise`.
-    public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
+    ///   - id: Group ID (numerical).
+    ///   - name: Group Name.
+    public init(id: String? = nil, name: String? = nil) {
         self.id = id
-        self.type = type
+        self.name = name
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(EnterpriseBaseTypeField.self, forKey: .type)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(name, forKey: .name)
     }
 
     /// Sets the raw JSON data.

@@ -1,11 +1,10 @@
 import Foundation
 
-/// A representation of a enterprise, used when
-/// nested within another resource.
-public class EnterpriseBase: Codable, RawJSONReadable {
+/// A user tracking code.
+public class UserTrackingCodeV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
-        case type
+        case name
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,32 +16,32 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise.
-    public let id: String?
+    /// The ID of the user tracking code.
+    @CodableTriState public private(set) var id: Int64?
 
-    /// The value will always be `enterprise`.
-    public let type: EnterpriseBaseTypeField?
+    /// The name of the user tracking code.
+    @CodableTriState public private(set) var name: String?
 
-    /// Initializer for a EnterpriseBase.
+    /// Initializer for a UserTrackingCodeV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise.
-    ///   - type: The value will always be `enterprise`.
-    public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
-        self.id = id
-        self.type = type
+    ///   - id: The ID of the user tracking code.
+    ///   - name: The name of the user tracking code.
+    public init(id: TriStateField<Int64> = nil, name: TriStateField<String> = nil) {
+        self._id = CodableTriState(state: id)
+        self._name = CodableTriState(state: name)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(EnterpriseBaseTypeField.self, forKey: .type)
+        id = try container.decodeIfPresent(Int64.self, forKey: .id)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(field: _id.state, forKey: .id)
+        try container.encode(field: _name.state, forKey: .name)
     }
 
     /// Sets the raw JSON data.
