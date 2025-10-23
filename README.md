@@ -287,8 +287,8 @@ We highly recommend upgrading to the latest SDK major release at the earliest co
 | Version | Supported Environments                                  | State     | First Release | EOL/Terminated         |
 |---------|---------------------------------------------------------|-----------|---------------|------------------------|
 | 10      | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 17 Sep 2025   | TBD                    |
-| 6       | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | Q4 2025       | 2027 or v7 is released |
-| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 28 Oct 2021   | 23 Oct 2025            |
+| 6       | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 23 Oct 2025   | 2027 or v7 is released |
+| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | EOL       | 28 Oct 2021   | 23 Oct 2025            |
 | 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021            |
 | 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020            |
 
