@@ -1,11 +1,8 @@
 import Foundation
 
-/// A representation of a enterprise, used when
-/// nested within another resource.
-public class EnterpriseBase: Codable, RawJSONReadable {
+public class EnterpriseFeatureSettingV2025R0FeatureField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
-        case type
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,32 +14,25 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise.
-    public let id: String?
+    /// The identifier of the feature.
+    @CodableTriState public private(set) var id: String?
 
-    /// The value will always be `enterprise`.
-    public let type: EnterpriseBaseTypeField?
-
-    /// Initializer for a EnterpriseBase.
+    /// Initializer for a EnterpriseFeatureSettingV2025R0FeatureField.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise.
-    ///   - type: The value will always be `enterprise`.
-    public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
-        self.id = id
-        self.type = type
+    ///   - id: The identifier of the feature.
+    public init(id: TriStateField<String> = nil) {
+        self._id = CodableTriState(state: id)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(EnterpriseBaseTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(field: _id.state, forKey: .id)
     }
 
     /// Sets the raw JSON data.

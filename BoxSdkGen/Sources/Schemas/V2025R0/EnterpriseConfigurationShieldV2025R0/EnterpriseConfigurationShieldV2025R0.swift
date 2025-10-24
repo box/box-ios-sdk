@@ -1,11 +1,9 @@
 import Foundation
 
-/// A representation of a enterprise, used when
-/// nested within another resource.
-public class EnterpriseBase: Codable, RawJSONReadable {
+/// The enterprise configuration for the shield category.
+public class EnterpriseConfigurationShieldV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
-        case id
-        case type
+        case shieldRules = "shield_rules"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,32 +15,25 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise.
-    public let id: String?
+    /// The shield rules configuration for the enterprise.
+    public let shieldRules: [ShieldRuleItemV2025R0]?
 
-    /// The value will always be `enterprise`.
-    public let type: EnterpriseBaseTypeField?
-
-    /// Initializer for a EnterpriseBase.
+    /// Initializer for a EnterpriseConfigurationShieldV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise.
-    ///   - type: The value will always be `enterprise`.
-    public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
-        self.id = id
-        self.type = type
+    ///   - shieldRules: The shield rules configuration for the enterprise.
+    public init(shieldRules: [ShieldRuleItemV2025R0]? = nil) {
+        self.shieldRules = shieldRules
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(EnterpriseBaseTypeField.self, forKey: .type)
+        shieldRules = try container.decodeIfPresent([ShieldRuleItemV2025R0].self, forKey: .shieldRules)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(shieldRules, forKey: .shieldRules)
     }
 
     /// Sets the raw JSON data.
