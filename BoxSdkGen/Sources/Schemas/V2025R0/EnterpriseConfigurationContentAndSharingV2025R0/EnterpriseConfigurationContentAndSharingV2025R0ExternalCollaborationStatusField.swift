@@ -15,14 +15,14 @@ public class EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaboratio
 
 
     /// The external collaboration status.
-    @CodableTriState public private(set) var value: EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaborationStatusFieldValueField?
+    @CodableTriState public private(set) var value: String?
 
     /// Initializer for a EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaborationStatusField.
     ///
     /// - Parameters:
     ///   - isUsed: Indicates whether a configuration is used for a given enterprise.
     ///   - value: The external collaboration status.
-    public init(isUsed: Bool? = nil, value: TriStateField<EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaborationStatusFieldValueField> = nil) {
+    public init(isUsed: Bool? = nil, value: TriStateField<String> = nil) {
         self._value = CodableTriState(state: value)
 
         super.init(isUsed: isUsed)
@@ -30,7 +30,7 @@ public class EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaboratio
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.decodeIfPresent(EnterpriseConfigurationContentAndSharingV2025R0ExternalCollaborationStatusFieldValueField.self, forKey: .value)
+        value = try container.decodeIfPresent(String.self, forKey: .value)
 
         try super.init(from: decoder)
     }
