@@ -14,14 +14,14 @@ public class EnterpriseConfigurationContentAndSharingV2025R0CollaborationRestric
     }
 
 
-    public let value: [CollaborationRestrictionV2025R0]?
+    public let value: [String]?
 
     /// Initializer for a EnterpriseConfigurationContentAndSharingV2025R0CollaborationRestrictionsField.
     ///
     /// - Parameters:
     ///   - isUsed: Indicates whether a configuration is used for a given enterprise.
     ///   - value: 
-    public init(isUsed: Bool? = nil, value: [CollaborationRestrictionV2025R0]? = nil) {
+    public init(isUsed: Bool? = nil, value: [String]? = nil) {
         self.value = value
 
         super.init(isUsed: isUsed)
@@ -29,7 +29,7 @@ public class EnterpriseConfigurationContentAndSharingV2025R0CollaborationRestric
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.decodeIfPresent([CollaborationRestrictionV2025R0].self, forKey: .value)
+        value = try container.decodeIfPresent([String].self, forKey: .value)
 
         try super.init(from: decoder)
     }
