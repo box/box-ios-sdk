@@ -2,29 +2,7 @@
   <img src="https://github.com/box/sdks/blob/master/images/box-dev-logo.png" alt= “box-dev-logo” width="30%" height="50%">
 </p>
 
-# Versioning Strategy
-
-Starting with v10 of the SDK, we’ve introduced a new generated codebase designed to enhance your experience with the Box API.  
-It is currently available on the [sdk-gen](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch and uses the new `BoxSdkGen` module instead of the old `BoxSDK`.
-
-v10 is targeted at new users of Box iOS SDK and users already working with the generated Box Swift SDK previously available under the [Box Swift SDK Gen repository](https://github.com/box/box-swift-sdk-gen).
-
-For users of v5 of the Box iOS SDK, no action is required at this time — we’ll be providing an upcoming v6 release that will include both `BoxSDK` and `BoxSdkGen` modules for a smooth migration path. To avoid unintentional upgrades, pin your version to `5.x.y` in your dependency manager.
-
-For full guidance on SDK versioning, see the [Box SDK Versioning Guide](https://developer.box.com/guides/tooling/sdks/sdk-versioning/).
-
----
-
-## Which Version Should I Use?
-
-| Scenario                                                                                 | Recommended Version                                               | Example Dependency (SPM / CocoaPods)                                                                                                |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Creating a new application                                                               | Use [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)        | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'` |
-| Existing app using [BoxSdkGen](https://cocoapods.org/pods/BoxSdkGen) artifact            | Upgrade to [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'` |
-| Existing app using [BoxSDK](https://cocoapods.org/pods/BoxSDK) and planning new features | Wait for v6 to start migration process                            | TBD                                                                                                                                 |
-| Existing app using [BoxSDK](https://cocoapods.org/pods/BoxSDK) and not planning changes  | Stay on your current version                                      | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", "5.6.0"..<"6.0.0")`<br>**CocoaPods:** `pod 'BoxSDK', '~> 5.6'`    |
-
-# Box iOS SDK
+# Box iOS SDK v10
 
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
 ![build](https://github.com/box/box-ios-sdk/actions/workflows/build_and_test.yml/badge.svg?branch=sdk-gen)
@@ -34,9 +12,38 @@ For full guidance on SDK versioning, see the [Box SDK Versioning Guide](https://
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-orange.svg)](https://cocoapods.org/pods/BoxSDK)
 
-We are excited to introduce the stable release of the latest generation of Box iOS SDK, designed to elevate the developer experience and streamline your integration with the Box Content Cloud.
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-With this SDK, you’ll have access to:
+- [Introduction](#introduction)
+- [Supported versions](#supported-versions)
+  - [Version v6](#version-v6)
+  - [Version v10](#version-v10)
+  - [Which Version Should I Use?](#which-version-should-i-use)
+- [Requirements](#requirements)
+- [Installing](#installing)
+  - [Swift Package Manager](#swift-package-manager)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+- [Getting Started](#getting-started)
+- [Authentication](#authentication)
+- [Documentation](#documentation)
+- [Migration guides](#migration-guides)
+- [Versioning](#versioning)
+  - [Version schedule](#version-schedule)
+- [Contributing](#contributing)
+- [FIPS 140-2 Compliance](#fips-140-2-compliance)
+- [Questions, Bugs, and Feature Requests?](#questions-bugs-and-feature-requests)
+- [Copyright and License](#copyright-and-license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Introduction
+
+We are excited to introduce the v10 major release of the Box iOS SDK,
+designed to elevate the developer experience and streamline your integration with the Box Content Cloud.
+
+With this SDK version, we provide the `BoxSdkGen` module, which gives you access to:
 
 1. Full API Support: The new generation of Box SDKs empowers developers with complete coverage of the Box API ecosystem. You can now access all the latest features and functionalities offered by Box, allowing you to build even more sophisticated and feature-rich applications.
 2. Rapid API Updates: Say goodbye to waiting for new Box APIs to be incorporated into the SDK. With our new auto-generation development approach, we can now add new Box APIs to the SDK at a much faster pace (in a matter of days). This means you can leverage the most up-to-date features in your applications without delay.
@@ -46,27 +53,49 @@ With this SDK, you’ll have access to:
 
 Embrace the new generation of Box SDKs and unlock the full potential of the Box Content Cloud.
 
-# Table of contents
+# Supported versions
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+To enhance developer experience, we have introduced the new generated codebase through the `BoxSdkGen` module.
+The `BoxSdkGen` module is available in two major supported versions: v6 and v10.
 
-- [Installing](#installing)
-  - [Swift Package Manager](#swift-package-manager)
-  - [Carthage](#carthage)
-  - [CocoaPods](#cocoapods)
-- [Getting Started](#getting-started)
-- [Documentation](#documentation)
-- [Upgrades](#upgrades)
-- [Integration Tests](#integration-tests)
-  - [Running integration tests locally](#running-integration-tests-locally)
-    - [Create Platform Application](#create-platform-application)
-    - [Export configuration](#export-configuration)
-    - [Running tests](#running-tests)
-- [Questions, Bugs, and Feature Requests?](#questions-bugs-and-feature-requests)
-- [Copyright and License](#copyright-and-license)
+## Version v6
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+In v6 of the Box iOS SDK, we are introducing a version that consolidates both the manually written module (`BoxSDK`)
+and the new generated module (`BoxSdkGen`). This allows developers to use both modules simultaneously within a single project
+
+The codebase for v6 of the Box iOS SDK is currently available on the [combined-sdk](https://github.com/box/box-ios-sdk/tree/combined-sdk) branch.
+Migration guide which would help with migration from `BoxSDK` to `BoxSdkGen` can be found [here](./migration-guides/from-BoxSDK-to-BoxSdkGen.md).
+
+Version v6 is intended for:
+
+- Existing developers of the Box iOS SDK v5 who want to access new API features while keeping their current codebase largely unchanged.
+- Existing developers who are in the process of migrating to `BoxSdkGen`, but do not want to move all their code to the new module immediately.
+
+## Version v10
+
+Starting with v10, the SDK is built entirely on the generated `BoxSdkGen` module, which fully and exclusively replaces the old `BoxSDK` module.
+The codebase for v10 of the Box iOS SDK is currently available on the [sdk-gen](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch.
+
+Version v10 is intended for:
+
+- New users of the Box iOS SDK.
+- Developers already working with the generated Box iOS SDK previously available under the [Box Swift SDK Gen repository](https://github.com/box/box-swift-sdk-gen).
+
+## Which Version Should I Use?
+
+| Scenario                                                                                                              | Recommended Version                                                   | Example Dependency (SPM / CocoaPods)                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Creating a new application                                                                                            | Use [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)            | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
+| App using [BoxSdkGen](https://github.com/box/box-swift-sdk-gen)                                                       | Migrate to [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)     | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
+| App using both [BoxSdkGen](https://github.com/box/box-swift-sdk-gen) and [BoxSDK](https://github.com/box/box-ios-sdk) | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |
+| App using v5 of [BoxSDK](https://github.com/box/box-ios-sdk)                                                          | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |
+
+For full guidance on SDK versioning, see the [Box SDK Versioning Guide](https://developer.box.com/guides/tooling/sdks/sdk-versioning/).
+
+# Requirements
+
+- iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+
+- Xcode 13.3+
 
 # Installing
 
@@ -169,68 +198,59 @@ if let entries = items.entries {
 }
 ```
 
-The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs).
+# Authentication
 
-We recommend, familiarizing yourself with the remaining [authentication methods](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Authentication.md), [uploading files](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Uploads.md) and [downloading files](https://github.com/box/box-ios-sdk/tree/sdk-gen/docs/Downloads.md).
+Box iOS SDK v10 supports multiple authentication methods including Developer Token, OAuth 2.0,
+Client Credentials Grant, and JSON Web Token (JWT).
+
+You can find detailed instructions and example code for each authentication method in
+[Authentication](./docs/Authentication.md) document.
 
 # Documentation
 
 Browse the [docs](docs/README.md) or see [API Reference](https://developer.box.com/reference/) for more information.
 
-# Upgrades
+# Migration guides
 
-The SDK is updated regularly to include new features, enhancements, and bug fixes. If you are upgrading from manual SDK to this new generated SDK checkout the [migration guide](migration-guides/from-v5-to-v10.md) and [changelog](CHANGELOG.md) for more information.
+Migration guides which help you to migrate to supported major SDK versions can be found [here](./migration-guides).
 
-# Integration Tests
+# Versioning
 
-## Running integration tests locally
+We use a modified version of [Semantic Versioning](https://semver.org/) for all changes. See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022.
 
-### Create Platform Application
+A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  
+Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release.
+Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade.
+We always recommend that all users run the latest available minor release for whatever major version is in use.
+We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
 
-To run integration tests locally you will need a `Custom App` created in the [Box Developer
-Console](https://app.box.com/developers/console)
-with `Server Authentication (Client Credentials Grant)` selected as authentication method.
-Once created you can edit properties of the application:
+### Version schedule
 
-- In section `App Access Level` select `App + Enterprise Access`. You can enable all `Application Scopes`.
-- In section `Advanced Features` enable `Make API calls using the as-user header` and `Generate user access tokens`.
+| Version | Supported Environments                                  | State     | First Release | EOL/Terminated         |
+| ------- | ------------------------------------------------------- | --------- | ------------- | ---------------------- |
+| 10      | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 17 Sep 2025   | TBD                    |
+| 6       | iOS 13.0+ / Mac OS X 10.15+ / tvOS 13.0+ / watchOS 6.0+ | Supported | 23 Oct 2025   | 2027 or v7 is released |
+| 5       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | EOL       | 28 Oct 2021   | 23 Oct 2025            |
+| 4       |                                                         | EOL       | 13 Feb 2020   | 28 Oct 2021            |
+| 3       |                                                         | EOL       | 20 Nov 2019   | 13 Feb 2020            |
 
-Now select `Authorization` and submit application to be reviewed by account admin.
+# Contributing
 
-### Export configuration
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-To run integration tests, you need several environment variables specifying your account and the Box application you've created.
+# FIPS 140-2 Compliance
 
-1. Set the `CLIENT_ID` environment variable to its corresponding value from the `Configuration` tab in the section `OAuth 2.0 Credentials` of your application.
-2. Set the `CLIENT_SECRET` environment variable to its corresponding value from the `Configuration` tab in the section `OAuth 2.0 Credentials` of your application.
-3. Set the `ENTERPRISE_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
-4. Set the `USER_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
-5. Set the `BOX_FILE_REQUEST_ID` environment variable to the ID of file request already created in the user account, `BOX_EXTERNAL_USER_EMAIL` with email of free external user which not belongs to any enterprise.
-6. Set the `WORKFLOW_FOLDER_ID` environment variable to the ID of the Relay workflow that deletes the file that triggered the workflow. The workflow should have a manual start to be able to start it from the API.
-7. Set environment variable: `APP_ITEM_ASSOCIATION_FILE_ID` to the ID of the file with associated app item and `APP_ITEM_ASSOCIATION_FOLDER_ID` to the ID of the folder with associated app item.
-8. Set environment variable: `APP_ITEM_SHARED_LINK` to the shared link associated with app item.
-9. Set environment variable: `SLACK_AUTOMATION_USER_ID` to the ID of the user responsible for the Slack automation.
-10. Set environment variable: `SLACK_ORG_ID` to the ID of the Slack organization.
-11. Set environment variable: `SLACK_PARTNER_ITEM_ID` to the ID of the Slack partner item.
-
-### Running tests
-
-To run integration tests locally:
-
-1. `swift test`
+The Box iOS SDK uses the CommonCrypto library, which relies on Apple's corecrypto cryptographic module. This module has undergone multiple validations by the Cryptographic Module Validation Program (CMVP) and is confirmed to be compliant with FIPS 140-2 standards. For further information, please refer to [Apple's security certification](https://support.apple.com/en-gb/guide/certifications/apc30d0ed034/web) and [iOS security certifications](https://support.apple.com/en-gb/guide/certifications/apc3fa917cb49/1/web/1.0).
 
 # Questions, Bugs, and Feature Requests?
 
-Need to contact us directly? [Browse the issues
-tickets](https://github.com/box/box-ios-sdk/issues)! Or, if that
-doesn't work, [file a new
-one](https://github.com/box/box-ios-sdk/issues/new) and we will get
-back to you. If you have general questions about the Box API, you can
-post to the [Box Developer Forum](https://forum.box.com/).
+Need to contact us directly? [Browse the issues tickets](https://github.com/box/box-ios-sdk/issues)! Or, if that
+doesn't work, [file a new one](https://github.com/box/box-ios-sdk/issues/new) and we will get
+back to you. If you have general questions about the Box API, you can post to the [Box Developer Forum](https://community.box.com/box-platform-5).
 
 # Copyright and License
 
-Copyright 2023 Box, Inc. All rights reserved.
+Copyright 2025 Box, Inc. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
