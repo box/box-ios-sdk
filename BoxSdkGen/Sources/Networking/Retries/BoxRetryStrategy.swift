@@ -22,7 +22,7 @@ public class BoxRetryStrategy: RetryStrategy {
         }
 
         let isSuccessful: Bool = fetchResponse.status >= 200 && fetchResponse.status < 400
-        let retryAfterHeader: String? = fetchResponse.headers["Retry-After"]
+        let retryAfterHeader: String? = fetchResponse.headers.keys.contains("Retry-After") ? fetchResponse.headers["Retry-After"] : nil
         let isAcceptedWithRetryAfter: Bool = fetchResponse.status == 202 && retryAfterHeader != nil
         if attemptNumber >= self.maxAttempts {
             return false
