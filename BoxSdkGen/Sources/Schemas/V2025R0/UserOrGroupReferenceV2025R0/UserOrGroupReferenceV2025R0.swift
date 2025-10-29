@@ -1,11 +1,10 @@
 import Foundation
 
-/// A representation of a enterprise, used when
-/// nested within another resource.
-public class EnterpriseBase: Codable, RawJSONReadable {
+/// A reference to a user or group.
+public class UserOrGroupReferenceV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
-        case id
         case type
+        case id
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,32 +16,32 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise.
+    /// The type `user` or `group`.
+    public let type: UserOrGroupReferenceV2025R0TypeField?
+
+    /// The identifier of the user or group.
     public let id: String?
 
-    /// The value will always be `enterprise`.
-    public let type: EnterpriseBaseTypeField?
-
-    /// Initializer for a EnterpriseBase.
+    /// Initializer for a UserOrGroupReferenceV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise.
-    ///   - type: The value will always be `enterprise`.
-    public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
-        self.id = id
+    ///   - type: The type `user` or `group`.
+    ///   - id: The identifier of the user or group.
+    public init(type: UserOrGroupReferenceV2025R0TypeField? = nil, id: String? = nil) {
         self.type = type
+        self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decodeIfPresent(UserOrGroupReferenceV2025R0TypeField.self, forKey: .type)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(EnterpriseBaseTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(id, forKey: .id)
     }
 
     /// Sets the raw JSON data.
