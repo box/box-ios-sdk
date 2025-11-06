@@ -1,13 +1,13 @@
 import Foundation
 
 public enum WeblinkReferenceV2025R0TypeField: CodableStringEnum {
-    case weblink
+    case webLink
     case customValue(String)
 
     public init(rawValue value: String) {
         switch value.lowercased() {
-        case "weblink".lowercased():
-            self = .weblink
+        case "web_link".lowercased():
+            self = .webLink
         default:
             self = .customValue(value)
         }
@@ -15,8 +15,8 @@ public enum WeblinkReferenceV2025R0TypeField: CodableStringEnum {
 
     public var rawValue: String {
         switch self {
-        case .weblink:
-            return "weblink"
+        case .webLink:
+            return "web_link"
         case .customValue(let value):
             return value
         }
