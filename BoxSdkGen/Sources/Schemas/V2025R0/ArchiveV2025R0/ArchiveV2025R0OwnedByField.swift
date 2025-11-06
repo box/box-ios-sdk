@@ -1,7 +1,6 @@
 import Foundation
 
-/// Web link reference.
-public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
+public class ArchiveV2025R0OwnedByField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -16,18 +15,18 @@ public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the web link.
+    /// The unique identifier that represents a user who owns the archive.
     public let id: String
 
-    /// The value will always be `web_link`.
-    public let type: WeblinkReferenceV2025R0TypeField
+    /// The value is always `user`.
+    public let type: String
 
-    /// Initializer for a WeblinkReferenceV2025R0.
+    /// Initializer for a ArchiveV2025R0OwnedByField.
     ///
     /// - Parameters:
-    ///   - id: ID of the web link.
-    ///   - type: The value will always be `web_link`.
-    public init(id: String, type: WeblinkReferenceV2025R0TypeField = WeblinkReferenceV2025R0TypeField.webLink) {
+    ///   - id: The unique identifier that represents a user who owns the archive.
+    ///   - type: The value is always `user`.
+    public init(id: String, type: String) {
         self.id = id
         self.type = type
     }
@@ -35,7 +34,7 @@ public class WeblinkReferenceV2025R0: Codable, RawJSONReadable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(WeblinkReferenceV2025R0TypeField.self, forKey: .type)
+        type = try container.decode(String.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
