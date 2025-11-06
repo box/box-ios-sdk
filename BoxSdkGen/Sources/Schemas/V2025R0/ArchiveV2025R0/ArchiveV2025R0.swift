@@ -10,6 +10,8 @@ public class ArchiveV2025R0: Codable, RawJSONReadable {
         case name
         case size
         case type
+        case description
+        case ownedBy = "owned_by"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -35,8 +37,14 @@ public class ArchiveV2025R0: Codable, RawJSONReadable {
     /// The size of the archive in bytes.
     public let size: Int64
 
-    /// The value will always be `archive`.
+    /// The value is always `archive`.
     public let type: ArchiveV2025R0TypeField
+
+    /// The description of the archive.
+    @CodableTriState public private(set) var description: String?
+
+    /// The part of an archive API response that describes the user who owns the archive.
+    public let ownedBy: ArchiveV2025R0OwnedByField?
 
     /// Initializer for a ArchiveV2025R0.
     ///
@@ -49,12 +57,16 @@ public class ArchiveV2025R0: Codable, RawJSONReadable {
     ///     (`/`, `\`), names with trailing spaces, and names `.` and `..` are
     ///     not allowed.
     ///   - size: The size of the archive in bytes.
-    ///   - type: The value will always be `archive`.
-    public init(id: String, name: String, size: Int64, type: ArchiveV2025R0TypeField = ArchiveV2025R0TypeField.archive) {
+    ///   - type: The value is always `archive`.
+    ///   - description: The description of the archive.
+    ///   - ownedBy: The part of an archive API response that describes the user who owns the archive.
+    public init(id: String, name: String, size: Int64, type: ArchiveV2025R0TypeField = ArchiveV2025R0TypeField.archive, description: TriStateField<String> = nil, ownedBy: ArchiveV2025R0OwnedByField? = nil) {
         self.id = id
         self.name = name
         self.size = size
         self.type = type
+        self._description = CodableTriState(state: description)
+        self.ownedBy = ownedBy
     }
 
     required public init(from decoder: Decoder) throws {
@@ -63,6 +75,8 @@ public class ArchiveV2025R0: Codable, RawJSONReadable {
         name = try container.decode(String.self, forKey: .name)
         size = try container.decode(Int64.self, forKey: .size)
         type = try container.decode(ArchiveV2025R0TypeField.self, forKey: .type)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        ownedBy = try container.decodeIfPresent(ArchiveV2025R0OwnedByField.self, forKey: .ownedBy)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -71,6 +85,8 @@ public class ArchiveV2025R0: Codable, RawJSONReadable {
         try container.encode(name, forKey: .name)
         try container.encode(size, forKey: .size)
         try container.encode(type, forKey: .type)
+        try container.encode(field: _description.state, forKey: .description)
+        try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
     }
 
     /// Sets the raw JSON data.
