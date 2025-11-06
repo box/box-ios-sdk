@@ -26,7 +26,7 @@ public enum HubItemReferenceV2025R0: Codable {
                         return
                     }
 
-                case "weblink":
+                case "web_link":
                     if let content = try? WeblinkReferenceV2025R0(from: decoder) {
                         self = .weblinkReferenceV2025R0(content)
                         return
