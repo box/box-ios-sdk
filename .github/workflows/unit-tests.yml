@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - combined-sdk
+
+permissions:
+  contents: read
+
 jobs:
   ios-build-and-test:
     runs-on: macos-13

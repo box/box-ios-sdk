@@ -3,7 +3,11 @@ on:
   pull_request_target:
     types: [opened, synchronize, edited]
     branches:
-      - main
+      - combined-sdk
+
+permissions:
+  contents: read
+  
 jobs:
   spellcheck-request-title:
     runs-on: ubuntu-latest
