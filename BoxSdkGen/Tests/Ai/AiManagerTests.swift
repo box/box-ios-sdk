@@ -13,8 +13,8 @@ class AiManagerTests: RetryableTestCase {
         await runWithRetryAsync {
             let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
             let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-            let response: AiResponseFull? = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "Sun rises in the East")]))
-            XCTAssertTrue(response!.answer.contains("East"))
+            let response: AiResponseFull? = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "Which direction does the Sun rise?", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "The Sun rises in the east")]))
+            XCTAssertTrue(response!.answer.contains("east"))
             XCTAssertTrue(response!.completionReason == "done")
             try await client.files.deleteFileById(fileId: fileToAsk.id)
         }
@@ -24,8 +24,8 @@ class AiManagerTests: RetryableTestCase {
         await runWithRetryAsync {
             let fileToAsk1: FileFull = try await CommonsManager().uploadNewFile()
             let fileToAsk2: FileFull = try await CommonsManager().uploadNewFile()
-            let response: AiResponseFull? = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiItemAsk(id: fileToAsk1.id, type: AiItemAskTypeField.file, content: "Earth goes around the sun"), AiItemAsk(id: fileToAsk2.id, type: AiItemAskTypeField.file, content: "Sun rises in the East in the morning")]))
-            XCTAssertTrue(response!.answer.contains("East"))
+            let response: AiResponseFull? = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction does the Sun rise?", items: [AiItemAsk(id: fileToAsk1.id, type: AiItemAskTypeField.file, content: "Earth goes around the Sun"), AiItemAsk(id: fileToAsk2.id, type: AiItemAskTypeField.file, content: "The Sun rises in the east in the morning")]))
+            XCTAssertTrue(response!.answer.contains("east"))
             XCTAssertTrue(response!.completionReason == "done")
             try await client.files.deleteFileById(fileId: fileToAsk1.id)
             try await client.files.deleteFileById(fileId: fileToAsk2.id)
@@ -35,9 +35,8 @@ class AiManagerTests: RetryableTestCase {
     public func testAiTextGenWithDialogueHistory() async throws {
         await runWithRetryAsync {
             let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-            let aiAgentConfig: AiAgent = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
-            let response: AiResponse = try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Parapharse the document.s", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the sun. Sun rises in the East in the morning.")], dialogueHistory: [AiDialogueHistory(prompt: "What does the earth go around?", answer: "The sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiDialogueHistory(prompt: "On Earth, where does the sun rise?", answer: "East", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
-            XCTAssertTrue(response.answer.contains("sun"))
+            let response: AiResponse = try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Paraphrase the documents", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the Sun. The Sun rises in the east in the morning.")], dialogueHistory: [AiDialogueHistory(prompt: "What does the earth go around?", answer: "The Sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiDialogueHistory(prompt: "On Earth, where does the Sun rise?", answer: "east", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
+            XCTAssertTrue(response.answer.contains("Sun"))
             XCTAssertTrue(response.completionReason == "done")
             try await client.files.deleteFileById(fileId: fileToAsk.id)
         }
