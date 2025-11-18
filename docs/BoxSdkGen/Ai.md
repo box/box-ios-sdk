@@ -18,7 +18,7 @@ See the endpoint docs at
 
 <!-- sample post_ai_ask -->
 ```
-try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "Sun rises in the East")]))
+try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "Which direction does the Sun rise?", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "The Sun rises in the east")]))
 ```
 
 ### Arguments
@@ -47,7 +47,7 @@ See the endpoint docs at
 
 <!-- sample post_ai_text_gen -->
 ```
-try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Parapharse the document.s", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the sun. Sun rises in the East in the morning.")], dialogueHistory: [AiDialogueHistory(prompt: "What does the earth go around?", answer: "The sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiDialogueHistory(prompt: "On Earth, where does the sun rise?", answer: "East", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
+try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Paraphrase the documents", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the Sun. The Sun rises in the east in the morning.")], dialogueHistory: [AiDialogueHistory(prompt: "What does the earth go around?", answer: "The Sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiDialogueHistory(prompt: "On Earth, where does the Sun rise?", answer: "east", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
 ```
 
 ### Arguments
