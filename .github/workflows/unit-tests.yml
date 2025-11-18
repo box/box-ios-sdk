@@ -9,17 +9,15 @@ permissions:
 
 jobs:
   ios-build-and-test:
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14']
+        destination: ['platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro']
     steps:
       - name: Git - Checkout
         uses: actions/checkout@v4
       - name: List Xcode available versions
         run: ls -n /Applications/ | grep Xcode*
-      - name: Setup - Xcode
-        run: sudo xcode-select -s /Applications/Xcode_14.2.app
       - name: Setup - Ruby and bundler dependencies
         uses: ruby/setup-ruby@v1
         with:
