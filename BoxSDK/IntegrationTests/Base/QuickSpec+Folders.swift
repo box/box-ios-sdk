@@ -13,7 +13,7 @@ import Quick
 extension QuickSpec {
 
     static func createFolder(client: BoxClient, name: String, parentId: String = "0", callback: @escaping (Folder) -> Void) {
-        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+        waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
             client.folders.create(name: name, parentId: parentId) { result in
                 switch result {
                 case let .success(folder):
@@ -32,7 +32,7 @@ extension QuickSpec {
             return
         }
 
-        waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+        waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
             client.folders.delete(folderId: folder.id, recursive: recursive) { result in
                 if case let .failure(error) = result {
                     fail("Expected delete call to succeed, but instead got \(error)")

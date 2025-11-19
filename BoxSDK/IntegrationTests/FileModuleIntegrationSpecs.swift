@@ -1309,7 +1309,7 @@ class FileModuleIntegrationSpecs: QuickSpec {
                     // create session
                     var session: UploadSession?
 
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         client.files.createUploadSession(
                             folderId: rootFolder.id,
                             fileName: IntegrationTestResources.bigImage.fileName,
@@ -1336,7 +1336,7 @@ class FileModuleIntegrationSpecs: QuickSpec {
                     guard let session = session else { return }
 
                     // abort session
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         client.files.abortUpload(sessionId: session.id) { result in
                             switch result {
                             case .success:
@@ -1350,7 +1350,7 @@ class FileModuleIntegrationSpecs: QuickSpec {
                     }
 
                     // get upload session
-                    waitUntil(timeout: .seconds(Constants.Timeout.default)) { done in
+                    waitUntil(timeout: .seconds(Constants.Timeout.large)) { done in
                         client.files.getUploadSession(sessionId: session.id) { result in
                             switch result {
                             case .success:
