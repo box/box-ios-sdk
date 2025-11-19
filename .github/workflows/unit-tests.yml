@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-15
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=18.6,name=iPhone 16 Pro']
+        destination: ['platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro']
     steps:
       - name: Git - Checkout
         uses: actions/checkout@v4
