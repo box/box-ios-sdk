@@ -24,6 +24,7 @@ class AuthModuleSpecs: QuickSpec {
 
         beforeEach {
             sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
+            try? sdk.updateConfiguration(maxRetryAttempts: 0)
             let networkAgent = BoxNetworkAgent(configuration: sdk.configuration)
             sut = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
         }
