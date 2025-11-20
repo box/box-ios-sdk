@@ -1,5 +1,5 @@
 import Foundation
 
 public struct Version {
-    public static let sdkVersion = "10.0.1"
+    public static let sdkVersion = "10.1.0"
 }

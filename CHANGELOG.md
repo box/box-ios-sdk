@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.1.0](https://github.com/box/box-ios-sdk/compare/10.0.1...10.1.0) (2025-11-20)
+
+
+### New Features and Enhancements
+
+* Support GET enterprise configuration API (box/box-openapi[#559](https://github.com/box/box-ios-sdk/issues/559)) ([#1179](https://github.com/box/box-ios-sdk/issues/1179)) ([936edf7](https://github.com/box/box-ios-sdk/commit/936edf7532765dfe3c0ccb7175966ee4ec265cf3))
+* Support Archive API (box/box-openapi[#563](https://github.com/box/box-ios-sdk/issues/563)) ([#1238](https://github.com/box/box-ios-sdk/issues/1238)) ([a2662e3](https://github.com/box/box-ios-sdk/commit/a2662e3bd088956769ed95d588e71623d0537c40))
+
 ### [10.0.1](https://github.com/box/box-ios-sdk/compare/10.0.0...10.0.1) (2025-10-06)
 
 
