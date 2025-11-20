@@ -5,9 +5,9 @@
 # Box iOS SDK v10
 
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
-![build](https://github.com/box/box-ios-sdk/actions/workflows/build_and_test.yml/badge.svg?branch=sdk-gen)
+![build](https://github.com/box/box-ios-sdk/actions/workflows/build_and_test.yml/badge.svg?branch=main)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)
-[![Coverage Status](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=sdk-gen)](https://coveralls.io/github/box/box-ios-sdk?branch=sdk-gen)
+[![Coverage Status](https://coveralls.io/repos/github/box/box-ios-sdk/badge.svg?branch=main)](https://coveralls.io/github/box/box-ios-sdk?branch=main)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-orange.svg)](https://cocoapods.org/pods/BoxSDK)
@@ -74,7 +74,7 @@ Version v6 is intended for:
 ## Version v10
 
 Starting with v10, the SDK is built entirely on the generated `BoxSdkGen` module, which fully and exclusively replaces the old `BoxSDK` module.
-The codebase for v10 of the Box iOS SDK is currently available on the [sdk-gen](https://github.com/box/box-ios-sdk/tree/sdk-gen) branch.
+The codebase for v10 of the Box iOS SDK is currently available on the [main](https://github.com/box/box-ios-sdk/tree/main) branch.
 
 Version v10 is intended for:
 
@@ -85,8 +85,8 @@ Version v10 is intended for:
 
 | Scenario                                                                                                              | Recommended Version                                                   | Example Dependency (SPM / CocoaPods)                                                                                                         |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Creating a new application                                                                                            | Use [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)            | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
-| App using [BoxSdkGen](https://github.com/box/box-swift-sdk-gen)                                                       | Migrate to [v10](https://github.com/box/box-ios-sdk/tree/sdk-gen)     | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
+| Creating a new application                                                                                            | Use [v10](https://github.com/box/box-ios-sdk/tree/main)               | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
+| App using [BoxSdkGen](https://github.com/box/box-swift-sdk-gen)                                                       | Migrate to [v10](https://github.com/box/box-ios-sdk/tree/main)        | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", from: "10.0.0")`<br>**CocoaPods:** `pod 'BoxSdkGen', '~> 10.0.0'`          |
 | App using both [BoxSdkGen](https://github.com/box/box-swift-sdk-gen) and [BoxSDK](https://github.com/box/box-ios-sdk) | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |
 | App using v5 of [BoxSDK](https://github.com/box/box-ios-sdk)                                                          | Upgrade to [v6](https://github.com/box/box-ios-sdk/tree/combined-sdk) | **SPM:** `.package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))`<br>**CocoaPods:** `pod 'BoxSDK', '~> 6.0'` |
 
