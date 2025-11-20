@@ -5,15 +5,10 @@ All notable changes to this project will be documented in this file. See [standa
 ## [6.1.0](https://github.com/box/box-ios-sdk/compare/6.0.0...6.1.0) (2025-11-20)
 
 
-### Bug Fixes
-
-* **boxsdkgen:** remove enum types from GET enterprise configurations endpoint (box/box-openapi[#560](https://github.com/box/box-ios-sdk/issues/560)) ([#1206](https://github.com/box/box-ios-sdk/issues/1206)) ([805c937](https://github.com/box/box-ios-sdk/commit/805c937c2cd68440ab7f975d59259ee4f4ce144e)), closes [box/box-codegen#872](https://github.com/box/box-codegen/issues/872)
-
-
 ### New Features and Enhancements
 
-* **boxsdkgen:** add GET enterprise configuration endpoint (box/box-openapi[#559](https://github.com/box/box-ios-sdk/issues/559)) ([#1190](https://github.com/box/box-ios-sdk/issues/1190)) ([c91bb4f](https://github.com/box/box-ios-sdk/commit/c91bb4fa1b5907698fd6d0fd38560501c4d0274b))
-* **boxsdkgen:** support update Archive API (box/box-openapi[#563](https://github.com/box/box-ios-sdk/issues/563)) ([#1237](https://github.com/box/box-ios-sdk/issues/1237)) ([07aaf3a](https://github.com/box/box-ios-sdk/commit/07aaf3adde1ec46ed6f2423093b451b975005368))
+* **boxsdkgen:** Support GET enterprise configuration API (box/box-openapi[#559](https://github.com/box/box-ios-sdk/issues/559)) ([#1190](https://github.com/box/box-ios-sdk/issues/1190)) ([c91bb4f](https://github.com/box/box-ios-sdk/commit/c91bb4fa1b5907698fd6d0fd38560501c4d0274b))
+* **boxsdkgen:** Support Archive API (box/box-openapi[#563](https://github.com/box/box-ios-sdk/issues/563)) ([#1237](https://github.com/box/box-ios-sdk/issues/1237)) ([07aaf3a](https://github.com/box/box-ios-sdk/commit/07aaf3adde1ec46ed6f2423093b451b975005368))
 
 ## [6.0.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v6.0.0) (2025-10-23)
 
