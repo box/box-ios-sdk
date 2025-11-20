@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/box/box-ios-sdk/compare/6.0.0...6.1.0) (2025-11-20)
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** Support GET enterprise configuration API (box/box-openapi[#559](https://github.com/box/box-ios-sdk/issues/559)) ([#1190](https://github.com/box/box-ios-sdk/issues/1190)) ([c91bb4f](https://github.com/box/box-ios-sdk/commit/c91bb4fa1b5907698fd6d0fd38560501c4d0274b))
+* **boxsdkgen:** Support Archive API (box/box-openapi[#563](https://github.com/box/box-ios-sdk/issues/563)) ([#1237](https://github.com/box/box-ios-sdk/issues/1237)) ([07aaf3a](https://github.com/box/box-ios-sdk/commit/07aaf3adde1ec46ed6f2423093b451b975005368))
+
 ## [6.0.0](https://github.com/box/box-ios-sdk/compare/v5.6.0...v6.0.0) (2025-10-23)
 
 Introducing a new major version of Box iOS SDK `v6` that includes two modules — the manually maintained module and the generated module. The coexisting modules provide easier access to the latest Box API features and support gradual migration to the standalone generated module.
