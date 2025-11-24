@@ -10,8 +10,8 @@ public class CollectionsManager {
         self.networkSession = networkSession
     }
 
-    /// Retrieves all collections for a given user.
-    /// 
+    /// Retrieves all collections for a given user
+    ///
     /// Currently, only the `favorites` collection
     /// is supported.
     ///
