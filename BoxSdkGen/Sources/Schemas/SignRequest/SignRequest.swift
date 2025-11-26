@@ -15,6 +15,9 @@ public class SignRequest: SignRequestBase {
         case autoExpireAt = "auto_expire_at"
         case parentFolder = "parent_folder"
         case collaboratorLevel = "collaborator_level"
+        case shortId = "short_id"
+        case createdAt = "created_at"
+        case finishedAt = "finished_at"
         case senderEmail = "sender_email"
         case senderId = "sender_id"
     }
@@ -69,6 +72,15 @@ public class SignRequest: SignRequestBase {
     /// The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer".
     @CodableTriState public private(set) var collaboratorLevel: String?
 
+    /// Short identifier for the sign request.
+    public let shortId: String?
+
+    /// Timestamp marking when the sign request was created.
+    public let createdAt: Date?
+
+    /// Timestamp indicating when all signing actions completed.
+    @CodableTriState public private(set) var finishedAt: Date?
+
     /// The email address of the sender of the sign request.
     @CodableTriState public private(set) var senderEmail: String?
 
@@ -110,9 +122,12 @@ public class SignRequest: SignRequestBase {
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     ///   - parentFolder: 
     ///   - collaboratorLevel: The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer".
+    ///   - shortId: Short identifier for the sign request.
+    ///   - createdAt: Timestamp marking when the sign request was created.
+    ///   - finishedAt: Timestamp indicating when all signing actions completed.
     ///   - senderEmail: The email address of the sender of the sign request.
     ///   - senderId: The user ID of the sender of the sign request.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, shortId: String? = nil, createdAt: Date? = nil, finishedAt: TriStateField<Date> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -125,6 +140,9 @@ public class SignRequest: SignRequestBase {
         self._autoExpireAt = CodableTriState(state: autoExpireAt)
         self.parentFolder = parentFolder
         self._collaboratorLevel = CodableTriState(state: collaboratorLevel)
+        self.shortId = shortId
+        self.createdAt = createdAt
+        self._finishedAt = CodableTriState(state: finishedAt)
         self._senderEmail = CodableTriState(state: senderEmail)
         self._senderId = CodableTriState(state: senderId)
 
@@ -145,6 +163,9 @@ public class SignRequest: SignRequestBase {
         autoExpireAt = try container.decodeDateTimeIfPresent(forKey: .autoExpireAt)
         parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
         collaboratorLevel = try container.decodeIfPresent(String.self, forKey: .collaboratorLevel)
+        shortId = try container.decodeIfPresent(String.self, forKey: .shortId)
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        finishedAt = try container.decodeDateTimeIfPresent(forKey: .finishedAt)
         senderEmail = try container.decodeIfPresent(String.self, forKey: .senderEmail)
         senderId = try container.decodeIfPresent(Int64.self, forKey: .senderId)
 
@@ -165,6 +186,9 @@ public class SignRequest: SignRequestBase {
         try container.encodeDateTime(field: _autoExpireAt.state, forKey: .autoExpireAt)
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try container.encode(field: _collaboratorLevel.state, forKey: .collaboratorLevel)
+        try container.encodeIfPresent(shortId, forKey: .shortId)
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTime(field: _finishedAt.state, forKey: .finishedAt)
         try container.encode(field: _senderEmail.state, forKey: .senderEmail)
         try container.encode(field: _senderId.state, forKey: .senderId)
         try super.encode(to: encoder)
