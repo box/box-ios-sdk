@@ -1,0 +1,47 @@
+# Xcode
+
+## User-specific configurations
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Generated files
+.DS_Store
+*.moved-aside
+DerivedData/
+build/
+Build/
+.build/
+
+## Other
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+/SourcePackages/
+/workspace-state.json
+
+# Cocoapods
+Pods/
+
+# Carthage
+Carthage/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# JetBrains AppCode
+.idea/
