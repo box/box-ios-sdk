@@ -14,14 +14,14 @@ public class EnterpriseConfigurationSecurityV2025R0ExternalCollabMultiFactorAuth
     }
 
 
-    public let value: ExternalCollabSecuritySettingsV2025R0??
+    public let value: ExternalCollabSecuritySettingsV2025R0?
 
     /// Initializer for a EnterpriseConfigurationSecurityV2025R0ExternalCollabMultiFactorAuthSettingsField.
     ///
     /// - Parameters:
     ///   - isUsed: Indicates whether a configuration is used for a given enterprise.
     ///   - value: 
-    public init(isUsed: Bool? = nil, value: ExternalCollabSecuritySettingsV2025R0?? = nil) {
+    public init(isUsed: Bool? = nil, value: ExternalCollabSecuritySettingsV2025R0? = nil) {
         self.value = value
 
         super.init(isUsed: isUsed)
@@ -29,7 +29,7 @@ public class EnterpriseConfigurationSecurityV2025R0ExternalCollabMultiFactorAuth
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.decodeIfPresent(ExternalCollabSecuritySettingsV2025R0?.self, forKey: .value)
+        value = try container.decodeIfPresent(ExternalCollabSecuritySettingsV2025R0.self, forKey: .value)
 
         try super.init(from: decoder)
     }

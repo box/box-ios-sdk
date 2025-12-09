@@ -33,9 +33,9 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     /// Type of the generated file.
     public let outputType: String
 
-    public let outputFile: FileReferenceV2025R0??
+    public let outputFile: FileReferenceV2025R0?
 
-    public let outputFileVersion: FileVersionBaseV2025R0??
+    public let outputFileVersion: FileVersionBaseV2025R0?
 
     /// Initializer for a DocGenJobV2025R0.
     ///
@@ -49,7 +49,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     ///   - type: The value will always be `docgen_job`.
     ///   - outputFile: 
     ///   - outputFileVersion: 
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0?? = nil, outputFileVersion: FileVersionBaseV2025R0?? = nil) {
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil) {
         self.batch = batch
         self.templateFile = templateFile
         self.templateFileVersion = templateFileVersion
@@ -68,8 +68,8 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         templateFileVersion = try container.decode(FileVersionBaseV2025R0.self, forKey: .templateFileVersion)
         status = try container.decode(DocGenJobV2025R0StatusField.self, forKey: .status)
         outputType = try container.decode(String.self, forKey: .outputType)
-        outputFile = try container.decodeIfPresent(FileReferenceV2025R0?.self, forKey: .outputFile)
-        outputFileVersion = try container.decodeIfPresent(FileVersionBaseV2025R0?.self, forKey: .outputFileVersion)
+        outputFile = try container.decodeIfPresent(FileReferenceV2025R0.self, forKey: .outputFile)
+        outputFileVersion = try container.decodeIfPresent(FileVersionBaseV2025R0.self, forKey: .outputFileVersion)
 
         try super.init(from: decoder)
     }

@@ -26,13 +26,13 @@ public class EnterpriseConfigurationV2025R0: Codable, RawJSONReadable {
     /// The value will always be `enterprise_configuration`.
     public let type: EnterpriseConfigurationV2025R0TypeField?
 
-    public let security: EnterpriseConfigurationSecurityV2025R0??
+    public let security: EnterpriseConfigurationSecurityV2025R0?
 
-    public let contentAndSharing: EnterpriseConfigurationContentAndSharingV2025R0??
+    public let contentAndSharing: EnterpriseConfigurationContentAndSharingV2025R0?
 
-    public let userSettings: EnterpriseConfigurationUserSettingsV2025R0??
+    public let userSettings: EnterpriseConfigurationUserSettingsV2025R0?
 
-    public let shield: EnterpriseConfigurationShieldV2025R0??
+    public let shield: EnterpriseConfigurationShieldV2025R0?
 
     /// Initializer for a EnterpriseConfigurationV2025R0.
     ///
@@ -43,7 +43,7 @@ public class EnterpriseConfigurationV2025R0: Codable, RawJSONReadable {
     ///   - contentAndSharing: 
     ///   - userSettings: 
     ///   - shield: 
-    public init(id: String? = nil, type: EnterpriseConfigurationV2025R0TypeField? = nil, security: EnterpriseConfigurationSecurityV2025R0?? = nil, contentAndSharing: EnterpriseConfigurationContentAndSharingV2025R0?? = nil, userSettings: EnterpriseConfigurationUserSettingsV2025R0?? = nil, shield: EnterpriseConfigurationShieldV2025R0?? = nil) {
+    public init(id: String? = nil, type: EnterpriseConfigurationV2025R0TypeField? = nil, security: EnterpriseConfigurationSecurityV2025R0? = nil, contentAndSharing: EnterpriseConfigurationContentAndSharingV2025R0? = nil, userSettings: EnterpriseConfigurationUserSettingsV2025R0? = nil, shield: EnterpriseConfigurationShieldV2025R0? = nil) {
         self.id = id
         self.type = type
         self.security = security
@@ -56,10 +56,10 @@ public class EnterpriseConfigurationV2025R0: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(EnterpriseConfigurationV2025R0TypeField.self, forKey: .type)
-        security = try container.decodeIfPresent(EnterpriseConfigurationSecurityV2025R0?.self, forKey: .security)
-        contentAndSharing = try container.decodeIfPresent(EnterpriseConfigurationContentAndSharingV2025R0?.self, forKey: .contentAndSharing)
-        userSettings = try container.decodeIfPresent(EnterpriseConfigurationUserSettingsV2025R0?.self, forKey: .userSettings)
-        shield = try container.decodeIfPresent(EnterpriseConfigurationShieldV2025R0?.self, forKey: .shield)
+        security = try container.decodeIfPresent(EnterpriseConfigurationSecurityV2025R0.self, forKey: .security)
+        contentAndSharing = try container.decodeIfPresent(EnterpriseConfigurationContentAndSharingV2025R0.self, forKey: .contentAndSharing)
+        userSettings = try container.decodeIfPresent(EnterpriseConfigurationUserSettingsV2025R0.self, forKey: .userSettings)
+        shield = try container.decodeIfPresent(EnterpriseConfigurationShieldV2025R0.self, forKey: .shield)
     }
 
     public func encode(to encoder: Encoder) throws {
