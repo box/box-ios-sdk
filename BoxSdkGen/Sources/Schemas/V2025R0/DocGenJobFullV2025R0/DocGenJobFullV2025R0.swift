@@ -44,7 +44,7 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
     ///   - outputFile: 
     ///   - outputFileVersion: 
     ///   - createdAt: Time of job creation.
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0?? = nil, outputFileVersion: FileVersionBaseV2025R0?? = nil, createdAt: String? = nil) {
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, createdAt: String? = nil) {
         self.createdBy = createdBy
         self.enterprise = enterprise
         self.source = source
