@@ -6,7 +6,6 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         case items
         case metadataTemplate = "metadata_template"
         case fields
-        case includeConfidenceScore = "include_confidence_score"
         case aiAgent = "ai_agent"
     }
 
@@ -30,9 +29,6 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     /// For your request to work, you must provide either `metadata_template` or `fields`, but not both.
     public let fields: [AiExtractStructuredFieldsField]?
 
-    /// A flag to indicate whether confidence scores for every extracted field should be returned.
-    public let includeConfidenceScore: Bool?
-
     public let aiAgent: AiExtractStructuredAgent?
 
     /// Initializer for a AiExtractStructured.
@@ -43,13 +39,11 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     ///     For your request to work, you must provide either `metadata_template` or `fields`, but not both.
     ///   - fields: The fields to be extracted from the provided items.
     ///     For your request to work, you must provide either `metadata_template` or `fields`, but not both.
-    ///   - includeConfidenceScore: A flag to indicate whether confidence scores for every extracted field should be returned.
     ///   - aiAgent: 
-    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, includeConfidenceScore: Bool? = nil, aiAgent: AiExtractStructuredAgent? = nil) {
+    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, aiAgent: AiExtractStructuredAgent? = nil) {
         self.items = items
         self.metadataTemplate = metadataTemplate
         self.fields = fields
-        self.includeConfidenceScore = includeConfidenceScore
         self.aiAgent = aiAgent
     }
 
@@ -58,7 +52,6 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         items = try container.decode([AiItemBase].self, forKey: .items)
         metadataTemplate = try container.decodeIfPresent(AiExtractStructuredMetadataTemplateField.self, forKey: .metadataTemplate)
         fields = try container.decodeIfPresent([AiExtractStructuredFieldsField].self, forKey: .fields)
-        includeConfidenceScore = try container.decodeIfPresent(Bool.self, forKey: .includeConfidenceScore)
         aiAgent = try container.decodeIfPresent(AiExtractStructuredAgent.self, forKey: .aiAgent)
     }
 
@@ -67,7 +60,6 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         try container.encode(items, forKey: .items)
         try container.encodeIfPresent(metadataTemplate, forKey: .metadataTemplate)
         try container.encodeIfPresent(fields, forKey: .fields)
-        try container.encodeIfPresent(includeConfidenceScore, forKey: .includeConfidenceScore)
         try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
     }
 

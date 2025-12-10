@@ -6,7 +6,6 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
         case answer
         case createdAt = "created_at"
         case completionReason = "completion_reason"
-        case confidenceScore = "confidence_score"
         case aiAgentInfo = "ai_agent_info"
     }
 
@@ -27,9 +26,6 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
     /// The reason the response finishes.
     public let completionReason: String?
 
-    /// The confidence score numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
-    public let confidenceScore: [String: AnyCodable]?
-
     public let aiAgentInfo: AiAgentInfo?
 
     /// Initializer for a AiExtractStructuredResponse.
@@ -38,13 +34,11 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
     ///   - answer: 
     ///   - createdAt: The ISO date formatted timestamp of when the answer to the prompt was created.
     ///   - completionReason: The reason the response finishes.
-    ///   - confidenceScore: The confidence score numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
     ///   - aiAgentInfo: 
-    public init(answer: AiExtractResponse, createdAt: Date, completionReason: String? = nil, confidenceScore: [String: AnyCodable]? = nil, aiAgentInfo: AiAgentInfo? = nil) {
+    public init(answer: AiExtractResponse, createdAt: Date, completionReason: String? = nil, aiAgentInfo: AiAgentInfo? = nil) {
         self.answer = answer
         self.createdAt = createdAt
         self.completionReason = completionReason
-        self.confidenceScore = confidenceScore
         self.aiAgentInfo = aiAgentInfo
     }
 
@@ -53,7 +47,6 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
         answer = try container.decode(AiExtractResponse.self, forKey: .answer)
         createdAt = try container.decodeDateTime(forKey: .createdAt)
         completionReason = try container.decodeIfPresent(String.self, forKey: .completionReason)
-        confidenceScore = try container.decodeIfPresent([String: AnyCodable].self, forKey: .confidenceScore)
         aiAgentInfo = try container.decodeIfPresent(AiAgentInfo.self, forKey: .aiAgentInfo)
     }
 
@@ -62,7 +55,6 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
         try container.encode(answer, forKey: .answer)
         try container.encodeDateTime(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(completionReason, forKey: .completionReason)
-        try container.encodeIfPresent(confidenceScore, forKey: .confidenceScore)
         try container.encodeIfPresent(aiAgentInfo, forKey: .aiAgentInfo)
     }
 
