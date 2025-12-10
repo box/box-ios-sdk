@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.1.1](https://github.com/box/box-ios-sdk/compare/10.1.0...10.1.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* Remove duplicate optional wrapping (box/box-codegen[#898](https://github.com/box/box-ios-sdk/issues/898)) ([#1301](https://github.com/box/box-ios-sdk/issues/1301)) ([0fff45e](https://github.com/box/box-ios-sdk/commit/0fff45ed3139ffebaafc9af4113bbb61d7fd3945))
+
+
+### New Features and Enhancements
+
+* Support new sign request metadata (box/box-openapi[#565](https://github.com/box/box-ios-sdk/issues/565)) ([#1285](https://github.com/box/box-ios-sdk/issues/1285)) ([d541f12](https://github.com/box/box-ios-sdk/commit/d541f128badac0929d586fe2de2f8e2a2c5a786b))
+
 ## [10.1.0](https://github.com/box/box-ios-sdk/compare/10.0.1...10.1.0) (2025-11-20)
 
 
