@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/box/box-ios-sdk/compare/6.1.0...6.2.0) (2025-12-10)
+
+
+### Bug Fixes
+
+* **boxsdkgen:** Remove duplicate optional wrapping (box/box-codegen[#898](https://github.com/box/box-ios-sdk/issues/898)) ([#1302](https://github.com/box/box-ios-sdk/issues/1302)) ([4fae34a](https://github.com/box/box-ios-sdk/commit/4fae34add0569ac907d2f50e1ab2a7da7a223f6b))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** Remove `confidence_score` and `include_confidence_score` from AI extract (box/box-openapi[#567](https://github.com/box/box-ios-sdk/issues/567)) ([#1304](https://github.com/box/box-ios-sdk/issues/1304)) ([143ef03](https://github.com/box/box-ios-sdk/commit/143ef03119c6ac6f7f4bff198ce8578a78abd353))
+* **boxsdkgen:** Support new sign request metadata (box/box-openapi[#565](https://github.com/box/box-ios-sdk/issues/565)) ([#1286](https://github.com/box/box-ios-sdk/issues/1286)) ([e6c0826](https://github.com/box/box-ios-sdk/commit/e6c082659f65bfcc8eb17de1552d23d07eeb7d56))
+
 ## [6.1.0](https://github.com/box/box-ios-sdk/compare/6.0.0...6.1.0) (2025-11-20)
 
 
