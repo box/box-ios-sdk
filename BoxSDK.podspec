@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'BoxSDK'
-  spec.version      = '10.1.0'
+  spec.version      = '10.2.0'
   spec.summary      = 'Box Swift SDK'
   spec.homepage     = 'https://github.com/box/box-ios-sdk'
   spec.license      = 'Apache License, Version 2.0'
