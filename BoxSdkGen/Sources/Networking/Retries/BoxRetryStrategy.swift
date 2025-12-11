@@ -54,7 +54,7 @@ public class BoxRetryStrategy: RetryStrategy {
     }
 
     public func retryAfter(fetchOptions: FetchOptions, fetchResponse: FetchResponse, attemptNumber: Int) -> Double {
-        let retryAfterHeader: String? = fetchResponse.headers["Retry-After"]
+        let retryAfterHeader: String? = fetchResponse.headers.keys.contains("Retry-After") ? fetchResponse.headers["Retry-After"] : nil
         if retryAfterHeader != nil {
             return Double(retryAfterHeader!)!
         }
