@@ -14,6 +14,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         case dimensions
         case label
         case readOnly = "read_only"
+        case validation
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -58,8 +59,12 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     /// The label field is used especially for text, attachment, radio, and checkbox type inputs.
     @CodableTriState public private(set) var label: String?
 
-    /// Whether this input was defined as read-only(immutable by signers) or not.
+    /// Indicates whether this input is read-only (cannot be modified by signers).
     public let readOnly: Bool?
+
+    /// Specifies the formatting rules that signers must follow for text field inputs.
+    /// If set, this validation is mandatory.
+    public let validation: SignRequestSignerInputValidation?
 
     /// Initializer for a TemplateSignerInput.
     ///
@@ -81,8 +86,10 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - coordinates: Where the input is located on a page.
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
-    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not.
-    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: TriStateField<String> = nil, dropdownChoices: TriStateField<[String]> = nil, groupId: TriStateField<String> = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: TriStateField<String> = nil, readOnly: Bool? = nil) {
+    ///   - readOnly: Indicates whether this input is read-only (cannot be modified by signers).
+    ///   - validation: Specifies the formatting rules that signers must follow for text field inputs.
+    ///     If set, this validation is mandatory.
+    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: TriStateField<String> = nil, dropdownChoices: TriStateField<[String]> = nil, groupId: TriStateField<String> = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: TriStateField<String> = nil, readOnly: Bool? = nil, validation: SignRequestSignerInputValidation? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
@@ -94,6 +101,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         self.dimensions = dimensions
         self._label = CodableTriState(state: label)
         self.readOnly = readOnly
+        self.validation = validation
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
@@ -111,6 +119,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         dimensions = try container.decodeIfPresent(TemplateSignerInputDimensionsField.self, forKey: .dimensions)
         label = try container.decodeIfPresent(String.self, forKey: .label)
         readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
+        validation = try container.decodeIfPresent(SignRequestSignerInputValidation.self, forKey: .validation)
 
         try super.init(from: decoder)
     }
@@ -128,6 +137,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(dimensions, forKey: .dimensions)
         try container.encode(field: _label.state, forKey: .label)
         try container.encodeIfPresent(readOnly, forKey: .readOnly)
+        try container.encodeIfPresent(validation, forKey: .validation)
         try super.encode(to: encoder)
     }
 
