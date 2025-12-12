@@ -7,6 +7,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         case type
         case contentType = "content_type"
         case readOnly = "read_only"
+        case validation
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -27,8 +28,12 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     /// Content type of input.
     public let contentType: SignRequestSignerInputContentTypeField?
 
-    /// Whether this input was defined as read-only(immutable by signers) or not.
+    /// Indicates whether this input is read-only (cannot be modified by signers).
     public let readOnly: Bool?
+
+    /// Specifies the formatting rules that signers must follow for text field inputs.
+    /// If set, this validation is mandatory.
+    public let validation: SignRequestSignerInputValidation?
 
     /// Initializer for a SignRequestSignerInput.
     ///
@@ -40,12 +45,15 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///   - dateValue: Date prefill value.
     ///   - type: Type of input.
     ///   - contentType: Content type of input.
-    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not.
-    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil) {
+    ///   - readOnly: Indicates whether this input is read-only (cannot be modified by signers).
+    ///   - validation: Specifies the formatting rules that signers must follow for text field inputs.
+    ///     If set, this validation is mandatory.
+    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil, validation: SignRequestSignerInputValidation? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
         self.readOnly = readOnly
+        self.validation = validation
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
@@ -56,6 +64,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         type = try container.decodeIfPresent(SignRequestSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(SignRequestSignerInputContentTypeField.self, forKey: .contentType)
         readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
+        validation = try container.decodeIfPresent(SignRequestSignerInputValidation.self, forKey: .validation)
 
         try super.init(from: decoder)
     }
@@ -66,6 +75,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(contentType, forKey: .contentType)
         try container.encodeIfPresent(readOnly, forKey: .readOnly)
+        try container.encodeIfPresent(validation, forKey: .validation)
         try super.encode(to: encoder)
     }
 
