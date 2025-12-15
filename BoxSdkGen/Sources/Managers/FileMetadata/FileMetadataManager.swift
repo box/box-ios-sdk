@@ -21,12 +21,14 @@ public class FileMetadataManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
+    ///   - queryParams: Query parameters of getFileMetadata method
     ///   - headers: Headers of getFileMetadata method
     /// - Returns: The `Metadatas`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadata(fileId: String, headers: GetFileMetadataHeaders = GetFileMetadataHeaders()) async throws -> Metadatas {
+    public func getFileMetadata(fileId: String, queryParams: GetFileMetadataQueryParams = GetFileMetadataQueryParams(), headers: GetFileMetadataHeaders = GetFileMetadataHeaders()) async throws -> Metadatas {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["view": Utils.Strings.toString(value: queryParams.view)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Metadatas.deserialize(from: response.data!)
     }
 
@@ -46,12 +48,14 @@ public class FileMetadataManager {
     ///     Example: "global"
     ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
+    ///   - queryParams: Query parameters of getFileMetadataById method
     ///   - headers: Headers of getFileMetadataById method
     /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadataById(fileId: String, scope: GetFileMetadataByIdScope, templateKey: String, headers: GetFileMetadataByIdHeaders = GetFileMetadataByIdHeaders()) async throws -> MetadataFull {
+    public func getFileMetadataById(fileId: String, scope: GetFileMetadataByIdScope, templateKey: String, queryParams: GetFileMetadataByIdQueryParams = GetFileMetadataByIdQueryParams(), headers: GetFileMetadataByIdHeaders = GetFileMetadataByIdHeaders()) async throws -> MetadataFull {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["view": Utils.Strings.toString(value: queryParams.view)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataFull.deserialize(from: response.data!)
     }
 
