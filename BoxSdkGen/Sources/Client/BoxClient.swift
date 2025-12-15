@@ -149,6 +149,8 @@ public class BoxClient {
 
     public let aiStudio: AiStudioManager
 
+    public let metadataTaxonomies: MetadataTaxonomiesManager
+
     public let docgenTemplate: DocgenTemplateManager
 
     public let docgen: DocgenManager
@@ -242,6 +244,7 @@ public class BoxClient {
         self.integrationMappings = IntegrationMappingsManager(auth: self.auth, networkSession: self.networkSession)
         self.ai = AiManager(auth: self.auth, networkSession: self.networkSession)
         self.aiStudio = AiStudioManager(auth: self.auth, networkSession: self.networkSession)
+        self.metadataTaxonomies = MetadataTaxonomiesManager(auth: self.auth, networkSession: self.networkSession)
         self.docgenTemplate = DocgenTemplateManager(auth: self.auth, networkSession: self.networkSession)
         self.docgen = DocgenManager(auth: self.auth, networkSession: self.networkSession)
         self.enterpriseConfigurations = EnterpriseConfigurationsManager(auth: self.auth, networkSession: self.networkSession)

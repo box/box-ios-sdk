@@ -6,6 +6,7 @@ public enum CreateMetadataTemplateRequestBodyFieldsTypeField: CodableStringEnum 
     case date
     case enum_
     case multiSelect
+    case taxonomy
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -20,6 +21,8 @@ public enum CreateMetadataTemplateRequestBodyFieldsTypeField: CodableStringEnum 
             self = .enum_
         case "multiSelect".lowercased():
             self = .multiSelect
+        case "taxonomy".lowercased():
+            self = .taxonomy
         default:
             self = .customValue(value)
         }
@@ -37,6 +40,8 @@ public enum CreateMetadataTemplateRequestBodyFieldsTypeField: CodableStringEnum 
             return "enum"
         case .multiSelect:
             return "multiSelect"
+        case .taxonomy:
+            return "taxonomy"
         case .customValue(let value):
             return value
         }
