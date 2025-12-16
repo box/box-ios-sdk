@@ -11,10 +11,11 @@ class DocgenManagerTests: RetryableTestCase {
 
     public func testDocgenBatchAndJobs() async throws {
         await runWithRetryAsync {
-            let uploadedFile: FileFull = try await CommonsManager().uploadNewFile()
+            let uploadedFilePdf: FileFull = try await CommonsManager().uploadNewFile()
+            let uploadedFileDocx: FileFull = try await client.files.updateFileById(fileId: uploadedFilePdf.id, requestBody: UpdateFileByIdRequestBody(name: "\(uploadedFilePdf.name!)\(".docx")"))
             let folder: FolderFull = try await CommonsManager().createNewFolder()
-            let createdDocgenTemplate: DocGenTemplateBaseV2025R0 = try await client.docgenTemplate.createDocgenTemplateV2025R0(requestBody: DocGenTemplateCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFile.id)))
-            let docgenBatch: DocGenBatchBaseV2025R0 = try await client.docgen.createDocgenBatchV2025R0(requestBody: DocGenBatchCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFile.id), inputSource: "api", destinationFolder: DocGenBatchCreateRequestV2025R0DestinationFolderField(id: folder.id), outputType: "pdf", documentGenerationData: [DocGenDocumentGenerationDataV2025R0(generatedFileName: "test", userInput: ["abc": "xyz"])]))
+            let createdDocgenTemplate: DocGenTemplateBaseV2025R0 = try await client.docgenTemplate.createDocgenTemplateV2025R0(requestBody: DocGenTemplateCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFileDocx.id)))
+            let docgenBatch: DocGenBatchBaseV2025R0 = try await client.docgen.createDocgenBatchV2025R0(requestBody: DocGenBatchCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFileDocx.id), inputSource: "api", destinationFolder: DocGenBatchCreateRequestV2025R0DestinationFolderField(id: folder.id), outputType: "pdf", documentGenerationData: [DocGenDocumentGenerationDataV2025R0(generatedFileName: "test", userInput: ["abc": "xyz"])]))
             XCTAssertTrue(docgenBatch.id != "")
             XCTAssertTrue(Utils.Strings.toString(value: docgenBatch.type) == "docgen_batch")
             let docgenBatchJobs: DocGenJobsV2025R0 = try await client.docgen.getDocgenBatchJobByIdV2025R0(batchId: docgenBatch.id)
@@ -23,7 +24,7 @@ class DocgenManagerTests: RetryableTestCase {
             XCTAssertTrue(Utils.Strings.toString(value: docgenBatchJobs.entries![0].type) == "docgen_job")
             XCTAssertTrue(docgenBatchJobs.entries![0].outputType == "pdf")
             XCTAssertTrue(Utils.Strings.toString(value: docgenBatchJobs.entries![0].status) != "")
-            XCTAssertTrue(docgenBatchJobs.entries![0].templateFile.id == uploadedFile.id)
+            XCTAssertTrue(docgenBatchJobs.entries![0].templateFile.id == uploadedFileDocx.id)
             XCTAssertTrue(docgenBatchJobs.entries![0].batch.id == docgenBatch.id)
             let docgenJobs: DocGenJobsFullV2025R0 = try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(10000)))
             XCTAssertTrue(docgenJobs.entries!.count >= 1)
@@ -52,7 +53,7 @@ class DocgenManagerTests: RetryableTestCase {
             XCTAssertTrue(docgenJob.templateFileVersion.id != "")
             XCTAssertTrue(Utils.Strings.toString(value: docgenJob.type) == "docgen_job")
             try await client.folders.deleteFolderById(folderId: folder.id)
-            try await client.files.deleteFileById(fileId: uploadedFile.id)
+            try await client.files.deleteFileById(fileId: uploadedFileDocx.id)
         }
     }
 }
