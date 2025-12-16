@@ -74,7 +74,7 @@ jobs:
           echo "✅ Environment variables injected into $XCTESTPLAN_PATH"
       - name: Run all iOS tests
         working-directory: ./BoxSdkGen
-        if: startsWith(github.head_ref, 'codegen-release')
+        if: ${{ github.actor != 'dependabot[bot]' && startsWith(github.head_ref, 'codegen-release') }}
         run: |
           set -o pipefail
           xcodebuild \
@@ -88,7 +88,7 @@ jobs:
             clean test | xcpretty
       - name: Run Smoke iOS tests
         working-directory: ./BoxSdkGen
-        if: "!startsWith(github.head_ref, 'codegen-release')"
+        if: ${{ github.actor != 'dependabot[bot]' && !startsWith(github.head_ref, 'codegen-release') }}
         run: |
           set -o pipefail
           SMOKE_TESTS=(
@@ -130,6 +130,19 @@ jobs:
             "${ONLY_TESTING_FLAGS[@]}" \
             clean test | xcpretty
 
+      - name: Build iOS (Dependabot only, no tests)
+        working-directory: ./BoxSdkGen
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        run: |
+          set -o pipefail
+          xcodebuild \
+            OTHER_SWIFT_FLAGS="-suppress-warnings" \
+            -project "BoxSdkGen.xcodeproj" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
+            -destination "${{ matrix.destination }}" \
+            -derivedDataPath build/DerivedData \
+            build
+
   linux:
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
@@ -163,9 +176,13 @@ jobs:
         run: swift --version
       - name: Run All Swift tests
         working-directory: BoxSdkGen
-        if: startsWith(github.head_ref, 'codegen-release')
+        if: ${{ github.actor != 'dependabot[bot]' && startsWith(github.head_ref, 'codegen-release') }}
         run: swift test -Xswiftc -suppress-warnings
       - name: Run Smoke Swift tests
         working-directory: BoxSdkGen
-        if: "!startsWith(github.head_ref, 'codegen-release')"
+        if: ${{ github.actor != 'dependabot[bot]' && !startsWith(github.head_ref, 'codegen-release') }}
         run: swift test -Xswiftc -suppress-warnings --filter "BoxSdkGenTests\.(Auth|Files|Downloads|Uploads)ManagerTests"
+      - name: Build Swift package (Dependabot only, no tests)
+        working-directory: BoxSdkGen
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        run: swift build -Xswiftc -suppress-warnings
