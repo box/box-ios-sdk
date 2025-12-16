@@ -25,12 +25,14 @@ public class FolderMetadataManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
+    ///   - queryParams: Query parameters of getFolderMetadata method
     ///   - headers: Headers of getFolderMetadata method
     /// - Returns: The `Metadatas`.
     /// - Throws: The `GeneralError`.
-    public func getFolderMetadata(folderId: String, headers: GetFolderMetadataHeaders = GetFolderMetadataHeaders()) async throws -> Metadatas {
+    public func getFolderMetadata(folderId: String, queryParams: GetFolderMetadataQueryParams = GetFolderMetadataQueryParams(), headers: GetFolderMetadataHeaders = GetFolderMetadataHeaders()) async throws -> Metadatas {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["view": Utils.Strings.toString(value: queryParams.view)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Metadatas.deserialize(from: response.data!)
     }
 
