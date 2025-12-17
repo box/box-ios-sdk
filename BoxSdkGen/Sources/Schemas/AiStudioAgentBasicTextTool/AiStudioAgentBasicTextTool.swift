@@ -21,7 +21,7 @@ public class AiStudioAgentBasicTextTool: AiAgentBasicTextTool {
     /// Initializer for a AiStudioAgentBasicTextTool.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
+    ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](https://developer.box.com/guides/box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: 
     ///   - systemMessage: System messages try to help the LLM "understand" its role and what it is supposed to do.

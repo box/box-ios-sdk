@@ -52,9 +52,9 @@ public class MetadataCascadePolicy: Codable, RawJSONReadable {
     /// get all instances on a [file][file] or [folder][folder]
     /// to inspect a template's key.
     /// 
-    /// [list]: e://get-metadata-templates-enterprise
-    /// [file]: e://get-files-id-metadata
-    /// [folder]: e://get-folders-id-metadata
+    /// [list]: https://developer.box.com/reference/get-metadata-templates-enterprise
+    /// [file]: https://developer.box.com/reference/get-files-id-metadata
+    /// [folder]: https://developer.box.com/reference/get-folders-id-metadata
     public let templateKey: String?
 
     /// Initializer for a MetadataCascadePolicy.
@@ -81,9 +81,9 @@ public class MetadataCascadePolicy: Codable, RawJSONReadable {
     ///     get all instances on a [file][file] or [folder][folder]
     ///     to inspect a template's key.
     ///     
-    ///     [list]: e://get-metadata-templates-enterprise
-    ///     [file]: e://get-files-id-metadata
-    ///     [folder]: e://get-folders-id-metadata
+    ///     [list]: https://developer.box.com/reference/get-metadata-templates-enterprise
+    ///     [file]: https://developer.box.com/reference/get-files-id-metadata
+    ///     [folder]: https://developer.box.com/reference/get-folders-id-metadata
     public init(id: String, type: MetadataCascadePolicyTypeField = MetadataCascadePolicyTypeField.metadataCascadePolicy, ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField? = nil, parent: MetadataCascadePolicyParentField? = nil, scope: String? = nil, templateKey: String? = nil) {
         self.id = id
         self.type = type
