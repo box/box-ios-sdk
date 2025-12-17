@@ -7,6 +7,7 @@ public enum MetadataTemplateFieldsTypeField: CodableStringEnum {
     case enum_
     case multiSelect
     case integer
+    case taxonomy
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -23,6 +24,8 @@ public enum MetadataTemplateFieldsTypeField: CodableStringEnum {
             self = .multiSelect
         case "integer".lowercased():
             self = .integer
+        case "taxonomy".lowercased():
+            self = .taxonomy
         default:
             self = .customValue(value)
         }
@@ -42,6 +45,8 @@ public enum MetadataTemplateFieldsTypeField: CodableStringEnum {
             return "multiSelect"
         case .integer:
             return "integer"
+        case .taxonomy:
+            return "taxonomy"
         case .customValue(let value):
             return value
         }
