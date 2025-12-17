@@ -31,8 +31,8 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     /// (`/`, `\`), names with trailing spaces, and names `.` and `..` are
     /// not allowed.
     /// 
-    /// Folder names must be unique within their parent folder. The name check is case-insensitive, 
-    /// so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    /// Folder names must be unique within their parent folder. The name check is case-insensitive,
+    /// so a folder named `New Folder` cannot be created in a parent folder that already contains
     /// a folder named `new folder`.
     public let name: String?
 
@@ -79,7 +79,7 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     /// Passing an empty array `[]` or `null` will remove
     /// the folder from all collections.
     /// 
-    /// [1]: e://get-collections
+    /// [1]: https://developer.box.com/reference/get-collections
     @CodableTriState public private(set) var collections: [UpdateFolderByIdRequestBodyCollectionsField]?
 
     /// Restricts collaborators who are not the owner of
@@ -104,8 +104,8 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     ///     (`/`, `\`), names with trailing spaces, and names `.` and `..` are
     ///     not allowed.
     ///     
-    ///     Folder names must be unique within their parent folder. The name check is case-insensitive, 
-    ///     so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    ///     Folder names must be unique within their parent folder. The name check is case-insensitive,
+    ///     so a folder named `New Folder` cannot be created in a parent folder that already contains
     ///     a folder named `new folder`.
     ///   - description: The optional description of this folder.
     ///   - syncState: Specifies whether a folder should be synced to a
@@ -137,7 +137,7 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     ///     Passing an empty array `[]` or `null` will remove
     ///     the folder from all collections.
     ///     
-    ///     [1]: e://get-collections
+    ///     [1]: https://developer.box.com/reference/get-collections
     ///   - canNonOwnersViewCollaborators: Restricts collaborators who are not the owner of
     ///     this folder from viewing other collaborations on
     ///     this folder.

@@ -25,7 +25,7 @@ public class UpdateFileByIdRequestBody: Codable, RawJSONReadable {
     /// An optional different name for the file. This can be used to
     /// rename the file.
     /// 
-    /// File names must be unique within their parent folder. The name check is case-insensitive, so a file 
+    /// File names must be unique within their parent folder. The name check is case-insensitive, so a file
     /// named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
     public let name: String?
 
@@ -63,7 +63,7 @@ public class UpdateFileByIdRequestBody: Codable, RawJSONReadable {
     /// Passing an empty array `[]` or `null` will remove
     /// the file from all collections.
     /// 
-    /// [1]: e://get-collections
+    /// [1]: https://developer.box.com/reference/get-collections
     @CodableTriState public private(set) var collections: [UpdateFileByIdRequestBodyCollectionsField]?
 
     /// The tags for this item. These tags are shown in
@@ -82,7 +82,7 @@ public class UpdateFileByIdRequestBody: Codable, RawJSONReadable {
     ///   - name: An optional different name for the file. This can be used to
     ///     rename the file.
     ///     
-    ///     File names must be unique within their parent folder. The name check is case-insensitive, so a file 
+    ///     File names must be unique within their parent folder. The name check is case-insensitive, so a file
     ///     named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
     ///   - description: The description for a file. This can be seen in the right-hand sidebar panel
     ///     when viewing a file in the Box web app. Additionally, this index is used in
@@ -108,7 +108,7 @@ public class UpdateFileByIdRequestBody: Codable, RawJSONReadable {
     ///     Passing an empty array `[]` or `null` will remove
     ///     the file from all collections.
     ///     
-    ///     [1]: e://get-collections
+    ///     [1]: https://developer.box.com/reference/get-collections
     ///   - tags: The tags for this item. These tags are shown in
     ///     the Box web app and mobile apps next to an item.
     ///     
