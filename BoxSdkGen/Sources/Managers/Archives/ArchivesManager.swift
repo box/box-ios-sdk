@@ -12,7 +12,7 @@ public class ArchivesManager {
 
     /// Retrieves archives for an enterprise.
     /// 
-    /// To learn more about the archive APIs, see the [Archive API Guide](g://archives).
+    /// To learn more about the archive APIs, see the [Archive API Guide](https://developer.box.com/guides/archives).
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getArchivesV2025R0 method
@@ -28,7 +28,7 @@ public class ArchivesManager {
 
     /// Creates an archive.
     /// 
-    /// To learn more about the archive APIs, see the [Archive API Guide](g://archives).
+    /// To learn more about the archive APIs, see the [Archive API Guide](https://developer.box.com/guides/archives).
     ///
     /// - Parameters:
     ///   - requestBody: Request body of createArchiveV2025R0 method
@@ -43,7 +43,7 @@ public class ArchivesManager {
 
     /// Permanently deletes an archive.
     /// 
-    /// To learn more about the archive APIs, see the [Archive API Guide](g://archives).
+    /// To learn more about the archive APIs, see the [Archive API Guide](https://developer.box.com/guides/archives).
     ///
     /// - Parameters:
     ///   - archiveId: The ID of the archive.
@@ -57,7 +57,7 @@ public class ArchivesManager {
 
     /// Updates an archive.
     /// 
-    /// To learn more about the archive APIs, see the [Archive API Guide](g://archives).
+    /// To learn more about the archive APIs, see the [Archive API Guide](https://developer.box.com/guides/archives).
     ///
     /// - Parameters:
     ///   - archiveId: The ID of the archive.
