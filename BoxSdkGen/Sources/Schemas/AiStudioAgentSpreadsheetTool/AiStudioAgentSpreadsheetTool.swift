@@ -17,7 +17,7 @@ public class AiStudioAgentSpreadsheetTool: AiAgentSpreadsheetTool {
     /// Initializer for a AiStudioAgentSpreadsheetTool.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI agent for spreadsheets. For specific model values, see the [available models list](g://box-ai/supported-models).
+    ///   - model: The model used for the AI agent for spreadsheets. For specific model values, see the [available models list](https://developer.box.com/guides/box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: 
     public override init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil) {

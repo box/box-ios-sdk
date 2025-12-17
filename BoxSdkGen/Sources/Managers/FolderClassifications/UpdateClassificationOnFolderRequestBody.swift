@@ -20,14 +20,14 @@ public class UpdateClassificationOnFolderRequestBody: Codable, RawJSONReadable {
     /// 
     /// To list the available classifications in an enterprise,
     /// use the classification API to retrieve the
-    /// [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
+    /// [classification template](https://developer.box.com/reference/get-metadata-templates-enterprise-securityClassification-6VMVochwUWo-schema)
     /// which lists all available classification keys.
     public let value: String
 
     /// The value will always be `replace`.
     public let op: UpdateClassificationOnFolderRequestBodyOpField
 
-    /// Defines classifications 
+    /// Defines classifications
     /// available in the enterprise.
     public let path: UpdateClassificationOnFolderRequestBodyPathField
 
@@ -38,10 +38,10 @@ public class UpdateClassificationOnFolderRequestBody: Codable, RawJSONReadable {
     ///     
     ///     To list the available classifications in an enterprise,
     ///     use the classification API to retrieve the
-    ///     [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
+    ///     [classification template](https://developer.box.com/reference/get-metadata-templates-enterprise-securityClassification-6VMVochwUWo-schema)
     ///     which lists all available classification keys.
     ///   - op: The value will always be `replace`.
-    ///   - path: Defines classifications 
+    ///   - path: Defines classifications
     ///     available in the enterprise.
     public init(value: String, op: UpdateClassificationOnFolderRequestBodyOpField = UpdateClassificationOnFolderRequestBodyOpField.replace, path: UpdateClassificationOnFolderRequestBodyPathField = UpdateClassificationOnFolderRequestBodyPathField.boxSecurityClassificationKey) {
         self.value = value
