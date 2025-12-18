@@ -54,7 +54,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataCascadePolicyById(metadataCascadePolicyId: String, headers: GetMetadataCascadePolicyByIdHeaders = GetMetadataCascadePolicyByIdHeaders()) async throws -> MetadataCascadePolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(Utils.Strings.toString(value: metadataCascadePolicyId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataCascadePolicy.deserialize(from: response.data!)
     }
 
@@ -67,7 +67,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataCascadePolicyById(metadataCascadePolicyId: String, headers: DeleteMetadataCascadePolicyByIdHeaders = DeleteMetadataCascadePolicyByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(Utils.Strings.toString(value: metadataCascadePolicyId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Force the metadata on a folder with a metadata cascade policy to be applied to
@@ -83,7 +83,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func applyMetadataCascadePolicy(metadataCascadePolicyId: String, requestBody: ApplyMetadataCascadePolicyRequestBody, headers: ApplyMetadataCascadePolicyHeaders = ApplyMetadataCascadePolicyHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)\("/apply")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(Utils.Strings.toString(value: metadataCascadePolicyId)!)\("/apply")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

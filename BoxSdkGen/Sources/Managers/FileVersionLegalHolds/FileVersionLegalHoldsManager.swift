@@ -21,7 +21,7 @@ public class FileVersionLegalHoldsManager {
     /// - Throws: The `GeneralError`.
     public func getFileVersionLegalHoldById(fileVersionLegalHoldId: String, headers: GetFileVersionLegalHoldByIdHeaders = GetFileVersionLegalHoldByIdHeaders()) async throws -> FileVersionLegalHold {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds/")\(fileVersionLegalHoldId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds/")\(Utils.Strings.toString(value: fileVersionLegalHoldId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileVersionLegalHold.deserialize(from: response.data!)
     }
 

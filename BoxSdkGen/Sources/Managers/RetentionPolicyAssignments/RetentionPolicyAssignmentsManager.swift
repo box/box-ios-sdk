@@ -23,7 +23,7 @@ public class RetentionPolicyAssignmentsManager {
     public func getRetentionPolicyAssignments(retentionPolicyId: String, queryParams: GetRetentionPolicyAssignmentsQueryParams = GetRetentionPolicyAssignmentsQueryParams(), headers: GetRetentionPolicyAssignmentsHeaders = GetRetentionPolicyAssignmentsHeaders()) async throws -> RetentionPolicyAssignments {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["type": Utils.Strings.toString(value: queryParams.type), "fields": Utils.Strings.toString(value: queryParams.fields), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)\("/assignments")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(Utils.Strings.toString(value: retentionPolicyId)!)\("/assignments")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicyAssignments.deserialize(from: response.data!)
     }
 
@@ -52,7 +52,7 @@ public class RetentionPolicyAssignmentsManager {
     public func getRetentionPolicyAssignmentById(retentionPolicyAssignmentId: String, queryParams: GetRetentionPolicyAssignmentByIdQueryParams = GetRetentionPolicyAssignmentByIdQueryParams(), headers: GetRetentionPolicyAssignmentByIdHeaders = GetRetentionPolicyAssignmentByIdHeaders()) async throws -> RetentionPolicyAssignment {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(Utils.Strings.toString(value: retentionPolicyAssignmentId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicyAssignment.deserialize(from: response.data!)
     }
 
@@ -66,7 +66,7 @@ public class RetentionPolicyAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func deleteRetentionPolicyAssignmentById(retentionPolicyAssignmentId: String, headers: DeleteRetentionPolicyAssignmentByIdHeaders = DeleteRetentionPolicyAssignmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(Utils.Strings.toString(value: retentionPolicyAssignmentId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Returns a list of files under retention for a retention policy assignment.
@@ -81,7 +81,7 @@ public class RetentionPolicyAssignmentsManager {
     public func getFilesUnderRetentionPolicyAssignment(retentionPolicyAssignmentId: String, queryParams: GetFilesUnderRetentionPolicyAssignmentQueryParams = GetFilesUnderRetentionPolicyAssignmentQueryParams(), headers: GetFilesUnderRetentionPolicyAssignmentHeaders = GetFilesUnderRetentionPolicyAssignmentHeaders()) async throws -> FilesUnderRetention {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)\("/files_under_retention")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policy_assignments/")\(Utils.Strings.toString(value: retentionPolicyAssignmentId)!)\("/files_under_retention")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FilesUnderRetention.deserialize(from: response.data!)
     }
 

@@ -48,7 +48,7 @@ public class AiStudioManager {
     /// - Throws: The `GeneralError`.
     public func updateAiAgentById(agentId: String, requestBody: CreateAiAgent, headers: UpdateAiAgentByIdHeaders = UpdateAiAgentByIdHeaders()) async throws -> AiSingleAgentResponseFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(Utils.Strings.toString(value: agentId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try AiSingleAgentResponseFull.deserialize(from: response.data!)
     }
 
@@ -64,7 +64,7 @@ public class AiStudioManager {
     public func getAiAgentById(agentId: String, queryParams: GetAiAgentByIdQueryParams = GetAiAgentByIdQueryParams(), headers: GetAiAgentByIdHeaders = GetAiAgentByIdHeaders()) async throws -> AiSingleAgentResponseFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(Utils.Strings.toString(value: agentId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try AiSingleAgentResponseFull.deserialize(from: response.data!)
     }
 
@@ -77,7 +77,7 @@ public class AiStudioManager {
     /// - Throws: The `GeneralError`.
     public func deleteAiAgentById(agentId: String, headers: DeleteAiAgentByIdHeaders = DeleteAiAgentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(Utils.Strings.toString(value: agentId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

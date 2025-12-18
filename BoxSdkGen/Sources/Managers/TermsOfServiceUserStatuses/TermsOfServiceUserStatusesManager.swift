@@ -50,7 +50,7 @@ public class TermsOfServiceUserStatusesManager {
     /// - Throws: The `GeneralError`.
     public func updateTermsOfServiceStatusForUserById(termsOfServiceUserStatusId: String, requestBody: UpdateTermsOfServiceStatusForUserByIdRequestBody, headers: UpdateTermsOfServiceStatusForUserByIdHeaders = UpdateTermsOfServiceStatusForUserByIdHeaders()) async throws -> TermsOfServiceUserStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_service_user_statuses/")\(termsOfServiceUserStatusId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_service_user_statuses/")\(Utils.Strings.toString(value: termsOfServiceUserStatusId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServiceUserStatus.deserialize(from: response.data!)
     }
 

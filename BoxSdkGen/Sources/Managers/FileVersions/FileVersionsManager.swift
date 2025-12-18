@@ -31,7 +31,7 @@ public class FileVersionsManager {
     public func getFileVersions(fileId: String, queryParams: GetFileVersionsQueryParams = GetFileVersionsQueryParams(), headers: GetFileVersionsHeaders = GetFileVersionsHeaders()) async throws -> FileVersions {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/versions")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileVersions.deserialize(from: response.data!)
     }
 
@@ -57,7 +57,7 @@ public class FileVersionsManager {
     public func getFileVersionById(fileId: String, fileVersionId: String, queryParams: GetFileVersionByIdQueryParams = GetFileVersionByIdQueryParams(), headers: GetFileVersionByIdHeaders = GetFileVersionByIdHeaders()) async throws -> FileVersionFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/versions/")\(Utils.Strings.toString(value: fileVersionId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileVersionFull.deserialize(from: response.data!)
     }
 
@@ -80,7 +80,7 @@ public class FileVersionsManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileVersionById(fileId: String, fileVersionId: String, headers: DeleteFileVersionByIdHeaders = DeleteFileVersionByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/versions/")\(Utils.Strings.toString(value: fileVersionId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Restores a specific version of a file after it was deleted.
@@ -105,7 +105,7 @@ public class FileVersionsManager {
     /// - Throws: The `GeneralError`.
     public func updateFileVersionById(fileId: String, fileVersionId: String, requestBody: UpdateFileVersionByIdRequestBody = UpdateFileVersionByIdRequestBody(), headers: UpdateFileVersionByIdHeaders = UpdateFileVersionByIdHeaders()) async throws -> FileVersionFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/versions/")\(Utils.Strings.toString(value: fileVersionId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileVersionFull.deserialize(from: response.data!)
     }
 
@@ -143,7 +143,7 @@ public class FileVersionsManager {
     public func promoteFileVersion(fileId: String, requestBody: PromoteFileVersionRequestBody = PromoteFileVersionRequestBody(), queryParams: PromoteFileVersionQueryParams = PromoteFileVersionQueryParams(), headers: PromoteFileVersionHeaders = PromoteFileVersionHeaders()) async throws -> FileVersionFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/current")", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/versions/current")", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileVersionFull.deserialize(from: response.data!)
     }
 

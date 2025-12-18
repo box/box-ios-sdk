@@ -30,7 +30,7 @@ public class ListCollaborationsManager {
     public func getFileCollaborations(fileId: String, queryParams: GetFileCollaborationsQueryParams = GetFileCollaborationsQueryParams(), headers: GetFileCollaborationsHeaders = GetFileCollaborationsHeaders()) async throws -> Collaborations {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Collaborations.deserialize(from: response.data!)
     }
 
@@ -54,7 +54,7 @@ public class ListCollaborationsManager {
     public func getFolderCollaborations(folderId: String, queryParams: GetFolderCollaborationsQueryParams = GetFolderCollaborationsQueryParams(), headers: GetFolderCollaborationsHeaders = GetFolderCollaborationsHeaders()) async throws -> Collaborations {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Collaborations.deserialize(from: response.data!)
     }
 
@@ -88,7 +88,7 @@ public class ListCollaborationsManager {
     public func getGroupCollaborations(groupId: String, queryParams: GetGroupCollaborationsQueryParams = GetGroupCollaborationsQueryParams(), headers: GetGroupCollaborationsHeaders = GetGroupCollaborationsHeaders()) async throws -> CollaborationsOffsetPaginated {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/groups/")\(groupId)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/groups/")\(Utils.Strings.toString(value: groupId)!)\("/collaborations")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try CollaborationsOffsetPaginated.deserialize(from: response.data!)
     }
 

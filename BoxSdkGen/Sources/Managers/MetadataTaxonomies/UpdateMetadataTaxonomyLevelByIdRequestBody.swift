@@ -1,6 +1,6 @@
 import Foundation
 
-public class PatchMetadataTaxonomiesIdIdLevelsIdRequestBody: Codable, RawJSONReadable {
+public class UpdateMetadataTaxonomyLevelByIdRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case displayName
         case description
@@ -21,7 +21,7 @@ public class PatchMetadataTaxonomiesIdIdLevelsIdRequestBody: Codable, RawJSONRea
     /// The description of the taxonomy level.
     public let description: String?
 
-    /// Initializer for a PatchMetadataTaxonomiesIdIdLevelsIdRequestBody.
+    /// Initializer for a UpdateMetadataTaxonomyLevelByIdRequestBody.
     ///
     /// - Parameters:
     ///   - displayName: The display name of the taxonomy level.

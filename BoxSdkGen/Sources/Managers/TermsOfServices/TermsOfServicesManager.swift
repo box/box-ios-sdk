@@ -49,7 +49,7 @@ public class TermsOfServicesManager {
     /// - Throws: The `GeneralError`.
     public func getTermsOfServiceById(termsOfServiceId: String, headers: GetTermsOfServiceByIdHeaders = GetTermsOfServiceByIdHeaders()) async throws -> TermsOfService {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_services/")\(termsOfServiceId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_services/")\(Utils.Strings.toString(value: termsOfServiceId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TermsOfService.deserialize(from: response.data!)
     }
 
@@ -64,7 +64,7 @@ public class TermsOfServicesManager {
     /// - Throws: The `GeneralError`.
     public func updateTermsOfServiceById(termsOfServiceId: String, requestBody: UpdateTermsOfServiceByIdRequestBody, headers: UpdateTermsOfServiceByIdHeaders = UpdateTermsOfServiceByIdHeaders()) async throws -> TermsOfService {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_services/")\(termsOfServiceId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_services/")\(Utils.Strings.toString(value: termsOfServiceId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TermsOfService.deserialize(from: response.data!)
     }
 

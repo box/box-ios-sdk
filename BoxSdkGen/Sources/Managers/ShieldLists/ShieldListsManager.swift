@@ -47,7 +47,7 @@ public class ShieldListsManager {
     /// - Throws: The `GeneralError`.
     public func getShieldListByIdV2025R0(shieldListId: String, headers: GetShieldListByIdV2025R0Headers = GetShieldListByIdV2025R0Headers()) async throws -> ShieldListV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(shieldListId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(Utils.Strings.toString(value: shieldListId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldListV2025R0.deserialize(from: response.data!)
     }
 
@@ -62,7 +62,7 @@ public class ShieldListsManager {
     /// - Throws: The `GeneralError`.
     public func deleteShieldListByIdV2025R0(shieldListId: String, headers: DeleteShieldListByIdV2025R0Headers = DeleteShieldListByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(shieldListId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(Utils.Strings.toString(value: shieldListId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Updates a shield list.
@@ -78,7 +78,7 @@ public class ShieldListsManager {
     /// - Throws: The `GeneralError`.
     public func updateShieldListByIdV2025R0(shieldListId: String, requestBody: ShieldListsUpdateV2025R0, headers: UpdateShieldListByIdV2025R0Headers = UpdateShieldListByIdV2025R0Headers()) async throws -> ShieldListV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(shieldListId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_lists/")\(Utils.Strings.toString(value: shieldListId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldListV2025R0.deserialize(from: response.data!)
     }
 

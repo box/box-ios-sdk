@@ -34,7 +34,7 @@ public class StoragePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func getStoragePolicyById(storagePolicyId: String, headers: GetStoragePolicyByIdHeaders = GetStoragePolicyByIdHeaders()) async throws -> StoragePolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/storage_policies/")\(storagePolicyId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/storage_policies/")\(Utils.Strings.toString(value: storagePolicyId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try StoragePolicy.deserialize(from: response.data!)
     }
 

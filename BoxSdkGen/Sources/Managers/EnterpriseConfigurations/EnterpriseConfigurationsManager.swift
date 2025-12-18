@@ -22,7 +22,7 @@ public class EnterpriseConfigurationsManager {
     public func getEnterpriseConfigurationByIdV2025R0(enterpriseId: String, queryParams: GetEnterpriseConfigurationByIdV2025R0QueryParams, headers: GetEnterpriseConfigurationByIdV2025R0Headers = GetEnterpriseConfigurationByIdV2025R0Headers()) async throws -> EnterpriseConfigurationV2025R0 {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["categories": Utils.Strings.toString(value: queryParams.categories)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/enterprise_configurations/")\(enterpriseId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/enterprise_configurations/")\(Utils.Strings.toString(value: enterpriseId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try EnterpriseConfigurationV2025R0.deserialize(from: response.data!)
     }
 

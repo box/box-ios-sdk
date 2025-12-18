@@ -52,7 +52,7 @@ public class ArchivesManager {
     /// - Throws: The `GeneralError`.
     public func deleteArchiveByIdV2025R0(archiveId: String, headers: DeleteArchiveByIdV2025R0Headers = DeleteArchiveByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/archives/")\(archiveId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/archives/")\(Utils.Strings.toString(value: archiveId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Updates an archive.
@@ -68,7 +68,7 @@ public class ArchivesManager {
     /// - Throws: The `GeneralError`.
     public func updateArchiveByIdV2025R0(archiveId: String, requestBody: UpdateArchiveByIdV2025R0RequestBody = UpdateArchiveByIdV2025R0RequestBody(), headers: UpdateArchiveByIdV2025R0Headers = UpdateArchiveByIdV2025R0Headers()) async throws -> ArchiveV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/archives/")\(archiveId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/archives/")\(Utils.Strings.toString(value: archiveId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ArchiveV2025R0.deserialize(from: response.data!)
     }
 
