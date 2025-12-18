@@ -40,7 +40,7 @@ public class MetadataTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataTemplate(scope: GetMetadataTemplateScope, templateKey: String, headers: GetMetadataTemplateHeaders = GetMetadataTemplateHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(Utils.Strings.toString(value: scope)!)\("/")\(Utils.Strings.toString(value: templateKey)!)\("/schema")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data!)
     }
 
@@ -63,7 +63,7 @@ public class MetadataTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func updateMetadataTemplate(scope: UpdateMetadataTemplateScope, templateKey: String, requestBody: [UpdateMetadataTemplateRequestBody], headers: UpdateMetadataTemplateHeaders = UpdateMetadataTemplateHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(Utils.Strings.toString(value: scope)!)\("/")\(Utils.Strings.toString(value: templateKey)!)\("/schema")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data!)
     }
 
@@ -79,7 +79,7 @@ public class MetadataTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataTemplate(scope: DeleteMetadataTemplateScope, templateKey: String, headers: DeleteMetadataTemplateHeaders = DeleteMetadataTemplateHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(Utils.Strings.toString(value: scope)!)\("/")\(Utils.Strings.toString(value: templateKey)!)\("/schema")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves a metadata template by its ID.
@@ -92,7 +92,7 @@ public class MetadataTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataTemplateById(templateId: String, headers: GetMetadataTemplateByIdHeaders = GetMetadataTemplateByIdHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(templateId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(Utils.Strings.toString(value: templateId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data!)
     }
 

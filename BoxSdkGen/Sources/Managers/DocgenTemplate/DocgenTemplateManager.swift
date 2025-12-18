@@ -46,7 +46,7 @@ public class DocgenTemplateManager {
     /// - Throws: The `GeneralError`.
     public func deleteDocgenTemplateByIdV2025R0(templateId: String, headers: DeleteDocgenTemplateByIdV2025R0Headers = DeleteDocgenTemplateByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(templateId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(Utils.Strings.toString(value: templateId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Lists details of a specific Box Doc Gen template.
@@ -59,7 +59,7 @@ public class DocgenTemplateManager {
     /// - Throws: The `GeneralError`.
     public func getDocgenTemplateByIdV2025R0(templateId: String, headers: GetDocgenTemplateByIdV2025R0Headers = GetDocgenTemplateByIdV2025R0Headers()) async throws -> DocGenTemplateV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(templateId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(Utils.Strings.toString(value: templateId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try DocGenTemplateV2025R0.deserialize(from: response.data!)
     }
 
@@ -75,7 +75,7 @@ public class DocgenTemplateManager {
     public func getDocgenTemplateTagsV2025R0(templateId: String, queryParams: GetDocgenTemplateTagsV2025R0QueryParams = GetDocgenTemplateTagsV2025R0QueryParams(), headers: GetDocgenTemplateTagsV2025R0Headers = GetDocgenTemplateTagsV2025R0Headers()) async throws -> DocGenTagsV2025R0 {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["template_version_id": Utils.Strings.toString(value: queryParams.templateVersionId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(templateId)\("/tags")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_templates/")\(Utils.Strings.toString(value: templateId)!)\("/tags")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try DocGenTagsV2025R0.deserialize(from: response.data!)
     }
 
@@ -91,7 +91,7 @@ public class DocgenTemplateManager {
     public func getDocgenTemplateJobByIdV2025R0(templateId: String, queryParams: GetDocgenTemplateJobByIdV2025R0QueryParams = GetDocgenTemplateJobByIdV2025R0QueryParams(), headers: GetDocgenTemplateJobByIdV2025R0Headers = GetDocgenTemplateJobByIdV2025R0Headers()) async throws -> DocGenJobsV2025R0 {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_template_jobs/")\(templateId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_template_jobs/")\(Utils.Strings.toString(value: templateId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try DocGenJobsV2025R0.deserialize(from: response.data!)
     }
 

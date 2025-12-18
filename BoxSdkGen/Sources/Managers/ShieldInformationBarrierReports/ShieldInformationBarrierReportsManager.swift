@@ -47,7 +47,7 @@ public class ShieldInformationBarrierReportsManager {
     /// - Throws: The `GeneralError`.
     public func getShieldInformationBarrierReportById(shieldInformationBarrierReportId: String, headers: GetShieldInformationBarrierReportByIdHeaders = GetShieldInformationBarrierReportByIdHeaders()) async throws -> ShieldInformationBarrierReport {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_reports/")\(shieldInformationBarrierReportId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_reports/")\(Utils.Strings.toString(value: shieldInformationBarrierReportId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierReport.deserialize(from: response.data!)
     }
 

@@ -20,7 +20,7 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func getTaskAssignments(taskId: String, headers: GetTaskAssignmentsHeaders = GetTaskAssignmentsHeaders()) async throws -> TaskAssignments {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)\("/assignments")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(Utils.Strings.toString(value: taskId)!)\("/assignments")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignments.deserialize(from: response.data!)
     }
 
@@ -50,7 +50,7 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func getTaskAssignmentById(taskAssignmentId: String, headers: GetTaskAssignmentByIdHeaders = GetTaskAssignmentByIdHeaders()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(taskAssignmentId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(Utils.Strings.toString(value: taskAssignmentId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignment.deserialize(from: response.data!)
     }
 
@@ -66,7 +66,7 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func updateTaskAssignmentById(taskAssignmentId: String, requestBody: UpdateTaskAssignmentByIdRequestBody = UpdateTaskAssignmentByIdRequestBody(), headers: UpdateTaskAssignmentByIdHeaders = UpdateTaskAssignmentByIdHeaders()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(taskAssignmentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(Utils.Strings.toString(value: taskAssignmentId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignment.deserialize(from: response.data!)
     }
 
@@ -79,7 +79,7 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func deleteTaskAssignmentById(taskAssignmentId: String, headers: DeleteTaskAssignmentByIdHeaders = DeleteTaskAssignmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(taskAssignmentId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/task_assignments/")\(Utils.Strings.toString(value: taskAssignmentId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

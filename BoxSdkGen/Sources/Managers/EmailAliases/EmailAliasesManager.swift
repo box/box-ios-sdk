@@ -21,7 +21,7 @@ public class EmailAliasesManager {
     /// - Throws: The `GeneralError`.
     public func getUserEmailAliases(userId: String, headers: GetUserEmailAliasesHeaders = GetUserEmailAliasesHeaders()) async throws -> EmailAliases {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/email_aliases")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(Utils.Strings.toString(value: userId)!)\("/email_aliases")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try EmailAliases.deserialize(from: response.data!)
     }
 
@@ -36,7 +36,7 @@ public class EmailAliasesManager {
     /// - Throws: The `GeneralError`.
     public func createUserEmailAlias(userId: String, requestBody: CreateUserEmailAliasRequestBody, headers: CreateUserEmailAliasHeaders = CreateUserEmailAliasHeaders()) async throws -> EmailAlias {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/email_aliases")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(Utils.Strings.toString(value: userId)!)\("/email_aliases")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try EmailAlias.deserialize(from: response.data!)
     }
 
@@ -51,7 +51,7 @@ public class EmailAliasesManager {
     /// - Throws: The `GeneralError`.
     public func deleteUserEmailAliasById(userId: String, emailAliasId: String, headers: DeleteUserEmailAliasByIdHeaders = DeleteUserEmailAliasByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/email_aliases/")\(emailAliasId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(Utils.Strings.toString(value: userId)!)\("/email_aliases/")\(Utils.Strings.toString(value: emailAliasId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

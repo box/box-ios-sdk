@@ -51,7 +51,7 @@ public class SharedLinksFoldersManager {
     public func getSharedLinkForFolder(folderId: String, queryParams: GetSharedLinkForFolderQueryParams, headers: GetSharedLinkForFolderHeaders = GetSharedLinkForFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("#get_shared_link")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("#get_shared_link")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data!)
     }
 
@@ -77,7 +77,7 @@ public class SharedLinksFoldersManager {
     public func addShareLinkToFolder(folderId: String, requestBody: AddShareLinkToFolderRequestBody = AddShareLinkToFolderRequestBody(), queryParams: AddShareLinkToFolderQueryParams, headers: AddShareLinkToFolderHeaders = AddShareLinkToFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("#add_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("#add_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data!)
     }
 
@@ -103,7 +103,7 @@ public class SharedLinksFoldersManager {
     public func updateSharedLinkOnFolder(folderId: String, requestBody: UpdateSharedLinkOnFolderRequestBody = UpdateSharedLinkOnFolderRequestBody(), queryParams: UpdateSharedLinkOnFolderQueryParams, headers: UpdateSharedLinkOnFolderHeaders = UpdateSharedLinkOnFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("#update_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("#update_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data!)
     }
 
@@ -129,7 +129,7 @@ public class SharedLinksFoldersManager {
     public func removeSharedLinkFromFolder(folderId: String, requestBody: RemoveSharedLinkFromFolderRequestBody = RemoveSharedLinkFromFolderRequestBody(), queryParams: RemoveSharedLinkFromFolderQueryParams, headers: RemoveSharedLinkFromFolderHeaders = RemoveSharedLinkFromFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("#remove_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("#remove_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data!)
     }
 

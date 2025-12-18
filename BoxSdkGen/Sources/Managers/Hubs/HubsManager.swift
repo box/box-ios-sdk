@@ -70,7 +70,7 @@ public class HubsManager {
     /// - Throws: The `GeneralError`.
     public func getHubByIdV2025R0(hubId: String, headers: GetHubByIdV2025R0Headers = GetHubByIdV2025R0Headers()) async throws -> HubV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(Utils.Strings.toString(value: hubId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
@@ -91,7 +91,7 @@ public class HubsManager {
     /// - Throws: The `GeneralError`.
     public func updateHubByIdV2025R0(hubId: String, requestBody: HubUpdateRequestV2025R0, headers: UpdateHubByIdV2025R0Headers = UpdateHubByIdV2025R0Headers()) async throws -> HubV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(Utils.Strings.toString(value: hubId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
@@ -110,7 +110,7 @@ public class HubsManager {
     /// - Throws: The `GeneralError`.
     public func deleteHubByIdV2025R0(hubId: String, headers: DeleteHubByIdV2025R0Headers = DeleteHubByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(Utils.Strings.toString(value: hubId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Creates a copy of a Box Hub.
@@ -132,7 +132,7 @@ public class HubsManager {
     /// - Throws: The `GeneralError`.
     public func copyHubV2025R0(hubId: String, requestBody: HubCopyRequestV2025R0, headers: CopyHubV2025R0Headers = CopyHubV2025R0Headers()) async throws -> HubV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)\("/copy")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(Utils.Strings.toString(value: hubId)!)\("/copy")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubV2025R0.deserialize(from: response.data!)
     }
 

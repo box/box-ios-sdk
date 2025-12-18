@@ -34,7 +34,7 @@ public class SignTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func getSignTemplateById(templateId: String, headers: GetSignTemplateByIdHeaders = GetSignTemplateByIdHeaders()) async throws -> SignTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_templates/")\(templateId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_templates/")\(Utils.Strings.toString(value: templateId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try SignTemplate.deserialize(from: response.data!)
     }
 

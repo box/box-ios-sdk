@@ -26,7 +26,7 @@ public class TrashedWebLinksManager {
     public func restoreWeblinkFromTrash(webLinkId: String, requestBody: RestoreWeblinkFromTrashRequestBody = RestoreWeblinkFromTrashRequestBody(), queryParams: RestoreWeblinkFromTrashQueryParams = RestoreWeblinkFromTrashQueryParams(), headers: RestoreWeblinkFromTrashHeaders = RestoreWeblinkFromTrashHeaders()) async throws -> TrashWebLinkRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(webLinkId)", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(Utils.Strings.toString(value: webLinkId)!)", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TrashWebLinkRestored.deserialize(from: response.data!)
     }
 
@@ -42,7 +42,7 @@ public class TrashedWebLinksManager {
     public func getTrashedWebLinkById(webLinkId: String, queryParams: GetTrashedWebLinkByIdQueryParams = GetTrashedWebLinkByIdQueryParams(), headers: GetTrashedWebLinkByIdHeaders = GetTrashedWebLinkByIdHeaders()) async throws -> TrashWebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(webLinkId)\("/trash")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(Utils.Strings.toString(value: webLinkId)!)\("/trash")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TrashWebLink.deserialize(from: response.data!)
     }
 
@@ -56,7 +56,7 @@ public class TrashedWebLinksManager {
     /// - Throws: The `GeneralError`.
     public func deleteTrashedWebLinkById(webLinkId: String, headers: DeleteTrashedWebLinkByIdHeaders = DeleteTrashedWebLinkByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(webLinkId)\("/trash")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/web_links/")\(Utils.Strings.toString(value: webLinkId)!)\("/trash")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }
