@@ -36,7 +36,7 @@ public class MetadataTaxonomiesManager {
     public func getMetadataTaxonomies(namespace: String, queryParams: GetMetadataTaxonomiesQueryParams = GetMetadataTaxonomiesQueryParams(), headers: GetMetadataTaxonomiesHeaders = GetMetadataTaxonomiesHeaders()) async throws -> MetadataTaxonomies {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomies.deserialize(from: response.data!)
     }
 
@@ -52,7 +52,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataTaxonomyByKey(namespace: String, taxonomyKey: String, headers: GetMetadataTaxonomyByKeyHeaders = GetMetadataTaxonomyByKeyHeaders()) async throws -> MetadataTaxonomy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomy.deserialize(from: response.data!)
     }
 
@@ -69,7 +69,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func updateMetadataTaxonomy(namespace: String, taxonomyKey: String, requestBody: UpdateMetadataTaxonomyRequestBody, headers: UpdateMetadataTaxonomyHeaders = UpdateMetadataTaxonomyHeaders()) async throws -> MetadataTaxonomy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomy.deserialize(from: response.data!)
     }
 
@@ -85,7 +85,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataTaxonomy(namespace: String, taxonomyKey: String, headers: DeleteMetadataTaxonomyHeaders = DeleteMetadataTaxonomyHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Creates new metadata taxonomy levels.
@@ -101,7 +101,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func createMetadataTaxonomyLevel(namespace: String, taxonomyKey: String, requestBody: [MetadataTaxonomyLevel], headers: CreateMetadataTaxonomyLevelHeaders = CreateMetadataTaxonomyLevelHeaders()) async throws -> MetadataTaxonomyLevels {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/levels")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/levels")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyLevels.deserialize(from: response.data!)
     }
 
@@ -114,13 +114,13 @@ public class MetadataTaxonomiesManager {
     ///     Example: "geography"
     ///   - levelIndex: The index of the metadata taxonomy level.
     ///     Example: 1
-    ///   - requestBody: Request body of patchMetadataTaxonomiesIdIdLevelsId method
-    ///   - headers: Headers of patchMetadataTaxonomiesIdIdLevelsId method
+    ///   - requestBody: Request body of updateMetadataTaxonomyLevelById method
+    ///   - headers: Headers of updateMetadataTaxonomyLevelById method
     /// - Returns: The `MetadataTaxonomyLevel`.
     /// - Throws: The `GeneralError`.
-    public func patchMetadataTaxonomiesIdIdLevelsId(namespace: String, taxonomyKey: String, levelIndex: Int64, requestBody: PatchMetadataTaxonomiesIdIdLevelsIdRequestBody, headers: PatchMetadataTaxonomiesIdIdLevelsIdHeaders = PatchMetadataTaxonomiesIdIdLevelsIdHeaders()) async throws -> MetadataTaxonomyLevel {
+    public func updateMetadataTaxonomyLevelById(namespace: String, taxonomyKey: String, levelIndex: Int64, requestBody: UpdateMetadataTaxonomyLevelByIdRequestBody, headers: UpdateMetadataTaxonomyLevelByIdHeaders = UpdateMetadataTaxonomyLevelByIdHeaders()) async throws -> MetadataTaxonomyLevel {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/levels/")\(Utils.Strings.toString(value: levelIndex))", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/levels/")\(Utils.Strings.toString(value: levelIndex)!)", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyLevel.deserialize(from: response.data!)
     }
 
@@ -138,7 +138,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func addMetadataTaxonomyLevel(namespace: String, taxonomyKey: String, requestBody: AddMetadataTaxonomyLevelRequestBody, headers: AddMetadataTaxonomyLevelHeaders = AddMetadataTaxonomyLevelHeaders()) async throws -> MetadataTaxonomyLevels {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/levels:append")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/levels:append")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyLevels.deserialize(from: response.data!)
     }
 
@@ -154,7 +154,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataTaxonomyLevel(namespace: String, taxonomyKey: String, headers: DeleteMetadataTaxonomyLevelHeaders = DeleteMetadataTaxonomyLevelHeaders()) async throws -> MetadataTaxonomyLevels {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/levels:trim")", method: "POST", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/levels:trim")", method: "POST", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyLevels.deserialize(from: response.data!)
     }
 
@@ -174,7 +174,7 @@ public class MetadataTaxonomiesManager {
     public func getMetadataTaxonomyNodes(namespace: String, taxonomyKey: String, queryParams: GetMetadataTaxonomyNodesQueryParams = GetMetadataTaxonomyNodesQueryParams(), headers: GetMetadataTaxonomyNodesHeaders = GetMetadataTaxonomyNodesHeaders()) async throws -> MetadataTaxonomyNodes {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["level": Utils.Strings.toString(value: queryParams.level), "parent": Utils.Strings.toString(value: queryParams.parent), "ancestor": Utils.Strings.toString(value: queryParams.ancestor), "query": Utils.Strings.toString(value: queryParams.query), "include-total-result-count": Utils.Strings.toString(value: queryParams.includeTotalResultCount), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/nodes")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/nodes")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNodes.deserialize(from: response.data!)
     }
 
@@ -191,7 +191,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func createMetadataTaxonomyNode(namespace: String, taxonomyKey: String, requestBody: CreateMetadataTaxonomyNodeRequestBody, headers: CreateMetadataTaxonomyNodeHeaders = CreateMetadataTaxonomyNodeHeaders()) async throws -> MetadataTaxonomyNode {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/nodes")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/nodes")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNode.deserialize(from: response.data!)
     }
 
@@ -209,7 +209,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataTaxonomyNodeById(namespace: String, taxonomyKey: String, nodeId: String, headers: GetMetadataTaxonomyNodeByIdHeaders = GetMetadataTaxonomyNodeByIdHeaders()) async throws -> MetadataTaxonomyNode {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/nodes/")\(nodeId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/nodes/")\(Utils.Strings.toString(value: nodeId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNode.deserialize(from: response.data!)
     }
 
@@ -228,7 +228,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func updateMetadataTaxonomyNode(namespace: String, taxonomyKey: String, nodeId: String, requestBody: UpdateMetadataTaxonomyNodeRequestBody = UpdateMetadataTaxonomyNodeRequestBody(), headers: UpdateMetadataTaxonomyNodeHeaders = UpdateMetadataTaxonomyNodeHeaders()) async throws -> MetadataTaxonomyNode {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/nodes/")\(nodeId)", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/nodes/")\(Utils.Strings.toString(value: nodeId)!)", method: "PATCH", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNode.deserialize(from: response.data!)
     }
 
@@ -247,7 +247,7 @@ public class MetadataTaxonomiesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataTaxonomyNode(namespace: String, taxonomyKey: String, nodeId: String, headers: DeleteMetadataTaxonomyNodeHeaders = DeleteMetadataTaxonomyNodeHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(namespace)\("/")\(taxonomyKey)\("/nodes/")\(nodeId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_taxonomies/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: taxonomyKey)!)\("/nodes/")\(Utils.Strings.toString(value: nodeId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Used to retrieve metadata taxonomy nodes which are available for the taxonomy field based 
@@ -269,7 +269,7 @@ public class MetadataTaxonomiesManager {
     public func getMetadataTemplateFieldOptions(namespace: String, templateKey: String, fieldKey: String, queryParams: GetMetadataTemplateFieldOptionsQueryParams = GetMetadataTemplateFieldOptionsQueryParams(), headers: GetMetadataTemplateFieldOptionsHeaders = GetMetadataTemplateFieldOptionsHeaders()) async throws -> MetadataTaxonomyNodes {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["level": Utils.Strings.toString(value: queryParams.level), "parent": Utils.Strings.toString(value: queryParams.parent), "ancestor": Utils.Strings.toString(value: queryParams.ancestor), "query": Utils.Strings.toString(value: queryParams.query), "include-total-result-count": Utils.Strings.toString(value: queryParams.includeTotalResultCount), "only-selectable-options": Utils.Strings.toString(value: queryParams.onlySelectableOptions), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(namespace)\("/")\(templateKey)\("/fields/")\(fieldKey)\("/options")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(Utils.Strings.toString(value: namespace)!)\("/")\(Utils.Strings.toString(value: templateKey)!)\("/fields/")\(Utils.Strings.toString(value: fieldKey)!)\("/options")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNodes.deserialize(from: response.data!)
     }
 

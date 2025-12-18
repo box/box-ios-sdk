@@ -26,7 +26,7 @@ public class FileWatermarksManager {
     /// - Throws: The `GeneralError`.
     public func getFileWatermark(fileId: String, headers: GetFileWatermarkHeaders = GetFileWatermarkHeaders()) async throws -> Watermark {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/watermark")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/watermark")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Watermark.deserialize(from: response.data!)
     }
 
@@ -47,7 +47,7 @@ public class FileWatermarksManager {
     /// - Throws: The `GeneralError`.
     public func updateFileWatermark(fileId: String, requestBody: UpdateFileWatermarkRequestBody, headers: UpdateFileWatermarkHeaders = UpdateFileWatermarkHeaders()) async throws -> Watermark {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/watermark")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/watermark")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Watermark.deserialize(from: response.data!)
     }
 
@@ -66,7 +66,7 @@ public class FileWatermarksManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileWatermark(fileId: String, headers: DeleteFileWatermarkHeaders = DeleteFileWatermarkHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/watermark")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/watermark")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

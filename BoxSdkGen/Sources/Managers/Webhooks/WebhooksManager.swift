@@ -52,7 +52,7 @@ public class WebhooksManager {
     /// - Throws: The `GeneralError`.
     public func getWebhookById(webhookId: String, headers: GetWebhookByIdHeaders = GetWebhookByIdHeaders()) async throws -> Webhook {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(webhookId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(Utils.Strings.toString(value: webhookId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Webhook.deserialize(from: response.data!)
     }
 
@@ -67,7 +67,7 @@ public class WebhooksManager {
     /// - Throws: The `GeneralError`.
     public func updateWebhookById(webhookId: String, requestBody: UpdateWebhookByIdRequestBody = UpdateWebhookByIdRequestBody(), headers: UpdateWebhookByIdHeaders = UpdateWebhookByIdHeaders()) async throws -> Webhook {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(webhookId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(Utils.Strings.toString(value: webhookId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try Webhook.deserialize(from: response.data!)
     }
 
@@ -80,7 +80,7 @@ public class WebhooksManager {
     /// - Throws: The `GeneralError`.
     public func deleteWebhookById(webhookId: String, headers: DeleteWebhookByIdHeaders = DeleteWebhookByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(webhookId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/webhooks/")\(Utils.Strings.toString(value: webhookId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

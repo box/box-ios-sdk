@@ -59,7 +59,7 @@ public class IntegrationMappingsManager {
     /// - Throws: The `GeneralError`.
     public func updateSlackIntegrationMappingById(integrationMappingId: String, requestBody: UpdateSlackIntegrationMappingByIdRequestBody = UpdateSlackIntegrationMappingByIdRequestBody(), headers: UpdateSlackIntegrationMappingByIdHeaders = UpdateSlackIntegrationMappingByIdHeaders()) async throws -> IntegrationMapping {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/slack/")\(integrationMappingId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/slack/")\(Utils.Strings.toString(value: integrationMappingId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try IntegrationMapping.deserialize(from: response.data!)
     }
 
@@ -76,7 +76,7 @@ public class IntegrationMappingsManager {
     /// - Throws: The `GeneralError`.
     public func deleteSlackIntegrationMappingById(integrationMappingId: String, headers: DeleteSlackIntegrationMappingByIdHeaders = DeleteSlackIntegrationMappingByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/slack/")\(integrationMappingId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/slack/")\(Utils.Strings.toString(value: integrationMappingId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Lists [Teams integration mappings](https://support.box.com/hc/en-us/articles/360044681474-Using-Box-for-Teams) in a users' enterprise.
@@ -125,7 +125,7 @@ public class IntegrationMappingsManager {
     /// - Throws: The `GeneralError`.
     public func updateTeamsIntegrationMappingById(integrationMappingId: String, requestBody: UpdateTeamsIntegrationMappingByIdRequestBody = UpdateTeamsIntegrationMappingByIdRequestBody(), headers: UpdateTeamsIntegrationMappingByIdHeaders = UpdateTeamsIntegrationMappingByIdHeaders()) async throws -> IntegrationMappingTeams {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(Utils.Strings.toString(value: integrationMappingId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try IntegrationMappingTeams.deserialize(from: response.data!)
     }
 
@@ -140,7 +140,7 @@ public class IntegrationMappingsManager {
     /// - Throws: The `GeneralError`.
     public func deleteTeamsIntegrationMappingById(integrationMappingId: String, headers: DeleteTeamsIntegrationMappingByIdHeaders = DeleteTeamsIntegrationMappingByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(Utils.Strings.toString(value: integrationMappingId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

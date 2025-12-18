@@ -42,7 +42,7 @@ public class TrashedFoldersManager {
     public func restoreFolderFromTrash(folderId: String, requestBody: RestoreFolderFromTrashRequestBody = RestoreFolderFromTrashRequestBody(), queryParams: RestoreFolderFromTrashQueryParams = RestoreFolderFromTrashQueryParams(), headers: RestoreFolderFromTrashHeaders = RestoreFolderFromTrashHeaders()) async throws -> TrashFolderRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TrashFolderRestored.deserialize(from: response.data!)
     }
 
@@ -77,7 +77,7 @@ public class TrashedFoldersManager {
     public func getTrashedFolderById(folderId: String, queryParams: GetTrashedFolderByIdQueryParams = GetTrashedFolderByIdQueryParams(), headers: GetTrashedFolderByIdHeaders = GetTrashedFolderByIdHeaders()) async throws -> TrashFolder {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/trash")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("/trash")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try TrashFolder.deserialize(from: response.data!)
     }
 
@@ -100,7 +100,7 @@ public class TrashedFoldersManager {
     /// - Throws: The `GeneralError`.
     public func deleteTrashedFolderById(folderId: String, headers: DeleteTrashedFolderByIdHeaders = DeleteTrashedFolderByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/trash")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(Utils.Strings.toString(value: folderId)!)\("/trash")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

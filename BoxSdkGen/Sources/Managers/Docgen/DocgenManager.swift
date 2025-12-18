@@ -20,7 +20,7 @@ public class DocgenManager {
     /// - Throws: The `GeneralError`.
     public func getDocgenJobByIdV2025R0(jobId: String, headers: GetDocgenJobByIdV2025R0Headers = GetDocgenJobByIdV2025R0Headers()) async throws -> DocGenJobV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_jobs/")\(jobId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_jobs/")\(Utils.Strings.toString(value: jobId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try DocGenJobV2025R0.deserialize(from: response.data!)
     }
 
@@ -50,7 +50,7 @@ public class DocgenManager {
     public func getDocgenBatchJobByIdV2025R0(batchId: String, queryParams: GetDocgenBatchJobByIdV2025R0QueryParams = GetDocgenBatchJobByIdV2025R0QueryParams(), headers: GetDocgenBatchJobByIdV2025R0Headers = GetDocgenBatchJobByIdV2025R0Headers()) async throws -> DocGenJobsV2025R0 {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_batch_jobs/")\(batchId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/docgen_batch_jobs/")\(Utils.Strings.toString(value: batchId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try DocGenJobsV2025R0.deserialize(from: response.data!)
     }
 
