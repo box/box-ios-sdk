@@ -41,7 +41,7 @@ public class HubItemsManager {
     /// - Throws: The `GeneralError`.
     public func manageHubItemsV2025R0(hubId: String, requestBody: HubItemsManageRequestV2025R0, headers: ManageHubItemsV2025R0Headers = ManageHubItemsV2025R0Headers()) async throws -> HubItemsManageResponseV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)\("/manage_items")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(Utils.Strings.toString(value: hubId)!)\("/manage_items")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubItemsManageResponseV2025R0.deserialize(from: response.data!)
     }
 

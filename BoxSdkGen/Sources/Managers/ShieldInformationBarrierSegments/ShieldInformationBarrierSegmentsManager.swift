@@ -20,7 +20,7 @@ public class ShieldInformationBarrierSegmentsManager {
     /// - Throws: The `GeneralError`.
     public func getShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: String, headers: GetShieldInformationBarrierSegmentByIdHeaders = GetShieldInformationBarrierSegmentByIdHeaders()) async throws -> ShieldInformationBarrierSegment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(Utils.Strings.toString(value: shieldInformationBarrierSegmentId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegment.deserialize(from: response.data!)
     }
 
@@ -34,7 +34,7 @@ public class ShieldInformationBarrierSegmentsManager {
     /// - Throws: The `GeneralError`.
     public func deleteShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: String, headers: DeleteShieldInformationBarrierSegmentByIdHeaders = DeleteShieldInformationBarrierSegmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(Utils.Strings.toString(value: shieldInformationBarrierSegmentId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Updates the shield information barrier segment based on provided ID..
@@ -48,7 +48,7 @@ public class ShieldInformationBarrierSegmentsManager {
     /// - Throws: The `GeneralError`.
     public func updateShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: String, requestBody: UpdateShieldInformationBarrierSegmentByIdRequestBody = UpdateShieldInformationBarrierSegmentByIdRequestBody(), headers: UpdateShieldInformationBarrierSegmentByIdHeaders = UpdateShieldInformationBarrierSegmentByIdHeaders()) async throws -> ShieldInformationBarrierSegment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(Utils.Strings.toString(value: shieldInformationBarrierSegmentId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegment.deserialize(from: response.data!)
     }
 

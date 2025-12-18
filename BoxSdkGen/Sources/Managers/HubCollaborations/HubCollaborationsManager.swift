@@ -49,7 +49,7 @@ public class HubCollaborationsManager {
     /// - Throws: The `GeneralError`.
     public func getHubCollaborationByIdV2025R0(hubCollaborationId: String, headers: GetHubCollaborationByIdV2025R0Headers = GetHubCollaborationByIdV2025R0Headers()) async throws -> HubCollaborationV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(hubCollaborationId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(Utils.Strings.toString(value: hubCollaborationId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubCollaborationV2025R0.deserialize(from: response.data!)
     }
 
@@ -65,7 +65,7 @@ public class HubCollaborationsManager {
     /// - Throws: The `GeneralError`.
     public func updateHubCollaborationByIdV2025R0(hubCollaborationId: String, requestBody: HubCollaborationUpdateRequestV2025R0, headers: UpdateHubCollaborationByIdV2025R0Headers = UpdateHubCollaborationByIdV2025R0Headers()) async throws -> HubCollaborationV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(hubCollaborationId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(Utils.Strings.toString(value: hubCollaborationId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubCollaborationV2025R0.deserialize(from: response.data!)
     }
 
@@ -78,7 +78,7 @@ public class HubCollaborationsManager {
     /// - Throws: The `GeneralError`.
     public func deleteHubCollaborationByIdV2025R0(hubCollaborationId: String, headers: DeleteHubCollaborationByIdV2025R0Headers = DeleteHubCollaborationByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(hubCollaborationId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_collaborations/")\(Utils.Strings.toString(value: hubCollaborationId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

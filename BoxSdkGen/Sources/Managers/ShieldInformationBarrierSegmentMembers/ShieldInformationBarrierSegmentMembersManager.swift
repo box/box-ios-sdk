@@ -21,7 +21,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Throws: The `GeneralError`.
     public func getShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: String, headers: GetShieldInformationBarrierSegmentMemberByIdHeaders = GetShieldInformationBarrierSegmentMemberByIdHeaders()) async throws -> ShieldInformationBarrierSegmentMember {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(Utils.Strings.toString(value: shieldInformationBarrierSegmentMemberId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegmentMember.deserialize(from: response.data!)
     }
 
@@ -35,7 +35,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Throws: The `GeneralError`.
     public func deleteShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: String, headers: DeleteShieldInformationBarrierSegmentMemberByIdHeaders = DeleteShieldInformationBarrierSegmentMemberByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(Utils.Strings.toString(value: shieldInformationBarrierSegmentMemberId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Lists shield information barrier segment members

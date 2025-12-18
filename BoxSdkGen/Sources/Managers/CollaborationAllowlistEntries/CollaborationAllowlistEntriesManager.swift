@@ -50,7 +50,7 @@ public class CollaborationAllowlistEntriesManager {
     /// - Throws: The `GeneralError`.
     public func getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: GetCollaborationWhitelistEntryByIdHeaders = GetCollaborationWhitelistEntryByIdHeaders()) async throws -> CollaborationAllowlistEntry {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_entries/")\(Utils.Strings.toString(value: collaborationWhitelistEntryId)!)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try CollaborationAllowlistEntry.deserialize(from: response.data!)
     }
 
@@ -64,7 +64,7 @@ public class CollaborationAllowlistEntriesManager {
     /// - Throws: The `GeneralError`.
     public func deleteCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: DeleteCollaborationWhitelistEntryByIdHeaders = DeleteCollaborationWhitelistEntryByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_entries/")\(Utils.Strings.toString(value: collaborationWhitelistEntryId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

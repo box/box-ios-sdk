@@ -49,7 +49,7 @@ public class RetentionPoliciesManager {
     public func getRetentionPolicyById(retentionPolicyId: String, queryParams: GetRetentionPolicyByIdQueryParams = GetRetentionPolicyByIdQueryParams(), headers: GetRetentionPolicyByIdHeaders = GetRetentionPolicyByIdHeaders()) async throws -> RetentionPolicy {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(Utils.Strings.toString(value: retentionPolicyId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicy.deserialize(from: response.data!)
     }
 
@@ -64,7 +64,7 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func updateRetentionPolicyById(retentionPolicyId: String, requestBody: UpdateRetentionPolicyByIdRequestBody = UpdateRetentionPolicyByIdRequestBody(), headers: UpdateRetentionPolicyByIdHeaders = UpdateRetentionPolicyByIdHeaders()) async throws -> RetentionPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(Utils.Strings.toString(value: retentionPolicyId)!)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicy.deserialize(from: response.data!)
     }
 
@@ -77,7 +77,7 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func deleteRetentionPolicyById(retentionPolicyId: String, headers: DeleteRetentionPolicyByIdHeaders = DeleteRetentionPolicyByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(Utils.Strings.toString(value: retentionPolicyId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

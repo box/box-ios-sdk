@@ -56,7 +56,7 @@ public class TransferManager {
     public func transferOwnedFolder(userId: String, requestBody: TransferOwnedFolderRequestBody, queryParams: TransferOwnedFolderQueryParams = TransferOwnedFolderQueryParams(), headers: TransferOwnedFolderHeaders = TransferOwnedFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "notify": Utils.Strings.toString(value: queryParams.notify)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/folders/0")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(Utils.Strings.toString(value: userId)!)\("/folders/0")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data!)
     }
 

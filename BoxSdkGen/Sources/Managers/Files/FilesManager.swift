@@ -28,7 +28,7 @@ public class FilesManager {
     public func getFileById(fileId: String, queryParams: GetFileByIdQueryParams = GetFileByIdQueryParams(), headers: GetFileByIdHeaders = GetFileByIdHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi), "x-rep-hints": Utils.Strings.toString(value: headers.xRepHints)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileFull.deserialize(from: response.data!)
     }
 
@@ -52,7 +52,7 @@ public class FilesManager {
     public func updateFileById(fileId: String, requestBody: UpdateFileByIdRequestBody = UpdateFileByIdRequestBody(), queryParams: UpdateFileByIdQueryParams = UpdateFileByIdQueryParams(), headers: UpdateFileByIdHeaders = UpdateFileByIdHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileFull.deserialize(from: response.data!)
     }
 
@@ -75,7 +75,7 @@ public class FilesManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileById(fileId: String, headers: DeleteFileByIdHeaders = DeleteFileByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Creates a copy of a file.
@@ -97,7 +97,7 @@ public class FilesManager {
     public func copyFile(fileId: String, requestBody: CopyFileRequestBody, queryParams: CopyFileQueryParams = CopyFileQueryParams(), headers: CopyFileHeaders = CopyFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/copy")", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/copy")", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try FileFull.deserialize(from: response.data!)
     }
 
@@ -130,7 +130,7 @@ public class FilesManager {
     public func getFileThumbnailUrl(fileId: String, extension_: GetFileThumbnailUrlExtension, queryParams: GetFileThumbnailUrlQueryParams = GetFileThumbnailUrlQueryParams(), headers: GetFileThumbnailUrlHeaders = GetFileThumbnailUrlHeaders()) async throws -> String {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["min_height": Utils.Strings.toString(value: queryParams.minHeight), "min_width": Utils.Strings.toString(value: queryParams.minWidth), "max_height": Utils.Strings.toString(value: queryParams.maxHeight), "max_width": Utils.Strings.toString(value: queryParams.maxWidth)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/thumbnail.")\(extension_)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession, followRedirects: false))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/thumbnail.")\(Utils.Strings.toString(value: extension_)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession, followRedirects: false))
         if response.headers.keys.contains("location") {
             return response.headers["location"]!
         }
@@ -172,7 +172,7 @@ public class FilesManager {
     public func getFileThumbnailById(fileId: String, extension_: GetFileThumbnailByIdExtension, downloadDestinationUrl: URL, queryParams: GetFileThumbnailByIdQueryParams = GetFileThumbnailByIdQueryParams(), headers: GetFileThumbnailByIdHeaders = GetFileThumbnailByIdHeaders()) async throws -> URL? {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["min_height": Utils.Strings.toString(value: queryParams.minHeight), "min_width": Utils.Strings.toString(value: queryParams.minWidth), "max_height": Utils.Strings.toString(value: queryParams.maxHeight), "max_width": Utils.Strings.toString(value: queryParams.maxWidth)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/thumbnail.")\(extension_)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.binary, downloadDestinationUrl: downloadDestinationUrl, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(Utils.Strings.toString(value: fileId)!)\("/thumbnail.")\(Utils.Strings.toString(value: extension_)!)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.binary, downloadDestinationUrl: downloadDestinationUrl, auth: self.auth, networkSession: self.networkSession))
         if Utils.Strings.toString(value: response.status) == "202" {
             return nil
         }
