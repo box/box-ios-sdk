@@ -256,8 +256,8 @@ public class MetadataTaxonomiesManager {
     /// With a `query` parameter specified, results are sorted in order of relevance.
     ///
     /// - Parameters:
-    ///   - scope: The scope of the metadata template.
-    ///     Example: "global"
+    ///   - namespace: The namespace of the metadata taxonomy.
+    ///     Example: "enterprise_123456"
     ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - fieldKey: The key of the metadata taxonomy field in the template.
@@ -266,10 +266,10 @@ public class MetadataTaxonomiesManager {
     ///   - headers: Headers of getMetadataTemplateFieldOptions method
     /// - Returns: The `MetadataTaxonomyNodes`.
     /// - Throws: The `GeneralError`.
-    public func getMetadataTemplateFieldOptions(scope: GetMetadataTemplateFieldOptionsScope, templateKey: String, fieldKey: String, queryParams: GetMetadataTemplateFieldOptionsQueryParams = GetMetadataTemplateFieldOptionsQueryParams(), headers: GetMetadataTemplateFieldOptionsHeaders = GetMetadataTemplateFieldOptionsHeaders()) async throws -> MetadataTaxonomyNodes {
+    public func getMetadataTemplateFieldOptions(namespace: String, templateKey: String, fieldKey: String, queryParams: GetMetadataTemplateFieldOptionsQueryParams = GetMetadataTemplateFieldOptionsQueryParams(), headers: GetMetadataTemplateFieldOptionsHeaders = GetMetadataTemplateFieldOptionsHeaders()) async throws -> MetadataTaxonomyNodes {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["level": Utils.Strings.toString(value: queryParams.level), "parent": Utils.Strings.toString(value: queryParams.parent), "ancestor": Utils.Strings.toString(value: queryParams.ancestor), "query": Utils.Strings.toString(value: queryParams.query), "include-total-result-count": Utils.Strings.toString(value: queryParams.includeTotalResultCount), "only-selectable-options": Utils.Strings.toString(value: queryParams.onlySelectableOptions), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/fields/")\(fieldKey)\("/options")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(namespace)\("/")\(templateKey)\("/fields/")\(fieldKey)\("/options")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try MetadataTaxonomyNodes.deserialize(from: response.data!)
     }
 
