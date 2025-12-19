@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/box/box-ios-sdk/compare/6.2.0...6.3.0) (2025-12-19)
+
+
+### Bug Fixes
+
+* **boxsdkgen:** add taxonomy to Metadata Field (read) definition (box/box-openapi[#572](https://github.com/box/box-ios-sdk/issues/572)) ([#1334](https://github.com/box/box-ios-sdk/issues/1334)) ([373240a](https://github.com/box/box-ios-sdk/commit/373240ae0884f94c64a0caa2951f29212becd0fd))
+* **boxsdkgen:** fix `RetryAfter` function when there's no `Retry-After` header (box/box-codegen[#903](https://github.com/box/box-ios-sdk/issues/903)) ([#1312](https://github.com/box/box-ios-sdk/issues/1312)) ([783ef91](https://github.com/box/box-ios-sdk/commit/783ef91c6744caeddb4fda3d83c070095733f6c1))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add Metadata Taxonomies api (box/box-openapi[#569](https://github.com/box/box-ios-sdk/issues/569)) ([#1320](https://github.com/box/box-ios-sdk/issues/1320)) ([2b52332](https://github.com/box/box-ios-sdk/commit/2b52332460bb03412bd96df77e8cf45bb8abf35f))
+* **boxsdkgen:** text input validation for Box Sign (box/box-openapi[#568](https://github.com/box/box-ios-sdk/issues/568)) ([#1314](https://github.com/box/box-ios-sdk/issues/1314)) ([bebd148](https://github.com/box/box-ios-sdk/commit/bebd148378927efc4d015f88914d2b0a5915c41d))
+* **boxsdkgen:** Treat `nullable` fields as Optional (box/box-codegen[#906](https://github.com/box/box-ios-sdk/issues/906)) ([#1324](https://github.com/box/box-ios-sdk/issues/1324)) ([c17e23a](https://github.com/box/box-ios-sdk/commit/c17e23af55829f182e3d302682d0444520693217))
+
 ## [6.2.0](https://github.com/box/box-ios-sdk/compare/6.1.0...6.2.0) (2025-12-10)
 
 
