@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.3.0](https://github.com/box/box-ios-sdk/compare/10.2.0...10.3.0) (2025-12-19)
+
+
+### Bug Fixes
+
+* add taxonomy to Metadata Field (read) definition (box/box-openapi[#572](https://github.com/box/box-ios-sdk/issues/572)) ([#1335](https://github.com/box/box-ios-sdk/issues/1335)) ([3dae5b0](https://github.com/box/box-ios-sdk/commit/3dae5b0335474a8b2a01f41d5ca71e21d0d77366))
+* fix `RetryAfter` function when there's no `Retry-After` header (box/box-codegen[#903](https://github.com/box/box-ios-sdk/issues/903)) ([#1313](https://github.com/box/box-ios-sdk/issues/1313)) ([52a72ad](https://github.com/box/box-ios-sdk/commit/52a72ad706de7b9079df55d5be5dd9e1fab247c3))
+
+
+### New Features and Enhancements
+
+* add Metadata Taxonomies api (box/box-openapi[#569](https://github.com/box/box-ios-sdk/issues/569)) ([#1321](https://github.com/box/box-ios-sdk/issues/1321)) ([20497cc](https://github.com/box/box-ios-sdk/commit/20497cce040703560a686b5640b943fb3f363f0d))
+* text input validation for Box Sign (box/box-openapi[#568](https://github.com/box/box-ios-sdk/issues/568)) ([#1315](https://github.com/box/box-ios-sdk/issues/1315)) ([7ffe641](https://github.com/box/box-ios-sdk/commit/7ffe641fda1a0a3ffe5a3eded0c8cafc840bb76f))
+* Treat `nullable` fields as Optional (box/box-codegen[#906](https://github.com/box/box-ios-sdk/issues/906)) ([#1325](https://github.com/box/box-ios-sdk/issues/1325)) ([af828ea](https://github.com/box/box-ios-sdk/commit/af828ea1d2585b3d117035722028f28a2ad3dcbc))
+
 ## [10.2.0](https://github.com/box/box-ios-sdk/compare/10.1.0...10.2.0) (2025-12-10)
 
 
