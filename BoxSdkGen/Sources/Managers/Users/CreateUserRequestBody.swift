@@ -47,7 +47,7 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     public let role: CreateUserRequestBodyRoleField?
 
     /// The language of the user, formatted in modified version of the
-    /// [ISO 639-1](/guides/api-calls/language-codes) format.
+    /// [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     public let language: String?
 
     /// Whether the user can use Box Sync.
@@ -108,7 +108,7 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     ///   - isPlatformAccessOnly: Specifies that the user is an app user.
     ///   - role: The user’s enterprise role.
     ///   - language: The language of the user, formatted in modified version of the
-    ///     [ISO 639-1](/guides/api-calls/language-codes) format.
+    ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     ///   - isSyncEnabled: Whether the user can use Box Sync.
     ///   - jobTitle: The user’s job title.
     ///   - phone: The user’s phone number.

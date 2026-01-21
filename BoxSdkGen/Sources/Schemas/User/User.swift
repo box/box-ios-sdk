@@ -35,7 +35,7 @@ public class User: UserMini {
     public let modifiedAt: Date?
 
     /// The language of the user, formatted in modified version of the
-    /// [ISO 639-1](/guides/api-calls/language-codes) format.
+    /// [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     public let language: String?
 
     /// The user's timezone.
@@ -81,7 +81,7 @@ public class User: UserMini {
     ///   - createdAt: When the user object was created.
     ///   - modifiedAt: When the user object was last modified.
     ///   - language: The language of the user, formatted in modified version of the
-    ///     [ISO 639-1](/guides/api-calls/language-codes) format.
+    ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     ///   - timezone: The user's timezone.
     ///   - spaceAmount: The user’s total available space amount in bytes.
     ///   - spaceUsed: The amount of space in use by the user.
