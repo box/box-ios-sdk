@@ -14,6 +14,7 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
         case canUpload = "can_upload"
         case canViewAnnotationsAll = "can_view_annotations_all"
         case canViewAnnotationsSelf = "can_view_annotations_self"
+        case canApplyWatermark = "can_apply_watermark"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -66,6 +67,9 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
     /// on this file.
     public let canViewAnnotationsSelf: Bool
 
+    /// Specifies if the user can apply a watermark to this file.
+    public let canApplyWatermark: Bool?
+
     /// Initializer for a FileFullPermissionsField.
     ///
     /// - Parameters:
@@ -86,7 +90,8 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
     ///   - canViewAnnotationsAll: Specifies if the user view all annotations placed on this file.
     ///   - canViewAnnotationsSelf: Specifies if the user view annotations placed by themselves
     ///     on this file.
-    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canAnnotate: Bool, canComment: Bool, canPreview: Bool, canUpload: Bool, canViewAnnotationsAll: Bool, canViewAnnotationsSelf: Bool) {
+    ///   - canApplyWatermark: Specifies if the user can apply a watermark to this file.
+    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canAnnotate: Bool, canComment: Bool, canPreview: Bool, canUpload: Bool, canViewAnnotationsAll: Bool, canViewAnnotationsSelf: Bool, canApplyWatermark: Bool? = nil) {
         self.canDelete = canDelete
         self.canDownload = canDownload
         self.canInviteCollaborator = canInviteCollaborator
@@ -99,6 +104,7 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
         self.canUpload = canUpload
         self.canViewAnnotationsAll = canViewAnnotationsAll
         self.canViewAnnotationsSelf = canViewAnnotationsSelf
+        self.canApplyWatermark = canApplyWatermark
     }
 
     required public init(from decoder: Decoder) throws {
@@ -115,6 +121,7 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
         canUpload = try container.decode(Bool.self, forKey: .canUpload)
         canViewAnnotationsAll = try container.decode(Bool.self, forKey: .canViewAnnotationsAll)
         canViewAnnotationsSelf = try container.decode(Bool.self, forKey: .canViewAnnotationsSelf)
+        canApplyWatermark = try container.decodeIfPresent(Bool.self, forKey: .canApplyWatermark)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -131,6 +138,7 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
         try container.encode(canUpload, forKey: .canUpload)
         try container.encode(canViewAnnotationsAll, forKey: .canViewAnnotationsAll)
         try container.encode(canViewAnnotationsSelf, forKey: .canViewAnnotationsSelf)
+        try container.encodeIfPresent(canApplyWatermark, forKey: .canApplyWatermark)
     }
 
     /// Sets the raw JSON data.
