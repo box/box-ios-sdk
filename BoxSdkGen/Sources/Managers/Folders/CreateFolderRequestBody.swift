@@ -24,8 +24,8 @@ public class CreateFolderRequestBody: Codable, RawJSONReadable {
     /// (`/`, `\`), names with trailing spaces, and names `.` and `..` are
     /// not allowed.
     /// 
-    /// Folder names must be unique within their parent folder. The name check is case-insensitive, 
-    /// so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    /// Folder names must be unique within their parent folder. The name check is case-insensitive,
+    /// so a folder named `New Folder` cannot be created in a parent folder that already contains
     /// a folder named `new folder`.
     public let name: String
 
@@ -49,8 +49,8 @@ public class CreateFolderRequestBody: Codable, RawJSONReadable {
     ///     (`/`, `\`), names with trailing spaces, and names `.` and `..` are
     ///     not allowed.
     ///     
-    ///     Folder names must be unique within their parent folder. The name check is case-insensitive, 
-    ///     so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    ///     Folder names must be unique within their parent folder. The name check is case-insensitive,
+    ///     so a folder named `New Folder` cannot be created in a parent folder that already contains
     ///     a folder named `new folder`.
     ///   - parent: The parent folder to create the new folder within.
     ///   - folderUploadEmail: 

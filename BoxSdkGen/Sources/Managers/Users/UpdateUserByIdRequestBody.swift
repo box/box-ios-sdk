@@ -55,7 +55,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     public let role: UpdateUserByIdRequestBodyRoleField?
 
     /// The language of the user, formatted in modified version of the
-    /// [ISO 639-1](/guides/api-calls/language-codes) format.
+    /// [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     public let language: String?
 
     /// Whether the user can use Box Sync.
@@ -133,7 +133,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     ///     primary login address cannot be changed.
     ///   - role: The user’s enterprise role.
     ///   - language: The language of the user, formatted in modified version of the
-    ///     [ISO 639-1](/guides/api-calls/language-codes) format.
+    ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     ///   - isSyncEnabled: Whether the user can use Box Sync.
     ///   - jobTitle: The user’s job title.
     ///   - phone: The user’s phone number.

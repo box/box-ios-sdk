@@ -31,7 +31,7 @@ public class RealtimeServer: Codable, RawJSONReadable {
 
     /// The maximum number of retries this server will
     /// allow before a new long poll should be started by
-    /// getting a [new list of server](#options-events).
+    /// getting a [new list of server](https://developer.box.com/reference/options-events).
     public let maxRetries: String?
 
     /// The maximum number of seconds without a response
@@ -50,7 +50,7 @@ public class RealtimeServer: Codable, RawJSONReadable {
     ///   - ttl: The time in minutes for which this server is available.
     ///   - maxRetries: The maximum number of retries this server will
     ///     allow before a new long poll should be started by
-    ///     getting a [new list of server](#options-events).
+    ///     getting a [new list of server](https://developer.box.com/reference/options-events).
     ///   - retryTimeout: The maximum number of seconds without a response
     ///     after which you should retry the long poll connection.
     ///     
