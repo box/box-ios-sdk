@@ -99,7 +99,7 @@ public class FoldersManager {
     /// folders, and web links.
     /// 
     /// To request more information about the folder itself, like its size,
-    /// use the [Get a folder](#get-folders-id) endpoint instead.
+    /// use the [Get a folder](https://developer.box.com/reference/get-folders-id) endpoint instead.
     ///
     /// - Parameters:
     ///   - folderId: The unique identifier that represent a folder.
