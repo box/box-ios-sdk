@@ -9,6 +9,7 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
         case canSetShareAccess = "can_set_share_access"
         case canShare = "can_share"
         case canUpload = "can_upload"
+        case canApplyWatermark = "can_apply_watermark"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -45,6 +46,9 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
     /// Specifies if the user can upload into this folder.
     public let canUpload: Bool
 
+    /// Specifies if the user can apply a watermark to this folder and its contents.
+    public let canApplyWatermark: Bool?
+
     /// Initializer for a FolderFullPermissionsField.
     ///
     /// - Parameters:
@@ -59,7 +63,8 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
     ///     existing shared link on this item.
     ///   - canShare: Specifies if the user can create a shared link for this item.
     ///   - canUpload: Specifies if the user can upload into this folder.
-    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canUpload: Bool) {
+    ///   - canApplyWatermark: Specifies if the user can apply a watermark to this folder and its contents.
+    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canUpload: Bool, canApplyWatermark: Bool? = nil) {
         self.canDelete = canDelete
         self.canDownload = canDownload
         self.canInviteCollaborator = canInviteCollaborator
@@ -67,6 +72,7 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
         self.canSetShareAccess = canSetShareAccess
         self.canShare = canShare
         self.canUpload = canUpload
+        self.canApplyWatermark = canApplyWatermark
     }
 
     required public init(from decoder: Decoder) throws {
@@ -78,6 +84,7 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
         canSetShareAccess = try container.decode(Bool.self, forKey: .canSetShareAccess)
         canShare = try container.decode(Bool.self, forKey: .canShare)
         canUpload = try container.decode(Bool.self, forKey: .canUpload)
+        canApplyWatermark = try container.decodeIfPresent(Bool.self, forKey: .canApplyWatermark)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -89,6 +96,7 @@ public class FolderFullPermissionsField: Codable, RawJSONReadable {
         try container.encode(canSetShareAccess, forKey: .canSetShareAccess)
         try container.encode(canShare, forKey: .canShare)
         try container.encode(canUpload, forKey: .canUpload)
+        try container.encodeIfPresent(canApplyWatermark, forKey: .canApplyWatermark)
     }
 
     /// Sets the raw JSON data.
