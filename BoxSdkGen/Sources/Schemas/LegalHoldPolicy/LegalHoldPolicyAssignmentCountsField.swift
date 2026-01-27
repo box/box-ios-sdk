@@ -6,6 +6,8 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         case folder
         case file
         case fileVersion = "file_version"
+        case ownership
+        case interactions
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -17,7 +19,7 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
     }
 
 
-    /// The number of users this policy is applied to.
+    /// The number of users this policy is applied to with the `access` type assignment.
     public let user: Int64?
 
     /// The number of folders this policy is applied to.
@@ -29,18 +31,28 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
     /// The number of file versions this policy is applied to.
     public let fileVersion: Int64?
 
+    /// The number of users this policy is applied to with the `ownership` type assignment.
+    public let ownership: Int64?
+
+    /// The number of users this policy is applied to with the `interactions` type assignment.
+    public let interactions: Int64?
+
     /// Initializer for a LegalHoldPolicyAssignmentCountsField.
     ///
     /// - Parameters:
-    ///   - user: The number of users this policy is applied to.
+    ///   - user: The number of users this policy is applied to with the `access` type assignment.
     ///   - folder: The number of folders this policy is applied to.
     ///   - file: The number of files this policy is applied to.
     ///   - fileVersion: The number of file versions this policy is applied to.
-    public init(user: Int64? = nil, folder: Int64? = nil, file: Int64? = nil, fileVersion: Int64? = nil) {
+    ///   - ownership: The number of users this policy is applied to with the `ownership` type assignment.
+    ///   - interactions: The number of users this policy is applied to with the `interactions` type assignment.
+    public init(user: Int64? = nil, folder: Int64? = nil, file: Int64? = nil, fileVersion: Int64? = nil, ownership: Int64? = nil, interactions: Int64? = nil) {
         self.user = user
         self.folder = folder
         self.file = file
         self.fileVersion = fileVersion
+        self.ownership = ownership
+        self.interactions = interactions
     }
 
     required public init(from decoder: Decoder) throws {
@@ -49,6 +61,8 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         folder = try container.decodeIfPresent(Int64.self, forKey: .folder)
         file = try container.decodeIfPresent(Int64.self, forKey: .file)
         fileVersion = try container.decodeIfPresent(Int64.self, forKey: .fileVersion)
+        ownership = try container.decodeIfPresent(Int64.self, forKey: .ownership)
+        interactions = try container.decodeIfPresent(Int64.self, forKey: .interactions)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -57,6 +71,8 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         try container.encodeIfPresent(folder, forKey: .folder)
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
+        try container.encodeIfPresent(ownership, forKey: .ownership)
+        try container.encodeIfPresent(interactions, forKey: .interactions)
     }
 
     /// Sets the raw JSON data.

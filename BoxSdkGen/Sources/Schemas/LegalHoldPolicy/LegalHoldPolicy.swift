@@ -43,7 +43,7 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     /// * 'released' - the policy is no longer active.
     public let status: LegalHoldPolicyStatusField?
 
-    /// Counts of assignments within this a legal hold policy by item type.
+    /// Counts of assignments within a legal hold policy by item type.
     public let assignmentCounts: LegalHoldPolicyAssignmentCountsField?
 
     public let createdBy: UserMini?
@@ -88,7 +88,7 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     ///     * 'releasing' - that the process is in the process
     ///       of being released.
     ///     * 'released' - the policy is no longer active.
-    ///   - assignmentCounts: Counts of assignments within this a legal hold policy by item type.
+    ///   - assignmentCounts: Counts of assignments within a legal hold policy by item type.
     ///   - createdBy: 
     ///   - createdAt: When the legal hold policy object was created.
     ///   - modifiedAt: When the legal hold policy object was modified.
