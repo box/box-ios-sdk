@@ -24,7 +24,7 @@ public class LegalHoldPolicyAssignmentsManager {
         return try LegalHoldPolicyAssignments.deserialize(from: response.data!)
     }
 
-    /// Assign a legal hold to a file, file version, folder, or user.
+    /// Assign a legal hold to an item type of: file, file version, folder, user, ownership, or interactions.
     ///
     /// - Parameters:
     ///   - requestBody: Request body of createLegalHoldPolicyAssignment method
