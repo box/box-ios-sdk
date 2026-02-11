@@ -34,9 +34,8 @@ public class GetFolderItemsQueryParams {
 
     /// The offset of the item at which to begin the response.
     /// 
-    /// Queries with offset parameter value
-    /// exceeding 10000 will be rejected
-    /// with a 400 response.
+    /// Offset-based pagination is not guaranteed to work reliably for high offset values and may fail for large datasets. In
+    /// those cases, use marker-based pagination by setting `usemarker` to `true`.
     public let offset: Int64?
 
     /// The maximum number of items to return per page.
@@ -106,9 +105,8 @@ public class GetFolderItemsQueryParams {
     ///     This requires `usemarker` to be set to `true`.
     ///   - offset: The offset of the item at which to begin the response.
     ///     
-    ///     Queries with offset parameter value
-    ///     exceeding 10000 will be rejected
-    ///     with a 400 response.
+    ///     Offset-based pagination is not guaranteed to work reliably for high offset values and may fail for large datasets. In
+    ///     those cases, use marker-based pagination by setting `usemarker` to `true`.
     ///   - limit: The maximum number of items to return per page.
     ///   - sort: Defines the **second** attribute by which items
     ///     are sorted.
