@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.4.0](https://github.com/box/box-ios-sdk/compare/6.3.0...6.4.0) (2026-02-11)
+
+
+### Bug Fixes
+
+* **boxsdkgen:** Correct enum value for legal hold policy changes (box/box-openapi[#581](https://github.com/box/box-ios-sdk/issues/581)) ([#1375](https://github.com/box/box-ios-sdk/issues/1375)) ([d16f003](https://github.com/box/box-ios-sdk/commit/d16f003c1a4ec93e7d7dac59d3636ef54ac162be))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add confidence scores for structured extract (box/box-openapi[#582](https://github.com/box/box-ios-sdk/issues/582)) ([#1378](https://github.com/box/box-ios-sdk/issues/1378)) ([26bf4de](https://github.com/box/box-ios-sdk/commit/26bf4de255953975b4865f943b71d4e1c5feca0a))
+* **boxsdkgen:** add signer language, cancel sign request reason (box/box-openapi[#584](https://github.com/box/box-ios-sdk/issues/584)) ([#1394](https://github.com/box/box-ios-sdk/issues/1394)) ([8526aa6](https://github.com/box/box-ios-sdk/commit/8526aa6063315c6140b3742562222940dec87d79))
+* **boxsdkgen:** Add watermarking permissions and sources information (box/box-openapi[#579](https://github.com/box/box-ios-sdk/issues/579)) ([#1367](https://github.com/box/box-ios-sdk/issues/1367)) ([abe6e2c](https://github.com/box/box-ios-sdk/commit/abe6e2cf6fb6866a13d51828ac1e5d721fe22395))
+
 ## [6.3.0](https://github.com/box/box-ios-sdk/compare/6.2.0...6.3.0) (2025-12-19)
 
 
