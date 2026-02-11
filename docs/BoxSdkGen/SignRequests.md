@@ -25,6 +25,8 @@ try await client.signRequests.cancelSignRequest(signRequestId: createdSignReques
 
 - signRequestId `String`
   - The ID of the signature request. Example: "33243242"
+- requestBody `SignRequestCancelRequest?`
+  - Request body of cancelSignRequest method
 - headers `CancelSignRequestHeaders`
   - Headers of cancelSignRequest method
 

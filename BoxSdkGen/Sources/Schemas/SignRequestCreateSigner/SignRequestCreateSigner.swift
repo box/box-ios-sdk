@@ -16,6 +16,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
         case password
         case signerGroupId = "signer_group_id"
         case suppressNotifications = "suppress_notifications"
+        case language
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -89,6 +90,10 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     /// If true, no emails about the sign request will be sent.
     @CodableTriState public private(set) var suppressNotifications: Bool?
 
+    /// The language of the user, formatted in modified version of the
+    /// [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
+    @CodableTriState public private(set) var language: String?
+
     /// Initializer for a SignRequestCreateSigner.
     ///
     /// - Parameters:
@@ -130,7 +135,9 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
     ///   - suppressNotifications: If true, no emails about the sign request will be sent.
-    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil) {
+    ///   - language: The language of the user, formatted in modified version of the
+    ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
+    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil, language: TriStateField<String> = nil) {
         self._email = CodableTriState(state: email)
         self.role = role
         self.isInPerson = isInPerson
@@ -143,6 +150,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
         self._password = CodableTriState(state: password)
         self._signerGroupId = CodableTriState(state: signerGroupId)
         self._suppressNotifications = CodableTriState(state: suppressNotifications)
+        self._language = CodableTriState(state: language)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -159,6 +167,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
         password = try container.decodeIfPresent(String.self, forKey: .password)
         signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
         suppressNotifications = try container.decodeIfPresent(Bool.self, forKey: .suppressNotifications)
+        language = try container.decodeIfPresent(String.self, forKey: .language)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -175,6 +184,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
         try container.encode(field: _password.state, forKey: .password)
         try container.encode(field: _signerGroupId.state, forKey: .signerGroupId)
         try container.encode(field: _suppressNotifications.state, forKey: .suppressNotifications)
+        try container.encode(field: _language.state, forKey: .language)
     }
 
     /// Sets the raw JSON data.
