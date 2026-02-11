@@ -15,12 +15,13 @@ public class SignRequestsManager {
     /// - Parameters:
     ///   - signRequestId: The ID of the signature request.
     ///     Example: "33243242"
+    ///   - requestBody: Request body of cancelSignRequest method
     ///   - headers: Headers of cancelSignRequest method
     /// - Returns: The `SignRequest`.
     /// - Throws: The `GeneralError`.
-    public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeaders = CancelSignRequestHeaders()) async throws -> SignRequest {
+    public func cancelSignRequest(signRequestId: String, requestBody: SignRequestCancelRequest? = nil, headers: CancelSignRequestHeaders = CancelSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(Utils.Strings.toString(value: signRequestId)!)\("/cancel")", method: "POST", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(Utils.Strings.toString(value: signRequestId)!)\("/cancel")", method: "POST", headers: headersMap, data: requestBody != nil ? try requestBody.serialize() : nil, contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data!)
     }
 

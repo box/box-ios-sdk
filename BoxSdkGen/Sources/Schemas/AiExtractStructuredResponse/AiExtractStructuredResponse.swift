@@ -27,7 +27,7 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
     /// The reason the response finishes.
     public let completionReason: String?
 
-    /// The confidence score numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
+    /// The confidence score levels and numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
     public let confidenceScore: [String: AnyCodable]?
 
     public let aiAgentInfo: AiAgentInfo?
@@ -38,7 +38,7 @@ public class AiExtractStructuredResponse: Codable, RawJSONReadable {
     ///   - answer: 
     ///   - createdAt: The ISO date formatted timestamp of when the answer to the prompt was created.
     ///   - completionReason: The reason the response finishes.
-    ///   - confidenceScore: The confidence score numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
+    ///   - confidenceScore: The confidence score levels and numeric values for each extracted field as a JSON dictionary. This can be empty if no field could be extracted.
     ///   - aiAgentInfo: 
     public init(answer: AiExtractResponse, createdAt: Date, completionReason: String? = nil, confidenceScore: [String: AnyCodable]? = nil, aiAgentInfo: AiAgentInfo? = nil) {
         self.answer = answer
