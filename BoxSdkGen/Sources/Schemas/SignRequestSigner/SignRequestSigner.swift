@@ -84,6 +84,8 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
     ///   - suppressNotifications: If true, no emails about the sign request will be sent.
+    ///   - language: The language of the user, formatted in modified version of the
+    ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     ///   - hasViewedDocument: Set to `true` if the signer views the document.
     ///   - signerDecision: Final decision made by the signer.
     ///   - inputs: 
@@ -95,7 +97,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     parameter was passed in the
     ///     `create Box Sign request` call.
     ///   - attachments: Attachments that the signer uploaded.
-    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil, hasViewedDocument: Bool? = nil, signerDecision: TriStateField<SignRequestSignerSignerDecisionField> = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: TriStateField<String> = nil, iframeableEmbedUrl: TriStateField<String> = nil, attachments: TriStateField<[SignRequestSignerAttachment]> = nil) {
+    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil, language: TriStateField<String> = nil, hasViewedDocument: Bool? = nil, signerDecision: TriStateField<SignRequestSignerSignerDecisionField> = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: TriStateField<String> = nil, iframeableEmbedUrl: TriStateField<String> = nil, attachments: TriStateField<[SignRequestSignerAttachment]> = nil) {
         self.hasViewedDocument = hasViewedDocument
         self._signerDecision = CodableTriState(state: signerDecision)
         self.inputs = inputs
@@ -103,7 +105,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
         self._iframeableEmbedUrl = CodableTriState(state: iframeableEmbedUrl)
         self._attachments = CodableTriState(state: attachments)
 
-        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password, signerGroupId: signerGroupId, suppressNotifications: suppressNotifications)
+        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password, signerGroupId: signerGroupId, suppressNotifications: suppressNotifications, language: language)
     }
 
     required public init(from decoder: Decoder) throws {

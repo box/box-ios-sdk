@@ -128,6 +128,7 @@
 		03BFA7A12E3F0AFFA5A56760 /* InvitesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC8030B3E7DE70EA02A88D8 /* InvitesManagerTests.swift */; };
 		03CA8F01097C35F58131329E /* FetchConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42FCB647943BEAB1CCE07BD /* FetchConversation.swift */; };
 		03DF6E07A617F50D5B8E99F7 /* AiItemBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B467D8389121053015613E /* AiItemBase.swift */; };
+		03E1BBC3F73B9836F0DA6FAF /* SignRequestCancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */; };
 		03E5F0027FA4DB2C4421FFDD /* DeleteGroupByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1E490567940B760337F16 /* DeleteGroupByIdHeaders.swift */; };
 		03EA86E2CDB4464F283993FF /* SignRequestSignerInputDateEuValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0902DB0ABC9B35208560FD9 /* SignRequestSignerInputDateEuValidation.swift */; };
 		03EAB9C4C9883D34A7207E34 /* FileVersionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9628969755C5E3BDFCB6B51 /* FileVersionBase.swift */; };
@@ -2626,6 +2627,7 @@
 		47C2F14EB7B223593A76AF1E /* GetRetentionPolicyAssignmentByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1D50DB2BFA8F1BA8B94AF /* GetRetentionPolicyAssignmentByIdQueryParams.swift */; };
 		47C59EC05C35B2F1588047BB /* CreateCommentQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CC81E0A76EFB8741519176 /* CreateCommentQueryParams.swift */; };
 		47CA0EB0B84B0A528E99A902 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
+		47D00CA0FED0F6EDA4281B7C /* SignRequestCancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */; };
 		47D0637601927424E7D857BF /* AiResponseFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79D972D711D25F9085E9A7B /* AiResponseFull.swift */; };
 		47DD22CCF5D3C39784E5370F /* GetSlackIntegrationMappingHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769276799FF14E0360DCE91 /* GetSlackIntegrationMappingHeaders.swift */; };
 		47E053A67CA8C232358E1174 /* CreateFolderQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EB40214A032BAD2A9CEA0 /* CreateFolderQueryParams.swift */; };
@@ -3903,6 +3905,7 @@
 		6C37C31EF4EC6C930DB74012 /* DeleteUserEmailAliasByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E5FBA512A4438191A7A4C6 /* DeleteUserEmailAliasByIdHeaders.swift */; };
 		6C3835C286920EC856D7ACAE /* AuthorizeUserHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F10BEC27B8E133A5CA64A /* AuthorizeUserHeaders.swift */; };
 		6C3F850B8A367B41241E3BA3 /* UpdateMetadataTaxonomyNodeRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDADD7ADFC97B52A1D086D /* UpdateMetadataTaxonomyNodeRequestBody.swift */; };
+		6C43FBDB9D685D0F6FF70418 /* SignRequestCancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */; };
 		6C4E664705CBE7811F24D333 /* GetSharedLinkForFolderHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD64E25A43913E087C897C19 /* GetSharedLinkForFolderHeaders.swift */; };
 		6C55CF0DFB50F0411142063B /* DeleteCollaborationWhitelistExemptTargetByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9129EB663679725B438BF1B6 /* DeleteCollaborationWhitelistExemptTargetByIdHeaders.swift */; };
 		6C5ECB115815BC01E8834950 /* KeywordSkillCardInvocationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3EA73843D4FAF6F04A9F6 /* KeywordSkillCardInvocationField.swift */; };
@@ -3951,6 +3954,7 @@
 		6D682DC7EA1E1D712AE37169 /* CreateRetentionPolicyAssignmentRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D49CCB7CFFC7057CFC6BD45 /* CreateRetentionPolicyAssignmentRequestBody.swift */; };
 		6D7147402FD60BFC288E99E8 /* SignRequestSignerInputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BE6ABA26FE8EE790E51FFE /* SignRequestSignerInputValidation.swift */; };
 		6D74D09DB68195E1AA242E87 /* UpdateCommentByIdRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BE2E2495E4D835D77B00FD /* UpdateCommentByIdRequestBody.swift */; };
+		6D7D48EAA7AA52BD74D036BB /* SignRequestCancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */; };
 		6D849BE73254DA3ABCBBDD67 /* UpdateSharedLinkOnFolderQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B469046B0288E266285151B /* UpdateSharedLinkOnFolderQueryParams.swift */; };
 		6D9B705B91CA1C98CFEC574B /* FileVersionsOrderDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9277CDAEA8B8F2A09263EB /* FileVersionsOrderDirectionField.swift */; };
 		6DA1B6FA2333373643BBB6C3 /* DeleteUserAvatarHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B259FA44E9D1800AADF8B /* DeleteUserAvatarHeaders.swift */; };
@@ -8503,6 +8507,7 @@
 		ECF2F10B56DD3816463F0561 /* CreateZipDownloadHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE82E7E7EC315B4D2B0121BC /* CreateZipDownloadHeaders.swift */; };
 		ECF491D804FCDFF642C9B7AA /* GetTrashedFolderByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780F70C5C2E021CABF94A1A /* GetTrashedFolderByIdQueryParams.swift */; };
 		ECFA095BFF1B0F84BA9C4231 /* PostOAuth2TokenActorTokenTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014E8685E6F17E1C8161D5BD /* PostOAuth2TokenActorTokenTypeField.swift */; };
+		ECFC7286826453E37ED79B07 /* SignRequestCancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */; };
 		ED012C440CDAEDE08463A746 /* DataSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39EC600745E9A91FCE593BD /* DataSanitizer.swift */; };
 		ED021C45648B55D5C4F3B33C /* SharedLinksAppItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181352BD3C524C7AC7406BD /* SharedLinksAppItemsManager.swift */; };
 		ED057AACF507422558C2346B /* IntegrationMappingIntegrationTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E0DC157CC09D115E36F3D1 /* IntegrationMappingIntegrationTypeField.swift */; };
@@ -9536,6 +9541,7 @@
 		209005D4B12C788F08B82805 /* UploadFileVersionHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileVersionHeaders.swift; sourceTree = "<group>"; };
 		209B76B36791498E1E0ED65F /* TransferOwnedFolderRequestBodyOwnedByField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOwnedFolderRequestBodyOwnedByField.swift; sourceTree = "<group>"; };
 		20A78C5B0D9AC5D62EDB346E /* GetLegalHoldPoliciesQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLegalHoldPoliciesQueryParams.swift; sourceTree = "<group>"; };
+		20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestCancelRequest.swift; sourceTree = "<group>"; };
 		20E8DDB81401838FC3E1142B /* AiAgentExtractTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiAgentExtractTypeField.swift; sourceTree = "<group>"; };
 		211FF916E1D7ABE706795D77 /* AddMetadataTaxonomyLevelRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMetadataTaxonomyLevelRequestBody.swift; sourceTree = "<group>"; };
 		2121945BE3E9641F50E9D69D /* ListUserV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserV2025R0.swift; sourceTree = "<group>"; };
@@ -14608,6 +14614,14 @@
 			path = ClassificationTemplate;
 			sourceTree = "<group>";
 		};
+		95FDF875FF184A4901C59C2A /* SignRequestCancelRequest */ = {
+			isa = PBXGroup;
+			children = (
+				20E866749EDCF2A58AAE062F /* SignRequestCancelRequest.swift */,
+			);
+			path = SignRequestCancelRequest;
+			sourceTree = "<group>";
+		};
 		96931114E21D36F027FF83F0 /* SignRequestPrefillTag */ = {
 			isa = PBXGroup;
 			children = (
@@ -17425,6 +17439,7 @@
 				B70E26971484C99E6ABE9B63 /* ShieldInformationBarrierSegments */,
 				0A8DD84808D4BB4A56A100ED /* SignRequest */,
 				CE9E13E4D1352AE8078379D2 /* SignRequestBase */,
+				95FDF875FF184A4901C59C2A /* SignRequestCancelRequest */,
 				7F58A52617FF5C21C1ED71B7 /* SignRequestCreateRequest */,
 				A66D97F6AE59B22E3C57C1CB /* SignRequestCreateSigner */,
 				96931114E21D36F027FF83F0 /* SignRequestPrefillTag */,
@@ -19317,6 +19332,7 @@
 				851E9DC6FCFDF399E2022ABD /* ShieldRuleItemV2025R0TypeField.swift in Sources */,
 				1562C63D20946D870ACC1E77 /* SignRequest.swift in Sources */,
 				E204481BEE3579D97A7B44FC /* SignRequestBase.swift in Sources */,
+				6D7D48EAA7AA52BD74D036BB /* SignRequestCancelRequest.swift in Sources */,
 				2C7D67F8441634C64E290755 /* SignRequestCreateRequest.swift in Sources */,
 				680BCBD3493E4C6A8AB03728 /* SignRequestCreateRequestSignatureColorField.swift in Sources */,
 				5EF0B15A571C8EAE86507418 /* SignRequestCreateSigner.swift in Sources */,
@@ -21077,6 +21093,7 @@
 				06A0834677B8678914C320AF /* ShieldRuleItemV2025R0TypeField.swift in Sources */,
 				106323ED9AE9CC0302E0CFA0 /* SignRequest.swift in Sources */,
 				5DC30EC1BBE212362F59B269 /* SignRequestBase.swift in Sources */,
+				03E1BBC3F73B9836F0DA6FAF /* SignRequestCancelRequest.swift in Sources */,
 				13A4E8F07BC394E134C753DD /* SignRequestCreateRequest.swift in Sources */,
 				6B4FBC86036096D0C75804C3 /* SignRequestCreateRequestSignatureColorField.swift in Sources */,
 				88B1B38EC0CC04497BA5EE9A /* SignRequestCreateSigner.swift in Sources */,
@@ -23015,6 +23032,7 @@
 				6F8D679215DD20CA9A4ABEE7 /* ShieldRuleItemV2025R0TypeField.swift in Sources */,
 				A7BE4A7306FB21EE0A726103 /* SignRequest.swift in Sources */,
 				32A95FC87FF62904A2D0E85B /* SignRequestBase.swift in Sources */,
+				ECFC7286826453E37ED79B07 /* SignRequestCancelRequest.swift in Sources */,
 				D6E13E3645A412378C651DDF /* SignRequestCreateRequest.swift in Sources */,
 				35CEE5C29D5B19DF70EBCBE8 /* SignRequestCreateRequestSignatureColorField.swift in Sources */,
 				F4F4B3873CB6E3645271AF51 /* SignRequestCreateSigner.swift in Sources */,
@@ -24775,6 +24793,7 @@
 				11A439DB4FEE323F594D21BD /* ShieldRuleItemV2025R0TypeField.swift in Sources */,
 				009013CDD527B15466174D79 /* SignRequest.swift in Sources */,
 				0D507896DF08ACFDDD62FC51 /* SignRequestBase.swift in Sources */,
+				6C43FBDB9D685D0F6FF70418 /* SignRequestCancelRequest.swift in Sources */,
 				EF9DA4E06B54F18F76E7F33E /* SignRequestCreateRequest.swift in Sources */,
 				6181C3C7EFA1B1B936C30E65 /* SignRequestCreateRequestSignatureColorField.swift in Sources */,
 				C84C018ABC663CC849B9C161 /* SignRequestCreateSigner.swift in Sources */,
@@ -26624,6 +26643,7 @@
 				2826B64A74DBFB26CBEDA91B /* ShieldRuleItemV2025R0TypeField.swift in Sources */,
 				488F4C28F623868EB70AB7D0 /* SignRequest.swift in Sources */,
 				31ED17C9CF11FDEC5C3B05D3 /* SignRequestBase.swift in Sources */,
+				47D00CA0FED0F6EDA4281B7C /* SignRequestCancelRequest.swift in Sources */,
 				496BB065875B563A769F4F5E /* SignRequestCreateRequest.swift in Sources */,
 				484F1B2CBBF4361E6E4E3F57 /* SignRequestCreateRequestSignatureColorField.swift in Sources */,
 				318C7E0DE4868B5889CA4B5D /* SignRequestCreateSigner.swift in Sources */,
