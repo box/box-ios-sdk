@@ -13,6 +13,7 @@
   - [Network Exception Handling](#network-exception-handling)
   - [Customizing Retry Parameters](#customizing-retry-parameters)
   - [Custom Retry Strategy](#custom-retry-strategy)
+- [Timeouts](#timeouts)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -174,3 +175,31 @@ let networkSession = NetworkSession(
 let auth = BoxDeveloperTokenAuth(token: "DEVELOPER_TOKEN")
 let client = BoxClient(auth: auth, networkSession: networkSession)
 ```
+
+## Timeouts
+
+You can configure request timeouts with `TimeoutConfig` on `NetworkSession`.
+Swift SDK supports separate values for request and resource timeouts, both in milliseconds.
+
+```swift
+let timeoutConfig = TimeoutConfig(
+    timeoutIntervalForRequestMs: 10000,
+    timeoutIntervalForResourceMs: 60000
+)
+
+let networkSession: NetworkSession = NetworkSession(
+    timeoutConfig: timeoutConfig
+)
+let auth: BoxDeveloperTokenAuth = BoxDeveloperTokenAuth(token: "DEVELOPER_TOKEN")
+let client: BoxClient = BoxClient(auth: auth, networkSession: networkSession)
+```
+
+How timeout handling works:
+
+- `timeoutIntervalForRequestMs` maps to `URLSessionConfiguration.timeoutIntervalForRequest` and controls how long a request can wait for data before timing out.
+- `timeoutIntervalForResourceMs` maps to `URLSessionConfiguration.timeoutIntervalForResource` and controls the maximum total time allowed for the full resource transfer.
+- Timeout values are configured in milliseconds and converted to seconds for `URLSessionConfiguration`.
+- If a timeout value is not provided, the current `URLSessionConfiguration` value is kept.
+- Timeout failures are treated as network exceptions, and retry behavior is controlled by the configured retry strategy.
+- If retries are exhausted after timeout failures, the SDK throws `BoxSDKError`.
+- Timeout applies to a single HTTP request attempt to the Box API (not the total time across all retries).

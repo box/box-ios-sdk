@@ -24,13 +24,40 @@ public class DefaultNetworkClient: NetworkClient {
     /// Handles redirect behavior for URLSession tasks on a per-task basis.
     private let redirectHandler: RedirectHandler
 
+
+    /// Returns a new `BoxNetworkClient` with updated timeouts applied globally to its `URLSession`.
+    ///
+    /// - Parameter timeoutConfig: Timeout configuration in milliseconds.
+    /// - Returns: A new `BoxNetworkClient` instance configured with the provided timeouts.
+    public func withTimeoutConfig(timeoutConfig: TimeoutConfig) -> DefaultNetworkClient {
+        let baseConfig = (self.session.configuration.copy() as? URLSessionConfiguration) ?? self.session.configuration
+        return DefaultNetworkClient(configuration: baseConfig, timeoutConfig: timeoutConfig)
+    }
+
     ///  Initializer
     ///
     /// - Parameters:
     ///   - configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, and credential storage.
-    public init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
+    ///   - timeoutConfig: Timeout configuration in milliseconds.
+    public init(
+        configuration: URLSessionConfiguration = URLSessionConfiguration.default,
+        timeoutConfig: TimeoutConfig? = nil
+    ) {
         self.redirectHandler = RedirectHandler()
-        self.session = URLSession(configuration: configuration, delegate: redirectHandler, delegateQueue: nil)
+        let config = configuration
+
+        if let timeoutConfig {
+            if let timeoutIntervalForRequestMs = timeoutConfig.timeoutIntervalForRequestMs {
+                // URLSessionConfiguration expects seconds; TimeoutConfig is in milliseconds.
+                config.timeoutIntervalForRequest = TimeInterval(Double(timeoutIntervalForRequestMs) / 1000.0)
+            }
+            if let timeoutIntervalForResourceMs = timeoutConfig.timeoutIntervalForResourceMs {
+                // URLSessionConfiguration expects seconds; TimeoutConfig is in milliseconds.
+                config.timeoutIntervalForResource = TimeInterval(Double(timeoutIntervalForResourceMs) / 1000.0)
+            }
+        }
+
+        self.session = URLSession(configuration: config, delegate: redirectHandler, delegateQueue: nil)
     }
 
     /// Executes requests
