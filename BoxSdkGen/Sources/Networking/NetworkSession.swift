@@ -21,6 +21,9 @@ open class NetworkSession {
     /// Sensitive data sanitizer
     public let dataSanitizer: DataSanitizer
 
+    /// Timeout config
+    public let timeoutConfig: TimeoutConfig?
+
 
     /// Initializer
     ///
@@ -35,13 +38,15 @@ open class NetworkSession {
         additionalHeaders: [String: String] = [:],
         retryStrategy: RetryStrategy = BoxRetryStrategy(),
         baseUrls: BaseUrls = BaseUrls(),
-        dataSanitizer: DataSanitizer = DataSanitizer()
+        dataSanitizer: DataSanitizer = DataSanitizer(),
+        timeoutConfig: TimeoutConfig? = nil
     ) {
         self.networkClient = networkClient
         self.additionalHeaders = additionalHeaders
         self.retryStrategy = retryStrategy
         self.baseUrls = baseUrls
         self.dataSanitizer = dataSanitizer
+        self.timeoutConfig = timeoutConfig
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -50,7 +55,7 @@ open class NetworkSession {
     /// - Parameters:
     ///   - additionalHeaders: Dictionary of headers, which are appended to each API request
     public func withAdditionalHeaders(additionalHeaders: [String: String]) -> NetworkSession {
-        return NetworkSession(networkClient: self.networkClient, additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer)
+        return NetworkSession(networkClient: self.networkClient, additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer, timeoutConfig: self.timeoutConfig)
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -59,7 +64,7 @@ open class NetworkSession {
     /// - Parameters:
     ///   - baseUrls: Custom base urls
     public func withCustomBaseUrls(baseUrls: BaseUrls) -> NetworkSession {
-        return NetworkSession(networkClient: self.networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: baseUrls, dataSanitizer: self.dataSanitizer)
+        return NetworkSession(networkClient: self.networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: baseUrls, dataSanitizer: self.dataSanitizer, timeoutConfig: self.timeoutConfig)
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -68,7 +73,7 @@ open class NetworkSession {
     /// - Parameters:
     ///   - networkSettings: Additional network settings.
     public func withNetworkClient(networkClient: NetworkClient) -> NetworkSession {
-        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer)
+        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer, timeoutConfig: self.timeoutConfig)
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -77,7 +82,7 @@ open class NetworkSession {
     /// - Parameters:
     ///   - dataSanitizer: Sensitive data sanitizer
     public func withDataSanitizer(dataSanitizer: DataSanitizer) -> NetworkSession {
-        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: dataSanitizer)
+        return NetworkSession(networkClient: self.networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: self.retryStrategy, baseUrls: self.baseUrls, dataSanitizer: dataSanitizer, timeoutConfig: self.timeoutConfig)
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -86,6 +91,32 @@ open class NetworkSession {
     /// - Parameters:
     ///   - retryStrategy: Retry Strategy
     public func withRetryStrategy(retryStrategy: RetryStrategy) -> NetworkSession {
-        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer)
+        return NetworkSession(networkClient: self.networkClient, additionalHeaders: self.additionalHeaders, retryStrategy: retryStrategy, baseUrls: self.baseUrls, dataSanitizer: self.dataSanitizer, timeoutConfig: self.timeoutConfig)
+    }
+
+    /// Generate a fresh network session by duplicating the existing configuration and network parameters,
+    /// while also including timeout config to be used for every API call.
+    ///
+    /// - Parameters:
+    ///   - timeoutConfig: Timeout config
+    /// - Throws: `BoxSDKError` when timeouts are not supported by the configured `networkClient`.
+    public func withTimeoutConfig(timeoutConfig: TimeoutConfig) throws -> NetworkSession {
+        let newClient: NetworkClient
+        if let boxNetworkClient = self.networkClient as? BoxNetworkClient {
+            newClient = boxNetworkClient.withTimeoutConfig(timeoutConfig: timeoutConfig)
+        } else if let defaultNetworkClient = self.networkClient as? DefaultNetworkClient {
+            newClient = defaultNetworkClient.withTimeoutConfig(timeoutConfig: timeoutConfig)
+        } else {
+            throw BoxSDKError(message: "Timeouts are only supported for BoxNetworkClient and DefaultNetworkClient")
+        }
+
+        return NetworkSession(
+            networkClient: newClient,
+            additionalHeaders: self.additionalHeaders,
+            retryStrategy: self.retryStrategy,
+            baseUrls: self.baseUrls,
+            dataSanitizer: self.dataSanitizer,
+            timeoutConfig: timeoutConfig
+        )
     }
 }
