@@ -16,6 +16,7 @@ divided across resource managers.
   - [Suppress notifications](#suppress-notifications)
   - [Custom headers](#custom-headers)
 - [Custom Base URLs](#custom-base-urls)
+- [Use Timeouts for API calls](#use-timeouts-for-api-calls)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -168,4 +169,18 @@ let newClient = client.withCustomBaseUrls(baseUrls: BaseUrls(
   uploadUrl: "https://upload.box.com/api",
   oauth2Url: "https://account.box.com/api/oauth2"
 ))
+```
+
+# Use Timeouts for API calls
+
+To configure request timeouts for API calls, call `client.withTimeouts(config:)`.
+This creates a new client with timeout settings, leaving the original client unmodified.
+
+```swift
+let timeoutConfig = TimeoutConfig(
+    timeoutIntervalForRequestMs: 10000,
+    timeoutIntervalForResourceMs: 60000
+)
+
+let newClient = try client.withTimeouts(config: timeoutConfig)
 ```
