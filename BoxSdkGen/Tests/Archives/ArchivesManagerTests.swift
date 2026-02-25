@@ -26,7 +26,6 @@ class ArchivesManagerTests: RetryableTestCase {
             XCTAssertTrue(updatedArchive.description! == newArchiveDescription)
             let archives: ArchivesV2025R0 = try await client.archives.getArchivesV2025R0(queryParams: GetArchivesV2025R0QueryParams(limit: Int64(100)))
             XCTAssertTrue(archives.entries!.count > 0)
-            try await client.archives.deleteArchiveByIdV2025R0(archiveId: archive.id)
             await XCTAssertThrowsErrorAsync(try await client.archives.deleteArchiveByIdV2025R0(archiveId: archive.id))
         }
     }
