@@ -302,4 +302,14 @@ public class BoxClient {
         return BoxClient(auth: self.auth, networkSession: self.networkSession.withCustomBaseUrls(baseUrls: baseUrls))
     }
 
+    /// Create a new client with custom timeouts that will be used for every API call
+    ///
+    /// - Parameters:
+    ///   - config: Timeout configuration.
+    /// - Returns: The `BoxClient`.
+    /// - Throws: The `GeneralError`.
+    public func withTimeouts(config: TimeoutConfig) throws -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: try self.networkSession.withTimeoutConfig(timeoutConfig: config))
+    }
+
 }
