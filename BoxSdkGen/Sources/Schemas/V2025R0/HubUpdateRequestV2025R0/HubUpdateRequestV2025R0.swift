@@ -9,6 +9,7 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
         case isCollaborationRestrictedToEnterprise = "is_collaboration_restricted_to_enterprise"
         case canNonOwnersInvite = "can_non_owners_invite"
         case canSharedLinkBeCreated = "can_shared_link_be_created"
+        case canPublicSharedLinkBeCreated = "can_public_shared_link_be_created"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -38,6 +39,9 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
     /// Indicates if a shared link can be created for the Box Hub.
     public let canSharedLinkBeCreated: Bool?
 
+    /// Indicates if a public shared link can be created for the Box Hub.
+    public let canPublicSharedLinkBeCreated: Bool?
+
     /// Initializer for a HubUpdateRequestV2025R0.
     ///
     /// - Parameters:
@@ -47,13 +51,15 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
     ///   - isCollaborationRestrictedToEnterprise: Indicates if collaboration is restricted to the enterprise.
     ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the Box Hub.
     ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the Box Hub.
-    public init(title: String? = nil, description: String? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil) {
+    ///   - canPublicSharedLinkBeCreated: Indicates if a public shared link can be created for the Box Hub.
+    public init(title: String? = nil, description: String? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil, canPublicSharedLinkBeCreated: Bool? = nil) {
         self.title = title
         self.description = description
         self.isAiEnabled = isAiEnabled
         self.isCollaborationRestrictedToEnterprise = isCollaborationRestrictedToEnterprise
         self.canNonOwnersInvite = canNonOwnersInvite
         self.canSharedLinkBeCreated = canSharedLinkBeCreated
+        self.canPublicSharedLinkBeCreated = canPublicSharedLinkBeCreated
     }
 
     required public init(from decoder: Decoder) throws {
@@ -64,6 +70,7 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
         isCollaborationRestrictedToEnterprise = try container.decodeIfPresent(Bool.self, forKey: .isCollaborationRestrictedToEnterprise)
         canNonOwnersInvite = try container.decodeIfPresent(Bool.self, forKey: .canNonOwnersInvite)
         canSharedLinkBeCreated = try container.decodeIfPresent(Bool.self, forKey: .canSharedLinkBeCreated)
+        canPublicSharedLinkBeCreated = try container.decodeIfPresent(Bool.self, forKey: .canPublicSharedLinkBeCreated)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -74,6 +81,7 @@ public class HubUpdateRequestV2025R0: Codable, RawJSONReadable {
         try container.encodeIfPresent(isCollaborationRestrictedToEnterprise, forKey: .isCollaborationRestrictedToEnterprise)
         try container.encodeIfPresent(canNonOwnersInvite, forKey: .canNonOwnersInvite)
         try container.encodeIfPresent(canSharedLinkBeCreated, forKey: .canSharedLinkBeCreated)
+        try container.encodeIfPresent(canPublicSharedLinkBeCreated, forKey: .canPublicSharedLinkBeCreated)
     }
 
     /// Sets the raw JSON data.

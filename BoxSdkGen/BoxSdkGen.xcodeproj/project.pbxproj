@@ -17795,9 +17795,10 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 8DBBB4DCC44E3FB7C21B4F4F /* Build configuration list for PBXProject "BoxSdkGen" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -17807,6 +17808,7 @@
 			mainGroup = 47F467DE023DFEDC03202AF8;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			productRefGroup = 2C2AEC5CD2A5FFA5EEC9EFB6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
