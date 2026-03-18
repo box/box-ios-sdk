@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.5.0](https://github.com/box/box-ios-sdk/compare/6.4.0...6.5.0) (2026-03-18)
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add `canPublicSharedLinkBeCreated` to `Hubs` (box/box-codegen[#928](https://github.com/box/box-ios-sdk/issues/928)) ([#1419](https://github.com/box/box-ios-sdk/issues/1419)) ([fc31122](https://github.com/box/box-ios-sdk/commit/fc3112295e70c30828ce8d22b2f0e769c951aa53))
+* **boxsdkgen:** Add configurable timeouts for SDKs (box/box-codegen[#924](https://github.com/box/box-ios-sdk/issues/924)) ([#1413](https://github.com/box/box-ios-sdk/issues/1413)) ([2ec0103](https://github.com/box/box-ios-sdk/commit/2ec010388d83237c5ba54585db652ba8a6614838))
+
 ## [6.4.0](https://github.com/box/box-ios-sdk/compare/6.3.0...6.4.0) (2026-02-11)
 
 
