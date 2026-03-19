@@ -18,7 +18,7 @@ public class HubItemsManager {
     /// - Returns: The `HubItemsV2025R0`.
     /// - Throws: The `GeneralError`.
     public func getHubItemsV2025R0(queryParams: GetHubItemsV2025R0QueryParams, headers: GetHubItemsV2025R0Headers = GetHubItemsV2025R0Headers()) async throws -> HubItemsV2025R0 {
-        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["hub_id": Utils.Strings.toString(value: queryParams.hubId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["hub_id": Utils.Strings.toString(value: queryParams.hubId), "parent_id": Utils.Strings.toString(value: queryParams.parentId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hub_items")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubItemsV2025R0.deserialize(from: response.data!)
