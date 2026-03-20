@@ -21,7 +21,7 @@ public class AiStudioAgentSpreadsheetToolResponse: AiStudioAgentSpreadsheetTool 
     /// Initializer for a AiStudioAgentSpreadsheetToolResponse.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI agent for spreadsheets. For specific model values, see the [available models list](https://developer.box.com/guides/box-ai/supported-models).
+    ///   - model: The model used for the AI agent for spreadsheets. For specific model values, see the [available models list](https://developer.box.com/guides/box-ai/ai-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: 
     ///   - warnings: Warnings concerning tool.
