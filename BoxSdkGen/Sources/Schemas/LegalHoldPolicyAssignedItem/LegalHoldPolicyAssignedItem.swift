@@ -1,58 +1,61 @@
 import Foundation
 
-/// The item that the legal hold policy
-/// is assigned to. Includes type and ID.
-public enum LegalHoldPolicyAssignedItem: Codable {
-    case file(File)
-    case folder(Folder)
-    case webLink(WebLink)
-
-    private enum DiscriminatorCodingKey: String, CodingKey {
+/// The item that the legal hold policy is assigned to. Includes type and ID.
+public class LegalHoldPolicyAssignedItem: Codable, RawJSONReadable {
+    private enum CodingKeys: String, CodingKey {
         case type
+        case id
     }
 
-    public init(from decoder: Decoder) throws {
-        if let container = try? decoder.container(keyedBy: DiscriminatorCodingKey.self) {
-            if let discriminator_0 = try? container.decode(String.self, forKey: .type) {
-                switch discriminator_0 {
-                case "file":
-                    if let content = try? File(from: decoder) {
-                        self = .file(content)
-                        return
-                    }
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
 
-                case "folder":
-                    if let content = try? Folder(from: decoder) {
-                        self = .folder(content)
-                        return
-                    }
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
 
-                case "web_link":
-                    if let content = try? WebLink(from: decoder) {
-                        self = .webLink(content)
-                        return
-                    }
 
-                default:
-                    break
-                }
-            }
+    /// The type of item the policy is assigned to.
+    public let type: LegalHoldPolicyAssignedItemTypeField
 
-        }
+    /// The ID of the item the policy is assigned to.
+    public let id: String
 
-        throw DecodingError.typeMismatch(LegalHoldPolicyAssignedItem.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+    /// Initializer for a LegalHoldPolicyAssignedItem.
+    ///
+    /// - Parameters:
+    ///   - type: The type of item the policy is assigned to.
+    ///   - id: The ID of the item the policy is assigned to.
+    public init(type: LegalHoldPolicyAssignedItemTypeField, id: String) {
+        self.type = type
+        self.id = id
+    }
 
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decode(LegalHoldPolicyAssignedItemTypeField.self, forKey: .type)
+        id = try container.decode(String.self, forKey: .id)
     }
 
     public func encode(to encoder: Encoder) throws {
-        switch self {
-        case .file(let file):
-            try file.encode(to: encoder)
-        case .folder(let folder):
-            try folder.encode(to: encoder)
-        case .webLink(let webLink):
-            try webLink.encode(to: encoder)
-        }
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
+        try container.encode(id, forKey: .id)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

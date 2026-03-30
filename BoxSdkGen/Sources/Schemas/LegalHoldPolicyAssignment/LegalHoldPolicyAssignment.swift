@@ -1,7 +1,7 @@
 import Foundation
 
 /// Legal Hold Assignments are used to assign Legal Hold
-/// Policies to Users, Folders, Files, or File Versions.
+/// Policies to an item type of: Users, Folders, Files, File Versions, Ownership, or Interactions.
 /// 
 /// Creating a Legal Hold Assignment puts a hold
 /// on the File-Versions that belong to the Assignment's
