@@ -5,7 +5,7 @@ public enum SearchForContentQueryParamsContentTypesField: CodableStringEnum {
     case description
     case fileContent
     case comments
-    case tag
+    case tags
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -18,8 +18,8 @@ public enum SearchForContentQueryParamsContentTypesField: CodableStringEnum {
             self = .fileContent
         case "comments".lowercased():
             self = .comments
-        case "tag".lowercased():
-            self = .tag
+        case "tags".lowercased():
+            self = .tags
         default:
             self = .customValue(value)
         }
@@ -35,8 +35,8 @@ public enum SearchForContentQueryParamsContentTypesField: CodableStringEnum {
             return "file_content"
         case .comments:
             return "comments"
-        case .tag:
-            return "tag"
+        case .tags:
+            return "tags"
         case .customValue(let value):
             return value
         }

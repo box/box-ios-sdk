@@ -5,6 +5,7 @@ public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case action
         case item
+        case parentId = "parent_id"
         case status
         case error
     }
@@ -23,6 +24,9 @@ public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
 
     public let item: HubItemReferenceV2025R0?
 
+    /// The ID of the parent block the item was added to.
+    public let parentId: String?
+
     /// The HTTP status code of the operation.
     public let status: Int64?
 
@@ -34,11 +38,13 @@ public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - action: The action performed on the item.
     ///   - item: 
+    ///   - parentId: The ID of the parent block the item was added to.
     ///   - status: The HTTP status code of the operation.
     ///   - error: Error message if the operation failed.
-    public init(action: String? = nil, item: HubItemReferenceV2025R0? = nil, status: Int64? = nil, error: String? = nil) {
+    public init(action: String? = nil, item: HubItemReferenceV2025R0? = nil, parentId: String? = nil, status: Int64? = nil, error: String? = nil) {
         self.action = action
         self.item = item
+        self.parentId = parentId
         self.status = status
         self.error = error
     }
@@ -47,6 +53,7 @@ public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         action = try container.decodeIfPresent(String.self, forKey: .action)
         item = try container.decodeIfPresent(HubItemReferenceV2025R0.self, forKey: .item)
+        parentId = try container.decodeIfPresent(String.self, forKey: .parentId)
         status = try container.decodeIfPresent(Int64.self, forKey: .status)
         error = try container.decodeIfPresent(String.self, forKey: .error)
     }
@@ -55,6 +62,7 @@ public class HubItemOperationResultV2025R0: Codable, RawJSONReadable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(item, forKey: .item)
+        try container.encodeIfPresent(parentId, forKey: .parentId)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(error, forKey: .error)
     }
