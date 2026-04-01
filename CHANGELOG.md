@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.6.0](https://github.com/box/box-ios-sdk/compare/6.5.0...6.6.0) (2026-04-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **boxsdkgen:** Correct search content type 'tags' to match API (box/box-openapi#591) (#1437)
+
+### Bug Fixes
+
+* **boxsdkgen:** Correct search content type 'tags' to match API (box/box-openapi[#591](https://github.com/box/box-ios-sdk/issues/591)) ([#1437](https://github.com/box/box-ios-sdk/issues/1437)) ([ae3f23a](https://github.com/box/box-ios-sdk/commit/ae3f23a570cb19121f03e91d8ec4cfc049878f24))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** Add `reference` to `AI` and `parent_id` to `HubsItems` (box/box-openapi[#588](https://github.com/box/box-ios-sdk/issues/588)) ([#1423](https://github.com/box/box-ios-sdk/issues/1423)) ([a038414](https://github.com/box/box-ios-sdk/commit/a038414b3d635ae8521cd3bfb695d1279161b3cb))
+* **boxsdkgen:** Support Hub Document API (box/box-codegen[#930](https://github.com/box/box-ios-sdk/issues/930)) ([#1438](https://github.com/box/box-ios-sdk/issues/1438)) ([2fd2f2a](https://github.com/box/box-ios-sdk/commit/2fd2f2ad295af902b32732a61eac01ce33ae4cd8))
+
 ## [6.5.0](https://github.com/box/box-ios-sdk/compare/6.4.0...6.5.0) (2026-03-18)
 
 
