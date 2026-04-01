@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.6.0](https://github.com/box/box-ios-sdk/compare/10.5.0...10.6.0) (2026-04-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* Correct search content type 'tags' to match API (box/box-openapi#591) (#1442)
+* Align `LegalHoldPolicyAssignedItem` with API  (box/box-openapi#1554) (box/box-openapi#590) (#1440)
+
+### Bug Fixes
+
+* Align `LegalHoldPolicyAssignedItem` with API  (box/box-openapi[#1554](https://github.com/box/box-ios-sdk/issues/1554)) (box/box-openapi[#590](https://github.com/box/box-ios-sdk/issues/590)) ([#1440](https://github.com/box/box-ios-sdk/issues/1440)) ([c6e9f9b](https://github.com/box/box-ios-sdk/commit/c6e9f9b4b0bd838859b9971032c5fd3965e36e61))
+* Correct search content type 'tags' to match API (box/box-openapi[#591](https://github.com/box/box-ios-sdk/issues/591)) ([#1442](https://github.com/box/box-ios-sdk/issues/1442)) ([4c35f6f](https://github.com/box/box-ios-sdk/commit/4c35f6fb383bde5579d00c9d735720a6285361cb))
+
+
+### New Features and Enhancements
+
+* Add `reference` to `AI` and `parent_id` to `HubsItems` (box/box-openapi[#588](https://github.com/box/box-ios-sdk/issues/588)) ([#1424](https://github.com/box/box-ios-sdk/issues/1424)) ([330e763](https://github.com/box/box-ios-sdk/commit/330e763cc5ca08ab936b20130bda0ea28a8153d2))
+* Support Hub Document API (box/box-codegen[#930](https://github.com/box/box-ios-sdk/issues/930)) ([#1443](https://github.com/box/box-ios-sdk/issues/1443)) ([e176bef](https://github.com/box/box-ios-sdk/commit/e176bef06ab8b80ce3d5f6a4a3890a8d86e53c98))
+
 ## [10.5.0](https://github.com/box/box-ios-sdk/compare/10.4.0...10.5.0) (2026-03-19)
 
 
