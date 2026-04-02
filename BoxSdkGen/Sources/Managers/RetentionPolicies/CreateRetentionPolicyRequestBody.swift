@@ -49,7 +49,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     /// content.  If the policy has a `policy_type` of
     /// `indefinite`, the `retention_length` will also be
     /// `indefinite`.
-    public let retentionLength: String?
+    public let retentionLength: CreateRetentionPolicyRequestBodyRetentionLengthField?
 
     /// Specifies the retention type:
     /// 
@@ -123,7 +123,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     ///     when the policy nears expiration.
     ///   - customNotificationRecipients: A list of users notified when
     ///     the retention policy duration is about to end.
-    public init(policyName: String, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField, description: String? = nil, retentionLength: String? = nil, retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
+    public init(policyName: String, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField, description: String? = nil, retentionLength: CreateRetentionPolicyRequestBodyRetentionLengthField? = nil, retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
         self.policyName = policyName
         self.policyType = policyType
         self.dispositionAction = dispositionAction
@@ -141,7 +141,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
         policyType = try container.decode(CreateRetentionPolicyRequestBodyPolicyTypeField.self, forKey: .policyType)
         dispositionAction = try container.decode(CreateRetentionPolicyRequestBodyDispositionActionField.self, forKey: .dispositionAction)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
+        retentionLength = try container.decodeIfPresent(CreateRetentionPolicyRequestBodyRetentionLengthField.self, forKey: .retentionLength)
         retentionType = try container.decodeIfPresent(CreateRetentionPolicyRequestBodyRetentionTypeField.self, forKey: .retentionType)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
