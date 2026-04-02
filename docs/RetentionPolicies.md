@@ -1,6 +1,5 @@
 # RetentionPoliciesManager
 
-
 - [List retention policies](#list-retention-policies)
 - [Create retention policy](#create-retention-policy)
 - [Get retention policy](#get-retention-policy)
@@ -17,6 +16,7 @@ See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-retention-policies/).
 
 <!-- sample get_retention_policies -->
+
 ```
 try await client.retentionPolicies.getRetentionPolicies()
 ```
@@ -28,13 +28,11 @@ try await client.retentionPolicies.getRetentionPolicies()
 - headers `GetRetentionPoliciesHeaders`
   - Headers of getRetentionPolicies method
 
-
 ### Returns
 
 This function returns a value of type `RetentionPolicies`.
 
 Returns a list retention policies in the enterprise.
-
 
 ## Create retention policy
 
@@ -46,8 +44,9 @@ See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-retention-policies/).
 
 <!-- sample post_retention_policies -->
+
 ```
-try await client.retentionPolicies.createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBody(policyName: retentionPolicyName, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField.finite, areOwnersNotified: true, canOwnerExtendRetention: true, description: retentionDescription, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField.removeRetention, retentionLength: "1", retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField.modifiable))
+try await client.retentionPolicies.createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBody(policyName: retentionPolicyName, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField.finite, areOwnersNotified: true, canOwnerExtendRetention: true, description: retentionDescription, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField.removeRetention, retentionLength: .string("1"), retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField.modifiable))
 ```
 
 ### Arguments
@@ -57,13 +56,11 @@ try await client.retentionPolicies.createRetentionPolicy(requestBody: CreateRete
 - headers `CreateRetentionPolicyHeaders`
   - Headers of createRetentionPolicy method
 
-
 ### Returns
 
 This function returns a value of type `RetentionPolicy`.
 
 Returns a new retention policy object.
-
 
 ## Get retention policy
 
@@ -75,6 +72,7 @@ See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-retention-policies-id/).
 
 <!-- sample get_retention_policies_id -->
+
 ```
 try await client.retentionPolicies.getRetentionPolicyById(retentionPolicyId: retentionPolicy.id)
 ```
@@ -88,13 +86,11 @@ try await client.retentionPolicies.getRetentionPolicyById(retentionPolicyId: ret
 - headers `GetRetentionPolicyByIdHeaders`
   - Headers of getRetentionPolicyById method
 
-
 ### Returns
 
 This function returns a value of type `RetentionPolicy`.
 
 Returns the retention policy object.
-
 
 ## Update retention policy
 
@@ -106,6 +102,7 @@ See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-retention-policies-id/).
 
 <!-- sample put_retention_policies_id -->
+
 ```
 try await client.retentionPolicies.updateRetentionPolicyById(retentionPolicyId: retentionPolicy.id, requestBody: UpdateRetentionPolicyByIdRequestBody(policyName: updatedRetentionPolicyName))
 ```
@@ -119,13 +116,11 @@ try await client.retentionPolicies.updateRetentionPolicyById(retentionPolicyId: 
 - headers `UpdateRetentionPolicyByIdHeaders`
   - Headers of updateRetentionPolicyById method
 
-
 ### Returns
 
 This function returns a value of type `RetentionPolicy`.
 
 Returns the updated retention policy object.
-
 
 ## Delete retention policy
 
@@ -137,6 +132,7 @@ See the endpoint docs at
 [API Reference](https://developer.box.com/reference/delete-retention-policies-id/).
 
 <!-- sample delete_retention_policies_id -->
+
 ```
 try await client.retentionPolicies.deleteRetentionPolicyById(retentionPolicyId: retentionPolicy.id)
 ```
@@ -148,11 +144,8 @@ try await client.retentionPolicies.deleteRetentionPolicyById(retentionPolicyId: 
 - headers `DeleteRetentionPolicyByIdHeaders`
   - Headers of deleteRetentionPolicyById method
 
-
 ### Returns
 
 This function returns a value of type ``.
 
 Returns an empty response when the policy has been deleted.
-
-
