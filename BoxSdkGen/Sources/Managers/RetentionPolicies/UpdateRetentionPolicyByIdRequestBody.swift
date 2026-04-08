@@ -65,7 +65,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     /// content.  If the policy has a `policy_type` of
     /// `indefinite`, the `retention_length` will also be
     /// `indefinite`.
-    public let retentionLength: String?
+    public let retentionLength: UpdateRetentionPolicyByIdRequestBodyRetentionLengthField?
 
     /// Used to retire a retention policy.
     /// 
@@ -135,7 +135,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     ///     under the policy are notified when
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention duration is about to end.
-    public init(policyName: TriStateField<String> = nil, description: TriStateField<String> = nil, dispositionAction: String? = nil, retentionType: TriStateField<String> = nil, retentionLength: String? = nil, status: TriStateField<String> = nil, canOwnerExtendRetention: TriStateField<Bool> = nil, areOwnersNotified: TriStateField<Bool> = nil, customNotificationRecipients: TriStateField<[UserBase]> = nil) {
+    public init(policyName: TriStateField<String> = nil, description: TriStateField<String> = nil, dispositionAction: String? = nil, retentionType: TriStateField<String> = nil, retentionLength: UpdateRetentionPolicyByIdRequestBodyRetentionLengthField? = nil, status: TriStateField<String> = nil, canOwnerExtendRetention: TriStateField<Bool> = nil, areOwnersNotified: TriStateField<Bool> = nil, customNotificationRecipients: TriStateField<[UserBase]> = nil) {
         self._policyName = CodableTriState(state: policyName)
         self._description = CodableTriState(state: description)
         self.dispositionAction = dispositionAction
@@ -153,7 +153,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
         description = try container.decodeIfPresent(String.self, forKey: .description)
         dispositionAction = try container.decodeIfPresent(String.self, forKey: .dispositionAction)
         retentionType = try container.decodeIfPresent(String.self, forKey: .retentionType)
-        retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
+        retentionLength = try container.decodeIfPresent(UpdateRetentionPolicyByIdRequestBodyRetentionLengthField.self, forKey: .retentionLength)
         status = try container.decodeIfPresent(String.self, forKey: .status)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
