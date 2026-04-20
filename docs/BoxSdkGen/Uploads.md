@@ -25,10 +25,10 @@ guard let fileStream = InputStream(url: URL(string: "<URL_TO_YOUR_FILE>")!) else
 }
 
 // Create a request body with the required parameters
-let requestBody = UploadFileRequestBodyArg(
-    attributes: UploadFileRequestBodyArgAttributesField(
+let requestBody = UploadFileRequestBody(
+    attributes: UploadFileRequestBodyAttributesField(
         name: "filename.txt",
-        parent: UploadFileRequestBodyArgAttributesFieldParentField(id: "0")
+        parent: UploadFileRequestBodyAttributesParentField(id: "0")
     ),
     file: fileStream
 )
@@ -50,4 +50,4 @@ let data: Data = stringContent.data(using: .utf8)!
 let stream: InputStream = InputStream(data: data)
 ```
 
-Then we just pass the created `stream` to the `file` argument when initializing the `UploadFileRequestBodyArg` object.
+Then we just pass the created `stream` to the `file` argument when initializing the `UploadFileRequestBody` object.
