@@ -9,6 +9,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
         case retentionLength = "retention_length"
         case status
         case canOwnerExtendRetention = "can_owner_extend_retention"
+        case maxExtensionLength = "max_extension_length"
         case areOwnersNotified = "are_owners_notified"
         case customNotificationRecipients = "custom_notification_recipients"
     }
@@ -78,6 +79,8 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     /// duration is about to end.
     @CodableTriState public private(set) var canOwnerExtendRetention: Bool?
 
+    public let maxExtensionLength: RetentionPolicyMaxExtensionLengthRequest?
+
     /// Determines if owners and co-owners of items
     /// under the policy are notified when
     /// the retention duration is about to end.
@@ -131,11 +134,12 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     ///   - canOwnerExtendRetention: Determines if the owner of items under the policy
     ///     can extend the retention when the original retention
     ///     duration is about to end.
+    ///   - maxExtensionLength: 
     ///   - areOwnersNotified: Determines if owners and co-owners of items
     ///     under the policy are notified when
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention duration is about to end.
-    public init(policyName: TriStateField<String> = nil, description: TriStateField<String> = nil, dispositionAction: String? = nil, retentionType: TriStateField<String> = nil, retentionLength: UpdateRetentionPolicyByIdRequestBodyRetentionLengthField? = nil, status: TriStateField<String> = nil, canOwnerExtendRetention: TriStateField<Bool> = nil, areOwnersNotified: TriStateField<Bool> = nil, customNotificationRecipients: TriStateField<[UserBase]> = nil) {
+    public init(policyName: TriStateField<String> = nil, description: TriStateField<String> = nil, dispositionAction: String? = nil, retentionType: TriStateField<String> = nil, retentionLength: UpdateRetentionPolicyByIdRequestBodyRetentionLengthField? = nil, status: TriStateField<String> = nil, canOwnerExtendRetention: TriStateField<Bool> = nil, maxExtensionLength: RetentionPolicyMaxExtensionLengthRequest? = nil, areOwnersNotified: TriStateField<Bool> = nil, customNotificationRecipients: TriStateField<[UserBase]> = nil) {
         self._policyName = CodableTriState(state: policyName)
         self._description = CodableTriState(state: description)
         self.dispositionAction = dispositionAction
@@ -143,6 +147,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
         self.retentionLength = retentionLength
         self._status = CodableTriState(state: status)
         self._canOwnerExtendRetention = CodableTriState(state: canOwnerExtendRetention)
+        self.maxExtensionLength = maxExtensionLength
         self._areOwnersNotified = CodableTriState(state: areOwnersNotified)
         self._customNotificationRecipients = CodableTriState(state: customNotificationRecipients)
     }
@@ -156,6 +161,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
         retentionLength = try container.decodeIfPresent(UpdateRetentionPolicyByIdRequestBodyRetentionLengthField.self, forKey: .retentionLength)
         status = try container.decodeIfPresent(String.self, forKey: .status)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
+        maxExtensionLength = try container.decodeIfPresent(RetentionPolicyMaxExtensionLengthRequest.self, forKey: .maxExtensionLength)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
         customNotificationRecipients = try container.decodeIfPresent([UserBase].self, forKey: .customNotificationRecipients)
     }
@@ -169,6 +175,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
         try container.encodeIfPresent(retentionLength, forKey: .retentionLength)
         try container.encode(field: _status.state, forKey: .status)
         try container.encode(field: _canOwnerExtendRetention.state, forKey: .canOwnerExtendRetention)
+        try container.encodeIfPresent(maxExtensionLength, forKey: .maxExtensionLength)
         try container.encode(field: _areOwnersNotified.state, forKey: .areOwnersNotified)
         try container.encode(field: _customNotificationRecipients.state, forKey: .customNotificationRecipients)
     }

@@ -31,10 +31,10 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
     /// The context about the key that may include how to find and format it.
     public let prompt: String?
 
-    /// The type of the field. It include but is not limited to string, float, date, enum, and multiSelect.
+    /// The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, and `multiSelect`.
     public let type: String?
 
-    /// A list of options for this field. This is most often used in combination with the enum and multiSelect field types.
+    /// A list of options for this field. This is most often used in combination with the `enum` and `multiSelect` field types.
     public let options: [AiExtractStructuredFieldsOptionsField]?
 
     /// Initializer for a AiExtractStructuredFieldsField.
@@ -44,8 +44,8 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
     ///   - description: A description of the field.
     ///   - displayName: The display name of the field.
     ///   - prompt: The context about the key that may include how to find and format it.
-    ///   - type: The type of the field. It include but is not limited to string, float, date, enum, and multiSelect.
-    ///   - options: A list of options for this field. This is most often used in combination with the enum and multiSelect field types.
+    ///   - type: The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, and `multiSelect`.
+    ///   - options: A list of options for this field. This is most often used in combination with the `enum` and `multiSelect` field types.
     public init(key: String, description: String? = nil, displayName: String? = nil, prompt: String? = nil, type: String? = nil, options: [AiExtractStructuredFieldsOptionsField]? = nil) {
         self.key = key
         self.description = description
