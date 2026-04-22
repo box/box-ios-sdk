@@ -54,6 +54,7 @@
 		013D9DDB2CD6F386D729A604 /* FolderFullMetadataField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCB2A92E7DE48A926374FA /* FolderFullMetadataField.swift */; };
 		01412788677BAC1265A43D78 /* PreflightFileUploadCheckRequestBodyParentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B1B284F6B62A447C149FCE /* PreflightFileUploadCheckRequestBodyParentField.swift */; };
 		01463DBB31F1FCDC5EA1A0DD /* CreateGroupRequestBodyInvitabilityLevelField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834CF4825F52EBA456DDF815 /* CreateGroupRequestBodyInvitabilityLevelField.swift */; };
+		014720CC955145A06B433AFE /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */; };
 		0149E92F7D93D235178B77EF /* AiAgentTextGenTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32CF342884B3BB28C104B /* AiAgentTextGenTypeField.swift */; };
 		015429A4554E059B5D5A0888 /* SharedLinksFoldersManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF02A345DF2761DC40596B7B /* SharedLinksFoldersManagerTests.swift */; };
 		015B83241CDCE8F145CFA01C /* DeleteWebLinkByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A58573C44C165C200B0587 /* DeleteWebLinkByIdHeaders.swift */; };
@@ -566,6 +567,7 @@
 		0F08F77B20D0F4C1714EE469 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDCC4E5F6381114E5416783 /* Groups.swift */; };
 		0F0D9225FB143CA6B12208D1 /* UpdateFileByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E58CB1228E76AF797750E /* UpdateFileByIdQueryParams.swift */; };
 		0F1650014B30A3C924FBDA74 /* CollaborationAllowlistExemptTargetsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010F1B105DC238D7D4F08EF /* CollaborationAllowlistExemptTargetsManagerTests.swift */; };
+		0F18F20269D855A65AEE1BE7 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */; };
 		0F388502F7A039250F42A6A9 /* HubCreateRequestV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06708334F10FE5B5824A3329 /* HubCreateRequestV2025R0.swift */; };
 		0F3E1AC85E36C080366E805E /* BoxSDKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070310DE83C4505B1DFD4BBA /* BoxSDKError.swift */; };
 		0F45F0366AFEA32D0F03C33F /* RoleVariableTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746EE1B66BDE1B9D1BCC785 /* RoleVariableTypeField.swift */; };
@@ -1732,6 +1734,7 @@
 		30275C91A584C1A344E26571 /* GetHubCollaborationsV2025R0Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023EF658AD3038A2983A96A0 /* GetHubCollaborationsV2025R0Headers.swift */; };
 		30276B92EB36207BA08F51DC /* TranscriptSkillCardEntriesAppearsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5679BAAEBEC09F32F44837 /* TranscriptSkillCardEntriesAppearsField.swift */; };
 		302C0A675B4328F5FF23F5C5 /* UpdateGroupByIdRequestBodyInvitabilityLevelField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D165DCBA848D51DEE4585 /* UpdateGroupByIdRequestBodyInvitabilityLevelField.swift */; };
+		302DBE26144ECDFE1028014E /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */; };
 		302E9D9314E4E68CE1583091 /* DeleteGroupMembershipByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047CB7FA79C5BD1156B6DD90 /* DeleteGroupMembershipByIdHeaders.swift */; };
 		3031496915D5A21774ED96AD /* DocGenTagV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB89444E859D0337CF868113 /* DocGenTagV2025R0.swift */; };
 		3031714174EFB733DC4E7C0E /* DeleteClassificationFromFolderHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF23BB9B9C39D7469EA350 /* DeleteClassificationFromFolderHeaders.swift */; };
@@ -1779,6 +1782,7 @@
 		3142C95F0836886362F39DAA /* MetadataTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C30074F37A834EEC4238E29 /* MetadataTemplates.swift */; };
 		314A5C7E2980B372090040EA /* ArchiveV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A3A607052451AB5D0F117 /* ArchiveV2025R0.swift */; };
 		314FD7F39E7F646B884B2ACD /* CreateShieldInformationBarrierHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E6C0016CAE6B6C8779F9F /* CreateShieldInformationBarrierHeaders.swift */; };
+		315226230A85558361FC156F /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */; };
 		3157E3D28F5436ED610DD449 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498AEB6E5308CFA95F227969 /* Metadata.swift */; };
 		31659C907A2BC1E4F78E00A7 /* StartWorkflowRequestBodyFilesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF237B03FC47E026ECCB95 /* StartWorkflowRequestBodyFilesField.swift */; };
 		3171037921304F80487B081E /* DevicePinnersManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825B33C6DC6B4170F3B9D50C /* DevicePinnersManagerTests.swift */; };
@@ -2083,6 +2087,7 @@
 		38FCBD22BCD5180B7A0222A4 /* ShieldListContentV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD37B42513BD76F4238026 /* ShieldListContentV2025R0.swift */; };
 		3907D8C727FD44F380BC347B /* IntegrationMappingSlackOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA804F468DFF40EAE2C9D57 /* IntegrationMappingSlackOptions.swift */; };
 		390AB0C90E0F29ACC6156BD4 /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F52C7BE73C0AA718B5A825 /* TermsOfService.swift */; };
+		390B2D0658362B34B4BC385B /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */; };
 		390C0931BB6B2D00110F797F /* DeleteUserByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE625B8A6A0902677F34D72C /* DeleteUserByIdQueryParams.swift */; };
 		390ECC2B65D5DFAE2DC14D37 /* RestoreFileFromTrashRequestBodyParentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC62A2722F66D743E0483C7 /* RestoreFileFromTrashRequestBodyParentField.swift */; };
 		390F06984A4D84C075FFD8F3 /* WebLinkMini.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77410D3BB24A5CA07D133AF /* WebLinkMini.swift */; };
@@ -2242,6 +2247,7 @@
 		3D5808584035D3FEE664718B /* AiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247F16B982F1ACC69F71844B /* AiResponse.swift */; };
 		3D58FE12339FCAAE3663BCF0 /* GetFileVersionLegalHoldsQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0736F91A4C11D64236A2B /* GetFileVersionLegalHoldsQueryParams.swift */; };
 		3D5A8889C994F093B15AD5E3 /* MetadataTaxonomyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D05A1C3BA0E8E3F390A7CF /* MetadataTaxonomyLevel.swift */; };
+		3D5E3728F7D18043D659FDDF /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */; };
 		3D6BACA181936B33FC81CE41 /* StatusSkillCardSkillCardTitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12494DC17C9FD12AA5E5D03 /* StatusSkillCardSkillCardTitleField.swift */; };
 		3D80724DEFFC1462E3E9D05C /* CreateLegalHoldPolicyHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1764C495883C53F37AE4C1 /* CreateLegalHoldPolicyHeaders.swift */; };
 		3D86D0BCBC44F808A13E91C6 /* MetadataCascadePolicies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006E71CACBBC29F6F2D0B75 /* MetadataCascadePolicies.swift */; };
@@ -2585,6 +2591,7 @@
 		4649BA895EEA72A44C0A912E /* TerminateGroupsSessionsRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4186CDA3CA60BFCFE2D6A48 /* TerminateGroupsSessionsRequestBody.swift */; };
 		4650EF3AABBF75CFAC2106E3 /* RealtimeServers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F04F2EBEE52D9984280B27 /* RealtimeServers.swift */; };
 		465C021082CAC02B7A0020A1 /* UpdateFolderByIdRequestBodySharedLinkAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF43826DD5F0561C69C547C /* UpdateFolderByIdRequestBodySharedLinkAccessField.swift */; };
+		465E20CFF228DB3A085AC200 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */; };
 		466264B0800A421769475ED5 /* FindWebLinkForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8A70E90EDB5A51D0F3787C /* FindWebLinkForSharedLinkHeaders.swift */; };
 		46632E0E4A68D0446B5B0A4A /* CreateUserHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66176558CCB292AA250F6B6 /* CreateUserHeaders.swift */; };
 		4666D4FC362E06089AAC2235 /* UpdateTeamsIntegrationMappingByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FA167B75C5029EADE4FB2 /* UpdateTeamsIntegrationMappingByIdHeaders.swift */; };
@@ -3070,6 +3077,7 @@
 		52BE0364864448BD1FE53EE1 /* CreateWebhookRequestBodyTargetField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6628ACAA184DE730C28D8 /* CreateWebhookRequestBodyTargetField.swift */; };
 		52C73AF0D79C3EE2F508F44E /* AiExtractStructuredResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BA139560E18A089EBE9405 /* AiExtractStructuredResponse.swift */; };
 		52CE99C636FFED0A248773EA /* DeleteStoragePolicyAssignmentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223E068FAB6489749E2BB77C /* DeleteStoragePolicyAssignmentByIdHeaders.swift */; };
+		52D00ED47660A37185408E65 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */; };
 		52D45288D04D1487085FF4F6 /* ZipDownloadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D749A8AE7897A94B888BF75 /* ZipDownloadStatus.swift */; };
 		52D9D920D0D8CF2EC9DCF8DB /* DeleteShieldInformationBarrierSegmentMemberByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7407C94D9E910356788E79 /* DeleteShieldInformationBarrierSegmentMemberByIdHeaders.swift */; };
 		52DB46B43BC301624D14222F /* ShieldInformationBarrierStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B3B1796F4ECB8D0407A308 /* ShieldInformationBarrierStatusField.swift */; };
@@ -3304,6 +3312,7 @@
 		5A3F83C37922183DD3A17662 /* AddClassificationRequestBodyDataStaticConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A52B2BA36F17339F416CA /* AddClassificationRequestBodyDataStaticConfigField.swift */; };
 		5A4027880A5359DD9C3FC03A /* HubItemOperationV2025R0ActionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64D64BEDFD9FFB0700E190 /* HubItemOperationV2025R0ActionField.swift */; };
 		5A418FFE7F55B0D41207BFFF /* RetentionPolicyAssignmentCountsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A602239D23083FE3CCDC67D /* RetentionPolicyAssignmentCountsField.swift */; };
+		5A4A9CDE872FF832EAF4F9F0 /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */; };
 		5A4BA4EEEF65F24987A0F244 /* UpdateSlackIntegrationMappingByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ED4B47D4B958D095EE0788 /* UpdateSlackIntegrationMappingByIdHeaders.swift */; };
 		5A657C5C1AC124EC80831A62 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		5A66667DA673C5613F6EA78C /* DeleteTrashedWebLinkByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CDD0E4818E8110E7E99F5 /* DeleteTrashedWebLinkByIdHeaders.swift */; };
@@ -4003,6 +4012,7 @@
 		6DB975B84B933B5DD5A7B437 /* GetHubDocumentBlocksV2025R0Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D37FD8DF3E709C2EEF93C26 /* GetHubDocumentBlocksV2025R0Headers.swift */; };
 		6DC6056CB0FAD34EED90EB0F /* UserIntegrationMappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D68A0B20B1FF7FAA52915A /* UserIntegrationMappings.swift */; };
 		6DC618BDF69DCB6EF49EFB73 /* GetTrashedFileByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180BBA60426F52FE239E1D1B /* GetTrashedFileByIdQueryParams.swift */; };
+		6DC6F82D01B5FD4967764241 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */; };
 		6DD1460D136F745196827BF5 /* UserBaseV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AA5B15D4F8E6CFA76F528 /* UserBaseV2025R0.swift */; };
 		6DDD512EBF76DC56C230D77F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B0A14A02C0676AF00FD8E /* Task.swift */; };
 		6DDE61CDCB640BEAC7168E95 /* DeleteLegalHoldPolicyByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAF26334AD9AC6E282CAE7 /* DeleteLegalHoldPolicyByIdHeaders.swift */; };
@@ -5257,6 +5267,7 @@
 		8F8CB7221BB50080FD2B90F7 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11544C01F76E44ABE56C8B64 /* Version.swift */; };
 		8F8DB50655AE221D9EFB5861 /* ZipDownloadNameConflictsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4488D4A97B18420EED84E /* ZipDownloadNameConflictsField.swift */; };
 		8F9E17E8569F26399C8D77FD /* CreateFolderLockRequestBodyLockedOperationsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78F240BDE46FC4947032B04 /* CreateFolderLockRequestBodyLockedOperationsField.swift */; };
+		8F9E3941EBFF0F077F057C8A /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */; };
 		8FA15CBC5237759D109742E6 /* WebLinkSharedLinkEffectiveAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7ED3A90EAF00E2FF51987 /* WebLinkSharedLinkEffectiveAccessField.swift */; };
 		8FABC163E096C3087A07E9AC /* FolderClassificationsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BB623EEDCA3D94F06A5C56 /* FolderClassificationsManagerTests.swift */; };
 		8FB1CC655EFC35392C59177B /* DevicePinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338B1D0D7B2B8865C637C68 /* DevicePinner.swift */; };
@@ -5800,6 +5811,7 @@
 		9EC8E0D46E2018405CA45F4A /* StartWorkflowRequestBodyFilesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF237B03FC47E026ECCB95 /* StartWorkflowRequestBodyFilesField.swift */; };
 		9EC9369D627F5A1835533794 /* HubsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F66775CF312CB7469A0F9DB /* HubsManager.swift */; };
 		9ECB3C87F6A61565B90245A2 /* AuthorizeUserHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F10BEC27B8E133A5CA64A /* AuthorizeUserHeaders.swift */; };
+		9ED4C9BEF2939A33F4CAF403 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */; };
 		9EDB099B50B7383B52E77114 /* TrashWebLinkPathCollectionEntriesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE20BC6125D2834441B297 /* TrashWebLinkPathCollectionEntriesField.swift */; };
 		9EDC220C622748A693B2556E /* ConflictError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508E5FD59F0E1987416455E5 /* ConflictError.swift */; };
 		9EDD7958A0694281BDA6EFDE /* AddShareLinkToFolderRequestBodySharedLinkAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6BD162509AAE4071A244EF /* AddShareLinkToFolderRequestBodySharedLinkAccessField.swift */; };
@@ -6012,6 +6024,7 @@
 		A48060926789779BE381EE76 /* DocGenJobBaseV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F440B128A581DCA8EFD6 /* DocGenJobBaseV2025R0TypeField.swift */; };
 		A482E1C09D65B64DCCEFE975 /* ResponseFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCBAC6A6CA32BF7D6BBFB18 /* ResponseFormat.swift */; };
 		A4A494B552D8B07BF7DF8FAC /* ShieldListContentIpV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E882956EE5A71E6956FC2A44 /* ShieldListContentIpV2025R0.swift */; };
+		A4A5B676457EC5DC741264F3 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */; };
 		A4AB3858B6B96849FD65EF19 /* StartWorkflowRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72D24E4593877FEE8692E7 /* StartWorkflowRequestBody.swift */; };
 		A4B20DB915D558F17724F642 /* UpdateAllSkillCardsOnFileRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AFF10C7017C7146ECEB768 /* UpdateAllSkillCardsOnFileRequestBody.swift */; };
 		A4B5ED220632B5B403384657 /* UpdateSharedLinkOnWebLinkRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A6D5D386F2D1060255C50 /* UpdateSharedLinkOnWebLinkRequestBody.swift */; };
@@ -6702,6 +6715,7 @@
 		B75D36352C95FF88833064C3 /* TrashWebLinkRestoredTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D784C92AD4E671BFB25DE2B /* TrashWebLinkRestoredTypeField.swift */; };
 		B76CFBE6EFC1E35D5F59E83E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36E6B3330A1B8B7F6A6403 /* XCTest+Extensions.swift */; };
 		B773A11854D4D60AD51B75A9 /* CollaborationAllowlistEntriesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB17787DF519C41C919208E7 /* CollaborationAllowlistEntriesManagerTests.swift */; };
+		B77B50E7FC770F9E0F6D0837 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */; };
 		B7878F999A94B01D033AEBEE /* CreateClassificationTemplateRequestBodyTemplateKeyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D62F35A486736CA17F79D1 /* CreateClassificationTemplateRequestBodyTemplateKeyField.swift */; };
 		B7936AC5FB3C44D84FDCFC77 /* ShieldInformationBarriersManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546C805309B9AFAAE0ADBB4 /* ShieldInformationBarriersManagerTests.swift */; };
 		B79D637105B7BFC0B996513E /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB7DF3D260FF33A7CAB15A4 /* AnyCodable.swift */; };
@@ -7180,6 +7194,7 @@
 		C54D5C6E97106A70155D15C8 /* FolderSharedLinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5066ED85D9B043BA5F8FAD /* FolderSharedLinkField.swift */; };
 		C55026636E47E90B3B43DB8B /* GetGroupsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDD97BA6C1DCE7DF42ABEB2 /* GetGroupsHeaders.swift */; };
 		C550488DFE7617DA215C37E8 /* ArchiveV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A3A607052451AB5D0F117 /* ArchiveV2025R0.swift */; };
+		C56295AF0A28485EDE17CCA2 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */; };
 		C564D9D6D1A293CF866B1941 /* CollaboratorVariableVariableValueTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99A4F28583E03BA3D537017 /* CollaboratorVariableVariableValueTypeField.swift */; };
 		C566B2E563B2B0CC11084E80 /* UserTrackingCodeV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA801D1D8411BE2465DDAAE /* UserTrackingCodeV2025R0.swift */; };
 		C568C50584EA04BAD727E1C1 /* AiAgentLongTextToolEmbeddingsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C592B40CEB5528096A5209 /* AiAgentLongTextToolEmbeddingsField.swift */; };
@@ -7963,6 +7978,7 @@
 		DB0DB2F195D2B377631EA092 /* WebLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66797EF875D839E8EDB15E51 /* WebLink.swift */; };
 		DB107C33C54BC77E8CD85552 /* KeywordSkillCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18ACFF15A0955D7E922DFAF /* KeywordSkillCard.swift */; };
 		DB1B74D11B4CF8A357AF7BD4 /* StartWorkflowRequestBodyFilesTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9450946E985F71D4EF58E2 /* StartWorkflowRequestBodyFilesTypeField.swift */; };
+		DB264DDD98650328E3BC7463 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */; };
 		DB393F02E0D45EBF106ECFAD /* AiTextGenAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5157EEEA1109E9FED147E /* AiTextGenAgent.swift */; };
 		DB3F1D0DC92CE1307EA10902 /* HubAccessGranteeV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9766E505E5DDCE6965251BF9 /* HubAccessGranteeV2025R0.swift */; };
 		DB413B359C732924A780C4EA /* SignTemplateAdditionalInfoNonEditableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF1A566BDECA81D5E8D866 /* SignTemplateAdditionalInfoNonEditableField.swift */; };
@@ -8244,6 +8260,7 @@
 		E26E7E859E6C4C683F4AA533 /* DefaultNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07D925023A2AB588AEFEFE /* DefaultNetworkClient.swift */; };
 		E2828265250327E028154E58 /* UpdateSharedLinkOnFileRequestBodySharedLinkPermissionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB1FB8C35B9694496F00E8 /* UpdateSharedLinkOnFileRequestBodySharedLinkPermissionsField.swift */; };
 		E288089CFEE2E47C6D9AA3B1 /* TranscriptSkillCardSkillField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68612D72BD9F662F706A10F1 /* TranscriptSkillCardSkillField.swift */; };
+		E28904D553A497CD99DAE1E5 /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */; };
 		E2904B564F6F9A93A5396A20 /* FileReferenceV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAACFD849564AD8E0AC407F /* FileReferenceV2025R0TypeField.swift */; };
 		E29E0B4A4DCA728F9A8CA4A6 /* AiExtractStructuredFieldsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2075A4D7D24050DCCE7F31 /* AiExtractStructuredFieldsField.swift */; };
 		E2A4A90704A550CA90D8A626 /* GetStoragePolicyAssignmentsQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B7643B78D80D6D73E0596C /* GetStoragePolicyAssignmentsQueryParams.swift */; };
@@ -8411,6 +8428,7 @@
 		E72D151F94E7C50554069D4B /* GetLegalHoldPolicyAssignmentFileOnHoldQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C7A18001531B10088D5C03 /* GetLegalHoldPolicyAssignmentFileOnHoldQueryParams.swift */; };
 		E7375638551D70301A177F62 /* CreateWebhookRequestBodyTriggersField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B67A4FF7177E407B7D9A6 /* CreateWebhookRequestBodyTriggersField.swift */; };
 		E73BB51E26EC8F9CC3BD2E76 /* CreateShieldListV2025R0Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4DCA96CE53B2D5E7FABE27 /* CreateShieldListV2025R0Headers.swift */; };
+		E748822B132A812187C54E75 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */; };
 		E74BD72C5968482108386F63 /* JsonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B48FB8FDD47DBDDB49546 /* JsonUtils.swift */; };
 		E7606FD27E29BD2BD142409C /* AiMultipleAgentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83985FBE3EACE4533EF2A67 /* AiMultipleAgentResponse.swift */; };
 		E76ADCB358441092F97E385C /* EnterpriseFeatureSettingV2025R0FeatureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231BA3617BB1519F7E5327A2 /* EnterpriseFeatureSettingV2025R0FeatureField.swift */; };
@@ -8433,6 +8451,7 @@
 		E7F2224146F25417208063E1 /* UpdateTaskAssignmentByIdRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A832EBA0BF868DE5D5866983 /* UpdateTaskAssignmentByIdRequestBody.swift */; };
 		E7F7387941D3B789DF9DBBB5 /* UpdateRetentionPolicyByIdRequestBodyRetentionLengthField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E89343FC12D14AB00D262 /* UpdateRetentionPolicyByIdRequestBodyRetentionLengthField.swift */; };
 		E7F7799BC4D56BAEA43281B8 /* AddClassificationRequestBodyDataStaticConfigClassificationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26C22C8E37D563E03215AB /* AddClassificationRequestBodyDataStaticConfigClassificationField.swift */; };
+		E7F85315FF1765DED6F28C2D /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */; };
 		E7FD36D0B521D58EA5835514 /* GetRetentionPolicyByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5404B1DBD602F8181BC0F263 /* GetRetentionPolicyByIdHeaders.swift */; };
 		E824104FF7157D36515D0C2A /* DeleteFolderByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3488997E4E26D1CED1F0B706 /* DeleteFolderByIdQueryParams.swift */; };
 		E82C50101B0E38FDD763C98A /* WorkflowFlowsOutcomesActionTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA9B8B337C3750922E6B88 /* WorkflowFlowsOutcomesActionTypeField.swift */; };
@@ -8655,6 +8674,7 @@
 		EDD7F4704A431BF4118D5F60 /* CreateUserRequestBodyStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4281287FD800D159AE2AC46 /* CreateUserRequestBodyStatusField.swift */; };
 		EDD9047037AC48483CD99494 /* UpdateClassificationRequestBodyFieldKeyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B001733845353931C481D2B /* UpdateClassificationRequestBodyFieldKeyField.swift */; };
 		EDDC81A74A8E36E643FAADC0 /* CreateClassificationTemplateHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560F2839AEACB7F412D3DD6 /* CreateClassificationTemplateHeaders.swift */; };
+		EDE4A2D11EED5F63FD7F4586 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */; };
 		EDEBB62D4BAC367939B4FE46 /* GetFolderCollaborationsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF73D6481BD02F78762A2E /* GetFolderCollaborationsHeaders.swift */; };
 		EDECCA7296E2C653F1432751 /* SignRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D79369292D2A6D42C03E4C /* SignRequests.swift */; };
 		EDF8B3E6BF68B0F1A446517C /* CreateUserRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99962409D71B64C107CE7E0A /* CreateUserRequestBody.swift */; };
@@ -10056,6 +10076,7 @@
 		561F0401A692C925218DBB11 /* GetRetentionPoliciesQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRetentionPoliciesQueryParams.swift; sourceTree = "<group>"; };
 		562DF5491F2A7AE72A1CD92E /* FetchOptions+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchOptions+Extension.swift"; sourceTree = "<group>"; };
 		5633675A31D6C0136B3F8DA4 /* SearchForContentQueryParamsTrashContentField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForContentQueryParamsTrashContentField.swift; sourceTree = "<group>"; };
+		56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyMaxExtensionLengthRequest.swift; sourceTree = "<group>"; };
 		563D7728661CC60FC0563CDE /* GetTrashedWebLinkByIdHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrashedWebLinkByIdHeaders.swift; sourceTree = "<group>"; };
 		56557F7043F4FF4635B427D2 /* FileBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBase.swift; sourceTree = "<group>"; };
 		56715A732CF47222978B117C /* AiExtractStructuredMetadataTemplateTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiExtractStructuredMetadataTemplateTypeField.swift; sourceTree = "<group>"; };
@@ -11003,7 +11024,9 @@
 		D5271E09EC56B6F24CFA5A9A /* GetFileUploadSessionPartsByUrlHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFileUploadSessionPartsByUrlHeaders.swift; sourceTree = "<group>"; };
 		D543EB33173D73BBA21C3ECE /* FolderWatermarksManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderWatermarksManagerTests.swift; sourceTree = "<group>"; };
 		D55204827B3642844A8A3903 /* BoxSdkGenTests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxSdkGenTests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyMaxExtensionLengthResponse.swift; sourceTree = "<group>"; };
 		D5A5512CC2E62EE795AF7021 /* SignTemplateAdditionalInfoRequiredField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTemplateAdditionalInfoRequiredField.swift; sourceTree = "<group>"; };
+		D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyMaxExtensionLengthResponseEnum.swift; sourceTree = "<group>"; };
 		D5DAF0D20E11A9564EB19468 /* HubSectionTitleTextBlockV2025R0TypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSectionTitleTextBlockV2025R0TypeField.swift; sourceTree = "<group>"; };
 		D604EE62C591B86DAB076787 /* GetTermsOfServiceUserStatusesHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTermsOfServiceUserStatusesHeaders.swift; sourceTree = "<group>"; };
 		D621300E91B7433D63A79C33 /* HubItemV2025R0TypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubItemV2025R0TypeField.swift; sourceTree = "<group>"; };
@@ -11011,6 +11034,7 @@
 		D6A01D354945E5DADD8D5DF6 /* TrashFileTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashFileTypeField.swift; sourceTree = "<group>"; };
 		D6C9CC58C132F24992B2F1F0 /* SignRequestSignFilesField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestSignFilesField.swift; sourceTree = "<group>"; };
 		D7241797585329BA38D6373B /* InMemoryTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTokenStorage.swift; sourceTree = "<group>"; };
+		D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyMaxExtensionLengthRequestEnum.swift; sourceTree = "<group>"; };
 		D75297D09617802C8801C458 /* CreateCollaborationRequestBodyItemTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollaborationRequestBodyItemTypeField.swift; sourceTree = "<group>"; };
 		D7533E1F2760DCE46C0E7CC8 /* MetadataTaxonomies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataTaxonomies.swift; sourceTree = "<group>"; };
 		D769276799FF14E0360DCE91 /* GetSlackIntegrationMappingHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSlackIntegrationMappingHeaders.swift; sourceTree = "<group>"; };
@@ -14194,6 +14218,15 @@
 			path = ClientError;
 			sourceTree = "<group>";
 		};
+		7D7F9DC9D7DFE08C0FFBE019 /* RetentionPolicyMaxExtensionLengthRequest */ = {
+			isa = PBXGroup;
+			children = (
+				56378FCA67E7FE1EA2092D16 /* RetentionPolicyMaxExtensionLengthRequest.swift */,
+				D7373BB226C3126324538940 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift */,
+			);
+			path = RetentionPolicyMaxExtensionLengthRequest;
+			sourceTree = "<group>";
+		};
 		7DF036C223FEA7F122F6AC8A /* MetadataQueryResults */ = {
 			isa = PBXGroup;
 			children = (
@@ -16425,6 +16458,15 @@
 			path = SignRequests;
 			sourceTree = "<group>";
 		};
+		D953E61CA0476F70E39E2E8B /* RetentionPolicyMaxExtensionLengthResponse */ = {
+			isa = PBXGroup;
+			children = (
+				D564B53720D3AB9428263216 /* RetentionPolicyMaxExtensionLengthResponse.swift */,
+				D5D37DD7A62AADDED4F8A99E /* RetentionPolicyMaxExtensionLengthResponseEnum.swift */,
+			);
+			path = RetentionPolicyMaxExtensionLengthResponse;
+			sourceTree = "<group>";
+		};
 		DA1B20F64CB23B5414C0F465 /* EnterpriseConfigurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -17658,6 +17700,8 @@
 				63316AEFC37AD1CB55809D1C /* RetentionPolicyAssignment */,
 				DCAB22AB8AB0435E72927658 /* RetentionPolicyAssignments */,
 				2B52F47DE144A691B75B8BF1 /* RetentionPolicyBase */,
+				7D7F9DC9D7DFE08C0FFBE019 /* RetentionPolicyMaxExtensionLengthRequest */,
+				D953E61CA0476F70E39E2E8B /* RetentionPolicyMaxExtensionLengthResponse */,
 				CDF713BF085B508EC70CD21B /* RetentionPolicyMini */,
 				CA08D95F125CF49BDBC6F8F5 /* RoleVariable */,
 				3049A5486D7C2E335CEBA0D0 /* SearchResultItem */,
@@ -19500,6 +19544,10 @@
 				D331DF7086FFC31B9CE3EDD8 /* RetentionPolicyAssignmentsManager.swift in Sources */,
 				A3C30CB0DF64C896CE834075 /* RetentionPolicyBase.swift in Sources */,
 				5AC0C86CCFAE5D24D25A12E1 /* RetentionPolicyBaseTypeField.swift in Sources */,
+				8F9E3941EBFF0F077F057C8A /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */,
+				465E20CFF228DB3A085AC200 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */,
+				3D5E3728F7D18043D659FDDF /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */,
+				E7F85315FF1765DED6F28C2D /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */,
 				E1AE4EACFC959D9E82D4E772 /* RetentionPolicyMini.swift in Sources */,
 				3FE39B0AD1B1961C88C23AB7 /* RetentionPolicyMiniDispositionActionField.swift in Sources */,
 				09094C254C34DAB3B0B96496 /* RetentionPolicyPolicyTypeField.swift in Sources */,
@@ -21287,6 +21335,10 @@
 				197C879F55FE1357D360EA98 /* RetentionPolicyAssignmentsManager.swift in Sources */,
 				8563E9393C3FCEE808B3BFB0 /* RetentionPolicyBase.swift in Sources */,
 				AA103BEF9B5663D81446DA2A /* RetentionPolicyBaseTypeField.swift in Sources */,
+				A4A5B676457EC5DC741264F3 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */,
+				014720CC955145A06B433AFE /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */,
+				315226230A85558361FC156F /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */,
+				B77B50E7FC770F9E0F6D0837 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */,
 				4ADE7527272306C570F3C49E /* RetentionPolicyMini.swift in Sources */,
 				E9673A7DBC34AAAC71682213 /* RetentionPolicyMiniDispositionActionField.swift in Sources */,
 				EEAB418A1DCAC5BE2EFCF343 /* RetentionPolicyPolicyTypeField.swift in Sources */,
@@ -23248,6 +23300,10 @@
 				0C3900A3ECBAD3A82C72A45C /* RetentionPolicyAssignmentsManager.swift in Sources */,
 				3F538279759C64970C8A6B21 /* RetentionPolicyBase.swift in Sources */,
 				37AD8FE037E33C6E194ED23B /* RetentionPolicyBaseTypeField.swift in Sources */,
+				0F18F20269D855A65AEE1BE7 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */,
+				C56295AF0A28485EDE17CCA2 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */,
+				302DBE26144ECDFE1028014E /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */,
+				DB264DDD98650328E3BC7463 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */,
 				AA5754E618A17BD5CEC1EEAB /* RetentionPolicyMini.swift in Sources */,
 				DA3CF798CC0E1E16ED67CF4D /* RetentionPolicyMiniDispositionActionField.swift in Sources */,
 				AA3863286A91764A9F440F42 /* RetentionPolicyPolicyTypeField.swift in Sources */,
@@ -25035,6 +25091,10 @@
 				3596DBA7536C8DF9BD40D6F3 /* RetentionPolicyAssignmentsManager.swift in Sources */,
 				E54AC3E0AEC72B81672B2FE7 /* RetentionPolicyBase.swift in Sources */,
 				E72D11CEAB6C336C6FEE97A0 /* RetentionPolicyBaseTypeField.swift in Sources */,
+				6DC6F82D01B5FD4967764241 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */,
+				52D00ED47660A37185408E65 /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */,
+				E28904D553A497CD99DAE1E5 /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */,
+				9ED4C9BEF2939A33F4CAF403 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */,
 				903E0CFEA036EDB5B60D8D08 /* RetentionPolicyMini.swift in Sources */,
 				451F0773168B04987EAB7C87 /* RetentionPolicyMiniDispositionActionField.swift in Sources */,
 				34D7428D3C372BDB472830E9 /* RetentionPolicyPolicyTypeField.swift in Sources */,
@@ -26909,6 +26969,10 @@
 				DBD223263A5654C2CAB980FB /* RetentionPolicyAssignmentsManager.swift in Sources */,
 				F2287655ED20548E4CD0E449 /* RetentionPolicyBase.swift in Sources */,
 				7544A42AD9822D9F69AC9CEF /* RetentionPolicyBaseTypeField.swift in Sources */,
+				EDE4A2D11EED5F63FD7F4586 /* RetentionPolicyMaxExtensionLengthRequest.swift in Sources */,
+				390B2D0658362B34B4BC385B /* RetentionPolicyMaxExtensionLengthRequestEnum.swift in Sources */,
+				5A4A9CDE872FF832EAF4F9F0 /* RetentionPolicyMaxExtensionLengthResponse.swift in Sources */,
+				E748822B132A812187C54E75 /* RetentionPolicyMaxExtensionLengthResponseEnum.swift in Sources */,
 				55593C7FB12B5CBEB4B71440 /* RetentionPolicyMini.swift in Sources */,
 				C78768D143CD66A7CD53BB89 /* RetentionPolicyMiniDispositionActionField.swift in Sources */,
 				5941753355FAA2F4A7C411E3 /* RetentionPolicyPolicyTypeField.swift in Sources */,

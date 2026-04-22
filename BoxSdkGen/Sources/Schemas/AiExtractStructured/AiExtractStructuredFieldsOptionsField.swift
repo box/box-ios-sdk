@@ -14,13 +14,13 @@ public class AiExtractStructuredFieldsOptionsField: Codable, RawJSONReadable {
     }
 
 
-    /// A unique identifier for the field.
+    /// A unique identifier for the option.
     public let key: String
 
     /// Initializer for a AiExtractStructuredFieldsOptionsField.
     ///
     /// - Parameters:
-    ///   - key: A unique identifier for the field.
+    ///   - key: A unique identifier for the option.
     public init(key: String) {
         self.key = key
     }

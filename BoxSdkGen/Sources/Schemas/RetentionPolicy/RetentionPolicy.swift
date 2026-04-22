@@ -107,6 +107,7 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///     which will lift the retention policy from the content,
     ///     allowing it to be deleted by users,
     ///     once the retention policy has expired.
+    ///   - maxExtensionLength: 
     ///   - description: The additional text description of the retention policy.
     ///   - policyType: The type of the retention policy. A retention
     ///     policy type can either be `finite`, where a
@@ -144,7 +145,7 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention policy duration is about to end.
     ///   - assignmentCounts: Counts the retention policy assignments for each item type.
-    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, maxExtensionLength: RetentionPolicyMaxExtensionLengthResponse? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
         self.description = description
         self.policyType = policyType
         self.retentionType = retentionType
@@ -157,7 +158,7 @@ public class RetentionPolicy: RetentionPolicyMini {
         self.customNotificationRecipients = customNotificationRecipients
         self.assignmentCounts = assignmentCounts
 
-        super.init(id: id, type: type, policyName: policyName, retentionLength: retentionLength, dispositionAction: dispositionAction)
+        super.init(id: id, type: type, policyName: policyName, retentionLength: retentionLength, dispositionAction: dispositionAction, maxExtensionLength: maxExtensionLength)
     }
 
     required public init(from decoder: Decoder) throws {
