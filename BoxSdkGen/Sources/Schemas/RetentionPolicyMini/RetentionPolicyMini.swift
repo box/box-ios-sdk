@@ -7,6 +7,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         case policyName = "policy_name"
         case retentionLength = "retention_length"
         case dispositionAction = "disposition_action"
+        case maxExtensionLength = "max_extension_length"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -38,6 +39,8 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     /// once the retention policy has expired.
     public let dispositionAction: RetentionPolicyMiniDispositionActionField?
 
+    public let maxExtensionLength: RetentionPolicyMaxExtensionLengthResponse?
+
     /// Initializer for a RetentionPolicyMini.
     ///
     /// - Parameters:
@@ -57,10 +60,12 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     ///     which will lift the retention policy from the content,
     ///     allowing it to be deleted by users,
     ///     once the retention policy has expired.
-    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil) {
+    ///   - maxExtensionLength: 
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, maxExtensionLength: RetentionPolicyMaxExtensionLengthResponse? = nil) {
         self.policyName = policyName
         self.retentionLength = retentionLength
         self.dispositionAction = dispositionAction
+        self.maxExtensionLength = maxExtensionLength
 
         super.init(id: id, type: type)
     }
@@ -70,6 +75,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         policyName = try container.decodeIfPresent(String.self, forKey: .policyName)
         retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
         dispositionAction = try container.decodeIfPresent(RetentionPolicyMiniDispositionActionField.self, forKey: .dispositionAction)
+        maxExtensionLength = try container.decodeIfPresent(RetentionPolicyMaxExtensionLengthResponse.self, forKey: .maxExtensionLength)
 
         try super.init(from: decoder)
     }
@@ -79,6 +85,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         try container.encodeIfPresent(policyName, forKey: .policyName)
         try container.encodeIfPresent(retentionLength, forKey: .retentionLength)
         try container.encodeIfPresent(dispositionAction, forKey: .dispositionAction)
+        try container.encodeIfPresent(maxExtensionLength, forKey: .maxExtensionLength)
         try super.encode(to: encoder)
     }
 

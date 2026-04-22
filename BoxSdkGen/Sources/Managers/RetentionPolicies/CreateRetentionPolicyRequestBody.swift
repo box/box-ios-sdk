@@ -9,6 +9,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
         case retentionLength = "retention_length"
         case retentionType = "retention_type"
         case canOwnerExtendRetention = "can_owner_extend_retention"
+        case maxExtensionLength = "max_extension_length"
         case areOwnersNotified = "are_owners_notified"
         case customNotificationRecipients = "custom_notification_recipients"
     }
@@ -72,6 +73,8 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     /// extend the retention.
     public let canOwnerExtendRetention: Bool?
 
+    public let maxExtensionLength: RetentionPolicyMaxExtensionLengthRequest?
+
     /// Whether owner and co-owners of a file are notified
     /// when the policy nears expiration.
     public let areOwnersNotified: Bool?
@@ -119,11 +122,12 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     ///     compliance with regulatory retention policies.
     ///   - canOwnerExtendRetention: Whether the owner of a file will be allowed to
     ///     extend the retention.
+    ///   - maxExtensionLength: 
     ///   - areOwnersNotified: Whether owner and co-owners of a file are notified
     ///     when the policy nears expiration.
     ///   - customNotificationRecipients: A list of users notified when
     ///     the retention policy duration is about to end.
-    public init(policyName: String, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField, description: String? = nil, retentionLength: CreateRetentionPolicyRequestBodyRetentionLengthField? = nil, retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
+    public init(policyName: String, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField, description: String? = nil, retentionLength: CreateRetentionPolicyRequestBodyRetentionLengthField? = nil, retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, maxExtensionLength: RetentionPolicyMaxExtensionLengthRequest? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
         self.policyName = policyName
         self.policyType = policyType
         self.dispositionAction = dispositionAction
@@ -131,6 +135,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
         self.retentionLength = retentionLength
         self.retentionType = retentionType
         self.canOwnerExtendRetention = canOwnerExtendRetention
+        self.maxExtensionLength = maxExtensionLength
         self.areOwnersNotified = areOwnersNotified
         self.customNotificationRecipients = customNotificationRecipients
     }
@@ -144,6 +149,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
         retentionLength = try container.decodeIfPresent(CreateRetentionPolicyRequestBodyRetentionLengthField.self, forKey: .retentionLength)
         retentionType = try container.decodeIfPresent(CreateRetentionPolicyRequestBodyRetentionTypeField.self, forKey: .retentionType)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
+        maxExtensionLength = try container.decodeIfPresent(RetentionPolicyMaxExtensionLengthRequest.self, forKey: .maxExtensionLength)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
         customNotificationRecipients = try container.decodeIfPresent([UserMini].self, forKey: .customNotificationRecipients)
     }
@@ -157,6 +163,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
         try container.encodeIfPresent(retentionLength, forKey: .retentionLength)
         try container.encodeIfPresent(retentionType, forKey: .retentionType)
         try container.encodeIfPresent(canOwnerExtendRetention, forKey: .canOwnerExtendRetention)
+        try container.encodeIfPresent(maxExtensionLength, forKey: .maxExtensionLength)
         try container.encodeIfPresent(areOwnersNotified, forKey: .areOwnersNotified)
         try container.encodeIfPresent(customNotificationRecipients, forKey: .customNotificationRecipients)
     }

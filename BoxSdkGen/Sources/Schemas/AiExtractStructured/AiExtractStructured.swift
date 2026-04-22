@@ -6,9 +6,9 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         case items
         case metadataTemplate = "metadata_template"
         case fields
+        case aiAgent = "ai_agent"
         case includeConfidenceScore = "include_confidence_score"
         case includeReference = "include_reference"
-        case aiAgent = "ai_agent"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -31,13 +31,13 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     /// For your request to work, you must provide either `metadata_template` or `fields`, but not both.
     public let fields: [AiExtractStructuredFieldsField]?
 
+    public let aiAgent: AiExtractStructuredAgent?
+
     /// A flag to indicate whether confidence scores for every extracted field should be returned.
     public let includeConfidenceScore: Bool?
 
     /// A flag to indicate whether references for every extracted field should be returned.
     public let includeReference: Bool?
-
-    public let aiAgent: AiExtractStructuredAgent?
 
     /// Initializer for a AiExtractStructured.
     ///
@@ -47,16 +47,16 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     ///     For your request to work, you must provide either `metadata_template` or `fields`, but not both.
     ///   - fields: The fields to be extracted from the provided items.
     ///     For your request to work, you must provide either `metadata_template` or `fields`, but not both.
+    ///   - aiAgent: 
     ///   - includeConfidenceScore: A flag to indicate whether confidence scores for every extracted field should be returned.
     ///   - includeReference: A flag to indicate whether references for every extracted field should be returned.
-    ///   - aiAgent: 
-    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, includeConfidenceScore: Bool? = nil, includeReference: Bool? = nil, aiAgent: AiExtractStructuredAgent? = nil) {
+    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, aiAgent: AiExtractStructuredAgent? = nil, includeConfidenceScore: Bool? = nil, includeReference: Bool? = nil) {
         self.items = items
         self.metadataTemplate = metadataTemplate
         self.fields = fields
+        self.aiAgent = aiAgent
         self.includeConfidenceScore = includeConfidenceScore
         self.includeReference = includeReference
-        self.aiAgent = aiAgent
     }
 
     required public init(from decoder: Decoder) throws {
@@ -64,9 +64,9 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         items = try container.decode([AiItemBase].self, forKey: .items)
         metadataTemplate = try container.decodeIfPresent(AiExtractStructuredMetadataTemplateField.self, forKey: .metadataTemplate)
         fields = try container.decodeIfPresent([AiExtractStructuredFieldsField].self, forKey: .fields)
+        aiAgent = try container.decodeIfPresent(AiExtractStructuredAgent.self, forKey: .aiAgent)
         includeConfidenceScore = try container.decodeIfPresent(Bool.self, forKey: .includeConfidenceScore)
         includeReference = try container.decodeIfPresent(Bool.self, forKey: .includeReference)
-        aiAgent = try container.decodeIfPresent(AiExtractStructuredAgent.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -74,9 +74,9 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         try container.encode(items, forKey: .items)
         try container.encodeIfPresent(metadataTemplate, forKey: .metadataTemplate)
         try container.encodeIfPresent(fields, forKey: .fields)
+        try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
         try container.encodeIfPresent(includeConfidenceScore, forKey: .includeConfidenceScore)
         try container.encodeIfPresent(includeReference, forKey: .includeReference)
-        try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
     }
 
     /// Sets the raw JSON data.
