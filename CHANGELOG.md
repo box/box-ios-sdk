@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### ⚠ BREAKING CHANGES
 
 * **boxsdkgen:** Update `retentionLength` field to accept both string and integer (box/box-codegen#932) (#1451)
+* **boxsdkgen:** Add `max_extension_length` field to Retention Policies (box/box-openapi#593) [#1464]
 
 ### Bug Fixes
 
