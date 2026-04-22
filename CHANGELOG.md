@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.7.0](https://github.com/box/box-ios-sdk/compare/6.6.0...6.7.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **boxsdkgen:** Update `retentionLength` field to accept both string and integer (box/box-codegen#932) (#1451)
+
+### Bug Fixes
+
+* **boxsdkgen:** Update `retentionLength` field to accept both string and integer (box/box-codegen[#932](https://github.com/box/box-ios-sdk/issues/932)) ([#1451](https://github.com/box/box-ios-sdk/issues/1451)) ([5eacf00](https://github.com/box/box-ios-sdk/commit/5eacf00a2b2b84dcfe24c4eeae06dbf8f24296d4))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** Add `max_extension_length` field to Retention Policies (box/box-openapi[#593](https://github.com/box/box-ios-sdk/issues/593)) ([#1464](https://github.com/box/box-ios-sdk/issues/1464)) ([c520993](https://github.com/box/box-ios-sdk/commit/c520993af9b0129f376fda8f8451712187e73707))
+
 ## [6.6.0](https://github.com/box/box-ios-sdk/compare/6.5.0...6.6.0) (2026-04-01)
 
 
