@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.7.1](https://github.com/box/box-ios-sdk/compare/6.7.0...6.7.1) (2026-04-23)
+
 ## [6.7.0](https://github.com/box/box-ios-sdk/compare/6.6.0...6.7.0) (2026-04-22)
 
 
