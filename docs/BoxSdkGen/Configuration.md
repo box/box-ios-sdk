@@ -200,6 +200,7 @@ How timeout handling works:
 - `timeoutIntervalForResourceMs` maps to `URLSessionConfiguration.timeoutIntervalForResource` and controls the maximum total time allowed for the full resource transfer.
 - Timeout values are configured in milliseconds and converted to seconds for `URLSessionConfiguration`.
 - If a timeout value is not provided, the current `URLSessionConfiguration` value is kept.
+- If timeout config is not provided, the SDK uses the `URLSessionConfiguration` default timeout settings: `timeoutIntervalForRequest` of 60 seconds and `timeoutIntervalForResource` of 7 days (604800 seconds).
 - Timeout failures are treated as network exceptions, and retry behavior is controlled by the configured retry strategy.
 - If retries are exhausted after timeout failures, the SDK throws `BoxSDKError`.
 - Timeout applies to a single HTTP request attempt to the Box API (not the total time across all retries).
