@@ -36,6 +36,7 @@ jobs:
       SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
       SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
       ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+      AUTOMATE_WORKFLOW_FOLDER_ID: ${{ secrets.AUTOMATE_WORKFLOW_FOLDER_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -64,7 +65,8 @@ jobs:
             {key: "SLACK_AUTOMATION_USER_ID", value: env.SLACK_AUTOMATION_USER_ID},
             {key: "SLACK_ORG_ID", value: env.SLACK_ORG_ID},
             {key: "SLACK_PARTNER_ITEM_ID", value: env.SLACK_PARTNER_ITEM_ID},
-            {key: "ADMIN_USER_ID", value: env.ADMIN_USER_ID}
+            {key: "ADMIN_USER_ID", value: env.ADMIN_USER_ID},
+            {key: "AUTOMATE_WORKFLOW_FOLDER_ID", value: env.AUTOMATE_WORKFLOW_FOLDER_ID}
           ]')
 
           jq --argjson envVars "$ENV_JSON" \
@@ -169,6 +171,7 @@ jobs:
         SLACK_ORG_ID: ${{ secrets.SLACK_ORG_ID }}
         SLACK_PARTNER_ITEM_ID: ${{ secrets.SLACK_PARTNER_ITEM_ID }}
         ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+        AUTOMATE_WORKFLOW_FOLDER_ID: ${{ secrets.AUTOMATE_WORKFLOW_FOLDER_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

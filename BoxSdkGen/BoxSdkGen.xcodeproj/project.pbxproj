@@ -726,6 +726,7 @@
 		13AAC40D77674E69506546D3 /* AiItemAsk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B7FF059CC9D20DB436FAF /* AiItemAsk.swift */; };
 		13AEBD35C36F8B7669B3CD7A /* AiStudioAgentBasicGenTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA81FC491BE3966589AC47 /* AiStudioAgentBasicGenTool.swift */; };
 		13BC34CF82F2660C68DD6D47 /* UploadFileVersionQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E70AD81316763FD168D14A5 /* UploadFileVersionQueryParams.swift */; };
+		13BEAE1DDBC9D0683215AD76 /* AutomateWorkflowsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */; };
 		13C0FE40495A7CE13196245E /* FilesUnderRetention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B40AFB571D89BD133C759A /* FilesUnderRetention.swift */; };
 		13C37DA91D9F29663AFC67F5 /* UpdateShieldInformationBarrierSegmentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFBC47663E05876B168BEB /* UpdateShieldInformationBarrierSegmentByIdHeaders.swift */; };
 		13C81D02E8B4BAA5FBB464FF /* GetStoragePoliciesHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA453B2DA63D02705740A3A /* GetStoragePoliciesHeaders.swift */; };
@@ -1265,6 +1266,7 @@
 		22F79953F82345AE11202F12 /* WorkflowFlowsTriggerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C679C47D677058D21CA37 /* WorkflowFlowsTriggerField.swift */; };
 		23009F96A660AE1706299CD7 /* GetAuthorizeUrlOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2637825742530CC312E005 /* GetAuthorizeUrlOptions.swift */; };
 		2305DFEBB614BF307B9CD3BF /* GetRetentionPolicyAssignmentByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1D50DB2BFA8F1BA8B94AF /* GetRetentionPolicyAssignmentByIdQueryParams.swift */; };
+		230657E83D0A6DB0F0C2CC24 /* AutomateWorkflowsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */; };
 		2307438AED227EF06557D657 /* MetadataCascadePolicyTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970C3E83F0B721FC709D765 /* MetadataCascadePolicyTypeField.swift */; };
 		230B315C0E3EEB61B5F66FDF /* AiAgentLongTextToolEmbeddingsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C592B40CEB5528096A5209 /* AiAgentLongTextToolEmbeddingsField.swift */; };
 		230D9A21EDA3CA0D803A40AE /* TaskAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D9CD7C63669E700CC3D69A /* TaskAssignment.swift */; };
@@ -2373,6 +2375,7 @@
 		401EA88BBBF8F4A6A66E120C /* ShieldInformationBarriers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BC5008F73EFF5E876A0D7C /* ShieldInformationBarriers.swift */; };
 		4031867670112270E6CDC414 /* AiLlmEndpointParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AAD5EA59AA48B701DAF7C /* AiLlmEndpointParams.swift */; };
 		403378F5105FBC35AB952D82 /* CopyFileRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F0E7FC1E77566597F0543D /* CopyFileRequestBody.swift */; };
+		4038B12CA1D62ED5D41AB1FD /* AutomateWorkflowsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */; };
 		40455F54ED48D5C4DCA0E4A3 /* DeleteShieldInformationBarrierSegmentMemberByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7407C94D9E910356788E79 /* DeleteShieldInformationBarrierSegmentMemberByIdHeaders.swift */; };
 		4048BD4621900C246EE12958 /* CreateAiAgentHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34AB3211DBA3CA8623F9F9 /* CreateAiAgentHeaders.swift */; };
 		404AC2851F12BAB8EDDA2E15 /* FileRequestCopyRequestFolderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE213972FA9A1227DCA7ED0 /* FileRequestCopyRequestFolderField.swift */; };
@@ -4404,6 +4407,7 @@
 		7739E55C100C49B9540FB046 /* TrashFolderRestoredTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0AB16CFB052F4AC5AB3FC7 /* TrashFolderRestoredTypeField.swift */; };
 		773AFC57932C442691D3509E /* UpdateFolderByIdRequestBodySyncStateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DFC97751B823D049CB8ED /* UpdateFolderByIdRequestBodySyncStateField.swift */; };
 		7746478F931822CB2450146D /* UpdateClassificationOnFolderHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03779F96F129CB878103568 /* UpdateClassificationOnFolderHeaders.swift */; };
+		774750176767666A93C566F1 /* AutomateWorkflowsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */; };
 		775138C070642BC6108CA55C /* SharedLinksFoldersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873C62E1AA40451DAF6B304 /* SharedLinksFoldersManager.swift */; };
 		775F5F6B25C5E93E8A87F3BC /* AiStudioAgentBasicGenTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA81FC491BE3966589AC47 /* AiStudioAgentBasicGenTool.swift */; };
 		777D0174BCF7D71D142DA885 /* DownloadFileQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DF6EED19A5DFE0B5412F2 /* DownloadFileQueryParams.swift */; };
@@ -5126,6 +5130,7 @@
 		89FDFA09F9763C8428D033F5 /* GetSlackIntegrationMappingQueryParamsPartnerItemTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A161C9AE5FD1CAC2DB1CD96 /* GetSlackIntegrationMappingQueryParamsPartnerItemTypeField.swift */; };
 		89FFB0DB641F39E550ECD252 /* AiStudioAgentTextGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C95284D7438617C8AA5374B /* AiStudioAgentTextGen.swift */; };
 		8A07B964BB14963121C5D89F /* GetShieldInformationBarrierSegmentMembersQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D065DD9E15C7AFCDEA0597ED /* GetShieldInformationBarrierSegmentMembersQueryParams.swift */; };
+		8A0FCB6E79CDF35A186FCD41 /* AutomateWorkflowsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */; };
 		8A2128B8707242BC5A55A2AD /* DateFormatter+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9590D506D0EA13A877D993 /* DateFormatter+Convenience.swift */; };
 		8A4511176E04831F6A824D1D /* ClassificationTemplateFieldsOptionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418895A18CFBEA8F69444974 /* ClassificationTemplateFieldsOptionsField.swift */; };
 		8A4B6ECD7DB653CDDA7883F2 /* BoxOAuth+LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645E39FE3DB1AB80B02F4973 /* BoxOAuth+LoginFlow.swift */; };
@@ -9872,6 +9877,7 @@
 		2C973F97BE20D40056122BE4 /* SignRequestPrefillTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRequestPrefillTag.swift; sourceTree = "<group>"; };
 		2C980F2FAAFD4A235C2DDD4D /* CreateMetadataTemplateRequestBodyFieldsOptionsField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMetadataTemplateRequestBodyFieldsOptionsField.swift; sourceTree = "<group>"; };
 		2CA8305DBB0C1751E0595795 /* CollaborationAllowlistEntryDirectionField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistEntryDirectionField.swift; sourceTree = "<group>"; };
+		2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomateWorkflowsManagerTests.swift; sourceTree = "<group>"; };
 		2D53FF0A9F15899F73C71081 /* DocGenTagsProcessingMessageV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocGenTagsProcessingMessageV2025R0.swift; sourceTree = "<group>"; };
 		2D5923082759B7FD2D748C77 /* UserAvatarPicUrlsField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarPicUrlsField.swift; sourceTree = "<group>"; };
 		2DDCC4E5F6381114E5416783 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
@@ -12708,6 +12714,14 @@
 				989F19A1B8E2F3A66DB97DB6 /* AiStudioAgentExtractResponseTypeField.swift */,
 			);
 			path = AiStudioAgentExtractResponse;
+			sourceTree = "<group>";
+		};
+		31F4E2C00CBC3A761BBDFEB9 /* AutomateWorkflows */ = {
+			isa = PBXGroup;
+			children = (
+				2CBC6329A1C6B6A7DA6DB082 /* AutomateWorkflowsManagerTests.swift */,
+			);
+			path = AutomateWorkflows;
 			sourceTree = "<group>";
 		};
 		3437147BA03E3C9901E50224 /* WebLinkBase */ = {
@@ -16301,6 +16315,7 @@
 				A0B9F04ED76AF4AC99ABFB5A /* AppItemAssociations */,
 				09BFDE8E9D16A699E180B77C /* Archives */,
 				41AA58621ACA2250F5D0A310 /* Auth */,
+				31F4E2C00CBC3A761BBDFEB9 /* AutomateWorkflows */,
 				C10596B7217DC797FE46B28E /* Avatars */,
 				2DA25DACB424869B77B59C97 /* ChunkedUploads */,
 				B1316B3F2D425B6E83F7D55B /* Classifications */,
@@ -18370,6 +18385,7 @@
 				C2AF53671DAE2BAED3EC206C /* AppItemAssociationsManagerTests.swift in Sources */,
 				42D291F444756A5F75E2B3D1 /* ArchivesManagerTests.swift in Sources */,
 				054842D8033CCB40AA45AAB3 /* AuthManagerTests.swift in Sources */,
+				4038B12CA1D62ED5D41AB1FD /* AutomateWorkflowsManagerTests.swift in Sources */,
 				0198817607CF97AA17E0EC17 /* AvatarsManagerTests.swift in Sources */,
 				4CD279276B1D93B5DCA7DCDE /* ChunkedUploadsManagerTests.swift in Sources */,
 				1C8A7E420E963678B4ED68C4 /* ClassificationsManagerTests.swift in Sources */,
@@ -18457,6 +18473,7 @@
 				97DD36716294235E28A7796F /* AppItemAssociationsManagerTests.swift in Sources */,
 				7B09632AE37D55C9E73BC17F /* ArchivesManagerTests.swift in Sources */,
 				B95D29E8CEFC93BABDE88147 /* AuthManagerTests.swift in Sources */,
+				230657E83D0A6DB0F0C2CC24 /* AutomateWorkflowsManagerTests.swift in Sources */,
 				64F26B704E36F73418ED4685 /* AvatarsManagerTests.swift in Sources */,
 				355B8178D129ABD1B35CDD27 /* ChunkedUploadsManagerTests.swift in Sources */,
 				ADE2DC07A846F0B7E951DD0D /* ClassificationsManagerTests.swift in Sources */,
@@ -22162,6 +22179,7 @@
 				3CAF82A57594880667ACA60B /* AppItemAssociationsManagerTests.swift in Sources */,
 				DD99367F336B8C4F7CB74D11 /* ArchivesManagerTests.swift in Sources */,
 				B9D3250FE24CCC4CA4E36F9D /* AuthManagerTests.swift in Sources */,
+				774750176767666A93C566F1 /* AutomateWorkflowsManagerTests.swift in Sources */,
 				45A0D971CC3612160E895F02 /* AvatarsManagerTests.swift in Sources */,
 				65569B4E16748C8F36C5EF76 /* ChunkedUploadsManagerTests.swift in Sources */,
 				0671F6486469B3030DC12C50 /* ClassificationsManagerTests.swift in Sources */,
@@ -22249,6 +22267,7 @@
 				7AFFA89BDFF9A9A9BE89D7EB /* AppItemAssociationsManagerTests.swift in Sources */,
 				F5468643947DA45DE2E7230E /* ArchivesManagerTests.swift in Sources */,
 				3920815263938AD7F88A3400 /* AuthManagerTests.swift in Sources */,
+				13BEAE1DDBC9D0683215AD76 /* AutomateWorkflowsManagerTests.swift in Sources */,
 				C730E629DBC3C6F5713CB4D3 /* AvatarsManagerTests.swift in Sources */,
 				F414DEF1A0C19CA8108BE180 /* ChunkedUploadsManagerTests.swift in Sources */,
 				A6D2895548F2D3BB1B7A883C /* ClassificationsManagerTests.swift in Sources */,
@@ -25954,6 +25973,7 @@
 				D4C882AC5F1F644AD6EAE176 /* AppItemAssociationsManagerTests.swift in Sources */,
 				91544B27855A98C1441DF3AF /* ArchivesManagerTests.swift in Sources */,
 				67E4623F75CE24EAC52B6FD4 /* AuthManagerTests.swift in Sources */,
+				8A0FCB6E79CDF35A186FCD41 /* AutomateWorkflowsManagerTests.swift in Sources */,
 				39DCAC4208CB7AFB7C581204 /* AvatarsManagerTests.swift in Sources */,
 				9EA33B5EF3B9A8C0580E1C5A /* ChunkedUploadsManagerTests.swift in Sources */,
 				81F81E85A8B97872E84D72D9 /* ClassificationsManagerTests.swift in Sources */,
