@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.8.0](https://github.com/box/box-ios-sdk/compare/10.7.0...10.8.0) (2026-04-30)
+
+
+### New Features and Enhancements
+
+* Automate Public API (box/box-openapi[#594](https://github.com/box/box-ios-sdk/issues/594)) ([#1478](https://github.com/box/box-ios-sdk/issues/1478)) ([1df6e4b](https://github.com/box/box-ios-sdk/commit/1df6e4b16c79ef9d22d9b103cbe7b09dc1f5d09f))
+
 ## [10.7.0](https://github.com/box/box-ios-sdk/compare/10.6.0...10.7.0) (2026-04-22)
 
 
