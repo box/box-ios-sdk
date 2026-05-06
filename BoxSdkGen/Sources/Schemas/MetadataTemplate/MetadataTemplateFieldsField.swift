@@ -8,6 +8,10 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
         case description
         case hidden
         case options
+        case taxonomyKey
+        case taxonomyId
+        case namespace
+        case optionsRules
         case id
     }
 
@@ -25,8 +29,11 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
     /// date-time picker.
     /// 
     /// Additionally, metadata templates support an `enum` field for a basic list
-    /// of items, and ` multiSelect` field for a similar list of items where the
+    /// of items, and `multiSelect` field for a similar list of items where the
     /// user can select more than one value.
+    /// 
+    /// Metadata taxonomies are also supported as a `taxonomy` field type 
+    /// with a specific set of additional properties, which describe its structure.
     /// 
     /// **Note**: The `integer` value is deprecated.
     /// It is still present in the response,
@@ -52,6 +59,22 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
     /// with the `enum` and `multiSelect` field types.
     public let options: [MetadataTemplateFieldsOptionsField]?
 
+    /// The unique key of the metadata taxonomy to use for this taxonomy field.
+    /// This property is required when the field `type` is set to `taxonomy`.
+    public let taxonomyKey: String?
+
+    /// The unique ID of the metadata taxonomy to use for this taxonomy field.
+    /// This property is required when the field `type` is set to `taxonomy`.
+    public let taxonomyId: String?
+
+    /// The namespace of the metadata taxonomy to use for this taxonomy field.
+    /// This property is required when the field `type` is set to `taxonomy`.
+    public let namespace: String?
+
+    /// An object defining additional rules for the options of the taxonomy field.
+    /// This property is required when the field `type` is set to `taxonomy`.
+    public let optionsRules: MetadataTemplateFieldsOptionsRulesField?
+
     /// The unique ID of the metadata template field.
     public let id: String?
 
@@ -63,8 +86,11 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
     ///     date-time picker.
     ///     
     ///     Additionally, metadata templates support an `enum` field for a basic list
-    ///     of items, and ` multiSelect` field for a similar list of items where the
+    ///     of items, and `multiSelect` field for a similar list of items where the
     ///     user can select more than one value.
+    ///     
+    ///     Metadata taxonomies are also supported as a `taxonomy` field type 
+    ///     with a specific set of additional properties, which describe its structure.
     ///     
     ///     **Note**: The `integer` value is deprecated.
     ///     It is still present in the response,
@@ -78,14 +104,26 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
     ///     through the API instead.
     ///   - options: A list of options for this field. This is used in combination
     ///     with the `enum` and `multiSelect` field types.
+    ///   - taxonomyKey: The unique key of the metadata taxonomy to use for this taxonomy field.
+    ///     This property is required when the field `type` is set to `taxonomy`.
+    ///   - taxonomyId: The unique ID of the metadata taxonomy to use for this taxonomy field.
+    ///     This property is required when the field `type` is set to `taxonomy`.
+    ///   - namespace: The namespace of the metadata taxonomy to use for this taxonomy field.
+    ///     This property is required when the field `type` is set to `taxonomy`.
+    ///   - optionsRules: An object defining additional rules for the options of the taxonomy field.
+    ///     This property is required when the field `type` is set to `taxonomy`.
     ///   - id: The unique ID of the metadata template field.
-    public init(type: MetadataTemplateFieldsTypeField, key: String, displayName: String, description: String? = nil, hidden: Bool? = nil, options: [MetadataTemplateFieldsOptionsField]? = nil, id: String? = nil) {
+    public init(type: MetadataTemplateFieldsTypeField, key: String, displayName: String, description: String? = nil, hidden: Bool? = nil, options: [MetadataTemplateFieldsOptionsField]? = nil, taxonomyKey: String? = nil, taxonomyId: String? = nil, namespace: String? = nil, optionsRules: MetadataTemplateFieldsOptionsRulesField? = nil, id: String? = nil) {
         self.type = type
         self.key = key
         self.displayName = displayName
         self.description = description
         self.hidden = hidden
         self.options = options
+        self.taxonomyKey = taxonomyKey
+        self.taxonomyId = taxonomyId
+        self.namespace = namespace
+        self.optionsRules = optionsRules
         self.id = id
     }
 
@@ -97,6 +135,10 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
         description = try container.decodeIfPresent(String.self, forKey: .description)
         hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden)
         options = try container.decodeIfPresent([MetadataTemplateFieldsOptionsField].self, forKey: .options)
+        taxonomyKey = try container.decodeIfPresent(String.self, forKey: .taxonomyKey)
+        taxonomyId = try container.decodeIfPresent(String.self, forKey: .taxonomyId)
+        namespace = try container.decodeIfPresent(String.self, forKey: .namespace)
+        optionsRules = try container.decodeIfPresent(MetadataTemplateFieldsOptionsRulesField.self, forKey: .optionsRules)
         id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 
@@ -108,6 +150,10 @@ public class MetadataTemplateFieldsField: Codable, RawJSONReadable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(options, forKey: .options)
+        try container.encodeIfPresent(taxonomyKey, forKey: .taxonomyKey)
+        try container.encodeIfPresent(taxonomyId, forKey: .taxonomyId)
+        try container.encodeIfPresent(namespace, forKey: .namespace)
+        try container.encodeIfPresent(optionsRules, forKey: .optionsRules)
         try container.encodeIfPresent(id, forKey: .id)
     }
 
