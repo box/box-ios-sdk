@@ -493,7 +493,7 @@ See the endpoint docs at
 
 <!-- sample get_metadata_templates_id_id_fields_id_options -->
 ```
-try await client.metadataTaxonomies.getMetadataTemplateFieldOptions(namespace: namespace, templateKey: metadataTemplateKey, fieldKey: "taxonomy")
+try await client.metadataTaxonomies.getMetadataTemplateFieldOptions(namespace: namespace, templateKey: metadataTemplateKey, fieldKey: fieldKey)
 ```
 
 ### Arguments
