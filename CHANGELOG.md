@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-* **boxsdkgen:** Mark `id` field of `AIAgentReference` required (box/box-openapi#1629) (box/box-openapi#595) (#1487)
+* **boxsdkgen:** Mark `id` field of `AIAgentReference` required (box/box-openapi[#1629](https://github.com/box/box-ios-sdk/issues/1629)) (box/box-openapi[#595](https://github.com/box/box-ios-sdk/issues/595)) ([#1487](https://github.com/box/box-ios-sdk/issues/1487)) ([06facee](https://github.com/box/box-ios-sdk/commit/06facee260a003198f8996f973d78755b9b6ba3b))
 
 ### Bug Fixes
 
