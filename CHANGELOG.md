@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.9.0](https://github.com/box/box-ios-sdk/compare/10.8.0...10.9.0) (2026-05-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Mark `id` field of `AIAgentReference` required (box/box-openapi[#1629](https://github.com/box/box-ios-sdk/issues/1629)) (box/box-openapi[#595](https://github.com/box/box-ios-sdk/issues/595)) ([#1488](https://github.com/box/box-ios-sdk/issues/1488)) ([907f3f4](https://github.com/box/box-ios-sdk/commit/907f3f403366452c93afc470818a97118c5383c9))
+
+### Bug Fixes
+
+* Fix metadata template schema (box/box-openapi[#596](https://github.com/box/box-ios-sdk/issues/596)) ([#1489](https://github.com/box/box-ios-sdk/issues/1489)) ([bed6d9c](https://github.com/box/box-ios-sdk/commit/bed6d9c1a70b1927853bfcf38ddc08164633e1ab))
+* Mark `id` field of `AIAgentReference` required (box/box-openapi[#1629](https://github.com/box/box-ios-sdk/issues/1629)) (box/box-openapi[#595](https://github.com/box/box-ios-sdk/issues/595)) ([#1488](https://github.com/box/box-ios-sdk/issues/1488)) ([907f3f4](https://github.com/box/box-ios-sdk/commit/907f3f403366452c93afc470818a97118c5383c9))
+
 ## [10.8.0](https://github.com/box/box-ios-sdk/compare/10.7.0...10.8.0) (2026-04-30)
 
 
