@@ -3,8 +3,8 @@ import Foundation
 /// The AI agent used to handle queries.
 public class AiAgentReference: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case id
+        case type
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -16,36 +16,36 @@ public class AiAgentReference: Codable, RawJSONReadable {
     }
 
 
-    /// The type of AI agent used to handle queries.
-    public let type: AiAgentReferenceTypeField
-
     /// The ID of an Agent. This can be a numeric ID for custom agents (for example, `14031`)
     /// or a unique identifier for pre-built agents (for example, `enhanced_extract_agent`
     /// for the [Enhanced Extract Agent](https://developer.box.com/guides/box-ai/ai-tutorials/extract-metadata-structured#enhanced-extract-agent)).
-    public let id: String?
+    public let id: String
+
+    /// The type of AI agent used to handle queries.
+    public let type: AiAgentReferenceTypeField
 
     /// Initializer for a AiAgentReference.
     ///
     /// - Parameters:
-    ///   - type: The type of AI agent used to handle queries.
     ///   - id: The ID of an Agent. This can be a numeric ID for custom agents (for example, `14031`)
     ///     or a unique identifier for pre-built agents (for example, `enhanced_extract_agent`
     ///     for the [Enhanced Extract Agent](https://developer.box.com/guides/box-ai/ai-tutorials/extract-metadata-structured#enhanced-extract-agent)).
-    public init(type: AiAgentReferenceTypeField = AiAgentReferenceTypeField.aiAgentId, id: String? = nil) {
-        self.type = type
+    ///   - type: The type of AI agent used to handle queries.
+    public init(id: String, type: AiAgentReferenceTypeField = AiAgentReferenceTypeField.aiAgentId) {
         self.id = id
+        self.type = type
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
         type = try container.decode(AiAgentReferenceTypeField.self, forKey: .type)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(id, forKey: .id)
     }
 
     /// Sets the raw JSON data.
