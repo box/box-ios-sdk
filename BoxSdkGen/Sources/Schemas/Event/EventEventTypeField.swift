@@ -6,9 +6,15 @@ public enum EventEventTypeField: CodableStringEnum {
     case addDeviceAssociation
     case addLoginActivityDevice
     case adminLogin
+    case aiSecurityDetection
+    case annotationv2Create
+    case annotationv2Delete
+    case annotationv2Edit
     case applicationCreated
     case applicationPublicKeyAdded
     case applicationPublicKeyDeleted
+    case boxAiUserFailedRequest
+    case boxAiUserRequest
     case changeAdminRole
     case changeFolderPermission
     case collaborationAccept
@@ -20,9 +26,18 @@ public enum EventEventTypeField: CodableStringEnum {
     case collabInviteCollaborator
     case collabRemoveCollaborator
     case collabRoleChange
+    case collectionCreate
+    case collectionDelete
+    case collectionItemCreate
+    case collectionItemDelete
+    case collectionItemUpdate
+    case collectionUpdate
     case commentCreate
     case commentDelete
     case contentAccess
+    case contentRecoveryReportCreate
+    case contentRecoveryReportDelete
+    case contentRecoveryReportInitiate
     case contentWorkflowAbnormalDownloadActivity
     case contentWorkflowAutomationAdd
     case contentWorkflowAutomationDelete
@@ -35,29 +50,38 @@ public enum EventEventTypeField: CodableStringEnum {
     case delete
     case deleteUser
     case deviceTrustCheckFailed
+    case disableMultiFactorAuth
     case download
     case edit
     case editUser
-    case edrCrowdstrikeDeviceDetected
-    case edrCrowdstrikeNoBoxTools
-    case edrCrowdstrikeBoxToolsOutdated
-    case edrCrowdstrikeDriveOutdated
     case edrCrowdstrikeAccessAllowedNoCrowdstrikeDevice
     case edrCrowdstrikeAccessRevoked
+    case edrCrowdstrikeBoxToolsOutdated
+    case edrCrowdstrikeDeviceDetected
+    case edrCrowdstrikeDriveOutdated
+    case edrCrowdstrikeNoBoxTools
     case emailAliasConfirm
     case emailAliasRemove
+    case enableMultiFactorAuth
     case enableTwoFactorAuth
     case enterpriseAppAuthorizationUpdate
+    case externalCollabSecuritySettings
     case failedLogin
     case fileMarkedMalicious
     case fileWatermarkedDownload
     case groupAddItem
     case groupAddUser
+    case groupAdminCreated
+    case groupAdminDeleted
+    case groupAdminPermissionsUpdated
     case groupCreation
     case groupDeletion
     case groupEdited
     case groupRemoveItem
     case groupRemoveUser
+    case itemAssociationCreated
+    case itemAssociationDeleted
+    case itemAssociationUpdated
     case itemCopy
     case itemCreate
     case itemDownload
@@ -96,19 +120,35 @@ public enum EventEventTypeField: CodableStringEnum {
     case metadataTemplateUpdate
     case move
     case newUser
+    case oauth2AccessTokenRevoke
     case preview
     case removeDeviceAssociation
     case removeLoginActivityDevice
     case rename
     case retentionPolicyAssignmentAdd
     case share
+    case sharedLinkRedirectOutOfSharedContext
     case sharedLinkSend
     case shareExpiration
+    case shieldAccessPolicyCreated
+    case shieldAccessPolicyDeleted
+    case shieldAccessPolicyUpdated
     case shieldAlert
+    case shieldDownloadBlocked
     case shieldExternalCollabAccessBlocked
     case shieldExternalCollabAccessBlockedMissingJustification
     case shieldExternalCollabInviteBlocked
     case shieldExternalCollabInviteBlockedMissingJustification
+    case shieldExternalCollabInviteJustified
+    case shieldInformationBarrierCollabBlocked
+    case shieldInformationBarrierDisabled
+    case shieldInformationBarrierEnabled
+    case shieldInformationBarrierGroupAddUserBlocked
+    case shieldInformationBarrierItemCopyBlocked
+    case shieldInformationBarrierItemMoveBlocked
+    case shieldInformationBarrierItemOwnerTransferBlocked
+    case shieldInformationBarrierPending
+    case shieldInformationBarrierSharedItemAccessBlocked
     case shieldJustificationApproval
     case shieldSharedLinkAccessBlocked
     case shieldSharedLinkStatusRestrictedOnCreate
@@ -122,6 +162,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case signDocumentExpired
     case signDocumentSigned
     case signDocumentViewedBySigned
+    case signDocumentViewedBySigner
     case signerDownloaded
     case signerForwarded
     case storageExpiration
@@ -156,12 +197,24 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .addLoginActivityDevice
         case "ADMIN_LOGIN".lowercased():
             self = .adminLogin
+        case "AI_SECURITY_DETECTION".lowercased():
+            self = .aiSecurityDetection
+        case "ANNOTATIONV2_CREATE".lowercased():
+            self = .annotationv2Create
+        case "ANNOTATIONV2_DELETE".lowercased():
+            self = .annotationv2Delete
+        case "ANNOTATIONV2_EDIT".lowercased():
+            self = .annotationv2Edit
         case "APPLICATION_CREATED".lowercased():
             self = .applicationCreated
         case "APPLICATION_PUBLIC_KEY_ADDED".lowercased():
             self = .applicationPublicKeyAdded
         case "APPLICATION_PUBLIC_KEY_DELETED".lowercased():
             self = .applicationPublicKeyDeleted
+        case "BOX_AI_USER_FAILED_REQUEST".lowercased():
+            self = .boxAiUserFailedRequest
+        case "BOX_AI_USER_REQUEST".lowercased():
+            self = .boxAiUserRequest
         case "CHANGE_ADMIN_ROLE".lowercased():
             self = .changeAdminRole
         case "CHANGE_FOLDER_PERMISSION".lowercased():
@@ -184,12 +237,30 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .collabRemoveCollaborator
         case "COLLAB_ROLE_CHANGE".lowercased():
             self = .collabRoleChange
+        case "COLLECTION_CREATE".lowercased():
+            self = .collectionCreate
+        case "COLLECTION_DELETE".lowercased():
+            self = .collectionDelete
+        case "COLLECTION_ITEM_CREATE".lowercased():
+            self = .collectionItemCreate
+        case "COLLECTION_ITEM_DELETE".lowercased():
+            self = .collectionItemDelete
+        case "COLLECTION_ITEM_UPDATE".lowercased():
+            self = .collectionItemUpdate
+        case "COLLECTION_UPDATE".lowercased():
+            self = .collectionUpdate
         case "COMMENT_CREATE".lowercased():
             self = .commentCreate
         case "COMMENT_DELETE".lowercased():
             self = .commentDelete
         case "CONTENT_ACCESS".lowercased():
             self = .contentAccess
+        case "CONTENT_RECOVERY_REPORT_CREATE".lowercased():
+            self = .contentRecoveryReportCreate
+        case "CONTENT_RECOVERY_REPORT_DELETE".lowercased():
+            self = .contentRecoveryReportDelete
+        case "CONTENT_RECOVERY_REPORT_INITIATE".lowercased():
+            self = .contentRecoveryReportInitiate
         case "CONTENT_WORKFLOW_ABNORMAL_DOWNLOAD_ACTIVITY".lowercased():
             self = .contentWorkflowAbnormalDownloadActivity
         case "CONTENT_WORKFLOW_AUTOMATION_ADD".lowercased():
@@ -214,32 +285,38 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .deleteUser
         case "DEVICE_TRUST_CHECK_FAILED".lowercased():
             self = .deviceTrustCheckFailed
+        case "DISABLE_MULTI_FACTOR_AUTH".lowercased():
+            self = .disableMultiFactorAuth
         case "DOWNLOAD".lowercased():
             self = .download
         case "EDIT".lowercased():
             self = .edit
         case "EDIT_USER".lowercased():
             self = .editUser
-        case "EDR_CROWDSTRIKE_DEVICE_DETECTED".lowercased():
-            self = .edrCrowdstrikeDeviceDetected
-        case "EDR_CROWDSTRIKE_NO_BOX_TOOLS".lowercased():
-            self = .edrCrowdstrikeNoBoxTools
-        case "EDR_CROWDSTRIKE_BOX_TOOLS_OUTDATED".lowercased():
-            self = .edrCrowdstrikeBoxToolsOutdated
-        case "EDR_CROWDSTRIKE_DRIVE_OUTDATED".lowercased():
-            self = .edrCrowdstrikeDriveOutdated
         case "EDR_CROWDSTRIKE_ACCESS_ALLOWED_NO_CROWDSTRIKE_DEVICE".lowercased():
             self = .edrCrowdstrikeAccessAllowedNoCrowdstrikeDevice
         case "EDR_CROWDSTRIKE_ACCESS_REVOKED".lowercased():
             self = .edrCrowdstrikeAccessRevoked
+        case "EDR_CROWDSTRIKE_BOX_TOOLS_OUTDATED".lowercased():
+            self = .edrCrowdstrikeBoxToolsOutdated
+        case "EDR_CROWDSTRIKE_DEVICE_DETECTED".lowercased():
+            self = .edrCrowdstrikeDeviceDetected
+        case "EDR_CROWDSTRIKE_DRIVE_OUTDATED".lowercased():
+            self = .edrCrowdstrikeDriveOutdated
+        case "EDR_CROWDSTRIKE_NO_BOX_TOOLS".lowercased():
+            self = .edrCrowdstrikeNoBoxTools
         case "EMAIL_ALIAS_CONFIRM".lowercased():
             self = .emailAliasConfirm
         case "EMAIL_ALIAS_REMOVE".lowercased():
             self = .emailAliasRemove
+        case "ENABLE_MULTI_FACTOR_AUTH".lowercased():
+            self = .enableMultiFactorAuth
         case "ENABLE_TWO_FACTOR_AUTH".lowercased():
             self = .enableTwoFactorAuth
         case "ENTERPRISE_APP_AUTHORIZATION_UPDATE".lowercased():
             self = .enterpriseAppAuthorizationUpdate
+        case "EXTERNAL_COLLAB_SECURITY_SETTINGS".lowercased():
+            self = .externalCollabSecuritySettings
         case "FAILED_LOGIN".lowercased():
             self = .failedLogin
         case "FILE_MARKED_MALICIOUS".lowercased():
@@ -250,6 +327,12 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .groupAddItem
         case "GROUP_ADD_USER".lowercased():
             self = .groupAddUser
+        case "GROUP_ADMIN_CREATED".lowercased():
+            self = .groupAdminCreated
+        case "GROUP_ADMIN_DELETED".lowercased():
+            self = .groupAdminDeleted
+        case "GROUP_ADMIN_PERMISSIONS_UPDATED".lowercased():
+            self = .groupAdminPermissionsUpdated
         case "GROUP_CREATION".lowercased():
             self = .groupCreation
         case "GROUP_DELETION".lowercased():
@@ -260,6 +343,12 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .groupRemoveItem
         case "GROUP_REMOVE_USER".lowercased():
             self = .groupRemoveUser
+        case "ITEM_ASSOCIATION_CREATED".lowercased():
+            self = .itemAssociationCreated
+        case "ITEM_ASSOCIATION_DELETED".lowercased():
+            self = .itemAssociationDeleted
+        case "ITEM_ASSOCIATION_UPDATED".lowercased():
+            self = .itemAssociationUpdated
         case "ITEM_COPY".lowercased():
             self = .itemCopy
         case "ITEM_CREATE".lowercased():
@@ -336,6 +425,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .move
         case "NEW_USER".lowercased():
             self = .newUser
+        case "OAUTH2_ACCESS_TOKEN_REVOKE".lowercased():
+            self = .oauth2AccessTokenRevoke
         case "PREVIEW".lowercased():
             self = .preview
         case "REMOVE_DEVICE_ASSOCIATION".lowercased():
@@ -348,12 +439,22 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .retentionPolicyAssignmentAdd
         case "SHARE".lowercased():
             self = .share
+        case "SHARED_LINK_REDIRECT_OUT_OF_SHARED_CONTEXT".lowercased():
+            self = .sharedLinkRedirectOutOfSharedContext
         case "SHARED_LINK_SEND".lowercased():
             self = .sharedLinkSend
         case "SHARE_EXPIRATION".lowercased():
             self = .shareExpiration
+        case "SHIELD_ACCESS_POLICY_CREATED".lowercased():
+            self = .shieldAccessPolicyCreated
+        case "SHIELD_ACCESS_POLICY_DELETED".lowercased():
+            self = .shieldAccessPolicyDeleted
+        case "SHIELD_ACCESS_POLICY_UPDATED".lowercased():
+            self = .shieldAccessPolicyUpdated
         case "SHIELD_ALERT".lowercased():
             self = .shieldAlert
+        case "SHIELD_DOWNLOAD_BLOCKED".lowercased():
+            self = .shieldDownloadBlocked
         case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED".lowercased():
             self = .shieldExternalCollabAccessBlocked
         case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION".lowercased():
@@ -362,6 +463,26 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .shieldExternalCollabInviteBlocked
         case "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION".lowercased():
             self = .shieldExternalCollabInviteBlockedMissingJustification
+        case "SHIELD_EXTERNAL_COLLAB_INVITE_JUSTIFIED".lowercased():
+            self = .shieldExternalCollabInviteJustified
+        case "SHIELD_INFORMATION_BARRIER_COLLAB_BLOCKED".lowercased():
+            self = .shieldInformationBarrierCollabBlocked
+        case "SHIELD_INFORMATION_BARRIER_DISABLED".lowercased():
+            self = .shieldInformationBarrierDisabled
+        case "SHIELD_INFORMATION_BARRIER_ENABLED".lowercased():
+            self = .shieldInformationBarrierEnabled
+        case "SHIELD_INFORMATION_BARRIER_GROUP_ADD_USER_BLOCKED".lowercased():
+            self = .shieldInformationBarrierGroupAddUserBlocked
+        case "SHIELD_INFORMATION_BARRIER_ITEM_COPY_BLOCKED".lowercased():
+            self = .shieldInformationBarrierItemCopyBlocked
+        case "SHIELD_INFORMATION_BARRIER_ITEM_MOVE_BLOCKED".lowercased():
+            self = .shieldInformationBarrierItemMoveBlocked
+        case "SHIELD_INFORMATION_BARRIER_ITEM_OWNER_TRANSFER_BLOCKED".lowercased():
+            self = .shieldInformationBarrierItemOwnerTransferBlocked
+        case "SHIELD_INFORMATION_BARRIER_PENDING".lowercased():
+            self = .shieldInformationBarrierPending
+        case "SHIELD_INFORMATION_BARRIER_SHARED_ITEM_ACCESS_BLOCKED".lowercased():
+            self = .shieldInformationBarrierSharedItemAccessBlocked
         case "SHIELD_JUSTIFICATION_APPROVAL".lowercased():
             self = .shieldJustificationApproval
         case "SHIELD_SHARED_LINK_ACCESS_BLOCKED".lowercased():
@@ -388,6 +509,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .signDocumentSigned
         case "SIGN_DOCUMENT_VIEWED_BY_SIGNED".lowercased():
             self = .signDocumentViewedBySigned
+        case "SIGN_DOCUMENT_VIEWED_BY_SIGNER".lowercased():
+            self = .signDocumentViewedBySigner
         case "SIGNER_DOWNLOADED".lowercased():
             self = .signerDownloaded
         case "SIGNER_FORWARDED".lowercased():
@@ -445,12 +568,24 @@ public enum EventEventTypeField: CodableStringEnum {
             return "ADD_LOGIN_ACTIVITY_DEVICE"
         case .adminLogin:
             return "ADMIN_LOGIN"
+        case .aiSecurityDetection:
+            return "AI_SECURITY_DETECTION"
+        case .annotationv2Create:
+            return "ANNOTATIONV2_CREATE"
+        case .annotationv2Delete:
+            return "ANNOTATIONV2_DELETE"
+        case .annotationv2Edit:
+            return "ANNOTATIONV2_EDIT"
         case .applicationCreated:
             return "APPLICATION_CREATED"
         case .applicationPublicKeyAdded:
             return "APPLICATION_PUBLIC_KEY_ADDED"
         case .applicationPublicKeyDeleted:
             return "APPLICATION_PUBLIC_KEY_DELETED"
+        case .boxAiUserFailedRequest:
+            return "BOX_AI_USER_FAILED_REQUEST"
+        case .boxAiUserRequest:
+            return "BOX_AI_USER_REQUEST"
         case .changeAdminRole:
             return "CHANGE_ADMIN_ROLE"
         case .changeFolderPermission:
@@ -473,12 +608,30 @@ public enum EventEventTypeField: CodableStringEnum {
             return "COLLAB_REMOVE_COLLABORATOR"
         case .collabRoleChange:
             return "COLLAB_ROLE_CHANGE"
+        case .collectionCreate:
+            return "COLLECTION_CREATE"
+        case .collectionDelete:
+            return "COLLECTION_DELETE"
+        case .collectionItemCreate:
+            return "COLLECTION_ITEM_CREATE"
+        case .collectionItemDelete:
+            return "COLLECTION_ITEM_DELETE"
+        case .collectionItemUpdate:
+            return "COLLECTION_ITEM_UPDATE"
+        case .collectionUpdate:
+            return "COLLECTION_UPDATE"
         case .commentCreate:
             return "COMMENT_CREATE"
         case .commentDelete:
             return "COMMENT_DELETE"
         case .contentAccess:
             return "CONTENT_ACCESS"
+        case .contentRecoveryReportCreate:
+            return "CONTENT_RECOVERY_REPORT_CREATE"
+        case .contentRecoveryReportDelete:
+            return "CONTENT_RECOVERY_REPORT_DELETE"
+        case .contentRecoveryReportInitiate:
+            return "CONTENT_RECOVERY_REPORT_INITIATE"
         case .contentWorkflowAbnormalDownloadActivity:
             return "CONTENT_WORKFLOW_ABNORMAL_DOWNLOAD_ACTIVITY"
         case .contentWorkflowAutomationAdd:
@@ -503,32 +656,38 @@ public enum EventEventTypeField: CodableStringEnum {
             return "DELETE_USER"
         case .deviceTrustCheckFailed:
             return "DEVICE_TRUST_CHECK_FAILED"
+        case .disableMultiFactorAuth:
+            return "DISABLE_MULTI_FACTOR_AUTH"
         case .download:
             return "DOWNLOAD"
         case .edit:
             return "EDIT"
         case .editUser:
             return "EDIT_USER"
-        case .edrCrowdstrikeDeviceDetected:
-            return "EDR_CROWDSTRIKE_DEVICE_DETECTED"
-        case .edrCrowdstrikeNoBoxTools:
-            return "EDR_CROWDSTRIKE_NO_BOX_TOOLS"
-        case .edrCrowdstrikeBoxToolsOutdated:
-            return "EDR_CROWDSTRIKE_BOX_TOOLS_OUTDATED"
-        case .edrCrowdstrikeDriveOutdated:
-            return "EDR_CROWDSTRIKE_DRIVE_OUTDATED"
         case .edrCrowdstrikeAccessAllowedNoCrowdstrikeDevice:
             return "EDR_CROWDSTRIKE_ACCESS_ALLOWED_NO_CROWDSTRIKE_DEVICE"
         case .edrCrowdstrikeAccessRevoked:
             return "EDR_CROWDSTRIKE_ACCESS_REVOKED"
+        case .edrCrowdstrikeBoxToolsOutdated:
+            return "EDR_CROWDSTRIKE_BOX_TOOLS_OUTDATED"
+        case .edrCrowdstrikeDeviceDetected:
+            return "EDR_CROWDSTRIKE_DEVICE_DETECTED"
+        case .edrCrowdstrikeDriveOutdated:
+            return "EDR_CROWDSTRIKE_DRIVE_OUTDATED"
+        case .edrCrowdstrikeNoBoxTools:
+            return "EDR_CROWDSTRIKE_NO_BOX_TOOLS"
         case .emailAliasConfirm:
             return "EMAIL_ALIAS_CONFIRM"
         case .emailAliasRemove:
             return "EMAIL_ALIAS_REMOVE"
+        case .enableMultiFactorAuth:
+            return "ENABLE_MULTI_FACTOR_AUTH"
         case .enableTwoFactorAuth:
             return "ENABLE_TWO_FACTOR_AUTH"
         case .enterpriseAppAuthorizationUpdate:
             return "ENTERPRISE_APP_AUTHORIZATION_UPDATE"
+        case .externalCollabSecuritySettings:
+            return "EXTERNAL_COLLAB_SECURITY_SETTINGS"
         case .failedLogin:
             return "FAILED_LOGIN"
         case .fileMarkedMalicious:
@@ -539,6 +698,12 @@ public enum EventEventTypeField: CodableStringEnum {
             return "GROUP_ADD_ITEM"
         case .groupAddUser:
             return "GROUP_ADD_USER"
+        case .groupAdminCreated:
+            return "GROUP_ADMIN_CREATED"
+        case .groupAdminDeleted:
+            return "GROUP_ADMIN_DELETED"
+        case .groupAdminPermissionsUpdated:
+            return "GROUP_ADMIN_PERMISSIONS_UPDATED"
         case .groupCreation:
             return "GROUP_CREATION"
         case .groupDeletion:
@@ -549,6 +714,12 @@ public enum EventEventTypeField: CodableStringEnum {
             return "GROUP_REMOVE_ITEM"
         case .groupRemoveUser:
             return "GROUP_REMOVE_USER"
+        case .itemAssociationCreated:
+            return "ITEM_ASSOCIATION_CREATED"
+        case .itemAssociationDeleted:
+            return "ITEM_ASSOCIATION_DELETED"
+        case .itemAssociationUpdated:
+            return "ITEM_ASSOCIATION_UPDATED"
         case .itemCopy:
             return "ITEM_COPY"
         case .itemCreate:
@@ -625,6 +796,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "MOVE"
         case .newUser:
             return "NEW_USER"
+        case .oauth2AccessTokenRevoke:
+            return "OAUTH2_ACCESS_TOKEN_REVOKE"
         case .preview:
             return "PREVIEW"
         case .removeDeviceAssociation:
@@ -637,12 +810,22 @@ public enum EventEventTypeField: CodableStringEnum {
             return "RETENTION_POLICY_ASSIGNMENT_ADD"
         case .share:
             return "SHARE"
+        case .sharedLinkRedirectOutOfSharedContext:
+            return "SHARED_LINK_REDIRECT_OUT_OF_SHARED_CONTEXT"
         case .sharedLinkSend:
             return "SHARED_LINK_SEND"
         case .shareExpiration:
             return "SHARE_EXPIRATION"
+        case .shieldAccessPolicyCreated:
+            return "SHIELD_ACCESS_POLICY_CREATED"
+        case .shieldAccessPolicyDeleted:
+            return "SHIELD_ACCESS_POLICY_DELETED"
+        case .shieldAccessPolicyUpdated:
+            return "SHIELD_ACCESS_POLICY_UPDATED"
         case .shieldAlert:
             return "SHIELD_ALERT"
+        case .shieldDownloadBlocked:
+            return "SHIELD_DOWNLOAD_BLOCKED"
         case .shieldExternalCollabAccessBlocked:
             return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED"
         case .shieldExternalCollabAccessBlockedMissingJustification:
@@ -651,6 +834,26 @@ public enum EventEventTypeField: CodableStringEnum {
             return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED"
         case .shieldExternalCollabInviteBlockedMissingJustification:
             return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION"
+        case .shieldExternalCollabInviteJustified:
+            return "SHIELD_EXTERNAL_COLLAB_INVITE_JUSTIFIED"
+        case .shieldInformationBarrierCollabBlocked:
+            return "SHIELD_INFORMATION_BARRIER_COLLAB_BLOCKED"
+        case .shieldInformationBarrierDisabled:
+            return "SHIELD_INFORMATION_BARRIER_DISABLED"
+        case .shieldInformationBarrierEnabled:
+            return "SHIELD_INFORMATION_BARRIER_ENABLED"
+        case .shieldInformationBarrierGroupAddUserBlocked:
+            return "SHIELD_INFORMATION_BARRIER_GROUP_ADD_USER_BLOCKED"
+        case .shieldInformationBarrierItemCopyBlocked:
+            return "SHIELD_INFORMATION_BARRIER_ITEM_COPY_BLOCKED"
+        case .shieldInformationBarrierItemMoveBlocked:
+            return "SHIELD_INFORMATION_BARRIER_ITEM_MOVE_BLOCKED"
+        case .shieldInformationBarrierItemOwnerTransferBlocked:
+            return "SHIELD_INFORMATION_BARRIER_ITEM_OWNER_TRANSFER_BLOCKED"
+        case .shieldInformationBarrierPending:
+            return "SHIELD_INFORMATION_BARRIER_PENDING"
+        case .shieldInformationBarrierSharedItemAccessBlocked:
+            return "SHIELD_INFORMATION_BARRIER_SHARED_ITEM_ACCESS_BLOCKED"
         case .shieldJustificationApproval:
             return "SHIELD_JUSTIFICATION_APPROVAL"
         case .shieldSharedLinkAccessBlocked:
@@ -677,6 +880,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "SIGN_DOCUMENT_SIGNED"
         case .signDocumentViewedBySigned:
             return "SIGN_DOCUMENT_VIEWED_BY_SIGNED"
+        case .signDocumentViewedBySigner:
+            return "SIGN_DOCUMENT_VIEWED_BY_SIGNER"
         case .signerDownloaded:
             return "SIGNER_DOWNLOADED"
         case .signerForwarded:
