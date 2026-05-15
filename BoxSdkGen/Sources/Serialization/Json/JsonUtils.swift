@@ -11,6 +11,15 @@ public enum JsonUtils {
         return try data.toJson()
     }
 
+    /// Converts SerializedData to a JSON string (UTF-8). Used where generated code expects `sd_to_json` to return `String`.
+    ///
+    /// - Parameter data: The SerializedData object.
+    /// - Returns: JSON text.
+    /// - Throws: An error if the conversion fails.
+    public static func sdToJsonString(data: SerializedData) throws -> String {
+        return Utils.Strings.from(data: try sdToJson(data: data))
+    }
+
     /// Converts SerializedData to URL parameters.
     ///
     /// - Parameter data: The SerializedData object.
@@ -117,5 +126,28 @@ public enum JsonUtils {
         }
 
         return sanitizedDictionary
+    }
+
+    /// Sanitizes a form-encoded body string by replacing the values of specified keys with a sanitized value.
+    ///
+    /// - Parameters:
+    ///   - body: The form-encoded body string to sanitize.
+    ///   - keysToSanitize: The keys to sanitize.
+    /// - Returns: A new form-encoded body string with the specified keys sanitized.
+    public static func sanitizeFormEncodedBodyFromString(body: String, keysToSanitize: [String: String]) -> String {
+        return body
+            .components(separatedBy: "&")
+            .map { parameter in
+                guard let separatorIndex = parameter.firstIndex(of: "=") else {
+                    return parameter
+                }
+
+                let key = String(parameter[..<separatorIndex])
+                let valueStartIndex = parameter.index(after: separatorIndex)
+                let value = String(parameter[valueStartIndex...])
+                let sanitizedValue = keysToSanitize.keys.contains(key.lowercased()) ? sanitizedValue() : value
+                return "\(key)=\(sanitizedValue)"
+            }
+            .joined(separator: "&")
     }
 }
