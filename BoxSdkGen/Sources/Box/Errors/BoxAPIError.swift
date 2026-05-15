@@ -51,9 +51,10 @@ extension BoxAPIError {
             url: conversation.options.url,
             queryParams: conversation.options.params ?? [:],
             headers:  requestHeaders,
-            body:  requestHeaders[HTTPHeaderKey.contentType, default: ""].paramValue == HTTPHeaderContentTypeValue.urlEncoded
+            body: conversation.options.contentType == HTTPHeaderContentTypeValue.urlEncoded
             ? try? conversation.options.data?.toUrlParams()
-            : try? Utils.Strings.from(data: conversation.options.data?.toJson() ?? Data())
+            : try? Utils.Strings.from(data: conversation.options.data?.toJson() ?? Data()),
+            contentType: conversation.options.contentType
         )
 
         var body: SerializedData?

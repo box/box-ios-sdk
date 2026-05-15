@@ -10,6 +10,8 @@ enum HTTPHeaderKey {
 }
 
 enum HTTPHeaderContentTypeValue {
+    static let json = "application/json"
+    static let jsonPatch = "application/json-patch+json"
     static let urlEncoded = "application/x-www-form-urlencoded"
 }
 

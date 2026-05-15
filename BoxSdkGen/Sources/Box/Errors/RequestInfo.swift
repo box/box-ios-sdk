@@ -11,7 +11,8 @@ public class RequestInfo {
     public let headers: [String: String]
     /// The body of the Request
     public let body: String?
-
+    /// The content type of the Request
+    public let contentType: String?
     /// Initializer
     ///
     /// - Parameters:
@@ -20,12 +21,14 @@ public class RequestInfo {
     ///   - queryParams: The query parameters sent in the Request
     ///   - headers: The HTTP headers sent in the Request
     ///   - body: The body of the Request
-    public init(method: String, url: String, queryParams: [String: String], headers: [String: String], body: String? = nil) {
+    ///   - contentType: The content type of the Request
+    public init(method: String, url: String, queryParams: [String: String], headers: [String: String], body: String? = nil, contentType: String? = nil) {
         self.method = method
         self.url = url
         self.queryParams = queryParams
         self.headers = headers
         self.body = body
+        self.contentType = contentType
     }
 
 }
@@ -40,7 +43,9 @@ extension RequestInfo {
         dict["url"] = url
         dict["queryParams"] = queryParams
         dict["headers"] = dataSanitizer.sanitizeHeaders(headers: headers)
-        dict["body"] = body
+        if let body = self.body {
+            dict["body"] = dataSanitizer.sanitizeStringBody(body: body, contentType: contentType)
+        }
         return dict
     }
 }
