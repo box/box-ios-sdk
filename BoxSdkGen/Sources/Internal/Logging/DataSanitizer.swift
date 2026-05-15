@@ -15,4 +15,25 @@ public class DataSanitizer {
         return JsonUtils.sanitizeSerializedData(sd: body, keysToSanitize: self.keysToSanitize)
     }
 
+    public func sanitizeFormEncodedBody(body: String) -> String {
+        return JsonUtils.sanitizeFormEncodedBodyFromString(body: body, keysToSanitize: self.keysToSanitize)
+    }
+
+    public func sanitizeStringBody(body: String, contentType: String? = nil) -> String {
+        if contentType == "application/json" || contentType == "application/json-patch+json" {
+            do {
+                return try JsonUtils.sdToJsonString(data: self.sanitizeBody(body: JsonUtils.jsonToSerializedData(text: body)))
+            } catch {
+                return body
+            }
+
+        }
+
+        if contentType == "application/x-www-form-urlencoded" {
+            return self.sanitizeFormEncodedBody(body: body)
+        }
+
+        return body
+    }
+
 }
