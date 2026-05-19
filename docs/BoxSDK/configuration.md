@@ -7,6 +7,7 @@ The iOS SDK provides dedicated method, that helps you to customize SDK configura
 [update-configure]: https://opensource.box.com/box-ios-sdk/Classes/BoxSDK.html#/s:6BoxSDKAAC19updateConfiguration10apiBaseURL09uploadApifG0015oauth2AuthorizeG016maxRetryAttempts21tokenRefreshThreshold21consoleLogDestination04filesT019clientAnalyticsInfoy10Foundation0G0VSg_A2OSiSgSdSgAA07ConsolesT0CSgAA04FilesT0CSgAA06ClientwX0VSgtKF
 
 
+  - [Network timeouts](#network-timeouts)
   - [URLs configuration](#urls-configuration)
     - [Api Base URL](#api-base-url)
     - [Upload Api Base URL](#upload-api-base-url)
@@ -18,6 +19,17 @@ The iOS SDK provides dedicated method, that helps you to customize SDK configura
     - [File Logging](#file-logging)
   - [Client Analytics Info](#client-analytics-info)
   
+
+Network timeouts
+----------------
+
+API calls are made with `URLSession` in [`BoxNetworkAgent`][box-network-agent], using [`URLSessionConfiguration.default`][urlsession-config]. That configuration applies the following [Apple defaults][urlsession-config]:
+
+- `timeoutIntervalForRequest`: **60 seconds**
+- `timeoutIntervalForResource`: **7 days**
+
+[box-network-agent]: https://opensource.box.com/box-ios-sdk/Classes/BoxNetworkAgent.html
+[urlsession-config]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration
 
 URLs configuration
 ------------------
