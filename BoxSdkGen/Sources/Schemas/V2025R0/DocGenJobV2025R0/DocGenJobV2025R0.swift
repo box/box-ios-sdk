@@ -10,6 +10,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         case outputType = "output_type"
         case outputFile = "output_file"
         case outputFileVersion = "output_file_version"
+        case failures
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -37,6 +38,9 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
 
     public let outputFileVersion: FileVersionBaseV2025R0?
 
+    /// Errors and warnings that occurred during document generation.
+    @CodableTriState public private(set) var failures: DocGenJobV2025R0FailuresField?
+
     /// Initializer for a DocGenJobV2025R0.
     ///
     /// - Parameters:
@@ -49,7 +53,8 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     ///   - type: The value will always be `docgen_job`.
     ///   - outputFile: 
     ///   - outputFileVersion: 
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil) {
+    ///   - failures: Errors and warnings that occurred during document generation.
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil) {
         self.batch = batch
         self.templateFile = templateFile
         self.templateFileVersion = templateFileVersion
@@ -57,6 +62,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         self.outputType = outputType
         self.outputFile = outputFile
         self.outputFileVersion = outputFileVersion
+        self._failures = CodableTriState(state: failures)
 
         super.init(id: id, type: type)
     }
@@ -70,6 +76,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         outputType = try container.decode(String.self, forKey: .outputType)
         outputFile = try container.decodeIfPresent(FileReferenceV2025R0.self, forKey: .outputFile)
         outputFileVersion = try container.decodeIfPresent(FileVersionBaseV2025R0.self, forKey: .outputFileVersion)
+        failures = try container.decodeIfPresent(DocGenJobV2025R0FailuresField.self, forKey: .failures)
 
         try super.init(from: decoder)
     }
@@ -83,6 +90,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         try container.encode(outputType, forKey: .outputType)
         try container.encodeIfPresent(outputFile, forKey: .outputFile)
         try container.encodeIfPresent(outputFileVersion, forKey: .outputFileVersion)
+        try container.encode(field: _failures.state, forKey: .failures)
         try super.encode(to: encoder)
     }
 
