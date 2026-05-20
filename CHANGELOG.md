@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file. See [standa
 ## [10.10.0](https://github.com/box/box-ios-sdk/compare/10.9.0...10.10.0) (2026-05-20)
 
 
+### ⚠ BREAKING CHANGES
+
+* add failure related fields to `DocGenJob` (box/box-openapi[#598](https://github.com/box/box-ios-sdk/issues/598)) ([#1515](https://github.com/box/box-ios-sdk/issues/1515)) ([8f2cbe2](https://github.com/box/box-ios-sdk/commit/8f2cbe20902c307feaed75cb1e5462c59eee7cb9))
+
 ### New Features and Enhancements
 
 * add failure related fields to `DocGenJob` (box/box-openapi[#598](https://github.com/box/box-ios-sdk/issues/598)) ([#1515](https://github.com/box/box-ios-sdk/issues/1515)) ([8f2cbe2](https://github.com/box/box-ios-sdk/commit/8f2cbe20902c307feaed75cb1e5462c59eee7cb9))
