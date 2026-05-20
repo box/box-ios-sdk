@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.10.0](https://github.com/box/box-ios-sdk/compare/10.9.0...10.10.0) (2026-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* add failure related fields to `DocGenJob` (box/box-openapi[#598](https://github.com/box/box-ios-sdk/issues/598)) ([#1515](https://github.com/box/box-ios-sdk/issues/1515)) ([8f2cbe2](https://github.com/box/box-ios-sdk/commit/8f2cbe20902c307feaed75cb1e5462c59eee7cb9))
+
+### New Features and Enhancements
+
+* add failure related fields to `DocGenJob` (box/box-openapi[#598](https://github.com/box/box-ios-sdk/issues/598)) ([#1515](https://github.com/box/box-ios-sdk/issues/1515)) ([8f2cbe2](https://github.com/box/box-ios-sdk/commit/8f2cbe20902c307feaed75cb1e5462c59eee7cb9))
+* Add new event types (box/box-openapi[#597](https://github.com/box/box-ios-sdk/issues/597)) ([#1506](https://github.com/box/box-ios-sdk/issues/1506)) ([e0affb4](https://github.com/box/box-ios-sdk/commit/e0affb430a4901f899089006efea666b0c7e1337))
+* Sanitize request body in `BoxAPIError` (box/box-codegen[#948](https://github.com/box/box-ios-sdk/issues/948)) ([#1508](https://github.com/box/box-ios-sdk/issues/1508)) ([b180ee9](https://github.com/box/box-ios-sdk/commit/b180ee99cfe57cf96a5a33b991f18efd1b4a312c))
+
 ## [10.9.0](https://github.com/box/box-ios-sdk/compare/10.8.0...10.9.0) (2026-05-06)
 
 
