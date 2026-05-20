@@ -43,14 +43,15 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
     ///   - type: The value will always be `docgen_job`.
     ///   - outputFile: 
     ///   - outputFileVersion: 
+    ///   - failures: Errors and warnings that occurred during document generation.
     ///   - createdAt: Time of job creation.
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, createdAt: String? = nil) {
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil, createdAt: String? = nil) {
         self.createdBy = createdBy
         self.enterprise = enterprise
         self.source = source
         self.createdAt = createdAt
 
-        super.init(id: id, batch: batch, templateFile: templateFile, templateFileVersion: templateFileVersion, status: status, outputType: outputType, type: type, outputFile: outputFile, outputFileVersion: outputFileVersion)
+        super.init(id: id, batch: batch, templateFile: templateFile, templateFileVersion: templateFileVersion, status: status, outputType: outputType, type: type, outputFile: outputFile, outputFileVersion: outputFileVersion, failures: failures)
     }
 
     required public init(from decoder: Decoder) throws {
