@@ -1,6 +1,6 @@
 import Foundation
 
-public class ConvertMarkdownToBoxNoteManager {
+public class NotesManager {
     public let auth: Authentication?
 
     public let networkSession: NetworkSession

@@ -8,6 +8,7 @@ public enum SignRequestStatusField: CodableStringEnum {
     case signed
     case cancelled
     case declined
+    case error
     case errorConverting
     case errorSending
     case expired
@@ -31,6 +32,8 @@ public enum SignRequestStatusField: CodableStringEnum {
             self = .cancelled
         case "declined".lowercased():
             self = .declined
+        case "error".lowercased():
+            self = .error
         case "error_converting".lowercased():
             self = .errorConverting
         case "error_sending".lowercased():
@@ -62,6 +65,8 @@ public enum SignRequestStatusField: CodableStringEnum {
             return "cancelled"
         case .declined:
             return "declined"
+        case .error:
+            return "error"
         case .errorConverting:
             return "error_converting"
         case .errorSending:
