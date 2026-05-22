@@ -173,6 +173,8 @@ public class BoxClient {
 
     public let automateWorkflows: AutomateWorkflowsManager
 
+    public let notes: NotesManager
+
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
@@ -260,6 +262,7 @@ public class BoxClient {
         self.archives = ArchivesManager(auth: self.auth, networkSession: self.networkSession)
         self.externalUsers = ExternalUsersManager(auth: self.auth, networkSession: self.networkSession)
         self.automateWorkflows = AutomateWorkflowsManager(auth: self.auth, networkSession: self.networkSession)
+        self.notes = NotesManager(auth: self.auth, networkSession: self.networkSession)
     }
 
     /// Make a custom http request using the client authentication and network session.
