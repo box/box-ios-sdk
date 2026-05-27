@@ -14,7 +14,7 @@ See the endpoint docs at
 
 <!-- sample post_notes_convert_v2026.0 -->
 ```
-try await downscopedClient.notes.createNoteConvertV2026R0(requestBody: NotesConvertRequestBodyV2026R0(content: markdownContent, contentFormat: NotesConvertRequestBodyV2026R0ContentFormatField.markdown, parent: FolderReferenceV2026R0(id: "0"), name: noteName))
+try await client.notes.createNoteConvertV2026R0(requestBody: NotesConvertRequestBodyV2026R0(content: markdownContent, contentFormat: NotesConvertRequestBodyV2026R0ContentFormatField.markdown, parent: FolderReferenceV2026R0(id: "0"), name: noteName))
 ```
 
 ### Arguments
