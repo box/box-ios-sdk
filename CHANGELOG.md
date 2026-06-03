@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.11.0](https://github.com/box/box-ios-sdk/compare/10.10.0...10.11.0) (2026-06-03)
+
+
+### New Features and Enhancements
+
+* Add Convert Note API (box/box-codegen[#955](https://github.com/box/box-ios-sdk/issues/955)) ([#1527](https://github.com/box/box-ios-sdk/issues/1527)) ([3efe279](https://github.com/box/box-ios-sdk/commit/3efe2796343198a50daf9f81916facd214162140))
+
 ## [10.10.0](https://github.com/box/box-ios-sdk/compare/10.9.0...10.10.0) (2026-05-20)
 
 
