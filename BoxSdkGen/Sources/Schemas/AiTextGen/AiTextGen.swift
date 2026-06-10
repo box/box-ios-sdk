@@ -24,8 +24,8 @@ public class AiTextGen: Codable, RawJSONReadable {
     /// The items to be processed by the LLM, often files.
     /// The array can include **exactly one** element.
     /// 
-    /// **Note**: Box AI handles documents with text representations up to 1MB in size.
-    /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
+    /// **Note**: Box AI handles documents with text representations up to 2MB in size.
+    /// If the file size exceeds 2MB, the first 2MB of text representation will be processed.
     public let items: [AiTextGenItemsField]
 
     /// The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
@@ -40,8 +40,8 @@ public class AiTextGen: Codable, RawJSONReadable {
     ///   - items: The items to be processed by the LLM, often files.
     ///     The array can include **exactly one** element.
     ///     
-    ///     **Note**: Box AI handles documents with text representations up to 1MB in size.
-    ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
+    ///     **Note**: Box AI handles documents with text representations up to 2MB in size.
+    ///     If the file size exceeds 2MB, the first 2MB of text representation will be processed.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
     ///   - aiAgent: 
     public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiDialogueHistory]? = nil, aiAgent: AiTextGenAgent? = nil) {

@@ -6,6 +6,7 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case addDeviceAssociation
     case addLoginActivityDevice
     case adminLogin
+    case advancedFolderSettingsUpdate
     case applicationCreated
     case applicationPublicKeyAdded
     case applicationPublicKeyDeleted
@@ -18,6 +19,7 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case collaborationRoleChange
     case commentCreate
     case commentDelete
+    case commentEdit
     case contentWorkflowAbnormalDownloadActivity
     case contentWorkflowAutomationAdd
     case contentWorkflowAutomationDelete
@@ -34,11 +36,19 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case edit
     case editUser
     case emailAliasConfirm
+    case emailAliasPrimary
     case emailAliasRemove
+    case emailUploadDisabled
+    case emailUploadEnabled
     case enterpriseAppAuthorizationUpdate
     case externalCollabSecuritySettings
     case failedLogin
+    case favorite
     case fileMarkedMalicious
+    case fileRequestCreate
+    case fileRequestDelete
+    case fileRequestUpdate
+    case fileVersionRestore
     case fileWatermarkedDownload
     case groupAddItem
     case groupAddUser
@@ -47,6 +57,7 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case groupEdited
     case groupRemoveItem
     case groupRemoveUser
+    case illegalItemOwnershipTransferByUser
     case itemEmailSend
     case itemModify
     case itemOpen
@@ -60,6 +71,9 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case legalHoldPolicyUpdate
     case lock
     case login
+    case metadataCascadePolicyApply
+    case metadataCascadePolicyCreate
+    case metadataInstanceCopy
     case metadataInstanceCreate
     case metadataInstanceDelete
     case metadataInstanceUpdate
@@ -69,6 +83,7 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case move
     case newUser
     case oauth2AccessTokenRevoke
+    case oauth2RefreshTokenRevoke
     case preview
     case removeDeviceAssociation
     case removeLoginActivityDevice
@@ -106,6 +121,7 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case termsOfServiceAccept
     case termsOfServiceReject
     case undelete
+    case unfavorite
     case unlock
     case unshare
     case updateCollaborationExpiration
@@ -114,6 +130,9 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case userAuthenticateOauth2AccessTokenCreate
     case watermarkLabelCreate
     case watermarkLabelDelete
+    case workflowAutomationCreate
+    case workflowAutomationDelete
+    case workflowAutomationUpdate
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -128,6 +147,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .addLoginActivityDevice
         case "ADMIN_LOGIN".lowercased():
             self = .adminLogin
+        case "ADVANCED_FOLDER_SETTINGS_UPDATE".lowercased():
+            self = .advancedFolderSettingsUpdate
         case "APPLICATION_CREATED".lowercased():
             self = .applicationCreated
         case "APPLICATION_PUBLIC_KEY_ADDED".lowercased():
@@ -152,6 +173,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .commentCreate
         case "COMMENT_DELETE".lowercased():
             self = .commentDelete
+        case "COMMENT_EDIT".lowercased():
+            self = .commentEdit
         case "CONTENT_WORKFLOW_ABNORMAL_DOWNLOAD_ACTIVITY".lowercased():
             self = .contentWorkflowAbnormalDownloadActivity
         case "CONTENT_WORKFLOW_AUTOMATION_ADD".lowercased():
@@ -184,16 +207,32 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .editUser
         case "EMAIL_ALIAS_CONFIRM".lowercased():
             self = .emailAliasConfirm
+        case "EMAIL_ALIAS_PRIMARY".lowercased():
+            self = .emailAliasPrimary
         case "EMAIL_ALIAS_REMOVE".lowercased():
             self = .emailAliasRemove
+        case "EMAIL_UPLOAD_DISABLED".lowercased():
+            self = .emailUploadDisabled
+        case "EMAIL_UPLOAD_ENABLED".lowercased():
+            self = .emailUploadEnabled
         case "ENTERPRISE_APP_AUTHORIZATION_UPDATE".lowercased():
             self = .enterpriseAppAuthorizationUpdate
         case "EXTERNAL_COLLAB_SECURITY_SETTINGS".lowercased():
             self = .externalCollabSecuritySettings
         case "FAILED_LOGIN".lowercased():
             self = .failedLogin
+        case "FAVORITE".lowercased():
+            self = .favorite
         case "FILE_MARKED_MALICIOUS".lowercased():
             self = .fileMarkedMalicious
+        case "FILE_REQUEST_CREATE".lowercased():
+            self = .fileRequestCreate
+        case "FILE_REQUEST_DELETE".lowercased():
+            self = .fileRequestDelete
+        case "FILE_REQUEST_UPDATE".lowercased():
+            self = .fileRequestUpdate
+        case "FILE_VERSION_RESTORE".lowercased():
+            self = .fileVersionRestore
         case "FILE_WATERMARKED_DOWNLOAD".lowercased():
             self = .fileWatermarkedDownload
         case "GROUP_ADD_ITEM".lowercased():
@@ -210,6 +249,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .groupRemoveItem
         case "GROUP_REMOVE_USER".lowercased():
             self = .groupRemoveUser
+        case "ILLEGAL_ITEM_OWNERSHIP_TRANSFER_BY_USER".lowercased():
+            self = .illegalItemOwnershipTransferByUser
         case "ITEM_EMAIL_SEND".lowercased():
             self = .itemEmailSend
         case "ITEM_MODIFY".lowercased():
@@ -236,6 +277,12 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .lock
         case "LOGIN".lowercased():
             self = .login
+        case "METADATA_CASCADE_POLICY_APPLY".lowercased():
+            self = .metadataCascadePolicyApply
+        case "METADATA_CASCADE_POLICY_CREATE".lowercased():
+            self = .metadataCascadePolicyCreate
+        case "METADATA_INSTANCE_COPY".lowercased():
+            self = .metadataInstanceCopy
         case "METADATA_INSTANCE_CREATE".lowercased():
             self = .metadataInstanceCreate
         case "METADATA_INSTANCE_DELETE".lowercased():
@@ -254,6 +301,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .newUser
         case "OAUTH2_ACCESS_TOKEN_REVOKE".lowercased():
             self = .oauth2AccessTokenRevoke
+        case "OAUTH2_REFRESH_TOKEN_REVOKE".lowercased():
+            self = .oauth2RefreshTokenRevoke
         case "PREVIEW".lowercased():
             self = .preview
         case "REMOVE_DEVICE_ASSOCIATION".lowercased():
@@ -328,6 +377,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .termsOfServiceReject
         case "UNDELETE".lowercased():
             self = .undelete
+        case "UNFAVORITE".lowercased():
+            self = .unfavorite
         case "UNLOCK".lowercased():
             self = .unlock
         case "UNSHARE".lowercased():
@@ -344,6 +395,12 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .watermarkLabelCreate
         case "WATERMARK_LABEL_DELETE".lowercased():
             self = .watermarkLabelDelete
+        case "WORKFLOW_AUTOMATION_CREATE".lowercased():
+            self = .workflowAutomationCreate
+        case "WORKFLOW_AUTOMATION_DELETE".lowercased():
+            self = .workflowAutomationDelete
+        case "WORKFLOW_AUTOMATION_UPDATE".lowercased():
+            self = .workflowAutomationUpdate
         default:
             self = .customValue(value)
         }
@@ -361,6 +418,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "ADD_LOGIN_ACTIVITY_DEVICE"
         case .adminLogin:
             return "ADMIN_LOGIN"
+        case .advancedFolderSettingsUpdate:
+            return "ADVANCED_FOLDER_SETTINGS_UPDATE"
         case .applicationCreated:
             return "APPLICATION_CREATED"
         case .applicationPublicKeyAdded:
@@ -385,6 +444,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "COMMENT_CREATE"
         case .commentDelete:
             return "COMMENT_DELETE"
+        case .commentEdit:
+            return "COMMENT_EDIT"
         case .contentWorkflowAbnormalDownloadActivity:
             return "CONTENT_WORKFLOW_ABNORMAL_DOWNLOAD_ACTIVITY"
         case .contentWorkflowAutomationAdd:
@@ -417,16 +478,32 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "EDIT_USER"
         case .emailAliasConfirm:
             return "EMAIL_ALIAS_CONFIRM"
+        case .emailAliasPrimary:
+            return "EMAIL_ALIAS_PRIMARY"
         case .emailAliasRemove:
             return "EMAIL_ALIAS_REMOVE"
+        case .emailUploadDisabled:
+            return "EMAIL_UPLOAD_DISABLED"
+        case .emailUploadEnabled:
+            return "EMAIL_UPLOAD_ENABLED"
         case .enterpriseAppAuthorizationUpdate:
             return "ENTERPRISE_APP_AUTHORIZATION_UPDATE"
         case .externalCollabSecuritySettings:
             return "EXTERNAL_COLLAB_SECURITY_SETTINGS"
         case .failedLogin:
             return "FAILED_LOGIN"
+        case .favorite:
+            return "FAVORITE"
         case .fileMarkedMalicious:
             return "FILE_MARKED_MALICIOUS"
+        case .fileRequestCreate:
+            return "FILE_REQUEST_CREATE"
+        case .fileRequestDelete:
+            return "FILE_REQUEST_DELETE"
+        case .fileRequestUpdate:
+            return "FILE_REQUEST_UPDATE"
+        case .fileVersionRestore:
+            return "FILE_VERSION_RESTORE"
         case .fileWatermarkedDownload:
             return "FILE_WATERMARKED_DOWNLOAD"
         case .groupAddItem:
@@ -443,6 +520,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "GROUP_REMOVE_ITEM"
         case .groupRemoveUser:
             return "GROUP_REMOVE_USER"
+        case .illegalItemOwnershipTransferByUser:
+            return "ILLEGAL_ITEM_OWNERSHIP_TRANSFER_BY_USER"
         case .itemEmailSend:
             return "ITEM_EMAIL_SEND"
         case .itemModify:
@@ -469,6 +548,12 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "LOCK"
         case .login:
             return "LOGIN"
+        case .metadataCascadePolicyApply:
+            return "METADATA_CASCADE_POLICY_APPLY"
+        case .metadataCascadePolicyCreate:
+            return "METADATA_CASCADE_POLICY_CREATE"
+        case .metadataInstanceCopy:
+            return "METADATA_INSTANCE_COPY"
         case .metadataInstanceCreate:
             return "METADATA_INSTANCE_CREATE"
         case .metadataInstanceDelete:
@@ -487,6 +572,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "NEW_USER"
         case .oauth2AccessTokenRevoke:
             return "OAUTH2_ACCESS_TOKEN_REVOKE"
+        case .oauth2RefreshTokenRevoke:
+            return "OAUTH2_REFRESH_TOKEN_REVOKE"
         case .preview:
             return "PREVIEW"
         case .removeDeviceAssociation:
@@ -561,6 +648,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "TERMS_OF_SERVICE_REJECT"
         case .undelete:
             return "UNDELETE"
+        case .unfavorite:
+            return "UNFAVORITE"
         case .unlock:
             return "UNLOCK"
         case .unshare:
@@ -577,6 +666,12 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "WATERMARK_LABEL_CREATE"
         case .watermarkLabelDelete:
             return "WATERMARK_LABEL_DELETE"
+        case .workflowAutomationCreate:
+            return "WORKFLOW_AUTOMATION_CREATE"
+        case .workflowAutomationDelete:
+            return "WORKFLOW_AUTOMATION_DELETE"
+        case .workflowAutomationUpdate:
+            return "WORKFLOW_AUTOMATION_UPDATE"
         case .customValue(let value):
             return value
         }
