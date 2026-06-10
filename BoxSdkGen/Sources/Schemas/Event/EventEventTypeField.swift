@@ -6,6 +6,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case addDeviceAssociation
     case addLoginActivityDevice
     case adminLogin
+    case advancedFolderSettingsUpdate
     case aiSecurityDetection
     case annotationv2Create
     case annotationv2Delete
@@ -34,6 +35,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case collectionUpdate
     case commentCreate
     case commentDelete
+    case commentEdit
     case contentAccess
     case contentRecoveryReportCreate
     case contentRecoveryReportDelete
@@ -61,13 +63,21 @@ public enum EventEventTypeField: CodableStringEnum {
     case edrCrowdstrikeDriveOutdated
     case edrCrowdstrikeNoBoxTools
     case emailAliasConfirm
+    case emailAliasPrimary
     case emailAliasRemove
+    case emailUploadDisabled
+    case emailUploadEnabled
     case enableMultiFactorAuth
     case enableTwoFactorAuth
     case enterpriseAppAuthorizationUpdate
     case externalCollabSecuritySettings
     case failedLogin
+    case favorite
     case fileMarkedMalicious
+    case fileRequestCreate
+    case fileRequestDelete
+    case fileRequestUpdate
+    case fileVersionRestore
     case fileWatermarkedDownload
     case groupAddItem
     case groupAddUser
@@ -79,6 +89,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case groupEdited
     case groupRemoveItem
     case groupRemoveUser
+    case illegalItemOwnershipTransferByUser
     case itemAssociationCreated
     case itemAssociationDeleted
     case itemAssociationUpdated
@@ -112,6 +123,9 @@ public enum EventEventTypeField: CodableStringEnum {
     case login
     case masterInviteAccept
     case masterInviteReject
+    case metadataCascadePolicyApply
+    case metadataCascadePolicyCreate
+    case metadataInstanceCopy
     case metadataInstanceCreate
     case metadataInstanceDelete
     case metadataInstanceUpdate
@@ -121,6 +135,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case move
     case newUser
     case oauth2AccessTokenRevoke
+    case oauth2RefreshTokenRevoke
     case preview
     case removeDeviceAssociation
     case removeLoginActivityDevice
@@ -175,6 +190,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case termsOfServiceAccept
     case termsOfServiceReject
     case undelete
+    case unfavorite
     case unlock
     case unshare
     case updateCollaborationExpiration
@@ -183,6 +199,9 @@ public enum EventEventTypeField: CodableStringEnum {
     case userAuthenticateOauth2AccessTokenCreate
     case watermarkLabelCreate
     case watermarkLabelDelete
+    case workflowAutomationCreate
+    case workflowAutomationDelete
+    case workflowAutomationUpdate
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -197,6 +216,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .addLoginActivityDevice
         case "ADMIN_LOGIN".lowercased():
             self = .adminLogin
+        case "ADVANCED_FOLDER_SETTINGS_UPDATE".lowercased():
+            self = .advancedFolderSettingsUpdate
         case "AI_SECURITY_DETECTION".lowercased():
             self = .aiSecurityDetection
         case "ANNOTATIONV2_CREATE".lowercased():
@@ -253,6 +274,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .commentCreate
         case "COMMENT_DELETE".lowercased():
             self = .commentDelete
+        case "COMMENT_EDIT".lowercased():
+            self = .commentEdit
         case "CONTENT_ACCESS".lowercased():
             self = .contentAccess
         case "CONTENT_RECOVERY_REPORT_CREATE".lowercased():
@@ -307,8 +330,14 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .edrCrowdstrikeNoBoxTools
         case "EMAIL_ALIAS_CONFIRM".lowercased():
             self = .emailAliasConfirm
+        case "EMAIL_ALIAS_PRIMARY".lowercased():
+            self = .emailAliasPrimary
         case "EMAIL_ALIAS_REMOVE".lowercased():
             self = .emailAliasRemove
+        case "EMAIL_UPLOAD_DISABLED".lowercased():
+            self = .emailUploadDisabled
+        case "EMAIL_UPLOAD_ENABLED".lowercased():
+            self = .emailUploadEnabled
         case "ENABLE_MULTI_FACTOR_AUTH".lowercased():
             self = .enableMultiFactorAuth
         case "ENABLE_TWO_FACTOR_AUTH".lowercased():
@@ -319,8 +348,18 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .externalCollabSecuritySettings
         case "FAILED_LOGIN".lowercased():
             self = .failedLogin
+        case "FAVORITE".lowercased():
+            self = .favorite
         case "FILE_MARKED_MALICIOUS".lowercased():
             self = .fileMarkedMalicious
+        case "FILE_REQUEST_CREATE".lowercased():
+            self = .fileRequestCreate
+        case "FILE_REQUEST_DELETE".lowercased():
+            self = .fileRequestDelete
+        case "FILE_REQUEST_UPDATE".lowercased():
+            self = .fileRequestUpdate
+        case "FILE_VERSION_RESTORE".lowercased():
+            self = .fileVersionRestore
         case "FILE_WATERMARKED_DOWNLOAD".lowercased():
             self = .fileWatermarkedDownload
         case "GROUP_ADD_ITEM".lowercased():
@@ -343,6 +382,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .groupRemoveItem
         case "GROUP_REMOVE_USER".lowercased():
             self = .groupRemoveUser
+        case "ILLEGAL_ITEM_OWNERSHIP_TRANSFER_BY_USER".lowercased():
+            self = .illegalItemOwnershipTransferByUser
         case "ITEM_ASSOCIATION_CREATED".lowercased():
             self = .itemAssociationCreated
         case "ITEM_ASSOCIATION_DELETED".lowercased():
@@ -409,6 +450,12 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .masterInviteAccept
         case "MASTER_INVITE_REJECT".lowercased():
             self = .masterInviteReject
+        case "METADATA_CASCADE_POLICY_APPLY".lowercased():
+            self = .metadataCascadePolicyApply
+        case "METADATA_CASCADE_POLICY_CREATE".lowercased():
+            self = .metadataCascadePolicyCreate
+        case "METADATA_INSTANCE_COPY".lowercased():
+            self = .metadataInstanceCopy
         case "METADATA_INSTANCE_CREATE".lowercased():
             self = .metadataInstanceCreate
         case "METADATA_INSTANCE_DELETE".lowercased():
@@ -427,6 +474,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .newUser
         case "OAUTH2_ACCESS_TOKEN_REVOKE".lowercased():
             self = .oauth2AccessTokenRevoke
+        case "OAUTH2_REFRESH_TOKEN_REVOKE".lowercased():
+            self = .oauth2RefreshTokenRevoke
         case "PREVIEW".lowercased():
             self = .preview
         case "REMOVE_DEVICE_ASSOCIATION".lowercased():
@@ -535,6 +584,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .termsOfServiceReject
         case "UNDELETE".lowercased():
             self = .undelete
+        case "UNFAVORITE".lowercased():
+            self = .unfavorite
         case "UNLOCK".lowercased():
             self = .unlock
         case "UNSHARE".lowercased():
@@ -551,6 +602,12 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .watermarkLabelCreate
         case "WATERMARK_LABEL_DELETE".lowercased():
             self = .watermarkLabelDelete
+        case "WORKFLOW_AUTOMATION_CREATE".lowercased():
+            self = .workflowAutomationCreate
+        case "WORKFLOW_AUTOMATION_DELETE".lowercased():
+            self = .workflowAutomationDelete
+        case "WORKFLOW_AUTOMATION_UPDATE".lowercased():
+            self = .workflowAutomationUpdate
         default:
             self = .customValue(value)
         }
@@ -568,6 +625,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "ADD_LOGIN_ACTIVITY_DEVICE"
         case .adminLogin:
             return "ADMIN_LOGIN"
+        case .advancedFolderSettingsUpdate:
+            return "ADVANCED_FOLDER_SETTINGS_UPDATE"
         case .aiSecurityDetection:
             return "AI_SECURITY_DETECTION"
         case .annotationv2Create:
@@ -624,6 +683,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "COMMENT_CREATE"
         case .commentDelete:
             return "COMMENT_DELETE"
+        case .commentEdit:
+            return "COMMENT_EDIT"
         case .contentAccess:
             return "CONTENT_ACCESS"
         case .contentRecoveryReportCreate:
@@ -678,8 +739,14 @@ public enum EventEventTypeField: CodableStringEnum {
             return "EDR_CROWDSTRIKE_NO_BOX_TOOLS"
         case .emailAliasConfirm:
             return "EMAIL_ALIAS_CONFIRM"
+        case .emailAliasPrimary:
+            return "EMAIL_ALIAS_PRIMARY"
         case .emailAliasRemove:
             return "EMAIL_ALIAS_REMOVE"
+        case .emailUploadDisabled:
+            return "EMAIL_UPLOAD_DISABLED"
+        case .emailUploadEnabled:
+            return "EMAIL_UPLOAD_ENABLED"
         case .enableMultiFactorAuth:
             return "ENABLE_MULTI_FACTOR_AUTH"
         case .enableTwoFactorAuth:
@@ -690,8 +757,18 @@ public enum EventEventTypeField: CodableStringEnum {
             return "EXTERNAL_COLLAB_SECURITY_SETTINGS"
         case .failedLogin:
             return "FAILED_LOGIN"
+        case .favorite:
+            return "FAVORITE"
         case .fileMarkedMalicious:
             return "FILE_MARKED_MALICIOUS"
+        case .fileRequestCreate:
+            return "FILE_REQUEST_CREATE"
+        case .fileRequestDelete:
+            return "FILE_REQUEST_DELETE"
+        case .fileRequestUpdate:
+            return "FILE_REQUEST_UPDATE"
+        case .fileVersionRestore:
+            return "FILE_VERSION_RESTORE"
         case .fileWatermarkedDownload:
             return "FILE_WATERMARKED_DOWNLOAD"
         case .groupAddItem:
@@ -714,6 +791,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "GROUP_REMOVE_ITEM"
         case .groupRemoveUser:
             return "GROUP_REMOVE_USER"
+        case .illegalItemOwnershipTransferByUser:
+            return "ILLEGAL_ITEM_OWNERSHIP_TRANSFER_BY_USER"
         case .itemAssociationCreated:
             return "ITEM_ASSOCIATION_CREATED"
         case .itemAssociationDeleted:
@@ -780,6 +859,12 @@ public enum EventEventTypeField: CodableStringEnum {
             return "MASTER_INVITE_ACCEPT"
         case .masterInviteReject:
             return "MASTER_INVITE_REJECT"
+        case .metadataCascadePolicyApply:
+            return "METADATA_CASCADE_POLICY_APPLY"
+        case .metadataCascadePolicyCreate:
+            return "METADATA_CASCADE_POLICY_CREATE"
+        case .metadataInstanceCopy:
+            return "METADATA_INSTANCE_COPY"
         case .metadataInstanceCreate:
             return "METADATA_INSTANCE_CREATE"
         case .metadataInstanceDelete:
@@ -798,6 +883,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "NEW_USER"
         case .oauth2AccessTokenRevoke:
             return "OAUTH2_ACCESS_TOKEN_REVOKE"
+        case .oauth2RefreshTokenRevoke:
+            return "OAUTH2_REFRESH_TOKEN_REVOKE"
         case .preview:
             return "PREVIEW"
         case .removeDeviceAssociation:
@@ -906,6 +993,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "TERMS_OF_SERVICE_REJECT"
         case .undelete:
             return "UNDELETE"
+        case .unfavorite:
+            return "UNFAVORITE"
         case .unlock:
             return "UNLOCK"
         case .unshare:
@@ -922,6 +1011,12 @@ public enum EventEventTypeField: CodableStringEnum {
             return "WATERMARK_LABEL_CREATE"
         case .watermarkLabelDelete:
             return "WATERMARK_LABEL_DELETE"
+        case .workflowAutomationCreate:
+            return "WORKFLOW_AUTOMATION_CREATE"
+        case .workflowAutomationDelete:
+            return "WORKFLOW_AUTOMATION_DELETE"
+        case .workflowAutomationUpdate:
+            return "WORKFLOW_AUTOMATION_UPDATE"
         case .customValue(let value):
             return value
         }
