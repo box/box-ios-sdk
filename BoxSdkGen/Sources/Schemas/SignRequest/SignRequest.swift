@@ -18,6 +18,7 @@ public class SignRequest: SignRequestBase {
         case shortId = "short_id"
         case createdAt = "created_at"
         case finishedAt = "finished_at"
+        case errorCode = "error_code"
         case senderEmail = "sender_email"
         case senderId = "sender_id"
     }
@@ -81,6 +82,10 @@ public class SignRequest: SignRequestBase {
     /// Timestamp indicating when all signing actions completed.
     @CodableTriState public private(set) var finishedAt: Date?
 
+    /// When the sign request is in an error state, identifies the specific
+    /// reason. Null when no error code applies.
+    @CodableTriState public private(set) var errorCode: String?
+
     /// The email address of the sender of the sign request.
     @CodableTriState public private(set) var senderEmail: String?
 
@@ -125,9 +130,11 @@ public class SignRequest: SignRequestBase {
     ///   - shortId: Short identifier for the sign request.
     ///   - createdAt: Timestamp marking when the sign request was created.
     ///   - finishedAt: Timestamp indicating when all signing actions completed.
+    ///   - errorCode: When the sign request is in an error state, identifies the specific
+    ///     reason. Null when no error code applies.
     ///   - senderEmail: The email address of the sender of the sign request.
     ///   - senderId: The user ID of the sender of the sign request.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, shortId: String? = nil, createdAt: Date? = nil, finishedAt: TriStateField<Date> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, shortId: String? = nil, createdAt: Date? = nil, finishedAt: TriStateField<Date> = nil, errorCode: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -143,6 +150,7 @@ public class SignRequest: SignRequestBase {
         self.shortId = shortId
         self.createdAt = createdAt
         self._finishedAt = CodableTriState(state: finishedAt)
+        self._errorCode = CodableTriState(state: errorCode)
         self._senderEmail = CodableTriState(state: senderEmail)
         self._senderId = CodableTriState(state: senderId)
 
@@ -166,6 +174,7 @@ public class SignRequest: SignRequestBase {
         shortId = try container.decodeIfPresent(String.self, forKey: .shortId)
         createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         finishedAt = try container.decodeDateTimeIfPresent(forKey: .finishedAt)
+        errorCode = try container.decodeIfPresent(String.self, forKey: .errorCode)
         senderEmail = try container.decodeIfPresent(String.self, forKey: .senderEmail)
         senderId = try container.decodeIfPresent(Int64.self, forKey: .senderId)
 
@@ -189,6 +198,7 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(shortId, forKey: .shortId)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeDateTime(field: _finishedAt.state, forKey: .finishedAt)
+        try container.encode(field: _errorCode.state, forKey: .errorCode)
         try container.encode(field: _senderEmail.state, forKey: .senderEmail)
         try container.encode(field: _senderId.state, forKey: .senderId)
         try super.encode(to: encoder)
