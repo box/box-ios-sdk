@@ -8,6 +8,10 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
         case prompt
         case type
         case options
+        case fields
+        case taxonomyKey = "taxonomy_key"
+        case namespace
+        case optionsRules = "options_rules"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -31,11 +35,22 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
     /// The context about the key that may include how to find and format it.
     public let prompt: String?
 
-    /// The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, and `multiSelect`.
+    /// The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, `multiSelect`,`taxonomy`, `struct`, and `table`.
     public let type: String?
 
     /// A list of options for this field. This is most often used in combination with the `enum` and `multiSelect` field types.
     public let options: [AiExtractStructuredFieldsOptionsField]?
+
+    /// The nested fields for this field. Used with `struct` and `table` field types to define the nested structure.
+    public let fields: [AiExtractSubField]?
+
+    /// The identifier for a taxonomy, which corresponds to the `key` of the taxonomy source. Required if using `taxonomy` type field.
+    public let taxonomyKey: String?
+
+    /// The namespace of the taxonomy source. Required if using `taxonomy` type field from an existing taxonomy.
+    public let namespace: String?
+
+    public let optionsRules: AiOptionsRules?
 
     /// Initializer for a AiExtractStructuredFieldsField.
     ///
@@ -44,15 +59,23 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
     ///   - description: A description of the field.
     ///   - displayName: The display name of the field.
     ///   - prompt: The context about the key that may include how to find and format it.
-    ///   - type: The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, and `multiSelect`.
+    ///   - type: The type of the field. It can include but is not limited to `string`, `float`, `date`, `enum`, `multiSelect`,`taxonomy`, `struct`, and `table`.
     ///   - options: A list of options for this field. This is most often used in combination with the `enum` and `multiSelect` field types.
-    public init(key: String, description: String? = nil, displayName: String? = nil, prompt: String? = nil, type: String? = nil, options: [AiExtractStructuredFieldsOptionsField]? = nil) {
+    ///   - fields: The nested fields for this field. Used with `struct` and `table` field types to define the nested structure.
+    ///   - taxonomyKey: The identifier for a taxonomy, which corresponds to the `key` of the taxonomy source. Required if using `taxonomy` type field.
+    ///   - namespace: The namespace of the taxonomy source. Required if using `taxonomy` type field from an existing taxonomy.
+    ///   - optionsRules: 
+    public init(key: String, description: String? = nil, displayName: String? = nil, prompt: String? = nil, type: String? = nil, options: [AiExtractStructuredFieldsOptionsField]? = nil, fields: [AiExtractSubField]? = nil, taxonomyKey: String? = nil, namespace: String? = nil, optionsRules: AiOptionsRules? = nil) {
         self.key = key
         self.description = description
         self.displayName = displayName
         self.prompt = prompt
         self.type = type
         self.options = options
+        self.fields = fields
+        self.taxonomyKey = taxonomyKey
+        self.namespace = namespace
+        self.optionsRules = optionsRules
     }
 
     required public init(from decoder: Decoder) throws {
@@ -63,6 +86,10 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
         prompt = try container.decodeIfPresent(String.self, forKey: .prompt)
         type = try container.decodeIfPresent(String.self, forKey: .type)
         options = try container.decodeIfPresent([AiExtractStructuredFieldsOptionsField].self, forKey: .options)
+        fields = try container.decodeIfPresent([AiExtractSubField].self, forKey: .fields)
+        taxonomyKey = try container.decodeIfPresent(String.self, forKey: .taxonomyKey)
+        namespace = try container.decodeIfPresent(String.self, forKey: .namespace)
+        optionsRules = try container.decodeIfPresent(AiOptionsRules.self, forKey: .optionsRules)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -73,6 +100,10 @@ public class AiExtractStructuredFieldsField: Codable, RawJSONReadable {
         try container.encodeIfPresent(prompt, forKey: .prompt)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(options, forKey: .options)
+        try container.encodeIfPresent(fields, forKey: .fields)
+        try container.encodeIfPresent(taxonomyKey, forKey: .taxonomyKey)
+        try container.encodeIfPresent(namespace, forKey: .namespace)
+        try container.encodeIfPresent(optionsRules, forKey: .optionsRules)
     }
 
     /// Sets the raw JSON data.
