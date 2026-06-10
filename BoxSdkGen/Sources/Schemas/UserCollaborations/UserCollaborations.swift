@@ -21,7 +21,7 @@ public class UserCollaborations: UserBase {
     /// The display name of this user. If the collaboration status is `pending`, an empty string is returned.
     public let name: String?
 
-    /// The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
+    /// The primary email address of this user. If the collaboration status is `pending`, a login value is returned.
     public let login: String?
 
     /// If set to `false`, the user is either deactivated or deleted.
@@ -33,7 +33,7 @@ public class UserCollaborations: UserBase {
     ///   - id: The unique identifier for this user.
     ///   - type: The value will always be `user`.
     ///   - name: The display name of this user. If the collaboration status is `pending`, an empty string is returned.
-    ///   - login: The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
+    ///   - login: The primary email address of this user. If the collaboration status is `pending`, a login value is returned.
     ///   - isActive: If set to `false`, the user is either deactivated or deleted.
     public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, isActive: Bool? = nil) {
         self.name = name

@@ -9,6 +9,7 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         case aiAgent = "ai_agent"
         case includeConfidenceScore = "include_confidence_score"
         case includeReference = "include_reference"
+        case taxonomySources = "taxonomy_sources"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -39,6 +40,10 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     /// A flag to indicate whether references for every extracted field should be returned.
     public let includeReference: Bool?
 
+    /// The taxonomy sources to be used for the structured extraction. They can either be an existing file or a taxonomy.
+    /// For your request to work, `fields` must also be provided. `taxonomy_sources` is not supported with `metadata_template`.
+    public let taxonomySources: [AiTaxonomySource]?
+
     /// Initializer for a AiExtractStructured.
     ///
     /// - Parameters:
@@ -50,13 +55,16 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     ///   - aiAgent: 
     ///   - includeConfidenceScore: A flag to indicate whether confidence scores for every extracted field should be returned.
     ///   - includeReference: A flag to indicate whether references for every extracted field should be returned.
-    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, aiAgent: AiExtractStructuredAgent? = nil, includeConfidenceScore: Bool? = nil, includeReference: Bool? = nil) {
+    ///   - taxonomySources: The taxonomy sources to be used for the structured extraction. They can either be an existing file or a taxonomy.
+    ///     For your request to work, `fields` must also be provided. `taxonomy_sources` is not supported with `metadata_template`.
+    public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, aiAgent: AiExtractStructuredAgent? = nil, includeConfidenceScore: Bool? = nil, includeReference: Bool? = nil, taxonomySources: [AiTaxonomySource]? = nil) {
         self.items = items
         self.metadataTemplate = metadataTemplate
         self.fields = fields
         self.aiAgent = aiAgent
         self.includeConfidenceScore = includeConfidenceScore
         self.includeReference = includeReference
+        self.taxonomySources = taxonomySources
     }
 
     required public init(from decoder: Decoder) throws {
@@ -67,6 +75,7 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         aiAgent = try container.decodeIfPresent(AiExtractStructuredAgent.self, forKey: .aiAgent)
         includeConfidenceScore = try container.decodeIfPresent(Bool.self, forKey: .includeConfidenceScore)
         includeReference = try container.decodeIfPresent(Bool.self, forKey: .includeReference)
+        taxonomySources = try container.decodeIfPresent([AiTaxonomySource].self, forKey: .taxonomySources)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -77,6 +86,7 @@ public class AiExtractStructured: Codable, RawJSONReadable {
         try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
         try container.encodeIfPresent(includeConfidenceScore, forKey: .includeConfidenceScore)
         try container.encodeIfPresent(includeReference, forKey: .includeReference)
+        try container.encodeIfPresent(taxonomySources, forKey: .taxonomySources)
     }
 
     /// Sets the raw JSON data.

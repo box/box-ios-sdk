@@ -63,7 +63,7 @@ public class Collaboration: Codable, RawJSONReadable {
     public let isAccessOnly: Bool?
 
     /// The status of the collaboration invitation. If the status
-    /// is `pending`, `login` and `name` return an empty string.
+    /// is `pending`, `name` returns an empty string.
     public let status: CollaborationStatusField?
 
     /// When the `status` of the collaboration object changed to
@@ -99,7 +99,7 @@ public class Collaboration: Codable, RawJSONReadable {
     ///     see the path to the root folder for the
     ///     shared item.
     ///   - status: The status of the collaboration invitation. If the status
-    ///     is `pending`, `login` and `name` return an empty string.
+    ///     is `pending`, `name` returns an empty string.
     ///   - acknowledgedAt: When the `status` of the collaboration object changed to
     ///     `accepted` or `rejected`.
     ///   - createdBy: 
