@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.12.0](https://github.com/box/box-ios-sdk/compare/10.11.0...10.12.0) (2026-06-11)
+
+
+### New Features and Enhancements
+
+* Add new event types (box/box-openapi[#1703](https://github.com/box/box-ios-sdk/issues/1703)) (box/box-openapi[#605](https://github.com/box/box-ios-sdk/issues/605)) ([#1553](https://github.com/box/box-ios-sdk/issues/1553)) ([0007eda](https://github.com/box/box-ios-sdk/commit/0007eda8466273748d898eb919c6441cc60f306a))
+* Add new parameters to ai extract structured method (box/box-openapi[#604](https://github.com/box/box-ios-sdk/issues/604)) ([#1552](https://github.com/box/box-ios-sdk/issues/1552)) ([6d11e6b](https://github.com/box/box-ios-sdk/commit/6d11e6ba91b463ea0a9189ddc4c985f6586cbbf2))
+* Expose `errorCode` in sign request schemas (box/box-openapi[#601](https://github.com/box/box-ios-sdk/issues/601)) ([#1551](https://github.com/box/box-ios-sdk/issues/1551)) ([0ab4f19](https://github.com/box/box-ios-sdk/commit/0ab4f19de05a8789e3182df3e69cc440763a951e))
+
 ## [10.11.0](https://github.com/box/box-ios-sdk/compare/10.10.0...10.11.0) (2026-06-03)
 
 
