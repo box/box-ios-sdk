@@ -10,6 +10,8 @@ permissions:
 jobs:
   integration-tests:
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     strategy:
       matrix:
         destination: ['platform=iOS Simulator,OS=18.6,name=iPhone 16 Pro']
