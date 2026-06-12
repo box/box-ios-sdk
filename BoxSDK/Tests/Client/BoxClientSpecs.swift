@@ -60,22 +60,23 @@ class BoxClientSpecs: QuickSpec {
             }
 
             describe("destroy()") {
+                func makeClient(token: String, clientId: String = "ksdjfksadfisdg", clientSecret: String = "liuwerfiberdus", networkAgent: FakeNetworkAgent) -> BoxClient {
+                    let sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
+                    let authModule = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
+                    let session = SingleTokenSession(token: token, authModule: authModule)
+                    return BoxClient(networkAgent: networkAgent, session: session, configuration: sdk.configuration)
+                }
+
                 it("should make request to revoke the current access token") {
                     let currentToken = "sdufhgseit983e4g"
                     let clientID = "ksdjfksadfisdg"
                     let clientSecret = "liuwerfiberdus"
-                    let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
-                    let client = sdk.getClient(token: currentToken)
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: currentToken, clientId: clientID, clientSecret: clientSecret, networkAgent: networkAgent)
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/oauth2/revoke")
-                            && isMethodPOST()
-                            && self.compareURLEncodedBody(["client_id": clientID, "client_secret": clientSecret, "token": currentToken])
-                    ) { _ in
-                        HTTPStubsResponse(
-                            data: Data(), statusCode: 200, headers: [:]
-                        )
+                    networkAgent.sendHandler = { request in
+                        expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/revoke", urlEncodedBody: ["client_id": clientID, "client_secret": clientSecret, "token": currentToken])
+                        return .success(makeResponse(request: request, data: Data(), statusCode: 200))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
@@ -92,16 +93,13 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should produce error when revocation request fails") {
-                    let client = BoxSDK.getClient(token: "sajkhdbldf")
+                    let token = "sajkhdbldf"
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: token, networkAgent: networkAgent)
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/oauth2/revoke")
-                            && isMethodPOST()
-                    ) { _ in
-                        HTTPStubsResponse(
-                            data: Data(), statusCode: 400, headers: [:]
-                        )
+                    networkAgent.sendHandler = { request in
+                        expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/revoke", urlEncodedBody: ["client_id": "ksdjfksadfisdg", "client_secret": "liuwerfiberdus", "token": token])
+                        return makeFailure(request: request, data: Data(), statusCode: 400)
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
@@ -118,16 +116,13 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should render client inoperable when revocation request succeeds") {
-                    let client = BoxSDK.getClient(token: "sajkhdbldf")
+                    let token = "sajkhdbldf"
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: token, networkAgent: networkAgent)
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/oauth2/revoke")
-                            && isMethodPOST()
-                    ) { _ in
-                        HTTPStubsResponse(
-                            data: Data(), statusCode: 200, headers: [:]
-                        )
+                    networkAgent.sendHandler = { request in
+                        expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/revoke", urlEncodedBody: ["client_id": "ksdjfksadfisdg", "client_secret": "liuwerfiberdus", "token": token])
+                        return .success(makeResponse(request: request, data: Data(), statusCode: 200))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in

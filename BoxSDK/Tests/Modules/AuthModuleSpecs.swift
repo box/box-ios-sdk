@@ -8,8 +8,6 @@
 
 @testable import BoxSDK
 import Nimble
-import OHHTTPStubs
-import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class AuthModuleSpecs: QuickSpec {
@@ -21,31 +19,21 @@ class AuthModuleSpecs: QuickSpec {
     override class func spec() {
         var sdk: BoxSDK!
         var sut: AuthModule!
+        var networkAgent: FakeNetworkAgent!
 
         beforeEach {
             sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
             try? sdk.updateConfiguration(maxRetryAttempts: 0)
-            let networkAgent = BoxNetworkAgent(configuration: sdk.configuration)
+            networkAgent = FakeNetworkAgent()
             sut = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
-        }
-
-        afterEach {
-            HTTPStubs.removeAllStubs()
         }
 
         describe("AuthModuleSpecs") {
             context("get access Token after a successful OAuth web authentication") {
                 beforeEach {
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/oauth2/token")
-                            && isMethodPOST()
-                            && compareURLEncodedBody(["client_id": clientId, "client_secret": clientSecret, "code": code, "grant_type": "authorization_code"])
-                    ) { _ in
-                        HTTPStubsResponse(
-                            fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
-                            statusCode: 200, headers: ["Content-Type": "application/json"]
-                        )
+                    networkAgent.sendHandler = { request in
+                        expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/token", urlEncodedBody: ["client_id": clientId, "client_secret": clientSecret, "code": code, "grant_type": "authorization_code"])
+                        return .success(makeResponse(request: request, fixture: "AccessToken.json", statusCode: 200, headers: ["Content-Type": "application/json"]))
                     }
                 }
 
@@ -70,16 +58,9 @@ class AuthModuleSpecs: QuickSpec {
 
             context("get access Token after an unsuccessful OAuth web authentication") {
                 beforeEach {
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/oauth2/token")
-                            && isMethodPOST()
-                    ) { _ in
-                        HTTPStubsResponse(
-                            jsonObject: ["error": "invalid_grant", "error_description": "Auth code doesn't exist or is invalid for the client"],
-                            statusCode: 400,
-                            headers: [:]
-                        )
+                    networkAgent.sendHandler = { request in
+                        expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/token", urlEncodedBody: ["client_id": clientId, "client_secret": clientSecret, "code": code, "grant_type": "authorization_code"])
+                        return makeFailure(request: request, jsonObject: ["error": "invalid_grant", "error_description": "Auth code doesn't exist or is invalid for the client"], statusCode: 400)
                     }
                 }
 
@@ -106,15 +87,9 @@ class AuthModuleSpecs: QuickSpec {
 
                 let tokenToRevoke = "asjhkdbfoq83w47gtlqiuwberg"
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/revoke")
-                        && isMethodPOST()
-                        && compareURLEncodedBody(["client_id": clientId, "client_secret": clientSecret, "token": tokenToRevoke])
-                ) { _ in
-                    HTTPStubsResponse(
-                        data: Data(), statusCode: 200, headers: [:]
-                    )
+                networkAgent.sendHandler = { request in
+                    expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/revoke", urlEncodedBody: ["client_id": clientId, "client_secret": clientSecret, "token": tokenToRevoke])
+                    return .success(makeResponse(request: request, data: Data(), statusCode: 200))
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
@@ -131,14 +106,9 @@ class AuthModuleSpecs: QuickSpec {
             }
 
             it("should produce error when the revocation request fails") {
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/revoke")
-                        && isMethodPOST()
-                ) { _ in
-                    HTTPStubsResponse(
-                        data: Data(), statusCode: 400, headers: [:]
-                    )
+                networkAgent.sendHandler = { request in
+                    expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/revoke", urlEncodedBody: ["client_id": clientId, "client_secret": clientSecret, "token": "adjhfgbs"])
+                    return makeFailure(request: request, data: Data(), statusCode: 400)
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
@@ -161,40 +131,23 @@ class AuthModuleSpecs: QuickSpec {
 
                 let tokenToDownscope = "asjhkdbfoq83w47gtlqiuwberg"
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/token")
-                        && isMethodPOST()
-                        && compareURLEncodedBody(
-                            [
-                                "subject_token": tokenToDownscope,
-                                "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
-                                "scope": "item_preview item_upload",
-                                "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
-                                "resource": "https://api.box.com/2.0/files/123",
-                                "box_shared_link": "https://app.box.com/s/xyz"
-                            ],
-                            checkClosure: { (checkTuple: CheckClosureTuple) in
-                                if let lastPathElement = checkTuple.path.last {
-                                    if case let .string(pathKey) = lastPathElement {
-                                        if pathKey == "scope" {
-                                            if let firstString = checkTuple.first as? String, let secondString = checkTuple.second as? String {
-                                                if Set(firstString.split(separator: " ")) == Set(secondString.split(separator: " ")) {
-                                                    return .equal
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                return .default
-                            }
-                        )
-                ) { _ in
-                    HTTPStubsResponse(
-                        fileAtPath: TestAssets.path(forResource: "DownscopeToken.json")!,
-                        statusCode: 200, headers: ["Content-Type": "application/json"]
+                networkAgent.sendHandler = { request in
+                    expectRequest(
+                        request,
+                        method: .post,
+                        host: "api.box.com",
+                        path: "/oauth2/token",
+                        urlEncodedBody: [
+                            "subject_token": tokenToDownscope,
+                            "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
+                            "scope": "item_preview item_upload",
+                            "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
+                            "resource": "https://api.box.com/2.0/files/123",
+                            "box_shared_link": "https://app.box.com/s/xyz"
+                        ],
+                        unorderedValueKeys: ["scope"]
                     )
+                    return .success(makeResponse(request: request, fixture: "DownscopeToken.json", statusCode: 200, headers: ["Content-Type": "application/json"]))
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
@@ -222,23 +175,9 @@ class AuthModuleSpecs: QuickSpec {
 
                 let refreshToken = "zaqxswedc"
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/token")
-                        && isMethodPOST()
-                        && compareURLEncodedBody(
-                            [
-                                "grant_type": "refresh_token",
-                                "client_id": clientId,
-                                "client_secret": clientSecret,
-                                "refresh_token": refreshToken
-                            ]
-                        )
-                ) { _ in
-                    HTTPStubsResponse(
-                        fileAtPath: TestAssets.path(forResource: "AccessToken.json")!,
-                        statusCode: 200, headers: ["Content-Type": "application/json"]
-                    )
+                networkAgent.sendHandler = { request in
+                    expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/token", urlEncodedBody: ["grant_type": "refresh_token", "client_id": clientId, "client_secret": clientSecret, "refresh_token": refreshToken])
+                    return .success(makeResponse(request: request, fixture: "AccessToken.json", statusCode: 200, headers: ["Content-Type": "application/json"]))
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
@@ -260,16 +199,9 @@ class AuthModuleSpecs: QuickSpec {
 
             it("should get an 400 error after pass invalid refresh token") {
 
-                stub(
-                    condition: isHost("api.box.com")
-                        && isPath("/oauth2/token")
-                        && isMethodPOST()
-                ) { _ in
-                    HTTPStubsResponse(
-                        jsonObject: ["error": "invalid_grant", "error_description": "Invalid refresh token"],
-                        statusCode: 400,
-                        headers: [:]
-                    )
+                networkAgent.sendHandler = { request in
+                    expectRequest(request, method: .post, host: "api.box.com", path: "/oauth2/token", urlEncodedBody: ["grant_type": "refresh_token", "client_id": clientId, "client_secret": clientSecret, "refresh_token": "invalid token"])
+                    return makeFailure(request: request, jsonObject: ["error": "invalid_grant", "error_description": "Invalid refresh token"], statusCode: 400)
                 }
 
                 waitUntil(timeout: .seconds(10)) { done in
