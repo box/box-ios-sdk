@@ -46,8 +46,23 @@ class RedirectHandler: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         let shouldRedirect = allowRedirectTasks.contains(task.taskIdentifier)
         lock.unlock()
 
-        // Only follow the redirect if it was explicitly allowed for this task
-        completionHandler(shouldRedirect ? request : nil)
+        guard shouldRedirect else {
+            completionHandler(nil)
+            return
+        }
+
+        // Strip Authorization on cross-host redirects. Apple's URLSession does this automatically;
+        // FoundationNetworking on Linux does not, which leaks the Box token to redirect targets (e.g. GCS)
+        // and causes the redirected request to fail with 401 Unauthorized.
+        let originalHost = task.originalRequest?.url?.host
+        let newHost = request.url?.host
+        if let originalHost, let newHost, originalHost != newHost {
+            var sanitized = request
+            sanitized.setValue(nil, forHTTPHeaderField: "Authorization")
+            completionHandler(sanitized)
+        } else {
+            completionHandler(request)
+        }
     }
 
     /// Called when a task finishes, either successfully or with an error.
