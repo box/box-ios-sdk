@@ -137,6 +137,7 @@
 		0C506CB422A6ABA4007F18A4 /* GetCollaboration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C506CB322A6ABA4007F18A4 /* GetCollaboration.json */; };
 		0C506CB822A6AE76007F18A4 /* CreateCollaboration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C506CB722A6AE76007F18A4 /* CreateCollaboration.json */; };
 		0C506CBD22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C506CBC22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift */; };
+		0DFA00112C1B000000000001 /* FakeNetworkAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA00102C1B000000000001 /* FakeNetworkAgent.swift */; };
 		0C506CC122A6B376007F18A4 /* PendingCollaborations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C506CC022A6B376007F18A4 /* PendingCollaborations.json */; };
 		0C506CC522A6BF28007F18A4 /* UpdateCollaboration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C506CC422A6BF28007F18A4 /* UpdateCollaboration.json */; };
 		0C59EA3B2289C63300DAE688 /* CreateUser.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C59EA2C2289BBBA00DAE688 /* CreateUser.json */; };
@@ -765,6 +766,7 @@
 		0C506CB322A6ABA4007F18A4 /* GetCollaboration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetCollaboration.json; sourceTree = "<group>"; };
 		0C506CB722A6AE76007F18A4 /* CreateCollaboration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateCollaboration.json; sourceTree = "<group>"; };
 		0C506CBC22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OHTTPStubs+JSONComparer.swift"; sourceTree = "<group>"; };
+		0DFA00102C1B000000000001 /* FakeNetworkAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkAgent.swift; sourceTree = "<group>"; };
 		0C506CC022A6B376007F18A4 /* PendingCollaborations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PendingCollaborations.json; sourceTree = "<group>"; };
 		0C506CC422A6BF28007F18A4 /* UpdateCollaboration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UpdateCollaboration.json; sourceTree = "<group>"; };
 		0C59EA2C2289BBBA00DAE688 /* CreateUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateUser.json; sourceTree = "<group>"; };
@@ -1399,6 +1401,7 @@
 			isa = PBXGroup;
 			children = (
 				0C28DCC322AF099F0005AC46 /* JSONComparison */,
+				0DFA00102C1B000000000001 /* FakeNetworkAgent.swift */,
 				0C506CBC22A6AF97007F18A4 /* OHTTPStubs+JSONComparer.swift */,
 				0D9D60FB2A4124B6006CF672 /* TestAssets.swift */,
 			);
@@ -3193,6 +3196,7 @@
 				0546B2FF26F9F5C500922C04 /* CommentItemSpecs.swift in Sources */,
 				05B51E0429D7144C00CDFA9B /* PagingIteratorSpecs.swift in Sources */,
 				0D9D60FC2A4124B7006CF672 /* TestAssets.swift in Sources */,
+				0DFA00112C1B000000000001 /* FakeNetworkAgent.swift in Sources */,
 				0546B2FC26F9EDDA00922C04 /* TokenScopeSpecs.swift in Sources */,
 				97D3FFBC22B1DBB9008C1CE6 /* FolderSpecs.swift in Sources */,
 				05EE814627185554006A2329 /* SignRequestSpecs.swift in Sources */,
