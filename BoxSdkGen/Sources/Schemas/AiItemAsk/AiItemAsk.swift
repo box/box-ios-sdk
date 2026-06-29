@@ -17,10 +17,12 @@ public class AiItemAsk: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the file.
+    /// The ID of the file, or the ID of the Box Hub when `type` is `hubs`.
     public let id: String
 
-    /// The type of the item. A `hubs` item must be used as a single item.
+    /// The type of the item. Use `file` to ask a question about a file, or `hubs` to
+    /// search across and ask a question about the entire contents of a Box Hub.
+    /// A `hubs` item must be the only item in the request.
     public let type: AiItemAskTypeField
 
     /// The content of the item, often the text representation.
@@ -29,8 +31,10 @@ public class AiItemAsk: Codable, RawJSONReadable {
     /// Initializer for a AiItemAsk.
     ///
     /// - Parameters:
-    ///   - id: The ID of the file.
-    ///   - type: The type of the item. A `hubs` item must be used as a single item.
+    ///   - id: The ID of the file, or the ID of the Box Hub when `type` is `hubs`.
+    ///   - type: The type of the item. Use `file` to ask a question about a file, or `hubs` to
+    ///     search across and ask a question about the entire contents of a Box Hub.
+    ///     A `hubs` item must be the only item in the request.
     ///   - content: The content of the item, often the text representation.
     public init(id: String, type: AiItemAskTypeField, content: String? = nil) {
         self.id = id
