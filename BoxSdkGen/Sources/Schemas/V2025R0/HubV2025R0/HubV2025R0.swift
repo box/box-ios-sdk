@@ -16,6 +16,7 @@ public class HubV2025R0: HubBaseV2025R0 {
         case canNonOwnersInvite = "can_non_owners_invite"
         case canSharedLinkBeCreated = "can_shared_link_be_created"
         case canPublicSharedLinkBeCreated = "can_public_shared_link_be_created"
+        case copyHubAccess = "copy_hub_access"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -63,6 +64,13 @@ public class HubV2025R0: HubBaseV2025R0 {
     /// Indicates if a public shared link can be created for the Box Hub.
     public let canPublicSharedLinkBeCreated: Bool?
 
+    /// Specifies who is allowed to copy the Box Hub.
+    /// 
+    /// * `all` - Any user with access to the Hub can copy it.
+    /// * `company` - Only users within the same enterprise as the Hub can copy it.
+    /// * `none` - No one can copy the Hub.
+    public let copyHubAccess: HubV2025R0CopyHubAccessField?
+
     /// Initializer for a HubV2025R0.
     ///
     /// - Parameters:
@@ -88,7 +96,12 @@ public class HubV2025R0: HubBaseV2025R0 {
     ///   - canNonOwnersInvite: Indicates if non-owners can invite others to the Box Hub.
     ///   - canSharedLinkBeCreated: Indicates if a shared link can be created for the Box Hub.
     ///   - canPublicSharedLinkBeCreated: Indicates if a public shared link can be created for the Box Hub.
-    public init(id: String, type: HubBaseV2025R0TypeField = HubBaseV2025R0TypeField.hubs, title: String? = nil, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, createdBy: UserMiniV2025R0? = nil, updatedBy: UserMiniV2025R0? = nil, viewCount: Int? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil, canPublicSharedLinkBeCreated: Bool? = nil) {
+    ///   - copyHubAccess: Specifies who is allowed to copy the Box Hub.
+    ///     
+    ///     * `all` - Any user with access to the Hub can copy it.
+    ///     * `company` - Only users within the same enterprise as the Hub can copy it.
+    ///     * `none` - No one can copy the Hub.
+    public init(id: String, type: HubBaseV2025R0TypeField = HubBaseV2025R0TypeField.hubs, title: String? = nil, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, createdBy: UserMiniV2025R0? = nil, updatedBy: UserMiniV2025R0? = nil, viewCount: Int? = nil, isAiEnabled: Bool? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, canNonOwnersInvite: Bool? = nil, canSharedLinkBeCreated: Bool? = nil, canPublicSharedLinkBeCreated: Bool? = nil, copyHubAccess: HubV2025R0CopyHubAccessField? = nil) {
         self.title = title
         self.description = description
         self.createdAt = createdAt
@@ -101,6 +114,7 @@ public class HubV2025R0: HubBaseV2025R0 {
         self.canNonOwnersInvite = canNonOwnersInvite
         self.canSharedLinkBeCreated = canSharedLinkBeCreated
         self.canPublicSharedLinkBeCreated = canPublicSharedLinkBeCreated
+        self.copyHubAccess = copyHubAccess
 
         super.init(id: id, type: type)
     }
@@ -119,6 +133,7 @@ public class HubV2025R0: HubBaseV2025R0 {
         canNonOwnersInvite = try container.decodeIfPresent(Bool.self, forKey: .canNonOwnersInvite)
         canSharedLinkBeCreated = try container.decodeIfPresent(Bool.self, forKey: .canSharedLinkBeCreated)
         canPublicSharedLinkBeCreated = try container.decodeIfPresent(Bool.self, forKey: .canPublicSharedLinkBeCreated)
+        copyHubAccess = try container.decodeIfPresent(HubV2025R0CopyHubAccessField.self, forKey: .copyHubAccess)
 
         try super.init(from: decoder)
     }
@@ -137,6 +152,7 @@ public class HubV2025R0: HubBaseV2025R0 {
         try container.encodeIfPresent(canNonOwnersInvite, forKey: .canNonOwnersInvite)
         try container.encodeIfPresent(canSharedLinkBeCreated, forKey: .canSharedLinkBeCreated)
         try container.encodeIfPresent(canPublicSharedLinkBeCreated, forKey: .canPublicSharedLinkBeCreated)
+        try container.encodeIfPresent(copyHubAccess, forKey: .copyHubAccess)
         try super.encode(to: encoder)
     }
 

@@ -8,6 +8,8 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         case contentType = "content_type"
         case readOnly = "read_only"
         case validation
+        case reason
+        case isValidated = "is_validated"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -35,6 +37,15 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     /// If set, this validation is mandatory.
     public let validation: SignRequestSignerInputValidation?
 
+    /// The reason for the signer's input, applicable to signature or initial content types
+    /// in a `cfr11` request flow. The value is `null` when not applicable.
+    @CodableTriState public private(set) var reason: String?
+
+    /// Indicates whether the signer's input has been validated through re-authentication.
+    /// Applicable only for signature or initial content types in a `cfr11` request flow.
+    /// The value is `null` for standard request flows or non-applicable input types.
+    @CodableTriState public private(set) var isValidated: Bool?
+
     /// Initializer for a SignRequestSignerInput.
     ///
     /// - Parameters:
@@ -48,12 +59,19 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///   - readOnly: Indicates whether this input is read-only (cannot be modified by signers).
     ///   - validation: Specifies the formatting rules that signers must follow for text field inputs.
     ///     If set, this validation is mandatory.
-    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil, validation: SignRequestSignerInputValidation? = nil) {
+    ///   - reason: The reason for the signer's input, applicable to signature or initial content types
+    ///     in a `cfr11` request flow. The value is `null` when not applicable.
+    ///   - isValidated: Indicates whether the signer's input has been validated through re-authentication.
+    ///     Applicable only for signature or initial content types in a `cfr11` request flow.
+    ///     The value is `null` for standard request flows or non-applicable input types.
+    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil, validation: SignRequestSignerInputValidation? = nil, reason: TriStateField<String> = nil, isValidated: TriStateField<Bool> = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
         self.readOnly = readOnly
         self.validation = validation
+        self._reason = CodableTriState(state: reason)
+        self._isValidated = CodableTriState(state: isValidated)
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
@@ -65,6 +83,8 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         contentType = try container.decodeIfPresent(SignRequestSignerInputContentTypeField.self, forKey: .contentType)
         readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
         validation = try container.decodeIfPresent(SignRequestSignerInputValidation.self, forKey: .validation)
+        reason = try container.decodeIfPresent(String.self, forKey: .reason)
+        isValidated = try container.decodeIfPresent(Bool.self, forKey: .isValidated)
 
         try super.init(from: decoder)
     }
@@ -76,6 +96,8 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(contentType, forKey: .contentType)
         try container.encodeIfPresent(readOnly, forKey: .readOnly)
         try container.encodeIfPresent(validation, forKey: .validation)
+        try container.encode(field: _reason.state, forKey: .reason)
+        try container.encode(field: _isValidated.state, forKey: .isValidated)
         try super.encode(to: encoder)
     }
 

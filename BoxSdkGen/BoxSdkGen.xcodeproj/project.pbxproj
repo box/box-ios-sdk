@@ -1707,6 +1707,7 @@
 		2E28294EFD0BAE76144E330B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80C5BBAD784EB919F5DBCD2 /* User.swift */; };
 		2E3679DFA931D719D33FF91F /* MetadataTemplateFieldsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAAC834DF5C2E2AB1D89B3C /* MetadataTemplateFieldsField.swift */; };
 		2E3942C643C024FD2ADC0BF5 /* CreateShieldInformationBarrierSegmentMemberRequestBodyShieldInformationBarrierSegmentTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99F90C890EEC29AA9BF6F /* CreateShieldInformationBarrierSegmentMemberRequestBodyShieldInformationBarrierSegmentTypeField.swift */; };
+		2E3AC408FDF7B10C2C2334AE /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */; };
 		2E470A33A2B795F4D4742FA2 /* CreateFolderLockRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2B68C822EB46B4F11DF0EE /* CreateFolderLockRequestBody.swift */; };
 		2E480EDA54E26A34CA7D8E86 /* UpdateClassificationRequestBodyDataField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DE37B500F090B8A6CCE66F /* UpdateClassificationRequestBodyDataField.swift */; };
 		2E4CBBD4F63FC70859440258 /* LegalHoldPolicyMini.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E579FB931B4858C2AA01C4 /* LegalHoldPolicyMini.swift */; };
@@ -3435,12 +3436,15 @@
 		5BAA499156B3263AC4DCF4E8 /* SharedLinksWebLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB58A4FEFF45C42AC9858E05 /* SharedLinksWebLinksManager.swift */; };
 		5BAF5ACAB5FE3E0C455D3976 /* CreateGroupQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708A459EAB5ABD76387D11F /* CreateGroupQueryParams.swift */; };
 		5BB42423BF75252214A60250 /* DevicePinnersOrderDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77612608DFC677BA7D29FC67 /* DevicePinnersOrderDirectionField.swift */; };
+		5BBF972688A4985998E25009 /* HubV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */; };
 		5BC52D9E4DA4512D6F5674D7 /* GetGroupByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E92496ACDB780675175B0C /* GetGroupByIdHeaders.swift */; };
 		5BCAE2EA4338E8E4B9026034 /* HubDocumentBlocksV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AFE76FEACF2190C027D00C /* HubDocumentBlocksV2025R0TypeField.swift */; };
 		5BD3A2D1F28BB985F0CC7D25 /* ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC020B91214DD53BA13FE50 /* ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField.swift */; };
 		5BD3A946BB29FDB878C9F365 /* TrashedWebLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88DAF5B5A5A48F27CFD7A8 /* TrashedWebLinksManager.swift */; };
 		5BD3ADBFB459611F92B8352B /* WorkflowFlowsTriggerScopeTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19DE4FB3608A6FD01594C0B /* WorkflowFlowsTriggerScopeTypeField.swift */; };
+		5BEBD1784134D1E2311DCBC0 /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */; };
 		5BFD8466120825EC1B65A134 /* UserMiniV2026R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADDA80AA73EDE720A42C6B /* UserMiniV2026R0.swift */; };
+		5C05F279825F8EFAA56C9E85 /* HubV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */; };
 		5C07109ADE3C2D87A8AB35F2 /* PostOAuth2TokenSubjectTokenTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B845643918E964B1CC9FC5 /* PostOAuth2TokenSubjectTokenTypeField.swift */; };
 		5C0E46BA6F034A2375BB823D /* ClassificationTemplateFieldsKeyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729E0F5D4964620BE39010E8 /* ClassificationTemplateFieldsKeyField.swift */; };
 		5C1A66D8A0183B0F822EDDC2 /* AddClassificationToFileHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D81F3124D703E064B46652 /* AddClassificationToFileHeaders.swift */; };
@@ -4714,6 +4718,7 @@
 		7DE43449969EB0AD6503BD60 /* CreateCollaborationRequestBodyAccessibleByTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB482565828957773B667A36 /* CreateCollaborationRequestBodyAccessibleByTypeField.swift */; };
 		7DE8F72298FF6BE4CC597AFB /* FileVersionsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723D17CADA18A97A5B1609E2 /* FileVersionsManagerTests.swift */; };
 		7E060950700A36860572F235 /* GetTeamsIntegrationMappingHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0356B68726D2BB6231B330F /* GetTeamsIntegrationMappingHeaders.swift */; };
+		7E0B4B76A3A0F89A3A573BB6 /* HubV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */; };
 		7E0B4B9A2A16D4AD7EFD9D9A /* MetadataCascadePoliciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7BB55C5BB79DCEEE4872FA /* MetadataCascadePoliciesManager.swift */; };
 		7E0B9C86B3109441042F3767 /* UploadsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669C68590C8C45F36462585 /* UploadsManagerTests.swift */; };
 		7E0B9DEA7A0614A1F18BE5F6 /* UploadFileVersionRequestBodyAttributesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26049889DBD2AFD671301B /* UploadFileVersionRequestBodyAttributesField.swift */; };
@@ -7311,6 +7316,7 @@
 		C477FA655812BDDFA9E7A2F9 /* StoragePolicyAssignmentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99192B8C64DE2516BFA39E9 /* StoragePolicyAssignmentsManager.swift */; };
 		C479429F9E4F38ED27DA5213 /* WorkflowFlowsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A93D775DB96903F44DE68 /* WorkflowFlowsField.swift */; };
 		C47B11610562715CE2FA0054 /* GetEnterpriseDevicePinnersHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510083DDA00DDDC0ED26D4AD /* GetEnterpriseDevicePinnersHeaders.swift */; };
+		C48F04383D09DDAF6FB3D8DC /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */; };
 		C4905D0A4057CD2F9E5C237E /* EmailAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0123201F66266B73E7195 /* EmailAliases.swift */; };
 		C4A0132EC3B2BA28C66B20C0 /* HubDocumentBlocksV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EB98F20A1D3DD7764D8F31 /* HubDocumentBlocksV2025R0.swift */; };
 		C4A51C49538E57D9DF1A5A9F /* FileRequestCopyRequestFolderTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170B753C679090AB3DB9643 /* FileRequestCopyRequestFolderTypeField.swift */; };
@@ -7583,6 +7589,7 @@
 		CC32EF7A89EDF84210B488CF /* GroupFullInvitabilityLevelField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB5FF8D981B4E24859BB7B /* GroupFullInvitabilityLevelField.swift */; };
 		CC406A45C80EE4CE6F51CFE8 /* CreateRetentionPolicyHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2293E7820ED440FBA0264 /* CreateRetentionPolicyHeaders.swift */; };
 		CC4D153A2C838B52BB4CE94B /* GetSignRequestByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCC923F28F4559EC336AD1A /* GetSignRequestByIdHeaders.swift */; };
+		CC4FA50E03A2DDC35CEF561F /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */; };
 		CC544428F320FAA6B40BF591 /* GetFileThumbnailByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAEAD18BF70285571593DE /* GetFileThumbnailByIdQueryParams.swift */; };
 		CC5DC24AA541DD6C809EC276 /* ZipDownloadStatusStateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F51E046C133A04E403A9636 /* ZipDownloadStatusStateField.swift */; };
 		CC5F95DCDD994C0355F3CC37 /* CodableStringEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02F42BDD6D758E226C0ADB /* CodableStringEnum.swift */; };
@@ -8184,6 +8191,7 @@
 		DC450D933EA8392F5C7E3148 /* ArchiveV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C91CD86DFA4BACFC237B07 /* ArchiveV2025R0TypeField.swift */; };
 		DC4BE37EF4CAF75B89800ECC /* GetEnterpriseHubsV2025R0QueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973AD2BEA22EDDE2B4D9FCA1 /* GetEnterpriseHubsV2025R0QueryParams.swift */; };
 		DC681F188B727E70021C31C7 /* UpdateFolderByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D183E8A0619B4703F7C34 /* UpdateFolderByIdHeaders.swift */; };
+		DC835FBE6A563F5DD214ADC3 /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */; };
 		DC84512607246CA92424C66B /* GetHubCollaborationsV2025R0Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023EF658AD3038A2983A96A0 /* GetHubCollaborationsV2025R0Headers.swift */; };
 		DC887FA352B6F7AD01B95957 /* GetRetentionPolicyAssignmentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655AD88A9C4DEBC23B3CEC95 /* GetRetentionPolicyAssignmentByIdHeaders.swift */; };
 		DC9000198C854E38882F2BDB /* AddShareLinkToFileRequestBodySharedLinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A9514999A2D4C60653C85 /* AddShareLinkToFileRequestBodySharedLinkField.swift */; };
@@ -8447,6 +8455,7 @@
 		E2FD12F1946B6A35CB4A7A99 /* HubCalloutBoxTextBlockV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7AD12A74B0B9E177140AA7 /* HubCalloutBoxTextBlockV2025R0.swift */; };
 		E308C1A9D2728424F9E11862 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38454F626BF3FC94CA0B3723 /* Resource.swift */; };
 		E30C05ABDDD701D6D06C4408 /* ShieldListV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA835315289C334679EE19F4 /* ShieldListV2025R0.swift */; };
+		E312BDD2581273A0F93A8D08 /* HubV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */; };
 		E31A4B3F595F18D420BDDFF8 /* AddClassificationHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4124A5D751581667716715 /* AddClassificationHeaders.swift */; };
 		E31E4CD8BA093A7E83B4F7AB /* CreateClassificationTemplateRequestBodyFieldsOptionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5101C1E63FC3BD5BCDBF5 /* CreateClassificationTemplateRequestBodyFieldsOptionsField.swift */; };
 		E32626E577BAD7ACF63388FF /* StoragePoliciesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4D3EFEA1A027A8092A995 /* StoragePoliciesManagerTests.swift */; };
@@ -9474,6 +9483,7 @@
 		FE447DB3319E4FA059DDA23C /* ClientErrorTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B24EB57704CAF722FBB22BF /* ClientErrorTypeField.swift */; };
 		FE460FBE90B64EB9B5CAB9F4 /* HubItemReferenceV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804E25AE86F32E2D4082AB7B /* HubItemReferenceV2025R0.swift */; };
 		FE4E1CCEDF3DDB7AF05008B8 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC948A0B149BD1A0A46178E /* Hash.swift */; };
+		FE60A7820BCA92243409A746 /* HubV2025R0CopyHubAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */; };
 		FE684A40BDFE906C448D92AA /* HubParagraphTextBlockV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8449C4FEABD236E60D41CF /* HubParagraphTextBlockV2025R0TypeField.swift */; };
 		FE6FE47362CEA72192542E6E /* LegalHoldPolicyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C46FFE9A864F9AA6E34378 /* LegalHoldPolicyAssignment.swift */; };
 		FE747A65F3113A5D5659EB40 /* ShieldInformationBarrierReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1C805F496B17EB58A2B8C /* ShieldInformationBarrierReports.swift */; };
@@ -11314,6 +11324,7 @@
 		DE625B8A6A0902677F34D72C /* DeleteUserByIdQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserByIdQueryParams.swift; sourceTree = "<group>"; };
 		DE649299ED6E25560BBFB147 /* HubCopyRequestV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubCopyRequestV2025R0.swift; sourceTree = "<group>"; };
 		DE82E7E7EC315B4D2B0121BC /* CreateZipDownloadHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipDownloadHeaders.swift; sourceTree = "<group>"; };
+		DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubV2025R0CopyHubAccessField.swift; sourceTree = "<group>"; };
 		DEA3E071D88883EC82B1990B /* GetAiAgentsQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAiAgentsQueryParams.swift; sourceTree = "<group>"; };
 		DEE9C95B9A57493AE3F87B53 /* EnterpriseFeatureSettingsItemV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseFeatureSettingsItemV2025R0.swift; sourceTree = "<group>"; };
 		DEECFF7C5857CAD034899504 /* MetadataTemplateFieldsOptionsField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataTemplateFieldsOptionsField.swift; sourceTree = "<group>"; };
@@ -11420,6 +11431,7 @@
 		ED82A691DB0D4C1E3F475A89 /* FileFullRepresentationsEntriesStatusField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFullRepresentationsEntriesStatusField.swift; sourceTree = "<group>"; };
 		ED8392626CCC1E53544D4FBB /* ExternalUsersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalUsersManager.swift; sourceTree = "<group>"; };
 		ED88B040A2BDE06209E8BB9B /* TranscriptSkillCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptSkillCard.swift; sourceTree = "<group>"; };
+		EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubUpdateRequestV2025R0CopyHubAccessField.swift; sourceTree = "<group>"; };
 		EDB405E91ED8C375FC9DD816 /* SearchManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManagerTests.swift; sourceTree = "<group>"; };
 		EDD9B582DE26E91DD5579E05 /* GetGlobalMetadataTemplatesHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGlobalMetadataTemplatesHeaders.swift; sourceTree = "<group>"; };
 		EE0BCC51CE64EE3C44DC5C4A /* DocGenTemplateBaseV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocGenTemplateBaseV2025R0.swift; sourceTree = "<group>"; };
@@ -11970,6 +11982,7 @@
 			isa = PBXGroup;
 			children = (
 				B8CF45F9245C990DFB721743 /* HubUpdateRequestV2025R0.swift */,
+				EDA51332FD0714F974F97AF9 /* HubUpdateRequestV2025R0CopyHubAccessField.swift */,
 			);
 			path = HubUpdateRequestV2025R0;
 			sourceTree = "<group>";
@@ -13253,6 +13266,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D1FFD3752BBFE1C31A0C2F /* HubV2025R0.swift */,
+				DEA1B3A06EA2BA370F0224EF /* HubV2025R0CopyHubAccessField.swift */,
 			);
 			path = HubV2025R0;
 			sourceTree = "<group>";
@@ -19839,7 +19853,9 @@
 				C5E91B8A466C924231A2DBDC /* HubSectionTitleTextBlockV2025R0.swift in Sources */,
 				6E70083A42E24D2C9CCF77F8 /* HubSectionTitleTextBlockV2025R0TypeField.swift in Sources */,
 				ADC300B96ADA99477A8EAB19 /* HubUpdateRequestV2025R0.swift in Sources */,
+				5BEBD1784134D1E2311DCBC0 /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */,
 				2053578BE2818606C1AB701F /* HubV2025R0.swift in Sources */,
+				E312BDD2581273A0F93A8D08 /* HubV2025R0CopyHubAccessField.swift in Sources */,
 				0B20D0E9978A731D5F32A99D /* HubsManager.swift in Sources */,
 				78D3657BC135627FBCE9ED37 /* HubsV2025R0.swift in Sources */,
 				68D7F7918BE3DCC9F33FA1E1 /* InMemoryTokenStorage.swift in Sources */,
@@ -21666,7 +21682,9 @@
 				C50376EA3ADB0E28AF13C7DF /* HubSectionTitleTextBlockV2025R0.swift in Sources */,
 				842F1A068BE5E43CC83C7EAD /* HubSectionTitleTextBlockV2025R0TypeField.swift in Sources */,
 				FE132038EB209CC51EE0B5E3 /* HubUpdateRequestV2025R0.swift in Sources */,
+				CC4FA50E03A2DDC35CEF561F /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */,
 				ADDEFF909118EBA71AD5E175 /* HubV2025R0.swift in Sources */,
+				7E0B4B76A3A0F89A3A573BB6 /* HubV2025R0CopyHubAccessField.swift in Sources */,
 				0D38AF620E3856FCBE7E8E10 /* HubsManager.swift in Sources */,
 				8591C91D46C4FBC4E8EFE69C /* HubsV2025R0.swift in Sources */,
 				320D8EDD0E87F0D6EA940433 /* InMemoryTokenStorage.swift in Sources */,
@@ -23671,7 +23689,9 @@
 				DF80D9C0D1436752AD38D381 /* HubSectionTitleTextBlockV2025R0.swift in Sources */,
 				E78AAF6B73886204F7E4F01A /* HubSectionTitleTextBlockV2025R0TypeField.swift in Sources */,
 				204EAD793F98DCC6443A02D4 /* HubUpdateRequestV2025R0.swift in Sources */,
+				2E3AC408FDF7B10C2C2334AE /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */,
 				8D02788FE9BC4DA255858AC8 /* HubV2025R0.swift in Sources */,
+				5BBF972688A4985998E25009 /* HubV2025R0CopyHubAccessField.swift in Sources */,
 				DC912DEEEF4938DF51648F2F /* HubsManager.swift in Sources */,
 				5FD86EF17C0ABB8EBB5A2E30 /* HubsV2025R0.swift in Sources */,
 				106D5B9DDE813387CA6B2006 /* InMemoryTokenStorage.swift in Sources */,
@@ -25498,7 +25518,9 @@
 				29A5504F87C7660CBF672507 /* HubSectionTitleTextBlockV2025R0.swift in Sources */,
 				17E69905073BD3899F28DAF3 /* HubSectionTitleTextBlockV2025R0TypeField.swift in Sources */,
 				8DE29113A266C6F5085E0950 /* HubUpdateRequestV2025R0.swift in Sources */,
+				DC835FBE6A563F5DD214ADC3 /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */,
 				74806509D99663138D88CA09 /* HubV2025R0.swift in Sources */,
+				FE60A7820BCA92243409A746 /* HubV2025R0CopyHubAccessField.swift in Sources */,
 				CB2B7E564B84723B77D7EAC1 /* HubsManager.swift in Sources */,
 				0034953C09A6742AADB882D1 /* HubsV2025R0.swift in Sources */,
 				47F676FDD30292EB761549D1 /* InMemoryTokenStorage.swift in Sources */,
@@ -27414,7 +27436,9 @@
 				338002472B2B66A0D72072C5 /* HubSectionTitleTextBlockV2025R0.swift in Sources */,
 				79469468594EFFCB051AA901 /* HubSectionTitleTextBlockV2025R0TypeField.swift in Sources */,
 				E9B7A5FC0DC30BAA2386518B /* HubUpdateRequestV2025R0.swift in Sources */,
+				C48F04383D09DDAF6FB3D8DC /* HubUpdateRequestV2025R0CopyHubAccessField.swift in Sources */,
 				9167A11EFFC82F938088B969 /* HubV2025R0.swift in Sources */,
+				5C05F279825F8EFAA56C9E85 /* HubV2025R0CopyHubAccessField.swift in Sources */,
 				9EC9369D627F5A1835533794 /* HubsManager.swift in Sources */,
 				095C5DE8ACECF7DA5646A3F3 /* HubsV2025R0.swift in Sources */,
 				4AD52C87C29275E4A1DD0185 /* InMemoryTokenStorage.swift in Sources */,
