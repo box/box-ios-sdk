@@ -108,6 +108,8 @@ public class SignRequest: SignRequestBase {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
+    ///   - requestFlow: The flow type of the sign request. Values can include `standard` or `cfr11`.
+    ///     When not specified during creation, a default is chosen based on admin settings.
     ///   - type: The value will always be `sign-request`.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signers: Array of signers for the signature request.
@@ -134,7 +136,7 @@ public class SignRequest: SignRequestBase {
     ///     reason. Null when no error code applies.
     ///   - senderEmail: The email address of the sender of the sign request.
     ///   - senderId: The user ID of the sender of the sign request.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, shortId: String? = nil, createdAt: Date? = nil, finishedAt: TriStateField<Date> = nil, errorCode: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, requestFlow: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, shortId: String? = nil, createdAt: Date? = nil, finishedAt: TriStateField<Date> = nil, errorCode: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -154,7 +156,7 @@ public class SignRequest: SignRequestBase {
         self._senderEmail = CodableTriState(state: senderEmail)
         self._senderId = CodableTriState(state: senderId)
 
-        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName)
+        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName, requestFlow: requestFlow)
     }
 
     required public init(from decoder: Decoder) throws {

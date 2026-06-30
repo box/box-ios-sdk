@@ -20,6 +20,7 @@ public class SignTemplate: Codable, RawJSONReadable {
         case additionalInfo = "additional_info"
         case readySignLink = "ready_sign_link"
         case customBranding = "custom_branding"
+        case requestFlow = "request_flow"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -118,6 +119,9 @@ public class SignTemplate: Codable, RawJSONReadable {
     /// and signature requests.
     @CodableTriState public private(set) var customBranding: SignTemplateCustomBrandingField?
 
+    /// The sign flow of sign requests created from the template. Values can include `standard` or `cfr11`.
+    @CodableTriState public private(set) var requestFlow: String?
+
     /// Initializer for a SignTemplate.
     ///
     /// - Parameters:
@@ -175,7 +179,8 @@ public class SignTemplate: Codable, RawJSONReadable {
     ///     available to Box Verified Enterprises.
     ///   - customBranding: Custom branding applied to notifications
     ///     and signature requests.
-    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: TriStateField<String> = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, daysValid: TriStateField<Int64> = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: TriStateField<SignTemplateReadySignLinkField> = nil, customBranding: TriStateField<SignTemplateCustomBrandingField> = nil) {
+    ///   - requestFlow: The sign flow of sign requests created from the template. Values can include `standard` or `cfr11`.
+    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: TriStateField<String> = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, daysValid: TriStateField<Int64> = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: TriStateField<SignTemplateReadySignLinkField> = nil, customBranding: TriStateField<SignTemplateCustomBrandingField> = nil, requestFlow: TriStateField<String> = nil) {
         self.type = type
         self.id = id
         self._name = CodableTriState(state: name)
@@ -193,6 +198,7 @@ public class SignTemplate: Codable, RawJSONReadable {
         self.additionalInfo = additionalInfo
         self._readySignLink = CodableTriState(state: readySignLink)
         self._customBranding = CodableTriState(state: customBranding)
+        self._requestFlow = CodableTriState(state: requestFlow)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -214,6 +220,7 @@ public class SignTemplate: Codable, RawJSONReadable {
         additionalInfo = try container.decodeIfPresent(SignTemplateAdditionalInfoField.self, forKey: .additionalInfo)
         readySignLink = try container.decodeIfPresent(SignTemplateReadySignLinkField.self, forKey: .readySignLink)
         customBranding = try container.decodeIfPresent(SignTemplateCustomBrandingField.self, forKey: .customBranding)
+        requestFlow = try container.decodeIfPresent(String.self, forKey: .requestFlow)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -235,6 +242,7 @@ public class SignTemplate: Codable, RawJSONReadable {
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
         try container.encode(field: _readySignLink.state, forKey: .readySignLink)
         try container.encode(field: _customBranding.state, forKey: .customBranding)
+        try container.encode(field: _requestFlow.state, forKey: .requestFlow)
     }
 
     /// Sets the raw JSON data.

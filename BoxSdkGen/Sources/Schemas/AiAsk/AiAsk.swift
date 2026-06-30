@@ -34,6 +34,9 @@ public class AiAsk: Codable, RawJSONReadable {
     public let prompt: String
 
     /// The items to be processed by the LLM, often files.
+    /// To search across and ask questions about the contents of a Box Hub,
+    /// pass a single item with `type` set to `hubs`. See the item `type`
+    /// property for details.
     public let items: [AiItemAsk]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
@@ -57,6 +60,9 @@ public class AiAsk: Codable, RawJSONReadable {
     ///   - prompt: The prompt provided by the client to be answered by the LLM.
     ///     The prompt's length is limited to 10000 characters.
     ///   - items: The items to be processed by the LLM, often files.
+    ///     To search across and ask questions about the contents of a Box Hub,
+    ///     pass a single item with `type` set to `hubs`. See the item `type`
+    ///     property for details.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
