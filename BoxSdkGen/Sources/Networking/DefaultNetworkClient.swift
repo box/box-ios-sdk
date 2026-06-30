@@ -49,14 +49,11 @@ public class DefaultNetworkClient: NetworkClient {
         let config = configuration
 
         if let timeoutConfig {
-            if let timeoutIntervalForRequestMs = timeoutConfig.timeoutIntervalForRequestMs {
-                // URLSessionConfiguration expects seconds; TimeoutConfig is in milliseconds.
-                config.timeoutIntervalForRequest = TimeInterval(Double(timeoutIntervalForRequestMs) / 1000.0)
-            }
-            if let timeoutIntervalForResourceMs = timeoutConfig.timeoutIntervalForResourceMs {
-                // URLSessionConfiguration expects seconds; TimeoutConfig is in milliseconds.
-                config.timeoutIntervalForResource = TimeInterval(Double(timeoutIntervalForResourceMs) / 1000.0)
-            }
+            let requestMs = timeoutConfig.timeoutIntervalForRequestMs ?? 60000
+            config.timeoutIntervalForRequest = TimeInterval(Double(requestMs) / 1000.0)
+
+            let resourceMs = timeoutConfig.timeoutIntervalForResourceMs ?? 21600000
+            config.timeoutIntervalForResource = TimeInterval(Double(resourceMs) / 1000.0)
         }
 
         self.session = URLSession(configuration: config, delegate: redirectHandler, delegateQueue: nil)
