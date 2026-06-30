@@ -16,6 +16,7 @@ public class SignRequestBase: Codable, RawJSONReadable {
         case externalId = "external_id"
         case templateId = "template_id"
         case externalSystemName = "external_system_name"
+        case requestFlow = "request_flow"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -66,6 +67,10 @@ public class SignRequestBase: Codable, RawJSONReadable {
     /// Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     @CodableTriState public private(set) var externalSystemName: String?
 
+    /// The flow type of the sign request. Values can include `standard` or `cfr11`.
+    /// When not specified during creation, a default is chosen based on admin settings.
+    @CodableTriState public private(set) var requestFlow: String?
+
     /// Initializer for a SignRequestBase.
     ///
     /// - Parameters:
@@ -82,7 +87,9 @@ public class SignRequestBase: Codable, RawJSONReadable {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil) {
+    ///   - requestFlow: The flow type of the sign request. Values can include `standard` or `cfr11`.
+    ///     When not specified during creation, a default is chosen based on admin settings.
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, requestFlow: TriStateField<String> = nil) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self._redirectUrl = CodableTriState(state: redirectUrl)
         self._declinedRedirectUrl = CodableTriState(state: declinedRedirectUrl)
@@ -96,6 +103,7 @@ public class SignRequestBase: Codable, RawJSONReadable {
         self._externalId = CodableTriState(state: externalId)
         self._templateId = CodableTriState(state: templateId)
         self._externalSystemName = CodableTriState(state: externalSystemName)
+        self._requestFlow = CodableTriState(state: requestFlow)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -113,6 +121,7 @@ public class SignRequestBase: Codable, RawJSONReadable {
         externalId = try container.decodeIfPresent(String.self, forKey: .externalId)
         templateId = try container.decodeIfPresent(String.self, forKey: .templateId)
         externalSystemName = try container.decodeIfPresent(String.self, forKey: .externalSystemName)
+        requestFlow = try container.decodeIfPresent(String.self, forKey: .requestFlow)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -130,6 +139,7 @@ public class SignRequestBase: Codable, RawJSONReadable {
         try container.encode(field: _externalId.state, forKey: .externalId)
         try container.encode(field: _templateId.state, forKey: .templateId)
         try container.encode(field: _externalSystemName.state, forKey: .externalSystemName)
+        try container.encode(field: _requestFlow.state, forKey: .requestFlow)
     }
 
     /// Sets the raw JSON data.
