@@ -179,12 +179,17 @@ let client = BoxClient(auth: auth, networkSession: networkSession)
 ## Timeouts
 
 You can configure request timeouts with `TimeoutConfig` on `NetworkSession`.
-Swift SDK supports separate values for request and resource timeouts, both in milliseconds.
+The SDK supports the following timeout values, all in milliseconds:
+
+| Parameter                      | Description                                                                                                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `timeoutIntervalForRequestMs`  | Maps to `URLSessionConfiguration.timeoutIntervalForRequest`. Maximum idle time (between data packets) before the request times out. The timer resets each time data arrives. |
+| `timeoutIntervalForResourceMs` | Maps to `URLSessionConfiguration.timeoutIntervalForResource`. Maximum total wall-clock time allowed for the full resource transfer.                                          |
 
 ```swift
 let timeoutConfig = TimeoutConfig(
-    timeoutIntervalForRequestMs: 10000,
-    timeoutIntervalForResourceMs: 60000
+    timeoutIntervalForRequestMs: 30000,
+    timeoutIntervalForResourceMs: 120000
 )
 
 let networkSession: NetworkSession = NetworkSession(
@@ -196,11 +201,11 @@ let client: BoxClient = BoxClient(auth: auth, networkSession: networkSession)
 
 How timeout handling works:
 
-- `timeoutIntervalForRequestMs` maps to `URLSessionConfiguration.timeoutIntervalForRequest` and controls how long a request can wait for data before timing out.
-- `timeoutIntervalForResourceMs` maps to `URLSessionConfiguration.timeoutIntervalForResource` and controls the maximum total time allowed for the full resource transfer.
+- `timeoutIntervalForRequestMs` maps to `URLSessionConfiguration.timeoutIntervalForRequest` and controls how long a request can wait between data packets before timing out. The timer resets each time data arrives. This covers both the connection phase (no data during DNS/TCP/TLS) and the response reading phase.
+- `timeoutIntervalForResourceMs` maps to `URLSessionConfiguration.timeoutIntervalForResource` and controls the maximum total wall-clock time for the entire transfer. This timer never resets.
 - Timeout values are configured in milliseconds and converted to seconds for `URLSessionConfiguration`.
-- If a timeout value is not provided, the current `URLSessionConfiguration` value is kept.
-- If timeout config is not provided, the SDK uses the `URLSessionConfiguration` default timeout settings: `timeoutIntervalForRequest` of 60 seconds and `timeoutIntervalForResource` of 7 days (604800 seconds).
+- If timeout config is not provided, the SDK uses default timeouts: `timeoutIntervalForRequestMs: 60000` (60 seconds) and `timeoutIntervalForResourceMs: 21600000` (6 hours).
+- If a specific timeout value is not provided within the config, the default for that value is used.
 - Timeout failures are treated as network exceptions, and retry behavior is controlled by the configured retry strategy.
 - If retries are exhausted after timeout failures, the SDK throws `BoxSDKError`.
 - Timeout applies to a single HTTP request attempt to the Box API (not the total time across all retries).
