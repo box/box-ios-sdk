@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.13.0](https://github.com/box/box-ios-sdk/compare/6.12.0...6.13.0) (2026-07-09)
+
+
+### Bug Fixes
+
+* **boxsdkgen:** Strip Authorization header on cross-host redirects in Swift (box/box-codegen[#964](https://github.com/box/box-ios-sdk/issues/964)) ([#1559](https://github.com/box/box-ios-sdk/issues/1559)) ([545a32a](https://github.com/box/box-ios-sdk/commit/545a32ae6e1782ee102dd9457d98b0480dac8d25))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** Add new fields to Hubs (box/box-openapi[#606](https://github.com/box/box-ios-sdk/issues/606)) ([#1568](https://github.com/box/box-ios-sdk/issues/1568)) ([49f3b09](https://github.com/box/box-ios-sdk/commit/49f3b099fe2c949e6f252fc1896af58c51752267))
+* **boxsdkgen:** Setup common default timeout (box/box-codegen[#965](https://github.com/box/box-ios-sdk/issues/965)) ([#1575](https://github.com/box/box-ios-sdk/issues/1575)) ([f434389](https://github.com/box/box-ios-sdk/commit/f4343890486f75e72c6fc5e11f901dfebe9a9961))
+
 ## [6.12.0](https://github.com/box/box-ios-sdk/compare/6.11.0...6.12.0) (2026-06-11)
 
 
