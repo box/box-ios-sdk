@@ -18553,16 +18553,16 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				31869E9885AFFB43C63A9436 /* BoxSdkGenTests_iOS */,
-				7E538CB0EB4731E34657E886 /* BoxSdkGenTests_macOS */,
-				FD257239AE7B70E88AAC6776 /* BoxSdkGenTests_tvOS */,
-				F94213E9972E54674A401252 /* BoxSdkGenTests_visionOS */,
-				84DA855E267BA0DC317F3DD1 /* BoxSdkGenTests_watchOS */,
 				C892CE4C863083A393D80704 /* BoxSdkGen_iOS */,
 				2BC78A2B0E1559B2E573B713 /* BoxSdkGen_macOS */,
 				5219AF73676E9F3BD4662866 /* BoxSdkGen_tvOS */,
 				6E8DEA07D7EBE23A5DAECF8D /* BoxSdkGen_visionOS */,
 				2BB70A80F44A1560FF638B79 /* BoxSdkGen_watchOS */,
+				7E538CB0EB4731E34657E886 /* BoxSdkGenTests_macOS */,
+				31869E9885AFFB43C63A9436 /* BoxSdkGenTests_iOS */,
+				FD257239AE7B70E88AAC6776 /* BoxSdkGenTests_tvOS */,
+				84DA855E267BA0DC317F3DD1 /* BoxSdkGenTests_watchOS */,
+				F94213E9972E54674A401252 /* BoxSdkGenTests_visionOS */,
 			);
 		};
 /* End PBXProject section */
