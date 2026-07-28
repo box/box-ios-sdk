@@ -165,6 +165,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case shieldInformationBarrierPending
     case shieldInformationBarrierSharedItemAccessBlocked
     case shieldJustificationApproval
+    case shieldPreviewBlocked
     case shieldSharedLinkAccessBlocked
     case shieldSharedLinkStatusRestrictedOnCreate
     case shieldSharedLinkStatusRestrictedOnUpdate
@@ -534,6 +535,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .shieldInformationBarrierSharedItemAccessBlocked
         case "SHIELD_JUSTIFICATION_APPROVAL".lowercased():
             self = .shieldJustificationApproval
+        case "SHIELD_PREVIEW_BLOCKED".lowercased():
+            self = .shieldPreviewBlocked
         case "SHIELD_SHARED_LINK_ACCESS_BLOCKED".lowercased():
             self = .shieldSharedLinkAccessBlocked
         case "SHIELD_SHARED_LINK_STATUS_RESTRICTED_ON_CREATE".lowercased():
@@ -943,6 +946,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "SHIELD_INFORMATION_BARRIER_SHARED_ITEM_ACCESS_BLOCKED"
         case .shieldJustificationApproval:
             return "SHIELD_JUSTIFICATION_APPROVAL"
+        case .shieldPreviewBlocked:
+            return "SHIELD_PREVIEW_BLOCKED"
         case .shieldSharedLinkAccessBlocked:
             return "SHIELD_SHARED_LINK_ACCESS_BLOCKED"
         case .shieldSharedLinkStatusRestrictedOnCreate:
