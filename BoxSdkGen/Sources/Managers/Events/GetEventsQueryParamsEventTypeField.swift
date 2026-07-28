@@ -93,11 +93,13 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
     case sharedLinkSend
     case shareExpiration
     case shieldAlert
+    case shieldDownloadBlocked
     case shieldExternalCollabAccessBlocked
     case shieldExternalCollabAccessBlockedMissingJustification
     case shieldExternalCollabInviteBlocked
     case shieldExternalCollabInviteBlockedMissingJustification
     case shieldJustificationApproval
+    case shieldPreviewBlocked
     case shieldSharedLinkAccessBlocked
     case shieldSharedLinkStatusRestrictedOnCreate
     case shieldSharedLinkStatusRestrictedOnUpdate
@@ -321,6 +323,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .shareExpiration
         case "SHIELD_ALERT".lowercased():
             self = .shieldAlert
+        case "SHIELD_DOWNLOAD_BLOCKED".lowercased():
+            self = .shieldDownloadBlocked
         case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED".lowercased():
             self = .shieldExternalCollabAccessBlocked
         case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION".lowercased():
@@ -331,6 +335,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             self = .shieldExternalCollabInviteBlockedMissingJustification
         case "SHIELD_JUSTIFICATION_APPROVAL".lowercased():
             self = .shieldJustificationApproval
+        case "SHIELD_PREVIEW_BLOCKED".lowercased():
+            self = .shieldPreviewBlocked
         case "SHIELD_SHARED_LINK_ACCESS_BLOCKED".lowercased():
             self = .shieldSharedLinkAccessBlocked
         case "SHIELD_SHARED_LINK_STATUS_RESTRICTED_ON_CREATE".lowercased():
@@ -592,6 +598,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "SHARE_EXPIRATION"
         case .shieldAlert:
             return "SHIELD_ALERT"
+        case .shieldDownloadBlocked:
+            return "SHIELD_DOWNLOAD_BLOCKED"
         case .shieldExternalCollabAccessBlocked:
             return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED"
         case .shieldExternalCollabAccessBlockedMissingJustification:
@@ -602,6 +610,8 @@ public enum GetEventsQueryParamsEventTypeField: CodableStringEnum {
             return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION"
         case .shieldJustificationApproval:
             return "SHIELD_JUSTIFICATION_APPROVAL"
+        case .shieldPreviewBlocked:
+            return "SHIELD_PREVIEW_BLOCKED"
         case .shieldSharedLinkAccessBlocked:
             return "SHIELD_SHARED_LINK_ACCESS_BLOCKED"
         case .shieldSharedLinkStatusRestrictedOnCreate:
