@@ -19,6 +19,8 @@ public class WebLink: WebLinkMini {
         case ownedBy = "owned_by"
         case sharedLink = "shared_link"
         case itemStatus = "item_status"
+        case collections
+        case allowedSharedLinkAccessLevels = "allowed_shared_link_access_levels"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -64,6 +66,20 @@ public class WebLink: WebLinkMini {
     /// the file has been permanently deleted.
     public let itemStatus: WebLinkItemStatusField?
 
+    /// The collections that this web link belongs to.
+    /// 
+    /// For more information, see the
+    /// [collections guide](https://developer.box.com/guides/collections).
+    public let collections: [Collection]?
+
+    /// The shared link access levels the authenticated user is allowed to
+    /// use when creating or updating a shared link for this web link.
+    /// 
+    /// The list depends on item policy and user authorization, so it may be
+    /// narrower than the levels available to the owner. An empty array means
+    /// no access level is available to this user.
+    public let allowedSharedLinkAccessLevels: [WebLinkAllowedSharedLinkAccessLevelsField]?
+
     /// Initializer for a WebLink.
     ///
     /// - Parameters:
@@ -90,7 +106,17 @@ public class WebLink: WebLinkMini {
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
     ///     the file has been permanently deleted.
-    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
+    ///   - collections: The collections that this web link belongs to.
+    ///     
+    ///     For more information, see the
+    ///     [collections guide](https://developer.box.com/guides/collections).
+    ///   - allowedSharedLinkAccessLevels: The shared link access levels the authenticated user is allowed to
+    ///     use when creating or updating a shared link for this web link.
+    ///     
+    ///     The list depends on item policy and user authorization, so it may be
+    ///     narrower than the levels available to the owner. An empty array means
+    ///     no access level is available to this user.
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil, collections: [Collection]? = nil, allowedSharedLinkAccessLevels: [WebLinkAllowedSharedLinkAccessLevelsField]? = nil) {
         self.parent = parent
         self.description = description
         self.pathCollection = pathCollection
@@ -103,6 +129,8 @@ public class WebLink: WebLinkMini {
         self.ownedBy = ownedBy
         self.sharedLink = sharedLink
         self.itemStatus = itemStatus
+        self.collections = collections
+        self.allowedSharedLinkAccessLevels = allowedSharedLinkAccessLevels
 
         super.init(id: id, type: type, etag: etag, url: url, sequenceId: sequenceId, name: name)
     }
@@ -121,6 +149,8 @@ public class WebLink: WebLinkMini {
         ownedBy = try container.decodeIfPresent(UserMini.self, forKey: .ownedBy)
         sharedLink = try container.decodeIfPresent(WebLinkSharedLinkField.self, forKey: .sharedLink)
         itemStatus = try container.decodeIfPresent(WebLinkItemStatusField.self, forKey: .itemStatus)
+        collections = try container.decodeIfPresent([Collection].self, forKey: .collections)
+        allowedSharedLinkAccessLevels = try container.decodeIfPresent([WebLinkAllowedSharedLinkAccessLevelsField].self, forKey: .allowedSharedLinkAccessLevels)
 
         try super.init(from: decoder)
     }
@@ -139,6 +169,8 @@ public class WebLink: WebLinkMini {
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
+        try container.encodeIfPresent(collections, forKey: .collections)
+        try container.encodeIfPresent(allowedSharedLinkAccessLevels, forKey: .allowedSharedLinkAccessLevels)
         try super.encode(to: encoder)
     }
 
