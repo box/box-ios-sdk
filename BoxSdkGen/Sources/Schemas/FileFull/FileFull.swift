@@ -25,6 +25,11 @@ public class FileFull: File {
         case dispositionAt = "disposition_at"
         case sharedLinkPermissionOptions = "shared_link_permission_options"
         case isAssociatedWithAppItem = "is_associated_with_app_item"
+        case collections
+        case isDownloadAvailable = "is_download_available"
+        case downloadUrl = "download_url"
+        case authenticatedDownloadUrl = "authenticated_download_url"
+        case allowedSharedLinkAccessLevels = "allowed_shared_link_access_levels"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -99,6 +104,41 @@ public class FileFull: File {
     /// true even if the context user does not have access to the app item(s)
     /// associated with the file.
     public let isAssociatedWithAppItem: Bool?
+
+    /// The collections that this file belongs to.
+    /// 
+    /// For more information, see the
+    /// [collections guide](https://developer.box.com/guides/collections).
+    public let collections: [Collection]?
+
+    /// Whether the file's binary content is eligible to be downloaded.
+    /// 
+    /// This is a content-level flag and does not reflect whether the
+    /// current user is authorized to download the file. Use
+    /// `permissions.can_download`, when available, for that.
+    public let isDownloadAvailable: Bool?
+
+    /// A pre-authorized, expiring URL for directly downloading the file's
+    /// content. Requires authentication and is valid only for the current
+    /// session.
+    /// 
+    /// This field is only returned for files, not folders or web links.
+    public let downloadUrl: String?
+
+    /// A stable API URL for the file content endpoint,
+    /// `/2.0/files/{id}/content`. Unlike `download_url`, authorization is
+    /// evaluated when the URL is requested with a valid access token.
+    /// 
+    /// This field is only returned for files, not folders or web links.
+    public let authenticatedDownloadUrl: String?
+
+    /// The shared link access levels the authenticated user is allowed to
+    /// use when creating or updating a shared link for this file.
+    /// 
+    /// The list depends on item policy and user authorization, so it may be
+    /// narrower than the levels available to the owner. An empty array means
+    /// no access level is available to this user.
+    public let allowedSharedLinkAccessLevels: [FileFullAllowedSharedLinkAccessLevelsField]?
 
     /// Initializer for a FileFull.
     ///
@@ -175,7 +215,32 @@ public class FileFull: File {
     ///     is associated with at least one app item. Note that this will return
     ///     true even if the context user does not have access to the app item(s)
     ///     associated with the file.
-    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: TriStateField<FileFullLockField> = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: TriStateField<Date> = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: TriStateField<Date> = nil, sharedLinkPermissionOptions: TriStateField<[FileFullSharedLinkPermissionOptionsField]> = nil, isAssociatedWithAppItem: Bool? = nil) {
+    ///   - collections: The collections that this file belongs to.
+    ///     
+    ///     For more information, see the
+    ///     [collections guide](https://developer.box.com/guides/collections).
+    ///   - isDownloadAvailable: Whether the file's binary content is eligible to be downloaded.
+    ///     
+    ///     This is a content-level flag and does not reflect whether the
+    ///     current user is authorized to download the file. Use
+    ///     `permissions.can_download`, when available, for that.
+    ///   - downloadUrl: A pre-authorized, expiring URL for directly downloading the file's
+    ///     content. Requires authentication and is valid only for the current
+    ///     session.
+    ///     
+    ///     This field is only returned for files, not folders or web links.
+    ///   - authenticatedDownloadUrl: A stable API URL for the file content endpoint,
+    ///     `/2.0/files/{id}/content`. Unlike `download_url`, authorization is
+    ///     evaluated when the URL is requested with a valid access token.
+    ///     
+    ///     This field is only returned for files, not folders or web links.
+    ///   - allowedSharedLinkAccessLevels: The shared link access levels the authenticated user is allowed to
+    ///     use when creating or updating a shared link for this file.
+    ///     
+    ///     The list depends on item policy and user authorization, so it may be
+    ///     narrower than the levels available to the owner. An empty array means
+    ///     no access level is available to this user.
+    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: TriStateField<FileFullLockField> = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: TriStateField<Date> = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: TriStateField<Date> = nil, sharedLinkPermissionOptions: TriStateField<[FileFullSharedLinkPermissionOptionsField]> = nil, isAssociatedWithAppItem: Bool? = nil, collections: [Collection]? = nil, isDownloadAvailable: Bool? = nil, downloadUrl: String? = nil, authenticatedDownloadUrl: String? = nil, allowedSharedLinkAccessLevels: [FileFullAllowedSharedLinkAccessLevelsField]? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
@@ -197,6 +262,11 @@ public class FileFull: File {
         self._dispositionAt = CodableTriState(state: dispositionAt)
         self._sharedLinkPermissionOptions = CodableTriState(state: sharedLinkPermissionOptions)
         self.isAssociatedWithAppItem = isAssociatedWithAppItem
+        self.collections = collections
+        self.isDownloadAvailable = isDownloadAvailable
+        self.downloadUrl = downloadUrl
+        self.authenticatedDownloadUrl = authenticatedDownloadUrl
+        self.allowedSharedLinkAccessLevels = allowedSharedLinkAccessLevels
 
         super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
     }
@@ -224,6 +294,11 @@ public class FileFull: File {
         dispositionAt = try container.decodeDateTimeIfPresent(forKey: .dispositionAt)
         sharedLinkPermissionOptions = try container.decodeIfPresent([FileFullSharedLinkPermissionOptionsField].self, forKey: .sharedLinkPermissionOptions)
         isAssociatedWithAppItem = try container.decodeIfPresent(Bool.self, forKey: .isAssociatedWithAppItem)
+        collections = try container.decodeIfPresent([Collection].self, forKey: .collections)
+        isDownloadAvailable = try container.decodeIfPresent(Bool.self, forKey: .isDownloadAvailable)
+        downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
+        authenticatedDownloadUrl = try container.decodeIfPresent(String.self, forKey: .authenticatedDownloadUrl)
+        allowedSharedLinkAccessLevels = try container.decodeIfPresent([FileFullAllowedSharedLinkAccessLevelsField].self, forKey: .allowedSharedLinkAccessLevels)
 
         try super.init(from: decoder)
     }
@@ -251,6 +326,11 @@ public class FileFull: File {
         try container.encodeDateTime(field: _dispositionAt.state, forKey: .dispositionAt)
         try container.encode(field: _sharedLinkPermissionOptions.state, forKey: .sharedLinkPermissionOptions)
         try container.encodeIfPresent(isAssociatedWithAppItem, forKey: .isAssociatedWithAppItem)
+        try container.encodeIfPresent(collections, forKey: .collections)
+        try container.encodeIfPresent(isDownloadAvailable, forKey: .isDownloadAvailable)
+        try container.encodeIfPresent(downloadUrl, forKey: .downloadUrl)
+        try container.encodeIfPresent(authenticatedDownloadUrl, forKey: .authenticatedDownloadUrl)
+        try container.encodeIfPresent(allowedSharedLinkAccessLevels, forKey: .allowedSharedLinkAccessLevels)
         try super.encode(to: encoder)
     }
 
