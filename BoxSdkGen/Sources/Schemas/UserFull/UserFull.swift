@@ -11,6 +11,7 @@ public class UserFull: User {
         case isExternalCollabRestricted = "is_external_collab_restricted"
         case isExemptFromDeviceLimits = "is_exempt_from_device_limits"
         case isExemptFromLoginVerification = "is_exempt_from_login_verification"
+        case isCollaboratedContentAvailableWhenOwnerInactive = "is_collaborated_content_available_when_owner_inactive"
         case enterprise
         case myTags = "my_tags"
         case hostname
@@ -51,6 +52,11 @@ public class UserFull: User {
 
     /// Whether the user must use two-factor authentication.
     public let isExemptFromLoginVerification: Bool?
+
+    /// Whether collaborators can access content owned by the user when the
+    /// user is inactive. This setting preserves existing collaborator access
+    /// and does not grant new permissions.
+    public let isCollaboratedContentAvailableWhenOwnerInactive: Bool?
 
     public let enterprise: UserFullEnterpriseField?
 
@@ -105,6 +111,9 @@ public class UserFull: User {
     ///     enterprise.
     ///   - isExemptFromDeviceLimits: Whether to exempt the user from Enterprise device limits.
     ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication.
+    ///   - isCollaboratedContentAvailableWhenOwnerInactive: Whether collaborators can access content owned by the user when the
+    ///     user is inactive. This setting preserves existing collaborator access
+    ///     and does not grant new permissions.
     ///   - enterprise: 
     ///   - myTags: Tags for all files and folders owned by the user. Values returned
     ///     will only contain tags that were set by the requester.
@@ -114,7 +123,7 @@ public class UserFull: User {
     ///   - externalAppUserId: An external identifier for an app user, which can be used to look up
     ///     the user. This can be used to tie user IDs from external identity
     ///     providers to Box users.
-    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: TriStateField<UserNotificationEmailField> = nil, role: UserFullRoleField? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, isSyncEnabled: Bool? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, enterprise: UserFullEnterpriseField? = nil, myTags: [String]? = nil, hostname: String? = nil, isPlatformAccessOnly: Bool? = nil, externalAppUserId: String? = nil) {
+    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: TriStateField<UserNotificationEmailField> = nil, role: UserFullRoleField? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, isSyncEnabled: Bool? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, isCollaboratedContentAvailableWhenOwnerInactive: Bool? = nil, enterprise: UserFullEnterpriseField? = nil, myTags: [String]? = nil, hostname: String? = nil, isPlatformAccessOnly: Bool? = nil, externalAppUserId: String? = nil) {
         self.role = role
         self.trackingCodes = trackingCodes
         self.canSeeManagedUsers = canSeeManagedUsers
@@ -122,6 +131,7 @@ public class UserFull: User {
         self.isExternalCollabRestricted = isExternalCollabRestricted
         self.isExemptFromDeviceLimits = isExemptFromDeviceLimits
         self.isExemptFromLoginVerification = isExemptFromLoginVerification
+        self.isCollaboratedContentAvailableWhenOwnerInactive = isCollaboratedContentAvailableWhenOwnerInactive
         self.enterprise = enterprise
         self.myTags = myTags
         self.hostname = hostname
@@ -140,6 +150,7 @@ public class UserFull: User {
         isExternalCollabRestricted = try container.decodeIfPresent(Bool.self, forKey: .isExternalCollabRestricted)
         isExemptFromDeviceLimits = try container.decodeIfPresent(Bool.self, forKey: .isExemptFromDeviceLimits)
         isExemptFromLoginVerification = try container.decodeIfPresent(Bool.self, forKey: .isExemptFromLoginVerification)
+        isCollaboratedContentAvailableWhenOwnerInactive = try container.decodeIfPresent(Bool.self, forKey: .isCollaboratedContentAvailableWhenOwnerInactive)
         enterprise = try container.decodeIfPresent(UserFullEnterpriseField.self, forKey: .enterprise)
         myTags = try container.decodeIfPresent([String].self, forKey: .myTags)
         hostname = try container.decodeIfPresent(String.self, forKey: .hostname)
@@ -158,6 +169,7 @@ public class UserFull: User {
         try container.encodeIfPresent(isExternalCollabRestricted, forKey: .isExternalCollabRestricted)
         try container.encodeIfPresent(isExemptFromDeviceLimits, forKey: .isExemptFromDeviceLimits)
         try container.encodeIfPresent(isExemptFromLoginVerification, forKey: .isExemptFromLoginVerification)
+        try container.encodeIfPresent(isCollaboratedContentAvailableWhenOwnerInactive, forKey: .isCollaboratedContentAvailableWhenOwnerInactive)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(myTags, forKey: .myTags)
         try container.encodeIfPresent(hostname, forKey: .hostname)
