@@ -19,6 +19,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
         case isExemptFromDeviceLimits = "is_exempt_from_device_limits"
         case isExemptFromLoginVerification = "is_exempt_from_login_verification"
         case isPasswordResetRequired = "is_password_reset_required"
+        case isCollaboratedContentAvailableWhenOwnerInactive = "is_collaborated_content_available_when_owner_inactive"
         case status
         case spaceAmount = "space_amount"
         case notificationEmail = "notification_email"
@@ -96,6 +97,11 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     /// Whether the user is required to reset their password.
     public let isPasswordResetRequired: Bool?
 
+    /// Whether collaborators can access content owned by the user when
+    /// the user is inactive. This setting preserves existing
+    /// collaborator access and does not grant new permissions.
+    public let isCollaboratedContentAvailableWhenOwnerInactive: Bool?
+
     /// The user's account status.
     public let status: UpdateUserByIdRequestBodyStatusField?
 
@@ -150,6 +156,9 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     ///   - isExemptFromDeviceLimits: Whether to exempt the user from enterprise device limits.
     ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication.
     ///   - isPasswordResetRequired: Whether the user is required to reset their password.
+    ///   - isCollaboratedContentAvailableWhenOwnerInactive: Whether collaborators can access content owned by the user when
+    ///     the user is inactive. This setting preserves existing
+    ///     collaborator access and does not grant new permissions.
     ///   - status: The user's account status.
     ///   - spaceAmount: The user’s total available space in bytes. Set this to `-1` to
     ///     indicate unlimited storage.
@@ -165,7 +174,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     ///     
     ///     Note: In order to update this field, you need to request a token
     ///     using the application that created the app user.
-    public init(enterprise: TriStateField<String> = nil, notify: Bool? = nil, name: String? = nil, login: String? = nil, role: UpdateUserByIdRequestBodyRoleField? = nil, language: String? = nil, isSyncEnabled: Bool? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, timezone: String? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, isPasswordResetRequired: Bool? = nil, status: UpdateUserByIdRequestBodyStatusField? = nil, spaceAmount: Int64? = nil, notificationEmail: TriStateField<UpdateUserByIdRequestBodyNotificationEmailField> = nil, externalAppUserId: String? = nil) {
+    public init(enterprise: TriStateField<String> = nil, notify: Bool? = nil, name: String? = nil, login: String? = nil, role: UpdateUserByIdRequestBodyRoleField? = nil, language: String? = nil, isSyncEnabled: Bool? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, timezone: String? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, isPasswordResetRequired: Bool? = nil, isCollaboratedContentAvailableWhenOwnerInactive: Bool? = nil, status: UpdateUserByIdRequestBodyStatusField? = nil, spaceAmount: Int64? = nil, notificationEmail: TriStateField<UpdateUserByIdRequestBodyNotificationEmailField> = nil, externalAppUserId: String? = nil) {
         self._enterprise = CodableTriState(state: enterprise)
         self.notify = notify
         self.name = name
@@ -183,6 +192,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
         self.isExemptFromDeviceLimits = isExemptFromDeviceLimits
         self.isExemptFromLoginVerification = isExemptFromLoginVerification
         self.isPasswordResetRequired = isPasswordResetRequired
+        self.isCollaboratedContentAvailableWhenOwnerInactive = isCollaboratedContentAvailableWhenOwnerInactive
         self.status = status
         self.spaceAmount = spaceAmount
         self._notificationEmail = CodableTriState(state: notificationEmail)
@@ -208,6 +218,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
         isExemptFromDeviceLimits = try container.decodeIfPresent(Bool.self, forKey: .isExemptFromDeviceLimits)
         isExemptFromLoginVerification = try container.decodeIfPresent(Bool.self, forKey: .isExemptFromLoginVerification)
         isPasswordResetRequired = try container.decodeIfPresent(Bool.self, forKey: .isPasswordResetRequired)
+        isCollaboratedContentAvailableWhenOwnerInactive = try container.decodeIfPresent(Bool.self, forKey: .isCollaboratedContentAvailableWhenOwnerInactive)
         status = try container.decodeIfPresent(UpdateUserByIdRequestBodyStatusField.self, forKey: .status)
         spaceAmount = try container.decodeIfPresent(Int64.self, forKey: .spaceAmount)
         notificationEmail = try container.decodeIfPresent(UpdateUserByIdRequestBodyNotificationEmailField.self, forKey: .notificationEmail)
@@ -233,6 +244,7 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
         try container.encodeIfPresent(isExemptFromDeviceLimits, forKey: .isExemptFromDeviceLimits)
         try container.encodeIfPresent(isExemptFromLoginVerification, forKey: .isExemptFromLoginVerification)
         try container.encodeIfPresent(isPasswordResetRequired, forKey: .isPasswordResetRequired)
+        try container.encodeIfPresent(isCollaboratedContentAvailableWhenOwnerInactive, forKey: .isCollaboratedContentAvailableWhenOwnerInactive)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(spaceAmount, forKey: .spaceAmount)
         try container.encode(field: _notificationEmail.state, forKey: .notificationEmail)
