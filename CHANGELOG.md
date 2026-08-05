@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.14.0](https://github.com/box/box-ios-sdk/compare/10.13.0...10.14.0) (2026-08-05)
+
+
+### New Features and Enhancements
+
+* add `is_collaborated_content_available_when_owner_inactive` property (box/box-openapi[#613](https://github.com/box/box-ios-sdk/issues/613)) ([#1606](https://github.com/box/box-ios-sdk/issues/1606)) ([fd1a20c](https://github.com/box/box-ios-sdk/commit/fd1a20c0c80f1b56318b76a77483965cdea8a1bf))
+* Added two missing event types (box/box-openapi[#611](https://github.com/box/box-ios-sdk/issues/611)) ([#1600](https://github.com/box/box-ios-sdk/issues/1600)) ([73f7b98](https://github.com/box/box-ios-sdk/commit/73f7b985e3481552ba49ffbb83a5d1b9d2d4d43e))
+* Support query APIs (box/box-openapi[#610](https://github.com/box/box-ios-sdk/issues/610)) ([#1597](https://github.com/box/box-ios-sdk/issues/1597)) ([0bb4da5](https://github.com/box/box-ios-sdk/commit/0bb4da52ab6758309c563a8289bb029db8ffb28b))
+
 ## [10.13.0](https://github.com/box/box-ios-sdk/compare/10.12.0...10.13.0) (2026-07-10)
 
 
