@@ -15,6 +15,7 @@ public enum SignRequestSignerInputValidation: Codable {
     case signRequestSignerInputNumberWithPeriodValidation(SignRequestSignerInputNumberWithPeriodValidation)
     case signRequestSignerInputSsnValidation(SignRequestSignerInputSsnValidation)
     case signRequestSignerInputZip4Validation(SignRequestSignerInputZip4Validation)
+    case signRequestSignerInputZipjpValidation(SignRequestSignerInputZipjpValidation)
     case signRequestSignerInputZipValidation(SignRequestSignerInputZipValidation)
 
     public init(from decoder: Decoder) throws {
@@ -68,6 +69,11 @@ public enum SignRequestSignerInputValidation: Codable {
             return
         }
 
+        if let content = try? SignRequestSignerInputZipjpValidation(from: decoder) {
+            self = .signRequestSignerInputZipjpValidation(content)
+            return
+        }
+
         if let content = try? SignRequestSignerInputZipValidation(from: decoder) {
             self = .signRequestSignerInputZipValidation(content)
             return
@@ -99,6 +105,8 @@ public enum SignRequestSignerInputValidation: Codable {
             try signRequestSignerInputSsnValidation.encode(to: encoder)
         case .signRequestSignerInputZip4Validation(let signRequestSignerInputZip4Validation):
             try signRequestSignerInputZip4Validation.encode(to: encoder)
+        case .signRequestSignerInputZipjpValidation(let signRequestSignerInputZipjpValidation):
+            try signRequestSignerInputZipjpValidation.encode(to: encoder)
         case .signRequestSignerInputZipValidation(let signRequestSignerInputZipValidation):
             try signRequestSignerInputZipValidation.encode(to: encoder)
         }
