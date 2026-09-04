@@ -188,6 +188,47 @@ public class ChunkedUploadsManager {
         return try UploadParts.deserialize(from: response.data!)
     }
 
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over CreateFileUploadSessionPlan method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Plan an upload session by checking which parts already exist on the server.
+    /// This endpoint allows clients to optimize uploads by skipping parts that
+    /// have already been uploaded (cache hits) and only uploading missing parts.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - url: URL of createFileUploadSessionPlan method
+    ///   - requestBody: Request body of createFileUploadSessionPlan method
+    ///   - headers: Headers of createFileUploadSessionPlan method
+    /// - Returns: The `UploadSessionPlanResponse`.
+    /// - Throws: The `GeneralError`.
+    public func createFileUploadSessionPlanByUrl(url: String, requestBody: UploadSessionPlanRequest, headers: CreateFileUploadSessionPlanByUrlHeaders = CreateFileUploadSessionPlanByUrlHeaders()) async throws -> UploadSessionPlanResponse {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSessionPlanResponse.deserialize(from: response.data!)
+    }
+
+    /// Plan an upload session by checking which parts already exist on the server.
+    /// This endpoint allows clients to optimize uploads by skipping parts that
+    /// have already been uploaded (cache hits) and only uploading missing parts.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - requestBody: Request body of createFileUploadSessionPlan method
+    ///   - headers: Headers of createFileUploadSessionPlan method
+    /// - Returns: The `UploadSessionPlanResponse`.
+    /// - Throws: The `GeneralError`.
+    public func createFileUploadSessionPlan(uploadSessionId: String, requestBody: UploadSessionPlanRequest, headers: CreateFileUploadSessionPlanHeaders = CreateFileUploadSessionPlanHeaders()) async throws -> UploadSessionPlanResponse {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(Utils.Strings.toString(value: uploadSessionId)!)\("/plan")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSessionPlanResponse.deserialize(from: response.data!)
+    }
+
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over CreateFileUploadSessionCommit method. 
     /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
     ///  Close an upload session and create a file from the uploaded chunks.

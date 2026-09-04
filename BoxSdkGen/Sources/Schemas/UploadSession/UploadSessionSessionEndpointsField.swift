@@ -2,6 +2,7 @@ import Foundation
 
 public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
+        case plan
         case uploadPart = "upload_part"
         case commit
         case abort
@@ -18,6 +19,10 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
         return _rawData
     }
 
+
+    /// The URL used to plan the upload session by checking which parts
+    /// already exist on the server.
+    public let plan: String?
 
     /// The URL to upload parts to.
     public let uploadPart: String?
@@ -40,13 +45,16 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
     /// Initializer for a UploadSessionSessionEndpointsField.
     ///
     /// - Parameters:
+    ///   - plan: The URL used to plan the upload session by checking which parts
+    ///     already exist on the server.
     ///   - uploadPart: The URL to upload parts to.
     ///   - commit: The URL used to commit the file.
     ///   - abort: The URL for used to abort the session.
     ///   - listParts: The URL users to list all parts.
     ///   - status: The URL used to get the status of the upload.
     ///   - logEvent: The URL used to get the upload log from.
-    public init(uploadPart: String? = nil, commit: String? = nil, abort: String? = nil, listParts: String? = nil, status: String? = nil, logEvent: String? = nil) {
+    public init(plan: String? = nil, uploadPart: String? = nil, commit: String? = nil, abort: String? = nil, listParts: String? = nil, status: String? = nil, logEvent: String? = nil) {
+        self.plan = plan
         self.uploadPart = uploadPart
         self.commit = commit
         self.abort = abort
@@ -57,6 +65,7 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        plan = try container.decodeIfPresent(String.self, forKey: .plan)
         uploadPart = try container.decodeIfPresent(String.self, forKey: .uploadPart)
         commit = try container.decodeIfPresent(String.self, forKey: .commit)
         abort = try container.decodeIfPresent(String.self, forKey: .abort)
@@ -67,6 +76,7 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(plan, forKey: .plan)
         try container.encodeIfPresent(uploadPart, forKey: .uploadPart)
         try container.encodeIfPresent(commit, forKey: .commit)
         try container.encodeIfPresent(abort, forKey: .abort)
