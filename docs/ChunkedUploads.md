@@ -56,7 +56,10 @@ This operation is performed by calling function `createFileUploadSessionForExist
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-files-id-upload-sessions/).
 
-*Currently we don't have an example for calling `createFileUploadSessionForExistingFile` in integration tests*
+<!-- sample post_files_id_upload_sessions -->
+```
+try await client.chunkedUploads.createFileUploadSessionForExistingFile(fileId: uploadedFile.id, requestBody: CreateFileUploadSessionForExistingFileRequestBody(fileSize: Int64(fileSize)))
+```
 
 ### Arguments
 
@@ -357,7 +360,10 @@ This operation is performed by calling function `createFileUploadSessionPlanByUr
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-files-upload-sessions-id-plan/).
 
-*Currently we don't have an example for calling `createFileUploadSessionPlanByUrl` in integration tests*
+<!-- sample post_files_upload_sessions_id_plan -->
+```
+try await client.chunkedUploads.createFileUploadSessionPlanByUrl(url: planUrl, requestBody: UploadSessionPlanRequest(parts: parts))
+```
 
 ### Arguments
 
@@ -496,7 +502,7 @@ This operation is performed by calling function `uploadBigFile`.
 
 
 ```
-try await client.chunkedUploads.uploadBigFile(file: fileByteStream, fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
+try await client.chunkedUploads.uploadBigFile(file: Utils.generateByteStreamFromBuffer(buffer: fileBuffer), fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
 ```
 
 ### Arguments
