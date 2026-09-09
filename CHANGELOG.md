@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.15.0](https://github.com/box/box-ios-sdk/compare/6.14.0...6.15.0) (2026-09-09)
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add Japanese ZIP code validation to sign request (box/box-openapi[#615](https://github.com/box/box-ios-sdk/issues/615)) ([#1630](https://github.com/box/box-ios-sdk/issues/1630)) ([8ebf7c3](https://github.com/box/box-ios-sdk/commit/8ebf7c3b80943513b383e33602b47af6f95bacf1))
+* **boxsdkgen:** Support chunk upload session plan API (box/box-openapi[#616](https://github.com/box/box-ios-sdk/issues/616)) ([#1632](https://github.com/box/box-ios-sdk/issues/1632)) ([c2e84c1](https://github.com/box/box-ios-sdk/commit/c2e84c15aec2e23268cd1788c527c769e9a2a7b8))
+
 ## [6.14.0](https://github.com/box/box-ios-sdk/compare/6.13.0...6.14.0) (2026-08-05)
 
 
