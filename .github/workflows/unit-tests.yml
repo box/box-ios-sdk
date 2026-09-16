@@ -18,6 +18,15 @@ jobs:
     steps:
       - name: Git - Checkout
         uses: actions/checkout@v4
+      - name: Ensure iOS Simulator runtime is available
+        run: |
+          if ! xcrun simctl list runtimes | grep -q "iOS 18"; then
+            echo "iOS Simulator runtime not found. Installing..."
+            xcodebuild -downloadPlatform iOS
+          else
+            echo "iOS Simulator runtime already available."
+          fi
+          xcrun simctl list runtimes
       - name: List Xcode available versions
         run: ls -n /Applications/ | grep Xcode*
       - name: Setup - Ruby and bundler dependencies
