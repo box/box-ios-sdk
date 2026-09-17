@@ -173,4 +173,25 @@ class ChunkedUploadsManagerTests: RetryableTestCase {
             try await client.files.deleteFileById(fileId: uploadedFile.id)
         }
     }
+
+    public func testChunkedUploadFileVersionConvenienceMethod() async throws {
+        await runWithRetryAsync {
+            let fileName: String = Utils.getUUID()
+            let fileSize: Int = 20 * 1024 * 1024
+            let parentFolderId: String = "0"
+            let uploadedFile: File = try await client.chunkedUploads.uploadBigFile(file: Utils.generateByteStream(size: fileSize), fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
+            XCTAssertTrue(uploadedFile.name! == fileName)
+            XCTAssertTrue(uploadedFile.size! == fileSize)
+            let versionFileSize: Int = 21 * 1024 * 1024
+            let versionName: String = Utils.getUUID()
+            let uploadedFileVersion: FileFull? = try await client.chunkedUploads.uploadBigFileVersion(fileId: uploadedFile.id, file: Utils.generateByteStream(size: versionFileSize), fileSize: Int64(versionFileSize), fileName: versionName)
+            XCTAssertTrue(uploadedFileVersion != nil)
+            XCTAssertTrue(uploadedFileVersion!.id == uploadedFile.id)
+            XCTAssertTrue(uploadedFileVersion!.name! == versionName)
+            XCTAssertTrue(uploadedFileVersion!.size! == versionFileSize)
+            XCTAssertTrue(uploadedFileVersion!.name! != fileName)
+            XCTAssertTrue(uploadedFileVersion!.size! != uploadedFile.size)
+            try await client.files.deleteFileById(fileId: uploadedFile.id)
+        }
+    }
 }
