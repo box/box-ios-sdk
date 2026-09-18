@@ -11,12 +11,15 @@ public class PartAccumulator {
 
     public let fileHash: Hash
 
-    public init(lastIndex: Int64, parts: [UploadPart], fileSize: Int64, uploadPartUrl: String, fileHash: Hash) {
+    public let planUrl: String
+
+    public init(lastIndex: Int64, parts: [UploadPart], fileSize: Int64, uploadPartUrl: String, fileHash: Hash, planUrl: String = "") {
         self.lastIndex = lastIndex
         self.parts = parts
         self.fileSize = fileSize
         self.uploadPartUrl = uploadPartUrl
         self.fileHash = fileHash
+        self.planUrl = planUrl
     }
 
 }
