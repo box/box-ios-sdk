@@ -41,6 +41,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Ensure iOS Simulator runtime is available
+        run: |
+          if ! xcrun simctl list runtimes | grep -q "iOS 18"; then
+            echo "iOS Simulator runtime not found. Installing..."
+            xcodebuild -downloadPlatform iOS
+          else
+            echo "iOS Simulator runtime already available."
+          fi
+          xcrun simctl list runtimes
       - name: Install dependencies
         working-directory: ./BoxSdkGen
         run: |
