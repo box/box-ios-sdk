@@ -293,7 +293,7 @@ public class ChunkedUploadsManager {
         assert(part.size! == chunkSize)
         assert(part.offset! == bytesStart)
         acc.fileHash.updateHash(data: chunkBuffer)
-        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadPartUrl: acc.uploadPartUrl, fileHash: acc.fileHash)
+        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadPartUrl: acc.uploadPartUrl, fileHash: acc.fileHash, planUrl: acc.planUrl)
     }
 
     /// Starts the process of chunk uploading a big file. Should return a File object representing uploaded file.
@@ -323,6 +323,79 @@ public class ChunkedUploadsManager {
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
         let committedSession: Files? = try await self.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
+        return committedSession!.entries![0]
+    }
+
+    public func getCachedUploadPart(planUrl: String, offset: Int64, size: Int64, sha512: String) async throws -> UploadPart? {
+        let plan: UploadSessionPlanResponse = try await self.createFileUploadSessionPlanByUrl(url: planUrl, requestBody: UploadSessionPlanRequest(parts: [UploadPartPlan(offset: offset, size: size, sha512: sha512)]))
+        if plan.hits.count > 0 {
+            let hit: UploadPartPlanHit = plan.hits[0]
+            return UploadPart(partId: hit.partId, offset: hit.offset, size: hit.size)
+        }
+
+        return nil
+    }
+
+    public func reducerForFileVersion(acc: PartAccumulator, chunk: InputStream) async throws -> PartAccumulator {
+        let lastIndex: Int64 = acc.lastIndex
+        let parts: [UploadPart] = acc.parts
+        let chunkBuffer: Data = Utils.readByteStream(byteStream: chunk)
+        let hash: Hash = Hash(algorithm: HashName.sha1)
+        hash.updateHash(data: chunkBuffer)
+        let sha1: String = await hash.digestHash(encoding: "base64")
+        let digest: String = "\("sha=")\(sha1)"
+        let chunkSize: Int = Utils.bufferLength(buffer: chunkBuffer)
+        let bytesStart: Int64 = lastIndex + 1
+        let bytesEnd: Int64 = lastIndex + Int64(chunkSize)
+        let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
+        let sha512Hash: Hash = Hash(algorithm: HashName.sha512)
+        sha512Hash.updateHash(data: chunkBuffer)
+        let sha512: String = await sha512Hash.digestHash(encoding: "hex")
+        let cachedPart: UploadPart? = try await self.getCachedUploadPart(planUrl: acc.planUrl, offset: bytesStart, size: Int64(chunkSize), sha512: sha512)
+        if cachedPart != nil {
+            acc.fileHash.updateHash(data: chunkBuffer)
+            return PartAccumulator(lastIndex: bytesEnd, parts: parts + [cachedPart!], fileSize: acc.fileSize, uploadPartUrl: acc.uploadPartUrl, fileHash: acc.fileHash, planUrl: acc.planUrl)
+        }
+
+        let uploadedPart: UploadedPart = try await self.uploadFilePartByUrl(url: acc.uploadPartUrl, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartByUrlHeaders(digest: digest, contentRange: contentRange))
+        let part: UploadPart = uploadedPart.part!
+        let partSha1: String = Utils.Strings.hextToBase64(value: part.sha1!)
+        assert(partSha1 == sha1)
+        assert(part.size! == chunkSize)
+        assert(part.offset! == bytesStart)
+        acc.fileHash.updateHash(data: chunkBuffer)
+        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadPartUrl: acc.uploadPartUrl, fileHash: acc.fileHash, planUrl: acc.planUrl)
+    }
+
+    /// Starts the process of chunk uploading a new version of a big file. Should return a File object representing the uploaded file version. Returns nothing when commit responds with 202 because the file did not change.
+    ///
+    /// - Parameters:
+    ///   - fileId: The ID of the file to upload a new version of.
+    ///   - file: The stream of the file to upload.
+    ///   - fileSize: The total size of the file for the chunked upload in bytes.
+    ///   - fileName: The optional new name of the file.
+    /// - Returns: The `FileFull?`.
+    /// - Throws: The `GeneralError`.
+    public func uploadBigFileVersion(fileId: String, file: InputStream, fileSize: Int64, fileName: String? = nil) async throws -> FileFull? {
+        let uploadSession: UploadSession = try await self.createFileUploadSessionForExistingFile(fileId: fileId, requestBody: CreateFileUploadSessionForExistingFileRequestBody(fileSize: fileSize, fileName: fileName))
+        let uploadPartUrl: String = uploadSession.sessionEndpoints!.uploadPart!
+        let commitUrl: String = uploadSession.sessionEndpoints!.commit!
+        let planUrl: String = uploadSession.sessionEndpoints!.plan!
+        let partSize: Int64 = uploadSession.partSize!
+        let totalParts: Int = uploadSession.totalParts!
+        assert(partSize * Int64(totalParts) >= fileSize)
+        assert(uploadSession.numPartsProcessed == 0)
+        let fileHash: Hash = Hash(algorithm: HashName.sha1)
+        let chunksIterator: StreamSequence = Utils.iterateChunks(stream: file, chunkSize: partSize, fileSize: fileSize)
+        let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducerForFileVersion, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadPartUrl: uploadPartUrl, fileHash: fileHash, planUrl: planUrl))
+        let parts: [UploadPart] = results.parts
+        let sha1: String = await fileHash.digestHash(encoding: "base64")
+        let digest: String = "\("sha=")\(sha1)"
+        let committedSession: Files? = try await self.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
+        if committedSession == nil {
+            return nil
+        }
+
         return committedSession!.entries![0]
     }
 
