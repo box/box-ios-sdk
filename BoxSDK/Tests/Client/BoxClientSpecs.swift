@@ -8,26 +8,37 @@
 
 @testable import BoxSDK
 import Nimble
-import OHHTTPStubs
-import OHHTTPStubs.NSURLRequest_HTTPBodyTesting
 import Quick
 
 class BoxClientSpecs: QuickSpec {
 
     override class func spec() {
-        var sut: BoxClient?
 
-        beforeEach {
-            sut = BoxSDK.getClient(token: "asdasd")
+        func makeClient(token: String, clientId: String = "ksdjfksadfisdg", clientSecret: String = "liuwerfiberdus", networkAgent: FakeNetworkAgent) -> BoxClient {
+            let sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
+            let authModule = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
+            let session = SingleTokenSession(token: token, authModule: authModule)
+            return BoxClient(networkAgent: networkAgent, session: session, configuration: sdk.configuration)
         }
 
-        afterEach {
-            sut = nil
+        func makeOAuth2Client(token: String, clientId: String = "ksdjfksadfisdg", clientSecret: String = "liuwerfiberdus", networkAgent: FakeNetworkAgent) -> BoxClient {
+            let sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
+            let authModule = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
+            let tokenInfo = TokenInfo(accessToken: token, expiresIn: 3681)
+            let session = OAuth2Session(authModule: authModule, tokenInfo: tokenInfo, tokenStore: MemoryTokenStore(), configuration: sdk.configuration)
+            return BoxClient(networkAgent: networkAgent, session: session, configuration: sdk.configuration)
+        }
+
+        func loadFixture(_ name: String) -> Data {
+            let url = URL(fileURLWithPath: TestAssets.path(forResource: name)!)
+            // swiftlint:disable:next force_try
+            return try! Data(contentsOf: url)
         }
 
         describe("BoxClientSpec") {
             context("Box Modules and BoxClient reference relationship") {
                 it("BoxClient Module shouldn't have a BoxClient reference once the client is destroyed") {
+                    var sut: BoxClient? = BoxSDK.getClient(token: "asdasd")
                     let fileModule = sut!.files
                     let foldersModule = sut!.folders
                     let usersModule = sut!.users
@@ -40,33 +51,29 @@ class BoxClientSpecs: QuickSpec {
 
             context("Get new client to behave as another user") {
                 it("should add as User header to be able to passed it to the Network Client") {
-                    let asUserClient = sut?.asUser(withId: "1234567")
-                    expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.asUser: "1234567"]))
+                    let sut = BoxSDK.getClient(token: "asdasd")
+                    let asUserClient = sut.asUser(withId: "1234567")
+                    expect(asUserClient.headers).to(equal([BoxHTTPHeaderKey.asUser: "1234567"]))
                 }
             }
 
             context("BoxClient add valid headers when user request a new client to use with") {
                 it("should add proper shared_Link and password header to be able to passed it to the Network Client") {
-                    let asUserClient = sut?.withSharedLink(url: URL(string: "http://box.com")!, password: "123121")
-                    expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com&shared_link_password=123121"]))
+                    let sut = BoxSDK.getClient(token: "asdasd")
+                    let asUserClient = sut.withSharedLink(url: URL(string: "http://box.com")!, password: "123121")
+                    expect(asUserClient.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com&shared_link_password=123121"]))
                 }
             }
 
             context("BoxClient add valid headers when user request a new client to use with") {
                 it("should add shared_Link header to be able to passed it to the Network Client") {
-                    let asUserClient = sut?.withSharedLink(url: URL(string: "http://box.com")!, password: nil)
-                    expect(asUserClient?.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com"]))
+                    let sut = BoxSDK.getClient(token: "asdasd")
+                    let asUserClient = sut.withSharedLink(url: URL(string: "http://box.com")!, password: nil)
+                    expect(asUserClient.headers).to(equal([BoxHTTPHeaderKey.boxApi: "shared_link=http://box.com"]))
                 }
             }
 
             describe("destroy()") {
-                func makeClient(token: String, clientId: String = "ksdjfksadfisdg", clientSecret: String = "liuwerfiberdus", networkAgent: FakeNetworkAgent) -> BoxClient {
-                    let sdk = BoxSDK(clientId: clientId, clientSecret: clientSecret)
-                    let authModule = AuthModule(networkAgent: networkAgent, configuration: sdk.configuration)
-                    let session = SingleTokenSession(token: token, authModule: authModule)
-                    return BoxClient(networkAgent: networkAgent, session: session, configuration: sdk.configuration)
-                }
-
                 it("should make request to revoke the current access token") {
                     let currentToken = "sdufhgseit983e4g"
                     let clientID = "ksdjfksadfisdg"
@@ -144,34 +151,12 @@ class BoxClientSpecs: QuickSpec {
 
             describe("Revoked access token") {
                 it("should produce error when access token has been revoked") {
-                    let clientID = "ksdjfksadfisdg"
-                    let clientSecret = "liuwerfiberdus"
-                    let accessToken = "nekoTssecca"
-                    let expiresIn: TimeInterval = 3681
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeOAuth2Client(token: "nekoTssecca", networkAgent: networkAgent)
 
-                    var client: BoxClient!
-                    let sdk = BoxSDK(clientId: clientID, clientSecret: clientSecret)
-                    waitUntil(timeout: .seconds(10)) { done in
-                        let tokenInfo = TokenInfo(accessToken: accessToken, expiresIn: expiresIn)
-                        sdk.getOAuth2Client(tokenInfo: tokenInfo, tokenStore: nil) { result in
-                            switch result {
-                            case let .success(c):
-                                client = c
-                            case let .failure(error):
-                                fail("Expected getting client to succeed, but instead got \(error)")
-                            }
-                            done()
-                        }
-                    }
-
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/2.0/users/me")
-                            && isMethodGET()
-                    ) { _ in
-                        HTTPStubsResponse(
-                            data: Data(), statusCode: 401, headers: [:]
-                        )
+                    networkAgent.sendHandler = { request in
+                        let response = makeResponse(request: request, data: Data(), statusCode: 401)
+                        return .failure(BoxAPIAuthError(message: .unauthorizedAccess, request: request, response: response))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
@@ -191,18 +176,15 @@ class BoxClientSpecs: QuickSpec {
 
             context("Custom API calls") {
                 it("should make valid get() API call") {
-                    stub(condition: isHost("api.box.com")
-                        && isPath("/2.0/files/5000948880")
-                        && isMethodGET()
-                    ) { _ in
-                        HTTPStubsResponse(
-                            fileAtPath: TestAssets.path(forResource: "GetFileInfo.json")!,
-                            statusCode: 200, headers: ["Content-Type": "application/json"]
-                        )
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, fixture: "GetFileInfo.json", statusCode: 200, headers: ["Content-Type": "application/json"]))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.get(url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: sut!.configuration)) { result in
+                        client.get(url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: client.configuration)) { result in
                             let fileResult: Result<File, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
 
                             switch fileResult {
@@ -219,26 +201,21 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid post() API call") {
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, fixture: "FullWebLink.json", statusCode: 201, headers: ["Content-Type": "application/json"]))
+                    }
+
                     var body: [String: Any] = [:]
                     body["parent"] = ["id": "33333"]
                     body["url"] = "https://example.com"
                     body["name"] = "Example Web Link"
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/2.0/web_links")
-                            && isMethodPOST()
-                            && hasJsonBody(body)
-                    ) { _ in
-                        HTTPStubsResponse(
-                            fileAtPath: TestAssets.path(forResource: "FullWebLink.json")!,
-                            statusCode: 201, headers: ["Content-Type": "application/json"]
-                        )
-                    }
-
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.post(
-                            url: URL.boxAPIEndpoint("/2.0/web_links", configuration: sut!.configuration),
+                        client.post(
+                            url: URL.boxAPIEndpoint("/2.0/web_links", configuration: client.configuration),
                             json: body
                         ) { result in
                             let webLinkResult: Result<WebLink, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
@@ -259,25 +236,20 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid put() API call") {
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, fixture: "UpdateFileInfo.json", statusCode: 200))
+                    }
+
                     var body: [String: Any] = [:]
                     body["name"] = "testfile.jpg"
                     body["description"] = "Test File"
 
-                    stub(
-                        condition: isHost("api.box.com") && isPath("/2.0/files/5000948880")
-                            && containsQueryParams(["fields": "name,created_by"])
-                            && isMethodPUT()
-                            && hasJsonBody(body)
-                    ) { _ in
-                        HTTPStubsResponse(
-                            fileAtPath: TestAssets.path(forResource: "UpdateFileInfo.json")!,
-                            statusCode: 200, headers: [:]
-                        )
-                    }
-
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.put(
-                            url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: sut!.configuration),
+                        client.put(
+                            url: URL.boxAPIEndpoint("/2.0/files/5000948880", configuration: client.configuration),
                             queryParameters: ["fields": "name,created_by"],
                             json: body
                         ) { result in
@@ -300,16 +272,15 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid delete() API call") {
-                    stub(
-                        condition: isHost("api.box.com") &&
-                            isPath("/2.0/files/12345") &&
-                            isMethodDELETE()
-                    ) { _ in
-                        HTTPStubsResponse(data: Data(), statusCode: 204, headers: [:])
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, data: Data(), statusCode: 204))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.delete(url: URL.boxAPIEndpoint("/2.0/files/12345", configuration: sut!.configuration)) { result in
+                        client.delete(url: URL.boxAPIEndpoint("/2.0/files/12345", configuration: client.configuration)) { result in
                             if case let .failure(error) = result {
                                 fail("Expected delete call to succeed, but instead got \(error)")
                             }
@@ -320,22 +291,20 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid options() API call") {
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, data: Data(), statusCode: 200))
+                    }
+
                     var body: [String: Any] = [:]
                     body["parent"] = ["id": "12345"]
                     body["name"] = "exampleName.txt"
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/2.0/files/content")
-                            && { $0.httpMethod == "OPTIONS" }
-                            && hasJsonBody(body)
-                    ) { _ in
-                        HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
-                    }
-
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.options(
-                            url: URL.boxAPIEndpoint("/2.0/files/content", configuration: sut!.configuration),
+                        client.options(
+                            url: URL.boxAPIEndpoint("/2.0/files/content", configuration: client.configuration),
                             json: body
                         ) { result in
                             if case let .failure(error) = result {
@@ -348,20 +317,18 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid download() API call") {
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
                     let destinationURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("doc.txt")
 
-                    stub(
-                        condition: isHost("api.box.com") &&
-                            isPath("/2.0/files/12345/content") &&
-                            isMethodGET() &&
-                            containsQueryParams(["version": "1"])
-                    ) { _ in
-                        HTTPStubsResponse(data: Data(), statusCode: 200, headers: [:])
+                    networkAgent.sendHandler = { request in
+                        FileManager.default.createFile(atPath: destinationURL.path, contents: Data(), attributes: nil)
+                        return .success(makeResponse(request: request, data: Data(), statusCode: 200))
                     }
 
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.download(
-                            url: URL.boxAPIEndpoint("/2.0/files/12345/content", configuration: sut!.configuration),
+                        client.download(
+                            url: URL.boxAPIEndpoint("/2.0/files/12345/content", configuration: client.configuration),
                             downloadDestinationURL: destinationURL,
                             queryParameters: ["version": "1"]
                         ) { result in
@@ -378,31 +345,23 @@ class BoxClientSpecs: QuickSpec {
                 }
 
                 it("should make valid send() API call") {
+                    let networkAgent = FakeNetworkAgent()
+                    let client = makeClient(token: "asdasd", networkAgent: networkAgent)
+
+                    networkAgent.sendHandler = { request in
+                        return .success(makeResponse(request: request, fixture: "GetUserInfo.json", statusCode: 200, headers: ["Content-Type": "application/json"]))
+                    }
+
                     let boxRequest = BoxRequest(
                         httpMethod: .get,
-                        url: URL.boxAPIEndpoint("/2.0/users/11111", configuration: sut!.configuration),
+                        url: URL.boxAPIEndpoint("/2.0/users/11111", configuration: client.configuration),
                         httpHeaders: ["X-Custom-Header": "CustomValue", "Content-Type": "application/vnd.box+json"],
                         queryParams: ["fields": "name,login"],
                         body: .jsonObject(["some_key": "some_value"])
                     )
 
-                    stub(
-                        condition: isHost("api.box.com")
-                            && isPath("/2.0/users/11111")
-                            && isMethodGET()
-                            && hasHeaderNamed("X-Custom-Header", value: "CustomValue")
-                            && hasHeaderNamed("Content-Type", value: "application/vnd.box+json")
-                            && containsQueryParams(["fields": "name,login"])
-                            && hasJsonBody(["some_key": "some_value"])
-                    ) { _ in
-                        HTTPStubsResponse(
-                            fileAtPath: TestAssets.path(forResource: "GetUserInfo.json")!,
-                            statusCode: 200, headers: ["Content-Type": "application/json"]
-                        )
-                    }
-
                     waitUntil(timeout: .seconds(10)) { done in
-                        sut!.send(request: boxRequest) { result in
+                        client.send(request: boxRequest) { result in
                             let userResult: Result<User, BoxSDKError> = result.flatMap { ObjectDeserializer.deserialize(data: $0.body) }
 
                             switch userResult {
@@ -419,14 +378,5 @@ class BoxClientSpecs: QuickSpec {
                 }
             }
         }
-    }
-
-    private func makeTokenInfoForDownscope() -> TokenInfo {
-        return TokenInfo(
-            accessToken: "asjhkdbfoq83w47gtlqiuwberg",
-            refreshToken: "valid refresh token",
-            expiresIn: 999,
-            tokenType: "bearer"
-        )
     }
 }
