@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.16.0](https://github.com/box/box-ios-sdk/compare/10.15.0...10.16.0) (2026-09-23)
+
+
+### New Features and Enhancements
+
+* Support upload big file version convenience method (box/box-codegen[#988](https://github.com/box/box-ios-sdk/issues/988)) ([469afb5](https://github.com/box/box-ios-sdk/commit/469afb546884fd5ab7230aac488a8559a9314cd8))
+
 ## [10.15.0](https://github.com/box/box-ios-sdk/compare/10.14.0...10.15.0) (2026-09-09)
 
 
