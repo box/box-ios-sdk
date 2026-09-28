@@ -34,10 +34,10 @@ public class AiExtractStructured: Codable, RawJSONReadable {
 
     public let aiAgent: AiExtractStructuredAgent?
 
-    /// A flag to indicate whether confidence scores for every extracted field should be returned.
+    /// A flag to indicate whether confidence scores for every extracted field should be returned. Estimates the likelihood that an extracted metadata field value is accurate and correct. Displays a numerical and categorical confidence score to help users and automated systems quickly determine extraction reliability.
     public let includeConfidenceScore: Bool?
 
-    /// A flag to indicate whether references for every extracted field should be returned.
+    /// A flag to indicate whether references for every extracted field should be returned. References and bounding boxes show where the agent extracted the metadata from. They help you check for accuracy and fix any mistakes. References are short, exact quotes from the original document used to verify results. Bounding boxes highlight the specific areas on the page where that text is found.
     public let includeReference: Bool?
 
     /// The taxonomy sources to be used for the structured extraction. They can either be an existing file or a taxonomy.
@@ -53,8 +53,8 @@ public class AiExtractStructured: Codable, RawJSONReadable {
     ///   - fields: The fields to be extracted from the provided items.
     ///     For your request to work, you must provide either `metadata_template` or `fields`, but not both.
     ///   - aiAgent: 
-    ///   - includeConfidenceScore: A flag to indicate whether confidence scores for every extracted field should be returned.
-    ///   - includeReference: A flag to indicate whether references for every extracted field should be returned.
+    ///   - includeConfidenceScore: A flag to indicate whether confidence scores for every extracted field should be returned. Estimates the likelihood that an extracted metadata field value is accurate and correct. Displays a numerical and categorical confidence score to help users and automated systems quickly determine extraction reliability.
+    ///   - includeReference: A flag to indicate whether references for every extracted field should be returned. References and bounding boxes show where the agent extracted the metadata from. They help you check for accuracy and fix any mistakes. References are short, exact quotes from the original document used to verify results. Bounding boxes highlight the specific areas on the page where that text is found.
     ///   - taxonomySources: The taxonomy sources to be used for the structured extraction. They can either be an existing file or a taxonomy.
     ///     For your request to work, `fields` must also be provided. `taxonomy_sources` is not supported with `metadata_template`.
     public init(items: [AiItemBase], metadataTemplate: AiExtractStructuredMetadataTemplateField? = nil, fields: [AiExtractStructuredFieldsField]? = nil, aiAgent: AiExtractStructuredAgent? = nil, includeConfidenceScore: Bool? = nil, includeReference: Bool? = nil, taxonomySources: [AiTaxonomySource]? = nil) {
