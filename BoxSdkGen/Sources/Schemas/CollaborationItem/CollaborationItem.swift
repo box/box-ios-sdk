@@ -1,10 +1,11 @@
 import Foundation
 
-/// A collaboration item.
+/// A mini representation of the file, folder, or web link that a
+/// collaboration is granted on.
 public enum CollaborationItem: Codable {
-    case file(File)
-    case folder(Folder)
-    case webLink(WebLink)
+    case fileMini(FileMini)
+    case folderMini(FolderMini)
+    case webLinkMini(WebLinkMini)
 
     private enum DiscriminatorCodingKey: String, CodingKey {
         case type
@@ -15,20 +16,20 @@ public enum CollaborationItem: Codable {
             if let discriminator_0 = try? container.decode(String.self, forKey: .type) {
                 switch discriminator_0 {
                 case "file":
-                    if let content = try? File(from: decoder) {
-                        self = .file(content)
+                    if let content = try? FileMini(from: decoder) {
+                        self = .fileMini(content)
                         return
                     }
 
                 case "folder":
-                    if let content = try? Folder(from: decoder) {
-                        self = .folder(content)
+                    if let content = try? FolderMini(from: decoder) {
+                        self = .folderMini(content)
                         return
                     }
 
                 case "web_link":
-                    if let content = try? WebLink(from: decoder) {
-                        self = .webLink(content)
+                    if let content = try? WebLinkMini(from: decoder) {
+                        self = .webLinkMini(content)
                         return
                     }
 
@@ -45,12 +46,12 @@ public enum CollaborationItem: Codable {
 
     public func encode(to encoder: Encoder) throws {
         switch self {
-        case .file(let file):
-            try file.encode(to: encoder)
-        case .folder(let folder):
-            try folder.encode(to: encoder)
-        case .webLink(let webLink):
-            try webLink.encode(to: encoder)
+        case .fileMini(let fileMini):
+            try fileMini.encode(to: encoder)
+        case .folderMini(let folderMini):
+            try folderMini.encode(to: encoder)
+        case .webLinkMini(let webLinkMini):
+            try webLinkMini.encode(to: encoder)
         }
     }
 
