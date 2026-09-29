@@ -59,7 +59,7 @@ public class WebLink: WebLinkMini {
 
     public let ownedBy: UserMini?
 
-    public let sharedLink: WebLinkSharedLinkField?
+    @CodableTriState public private(set) var sharedLink: WebLinkSharedLinkField?
 
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
@@ -116,7 +116,7 @@ public class WebLink: WebLinkMini {
     ///     The list depends on item policy and user authorization, so it may be
     ///     narrower than the levels available to the owner. An empty array means
     ///     no access level is available to this user.
-    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil, collections: [Collection]? = nil, allowedSharedLinkAccessLevels: [WebLinkAllowedSharedLinkAccessLevelsField]? = nil) {
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: TriStateField<WebLinkSharedLinkField> = nil, itemStatus: WebLinkItemStatusField? = nil, collections: [Collection]? = nil, allowedSharedLinkAccessLevels: [WebLinkAllowedSharedLinkAccessLevelsField]? = nil) {
         self.parent = parent
         self.description = description
         self.pathCollection = pathCollection
@@ -127,7 +127,7 @@ public class WebLink: WebLinkMini {
         self.createdBy = createdBy
         self.modifiedBy = modifiedBy
         self.ownedBy = ownedBy
-        self.sharedLink = sharedLink
+        self._sharedLink = CodableTriState(state: sharedLink)
         self.itemStatus = itemStatus
         self.collections = collections
         self.allowedSharedLinkAccessLevels = allowedSharedLinkAccessLevels
@@ -167,7 +167,7 @@ public class WebLink: WebLinkMini {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
         try container.encodeIfPresent(collections, forKey: .collections)
         try container.encodeIfPresent(allowedSharedLinkAccessLevels, forKey: .allowedSharedLinkAccessLevels)
