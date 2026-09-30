@@ -88,7 +88,7 @@ public class FileFull: File {
 
     public let representations: FileFullRepresentationsField?
 
-    public let classification: FileFullClassificationField?
+    @CodableTriState public private(set) var classification: FileFullClassificationField?
 
     public let uploaderDisplayName: String?
 
@@ -240,7 +240,7 @@ public class FileFull: File {
     ///     The list depends on item policy and user authorization, so it may be
     ///     narrower than the levels available to the owner. An empty array means
     ///     no access level is available to this user.
-    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: TriStateField<FileFullLockField> = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: TriStateField<Date> = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: TriStateField<Date> = nil, sharedLinkPermissionOptions: TriStateField<[FileFullSharedLinkPermissionOptionsField]> = nil, isAssociatedWithAppItem: Bool? = nil, collections: [Collection]? = nil, isDownloadAvailable: Bool? = nil, downloadUrl: String? = nil, authenticatedDownloadUrl: String? = nil, allowedSharedLinkAccessLevels: [FileFullAllowedSharedLinkAccessLevelsField]? = nil) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: TriStateField<FileSharedLinkField> = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: TriStateField<FileFullLockField> = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: TriStateField<Date> = nil, representations: FileFullRepresentationsField? = nil, classification: TriStateField<FileFullClassificationField> = nil, uploaderDisplayName: String? = nil, dispositionAt: TriStateField<Date> = nil, sharedLinkPermissionOptions: TriStateField<[FileFullSharedLinkPermissionOptionsField]> = nil, isAssociatedWithAppItem: Bool? = nil, collections: [Collection]? = nil, isDownloadAvailable: Bool? = nil, downloadUrl: String? = nil, authenticatedDownloadUrl: String? = nil, allowedSharedLinkAccessLevels: [FileFullAllowedSharedLinkAccessLevelsField]? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
@@ -257,7 +257,7 @@ public class FileFull: File {
         self.metadata = metadata
         self._expiresAt = CodableTriState(state: expiresAt)
         self.representations = representations
-        self.classification = classification
+        self._classification = CodableTriState(state: classification)
         self.uploaderDisplayName = uploaderDisplayName
         self._dispositionAt = CodableTriState(state: dispositionAt)
         self._sharedLinkPermissionOptions = CodableTriState(state: sharedLinkPermissionOptions)
@@ -321,7 +321,7 @@ public class FileFull: File {
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeDateTime(field: _expiresAt.state, forKey: .expiresAt)
         try container.encodeIfPresent(representations, forKey: .representations)
-        try container.encodeIfPresent(classification, forKey: .classification)
+        try container.encode(field: _classification.state, forKey: .classification)
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
         try container.encodeDateTime(field: _dispositionAt.state, forKey: .dispositionAt)
         try container.encode(field: _sharedLinkPermissionOptions.state, forKey: .sharedLinkPermissionOptions)

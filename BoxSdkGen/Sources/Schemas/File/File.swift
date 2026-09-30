@@ -68,7 +68,7 @@ public class File: FileMini {
 
     public let ownedBy: UserMini?
 
-    public let sharedLink: FileSharedLinkField?
+    @CodableTriState public private(set) var sharedLink: FileSharedLinkField?
 
     @CodableTriState public private(set) var parent: FolderMini?
 
@@ -123,7 +123,7 @@ public class File: FileMini {
     ///     * `active` when the item has is not in the trash
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
-    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: TriStateField<FileSharedLinkField> = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil) {
         self.description = description
         self.size = size
         self.pathCollection = pathCollection
@@ -136,7 +136,7 @@ public class File: FileMini {
         self.createdBy = createdBy
         self.modifiedBy = modifiedBy
         self.ownedBy = ownedBy
-        self.sharedLink = sharedLink
+        self._sharedLink = CodableTriState(state: sharedLink)
         self._parent = CodableTriState(state: parent)
         self.itemStatus = itemStatus
 
@@ -178,7 +178,7 @@ public class File: FileMini {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
         try container.encode(field: _parent.state, forKey: .parent)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
         try super.encode(to: encoder)
