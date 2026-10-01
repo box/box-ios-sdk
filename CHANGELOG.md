@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [6.17.0](https://github.com/box/box-ios-sdk/compare/6.16.0...6.17.0) (2026-10-01)
 
+* **boxsdkgen:** use `FileMini`/`FolderMini`/`WebLinkMini` in `CollaborationItem` (box/box-openapi[#619](https://github.com/box/box-openapi/pull/619)) ([47724eb](https://github.com/box/box-ios-sdk/commit/47724ebb1c065e90f5bb298e3f10d8292b866eac))
+
+### Bug Fixes
+
+* **boxsdkgen:** use `FileMini`/`FolderMini`/`WebLinkMini` in `CollaborationItem` (box/box-openapi[#619](https://github.com/box/box-openapi/pull/619)) ([47724eb](https://github.com/box/box-ios-sdk/commit/47724ebb1c065e90f5bb298e3f10d8292b866eac))
+
 ## [6.16.0](https://github.com/box/box-ios-sdk/compare/6.15.0...6.16.0) (2026-09-23)
 
 
