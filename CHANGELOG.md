@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.17.0](https://github.com/box/box-ios-sdk/compare/10.16.0...10.17.0) (2026-10-01)
+
+### ⚠ BREAKING CHANGES
+
+* use `FileMini`/`FolderMini`/`WebLinkMini` in `CollaborationItem` (box/box-openapi[#619](https://github.com/box/box-openapi/pull/619)) ([b63c603](https://github.com/box/box-ios-sdk/commit/b63c60354fa20ef22d7eee4e20a40717c60132db))
+
+### Bug Fixes
+
+* use `FileMini`/`FolderMini`/`WebLinkMini` in `CollaborationItem` (box/box-openapi[#619](https://github.com/box/box-openapi/pull/619)) ([b63c603](https://github.com/box/box-ios-sdk/commit/b63c60354fa20ef22d7eee4e20a40717c60132db))
+
 ## [10.16.0](https://github.com/box/box-ios-sdk/compare/10.15.0...10.16.0) (2026-09-23)
 
 
