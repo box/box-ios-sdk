@@ -8,6 +8,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         case templateFileVersion = "template_file_version"
         case status
         case outputType = "output_type"
+        case externalId = "external_id"
         case outputFile = "output_file"
         case outputFileVersion = "output_file_version"
         case failures
@@ -34,6 +35,12 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     /// Type of the generated file.
     public let outputType: String
 
+    /// An optional identifier supplied by the caller when the Box Doc Gen
+    /// job was created. Returned for correlation only. It is not a Box
+    /// resource ID, is not required to be unique, and cannot be used to
+    /// look up the job.
+    public let externalId: String?
+
     public let outputFile: FileReferenceV2025R0?
 
     public let outputFileVersion: FileVersionBaseV2025R0?
@@ -51,15 +58,20 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     ///   - status: Status of the job.
     ///   - outputType: Type of the generated file.
     ///   - type: The value will always be `docgen_job`.
+    ///   - externalId: An optional identifier supplied by the caller when the Box Doc Gen
+    ///     job was created. Returned for correlation only. It is not a Box
+    ///     resource ID, is not required to be unique, and cannot be used to
+    ///     look up the job.
     ///   - outputFile: 
     ///   - outputFileVersion: 
     ///   - failures: Errors and warnings that occurred during document generation.
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil) {
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, externalId: String? = nil, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil) {
         self.batch = batch
         self.templateFile = templateFile
         self.templateFileVersion = templateFileVersion
         self.status = status
         self.outputType = outputType
+        self.externalId = externalId
         self.outputFile = outputFile
         self.outputFileVersion = outputFileVersion
         self._failures = CodableTriState(state: failures)
@@ -74,6 +86,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         templateFileVersion = try container.decode(FileVersionBaseV2025R0.self, forKey: .templateFileVersion)
         status = try container.decode(DocGenJobV2025R0StatusField.self, forKey: .status)
         outputType = try container.decode(String.self, forKey: .outputType)
+        externalId = try container.decodeIfPresent(String.self, forKey: .externalId)
         outputFile = try container.decodeIfPresent(FileReferenceV2025R0.self, forKey: .outputFile)
         outputFileVersion = try container.decodeIfPresent(FileVersionBaseV2025R0.self, forKey: .outputFileVersion)
         failures = try container.decodeIfPresent(DocGenJobV2025R0FailuresField.self, forKey: .failures)
@@ -88,6 +101,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
         try container.encode(templateFileVersion, forKey: .templateFileVersion)
         try container.encode(status, forKey: .status)
         try container.encode(outputType, forKey: .outputType)
+        try container.encodeIfPresent(externalId, forKey: .externalId)
         try container.encodeIfPresent(outputFile, forKey: .outputFile)
         try container.encodeIfPresent(outputFileVersion, forKey: .outputFileVersion)
         try container.encode(field: _failures.state, forKey: .failures)

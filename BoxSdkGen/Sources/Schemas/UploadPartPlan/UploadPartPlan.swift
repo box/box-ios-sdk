@@ -26,7 +26,8 @@ public class UploadPartPlan: Codable, RawJSONReadable {
     /// The size of the chunk in bytes.
     public let size: Int64
 
-    /// The `SHA-512` hash of the chunk.
+    /// The `SHA-512` hash of the chunk, as a hex string
+    /// of 128 lower case characters.
     public let sha512: String
 
     /// Initializer for a UploadPartPlan.
@@ -36,7 +37,8 @@ public class UploadPartPlan: Codable, RawJSONReadable {
     ///     in bytes. The lower bound of the position
     ///     of the chunk within the file.
     ///   - size: The size of the chunk in bytes.
-    ///   - sha512: The `SHA-512` hash of the chunk.
+    ///   - sha512: The `SHA-512` hash of the chunk, as a hex string
+    ///     of 128 lower case characters.
     public init(offset: Int64, size: Int64, sha512: String) {
         self.offset = offset
         self.size = size
