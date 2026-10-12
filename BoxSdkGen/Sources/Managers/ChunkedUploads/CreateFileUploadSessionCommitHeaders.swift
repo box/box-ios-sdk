@@ -7,6 +7,9 @@ public class CreateFileUploadSessionCommitHeaders {
     /// encoded. The format of this header is as
     /// `sha=BASE64_ENCODED_DIGEST`.
     /// 
+    /// `SHA-512` is not supported for the whole-file digest, even if
+    /// the parts were uploaded with `SHA-512` digests.
+    /// 
     /// [1]: https://tools.ietf.org/html/rfc3230
     public let digest: String
 
@@ -38,6 +41,9 @@ public class CreateFileUploadSessionCommitHeaders {
     ///     Only SHA1 is supported. The SHA1 digest must be Base64
     ///     encoded. The format of this header is as
     ///     `sha=BASE64_ENCODED_DIGEST`.
+    ///     
+    ///     `SHA-512` is not supported for the whole-file digest, even if
+    ///     the parts were uploaded with `SHA-512` digests.
     ///     
     ///     [1]: https://tools.ietf.org/html/rfc3230
     ///   - ifMatch: Ensures this item hasn't recently changed before

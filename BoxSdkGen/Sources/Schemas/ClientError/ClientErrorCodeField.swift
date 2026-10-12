@@ -13,6 +13,7 @@ public enum ClientErrorCodeField: CodableStringEnum {
     case methodNotAllowed
     case conflict
     case preconditionFailed
+    case unprocessableEntity
     case tooManyRequests
     case internalServerError
     case unavailable
@@ -46,6 +47,8 @@ public enum ClientErrorCodeField: CodableStringEnum {
             self = .conflict
         case "precondition_failed".lowercased():
             self = .preconditionFailed
+        case "unprocessable_entity".lowercased():
+            self = .unprocessableEntity
         case "too_many_requests".lowercased():
             self = .tooManyRequests
         case "internal_server_error".lowercased():
@@ -87,6 +90,8 @@ public enum ClientErrorCodeField: CodableStringEnum {
             return "conflict"
         case .preconditionFailed:
             return "precondition_failed"
+        case .unprocessableEntity:
+            return "unprocessable_entity"
         case .tooManyRequests:
             return "too_many_requests"
         case .internalServerError:
