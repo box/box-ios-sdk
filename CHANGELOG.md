@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.18.0](https://github.com/box/box-ios-sdk/compare/6.17.0...6.18.0) (2026-10-15)
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add `sha512` support for chunked uploads and DocGen `externalId` (box/box-openapi[#620](https://github.com/box/box-ios-sdk/issues/620)) ([a0c3a98](https://github.com/box/box-ios-sdk/commit/a0c3a986fa03218fa4c806c7f8229eca87a328ba))
+
 ## [6.17.0](https://github.com/box/box-ios-sdk/compare/6.16.0...6.17.0) (2026-10-01)
 
 * **boxsdkgen:** use `FileMini`/`FolderMini`/`WebLinkMini` in `CollaborationItem` (box/box-openapi[#619](https://github.com/box/box-openapi/pull/619)) ([47724eb](https://github.com/box/box-ios-sdk/commit/47724ebb1c065e90f5bb298e3f10d8292b866eac))
