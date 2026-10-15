@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.18.0](https://github.com/box/box-ios-sdk/compare/10.17.0...10.18.0) (2026-10-15)
+
+
+### New Features and Enhancements
+
+* update chunked upload to support `sha512` and add `external_id` to DocGen (box/box-openapi[#620](https://github.com/box/box-ios-sdk/issues/620)) ([24f00c5](https://github.com/box/box-ios-sdk/commit/24f00c552edbaceec29f6198267f8827e1fddb69))
+
 ## [10.17.0](https://github.com/box/box-ios-sdk/compare/10.16.0...10.17.0) (2026-10-01)
 
 ### ⚠ BREAKING CHANGES
