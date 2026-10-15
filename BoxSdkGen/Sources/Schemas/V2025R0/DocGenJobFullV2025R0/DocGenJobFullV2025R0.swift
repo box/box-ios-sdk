@@ -41,17 +41,21 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
     ///   - enterprise: 
     ///   - source: Source of the request.
     ///   - type: The value will always be `docgen_job`.
+    ///   - externalId: An optional identifier supplied by the caller when the Box Doc Gen
+    ///     job was created. Returned for correlation only. It is not a Box
+    ///     resource ID, is not required to be unique, and cannot be used to
+    ///     look up the job.
     ///   - outputFile: 
     ///   - outputFileVersion: 
     ///   - failures: Errors and warnings that occurred during document generation.
     ///   - createdAt: Time of job creation.
-    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil, createdAt: String? = nil) {
+    public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, createdBy: UserBaseV2025R0, enterprise: EnterpriseReferenceV2025R0, source: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, externalId: String? = nil, outputFile: FileReferenceV2025R0? = nil, outputFileVersion: FileVersionBaseV2025R0? = nil, failures: TriStateField<DocGenJobV2025R0FailuresField> = nil, createdAt: String? = nil) {
         self.createdBy = createdBy
         self.enterprise = enterprise
         self.source = source
         self.createdAt = createdAt
 
-        super.init(id: id, batch: batch, templateFile: templateFile, templateFileVersion: templateFileVersion, status: status, outputType: outputType, type: type, outputFile: outputFile, outputFileVersion: outputFileVersion, failures: failures)
+        super.init(id: id, batch: batch, templateFile: templateFile, templateFileVersion: templateFileVersion, status: status, outputType: outputType, type: type, externalId: externalId, outputFile: outputFile, outputFileVersion: outputFileVersion, failures: failures)
     }
 
     required public init(from decoder: Decoder) throws {
