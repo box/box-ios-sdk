@@ -30,7 +30,7 @@ public class UploadSession: Codable, RawJSONReadable {
     /// The date and time when this session expires.
     public let sessionExpiresAt: Date?
 
-    /// The  size in bytes that must be used for all parts of of the
+    /// The size in bytes that must be used for all parts of the
     /// upload.
     /// 
     /// Only the last part is allowed to be of a smaller size.
@@ -43,7 +43,7 @@ public class UploadSession: Codable, RawJSONReadable {
     /// The number of parts that have been uploaded and processed
     /// by the server. This starts at `0`.
     /// 
-    /// When committing a file files, inspecting this property can
+    /// When committing a file, inspecting this property can
     /// provide insight if all parts have been uploaded correctly.
     public let numPartsProcessed: Int?
 
@@ -55,7 +55,7 @@ public class UploadSession: Codable, RawJSONReadable {
     ///   - id: The unique identifier for this session.
     ///   - type: The value will always be `upload_session`.
     ///   - sessionExpiresAt: The date and time when this session expires.
-    ///   - partSize: The  size in bytes that must be used for all parts of of the
+    ///   - partSize: The size in bytes that must be used for all parts of the
     ///     upload.
     ///     
     ///     Only the last part is allowed to be of a smaller size.
@@ -64,7 +64,7 @@ public class UploadSession: Codable, RawJSONReadable {
     ///   - numPartsProcessed: The number of parts that have been uploaded and processed
     ///     by the server. This starts at `0`.
     ///     
-    ///     When committing a file files, inspecting this property can
+    ///     When committing a file, inspecting this property can
     ///     provide insight if all parts have been uploaded correctly.
     ///   - sessionEndpoints: 
     public init(id: String? = nil, type: UploadSessionTypeField? = nil, sessionExpiresAt: Date? = nil, partSize: Int64? = nil, totalParts: Int? = nil, numPartsProcessed: Int? = nil, sessionEndpoints: UploadSessionSessionEndpointsField? = nil) {

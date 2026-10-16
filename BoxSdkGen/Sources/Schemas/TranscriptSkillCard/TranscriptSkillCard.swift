@@ -29,7 +29,7 @@ public class TranscriptSkillCard: Codable, RawJSONReadable {
     /// which instance of a service applied the metadata.
     public let invocation: TranscriptSkillCardInvocationField
 
-    /// An list of entries for the card. This represents the individual entries of
+    /// A list of entries for the card. This represents the individual entries of
     /// the transcription.
     public let entries: [TranscriptSkillCardEntriesField]
 
@@ -57,7 +57,7 @@ public class TranscriptSkillCard: Codable, RawJSONReadable {
     ///   - skill: The service that applied this metadata.
     ///   - invocation: The invocation of this service, used to track
     ///     which instance of a service applied the metadata.
-    ///   - entries: An list of entries for the card. This represents the individual entries of
+    ///   - entries: A list of entries for the card. This represents the individual entries of
     ///     the transcription.
     ///   - createdAt: The optional date and time this card was created at.
     ///   - type: The value will always be `skill_card`.
