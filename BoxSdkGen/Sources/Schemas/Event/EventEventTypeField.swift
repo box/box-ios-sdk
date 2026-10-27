@@ -142,6 +142,8 @@ public enum EventEventTypeField: CodableStringEnum {
     case rename
     case retentionPolicyAssignmentAdd
     case share
+    case sharedLinkOneTimePasscodeAccess
+    case sharedLinkOneTimePasscodeChallenge
     case sharedLinkRedirectOutOfSharedContext
     case sharedLinkSend
     case shareExpiration
@@ -152,6 +154,7 @@ public enum EventEventTypeField: CodableStringEnum {
     case shieldDownloadBlocked
     case shieldExternalCollabAccessBlocked
     case shieldExternalCollabAccessBlockedMissingJustification
+    case shieldExternalCollabAccessJustified
     case shieldExternalCollabInviteBlocked
     case shieldExternalCollabInviteBlockedMissingJustification
     case shieldExternalCollabInviteJustified
@@ -489,6 +492,10 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .retentionPolicyAssignmentAdd
         case "SHARE".lowercased():
             self = .share
+        case "SHARED_LINK_ONE_TIME_PASSCODE_ACCESS".lowercased():
+            self = .sharedLinkOneTimePasscodeAccess
+        case "SHARED_LINK_ONE_TIME_PASSCODE_CHALLENGE".lowercased():
+            self = .sharedLinkOneTimePasscodeChallenge
         case "SHARED_LINK_REDIRECT_OUT_OF_SHARED_CONTEXT".lowercased():
             self = .sharedLinkRedirectOutOfSharedContext
         case "SHARED_LINK_SEND".lowercased():
@@ -509,6 +516,8 @@ public enum EventEventTypeField: CodableStringEnum {
             self = .shieldExternalCollabAccessBlocked
         case "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION".lowercased():
             self = .shieldExternalCollabAccessBlockedMissingJustification
+        case "SHIELD_EXTERNAL_COLLAB_ACCESS_JUSTIFIED".lowercased():
+            self = .shieldExternalCollabAccessJustified
         case "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED".lowercased():
             self = .shieldExternalCollabInviteBlocked
         case "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED_MISSING_JUSTIFICATION".lowercased():
@@ -900,6 +909,10 @@ public enum EventEventTypeField: CodableStringEnum {
             return "RETENTION_POLICY_ASSIGNMENT_ADD"
         case .share:
             return "SHARE"
+        case .sharedLinkOneTimePasscodeAccess:
+            return "SHARED_LINK_ONE_TIME_PASSCODE_ACCESS"
+        case .sharedLinkOneTimePasscodeChallenge:
+            return "SHARED_LINK_ONE_TIME_PASSCODE_CHALLENGE"
         case .sharedLinkRedirectOutOfSharedContext:
             return "SHARED_LINK_REDIRECT_OUT_OF_SHARED_CONTEXT"
         case .sharedLinkSend:
@@ -920,6 +933,8 @@ public enum EventEventTypeField: CodableStringEnum {
             return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED"
         case .shieldExternalCollabAccessBlockedMissingJustification:
             return "SHIELD_EXTERNAL_COLLAB_ACCESS_BLOCKED_MISSING_JUSTIFICATION"
+        case .shieldExternalCollabAccessJustified:
+            return "SHIELD_EXTERNAL_COLLAB_ACCESS_JUSTIFIED"
         case .shieldExternalCollabInviteBlocked:
             return "SHIELD_EXTERNAL_COLLAB_INVITE_BLOCKED"
         case .shieldExternalCollabInviteBlockedMissingJustification:
