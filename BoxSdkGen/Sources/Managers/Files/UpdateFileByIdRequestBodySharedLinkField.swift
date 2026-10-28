@@ -7,6 +7,7 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable, RawJSONReadable 
         case vanityName = "vanity_name"
         case unsharedAt = "unshared_at"
         case permissions
+        case oneTimePasscode = "one_time_passcode"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -54,6 +55,8 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable, RawJSONReadable 
 
     public let permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField?
 
+    public let oneTimePasscode: SharedLinkOtpWritable?
+
     /// Initializer for a UpdateFileByIdRequestBodySharedLinkField.
     ///
     /// - Parameters:
@@ -84,12 +87,14 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable, RawJSONReadable 
     ///     expire. This field can only be set by
     ///     users with paid accounts.
     ///   - permissions: 
-    public init(access: UpdateFileByIdRequestBodySharedLinkAccessField? = nil, password: TriStateField<String> = nil, vanityName: String? = nil, unsharedAt: Date? = nil, permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField? = nil) {
+    ///   - oneTimePasscode: 
+    public init(access: UpdateFileByIdRequestBodySharedLinkAccessField? = nil, password: TriStateField<String> = nil, vanityName: String? = nil, unsharedAt: Date? = nil, permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField? = nil, oneTimePasscode: SharedLinkOtpWritable? = nil) {
         self.access = access
         self._password = CodableTriState(state: password)
         self.vanityName = vanityName
         self.unsharedAt = unsharedAt
         self.permissions = permissions
+        self.oneTimePasscode = oneTimePasscode
     }
 
     required public init(from decoder: Decoder) throws {
@@ -99,6 +104,7 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable, RawJSONReadable 
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
         unsharedAt = try container.decodeDateTimeIfPresent(forKey: .unsharedAt)
         permissions = try container.decodeIfPresent(UpdateFileByIdRequestBodySharedLinkPermissionsField.self, forKey: .permissions)
+        oneTimePasscode = try container.decodeIfPresent(SharedLinkOtpWritable.self, forKey: .oneTimePasscode)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -108,6 +114,7 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable, RawJSONReadable 
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
         try container.encodeDateTimeIfPresent(field: unsharedAt, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
+        try container.encodeIfPresent(oneTimePasscode, forKey: .oneTimePasscode)
     }
 
     /// Sets the raw JSON data.
