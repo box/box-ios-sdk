@@ -175,8 +175,6 @@ public class BoxClient {
 
     public let notes: NotesManager
 
-    public let documentSplit: DocumentSplitManager
-
     public let query: QueryManager
 
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
@@ -267,7 +265,6 @@ public class BoxClient {
         self.externalUsers = ExternalUsersManager(auth: self.auth, networkSession: self.networkSession)
         self.automateWorkflows = AutomateWorkflowsManager(auth: self.auth, networkSession: self.networkSession)
         self.notes = NotesManager(auth: self.auth, networkSession: self.networkSession)
-        self.documentSplit = DocumentSplitManager(auth: self.auth, networkSession: self.networkSession)
         self.query = QueryManager(auth: self.auth, networkSession: self.networkSession)
     }
 

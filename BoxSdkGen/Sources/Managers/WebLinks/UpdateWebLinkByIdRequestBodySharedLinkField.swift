@@ -6,7 +6,6 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable, RawJSONReadab
         case password
         case vanityName = "vanity_name"
         case unsharedAt = "unshared_at"
-        case oneTimePasscode = "one_time_passcode"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -54,8 +53,6 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable, RawJSONReadab
     /// current date and time.
     public let unsharedAt: Date?
 
-    public let oneTimePasscode: SharedLinkOtpWritable?
-
     /// Initializer for a UpdateWebLinkByIdRequestBodySharedLinkField.
     ///
     /// - Parameters:
@@ -87,13 +84,11 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable, RawJSONReadab
     ///     expire. This field can only be set by
     ///     users with paid accounts. The value must be greater than the
     ///     current date and time.
-    ///   - oneTimePasscode: 
-    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: TriStateField<String> = nil, vanityName: String? = nil, unsharedAt: Date? = nil, oneTimePasscode: SharedLinkOtpWritable? = nil) {
+    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: TriStateField<String> = nil, vanityName: String? = nil, unsharedAt: Date? = nil) {
         self.access = access
         self._password = CodableTriState(state: password)
         self.vanityName = vanityName
         self.unsharedAt = unsharedAt
-        self.oneTimePasscode = oneTimePasscode
     }
 
     required public init(from decoder: Decoder) throws {
@@ -102,7 +97,6 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable, RawJSONReadab
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
         unsharedAt = try container.decodeDateTimeIfPresent(forKey: .unsharedAt)
-        oneTimePasscode = try container.decodeIfPresent(SharedLinkOtpWritable.self, forKey: .oneTimePasscode)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -111,7 +105,6 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable, RawJSONReadab
         try container.encode(field: _password.state, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
         try container.encodeDateTimeIfPresent(field: unsharedAt, forKey: .unsharedAt)
-        try container.encodeIfPresent(oneTimePasscode, forKey: .oneTimePasscode)
     }
 
     /// Sets the raw JSON data.
