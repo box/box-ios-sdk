@@ -8,7 +8,6 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
         case isPasswordEnabled = "is_password_enabled"
         case downloadCount = "download_count"
         case previewCount = "preview_count"
-        case oneTimePasscode = "one_time_passcode"
         case downloadUrl = "download_url"
         case vanityUrl = "vanity_url"
         case vanityName = "vanity_name"
@@ -55,8 +54,6 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
 
     /// The number of times this item has been previewed.
     public let previewCount: Int64
-
-    public let oneTimePasscode: WebLinkSharedLinkOneTimePasscodeField
 
     /// A URL that can be used to download the file. This URL can be used in
     /// a browser to download the file. This URL includes the file
@@ -113,7 +110,6 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
     ///   - isPasswordEnabled: Defines if the shared link requires a password to access the item.
     ///   - downloadCount: The number of times this item has been downloaded.
     ///   - previewCount: The number of times this item has been previewed.
-    ///   - oneTimePasscode: 
     ///   - downloadUrl: A URL that can be used to download the file. This URL can be used in
     ///     a browser to download the file. This URL includes the file
     ///     extension so that the file will be saved with the right file type.
@@ -136,14 +132,13 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
     ///   - permissions: Defines if this link allows a user to preview, edit, and download an item.
     ///     These permissions refer to the shared link only and
     ///     do not supersede permissions applied to the item itself.
-    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, oneTimePasscode: WebLinkSharedLinkOneTimePasscodeField, downloadUrl: TriStateField<String> = nil, vanityUrl: TriStateField<String> = nil, vanityName: TriStateField<String> = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: TriStateField<Date> = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
+    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: TriStateField<String> = nil, vanityUrl: TriStateField<String> = nil, vanityName: TriStateField<String> = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: TriStateField<Date> = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
         self.url = url
         self.effectiveAccess = effectiveAccess
         self.effectivePermission = effectivePermission
         self.isPasswordEnabled = isPasswordEnabled
         self.downloadCount = downloadCount
         self.previewCount = previewCount
-        self.oneTimePasscode = oneTimePasscode
         self._downloadUrl = CodableTriState(state: downloadUrl)
         self._vanityUrl = CodableTriState(state: vanityUrl)
         self._vanityName = CodableTriState(state: vanityName)
@@ -160,7 +155,6 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
         isPasswordEnabled = try container.decode(Bool.self, forKey: .isPasswordEnabled)
         downloadCount = try container.decode(Int64.self, forKey: .downloadCount)
         previewCount = try container.decode(Int64.self, forKey: .previewCount)
-        oneTimePasscode = try container.decode(WebLinkSharedLinkOneTimePasscodeField.self, forKey: .oneTimePasscode)
         downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
         vanityUrl = try container.decodeIfPresent(String.self, forKey: .vanityUrl)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
@@ -177,7 +171,6 @@ public class WebLinkSharedLinkField: Codable, RawJSONReadable {
         try container.encode(isPasswordEnabled, forKey: .isPasswordEnabled)
         try container.encode(downloadCount, forKey: .downloadCount)
         try container.encode(previewCount, forKey: .previewCount)
-        try container.encode(oneTimePasscode, forKey: .oneTimePasscode)
         try container.encode(field: _downloadUrl.state, forKey: .downloadUrl)
         try container.encode(field: _vanityUrl.state, forKey: .vanityUrl)
         try container.encode(field: _vanityName.state, forKey: .vanityName)
