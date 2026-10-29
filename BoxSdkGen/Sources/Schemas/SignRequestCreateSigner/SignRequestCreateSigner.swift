@@ -87,7 +87,9 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     /// instead for signers in the same signer group.
     @CodableTriState public private(set) var signerGroupId: String?
 
-    /// If true, no emails about the sign request will be sent.
+    /// If true, no emails about the sign request are sent.
+    /// The `embed_url_external_user_id` parameter is required when using
+    /// `suppress_notifications` for a signer.
     @CodableTriState public private(set) var suppressNotifications: Bool?
 
     /// The language of the user, formatted in modified version of the
@@ -134,7 +136,9 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     ///     as it was intended for an individual signer. The value provided can be any string and only used to
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
-    ///   - suppressNotifications: If true, no emails about the sign request will be sent.
+    ///   - suppressNotifications: If true, no emails about the sign request are sent.
+    ///     The `embed_url_external_user_id` parameter is required when using
+    ///     `suppress_notifications` for a signer.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil, language: TriStateField<String> = nil) {
