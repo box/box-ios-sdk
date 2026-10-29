@@ -28,7 +28,7 @@ public class KeywordSkillCard: Codable, RawJSONReadable {
     /// which instance of a service applied the metadata.
     public let invocation: KeywordSkillCardInvocationField
 
-    /// A list of entries in the metadata card.
+    /// An list of entries in the metadata card.
     public let entries: [KeywordSkillCardEntriesField]
 
     /// The optional date and time this card was created at.
@@ -49,7 +49,7 @@ public class KeywordSkillCard: Codable, RawJSONReadable {
     ///   - skill: The service that applied this metadata.
     ///   - invocation: The invocation of this service, used to track
     ///     which instance of a service applied the metadata.
-    ///   - entries: A list of entries in the metadata card.
+    ///   - entries: An list of entries in the metadata card.
     ///   - createdAt: The optional date and time this card was created at.
     ///   - type: The value will always be `skill_card`.
     ///   - skillCardType: The value will always be `keyword`.
