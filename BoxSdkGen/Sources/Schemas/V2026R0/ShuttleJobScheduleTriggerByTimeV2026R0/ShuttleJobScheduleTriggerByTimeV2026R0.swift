@@ -6,7 +6,7 @@ public class ShuttleJobScheduleTriggerByTimeV2026R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case startAt = "start_at"
         case timeZone = "time_zone"
-        case repeat
+        case repeat_ = "repeat"
         case type
     }
 
@@ -30,7 +30,7 @@ public class ShuttleJobScheduleTriggerByTimeV2026R0: Codable, RawJSONReadable {
     public let timeZone: String
 
     /// How often the schedule repeats after `start_at`.
-    public let repeat: ShuttleJobScheduleTriggerByTimeV2026R0RepeatField
+    public let repeat_: ShuttleJobScheduleTriggerByTimeV2026R0RepeatField
 
     /// The value will always be `by_time`.
     public let type: ShuttleJobScheduleTriggerByTimeV2026R0TypeField
@@ -44,12 +44,12 @@ public class ShuttleJobScheduleTriggerByTimeV2026R0: Codable, RawJSONReadable {
     ///   - timeZone: The IANA time zone that gives `start_at` its calendar meaning (for
     ///     example `America/Los_Angeles`). Recurrence and DST transitions are
     ///     evaluated in this zone.
-    ///   - repeat: How often the schedule repeats after `start_at`.
+    ///   - repeat_: How often the schedule repeats after `start_at`.
     ///   - type: The value will always be `by_time`.
-    public init(startAt: String, timeZone: String, repeat: ShuttleJobScheduleTriggerByTimeV2026R0RepeatField, type: ShuttleJobScheduleTriggerByTimeV2026R0TypeField = ShuttleJobScheduleTriggerByTimeV2026R0TypeField.byTime) {
+    public init(startAt: String, timeZone: String, repeat_: ShuttleJobScheduleTriggerByTimeV2026R0RepeatField, type: ShuttleJobScheduleTriggerByTimeV2026R0TypeField = ShuttleJobScheduleTriggerByTimeV2026R0TypeField.byTime) {
         self.startAt = startAt
         self.timeZone = timeZone
-        self.repeat = repeat
+        self.repeat_ = repeat_
         self.type = type
     }
 
@@ -57,7 +57,7 @@ public class ShuttleJobScheduleTriggerByTimeV2026R0: Codable, RawJSONReadable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         startAt = try container.decode(String.self, forKey: .startAt)
         timeZone = try container.decode(String.self, forKey: .timeZone)
-        repeat = try container.decode(ShuttleJobScheduleTriggerByTimeV2026R0RepeatField.self, forKey: .repeat)
+        repeat_ = try container.decode(ShuttleJobScheduleTriggerByTimeV2026R0RepeatField.self, forKey: .repeat_)
         type = try container.decode(ShuttleJobScheduleTriggerByTimeV2026R0TypeField.self, forKey: .type)
     }
 
@@ -65,7 +65,7 @@ public class ShuttleJobScheduleTriggerByTimeV2026R0: Codable, RawJSONReadable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(startAt, forKey: .startAt)
         try container.encode(timeZone, forKey: .timeZone)
-        try container.encode(repeat, forKey: .repeat)
+        try container.encode(repeat_, forKey: .repeat_)
         try container.encode(type, forKey: .type)
     }
 
