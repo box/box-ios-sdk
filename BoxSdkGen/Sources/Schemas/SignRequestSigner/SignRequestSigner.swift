@@ -83,7 +83,9 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     as it was intended for an individual signer. The value provided can be any string and only used to
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
-    ///   - suppressNotifications: If true, no emails about the sign request will be sent.
+    ///   - suppressNotifications: If true, no emails about the sign request are sent.
+    ///     The `embed_url_external_user_id` parameter is required when using
+    ///     `suppress_notifications` for a signer.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](https://developer.box.com/guides/api-calls/language-codes) format.
     ///   - hasViewedDocument: Set to `true` if the signer views the document.
