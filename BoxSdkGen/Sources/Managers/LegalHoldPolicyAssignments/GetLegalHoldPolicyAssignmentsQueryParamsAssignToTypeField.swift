@@ -7,6 +7,7 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
     case user
     case ownership
     case interactions
+    case metadataTemplate
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -23,6 +24,8 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
             self = .ownership
         case "interactions".lowercased():
             self = .interactions
+        case "metadata_template".lowercased():
+            self = .metadataTemplate
         default:
             self = .customValue(value)
         }
@@ -42,6 +45,8 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
             return "ownership"
         case .interactions:
             return "interactions"
+        case .metadataTemplate:
+            return "metadata_template"
         case .customValue(let value):
             return value
         }

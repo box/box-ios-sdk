@@ -54,7 +54,10 @@ This operation is performed by calling function `getDocumentSplitsV2026R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2026.0/get-document-splits/).
 
-*Currently we don't have an example for calling `getDocumentSplitsV2026R0` in integration tests*
+<!-- sample get_document_splits_v2026.0 -->
+```
+try await client.documentSplit.getDocumentSplitsV2026R0(queryParams: GetDocumentSplitsV2026R0QueryParams(limit: Int64(10)))
+```
 
 ### Arguments
 
