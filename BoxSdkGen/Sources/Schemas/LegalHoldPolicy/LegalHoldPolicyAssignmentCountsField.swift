@@ -8,6 +8,7 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         case fileVersion = "file_version"
         case ownership
         case interactions
+        case metadataTemplate = "metadata_template"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -37,6 +38,9 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
     /// The number of users this policy is applied to with the `interactions` type assignment.
     public let interactions: Int64?
 
+    /// The number of metadata templates this policy is applied to.
+    public let metadataTemplate: Int64?
+
     /// Initializer for a LegalHoldPolicyAssignmentCountsField.
     ///
     /// - Parameters:
@@ -46,13 +50,15 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
     ///   - fileVersion: The number of file versions this policy is applied to.
     ///   - ownership: The number of users this policy is applied to with the `ownership` type assignment.
     ///   - interactions: The number of users this policy is applied to with the `interactions` type assignment.
-    public init(user: Int64? = nil, folder: Int64? = nil, file: Int64? = nil, fileVersion: Int64? = nil, ownership: Int64? = nil, interactions: Int64? = nil) {
+    ///   - metadataTemplate: The number of metadata templates this policy is applied to.
+    public init(user: Int64? = nil, folder: Int64? = nil, file: Int64? = nil, fileVersion: Int64? = nil, ownership: Int64? = nil, interactions: Int64? = nil, metadataTemplate: Int64? = nil) {
         self.user = user
         self.folder = folder
         self.file = file
         self.fileVersion = fileVersion
         self.ownership = ownership
         self.interactions = interactions
+        self.metadataTemplate = metadataTemplate
     }
 
     required public init(from decoder: Decoder) throws {
@@ -63,6 +69,7 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         fileVersion = try container.decodeIfPresent(Int64.self, forKey: .fileVersion)
         ownership = try container.decodeIfPresent(Int64.self, forKey: .ownership)
         interactions = try container.decodeIfPresent(Int64.self, forKey: .interactions)
+        metadataTemplate = try container.decodeIfPresent(Int64.self, forKey: .metadataTemplate)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -73,6 +80,7 @@ public class LegalHoldPolicyAssignmentCountsField: Codable, RawJSONReadable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(ownership, forKey: .ownership)
         try container.encodeIfPresent(interactions, forKey: .interactions)
+        try container.encodeIfPresent(metadataTemplate, forKey: .metadataTemplate)
     }
 
     /// Sets the raw JSON data.
