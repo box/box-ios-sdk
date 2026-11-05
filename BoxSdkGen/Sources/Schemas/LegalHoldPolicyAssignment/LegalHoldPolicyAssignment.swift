@@ -1,7 +1,7 @@
 import Foundation
 
 /// Legal Hold Assignments are used to assign Legal Hold
-/// Policies to an item type of: Users, Folders, Files, File Versions, Ownership, or Interactions.
+/// Policies to an item type of: Users, Folders, Files, File Versions, Ownership, Interactions, or Metadata Templates.
 /// 
 /// Creating a Legal Hold Assignment puts a hold
 /// on the File-Versions that belong to the Assignment's
@@ -13,6 +13,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         case assignedBy = "assigned_by"
         case assignedAt = "assigned_at"
         case deletedAt = "deleted_at"
+        case filterFields = "filter_fields"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -41,6 +42,9 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     /// was not deleted.
     public let deletedAt: Date?
 
+    /// List of metadata template field filters. Only present when `assigned_to.type` is `metadata_template`.
+    public let filterFields: [LegalHoldPolicyAssignmentFilterField]?
+
     /// Initializer for a LegalHoldPolicyAssignment.
     ///
     /// - Parameters:
@@ -56,12 +60,14 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     ///     delete, this isn't quite the same time that the
     ///     assignment is fully deleted). If null, Assignment
     ///     was not deleted.
-    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: LegalHoldPolicyAssignedItem? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, deletedAt: Date? = nil) {
+    ///   - filterFields: List of metadata template field filters. Only present when `assigned_to.type` is `metadata_template`.
+    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: LegalHoldPolicyAssignedItem? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, deletedAt: Date? = nil, filterFields: [LegalHoldPolicyAssignmentFilterField]? = nil) {
         self.legalHoldPolicy = legalHoldPolicy
         self.assignedTo = assignedTo
         self.assignedBy = assignedBy
         self.assignedAt = assignedAt
         self.deletedAt = deletedAt
+        self.filterFields = filterFields
 
         super.init(id: id, type: type)
     }
@@ -73,6 +79,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
         assignedAt = try container.decodeDateTimeIfPresent(forKey: .assignedAt)
         deletedAt = try container.decodeDateTimeIfPresent(forKey: .deletedAt)
+        filterFields = try container.decodeIfPresent([LegalHoldPolicyAssignmentFilterField].self, forKey: .filterFields)
 
         try super.init(from: decoder)
     }
@@ -84,6 +91,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
         try container.encodeDateTimeIfPresent(field: assignedAt, forKey: .assignedAt)
         try container.encodeDateTimeIfPresent(field: deletedAt, forKey: .deletedAt)
+        try container.encodeIfPresent(filterFields, forKey: .filterFields)
         try super.encode(to: encoder)
     }
 
