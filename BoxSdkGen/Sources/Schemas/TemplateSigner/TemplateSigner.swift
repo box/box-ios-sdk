@@ -14,6 +14,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
         case isPasswordRequired = "is_password_required"
         case isPhoneNumberRequired = "is_phone_number_required"
         case loginRequired = "login_required"
+        case verificationMethod = "verification_method"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -67,6 +68,9 @@ public class TemplateSigner: Codable, RawJSONReadable {
     /// If true, the signer is required to login to access the document.
     @CodableTriState public private(set) var loginRequired: Bool?
 
+    /// The verification method for the signer.
+    public let verificationMethod: TemplateSignerVerificationMethod?
+
     /// Initializer for a TemplateSigner.
     ///
     /// - Parameters:
@@ -91,7 +95,8 @@ public class TemplateSigner: Codable, RawJSONReadable {
     ///   - isPhoneNumberRequired: If true for signers with a defined email, the phone number provided when the template was created is used by default. 
     ///     If true for signers without a specified / defined email, the template creator needs to provide a phone number when creating a request.
     ///   - loginRequired: If true, the signer is required to login to access the document.
-    public init(inputs: [TemplateSignerInput]? = nil, email: TriStateField<String> = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: TriStateField<String> = nil, label: TriStateField<String> = nil, publicId: String? = nil, isPasswordRequired: TriStateField<Bool> = nil, isPhoneNumberRequired: TriStateField<Bool> = nil, loginRequired: TriStateField<Bool> = nil) {
+    ///   - verificationMethod: The verification method for the signer.
+    public init(inputs: [TemplateSignerInput]? = nil, email: TriStateField<String> = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: TriStateField<String> = nil, label: TriStateField<String> = nil, publicId: String? = nil, isPasswordRequired: TriStateField<Bool> = nil, isPhoneNumberRequired: TriStateField<Bool> = nil, loginRequired: TriStateField<Bool> = nil, verificationMethod: TemplateSignerVerificationMethod? = nil) {
         self.inputs = inputs
         self._email = CodableTriState(state: email)
         self.role = role
@@ -103,6 +108,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
         self._isPasswordRequired = CodableTriState(state: isPasswordRequired)
         self._isPhoneNumberRequired = CodableTriState(state: isPhoneNumberRequired)
         self._loginRequired = CodableTriState(state: loginRequired)
+        self.verificationMethod = verificationMethod
     }
 
     required public init(from decoder: Decoder) throws {
@@ -118,6 +124,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
         isPasswordRequired = try container.decodeIfPresent(Bool.self, forKey: .isPasswordRequired)
         isPhoneNumberRequired = try container.decodeIfPresent(Bool.self, forKey: .isPhoneNumberRequired)
         loginRequired = try container.decodeIfPresent(Bool.self, forKey: .loginRequired)
+        verificationMethod = try container.decodeIfPresent(TemplateSignerVerificationMethod.self, forKey: .verificationMethod)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -133,6 +140,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
         try container.encode(field: _isPasswordRequired.state, forKey: .isPasswordRequired)
         try container.encode(field: _isPhoneNumberRequired.state, forKey: .isPhoneNumberRequired)
         try container.encode(field: _loginRequired.state, forKey: .loginRequired)
+        try container.encodeIfPresent(verificationMethod, forKey: .verificationMethod)
     }
 
     /// Sets the raw JSON data.
