@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.19.0](https://github.com/box/box-ios-sdk/compare/6.18.0...6.19.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **boxsdkgen:** rename `repeat` field to `repeat_` in `ShuttleJobScheduleTriggerByTimeV2026R0` (box/box-codegen[#998](https://github.com/box/box-ios-sdk/issues/998)) ([ced1b6c](https://github.com/box/box-ios-sdk/commit/ced1b6c975f18f9eb02bd1a6dba089d71309c462))
+
+
+### New Features and Enhancements
+
+* **boxsdkgen:** add `DocumentSplit` manager and V2026R0 schemas & one-time passcode fields (box/box-openapi[#621](https://github.com/box/box-ios-sdk/issues/621)) ([3ce0c92](https://github.com/box/box-ios-sdk/commit/3ce0c92cab01c684cda23de83e2c47c2f19f29bf))
+* **boxsdkgen:** add `metadata_template` assign target and `filter_fields` to legal hold APIs (box/box-openapi[#625](https://github.com/box/box-ios-sdk/issues/625)) ([57bf7d9](https://github.com/box/box-ios-sdk/commit/57bf7d9403073a3b7115d234d3e7ab9edeb33f18))
+* **boxsdkgen:** add `ShuttleManager` and generate shuttle API models/docs (box/box-openapi[#622](https://github.com/box/box-ios-sdk/issues/622)) ([#1711](https://github.com/box/box-ios-sdk/issues/1711)) ([35d85a4](https://github.com/box/box-ios-sdk/commit/35d85a44f6a25b5776b9f19944fc6f5a80200667))
+* **boxsdkgen:** add `verification_method` field to Signer schemas for BoxSign (box/box-openapi[#626](https://github.com/box/box-ios-sdk/issues/626)) ([cd71e8b](https://github.com/box/box-ios-sdk/commit/cd71e8bceed94c0cfd6b62d0d53fec2023361210))
+
 ## [6.18.0](https://github.com/box/box-ios-sdk/compare/6.17.0...6.18.0) (2026-10-15)
 
 
