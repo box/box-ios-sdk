@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.19.0](https://github.com/box/box-ios-sdk/compare/10.18.0...10.19.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* remove V2026R0 `DocumentSplit` schemas and manager files (box/box-codegen[#998](https://github.com/box/box-ios-sdk/issues/998)) ([#1712](https://github.com/box/box-ios-sdk/issues/1712)) ([94e42ff](https://github.com/box/box-ios-sdk/commit/94e42fffecafbfb357b693e54a48eaea5ddaec8f))
+
+
+### New Features and Enhancements
+
+* add `DocumentSplit` manager and `one_time_passcode` shared link OTP fields (box/box-openapi[#623](https://github.com/box/box-ios-sdk/issues/623)) ([31eb9a0](https://github.com/box/box-ios-sdk/commit/31eb9a0b9f2a40cc145fe247bff7b07cfe4bd288))
+* add `DocumentSplitManager` and document split APIs + OTP for shared links (box/box-openapi[#621](https://github.com/box/box-ios-sdk/issues/621)) ([e75afd2](https://github.com/box/box-ios-sdk/commit/e75afd2b27a83442cd4d4f88205fc22a8c248165))
+* add `filter_fields` and `metadata_template` support to legal holds API (box/box-openapi[#625](https://github.com/box/box-ios-sdk/issues/625)) ([f635166](https://github.com/box/box-ios-sdk/commit/f635166ff2fb2cf517ee589a6afdb900d2bedf93))
+* add `ShuttleManager` and V2026R0 `Shuttle` schemas and endpoints (box/box-openapi[#622](https://github.com/box/box-ios-sdk/issues/622)) ([#1716](https://github.com/box/box-ios-sdk/issues/1716)) ([c32c0ed](https://github.com/box/box-ios-sdk/commit/c32c0ed4029614d9fa5c4cc7b1b2712ea12ef2c1))
+* add `verification_method` schemas for BoxSign signers (box/box-openapi[#626](https://github.com/box/box-ios-sdk/issues/626)) ([f3e704e](https://github.com/box/box-ios-sdk/commit/f3e704e32f10a9de13548eab867299e203fac1d0))
+
 ## [10.18.0](https://github.com/box/box-ios-sdk/compare/10.17.0...10.18.0) (2026-10-15)
 
 
