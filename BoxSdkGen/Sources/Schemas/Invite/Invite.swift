@@ -11,6 +11,8 @@ public class Invite: Codable, RawJSONReadable {
         case status
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
+        case autoRollInAt = "auto_roll_in_at"
+        case isAutoRollIn = "is_auto_roll_in"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -44,6 +46,15 @@ public class Invite: Codable, RawJSONReadable {
     /// When the invite was modified.
     public let modifiedAt: Date?
 
+    /// The date and time when the user is added to the enterprise
+    /// automatically, or `null` if the user has to accept the invite.
+    @CodableTriState public private(set) var autoRollInAt: Date?
+
+    /// Whether the user is added to the enterprise automatically, without
+    /// having to accept the invite. When `true`, `auto_roll_in_at` contains
+    /// the date and time of the roll-in.
+    public let isAutoRollIn: Bool?
+
     /// Initializer for a Invite.
     ///
     /// - Parameters:
@@ -55,7 +66,12 @@ public class Invite: Codable, RawJSONReadable {
     ///   - status: The status of the invite.
     ///   - createdAt: When the invite was created.
     ///   - modifiedAt: When the invite was modified.
-    public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    ///   - autoRollInAt: The date and time when the user is added to the enterprise
+    ///     automatically, or `null` if the user has to accept the invite.
+    ///   - isAutoRollIn: Whether the user is added to the enterprise automatically, without
+    ///     having to accept the invite. When `true`, `auto_roll_in_at` contains
+    ///     the date and time of the roll-in.
+    public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, autoRollInAt: TriStateField<Date> = nil, isAutoRollIn: Bool? = nil) {
         self.id = id
         self.type = type
         self.invitedTo = invitedTo
@@ -64,6 +80,8 @@ public class Invite: Codable, RawJSONReadable {
         self.status = status
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self._autoRollInAt = CodableTriState(state: autoRollInAt)
+        self.isAutoRollIn = isAutoRollIn
     }
 
     required public init(from decoder: Decoder) throws {
@@ -76,6 +94,8 @@ public class Invite: Codable, RawJSONReadable {
         status = try container.decodeIfPresent(String.self, forKey: .status)
         createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
+        autoRollInAt = try container.decodeDateTimeIfPresent(forKey: .autoRollInAt)
+        isAutoRollIn = try container.decodeIfPresent(Bool.self, forKey: .isAutoRollIn)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -88,6 +108,8 @@ public class Invite: Codable, RawJSONReadable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
+        try container.encodeDateTime(field: _autoRollInAt.state, forKey: .autoRollInAt)
+        try container.encodeIfPresent(isAutoRollIn, forKey: .isAutoRollIn)
     }
 
     /// Sets the raw JSON data.
