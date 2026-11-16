@@ -16,6 +16,9 @@ public class FetchOptions {
     /// Request body of the request
     public let data: SerializedData?
 
+    /// Factory that builds a request body when `data` is not provided and rebuilds it for each retry.
+    public let dataFactory: RequestDataFactory?
+
     /// Stream data of the request
     public let fileStream: InputStream?
 
@@ -48,6 +51,7 @@ public class FetchOptions {
     ///   - params: HTTP query parameters
     ///   - headers: HTTP headers
     ///   - data: Request body of the request
+    ///   - dataFactory: Factory that builds a request body when `data` is not provided and rebuilds it for each retry.
     ///   - fileStream: Stream data of the request
     ///   - multipartData: Multipart data of the request
     ///   - contentType: Content type of the request body
@@ -56,12 +60,13 @@ public class FetchOptions {
     ///   - auth: Authentication object
     ///   - networkSession: Network session object
     ///   - followRedirects: A boolean value indicate if the request should follow redirects. Defaults to True. Not supported in Browser environment.
-    public init(url: String, method: String, params: [String: String]? = nil, headers: [String: String]? = nil, data: SerializedData? = nil, fileStream: InputStream? = nil, multipartData: [MultipartItem]? = nil, contentType: String = "application/json", responseFormat: ResponseFormat = ResponseFormat.json, downloadDestinationUrl: URL? = nil, auth: Authentication? = nil, networkSession: NetworkSession? = nil, followRedirects: Bool? = true) {
+    public init(url: String, method: String, params: [String: String]? = nil, headers: [String: String]? = nil, data: SerializedData? = nil, dataFactory: RequestDataFactory? = nil, fileStream: InputStream? = nil, multipartData: [MultipartItem]? = nil, contentType: String = "application/json", responseFormat: ResponseFormat = ResponseFormat.json, downloadDestinationUrl: URL? = nil, auth: Authentication? = nil, networkSession: NetworkSession? = nil, followRedirects: Bool? = true) {
         self.url = url
         self.method = method
         self.params = params
         self.headers = headers
         self.data = data
+        self.dataFactory = dataFactory
         self.fileStream = fileStream
         self.multipartData = multipartData
         self.contentType = contentType
