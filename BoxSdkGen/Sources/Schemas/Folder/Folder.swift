@@ -46,6 +46,11 @@ public class Folder: FolderMini {
 
     /// The folder size in bytes.
     /// 
+    /// This includes the files in the folder and its subfolders, along with
+    /// their previous versions. Files in Trash are not included. After a file
+    /// with many versions is moved to Trash, the value can take several days
+    /// to reflect the change.
+    /// 
     /// Be careful parsing this integer as its
     /// value can get very large.
     public let size: Int64?
@@ -118,6 +123,11 @@ public class Folder: FolderMini {
     ///     folder.
     ///   - description: 
     ///   - size: The folder size in bytes.
+    ///     
+    ///     This includes the files in the folder and its subfolders, along with
+    ///     their previous versions. Files in Trash are not included. After a file
+    ///     with many versions is moved to Trash, the value can take several days
+    ///     to reflect the change.
     ///     
     ///     Be careful parsing this integer as its
     ///     value can get very large.
