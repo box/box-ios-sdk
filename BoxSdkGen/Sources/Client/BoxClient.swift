@@ -181,6 +181,8 @@ public class BoxClient {
 
     public let shuttle: ShuttleManager
 
+    public let aiSessions: AiSessionsManager
+
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
@@ -272,6 +274,7 @@ public class BoxClient {
         self.documentSplit = DocumentSplitManager(auth: self.auth, networkSession: self.networkSession)
         self.query = QueryManager(auth: self.auth, networkSession: self.networkSession)
         self.shuttle = ShuttleManager(auth: self.auth, networkSession: self.networkSession)
+        self.aiSessions = AiSessionsManager(auth: self.auth, networkSession: self.networkSession)
     }
 
     /// Make a custom http request using the client authentication and network session.
