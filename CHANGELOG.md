@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.20.0](https://github.com/box/box-ios-sdk/compare/10.19.0...10.20.0) (2026-11-18)
+
+
+### Bug Fixes
+
+* Regenerate JWT assertions on token request retries (box/box-codegen[#1001](https://github.com/box/box-ios-sdk/issues/1001)) ([bc9a754](https://github.com/box/box-ios-sdk/commit/bc9a7541b5f3e0e1774e02837931b335b3af38dd))
+
+
+### New Features and Enhancements
+
+* add `is_auto_roll_in`/`auto_roll_in_at` to invites API models and docs (box/box-openapi[#627](https://github.com/box/box-ios-sdk/issues/627)) ([ca51135](https://github.com/box/box-ios-sdk/commit/ca51135b4ee194fe891219ec40a5964f71ba8d88))
+
 ## [10.19.0](https://github.com/box/box-ios-sdk/compare/10.18.0...10.19.0) (2026-11-10)
 
 
