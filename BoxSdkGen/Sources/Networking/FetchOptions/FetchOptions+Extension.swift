@@ -13,6 +13,7 @@ extension FetchOptions {
             params: params,
             headers: headers,
             data: data,
+            dataFactory: dataFactory,
             fileStream: fileStream,
             multipartData: multipartData,
             contentType: contentType,
