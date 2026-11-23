@@ -239,7 +239,7 @@ public class SearchForContentQueryParams {
     /// any of the users, an empty result set is returned.
     /// 
     /// Data available from 2023-02-01 onwards.
-    public let deletedUserIds: [String]?
+    public let deleterUserIds: [String]?
 
     /// Limits the search results to any items deleted within a given
     /// date range.
@@ -449,7 +449,7 @@ public class SearchForContentQueryParams {
     ///     Queries with offset parameter value
     ///     exceeding 10000 will be rejected
     ///     with a 400 response.
-    ///   - deletedUserIds: Limits the search results to items that were deleted by the given
+    ///   - deleterUserIds: Limits the search results to items that were deleted by the given
     ///     list of users, defined as a list of comma separated user IDs.
     ///     
     ///     The `trash_content` parameter needs to be set to `trashed_only`.
@@ -480,7 +480,7 @@ public class SearchForContentQueryParams {
     ///     is returned.
     ///     
     ///     Data available from 2023-02-01 onwards.
-    public init(query: String? = nil, scope: SearchForContentQueryParamsScopeField? = nil, fileExtensions: [String]? = nil, createdAtRange: [String]? = nil, updatedAtRange: [String]? = nil, sizeRange: [Int64]? = nil, ownerUserIds: [String]? = nil, recentUpdaterUserIds: [String]? = nil, ancestorFolderIds: [String]? = nil, contentTypes: [SearchForContentQueryParamsContentTypesField]? = nil, type: SearchForContentQueryParamsTypeField? = nil, trashContent: SearchForContentQueryParamsTrashContentField? = nil, mdfilters: [MetadataFilter]? = nil, sort: SearchForContentQueryParamsSortField? = nil, direction: SearchForContentQueryParamsDirectionField? = nil, limit: Int64? = nil, includeRecentSharedLinks: Bool? = nil, fields: [String]? = nil, offset: Int64? = nil, deletedUserIds: [String]? = nil, deletedAtRange: [String]? = nil) {
+    public init(query: String? = nil, scope: SearchForContentQueryParamsScopeField? = nil, fileExtensions: [String]? = nil, createdAtRange: [String]? = nil, updatedAtRange: [String]? = nil, sizeRange: [Int64]? = nil, ownerUserIds: [String]? = nil, recentUpdaterUserIds: [String]? = nil, ancestorFolderIds: [String]? = nil, contentTypes: [SearchForContentQueryParamsContentTypesField]? = nil, type: SearchForContentQueryParamsTypeField? = nil, trashContent: SearchForContentQueryParamsTrashContentField? = nil, mdfilters: [MetadataFilter]? = nil, sort: SearchForContentQueryParamsSortField? = nil, direction: SearchForContentQueryParamsDirectionField? = nil, limit: Int64? = nil, includeRecentSharedLinks: Bool? = nil, fields: [String]? = nil, offset: Int64? = nil, deleterUserIds: [String]? = nil, deletedAtRange: [String]? = nil) {
         self.query = query
         self.scope = scope
         self.fileExtensions = fileExtensions
@@ -500,7 +500,7 @@ public class SearchForContentQueryParams {
         self.includeRecentSharedLinks = includeRecentSharedLinks
         self.fields = fields
         self.offset = offset
-        self.deletedUserIds = deletedUserIds
+        self.deleterUserIds = deleterUserIds
         self.deletedAtRange = deletedAtRange
     }
 
